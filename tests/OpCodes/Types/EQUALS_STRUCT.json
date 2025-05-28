@@ -1,0 +1,106 @@
+{
+    "category": "Types",
+    "name": "EQUALS_STRUCT",
+    "tests": [
+        {
+            "name": "Equal",
+            "script": "11C51112C5110A110A9C",
+            "steps": [
+                {
+                    "actions": [
+                        "Execute"
+                    ],
+                    "result": {
+                        "state": "HALT",
+                        "resultStack": [
+                            {
+                                "type": "Boolean",
+                                "value": true
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "NotEqual",
+            "script": "11C51112C5110A110B9C",
+            "steps": [
+                {
+                    "actions": [
+                        "Execute"
+                    ],
+                    "result": {
+                        "state": "HALT",
+                        "resultStack": [
+                            {
+                                "type": "Boolean",
+                                "value": false
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "NotEqualDifferentSize",
+            "script": "11C51112C5110A9C",
+            "steps": [
+                {
+                    "actions": [
+                        "Execute"
+                    ],
+                    "result": {
+                        "state": "HALT",
+                        "resultStack": [
+                            {
+                                "type": "Boolean",
+                                "value": false
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "CircularReference",
+            "script": "52C0C001005152C0C0010051529C",
+            "steps": [
+                {
+                    "actions": [
+                        "Execute"
+                    ],
+                    "result": {
+                        "state": "HALT",
+                        "resultStack": [
+                            {
+                                "type": "Boolean",
+                                "value": true
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "NestedStructs",
+            "script": "11C5111252C0511011C5111252C051109C",
+            "steps": [
+                {
+                    "actions": [
+                        "Execute"
+                    ],
+                    "result": {
+                        "state": "HALT",
+                        "resultStack": [
+                            {
+                                "type": "Boolean",
+                                "value": true
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+} 

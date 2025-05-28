@@ -1,0 +1,56 @@
+# Create the network library
+add_library(neo_network OBJECT
+    ip_endpoint.cpp
+    message.cpp
+    tcp_server.cpp
+    p2p_server.cpp
+    upnp.cpp
+    p2p/message.cpp
+    p2p/node_capability.cpp
+    p2p/network_address.cpp
+    p2p/inventory_vector.cpp
+    p2p/connection.cpp
+    p2p/tcp_connection.cpp
+    p2p/remote_node.cpp
+    p2p/local_node.cpp
+    p2p/local_node_connection.cpp
+    p2p/local_node_messaging.cpp
+    p2p/peer.cpp
+    p2p/peer_list.cpp
+    p2p/task_manager.cpp
+    p2p/transaction_router.cpp
+    p2p/channels_config.cpp
+    p2p/payloads/extensible_payload.cpp
+    p2p/payloads/merkle_block_payload.cpp
+    p2p/payloads/oracle_response.cpp
+    p2p/payloads/addr_payload.cpp
+    p2p/payloads/inv_payload.cpp
+    p2p/payloads/ping_payload.cpp
+    p2p/payloads/headers_payload.cpp
+    p2p/payloads/get_blocks_payload.cpp
+    p2p/payloads/get_block_by_index_payload.cpp
+    p2p/payloads/version_payload.cpp
+    p2p/payloads/verack_payload.cpp
+    p2p/payloads/transaction_payload.cpp
+    p2p/payloads/block_payload.cpp
+)
+
+# Include directories
+target_include_directories(neo_network
+    PUBLIC
+        ${CMAKE_SOURCE_DIR}/include
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# Link dependencies
+if(Boost_FOUND)
+    target_link_libraries(neo_network
+        PUBLIC
+            Boost::system
+            Boost::thread
+    )
+    target_compile_definitions(neo_network PUBLIC NEO_HAS_BOOST)
+else()
+    message(WARNING "Boost not found - network features may be limited")
+endif()

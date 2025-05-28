@@ -1,0 +1,114 @@
+{
+    "category": "Control",
+    "name": "LEAVE",
+    "tests": [
+        {
+            "name": "LeaveFromTry",
+            "script": "0C080F114202123D001340",
+            "steps": [
+                {
+                    "actions": [
+                        "Execute"
+                    ],
+                    "result": {
+                        "state": "HALT",
+                        "resultStack": [
+                            {
+                                "type": "Integer",
+                                "value": 3
+                            },
+                            {
+                                "type": "Integer",
+                                "value": 1
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "LeaveFromCatch",
+            "script": "0C080F113A12131342023D001540",
+            "steps": [
+                {
+                    "actions": [
+                        "Execute"
+                    ],
+                    "result": {
+                        "state": "HALT",
+                        "resultStack": [
+                            {
+                                "type": "Integer",
+                                "value": 5
+                            },
+                            {
+                                "type": "Integer",
+                                "value": 3
+                            },
+                            {
+                                "type": "Integer",
+                                "value": 1
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "LeaveFromFinally",
+            "script": "0C0008111242021340",
+            "steps": [
+                {
+                    "actions": [
+                        "Execute"
+                    ],
+                    "result": {
+                        "state": "HALT",
+                        "resultStack": [
+                            {
+                                "type": "Integer",
+                                "value": 4
+                            },
+                            {
+                                "type": "Integer",
+                                "value": 2
+                            },
+                            {
+                                "type": "Integer",
+                                "value": 1
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "NestedTryLeave",
+            "script": "0C14001130132143D001440",
+            "steps": [
+                {
+                    "actions": [
+                        "Execute"
+                    ],
+                    "result": {
+                        "state": "HALT",
+                        "resultStack": [
+                            {
+                                "type": "Integer",
+                                "value": 5
+                            },
+                            {
+                                "type": "Integer",
+                                "value": 2
+                            },
+                            {
+                                "type": "Integer",
+                                "value": 1
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+} 

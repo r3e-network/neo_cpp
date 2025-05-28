@@ -1,0 +1,35 @@
+{
+  "name": "neo-cpp",
+  "version": "0.1.0",
+  "description": "Neo N3 C++ Node Implementation",
+  "homepage": "https://github.com/r3e-network/neo-cpp",
+  "license": "MIT",
+  "builtin-baseline": "8f54ef5453e7e76ff01e15988bf243e7247c5eb5",
+  "supports": "windows & linux & osx",
+  "dependencies": [
+    "boost-system",
+    "boost-filesystem", 
+    "boost-thread",
+    "boost-asio",
+    "boost-signals2",
+    "openssl",
+    "nlohmann-json",
+    "spdlog",
+    "rocksdb",
+    "gtest"
+  ],
+  "features": {
+    "tests": {
+      "description": "Build tests",
+      "dependencies": [
+        "gtest"
+      ]
+    },
+    "benchmarks": {
+      "description": "Build benchmarks",
+      "dependencies": [
+        "benchmark"
+      ]
+    }
+  }
+} 
