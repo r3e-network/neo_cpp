@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  neo-cpp-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: neo-cpp-tests
+    volumes:
+      - ./test-results:/neo-cpp/build/test-results
+    environment:
+      - GTEST_OUTPUT=xml:/neo-cpp/build/test-results/
+    command: >
+      sh -c "ctest --verbose --output-on-failure &&
+             echo '✅ All tests completed! Results saved to test-results/'"
+    
+  neo-cpp-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: neo-cpp-dev
+    volumes:
+      - .:/neo-cpp
+      - neo-build:/neo-cpp/build
+    working_dir: /neo-cpp
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+
+volumes:
+  neo-build:
