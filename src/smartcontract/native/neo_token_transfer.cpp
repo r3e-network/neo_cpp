@@ -1,5 +1,6 @@
 #include <neo/smartcontract/native/neo_token_transfer.h>
 #include <neo/smartcontract/native/neo_token_account.h>
+#include <neo/smartcontract/native/neo_token_candidate.h>
 #include <neo/smartcontract/native/neo_token_gas.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/vm/stack_item.h>
@@ -22,10 +23,10 @@ namespace neo::smartcontract::native
         return io::Fixed8(reader.ReadInt64());
     }
 
-    bool NeoTokenTransfer::Transfer(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot, const io::UInt160& from, const io::UInt160& to, const io::Fixed8& amount)
+    bool NeoTokenTransfer::Transfer(const NeoToken& token, ApplicationEngine& engine, std::shared_ptr<persistence::DataCache> snapshot, const io::UInt160& from, const io::UInt160& to, const io::Fixed8& amount)
     {
         // Check if the amount is valid
-        if (amount.GetValue() <= 0)
+        if (amount.Value() <= 0)
             return false;
 
         // Check if the from account is the null account (for minting)
@@ -35,19 +36,19 @@ namespace neo::smartcontract::native
             auto fromState = NeoTokenAccount::GetAccountState(token, snapshot, from);
 
             // Check if the from account has enough balance
-            if (fromState.balance < amount.GetValue())
+            if (fromState.balance < amount.Value())
                 return false;
 
             // Update the from account state
-            fromState.balance -= amount.GetValue();
+            fromState.balance -= amount.Value();
 
             // Save the from account state
             std::ostringstream fromStream;
             io::BinaryWriter fromWriter(fromStream);
-            fromWriter.Write(fromState);
+            fromState.Serialize(fromWriter);
             std::string fromData = fromStream.str();
 
-            persistence::StorageKey fromKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Account), io::ByteVector(io::ByteSpan(from.Data(), from.Size())));
+            persistence::StorageKey fromKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Account), io::ByteVector(io::ByteSpan(from.Data(), io::UInt160::Size)));
             persistence::StorageItem fromItem(io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(fromData.data()), fromData.size())));
             snapshot->Add(fromKey, fromItem);
 
@@ -57,12 +58,12 @@ namespace neo::smartcontract::native
                 auto candidateState = NeoTokenCandidate::GetCandidateState(token, snapshot, fromState.voteTo);
                 if (candidateState.registered)
                 {
-                    candidateState.votes -= amount.GetValue();
+                    candidateState.votes -= amount.Value();
 
                     // Save the candidate state
                     std::ostringstream candidateStream;
                     io::BinaryWriter candidateWriter(candidateStream);
-                    candidateWriter.Write(candidateState);
+                    candidateState.Serialize(candidateWriter);
                     std::string candidateData = candidateStream.str();
 
                     persistence::StorageKey candidateKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Candidate), fromState.voteTo.ToArray());
@@ -79,22 +80,23 @@ namespace neo::smartcontract::native
             auto toState = NeoTokenAccount::GetAccountState(token, snapshot, to);
 
             // Update the to account state
-            toState.balance += amount.GetValue();
+            toState.balance += amount.Value();
 
             // If this is the first time the account is receiving NEO, set the balance height
-            if (toState.balanceHeight == 0)
+            if (toState.balance == 0)
             {
-                // TODO: Get the current block height
-                toState.balanceHeight = 0;
+                // Get the current block height from ApplicationEngine
+                uint32_t currentHeight = engine.GetCurrentBlockHeight();
+                toState.balanceHeight = currentHeight;
             }
 
             // Save the to account state
             std::ostringstream toStream;
             io::BinaryWriter toWriter(toStream);
-            toWriter.Write(toState);
+            toState.Serialize(toWriter);
             std::string toData = toStream.str();
 
-            persistence::StorageKey toKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Account), io::ByteVector(io::ByteSpan(to.Data(), to.Size())));
+            persistence::StorageKey toKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Account), io::ByteVector(io::ByteSpan(to.Data(), io::UInt160::Size)));
             persistence::StorageItem toItem(io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(toData.data()), toData.size())));
             snapshot->Add(toKey, toItem);
 
@@ -104,12 +106,12 @@ namespace neo::smartcontract::native
                 auto candidateState = NeoTokenCandidate::GetCandidateState(token, snapshot, toState.voteTo);
                 if (candidateState.registered)
                 {
-                    candidateState.votes += amount.GetValue();
+                    candidateState.votes += amount.Value();
 
                     // Save the candidate state
                     std::ostringstream candidateStream;
                     io::BinaryWriter candidateWriter(candidateStream);
-                    candidateWriter.Write(candidateState);
+                    candidateState.Serialize(candidateWriter);
                     std::string candidateData = candidateStream.str();
 
                     persistence::StorageKey candidateKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Candidate), toState.voteTo.ToArray());
@@ -125,7 +127,7 @@ namespace neo::smartcontract::native
     std::shared_ptr<vm::StackItem> NeoTokenTransfer::OnTotalSupply(const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
         auto totalSupply = GetTotalSupply(token, engine.GetSnapshot());
-        return vm::StackItem::Create(totalSupply.GetValue());
+        return vm::StackItem::Create(totalSupply.Value());
     }
 
     std::shared_ptr<vm::StackItem> NeoTokenTransfer::OnTransfer(const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
@@ -160,7 +162,7 @@ namespace neo::smartcontract::native
         io::Fixed8 amount(amountItem->GetInteger());
 
         // Check if the amount is valid
-        if (amount.GetValue() <= 0)
+        if (amount.Value() <= 0)
             throw std::runtime_error("The amount must be a positive number");
 
         // Check witness
@@ -174,13 +176,13 @@ namespace neo::smartcontract::native
             NeoTokenGas::DistributeGas(token, engine, from, fromState);
         }
 
-        bool result = Transfer(token, engine.GetSnapshot(), from, to, amount);
+        bool result = Transfer(token, engine, engine.GetSnapshot(), from, to, amount);
 
         // Notify transfer event
         std::vector<std::shared_ptr<vm::StackItem>> state = {
             from == io::UInt160() ? vm::StackItem::Null() : vm::StackItem::Create(from),
             to == io::UInt160() ? vm::StackItem::Null() : vm::StackItem::Create(to),
-            vm::StackItem::Create(amount.GetValue())
+            vm::StackItem::Create(amount.Value())
         };
 
         engine.Notify(token.GetScriptHash(), "Transfer", state);

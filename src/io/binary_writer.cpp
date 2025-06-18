@@ -23,6 +23,11 @@ namespace neo::io
         Write(value);
     }
 
+    void BinaryWriter::WriteBool(bool value)
+    {
+        Write(value);
+    }
+
     void BinaryWriter::Write(uint8_t value)
     {
         stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
@@ -38,6 +43,11 @@ namespace neo::io
         stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
     }
 
+    void BinaryWriter::WriteUInt16(uint16_t value)
+    {
+        Write(value);
+    }
+
     void BinaryWriter::Write(uint32_t value)
     {
         stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
@@ -46,6 +56,11 @@ namespace neo::io
     void BinaryWriter::Write(uint64_t value)
     {
         stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
+    }
+
+    void BinaryWriter::WriteUInt64(uint64_t value)
+    {
+        Write(value);
     }
 
     void BinaryWriter::Write(int8_t value)

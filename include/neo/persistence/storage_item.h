@@ -110,9 +110,12 @@ namespace neo::persistence
                 std::stringstream ss;
                 io::BinaryWriter writer(ss);
                 
-                // For IInteroperable objects, we would use ToStackItem then serialize
-                // For now, just store a placeholder
-                value_ = io::ByteVector(1); // Placeholder
+                // Serialize the object using its Serialize method
+                obj->Serialize(writer);
+                
+                // Convert the stream to ByteVector
+                std::string data = ss.str();
+                value_ = io::ByteVector(reinterpret_cast<const uint8_t*>(data.c_str()), data.size());
             }
             else
             {

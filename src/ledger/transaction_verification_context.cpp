@@ -1,171 +1,114 @@
 #include <neo/ledger/transaction_verification_context.h>
+#include <neo/ledger/transaction.h>
+#include <sstream>
 
 namespace neo::ledger
 {
-    TransactionVerificationContext::TransactionVerificationContext()
-    {
-    }
+    TransactionVerificationContext::TransactionVerificationContext() = default;
 
-    VerifyResult TransactionVerificationContext::AddTransaction(std::shared_ptr<Transaction> transaction)
+    TransactionVerificationContext::~TransactionVerificationContext() = default;
+
+    bool TransactionVerificationContext::CheckTransaction(std::shared_ptr<Transaction> transaction)
     {
-        if (!transaction)
-        {
-            return VerifyResult::Invalid;
+        if (!transaction) {
+            return false;
         }
 
         auto hash = transaction->GetHash();
-
-        // Check if transaction already exists
-        if (Contains(hash))
-        {
-            return VerifyResult::AlreadyExists;
+        
+        // Check if transaction is already in context
+        if (transaction_hashes_.find(hash) != transaction_hashes_.end()) {
+            return false;
         }
 
-        // Validate the transaction
-        auto result = ValidateTransaction(transaction);
-        if (result != VerifyResult::Succeed)
-        {
-            return result;
+        // Check for output conflicts
+        if (HasOutputConflict(transaction)) {
+            return false;
         }
 
-        // Check for conflicts
-        result = CheckConflicts(transaction);
-        if (result != VerifyResult::Succeed)
-        {
-            return result;
+        // Check for account conflicts
+        if (HasAccountConflict(transaction)) {
+            return false;
         }
 
-        // Add to context
+        return true;
+    }
+
+    void TransactionVerificationContext::AddTransaction(std::shared_ptr<Transaction> transaction)
+    {
+        if (!transaction) {
+            return;
+        }
+
+        auto hash = transaction->GetHash();
+        
+        // Add transaction hash
         transaction_hashes_.insert(hash);
-        transactions_[hash] = transaction;
 
-        return VerifyResult::Succeed;
-    }
-
-    bool TransactionVerificationContext::RemoveTransaction(const io::UInt256& hash)
-    {
-        auto it = transactions_.find(hash);
-        if (it != transactions_.end())
-        {
-            transactions_.erase(it);
-            transaction_hashes_.erase(hash);
-            return true;
+        // Track used outputs
+        for (const auto& input : transaction->GetInputs()) {
+            auto key = MakeOutputKey(input.GetPrevHash(), input.GetPrevIndex());
+            used_outputs_[key] = hash;
         }
-        return false;
+
+        // Track account conflicts
+        for (const auto& signer : transaction->GetSigners()) {
+            account_conflicts_[signer.account] = hash;
+        }
     }
 
-    bool TransactionVerificationContext::Contains(const io::UInt256& hash) const
+    bool TransactionVerificationContext::IsConflicted(std::shared_ptr<Transaction> transaction) const
     {
-        return transaction_hashes_.count(hash) > 0;
+        if (!transaction) {
+            return false;
+        }
+
+        return HasOutputConflict(transaction) || HasAccountConflict(transaction);
     }
 
-    size_t TransactionVerificationContext::Count() const
+    void TransactionVerificationContext::Reset()
     {
-        return transactions_.size();
+        Clear();
     }
 
     void TransactionVerificationContext::Clear()
     {
+        used_outputs_.clear();
+        account_conflicts_.clear();
         transaction_hashes_.clear();
-        transactions_.clear();
     }
 
-    VerifyResult TransactionVerificationContext::CheckTransaction(std::shared_ptr<Transaction> transaction) const
+    size_t TransactionVerificationContext::GetTransactionCount() const
     {
-        if (!transaction)
-        {
-            return VerifyResult::Invalid;
-        }
-
-        auto hash = transaction->GetHash();
-
-        // Check if transaction already exists
-        if (Contains(hash))
-        {
-            return VerifyResult::AlreadyExists;
-        }
-
-        // Validate the transaction
-        auto result = ValidateTransaction(transaction);
-        if (result != VerifyResult::Succeed)
-        {
-            return result;
-        }
-
-        // Check for conflicts
-        return CheckConflicts(transaction);
+        return transaction_hashes_.size();
     }
 
-    std::unordered_set<io::UInt256> TransactionVerificationContext::GetTransactionHashes() const
+    std::string TransactionVerificationContext::MakeOutputKey(const io::UInt256& prev_hash, uint32_t index) const
     {
-        return transaction_hashes_;
+        std::ostringstream oss;
+        oss << prev_hash.ToString() << ":" << index;
+        return oss.str();
     }
 
-    VerifyResult TransactionVerificationContext::CheckConflicts(std::shared_ptr<Transaction> transaction) const
+    bool TransactionVerificationContext::HasOutputConflict(std::shared_ptr<Transaction> transaction) const
     {
-        // Check for transaction hash conflicts (double spending)
-        auto txHash = transaction->GetHash();
-        if (transaction_hashes_.find(txHash) != transaction_hashes_.end())
-        {
-            return VerifyResult::AlreadyExists;
-        }
-
-        // Check for oracle response conflicts
-        auto oracleAttr = transaction->GetOracleResponse();
-        if (oracleAttr)
-        {
-            auto oracleId = oracleAttr->GetId();
-            // Check if any existing transaction has the same oracle response ID
-            for (const auto& [existingHash, existingTx] : transactions_)
-            {
-                auto existingOracleAttr = existingTx->GetOracleResponse();
-                if (existingOracleAttr && existingOracleAttr->GetId() == oracleId)
-                {
-                    return VerifyResult::HasConflicts;
-                }
+        for (const auto& input : transaction->GetInputs()) {
+            auto key = MakeOutputKey(input.GetPrevHash(), input.GetPrevIndex());
+            if (used_outputs_.find(key) != used_outputs_.end()) {
+                return true;
             }
         }
-
-        return VerifyResult::Succeed;
+        return false;
     }
 
-    VerifyResult TransactionVerificationContext::ValidateTransaction(std::shared_ptr<Transaction> transaction) const
+    bool TransactionVerificationContext::HasAccountConflict(std::shared_ptr<Transaction> transaction) const
     {
-        // Basic transaction validation
-        // This is a simplified implementation
-
-        try
-        {
-            // Check transaction size
-            if (transaction->GetSize() == 0)
-            {
-                return VerifyResult::Invalid;
+        for (const auto& signer : transaction->GetSigners()) {
+            if (account_conflicts_.find(signer.account) != account_conflicts_.end()) {
+                return true;
             }
-
-            // Check if transaction is expired
-            // This would require access to current block height
-            // For now, we'll assume it's valid
-
-            // Check network fee
-            if (transaction->GetNetworkFee() < 0)
-            {
-                return VerifyResult::InsufficientFunds;
-            }
-
-            // Check system fee
-            if (transaction->GetSystemFee() < 0)
-            {
-                return VerifyResult::InsufficientFunds;
-            }
-
-            // Additional validations would go here
-
-            return VerifyResult::Succeed;
         }
-        catch (...)
-        {
-            return VerifyResult::Invalid;
-        }
+        return false;
     }
 
     // TransactionRemovedEventArgs implementation

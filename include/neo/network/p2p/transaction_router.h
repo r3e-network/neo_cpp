@@ -2,7 +2,7 @@
 
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/mempool.h>
-#include <neo/ledger/transaction.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
 #include <neo/io/uint256.h>
 #include <memory>
 #include <unordered_map>
@@ -14,6 +14,9 @@
 
 namespace neo::network::p2p
 {
+    // Use Neo3Transaction from payloads namespace
+    using Neo3Transaction = payloads::Neo3Transaction;
+    
     /**
      * @brief Routes transactions in the P2P network.
      */
@@ -53,13 +56,13 @@ namespace neo::network::p2p
          * @param transaction The transaction.
          * @return True if the transaction was added, false otherwise.
          */
-        bool AddTransaction(std::shared_ptr<ledger::Transaction> transaction);
+        bool AddTransaction(std::shared_ptr<Neo3Transaction> transaction);
 
         /**
          * @brief Gets the transactions in the router.
          * @return The transactions.
          */
-        std::vector<std::shared_ptr<ledger::Transaction>> GetTransactions() const;
+        std::vector<std::shared_ptr<Neo3Transaction>> GetTransactions() const;
 
         /**
          * @brief Removes a transaction from the router.
@@ -71,7 +74,7 @@ namespace neo::network::p2p
     private:
         std::shared_ptr<ledger::Blockchain> blockchain_;
         std::shared_ptr<ledger::MemoryPool> memPool_;
-        std::unordered_map<io::UInt256, std::shared_ptr<ledger::Transaction>> transactions_;
+        std::unordered_map<io::UInt256, std::shared_ptr<Neo3Transaction>> transactions_;
         mutable std::mutex transactionsMutex_;
         std::atomic<bool> running_;
         std::thread routerThread_;

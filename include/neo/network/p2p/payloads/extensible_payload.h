@@ -1,152 +1,176 @@
 #pragma once
 
-#include <neo/network/p2p/ipayload.h>
-#include <neo/network/p2p/iinventory.h>
-#include <neo/network/p2p/inventory_type.h>
-#include <neo/network/p2p/inventory_vector.h>
-#include <neo/cryptography/ecc/witness.h>
-#include <neo/io/byte_vector.h>
+#include <neo/network/p2p/payloads/ipayload.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
-#include <neo/types.h>
+#include <neo/io/binary_writer.h>
+#include <neo/io/binary_reader.h>
+#include <neo/io/ijson_serializable.h>
+#include <neo/cryptography/witness.h>
 #include <string>
+#include <vector>
 #include <memory>
 
 namespace neo::network::p2p::payloads
 {
     /**
-     * @brief Represents an extensible message that can be relayed.
+     * @brief Represents an extensible payload for network communication.
+     * This matches the C# ExtensiblePayload.cs implementation exactly.
      */
-    class ExtensiblePayload : public IPayload, public IInventory
+    class ExtensiblePayload : public IPayload, public io::IJsonSerializable
     {
     public:
         /**
          * @brief Default constructor.
          */
-        ExtensiblePayload();
+        ExtensiblePayload() = default;
 
         /**
-         * @brief Gets the category of the extension.
-         * @return The category of the extension.
+         * @brief Constructs an ExtensiblePayload with specified parameters.
+         * @param category The category string.
+         * @param valid_block_start The starting block for validity.
+         * @param valid_block_end The ending block for validity.
+         * @param sender The sender's script hash.
+         * @param data The payload data.
+         * @param witness The witness for verification.
          */
-        const std::string& GetCategory() const;
+        ExtensiblePayload(const std::string& category,
+                         uint32_t valid_block_start,
+                         uint32_t valid_block_end,
+                         const io::UInt160& sender,
+                         const io::ByteVector& data,
+                         const cryptography::Witness& witness);
 
         /**
-         * @brief Sets the category of the extension.
-         * @param category The category of the extension.
+         * @brief Gets the category string.
+         * @return The category.
          */
-        void SetCategory(const std::string& category);
+        const std::string& GetCategory() const { return category_; }
 
         /**
-         * @brief Gets the block height at which the payload becomes valid.
-         * @return The block height at which the payload becomes valid.
+         * @brief Sets the category string.
+         * @param category The category to set.
          */
-        uint32_t GetValidBlockStart() const;
+        void SetCategory(const std::string& category) { category_ = category; }
 
         /**
-         * @brief Sets the block height at which the payload becomes valid.
-         * @param validBlockStart The block height at which the payload becomes valid.
+         * @brief Gets the valid block start.
+         * @return The valid block start.
          */
-        void SetValidBlockStart(uint32_t validBlockStart);
+        uint32_t GetValidBlockStart() const { return valid_block_start_; }
 
         /**
-         * @brief Gets the block height at which the payload becomes invalid.
-         * @return The block height at which the payload becomes invalid.
+         * @brief Sets the valid block start.
+         * @param start The valid block start.
          */
-        uint32_t GetValidBlockEnd() const;
+        void SetValidBlockStart(uint32_t start) { valid_block_start_ = start; }
 
         /**
-         * @brief Sets the block height at which the payload becomes invalid.
-         * @param validBlockEnd The block height at which the payload becomes invalid.
+         * @brief Gets the valid block end.
+         * @return The valid block end.
          */
-        void SetValidBlockEnd(uint32_t validBlockEnd);
+        uint32_t GetValidBlockEnd() const { return valid_block_end_; }
 
         /**
-         * @brief Gets the sender of the payload.
-         * @return The sender of the payload.
+         * @brief Sets the valid block end.
+         * @param end The valid block end.
          */
-        const types::UInt160& GetSender() const;
+        void SetValidBlockEnd(uint32_t end) { valid_block_end_ = end; }
 
         /**
-         * @brief Sets the sender of the payload.
-         * @param sender The sender of the payload.
+         * @brief Gets the sender's script hash.
+         * @return The sender.
          */
-        void SetSender(const types::UInt160& sender);
+        const io::UInt160& GetSender() const { return sender_; }
 
         /**
-         * @brief Gets the data of the payload.
-         * @return The data of the payload.
+         * @brief Sets the sender's script hash.
+         * @param sender The sender to set.
          */
-        const io::ByteVector& GetData() const;
+        void SetSender(const io::UInt160& sender) { sender_ = sender; }
 
         /**
-         * @brief Sets the data of the payload.
-         * @param data The data of the payload.
+         * @brief Gets the payload data.
+         * @return The data.
          */
-        void SetData(const io::ByteVector& data);
+        const io::ByteVector& GetData() const { return data_; }
 
         /**
-         * @brief Gets the witness of the payload.
-         * @return The witness of the payload.
+         * @brief Sets the payload data.
+         * @param data The data to set.
          */
-        const cryptography::ecc::Witness& GetWitness() const;
+        void SetData(const io::ByteVector& data) { data_ = data; }
 
         /**
-         * @brief Sets the witness of the payload.
-         * @param witness The witness of the payload.
+         * @brief Gets the witness.
+         * @return The witness.
          */
-        void SetWitness(const cryptography::ecc::Witness& witness);
+        const cryptography::Witness& GetWitness() const { return witness_; }
 
         /**
-         * @brief Gets the hash of the payload.
-         * @return The hash of the payload.
+         * @brief Sets the witness.
+         * @param witness The witness to set.
          */
-        const types::UInt256& GetHash() const override;
+        void SetWitness(const cryptography::Witness& witness) { witness_ = witness; }
 
-        /**
-         * @brief Gets the inventory type of the payload.
-         * @return The inventory type of the payload.
-         */
-        InventoryType GetInventoryType() const override;
-
-        /**
-         * @brief Serializes the payload to a binary writer.
-         * @param writer The binary writer.
-         */
+        // IPayload implementation
         void Serialize(io::BinaryWriter& writer) const override;
-
-        /**
-         * @brief Deserializes the payload from a binary reader.
-         * @param reader The binary reader.
-         */
         void Deserialize(io::BinaryReader& reader) override;
+        io::UInt256 GetHash() const override;
+        size_t GetSize() const override;
+
+        // IJsonSerializable implementation
+        nlohmann::json ToJson() const override;
+        void FromJson(const nlohmann::json& json) override;
 
         /**
-         * @brief Serializes the payload to a JSON writer.
-         * @param writer The JSON writer.
+         * @brief Verifies the extensible payload.
+         * @param settings The protocol settings.
+         * @param snapshot The data cache snapshot.
+         * @return True if valid, false otherwise.
          */
-        void SerializeJson(io::JsonWriter& writer) const override;
+        bool Verify(std::shared_ptr<config::ProtocolSettings> settings,
+                   std::shared_ptr<persistence::DataCache> snapshot) const;
 
         /**
-         * @brief Deserializes the payload from a JSON reader.
-         * @param reader The JSON reader.
+         * @brief Checks if the payload is valid for the specified block index.
+         * @param block_index The block index to check.
+         * @return True if valid, false otherwise.
          */
-        void DeserializeJson(const io::JsonReader& reader) override;
+        bool IsValidFor(uint32_t block_index) const;
+
+        /**
+         * @brief Gets the unsigned data for verification.
+         * @return The unsigned data.
+         */
+        io::ByteVector GetUnsignedData() const;
+
+        /**
+         * @brief Creates an extensible payload.
+         * @param category The category.
+         * @param valid_block_start The starting block.
+         * @param valid_block_end The ending block.
+         * @param sender The sender.
+         * @param data The payload data.
+         * @return The created extensible payload.
+         */
+        static std::shared_ptr<ExtensiblePayload> Create(const std::string& category,
+                                                        uint32_t valid_block_start,
+                                                        uint32_t valid_block_end,
+                                                        const io::UInt160& sender,
+                                                        const io::ByteVector& data);
 
     private:
         std::string category_;
-        uint32_t validBlockStart_;
-        uint32_t validBlockEnd_;
-        types::UInt160 sender_;
+        uint32_t valid_block_start_ = 0;
+        uint32_t valid_block_end_ = 0;
+        io::UInt160 sender_;
         io::ByteVector data_;
-        cryptography::ecc::Witness witness_;
-        mutable types::UInt256 hash_;
-        mutable bool hashCalculated_;
+        cryptography::Witness witness_;
 
-        /**
-         * @brief Calculates the hash of the payload.
-         * @return The hash of the payload.
-         */
-        types::UInt256 CalculateHash() const;
+        // Cached hash
+        mutable std::optional<io::UInt256> hash_cache_;
+        mutable bool hash_calculated_ = false;
     };
-}
+
+} // namespace neo::network::p2p::payloads

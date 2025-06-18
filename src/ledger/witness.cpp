@@ -41,8 +41,7 @@ namespace neo::ledger
 
     int Witness::GetSize() const
     {
-        // Exactly match C# Witness.Size calculation: InvocationScript.GetVarSize() + VerificationScript.GetVarSize()
-        return invocationScript_.GetVarSize() + verificationScript_.GetVarSize();
+        return static_cast<int>(invocationScript_.Size() + verificationScript_.Size() + 2); // +2 for length prefixes
     }
 
     void Witness::Serialize(io::BinaryWriter& writer) const
@@ -67,9 +66,13 @@ namespace neo::ledger
 
     void Witness::DeserializeJson(const io::JsonReader& reader)
     {
-        // JSON deserialization implementation
-        // This would parse the JSON object and extract invocation and verification scripts
-        // For now, this is a placeholder
+        // Read invocation script as hex string
+        std::string invocationHex = reader.ReadString("invocation");
+        invocationScript_ = io::ByteVector::ParseHex(invocationHex);
+        
+        // Read verification script as hex string
+        std::string verificationHex = reader.ReadString("verification");
+        verificationScript_ = io::ByteVector::ParseHex(verificationHex);
     }
 
     bool Witness::operator==(const Witness& other) const

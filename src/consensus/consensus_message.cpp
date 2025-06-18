@@ -1,91 +1,88 @@
 #include <neo/consensus/consensus_message.h>
-#include <neo/io/binary_reader.h>
-#include <neo/io/binary_writer.h>
-#include <neo/cryptography/hash.h>
-#include <neo/cryptography/ecc/secp256r1.h>
-#include <sstream>
+#include <neo/consensus/change_view_message.h>
+#include <neo/consensus/commit_message.h>
+#include <neo/consensus/prepare_request.h>
+#include <neo/consensus/prepare_response.h>
+#include <neo/consensus/recovery_message.h>
+#include <neo/consensus/recovery_request.h>
+#include <neo/io/memory_stream.h>
+#include <stdexcept>
 
 namespace neo::consensus
 {
-    ConsensusMessage::ConsensusMessage(MessageType type, uint8_t viewNumber)
-        : type_(type), viewNumber_(viewNumber), validatorIndex_(0)
+    ConsensusMessage::ConsensusMessage(MessageType type)
+        : type_(type)
     {
     }
-    
-    MessageType ConsensusMessage::GetType() const
-    {
-        return type_;
-    }
-    
-    uint8_t ConsensusMessage::GetViewNumber() const
-    {
-        return viewNumber_;
-    }
-    
-    uint16_t ConsensusMessage::GetValidatorIndex() const
-    {
-        return validatorIndex_;
-    }
-    
-    void ConsensusMessage::SetValidatorIndex(uint16_t validatorIndex)
-    {
-        validatorIndex_ = validatorIndex;
-    }
-    
-    const io::ByteVector& ConsensusMessage::GetSignature() const
-    {
-        return signature_;
-    }
-    
-    void ConsensusMessage::SetSignature(const io::ByteVector& signature)
-    {
-        signature_ = signature;
-    }
-    
+
     void ConsensusMessage::Serialize(io::BinaryWriter& writer) const
     {
         writer.WriteByte(static_cast<uint8_t>(type_));
+        writer.WriteUInt32(blockIndex_);
+        writer.WriteByte(validatorIndex_);
         writer.WriteByte(viewNumber_);
-        writer.WriteUInt16(validatorIndex_);
-        writer.WriteVarBytes(signature_.Data(), signature_.Size());
     }
-    
+
     void ConsensusMessage::Deserialize(io::BinaryReader& reader)
     {
-        type_ = static_cast<MessageType>(reader.ReadByte());
+        auto readType = static_cast<MessageType>(reader.ReadByte());
+        if (readType != type_)
+            throw std::runtime_error("Invalid message type");
+        
+        blockIndex_ = reader.ReadUInt32();
+        validatorIndex_ = reader.ReadByte();
         viewNumber_ = reader.ReadByte();
-        validatorIndex_ = reader.ReadUInt16();
-        signature_ = reader.ReadVarBytes();
     }
-    
-    io::ByteVector ConsensusMessage::GetData() const
+
+    size_t ConsensusMessage::GetSize() const
     {
-        std::ostringstream stream;
-        io::BinaryWriter writer(stream);
-        writer.WriteByte(static_cast<uint8_t>(type_));
-        writer.WriteByte(viewNumber_);
-        writer.WriteUInt16(validatorIndex_);
-        std::string data = stream.str();
-        
-        return io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
+        return sizeof(uint8_t) +    // Type
+               sizeof(uint32_t) +   // BlockIndex
+               sizeof(uint8_t) +    // ValidatorIndex
+               sizeof(uint8_t);     // ViewNumber
     }
-    
-    bool ConsensusMessage::VerifySignature(const cryptography::ecc::ECPoint& publicKey) const
+
+    bool ConsensusMessage::Verify(const ProtocolSettings& settings) const
     {
-        if (signature_.IsEmpty())
-            return false;
-        
-        auto data = GetData();
-        auto hash = cryptography::Hash::Sha256(data.AsSpan());
-        
-        return cryptography::ecc::Secp256r1::VerifySignature(hash.AsSpan(), publicKey, signature_.AsSpan());
+        return validatorIndex_ < settings.GetValidatorsCount();
     }
-    
-    void ConsensusMessage::Sign(const cryptography::ecc::KeyPair& keyPair)
+
+    std::shared_ptr<ConsensusMessage> ConsensusMessage::DeserializeFrom(const io::ByteVector& data)
     {
-        auto data = GetData();
-        auto hash = cryptography::Hash::Sha256(data.AsSpan());
+        if (data.IsEmpty())
+            throw std::runtime_error("Empty data");
         
-        signature_ = cryptography::ecc::Secp256r1::Sign(hash.AsSpan(), keyPair);
+        auto type = static_cast<MessageType>(data[0]);
+        
+        std::shared_ptr<ConsensusMessage> message;
+        switch (type)
+        {
+            case MessageType::ChangeView:
+                message = std::make_shared<ChangeViewMessage>();
+                break;
+            case MessageType::PrepareRequest:
+                message = std::make_shared<PrepareRequest>();
+                break;
+            case MessageType::PrepareResponse:
+                message = std::make_shared<PrepareResponse>();
+                break;
+            case MessageType::Commit:
+                message = std::make_shared<CommitMessage>();
+                break;
+            case MessageType::RecoveryRequest:
+                message = std::make_shared<RecoveryRequest>();
+                break;
+            case MessageType::RecoveryMessage:
+                message = std::make_shared<RecoveryMessage>();
+                break;
+            default:
+                throw std::runtime_error("Unknown message type");
+        }
+        
+        io::MemoryStream stream(data);
+        io::BinaryReader reader(stream);
+        message->Deserialize(reader);
+        
+        return message;
     }
 }

@@ -21,7 +21,7 @@ namespace neo::network::p2p::payloads
 
     int BlockPayload::GetSize() const
     {
-        return block_ ? block_->GetSize() : 0;
+        return block_ ? static_cast<int>(block_->GetSize()) : 0;
     }
 
     BlockPayload BlockPayload::Create(std::shared_ptr<ledger::Block> block)

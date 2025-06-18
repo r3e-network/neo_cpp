@@ -84,8 +84,9 @@ namespace neo::smartcontract::native
                 if (notaries.empty())
                     notaries = GetNotaryNodes(engine.GetSnapshot());
 
-                // TODO: Extract nKeys from attribute data
-                auto nKeys = 1; // Stub for now
+                // Extract nKeys from NotaryAssisted attribute data
+                auto notaryAssistedAttr = tx->GetAttribute<ledger::NotaryAssisted>();
+                auto nKeys = notaryAssistedAttr ? notaryAssistedAttr->GetNKeys() : 1;
                 nFees += static_cast<int64_t>(nKeys) + 1;
 
                 if (tx->GetSender() == GetScriptHash())
@@ -248,8 +249,9 @@ namespace neo::smartcontract::native
 
                 auto policyContract = PolicyContract::GetInstance();
                 auto feePerKey = policyContract->GetAttributeFee(engine.GetSnapshot(), static_cast<uint8_t>(ledger::TransactionAttribute::Usage::NotaryAssisted));
-                // TODO: Extract nKeys from attribute data
-                auto nKeys = 1; // Stub for now
+                // Extract nKeys from NotaryAssisted attribute data
+                auto notaryAssistedAttr = tx->GetAttribute<ledger::NotaryAssisted>();
+                auto nKeys = notaryAssistedAttr ? notaryAssistedAttr->GetNKeys() : 1;
                 auto requiredFee = (static_cast<int64_t>(nKeys) + 1) * feePerKey;
                 if (deposit->Amount < tx->GetSystemFee() + tx->GetNetworkFee() + requiredFee)
                     return false;
@@ -378,7 +380,7 @@ namespace neo::smartcontract::native
         Till = static_cast<uint32_t>(structure[1]->GetInteger());
     }
 
-    std::shared_ptr<vm::StackItem> Notary::Deposit::ToStackItem(vm::IReferenceCounter* referenceCounter) const
+    std::shared_ptr<vm::StackItem> Notary::Deposit::ToStackItem(vm::IReferenceCounter* referenceCounter)
     {
         auto structure = vm::StackItem::CreateStruct(*referenceCounter);
         structure->Add(vm::StackItem::Create(Amount));

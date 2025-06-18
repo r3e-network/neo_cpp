@@ -229,10 +229,29 @@ namespace neo::io
         bool operator!=(const ByteVector& other) const { return data_ != other.data_; }
 
         /**
-         * @brief Gets the underlying vector.
-         * @return The underlying vector.
+         * @brief Gets the data as a const reference to std::vector.
+         * @return Const reference to the underlying vector.
          */
         const std::vector<uint8_t>& GetVector() const { return data_; }
+        
+        /**
+         * @brief Implicit conversion to std::vector<uint8_t>.
+         * @return Copy of the underlying vector.
+         */
+        operator std::vector<uint8_t>() const { return data_; }
+        
+        /**
+         * @brief Constructor from std::vector<uint8_t>.
+         * @param vec The vector to copy from.
+         */
+        ByteVector(const std::vector<uint8_t>& vec) : data_(vec) {}
+        
+        /**
+         * @brief Assignment from std::vector<uint8_t>.
+         * @param vec The vector to assign from.
+         * @return Reference to this ByteVector.
+         */
+        ByteVector& operator=(const std::vector<uint8_t>& vec) { data_ = vec; return *this; }
 
         /**
          * @brief Parses a hexadecimal string into a ByteVector.
@@ -276,6 +295,13 @@ namespace neo::io
          * @return The ByteVector.
          */
         static ByteVector FromHexString(const std::string& hex);
+
+        /**
+         * @brief Parses a hex string into a ByteVector (alias for FromHexString).
+         * @param hex The hex string.
+         * @return The ByteVector.
+         */
+        static ByteVector ParseHex(const std::string& hex) { return FromHexString(hex); }
 
         /**
          * @brief Converts the ByteVector to a base64 string.

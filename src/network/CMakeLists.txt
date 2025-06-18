@@ -33,6 +33,20 @@ add_library(neo_network OBJECT
     p2p/payloads/verack_payload.cpp
     p2p/payloads/transaction_payload.cpp
     p2p/payloads/block_payload.cpp
+    p2p/payloads/filter_load_payload.cpp
+    p2p/payloads/filter_add_payload.cpp
+    p2p/payloads/filter_clear_payload.cpp
+    p2p/payloads/get_addr_payload.cpp
+    p2p/payloads/get_headers_payload.cpp
+    p2p/payloads/mempool_payload.cpp
+    p2p/payloads/not_found_payload.cpp
+    p2p/payloads/reject_payload.cpp
+    p2p/payloads/neo3_transaction.cpp
+    p2p/payloads/conflicts.cpp
+    p2p/payloads/high_priority.cpp
+    p2p/payloads/not_valid_before.cpp
+    p2p/payloads/header.cpp
+    p2p/payloads/network_address_with_time.cpp
 )
 
 # Include directories

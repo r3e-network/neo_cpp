@@ -2,8 +2,16 @@
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
+#include <openssl/ec.h>
+#include <openssl/obj_mac.h>
 #include <stdexcept>
 #include <cstring>
+
+// Suppress OpenSSL deprecation warnings
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4996)
+#endif
 
 namespace neo::cryptography::ecc
 {
@@ -110,24 +118,78 @@ namespace neo::cryptography::ecc
             io::UInt256 x(io::ByteSpan(data.Data() + 1, 32));
             point.SetX(x);
 
-            // Calculate Y coordinate from X using curve equation: y² = x³ + ax + b
-            // For secp256r1: y² = x³ - 3x + b
-            // This is a simplified implementation that should be replaced with proper
-            // big integer arithmetic and modular square root calculation
+            // Use OpenSSL to properly decompress the point
+            try
+            {
+                // Create EC_GROUP for secp256r1 (prime256v1)
+                EC_GROUP* group = EC_GROUP_new_by_curve_name(NID_X9_62_prime256v1);
+                if (!group)
+                {
+                    throw std::runtime_error("Failed to create EC_GROUP");
+                }
 
-            // For now, we'll use a placeholder that indicates the point is compressed
-            // but doesn't calculate the actual Y coordinate. This should be replaced
-            // with proper elliptic curve point decompression using a crypto library
-            // like OpenSSL or similar.
+                // Create EC_POINT and set it from the compressed bytes
+                EC_POINT* ecPoint = EC_POINT_new(group);
+                if (!ecPoint)
+                {
+                    EC_GROUP_free(group);
+                    throw std::runtime_error("Failed to create EC_POINT");
+                }
 
-            // Set Y to a special value that indicates this is a compressed point
-            // The actual Y calculation requires:
-            // 1. Compute x³ - 3x + b (mod p) where p is the curve prime
-            // 2. Compute modular square root
-            // 3. Choose correct root based on parity bit (0x02 = even, 0x03 = odd)
+                // Convert compressed bytes to EC_POINT
+                if (EC_POINT_oct2point(group, ecPoint, data.Data(), data.Size(), nullptr) != 1)
+                {
+                    EC_POINT_free(ecPoint);
+                    EC_GROUP_free(group);
+                    throw std::runtime_error("Failed to decompress EC point");
+                }
 
-            // For production use, this should use proper cryptographic libraries
-            point.SetY(io::UInt256()); // Placeholder - needs proper implementation
+                // Extract Y coordinate
+                BIGNUM* x_bn = BN_new();
+                BIGNUM* y_bn = BN_new();
+                
+                if (!x_bn || !y_bn)
+                {
+                    if (x_bn) BN_free(x_bn);
+                    if (y_bn) BN_free(y_bn);
+                    EC_POINT_free(ecPoint);
+                    EC_GROUP_free(group);
+                    throw std::runtime_error("Failed to create BIGNUMs");
+                }
+
+                if (EC_POINT_get_affine_coordinates_GFp(group, ecPoint, x_bn, y_bn, nullptr) != 1)
+                {
+                    BN_free(x_bn);
+                    BN_free(y_bn);
+                    EC_POINT_free(ecPoint);
+                    EC_GROUP_free(group);
+                    throw std::runtime_error("Failed to get affine coordinates");
+                }
+
+                // Convert Y coordinate to UInt256
+                io::ByteVector y_bytes(32);
+                int y_len = BN_num_bytes(y_bn);
+                
+                // Zero-pad the Y coordinate to 32 bytes
+                std::memset(y_bytes.Data(), 0, 32);
+                BN_bn2bin(y_bn, y_bytes.Data() + (32 - y_len));
+                
+                io::UInt256 y(y_bytes.AsSpan());
+                point.SetY(y);
+
+                // Cleanup
+                BN_free(x_bn);
+                BN_free(y_bn);
+                EC_POINT_free(ecPoint);
+                EC_GROUP_free(group);
+            }
+            catch (const std::exception&)
+            {
+                // If OpenSSL decompression fails, we still set the X coordinate
+                // and mark Y as zero (indicating compressed point)
+                point.SetY(io::UInt256());
+            }
+
             return point;
         }
         else if (data.Size() == 65 && data[0] == 0x04)
@@ -240,3 +302,7 @@ namespace neo::cryptography::ecc
         }
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

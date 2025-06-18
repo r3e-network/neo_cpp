@@ -96,10 +96,13 @@ namespace neo::smartcontract::native
         return currentScriptHash == committeeAddress;
     }
 
-    std::tuple<io::UInt160, uint64_t> NameService::GetName(std::shared_ptr<persistence::StoreView> snapshot, const std::string& name) const
+    std::tuple<io::UInt160, uint64_t> NameService::GetName(std::shared_ptr<persistence::DataCache> snapshot, const std::string& name) const
     {
-        auto key = GetStorageKey(PREFIX_NAME, name);
-        auto value = GetStorageValue(snapshot, key);
+        if (!ValidateName(name))
+            throw std::runtime_error("Invalid name");
+
+        auto key = CreateStorageKey(PREFIX_NAME, io::ByteVector(reinterpret_cast<const uint8_t*>(name.data()), name.size()));
+        auto value = GetStorageValue(snapshot, key.GetKey());
         if (value.IsEmpty())
             throw std::runtime_error("Name not found");
 
@@ -121,62 +124,21 @@ namespace neo::smartcontract::native
         return std::regex_match(name, pattern);
     }
 
-    bool NameService::IsAvailable(std::shared_ptr<persistence::StoreView> snapshot, const std::string& name) const
+    bool NameService::IsAvailable(std::shared_ptr<persistence::DataCache> snapshot, const std::string& name) const
     {
-        // Check if name is valid
         if (!ValidateName(name))
             return false;
 
-        // Check if name is registered
-        auto key = GetStorageKey(PREFIX_NAME, name);
-        auto value = GetStorageValue(snapshot, key);
-        if (!value.IsEmpty())
+        try
         {
-            // Check if name is expired
-            std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
-            io::BinaryReader reader(stream);
-            reader.ReadSerializable<io::UInt160>();
-            uint64_t expiration = reader.ReadUInt64();
-            if (expiration > snapshot->GetCurrentBlockIndex())
-                return false;
+            auto [owner, expiration] = GetName(snapshot, name);
+            uint32_t currentHeight = snapshot->GetCurrentBlockIndex();
+            return expiration <= currentHeight;
         }
-
-        return true;
-    }
-
-    bool NameService::ValidateName(const std::string& name) const
-    {
-        // Check if name is empty
-        if (name.empty())
-            return false;
-
-        // Check if name is too long
-        if (name.length() > MAX_NAME_LENGTH)
-            return false;
-
-        // Check if name contains only valid characters
-        // Valid characters are: a-z, 0-9, -, .
-        static const std::regex nameRegex("^[a-z0-9-.]+$");
-        if (!std::regex_match(name, nameRegex))
-            return false;
-
-        // Check if name starts or ends with a hyphen
-        if (name[0] == '-' || name[name.length() - 1] == '-')
-            return false;
-
-        // Check if name contains consecutive hyphens
-        if (name.find("--") != std::string::npos)
-            return false;
-
-        // Check if name contains consecutive dots
-        if (name.find("..") != std::string::npos)
-            return false;
-
-        // Check if name starts or ends with a dot
-        if (name[0] == '.' || name[name.length() - 1] == '.')
-            return false;
-
-        return true;
+        catch (...)
+        {
+            return true; // Name not found, so it's available
+        }
     }
 
     bool NameService::ValidateRecordType(const std::string& type) const
@@ -220,21 +182,6 @@ namespace neo::smartcontract::native
         PutStorageValue(engine.GetSnapshot(), key, value);
 
         return vm::StackItem::Create(true);
-    }
-
-    bool NameService::CheckCommittee(ApplicationEngine& engine) const
-    {
-        // Get the current script hash
-        auto currentScriptHash = engine.GetCurrentScriptHash();
-
-        // Get the NEO token contract
-        auto neoToken = NeoToken::GetInstance();
-
-        // Get the committee address
-        auto committeeAddress = neoToken->GetCommitteeAddress(engine.GetSnapshot());
-
-        // Check if the current script hash is the committee address
-        return currentScriptHash == committeeAddress;
     }
 
     std::shared_ptr<vm::StackItem> NameService::OnIsAvailable(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)

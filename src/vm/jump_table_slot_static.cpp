@@ -106,42 +106,49 @@ namespace neo::vm
 
     void JumpTableSlotStatic::LDSFLD0(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         engine.Push(context.GetStaticField(0));
     }
 
     void JumpTableSlotStatic::LDSFLD1(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         engine.Push(context.GetStaticField(1));
     }
 
     void JumpTableSlotStatic::LDSFLD2(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         engine.Push(context.GetStaticField(2));
     }
 
     void JumpTableSlotStatic::LDSFLD3(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         engine.Push(context.GetStaticField(3));
     }
 
     void JumpTableSlotStatic::LDSFLD4(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         engine.Push(context.GetStaticField(4));
     }
 
     void JumpTableSlotStatic::LDSFLD5(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         engine.Push(context.GetStaticField(5));
     }
 
     void JumpTableSlotStatic::LDSFLD6(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         engine.Push(context.GetStaticField(6));
     }
@@ -155,42 +162,49 @@ namespace neo::vm
 
     void JumpTableSlotStatic::STSFLD0(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         context.SetStaticField(0, engine.Pop());
     }
 
     void JumpTableSlotStatic::STSFLD1(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         context.SetStaticField(1, engine.Pop());
     }
 
     void JumpTableSlotStatic::STSFLD2(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         context.SetStaticField(2, engine.Pop());
     }
 
     void JumpTableSlotStatic::STSFLD3(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         context.SetStaticField(3, engine.Pop());
     }
 
     void JumpTableSlotStatic::STSFLD4(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         context.SetStaticField(4, engine.Pop());
     }
 
     void JumpTableSlotStatic::STSFLD5(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         context.SetStaticField(5, engine.Pop());
     }
 
     void JumpTableSlotStatic::STSFLD6(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction;
         auto& context = engine.GetCurrentContext();
         context.SetStaticField(6, engine.Pop());
     }

@@ -10,26 +10,26 @@ namespace neo::vm
 {
     // Stack operations
 
-    void JumpTable::DEPTH(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::DEPTH(ExecutionEngine& engine, const Instruction&)
     {
         auto& context = engine.GetCurrentContext();
         auto size = context.GetEvaluationStack().size();
         engine.Push(StackItem::Create(static_cast<int64_t>(size)));
     }
 
-    void JumpTable::DROP(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::DROP(ExecutionEngine& engine, const Instruction&)
     {
         engine.Pop();
     }
 
-    void JumpTable::NIP(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::NIP(ExecutionEngine& engine, const Instruction&)
     {
         auto x = engine.Pop();
         engine.Pop();
         engine.Push(x);
     }
 
-    void JumpTable::XDROP(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::XDROP(ExecutionEngine& engine, const Instruction&)
     {
         auto n = engine.Pop()->GetInteger();
         if (n < 0)
@@ -55,35 +55,35 @@ namespace neo::vm
         }
     }
 
-    void JumpTable::CLEAR(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::CLEAR(ExecutionEngine& engine, const Instruction&)
     {
         auto& context = engine.GetCurrentContext();
         context.ClearStack();
     }
 
-    void JumpTable::DUP(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::DUP(ExecutionEngine& engine, const Instruction&)
     {
         auto x = engine.Peek(0);
         engine.Push(x);
     }
 
-    void JumpTable::OVER(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::OVER(ExecutionEngine& engine, const Instruction&)
     {
         auto x = engine.Peek(1);
         engine.Push(x);
     }
 
-    void JumpTable::PICK(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::PICK(ExecutionEngine& engine, const Instruction&)
     {
         auto n = engine.Pop()->GetInteger();
         if (n < 0)
             throw InvalidOperationException("Negative index for PICK");
 
-        auto x = engine.Peek(static_cast<size_t>(n));
+        auto x = engine.Peek(static_cast<int32_t>(n));
         engine.Push(x);
     }
 
-    void JumpTable::TUCK(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::TUCK(ExecutionEngine& engine, const Instruction&)
     {
         auto x1 = engine.Pop();
         auto x2 = engine.Pop();
@@ -92,7 +92,7 @@ namespace neo::vm
         engine.Push(x1);
     }
 
-    void JumpTable::SWAP(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::SWAP(ExecutionEngine& engine, const Instruction&)
     {
         auto x1 = engine.Pop();
         auto x2 = engine.Pop();
@@ -100,7 +100,7 @@ namespace neo::vm
         engine.Push(x2);
     }
 
-    void JumpTable::ROT(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::ROT(ExecutionEngine& engine, const Instruction&)
     {
         auto x1 = engine.Pop();
         auto x2 = engine.Pop();
@@ -110,7 +110,7 @@ namespace neo::vm
         engine.Push(x2);
     }
 
-    void JumpTable::ROLL(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::ROLL(ExecutionEngine& engine, const Instruction&)
     {
         auto n = engine.Pop()->GetInteger();
         if (n < 0)
@@ -141,7 +141,7 @@ namespace neo::vm
         engine.Push(target);
     }
 
-    void JumpTable::REVERSE3(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::REVERSE3(ExecutionEngine& engine, const Instruction&)
     {
         auto x1 = engine.Pop();
         auto x2 = engine.Pop();
@@ -151,7 +151,7 @@ namespace neo::vm
         engine.Push(x3);
     }
 
-    void JumpTable::REVERSE4(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::REVERSE4(ExecutionEngine& engine, const Instruction&)
     {
         auto x1 = engine.Pop();
         auto x2 = engine.Pop();
@@ -163,7 +163,7 @@ namespace neo::vm
         engine.Push(x4);
     }
 
-    void JumpTable::REVERSEN(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::REVERSEN(ExecutionEngine& engine, const Instruction&)
     {
         auto n = engine.Pop()->GetInteger();
         if (n < 0)

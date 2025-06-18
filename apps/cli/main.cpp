@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <exception>
 
 int main(int argc, char** argv)
 {
@@ -10,7 +11,7 @@ int main(int argc, char** argv)
         // Create main service
         neo::cli::MainService service;
         
-        // Run with command line arguments
+        // Convert command line arguments
         std::vector<std::string> args;
         for (int i = 1; i < argc; i++)
         {
@@ -24,7 +25,12 @@ int main(int argc, char** argv)
     }
     catch (const std::exception& e)
     {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Fatal error: " << e.what() << std::endl;
+        return 1;
+    }
+    catch (...)
+    {
+        std::cerr << "Unknown fatal error occurred" << std::endl;
         return 1;
     }
 }

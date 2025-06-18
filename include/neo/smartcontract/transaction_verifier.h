@@ -23,6 +23,7 @@ namespace neo::smartcontract
         Succeed,
         Failed,
         Invalid,
+        InvalidSignature,
         PolicyFail,
         InsufficientFunds,
         AlreadyExists,
@@ -49,6 +50,8 @@ namespace neo::smartcontract
                 return "Failed";
             case VerificationResult::Invalid:
                 return "Invalid";
+            case VerificationResult::InvalidSignature:
+                return "InvalidSignature";
             case VerificationResult::PolicyFail:
                 return "PolicyFail";
             case VerificationResult::InsufficientFunds:
@@ -252,12 +255,29 @@ namespace neo::smartcontract
          */
         bool IsMultiSignatureContract(const io::ByteVector& script);
 
-        std::shared_ptr<cache::Cache<VerificationOutput>> verificationCache_;
-        std::shared_ptr<metrics::Counter> verificationCounter_;
-        std::shared_ptr<metrics::Counter> verificationSuccessCounter_;
-        std::shared_ptr<metrics::Counter> verificationFailureCounter_;
-        std::shared_ptr<metrics::Histogram> verificationTimeHistogram_;
-        std::shared_ptr<metrics::Histogram> verificationGasHistogram_;
+        /**
+         * @brief Verifies a transaction's signature (internal helper).
+         * @param transaction The transaction to verify.
+         * @param context The verification context.
+         * @return The verification result.
+         */
+        VerificationResult VerifyTransactionSignature(const ledger::Transaction& transaction, const VerificationContext& context);
+
+        /**
+         * @brief Verifies a transaction's witness (internal helper).
+         * @param transaction The transaction to verify.
+         * @param context The verification context.
+         * @return The verification result.
+         */
+        VerificationResult VerifyTransactionWitness(const ledger::Transaction& transaction, const VerificationContext& context);
+
+        // Cache and metrics - using stub implementations for now
+        std::shared_ptr<void> verificationCache_;
+        std::shared_ptr<void> verificationCounter_;
+        std::shared_ptr<void> verificationSuccessCounter_;
+        std::shared_ptr<void> verificationFailureCounter_;
+        std::shared_ptr<void> verificationTimeHistogram_;
+        std::shared_ptr<void> verificationGasHistogram_;
     };
 
     /**

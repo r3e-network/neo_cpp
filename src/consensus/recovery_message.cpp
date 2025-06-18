@@ -61,7 +61,7 @@ namespace neo::consensus
             writer.WriteUInt16(message->GetValidatorIndex());
             writer.WriteByte(message->GetNewViewNumber());
             writer.WriteUInt64(message->GetTimestamp());
-            writer.WriteVarBytes(message->GetSignature().Data(), message->GetSignature().Size());
+            writer.WriteVarBytes(message->GetSignature().AsSpan());
         }
         
         // Serialize prepare request
@@ -79,9 +79,9 @@ namespace neo::consensus
                 writer.Write(hash);
             }
             
-            writer.WriteVarBytes(prepareRequest_->GetSignature().Data(), prepareRequest_->GetSignature().Size());
-            writer.WriteVarBytes(prepareRequest_->GetInvocationScript().Data(), prepareRequest_->GetInvocationScript().Size());
-            writer.WriteVarBytes(prepareRequest_->GetVerificationScript().Data(), prepareRequest_->GetVerificationScript().Size());
+            writer.WriteVarBytes(prepareRequest_->GetSignature().AsSpan());
+            writer.WriteVarBytes(prepareRequest_->GetInvocationScript().AsSpan());
+            writer.WriteVarBytes(prepareRequest_->GetVerificationScript().AsSpan());
         }
         else
         {
@@ -94,7 +94,7 @@ namespace neo::consensus
         {
             writer.WriteUInt16(message->GetValidatorIndex());
             writer.Write(message->GetPreparationHash());
-            writer.WriteVarBytes(message->GetSignature().Data(), message->GetSignature().Size());
+            writer.WriteVarBytes(message->GetSignature().AsSpan());
         }
         
         // Serialize commit messages
@@ -103,8 +103,8 @@ namespace neo::consensus
         {
             writer.WriteUInt16(message->GetValidatorIndex());
             writer.Write(message->GetCommitHash());
-            writer.WriteVarBytes(message->GetCommitSignature().Data(), message->GetCommitSignature().Size());
-            writer.WriteVarBytes(message->GetSignature().Data(), message->GetSignature().Size());
+            writer.WriteVarBytes(message->GetCommitSignature().AsSpan());
+            writer.WriteVarBytes(message->GetSignature().AsSpan());
         }
     }
     

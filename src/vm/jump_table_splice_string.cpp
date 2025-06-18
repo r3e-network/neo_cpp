@@ -33,7 +33,7 @@ namespace neo::vm
     }
 
     // JumpTableSpliceString implementations
-    void JumpTableSpliceString::CAT(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSpliceString::CAT(ExecutionEngine& engine, const Instruction&)
     {
         auto x2 = engine.Pop()->GetByteArray();
         auto x1 = engine.Pop()->GetByteArray();
@@ -49,7 +49,7 @@ namespace neo::vm
         engine.Push(StackItem::Create(result));
     }
 
-    void JumpTableSpliceString::SUBSTR(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSpliceString::SUBSTR(ExecutionEngine& engine, const Instruction&)
     {
         auto length = engine.Pop()->GetInteger();
         auto index = engine.Pop()->GetInteger();
@@ -70,7 +70,7 @@ namespace neo::vm
         engine.Push(StackItem::Create(result));
     }
 
-    void JumpTableSpliceString::LEFT(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSpliceString::LEFT(ExecutionEngine& engine, const Instruction&)
     {
         auto count = engine.Pop()->GetInteger();
         auto x = engine.Pop()->GetByteArray();
@@ -86,7 +86,7 @@ namespace neo::vm
         engine.Push(StackItem::Create(result));
     }
 
-    void JumpTableSpliceString::RIGHT(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSpliceString::RIGHT(ExecutionEngine& engine, const Instruction&)
     {
         auto count = engine.Pop()->GetInteger();
         auto x = engine.Pop()->GetByteArray();

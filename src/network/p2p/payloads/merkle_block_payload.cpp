@@ -3,6 +3,10 @@
 #include <neo/ledger/block.h>
 #include <stdexcept>
 #include <cmath>
+#include <vector>
+#include <limits>
+#include <algorithm>
+#include <cstddef>
 
 namespace neo::network::payloads
 {
@@ -87,13 +91,14 @@ namespace neo::network::payloads
         transactionCount_ = static_cast<uint32_t>(reader.ReadVarInt());
         
         int64_t hashCount = reader.ReadVarInt();
-        if (hashCount < 0 || hashCount > std::numeric_limits<size_t>::max())
+        if (hashCount < 0 || hashCount > static_cast<int64_t>(std::numeric_limits<size_t>::max()))
             throw std::out_of_range("Invalid hash count");
         
         hashes_.clear();
-        hashes_.reserve(static_cast<size_t>(hashCount));
+        size_t hashCountSize = static_cast<size_t>(hashCount);
+        hashes_.reserve(hashCountSize);
         
-        for (int64_t i = 0; i < hashCount; i++)
+        for (size_t i = 0; i < hashCountSize; ++i)
         {
             io::UInt256 hash = reader.ReadSerializable<io::UInt256>();
             hashes_.push_back(hash);
@@ -106,7 +111,8 @@ namespace neo::network::payloads
 
     void MerkleBlockPayload::SerializeJson(io::JsonWriter& writer) const
     {
-        writer.WriteStartObject("header");
+        writer.WritePropertyName("header");
+        writer.WriteStartObject();
         if (header_)
         {
             header_->SerializeJson(writer);
@@ -115,10 +121,11 @@ namespace neo::network::payloads
         
         writer.Write("transactionCount", transactionCount_);
         
-        writer.WriteStartArray("hashes");
+        writer.WritePropertyName("hashes");
+        writer.WriteStartArray();
         for (const auto& hash : hashes_)
         {
-            writer.Write(hash.ToString());
+            writer.WriteProperty("hash", hash.ToString());
         }
         writer.WriteEndArray();
         
@@ -127,7 +134,8 @@ namespace neo::network::payloads
 
     void MerkleBlockPayload::DeserializeJson(const io::JsonReader& reader)
     {
-        io::JsonReader headerReader = reader.ReadObject("header");
+        auto headerJson = reader.ReadObject("header");
+        io::JsonReader headerReader(headerJson);
         header_ = std::make_shared<blockchain::Header>();
         header_->DeserializeJson(headerReader);
         
@@ -139,10 +147,12 @@ namespace neo::network::payloads
         
         for (const auto& hashJson : hashesArray)
         {
-            io::JsonReader hashReader(hashJson);
-            std::string hashStr = hashReader.ReadString();
-            io::UInt256 hash = io::UInt256::Parse(hashStr);
-            hashes_.push_back(hash);
+            if (hashJson.is_string())
+            {
+                std::string hashStr = hashJson.get<std::string>();
+                io::UInt256 hash = io::UInt256::Parse(hashStr);
+                hashes_.push_back(hash);
+            }
         }
         
         flags_ = io::ByteVector::FromHexString(reader.ReadString("flags"));

@@ -159,7 +159,7 @@ namespace neo::io
     ByteVector BinaryReader::ReadVarBytes()
     {
         int64_t count = ReadVarInt();
-        if (count < 0 || count > std::numeric_limits<size_t>::max())
+        if (count < 0 || count > static_cast<int64_t>(std::numeric_limits<size_t>::max()))
             throw std::out_of_range("Invalid byte array size");
         return ReadBytes(static_cast<size_t>(count));
     }
@@ -206,7 +206,7 @@ namespace neo::io
     void BinaryReader::ReadBytes(uint8_t* data, size_t size)
     {
         stream_.read(reinterpret_cast<char*>(data), size);
-        if (stream_.gcount() != static_cast<std::streamsize>(size))
+        if (static_cast<size_t>(stream_.gcount()) != size)
             throw std::runtime_error("Unexpected end of stream");
     }
 }

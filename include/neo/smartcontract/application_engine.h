@@ -18,12 +18,18 @@
 #include <unordered_map>
 #include <string>
 #include <functional>
+#include <neo/smartcontract/vm_types.h>
+#include <neo/io/iserializable.h>
+#include <cstdint>
 
 // Forward declarations
 namespace neo::smartcontract::native { class NativeContract; }
 
 namespace neo::smartcontract
 {
+    // Forward declarations
+    class Script;
+    
     /**
      * @brief Represents an application engine.
      */
@@ -46,10 +52,45 @@ namespace neo::smartcontract
         ApplicationEngine(TriggerType trigger, const io::ISerializable* container, std::shared_ptr<persistence::DataCache> snapshot, const ledger::Block* persistingBlock = nullptr, int64_t gas = TestModeGas);
 
         /**
+         * @brief Destructor.
+         */
+        ~ApplicationEngine() = default;
+
+        /**
+         * @brief Gets the VM state.
+         * @return The VM state.
+         */
+        neo::vm::VMState GetState() const { return state_; }
+
+        /**
+         * @brief Gets the gas consumed.
+         * @return The gas consumed.
+         */
+        int64_t GetGasConsumed() const { return gas_consumed_; }
+
+        /**
+         * @brief Gets the gas remaining.
+         * @return The gas remaining.
+         */
+        int64_t GetGasLeft() const { return gas_limit_ - gas_consumed_; }
+
+        /**
          * @brief Gets the trigger type.
          * @return The trigger type.
          */
-        TriggerType GetTrigger() const;
+        TriggerType GetTrigger() const { return trigger_; }
+
+        /**
+         * @brief Gets the log entries.
+         * @return The log entries.
+         */
+        const std::vector<LogEntry>& GetLogs() const { return logs_; }
+
+        /**
+         * @brief Gets the notification entries.
+         * @return The notification entries.
+         */
+        const std::vector<NotifyEntry>& GetNotifications() const { return notifications_; }
 
         /**
          * @brief Gets the container.
@@ -76,18 +117,6 @@ namespace neo::smartcontract
         const ledger::Block* GetPersistingBlock() const;
 
         /**
-         * @brief Gets the gas consumed.
-         * @return The gas consumed.
-         */
-        int64_t GetGasConsumed() const;
-
-        /**
-         * @brief Gets the gas left.
-         * @return The gas left.
-         */
-        int64_t GetGasLeft() const;
-
-        /**
          * @brief Gets the current script hash.
          * @return The current script hash.
          */
@@ -106,25 +135,35 @@ namespace neo::smartcontract
         io::UInt160 GetEntryScriptHash() const;
 
         /**
-         * @brief Gets the notifications.
-         * @return The notifications.
+         * @brief Executes a script.
+         * @param script The script to execute.
+         * @return The VM state after execution.
          */
-        const std::vector<std::pair<io::UInt160, std::vector<std::shared_ptr<vm::StackItem>>>>& GetNotifications() const;
+        neo::vm::VMState Execute(const std::vector<uint8_t>& script);
+
+        /**
+         * @brief Executes the loaded script.
+         * @return The VM state after execution.
+         */
+        neo::vm::VMState Execute();
 
         /**
          * @brief Loads a script.
-         * @param script The script.
-         * @param initialPosition The initial position.
-         * @param configureContext The configure context function.
-         * @param scriptHash The script hash.
+         * @param script The script to load.
          */
-        void LoadScript(const io::ByteVector& script, int32_t initialPosition = 0, std::function<void(vm::ExecutionContext&)> configureContext = nullptr, const io::UInt160& scriptHash = io::UInt160());
+        void LoadScript(const std::vector<uint8_t>& script);
 
         /**
-         * @brief Executes the script.
-         * @return The state.
+         * @brief Adds a log entry.
+         * @param entry The log entry.
          */
-        vm::VMState Execute();
+        void AddLog(const LogEntry& entry) { logs_.push_back(entry); }
+
+        /**
+         * @brief Adds a notification entry.
+         * @param entry The notification entry.
+         */
+        void AddNotification(const NotifyEntry& entry) { notifications_.push_back(entry); }
 
         /**
          * @brief Checks if the engine has flag.
@@ -171,6 +210,12 @@ namespace neo::smartcontract
          * @return The result.
          */
         std::shared_ptr<vm::StackItem> CallContract(const io::UInt160& scriptHash, const std::string& method, const std::vector<std::shared_ptr<vm::StackItem>>& args, CallFlags flags);
+
+        /**
+         * @brief Logs a message.
+         * @param message The message to log.
+         */
+        void Log(const std::string& message);
 
         /**
          * @brief Notifies an event.
@@ -223,6 +268,12 @@ namespace neo::smartcontract
         const ProtocolSettings* GetProtocolSettings() const;
 
         /**
+         * @brief Gets the current block height.
+         * @return The current block height.
+         */
+        uint32_t GetCurrentBlockHeight() const;
+
+        /**
          * @brief Checks if a hardfork is enabled.
          * @param hardfork The hardfork to check.
          * @return True if the hardfork is enabled, false otherwise.
@@ -247,8 +298,6 @@ namespace neo::smartcontract
          */
         static std::unique_ptr<ApplicationEngine> Create(TriggerType trigger, const io::ISerializable* container, std::shared_ptr<persistence::DataCache> snapshot, const ledger::Block* persistingBlock = nullptr, int64_t gas = TestModeGas);
 
-
-
         /**
          * @brief Runs a script.
          * @param script The script.
@@ -261,30 +310,78 @@ namespace neo::smartcontract
          */
         static std::unique_ptr<ApplicationEngine> Run(const io::ByteVector& script, std::shared_ptr<persistence::DataCache> snapshot, const io::ISerializable* container = nullptr, const ledger::Block* persistingBlock = nullptr, int32_t offset = 0, int64_t gas = TestModeGas);
 
+        /**
+         * @brief Gets the current call flags.
+         * @return The current call flags.
+         */
+        CallFlags GetCallFlags() const { return flags_; }
 
+        /**
+         * @brief Gets the contracts map for system call implementations.
+         * @return Reference to the contracts map.
+         */
+        const std::unordered_map<io::UInt160, std::unordered_map<std::string, std::function<bool(ApplicationEngine&)>>>& GetContracts() const { return contracts_; }
+
+        /**
+         * @brief Gets mutable access to the contracts map for system call implementations.
+         * @return Reference to the contracts map.
+         */
+        std::unordered_map<io::UInt160, std::unordered_map<std::string, std::function<bool(ApplicationEngine&)>>>& GetContracts() { return contracts_; }
+
+        /**
+         * @brief Sets the call flags.
+         * @param flags The new call flags.
+         */
+        void SetCallFlags(CallFlags flags) { flags_ = flags; }
+
+        /**
+         * @brief Pops an item from the evaluation stack.
+         * @return The popped stack item.
+         */
+        std::shared_ptr<vm::StackItem> Pop();
+
+        /**
+         * @brief Pushes an item onto the evaluation stack.
+         * @param item The item to push.
+         */
+        void Push(std::shared_ptr<vm::StackItem> item);
+
+        /**
+         * @brief Gets the top item from the evaluation stack without removing it.
+         * @return The top stack item.
+         */
+        std::shared_ptr<vm::StackItem> Peek() const;
+
+        /**
+         * @brief Gets the script being executed.
+         * @return The script bytes.
+         */
+        io::ByteVector GetScript() const;
+
+        /**
+         * @brief Gets the exception message if execution failed.
+         * @return The exception message.
+         */
+        std::string GetException() const;
+
+        /**
+         * @brief Gets the result stack items.
+         * @return The result stack.
+         */
+        std::vector<std::shared_ptr<vm::StackItem>> GetResultStack() const;
+
+        /**
+         * @brief Gets the network magic value.
+         * @return The network magic value.
+         */
+        uint32_t GetNetworkMagic() const;
 
     // These members are made protected to allow access from system call implementations
     protected:
         std::unordered_map<io::UInt160, std::unordered_map<std::string, std::function<bool(ApplicationEngine&)>>> contracts_;
         CallFlags flags_;
 
-    private:
-        TriggerType trigger_;
-        const io::ISerializable* container_;
-        std::shared_ptr<persistence::DataCache> snapshot_;
-        const ledger::Block* persistingBlock_;
-        int64_t gasConsumed_;
-        int64_t gasLeft_;
-        std::vector<io::UInt160> scriptHashes_;
-        std::vector<std::pair<io::UInt160, std::vector<std::shared_ptr<vm::StackItem>>>> notifications_;
-        int64_t gasPrice_ = 1000;
-        uint32_t platformVersion_ = 0;
-        uint64_t random_ = 0;
-        int64_t networkFeePerByte_ = 1000;
-        ProtocolSettings protocolSettings_;
-
-        std::unordered_map<std::string, SystemCallDescriptor> systemCalls_;
-
+    public:
         /**
          * @brief Registers a system call.
          * @param name The name of the system call.
@@ -293,6 +390,25 @@ namespace neo::smartcontract
          * @param requiredFlags The required call flags.
          */
         void RegisterSystemCall(const std::string& name, std::function<bool(vm::ExecutionEngine&)> handler, int64_t gasCost = 0, CallFlags requiredFlags = CallFlags::None);
+
+    private:
+        TriggerType trigger_;
+        const io::ISerializable* container_;
+        std::shared_ptr<persistence::DataCache> snapshot_;
+        const ledger::Block* persisting_block_;
+        int64_t gas_limit_;
+        int64_t gas_consumed_;
+        neo::vm::VMState state_;
+        std::vector<LogEntry> logs_;
+        std::vector<NotifyEntry> notifications_;
+        int64_t gasPrice_ = 1000;
+        uint32_t platformVersion_ = 0;
+        uint64_t random_ = 0;
+        int64_t networkFeePerByte_ = 1000;
+        ProtocolSettings protocolSettings_;
+        std::string exception_;
+
+        std::unordered_map<std::string, SystemCallDescriptor> systemCalls_;
 
         /**
          * @brief Registers all system calls.

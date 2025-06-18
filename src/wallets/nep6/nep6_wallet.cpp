@@ -24,7 +24,7 @@ namespace neo::wallets::nep6
         : WalletAccount(keyPair), deployed_(false)
     {
         // Generate NEP2 key
-        nep2Key_ = cryptography::ecc::Secp256r1::ToNEP2(keyPair.PrivateKey, password, scrypt.GetN(), scrypt.GetR(), scrypt.GetP());
+        nep2Key_ = cryptography::ecc::Secp256r1::ToNEP2(keyPair.PrivateKey(), password, scrypt.GetN(), scrypt.GetR(), scrypt.GetP());
     }
 
     NEP6Account::NEP6Account(const io::UInt160& scriptHash, const std::string& nep2Key)
@@ -84,7 +84,7 @@ namespace neo::wallets::nep6
             
             // Calculate public key
             auto keyPair = cryptography::ecc::Secp256r1::FromPrivateKey(privateKey);
-            SetPublicKey(keyPair.PublicKey);
+            SetPublicKey(keyPair.PublicKey());
             
             return true;
         }
@@ -295,7 +295,7 @@ namespace neo::wallets::nep6
         auto account = std::make_shared<NEP6Account>(keyPair, password_, scrypt_);
         
         // Create contract
-        auto contract = smartcontract::Contract::CreateSignatureContract(keyPair.PublicKey);
+        auto contract = smartcontract::Contract::CreateSignatureContract(keyPair.PublicKey());
         account->SetContract(contract);
         
         // Set parameter names
@@ -331,10 +331,10 @@ namespace neo::wallets::nep6
         auto account = std::make_shared<NEP6Account>(keyPair.GetScriptHash(), nep2Key);
         
         // Set public key
-        account->SetPublicKey(keyPair.PublicKey);
+        account->SetPublicKey(keyPair.PublicKey());
         
         // Create contract
-        auto contract = smartcontract::Contract::CreateSignatureContract(keyPair.PublicKey);
+        auto contract = smartcontract::Contract::CreateSignatureContract(keyPair.PublicKey());
         account->SetContract(contract);
         
         // Set parameter names

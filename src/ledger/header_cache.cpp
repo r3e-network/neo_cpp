@@ -12,27 +12,44 @@ namespace neo::ledger
         }
     }
 
-    void HeaderCache::Add(std::shared_ptr<BlockHeader> header)
+    bool HeaderCache::Add(std::shared_ptr<Header> header)
     {
         if (!header)
         {
-            return;
+            return false;
         }
 
-        std::lock_guard<std::mutex> lock(mutex_);
+        std::unique_lock<std::shared_mutex> lock(mutex_);
         
         auto hash = header->GetHash();
-        headers_[hash] = header;
+        auto index = header->GetIndex();
         
-        EvictIfNeeded();
+        // Check if already exists
+        if (hash_index_.find(hash) != hash_index_.end())
+        {
+            return false;
+        }
+        
+        // Add to all indices
+        headers_.push_back(header);
+        hash_index_[hash] = header;
+        height_index_[index] = header;
+        
+        // Maintain size limit
+        while (headers_.size() > max_size_)
+        {
+            TryRemoveFirst();
+        }
+        
+        return true;
     }
 
-    std::shared_ptr<BlockHeader> HeaderCache::Get(const io::UInt256& hash) const
+    std::shared_ptr<Header> HeaderCache::Get(const io::UInt256& hash) const
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        std::shared_lock<std::shared_mutex> lock(mutex_);
         
-        auto it = headers_.find(hash);
-        if (it != headers_.end())
+        auto it = hash_index_.find(hash);
+        if (it != hash_index_.end())
         {
             return it->second;
         }
@@ -40,67 +57,67 @@ namespace neo::ledger
         return nullptr;
     }
 
-    bool HeaderCache::Contains(const io::UInt256& hash) const
+    std::shared_ptr<Header> HeaderCache::Get(uint32_t index) const
     {
-        std::lock_guard<std::mutex> lock(mutex_);
-        return headers_.count(hash) > 0;
-    }
-
-    bool HeaderCache::Remove(const io::UInt256& hash)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
+        std::shared_lock<std::shared_mutex> lock(mutex_);
         
-        auto it = headers_.find(hash);
-        if (it != headers_.end())
+        auto it = height_index_.find(index);
+        if (it != height_index_.end())
         {
-            headers_.erase(it);
-            return true;
+            return it->second;
         }
         
-        return false;
+        return nullptr;
     }
 
-    void HeaderCache::Clear()
+    std::shared_ptr<Header> HeaderCache::GetLast() const
     {
-        std::lock_guard<std::mutex> lock(mutex_);
-        headers_.clear();
-    }
-
-    size_t HeaderCache::Size() const
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-        return headers_.size();
-    }
-
-    size_t HeaderCache::MaxSize() const
-    {
-        return max_size_;
+        std::shared_lock<std::shared_mutex> lock(mutex_);
+        
+        if (headers_.empty())
+        {
+            return nullptr;
+        }
+        
+        return headers_.back();
     }
 
     bool HeaderCache::IsFull() const
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        std::shared_lock<std::shared_mutex> lock(mutex_);
         return headers_.size() >= max_size_;
     }
 
-    void HeaderCache::EvictIfNeeded()
+    size_t HeaderCache::Size() const
+    {
+        std::shared_lock<std::shared_mutex> lock(mutex_);
+        return headers_.size();
+    }
+
+    bool HeaderCache::TryRemoveFirst()
     {
         // This method assumes mutex is already locked
-        if (headers_.size() <= max_size_)
+        if (headers_.empty())
         {
-            return;
+            return false;
         }
 
-        // Simple eviction strategy: remove the header with the lowest index
-        // In a more sophisticated implementation, we might use LRU or other strategies
-        auto min_it = std::min_element(headers_.begin(), headers_.end(),
-            [](const auto& a, const auto& b) {
-                return a.second->GetIndex() < b.second->GetIndex();
-            });
+        auto first_header = headers_.front();
+        auto hash = first_header->GetHash();
+        auto index = first_header->GetIndex();
+        
+        headers_.pop_front();
+        hash_index_.erase(hash);
+        height_index_.erase(index);
+        
+        return true;
+    }
 
-        if (min_it != headers_.end())
-        {
-            headers_.erase(min_it);
-        }
+    void HeaderCache::Clear()
+    {
+        std::unique_lock<std::shared_mutex> lock(mutex_);
+        headers_.clear();
+        hash_index_.clear();
+        height_index_.clear();
     }
 }

@@ -149,4 +149,21 @@ namespace neo::io
         
         return json_[key];
     }
+
+    ByteVector JsonReader::ReadBase64String(const std::string& key) const
+    {
+        if (!json_.contains(key) || !json_[key].is_string())
+            return ByteVector();
+        
+        std::string base64 = json_[key].get<std::string>();
+        return ByteVector::FromBase64String(base64);
+    }
+
+    double JsonReader::ReadNumber(const std::string& key, double defaultValue) const
+    {
+        if (!json_.contains(key) || !json_[key].is_number())
+            return defaultValue;
+        
+        return json_[key].get<double>();
+    }
 }

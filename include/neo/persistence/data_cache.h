@@ -142,6 +142,13 @@ namespace neo::persistence
         std::vector<std::pair<StorageKey, StorageItem>> Find(const StorageKey* prefix = nullptr) const override;
 
         /**
+         * @brief Creates an iterator for storage items with the specified prefix.
+         * @param prefix The prefix.
+         * @return The storage iterator.
+         */
+        std::unique_ptr<StorageIterator> Seek(const StorageKey& prefix) const override;
+
+        /**
          * @brief Creates a snapshot of the cache.
          * @return The snapshot.
          */
@@ -225,6 +232,13 @@ namespace neo::persistence
          * @return The storage items found.
          */
         std::vector<std::pair<StorageKey, StorageItem>> Find(const StorageKey* prefix = nullptr) const override;
+
+        /**
+         * @brief Creates an iterator for storage items with the specified prefix.
+         * @param prefix The prefix.
+         * @return The storage iterator.
+         */
+        std::unique_ptr<StorageIterator> Seek(const StorageKey& prefix) const override;
 
         /**
          * @brief Creates a snapshot of the cache.

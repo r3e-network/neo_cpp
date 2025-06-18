@@ -4,6 +4,12 @@
 #include <openssl/evp.h>
 #include <cstring>
 
+// Suppress OpenSSL deprecation warnings for compatibility
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4996) // OpenSSL deprecation warnings
+#endif
+
 namespace neo::cryptography
 {
     io::UInt256 Hash::Sha256(const io::ByteSpan& data)
@@ -125,3 +131,7 @@ namespace neo::cryptography
         return h1;
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

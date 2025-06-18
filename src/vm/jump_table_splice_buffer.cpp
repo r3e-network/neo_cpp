@@ -22,7 +22,7 @@ namespace neo::vm
     }
 
     // JumpTableSpliceBuffer implementations
-    void JumpTableSpliceBuffer::NEWBUFFER(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSpliceBuffer::NEWBUFFER(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto size = engine.Pop()->GetInteger();
         if (size < 0 || size > engine.GetLimits().MaxItemSize)
@@ -33,7 +33,7 @@ namespace neo::vm
         engine.Push(std::make_shared<BufferItem>(buffer));
     }
 
-    void JumpTableSpliceBuffer::MEMCPY(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSpliceBuffer::MEMCPY(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto count = engine.Pop()->GetInteger();
         auto srcIndex = engine.Pop()->GetInteger();

@@ -4,7 +4,9 @@ add_library(neo_ledger OBJECT
     coin_reference.cpp
     transaction_output.cpp
     transaction_attribute.cpp
-    transaction.cpp
+    transaction_basic.cpp
+    transaction_serialization.cpp
+    transaction_verification.cpp
     transaction_json.cpp
     block.cpp
     block_json.cpp

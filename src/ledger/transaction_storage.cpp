@@ -76,13 +76,16 @@ namespace neo::ledger
 
                 io::ByteVector outputPrefixVector{UnspentOutputPrefix};
                 io::ByteVector outputIndexVector = io::ByteVector::FromUInt32(i);
-                persistence::StorageKey outputKey(io::UInt160(), io::ByteVector::Concat(outputPrefixVector.AsSpan(), hash.AsSpan(), outputIndexVector.AsSpan()));
+                io::ByteVector temp1 = io::ByteVector::Concat(outputPrefixVector.AsSpan(), hash.AsSpan());
+                persistence::StorageKey outputKey(io::UInt160(), io::ByteVector::Concat(temp1.AsSpan(), outputIndexVector.AsSpan()));
                 persistence::StorageItem outputItem(io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(outputData.data()), outputData.size())));
                 snapshot->Add(outputKey, outputItem);
 
                 // Store the address output
                 io::ByteVector addressPrefixVector{AddressOutputPrefix};
-                persistence::StorageKey addressKey(io::UInt160(), io::ByteVector::Concat(addressPrefixVector.AsSpan(), output.GetScriptHash().AsSpan(), hash.AsSpan(), outputIndexVector.AsSpan()));
+                io::ByteVector temp2 = io::ByteVector::Concat(addressPrefixVector.AsSpan(), output.GetScriptHash().AsSpan());
+                io::ByteVector temp3 = io::ByteVector::Concat(temp2.AsSpan(), hash.AsSpan());
+                persistence::StorageKey addressKey(io::UInt160(), io::ByteVector::Concat(temp3.AsSpan(), outputIndexVector.AsSpan()));
                 persistence::StorageItem addressItem(io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(outputData.data()), outputData.size())));
                 snapshot->Add(addressKey, addressItem);
             }
@@ -121,7 +124,7 @@ namespace neo::ledger
         // Check if the transaction is in storage
         io::ByteVector prefixVector{TransactionPrefix};
         persistence::StorageKey key(io::UInt160(), io::ByteVector::Concat(prefixVector.AsSpan(), hash.AsSpan()));
-        return dataCache_->TryGet(key).has_value();
+        return dataCache_->TryGet(key) != nullptr;
     }
 
     std::vector<TransactionOutput> TransactionStorage::GetUnspentOutputs(const io::UInt256& hash) const

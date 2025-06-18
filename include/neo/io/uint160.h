@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <stdexcept>
 #include <cstring>
+#include <functional>
 
 namespace neo::io
 {
@@ -21,6 +22,7 @@ namespace neo::io
          * @brief The size of the UInt160 in bytes.
          */
         static constexpr size_t Size = 20;
+        using value_type = std::array<uint8_t, Size>;
 
         /**
          * @brief Constructs a UInt160 initialized to zero.
@@ -37,6 +39,21 @@ namespace neo::io
             if (data.Size() != Size)
                 throw std::invalid_argument("Invalid UInt160 size");
             std::memcpy(data_.data(), data.Data(), Size);
+        }
+
+        /**
+         * @brief Constructs a UInt160 from a byte array.
+         * @param data The byte array.
+         */
+        explicit UInt160(const value_type& data) : data_(data) {}
+
+        /**
+         * @brief Constructs a UInt160 from a raw byte array.
+         * @param data The raw byte array.
+         */
+        explicit UInt160(const uint8_t* data)
+        {
+            std::memcpy(data_.data(), data, Size);
         }
 
         /**
@@ -103,10 +120,6 @@ namespace neo::io
          */
         bool operator>(const UInt160& other) const { return data_ > other.data_; }
 
-
-
-
-
         /**
          * @brief Parses a hexadecimal string into a UInt160.
          * @param hex The hexadecimal string.
@@ -122,6 +135,13 @@ namespace neo::io
          * @return True if the parsing was successful, false otherwise.
          */
         static bool TryParse(const std::string& hex, UInt160& result);
+
+        /**
+         * @brief Creates a UInt160 from a hex string.
+         * @param hex_string The hex string (with or without 0x prefix).
+         * @return The UInt160 value.
+         */
+        static UInt160 FromString(const std::string& hex_string);
 
         /**
          * @brief Checks if this UInt160 is zero.
@@ -144,6 +164,21 @@ namespace neo::io
         static UInt160 FromBytes(const ByteSpan& data) { return UInt160(data); }
 
         /**
+         * @brief Creates a UInt160 from a Neo address.
+         * @param address The Neo address string.
+         * @return The UInt160 script hash.
+         * @throws std::invalid_argument if the address is invalid.
+         */
+        static UInt160 FromAddress(const std::string& address);
+
+        /**
+         * @brief Converts the UInt160 to a Neo address.
+         * @param version The address version (default is 0x17 for Neo mainnet).
+         * @return The Neo address string.
+         */
+        std::string ToAddress(uint8_t version = 0x17) const;
+
+        /**
          * @brief Serializes the UInt160 to a binary writer.
          * @param writer The binary writer.
          */
@@ -155,22 +190,49 @@ namespace neo::io
          */
         void Deserialize(BinaryReader& reader) override;
 
+        /**
+         * @brief Array subscript operator.
+         * @param index The index.
+         * @return Reference to the byte at the index.
+         */
+        uint8_t& operator[](size_t index) { return data_[index]; }
+
+        /**
+         * @brief Array subscript operator (const).
+         * @param index The index.
+         * @return Const reference to the byte at the index.
+         */
+        const uint8_t& operator[](size_t index) const { return data_[index]; }
+
     private:
-        std::array<uint8_t, Size> data_;
+        value_type data_;
     };
 }
 
 // Add hash function for UInt160 to be used with std::unordered_map
 namespace std
 {
+    /**
+     * @brief Hash function for neo::io::UInt160.
+     */
     template<>
     struct hash<neo::io::UInt160>
     {
+        /**
+         * @brief Calculates the hash of a UInt160.
+         * @param value The UInt160.
+         * @return The hash.
+         */
         size_t operator()(const neo::io::UInt160& value) const noexcept
         {
             // Use the first 8 bytes as a hash
             const uint8_t* data = value.Data();
-            return *reinterpret_cast<const size_t*>(data);
+            size_t result = 0;
+            for (size_t i = 0; i < sizeof(size_t) && i < neo::io::UInt160::Size; i++)
+            {
+                result = (result << 8) | data[i];
+            }
+            return result;
         }
     };
 }

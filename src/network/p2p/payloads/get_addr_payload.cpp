@@ -4,11 +4,13 @@ namespace neo::network::p2p::payloads
 {
     void GetAddrPayload::Serialize(io::BinaryWriter& writer) const
     {
+        (void)writer; // Suppress unused parameter warning
         // GetAddr message has no payload data
     }
 
     void GetAddrPayload::Deserialize(io::BinaryReader& reader)
     {
+        (void)reader; // Suppress unused parameter warning
         // GetAddr message has no payload data
     }
     
@@ -21,6 +23,7 @@ namespace neo::network::p2p::payloads
     
     void GetAddrPayload::DeserializeJson(const io::JsonReader& reader)
     {
+        (void)reader; // Suppress unused parameter warning
         // No data to read
     }
 }

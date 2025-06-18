@@ -39,6 +39,12 @@ namespace neo::io
         void WriteBoolean(bool value);
 
         /**
+         * @brief Writes a boolean value to the stream (alias for Write(bool)).
+         * @param value The value to write.
+         */
+        void WriteBool(bool value);
+
+        /**
          * @brief Writes an 8-bit unsigned integer to the stream.
          * @param value The value to write.
          */
@@ -57,6 +63,12 @@ namespace neo::io
         void Write(uint16_t value);
 
         /**
+         * @brief Writes a 16-bit unsigned integer to the stream (alias for Write(uint16_t)).
+         * @param value The value to write.
+         */
+        void WriteUInt16(uint16_t value);
+
+        /**
          * @brief Writes a 32-bit unsigned integer to the stream.
          * @param value The value to write.
          */
@@ -67,6 +79,12 @@ namespace neo::io
          * @param value The value to write.
          */
         void Write(uint64_t value);
+
+        /**
+         * @brief Writes a 64-bit unsigned integer to the stream (alias for Write(uint64_t)).
+         * @param value The value to write.
+         */
+        void WriteUInt64(uint64_t value);
 
         /**
          * @brief Writes an 8-bit signed integer to the stream.

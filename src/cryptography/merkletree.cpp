@@ -98,7 +98,6 @@ namespace neo::cryptography
             return leaf == root;
 
         io::UInt256 hash = leaf;
-        size_t pathIndex = 0;
 
         for (size_t i = 0; i < path.size(); i++)
         {

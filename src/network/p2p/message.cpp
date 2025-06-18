@@ -133,8 +133,119 @@ namespace neo::network::p2p
         flags_ = static_cast<MessageFlags>(reader.ReadUInt8("flags"));
         command_ = static_cast<MessageCommand>(reader.ReadUInt8("command"));
 
-        // TODO: Deserialize payload based on command
-        // For now, just leave payload_ as nullptr
+        // Deserialize payload based on command matching C# ReflectionCache<MessageCommand>.CreateSerializable
+        if (!payloadData_.empty())
+        {
+            try
+            {
+                std::istringstream stream(std::string(reinterpret_cast<const char*>(payloadData_.data()), payloadData_.size()));
+                io::BinaryReader reader(stream);
+                
+                switch (command_)
+                {
+                    case MessageCommand::Version:
+                        {
+                            auto versionPayload = std::make_shared<payloads::VersionPayload>();
+                            versionPayload->Deserialize(reader);
+                            payload_ = versionPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::Addr:
+                        {
+                            auto addrPayload = std::make_shared<payloads::AddrPayload>();
+                            addrPayload->Deserialize(reader);
+                            payload_ = addrPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::Ping:
+                    case MessageCommand::Pong:
+                        {
+                            auto pingPayload = std::make_shared<payloads::PingPayload>();
+                            pingPayload->Deserialize(reader);
+                            payload_ = pingPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::Inv:
+                    case MessageCommand::GetData:
+                    case MessageCommand::NotFound:
+                        {
+                            auto invPayload = std::make_shared<payloads::InvPayload>();
+                            invPayload->Deserialize(reader);
+                            payload_ = invPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::GetHeaders:
+                    case MessageCommand::GetBlockByIndex:
+                        {
+                            auto getBlockPayload = std::make_shared<payloads::GetBlockByIndexPayload>();
+                            getBlockPayload->Deserialize(reader);
+                            payload_ = getBlockPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::Headers:
+                        {
+                            auto headersPayload = std::make_shared<payloads::HeadersPayload>();
+                            headersPayload->Deserialize(reader);
+                            payload_ = headersPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::Transaction:
+                        {
+                            auto transaction = std::make_shared<ledger::Transaction>();
+                            transaction->Deserialize(reader);
+                            payload_ = transaction;
+                        }
+                        break;
+                        
+                    case MessageCommand::Block:
+                        {
+                            auto block = std::make_shared<ledger::Block>();
+                            block->Deserialize(reader);
+                            payload_ = block;
+                        }
+                        break;
+                        
+                    case MessageCommand::Extensible:
+                        {
+                            auto extensiblePayload = std::make_shared<payloads::ExtensiblePayload>();
+                            extensiblePayload->Deserialize(reader);
+                            payload_ = extensiblePayload;
+                        }
+                        break;
+                        
+                    // Commands without payloads
+                    case MessageCommand::Verack:
+                    case MessageCommand::GetAddr:
+                    case MessageCommand::Mempool:
+                    case MessageCommand::Reject:
+                    case MessageCommand::FilterClear:
+                    case MessageCommand::Alert:
+                        payload_ = nullptr;
+                        break;
+                        
+                    default:
+                        // Unknown command, leave payload as nullptr
+                        payload_ = nullptr;
+                        break;
+                }
+            }
+            catch (...)
+            {
+                // If deserialization fails, leave payload as nullptr
+                payload_ = nullptr;
+            }
+        }
+        else
+        {
+            // No payload data
+            payload_ = nullptr;
+        }
     }
 
     io::ByteVector Message::ToArray(bool enableCompression) const
@@ -200,16 +311,117 @@ namespace neo::network::p2p
             payloadRaw_ = payloadCompressed_;
         }
 
-        // Create payload based on command
-        try
+        // Deserialize payload based on command matching C# ReflectionCache<MessageCommand>.CreateSerializable
+        if (!payloadData_.empty())
         {
-            std::istringstream stream(std::string(reinterpret_cast<const char*>(payloadRaw_.Data()), payloadRaw_.Size()));
-            io::BinaryReader reader(stream);
-            payload_ = network::PayloadFactory::DeserializePayload(command_, reader);
+            try
+            {
+                std::istringstream stream(std::string(reinterpret_cast<const char*>(payloadData_.data()), payloadData_.size()));
+                io::BinaryReader reader(stream);
+                
+                switch (command_)
+                {
+                    case MessageCommand::Version:
+                        {
+                            auto versionPayload = std::make_shared<payloads::VersionPayload>();
+                            versionPayload->Deserialize(reader);
+                            payload_ = versionPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::Addr:
+                        {
+                            auto addrPayload = std::make_shared<payloads::AddrPayload>();
+                            addrPayload->Deserialize(reader);
+                            payload_ = addrPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::Ping:
+                    case MessageCommand::Pong:
+                        {
+                            auto pingPayload = std::make_shared<payloads::PingPayload>();
+                            pingPayload->Deserialize(reader);
+                            payload_ = pingPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::Inv:
+                    case MessageCommand::GetData:
+                    case MessageCommand::NotFound:
+                        {
+                            auto invPayload = std::make_shared<payloads::InvPayload>();
+                            invPayload->Deserialize(reader);
+                            payload_ = invPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::GetHeaders:
+                    case MessageCommand::GetBlockByIndex:
+                        {
+                            auto getBlockPayload = std::make_shared<payloads::GetBlockByIndexPayload>();
+                            getBlockPayload->Deserialize(reader);
+                            payload_ = getBlockPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::Headers:
+                        {
+                            auto headersPayload = std::make_shared<payloads::HeadersPayload>();
+                            headersPayload->Deserialize(reader);
+                            payload_ = headersPayload;
+                        }
+                        break;
+                        
+                    case MessageCommand::Transaction:
+                        {
+                            auto transaction = std::make_shared<ledger::Transaction>();
+                            transaction->Deserialize(reader);
+                            payload_ = transaction;
+                        }
+                        break;
+                        
+                    case MessageCommand::Block:
+                        {
+                            auto block = std::make_shared<ledger::Block>();
+                            block->Deserialize(reader);
+                            payload_ = block;
+                        }
+                        break;
+                        
+                    case MessageCommand::Extensible:
+                        {
+                            auto extensiblePayload = std::make_shared<payloads::ExtensiblePayload>();
+                            extensiblePayload->Deserialize(reader);
+                            payload_ = extensiblePayload;
+                        }
+                        break;
+                        
+                    // Commands without payloads
+                    case MessageCommand::Verack:
+                    case MessageCommand::GetAddr:
+                    case MessageCommand::Mempool:
+                    case MessageCommand::Reject:
+                    case MessageCommand::FilterClear:
+                    case MessageCommand::Alert:
+                        payload_ = nullptr;
+                        break;
+                        
+                    default:
+                        // Unknown command, leave payload as nullptr
+                        payload_ = nullptr;
+                        break;
+                }
+            }
+            catch (...)
+            {
+                // If deserialization fails, leave payload as nullptr
+                payload_ = nullptr;
+            }
         }
-        catch (const std::exception&)
+        else
         {
-            // If deserialization fails, just leave payload_ as nullptr
+            // No payload data
             payload_ = nullptr;
         }
     }

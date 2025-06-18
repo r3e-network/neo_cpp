@@ -1,318 +1,501 @@
 #include <neo/ledger/blockchain.h>
-#include <neo/persistence/storage_key.h>
-#include <neo/persistence/storage_item.h>
-#include <neo/cryptography/hash.h>
-#include <neo/smartcontract/native/contract_management.h>
-#include <neo/smartcontract/native/native_contract.h>
+#include <neo/ledger/neo_system.h>
+#include <neo/ledger/memory_pool.h>
+#include <neo/smartcontract/native/ledger_contract.h>
+#include <neo/smartcontract/native/neo_token.h>
+#include <neo/smartcontract/native/gas_token.h>
+#include <neo/smartcontract/script_builder.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+#include <neo/cryptography/hash.h>
 #include <stdexcept>
 #include <iostream>
-#include <sstream>
+#include <algorithm>
+#include <chrono>
 
 namespace neo::ledger
 {
-    // Storage prefixes
-    static const uint8_t HeightPrefix = 0x08;
-    static const uint8_t CurrentBlockHashPrefix = 0x09;
+    // Static blockchain scripts for OnPersist and PostPersist
+    static const std::vector<uint8_t> ON_PERSIST_SCRIPT = {
+        0x41, 0x9e, 0xd8, 0x5e, 0x10  // SYSCALL System.Contract.NativeOnPersist
+    };
+    
+    static const std::vector<uint8_t> POST_PERSIST_SCRIPT = {
+        0x41, 0x9f, 0xd8, 0x5e, 0x10  // SYSCALL System.Contract.NativePostPersist
+    };
 
-    Blockchain::Blockchain(std::shared_ptr<persistence::DataCache> dataCache)
-        : dataCache_(dataCache),
-          blockStorage_(std::make_shared<BlockStorage>(dataCache)),
-          transactionStorage_(std::make_shared<TransactionStorage>(dataCache)),
-          callbacks_(std::make_shared<BlockchainCallbacks>()),
-          execution_(std::make_shared<BlockchainExecution>(callbacks_)),
-          height_(0)
+    Blockchain::Blockchain(std::shared_ptr<NeoSystem> system)
+        : system_(system)
+        , header_cache_(std::make_shared<HeaderCache>())
+        , data_cache_(system->GetStoreView())
+        , extensible_whitelist_cached_(false)
+        , running_(false)
     {
-        // Load the current height
-        persistence::StorageKey heightKey(io::UInt160(), io::ByteVector{HeightPrefix});
-        auto heightItem = dataCache_->TryGet(heightKey);
-        if (heightItem)
-        {
-            std::istringstream stream(std::string(reinterpret_cast<const char*>(heightItem->GetValue().Data()), heightItem->GetValue().Size()));
-            io::BinaryReader reader(stream);
-            height_ = reader.ReadUInt32();
+        if (!system_) {
+            throw std::invalid_argument("NeoSystem cannot be null");
         }
+    }
 
-        // Load the current block hash
-        persistence::StorageKey currentBlockHashKey(io::UInt160(), io::ByteVector{CurrentBlockHashPrefix});
-        auto currentBlockHashItem = dataCache_->TryGet(currentBlockHashKey);
-        if (currentBlockHashItem)
+    Blockchain::~Blockchain()
+    {
+        Stop();
+    }
+
+    void Blockchain::Initialize()
+    {
+        std::unique_lock<std::shared_mutex> lock(blockchain_mutex_);
+        
+        if (!IsGenesisBlockInitialized()) {
+            InitializeGenesisBlock();
+        }
+    }
+
+    void Blockchain::Start()
+    {
+        if (running_.exchange(true)) {
+            return; // Already running
+        }
+        
+        processing_thread_ = std::thread(&Blockchain::ProcessingThreadFunction, this);
+    }
+
+    void Blockchain::Stop()
+    {
+        if (!running_.exchange(false)) {
+            return; // Already stopped
+        }
+        
+        // Wake up processing thread
         {
-            std::istringstream stream(std::string(reinterpret_cast<const char*>(currentBlockHashItem->GetValue().Data()), currentBlockHashItem->GetValue().Size()));
-            io::BinaryReader reader(stream);
-            currentBlockHash_ = reader.ReadUInt256();
+            std::unique_lock<std::mutex> lock(processing_mutex_);
+            processing_cv_.notify_all();
+        }
+        
+        if (processing_thread_.joinable()) {
+            processing_thread_.join();
         }
     }
 
     uint32_t Blockchain::GetHeight() const
     {
-        std::lock_guard<std::mutex> lock(mutex_);
-        return height_;
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        return system_->GetLedgerContract()->GetCurrentIndex(data_cache_);
     }
 
     io::UInt256 Blockchain::GetCurrentBlockHash() const
     {
-        std::lock_guard<std::mutex> lock(mutex_);
-        return currentBlockHash_;
-    }
-
-    std::shared_ptr<BlockHeader> Blockchain::GetCurrentBlockHeader() const
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-        return blockStorage_->GetBlockHeader(currentBlockHash_);
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        uint32_t current_height = GetHeight();
+        if (current_height == 0) {
+            return system_->GetGenesisBlock()->GetHash();
+        }
+        return system_->GetLedgerContract()->GetBlockHash(data_cache_, current_height);
     }
 
     std::shared_ptr<Block> Blockchain::GetCurrentBlock() const
     {
-        std::lock_guard<std::mutex> lock(mutex_);
-        return blockStorage_->GetBlock(currentBlockHash_);
+        io::UInt256 current_hash = GetCurrentBlockHash();
+        return GetBlock(current_hash);
     }
 
     std::shared_ptr<Block> Blockchain::GetBlock(const io::UInt256& hash) const
     {
-        return blockStorage_->GetBlock(hash);
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        
+        // Check cache first
+        auto cache_it = block_cache_.find(hash);
+        if (cache_it != block_cache_.end()) {
+            return cache_it->second;
+        }
+        
+        // Load from storage
+        return system_->GetLedgerContract()->GetBlock(data_cache_, hash);
     }
 
     std::shared_ptr<Block> Blockchain::GetBlock(uint32_t index) const
     {
-        return blockStorage_->GetBlock(index);
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        
+        io::UInt256 block_hash = system_->GetLedgerContract()->GetBlockHash(data_cache_, index);
+        if (block_hash.IsZero()) {
+            return nullptr;
+        }
+        
+        return GetBlock(block_hash);
     }
 
-    std::shared_ptr<BlockHeader> Blockchain::GetBlockHeader(const io::UInt256& hash) const
+    io::UInt256 Blockchain::GetBlockHash(uint32_t index) const
     {
-        return blockStorage_->GetBlockHeader(hash);
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        return system_->GetLedgerContract()->GetBlockHash(data_cache_, index);
     }
 
-    std::shared_ptr<BlockHeader> Blockchain::GetBlockHeader(uint32_t index) const
+    std::shared_ptr<Header> Blockchain::GetBlockHeader(const io::UInt256& hash) const
     {
-        return blockStorage_->GetBlockHeader(index);
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        
+        // Check header cache first
+        auto header = header_cache_->Get(hash);
+        if (header) {
+            return header;
+        }
+        
+        // Load full block and return header
+        auto block = GetBlock(hash);
+        return block ? block->GetHeader() : nullptr;
+    }
+
+    std::shared_ptr<Header> Blockchain::GetBlockHeader(uint32_t index) const
+    {
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        
+        // Check header cache first
+        auto header = header_cache_->Get(index);
+        if (header) {
+            return header;
+        }
+        
+        // Load from storage
+        io::UInt256 block_hash = system_->GetLedgerContract()->GetBlockHash(data_cache_, index);
+        return block_hash.IsZero() ? nullptr : GetBlockHeader(block_hash);
     }
 
     std::shared_ptr<Transaction> Blockchain::GetTransaction(const io::UInt256& hash) const
     {
-        return transactionStorage_->GetTransaction(hash);
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        return system_->GetLedgerContract()->GetTransaction(data_cache_, hash);
     }
 
-    VerifyResult Blockchain::OnNewBlock(const Block& block)
+    int32_t Blockchain::GetTransactionHeight(const io::UInt256& hash) const
     {
-        std::lock_guard<std::mutex> lock(mutex_);
-
-        // Verify the block
-        if (!block.Verify())
-            return VerifyResult::Invalid;
-
-        // Check if the block already exists
-        if (blockStorage_->ContainsBlock(block.GetHash()))
-            return VerifyResult::AlreadyExists;
-
-        // Check if the previous block exists
-        if (block.GetIndex() > 0 && !blockStorage_->ContainsBlock(block.GetPrevHash()))
-            return VerifyResult::UnableToVerify;
-
-        // Check if the block is valid
-        if (block.GetIndex() != height_ + 1)
-            return VerifyResult::Invalid;
-
-        // Add the block
-        if (!AddBlock(block))
-            return VerifyResult::Invalid;
-
-        return VerifyResult::Succeed;
-    }
-
-    VerifyResult Blockchain::OnNewTransaction(const Transaction& transaction)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-
-        // Verify the transaction
-        if (!transaction.Verify())
-            return VerifyResult::Invalid;
-
-        // Check if the transaction already exists
-        if (transactionStorage_->ContainsTransaction(transaction.GetHash()))
-            return VerifyResult::AlreadyExists;
-
-        // Notify transaction execution
-        auto txPtr = std::make_shared<Transaction>(transaction);
-        callbacks_->NotifyTransactionExecution(txPtr);
-
-        return VerifyResult::Succeed;
-    }
-
-    bool Blockchain::AddBlock(const Block& block)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-
-        // Check if the block already exists
-        if (blockStorage_->ContainsBlock(block.GetHash()))
-            return false;
-
-        // Check if the block is valid
-        if (block.GetIndex() != height_ + 1)
-            return false;
-
-        // Create a snapshot
-        auto snapshot = dataCache_->CreateSnapshot();
-        auto dataSnapshot = std::dynamic_pointer_cast<persistence::DataCache>(snapshot);
-
-        // Add the block to storage
-        if (!blockStorage_->AddBlock(block, dataSnapshot))
-            return false;
-
-        // Add the transactions to storage
-        for (const auto& tx : block.GetTransactions())
-        {
-            if (!transactionStorage_->AddTransaction(*tx, dataSnapshot))
-                return false;
-        }
-
-        // Execute the block
-        if (!execution_->ExecuteBlock(block, dataSnapshot))
-            return false;
-
-        // Update the current height
-        if (block.GetIndex() > height_)
-        {
-            height_ = block.GetIndex();
-            std::ostringstream heightStream;
-            io::BinaryWriter heightWriter(heightStream);
-            heightWriter.Write(height_);
-            std::string heightData = heightStream.str();
-
-            persistence::StorageKey heightKey(io::UInt160(), io::ByteVector{HeightPrefix});
-            persistence::StorageItem heightItem(io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(heightData.data()), heightData.size())));
-            dataSnapshot->Add(heightKey, heightItem);
-
-            // Update the current block hash
-            currentBlockHash_ = block.GetHash();
-            std::ostringstream currentBlockHashStream;
-            io::BinaryWriter currentBlockHashWriter(currentBlockHashStream);
-            currentBlockHashWriter.Write(currentBlockHash_);
-            std::string currentBlockHashData = currentBlockHashStream.str();
-
-            persistence::StorageKey currentBlockHashKey(io::UInt160(), io::ByteVector{CurrentBlockHashPrefix});
-            persistence::StorageItem currentBlockHashItem(io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(currentBlockHashData.data()), currentBlockHashData.size())));
-            dataSnapshot->Add(currentBlockHashKey, currentBlockHashItem);
-        }
-
-        // Commit the changes
-        dataSnapshot->Commit();
-
-        // Notify block persistence
-        callbacks_->NotifyBlockPersistence(std::make_shared<Block>(block));
-
-        return true;
-    }
-
-    bool Blockchain::AddBlockHeader(const BlockHeader& header)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-
-        // Verify the block header
-        if (!header.Verify())
-            return false;
-
-        // Check if the block header already exists
-        if (blockStorage_->ContainsBlock(header.GetHash()))
-            return false;
-
-        // Create a snapshot
-        auto snapshot = dataCache_->CreateSnapshot();
-        auto dataSnapshot = std::dynamic_pointer_cast<persistence::DataCache>(snapshot);
-
-        // Add the block header to storage
-        if (!blockStorage_->AddBlockHeader(header, dataSnapshot))
-            return false;
-
-        // Commit the changes
-        dataSnapshot->Commit();
-
-        return true;
-    }
-
-    bool Blockchain::AddTransaction(const Transaction& transaction)
-    {
-        // Transactions are only added as part of blocks
-        return false;
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        return system_->GetLedgerContract()->GetTransactionHeight(data_cache_, hash);
     }
 
     bool Blockchain::ContainsBlock(const io::UInt256& hash) const
     {
-        return blockStorage_->ContainsBlock(hash);
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        
+        // Check cache first
+        if (block_cache_.find(hash) != block_cache_.end()) {
+            return true;
+        }
+        
+        return system_->GetLedgerContract()->ContainsBlock(data_cache_, hash);
     }
 
     bool Blockchain::ContainsTransaction(const io::UInt256& hash) const
     {
-        return transactionStorage_->ContainsTransaction(hash);
+        std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+        return system_->GetLedgerContract()->ContainsTransaction(data_cache_, hash);
     }
 
-    std::optional<io::UInt256> Blockchain::GetBlockHash(uint32_t index) const
+    VerifyResult Blockchain::OnNewBlock(std::shared_ptr<Block> block)
     {
-        return blockStorage_->GetBlockHash(index);
+        if (!block || !block->TryGetHash()) {
+            return VerifyResult::Invalid;
+        }
+
+        std::unique_lock<std::shared_mutex> lock(blockchain_mutex_);
+        
+        auto snapshot = data_cache_->CreateSnapshot();
+        uint32_t current_height = system_->GetLedgerContract()->GetCurrentIndex(snapshot);
+        uint32_t header_height = header_cache_->GetLast() ? header_cache_->GetLast()->GetIndex() : current_height;
+        
+        // Check if block already exists
+        if (block->GetIndex() <= current_height) {
+            return VerifyResult::AlreadyExists;
+        }
+        
+        // Check if we're missing previous blocks
+        if (block->GetIndex() - 1 > header_height) {
+            AddUnverifiedBlockToCache(block, "unknown");
+            return VerifyResult::UnableToVerify;
+        }
+        
+        // Verify block
+        if (block->GetIndex() == header_height + 1) {
+            if (!VerifyBlock(block, snapshot)) {
+                return VerifyResult::Invalid;
+            }
+        } else {
+            auto header = header_cache_->Get(block->GetIndex());
+            if (!header || header->GetHash() != block->GetHash()) {
+                return VerifyResult::Invalid;
+            }
+        }
+        
+        // Add to cache
+        block_cache_[block->GetHash()] = block;
+        
+        // Process if ready for persistence
+        if (block->GetIndex() == current_height + 1) {
+            // Queue for processing
+            std::unique_lock<std::mutex> proc_lock(processing_mutex_);
+            processing_queue_.push([this, block]() {
+                ProcessBlock(block);
+            });
+            processing_cv_.notify_one();
+        } else {
+            // Relay block if within range
+            if (block->GetIndex() + 99 >= header_height) {
+                // Would notify network layer here
+            }
+            
+            // Add header to cache if next expected
+            if (block->GetIndex() == header_height + 1) {
+                header_cache_->Add(block->GetHeader());
+            }
+        }
+        
+        return VerifyResult::Succeed;
     }
 
-    std::optional<io::UInt256> Blockchain::GetNextBlockHash(const io::UInt256& hash) const
+    void Blockchain::OnNewHeaders(const std::vector<std::shared_ptr<Header>>& headers)
     {
-        return blockStorage_->GetNextBlockHash(hash);
-    }
-
-    std::vector<TransactionOutput> Blockchain::GetUnspentOutputs(const io::UInt256& hash) const
-    {
-        return transactionStorage_->GetUnspentOutputs(hash);
-    }
-
-    std::vector<TransactionOutput> Blockchain::GetUnspentOutputs(const io::UInt160& scriptHash) const
-    {
-        return transactionStorage_->GetUnspentOutputs(scriptHash);
-    }
-
-    io::Fixed8 Blockchain::GetBalance(const io::UInt160& scriptHash, const io::UInt256& assetId) const
-    {
-        return transactionStorage_->GetBalance(scriptHash, assetId);
-    }
-
-    int32_t Blockchain::RegisterBlockPersistenceCallback(BlockPersistenceCallback callback)
-    {
-        return callbacks_->RegisterBlockPersistenceCallback(std::move(callback));
-    }
-
-    void Blockchain::UnregisterBlockPersistenceCallback(int32_t id)
-    {
-        callbacks_->UnregisterBlockPersistenceCallback(id);
-    }
-
-    int32_t Blockchain::RegisterTransactionExecutionCallback(TransactionExecutionCallback callback)
-    {
-        return callbacks_->RegisterTransactionExecutionCallback(std::move(callback));
-    }
-
-    void Blockchain::UnregisterTransactionExecutionCallback(int32_t id)
-    {
-        callbacks_->UnregisterTransactionExecutionCallback(id);
-    }
-
-    bool Blockchain::ExecuteBlock(const Block& block, std::shared_ptr<persistence::DataCache> snapshot)
-    {
-        return execution_->ExecuteBlock(block, snapshot);
-    }
-
-    void Blockchain::Initialize(const Block& genesisBlock)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-
-        // Check if the blockchain is already initialized
-        if (height_ > 0)
+        if (header_cache_->IsFull()) {
             return;
-
-        // Add the genesis block
-        if (!AddBlock(genesisBlock))
-            throw std::runtime_error("Failed to add genesis block");
-
-        // Initialize the blockchain execution
-        auto snapshot = dataCache_->CreateSnapshot();
-        auto dataSnapshot = std::dynamic_pointer_cast<persistence::DataCache>(snapshot);
-        execution_->Initialize(dataSnapshot);
-        dataSnapshot->Commit();
+        }
+        
+        std::unique_lock<std::shared_mutex> lock(blockchain_mutex_);
+        
+        auto snapshot = data_cache_->CreateSnapshot();
+        uint32_t header_height = header_cache_->GetLast() ? 
+                                header_cache_->GetLast()->GetIndex() : 
+                                system_->GetLedgerContract()->GetCurrentIndex(snapshot);
+        
+        for (const auto& header : headers) {
+            if (!header->TryGetHash()) {
+                continue;
+            }
+            
+            if (header->GetIndex() > header_height + 1) {
+                break;
+            }
+            
+            if (header->GetIndex() < header_height + 1) {
+                continue;
+            }
+            
+            if (!header->Verify(system_->GetSettings(), snapshot, header_cache_)) {
+                break;
+            }
+            
+            if (!header_cache_->Add(header)) {
+                break;
+            }
+            
+            ++header_height;
+        }
     }
-}
+
+    VerifyResult Blockchain::OnNewTransaction(std::shared_ptr<Transaction> transaction)
+    {
+        if (!transaction || !transaction->TryGetHash()) {
+            return VerifyResult::Invalid;
+        }
+        
+        auto hash = transaction->GetHash();
+        
+        // Check if transaction exists
+        switch (system_->ContainsTransaction(hash)) {
+            case ContainsTransactionType::ExistsInPool:
+                return VerifyResult::AlreadyInPool;
+            case ContainsTransactionType::ExistsInLedger:
+                return VerifyResult::AlreadyExists;
+        }
+        
+        // Check for conflicts
+        std::vector<io::UInt160> signers;
+        for (const auto& signer : transaction->GetSigners()) {
+            signers.push_back(signer.account);
+        }
+        
+        if (system_->ContainsConflictHash(hash, signers)) {
+            return VerifyResult::HasConflicts;
+        }
+        
+        // Try to add to memory pool
+        return system_->GetMemoryPool()->TryAdd(transaction, data_cache_);
+    }
+
+    VerifyResult Blockchain::OnNewExtensiblePayload(std::shared_ptr<network::payloads::ExtensiblePayload> payload)
+    {
+        if (!payload || !payload->TryGetHash()) {
+            return VerifyResult::Invalid;
+        }
+        
+        std::unique_lock<std::shared_mutex> lock(blockchain_mutex_);
+        
+        auto snapshot = data_cache_->CreateSnapshot();
+        
+        // Update whitelist if needed
+        if (!extensible_whitelist_cached_) {
+            extensible_witness_whitelist_ = UpdateExtensibleWitnessWhiteList(snapshot);
+            extensible_whitelist_cached_ = true;
+        }
+        
+        if (!payload->Verify(system_->GetSettings(), snapshot, extensible_witness_whitelist_)) {
+            return VerifyResult::Invalid;
+        }
+        
+        system_->GetRelayCache()->Add(payload);
+        return VerifyResult::Succeed;
+    }
+
+    bool Blockchain::ImportBlocks(const ImportData& import_data)
+    {
+        std::unique_lock<std::shared_mutex> lock(blockchain_mutex_);
+        
+        try {
+            uint32_t current_height = system_->GetLedgerContract()->GetCurrentIndex(data_cache_);
+            
+            for (const auto& block : import_data.blocks) {
+                if (block->GetIndex() <= current_height) {
+                    continue;
+                }
+                
+                if (block->GetIndex() != current_height + 1) {
+                    throw std::invalid_argument("Blocks must be imported in sequence");
+                }
+                
+                if (import_data.verify && !VerifyBlock(block, data_cache_)) {
+                    throw std::invalid_argument("Block verification failed");
+                }
+                
+                PersistBlock(block);
+                ++current_height;
+            }
+            
+            return true;
+        } catch (const std::exception& e) {
+            std::cerr << "Import failed: " << e.what() << std::endl;
+            return false;
+        }
+    }
+
+    void Blockchain::FillMemoryPool(const std::vector<std::shared_ptr<Transaction>>& transactions)
+    {
+        // Invalidate all transactions in memory pool
+        system_->GetMemoryPool()->InvalidateAllTransactions();
+        
+        auto snapshot = data_cache_->CreateSnapshot();
+        uint32_t max_traceable_blocks = system_->GetMaxTraceableBlocks();
+        
+        for (const auto& tx : transactions) {
+            if (system_->GetLedgerContract()->ContainsTransaction(snapshot, tx->GetHash())) {
+                continue;
+            }
+            
+            std::vector<io::UInt160> signers;
+            for (const auto& signer : tx->GetSigners()) {
+                signers.push_back(signer.account);
+            }
+            
+            if (system_->GetLedgerContract()->ContainsConflictHash(snapshot, tx->GetHash(), signers, max_traceable_blocks)) {
+                continue;
+            }
+            
+            // Remove if unverified in pool
+            system_->GetMemoryPool()->TryRemoveUnverified(tx->GetHash());
+            
+            // Add to memory pool
+            system_->GetMemoryPool()->TryAdd(tx, snapshot);
+        }
+    }
+
+    void Blockchain::ReverifyInventories(const std::vector<std::shared_ptr<IInventory>>& inventories)
+    {
+        for (const auto& inventory : inventories) {
+            // Process inventory without relaying
+            if (auto block = std::dynamic_pointer_cast<Block>(inventory)) {
+                OnNewBlock(block);
+            } else if (auto transaction = std::dynamic_pointer_cast<Transaction>(inventory)) {
+                OnNewTransaction(transaction);
+            } else if (auto payload = std::dynamic_pointer_cast<network::payloads::ExtensiblePayload>(inventory)) {
+                OnNewExtensiblePayload(payload);
+            }
+        }
+    }
+
+    // Event registration methods
+    void Blockchain::RegisterCommittingHandler(CommittingHandler handler)
+    {
+        std::lock_guard<std::mutex> lock(event_mutex_);
+        committing_handlers_.push_back(std::move(handler));
+    }
+
+    void Blockchain::RegisterCommittedHandler(CommittedHandler handler)
+    {
+        std::lock_guard<std::mutex> lock(event_mutex_);
+        committed_handlers_.push_back(std::move(handler));
+    }
+
+    void Blockchain::RegisterBlockPersistenceHandler(BlockPersistenceHandler handler)
+    {
+        std::lock_guard<std::mutex> lock(event_mutex_);
+        block_persistence_handlers_.push_back(std::move(handler));
+    }
+
+    void Blockchain::RegisterTransactionHandler(TransactionHandler handler)
+    {
+        std::lock_guard<std::mutex> lock(event_mutex_);
+        transaction_handlers_.push_back(std::move(handler));
+    }
+
+    void Blockchain::RegisterInventoryHandler(InventoryHandler handler)
+    {
+        std::lock_guard<std::mutex> lock(event_mutex_);
+        inventory_handlers_.push_back(std::move(handler));
+    }
+
+    void Blockchain::ProcessingThreadFunction()
+    {
+        while (running_) {
+            std::unique_lock<std::mutex> lock(processing_mutex_);
+            
+            // Wait for work or timeout for idle processing
+            processing_cv_.wait_for(lock, std::chrono::milliseconds(100), [this] {
+                return !processing_queue_.empty() || !running_;
+            });
+            
+            if (!running_) {
+                break;
+            }
+            
+            // Process queued work
+            while (!processing_queue_.empty() && running_) {
+                auto work = std::move(processing_queue_.front());
+                processing_queue_.pop();
+                lock.unlock();
+                
+                try {
+                    work();
+                } catch (const std::exception& e) {
+                    std::cerr << "Processing error: " << e.what() << std::endl;
+                }
+                
+                lock.lock();
+            }
+            
+            lock.unlock();
+            
+            // Idle processing
+            if (running_) {
+                IdleProcessingFunction();
+            }
+        }
+    }
+
+    void Blockchain::IdleProcessingFunction()
+    {
+        // Re-verify top unverified transactions
+        if (system_->GetMemoryPool()->ReVerifyTopUnverifiedTransactionsIfNeeded(
+                MaxTxToReverifyPerIdle, data_cache_)) {
+            // Schedule another idle processing cycle
+            std::unique_lock<std::mutex> lock(processing_mutex_);
+            processing_cv_.notify_one();
+        }
+    }
+
+} // namespace neo::ledger

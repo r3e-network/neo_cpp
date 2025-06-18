@@ -63,7 +63,7 @@ namespace neo::vm
         engine.Push(StackItem::Create(static_cast<int64_t>(position)));
     }
 
-    void JumpTableConstants::PUSHNULL(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSHNULL(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Null());
     }
@@ -92,92 +92,92 @@ namespace neo::vm
         engine.Push(StackItem::Create(ioData));
     }
 
-    void JumpTableConstants::PUSHM1(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSHM1(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(-1)));
     }
 
-    void JumpTableConstants::PUSH0(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH0(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(0)));
     }
 
-    void JumpTableConstants::PUSH1(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH1(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(1)));
     }
 
-    void JumpTableConstants::PUSH2(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH2(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(2)));
     }
 
-    void JumpTableConstants::PUSH3(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH3(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(3)));
     }
 
-    void JumpTableConstants::PUSH4(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH4(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(4)));
     }
 
-    void JumpTableConstants::PUSH5(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH5(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(5)));
     }
 
-    void JumpTableConstants::PUSH6(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH6(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(6)));
     }
 
-    void JumpTableConstants::PUSH7(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH7(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(7)));
     }
 
-    void JumpTableConstants::PUSH8(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH8(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(8)));
     }
 
-    void JumpTableConstants::PUSH9(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH9(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(9)));
     }
 
-    void JumpTableConstants::PUSH10(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH10(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(10)));
     }
 
-    void JumpTableConstants::PUSH11(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH11(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(11)));
     }
 
-    void JumpTableConstants::PUSH12(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH12(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(12)));
     }
 
-    void JumpTableConstants::PUSH13(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH13(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(13)));
     }
 
-    void JumpTableConstants::PUSH14(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH14(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(14)));
     }
 
-    void JumpTableConstants::PUSH15(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH15(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(15)));
     }
 
-    void JumpTableConstants::PUSH16(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableConstants::PUSH16(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(static_cast<int64_t>(16)));
     }

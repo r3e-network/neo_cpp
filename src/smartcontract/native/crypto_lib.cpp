@@ -1,8 +1,7 @@
 #include <neo/smartcontract/native/crypto_lib.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/cryptography/hash.h>
-#include <neo/cryptography/ecc.h>
-#include <neo/cryptography/ecc/ecpoint.h>
+#include <neo/cryptography/ecc/ec_point.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <sstream>
@@ -109,12 +108,27 @@ namespace neo::smartcontract::native
                 return vm::StackItem::Create(false);
 
             // Decode the public key to ECPoint (equivalent to C# ECPoint.DecodePoint)
-            auto ecPoint = cryptography::ECPoint::FromBytes(pubKey.AsSpan(), "secp256r1");
+            auto ecPoint = neo::cryptography::ECPoint::Parse(pubKey.ToHexString());
 
             // Use secp256r1 curve to verify signature (equivalent to C# Crypto.VerifySignature)
-            cryptography::Secp256r1 curve;
-            bool result = curve.Verify(message.AsSpan(), signature.AsSpan(), ecPoint);
-            return vm::StackItem::Create(result);
+            // Implement proper curve verification using ECDSA signature verification
+            try
+            {
+                // Verify that the public key is valid
+                if (!ecPoint.IsValid())
+                {
+                    return vm::StackItem::Create(false);
+                }
+                
+                // Perform ECDSA signature verification on secp256r1 curve
+                bool result = cryptography::Crypto::VerifySignature(message.AsSpan(), signature.AsSpan(), ecPoint);
+                return vm::StackItem::Create(result);
+            }
+            catch (const std::exception& e)
+            {
+                std::cerr << "Error verifying signature: " << e.what() << std::endl;
+                return vm::StackItem::Create(false);
+            }
         }
         catch (const std::exception&)
         {
@@ -149,21 +163,42 @@ namespace neo::smartcontract::native
                 return vm::StackItem::Create(false);
 
             // Decode the public key to ECPoint (equivalent to C# ECPoint.DecodePoint)
-            auto ecPoint = cryptography::ECPoint::FromBytes(pubKey.AsSpan(), curve);
+            auto ecPoint = neo::cryptography::ECPoint::Parse(pubKey.ToHexString());
 
             // Use the appropriate curve to verify signature
-            bool result = false;
-            if (curve == "secp256r1")
+            // Implement proper curve verification with support for both secp256r1 and secp256k1
+            try
             {
-                cryptography::Secp256r1 secp256r1;
-                result = secp256r1.Verify(message.AsSpan(), signature.AsSpan(), ecPoint);
+                // Verify that the public key is valid
+                if (!ecPoint.IsValid())
+                {
+                    return vm::StackItem::Create(false);
+                }
+                
+                // Perform ECDSA signature verification on the specified curve
+                bool result;
+                if (curve == "secp256r1")
+                {
+                    result = cryptography::Crypto::VerifySignature(message.AsSpan(), signature.AsSpan(), ecPoint);
+                }
+                else if (curve == "secp256k1")
+                {
+                    // For secp256k1, use the appropriate verification method
+                    result = cryptography::Crypto::VerifySignatureSecp256k1(message.AsSpan(), signature.AsSpan(), ecPoint);
+                }
+                else
+                {
+                    // Unsupported curve
+                    return vm::StackItem::Create(false);
+                }
+                
+                return vm::StackItem::Create(result);
             }
-            else if (curve == "secp256k1")
+            catch (const std::exception& e)
             {
-                cryptography::Secp256k1 secp256k1;
-                result = secp256k1.Verify(message.AsSpan(), signature.AsSpan(), ecPoint);
+                std::cerr << "Error verifying signature with curve " << curve << ": " << e.what() << std::endl;
+                return vm::StackItem::Create(false);
             }
-            return vm::StackItem::Create(result);
         }
         catch (const std::exception&)
         {

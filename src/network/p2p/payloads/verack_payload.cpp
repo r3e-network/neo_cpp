@@ -8,11 +8,13 @@ namespace neo::network::p2p::payloads
 {
     void VerAckPayload::Serialize(io::BinaryWriter& writer) const
     {
+        (void)writer; // Suppress unused parameter warning
         // VerAck has no payload data
     }
 
     void VerAckPayload::Deserialize(io::BinaryReader& reader)
     {
+        (void)reader; // Suppress unused parameter warning
         // VerAck has no payload data
     }
     

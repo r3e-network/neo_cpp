@@ -92,43 +92,43 @@ namespace neo::vm
     }
 
     // JumpTableSlotArgument implementations
-    void JumpTableSlotArgument::LDARG0(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::LDARG0(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadArgument(0));
     }
 
-    void JumpTableSlotArgument::LDARG1(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::LDARG1(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadArgument(1));
     }
 
-    void JumpTableSlotArgument::LDARG2(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::LDARG2(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadArgument(2));
     }
 
-    void JumpTableSlotArgument::LDARG3(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::LDARG3(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadArgument(3));
     }
 
-    void JumpTableSlotArgument::LDARG4(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::LDARG4(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadArgument(4));
     }
 
-    void JumpTableSlotArgument::LDARG5(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::LDARG5(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadArgument(5));
     }
 
-    void JumpTableSlotArgument::LDARG6(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::LDARG6(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadArgument(6));
@@ -141,43 +141,43 @@ namespace neo::vm
         engine.Push(context.LoadArgument(index));
     }
 
-    void JumpTableSlotArgument::STARG0(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::STARG0(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreArgument(0, engine.Pop());
     }
 
-    void JumpTableSlotArgument::STARG1(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::STARG1(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreArgument(1, engine.Pop());
     }
 
-    void JumpTableSlotArgument::STARG2(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::STARG2(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreArgument(2, engine.Pop());
     }
 
-    void JumpTableSlotArgument::STARG3(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::STARG3(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreArgument(3, engine.Pop());
     }
 
-    void JumpTableSlotArgument::STARG4(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::STARG4(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreArgument(4, engine.Pop());
     }
 
-    void JumpTableSlotArgument::STARG5(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::STARG5(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreArgument(5, engine.Pop());
     }
 
-    void JumpTableSlotArgument::STARG6(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotArgument::STARG6(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreArgument(6, engine.Pop());

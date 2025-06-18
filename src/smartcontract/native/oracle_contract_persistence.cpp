@@ -9,6 +9,7 @@
 #include <neo/ledger/transaction.h>
 #include <neo/ledger/transaction_attribute.h>
 #include <neo/ledger/oracle_response.h>
+#include <neo/cryptography/hash.h>
 #include <sstream>
 #include <algorithm>
 #include <iostream>
@@ -40,7 +41,7 @@ namespace neo::smartcontract::native
         // Initialize contract if needed
         auto key = GetStorageKey(PREFIX_PRICE, io::ByteVector{});
         auto value = GetStorageValue(engine.GetSnapshot(), key);
-        if (value.IsEmpty())
+        if (value.Size() == 0)
         {
             InitializeContract(engine, 0);
         }
@@ -55,11 +56,14 @@ namespace neo::smartcontract::native
         if (!block)
             return false;
 
+        // Track oracle nodes and their GAS rewards
+        std::vector<std::pair<io::UInt160, int64_t>> nodeRewards;
+
         // Process oracle response transactions
         for (const auto& tx : block->GetTransactions())
         {
             // Check if this is an oracle response transaction
-            auto response = tx->GetAttribute<ledger::OracleResponse>();
+            auto response = tx->GetOracleResponse();
             if (!response)
                 continue;
 
@@ -83,7 +87,7 @@ namespace neo::smartcontract::native
                 // If the list is empty, delete it
                 if (idList.GetCount() == 0)
                 {
-                    auto idListKey = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(io::ByteSpan(urlHash.Data(), urlHash.Size())));
+                    auto idListKey = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
                     DeleteStorageValue(engine.GetSnapshot(), idListKey);
                 }
                 else
@@ -95,26 +99,39 @@ namespace neo::smartcontract::native
                     std::string idListData = idListStream.str();
 
                     // Store the ID list
-                    auto idListKey = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(io::ByteSpan(urlHash.Data(), urlHash.Size())));
+                    auto idListKey = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
                     io::ByteVector idListValue(io::ByteSpan(reinterpret_cast<const uint8_t*>(idListData.data()), idListData.size()));
                     PutStorageValue(engine.GetSnapshot(), idListKey, idListValue);
                 }
 
-                // Distribute GAS to oracle nodes
+                // Get oracle nodes for GAS distribution
                 auto roleManagement = RoleManagement::GetInstance();
                 auto oracleNodes = roleManagement->GetDesignatedByRole(engine.GetSnapshot(), Role::Oracle, block->GetIndex());
 
                 if (!oracleNodes.empty())
                 {
-                    // Calculate GAS per node
-                    auto gasToken = GasToken::GetInstance();
-                    int64_t gasPerNode = GetPrice(engine.GetSnapshot()) / oracleNodes.size();
-
-                    // Distribute GAS to oracle nodes
-                    for (const auto& node : oracleNodes)
+                    // Calculate which node should get the reward (based on response ID)
+                    int index = static_cast<int>(response->GetId() % static_cast<uint64_t>(oracleNodes.size()));
+                    auto& selectedNode = oracleNodes[index];
+                    
+                    // Convert ECPoint to script hash
+                    auto scriptHash = neo::cryptography::Hash::Hash160(selectedNode.ToArray().AsSpan());
+                    
+                    // Add to rewards (accumulate if multiple responses from same node)
+                    int64_t price = GetPrice(engine.GetSnapshot());
+                    bool found = false;
+                    for (auto& reward : nodeRewards)
                     {
-                        auto account = cryptography::Hash::Hash160(node.ToArray().AsSpan());
-                        gasToken->Transfer(engine.GetSnapshot(), GetScriptHash(), account, gasPerNode);
+                        if (reward.first == scriptHash)
+                        {
+                            reward.second += price;
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                    {
+                        nodeRewards.emplace_back(scriptHash, price);
                     }
                 }
             }
@@ -122,6 +139,19 @@ namespace neo::smartcontract::native
             {
                 std::cerr << "Failed to process oracle response: " << ex.what() << std::endl;
                 // Continue processing other transactions
+            }
+        }
+
+        // Distribute accumulated GAS rewards to oracle nodes
+        if (!nodeRewards.empty())
+        {
+            auto gasToken = GasToken::GetInstance();
+            for (const auto& reward : nodeRewards)
+            {
+                if (reward.second > 0)
+                {
+                    gasToken->Transfer(engine.GetSnapshot(), GetScriptHash(), reward.first, reward.second);
+                }
             }
         }
 

@@ -33,24 +33,61 @@ namespace neo::plugins
 
     bool RPCPlugin::OnStart()
     {
-        // Register RPC request callback
-        auto rpcServer = GetRPCServer();
-        if (!rpcServer)
-            return false;
-        
-        // TODO: Register RPC request callback
+        // Register RPC request callback matching typical plugin architecture
+        try
+        {
+            if (rpcServer_)
+            {
+                // Register this plugin as a request handler
+                rpcServer_->RegisterRequestHandler(
+                    [this](const std::string& method, const json::JsonValue& params) -> json::JsonValue
+                    {
+                        return HandleRpcRequest(method, params);
+                    }
+                );
+                
+                // Register specific methods this plugin handles
+                RegisterRpcMethods();
+                
+                std::cout << "RPC plugin callbacks registered successfully" << std::endl;
+            }
+            else
+            {
+                std::cerr << "RPC server not available for callback registration" << std::endl;
+            }
+        }
+        catch (const std::exception& e)
+        {
+            std::cerr << "Failed to register RPC callbacks: " << e.what() << std::endl;
+        }
         
         return true;
     }
 
     bool RPCPlugin::OnStop()
     {
-        // Unregister RPC request callback
-        auto rpcServer = GetRPCServer();
-        if (!rpcServer)
-            return false;
-        
-        // TODO: Unregister RPC request callback
+        // Unregister RPC request callback for proper cleanup
+        try
+        {
+            if (rpcServer_)
+            {
+                // Unregister this plugin's request handler
+                rpcServer_->UnregisterRequestHandler();
+                
+                // Unregister specific methods this plugin handled
+                UnregisterRpcMethods();
+                
+                std::cout << "RPC plugin callbacks unregistered successfully" << std::endl;
+            }
+            else
+            {
+                std::cerr << "RPC server not available for callback unregistration" << std::endl;
+            }
+        }
+        catch (const std::exception& e)
+        {
+            std::cerr << "Failed to unregister RPC callbacks: " << e.what() << std::endl;
+        }
         
         return true;
     }

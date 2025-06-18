@@ -111,6 +111,16 @@ namespace neo::smartcontract::native
         static constexpr uint8_t PREFIX_ROLE = 1;
 
         /**
+         * @brief Role state constants for committee.
+         */
+        static constexpr Role ROLE_STATE_COMMITTEE = Role::StateValidator;
+
+        /**
+         * @brief Role state constants for validators.
+         */
+        static constexpr Role ROLE_STATE_VALIDATOR = Role::StateValidator;
+
+        /**
          * @brief Constructs a RoleManagement.
          */
         RoleManagement();

@@ -1,180 +1,141 @@
 #pragma once
 
-#include <neo/cryptography/ecc/ec_point.h>
+#include <neo/cryptography/ecc/ecpoint.h>
+#include <neo/io/byte_vector.h>
 #include <neo/io/uint160.h>
-#include <vector>
-#include <string>
-#include <span>
 #include <memory>
+#include <string>
 
 namespace neo::wallets
 {
     /**
-     * @brief Represents a cryptographic key pair for wallet operations.
+     * @brief Represents a cryptographic key pair (private key + public key)
      */
     class KeyPair
     {
     public:
         /**
-         * @brief Constructor from private key.
-         * @param private_key The private key bytes.
+         * @brief Constructor with private key
          */
-        explicit KeyPair(std::span<const uint8_t> private_key);
+        explicit KeyPair(const io::ByteVector& privateKey);
 
         /**
-         * @brief Constructor from private key vector.
-         * @param private_key The private key bytes.
-         */
-        explicit KeyPair(const std::vector<uint8_t>& private_key);
-
-        /**
-         * @brief Destructor.
+         * @brief Destructor
          */
         ~KeyPair();
 
         /**
-         * @brief Copy constructor.
-         * @param other The other key pair.
+         * @brief Copy constructor
          */
         KeyPair(const KeyPair& other);
 
         /**
-         * @brief Move constructor.
-         * @param other The other key pair.
+         * @brief Move constructor
          */
         KeyPair(KeyPair&& other) noexcept;
 
         /**
-         * @brief Copy assignment operator.
-         * @param other The other key pair.
-         * @return Reference to this key pair.
+         * @brief Copy assignment operator
          */
         KeyPair& operator=(const KeyPair& other);
 
         /**
-         * @brief Move assignment operator.
-         * @param other The other key pair.
-         * @return Reference to this key pair.
+         * @brief Move assignment operator
          */
         KeyPair& operator=(KeyPair&& other) noexcept;
 
         /**
-         * @brief Gets the private key.
-         * @return The private key bytes.
+         * @brief Generate a new random key pair
          */
-        std::vector<uint8_t> GetPrivateKey() const;
+        static std::unique_ptr<KeyPair> Generate();
 
         /**
-         * @brief Gets the public key.
-         * @return The public key.
+         * @brief Create key pair from WIF (Wallet Import Format)
          */
-        cryptography::ecc::ECPoint GetPublicKey() const;
+        static std::unique_ptr<KeyPair> FromWIF(const std::string& wif);
 
         /**
-         * @brief Gets the script hash for this key pair.
-         * @return The script hash.
-         */
-        io::UInt160 GetScriptHash() const;
-
-        /**
-         * @brief Gets the Neo address for this key pair.
-         * @param address_version The address version byte.
-         * @return The Neo address.
-         */
-        std::string GetAddress(uint8_t address_version = 0x35) const;
-
-        /**
-         * @brief Signs a message with this key pair.
-         * @param message The message to sign.
-         * @return The signature.
-         */
-        std::vector<uint8_t> Sign(std::span<const uint8_t> message) const;
-
-        /**
-         * @brief Verifies a signature against this key pair's public key.
-         * @param message The original message.
-         * @param signature The signature to verify.
-         * @return True if signature is valid, false otherwise.
-         */
-        bool VerifySignature(std::span<const uint8_t> message, std::span<const uint8_t> signature) const;
-
-        /**
-         * @brief Exports the key pair to WIF (Wallet Import Format).
-         * @return The WIF string.
-         */
-        std::string ToWIF() const;
-
-        /**
-         * @brief Creates a key pair from WIF (Wallet Import Format).
-         * @param wif The WIF string.
-         * @return The key pair.
-         */
-        static KeyPair FromWIF(const std::string& wif);
-
-        /**
-         * @brief Generates a new random key pair.
-         * @return A new key pair.
-         */
-        static KeyPair Generate();
-
-        /**
-         * @brief Creates a key pair from a hex string.
-         * @param hex The hex string of the private key.
-         * @return The key pair.
+         * @brief Create key pair from hex string
          */
         static KeyPair FromHex(const std::string& hex);
 
         /**
-         * @brief Exports the private key to hex string.
-         * @return The hex string.
+         * @brief Get the private key
+         */
+        const io::ByteVector& GetPrivateKey() const;
+
+        /**
+         * @brief Get the public key
+         */
+        const cryptography::ecc::ECPoint& GetPublicKey() const;
+
+        /**
+         * @brief Get the script hash
+         */
+        io::UInt160 GetScriptHash() const;
+
+        /**
+         * @brief Get the address
+         */
+        std::string GetAddress(uint8_t address_version = 0x17) const;
+
+        /**
+         * @brief Export private key to WIF format
+         */
+        std::string ToWIF() const;
+
+        /**
+         * @brief Export private key to hex format
          */
         std::string ToHex() const;
 
         /**
-         * @brief Checks if this key pair is valid.
-         * @return True if valid, false otherwise.
+         * @brief Check if the key pair is valid
          */
         bool IsValid() const;
 
         /**
-         * @brief Equality operator.
-         * @param other The other key pair.
-         * @return True if equal, false otherwise.
+         * @brief Sign data with this key pair
+         */
+        io::ByteVector Sign(const io::ByteVector& data) const;
+
+        /**
+         * @brief Verify signature with this key pair's public key
+         */
+        bool Verify(const io::ByteVector& data, const io::ByteVector& signature) const;
+
+        /**
+         * @brief Equality operator
          */
         bool operator==(const KeyPair& other) const;
 
         /**
-         * @brief Inequality operator.
-         * @param other The other key pair.
-         * @return True if not equal, false otherwise.
+         * @brief Inequality operator
          */
         bool operator!=(const KeyPair& other) const;
 
     private:
-        std::vector<uint8_t> private_key_;
-        mutable std::unique_ptr<cryptography::ecc::ECPoint> public_key_;
-        mutable std::unique_ptr<io::UInt160> script_hash_;
+        io::ByteVector privateKey_;
+        mutable std::unique_ptr<cryptography::ecc::ECPoint> publicKey_;
+        mutable std::unique_ptr<io::UInt160> scriptHash_;
 
-        /**
-         * @brief Validates the private key.
-         * @param private_key The private key to validate.
-         * @return True if valid, false otherwise.
-         */
-        static bool ValidatePrivateKey(std::span<const uint8_t> private_key);
-
-        /**
-         * @brief Computes the public key from the private key.
-         */
         void ComputePublicKey() const;
-
-        /**
-         * @brief Computes the script hash from the public key.
-         */
         void ComputeScriptHash() const;
+        void Clear();
+        
+        /**
+         * @brief Validate if private key is valid for secp256r1 curve
+         */
+        static bool IsValidPrivateKey(const io::ByteVector& privateKey);
 
         /**
-         * @brief Clears sensitive data.
+         * @brief Validate private key (alias)
          */
-        void Clear();
+        static bool ValidatePrivateKey(const io::ByteVector& privateKey);
+        
+        /**
+         * @brief Base58 encode data
+         */
+        static std::string Base58Encode(const io::ByteVector& data);
     };
 }

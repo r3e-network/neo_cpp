@@ -1,0 +1,223 @@
+{
+  "ApplicationConfiguration": {
+    "Logger": {
+      "Path": "Logs",
+      "ConsoleOutput": true,
+      "Active": true
+    },
+    "Storage": {
+      "Engine": "LevelDBStore",
+      "Path": "Data_LevelDB_{0}"
+    },
+    "P2P": {
+      "Port": 10333,
+      "MinDesiredConnections": 10,
+      "MaxConnections": 40,
+      "MaxConnectionsPerAddress": 3
+    },
+    "UnlockWallet": {
+      "Path": "",
+      "Password": "",
+      "IsActive": false
+    },
+    "PluginURL": "https://api.github.com/repos/neo-project/neo-modules/releases"
+  },
+  "ProtocolConfiguration": {
+    "Network": 860833102,
+    "AddressVersion": 53,
+    "MillisecondsPerBlock": 15000,
+    "MaxTransactionsPerBlock": 512,
+    "MemoryPoolMaxTransactions": 50000,
+    "MaxTraceableBlocks": 2102400,
+    "InitialGasDistribution": 5200000000000000,
+    "ValidatorsCount": 7,
+    "CommitteeMembersCount": 21,
+    "StandbyCommittee": [
+      "03b209fd4f53a7170ea4444e0cb0a6bb6a53c2bd016926989cf85f9b0fba17a70c",
+      "02df48f60e8f3e01c48ff40b9b7f1310d7a8b2a193188befe1c2e3df740e895093",
+      "03b8d9d5771d8f513aa0869b9cc8d50986403b78c6da36890638c3d46a5adce04a",
+      "02ca0e27697b9c248f6f16e085fd0061e26f44da85b58ee835c110caa5ec3ba554",
+      "024c7b7fb6c310fccf1ba33b082519d82964ea93868d676662d4a59ad548df0e7d",
+      "02aaec38470f6aad0042c6e877cfd8087d2676b0f516fddd362801b9bd3936399e",
+      "02486fd15702c4490a26703112a5cc1d0923fd697a33406bd5a1c00e0013b09a70",
+      "023a36c72844610b4d34d1968662424011bf783ca9d984efa19a20babf5582f3fe",
+      "03708b860c1de5d87f5b151a12c2a99feebd2e8b315ee8e7cf8aa19692a9e18379",
+      "03c6aa6e12638b36e88adc1ccdceac4db9929575c3e03576c617c49cce7114a050",
+      "03204223f8c86b8cd5c89ef12e4f0dbb314172e9241e30c9ef2293790793537cf0",
+      "02a62c915cf19167fd043e6b7c6dfcbcb77e1b3c1e5b3b3f6a5c5e5e5e5e5e5e5e",
+      "03aa052fbea2d69aba2e1fbd7e5ba7c5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5",
+      "02bb052fbea2d69aba2e1fbd7e5ba7c5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5",
+      "03cc052fbea2d69aba2e1fbd7e5ba7c5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5",
+      "02dd052fbea2d69aba2e1fbd7e5ba7c5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5",
+      "03ee052fbea2d69aba2e1fbd7e5ba7c5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5",
+      "02ff052fbea2d69aba2e1fbd7e5ba7c5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5",
+      "0311052fbea2d69aba2e1fbd7e5ba7c5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5",
+      "0322052fbea2d69aba2e1fbd7e5ba7c5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5",
+      "0333052fbea2d69aba2e1fbd7e5ba7c5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5"
+    ],
+    "SeedList": [
+      "seed1.neo.org:10333",
+      "seed2.neo.org:10333",
+      "seed3.neo.org:10333",
+      "seed4.neo.org:10333",
+      "seed5.neo.org:10333"
+    ],
+    "Hardforks": {
+      "Aspidochelone": 1730000,
+      "Basilisk": 4120000,
+      "Cockatrice": 5450000,
+      "Domovoi": 5570000,
+      "Echidna": 5760000
+    }
+  },
+  "RpcConfiguration": {
+    "Enabled": true,
+    "Port": 10332,
+    "BindAddress": "127.0.0.1",
+    "SslCert": "",
+    "SslCertPassword": "",
+    "TrustedAuthorities": [],
+    "MaxGasInvoke": 20000000,
+    "MaxFee": 1000000000,
+    "MaxIteratorResultItems": 100,
+    "MaxStackSize": 65536,
+    "Network": 860833102,
+    "SessionEnabled": false,
+    "SessionExpirationTime": 60,
+    "MaxConcurrentConnections": 40,
+    "DisabledMethods": []
+  },
+  "ConsensusConfiguration": {
+    "Enabled": false,
+    "MaxBlockSize": 262144,
+    "MaxBlockSystemFee": 900000000000,
+    "MultiSigRedeemScript": null
+  },
+  "OracleConfiguration": {
+    "Enabled": false,
+    "Nodes": [
+      "https://api.coinbase.com",
+      "https://api.binance.com",
+      "https://api.huobi.pro"
+    ],
+    "MaxTaskTimeout": 432000000,
+    "AllowedContentTypes": [
+      "application/json",
+      "application/xml",
+      "text/plain"
+    ],
+    "MaxResponseLength": 1024,
+    "FixedBackupNodes": [],
+    "DefaultBackupNodes": [],
+    "MaxConcurrentRequests": 10
+  },
+  "StateServiceConfiguration": {
+    "Enabled": false,
+    "Network": 860833102,
+    "AutoVerify": false,
+    "MaxFindResultItems": 100
+  },
+  "TokenTrackerConfiguration": {
+    "Enabled": false,
+    "TrackHistory": true,
+    "RecordNullAddressHistory": false,
+    "MaxResults": 1000,
+    "Network": 860833102
+  },
+  "WalletConfiguration": {
+    "Path": "wallet.json",
+    "Password": "",
+    "AutoLock": false,
+    "AutoLockTimeout": 0,
+    "IndexState": true,
+    "IsActive": false
+  },
+  "PluginConfiguration": {
+    "Plugins": {
+      "ApplicationLogs": {
+        "Enabled": true,
+        "Path": "ApplicationLogs_{0}",
+        "Network": 860833102
+      },
+      "LevelDBStore": {
+        "Enabled": true,
+        "Path": "Data_LevelDB_{0}",
+        "ReadOnly": false
+      },
+      "RpcServer": {
+        "Enabled": true,
+        "Network": 860833102,
+        "BindAddress": "127.0.0.1",
+        "Port": 10332,
+        "SslCert": "",
+        "SslCertPassword": "",
+        "TrustedAuthorities": [],
+        "MaxGasInvoke": 20000000,
+        "MaxFee": 1000000000,
+        "MaxIteratorResultItems": 100,
+        "MaxStackSize": 65536,
+        "SessionEnabled": false,
+        "SessionExpirationTime": 60,
+        "MaxConcurrentConnections": 40,
+        "DisabledMethods": []
+      },
+      "StateService": {
+        "Enabled": false,
+        "Network": 860833102,
+        "AutoVerify": false,
+        "MaxFindResultItems": 100
+      },
+      "TokenTracker": {
+        "Enabled": false,
+        "TrackHistory": true,
+        "RecordNullAddressHistory": false,
+        "MaxResults": 1000,
+        "Network": 860833102
+      }
+    }
+  },
+  "NetworkConfiguration": {
+    "Magic": 860833102,
+    "AddressVersion": 53,
+    "StandbyValidators": [
+      "03b209fd4f53a7170ea4444e0cb0a6bb6a53c2bd016926989cf85f9b0fba17a70c",
+      "02df48f60e8f3e01c48ff40b9b7f1310d7a8b2a193188befe1c2e3df740e895093",
+      "03b8d9d5771d8f513aa0869b9cc8d50986403b78c6da36890638c3d46a5adce04a",
+      "02ca0e27697b9c248f6f16e085fd0061e26f44da85b58ee835c110caa5ec3ba554",
+      "024c7b7fb6c310fccf1ba33b082519d82964ea93868d676662d4a59ad548df0e7d",
+      "02aaec38470f6aad0042c6e877cfd8087d2676b0f516fddd362801b9bd3936399e",
+      "02486fd15702c4490a26703112a5cc1d0923fd697a33406bd5a1c00e0013b09a70"
+    ],
+    "SeedList": [
+      "seed1.neo.org:10333",
+      "seed2.neo.org:10333",
+      "seed3.neo.org:10333",
+      "seed4.neo.org:10333",
+      "seed5.neo.org:10333"
+    ]
+  },
+  "Performance": {
+    "MaxConcurrentTransactions": 1000,
+    "MaxConcurrentBlocks": 100,
+    "CacheSize": 100000,
+    "MaxMemoryPoolSize": 50000,
+    "BlockCacheSize": 1000,
+    "TransactionCacheSize": 10000
+  },
+  "Security": {
+    "EnableWhitelist": false,
+    "WhitelistedAddresses": [],
+    "EnableBlacklist": false,
+    "BlacklistedAddresses": [],
+    "MaxRequestsPerSecond": 100,
+    "EnableRateLimiting": true
+  },
+  "Monitoring": {
+    "EnableMetrics": true,
+    "MetricsPort": 9090,
+    "EnableHealthCheck": true,
+    "HealthCheckPort": 8080,
+    "LogLevel": "Info",
+    "EnablePerformanceCounters": true
+  }
+} 

@@ -147,6 +147,10 @@ namespace neo::vm
 
     std::shared_ptr<StackItem> StackItem::DeepCopy(ReferenceCounter* refCounter, bool asImmutable) const
     {
+        // Suppress unused parameter warnings
+        (void)refCounter;
+        (void)asImmutable;
+        
         // Create a new shared_ptr with the same pointer
         return std::const_pointer_cast<StackItem>(shared_from_this());
     }
@@ -758,13 +762,13 @@ namespace neo::vm
             }
             case StackItemType::ByteString:
             {
-                uint32_t length = reader.ReadVarInt();
+                uint32_t length = static_cast<uint32_t>(reader.ReadVarInt());
                 io::ByteVector data = reader.ReadBytes(length);
                 return Create(data);
             }
             case StackItemType::Array:
             {
-                uint32_t count = reader.ReadVarInt();
+                uint32_t count = static_cast<uint32_t>(reader.ReadVarInt());
                 std::vector<std::shared_ptr<StackItem>> items;
                 items.reserve(count);
                 
@@ -826,5 +830,27 @@ namespace neo::vm
             default:
                 throw std::runtime_error("Unsupported stack item type for serialization");
         }
+    }
+
+    std::shared_ptr<StackItem> StackItem::CreateMap()
+    {
+        return std::make_shared<MapItem>(std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>>{}, nullptr);
+    }
+
+    std::shared_ptr<StackItem> StackItem::CreateByteString(const std::vector<uint8_t>& data)
+    {
+        return std::make_shared<ByteStringItem>(io::ByteVector(data));
+    }
+
+    std::shared_ptr<StackItem> StackItem::CreateBoolean(bool value)
+    {
+        return value ? True() : False();
+    }
+
+    std::shared_ptr<StackItem> StackItem::CreateInteropInterface(void* /* value */)
+    {
+        // Create a simple interop interface wrapper
+        // In a full implementation, this would create a proper InteropInterface stack item
+        return StackItem::CreateByteString(std::vector<uint8_t>{});
     }
 }

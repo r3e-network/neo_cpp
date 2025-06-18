@@ -58,9 +58,11 @@ namespace neo::ledger
 
     void CoinReference::DeserializeJson(const io::JsonReader& reader)
     {
-        // JSON deserialization implementation
-        // This would parse the JSON object and extract txid and vout
-        // For now, this is a placeholder
+        // Read transaction hash from "txid" field
+        prevHash_ = reader.ReadUInt256("txid");
+        
+        // Read output index from "vout" field
+        prevIndex_ = reader.ReadUInt16("vout");
     }
 
     bool CoinReference::operator==(const CoinReference& other) const

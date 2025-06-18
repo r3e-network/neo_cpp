@@ -13,6 +13,7 @@ add_library(neo_cli OBJECT
     transaction_commands.cpp
     contract_commands.cpp
     type_converters.cpp
+    console_helper.cpp
 )
 
 # Include directories

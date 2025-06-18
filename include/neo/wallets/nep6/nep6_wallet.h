@@ -181,35 +181,35 @@ namespace neo::wallets::nep6
          * @brief Creates a new account.
          * @return The new account.
          */
-        std::shared_ptr<WalletAccount> CreateAccount() override;
+        std::shared_ptr<WalletAccount> CreateAccount();
 
         /**
          * @brief Creates a new account with the specified private key.
          * @param privateKey The private key.
          * @return The new account.
          */
-        std::shared_ptr<WalletAccount> CreateAccount(const std::vector<uint8_t>& privateKey) override;
+        std::shared_ptr<WalletAccount> CreateAccount(const std::vector<uint8_t>& privateKey);
 
         /**
          * @brief Creates a new account with the specified key pair.
          * @param keyPair The key pair.
          * @return The new account.
          */
-        std::shared_ptr<WalletAccount> CreateAccount(const cryptography::ecc::KeyPair& keyPair) override;
+        std::shared_ptr<WalletAccount> CreateAccount(const cryptography::ecc::KeyPair& keyPair);
 
         /**
          * @brief Creates a new account with the specified WIF.
          * @param wif The WIF.
          * @return The new account.
          */
-        std::shared_ptr<WalletAccount> CreateAccountFromWIF(const std::string& wif) override;
+        std::shared_ptr<WalletAccount> CreateAccountFromWIF(const std::string& wif);
 
         /**
          * @brief Creates a new account with the specified script hash.
          * @param scriptHash The script hash.
          * @return The new account.
          */
-        std::shared_ptr<WalletAccount> CreateAccount(const io::UInt160& scriptHash) override;
+        std::shared_ptr<WalletAccount> CreateAccount(const io::UInt160& scriptHash);
 
         /**
          * @brief Imports an account from a NEP2 key.

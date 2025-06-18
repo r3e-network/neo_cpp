@@ -1,85 +1,98 @@
 #pragma once
 
+#include <neo/node/neo_system.h>
+#include <neo/rpc/rpc_server.h>
+#include <neo/wallets/wallet.h>
+#include <neo/cli/console_helper.h>
+#include <neo/io/uint256.h>
+#include <neo/io/uint160.h>
 #include <string>
 #include <vector>
 #include <unordered_map>
 #include <functional>
 #include <memory>
+#include <thread>
+#include <atomic>
 
-namespace neo
+namespace neo::cli
 {
-    class NeoSystem;
-    class Wallet;
-    
-    namespace cli
+    struct CommandLineOptions
     {
-        class CommandHandler;
-        class TypeConverter;
-        class CommandLineOptions;
-        
-        class MainService
-        {
-        public:
-            MainService();
-            ~MainService();
-            
-            void Run(const std::vector<std::string>& args);
-            void Start(const CommandLineOptions& options);
-            void Stop();
-            
-            void RegisterCommand(const std::string& name, const CommandHandler& handler, const std::string& category = "");
-            void RegisterCommandHandler(const std::string& typeName, const TypeConverter& converter);
-            
-            NeoSystem* GetNeoSystem() const;
-            Wallet* GetCurrentWallet() const;
-            
-        private:
-            NeoSystem* neoSystem_;
-            Wallet* currentWallet_;
-            std::unordered_map<std::string, CommandHandler> commands_;
-            std::unordered_map<std::string, std::unordered_map<std::string, CommandHandler>> commandsByCategory_;
-            std::unordered_map<std::string, TypeConverter> typeConverters_;
-            
-            void OnStartWithCommandLine(const std::vector<std::string>& args);
-            void OnCommand(const std::string& command);
-            void OnHelp(const std::string& category = "");
-            void OnExit();
-            
-            // Blockchain Commands
-            void OnShowBlock(const std::string& indexOrHash);
-            void OnShowHeader(const std::string& indexOrHash);
-            void OnShowTransaction(const UInt256& hash);
-            void OnShowMerkle(const UInt256& hash);
-            
-            // Node Commands
-            void OnShowState();
-            void OnShowPool();
-            void OnRelay(const io::ByteVector& data);
-            
-            // Wallet Commands
-            void OnCreateWallet(const std::string& path, const std::string& password);
-            void OnOpenWallet(const std::string& path, const std::string& password);
-            void OnCloseWallet();
-            void OnListAddress();
-            void OnListAsset();
-            void OnShowUtxo(const UInt160& scriptHash = UInt160());
-            
-            // Contract Commands
-            void OnDeploy(const std::string& filePath, const std::string& manifestPath = "", const json::JObject& data = json::JObject());
-            void OnInvoke(const UInt160& scriptHash, const std::string& operation, const std::vector<json::JObject>& args = {}, const std::vector<UInt160>& signers = {});
-            
-            // NEP-17 Commands
-            void OnTransfer(const UInt160& tokenHash, const UInt160& to, const Fixed8& amount, const UInt160& from = UInt160(), const std::string& data = "", const std::vector<UInt160>& signers = {});
-            void OnBalanceOf(const UInt160& tokenHash, const UInt160& address);
-            
-            // Network Commands
-            void OnShowPeers();
-            void OnConnect(const std::string& address, uint16_t port);
-            
-            // Plugin Commands
-            void OnInstallPlugin(const std::string& pluginName);
-            void OnUninstallPlugin(const std::string& pluginName);
-            void OnListPlugins();
-        };
-    }
+        std::string Config;
+        std::string Wallet;
+        std::string Password;
+        std::string DbEngine;
+        std::string DbPath;
+        bool NoVerify = false;
+        std::vector<std::string> Plugins;
+        int Verbose = 0;
+    };
+
+    using CommandHandler = std::function<bool(const std::vector<std::string>&)>;
+    using TypeConverter = std::function<void*(const std::vector<std::string>&, bool)>;
+
+    class MainService
+    {
+    public:
+        MainService();
+        ~MainService();
+
+        // Main entry points
+        void Run(const std::vector<std::string>& args);
+        void Start(const CommandLineOptions& options);
+        void Stop();
+
+        // Command registration
+        void RegisterCommand(const std::string& name, const CommandHandler& handler, const std::string& category = "");
+        void RegisterTypeConverter(const std::string& typeName, const TypeConverter& converter);
+
+        // Accessors
+        std::shared_ptr<node::NeoSystem> GetNeoSystem() const;
+        std::shared_ptr<wallets::Wallet> GetCurrentWallet() const;
+        bool HasWallet() const { return currentWallet_ != nullptr; }
+
+        // Command handlers
+        void OnCommand(const std::string& command);
+        void OnStartWithCommandLine(const std::vector<std::string>& args);
+        void OnHelp(const std::string& category = "");
+        void OnExit();
+        void OnClear();
+        void OnVersion();
+
+        // Blockchain Commands
+        void OnShowBlock(const std::string& indexOrHash);
+        void OnShowHeader(const std::string& indexOrHash);
+        void OnShowTransaction(const io::UInt256& hash);
+
+        // Node Commands
+        void OnShowState();
+        void OnShowPool();
+        void OnShowPeers();
+
+        // Wallet Commands
+        void OnOpenWallet(const std::string& path, const std::string& password);
+        void OnCloseWallet();
+        void OnShowBalance();
+        void OnShowBalance(const io::UInt160& assetId);
+        void OnShowAddress();
+        void OnTransfer(const io::UInt160& assetId, const std::string& address, double amount);
+
+    private:
+        std::shared_ptr<node::NeoSystem> neoSystem_;
+        std::shared_ptr<rpc::RPCServer> rpcServer_;
+        std::shared_ptr<wallets::Wallet> currentWallet_;
+        std::atomic<bool> running_;
+        std::thread consoleThread_;
+
+        std::unordered_map<std::string, CommandHandler> commands_;
+        std::unordered_map<std::string, std::unordered_map<std::string, CommandHandler>> commandsByCategory_;
+        std::unordered_map<std::string, TypeConverter> typeConverters_;
+
+        void InitializeCommands();
+        void InitializeBlockchainCommands();
+        void InitializeNodeCommands();
+        void InitializeWalletCommands();
+        void InitializeTypeConverters();
+        void RunConsole();
+    };
 }

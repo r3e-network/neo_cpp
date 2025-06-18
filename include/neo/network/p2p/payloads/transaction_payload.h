@@ -5,7 +5,7 @@
 #include <neo/io/binary_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/io/json_reader.h>
-#include <neo/ledger/transaction.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
 #include <memory>
 
 namespace neo::network::p2p::payloads
@@ -27,19 +27,19 @@ namespace neo::network::p2p::payloads
          * @brief Constructs a TransactionPayload with the specified transaction.
          * @param transaction The transaction.
          */
-        explicit TransactionPayload(std::shared_ptr<ledger::Transaction> transaction);
+        explicit TransactionPayload(std::shared_ptr<Neo3Transaction> transaction);
 
         /**
          * @brief Gets the transaction.
          * @return The transaction.
          */
-        std::shared_ptr<ledger::Transaction> GetTransaction() const;
+        std::shared_ptr<Neo3Transaction> GetTransaction() const;
 
         /**
          * @brief Sets the transaction.
          * @param transaction The transaction.
          */
-        void SetTransaction(std::shared_ptr<ledger::Transaction> transaction);
+        void SetTransaction(std::shared_ptr<Neo3Transaction> transaction);
 
         /**
          * @brief Gets the size of the payload.
@@ -52,7 +52,7 @@ namespace neo::network::p2p::payloads
          * @param transaction The transaction.
          * @return The created payload.
          */
-        static TransactionPayload Create(std::shared_ptr<ledger::Transaction> transaction);
+        static TransactionPayload Create(std::shared_ptr<Neo3Transaction> transaction);
 
         /**
          * @brief Serializes the TransactionPayload to a binary writer.
@@ -79,6 +79,6 @@ namespace neo::network::p2p::payloads
         void DeserializeJson(const io::JsonReader& reader) override;
 
     private:
-        std::shared_ptr<ledger::Transaction> transaction_;
+        std::shared_ptr<Neo3Transaction> transaction_;
     };
 }

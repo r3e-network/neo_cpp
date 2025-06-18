@@ -10,7 +10,7 @@ int main() {
     // Create a simple script that calls a system runtime function
     std::vector<uint8_t> script_bytes = {
         static_cast<uint8_t>(OpCode::SYSCALL),  // System call
-        0x12, 0x34, 0x56, 0x78                  // System call hash (placeholder)
+        0x2d, 0x9b, 0x72, 0x27                  // System.Runtime.GetTime hash
     };
 
     // Create a script from the bytes

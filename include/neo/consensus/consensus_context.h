@@ -1,221 +1,181 @@
 #pragma once
 
 #include <neo/cryptography/ecc/ecpoint.h>
-#include <neo/cryptography/ecc/keypair.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/io/byte_vector.h>
 #include <neo/ledger/block.h>
 #include <neo/ledger/transaction.h>
+#include <neo/ledger/transaction_verification_context.h>
+#include <neo/network/p2p/payloads/extensible_payload.h>
 #include <neo/consensus/consensus_message.h>
-#include <neo/consensus/prepare_request.h>
-#include <neo/consensus/prepare_response.h>
-#include <neo/consensus/commit_message.h>
-#include <neo/consensus/change_view_message.h>
-#include <neo/consensus/recovery_message.h>
-#include <neo/consensus/recovery_request.h>
+#include <neo/consensus/consensus_payload_helper.h>
+#include <neo/persistence/data_cache.h>
+#include <neo/protocol_settings.h>
+#include <neo/sign/isigner.h>
 #include <cstdint>
 #include <vector>
 #include <memory>
 #include <unordered_map>
-#include <unordered_set>
+#include <chrono>
 
 namespace neo::consensus
 {
     /**
-     * @brief Represents the consensus context.
+     * @brief Represents the consensus context for Neo N3 dBFT.
+     * 
+     * This class manages the state of the consensus process, including
+     * tracking messages from validators and building blocks.
      */
-    class ConsensusContext
+    class ConsensusContext : public io::ISerializable
     {
     public:
         /**
          * @brief Constructs a ConsensusContext.
-         * @param validators The validators.
-         * @param myIndex The index of the current node in the validators list.
-         * @param keyPair The key pair.
-         * @param blockIndex The block index.
+         * @param neoSystem The Neo system instance.
+         * @param settings The protocol settings.
+         * @param signer The signer for creating signatures.
          */
-        ConsensusContext(const std::vector<cryptography::ecc::ECPoint>& validators, uint16_t myIndex, const cryptography::ecc::KeyPair& keyPair, uint32_t blockIndex);
+        ConsensusContext(std::shared_ptr<ledger::NeoSystem> neoSystem,
+                        std::shared_ptr<ProtocolSettings> settings,
+                        std::shared_ptr<sign::ISigner> signer);
+
+        // Block and consensus state
+        std::shared_ptr<ledger::Block> Block;
+        uint8_t ViewNumber = 0;
+        std::chrono::milliseconds TimePerBlock;
+        std::vector<cryptography::ecc::ECPoint> Validators;
+        int MyIndex = -1;
+        std::vector<io::UInt256> TransactionHashes;
+        std::unordered_map<io::UInt256, std::shared_ptr<ledger::Transaction>> Transactions;
+        
+        // Consensus message storage (using ExtensiblePayload)
+        std::vector<std::shared_ptr<network::p2p::payloads::ExtensiblePayload>> PreparationPayloads;
+        std::vector<std::shared_ptr<network::p2p::payloads::ExtensiblePayload>> CommitPayloads;
+        std::vector<std::shared_ptr<network::p2p::payloads::ExtensiblePayload>> ChangeViewPayloads;
+        std::vector<std::shared_ptr<network::p2p::payloads::ExtensiblePayload>> LastChangeViewPayloads;
+        
+        // Last seen message tracking
+        std::unordered_map<cryptography::ecc::ECPoint, uint32_t> LastSeenMessage;
+        
+        // Transaction verification context
+        ledger::TransactionVerificationContext VerificationContext;
+        
+        // Snapshot of the blockchain state
+        std::shared_ptr<persistence::DataCache> Snapshot;
+
+        // Consensus parameters
+        int F() const { return (Validators.size() - 1) / 3; }
+        int M() const { return Validators.size() - F(); }
+        bool IsPrimary() const { return MyIndex == Block->GetPrimaryIndex(); }
+        bool IsBackup() const { return MyIndex >= 0 && MyIndex != Block->GetPrimaryIndex(); }
+        bool WatchOnly() const { return MyIndex < 0; }
+
+        // State queries
+        bool RequestSentOrReceived() const;
+        bool ResponseSent() const;
+        bool CommitSent() const;
+        bool BlockSent() const;
+        bool ViewChanging() const;
 
         /**
-         * @brief Gets the validators.
-         * @return The validators.
+         * @brief Resets the context for a new consensus round.
+         * @param viewNumber The view number.
          */
-        const std::vector<cryptography::ecc::ECPoint>& GetValidators() const;
+        void Reset(uint8_t viewNumber);
 
         /**
-         * @brief Gets the validator index.
-         * @return The validator index.
-         */
-        uint16_t GetValidatorIndex() const;
-
-        /**
-         * @brief Gets the primary index.
-         * @return The primary index.
-         */
-        uint16_t GetPrimaryIndex() const;
-
-        /**
-         * @brief Gets the primary index for the specified view.
+         * @brief Gets the primary index for a given view number.
          * @param viewNumber The view number.
          * @return The primary index.
          */
-        uint16_t GetPrimaryIndex(uint8_t viewNumber) const;
+        uint8_t GetPrimaryIndex(uint8_t viewNumber) const;
 
         /**
-         * @brief Gets the view number.
-         * @return The view number.
+         * @brief Creates a signed ExtensiblePayload for a consensus message.
+         * @param message The consensus message.
+         * @return The signed payload.
          */
-        uint8_t GetViewNumber() const;
+        std::shared_ptr<network::p2p::payloads::ExtensiblePayload> MakeSignedPayload(
+            std::shared_ptr<ConsensusMessage> message);
 
         /**
-         * @brief Sets the view number.
-         * @param viewNumber The view number.
+         * @brief Makes a change view message.
+         * @param reason The reason for changing view.
+         * @return The change view payload.
          */
-        void SetViewNumber(uint8_t viewNumber);
+        std::shared_ptr<network::p2p::payloads::ExtensiblePayload> MakeChangeView(uint8_t reason);
 
         /**
-         * @brief Gets the block index.
-         * @return The block index.
+         * @brief Makes a prepare request message.
+         * @return The prepare request payload.
          */
-        uint32_t GetBlockIndex() const;
+        std::shared_ptr<network::p2p::payloads::ExtensiblePayload> MakePrepareRequest();
 
         /**
-         * @brief Gets the block.
-         * @return The block.
+         * @brief Makes a prepare response message.
+         * @return The prepare response payload.
          */
-        std::shared_ptr<ledger::Block> GetBlock() const;
+        std::shared_ptr<network::p2p::payloads::ExtensiblePayload> MakePrepareResponse();
 
         /**
-         * @brief Sets the block.
-         * @param block The block.
+         * @brief Makes a commit message.
+         * @return The commit payload.
          */
-        void SetBlock(std::shared_ptr<ledger::Block> block);
+        std::shared_ptr<network::p2p::payloads::ExtensiblePayload> MakeCommit();
 
         /**
-         * @brief Gets the transactions.
-         * @return The transactions.
+         * @brief Makes a recovery request message.
+         * @return The recovery request payload.
          */
-        const std::vector<std::shared_ptr<ledger::Transaction>>& GetTransactions() const;
+        std::shared_ptr<network::p2p::payloads::ExtensiblePayload> MakeRecoveryRequest();
 
         /**
-         * @brief Sets the transactions.
-         * @param transactions The transactions.
+         * @brief Makes a recovery message.
+         * @return The recovery message payload.
          */
-        void SetTransactions(const std::vector<std::shared_ptr<ledger::Transaction>>& transactions);
+        std::shared_ptr<network::p2p::payloads::ExtensiblePayload> MakeRecoveryMessage();
 
         /**
-         * @brief Gets the prepare request message.
-         * @return The prepare request message.
+         * @brief Ensures transactions don't exceed block limits.
+         * @param txs The transactions to check.
          */
-        std::shared_ptr<PrepareRequest> GetPrepareRequestMessage() const;
+        void EnsureMaxBlockLimitation(const std::vector<std::shared_ptr<ledger::Transaction>>& txs);
 
         /**
-         * @brief Sets the prepare request message.
-         * @param message The prepare request message.
+         * @brief Saves the consensus state.
          */
-        void SetPrepareRequestMessage(std::shared_ptr<PrepareRequest> message);
+        void Save();
 
-        /**
-         * @brief Gets the prepare response messages.
-         * @return The prepare response messages.
-         */
-        const std::unordered_map<uint16_t, std::shared_ptr<PrepareResponse>>& GetPrepareResponseMessages() const;
-
-        /**
-         * @brief Adds a prepare response message.
-         * @param validatorIndex The validator index.
-         * @param message The prepare response message.
-         */
-        void AddPrepareResponseMessage(uint16_t validatorIndex, std::shared_ptr<PrepareResponse> message);
-
-        /**
-         * @brief Gets the commit messages.
-         * @return The commit messages.
-         */
-        const std::unordered_map<uint16_t, std::shared_ptr<CommitMessage>>& GetCommitMessages() const;
-
-        /**
-         * @brief Adds a commit message.
-         * @param validatorIndex The validator index.
-         * @param message The commit message.
-         */
-        void AddCommitMessage(uint16_t validatorIndex, std::shared_ptr<CommitMessage> message);
-
-        /**
-         * @brief Gets the change view messages.
-         * @return The change view messages.
-         */
-        const std::unordered_map<uint16_t, std::shared_ptr<ChangeViewMessage>>& GetChangeViewMessages() const;
-
-        /**
-         * @brief Adds a change view message.
-         * @param validatorIndex The validator index.
-         * @param message The change view message.
-         */
-        void AddChangeViewMessage(uint16_t validatorIndex, std::shared_ptr<ChangeViewMessage> message);
-
-        /**
-         * @brief Gets the recovery messages.
-         * @return The recovery messages.
-         */
-        const std::unordered_map<uint16_t, std::shared_ptr<RecoveryMessage>>& GetRecoveryMessages() const;
-
-        /**
-         * @brief Adds a recovery message.
-         * @param validatorIndex The validator index.
-         * @param message The recovery message.
-         */
-        void AddRecoveryMessage(uint16_t validatorIndex, std::shared_ptr<RecoveryMessage> message);
-
-        /**
-         * @brief Resets the context.
-         */
-        void Reset();
-
-        /**
-         * @brief Checks if the node is primary.
-         * @return True if the node is primary, false otherwise.
-         */
-        bool IsPrimary() const;
-
-        /**
-         * @brief Checks if the node is backup.
-         * @return True if the node is backup, false otherwise.
-         */
-        bool IsBackup() const;
-
-        /**
-         * @brief Checks if the node has received enough prepare responses.
-         * @return True if the node has received enough prepare responses, false otherwise.
-         */
-        bool HasReceivedEnoughPrepareResponses() const;
-
-        /**
-         * @brief Checks if the node has received enough commits.
-         * @return True if the node has received enough commits, false otherwise.
-         */
-        bool HasReceivedEnoughCommits() const;
-
-        /**
-         * @brief Checks if the node has received enough change view messages.
-         * @param viewNumber The view number.
-         * @return True if the node has received enough change view messages, false otherwise.
-         */
-        bool HasReceivedEnoughChangeViewMessages(uint8_t viewNumber) const;
+        // ISerializable implementation
+        void Serialize(io::BinaryWriter& writer) const override;
+        void Deserialize(io::BinaryReader& reader) override;
 
     private:
-        std::vector<cryptography::ecc::ECPoint> validators_;
-        uint16_t validatorIndex_;
-        cryptography::ecc::KeyPair keyPair_;
-        uint8_t viewNumber_;
-        uint32_t blockIndex_;
-        std::shared_ptr<ledger::Block> block_;
-        std::vector<std::shared_ptr<ledger::Transaction>> transactions_;
-        std::shared_ptr<PrepareRequest> prepareRequestMessage_;
-        std::unordered_map<uint16_t, std::shared_ptr<PrepareResponse>> prepareResponseMessages_;
-        std::unordered_map<uint16_t, std::shared_ptr<CommitMessage>> commitMessages_;
-        std::unordered_map<uint16_t, std::shared_ptr<ChangeViewMessage>> changeViewMessages_;
-        std::unordered_map<uint16_t, std::shared_ptr<RecoveryMessage>> recoveryMessages_;
+        std::shared_ptr<ledger::NeoSystem> neoSystem_;
+        std::shared_ptr<ProtocolSettings> settings_;
+        std::shared_ptr<sign::ISigner> signer_;
+        cryptography::ecc::ECPoint myPublicKey_;
+        size_t witnessSize_ = 0;
+        std::unordered_map<io::UInt256, std::shared_ptr<ConsensusMessage>> cachedMessages_;
+        
+        /**
+         * @brief Signs an ExtensiblePayload.
+         * @param payload The payload to sign.
+         */
+        void SignPayload(std::shared_ptr<network::p2p::payloads::ExtensiblePayload> payload);
+
+        /**
+         * @brief Gets the expected block size without transactions.
+         * @param txCount The transaction count.
+         * @return The expected size.
+         */
+        size_t GetExpectedBlockSizeWithoutTransactions(size_t txCount) const;
+
+        /**
+         * @brief Ensures the block header is properly set.
+         * @return The block.
+         */
+        std::shared_ptr<ledger::Block> EnsureHeader();
     };
 }

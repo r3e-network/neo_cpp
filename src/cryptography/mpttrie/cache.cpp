@@ -10,17 +10,20 @@ namespace neo::cryptography::mpttrie
 
     std::unique_ptr<Node> Cache::Resolve(const io::UInt256& hash)
     {
+        (void)hash; // Suppress unused parameter warning
         // Simplified implementation
         return std::make_unique<Node>();
     }
 
     void Cache::PutNode(std::unique_ptr<Node> node)
     {
+        (void)node; // Suppress unused parameter warning
         // Simplified implementation
     }
 
     void Cache::DeleteNode(const io::UInt256& hash)
     {
+        (void)hash; // Suppress unused parameter warning
         // Simplified implementation
     }
 

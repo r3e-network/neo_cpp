@@ -41,7 +41,7 @@ namespace neo::smartcontract::native
     {
         auto key = GetStorageKey(PREFIX_PRICE, io::ByteVector{});
         auto value = GetStorageValue(snapshot, key);
-        if (value.IsEmpty())
+        if (value.Size() == 0)
             return DEFAULT_PRICE;
 
         return *reinterpret_cast<const int64_t*>(value.Data());
@@ -51,12 +51,12 @@ namespace neo::smartcontract::native
     {
         auto key = GetStorageKey(PREFIX_ORACLE, io::ByteVector{});
         auto value = GetStorageValue(snapshot, key);
-        if (value.IsEmpty())
+        if (value.Size() == 0)
             return {};
 
         std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
         io::BinaryReader reader(stream);
-        uint32_t count = reader.ReadVarInt();
+        uint32_t count = static_cast<uint32_t>(reader.ReadVarInt());
         std::vector<io::UInt160> oracles;
         oracles.reserve(count);
         for (uint32_t i = 0; i < count; i++)
@@ -65,8 +65,6 @@ namespace neo::smartcontract::native
         }
         return oracles;
     }
-
-
 
     void OracleContract::SetPrice(std::shared_ptr<persistence::StoreView> snapshot, int64_t price)
     {
@@ -93,12 +91,4 @@ namespace neo::smartcontract::native
         io::ByteVector value(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
         PutStorageValue(snapshot, key, value);
     }
-
-
-
-
-
-
-
-
 }

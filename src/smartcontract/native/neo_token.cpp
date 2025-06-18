@@ -101,9 +101,9 @@ namespace neo::smartcontract::native
         return NeoTokenAccount::GetBalance(*this, snapshot, account);
     }
 
-    bool NeoToken::Transfer(std::shared_ptr<persistence::DataCache> snapshot, const io::UInt160& from, const io::UInt160& to, const io::Fixed8& amount)
+    bool NeoToken::Transfer(ApplicationEngine& engine, std::shared_ptr<persistence::DataCache> snapshot, const io::UInt160& from, const io::UInt160& to, const io::Fixed8& amount)
     {
-        return NeoTokenTransfer::Transfer(*this, snapshot, from, to, amount);
+        return NeoTokenTransfer::Transfer(*this, engine, snapshot, from, to, amount);
     }
 
     std::vector<cryptography::ecc::ECPoint> NeoToken::GetValidators(std::shared_ptr<persistence::DataCache> snapshot) const

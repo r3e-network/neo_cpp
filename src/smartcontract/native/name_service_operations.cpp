@@ -60,7 +60,7 @@ namespace neo::smartcontract::native
         notificationArgs.push_back(vm::StackItem::Create(name));
         notificationArgs.push_back(vm::StackItem::Create(io::ByteVector(io::ByteSpan(owner.Data(), io::UInt160::Size))));
         notificationArgs.push_back(vm::StackItem::Create(static_cast<int64_t>(expiration)));
-        engine.SendNotification(GetScriptHash(), "Register", vm::StackItem::Create(notificationArgs));
+        engine.Notify(GetScriptHash(), "Register", notificationArgs);
 
         return vm::StackItem::Create(true);
     }

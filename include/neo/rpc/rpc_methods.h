@@ -157,6 +157,94 @@ namespace neo::rpc
          */
         static nlohmann::json GetNextBlockValidators(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
+        /**
+         * @brief Gets the best block hash.
+         * @param neoSystem The Neo system.
+         * @param params The parameters.
+         * @return The result.
+         */
+        static nlohmann::json GetBestBlockHash(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+        /**
+         * @brief Gets the block header count.
+         * @param neoSystem The Neo system.
+         * @param params The parameters.
+         * @return The result.
+         */
+        static nlohmann::json GetBlockHeaderCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+        /**
+         * @brief Gets storage items.
+         * @param neoSystem The Neo system.
+         * @param params The parameters.
+         * @return The result.
+         */
+        static nlohmann::json GetStorage(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+        /**
+         * @brief Finds storage items.
+         * @param neoSystem The Neo system.
+         * @param params The parameters.
+         * @return The result.
+         */
+        static nlohmann::json FindStorage(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+        /**
+         * @brief Gets validator candidates.
+         * @param neoSystem The Neo system.
+         * @param params The parameters.
+         * @return The result.
+         */
+        static nlohmann::json GetCandidates(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+        /**
+         * @brief Gets native contracts.
+         * @param neoSystem The Neo system.
+         * @param params The parameters.
+         * @return The result.
+         */
+        static nlohmann::json GetNativeContracts(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+        /**
+         * @brief Submits a block.
+         * @param neoSystem The Neo system.
+         * @param params The parameters.
+         * @return The result.
+         */
+        static nlohmann::json SubmitBlock(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+        /**
+         * @brief Validates an address.
+         * @param neoSystem The Neo system.
+         * @param params The parameters.
+         * @return The result.
+         */
+        static nlohmann::json ValidateAddress(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+        /**
+         * @brief Traverses an iterator.
+         * @param neoSystem The Neo system.
+         * @param params The parameters.
+         * @return The result.
+         */
+        static nlohmann::json TraverseIterator(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+        /**
+         * @brief Terminates a session.
+         * @param neoSystem The Neo system.
+         * @param params The parameters.
+         * @return The result.
+         */
+        static nlohmann::json TerminateSession(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+        /**
+         * @brief Invokes contract verification.
+         * @param neoSystem The Neo system.
+         * @param params The parameters.
+         * @return The result.
+         */
+        static nlohmann::json InvokeContractVerify(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
     private:
         /**
          * @brief Converts a block to JSON.

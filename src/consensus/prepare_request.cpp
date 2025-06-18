@@ -78,8 +78,8 @@ namespace neo::consensus
             writer.Write(hash);
         }
         
-        writer.WriteVarBytes(invocationScript_.Data(), invocationScript_.Size());
-        writer.WriteVarBytes(verificationScript_.Data(), verificationScript_.Size());
+        writer.WriteVarBytes(invocationScript_.AsSpan());
+        writer.WriteVarBytes(verificationScript_.AsSpan());
     }
     
     void PrepareRequest::Deserialize(io::BinaryReader& reader)

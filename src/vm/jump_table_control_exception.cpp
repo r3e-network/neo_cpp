@@ -164,18 +164,18 @@ namespace neo::vm
         engine.SetJumping(true);
     }
 
-    void JumpTableControlException::ABORT(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableControlException::ABORT(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         throw InvalidOperationException("ABORT: Execution aborted");
     }
 
-    void JumpTableControlException::ASSERT(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableControlException::ASSERT(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         if (!engine.Pop()->GetBoolean())
             throw InvalidOperationException("ASSERT: Assertion failed");
     }
 
-    void JumpTableControlException::THROW(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableControlException::THROW(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto exception = engine.Pop();
         engine.ExecuteThrow(exception);
@@ -207,7 +207,7 @@ namespace neo::vm
         engine.ExecuteEndTry(endOffset);
     }
 
-    void JumpTableControlException::ENDFINALLY(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableControlException::ENDFINALLY(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         if (context.GetTryCount() == 0)

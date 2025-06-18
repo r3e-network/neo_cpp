@@ -2,6 +2,7 @@
 
 #include <neo/ledger/transaction.h>
 #include <neo/io/uint256.h>
+#include <neo/io/uint160.h>
 #include <unordered_set>
 #include <unordered_map>
 #include <memory>
@@ -43,83 +44,89 @@ namespace neo::ledger
     };
 
     /**
-     * @brief Context for verifying transactions to prevent conflicts.
+     * @brief Context for transaction verification to track conflicts and state.
+     * 
+     * ## Overview
+     * The TransactionVerificationContext tracks transaction verification state
+     * to detect conflicts and ensure proper validation during block processing
+     * and mempool operations.
+     * 
+     * ## API Reference
+     * - **Conflict Detection**: CheckTransaction(), AddTransaction()
+     * - **State Management**: Reset(), Clear()
+     * - **Validation**: IsConflicted()
+     * 
+     * ## Usage Examples
+     * ```cpp
+     * TransactionVerificationContext context;
+     * if (context.CheckTransaction(tx)) {
+     *     context.AddTransaction(tx);
+     * }
+     * ```
      */
     class TransactionVerificationContext
     {
     public:
         /**
-         * @brief Constructor.
+         * @brief Default constructor
          */
         TransactionVerificationContext();
 
         /**
-         * @brief Destructor.
+         * @brief Destructor
          */
-        ~TransactionVerificationContext() = default;
+        ~TransactionVerificationContext();
+
+        /**
+         * @brief Checks if a transaction can be added without conflicts.
+         * @param transaction The transaction to check
+         * @return True if the transaction can be added, false if there are conflicts
+         */
+        bool CheckTransaction(std::shared_ptr<Transaction> transaction);
 
         /**
          * @brief Adds a transaction to the verification context.
-         * @param transaction The transaction to add.
-         * @return The verification result.
+         * @param transaction The transaction to add
          */
-        VerifyResult AddTransaction(std::shared_ptr<Transaction> transaction);
+        void AddTransaction(std::shared_ptr<Transaction> transaction);
 
         /**
-         * @brief Removes a transaction from the verification context.
-         * @param hash The transaction hash.
-         * @return True if removed, false if not found.
+         * @brief Checks if there are any conflicts for the given transaction.
+         * @param transaction The transaction to check
+         * @return True if there are conflicts, false otherwise
          */
-        bool RemoveTransaction(const io::UInt256& hash);
+        bool IsConflicted(std::shared_ptr<Transaction> transaction) const;
 
         /**
-         * @brief Checks if a transaction exists in the context.
-         * @param hash The transaction hash.
-         * @return True if exists, false otherwise.
+         * @brief Resets the verification context.
          */
-        bool Contains(const io::UInt256& hash) const;
+        void Reset();
 
         /**
-         * @brief Gets the number of transactions in the context.
-         * @return The number of transactions.
-         */
-        size_t Count() const;
-
-        /**
-         * @brief Clears all transactions from the context.
+         * @brief Clears all tracked state.
          */
         void Clear();
 
         /**
-         * @brief Checks if adding a transaction would cause conflicts.
-         * @param transaction The transaction to check.
-         * @return The verification result.
+         * @brief Gets the number of transactions in the context.
+         * @return Number of transactions
          */
-        VerifyResult CheckTransaction(std::shared_ptr<Transaction> transaction) const;
-
-        /**
-         * @brief Gets all transaction hashes in the context.
-         * @return A set of transaction hashes.
-         */
-        std::unordered_set<io::UInt256> GetTransactionHashes() const;
+        size_t GetTransactionCount() const;
 
     private:
+        // Track used transaction outputs (prevhash:index -> transaction hash)
+        std::unordered_map<std::string, io::UInt256> used_outputs_;
+        
+        // Track account conflicts (account -> transaction hash)
+        std::unordered_map<io::UInt160, io::UInt256> account_conflicts_;
+        
+        // Set of transaction hashes in this context
         std::unordered_set<io::UInt256> transaction_hashes_;
-        std::unordered_map<io::UInt256, std::shared_ptr<Transaction>> transactions_;
 
-        /**
-         * @brief Checks for conflicts with existing transactions.
-         * @param transaction The transaction to check.
-         * @return The verification result.
-         */
-        VerifyResult CheckConflicts(std::shared_ptr<Transaction> transaction) const;
-
-        /**
-         * @brief Validates the transaction structure and content.
-         * @param transaction The transaction to validate.
-         * @return The verification result.
-         */
-        VerifyResult ValidateTransaction(std::shared_ptr<Transaction> transaction) const;
+        // Helper methods
+        std::string MakeOutputKey(const io::UInt256& prev_hash, uint32_t index) const;
+        bool HasOutputConflict(std::shared_ptr<Transaction> transaction) const;
+        bool HasAccountConflict(std::shared_ptr<Transaction> transaction) const;
     };
 
     /**

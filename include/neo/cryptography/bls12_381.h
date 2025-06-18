@@ -19,6 +19,21 @@ namespace neo::cryptography::bls12_381
         G1Point();
 
         /**
+         * @brief Destructor.
+         */
+        ~G1Point();
+
+        /**
+         * @brief Copy constructor.
+         */
+        G1Point(const G1Point& other);
+
+        /**
+         * @brief Assignment operator.
+         */
+        G1Point& operator=(const G1Point& other);
+
+        /**
          * @brief Constructs a G1Point from a byte array.
          * @param data The byte array.
          * @throws std::invalid_argument if the data is invalid.
@@ -115,6 +130,21 @@ namespace neo::cryptography::bls12_381
          * @brief Constructs a G2Point at infinity.
          */
         G2Point();
+
+        /**
+         * @brief Destructor.
+         */
+        ~G2Point();
+
+        /**
+         * @brief Copy constructor.
+         */
+        G2Point(const G2Point& other);
+
+        /**
+         * @brief Assignment operator.
+         */
+        G2Point& operator=(const G2Point& other);
 
         /**
          * @brief Constructs a G2Point from a byte array.
@@ -215,6 +245,21 @@ namespace neo::cryptography::bls12_381
         GTPoint();
 
         /**
+         * @brief Destructor.
+         */
+        ~GTPoint();
+
+        /**
+         * @brief Copy constructor.
+         */
+        GTPoint(const GTPoint& other);
+
+        /**
+         * @brief Assignment operator.
+         */
+        GTPoint& operator=(const GTPoint& other);
+
+        /**
          * @brief Constructs a GTPoint from a byte array.
          * @param data The byte array.
          * @throws std::invalid_argument if the data is invalid.
@@ -285,6 +330,10 @@ namespace neo::cryptography::bls12_381
         std::unique_ptr<Impl> impl_;
 
         GTPoint(std::unique_ptr<Impl> impl);
+
+        // Friend functions that need access to Impl
+        friend GTPoint Pairing(const G1Point& p, const G2Point& q);
+        friend GTPoint MultiPairing(const std::vector<G1Point>& ps, const std::vector<G2Point>& qs);
     };
 
     /**

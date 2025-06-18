@@ -9,6 +9,7 @@
 #include <neo/ledger/transaction.h>
 #include <neo/ledger/transaction_attribute.h>
 #include <neo/ledger/oracle_response.h>
+#include <neo/cryptography/hash.h>
 #include <sstream>
 #include <algorithm>
 #include <iostream>
@@ -19,7 +20,7 @@ namespace neo::smartcontract::native
     {
         auto key = GetStorageKey(PREFIX_REQUEST, io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t))));
         auto value = GetStorageValue(snapshot, key);
-        if (value.IsEmpty())
+        if (value.Size() == 0)
             throw std::runtime_error("Request not found");
 
         std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
@@ -33,27 +34,29 @@ namespace neo::smartcontract::native
 
     std::vector<std::pair<uint64_t, OracleRequest>> OracleContract::GetRequests(std::shared_ptr<persistence::StoreView> snapshot) const
     {
-        auto prefix = GetStorageKey(PREFIX_REQUEST, io::ByteVector{});
-        auto iterator = snapshot->Find(prefix);
+        auto prefix = CreateStorageKey(PREFIX_REQUEST);
+        auto results = snapshot->Find(&prefix);
 
         std::vector<std::pair<uint64_t, OracleRequest>> requests;
-        while (iterator->HasNext())
+        for (const auto& entry : results)
         {
-            auto entry = iterator->Next();
             auto key = entry.first.GetKey();
             auto value = entry.second.GetValue();
 
-            // Extract ID from key
-            uint64_t id = *reinterpret_cast<const uint64_t*>(key.Data() + 1);
+            // Extract ID from key (skip the prefix byte)
+            if (key.Size() >= sizeof(uint64_t) + 1)
+            {
+                uint64_t id = *reinterpret_cast<const uint64_t*>(key.Data() + 1);
 
-            // Deserialize request
-            std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
-            io::BinaryReader reader(stream);
+                // Deserialize request
+                std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
+                io::BinaryReader reader(stream);
 
-            OracleRequest request;
-            request.Deserialize(reader);
+                OracleRequest request;
+                request.Deserialize(reader);
 
-            requests.emplace_back(id, request);
+                requests.push_back(std::make_pair(id, request));
+            }
         }
 
         return requests;
@@ -85,7 +88,7 @@ namespace neo::smartcontract::native
     {
         auto key = GetStorageKey(PREFIX_RESPONSE, io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t))));
         auto value = GetStorageValue(snapshot, key);
-        if (value.IsEmpty())
+        if (value.Size() == 0)
             throw std::runtime_error("Response not found");
 
         std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
@@ -99,7 +102,7 @@ namespace neo::smartcontract::native
     {
         auto key = GetStorageKey(PREFIX_REQUEST_ID, io::ByteVector{});
         auto value = GetStorageValue(snapshot, key);
-        if (value.IsEmpty())
+        if (value.Size() == 0)
         {
             uint64_t id = 1;
             PutStorageValue(snapshot, key, io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t))));
@@ -133,7 +136,7 @@ namespace neo::smartcontract::native
         std::string data = stream.str();
 
         // Store the ID list
-        auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(io::ByteSpan(urlHash.Data(), urlHash.Size())));
+        auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
         io::ByteVector value(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
         PutStorageValue(snapshot, key, value);
     }
@@ -155,7 +158,7 @@ namespace neo::smartcontract::native
         // If the list is empty, delete it
         if (idList.GetCount() == 0)
         {
-            auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(io::ByteSpan(urlHash.Data(), urlHash.Size())));
+            auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
             DeleteStorageValue(snapshot, key);
             return;
         }
@@ -167,16 +170,16 @@ namespace neo::smartcontract::native
         std::string data = stream.str();
 
         // Store the ID list
-        auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(io::ByteSpan(urlHash.Data(), urlHash.Size())));
+        auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
         io::ByteVector value(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
         PutStorageValue(snapshot, key, value);
     }
 
     IdList OracleContract::GetIdList(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt256& urlHash) const
     {
-        auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(io::ByteSpan(urlHash.Data(), urlHash.Size())));
+        auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
         auto value = GetStorageValue(snapshot, key);
-        if (value.IsEmpty())
+        if (value.Size() == 0)
             return IdList();
 
         std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
@@ -188,9 +191,9 @@ namespace neo::smartcontract::native
         return idList;
     }
 
-    io::UInt256 OracleContract::GetUrlHash(const std::string& url) const
+    io::UInt256 OracleContract::GetUrlHash(const std::string& url)
     {
-        return cryptography::Hash::Hash256(io::ByteSpan(reinterpret_cast<const uint8_t*>(url.data()), url.size()));
+        return neo::cryptography::Hash::Hash256(io::ByteSpan(reinterpret_cast<const uint8_t*>(url.data()), url.size()));
     }
 
     uint64_t OracleContract::CreateRequest(std::shared_ptr<persistence::StoreView> snapshot, const std::string& url, const std::string& filter,
@@ -248,7 +251,7 @@ namespace neo::smartcontract::native
         std::string idListData = idListStream.str();
 
         // Store the ID list
-        auto idListKey = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(io::ByteSpan(urlHash.Data(), urlHash.Size())));
+        auto idListKey = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
         io::ByteVector idListValue(io::ByteSpan(reinterpret_cast<const uint8_t*>(idListData.data()), idListData.size()));
         PutStorageValue(snapshot, idListKey, idListValue);
 

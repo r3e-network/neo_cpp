@@ -3,8 +3,9 @@
 namespace neo::network::p2p::payloads
 {
     GetHeadersPayload::GetHeadersPayload(const io::UInt256& hashStart, int16_t count)
-        : GetBlocksPayload(hashStart, count)
+        : GetBlocksPayload(hashStart)
     {
+        SetCount(count);
     }
     
     GetHeadersPayload GetHeadersPayload::Create(const io::UInt256& hashStart, int16_t count)

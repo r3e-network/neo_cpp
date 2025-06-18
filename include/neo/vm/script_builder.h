@@ -92,6 +92,13 @@ namespace neo::vm
         ScriptBuilder& EmitSysCall(uint32_t api);
 
         /**
+         * @brief Emits an instruction with OpCode.SYSCALL.
+         * @param api The system call name.
+         * @return A reference to this instance after the emit operation has completed.
+         */
+        ScriptBuilder& EmitSysCall(const std::string& api);
+
+        /**
          * @brief Converts the value of this instance to a byte vector.
          * @return A byte vector contains the script.
          */
@@ -102,6 +109,41 @@ namespace neo::vm
          * @return A Script object.
          */
         Script ToScript() const;
+
+        /**
+         * @brief Emits a push instruction with the specified data (alias for EmitPush).
+         * @param data The data to be pushed.
+         * @return A reference to this instance after the emit operation has completed.
+         */
+        ScriptBuilder& EmitPushData(const io::ByteSpan& data) { return EmitPush(data); }
+        
+        /**
+         * @brief Emits a push instruction with the specified data (alias for EmitPush).
+         * @param data The data to be pushed.
+         * @return A reference to this instance after the emit operation has completed.
+         */
+        ScriptBuilder& EmitPushData(const io::ByteVector& data) { return EmitPush(data.AsSpan()); }
+        
+        /**
+         * @brief Emits a push instruction with the specified number (alias for EmitPush).
+         * @param value The number to be pushed.
+         * @return A reference to this instance after the emit operation has completed.
+         */
+        ScriptBuilder& EmitPushNumber(int64_t value) { return EmitPush(value); }
+        
+        /**
+         * @brief Emits a push instruction with the specified number (alias for EmitPush).
+         * @param value The number to be pushed.
+         * @return A reference to this instance after the emit operation has completed.
+         */
+        ScriptBuilder& EmitPushNumber(int32_t value) { return EmitPush(static_cast<int64_t>(value)); }
+        
+        /**
+         * @brief Emits a push instruction with the specified number (alias for EmitPush).
+         * @param value The number to be pushed.
+         * @return A reference to this instance after the emit operation has completed.
+         */
+        ScriptBuilder& EmitPushNumber(size_t value) { return EmitPush(static_cast<int64_t>(value)); }
 
     private:
         io::ByteVector script_;

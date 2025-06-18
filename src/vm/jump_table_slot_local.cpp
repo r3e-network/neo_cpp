@@ -121,43 +121,43 @@ namespace neo::vm
         context.SetArguments(arguments);
     }
 
-    void JumpTableSlotLocal::LDLOC0(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::LDLOC0(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadLocalVariable(0));
     }
 
-    void JumpTableSlotLocal::LDLOC1(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::LDLOC1(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadLocalVariable(1));
     }
 
-    void JumpTableSlotLocal::LDLOC2(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::LDLOC2(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadLocalVariable(2));
     }
 
-    void JumpTableSlotLocal::LDLOC3(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::LDLOC3(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadLocalVariable(3));
     }
 
-    void JumpTableSlotLocal::LDLOC4(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::LDLOC4(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadLocalVariable(4));
     }
 
-    void JumpTableSlotLocal::LDLOC5(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::LDLOC5(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadLocalVariable(5));
     }
 
-    void JumpTableSlotLocal::LDLOC6(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::LDLOC6(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         engine.Push(context.LoadLocalVariable(6));
@@ -170,43 +170,43 @@ namespace neo::vm
         engine.Push(context.LoadLocalVariable(index));
     }
 
-    void JumpTableSlotLocal::STLOC0(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::STLOC0(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreLocalVariable(0, engine.Pop());
     }
 
-    void JumpTableSlotLocal::STLOC1(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::STLOC1(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreLocalVariable(1, engine.Pop());
     }
 
-    void JumpTableSlotLocal::STLOC2(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::STLOC2(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreLocalVariable(2, engine.Pop());
     }
 
-    void JumpTableSlotLocal::STLOC3(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::STLOC3(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreLocalVariable(3, engine.Pop());
     }
 
-    void JumpTableSlotLocal::STLOC4(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::STLOC4(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreLocalVariable(4, engine.Pop());
     }
 
-    void JumpTableSlotLocal::STLOC5(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::STLOC5(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreLocalVariable(5, engine.Pop());
     }
 
-    void JumpTableSlotLocal::STLOC6(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableSlotLocal::STLOC6(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto& context = engine.GetCurrentContext();
         context.StoreLocalVariable(6, engine.Pop());

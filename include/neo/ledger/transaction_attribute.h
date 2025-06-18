@@ -85,6 +85,12 @@ namespace neo::ledger
         Usage GetUsage() const;
 
         /**
+         * @brief Gets the type (alias for GetUsage for RPC compatibility).
+         * @return The usage/type.
+         */
+        Usage GetType() const { return GetUsage(); }
+
+        /**
          * @brief Sets the usage.
          * @param usage The usage.
          */

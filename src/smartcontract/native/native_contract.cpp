@@ -100,7 +100,8 @@ namespace neo::smartcontract::native
 
     io::ByteVector NativeContract::GetStorageValue(std::shared_ptr<persistence::StoreView> snapshot, const io::ByteVector& key) const
     {
-        persistence::StorageKey storageKey(scriptHash_, key);
+        // Use Neo N3 storage key format with contract ID
+        auto storageKey = CreateStorageKey(key[0], io::ByteVector(key.AsSpan().subspan(1)));
         auto item = snapshot->TryGet(storageKey);
         if (!item)
             return io::ByteVector();
@@ -110,14 +111,16 @@ namespace neo::smartcontract::native
 
     void NativeContract::PutStorageValue(std::shared_ptr<persistence::StoreView> snapshot, const io::ByteVector& key, const io::ByteVector& value) const
     {
-        persistence::StorageKey storageKey(scriptHash_, key);
+        // Use Neo N3 storage key format with contract ID
+        auto storageKey = CreateStorageKey(key[0], io::ByteVector(key.AsSpan().subspan(1)));
         persistence::StorageItem item(value);
         snapshot->Add(storageKey, item);
     }
 
     void NativeContract::DeleteStorageValue(std::shared_ptr<persistence::StoreView> snapshot, const io::ByteVector& key) const
     {
-        persistence::StorageKey storageKey(scriptHash_, key);
+        // Use Neo N3 storage key format with contract ID
+        auto storageKey = CreateStorageKey(key[0], io::ByteVector(key.AsSpan().subspan(1)));
         snapshot->Delete(storageKey);
     }
 
@@ -128,51 +131,27 @@ namespace neo::smartcontract::native
 
     persistence::StorageKey NativeContract::CreateStorageKey(uint8_t prefix) const
     {
-        io::ByteVector key;
-        key.Push(prefix);
-        return persistence::StorageKey(scriptHash_, key);
+        return persistence::StorageKey::Create(static_cast<int32_t>(id_), prefix);
     }
 
     persistence::StorageKey NativeContract::CreateStorageKey(uint8_t prefix, const io::ByteVector& key) const
     {
-        io::ByteVector fullKey;
-        fullKey.Push(prefix);
-        fullKey.Append(key.AsSpan());
-        return persistence::StorageKey(scriptHash_, fullKey);
+        return persistence::StorageKey::Create(static_cast<int32_t>(id_), prefix, 
+            std::span<const uint8_t>(key.Data(), key.Size()));
     }
 
     persistence::StorageKey NativeContract::CreateStorageKey(uint8_t prefix, const io::UInt160& key) const
     {
-        io::ByteVector fullKey;
-        fullKey.Push(prefix);
-        io::ByteSpan keySpan(key.Data(), io::UInt160::Size);
-        fullKey.Append(keySpan);
-        return persistence::StorageKey(scriptHash_, fullKey);
+        return persistence::StorageKey::Create(static_cast<int32_t>(id_), prefix, key);
     }
 
     persistence::StorageKey NativeContract::CreateStorageKey(uint8_t prefix, const io::UInt256& key) const
     {
-        io::ByteVector fullKey;
-        fullKey.Push(prefix);
-        io::ByteSpan keySpan(key.Data(), io::UInt256::Size);
-        fullKey.Append(keySpan);
-        return persistence::StorageKey(scriptHash_, fullKey);
+        return persistence::StorageKey::Create(static_cast<int32_t>(id_), prefix, key);
     }
 
     persistence::StorageKey NativeContract::CreateStorageKey(uint8_t prefix, uint32_t key) const
     {
-        io::ByteVector fullKey;
-        fullKey.Push(prefix);
-
-        // Convert uint32_t to big-endian bytes (as per C# implementation)
-        uint8_t keyBytes[4];
-        keyBytes[0] = static_cast<uint8_t>((key >> 24) & 0xFF);
-        keyBytes[1] = static_cast<uint8_t>((key >> 16) & 0xFF);
-        keyBytes[2] = static_cast<uint8_t>((key >> 8) & 0xFF);
-        keyBytes[3] = static_cast<uint8_t>(key & 0xFF);
-
-        io::ByteSpan keySpan(keyBytes, 4);
-        fullKey.Append(keySpan);
-        return persistence::StorageKey(scriptHash_, fullKey);
+        return persistence::StorageKey::Create(static_cast<int32_t>(id_), prefix, key);
     }
 }

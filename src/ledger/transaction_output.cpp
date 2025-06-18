@@ -71,9 +71,17 @@ namespace neo::ledger
 
     void TransactionOutput::DeserializeJson(const io::JsonReader& reader)
     {
-        // JSON deserialization implementation
-        // This would parse the JSON object and extract asset, value, and address
-        // For now, this is a placeholder
+        // Read asset as hex string
+        std::string assetHex = reader.ReadString("asset");
+        assetId_ = io::UInt256::Parse(assetHex);
+        
+        // Read value as string and parse to Fixed8
+        std::string valueStr = reader.ReadString("value");
+        value_ = io::Fixed8::Parse(valueStr);
+        
+        // Read address as hex string
+        std::string addressHex = reader.ReadString("address");
+        scriptHash_ = io::UInt160::Parse(addressHex);
     }
 
     bool TransactionOutput::operator==(const TransactionOutput& other) const

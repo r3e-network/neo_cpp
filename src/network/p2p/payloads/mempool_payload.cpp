@@ -2,12 +2,12 @@
 
 namespace neo::network::p2p::payloads
 {
-    void MempoolPayload::Serialize(io::BinaryWriter& writer) const
+    void MempoolPayload::Serialize([[maybe_unused]] io::BinaryWriter& writer) const
     {
-        // Mempool has no payload data
+        // Mempool message has no payload data
     }
 
-    void MempoolPayload::Deserialize(io::BinaryReader& reader)
+    void MempoolPayload::Deserialize([[maybe_unused]] io::BinaryReader& reader)
     {
         // Mempool has no payload data
     }

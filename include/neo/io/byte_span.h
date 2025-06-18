@@ -133,6 +133,12 @@ namespace neo::io
         std::string ToHexString() const;
 
         /**
+         * @brief Converts the ByteSpan to a base64 string.
+         * @return The base64 string representation of the ByteSpan.
+         */
+        std::string ToBase64String() const;
+
+        /**
          * @brief Checks if this ByteSpan is equal to another ByteSpan.
          * @param other The other ByteSpan.
          * @return True if the ByteSpans are equal, false otherwise.

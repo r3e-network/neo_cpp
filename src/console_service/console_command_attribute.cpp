@@ -2,5 +2,9 @@
 
 namespace neo::console_service
 {
-    // Placeholder - implementation will be added as needed
+    // ConsoleCommandAttribute is primarily a data structure for metadata
+    // All functionality is implemented in the header as inline methods
+    
+    // Additional utility methods could be added here if needed for command processing
+    // For example: validation, parsing, formatting, etc.
 }

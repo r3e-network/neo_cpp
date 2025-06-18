@@ -1,15 +1,26 @@
-#include <neo/persistence/store_cache.h>
+#include <neo/persistence/data_cache.h>
 #include <stdexcept>
 
 namespace neo::persistence
 {
-    StoreCache::StoreCache(std::shared_ptr<IStoreSnapshot> store)
-        : store_(store)
+    StoreCache::StoreCache()
     {
-        if (!store_)
-        {
-            throw std::invalid_argument("Store cannot be null");
-        }
+        // TODO: Initialize store cache implementation
+    }
+
+    void StoreCache::Initialize()
+    {
+        // TODO: Initialize store cache
+    }
+
+    void StoreCache::Commit()
+    {
+        // TODO: Commit changes to underlying store
+    }
+
+    void StoreCache::Rollback()
+    {
+        // TODO: Rollback uncommitted changes
     }
 
     void StoreCache::Add(const StorageKey& key, const StorageItem& value)
@@ -149,12 +160,6 @@ namespace neo::persistence
         }
 
         return result;
-    }
-
-    void StoreCache::Commit()
-    {
-        // This is a read-only operation for StoreCache
-        // Actual commit would be handled by the store
     }
 
     size_t StoreCache::Count() const

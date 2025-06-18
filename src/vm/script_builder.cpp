@@ -132,6 +132,18 @@ namespace neo::vm
         return Emit(OpCode::SYSCALL, io::ByteSpan(reinterpret_cast<const uint8_t*>(&api), sizeof(api)));
     }
 
+    ScriptBuilder& ScriptBuilder::EmitSysCall(const std::string& api)
+    {
+        // For string-based syscalls, we need to convert the string to a hash
+        // This is a simplified implementation - in practice, you'd use a proper hash function
+        uint32_t hash = 0;
+        for (char c : api)
+        {
+            hash = hash * 31 + static_cast<uint32_t>(c);
+        }
+        return EmitSysCall(hash);
+    }
+
     io::ByteVector ScriptBuilder::ToArray() const
     {
         // Get the stream content

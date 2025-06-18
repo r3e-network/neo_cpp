@@ -111,14 +111,19 @@ namespace neo::vm
         JumpTableControlJump::CALL_L(engine, instruction);
     }
 
-    void JumpTable::CALLA(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::CALLA(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
-        JumpTableControlJump::CALLA(engine, instruction);
+        auto item = engine.Pop();
+        if (item->GetType() != StackItemType::Pointer)
+            throw InvalidOperationException("Item is not a pointer");
+
+        auto pointerItem = std::dynamic_pointer_cast<PointerItem>(item);
+        engine.ExecuteCall(pointerItem->GetPosition());
     }
 
-    void JumpTable::RET(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTable::RET(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
-        JumpTableControlJump::RET(engine, instruction);
+        engine.ExecuteRet();
     }
 
     void JumpTable::SYSCALL(ExecutionEngine& engine, const Instruction& instruction)
@@ -276,21 +281,6 @@ namespace neo::vm
         int32_t offset = instruction.TokenI32();
         int32_t position = context.GetInstructionPointer() + offset;
         engine.ExecuteCall(position);
-    }
-
-    void JumpTableControlJump::CALLA(ExecutionEngine& engine, const Instruction& instruction)
-    {
-        auto item = engine.Pop();
-        if (item->GetType() != StackItemType::Pointer)
-            throw InvalidOperationException("Item is not a pointer");
-
-        auto pointerItem = std::dynamic_pointer_cast<PointerItem>(item);
-        engine.ExecuteCall(pointerItem->GetPosition());
-    }
-
-    void JumpTableControlJump::RET(ExecutionEngine& engine, const Instruction& instruction)
-    {
-        engine.ExecuteRet();
     }
 
     void JumpTableControlJump::SYSCALL(ExecutionEngine& engine, const Instruction& instruction)

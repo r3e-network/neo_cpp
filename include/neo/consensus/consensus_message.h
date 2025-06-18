@@ -1,103 +1,114 @@
 #pragma once
 
 #include <neo/consensus/message_type.h>
-#include <neo/io/serializable.h>
+#include <neo/io/iserializable.h>
+#include <neo/io/binary_writer.h>
+#include <neo/io/binary_reader.h>
 #include <neo/io/byte_vector.h>
-#include <neo/cryptography/ecc/keypair.h>
+#include <neo/protocol_settings.h>
 #include <cstdint>
 #include <memory>
 
 namespace neo::consensus
 {
     /**
-     * @brief Represents a consensus message.
+     * @brief Base class for consensus messages.
+     * 
+     * In Neo N3, consensus messages are serialized and sent within
+     * ExtensiblePayload with category "dBFT".
      */
     class ConsensusMessage : public io::ISerializable
     {
     public:
         /**
-         * @brief Constructs a ConsensusMessage.
+         * @brief Constructs a ConsensusMessage with the specified type.
          * @param type The message type.
-         * @param viewNumber The view number.
          */
-        ConsensusMessage(MessageType type, uint8_t viewNumber);
-        
+        explicit ConsensusMessage(MessageType type);
+
         /**
-         * @brief Destructor.
+         * @brief Virtual destructor.
          */
         virtual ~ConsensusMessage() = default;
-        
+
         /**
          * @brief Gets the message type.
          * @return The message type.
          */
-        MessageType GetType() const;
-        
+        MessageType GetType() const { return type_; }
+
         /**
-         * @brief Gets the view number.
-         * @return The view number.
+         * @brief Gets the block index.
+         * @return The block index.
          */
-        uint8_t GetViewNumber() const;
-        
+        uint32_t GetBlockIndex() const { return blockIndex_; }
+
+        /**
+         * @brief Sets the block index.
+         * @param index The block index.
+         */
+        void SetBlockIndex(uint32_t index) { blockIndex_ = index; }
+
         /**
          * @brief Gets the validator index.
          * @return The validator index.
          */
-        uint16_t GetValidatorIndex() const;
-        
+        uint8_t GetValidatorIndex() const { return validatorIndex_; }
+
         /**
          * @brief Sets the validator index.
-         * @param validatorIndex The validator index.
+         * @param index The validator index.
          */
-        void SetValidatorIndex(uint16_t validatorIndex);
-        
+        void SetValidatorIndex(uint8_t index) { validatorIndex_ = index; }
+
         /**
-         * @brief Gets the signature.
-         * @return The signature.
+         * @brief Gets the view number.
+         * @return The view number.
          */
-        const io::ByteVector& GetSignature() const;
-        
+        uint8_t GetViewNumber() const { return viewNumber_; }
+
         /**
-         * @brief Sets the signature.
-         * @param signature The signature.
+         * @brief Sets the view number.
+         * @param viewNumber The view number.
          */
-        void SetSignature(const io::ByteVector& signature);
-        
+        void SetViewNumber(uint8_t viewNumber) { viewNumber_ = viewNumber; }
+
         /**
-         * @brief Serializes the object.
-         * @param writer The writer.
+         * @brief Serializes the message to a binary writer.
+         * @param writer The binary writer.
          */
         void Serialize(io::BinaryWriter& writer) const override;
-        
+
         /**
-         * @brief Deserializes the object.
-         * @param reader The reader.
+         * @brief Deserializes the message from a binary reader.
+         * @param reader The binary reader.
          */
         void Deserialize(io::BinaryReader& reader) override;
-        
+
         /**
-         * @brief Gets the message data.
-         * @return The message data.
+         * @brief Gets the size of the message.
+         * @return The size of the message.
          */
-        virtual io::ByteVector GetData() const;
-        
+        virtual size_t GetSize() const;
+
         /**
-         * @brief Verifies the signature.
-         * @param publicKey The public key.
-         * @return True if the signature is valid, false otherwise.
+         * @brief Verifies the message.
+         * @param settings The protocol settings.
+         * @return True if valid, false otherwise.
          */
-        bool VerifySignature(const cryptography::ecc::ECPoint& publicKey) const;
-        
+        virtual bool Verify(const ProtocolSettings& settings) const;
+
         /**
-         * @brief Signs the message.
-         * @param keyPair The key pair.
+         * @brief Deserializes a consensus message from data.
+         * @param data The data to deserialize.
+         * @return The deserialized message.
          */
-        void Sign(const cryptography::ecc::KeyPair& keyPair);
-        
-    private:
+        static std::shared_ptr<ConsensusMessage> DeserializeFrom(const io::ByteVector& data);
+
+    protected:
         MessageType type_;
-        uint8_t viewNumber_;
-        uint16_t validatorIndex_;
-        io::ByteVector signature_;
+        uint32_t blockIndex_ = 0;
+        uint8_t validatorIndex_ = 0;
+        uint8_t viewNumber_ = 0;
     };
 }

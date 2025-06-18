@@ -99,7 +99,76 @@ namespace neo::smartcontract::native
          */
         void SetGasPerBlock(std::shared_ptr<persistence::StoreView> snapshot, int64_t gasPerBlock);
 
+        /**
+         * @brief Transfers tokens between accounts.
+         * @param snapshot The snapshot.
+         * @param from The from account.
+         * @param to The to account.
+         * @param amount The amount to transfer.
+         * @return True if the transfer was successful, false otherwise.
+         */
+        bool Transfer(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& from, const io::UInt160& to, int64_t amount);
 
+        /**
+         * @brief Transfers tokens between accounts with callback.
+         * @param engine The application engine.
+         * @param from The from account.
+         * @param to The to account.
+         * @param amount The amount to transfer.
+         * @param data The data to pass to the callback.
+         * @param callOnPayment Whether to call the onNEP17Payment callback.
+         * @return True if the transfer was successful, false otherwise.
+         */
+        bool Transfer(ApplicationEngine& engine, const io::UInt160& from, const io::UInt160& to, int64_t amount, std::shared_ptr<vm::StackItem> data, bool callOnPayment);
+
+        /**
+         * @brief Mints tokens to an account.
+         * @param snapshot The snapshot.
+         * @param account The account.
+         * @param amount The amount to mint.
+         * @return True if the minting was successful, false otherwise.
+         */
+        bool Mint(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account, int64_t amount);
+
+        /**
+         * @brief Mints tokens to an account with callback.
+         * @param engine The application engine.
+         * @param account The account.
+         * @param amount The amount to mint.
+         * @param callOnPayment Whether to call the onNEP17Payment callback.
+         * @return True if the minting was successful, false otherwise.
+         */
+        bool Mint(ApplicationEngine& engine, const io::UInt160& account, int64_t amount, bool callOnPayment);
+
+        /**
+         * @brief Burns tokens from an account.
+         * @param snapshot The snapshot.
+         * @param account The account.
+         * @param amount The amount to burn.
+         * @return True if the burning was successful, false otherwise.
+         */
+        bool Burn(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account, int64_t amount);
+
+        /**
+         * @brief Burns tokens from an account with callback.
+         * @param engine The application engine.
+         * @param account The account.
+         * @param amount The amount to burn.
+         * @return True if the burning was successful, false otherwise.
+         */
+        bool Burn(ApplicationEngine& engine, const io::UInt160& account, int64_t amount);
+
+        /**
+         * @brief Handles post-transfer operations.
+         * @param engine The application engine.
+         * @param from The from account.
+         * @param to The to account.
+         * @param amount The amount transferred.
+         * @param data The data passed to the transfer.
+         * @param callOnPayment Whether to call the onNEP17Payment callback.
+         * @return True if the post-transfer was successful, false otherwise.
+         */
+        bool PostTransfer(ApplicationEngine& engine, const io::UInt160& from, const io::UInt160& to, int64_t amount, std::shared_ptr<vm::StackItem> data, bool callOnPayment);
 
         /**
          * @brief Gets the instance.

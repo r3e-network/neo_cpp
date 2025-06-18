@@ -70,7 +70,7 @@ namespace neo::network::p2p
 
     int NetworkAddressWithTime::GetSize() const
     {
-        return sizeof(uint32_t) + sizeof(uint64_t) + io::BinaryWriter::GetVarSize(address_) + sizeof(uint16_t);
+        return sizeof(uint32_t) + sizeof(uint64_t) + static_cast<int>(1 + address_.length()) + sizeof(uint16_t);
     }
 
     void NetworkAddressWithTime::SerializeJson(io::JsonWriter& writer) const

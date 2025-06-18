@@ -24,12 +24,14 @@ namespace neo::vm
     // JumpTableCompoundMap implementations
     void JumpTableCompoundMap::NEWMAP(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction; // Suppress unused parameter warning
         auto map = std::make_shared<MapItem>(std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>>{}, engine.GetReferenceCounter());
         engine.Push(map);
     }
 
     void JumpTableCompoundMap::PACKMAP(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction; // Suppress unused parameter warning
         auto size = engine.Pop()->GetInteger();
         if (size < 0 || size > 0xFFFF) // Reasonable limit
             throw InvalidOperationException("Invalid map size");

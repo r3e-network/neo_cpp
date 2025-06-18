@@ -108,6 +108,21 @@ namespace neo::io
         std::string ReadString(const std::string& key, const std::string& defaultValue = "") const;
 
         /**
+         * @brief Reads a base64 string from the JSON and decodes it to a byte array.
+         * @param key The key of the value to read.
+         * @return The decoded byte array, or an empty byte array if the key is not found.
+         */
+        ByteVector ReadBase64String(const std::string& key) const;
+
+        /**
+         * @brief Reads a number from the JSON as a double.
+         * @param key The key of the value to read.
+         * @param defaultValue The default value to return if the key is not found.
+         * @return The value read, or the default value if the key is not found.
+         */
+        double ReadNumber(const std::string& key, double defaultValue = 0.0) const;
+
+        /**
          * @brief Reads a byte array from the JSON.
          * @param key The key of the value to read.
          * @return The value read, or an empty byte array if the key is not found.

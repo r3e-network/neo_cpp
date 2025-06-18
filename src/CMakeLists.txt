@@ -16,8 +16,24 @@ add_subdirectory(consensus)
 add_subdirectory(rpc)
 add_subdirectory(cli)
 
+# Add core source files
+add_library(neo_core OBJECT
+    protocol_settings.cpp
+    protocol_settings_json.cpp
+    hardfork.cpp
+)
+
+target_include_directories(neo_core PUBLIC
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(neo_core PUBLIC
+    nlohmann_json::nlohmann_json
+)
+
 # Create the main library
 add_library(neo_cpp
+    $<TARGET_OBJECTS:neo_core>
     $<TARGET_OBJECTS:neo_cryptography>
     $<TARGET_OBJECTS:neo_mpttrie>
     $<TARGET_OBJECTS:neo_io>

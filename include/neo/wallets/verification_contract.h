@@ -54,9 +54,9 @@ namespace neo::wallets
 
         /**
          * @brief Gets the script hash of the contract.
-         * @return The script hash of the contract.
+         * @return The script hash.
          */
-        const io::UInt160& GetScriptHash() const;
+        io::UInt160 GetScriptHash() const;
 
         /**
          * @brief Gets the public keys.

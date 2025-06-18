@@ -1,7 +1,7 @@
 #include <neo/cli/type_converters.h>
 #include <neo/io/uint256.h>
 #include <neo/io/uint160.h>
-#include <neo/cryptography/ecc/ec_point.h>
+#include <neo/cryptography/ecc/ecpoint.h>
 #include <algorithm>
 #include <cctype>
 
@@ -66,6 +66,7 @@ namespace neo::cli
 
         // Register UInt256 converter
         RegisterConverter("UInt256", [](const std::vector<std::string>& args, bool canConsumeAll) -> void* {
+            (void)canConsumeAll; // Suppress unused parameter warning
             if (args.empty())
                 throw std::runtime_error("Missing argument for UInt256");
 
@@ -74,6 +75,7 @@ namespace neo::cli
 
         // Register UInt160 converter
         RegisterConverter("UInt160", [](const std::vector<std::string>& args, bool canConsumeAll) -> void* {
+            (void)canConsumeAll; // Suppress unused parameter warning
             if (args.empty())
                 throw std::runtime_error("Missing argument for UInt160");
 
@@ -82,14 +84,16 @@ namespace neo::cli
 
         // Register ECPoint converter
         RegisterConverter("ECPoint", [](const std::vector<std::string>& args, bool canConsumeAll) -> void* {
+            (void)canConsumeAll; // Suppress unused parameter warning
             if (args.empty())
                 throw std::runtime_error("Missing argument for ECPoint");
 
-            return new cryptography::ecc::ECPoint(cryptography::ecc::ECPoint::Parse(args[0]));
+            return new neo::cryptography::ecc::ECPoint(neo::cryptography::ecc::ECPoint::Parse(args[0]));
         });
 
         // Register int converter
         RegisterConverter("int", [](const std::vector<std::string>& args, bool canConsumeAll) -> void* {
+            (void)canConsumeAll; // Suppress unused parameter warning
             if (args.empty())
                 throw std::runtime_error("Missing argument for int");
 
@@ -98,6 +102,7 @@ namespace neo::cli
 
         // Register uint32_t converter
         RegisterConverter("uint32_t", [](const std::vector<std::string>& args, bool canConsumeAll) -> void* {
+            (void)canConsumeAll; // Suppress unused parameter warning
             if (args.empty())
                 throw std::runtime_error("Missing argument for uint32_t");
 
@@ -106,6 +111,7 @@ namespace neo::cli
 
         // Register bool converter
         RegisterConverter("bool", [](const std::vector<std::string>& args, bool canConsumeAll) -> void* {
+            (void)canConsumeAll; // Suppress unused parameter warning
             if (args.empty())
                 throw std::runtime_error("Missing argument for bool");
 

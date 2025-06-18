@@ -1,7 +1,11 @@
 #include <neo/vm/script.h>
 #include <neo/vm/exceptions.h>
+#include <neo/vm/opcode.h>
+#include <neo/io/binary_reader.h>
+#include <neo/io/memory_stream.h>
 #include <unordered_map>
 #include <stdexcept>
+#include <sstream>
 
 namespace neo::vm
 {
@@ -251,6 +255,6 @@ namespace neo::vm
 
     std::string Script::GetOpCodeName(OpCode opcode)
     {
-        return vm::GetOpCodeName(opcode);
+        return GetOpCodeName(opcode);
     }
 }

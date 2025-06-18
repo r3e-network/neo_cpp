@@ -6,7 +6,10 @@
 #include <array>
 #include <string>
 #include <cstdint>
+#include <cstddef>
+#include <cstring>
 #include <stdexcept>
+#include <functional>
 
 namespace neo::io
 {
@@ -20,6 +23,7 @@ namespace neo::io
          * @brief The size of the UInt256 in bytes.
          */
         static constexpr size_t Size = 32;
+        using value_type = std::array<uint8_t, Size>;
 
         /**
          * @brief Constructs a UInt256 initialized to zero.
@@ -35,7 +39,22 @@ namespace neo::io
         {
             if (data.Size() != Size)
                 throw std::invalid_argument("Invalid UInt256 size");
-            std::memcpy(data_.data(), data.Data(), Size);
+            memcpy(data_.data(), data.Data(), Size);
+        }
+
+        /**
+         * @brief Constructs a UInt256 from a byte array.
+         * @param data The byte array.
+         */
+        explicit UInt256(const value_type& data) : data_(data) {}
+
+        /**
+         * @brief Constructs a UInt256 from a raw byte array.
+         * @param data The raw byte array.
+         */
+        explicit UInt256(const uint8_t* data)
+        {
+            memcpy(data_.data(), data, Size);
         }
 
         /**
@@ -60,7 +79,7 @@ namespace neo::io
          * @brief Converts the UInt256 to a ByteVector.
          * @return A ByteVector copy of the UInt256.
          */
-        ByteVector ToArray() const { return ByteVector(AsSpan()); }
+        ByteVector ToArray() const { return ByteVector(data_.data(), Size); }
 
         /**
          * @brief Converts the UInt256 to a hexadecimal string.
@@ -73,34 +92,48 @@ namespace neo::io
          * @param other The other UInt256.
          * @return True if the UInt256s are equal, false otherwise.
          */
-        bool operator==(const UInt256& other) const { return data_ == other.data_; }
+        bool operator==(const UInt256& other) const 
+        { 
+            return std::equal(data_.begin(), data_.end(), other.data_.begin());
+        }
 
         /**
          * @brief Checks if this UInt256 is not equal to another UInt256.
          * @param other The other UInt256.
          * @return True if the UInt256s are not equal, false otherwise.
          */
-        bool operator!=(const UInt256& other) const { return data_ != other.data_; }
+        bool operator!=(const UInt256& other) const { return !(*this == other); }
 
         /**
          * @brief Checks if this UInt256 is less than another UInt256.
          * @param other The other UInt256.
          * @return True if this UInt256 is less than the other UInt256, false otherwise.
          */
-        bool operator<(const UInt256& other) const { return data_ < other.data_; }
+        bool operator<(const UInt256& other) const 
+        { 
+            return std::lexicographical_compare(data_.begin(), data_.end(), 
+                                               other.data_.begin(), other.data_.end());
+        }
 
         /**
          * @brief Checks if this UInt256 is greater than another UInt256.
          * @param other The other UInt256.
          * @return True if this UInt256 is greater than the other UInt256, false otherwise.
          */
-        bool operator>(const UInt256& other) const { return data_ > other.data_; }
+        bool operator>(const UInt256& other) const { return other < *this; }
 
         /**
          * @brief Converts this UInt256 to a string.
          * @return The string representation of this UInt256.
          */
         std::string ToString() const { return ToHexString(); }
+
+        /**
+         * @brief Converts this UInt256 to a string with optional byte order reversal.
+         * @param reverse If true, output in little-endian order; if false, big-endian order.
+         * @return The string representation of this UInt256.
+         */
+        std::string ToString(bool reverse) const;
 
         /**
          * @brief Parses a hexadecimal string into a UInt256.
@@ -142,8 +175,54 @@ namespace neo::io
          */
         void Deserialize(BinaryReader& reader) override;
 
+        /**
+         * @brief Creates a UInt256 from a hex string.
+         * @param hex_string The hex string (with or without 0x prefix).
+         * @return The UInt256 value.
+         */
+        static UInt256 FromString(const std::string& hex_string);
+
+        /**
+         * @brief Creates a UInt256 from a little-endian hex string.
+         * @param hex_string The hex string in little-endian format.
+         * @return The UInt256 value.
+         */
+        static UInt256 FromLittleEndianString(const std::string& hex_string);
+
+        /**
+         * @brief Gets the raw data.
+         * @return The raw data.
+         */
+        const value_type& GetData() const { return data_; }
+
+        /**
+         * @brief Gets the size in bytes.
+         * @return The size in bytes.
+         */
+        constexpr size_t size() const { return Size; }
+
+        /**
+         * @brief Converts to little-endian hex string.
+         * @return The little-endian hex string.
+         */
+        std::string ToLittleEndianString() const;
+
+        /**
+         * @brief Array subscript operator.
+         * @param index The index.
+         * @return Reference to the byte at the index.
+         */
+        uint8_t& operator[](size_t index) { return data_[index]; }
+
+        /**
+         * @brief Array subscript operator (const).
+         * @param index The index.
+         * @return Const reference to the byte at the index.
+         */
+        const uint8_t& operator[](size_t index) const { return data_[index]; }
+
     private:
-        std::array<uint8_t, Size> data_;
+        value_type data_;
     };
 }
 

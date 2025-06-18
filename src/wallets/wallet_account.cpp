@@ -11,7 +11,7 @@ namespace neo::wallets
     }
 
     WalletAccount::WalletAccount(const cryptography::ecc::KeyPair& keyPair)
-        : publicKey_(keyPair.PublicKey), privateKey_(keyPair.PrivateKey), locked_(false)
+        : publicKey_(keyPair.PublicKey()), privateKey_(keyPair.PrivateKey()), locked_(false)
     {
         // Calculate script hash
         scriptHash_ = cryptography::Hash::Hash160(publicKey_.ToArray().AsSpan());

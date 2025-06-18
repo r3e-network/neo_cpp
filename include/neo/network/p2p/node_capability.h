@@ -1,5 +1,6 @@
 #pragma once
 
+#include <neo/network/p2p/node_capability_types.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/binary_writer.h>
@@ -7,40 +8,11 @@
 #include <neo/io/json_writer.h>
 #include <neo/io/json_reader.h>
 #include <cstdint>
+#include <string>
+#include <vector>
 
 namespace neo::network::p2p
 {
-    /**
-     * @brief Represents the type of a node capability.
-     */
-    enum class NodeCapabilityType : uint8_t
-    {
-        /**
-         * @brief Unknown capability type.
-         */
-        Unknown = 0x00,
-        
-        /**
-         * @brief TCP server capability.
-         */
-        TcpServer = 0x01,
-        
-        /**
-         * @brief WebSocket server capability.
-         */
-        WsServer = 0x02,
-        
-        /**
-         * @brief Full node capability.
-         */
-        FullNode = 0x10,
-        
-        /**
-         * @brief Capability indicating message compression is disabled.
-         */
-        DisableCompression = 0xFE
-    };
-    
     /**
      * @brief Represents a capability of a node.
      */
@@ -269,4 +241,4 @@ namespace neo::network::p2p
     private:
         uint32_t startHeight_;
     };
-}
+} 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <neo/network/p2p/payloads/transaction.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
 #include <neo/io/uint256.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/json_writer.h>
@@ -12,77 +12,56 @@
 
 namespace neo::wallets
 {
+    // Use Neo3Transaction from network namespace
+    using Neo3Transaction = network::p2p::payloads::Neo3Transaction;
+    
     /**
-     * @brief Represents a transaction in a wallet.
+     * @brief Represents a wallet transaction.
      */
     class WalletTransaction : public io::IJsonSerializable
     {
     public:
         /**
-         * @brief Constructs an empty WalletTransaction.
-         */
-        WalletTransaction();
-
-        /**
-         * @brief Constructs a WalletTransaction with the specified transaction.
+         * @brief Constructs a wallet transaction.
          * @param transaction The transaction.
          */
-        explicit WalletTransaction(const network::p2p::payloads::Transaction& transaction);
-
-        /**
-         * @brief Constructs a WalletTransaction with the specified transaction and height.
-         * @param transaction The transaction.
-         * @param height The height of the block containing the transaction.
-         */
-        WalletTransaction(const network::p2p::payloads::Transaction& transaction, uint32_t height);
-
-        /**
-         * @brief Gets the hash of the transaction.
-         * @return The hash of the transaction.
-         */
-        const io::UInt256& GetHash() const;
-
-        /**
-         * @brief Sets the hash of the transaction.
-         * @param hash The hash of the transaction.
-         */
-        void SetHash(const io::UInt256& hash);
+        explicit WalletTransaction(std::shared_ptr<Neo3Transaction> transaction);
 
         /**
          * @brief Gets the transaction.
          * @return The transaction.
          */
-        const std::shared_ptr<network::p2p::payloads::Transaction>& GetTransaction() const;
+        std::shared_ptr<Neo3Transaction> GetTransaction() const { return transaction_; }
 
         /**
-         * @brief Sets the transaction.
-         * @param transaction The transaction.
+         * @brief Gets the transaction hash.
+         * @return The transaction hash.
          */
-        void SetTransaction(const std::shared_ptr<network::p2p::payloads::Transaction>& transaction);
+        io::UInt256 GetHash() const;
 
         /**
-         * @brief Gets the height of the block containing the transaction.
-         * @return The height of the block containing the transaction.
+         * @brief Gets the confirmation status.
+         * @return True if confirmed, false otherwise.
          */
-        uint32_t GetHeight() const;
+        bool IsConfirmed() const { return confirmed_; }
 
         /**
-         * @brief Sets the height of the block containing the transaction.
-         * @param height The height of the block containing the transaction.
+         * @brief Sets the confirmation status.
+         * @param confirmed The confirmation status.
          */
-        void SetHeight(uint32_t height);
+        void SetConfirmed(bool confirmed) { confirmed_ = confirmed; }
 
         /**
-         * @brief Gets the time when the transaction was added to the wallet.
-         * @return The time when the transaction was added to the wallet.
+         * @brief Gets the block height.
+         * @return The block height.
          */
-        const std::chrono::system_clock::time_point& GetTime() const;
+        uint32_t GetBlockHeight() const { return block_height_; }
 
         /**
-         * @brief Sets the time when the transaction was added to the wallet.
-         * @param time The time when the transaction was added to the wallet.
+         * @brief Sets the block height.
+         * @param height The block height.
          */
-        void SetTime(const std::chrono::system_clock::time_point& time);
+        void SetBlockHeight(uint32_t height) { block_height_ = height; }
 
         /**
          * @brief Serializes the WalletTransaction to a JSON writer.
@@ -97,9 +76,8 @@ namespace neo::wallets
         void DeserializeJson(const io::JsonReader& reader) override;
 
     private:
-        io::UInt256 hash_;
-        std::shared_ptr<network::p2p::payloads::Transaction> transaction_;
-        uint32_t height_;
-        std::chrono::system_clock::time_point time_;
+        std::shared_ptr<Neo3Transaction> transaction_;
+        bool confirmed_;
+        uint32_t block_height_;
     };
 }

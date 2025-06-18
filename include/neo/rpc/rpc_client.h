@@ -3,10 +3,12 @@
 #include <neo/rpc/rpc_request.h>
 #include <neo/rpc/rpc_response.h>
 #include <neo/json/json.h>
+#include <nlohmann/json.hpp>
 #include <string>
 #include <memory>
 #include <future>
 #include <functional>
+#include <map>
 
 namespace neo::rpc
 {
@@ -117,7 +119,7 @@ namespace neo::rpc
          * @param params The parameters.
          * @return The result JSON.
          */
-        json::JToken RpcSend(const std::string& method, const std::vector<json::JToken>& params = {});
+        nlohmann::json RpcSend(const std::string& method, const std::vector<nlohmann::json>& params = {});
 
         /**
          * @brief Sends an RPC request with method and parameters asynchronously.
@@ -125,7 +127,7 @@ namespace neo::rpc
          * @param params The parameters.
          * @return A future containing the result JSON.
          */
-        std::future<json::JToken> RpcSendAsync(const std::string& method, const std::vector<json::JToken>& params = {});
+        std::future<nlohmann::json> RpcSendAsync(const std::string& method, const std::vector<nlohmann::json>& params = {});
 
         // Blockchain methods
         /**
@@ -158,7 +160,7 @@ namespace neo::rpc
          * @param verbose Whether to return verbose information.
          * @return The block information.
          */
-        json::JToken GetBlock(const std::string& hash, bool verbose = true);
+        nlohmann::json GetBlock(const std::string& hash, bool verbose = true);
 
         /**
          * @brief Gets a block by hash asynchronously.
@@ -166,7 +168,7 @@ namespace neo::rpc
          * @param verbose Whether to return verbose information.
          * @return A future containing the block information.
          */
-        std::future<json::JToken> GetBlockAsync(const std::string& hash, bool verbose = true);
+        std::future<nlohmann::json> GetBlockAsync(const std::string& hash, bool verbose = true);
 
         /**
          * @brief Gets a block by index.
@@ -174,7 +176,7 @@ namespace neo::rpc
          * @param verbose Whether to return verbose information.
          * @return The block information.
          */
-        json::JToken GetBlock(uint32_t index, bool verbose = true);
+        nlohmann::json GetBlock(uint32_t index, bool verbose = true);
 
         /**
          * @brief Gets a block by index asynchronously.
@@ -182,7 +184,7 @@ namespace neo::rpc
          * @param verbose Whether to return verbose information.
          * @return A future containing the block information.
          */
-        std::future<json::JToken> GetBlockAsync(uint32_t index, bool verbose = true);
+        std::future<nlohmann::json> GetBlockAsync(uint32_t index, bool verbose = true);
 
         /**
          * @brief Gets a transaction by hash.
@@ -190,7 +192,7 @@ namespace neo::rpc
          * @param verbose Whether to return verbose information.
          * @return The transaction information.
          */
-        json::JToken GetTransaction(const std::string& hash, bool verbose = true);
+        nlohmann::json GetTransaction(const std::string& hash, bool verbose = true);
 
         /**
          * @brief Gets a transaction by hash asynchronously.
@@ -198,7 +200,7 @@ namespace neo::rpc
          * @param verbose Whether to return verbose information.
          * @return A future containing the transaction information.
          */
-        std::future<json::JToken> GetTransactionAsync(const std::string& hash, bool verbose = true);
+        std::future<nlohmann::json> GetTransactionAsync(const std::string& hash, bool verbose = true);
 
         /**
          * @brief Sends a raw transaction.
@@ -221,7 +223,7 @@ namespace neo::rpc
          * @param params The parameters.
          * @return The invocation result.
          */
-        json::JToken InvokeFunction(const std::string& script_hash, const std::string& operation, const std::vector<json::JToken>& params = {});
+        nlohmann::json InvokeFunction(const std::string& script_hash, const std::string& operation, const std::vector<nlohmann::json>& params = {});
 
         /**
          * @brief Invokes a smart contract function asynchronously.
@@ -230,19 +232,19 @@ namespace neo::rpc
          * @param params The parameters.
          * @return A future containing the invocation result.
          */
-        std::future<json::JToken> InvokeFunctionAsync(const std::string& script_hash, const std::string& operation, const std::vector<json::JToken>& params = {});
+        std::future<nlohmann::json> InvokeFunctionAsync(const std::string& script_hash, const std::string& operation, const std::vector<nlohmann::json>& params = {});
 
         /**
          * @brief Gets the version information.
          * @return The version information.
          */
-        json::JToken GetVersion();
+        nlohmann::json GetVersion();
 
         /**
          * @brief Gets the version information asynchronously.
          * @return A future containing the version information.
          */
-        std::future<json::JToken> GetVersionAsync();
+        std::future<nlohmann::json> GetVersionAsync();
 
     private:
         std::string base_url_;
@@ -255,7 +257,7 @@ namespace neo::rpc
          * @param params The parameters.
          * @return The RPC request.
          */
-        RpcRequest CreateRequest(const std::string& method, const std::vector<json::JToken>& params = {});
+        RpcRequest CreateRequest(const std::string& method, const std::vector<nlohmann::json>& params = {});
 
         /**
          * @brief Processes an RPC response.

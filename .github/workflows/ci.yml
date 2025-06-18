@@ -1,0 +1,344 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  release:
+    types: [ published ]
+
+env:
+  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+
+jobs:
+  # Job 1: Linux Build and Test
+  linux-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [gcc-10, gcc-11, clang-12, clang-13]
+        build_type: [Debug, Release]
+        
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Setup vcpkg cache
+      uses: actions/github-script@v6
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+          
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          cmake \
+          ninja-build \
+          pkg-config \
+          curl \
+          zip \
+          unzip \
+          tar \
+          git
+          
+    - name: Setup GCC 10
+      if: matrix.compiler == 'gcc-10'
+      run: |
+        sudo apt-get install -y gcc-10 g++-10
+        echo "CC=gcc-10" >> $GITHUB_ENV
+        echo "CXX=g++-10" >> $GITHUB_ENV
+        
+    - name: Setup GCC 11
+      if: matrix.compiler == 'gcc-11'
+      run: |
+        sudo apt-get install -y gcc-11 g++-11
+        echo "CC=gcc-11" >> $GITHUB_ENV
+        echo "CXX=g++-11" >> $GITHUB_ENV
+        
+    - name: Setup Clang 12
+      if: matrix.compiler == 'clang-12'
+      run: |
+        sudo apt-get install -y clang-12
+        echo "CC=clang-12" >> $GITHUB_ENV
+        echo "CXX=clang++-12" >> $GITHUB_ENV
+        
+    - name: Setup Clang 13
+      if: matrix.compiler == 'clang-13'
+      run: |
+        sudo apt-get install -y clang-13
+        echo "CC=clang-13" >> $GITHUB_ENV
+        echo "CXX=clang++-13" >> $GITHUB_ENV
+        
+    - name: Bootstrap vcpkg
+      run: |
+        ./vcpkg/bootstrap-vcpkg.sh
+        
+    - name: Configure CMake
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake \
+          -DCMAKE_CXX_STANDARD=20 \
+          -G Ninja
+          
+    - name: Build
+      run: cmake --build build --config ${{ matrix.build_type }} -j$(nproc)
+      
+    - name: Test
+      run: |
+        cd build
+        ctest --output-on-failure -C ${{ matrix.build_type }}
+        
+    - name: Memory Check (Debug only)
+      if: matrix.build_type == 'Debug' && matrix.compiler == 'gcc-11'
+      run: |
+        sudo apt-get install -y valgrind
+        cd build
+        valgrind --leak-check=full --error-exitcode=1 --track-origins=yes ./neo-unit-tests || true
+
+  # Job 2: Windows Build and Test
+  windows-build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
+        
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Setup vcpkg cache
+      uses: actions/github-script@v6
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+          
+    - name: Bootstrap vcpkg
+      run: .\vcpkg\bootstrap-vcpkg.bat
+      
+    - name: Configure CMake
+      run: |
+        cmake -B build `
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} `
+          -DCMAKE_TOOLCHAIN_FILE=.\vcpkg\scripts\buildsystems\vcpkg.cmake `
+          -DCMAKE_CXX_STANDARD=20 `
+          -A x64
+          
+    - name: Build
+      run: cmake --build build --config ${{ matrix.build_type }} -j
+      
+    - name: Test
+      run: |
+        cd build
+        ctest --output-on-failure -C ${{ matrix.build_type }}
+
+  # Job 3: macOS Build and Test
+  macos-build:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
+        
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Install dependencies
+      run: |
+        brew install cmake ninja pkg-config
+        
+    - name: Setup vcpkg cache
+      uses: actions/github-script@v6
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+          
+    - name: Bootstrap vcpkg
+      run: ./vcpkg/bootstrap-vcpkg.sh
+      
+    - name: Configure CMake
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake \
+          -DCMAKE_CXX_STANDARD=20 \
+          -G Ninja
+          
+    - name: Build
+      run: cmake --build build --config ${{ matrix.build_type }} -j$(sysctl -n hw.ncpu)
+      
+    - name: Test
+      run: |
+        cd build
+        ctest --output-on-failure -C ${{ matrix.build_type }}
+
+  # Job 4: Code Quality and Security
+  code-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          clang-format \
+          clang-tidy \
+          cppcheck \
+          cmake \
+          ninja-build
+          
+    - name: Check code formatting
+      run: |
+        find src include tests -name "*.cpp" -o -name "*.h" | \
+        xargs clang-format --dry-run --Werror
+        
+    - name: Run static analysis
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+          -G Ninja
+        
+        # Run clang-tidy
+        find src -name "*.cpp" | \
+        xargs clang-tidy -p build --warnings-as-errors=*
+        
+        # Run cppcheck
+        cppcheck --enable=all --error-exitcode=1 --suppress=missingIncludeSystem src/
+        
+    - name: Security scan with CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: cpp
+        
+    - name: Build for CodeQL
+      run: |
+        cmake -B build -DCMAKE_BUILD_TYPE=Debug
+        cmake --build build -j$(nproc)
+        
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+  # Job 5: Performance Benchmarks
+  performance:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          cmake \
+          ninja-build \
+          valgrind
+          
+    - name: Bootstrap vcpkg
+      run: ./vcpkg/bootstrap-vcpkg.sh
+      
+    - name: Configure and build
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake \
+          -DBUILD_BENCHMARKS=ON \
+          -G Ninja
+        cmake --build build -j$(nproc)
+        
+    - name: Run benchmarks
+      run: |
+        cd build
+        ./neo-benchmarks --benchmark_format=json | tee benchmark_results.json
+        
+    - name: Comment benchmark results
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          if (fs.existsSync('build/benchmark_results.json')) {
+            const results = JSON.parse(fs.readFileSync('build/benchmark_results.json', 'utf8'));
+            // Process and comment results
+            console.log('Benchmark results:', results);
+          }
+
+  # Job 6: Documentation
+  documentation:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Install Doxygen
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y doxygen graphviz
+        
+    - name: Generate documentation
+      run: |
+        cmake -B build
+        cmake --build build --target docs
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build/docs/html
+
+  # Job 7: Release
+  release:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    needs: [linux-build, windows-build, macos-build, code-quality]
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Bootstrap vcpkg
+      run: ./vcpkg/bootstrap-vcpkg.sh
+      
+    - name: Build release packages
+      run: |
+        # Linux package
+        cmake -B build-linux \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+        cmake --build build-linux -j$(nproc)
+        cd build-linux && cpack
+        
+    - name: Upload release assets
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./build-linux/Neo-CPP-*.tar.gz
+        asset_name: neo-cpp-linux.tar.gz
+        asset_content_type: application/gzip

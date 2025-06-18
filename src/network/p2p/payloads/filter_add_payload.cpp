@@ -21,7 +21,7 @@ namespace neo::network::p2p::payloads
     
     void FilterAddPayload::Serialize(io::BinaryWriter& writer) const
     {
-        writer.WriteVarBytes(data_);
+        writer.WriteVarBytes(data_.AsSpan());
     }
     
     void FilterAddPayload::Deserialize(io::BinaryReader& reader)

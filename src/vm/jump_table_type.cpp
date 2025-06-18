@@ -28,6 +28,7 @@ namespace neo::vm
     // JumpTableType implementations
     void JumpTableType::ISNULL(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction; // Suppress unused parameter warning
         auto item = engine.Pop();
         bool isNull = item->GetType() == StackItemType::Null;
         engine.Push(StackItem::Create(isNull));

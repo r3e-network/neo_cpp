@@ -213,6 +213,24 @@ namespace neo::network
         std::vector<std::shared_ptr<P2PPeer>> GetConnectedPeers() const;
 
         /**
+         * @brief Gets the number of connected peers.
+         * @return The number of connected peers.
+         */
+        size_t GetConnectedPeersCount() const;
+
+        /**
+         * @brief Gets the port number.
+         * @return The port number.
+         */
+        uint16_t GetPort() const;
+
+        /**
+         * @brief Gets a random nonce.
+         * @return A random nonce.
+         */
+        uint32_t GetNonce() const;
+
+        /**
          * @brief Broadcasts a message to all connected peers.
          * @param message The message.
          */

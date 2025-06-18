@@ -11,13 +11,13 @@ namespace neo::vm
 {
     // Extension operations
 
-    void JumpTableExtension::ABORTMSG(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableExtension::ABORTMSG(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto message = engine.Pop()->GetString();
         throw InvalidOperationException("ABORT: " + message);
     }
 
-    void JumpTableExtension::ASSERTMSG(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableExtension::ASSERTMSG(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto message = engine.Pop()->GetString();
         auto condition = engine.Pop()->GetBoolean();
@@ -26,12 +26,12 @@ namespace neo::vm
             throw InvalidOperationException("ASSERT: " + message);
     }
 
-    void JumpTableExtension::PUSHT(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableExtension::PUSHT(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(true));
     }
 
-    void JumpTableExtension::PUSHF(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableExtension::PUSHF(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         engine.Push(StackItem::Create(false));
     }
@@ -51,7 +51,7 @@ namespace neo::vm
 
     // Type checking and conversion operations
 
-    void JumpTableExtension::ISNULL(ExecutionEngine& engine, const Instruction& instruction)
+    void JumpTableExtension::ISNULL(ExecutionEngine& engine, const Instruction& /* instruction */)
     {
         auto item = engine.Pop();
         engine.Push(StackItem::Create(item->IsNull()));

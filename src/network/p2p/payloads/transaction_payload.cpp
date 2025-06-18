@@ -4,27 +4,27 @@ namespace neo::network::p2p::payloads
 {
     TransactionPayload::TransactionPayload() = default;
 
-    TransactionPayload::TransactionPayload(std::shared_ptr<ledger::Transaction> transaction)
+    TransactionPayload::TransactionPayload(std::shared_ptr<Neo3Transaction> transaction)
         : transaction_(transaction)
     {
     }
 
-    std::shared_ptr<ledger::Transaction> TransactionPayload::GetTransaction() const
+    std::shared_ptr<Neo3Transaction> TransactionPayload::GetTransaction() const
     {
         return transaction_;
     }
 
-    void TransactionPayload::SetTransaction(std::shared_ptr<ledger::Transaction> transaction)
+    void TransactionPayload::SetTransaction(std::shared_ptr<Neo3Transaction> transaction)
     {
         transaction_ = transaction;
     }
 
     int TransactionPayload::GetSize() const
     {
-        return transaction_ ? transaction_->GetSize() : 0;
+        return transaction_ ? static_cast<int>(transaction_->GetSize()) : 0;
     }
 
-    TransactionPayload TransactionPayload::Create(std::shared_ptr<ledger::Transaction> transaction)
+    TransactionPayload TransactionPayload::Create(std::shared_ptr<Neo3Transaction> transaction)
     {
         return TransactionPayload(transaction);
     }
@@ -39,7 +39,7 @@ namespace neo::network::p2p::payloads
 
     void TransactionPayload::Deserialize(io::BinaryReader& reader)
     {
-        transaction_ = std::make_shared<ledger::Transaction>();
+        transaction_ = std::make_shared<Neo3Transaction>();
         transaction_->Deserialize(reader);
     }
 
@@ -60,7 +60,7 @@ namespace neo::network::p2p::payloads
     {
         if (reader.GetJson().contains("transaction") && reader.GetJson()["transaction"].is_object())
         {
-            transaction_ = std::make_shared<ledger::Transaction>();
+            transaction_ = std::make_shared<Neo3Transaction>();
             io::JsonReader transactionReader(reader.GetJson()["transaction"]);
             transaction_->DeserializeJson(transactionReader);
         }

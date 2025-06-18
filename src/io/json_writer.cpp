@@ -94,4 +94,60 @@ namespace neo::io
         value.SerializeJson(writer);
         json_[key] = obj;
     }
+
+    void JsonWriter::WriteBase64String(const std::string& key, const ByteSpan& value)
+    {
+        json_[key] = value.ToBase64String();
+    }
+
+    void JsonWriter::WriteString(const std::string& key, const std::string& value)
+    {
+        json_[key] = value;
+    }
+
+    void JsonWriter::WriteNumber(const std::string& key, double value)
+    {
+        json_[key] = value;
+    }
+
+    void JsonWriter::WriteString(const std::string& value)
+    {
+        if (!currentPropertyName_.empty())
+        {
+            json_[currentPropertyName_] = value;
+            currentPropertyName_.clear();
+        }
+        else if (currentArray_ != nullptr)
+        {
+            currentArray_->push_back(value);
+        }
+        else if (currentObject_ != nullptr)
+        {
+            // Can't write string without property name in object context
+            throw std::runtime_error("WriteString called without property name in object context");
+        }
+    }
+
+    void JsonWriter::WriteNumber(double value)
+    {
+        if (!currentPropertyName_.empty())
+        {
+            json_[currentPropertyName_] = value;
+            currentPropertyName_.clear();
+        }
+        else if (currentArray_ != nullptr)
+        {
+            currentArray_->push_back(value);
+        }
+        else if (currentObject_ != nullptr)
+        {
+            // Can't write number without property name in object context
+            throw std::runtime_error("WriteNumber called without property name in object context");
+        }
+    }
+
+    void JsonWriter::WriteNumber(int value)
+    {
+        WriteNumber(static_cast<double>(value));
+    }
 }

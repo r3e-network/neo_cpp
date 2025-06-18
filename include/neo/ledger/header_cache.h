@@ -1,21 +1,23 @@
 #pragma once
 
-#include <neo/ledger/block_header.h>
+#include <neo/ledger/header.h>
 #include <neo/io/uint256.h>
-#include <unordered_map>
 #include <memory>
 #include <mutex>
+#include <shared_mutex>
+#include <unordered_map>
+#include <deque>
 
 namespace neo::ledger
 {
     /**
-     * @brief Cache for block headers to improve performance.
+     * @brief Header cache for efficient blockchain header synchronization.
      */
     class HeaderCache
     {
     public:
         /**
-         * @brief Constructor.
+         * @brief Constructs a header cache.
          * @param max_size Maximum number of headers to cache.
          */
         explicit HeaderCache(size_t max_size = 10000);
@@ -28,34 +30,35 @@ namespace neo::ledger
         /**
          * @brief Adds a header to the cache.
          * @param header The header to add.
+         * @return True if added successfully, false otherwise.
          */
-        void Add(std::shared_ptr<BlockHeader> header);
+        bool Add(std::shared_ptr<Header> header);
 
         /**
-         * @brief Gets a header from the cache.
-         * @param hash The header hash.
-         * @return The header if found, nullptr otherwise.
+         * @brief Gets a header by hash.
+         * @param hash The hash of the header.
+         * @return The header, or nullptr if not found.
          */
-        std::shared_ptr<BlockHeader> Get(const io::UInt256& hash) const;
+        std::shared_ptr<Header> Get(const io::UInt256& hash) const;
 
         /**
-         * @brief Checks if a header exists in the cache.
-         * @param hash The header hash.
-         * @return True if exists, false otherwise.
+         * @brief Gets a header by index.
+         * @param index The index of the header.
+         * @return The header, or nullptr if not found.
          */
-        bool Contains(const io::UInt256& hash) const;
+        std::shared_ptr<Header> Get(uint32_t index) const;
 
         /**
-         * @brief Removes a header from the cache.
-         * @param hash The header hash.
-         * @return True if removed, false if not found.
+         * @brief Gets the last header in the cache.
+         * @return The last header, or nullptr if cache is empty.
          */
-        bool Remove(const io::UInt256& hash);
+        std::shared_ptr<Header> GetLast() const;
 
         /**
-         * @brief Clears all headers from the cache.
+         * @brief Checks if the cache is full.
+         * @return True if full, false otherwise.
          */
-        void Clear();
+        bool IsFull() const;
 
         /**
          * @brief Gets the number of headers in the cache.
@@ -64,25 +67,22 @@ namespace neo::ledger
         size_t Size() const;
 
         /**
-         * @brief Gets the maximum cache size.
-         * @return The maximum size.
+         * @brief Tries to remove the first header from the cache.
+         * @return True if removed, false if cache is empty.
          */
-        size_t MaxSize() const;
+        bool TryRemoveFirst();
 
         /**
-         * @brief Checks if the cache is full.
-         * @return True if full, false otherwise.
+         * @brief Clears all headers from the cache.
          */
-        bool IsFull() const;
+        void Clear();
 
     private:
-        mutable std::mutex mutex_;
-        std::unordered_map<io::UInt256, std::shared_ptr<BlockHeader>> headers_;
+        mutable std::shared_mutex mutex_;
+        std::deque<std::shared_ptr<Header>> headers_;
+        std::unordered_map<io::UInt256, std::shared_ptr<Header>> hash_index_;
+        std::unordered_map<uint32_t, std::shared_ptr<Header>> height_index_;
         size_t max_size_;
-
-        /**
-         * @brief Evicts the oldest header if cache is full.
-         */
-        void EvictIfNeeded();
     };
-}
+
+} // namespace neo::ledger

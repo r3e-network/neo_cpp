@@ -1,214 +1,340 @@
-cmake_minimum_required(VERSION 3.15)
-project(neo_cpp VERSION 0.1.0 LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.20)
 
-# Use vcpkg toolchain
-if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    # Try multiple common locations for vcpkg
-    set(VCPKG_PATHS
-        "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../vcpkg/scripts/buildsystems/vcpkg.cmake"
-        "C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
-        "C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
-        "C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
-    )
-    
-    foreach(VCPKG_PATH ${VCPKG_PATHS})
-        if(EXISTS ${VCPKG_PATH})
-            set(CMAKE_TOOLCHAIN_FILE ${VCPKG_PATH} CACHE STRING "")
-            message(STATUS "Found vcpkg toolchain at: ${VCPKG_PATH}")
-            break()
-        endif()
-    endforeach()
-    
-    if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-        message(WARNING "vcpkg toolchain file not found. Please install vcpkg and set CMAKE_TOOLCHAIN_FILE manually.")
-    endif()
-endif()
+# Project configuration
+project(Neo-CPP 
+    VERSION 1.0.0
+    DESCRIPTION "Production-ready Neo blockchain node implementation in C++"
+    LANGUAGES CXX
+)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Compiler-specific configuration
+# Build type configuration
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+endif()
+
+# Compiler-specific options
 if(MSVC)
-    # MSVC-specific flags
-    add_compile_options(
-        /W4                     # Warning level 4
-        /WX-                    # Don't treat warnings as errors (for now)
-        /permissive-            # Disable non-conforming code
-        /Zc:__cplusplus         # Enable correct __cplusplus macro
-        /Zc:preprocessor        # Enable conforming preprocessor
-        /EHsc                   # Exception handling model
-        /bigobj                 # Allow large object files
-        /utf-8                  # Set source and execution character sets to UTF-8
-    )
+    # Visual Studio specific options
+    add_compile_options(/W4 /WX /permissive-)
+    add_compile_definitions(_WIN32_WINNT=0x0A00) # Windows 10
+    add_compile_definitions(NOMINMAX)
+    add_compile_definitions(WIN32_LEAN_AND_MEAN)
     
-    # MSVC-specific definitions
-    add_definitions(
-        -D_CRT_SECURE_NO_WARNINGS      # Disable CRT security warnings
-        -D_SCL_SECURE_NO_WARNINGS      # Disable SCL security warnings
-        -D_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
-        -D_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
-    )
+    # Enable parallel compilation
+    add_compile_options(/MP)
     
-    # Debug configuration
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd /Od /Zi /RTC1")
+    # Release optimizations
+    if(CMAKE_BUILD_TYPE STREQUAL "Release")
+        add_compile_options(/O2 /Ob2 /DNDEBUG)
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+    endif()
+else()
+    # GCC/Clang options
+    add_compile_options(-Wall -Wextra -Werror -pedantic)
     
-    # Release configuration
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD /O2 /Ob2 /DNDEBUG")
-    
-    # RelWithDebInfo configuration
-    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /MD /O2 /Ob1 /Zi")
-    
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    # GCC-specific flags
-    add_compile_options(
-        -Wall -Wextra -Wpedantic   # Enable warnings
-        -Wno-unused-parameter      # Disable unused parameter warnings
-        -fexceptions               # Enable exceptions
-        -frtti                     # Enable RTTI
-    )
-    
-    # Debug configuration
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0")
-    
-    # Release configuration
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG")
-    
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    # Clang-specific flags
-    add_compile_options(
-        -Wall -Wextra -Wpedantic   # Enable warnings
-        -Wno-unused-parameter      # Disable unused parameter warnings
-        -fexceptions               # Enable exceptions
-        -frtti                     # Enable RTTI
-    )
-    
-    # Debug configuration
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0")
-    
-    # Release configuration  
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG")
-endif()
-
-# Windows-specific definitions
-if(WIN32)
-    add_definitions(-D_WIN32_WINNT=0x0601)  # Windows 7 target
-    add_definitions(-DWIN32_LEAN_AND_MEAN)
-    add_definitions(-DNOMINMAX)
-    
-    # Additional Windows definitions for Neo
-    add_definitions(-DUNICODE -D_UNICODE)
-    add_definitions(-DWIN32_LEAN_AND_MEAN)
-    add_definitions(-DSTRICT)
-endif()
-
-# Platform-independent definitions
-add_definitions(-DNEO_VERSION_MAJOR=0)
-add_definitions(-DNEO_VERSION_MINOR=1)
-add_definitions(-DNEO_VERSION_PATCH=0)
-
-# Enable position independent code for shared libraries
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
-# Function to configure common target properties
-function(configure_neo_target target_name)
-    # Set C++ standard for this target
-    target_compile_features(${target_name} PUBLIC cxx_std_20)
-    
-    # Set compile definitions
-    target_compile_definitions(${target_name} PRIVATE
-        $<$<CONFIG:Debug>:DEBUG _DEBUG>
-        $<$<CONFIG:Release>:RELEASE NDEBUG>
-        $<$<CONFIG:RelWithDebInfo>:RELEASE>
-        $<$<CONFIG:MinSizeRel>:RELEASE NDEBUG>
-    )
-    
-    # MSVC-specific target configuration
-    if(MSVC)
-        target_compile_options(${target_name} PRIVATE
-            $<$<CONFIG:Debug>:/MDd>
-            $<$<CONFIG:Release>:/MD>
-            $<$<CONFIG:RelWithDebInfo>:/MD>
-            $<$<CONFIG:MinSizeRel>:/MD>
-        )
+    # Release optimizations
+    if(CMAKE_BUILD_TYPE STREQUAL "Release")
+        add_compile_options(-O3 -DNDEBUG -march=native)
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
     endif()
     
-    # Set target properties
-    set_target_properties(${target_name} PROPERTIES
-        CXX_STANDARD 20
-        CXX_STANDARD_REQUIRED ON
-        CXX_EXTENSIONS OFF
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-    )
-    
-    # Windows-specific target configuration
-    if(WIN32)
-        set_target_properties(${target_name} PROPERTIES
-            WIN32_EXECUTABLE TRUE
-        )
+    # Debug options
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        add_compile_options(-g -O0 -fsanitize=address -fsanitize=undefined)
+        add_link_options(-fsanitize=address -fsanitize=undefined)
     endif()
-endfunction()
+endif()
 
-# Set output directories
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+# vcpkg integration
+if(DEFINED CMAKE_TOOLCHAIN_FILE)
+    message(STATUS "Using vcpkg toolchain: ${CMAKE_TOOLCHAIN_FILE}")
+else()
+    set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        CACHE STRING "Vcpkg toolchain file")
+endif()
 
 # Find required packages
-message(STATUS "Finding required packages...")
-
-# Boost - required for networking and system utilities
-find_package(Boost REQUIRED COMPONENTS system filesystem thread)
-if(Boost_FOUND)
-    message(STATUS "Found Boost ${Boost_VERSION}")
-else()
-    message(FATAL_ERROR "Boost not found. Please install boost via vcpkg: vcpkg install boost-system boost-filesystem boost-thread")
-endif()
-
-# OpenSSL - required for cryptography
+find_package(Boost REQUIRED COMPONENTS system filesystem thread chrono regex program_options)
 find_package(OpenSSL REQUIRED)
-if(OpenSSL_FOUND)
-    message(STATUS "Found OpenSSL ${OPENSSL_VERSION}")
-endif()
+find_package(nlohmann_json REQUIRED)
+find_package(spdlog REQUIRED)
+find_package(fmt REQUIRED)
 
-# nlohmann_json - required for JSON processing
-find_package(nlohmann_json CONFIG REQUIRED)
-if(nlohmann_json_FOUND)
-    message(STATUS "Found nlohmann_json")
-endif()
-
-# spdlog - required for logging
-find_package(spdlog CONFIG REQUIRED)
-if(spdlog_FOUND)
-    message(STATUS "Found spdlog")
-endif()
-
-# GTest - required for testing
-find_package(GTest CONFIG REQUIRED)
+# Optional packages for testing
+find_package(GTest QUIET)
 if(GTest_FOUND)
-    message(STATUS "Found GTest")
-endif()
-
-# RocksDB - optional for persistent storage
-find_package(RocksDB CONFIG)
-if(RocksDB_FOUND)
-    message(STATUS "Found RocksDB - persistent storage enabled")
-    add_definitions(-DWITH_ROCKSDB)
+    enable_testing()
+    set(BUILD_TESTING ON)
 else()
-    message(WARNING "RocksDB not found - using memory store only. Install with: vcpkg install rocksdb")
-    # Create a dummy target for compatibility
-    add_library(RocksDB::rocksdb INTERFACE IMPORTED)
-    add_definitions(-DNO_ROCKSDB)
+    set(BUILD_TESTING OFF)
+    message(WARNING "GTest not found, testing disabled")
 endif()
 
 # Include directories
-include_directories(include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# Add subdirectories
-add_subdirectory(src)
-add_subdirectory(apps)
-add_subdirectory(tests)
+# Core library sources
+file(GLOB_RECURSE NEO_CORE_SOURCES
+    "src/cryptography/*.cpp"
+    "src/io/*.cpp"
+    "src/ledger/*.cpp"
+    "src/network/*.cpp"
+    "src/persistence/*.cpp"
+    "src/smartcontract/*.cpp"
+    "src/vm/*.cpp"
+    "src/consensus/*.cpp"
+    "src/rpc/*.cpp"
+    "src/logging/*.cpp"
+    "src/wallets/*.cpp"
+    "src/extensions/*.cpp"
+    "src/console_service/*.cpp"
+    "src/cli/*.cpp"
+)
+
+# Filter out temporary and test files
+list(FILTER NEO_CORE_SOURCES EXCLUDE REGEX ".*/tmp/.*\\.cpp$")
+list(FILTER NEO_CORE_SOURCES EXCLUDE REGEX ".*test.*\\.cpp$")
+list(FILTER NEO_CORE_SOURCES EXCLUDE REGEX ".*example.*\\.cpp$")
+
+# Core library headers
+file(GLOB_RECURSE NEO_CORE_HEADERS
+    "include/neo/*.h"
+)
+
+# Create core library
+add_library(neo-core STATIC ${NEO_CORE_SOURCES} ${NEO_CORE_HEADERS})
+
+# Link libraries to core
+target_link_libraries(neo-core
+    PUBLIC
+        Boost::system
+        Boost::filesystem
+        Boost::thread
+        Boost::chrono
+        Boost::regex
+        Boost::program_options
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        nlohmann_json::nlohmann_json
+        spdlog::spdlog
+        fmt::fmt
+)
+
+# Set target properties
+set_target_properties(neo-core PROPERTIES
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+    POSITION_INDEPENDENT_CODE ON
+)
+
+# Add node subdirectory
+add_subdirectory(src/node)
+
+# CLI executable
+add_executable(neo-cli tools/cli/main.cpp)
+target_link_libraries(neo-cli PRIVATE neo-core)
+
+# Set executable properties
+set_target_properties(neo-cli PROPERTIES
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+)
+
+# Installation configuration
+install(TARGETS neo-node-main neo-cli neo-core neo-node
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+)
+
+install(DIRECTORY include/neo
+    DESTINATION include
+    FILES_MATCHING PATTERN "*.h"
+)
+
+install(FILES config/production_config.json
+    DESTINATION etc
+    RENAME config.json
+)
+
+# Testing configuration
+if(BUILD_TESTING)
+    # Unit tests
+    file(GLOB_RECURSE TEST_SOURCES "tests/unit/*.cpp")
+    if(TEST_SOURCES)
+        add_executable(neo-unit-tests ${TEST_SOURCES})
+        target_link_libraries(neo-unit-tests 
+            PRIVATE 
+                neo-core 
+                GTest::gtest 
+                GTest::gtest_main
+        )
+        
+        # Add test discovery
+        include(GoogleTest)
+        gtest_discover_tests(neo-unit-tests)
+    endif()
+    
+    # Integration tests
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/integration/neo_integration_tests.cpp")
+        add_executable(neo-integration-tests tests/integration/neo_integration_tests.cpp)
+        target_link_libraries(neo-integration-tests 
+            PRIVATE 
+                neo-core 
+                GTest::gtest 
+                GTest::gtest_main
+        )
+        
+        # Add integration test
+        add_test(NAME integration_tests COMMAND neo-integration-tests)
+    endif()
+    
+    # Benchmark tests
+    file(GLOB_RECURSE BENCHMARK_SOURCES "tests/benchmarks/*.cpp")
+    if(BENCHMARK_SOURCES)
+        add_executable(neo-benchmarks ${BENCHMARK_SOURCES})
+        target_link_libraries(neo-benchmarks PRIVATE neo-core)
+    endif()
+endif()
+
+# Documentation generation
+find_package(Doxygen QUIET)
+if(Doxygen_FOUND)
+    set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in)
+    set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+    
+    if(EXISTS ${DOXYGEN_IN})
+        configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+        
+        add_custom_target(docs ALL
+            COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            COMMENT "Generating API documentation with Doxygen"
+            VERBATIM
+        )
+    endif()
+endif()
+
+# Package configuration
+set(CPACK_PACKAGE_NAME "Neo-CPP")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_DESCRIPTION}")
+set(CPACK_PACKAGE_VENDOR "Neo C++ Development Team")
+set(CPACK_PACKAGE_CONTACT "neo-cpp@neo.org")
+
+# Platform-specific packaging
+if(WIN32)
+    set(CPACK_GENERATOR "ZIP;NSIS")
+    set(CPACK_NSIS_DISPLAY_NAME "Neo C++ Node")
+    set(CPACK_NSIS_PACKAGE_NAME "Neo-CPP")
+    set(CPACK_NSIS_CONTACT "neo-cpp@neo.org")
+    set(CPACK_NSIS_HELP_LINK "https://github.com/neo-project/neo-cpp")
+elseif(APPLE)
+    set(CPACK_GENERATOR "TGZ;DragNDrop")
+else()
+    set(CPACK_GENERATOR "TGZ;DEB;RPM")
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Neo C++ Development Team")
+    set(CPACK_RPM_PACKAGE_LICENSE "MIT")
+endif()
+
+include(CPack)
+
+# Custom targets for development
+add_custom_target(format
+    COMMAND find ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/include 
+            -name "*.cpp" -o -name "*.h" | xargs clang-format -i
+    COMMENT "Formatting source code"
+)
+
+add_custom_target(lint
+    COMMAND find ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/include 
+            -name "*.cpp" -o -name "*.h" | xargs clang-tidy
+    COMMENT "Running static analysis"
+)
+
+# Performance profiling target
+add_custom_target(profile
+    COMMAND valgrind --tool=callgrind --callgrind-out-file=callgrind.out 
+            $<TARGET_FILE:neo-node-main> --config config.json
+    DEPENDS neo-node-main
+    COMMENT "Running performance profiling"
+)
+
+# Memory leak detection target
+add_custom_target(memcheck
+    COMMAND valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all 
+            $<TARGET_FILE:neo-node-main> --config config.json
+    DEPENDS neo-node-main
+    COMMENT "Running memory leak detection"
+)
+
+# Print configuration summary
+message(STATUS "")
+message(STATUS "Neo C++ Configuration Summary:")
+message(STATUS "  Version: ${PROJECT_VERSION}")
+message(STATUS "  Build type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "  C++ standard: ${CMAKE_CXX_STANDARD}")
+message(STATUS "  Compiler: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
+message(STATUS "  Install prefix: ${CMAKE_INSTALL_PREFIX}")
+message(STATUS "  Testing enabled: ${BUILD_TESTING}")
+if(Doxygen_FOUND)
+    message(STATUS "  Documentation: Enabled")
+else()
+    message(STATUS "  Documentation: Disabled (Doxygen not found)")
+endif()
+message(STATUS "")
+
+# Feature summary
+message(STATUS "Features:")
+message(STATUS "  Boost version: ${Boost_VERSION}")
+message(STATUS "  OpenSSL version: ${OPENSSL_VERSION}")
+message(STATUS "  JSON library: nlohmann/json")
+message(STATUS "  Logging: spdlog")
+if(GTest_FOUND)
+    message(STATUS "  Testing framework: Google Test")
+endif()
+message(STATUS "")
+
+# Build targets summary
+message(STATUS "Build targets:")
+message(STATUS "  neo-node - Main blockchain node executable")
+message(STATUS "  neo-cli - Command-line interface")
+message(STATUS "  neo-core - Core library")
+if(BUILD_TESTING)
+    message(STATUS "  neo-unit-tests - Unit test suite")
+    message(STATUS "  neo-integration-tests - Integration test suite")
+    if(BENCHMARK_SOURCES)
+        message(STATUS "  neo-benchmarks - Performance benchmarks")
+    endif()
+endif()
+if(Doxygen_FOUND)
+    message(STATUS "  docs - API documentation")
+endif()
+message(STATUS "")
+
+# Development targets
+message(STATUS "Development targets:")
+message(STATUS "  format - Format source code with clang-format")
+message(STATUS "  lint - Run static analysis with clang-tidy")
+message(STATUS "  profile - Run performance profiling with valgrind")
+message(STATUS "  memcheck - Run memory leak detection with valgrind")
+message(STATUS "")
+
+# Warnings for production deployment
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(WARNING "Debug build detected - not suitable for production deployment")
+endif()
+
+if(NOT CMAKE_INTERPROCEDURAL_OPTIMIZATION)
+    message(WARNING "Link-time optimization disabled - consider enabling for production")
+endif()
+
+message(STATUS "Configuration complete. Run 'make' or 'cmake --build .' to build.")
+message(STATUS "")

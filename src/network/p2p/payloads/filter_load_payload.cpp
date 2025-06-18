@@ -54,7 +54,7 @@ namespace neo::network::p2p::payloads
     
     void FilterLoadPayload::Serialize(io::BinaryWriter& writer) const
     {
-        writer.WriteVarBytes(filter_);
+        writer.WriteVarBytes(filter_.AsSpan());
         writer.Write(k_);
         writer.Write(tweak_);
         writer.Write(flags_);
@@ -82,9 +82,9 @@ namespace neo::network::p2p::payloads
     {
         reader.ReadStartObject();
         filter_ = io::ByteVector::FromHexString(reader.ReadString("filter"));
-        k_ = reader.ReadByte("k");
+        k_ = reader.ReadUInt8("k");
         tweak_ = reader.ReadUInt32("tweak");
-        flags_ = reader.ReadByte("flags");
+        flags_ = reader.ReadUInt8("flags");
         reader.ReadEndObject();
     }
 }

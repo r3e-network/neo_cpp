@@ -356,7 +356,7 @@ namespace neo::network::p2p
         }
     }
 
-    void RemoteNode::ProcessVerackMessage(const Message& message)
+    void RemoteNode::ProcessVerackMessage(const Message& /* message */)
     {
         // Only process verack message if we haven't handshaked yet
         if (handshaked_)

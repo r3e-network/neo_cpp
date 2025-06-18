@@ -11,76 +11,63 @@ namespace neo::smartcontract::native
 {
     // ValidateRecordType is implemented in name_service.cpp
 
-    std::string NameService::GetRecord(std::shared_ptr<persistence::StoreView> snapshot, const std::string& name, const std::string& type) const
+    std::string NameService::GetRecord(std::shared_ptr<persistence::DataCache> snapshot, const std::string& name, const std::string& type) const
     {
-        // Check if name is valid
         if (!ValidateName(name))
             throw std::runtime_error("Invalid name");
 
-        // Check if type is valid
         if (!ValidateRecordType(type))
             throw std::runtime_error("Invalid record type");
 
-        // Check if name is registered and not expired
         auto [owner, expiration] = GetName(snapshot, name);
-        if (expiration <= snapshot->GetCurrentBlockIndex())
+        uint32_t currentHeight = snapshot->GetCurrentBlockIndex();
+        if (expiration <= currentHeight)
             throw std::runtime_error("Name expired");
 
-        // Get record
-        std::string recordKey = name + ":" + type;
-        auto key = GetStorageKey(PREFIX_RECORD, recordKey);
-        auto value = GetStorageValue(snapshot, key);
+        auto key = CreateStorageKey(PREFIX_RECORD, io::ByteVector(reinterpret_cast<const uint8_t*>((name + "." + type).data()), (name + "." + type).size()));
+        auto value = GetStorageValue(snapshot, key.GetKey());
         if (value.IsEmpty())
-            throw std::runtime_error("Record not found");
+            return "";
 
         return std::string(reinterpret_cast<const char*>(value.Data()), value.Size());
     }
 
-    void NameService::SetRecord(std::shared_ptr<persistence::StoreView> snapshot, const std::string& name, const std::string& type, const std::string& value)
+    void NameService::SetRecord(std::shared_ptr<persistence::DataCache> snapshot, const std::string& name, const std::string& type, const std::string& data)
     {
-        // Check if name is valid
         if (!ValidateName(name))
             throw std::runtime_error("Invalid name");
 
-        // Check if type is valid
         if (!ValidateRecordType(type))
             throw std::runtime_error("Invalid record type");
 
-        // Check if value is valid
-        if (value.length() > MAX_RECORD_VALUE_LENGTH)
-            throw std::runtime_error("Record value too long");
+        if (data.size() > MAX_RECORD_SIZE)
+            throw std::runtime_error("Record data too large");
 
-        // Check if name is registered and not expired
         auto [owner, expiration] = GetName(snapshot, name);
-        if (expiration <= snapshot->GetCurrentBlockIndex())
+        uint32_t currentHeight = snapshot->GetCurrentBlockIndex();
+        if (expiration <= currentHeight)
             throw std::runtime_error("Name expired");
 
-        // Set record
-        std::string recordKey = name + ":" + type;
-        auto key = GetStorageKey(PREFIX_RECORD, recordKey);
-        io::ByteVector valueBytes(io::ByteSpan(reinterpret_cast<const uint8_t*>(value.data()), value.size()));
-        PutStorageValue(snapshot, key, valueBytes);
+        auto key = CreateStorageKey(PREFIX_RECORD, io::ByteVector(reinterpret_cast<const uint8_t*>((name + "." + type).data()), (name + "." + type).size()));
+        io::ByteVector value(reinterpret_cast<const uint8_t*>(data.data()), data.size());
+        PutStorageValue(snapshot, key.GetKey(), value);
     }
 
-    void NameService::DeleteRecord(std::shared_ptr<persistence::StoreView> snapshot, const std::string& name, const std::string& type)
+    void NameService::DeleteRecord(std::shared_ptr<persistence::DataCache> snapshot, const std::string& name, const std::string& type)
     {
-        // Check if name is valid
         if (!ValidateName(name))
             throw std::runtime_error("Invalid name");
 
-        // Check if type is valid
         if (!ValidateRecordType(type))
             throw std::runtime_error("Invalid record type");
 
-        // Check if name is registered and not expired
         auto [owner, expiration] = GetName(snapshot, name);
-        if (expiration <= snapshot->GetCurrentBlockIndex())
+        uint32_t currentHeight = snapshot->GetCurrentBlockIndex();
+        if (expiration <= currentHeight)
             throw std::runtime_error("Name expired");
 
-        // Delete record
-        std::string recordKey = name + ":" + type;
-        auto key = GetStorageKey(PREFIX_RECORD, recordKey);
-        DeleteStorageValue(snapshot, key);
+        auto key = CreateStorageKey(PREFIX_RECORD, io::ByteVector(reinterpret_cast<const uint8_t*>((name + "." + type).data()), (name + "." + type).size()));
+        DeleteStorageValue(snapshot, key.GetKey());
     }
 
     std::shared_ptr<vm::StackItem> NameService::OnGetRecord(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
@@ -132,7 +119,7 @@ namespace neo::smartcontract::native
             throw std::runtime_error("Invalid record type");
 
         // Check if value is valid
-        if (value.length() > MAX_RECORD_VALUE_LENGTH)
+        if (value.length() > MAX_RECORD_SIZE)
             throw std::runtime_error("Record value too long");
 
         // Get name
@@ -151,11 +138,12 @@ namespace neo::smartcontract::native
         SetRecord(engine.GetSnapshot(), name, type, value);
 
         // Send notification
-        std::vector<std::shared_ptr<vm::StackItem>> notificationArgs;
-        notificationArgs.push_back(vm::StackItem::Create(name));
-        notificationArgs.push_back(vm::StackItem::Create(type));
-        notificationArgs.push_back(vm::StackItem::Create(value));
-        engine.SendNotification(GetScriptHash(), "SetRecord", vm::StackItem::Create(notificationArgs));
+        std::vector<std::shared_ptr<vm::StackItem>> state = {
+            vm::StackItem::Create(name),
+            vm::StackItem::Create(type),
+            vm::StackItem::Create(value)
+        };
+        engine.Notify(GetScriptHash(), "SetRecord", state);
 
         return vm::StackItem::Create(true);
     }
@@ -197,10 +185,11 @@ namespace neo::smartcontract::native
             DeleteRecord(engine.GetSnapshot(), name, type);
 
             // Send notification
-            std::vector<std::shared_ptr<vm::StackItem>> notificationArgs;
-            notificationArgs.push_back(vm::StackItem::Create(name));
-            notificationArgs.push_back(vm::StackItem::Create(type));
-            engine.SendNotification(GetScriptHash(), "DeleteRecord", vm::StackItem::Create(notificationArgs));
+            std::vector<std::shared_ptr<vm::StackItem>> state = {
+                vm::StackItem::Create(name),
+                vm::StackItem::Create(type)
+            };
+            engine.Notify(GetScriptHash(), "DeleteRecord", state);
 
             return vm::StackItem::Create(true);
         }

@@ -24,13 +24,14 @@ namespace neo::smartcontract::native
         /**
          * @brief Transfers NEO from one account to another.
          * @param token The NEO token.
+         * @param engine The engine.
          * @param snapshot The snapshot.
          * @param from The from account.
          * @param to The to account.
          * @param amount The amount.
          * @return True if the transfer was successful, false otherwise.
          */
-        static bool Transfer(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot, const io::UInt160& from, const io::UInt160& to, const io::Fixed8& amount);
+        static bool Transfer(const NeoToken& token, neo::smartcontract::ApplicationEngine& engine, std::shared_ptr<persistence::DataCache> snapshot, const io::UInt160& from, const io::UInt160& to, const io::Fixed8& amount);
 
         /**
          * @brief Handles the totalSupply method.

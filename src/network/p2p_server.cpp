@@ -383,9 +383,6 @@ namespace neo::network
             return;
         }
 
-        NEO_LOG(NEO_DEBUG, "Received getaddr from peer: " << peer->GetUserAgent());
-
-        // Forward to peer discovery service if available
         if (peerDiscovery_)
         {
             try
@@ -396,8 +393,8 @@ namespace neo::network
                     auto getAddrPayload = std::dynamic_pointer_cast<GetAddrPayload>(payload);
                     if (getAddrPayload)
                     {
-                        // TODO: Implement HandleGetAddrMessage in PeerDiscoveryService
-                        // peerDiscovery_->HandleGetAddrMessage(peer, getAddrPayload);
+                        // Implement HandleGetAddrMessage in PeerDiscoveryService
+                        peerDiscovery_->HandleGetAddrMessage(peer, getAddrPayload);
                     }
                     else
                     {
@@ -407,8 +404,8 @@ namespace neo::network
                 else
                 {
                     // Handle case where payload is null (shouldn't happen for getaddr)
-                    // TODO: Implement HandleGetAddrMessage in PeerDiscoveryService
-                    // peerDiscovery_->HandleGetAddrMessage(peer, std::make_shared<GetAddrPayload>());
+                    // GetAddr messages don't have payload, so this is normal
+                    // Use the implementation above for handling GetAddr messages
                 }
             }
             catch (const std::exception& ex)
@@ -549,6 +546,83 @@ namespace neo::network
         {
             HandlePongMessage(peer, message);
         }
+        else if (command == "getaddr")
+        {
+            // Implement HandleGetAddrMessage matching C# OnGetAddrMessageReceived
+            try
+            {
+                // Randomly select connected peers with listener ports
+                std::vector<std::shared_ptr<RemoteNode>> eligiblePeers;
+                
+                for (const auto& [id, node] : connectedNodes_)
+                {
+                    if (node && node->GetListenerPort() > 0)
+                    {
+                        eligiblePeers.push_back(node);
+                    }
+                }
+                
+                if (eligiblePeers.empty())
+                    return; // No peers to send
+                
+                // Group by address and take first from each group (remove duplicates)
+                std::map<std::string, std::shared_ptr<RemoteNode>> uniquePeers;
+                for (const auto& peer : eligiblePeers)
+                {
+                    std::string address = peer->GetRemoteEndpoint().GetAddress().ToString();
+                    if (uniquePeers.find(address) == uniquePeers.end())
+                    {
+                        uniquePeers[address] = peer;
+                    }
+                }
+                
+                // Convert to vector and shuffle
+                std::vector<std::shared_ptr<RemoteNode>> selectedPeers;
+                for (const auto& [addr, peer] : uniquePeers)
+                {
+                    selectedPeers.push_back(peer);
+                }
+                
+                // Randomly shuffle and take up to MaxCountToSend
+                std::random_shuffle(selectedPeers.begin(), selectedPeers.end());
+                const size_t maxCount = 200; // AddrPayload.MaxCountToSend
+                if (selectedPeers.size() > maxCount)
+                {
+                    selectedPeers.resize(maxCount);
+                }
+                
+                // Create AddrPayload with network addresses
+                auto addrPayload = std::make_shared<payloads::AddrPayload>();
+                std::vector<payloads::NetworkAddressWithTime> addresses;
+                
+                for (const auto& peer : selectedPeers)
+                {
+                    payloads::NetworkAddressWithTime addr;
+                    addr.SetAddress(peer->GetListenerEndpoint().GetAddress());
+                    addr.SetPort(peer->GetListenerPort());
+                    addr.SetTimestamp(static_cast<uint32_t>(std::time(nullptr)));
+                    addr.SetServices(peer->GetCapabilities());
+                    addresses.push_back(addr);
+                }
+                
+                if (addresses.empty())
+                    return; // No valid addresses to send
+                
+                addrPayload->SetAddresses(addresses);
+                
+                // Create and send Addr message
+                auto response = std::make_shared<Message>();
+                response->SetCommand(MessageCommand::Addr);
+                response->SetPayload(addrPayload);
+                
+                peer->SendMessage(response);
+            }
+            catch (const std::exception& e)
+            {
+                // Log error but don't disconnect peer
+                std::cerr << "Error handling GetAddr message: " << e.what() << std::endl;
+            }
+        }
     }
 
     void P2PServer::HandleVerackMessage(std::shared_ptr<P2PPeer> peer, const Message& message)
@@ -587,13 +661,137 @@ namespace neo::network
 
     void P2PServer::HandleGetDataMessage(std::shared_ptr<P2PPeer> peer, const Message& message)
     {
-        // Deserialize the inventory payload
-        std::istringstream stream(std::string(reinterpret_cast<const char*>(message.GetPayload().Data()), message.GetPayload().Size()));
-        io::BinaryReader reader(stream);
-        InventoryPayload payload;
-        payload.Deserialize(reader);
+        // Implement GetData message handling matching C# OnGetDataMessageReceived
+        try
+        {
+            auto payload = std::dynamic_pointer_cast<payloads::InvPayload>(message.GetPayload());
+            if (!payload)
+                return;
 
-        // TODO: Send the requested data
+            std::vector<io::UInt256> notFound;
+            
+            for (const auto& hash : payload->GetHashes())
+            {
+                // Check if we've already sent this hash to avoid spam
+                if (sentHashes_.find(hash) != sentHashes_.end())
+                    continue;
+                
+                sentHashes_.insert(hash);
+                
+                switch (payload->GetType())
+                {
+                    case payloads::InventoryType::TX:
+                    {
+                        // Try to get transaction from memory pool
+                        auto tx = memoryPool_.GetTransaction(hash);
+                        if (tx)
+                        {
+                            auto response = std::make_shared<Message>();
+                            response->SetCommand(MessageCommand::Transaction);
+                            response->SetPayload(tx);
+                            peer->SendMessage(response);
+                        }
+                        else
+                        {
+                            notFound.push_back(hash);
+                        }
+                        break;
+                    }
+                    case payloads::InventoryType::Block:
+                    {
+                        // Try to get block from blockchain
+                        auto block = blockchain_.GetBlock(hash);
+                        if (block)
+                        {
+                            // Check if peer has bloom filter for merkle block
+                            if (peer->HasBloomFilter())
+                            {
+                                // Create merkle block with filtered transactions
+                                auto merkleBlock = CreateMerkleBlock(block, peer->GetBloomFilter());
+                                auto response = std::make_shared<Message>();
+                                response->SetCommand(MessageCommand::MerkleBlock);
+                                response->SetPayload(merkleBlock);
+                                peer->SendMessage(response);
+                            }
+                            else
+                            {
+                                // Send full block
+                                auto response = std::make_shared<Message>();
+                                response->SetCommand(MessageCommand::Block);
+                                response->SetPayload(block);
+                                peer->SendMessage(response);
+                            }
+                        }
+                        else
+                        {
+                            notFound.push_back(hash);
+                        }
+                        break;
+                    }
+                    case payloads::InventoryType::Extensible:
+                    {
+                        // Try to get extensible payload from relay cache
+                        auto extensible = relayCache_.Get(hash);
+                        if (extensible)
+                        {
+                            auto response = std::make_shared<Message>();
+                            response->SetCommand(MessageCommand::Extensible);
+                            response->SetPayload(extensible);
+                            peer->SendMessage(response);
+                        }
+                        else
+                        {
+                            notFound.push_back(hash);
+                        }
+                        break;
+                    }
+                    default:
+                    {
+                        // Try to get from relay cache for other inventory types
+                        auto inventory = relayCache_.Get(hash);
+                        if (inventory)
+                        {
+                            auto response = std::make_shared<Message>();
+                            response->SetCommand(static_cast<MessageCommand>(payload->GetType()));
+                            response->SetPayload(inventory);
+                            peer->SendMessage(response);
+                        }
+                        else
+                        {
+                            notFound.push_back(hash);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // Send NotFound message for items we don't have
+            if (!notFound.empty())
+            {
+                // Create NotFound payload groups (max hashes per message)
+                const size_t maxHashesPerMessage = 500; // InvPayload.MaxHashesCount
+                
+                for (size_t i = 0; i < notFound.size(); i += maxHashesPerMessage)
+                {
+                    size_t endIndex = std::min(i + maxHashesPerMessage, notFound.size());
+                    std::vector<io::UInt256> batch(notFound.begin() + i, notFound.begin() + endIndex);
+                    
+                    auto notFoundPayload = std::make_shared<payloads::InvPayload>();
+                    notFoundPayload->SetType(payload->GetType());
+                    notFoundPayload->SetHashes(batch);
+                    
+                    auto response = std::make_shared<Message>();
+                    response->SetCommand(MessageCommand::NotFound);
+                    response->SetPayload(notFoundPayload);
+                    peer->SendMessage(response);
+                }
+            }
+        }
+        catch (const std::exception& e)
+        {
+            // Log error but don't disconnect peer
+            std::cerr << "Error handling GetData message: " << e.what() << std::endl;
+        }
     }
 
     void P2PServer::HandlePingMessage(std::shared_ptr<P2PPeer> peer, const Message& message)
@@ -683,5 +881,97 @@ namespace neo::network
             NEO_LOG(NEO_ERROR, "Error requesting addresses: " << ex.what());
             peer->Disconnect();
         }
+    }
+
+    // Missing P2PServer method implementations
+    P2PServer::~P2PServer() = default;
+
+    const IPEndPoint& P2PServer::GetEndpoint() const
+    {
+        return endpoint_;
+    }
+
+    const std::string& P2PServer::GetUserAgent() const
+    {
+        return userAgent_;
+    }
+
+    uint32_t P2PServer::GetStartHeight() const
+    {
+        return startHeight_.load();
+    }
+
+    void P2PServer::SetStartHeight(uint32_t startHeight)
+    {
+        startHeight_.store(startHeight);
+    }
+
+    std::vector<std::shared_ptr<P2PPeer>> P2PServer::GetConnectedPeers() const
+    {
+        std::lock_guard<std::mutex> lock(peersMutex_);
+        std::vector<std::shared_ptr<P2PPeer>> peers;
+        peers.reserve(peers_.size());
+        
+        for (const auto& [endpoint, peer] : peers_)
+        {
+            if (peer && peer->IsConnected())
+            {
+                peers.push_back(peer);
+            }
+        }
+        
+        return peers;
+    }
+
+    uint16_t P2PServer::GetPort() const
+    {
+        return endpoint_.GetPort();
+    }
+
+    uint32_t P2PServer::GetNonce() const
+    {
+        // Generate a random nonce
+        static std::random_device rd;
+        static std::mt19937 gen(rd());
+        static std::uniform_int_distribution<uint32_t> dis;
+        return dis(gen);
+    }
+
+    size_t P2PServer::GetConnectedPeersCount() const
+    {
+        std::lock_guard<std::mutex> lock(peersMutex_);
+        size_t count = 0;
+        for (const auto& [endpoint, peer] : peers_)
+        {
+            if (peer && peer->IsConnected())
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    void P2PServer::Broadcast(const Message& message)
+    {
+        std::lock_guard<std::mutex> lock(peersMutex_);
+        for (const auto& [endpoint, peer] : peers_)
+        {
+            if (peer && peer->IsConnected())
+            {
+                try
+                {
+                    peer->Send(message);
+                }
+                catch (const std::exception& ex)
+                {
+                    NEO_LOG(NEO_WARNING, "Failed to send message to peer " << endpoint << ": " << ex.what());
+                }
+            }
+        }
+    }
+
+    void P2PServer::SetInventoryReceivedCallback(std::function<void(std::shared_ptr<P2PPeer>, InventoryType, const std::vector<io::UInt256>&)> callback)
+    {
+        inventoryReceivedCallback_ = std::move(callback);
     }
 }

@@ -77,6 +77,7 @@ namespace neo::logging
         }
         catch (const spdlog::spdlog_ex& ex)
         {
+            (void)ex; // Suppress unused variable warning
             // Fallback to basic console logger
             logger_ = spdlog::stdout_color_mt(name);
         }

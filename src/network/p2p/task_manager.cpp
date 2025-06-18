@@ -201,7 +201,53 @@ namespace neo::network::p2p
                 continue;
             }
 
-            // TODO: Request the block from peers
+            // Request the block from peers matching C# TaskManager implementation
+            try
+            {
+                // Create GetData payload for the block
+                auto getDataPayload = std::make_shared<payloads::InvPayload>();
+                getDataPayload->SetType(payloads::InventoryType::Block);
+                getDataPayload->AddHash(hash);
+                
+                // Create GetData message
+                auto message = std::make_shared<Message>();
+                message->SetCommand(MessageCommand::GetData);
+                message->SetPayload(getDataPayload);
+                
+                // Send to connected peers that might have the block
+                auto peers = localNode_->GetConnectedPeers();
+                bool requestSent = false;
+                
+                for (const auto& peer : peers)
+                {
+                    // Check if peer's last block index is higher than requested block
+                    if (peer->GetLastBlockIndex() >= blockIndex)
+                    {
+                        peer->SendMessage(message);
+                        requestSent = true;
+                        
+                        // Add to pending requests to track timeout
+                        pendingBlockRequests_[hash] = {
+                            std::chrono::steady_clock::now(),
+                            peer->GetId()
+                        };
+                        
+                        // Don't send to all peers, just a few
+                        if (requestSent)
+                            break;
+                    }
+                }
+                
+                if (!requestSent)
+                {
+                    // No suitable peers found, try again later
+                    std::cerr << "No peers available for block " << blockIndex << std::endl;
+                }
+            }
+            catch (const std::exception& e)
+            {
+                std::cerr << "Error requesting block " << blockIndex << ": " << e.what() << std::endl;
+            }
         }
     }
 
@@ -230,7 +276,50 @@ namespace neo::network::p2p
                 continue;
             }
 
-            // TODO: Request the transaction from peers
+            // Request the transaction from peers matching C# TaskManager implementation
+            try
+            {
+                // Create GetData payload for the transaction
+                auto getDataPayload = std::make_shared<payloads::InvPayload>();
+                getDataPayload->SetType(payloads::InventoryType::TX);
+                getDataPayload->AddHash(hash);
+                
+                // Create GetData message
+                auto message = std::make_shared<Message>();
+                message->SetCommand(MessageCommand::GetData);
+                message->SetPayload(getDataPayload);
+                
+                // Send to connected peers
+                auto peers = localNode_->GetConnectedPeers();
+                bool requestSent = false;
+                
+                for (const auto& peer : peers)
+                {
+                    // Send to any connected peer (transactions are more widely available)
+                    peer->SendMessage(message);
+                    requestSent = true;
+                    
+                    // Add to pending requests to track timeout
+                    pendingTxRequests_[hash] = {
+                        std::chrono::steady_clock::now(),
+                        peer->GetId()
+                    };
+                    
+                    // Send to multiple peers for better chance of getting the transaction
+                    if (requestSent && pendingTxRequests_.size() >= 3)
+                        break;
+                }
+                
+                if (!requestSent)
+                {
+                    // No peers available, try again later
+                    std::cerr << "No peers available for transaction " << hash.ToString() << std::endl;
+                }
+            }
+            catch (const std::exception& e)
+            {
+                std::cerr << "Error requesting transaction " << hash.ToString() << ": " << e.what() << std::endl;
+            }
         }
     }
 

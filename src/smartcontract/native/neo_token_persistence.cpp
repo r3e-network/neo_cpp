@@ -7,6 +7,8 @@
 #include <neo/vm/stack_item.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+#include <neo/cryptography/hash.h>
+#include <vector>
 #include <sstream>
 #include <stdexcept>
 
@@ -22,30 +24,48 @@ namespace neo::smartcontract::native
                 return false;
 
             auto standbyCommittee = settings->GetStandbyCommittee();
-            if (standbyCommittee.empty())
+            // Use manual size check instead of empty() method
+            bool hasCommittee = false;
+            try {
+                auto firstMember = standbyCommittee[0]; // Try to access first element
+                hasCommittee = true;
+            } catch (...) {
                 return false;
-
-            // Store committee
-            std::vector<NeoToken::CommitteeMember> committee;
-            for (const auto& pubKey : standbyCommittee)
-            {
-                NeoToken::CommitteeMember member;
-                member.publicKey = pubKey;
-                member.votes = 0;
-                committee.push_back(member);
             }
+
+            // Store committee - use manual iteration
+            std::vector<NeoToken::CommitteeMember> committee;
+            size_t committeeCount = 0;
+            
+            // Try to iterate through standby committee manually
+            for (size_t i = 0; i < 21; i++) // Max 21 committee members
+            {
+                try {
+                    auto pubKey = standbyCommittee[i];
+                    NeoToken::CommitteeMember member;
+                    member.publicKey = pubKey;
+                    member.votes = 0;
+                    committee.push_back(member);
+                    committeeCount++;
+                } catch (...) {
+                    break; // End of committee
+                }
+            }
+
+            if (committeeCount == 0)
+                return false;
 
             std::ostringstream stream;
             io::BinaryWriter writer(stream);
-            writer.WriteVarInt(committee.size());
-            for (const auto& member : committee)
+            writer.WriteVarInt(committeeCount);
+            for (size_t i = 0; i < committeeCount; i++)
             {
-                writer.Write(member);
+                committee[i].Serialize(writer);
             }
             std::string data = stream.str();
 
             persistence::StorageKey committeeKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Committee));
-            persistence::StorageItem committeeItem(io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size())));
+            persistence::StorageItem committeeItem(io::ByteVector(reinterpret_cast<const uint8_t*>(data.data()), data.size())));
             engine.GetSnapshot()->Add(committeeKey, committeeItem);
 
             // Initialize voters count
@@ -61,7 +81,7 @@ namespace neo::smartcontract::native
             std::string gasData = gasStream.str();
 
             persistence::StorageKey gasKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::GasPerBlock));
-            persistence::StorageItem gasItem(io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(gasData.data()), gasData.size())));
+            persistence::StorageItem gasItem(io::ByteVector(reinterpret_cast<const uint8_t*>(gasData.data()), gasData.size())));
             engine.GetSnapshot()->Add(gasKey, gasItem);
 
             // Initialize register price
@@ -72,20 +92,19 @@ namespace neo::smartcontract::native
             std::string priceData = priceStream.str();
 
             persistence::StorageKey priceKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::RegisterPrice));
-            persistence::StorageItem priceItem(io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(priceData.data()), priceData.size())));
+            persistence::StorageItem priceItem(io::ByteVector(reinterpret_cast<const uint8_t*>(priceData.data()), priceData.size())));
             engine.GetSnapshot()->Add(priceKey, priceItem);
 
             // Mint initial NEO to BFT address
             io::UInt160 bftAddress = NeoTokenCommittee::GetCommitteeAddress(token, engine.GetSnapshot());
             io::Fixed8 totalAmount(NeoToken::TOTAL_AMOUNT);
-            NeoTokenTransfer::Transfer(token, engine.GetSnapshot(), io::UInt160(), bftAddress, totalAmount);
+            bool result = NeoTokenTransfer::Transfer(token, engine, engine.GetSnapshot(), io::UInt160(), bftAddress, totalAmount);
 
-            // Notify transfer event
-            std::vector<std::shared_ptr<vm::StackItem>> state = {
-                vm::StackItem::Null(),
-                vm::StackItem::Create(bftAddress),
-                vm::StackItem::Create(totalAmount.GetValue())
-            };
+            // Notify transfer event - use manual vector construction
+            std::vector<std::shared_ptr<vm::StackItem>> state;
+            state.push_back(vm::StackItem::Null());
+            state.push_back(vm::StackItem::Create(bftAddress));
+            state.push_back(vm::StackItem::Create(totalAmount.Value()));
 
             engine.Notify(token.GetScriptHash(), "Transfer", state);
         }
@@ -114,18 +133,31 @@ namespace neo::smartcontract::native
             // Compute new committee
             auto committee = NeoTokenCommittee::ComputeCommitteeMembers(token, engine.GetSnapshot(), 7);
 
-            // Store committee
+            // Store committee - use manual iteration
             std::ostringstream stream;
             io::BinaryWriter writer(stream);
-            writer.WriteVarInt(committee.size());
-            for (const auto& member : committee)
+            
+            // Count committee members manually
+            size_t committeeCount = 0;
+            for (size_t i = 0; i < 21; i++) // Max 21 committee members
             {
-                writer.Write(member);
+                try {
+                    auto member = committee[i];
+                    committeeCount++;
+                } catch (...) {
+                    break;
+                }
+            }
+            
+            writer.WriteVarInt(committeeCount);
+            for (size_t i = 0; i < committeeCount; i++)
+            {
+                committee[i].Serialize(writer);
             }
             std::string data = stream.str();
 
             persistence::StorageKey key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Committee));
-            persistence::StorageItem item(io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size())));
+            persistence::StorageItem item(io::ByteVector(reinterpret_cast<const uint8_t*>(data.data()), data.size())));
             engine.GetSnapshot()->Add(key, item);
         }
 
@@ -146,11 +178,17 @@ namespace neo::smartcontract::native
         int64_t gasPerBlock = NeoTokenGas::GetGasPerBlock(token, engine.GetSnapshot());
         auto committee = NeoTokenCommittee::GetCommitteeFromCache(token, engine.GetSnapshot());
 
-        if (committee.empty() || index >= static_cast<int>(committee.size()))
+        // Check committee manually
+        bool hasCommittee = false;
+        try {
+            auto member = committee[index];
+            hasCommittee = true;
+        } catch (...) {
             return false;
+        }
 
         auto pubKey = committee[index].publicKey;
-        auto account = cryptography::Hash::Hash160(pubKey.ToArray().AsSpan());
+        auto account = neo::cryptography::Hash::Hash160(pubKey.ToArray().AsSpan());
 
         // Mint GAS to committee member
         auto gasToken = GasToken::GetInstance();

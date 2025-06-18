@@ -1,7 +1,7 @@
 #include <neo/network/p2p/transaction_router.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/mempool.h>
-#include <neo/ledger/transaction.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
 #include <neo/io/uint256.h>
 #include <chrono>
 #include <algorithm>
@@ -49,10 +49,10 @@ namespace neo::network::p2p
         return running_;
     }
 
-    bool TransactionRouter::AddTransaction(std::shared_ptr<ledger::Transaction> transaction)
+    bool TransactionRouter::AddTransaction(std::shared_ptr<Neo3Transaction> transaction)
     {
         // Check if the transaction already exists
-        if (memPool_->ContainsTransaction(transaction->GetHash()) || blockchain_->ContainsTransaction(transaction->GetHash()))
+        if (memPool_->ContainsKey(transaction->GetHash()) || blockchain_->ContainsTransaction(transaction->GetHash()))
             return false;
 
         // Add the transaction
@@ -76,11 +76,11 @@ namespace neo::network::p2p
         return true;
     }
 
-    std::vector<std::shared_ptr<ledger::Transaction>> TransactionRouter::GetTransactions() const
+    std::vector<std::shared_ptr<Neo3Transaction>> TransactionRouter::GetTransactions() const
     {
         std::lock_guard<std::mutex> lock(transactionsMutex_);
 
-        std::vector<std::shared_ptr<ledger::Transaction>> transactions;
+        std::vector<std::shared_ptr<Neo3Transaction>> transactions;
         transactions.reserve(transactions_.size());
 
         for (const auto& pair : transactions_)
@@ -136,11 +136,60 @@ namespace neo::network::p2p
                     continue;
                 }
 
+                // Check if the transaction is expired based on ValidUntilBlock
+                auto currentBlockHeight = blockchain_->GetCurrentBlockHeight();
+                if (transaction->GetValidUntilBlock() <= currentBlockHeight)
+                {
+                    // Transaction is expired, remove it
+                    RemoveTransaction(transaction->GetHash());
+                    continue;
+                }
+
                 // Add the transaction to the memory pool
                 if (memPool_->AddTransaction(transaction))
                 {
-                    // TODO: Relay the transaction to peers
-                    RemoveTransaction(transaction->GetHash());
+                    // Relay the transaction to peers matching C# implementation
+                    try
+                    {
+                        // Create Inv payload to announce the transaction
+                        auto invPayload = std::make_shared<payloads::InvPayload>();
+                        invPayload->SetType(payloads::InventoryType::TX);
+                        invPayload->AddHash(transaction->GetHash());
+                        
+                        // Create Inv message
+                        auto invMessage = std::make_shared<Message>();
+                        invMessage->SetCommand(MessageCommand::Inv);
+                        invMessage->SetPayload(invPayload);
+                        
+                        // Relay to connected peers
+                        auto peers = localNode_->GetConnectedPeers();
+                        size_t relayCount = 0;
+                        const size_t maxRelayPeers = 16; // Limit relay to avoid spam
+                        
+                        for (const auto& peer : peers)
+                        {
+                            // Don't relay back to the peer that sent us the transaction
+                            if (peer->GetId() != sourcePeerId)
+                            {
+                                peer->SendMessage(invMessage);
+                                relayCount++;
+                                
+                                if (relayCount >= maxRelayPeers)
+                                    break;
+                            }
+                        }
+                        
+                        // Mark transaction as relayed
+                        relayedTransactions_.insert(transaction->GetHash());
+                        
+                        // Remove from pending queue since we successfully relayed it
+                        RemoveTransaction(transaction->GetHash());
+                    }
+                    catch (const std::exception& e)
+                    {
+                        std::cerr << "Error relaying transaction: " << e.what() << std::endl;
+                        RemoveTransaction(transaction->GetHash());
+                    }
                 }
             }
 
@@ -164,8 +213,17 @@ namespace neo::network::p2p
 
             for (auto it = transactions_.begin(); it != transactions_.end();)
             {
-                // TODO: Check if the transaction is expired
-                ++it;
+                // Check if the transaction is expired based on ValidUntilBlock
+                auto currentBlockHeight = blockchain_->GetCurrentBlockHeight();
+                if (it->second->GetValidUntilBlock() <= currentBlockHeight)
+                {
+                    // Transaction is expired, remove it
+                    it = transactions_.erase(it);
+                }
+                else
+                {
+                    ++it;
+                }
             }
         }
     }

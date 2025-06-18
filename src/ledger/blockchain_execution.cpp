@@ -1,8 +1,16 @@
 #include <neo/ledger/blockchain_execution.h>
+#include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/trigger_type.h>
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/policy_contract.h>
 #include <neo/smartcontract/native/contract_management.h>
+#include <neo/smartcontract/native/ledger_contract.h>
+#include <neo/smartcontract/native/role_management.h>
+#include <neo/smartcontract/native/oracle_contract.h>
+#include <neo/smartcontract/native/std_lib.h>
+#include <neo/smartcontract/native/crypto_lib.h>
+#include <neo/vm/vm_state.h>
 
 namespace neo::ledger
 {

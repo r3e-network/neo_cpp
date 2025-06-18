@@ -1,7 +1,7 @@
 #pragma once
 
 #include <neo/network/p2p/ipayload.h>
-#include <neo/network/p2p/message_command.h>
+#include <neo/network/message_command.h>
 #include <neo/network/payload_type.h>
 #include <neo/io/binary_reader.h>
 #include <memory>

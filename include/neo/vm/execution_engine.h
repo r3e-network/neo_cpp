@@ -7,6 +7,7 @@
 #include <neo/vm/execution_engine_limits.h>
 #include <neo/vm/execution_context.h>
 #include <neo/vm/internal/byte_vector.h>
+#include <neo/vm/vm_state.h>
 #include <functional>
 #include <memory>
 #include <vector>
@@ -17,17 +18,6 @@
 
 namespace neo::vm
 {
-    /**
-     * @brief Enum for VM state.
-     */
-    enum class VMState
-    {
-        None,
-        Halt,
-        Fault,
-        Break
-    };
-
     // Forward declaration
     class ExecutionContext;
 

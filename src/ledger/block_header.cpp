@@ -1,6 +1,11 @@
 #include <neo/ledger/block_header.h>
 #include <neo/ledger/block.h>
 #include <neo/cryptography/hash.h>
+#include <neo/cryptography/crypto.h>
+#include <neo/cryptography/ecc/ecpoint.h>
+#include <neo/io/json_writer.h>
+#include <neo/io/json_reader.h>
+#include <nlohmann/json.hpp>
 #include <sstream>
 
 namespace neo::ledger
@@ -216,28 +221,28 @@ namespace neo::ledger
         witness_.Deserialize(reader);
     }
 
-    nlohmann::json BlockHeader::ToJson() const
+    void BlockHeader::SerializeJson(io::JsonWriter& writer) const
     {
-        nlohmann::json json;
-        json["version"] = version_;
-        json["previousblockhash"] = prevHash_.ToHexString();
-        json["merkleroot"] = merkleRoot_.ToHexString();
-        json["time"] = timestamp_;
-        json["index"] = index_;
-        json["nextconsensus"] = nextConsensus_.ToHexString();
+        writer.Write("version", version_);
+        writer.Write("previousblockhash", prevHash_.ToHexString());
+        writer.Write("merkleroot", merkleRoot_.ToHexString());
+        writer.Write("time", timestamp_);
+        writer.Write("index", index_);
+        writer.Write("nextconsensus", nextConsensus_.ToHexString());
 
-        nlohmann::json witnessJson;
-        witnessJson["invocation"] = witness_.GetInvocationScript().ToHexString();
-        witnessJson["verification"] = witness_.GetVerificationScript().ToHexString();
-        json["witness"] = witnessJson;
+        // Write witness as nested object using proper JsonWriter interface
+        writer.WritePropertyName("witness");
+        writer.WriteStartObject();
+        writer.Write("invocation", witness_.GetInvocationScript().ToHexString());
+        writer.Write("verification", witness_.GetVerificationScript().ToHexString());
+        writer.WriteEndObject();
 
-        json["hash"] = GetHash().ToHexString();
-
-        return json;
+        writer.Write("hash", GetHash().ToHexString());
     }
 
-    void BlockHeader::FromJson(const nlohmann::json& json)
+    void BlockHeader::DeserializeJson(const io::JsonReader& reader)
     {
+        auto json = reader.GetJson();
         version_ = json["version"];
         prevHash_ = io::UInt256::Parse(json["previousblockhash"].get<std::string>());
         merkleRoot_ = io::UInt256::Parse(json["merkleroot"].get<std::string>());
@@ -386,8 +391,8 @@ namespace neo::ledger
     io::ByteVector BlockHeader::GetSignData() const
     {
         // Get the data that should be signed for this block header
-        io::ByteVector signData;
-        io::BinaryWriter writer(signData);
+        std::ostringstream stream;
+        io::BinaryWriter writer(stream);
 
         // Serialize block header data without witness (unsigned data)
         writer.Write(version_);
@@ -403,6 +408,7 @@ namespace neo::ledger
         uint32_t networkMagic = 860833102; // Neo N3 MainNet magic
         writer.Write(networkMagic);
 
-        return signData;
+        std::string data = stream.str();
+        return io::ByteVector(reinterpret_cast<const uint8_t*>(data.data()), data.size());
     }
 }

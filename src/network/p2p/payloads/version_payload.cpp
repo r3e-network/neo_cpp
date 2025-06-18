@@ -5,6 +5,7 @@
 #include <neo/io/json_reader.h>
 #include <algorithm>
 #include <chrono>
+#include <functional>
 
 namespace neo::network::p2p::payloads
 {
@@ -210,7 +211,10 @@ namespace neo::network::p2p::payloads
         writer.Write("nonce", nonce_);
         writer.Write("userAgent", userAgent_);
         writer.Write("allowCompression", allowCompression_);
-        writer.WriteArray("capabilities", capabilities_);
+        std::function<void(io::JsonWriter&, const NodeCapability&)> capabilityWriter = [](io::JsonWriter& w, const NodeCapability& cap) {
+            cap.SerializeJson(w);
+        };
+        writer.WriteArray("capabilities", capabilities_, capabilityWriter);
     }
     
     void VersionPayload::DeserializeJson(const io::JsonReader& reader)
@@ -221,6 +225,17 @@ namespace neo::network::p2p::payloads
         nonce_ = reader.ReadUInt32("nonce");
         userAgent_ = reader.ReadString("userAgent");
         allowCompression_ = reader.ReadBool("allowCompression");
-        reader.ReadArray("capabilities", capabilities_);
+        
+        // Read capabilities array
+        auto capabilitiesJson = reader.ReadArray("capabilities");
+        capabilities_.clear();
+        if (capabilitiesJson.is_array()) {
+            for (const auto& capJson : capabilitiesJson) {
+                NodeCapability cap;
+                io::JsonReader capReader(capJson);
+                cap.DeserializeJson(capReader);
+                capabilities_.push_back(cap);
+            }
+        }
     }
 }

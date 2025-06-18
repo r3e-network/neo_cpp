@@ -275,15 +275,15 @@ namespace neo::cryptography::mpttrie
         {
             case NodeType::BranchNode:
                 DeserializeBranch(reader);
-                reference_ = reader.ReadVarInt();
+                reference_ = static_cast<int>(reader.ReadVarInt());
                 break;
             case NodeType::ExtensionNode:
                 DeserializeExtension(reader);
-                reference_ = reader.ReadVarInt();
+                reference_ = static_cast<int>(reader.ReadVarInt());
                 break;
             case NodeType::LeafNode:
                 DeserializeLeaf(reader);
-                reference_ = reader.ReadVarInt();
+                reference_ = static_cast<int>(reader.ReadVarInt());
                 break;
             case NodeType::HashNode:
                 stored_hash_ = reader.ReadUInt256();

@@ -24,7 +24,7 @@ namespace neo::consensus
     {
         ConsensusMessage::Serialize(writer);
         writer.Write(commitHash_);
-        writer.WriteVarBytes(commitSignature_.Data(), commitSignature_.Size());
+        writer.WriteVarBytes(commitSignature_.AsSpan());
     }
     
     void CommitMessage::Deserialize(io::BinaryReader& reader)

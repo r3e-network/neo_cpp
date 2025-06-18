@@ -3,6 +3,9 @@
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <stdexcept>
+#include <algorithm>
+#include <sstream>
+#include <iomanip>
 
 namespace neo::io
 {
@@ -10,46 +13,60 @@ namespace neo::io
     {
         UInt160 result;
         if (!TryParse(hex, result))
-            throw std::invalid_argument("Invalid UInt160 format");
+        {
+            throw std::invalid_argument("Invalid UInt160 hex string: " + hex);
+        }
         return result;
     }
 
     bool UInt160::TryParse(const std::string& hex, UInt160& result)
     {
-        try
+        std::string cleanHex = hex;
+        
+        // Remove 0x prefix if present
+        if (cleanHex.size() >= 2 && cleanHex.substr(0, 2) == "0x")
         {
-            // Remove '0x' prefix if present
-            std::string hexStr = hex;
-            if (hexStr.size() >= 2 && hexStr[0] == '0' && (hexStr[1] == 'x' || hexStr[1] == 'X'))
-                hexStr = hexStr.substr(2);
-
-            // Check length
-            if (hexStr.length() != Size * 2)
-                return false;
-
-            // Validate hex characters
-            for (char c : hexStr)
-            {
-                if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')))
-                    return false;
-            }
-
-            ByteVector bytes = ByteVector::Parse(hexStr);
-            if (bytes.Size() != Size)
-                return false;
-
-            result = UInt160(bytes.AsSpan());
-            return true;
+            cleanHex = cleanHex.substr(2);
         }
-        catch (const std::exception&)
+        
+        // Pad with leading zeros if necessary
+        if (cleanHex.size() < Size * 2)
+        {
+            cleanHex = std::string(Size * 2 - cleanHex.size(), '0') + cleanHex;
+        }
+        
+        // Check length
+        if (cleanHex.size() != Size * 2)
         {
             return false;
         }
+        
+        // Parse hex string (big-endian to little-endian)
+        for (size_t i = 0; i < Size; ++i)
+        {
+            std::string byteStr = cleanHex.substr((Size - 1 - i) * 2, 2);
+            char* endPtr;
+            unsigned long byteVal = std::strtoul(byteStr.c_str(), &endPtr, 16);
+            
+            if (*endPtr != '\0' || byteVal > 255)
+            {
+                return false;
+            }
+            
+            result.data_[i] = static_cast<uint8_t>(byteVal);
+        }
+        
+        return true;
+    }
+
+    UInt160 UInt160::FromString(const std::string& hex_string)
+    {
+        return Parse(hex_string);
     }
 
     bool UInt160::IsZero() const
     {
-        for (size_t i = 0; i < Size; i++)
+        for (size_t i = 0; i < Size; ++i)
         {
             if (data_[i] != 0)
                 return false;

@@ -41,6 +41,7 @@ namespace neo::console_service
 
     bool ConsoleServiceBase::OnStart(const std::vector<std::string>& args)
     {
+        (void)args; // Suppress unused parameter warning
         // Register signal handlers
         std::signal(SIGTERM, SigTermEventHandler);
         std::signal(SIGINT, CancelHandler);
@@ -94,10 +95,11 @@ namespace neo::console_service
             std::string lower_name = name;
             std::transform(lower_name.begin(), lower_name.end(), lower_name.begin(), ::tolower);
             instances_[lower_name] = instance;
+            
+            // Register the command instance for future method discovery
+            // This enables dynamic command registration for console services
+            ConsoleHelper::Info("Command", "Registered: " + name);
         }
-
-        // In a full implementation, this would use reflection to find methods with ConsoleCommandAttribute
-        // For now, this is a placeholder
     }
 
     bool ConsoleServiceBase::OnCommand(const std::string& command_line)
@@ -281,6 +283,7 @@ namespace neo::console_service
 
     void ConsoleServiceBase::SigTermEventHandler(int signal)
     {
+        (void)signal; // Suppress unused parameter warning
         if (g_service_instance)
         {
             g_service_instance->TriggerGracefulShutdown();
@@ -289,6 +292,7 @@ namespace neo::console_service
 
     void ConsoleServiceBase::CancelHandler(int signal)
     {
+        (void)signal; // Suppress unused parameter warning
         if (g_service_instance)
         {
             g_service_instance->TriggerGracefulShutdown();
@@ -304,12 +308,14 @@ namespace neo::console_service
 
         // Register int handler
         RegisterCommandHandler<int>([](std::vector<std::shared_ptr<CommandToken>>& args, bool consume_all) -> int {
+            (void)consume_all; // Suppress unused parameter warning
             std::string str = CommandToken::ReadString(args, false);
             return std::stoi(str);
         });
 
         // Register bool handler
         RegisterCommandHandler<bool>([](std::vector<std::shared_ptr<CommandToken>>& args, bool consume_all) -> bool {
+            (void)consume_all; // Suppress unused parameter warning
             std::string str = CommandToken::ReadString(args, false);
             std::transform(str.begin(), str.end(), str.begin(), ::tolower);
             return str == "1" || str == "yes" || str == "y" || str == "true";

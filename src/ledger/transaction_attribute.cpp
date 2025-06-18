@@ -173,9 +173,13 @@ namespace neo::ledger
 
     void TransactionAttribute::DeserializeJson(const io::JsonReader& reader)
     {
-        // JSON deserialization implementation
-        // This would parse the JSON object and extract usage and data
-        // For now, this is a placeholder
+        // Read usage
+        uint8_t usageValue = reader.ReadUInt8("usage");
+        usage_ = static_cast<Usage>(usageValue);
+        
+        // Read data as hex string
+        std::string dataHex = reader.ReadString("data");
+        data_ = io::ByteVector::ParseHex(dataHex);
     }
 
     bool TransactionAttribute::operator==(const TransactionAttribute& other) const

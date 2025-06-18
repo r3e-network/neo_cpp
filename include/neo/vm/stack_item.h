@@ -10,6 +10,7 @@
 #include <map>
 #include <string>
 #include <array>
+#include <cstddef>
 
 // Forward declarations
 namespace neo::vm
@@ -83,6 +84,36 @@ namespace neo::vm
          * @return The boolean value of the stack item.
          */
         virtual bool GetBoolean() const = 0;
+
+        /**
+         * @brief Checks if this stack item is a boolean.
+         * @return True if this is a boolean stack item.
+         */
+        virtual bool IsBoolean() const { return GetType() == StackItemType::Boolean; }
+
+        /**
+         * @brief Checks if this stack item is an integer.
+         * @return True if this is an integer stack item.
+         */
+        virtual bool IsInteger() const { return GetType() == StackItemType::Integer; }
+
+        /**
+         * @brief Checks if this stack item is a byte string.
+         * @return True if this is a byte string stack item.
+         */
+        virtual bool IsByteString() const { return GetType() == StackItemType::ByteString; }
+
+        /**
+         * @brief Checks if this stack item is a map.
+         * @return True if this is a map stack item.
+         */
+        virtual bool IsMap() const { return GetType() == StackItemType::Map; }
+
+        /**
+         * @brief Checks if this stack item is an interop interface.
+         * @return True if this is an interop interface stack item.
+         */
+        virtual bool IsInteropInterface() const { return GetType() == StackItemType::InteropInterface; }
 
         /**
          * @brief Gets the integer value of the stack item.
@@ -367,5 +398,56 @@ namespace neo::vm
          * @param on_stack Whether the stack item is on the stack.
          */
         void SetOnStack(bool on_stack);
+
+        /**
+         * @brief Creates a map stack item.
+         * @return The created map.
+         */
+        static std::shared_ptr<StackItem> CreateMap();
+
+        /**
+         * @brief Creates a byte string stack item.
+         * @param data The byte data.
+         * @return The created byte string.
+         */
+        static std::shared_ptr<StackItem> CreateByteString(const std::vector<uint8_t>& data);
+
+        /**
+         * @brief Creates a boolean stack item.
+         * @param value The boolean value.
+         * @return The created boolean.
+         */
+        static std::shared_ptr<StackItem> CreateBoolean(bool value);
+
+        /**
+         * @brief Sets the value of the stack item.
+         * @param value The new value to set.
+         */
+        virtual void SetValue(const std::vector<uint8_t>& /* value */) {}
+
+        /**
+         * @brief Sets the value of the stack item from another stack item.
+         * @param other The stack item to copy value from.
+         */
+        virtual void SetValue(std::shared_ptr<StackItem> /* other */) {}
+
+        /**
+         * @brief Creates an interop interface wrapper for an object.
+         * @param value The object to wrap.
+         * @return A new stack item representing the interop interface.
+         */
+        static std::shared_ptr<StackItem> CreateInteropInterface(void* value);
+
+        /**
+         * @brief Creates an interop interface wrapper for a typed object.
+         * @tparam T The type of the object.
+         * @param value The object to wrap.
+         * @return A new stack item representing the interop interface.
+         */
+        template<typename T>
+        static std::shared_ptr<StackItem> CreateInteropInterface(std::shared_ptr<T> value)
+        {
+            return CreateInteropInterface(static_cast<void*>(value.get()));
+        }
     };
 }

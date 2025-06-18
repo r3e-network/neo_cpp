@@ -8,6 +8,7 @@
 #include <thread>
 #include <chrono>
 #include <algorithm>
+#include <iostream>
 
 namespace neo::network::p2p
 {
@@ -192,8 +193,9 @@ namespace neo::network::p2p
 
             // Connect to the endpoint
             boost::asio::async_connect(socket, endpoints,
-                std::bind(&LocalNode::HandleConnect, this,
-                    std::placeholders::_1, std::move(socket), endpoint));
+                [this, endpoint, socket = std::move(socket)](const std::error_code& error, const boost::asio::ip::tcp::endpoint&) mutable {
+                    HandleConnect(error, std::move(socket), endpoint);
+                });
 
             return true;
         }
@@ -364,4 +366,152 @@ namespace neo::network::p2p
         std::lock_guard<std::mutex> lock(connectedNodesMutex_);
         connectedNodes_.erase(id);
     }
-}
+
+    void LocalNode::RelayTransaction(std::shared_ptr<ledger::Transaction> transaction)
+    {
+        // Implement transaction relay matching C# LocalNode.RelayDirectly
+        if (!transaction)
+            return;
+
+        try
+        {
+            // Create inventory message for the transaction
+            auto inventoryPayload = std::make_shared<payloads::InventoryPayload>();
+            inventoryPayload->SetType(payloads::InventoryType::TX);
+            inventoryPayload->AddHash(transaction->GetHash());
+
+            // Create message
+            auto message = std::make_shared<Message>();
+            message->SetCommand(MessageCommand::Inv);
+            message->SetPayload(inventoryPayload);
+
+            // Broadcast to connected peers
+            BroadcastMessage(message);
+
+            // Store transaction in memory pool for serving GetData requests
+            memoryPool_[transaction->GetHash()] = transaction;
+        }
+        catch (const std::exception& e)
+        {
+            // Log error but don't throw
+            std::cerr << "Failed to relay transaction: " << e.what() << std::endl;
+        }
+    }
+
+    void LocalNode::RelayBlock(std::shared_ptr<ledger::Block> block)
+    {
+        // Implement block relay matching C# LocalNode.RelayDirectly
+        if (!block)
+            return;
+
+        try
+        {
+            // Create inventory message for the block
+            auto inventoryPayload = std::make_shared<payloads::InventoryPayload>();
+            inventoryPayload->SetType(payloads::InventoryType::Block);
+            inventoryPayload->AddHash(block->GetHash());
+
+            // Create message
+            auto message = std::make_shared<Message>();
+            message->SetCommand(MessageCommand::Inv);
+            message->SetPayload(inventoryPayload);
+
+            // Broadcast to connected peers
+            BroadcastMessage(message);
+
+            // Store block for serving GetData requests
+            blockCache_[block->GetHash()] = block;
+        }
+        catch (const std::exception& e)
+        {
+            // Log error but don't throw
+            std::cerr << "Failed to relay block: " << e.what() << std::endl;
+        }
+    }
+
+    void LocalNode::DiscoverPeers()
+    {
+        // Implement peer discovery matching C# LocalNode.ConnectToPeers
+        try
+        {
+            // Get seed nodes from protocol settings
+            auto protocolSettings = ProtocolSettings::GetDefault();
+            auto seedNodes = protocolSettings.GetSeedList();
+
+            for (const auto& seedNode : seedNodes)
+            {
+                try
+                {
+                    // Parse seed node address
+                    size_t colonPos = seedNode.find(':');
+                    if (colonPos == std::string::npos)
+                        continue;
+
+                    std::string host = seedNode.substr(0, colonPos);
+                    std::string portStr = seedNode.substr(colonPos + 1);
+                    uint16_t port = static_cast<uint16_t>(std::stoi(portStr));
+
+                    // Create endpoint
+                    boost::asio::ip::tcp::endpoint endpoint(
+                        boost::asio::ip::address::from_string(host), port);
+
+                    // Check if we're already connected to this endpoint
+                    bool alreadyConnected = false;
+                    for (const auto& [id, node] : connectedNodes_)
+                    {
+                        if (node->GetEndpoint() == endpoint)
+                        {
+                            alreadyConnected = true;
+                            break;
+                        }
+                    }
+
+                    if (!alreadyConnected && connectedNodes_.size() < maxConnections_)
+                    {
+                        // Attempt to connect
+                        ConnectToPeer(endpoint);
+                    }
+                }
+                catch (const std::exception& e)
+                {
+                    // Log error and continue with next seed node
+                    std::cerr << "Failed to connect to seed node " << seedNode 
+                              << ": " << e.what() << std::endl;
+                }
+            }
+
+            // Request addresses from connected peers
+            RequestPeerAddresses();
+        }
+        catch (const std::exception& e)
+        {
+            std::cerr << "Peer discovery failed: " << e.what() << std::endl;
+        }
+    }
+
+    void LocalNode::RequestPeerAddresses()
+    {
+        // Implement address request matching C# LocalNode.RequestPeers
+        try
+        {
+            // Create GetAddr message
+            auto message = std::make_shared<Message>();
+            message->SetCommand(MessageCommand::GetAddr);
+            message->SetPayload(nullptr); // GetAddr has no payload
+
+            // Send to all connected peers
+            for (const auto& [id, node] : connectedNodes_)
+            {
+                try
+                {
+                    node->SendMessage(message);
+                }
+                catch (const std::exception& e)
+                {
+                    std::cerr << "Failed to request addresses from peer " << id 
+                              << ": " << e.what() << std::endl;
+                }
+            }
+        }
+        catch (const std::exception& e)
+        {

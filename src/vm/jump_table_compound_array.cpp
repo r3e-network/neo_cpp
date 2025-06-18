@@ -109,6 +109,7 @@ namespace neo::vm
     // JumpTableCompoundArray implementations
     void JumpTableCompoundArray::PACK(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction; // Suppress unused parameter warning
         auto size = engine.Pop()->GetInteger();
         if (size < 0 || size > 0xFFFF) // Reasonable limit
             throw InvalidOperationException("Invalid array size");
@@ -131,6 +132,7 @@ namespace neo::vm
 
     void JumpTableCompoundArray::UNPACK(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction; // Suppress unused parameter warning
         auto item = engine.Pop();
 
         if (item->GetType() == StackItemType::Array || item->GetType() == StackItemType::Struct)
@@ -160,12 +162,14 @@ namespace neo::vm
 
     void JumpTableCompoundArray::NEWARRAY0(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction; // Suppress unused parameter warning
         auto array = std::make_shared<ArrayItem>(std::vector<std::shared_ptr<StackItem>>{}, engine.GetReferenceCounter());
         engine.Push(array);
     }
 
     void JumpTableCompoundArray::NEWARRAY(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction; // Suppress unused parameter warning
         auto size = engine.Pop()->GetInteger();
         if (size < 0 || size > 0xFFFF) // Reasonable limit
             throw InvalidOperationException("Invalid array size");
@@ -209,12 +213,14 @@ namespace neo::vm
 
     void JumpTableCompoundArray::NEWSTRUCT0(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction; // Suppress unused parameter warning
         auto structItem = std::make_shared<StructItem>(std::vector<std::shared_ptr<StackItem>>{}, engine.GetReferenceCounter());
         engine.Push(structItem);
     }
 
     void JumpTableCompoundArray::NEWSTRUCT(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction; // Suppress unused parameter warning
         auto size = engine.Pop()->GetInteger();
         if (size < 0 || size > 0xFFFF) // Reasonable limit
             throw InvalidOperationException("Invalid struct size");
@@ -226,6 +232,7 @@ namespace neo::vm
 
     void JumpTableCompoundArray::SIZE(ExecutionEngine& engine, const Instruction& instruction)
     {
+        (void)instruction; // Suppress unused parameter warning
         auto item = engine.Pop();
         int64_t size = 0;
 

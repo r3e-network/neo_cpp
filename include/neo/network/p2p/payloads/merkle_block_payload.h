@@ -19,7 +19,7 @@ namespace neo::network::payloads
     /**
      * @brief Represents a merkle block payload for SPV protocol.
      */
-    class MerkleBlockPayload : public IPayload, public io::IJsonSerializable
+    class MerkleBlockPayload : public IPayload
     {
     public:
         /**

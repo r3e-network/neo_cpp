@@ -17,7 +17,7 @@ namespace neo::smartcontract::native
         /**
          * @brief The contract ID.
          */
-        static constexpr uint32_t ID = 9;
+        static constexpr uint32_t ID = 10;
 
         /**
          * @brief The contract name.
@@ -32,27 +32,27 @@ namespace neo::smartcontract::native
         /**
          * @brief The storage prefix for price.
          */
-        static constexpr uint8_t PREFIX_PRICE = 2;
+        static constexpr uint8_t PREFIX_PRICE = 0;
 
         /**
          * @brief The storage prefix for records.
          */
-        static constexpr uint8_t PREFIX_RECORD = 3;
+        static constexpr uint8_t PREFIX_RECORD = 2;
 
         /**
          * @brief The default price.
          */
-        static constexpr int64_t DEFAULT_PRICE = 1000000;
+        static constexpr int64_t DEFAULT_PRICE = 1000 * 100000000; // 1000 GAS
 
         /**
          * @brief The maximum name length.
          */
-        static constexpr int MAX_NAME_LENGTH = 255;
+        static constexpr size_t MAX_NAME_LENGTH = 255;
 
         /**
-         * @brief The maximum record value length.
+         * @brief The maximum record size.
          */
-        static constexpr int MAX_RECORD_VALUE_LENGTH = 1024;
+        static constexpr size_t MAX_RECORD_SIZE = 65535; // 64KB max record size
 
         /**
          * @brief The registration duration in blocks (approximately 1 year).

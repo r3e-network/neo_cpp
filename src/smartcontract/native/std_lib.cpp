@@ -4,6 +4,7 @@
 #include <neo/smartcontract/json_serializer.h>
 #include <neo/cryptography/base64.h>
 #include <neo/cryptography/base64url.h>
+#include <neo/cryptography/base58.h>
 #include <neo/cryptography/hash.h>
 #include <sstream>
 #include <algorithm>
@@ -31,11 +32,10 @@ namespace neo::smartcontract::native
         RegisterMethod("base64Decode", CallFlags::None, std::bind(&StdLib::OnBase64Decode, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("base64UrlEncode", CallFlags::None, std::bind(&StdLib::OnBase64UrlEncode, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("base64UrlDecode", CallFlags::None, std::bind(&StdLib::OnBase64UrlDecode, this, std::placeholders::_1, std::placeholders::_2));
-        // TODO: Implement Base58 encoding/decoding
-        // RegisterMethod("base58Encode", CallFlags::None, std::bind(&StdLib::OnBase58Encode, this, std::placeholders::_1, std::placeholders::_2));
-        // RegisterMethod("base58Decode", CallFlags::None, std::bind(&StdLib::OnBase58Decode, this, std::placeholders::_1, std::placeholders::_2));
-        // RegisterMethod("base58CheckEncode", CallFlags::None, std::bind(&StdLib::OnBase58CheckEncode, this, std::placeholders::_1, std::placeholders::_2));
-        // RegisterMethod("base58CheckDecode", CallFlags::None, std::bind(&StdLib::OnBase58CheckDecode, this, std::placeholders::_1, std::placeholders::_2));
+        RegisterMethod("base58Encode", CallFlags::None, std::bind(&StdLib::OnBase58Encode, this, std::placeholders::_1, std::placeholders::_2));
+        RegisterMethod("base58Decode", CallFlags::None, std::bind(&StdLib::OnBase58Decode, this, std::placeholders::_1, std::placeholders::_2));
+        RegisterMethod("base58CheckEncode", CallFlags::None, std::bind(&StdLib::OnBase58CheckEncode, this, std::placeholders::_1, std::placeholders::_2));
+        RegisterMethod("base58CheckDecode", CallFlags::None, std::bind(&StdLib::OnBase58CheckDecode, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("memoryCompare", CallFlags::None, std::bind(&StdLib::OnMemoryCompare, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("memoryCopy", CallFlags::None, std::bind(&StdLib::OnMemoryCopy, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("memorySearch", CallFlags::None, std::bind(&StdLib::OnMemorySearch, this, std::placeholders::_1, std::placeholders::_2));
@@ -121,6 +121,8 @@ namespace neo::smartcontract::native
 
     std::shared_ptr<vm::StackItem> StdLib::OnItoa(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.empty())
             throw std::runtime_error("Invalid arguments");
 
@@ -157,6 +159,8 @@ namespace neo::smartcontract::native
 
     std::shared_ptr<vm::StackItem> StdLib::OnAtoi(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.empty())
             throw std::runtime_error("Invalid arguments");
 
@@ -198,6 +202,8 @@ namespace neo::smartcontract::native
 
     std::shared_ptr<vm::StackItem> StdLib::OnBase64Encode(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.empty())
             throw std::runtime_error("Invalid arguments");
 
@@ -212,6 +218,8 @@ namespace neo::smartcontract::native
 
     std::shared_ptr<vm::StackItem> StdLib::OnBase64Decode(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.empty())
             throw std::runtime_error("Invalid arguments");
 
@@ -224,10 +232,10 @@ namespace neo::smartcontract::native
         return vm::StackItem::Create(result);
     }
 
-    // TODO: Implement Base58 encoding/decoding
-    /*
     std::shared_ptr<vm::StackItem> StdLib::OnBase58Encode(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.empty())
             throw std::runtime_error("Invalid arguments");
 
@@ -235,13 +243,15 @@ namespace neo::smartcontract::native
         auto data = dataItem->GetByteArray();
 
         // Encode to Base58
-        std::string result = cryptography::Base58::Encode(data.AsSpan());
+        std::string result = neo::cryptography::Base58::Encode(data);
 
         return vm::StackItem::Create(result);
     }
 
     std::shared_ptr<vm::StackItem> StdLib::OnBase58Decode(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.empty())
             throw std::runtime_error("Invalid arguments");
 
@@ -249,14 +259,47 @@ namespace neo::smartcontract::native
         auto data = dataItem->GetString();
 
         // Decode from Base58
-        io::ByteVector result = cryptography::Base58::Decode(data);
+        io::ByteVector result = neo::cryptography::Base58::DecodeToByteVector(data);
 
         return vm::StackItem::Create(result);
     }
-    */
+
+    std::shared_ptr<vm::StackItem> StdLib::OnBase58CheckEncode(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+    {
+        (void)engine; // Suppress unused parameter warning
+        
+        if (args.empty())
+            throw std::runtime_error("Invalid arguments");
+
+        auto dataItem = args[0];
+        auto data = dataItem->GetByteArray();
+
+        // Encode to Base58Check
+        std::string result = neo::cryptography::Base58::EncodeCheck(data);
+
+        return vm::StackItem::Create(result);
+    }
+
+    std::shared_ptr<vm::StackItem> StdLib::OnBase58CheckDecode(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+    {
+        (void)engine; // Suppress unused parameter warning
+        
+        if (args.empty())
+            throw std::runtime_error("Invalid arguments");
+
+        auto dataItem = args[0];
+        auto data = dataItem->GetString();
+
+        // Decode from Base58Check
+        io::ByteVector result = neo::cryptography::Base58::DecodeCheckToByteVector(data);
+
+        return vm::StackItem::Create(result);
+    }
 
     std::shared_ptr<vm::StackItem> StdLib::OnMemoryCompare(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.size() < 2)
             throw std::runtime_error("Invalid arguments");
 
@@ -281,6 +324,8 @@ namespace neo::smartcontract::native
 
     std::shared_ptr<vm::StackItem> StdLib::OnMemoryCopy(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.size() < 3)
             throw std::runtime_error("Invalid arguments");
 
@@ -293,16 +338,18 @@ namespace neo::smartcontract::native
         auto length = lengthItem->GetInteger();
 
         // Copy memory
-        if (length <= 0 || length > source.Size() || length > dest.Size())
+        if (length <= 0 || length > static_cast<int64_t>(source.Size()) || length > static_cast<int64_t>(dest.Size()))
             throw std::runtime_error("Invalid length");
 
-        std::memcpy(const_cast<uint8_t*>(dest.Data()), source.Data(), length);
+        std::memcpy(const_cast<uint8_t*>(dest.Data()), source.Data(), static_cast<size_t>(length));
 
         return vm::StackItem::Create(true);
     }
 
     std::shared_ptr<vm::StackItem> StdLib::OnMemorySearch(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.size() < 2)
             throw std::runtime_error("Invalid arguments");
 
@@ -327,6 +374,8 @@ namespace neo::smartcontract::native
 
     std::shared_ptr<vm::StackItem> StdLib::OnStringCompare(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.size() < 2)
             throw std::runtime_error("Invalid arguments");
 
@@ -344,6 +393,8 @@ namespace neo::smartcontract::native
 
     std::shared_ptr<vm::StackItem> StdLib::OnBase64UrlEncode(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.empty())
             throw std::runtime_error("Invalid arguments");
 
@@ -369,6 +420,8 @@ namespace neo::smartcontract::native
 
     std::shared_ptr<vm::StackItem> StdLib::OnBase64UrlDecode(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.empty())
             throw std::runtime_error("Invalid arguments");
 
@@ -381,62 +434,10 @@ namespace neo::smartcontract::native
         return vm::StackItem::Create(result);
     }
 
-    // TODO: Implement Base58Check encoding/decoding
-    /*
-    std::shared_ptr<vm::StackItem> StdLib::OnBase58CheckEncode(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
-    {
-        if (args.empty())
-            throw std::runtime_error("Invalid arguments");
-
-        auto dataItem = args[0];
-        auto data = dataItem->GetByteArray();
-
-        // Calculate checksum
-        auto hash = cryptography::Hash::Hash256(data.AsSpan());
-
-        // Create a new buffer with the data and the first 4 bytes of the checksum
-        io::ByteVector buffer(data.Size() + 4);
-        std::memcpy(buffer.Data(), data.Data(), data.Size());
-        std::memcpy(buffer.Data() + data.Size(), hash.Data(), 4);
-
-        // Encode to Base58
-        std::string result = cryptography::Base58::Encode(buffer.AsSpan());
-
-        return vm::StackItem::Create(result);
-    }
-
-    std::shared_ptr<vm::StackItem> StdLib::OnBase58CheckDecode(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
-    {
-        if (args.empty())
-            throw std::runtime_error("Invalid arguments");
-
-        auto dataItem = args[0];
-        auto data = dataItem->GetString();
-
-        // Decode from Base58
-        io::ByteVector buffer = cryptography::Base58::Decode(data);
-
-        // Check if the buffer is long enough
-        if (buffer.Size() < 4)
-            throw std::runtime_error("Invalid Base58Check string");
-
-        // Extract the data and the checksum
-        io::ByteVector result(buffer.Size() - 4);
-        std::memcpy(result.Data(), buffer.Data(), buffer.Size() - 4);
-
-        // Calculate the checksum
-        auto hash = cryptography::Hash::Hash256(io::ByteSpan(result.Data(), result.Size()));
-
-        // Verify the checksum
-        if (std::memcmp(hash.Data(), buffer.Data() + buffer.Size() - 4, 4) != 0)
-            throw std::runtime_error("Invalid Base58Check string");
-
-        return vm::StackItem::Create(result);
-    }
-    */
-
     std::shared_ptr<vm::StackItem> StdLib::OnStrLen(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
+        (void)engine; // Suppress unused parameter warning
+        
         if (args.empty())
             throw std::runtime_error("Invalid arguments");
 

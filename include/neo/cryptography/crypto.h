@@ -122,6 +122,21 @@ namespace neo::cryptography
          * @return True if the signature is valid, false otherwise.
          */
         static bool VerifySignature(const io::ByteSpan& message, const io::ByteSpan& signature, const ecc::ECPoint& publicKey);
+
+        /**
+         * @brief Signs a message with a private key.
+         * @param message The message to sign.
+         * @param privateKey The private key (must be 32 bytes).
+         * @return The signature.
+         */
+        static io::ByteVector Sign(const io::ByteSpan& message, const io::ByteSpan& privateKey);
+
+        /**
+         * @brief Computes the public key from a private key.
+         * @param privateKey The private key (must be 32 bytes).
+         * @return The computed public key.
+         */
+        static ecc::ECPoint ComputePublicKey(const io::ByteSpan& privateKey);
     };
 
 

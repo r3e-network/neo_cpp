@@ -31,7 +31,7 @@ namespace neo::smartcontract::native
                 // Save the old candidate state
                 std::ostringstream stream;
                 io::BinaryWriter writer(stream);
-                writer.Write(oldCandidateState);
+                oldCandidateState.Serialize(writer);
                 std::string data = stream.str();
 
                 persistence::StorageKey key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Candidate), state.voteTo.ToArray());
@@ -44,7 +44,7 @@ namespace neo::smartcontract::native
         if (pubKeys.empty())
         {
             // Clear vote
-            state.voteTo = cryptography::ecc::ECPoint::Infinity();
+            state.voteTo = cryptography::ecc::ECPoint();
             state.lastGasPerVote = 0;
         }
         else
@@ -60,7 +60,7 @@ namespace neo::smartcontract::native
             // Save the new candidate state
             std::ostringstream stream;
             io::BinaryWriter writer(stream);
-            writer.Write(candidateState);
+            candidateState.Serialize(writer);
             std::string data = stream.str();
 
             persistence::StorageKey key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Candidate), pubKeys[0].ToArray());
@@ -88,10 +88,10 @@ namespace neo::smartcontract::native
         // Save the account state
         std::ostringstream stream;
         io::BinaryWriter writer(stream);
-        writer.Write(state);
+        state.Serialize(writer);
         std::string data = stream.str();
 
-        persistence::StorageKey key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Account), io::ByteVector(io::ByteSpan(account.Data(), account.Size())));
+        persistence::StorageKey key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Account), io::ByteVector(io::ByteSpan(account.Data(), io::UInt160::Size)));
         persistence::StorageItem item(io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size())));
         snapshot->Add(key, item);
 
@@ -125,7 +125,7 @@ namespace neo::smartcontract::native
             cryptography::ecc::ECPoint pubKey;
             try
             {
-                pubKey = cryptography::ecc::ECPoint::FromBytes(pubKeyBytes.AsSpan());
+                pubKey = cryptography::ecc::ECPoint(pubKeyBytes.ToHexString());
             }
             catch (const std::exception&)
             {

@@ -6,93 +6,74 @@
 namespace neo::cli
 {
     /**
-     * @brief Helper class for console output.
+     * @brief Console helper utilities for CLI operations
      */
     class ConsoleHelper
     {
     public:
         /**
-         * @brief Writes an info message to the console.
-         * @param message The message.
+         * @brief Print an informational message
+         * @param message The message to print
          */
-        static void Info(const std::string& message)
-        {
-            std::cout << message << std::endl;
-        }
+        static void Info(const std::string& message);
 
         /**
-         * @brief Writes an info message to the console with a prefix.
-         * @param prefix The prefix.
-         * @param message The message.
+         * @brief Print an error message
+         * @param message The error message to print
          */
-        static void Info(const std::string& prefix, const std::string& message)
-        {
-            std::cout << prefix << message << std::endl;
-        }
+        static void Error(const std::string& message);
 
         /**
-         * @brief Writes a warning message to the console.
-         * @param message The message.
+         * @brief Print a warning message
+         * @param message The warning message to print
          */
-        static void Warning(const std::string& message)
-        {
-            std::cout << "WARNING: " << message << std::endl;
-        }
+        static void Warning(const std::string& message);
 
         /**
-         * @brief Writes an error message to the console.
-         * @param message The message.
+         * @brief Print a success message
+         * @param message The success message to print
          */
-        static void Error(const std::string& message)
-        {
-            std::cerr << "ERROR: " << message << std::endl;
-        }
+        static void Success(const std::string& message);
 
         /**
-         * @brief Reads a line from the console.
-         * @param prompt The prompt.
-         * @return The line.
+         * @brief Read a line from console with prompt
+         * @param prompt The prompt to display
+         * @return The input line
          */
-        static std::string ReadLine(const std::string& prompt = "")
-        {
-            if (!prompt.empty())
-            {
-                std::cout << prompt;
-            }
-
-            std::string line;
-            std::getline(std::cin, line);
-            return line;
-        }
+        static std::string ReadLine(const std::string& prompt = "");
 
         /**
-         * @brief Reads a password from the console.
-         * @param prompt The prompt.
-         * @return The password.
+         * @brief Read a password from console (hidden input)
+         * @param prompt The prompt to display
+         * @return The password
          */
-        static std::string ReadPassword(const std::string& prompt = "")
-        {
-            if (!prompt.empty())
-            {
-                std::cout << prompt;
-            }
+        static std::string ReadPassword(const std::string& prompt = "Password: ");
 
-            std::string password;
-            
-            // Hide input on Unix-like systems
-#ifndef _WIN32
-            system("stty -echo");
-#endif
+        /**
+         * @brief Clear the console screen
+         */
+        static void Clear();
 
-            std::getline(std::cin, password);
+        /**
+         * @brief Set console text color
+         * @param color The color code
+         */
+        static void SetColor(int color);
 
-            // Restore normal terminal behavior
-#ifndef _WIN32
-            system("stty echo");
-#endif
+        /**
+         * @brief Reset console text color to default
+         */
+        static void ResetColor();
 
-            std::cout << std::endl;
-            return password;
-        }
+    private:
+        // Console color codes
+        static constexpr int COLOR_DEFAULT = 0;
+        static constexpr int COLOR_RED = 1;
+        static constexpr int COLOR_GREEN = 2;
+        static constexpr int COLOR_YELLOW = 3;
+        static constexpr int COLOR_BLUE = 4;
+        static constexpr int COLOR_MAGENTA = 5;
+        static constexpr int COLOR_CYAN = 6;
+        static constexpr int COLOR_WHITE = 7;
     };
 }

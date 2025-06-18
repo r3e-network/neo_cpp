@@ -74,6 +74,14 @@ namespace neo::smartcontract::native
         std::shared_ptr<ContractState> GetContract(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& hash) const;
 
         /**
+         * @brief Gets a contract (overload for DataCache).
+         * @param snapshot The snapshot.
+         * @param hash The hash.
+         * @return The contract.
+         */
+        static std::shared_ptr<ContractState> GetContract(const persistence::DataCache& snapshot, const io::UInt160& hash);
+
+        /**
          * @brief Checks if a method exists in a contract.
          * @param snapshot The snapshot.
          * @param hash The hash.

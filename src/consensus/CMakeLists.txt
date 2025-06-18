@@ -8,10 +8,7 @@ add_library(neo_consensus OBJECT
     recovery_message.cpp
     recovery_request.cpp
     consensus_context.cpp
-    consensus_service.cpp
-    consensus_message_handlers.cpp
-    consensus_message_senders.cpp
-    consensus_block_processing.cpp
+    consensus_payload_helper.cpp
 )
 
 # Include directories

@@ -108,12 +108,41 @@ namespace neo::cryptography::ecc
         static ECPoint FromBytes(const io::ByteSpan& data, const std::string& curveName);
 
         /**
+         * @brief Creates an ECPoint from a byte array (with default curve).
+         * @param data The byte array.
+         * @return The ECPoint.
+         */
+        static ECPoint FromBytes(const io::ByteSpan& data) { return FromBytes(data, "secp256r1"); }
+
+        /**
          * @brief Creates an ECPoint from a hex string.
          * @param hex The hex string.
          * @param curveName The curve name.
          * @return The ECPoint.
          */
         static ECPoint FromHex(const std::string& hex, const std::string& curveName);
+
+        /**
+         * @brief Creates an ECPoint from a hex string (with default curve).
+         * @param hex The hex string.
+         * @return The ECPoint.
+         */
+        static ECPoint FromHex(const std::string& hex) { return FromHex(hex, "secp256r1"); }
+
+        /**
+         * @brief Converts this point to a string (hex representation).
+         * @param compressed True to use compressed format, false otherwise.
+         * @return The hex string representation.
+         */
+        std::string ToString(bool compressed = true) const { return ToHex(compressed); }
+
+        /**
+         * @brief Parses an ECPoint from a hex string.
+         * @param hex The hex string.
+         * @param curveName The curve name.
+         * @return The ECPoint.
+         */
+        static ECPoint Parse(const std::string& hex, const std::string& curveName = "secp256r1") { return FromHex(hex, curveName); }
 
         /**
          * @brief Gets the infinity point.

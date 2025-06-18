@@ -1,5 +1,6 @@
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/system_calls.h>
+#include <neo/vm/compound_items.h>
 
 namespace neo::smartcontract
 {
@@ -38,7 +39,7 @@ namespace neo::smartcontract
                         for (size_t i = 0; i < bytes.Size(); i++)
                         {
                             char buf[3];
-                            sprintf(buf, "%02x", bytes[i]);
+                            snprintf(buf, sizeof(buf), "%02x", bytes[i]);
                             result += buf;
                         }
                         result += "\"";
@@ -254,7 +255,10 @@ namespace neo::smartcontract
 
                             // Parse value
                             auto value = parseJson(json, pos);
-                            map->SetValue(key, value);
+                            auto mapItem = std::dynamic_pointer_cast<vm::MapItem>(map);
+                            if (mapItem) {
+                                mapItem->Set(key, value);
+                            }
 
                             // Skip whitespace
                             while (pos < json.size() && std::isspace(json[pos]))

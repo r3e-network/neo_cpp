@@ -72,9 +72,15 @@ namespace neo::network::p2p::payloads
 
     void GetBlocksPayload::DeserializeJson(const io::JsonReader& reader)
     {
-        // JSON deserialization implementation
-        // This would parse the JSON object and extract hash_start and count
-        // For now, this is a placeholder
-        throw std::runtime_error("JSON deserialization not implemented");
+        // Read hash_start
+        std::string hashStartStr = reader.ReadString("hash_start");
+        hashStart_ = io::UInt256::Parse(hashStartStr);
+        
+        // Read count
+        count_ = reader.ReadInt16("count");
+        
+        // Validate count (same validation as binary deserialization)
+        if (count_ < -1 || count_ == 0)
+            throw std::runtime_error("Invalid count");
     }
 }

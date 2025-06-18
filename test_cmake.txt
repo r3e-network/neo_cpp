@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 3.20)
+project(NeoTest)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# vcpkg integration
+set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
+
+# Find packages
+find_package(nlohmann_json REQUIRED)
+find_package(spdlog REQUIRED)
+find_package(OpenSSL REQUIRED)
+
+# Create test executable
+add_executable(neo-test test_build.cpp)
+
+# Link libraries
+target_link_libraries(neo-test 
+    PRIVATE 
+        nlohmann_json::nlohmann_json
+        spdlog::spdlog
+        OpenSSL::SSL
+        OpenSSL::Crypto
+) 

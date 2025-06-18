@@ -1,15 +1,25 @@
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/ecpoint.h>
+#include <neo/cryptography/hash.h>
 #include <openssl/rand.h>
-#include <openssl/evp.h>
+#include <openssl/ripemd.h>
+#include <openssl/sha.h>
 #include <openssl/hmac.h>
-#include <openssl/bio.h>
-#include <openssl/buffer.h>
 #include <openssl/ec.h>
 #include <openssl/ecdsa.h>
-#include <openssl/sha.h>
-#include <openssl/ripemd.h>
+#include <openssl/obj_mac.h>
+#include <openssl/evp.h>
+#include <openssl/bio.h>
+#include <openssl/buffer.h>
+#include <random>
 #include <stdexcept>
+#include <cstring>
+
+// Suppress OpenSSL deprecation warnings for the entire file
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4996) // OpenSSL deprecation warnings
+#endif
 
 namespace neo::cryptography
 {
@@ -338,4 +348,194 @@ namespace neo::cryptography
             return false;
         }
     }
+
+    io::ByteVector Crypto::Sign(const io::ByteSpan& message, const io::ByteSpan& privateKey)
+    {
+        if (privateKey.Size() != 32)
+        {
+            throw std::invalid_argument("Private key must be 32 bytes");
+        }
+
+        try
+        {
+            // Create EC_KEY from private key
+            EC_GROUP* group = EC_GROUP_new_by_curve_name(NID_secp256k1);
+            if (!group)
+                throw std::runtime_error("Failed to create EC_GROUP");
+
+            EC_KEY* eckey = EC_KEY_new();
+            if (!eckey)
+            {
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to create EC_KEY");
+            }
+
+            if (EC_KEY_set_group(eckey, group) != 1)
+            {
+                EC_KEY_free(eckey);
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to set EC_GROUP");
+            }
+
+            // Set private key
+            BIGNUM* privKeyBN = BN_bin2bn(privateKey.Data(), static_cast<int>(privateKey.Size()), nullptr);
+            if (!privKeyBN)
+            {
+                EC_KEY_free(eckey);
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to create BIGNUM from private key");
+            }
+
+            if (EC_KEY_set_private_key(eckey, privKeyBN) != 1)
+            {
+                BN_free(privKeyBN);
+                EC_KEY_free(eckey);
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to set private key");
+            }
+
+            // Generate public key from private key
+            EC_POINT* pubKey = EC_POINT_new(group);
+            if (!pubKey)
+            {
+                BN_free(privKeyBN);
+                EC_KEY_free(eckey);
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to create EC_POINT");
+            }
+
+            if (EC_POINT_mul(group, pubKey, privKeyBN, nullptr, nullptr, nullptr) != 1)
+            {
+                EC_POINT_free(pubKey);
+                BN_free(privKeyBN);
+                EC_KEY_free(eckey);
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to compute public key");
+            }
+
+            if (EC_KEY_set_public_key(eckey, pubKey) != 1)
+            {
+                EC_POINT_free(pubKey);
+                BN_free(privKeyBN);
+                EC_KEY_free(eckey);
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to set public key");
+            }
+
+            // Sign the message
+            ECDSA_SIG* sig = ECDSA_do_sign(message.Data(), static_cast<int>(message.Size()), eckey);
+            if (!sig)
+            {
+                EC_POINT_free(pubKey);
+                BN_free(privKeyBN);
+                EC_KEY_free(eckey);
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to sign message");
+            }
+
+            // Extract r and s from signature
+            const BIGNUM* r = nullptr;
+            const BIGNUM* s = nullptr;
+            ECDSA_SIG_get0(sig, &r, &s);
+
+            io::ByteVector signature(64);
+
+            // Convert r and s to bytes (32 bytes each, zero-padded)
+            int r_len = BN_num_bytes(r);
+            int s_len = BN_num_bytes(s);
+
+            std::memset(signature.Data(), 0, 64);
+            BN_bn2bin(r, signature.Data() + (32 - r_len));
+            BN_bn2bin(s, signature.Data() + 32 + (32 - s_len));
+
+            // Cleanup
+            ECDSA_SIG_free(sig);
+            EC_POINT_free(pubKey);
+            BN_free(privKeyBN);
+            EC_KEY_free(eckey);
+            EC_GROUP_free(group);
+
+            return signature;
+        }
+        catch (...)
+        {
+            throw std::runtime_error("Failed to sign message");
+        }
+    }
+
+    ecc::ECPoint Crypto::ComputePublicKey(const io::ByteSpan& privateKey)
+    {
+        if (privateKey.Size() != 32)
+        {
+            throw std::invalid_argument("Private key must be 32 bytes");
+        }
+
+        try
+        {
+            // Create EC_GROUP for secp256k1
+            EC_GROUP* group = EC_GROUP_new_by_curve_name(NID_secp256k1);
+            if (!group)
+                throw std::runtime_error("Failed to create EC_GROUP");
+
+            // Create BIGNUM from private key
+            BIGNUM* privKeyBN = BN_bin2bn(privateKey.Data(), static_cast<int>(privateKey.Size()), nullptr);
+            if (!privKeyBN)
+            {
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to create BIGNUM from private key");
+            }
+
+            // Compute public key: pubKey = privKey * G
+            EC_POINT* pubKeyPoint = EC_POINT_new(group);
+            if (!pubKeyPoint)
+            {
+                BN_free(privKeyBN);
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to create EC_POINT");
+            }
+
+            if (EC_POINT_mul(group, pubKeyPoint, privKeyBN, nullptr, nullptr, nullptr) != 1)
+            {
+                EC_POINT_free(pubKeyPoint);
+                BN_free(privKeyBN);
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to compute public key");
+            }
+
+            // Convert EC_POINT to compressed bytes (33 bytes)
+            size_t pubKeyLen = EC_POINT_point2oct(group, pubKeyPoint, POINT_CONVERSION_COMPRESSED, nullptr, 0, nullptr);
+            if (pubKeyLen != 33)
+            {
+                EC_POINT_free(pubKeyPoint);
+                BN_free(privKeyBN);
+                EC_GROUP_free(group);
+                throw std::runtime_error("Invalid public key length");
+            }
+
+            io::ByteVector pubKeyBytes(33);
+            if (EC_POINT_point2oct(group, pubKeyPoint, POINT_CONVERSION_COMPRESSED, pubKeyBytes.Data(), pubKeyLen, nullptr) != pubKeyLen)
+            {
+                EC_POINT_free(pubKeyPoint);
+                BN_free(privKeyBN);
+                EC_GROUP_free(group);
+                throw std::runtime_error("Failed to serialize public key");
+            }
+
+            // Cleanup
+            EC_POINT_free(pubKeyPoint);
+            BN_free(privKeyBN);
+            EC_GROUP_free(group);
+
+            // Create ECPoint from bytes
+            return ecc::ECPoint::FromBytes(pubKeyBytes.AsSpan());
+        }
+        catch (...)
+        {
+            throw std::runtime_error("Failed to compute public key");
+        }
+    }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

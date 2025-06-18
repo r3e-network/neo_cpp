@@ -72,6 +72,16 @@ namespace neo::smartcontract::native
         static constexpr uint8_t PREFIX_PRICE = 5;
 
         /**
+         * @brief The storage prefix for oracles.
+         */
+        static constexpr uint8_t PREFIX_ORACLE = 8;
+
+        /**
+         * @brief The storage prefix for responses.
+         */
+        static constexpr uint8_t PREFIX_RESPONSE = 10;
+
+        /**
          * @brief The default price.
          */
         static constexpr int64_t DEFAULT_PRICE = 1000000;
@@ -129,7 +139,7 @@ namespace neo::smartcontract::native
          * @param url The URL.
          * @return The URL hash.
          */
-        static io::ByteVector GetUrlHash(const std::string& url);
+        static io::UInt256 GetUrlHash(const std::string& url);
 
         /**
          * @brief Initializes the contract.

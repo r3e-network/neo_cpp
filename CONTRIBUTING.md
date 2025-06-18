@@ -1,43 +1,192 @@
-# Contributing to Neo N3 C++ Node
+# Contributing to Neo C++
 
-We love your input! We want to make contributing to the Neo N3 C++ Node as easy and transparent as possible, whether it's:
+Thank you for your interest in contributing to the Neo C++ blockchain node implementation! This document provides guidelines and information for contributors.
 
-- Reporting a bug
-- Discussing the current state of the code
-- Submitting a fix
-- Proposing new features
-- Becoming a maintainer
+## 🌟 How to Contribute
 
-## Development Process
+We welcome contributions of all kinds:
 
-We use GitHub to host code, to track issues and feature requests, as well as accept pull requests.
+- **Bug Reports**: Help us identify and fix issues
+- **Feature Requests**: Suggest new functionality
+- **Code Contributions**: Implement features, fix bugs, improve performance
+- **Documentation**: Improve guides, API docs, and examples
+- **Testing**: Add test cases, improve test coverage
+- **Performance**: Optimize existing code and algorithms
 
-### Pull Requests
+## 🚀 Getting Started
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+### Prerequisites
 
-### Pull Request Process
+Before contributing, ensure you have:
 
-1. Ensure any install or build dependencies are removed before the end of the layer when doing a build.
-2. Update the README.md or documentation with details of changes to the interface, this includes new environment variables, exposed ports, useful file locations, and container parameters.
-3. Increase the version numbers in any examples files and the README.md to the new version that this Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
-4. You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
+- C++20 compatible compiler (GCC 10+, Clang 12+, MSVC 2019+)
+- CMake 3.20+
+- Git
+- vcpkg (for dependency management)
+- Understanding of Neo blockchain concepts
 
-## Coding Style
+### Setting Up Development Environment
 
-We use the Google C++ Style Guide with some modifications:
+1. **Fork the Repository**
+   ```bash
+   # Fork the repo on GitHub, then clone your fork
+   git clone https://github.com/your-username/neo-cpp.git
+   cd neo-cpp
+   ```
 
-- Use 4 spaces for indentation
-- Use camelCase for function names
-- Use PascalCase for class names
-- Use snake_case for variable names
-- Use UPPER_SNAKE_CASE for constants and macros
+2. **Set Up Upstream Remote**
+   ```bash
+   git remote add upstream https://github.com/neo-project/neo-cpp.git
+   ```
 
-A `.clang-format` file is provided in the root directory to enforce the code style.
+3. **Initialize Dependencies**
+   ```bash
+   # Initialize vcpkg
+   git submodule update --init --recursive
+   ./vcpkg/bootstrap-vcpkg.sh  # or .bat on Windows
+   ```
+
+4. **Build the Project**
+   ```bash
+   mkdir build && cd build
+   cmake .. -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake
+   cmake --build . --config Debug
+   ```
+
+5. **Run Tests**
+   ```bash
+   ctest --output-on-failure
+   ```
+
+## 🔧 Development Workflow
+
+### 1. Create a Feature Branch
+
+```bash
+# Update your main branch
+git checkout main
+git pull upstream main
+
+# Create a new feature branch
+git checkout -b feature/your-feature-name
+```
+
+### 2. Make Changes
+
+- Write clean, well-documented code
+- Follow the project's coding standards
+- Add tests for new functionality
+- Update documentation as needed
+
+### 3. Test Your Changes
+
+```bash
+# Run all tests
+ctest
+
+# Run specific test categories
+ctest -L unit
+ctest -L integration
+
+# Check for memory leaks (Linux)
+valgrind --leak-check=full ./your-test
+
+# Static analysis
+make lint
+```
+
+### 4. Commit Your Changes
+
+```bash
+# Stage your changes
+git add .
+
+# Commit with a descriptive message
+git commit -m "feat: add new consensus mechanism feature
+
+- Implement new dBFT optimization
+- Add comprehensive unit tests
+- Update documentation
+- Improve performance by 15%"
+```
+
+### 5. Push and Create Pull Request
+
+```bash
+# Push to your fork
+git push origin feature/your-feature-name
+
+# Create a pull request on GitHub
+```
+
+## 📝 Coding Standards
+
+### C++ Style Guidelines
+
+- **Standard**: Follow C++20 best practices
+- **Naming Conventions**:
+  - Classes: `PascalCase` (e.g., `BlockChain`, `Transaction`)
+  - Functions/Methods: `PascalCase` (e.g., `ProcessBlock()`, `ValidateTransaction()`)
+  - Variables: `camelCase` (e.g., `blockHeight`, `transactionHash`)
+  - Member variables: `camelCase_` (e.g., `blockHeight_`, `isRunning_`)
+  - Constants: `UPPER_SNAKE_CASE` (e.g., `MAX_BLOCK_SIZE`)
+- **Headers**: Use `#pragma once` instead of include guards
+- **Memory Management**: Use smart pointers (`std::shared_ptr`, `std::unique_ptr`)
+- **Error Handling**: Use exceptions for error conditions
+- **Threading**: Use standard library threading primitives
+
+### Code Organization
+
+```cpp
+// Example header file structure
+#pragma once
+
+#include <memory>
+#include <string>
+#include <vector>
+
+namespace neo::ledger {
+
+/**
+ * @brief Represents a blockchain transaction
+ * 
+ * This class encapsulates all the data and functionality
+ * required for Neo N3 transactions.
+ */
+class Transaction {
+public:
+    Transaction() = default;
+    ~Transaction() = default;
+    
+    // Copy and move semantics
+    Transaction(const Transaction&) = default;
+    Transaction& operator=(const Transaction&) = default;
+    Transaction(Transaction&&) = default;
+    Transaction& operator=(Transaction&&) = default;
+    
+    /**
+     * @brief Validates the transaction
+     * @return true if valid, false otherwise
+     */
+    bool Validate() const;
+    
+private:
+    std::string hash_;
+    std::vector<uint8_t> script_;
+    uint64_t networkFee_;
+    uint64_t systemFee_;
+};
+
+} // namespace neo::ledger
+```
+
+### Documentation Standards
+
+- Use Doxygen-style comments for all public APIs
+- Include parameter descriptions and return value information
+- Provide usage examples for complex functions
+- Document thread safety guarantees
+- Explain algorithmic complexity where relevant
 
 ## Commit Message Convention
 

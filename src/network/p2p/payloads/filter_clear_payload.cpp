@@ -4,10 +4,11 @@ namespace neo::network::p2p::payloads
 {
     void FilterClearPayload::Serialize(io::BinaryWriter& writer) const
     {
+        (void)writer; // Suppress unused parameter warning
         // FilterClear has no payload data
     }
 
-    void FilterClearPayload::Deserialize(io::BinaryReader& reader)
+    void FilterClearPayload::Deserialize([[maybe_unused]] io::BinaryReader& reader)
     {
         // FilterClear has no payload data
     }

@@ -102,6 +102,27 @@ namespace neo::io
         void Write(const std::string& key, const std::string& value);
 
         /**
+         * @brief Writes a base64 encoded byte array to the JSON.
+         * @param key The key to write the value to.
+         * @param value The byte array to encode and write.
+         */
+        void WriteBase64String(const std::string& key, const ByteSpan& value);
+
+        /**
+         * @brief Writes a string value to the JSON.
+         * @param key The key to write the value to.
+         * @param value The string value to write.
+         */
+        void WriteString(const std::string& key, const std::string& value);
+
+        /**
+         * @brief Writes a numeric value to the JSON.
+         * @param key The key to write the value to.
+         * @param value The numeric value to write.
+         */
+        void WriteNumber(const std::string& key, double value);
+
+        /**
          * @brief Writes a byte array to the JSON.
          * @param key The key to write the value to.
          * @param value The value to write.
@@ -269,6 +290,24 @@ namespace neo::io
             }
             json_[key] = array;
         }
+
+        /**
+         * @brief Writes a string value to the JSON for streaming writing.
+         * @param value The string value to write.
+         */
+        void WriteString(const std::string& value);
+
+        /**
+         * @brief Writes a numeric value to the JSON for streaming writing.
+         * @param value The numeric value to write.
+         */
+        void WriteNumber(double value);
+
+        /**
+         * @brief Writes an integer value to the JSON for streaming writing.
+         * @param value The integer value to write.
+         */
+        void WriteNumber(int value);
 
     private:
         nlohmann::json& json_;
