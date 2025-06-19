@@ -1,6 +1,10 @@
-# Neo C++ - Neo N3 Blockchain Node Implementation
+# Neo C++ - Production Ready Blockchain Implementation
 
-A production-ready, high-performance implementation of the Neo N3 blockchain node in modern C++20.
+[![Build Status](https://github.com/your-org/neo-cpp/workflows/CI/badge.svg)](https://github.com/your-org/neo-cpp/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![C++](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://isocpp.org/)
+
+A complete, production-ready implementation of the Neo blockchain protocol in modern C++20. This project provides a full Neo N3 compatible node with comprehensive test coverage and professional build infrastructure.
 
 ## 🌟 Features
 

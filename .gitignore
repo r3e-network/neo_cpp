@@ -1,14 +1,107 @@
-# Directories to exclude
+# Build directories
+build/
+build_*/
+out/
+cmake-build-*/
+
+# Compiled binaries
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Object files
+*.o
+*.obj
+*.lo
+*.slo
+
+# CMake cache
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+Makefile
+*.cmake
+!CMakeLists.txt
+!cmake/*.cmake
+
+# vcpkg
+vcpkg_installed/
+vcpkg/buildtrees/
+vcpkg/downloads/
+vcpkg/packages/
+
+# IDE files
+.vscode/
+.vs/
+*.vcxproj*
+*.sln
+*.user
+.idea/
+*.iml
+*.iws
+*.ipr
 .cursor/
 .trae/
-neo/
-vcpkg_installed/
 
-# Keep @docs but exclude from git (local build artifacts)
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+logs/
+Logs/
+
+# Data directories
+Data_*/
+data/
+*.dat
+
+# Configuration overrides
+config_local.json
+production_config_local.json
+
+# Documentation build
+docs/html/
+docs/latex/
+docs/xml/
 @docs/
 
-# Documentation (keep in docs/ instead)
-!docs/
+# Package files
+*.tar.gz
+*.zip
+*.deb
+*.rpm
+
+# Testing
+Testing/
+*.gcda
+*.gcno
+*.gcov
+coverage.info
+coverage/
+
+# Neo-specific
+*.wallet
+keystore.json
+protocol.json
+plugins.json
+chain/
+chaindata/
+ApplicationLogs/
+Storage/
+Plugins/
 
 **/*build*/
 ## Ignore Visual Studio temporary files, build results, and

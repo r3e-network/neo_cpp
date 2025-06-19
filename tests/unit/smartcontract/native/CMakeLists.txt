@@ -7,6 +7,7 @@ add_executable(test_native_contracts
     test_gas_token.cpp
     test_ledger_contract.cpp
     test_neo_token.cpp
+    test_neo_token_all_methods_complete.cpp
     test_notary.cpp
     test_oracle_contract.cpp
     test_policy_contract.cpp

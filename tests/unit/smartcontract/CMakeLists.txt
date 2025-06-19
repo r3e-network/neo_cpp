@@ -9,6 +9,8 @@ add_executable(test_smartcontract
     test_transaction_verifier.cpp
     test_nef_file.cpp
     test_contract_parameters_context.cpp
+    test_interop_service_all_methods_complete.cpp
+    test_json_serializer_all_methods_complete.cpp
 )
 
 # Include directories

@@ -1,3 +1,6 @@
+# Add subdirectories
+add_subdirectory(nep6)
+
 # Create the wallets unit tests
 add_executable(test_wallets
     test_wallet.cpp
@@ -6,6 +9,7 @@ add_executable(test_wallets
     test_verification_contract.cpp
     test_helper.cpp
     test_key_pair.cpp
+    test_wallet_all_methods_complete.cpp
 )
 
 # Include directories

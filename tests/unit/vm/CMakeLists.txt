@@ -14,6 +14,16 @@ add_executable(test_vm
     test_try_catch.cpp
     test_reference_counter.cpp
     test_script_builder.cpp
+    test_script_builder_all_methods_complete.cpp
+    test_vm_json_all_methods_complete.cpp
+    test_evaluation_stack_all_methods_complete.cpp
+    test_stack_item_all_methods_complete.cpp
+    test_debugger_all_methods_complete.cpp
+    test_reference_counter_all_methods_complete.cpp
+    test_script_all_methods_complete.cpp
+    test_struct_all_methods_complete.cpp
+    test_slot_all_methods_complete.cpp
+    test_execution_context_all_methods_complete.cpp
     test_script_converter.cpp
 )
 

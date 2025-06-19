@@ -8,6 +8,8 @@ add_executable(test_network
     p2p/test_payloads.cpp
     p2p/test_connection.cpp
     p2p/test_peer.cpp
+    p2p/payloads/test_transaction_all_methods_complete.cpp
+    p2p/payloads/test_block_all_methods_complete.cpp
 )
 
 # Include directories

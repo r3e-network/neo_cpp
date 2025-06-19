@@ -4,6 +4,7 @@ add_executable(test_ledger
     test_block.cpp
     test_json_serialization.cpp
     test_header_cache.cpp
+    test_memory_pool_all_methods_complete.cpp
 )
 
 # Include directories
