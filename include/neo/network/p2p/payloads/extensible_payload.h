@@ -6,7 +6,9 @@
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/ijson_serializable.h>
-#include <neo/cryptography/witness.h>
+#include <neo/io/json_writer.h>
+#include <neo/io/json_reader.h>
+#include <neo/ledger/witness.h>
 #include <string>
 #include <vector>
 #include <memory>
@@ -39,7 +41,7 @@ namespace neo::network::p2p::payloads
                          uint32_t valid_block_end,
                          const io::UInt160& sender,
                          const io::ByteVector& data,
-                         const cryptography::Witness& witness);
+                         const ledger::Witness& witness);
 
         /**
          * @brief Gets the category string.
@@ -105,13 +107,13 @@ namespace neo::network::p2p::payloads
          * @brief Gets the witness.
          * @return The witness.
          */
-        const cryptography::Witness& GetWitness() const { return witness_; }
+        const ledger::Witness& GetWitness() const { return witness_; }
 
         /**
          * @brief Sets the witness.
          * @param witness The witness to set.
          */
-        void SetWitness(const cryptography::Witness& witness) { witness_ = witness; }
+        void SetWitness(const ledger::Witness& witness) { witness_ = witness; }
 
         // IPayload implementation
         void Serialize(io::BinaryWriter& writer) const override;
@@ -120,8 +122,8 @@ namespace neo::network::p2p::payloads
         size_t GetSize() const override;
 
         // IJsonSerializable implementation
-        nlohmann::json ToJson() const override;
-        void FromJson(const nlohmann::json& json) override;
+        void SerializeJson(io::JsonWriter& writer) const override;
+        void DeserializeJson(const io::JsonReader& reader) override;
 
         /**
          * @brief Verifies the extensible payload.
@@ -166,7 +168,7 @@ namespace neo::network::p2p::payloads
         uint32_t valid_block_end_ = 0;
         io::UInt160 sender_;
         io::ByteVector data_;
-        cryptography::Witness witness_;
+        ledger::Witness witness_;
 
         // Cached hash
         mutable std::optional<io::UInt256> hash_cache_;

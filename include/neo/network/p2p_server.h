@@ -249,7 +249,7 @@ namespace neo::network
         std::unique_ptr<TcpServer> server_;
         std::unique_ptr<TcpClient> client_;
         std::shared_ptr<PeerDiscoveryService> peerDiscovery_;
-        std::mutex peersMutex_;
+        mutable std::mutex peersMutex_;
         std::unordered_map<std::string, std::shared_ptr<P2PPeer>> peers_;
         std::function<void(std::shared_ptr<P2PPeer>, InventoryType, const std::vector<io::UInt256>&)> inventoryReceivedCallback_;
         boost::asio::io_context& ioContext_;

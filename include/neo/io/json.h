@@ -104,7 +104,7 @@ namespace neo::io
             std::string hex = "0x";
             for (uint8_t byte : bytes) {
                 char buf[3];
-                sprintf_s(buf, "%02x", byte);
+                snprintf(buf, sizeof(buf), "%02x", byte);
                 hex += buf;
             }
             data_[key] = hex;

@@ -20,7 +20,9 @@ add_library(neo_vm OBJECT
     jump_table_arithmetic_numeric.cpp
     jump_table_arithmetic_bitwise.cpp
     jump_table_stack.cpp
+    jump_table_stack_static.cpp
     jump_table_compound.cpp
+    jump_table_compound_static.cpp
     jump_table_compound_array.cpp
     jump_table_compound_map.cpp
     jump_table_control.cpp

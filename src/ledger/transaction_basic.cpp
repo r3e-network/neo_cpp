@@ -1,8 +1,8 @@
 #include <neo/ledger/transaction.h>
 #include <neo/ledger/signer.h>
 #include <neo/ledger/transaction_attribute.h>
-#include <neo/ledger/coin_reference.h>
-#include <neo/ledger/transaction_output.h>
+// #include <neo/ledger/coin_reference.h> - deprecated in Neo N3
+// #include <neo/ledger/transaction_output.h> - deprecated in Neo N3
 #include <neo/ledger/witness.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>

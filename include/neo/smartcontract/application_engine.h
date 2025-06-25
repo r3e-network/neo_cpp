@@ -396,8 +396,11 @@ namespace neo::smartcontract
         const io::ISerializable* container_;
         std::shared_ptr<persistence::DataCache> snapshot_;
         const ledger::Block* persisting_block_;
+        const ledger::Block* persistingBlock_; // Alternative naming for compatibility
         int64_t gas_limit_;
         int64_t gas_consumed_;
+        int64_t gasConsumed_; // Alternative naming for compatibility  
+        int64_t gasLeft_;
         neo::vm::VMState state_;
         std::vector<LogEntry> logs_;
         std::vector<NotifyEntry> notifications_;
@@ -407,6 +410,7 @@ namespace neo::smartcontract
         int64_t networkFeePerByte_ = 1000;
         ProtocolSettings protocolSettings_;
         std::string exception_;
+        std::vector<io::UInt160> scriptHashes_; // Stack of script hashes for context tracking
 
         std::unordered_map<std::string, SystemCallDescriptor> systemCalls_;
 

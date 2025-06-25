@@ -13,7 +13,7 @@
 #include <neo/smartcontract/native/name_service.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/persistence/memory_store.h>
-#include <neo/persistence/store_provider.h>
+#include <neo/persistence/data_cache.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <sstream>
@@ -31,14 +31,12 @@ protected:
     void SetUp() override
     {
         store = std::make_shared<MemoryStore>();
-        storeProvider = std::make_shared<StoreProvider>(store);
-        snapshot = storeProvider->CreateSnapshot();
+        snapshot = std::make_shared<DataCache>(store.get());
         engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot);
     }
 
     std::shared_ptr<MemoryStore> store;
-    std::shared_ptr<StoreProvider> storeProvider;
-    std::shared_ptr<StoreView> snapshot;
+    std::shared_ptr<DataCache> snapshot;
     std::shared_ptr<ApplicationEngine> engine;
 };
 

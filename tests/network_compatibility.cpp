@@ -3,199 +3,205 @@
 #include <neo/network/message.h>
 #include <neo/network/tcp_server.h>
 #include <neo/network/tcp_client.h>
-#include <neo/network/payloads/version_payload.h>
-#include <neo/network/payloads/addr_payload.h>
+#include <neo/network/p2p/payloads/version_payload.h>
+#include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/ip_endpoint.h>
 #include <neo/logging/logger.h>
 #include <thread>
 #include <chrono>
-#include <mutex>
-#include <condition_variable>
-#include <atomic>
-#include <vector>
-#include <cstdlib>
 #include <ctime>
 
 using namespace neo::network;
-using namespace neo::io;
-using namespace neo::network::payloads;
+using namespace neo::network::p2p::payloads;
 
 /**
- * @brief Network Compatibility Test Utility
- * 
- * This utility tests the compatibility of the Neo N3 C++ implementation with the C# implementation.
- * It can be run in either server or client mode:
- * - Server mode: Listens for connections and logs received messages.
- * - Client mode: Connects to a server and sends test messages.
+ * @brief Tests network compatibility and message exchange with Neo nodes
  */
-
-// Connection state tracker
 class ConnectionTracker
 {
-public:
-    ConnectionTracker() : messageCount_(0) {}
+private:
+    std::shared_ptr<TcpServer> server_;
+    std::shared_ptr<TcpClient> client_;
     
-    void AddConnection(std::shared_ptr<TcpConnection> connection)
+public:
+    ConnectionTracker() = default;
+    
+    void SetServer(std::shared_ptr<TcpServer> server)
     {
-        std::lock_guard<std::mutex> lock(mutex_);
-        connections_.push_back(connection);
-        
-        connection->SetMessageReceivedCallback([this, connection](const Message& message) {
-            HandleMessage(connection, message);
-        });
-        
-        connection->SetConnectionClosedCallback([this, connection]() {
-            RemoveConnection(connection);
-        });
+        server_ = server;
     }
     
-    void RemoveConnection(std::shared_ptr<TcpConnection> connection)
+    void SetClient(std::shared_ptr<TcpClient> client)
     {
-        std::lock_guard<std::mutex> lock(mutex_);
-        auto it = std::find(connections_.begin(), connections_.end(), connection);
-        if (it != connections_.end())
-        {
-            connections_.erase(it);
-            std::cout << "Connection closed, " << connections_.size() << " connections remaining" << std::endl;
-        }
+        client_ = client;
     }
     
     void HandleMessage(std::shared_ptr<TcpConnection> connection, const Message& message)
     {
-        std::lock_guard<std::mutex> lock(mutex_);
-        messageCount_++;
+        std::cout << "Received message: " << static_cast<int>(message.GetCommand()) << std::endl;
         
-        std::cout << "Received message #" << messageCount_ << " - Command: " 
-                  << GetCommandName(message.GetCommand()) 
-                  << ", Size: " << message.GetSize() << " bytes" << std::endl;
-        
-        // Process message based on command
         switch (message.GetCommand())
         {
             case MessageCommand::Version:
                 HandleVersionMessage(connection, message);
                 break;
+                
             case MessageCommand::Verack:
-                std::cout << "Received Verack message" << std::endl;
+                HandleVerackMessage(connection, message);
                 break;
+                
             case MessageCommand::GetAddr:
-                HandleGetAddrMessage(connection);
+                HandleGetAddrMessage(connection, message);
                 break;
+                
             case MessageCommand::Addr:
-                std::cout << "Received Addr message" << std::endl;
+                HandleAddrMessage(connection, message);
                 break;
+                
             case MessageCommand::Ping:
                 HandlePingMessage(connection, message);
                 break;
+                
             default:
-                std::cout << "Received unhandled message type: " 
-                          << static_cast<int>(message.GetCommand()) << std::endl;
-                break;
+                std::cout << "Unhandled message command: " << static_cast<int>(message.GetCommand()) << std::endl;
         }
     }
     
     void HandleVersionMessage(std::shared_ptr<TcpConnection> connection, const Message& message)
     {
-        // Extract version information
-        auto payload = std::dynamic_pointer_cast<VersionPayload>(message.GetPayload());
-        if (payload)
+        // Deserialize version payload
+        auto versionPayload = std::dynamic_pointer_cast<VersionPayload>(message.GetPayload());
+        if (!versionPayload)
         {
-            std::cout << "Version: " << payload->GetVersion()
-                      << ", User Agent: " << payload->GetUserAgent()
-                      << ", Start Height: " << payload->GetStartHeight() << std::endl;
+            std::cerr << "Failed to deserialize version payload" << std::endl;
+            return;
         }
         
-        // Send Verack response
+        std::cout << "Version message received:" << std::endl;
+        std::cout << "  Network: " << std::hex << versionPayload->GetNetwork() << std::dec << std::endl;
+        std::cout << "  Version: " << versionPayload->GetVersion() << std::endl;
+        std::cout << "  User Agent: " << versionPayload->GetUserAgent() << std::endl;
+        std::cout << "  Timestamp: " << versionPayload->GetTimestamp() << std::endl;
+        std::cout << "  Nonce: " << versionPayload->GetNonce() << std::endl;
+        
+        // Send Verack
         Message verackMessage(MessageCommand::Verack);
         connection->Send(verackMessage);
+        
         std::cout << "Sent Verack message" << std::endl;
     }
     
-    void HandleGetAddrMessage(std::shared_ptr<TcpConnection> connection)
+    void HandleVerackMessage(std::shared_ptr<TcpConnection> connection, const Message& message)
     {
-        // Send Addr message with sample network addresses
-        auto payload = std::make_shared<AddrPayload>();
-        std::vector<NetworkAddressWithTime> addresses;
+        std::cout << "Verack message received - handshake complete" << std::endl;
+    }
+    
+    void HandleGetAddrMessage(std::shared_ptr<TcpConnection> connection, const Message& message)
+    {
+        std::cout << "GetAddr message received - sending known addresses" << std::endl;
         
-        // Add some sample network addresses
-        NetworkAddressWithTime addr1;
-        addr1.address = IPEndPoint(IPAddress::Parse("35.187.20.172"), 10333);
-        addr1.timestamp = std::time(nullptr);
-        addr1.capabilities.tcp_server = true;
+        // Send some known addresses
+        SendKnownAddresses(connection);
+    }
+    
+    void HandleAddrMessage(std::shared_ptr<TcpConnection> connection, const Message& message)
+    {
+        // Deserialize addr payload
+        auto addrPayload = std::dynamic_pointer_cast<AddrPayload>(message.GetPayload());
+        if (!addrPayload)
+        {
+            std::cerr << "Failed to deserialize addr payload" << std::endl;
+            return;
+        }
+        
+        std::cout << "Addr message received with " << addrPayload->GetAddresses().size() << " addresses" << std::endl;
+    }
+    
+    void SendKnownAddresses(std::shared_ptr<TcpConnection> connection)
+    {
+        auto payload = std::make_shared<AddrPayload>();
+        std::vector<neo::network::p2p::NetworkAddressWithTime> addresses;
+        
+        // Add some known mainnet nodes
+        neo::network::p2p::NetworkAddressWithTime addr1;
+        addr1.SetAddress(IPAddress::Parse("35.187.20.172"));
+        addr1.SetPort(10333);
+        addr1.SetTimestamp(std::time(nullptr));
         addresses.push_back(addr1);
         
-        NetworkAddressWithTime addr2;
-        addr2.address = IPEndPoint(IPAddress::Parse("13.59.75.23"), 10333);
-        addr2.timestamp = std::time(nullptr);
-        addr2.capabilities.tcp_server = true;
+        neo::network::p2p::NetworkAddressWithTime addr2;
+        addr2.SetAddress(IPAddress::Parse("13.59.75.23"));
+        addr2.SetPort(10333);
+        addr2.SetTimestamp(std::time(nullptr));
         addresses.push_back(addr2);
         
         payload->SetAddresses(addresses);
         Message addrMessage(MessageCommand::Addr, payload);
         connection->Send(addrMessage);
+        
         std::cout << "Sent Addr message with " << addresses.size() << " addresses" << std::endl;
     }
     
     void HandlePingMessage(std::shared_ptr<TcpConnection> connection, const Message& message)
     {
-        // Send Pong message
+        // Respond with Pong
         Message pongMessage(MessageCommand::Pong);
         connection->Send(pongMessage);
-        std::cout << "Sent Pong message" << std::endl;
+        
+        std::cout << "Sent Pong message in response to Ping" << std::endl;
     }
-    
-    int GetMessageCount() const
-    {
-        return messageCount_;
-    }
-    
-    size_t GetConnectionCount() const
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-        return connections_.size();
-    }
-    
-private:
-    std::vector<std::shared_ptr<TcpConnection>> connections_;
-    mutable std::mutex mutex_;
-    int messageCount_;
 };
 
-// Server mode
+/**
+ * @brief Runs the server side of the compatibility test
+ */
 void RunServer(const IPEndPoint& endpoint)
 {
-    std::cout << "Starting server on " << endpoint.ToString() << std::endl;
-    
-    // Create server
-    TcpServer server(endpoint);
     ConnectionTracker tracker;
+    auto server = std::make_shared<TcpServer>(endpoint);
+    tracker.SetServer(server);
     
-    // Set up connection handler
-    server.SetConnectionAcceptedCallback([&tracker](std::shared_ptr<TcpConnection> connection) {
-        std::cout << "Accepted connection from " << connection->GetRemoteEndpoint().ToString() << std::endl;
-        tracker.AddConnection(connection);
-    });
+    server->OnConnectionReceived = [&tracker](std::shared_ptr<TcpConnection> connection) {
+        std::cout << "Client connected from: " << connection->GetRemoteEndPoint().ToString() << std::endl;
+        
+        connection->OnMessageReceived = [&tracker, connection](const Message& message) {
+            tracker.HandleMessage(connection, message);
+        };
+        
+        connection->OnDisconnected = [](DisconnectReason reason) {
+            std::cout << "Client disconnected. Reason: " << static_cast<int>(reason) << std::endl;
+        };
+    };
     
-    // Start server
-    server.Start();
+    server->Start();
+    std::cout << "Server listening on: " << endpoint.ToString() << std::endl;
     
-    std::cout << "Server started, press Enter to stop" << std::endl;
-    std::cin.get();
+    // Keep server running
+    std::this_thread::sleep_for(std::chrono::minutes(5));
     
-    std::cout << "Stopping server" << std::endl;
-    server.Stop();
+    server->Stop();
 }
 
-// Client mode
+/**
+ * @brief Runs the client side of the compatibility test
+ */
 void RunClient(const IPEndPoint& endpoint)
 {
-    std::cout << "Connecting to server at " << endpoint.ToString() << std::endl;
+    ConnectionTracker tracker;
+    auto client = std::make_shared<TcpClient>();
+    tracker.SetClient(client);
     
-    // Create client
-    TcpClient client;
-    auto connection = client.Connect(endpoint);
+    client->OnMessageReceived = [&tracker](const Message& message) {
+        tracker.HandleMessage(nullptr, message);
+    };
     
-    if (!connection)
+    client->OnDisconnected = [](DisconnectReason reason) {
+        std::cout << "Disconnected from server. Reason: " << static_cast<int>(reason) << std::endl;
+    };
+    
+    std::cout << "Connecting to: " << endpoint.ToString() << std::endl;
+    
+    if (!client->Connect(endpoint))
     {
         std::cerr << "Failed to connect to server" << std::endl;
         return;
@@ -203,19 +209,30 @@ void RunClient(const IPEndPoint& endpoint)
     
     std::cout << "Connected to server" << std::endl;
     
-    ConnectionTracker tracker;
-    tracker.AddConnection(connection);
+    // Get a proper connection handle
+    auto connection = client->GetConnection();
+    if (!connection)
+    {
+        std::cerr << "Failed to get connection handle" << std::endl;
+        return;
+    }
     
     // Send Version message
     auto versionPayload = std::make_shared<VersionPayload>();
     versionPayload->SetVersion(0);
-    versionPayload->SetServices(1);
+    versionPayload->SetNetwork(0x334E454F); // Neo mainnet magic
     versionPayload->SetTimestamp(std::time(nullptr));
-    versionPayload->SetPort(10333);
     versionPayload->SetNonce(rand());
     versionPayload->SetUserAgent("/Neo:3.0/C++/");
-    versionPayload->SetStartHeight(0);
-    versionPayload->SetRelay(true);
+    
+    // Add capabilities (TCP server capability)
+    std::vector<NodeCapability> capabilities;
+    NodeCapability tcpCapability;
+    tcpCapability.type = NodeCapabilityType::TcpServer;
+    tcpCapability.data.push_back(10333 & 0xFF);
+    tcpCapability.data.push_back((10333 >> 8) & 0xFF);
+    capabilities.push_back(tcpCapability);
+    versionPayload->SetCapabilities(capabilities);
     
     Message versionMessage(MessageCommand::Version, versionPayload);
     connection->Send(versionMessage);
@@ -234,60 +251,53 @@ void RunClient(const IPEndPoint& endpoint)
     connection->Send(pingMessage);
     std::cout << "Sent Ping message" << std::endl;
     
-    std::cout << "Client running, press Enter to disconnect" << std::endl;
-    std::cin.get();
+    // Keep client running to receive responses
+    std::this_thread::sleep_for(std::chrono::seconds(30));
     
-    std::cout << "Disconnecting from server" << std::endl;
-    connection->Stop();
-    client.Stop();
-}
-
-void PrintUsage(const char* programName)
-{
-    std::cout << "Usage: " << programName << " [server|client] [host] [port]" << std::endl;
-    std::cout << "  server: Run in server mode, listening on host:port" << std::endl;
-    std::cout << "  client: Run in client mode, connecting to host:port" << std::endl;
-    std::cout << "  host: Hostname or IP address (default: 127.0.0.1)" << std::endl;
-    std::cout << "  port: Port number (default: 10333)" << std::endl;
+    client->Disconnect();
 }
 
 int main(int argc, char* argv[])
 {
-    // Initialize random seed
-    std::srand(std::time(nullptr));
+    // Initialize logging
+    neo::logging::Logger::Instance().SetLevel(neo::logging::Logger::Level::Debug);
     
-    // Set up logging
-    neo::logging::Logger::Instance().SetLogLevel(neo::logging::LogLevel::Debug);
-    
-    // Parse arguments
-    std::string mode = "server";
-    std::string host = "127.0.0.1";
-    int port = 10333;
-    
-    if (argc > 1)
+    if (argc < 2)
     {
-        mode = argv[1];
-        if (mode != "server" && mode != "client")
+        std::cout << "Usage: " << argv[0] << " <server|client> [host] [port]" << std::endl;
+        std::cout << "Examples:" << std::endl;
+        std::cout << "  " << argv[0] << " server 127.0.0.1 10333    # Run as server" << std::endl;
+        std::cout << "  " << argv[0] << " client seed1.neo.org 10333 # Connect to mainnet" << std::endl;
+        return 1;
+    }
+    
+    std::string mode = argv[1];
+    std::string host = (argc > 2) ? argv[2] : "127.0.0.1";
+    uint16_t port = (argc > 3) ? std::stoi(argv[3]) : 10333;
+    
+    try
+    {
+        IPEndPoint endpoint(IPAddress::Parse(host), port);
+        
+        if (mode == "server")
         {
-            PrintUsage(argv[0]);
+            RunServer(endpoint);
+        }
+        else if (mode == "client")
+        {
+            RunClient(endpoint);
+        }
+        else
+        {
+            std::cerr << "Invalid mode. Use 'server' or 'client'" << std::endl;
             return 1;
         }
     }
-    
-    if (argc > 2)
-        host = argv[2];
-    
-    if (argc > 3)
-        port = std::atoi(argv[3]);
-    
-    // Create endpoint
-    IPEndPoint endpoint(IPAddress::Parse(host), port);
-    
-    // Run in specified mode
-    if (mode == "server")
-        RunServer(endpoint);
-    else
-        RunClient(endpoint);
+    catch (const std::exception& e)
+    {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
     
     return 0;
-} 
+}

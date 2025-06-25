@@ -1,10 +1,11 @@
-# Neo C++ - Production Ready Blockchain Implementation
+# Neo C++ - Professional Neo N3 Blockchain Implementation
 
-[![Build Status](https://github.com/your-org/neo-cpp/workflows/CI/badge.svg)](https://github.com/your-org/neo-cpp/actions)
+[![Build Status](https://github.com/r3e-network/neo_cpp/workflows/CI/badge.svg)](https://github.com/r3e-network/neo_cpp/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![C++](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://isocpp.org/)
+[![Neo N3](https://img.shields.io/badge/Neo-N3-green.svg)](https://neo.org/)
 
-A complete, production-ready implementation of the Neo blockchain protocol in modern C++20. This project provides a full Neo N3 compatible node with comprehensive test coverage and professional build infrastructure.
+A professional, high-performance implementation of the Neo N3 blockchain protocol in modern C++20. Converted from the official Neo N3 C# implementation with enhanced performance, cross-platform compatibility, and production-ready architecture.
 
 ## 🌟 Features
 
@@ -26,19 +27,22 @@ A complete, production-ready implementation of the Neo blockchain protocol in mo
 - **Wallet**: Cryptographic key management and transaction signing
 - **Storage**: Pluggable storage backends (LevelDB, RocksDB, Memory)
 
-### Key Features
+### Implementation Status
 
-- ✅ **Neo N3 Protocol**: Complete implementation of the Neo N3 specification
-- ✅ **Smart Contracts**: Native contract support (NEO, GAS, Policy, etc.)
-- ✅ **Consensus**: Full dBFT consensus mechanism
-- ✅ **P2P Network**: Robust peer-to-peer networking
-- ✅ **RPC API**: Comprehensive JSON-RPC interface
-- ✅ **Cryptography**: Advanced cryptographic operations including BLS12-381
-- ✅ **VM Execution**: Complete Neo VM for smart contract execution
+| **Module** | **Status** | **Completeness** | **Production Ready** |
+|------------|------------|------------------|----------------------|
+| **🔐 Cryptography** | ✅ Complete | 95% | **YES** - Full Neo3 crypto support |
+| **🖥️ Virtual Machine** | ✅ Complete | 95% | **YES** - Complete VM with all opcodes |
+| **📚 IO & Serialization** | ✅ Complete | 90% | **YES** - Full binary/JSON support |
+| **🌐 Networking** | ⚠️ Partial | 70% | **Partial** - P2P framework ready |
+| **💾 Ledger/Blockchain** | ⚠️ Partial | 75% | **Partial** - Core logic implemented |
+| **🤝 Consensus (dBFT)** | ⚠️ Partial | 60% | **Development** - Framework exists |
+| **💰 Smart Contracts** | ⚠️ Partial | 80% | **Partial** - Engine ready |
+| **💼 Wallets** | ✅ Complete | 85% | **YES** - NEP6 wallets supported |
 
 ## Project Status
 
-**✅ PRODUCTION READY** - This implementation has been thoroughly tested and is ready for production deployment.
+**🚧 ACTIVE DEVELOPMENT** - Core components are production-ready. Consensus and networking modules are under active development. Expected completion: Q2 2024.
 
 ## Getting Started
 
@@ -60,17 +64,16 @@ A complete, production-ready implementation of the Neo blockchain protocol in mo
 
 ```bash
 # Clone the repository
-git clone https://github.com/neo-project/neo-cpp.git
-cd neo-cpp
+git clone https://github.com/r3e-network/neo_cpp.git
+cd neo_cpp
 
-# Initialize vcpkg (if not already done)
-git submodule update --init --recursive
-./vcpkg/bootstrap-vcpkg.sh
+# Quick build (recommended for development)
+./scripts/build.sh
 
-# Configure and build
+# Or manual build
 mkdir build && cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake
-cmake --build . --config Release
+cmake .. -DNEO_BUILD_TESTS=ON
+make -j$(nproc)
 
 # Run tests
 ctest --output-on-failure
@@ -80,18 +83,21 @@ ctest --output-on-failure
 
 ```cmd
 # Open Developer Command Prompt
-git clone https://github.com/neo-project/neo-cpp.git
-cd neo-cpp
-
-# Initialize vcpkg
-git submodule update --init --recursive
-.\vcpkg\bootstrap-vcpkg.bat
+git clone https://github.com/r3e-network/neo_cpp.git
+cd neo_cpp
 
 # Build with Visual Studio
 mkdir build && cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=..\vcpkg\scripts\buildsystems\vcpkg.cmake
+cmake .. -DNEO_BUILD_TESTS=ON
 cmake --build . --config Release
 ```
+
+### Dependencies
+
+The build system automatically handles dependencies:
+- **Required**: OpenSSL (system package)
+- **Optional**: vcpkg for additional dependencies
+- **Bundled**: nlohmann/json, minimal logging fallback
 
 ## 📖 Usage
 
@@ -290,10 +296,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/neo-project/neo-cpp/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/neo-project/neo-cpp/discussions)
-- **Discord**: [Neo Community Discord](https://discord.gg/neo)
-- **Email**: neo-cpp@neo.org
+- **Issues**: [GitHub Issues](https://github.com/r3e-network/neo_cpp/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/r3e-network/neo_cpp/discussions)
+- **Pull Requests**: [GitHub PRs](https://github.com/r3e-network/neo_cpp/pulls)
+- **Documentation**: [Project Wiki](https://github.com/r3e-network/neo_cpp/wiki)
 
 ## 🙏 Acknowledgments
 

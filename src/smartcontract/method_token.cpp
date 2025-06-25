@@ -102,8 +102,7 @@ namespace neo::smartcontract
         writer.WritePropertyName("paramcount");
         writer.WriteNumber(parametersCount_);
         
-        writer.WritePropertyName("hasreturnvalue");
-        writer.WriteBoolean(hasReturnValue_);
+        writer.Write("hasreturnvalue", hasReturnValue_);
         
         writer.WritePropertyName("callflags");
         writer.WriteString(std::to_string(static_cast<uint8_t>(callFlags_)));
@@ -116,7 +115,7 @@ namespace neo::smartcontract
         hash_ = io::UInt160::Parse(reader.ReadString("hash"));
         method_ = reader.ReadString("method");
         parametersCount_ = static_cast<uint16_t>(reader.ReadNumber("paramcount"));
-        hasReturnValue_ = reader.ReadBoolean("hasreturnvalue");
+        hasReturnValue_ = reader.ReadBool("hasreturnvalue");
         callFlags_ = static_cast<CallFlags>(static_cast<uint8_t>(reader.ReadNumber("callflags")));
     }
 }

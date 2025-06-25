@@ -152,7 +152,7 @@ namespace neo::vm
          * @brief Loads a context.
          * @param context The context.
          */
-        void LoadContext(ExecutionContext& context);
+        void LoadContext(std::shared_ptr<ExecutionContext> context);
 
         /**
          * @brief Executes the script.

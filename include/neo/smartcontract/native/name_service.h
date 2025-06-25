@@ -42,7 +42,7 @@ namespace neo::smartcontract::native
         /**
          * @brief The default price.
          */
-        static constexpr int64_t DEFAULT_PRICE = 1000 * 100000000; // 1000 GAS
+        static constexpr int64_t DEFAULT_PRICE = 1000LL * 100000000LL; // 1000 GAS
 
         /**
          * @brief The maximum name length.

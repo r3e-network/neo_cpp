@@ -8,11 +8,15 @@
  * the existing codebase requirements.
  */
 
+#include <memory>
+#include <string>
+#include <iosfwd>
+
+#if defined(NEO_HAS_SPDLOG) && !defined(NEO_MINIMAL_LOGGING)
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
-#include <memory>
-#include <string>
+#endif
 
 namespace neo::logging
 {
@@ -152,37 +156,18 @@ namespace neo::logging
          * @param args Arguments
          */
         template<typename... Args>
-        void Log(Level level, const std::string& format, Args&&... args)
-        {
-            if (!logger_) return;
+        void Log(Level level, const std::string& format, Args&&... args);
 
-            switch (level)
-            {
-                case Level::Trace:
-                    logger_->trace(format, std::forward<Args>(args)...);
-                    break;
-                case Level::Debug:
-                    logger_->debug(format, std::forward<Args>(args)...);
-                    break;
-                case Level::Info:
-                    logger_->info(format, std::forward<Args>(args)...);
-                    break;
-                case Level::Warn:
-                    logger_->warn(format, std::forward<Args>(args)...);
-                    break;
-                case Level::Error:
-                    logger_->error(format, std::forward<Args>(args)...);
-                    break;
-                case Level::Critical:
-                    logger_->critical(format, std::forward<Args>(args)...);
-                    break;
-                default:
-                    break;
-            }
-        }
+        // Helper method for minimal logging
+        void LogMinimal(Level level, const std::string& message);
 
     private:
+#if defined(NEO_MINIMAL_LOGGING) || !defined(NEO_HAS_SPDLOG)
+        Level current_level_ = Level::Info;
+        std::string name_;
+#else
         std::shared_ptr<spdlog::logger> logger_;
+#endif
     };
 
     // Convenience macros for logging

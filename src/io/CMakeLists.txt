@@ -12,6 +12,7 @@ add_library(neo_io OBJECT
     uint256.cpp
     fixed8.cpp
     lru_cache.cpp
+    memory_stream.cpp
 )
 
 # Include directories

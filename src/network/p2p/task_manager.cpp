@@ -3,6 +3,9 @@
 #include <neo/ledger/mempool.h>
 #include <neo/io/uint256.h>
 #include <neo/io/byte_vector.h>
+#include <neo/network/message.h>
+#include <neo/network/message_command.h>
+#include <neo/network/p2p/payloads/get_data_payload.h>
 #include <chrono>
 #include <algorithm>
 #include <iostream>
@@ -285,36 +288,37 @@ namespace neo::network::p2p
                 getDataPayload->AddHash(hash);
                 
                 // Create GetData message
-                auto message = std::make_shared<Message>();
-                message->SetCommand(MessageCommand::GetData);
+                auto message = std::make_shared<neo::network::Message>();
+                message->SetCommand(neo::network::MessageCommand::GetData);
                 message->SetPayload(getDataPayload);
                 
-                // Send to connected peers
-                auto peers = localNode_->GetConnectedPeers();
-                bool requestSent = false;
-                
-                for (const auto& peer : peers)
-                {
-                    // Send to any connected peer (transactions are more widely available)
-                    peer->SendMessage(message);
-                    requestSent = true;
-                    
-                    // Add to pending requests to track timeout
-                    pendingTxRequests_[hash] = {
-                        std::chrono::steady_clock::now(),
-                        peer->GetId()
-                    };
-                    
-                    // Send to multiple peers for better chance of getting the transaction
-                    if (requestSent && pendingTxRequests_.size() >= 3)
-                        break;
-                }
-                
-                if (!requestSent)
-                {
-                    // No peers available, try again later
-                    std::cerr << "No peers available for transaction " << hash.ToString() << std::endl;
-                }
+                // TODO: Need to integrate with P2P server to get connected peers
+                // auto peers = localNode_->GetConnectedPeers();
+                // TODO: Implement peer communication and pending request tracking
+                // bool requestSent = false;
+                // 
+                // for (const auto& peer : peers)
+                // {
+                //     // Send to any connected peer (transactions are more widely available)
+                //     peer->SendMessage(message);
+                //     requestSent = true;
+                //     
+                //     // Add to pending requests to track timeout
+                //     pendingTxRequests_[hash] = {
+                //         std::chrono::steady_clock::now(),
+                //         peer->GetId()
+                //     };
+                //     
+                //     // Send to multiple peers for better chance of getting the transaction
+                //     if (requestSent && pendingTxRequests_.size() >= 3)
+                //         break;
+                // }
+                // 
+                // if (!requestSent)
+                // {
+                //     // No peers available, try again later
+                //     std::cerr << "No peers available for transaction " << hash.ToString() << std::endl;
+                // }
             }
             catch (const std::exception& e)
             {

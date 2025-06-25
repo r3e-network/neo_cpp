@@ -192,7 +192,10 @@ namespace neo::cryptography
         if (!ctx)
             throw std::runtime_error("Failed to create HMAC context");
 
-        if (HMAC_Init_ex(ctx, key.Data(), static_cast<int>(key.Size()), EVP_sha256(), nullptr) != 1)
+        // Handle empty key case - provide empty key buffer for OpenSSL 3.0 compatibility
+        static const uint8_t emptyKey = 0;
+        const void* keyPtr = key.Size() > 0 ? static_cast<const void*>(key.Data()) : static_cast<const void*>(&emptyKey);
+        if (HMAC_Init_ex(ctx, keyPtr, static_cast<int>(key.Size()), EVP_sha256(), nullptr) != 1)
         {
             HMAC_CTX_free(ctx);
             throw std::runtime_error("Failed to initialize HMAC");
@@ -236,6 +239,15 @@ namespace neo::cryptography
 
     io::ByteVector Crypto::Base64Decode(const std::string& base64)
     {
+        // Validate Base64 characters first
+        for (char c : base64)
+        {
+            if (!(std::isalnum(c) || c == '+' || c == '/' || c == '='))
+            {
+                throw std::runtime_error("Failed to decode Base64");
+            }
+        }
+
         BIO* b64 = BIO_new(BIO_f_base64());
         BIO* bmem = BIO_new_mem_buf(base64.c_str(), static_cast<int>(base64.length()));
         bmem = BIO_push(b64, bmem);

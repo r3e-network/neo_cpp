@@ -24,13 +24,13 @@ namespace neo::smartcontract
                 if (!HasFlag(descriptor.requiredFlags))
                 {
                     std::string requiredFlagsStr;
-                    if (HasFlag(descriptor.requiredFlags, CallFlags::ReadStates))
+                    if ((static_cast<uint8_t>(descriptor.requiredFlags) & static_cast<uint8_t>(CallFlags::ReadStates)) != 0)
                         requiredFlagsStr += "ReadStates ";
-                    if (HasFlag(descriptor.requiredFlags, CallFlags::WriteStates))
+                    if ((static_cast<uint8_t>(descriptor.requiredFlags) & static_cast<uint8_t>(CallFlags::WriteStates)) != 0)
                         requiredFlagsStr += "WriteStates ";
-                    if (HasFlag(descriptor.requiredFlags, CallFlags::AllowCall))
+                    if ((static_cast<uint8_t>(descriptor.requiredFlags) & static_cast<uint8_t>(CallFlags::AllowCall)) != 0)
                         requiredFlagsStr += "AllowCall ";
-                    if (HasFlag(descriptor.requiredFlags, CallFlags::AllowNotify))
+                    if ((static_cast<uint8_t>(descriptor.requiredFlags) & static_cast<uint8_t>(CallFlags::AllowNotify)) != 0)
                         requiredFlagsStr += "AllowNotify ";
 
                     throw MissingFlagsException(name, requiredFlagsStr);

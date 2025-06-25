@@ -61,14 +61,14 @@ namespace neo::console_service
 
         std::stringstream status;
         status << "Neo Node Status:\n";
-        status << "  Running: " << (IsNodeRunning() ? "Yes" : "No") << "\n";
-        status << "  Height: " << GetBlockchainHeight() << "\n";
-        status << "  Peers: " << GetPeerCount() << "\n";
+        status << "  Running: " << (this->IsNodeRunning() ? "Yes" : "No") << "\n";
+        status << "  Height: " << this->GetBlockchainHeight() << "\n";
+        status << "  Peers: " << this->GetPeerCount() << "\n";
 
         return status.str();
     }
 
-    bool ServiceProxy::StartNode()
+    bool neo::console_service::ServiceProxy::StartNode()
     {
         if (!neoSystem_)
             return false;
@@ -77,7 +77,7 @@ namespace neo::console_service
         {
             // Start the Neo node services
             // This would call the appropriate start methods on the Neo system
-            NotifyEvent("Node starting...");
+            this->NotifyEvent("Node starting...");
             
             // TODO: Implement actual node start logic
             // neoSystem_->Start();
@@ -87,12 +87,12 @@ namespace neo::console_service
         }
         catch (const std::exception& e)
         {
-            NotifyEvent("Failed to start node: " + std::string(e.what()));
+            this->NotifyEvent("Failed to start node: " + std::string(e.what()));
             return false;
         }
     }
 
-    bool ServiceProxy::StopNode()
+    bool neo::console_service::ServiceProxy::StopNode()
     {
         if (!neoSystem_)
             return false;
@@ -100,7 +100,7 @@ namespace neo::console_service
         try
         {
             // Stop the Neo node services
-            NotifyEvent("Node stopping...");
+            this->NotifyEvent("Node stopping...");
             
             // TODO: Implement actual node stop logic
             // neoSystem_->Stop();
@@ -110,12 +110,12 @@ namespace neo::console_service
         }
         catch (const std::exception& e)
         {
-            NotifyEvent("Failed to stop node: " + std::string(e.what()));
+            this->NotifyEvent("Failed to stop node: " + std::string(e.what()));
             return false;
         }
     }
 
-    std::string ServiceProxy::ExecuteCommand(const std::string& command, const std::vector<std::string>& args)
+    std::string neo::console_service::ServiceProxy::ExecuteCommand(const std::string& command, const std::vector<std::string>& args)
     {
         if (!neoSystem_)
             return "System not available";
@@ -125,15 +125,15 @@ namespace neo::console_service
             // Handle common system commands
             if (command == "status")
             {
-                return GetSystemStatus();
+                return this->GetSystemStatus();
             }
             else if (command == "height")
             {
-                return "Current height: " + std::to_string(GetBlockchainHeight());
+                return "Current height: " + std::to_string(this->GetBlockchainHeight());
             }
             else if (command == "peers")
             {
-                return "Connected peers: " + std::to_string(GetPeerCount());
+                return "Connected peers: " + std::to_string(this->GetPeerCount());
             }
             else if (command == "help")
             {
@@ -152,17 +152,17 @@ namespace neo::console_service
         }
     }
 
-    std::shared_ptr<neo::node::NeoSystem> ServiceProxy::GetNeoSystem() const
+    std::shared_ptr<neo::node::NeoSystem> neo::console_service::ServiceProxy::GetNeoSystem() const
     {
         return neoSystem_;
     }
 
-    void ServiceProxy::SetEventCallback(std::function<void(const std::string&)> callback)
+    void neo::console_service::ServiceProxy::SetEventCallback(std::function<void(const std::string&)> callback)
     {
         eventCallback_ = callback;
     }
 
-    void ServiceProxy::NotifyEvent(const std::string& event)
+    void neo::console_service::ServiceProxy::NotifyEvent(const std::string& event)
     {
         if (eventCallback_)
         {

@@ -2,6 +2,7 @@
 #include <neo/vm/execution_engine.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/exceptions.h>
+#include <neo/vm/script.h>
 #include <neo/vm/jump_table_constants.h>
 #include <neo/vm/jump_table_control_jump.h>
 #include <neo/vm/jump_table_control_exception.h>
@@ -84,8 +85,8 @@ namespace neo::vm
         SetHandler(OpCode::SYSCALL, JumpTableControlJump::SYSCALL);
 
         // Flow control - Exception handling operations
-        SetHandler(OpCode::LEAVE, JumpTableControlException::LEAVE);
-        SetHandler(OpCode::LEAVE_L, JumpTableControlException::LEAVE_L);
+        // SetHandler(OpCode::LEAVE, JumpTableControlException::LEAVE);
+        // SetHandler(OpCode::LEAVE_L, JumpTableControlException::LEAVE_L);
         SetHandler(OpCode::ABORT, JumpTableControlException::ABORT);
         SetHandler(OpCode::ASSERT, JumpTableControlException::ASSERT);
         SetHandler(OpCode::THROW, JumpTableControlException::THROW);
@@ -113,27 +114,27 @@ namespace neo::vm
         SetHandler(OpCode::REVERSEN, JumpTableStack::REVERSEN);
 
         // Arithmetic operations
-        SetHandler(OpCode::ADD, JumpTableArithmetic::ADD);
-        SetHandler(OpCode::SUB, JumpTableArithmetic::SUB);
-        SetHandler(OpCode::MUL, JumpTableArithmetic::MUL);
-        SetHandler(OpCode::DIV, JumpTableArithmetic::DIV);
-        SetHandler(OpCode::MOD, JumpTableArithmetic::MOD);
-        SetHandler(OpCode::POW, JumpTableArithmetic::POW);
-        SetHandler(OpCode::SQRT, JumpTableArithmetic::SQRT);
-        SetHandler(OpCode::SHL, JumpTableArithmetic::SHL);
-        SetHandler(OpCode::SHR, JumpTableArithmetic::SHR);
-        SetHandler(OpCode::NOT, JumpTableArithmetic::NOT);
-        SetHandler(OpCode::BOOLAND, JumpTableArithmetic::BOOLAND);
-        SetHandler(OpCode::BOOLOR, JumpTableArithmetic::BOOLOR);
-        SetHandler(OpCode::NUMEQUAL, JumpTableArithmetic::NUMEQUAL);
-        SetHandler(OpCode::NUMNOTEQUAL, JumpTableArithmetic::NUMNOTEQUAL);
-        SetHandler(OpCode::LT, JumpTableArithmetic::LT);
-        SetHandler(OpCode::GT, JumpTableArithmetic::GT);
-        SetHandler(OpCode::LE, JumpTableArithmetic::LE);
-        SetHandler(OpCode::GE, JumpTableArithmetic::GE);
-        SetHandler(OpCode::MIN, JumpTableArithmetic::MIN);
-        SetHandler(OpCode::MAX, JumpTableArithmetic::MAX);
-        SetHandler(OpCode::WITHIN, JumpTableArithmetic::WITHIN);
+        SetHandler(OpCode::ADD, [this](ExecutionEngine& engine, const Instruction& instruction) { ADD(engine, instruction); });
+        SetHandler(OpCode::SUB, [this](ExecutionEngine& engine, const Instruction& instruction) { SUB(engine, instruction); });
+        SetHandler(OpCode::MUL, [this](ExecutionEngine& engine, const Instruction& instruction) { MUL(engine, instruction); });
+        SetHandler(OpCode::DIV, [this](ExecutionEngine& engine, const Instruction& instruction) { DIV(engine, instruction); });
+        SetHandler(OpCode::MOD, [this](ExecutionEngine& engine, const Instruction& instruction) { MOD(engine, instruction); });
+        SetHandler(OpCode::POW, [this](ExecutionEngine& engine, const Instruction& instruction) { POW(engine, instruction); });
+        SetHandler(OpCode::SQRT, [this](ExecutionEngine& engine, const Instruction& instruction) { SQRT(engine, instruction); });
+        SetHandler(OpCode::SHL, [this](ExecutionEngine& engine, const Instruction& instruction) { SHL(engine, instruction); });
+        SetHandler(OpCode::SHR, [this](ExecutionEngine& engine, const Instruction& instruction) { SHR(engine, instruction); });
+        SetHandler(OpCode::NOT, [this](ExecutionEngine& engine, const Instruction& instruction) { NOT(engine, instruction); });
+        SetHandler(OpCode::BOOLAND, [this](ExecutionEngine& engine, const Instruction& instruction) { BOOLAND(engine, instruction); });
+        SetHandler(OpCode::BOOLOR, [this](ExecutionEngine& engine, const Instruction& instruction) { BOOLOR(engine, instruction); });
+        SetHandler(OpCode::NUMEQUAL, [this](ExecutionEngine& engine, const Instruction& instruction) { NUMEQUAL(engine, instruction); });
+        SetHandler(OpCode::NUMNOTEQUAL, [this](ExecutionEngine& engine, const Instruction& instruction) { NUMNOTEQUAL(engine, instruction); });
+        SetHandler(OpCode::LT, [this](ExecutionEngine& engine, const Instruction& instruction) { LT(engine, instruction); });
+        SetHandler(OpCode::GT, [this](ExecutionEngine& engine, const Instruction& instruction) { GT(engine, instruction); });
+        SetHandler(OpCode::LE, [this](ExecutionEngine& engine, const Instruction& instruction) { LE(engine, instruction); });
+        SetHandler(OpCode::GE, [this](ExecutionEngine& engine, const Instruction& instruction) { GE(engine, instruction); });
+        SetHandler(OpCode::MIN, [this](ExecutionEngine& engine, const Instruction& instruction) { MIN(engine, instruction); });
+        SetHandler(OpCode::MAX, [this](ExecutionEngine& engine, const Instruction& instruction) { MAX(engine, instruction); });
+        SetHandler(OpCode::WITHIN, [this](ExecutionEngine& engine, const Instruction& instruction) { WITHIN(engine, instruction); });
 
         // Compound type operations
         SetHandler(OpCode::PACK, JumpTableCompound::PACK);
@@ -251,14 +252,14 @@ namespace neo::vm
 
     void JumpTable::InvalidOpcode(ExecutionEngine& engine, const Instruction& instruction)
     {
-        throw InvalidOperationException("Invalid opcode: " + GetOpCodeName(instruction.OpCode));
+        throw InvalidOperationException("Invalid opcode: " + GetOpCodeName(instruction.opcode));
     }
 
     void JumpTable::ExecuteCall(ExecutionEngine& engine, int32_t position)
     {
         auto& context = engine.GetCurrentContext();
         auto clonedContext = context.Clone(position);
-        engine.LoadContext(*clonedContext);
+        engine.LoadContext(clonedContext);
     }
 
     void JumpTable::ExecuteJump(ExecutionEngine& engine, int32_t position)

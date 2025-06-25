@@ -47,6 +47,11 @@ namespace neo::vm
         return value_;
     }
 
+    std::vector<std::shared_ptr<StackItem>> ArrayItem::GetStruct() const
+    {
+        return value_;
+    }
+
     void ArrayItem::Add(std::shared_ptr<StackItem> item)
     {
         if (refCounter_)

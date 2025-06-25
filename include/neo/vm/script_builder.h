@@ -78,6 +78,13 @@ namespace neo::vm
         ScriptBuilder& EmitPush(const std::string& data);
 
         /**
+         * @brief Emits a push instruction with the specified string literal.
+         * @param data The string literal to be pushed.
+         * @return A reference to this instance after the emit operation has completed.
+         */
+        ScriptBuilder& EmitPush(const char* data);
+
+        /**
          * @brief Emits raw script.
          * @param script The raw script to be emitted.
          * @return A reference to this instance after the emit operation has completed.

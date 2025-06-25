@@ -86,29 +86,29 @@ namespace neo::vm
     }
 
     Instruction::Instruction(vm::OpCode opcode)
-        : OpCode(opcode), Operand()
+        : opcode(opcode), Operand()
     {
         InitializeOperandSizeTables();
     }
 
     Instruction::Instruction(vm::OpCode opcode, const internal::ByteVector& operand)
-        : OpCode(opcode), Operand(operand)
+        : opcode(opcode), Operand(operand)
     {
         InitializeOperandSizeTables();
     }
 
     Instruction::Instruction(const internal::ByteSpan& script, int ip)
-        : OpCode(static_cast<vm::OpCode>(script[ip++])), Operand()
+        : opcode(static_cast<vm::OpCode>(script[ip++])), Operand()
     {
         InitializeOperandSizeTables();
 
-        int operandSizePrefix = OperandSizePrefixTable[static_cast<uint8_t>(OpCode)];
+        int operandSizePrefix = OperandSizePrefixTable[static_cast<uint8_t>(opcode)];
         int operandSize = 0;
 
         switch (operandSizePrefix)
         {
             case 0:
-                operandSize = OperandSizeTable[static_cast<uint8_t>(OpCode)];
+                operandSize = OperandSizeTable[static_cast<uint8_t>(opcode)];
                 break;
             case 1:
                 if (ip >= script.Size())
@@ -144,10 +144,10 @@ namespace neo::vm
 
     int Instruction::Size() const
     {
-        int prefixSize = OperandSizePrefixTable[static_cast<uint8_t>(OpCode)];
+        int prefixSize = OperandSizePrefixTable[static_cast<uint8_t>(opcode)];
         return prefixSize > 0
             ? 1 + prefixSize + Operand.Size()
-            : 1 + OperandSizeTable[static_cast<uint8_t>(OpCode)];
+            : 1 + OperandSizeTable[static_cast<uint8_t>(opcode)];
     }
 
     int16_t Instruction::TokenI16() const
@@ -241,7 +241,7 @@ namespace neo::vm
 
     int64_t Instruction::GetOperand() const
     {
-        switch (OperandSizeTable[static_cast<uint8_t>(OpCode)])
+        switch (OperandSizeTable[static_cast<uint8_t>(opcode)])
         {
             case 1:
                 return TokenI8();

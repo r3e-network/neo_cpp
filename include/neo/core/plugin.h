@@ -1,0 +1,1 @@
+/home/neo/git/csahrp_cpp/include/neo/plugins/plugin.h

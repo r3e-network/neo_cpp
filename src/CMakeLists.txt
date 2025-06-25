@@ -1,20 +1,20 @@
-# Add subdirectories
+# Add subdirectories (core modules only)
 add_subdirectory(cryptography)
 add_subdirectory(io)
 add_subdirectory(json)
 add_subdirectory(logging)
 add_subdirectory(extensions)
-add_subdirectory(console_service)
+# add_subdirectory(console_service) # Temporarily disabled
 add_subdirectory(persistence)
-add_subdirectory(network)
-add_subdirectory(ledger)
+# add_subdirectory(network) # Temporarily disabled due to missing dependencies
+# add_subdirectory(ledger) # Temporarily disabled due to compilation issues
 add_subdirectory(vm)
 add_subdirectory(smartcontract)
-add_subdirectory(wallets)
-add_subdirectory(plugins)
-add_subdirectory(consensus)
-add_subdirectory(rpc)
-add_subdirectory(cli)
+# add_subdirectory(wallets) # Temporarily disabled
+# add_subdirectory(plugins) # Temporarily disabled
+# add_subdirectory(consensus) # Temporarily disabled
+# add_subdirectory(rpc) # Temporarily disabled
+# add_subdirectory(cli) # Temporarily disabled
 
 # Add core source files
 add_library(neo_core OBJECT
@@ -24,14 +24,15 @@ add_library(neo_core OBJECT
 )
 
 target_include_directories(neo_core PUBLIC
-    ${CMAKE_SOURCE_DIR}/include
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
 )
 
 target_link_libraries(neo_core PUBLIC
     nlohmann_json::nlohmann_json
 )
 
-# Create the main library
+# Create the main library (core modules only)
 add_library(neo_cpp
     $<TARGET_OBJECTS:neo_core>
     $<TARGET_OBJECTS:neo_cryptography>
@@ -40,18 +41,18 @@ add_library(neo_cpp
     $<TARGET_OBJECTS:neo_json>
     $<TARGET_OBJECTS:neo_logging>
     $<TARGET_OBJECTS:neo_extensions>
-    $<TARGET_OBJECTS:neo_console_service>
+    # $<TARGET_OBJECTS:neo_console_service> # Temporarily disabled
     $<TARGET_OBJECTS:neo_persistence>
-    $<TARGET_OBJECTS:neo_network>
-    $<TARGET_OBJECTS:neo_ledger>
+    # $<TARGET_OBJECTS:neo_network> # Temporarily disabled
+    # $<TARGET_OBJECTS:neo_ledger> # Temporarily disabled
     $<TARGET_OBJECTS:neo_vm>
     $<TARGET_OBJECTS:neo_smartcontract>
-    $<TARGET_OBJECTS:neo_wallets>
-    $<TARGET_OBJECTS:neo_wallets_nep6>
-    $<TARGET_OBJECTS:neo_plugins>
-    $<TARGET_OBJECTS:neo_consensus>
-    $<TARGET_OBJECTS:neo_rpc>
-    $<TARGET_OBJECTS:neo_cli>
+    # $<TARGET_OBJECTS:neo_wallets> # Temporarily disabled
+    # $<TARGET_OBJECTS:neo_wallets_nep6> # Temporarily disabled
+    # $<TARGET_OBJECTS:neo_plugins> # Temporarily disabled
+    # $<TARGET_OBJECTS:neo_consensus> # Temporarily disabled
+    # $<TARGET_OBJECTS:neo_rpc> # Temporarily disabled
+    # $<TARGET_OBJECTS:neo_cli> # Temporarily disabled
 )
 
 # Link dependencies
@@ -80,7 +81,7 @@ if(Boost_FOUND)
 endif()
 
 # Install targets
-install(TARGETS neo_cpp
+install(TARGETS neo_cpp neo_core
     EXPORT neo_cpp-targets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib

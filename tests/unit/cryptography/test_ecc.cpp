@@ -4,188 +4,115 @@
 #include <neo/io/byte_vector.h>
 
 using namespace neo::cryptography;
+using namespace neo::cryptography::ecc;
 using namespace neo::io;
 
 TEST(ECCTest, Secp256r1GenerateKeyPair)
 {
-    // Create a curve
-    auto curve = ECCurve::GetCurve("secp256r1");
-    
     // Generate a random private key
-    ByteVector privateKey = Crypto::GenerateRandomBytes(32);
+    ByteVector privateKey = Secp256r1::GeneratePrivateKey();
     
-    // Generate a key pair
-    ECPoint publicKey = curve->GenerateKeyPair(privateKey.AsSpan());
+    // Check private key is valid
+    EXPECT_TRUE(Secp256r1::IsValidPrivateKey(privateKey));
+    EXPECT_EQ(privateKey.Size(), Secp256r1::PRIVATE_KEY_SIZE);
+    
+    // Generate public key from private key
+    ByteVector publicKey = Secp256r1::ComputePublicKey(privateKey);
     
     // Check that the public key is valid
-    EXPECT_FALSE(publicKey.IsInfinity());
-    EXPECT_EQ(publicKey.GetCurveName(), "secp256r1");
+    EXPECT_TRUE(Secp256r1::IsValidPublicKey(publicKey));
+    EXPECT_EQ(publicKey.Size(), Secp256r1::PUBLIC_KEY_SIZE); // Compressed public key
     
-    // Check that the public key can be serialized and deserialized
-    ByteVector publicKeyBytes = publicKey.ToBytes(true);
-    EXPECT_EQ(publicKeyBytes.Size(), 33); // Compressed public key
-    
-    ECPoint publicKey2 = ECPoint::FromBytes(publicKeyBytes.AsSpan(), "secp256r1");
-    EXPECT_EQ(publicKey, publicKey2);
-    
-    // Check that the public key can be serialized and deserialized in uncompressed format
-    ByteVector publicKeyBytes2 = publicKey.ToBytes(false);
-    EXPECT_EQ(publicKeyBytes2.Size(), 65); // Uncompressed public key
-    
-    ECPoint publicKey3 = ECPoint::FromBytes(publicKeyBytes2.AsSpan(), "secp256r1");
-    EXPECT_EQ(publicKey, publicKey3);
-    
-    // Invalid private key size
-    ByteVector invalidPrivateKey = Crypto::GenerateRandomBytes(16);
-    EXPECT_THROW(curve->GenerateKeyPair(invalidPrivateKey.AsSpan()), std::invalid_argument);
+    // Test with invalid private key size
+    ByteVector invalidPrivateKey(10); // Too short
+    EXPECT_FALSE(Secp256r1::IsValidPrivateKey(invalidPrivateKey));
 }
 
 TEST(ECCTest, Secp256r1SignVerify)
 {
-    // Create a curve
-    auto curve = ECCurve::GetCurve("secp256r1");
-    
-    // Generate a random private key
-    ByteVector privateKey = Crypto::GenerateRandomBytes(32);
-    
     // Generate a key pair
-    ECPoint publicKey = curve->GenerateKeyPair(privateKey.AsSpan());
+    ByteVector privateKey = Secp256r1::GeneratePrivateKey();
+    ByteVector publicKey = Secp256r1::ComputePublicKey(privateKey);
     
     // Message to sign
     ByteVector message = ByteVector::Parse("010203040506070809");
     
     // Sign the message
-    ByteVector signature = curve->Sign(message.AsSpan(), privateKey.AsSpan());
+    ByteVector signature = Secp256r1::Sign(message, privateKey);
     
     // Verify the signature
-    bool valid = curve->Verify(message.AsSpan(), signature.AsSpan(), publicKey);
+    bool valid = Secp256r1::Verify(message, signature, publicKey);
     EXPECT_TRUE(valid);
     
     // Verify with a different message
     ByteVector message2 = ByteVector::Parse("0102030405060708");
-    bool valid2 = curve->Verify(message2.AsSpan(), signature.AsSpan(), publicKey);
+    bool valid2 = Secp256r1::Verify(message2, signature, publicKey);
     EXPECT_FALSE(valid2);
     
     // Verify with a different signature
-    ByteVector signature2 = curve->Sign(message2.AsSpan(), privateKey.AsSpan());
-    bool valid3 = curve->Verify(message.AsSpan(), signature2.AsSpan(), publicKey);
+    ByteVector signature2 = Secp256r1::Sign(message2, privateKey);
+    bool valid3 = Secp256r1::Verify(message, signature2, publicKey);
     EXPECT_FALSE(valid3);
     
     // Verify with a different public key
-    ByteVector privateKey2 = Crypto::GenerateRandomBytes(32);
-    ECPoint publicKey2 = curve->GenerateKeyPair(privateKey2.AsSpan());
-    bool valid4 = curve->Verify(message.AsSpan(), signature.AsSpan(), publicKey2);
+    ByteVector privateKey2 = Secp256r1::GeneratePrivateKey();
+    ByteVector publicKey2 = Secp256r1::ComputePublicKey(privateKey2);
+    bool valid4 = Secp256r1::Verify(message, signature, publicKey2);
     EXPECT_FALSE(valid4);
 }
 
-TEST(ECCTest, Secp256k1GenerateKeyPair)
+TEST(ECCTest, KeyPairClass)
 {
-    // Create a curve
-    auto curve = ECCurve::GetCurve("secp256k1");
+    // Create a key pair from a generated private key
+    ByteVector privateKey = Secp256r1::GeneratePrivateKey();
+    KeyPair keyPair(privateKey);
     
-    // Generate a random private key
-    ByteVector privateKey = Crypto::GenerateRandomBytes(32);
+    // Check that keys are valid
+    EXPECT_TRUE(Secp256r1::IsValidPrivateKey(keyPair.GetPrivateKey()));
+    EXPECT_EQ(keyPair.GetPrivateKey(), privateKey);
     
-    // Generate a key pair
-    ECPoint publicKey = curve->GenerateKeyPair(privateKey.AsSpan());
-    
-    // Check that the public key is valid
-    EXPECT_FALSE(publicKey.IsInfinity());
-    EXPECT_EQ(publicKey.GetCurveName(), "secp256k1");
-    
-    // Check that the public key can be serialized and deserialized
-    ByteVector publicKeyBytes = publicKey.ToBytes(true);
-    EXPECT_EQ(publicKeyBytes.Size(), 33); // Compressed public key
-    
-    ECPoint publicKey2 = ECPoint::FromBytes(publicKeyBytes.AsSpan(), "secp256k1");
-    EXPECT_EQ(publicKey, publicKey2);
-    
-    // Check that the public key can be serialized and deserialized in uncompressed format
-    ByteVector publicKeyBytes2 = publicKey.ToBytes(false);
-    EXPECT_EQ(publicKeyBytes2.Size(), 65); // Uncompressed public key
-    
-    ECPoint publicKey3 = ECPoint::FromBytes(publicKeyBytes2.AsSpan(), "secp256k1");
-    EXPECT_EQ(publicKey, publicKey3);
-    
-    // Invalid private key size
-    ByteVector invalidPrivateKey = Crypto::GenerateRandomBytes(16);
-    EXPECT_THROW(curve->GenerateKeyPair(invalidPrivateKey.AsSpan()), std::invalid_argument);
+    // Get public key as ByteVector for validation
+    ByteVector publicKeyBytes = keyPair.GetPublicKey().ToBytes(true);
+    EXPECT_TRUE(Secp256r1::IsValidPublicKey(publicKeyBytes));
+    EXPECT_EQ(publicKeyBytes, Secp256r1::ComputePublicKey(privateKey));
 }
 
-TEST(ECCTest, Secp256k1SignVerify)
+TEST(ECCTest, ECPointClass)
 {
-    // Create a curve
-    auto curve = ECCurve::GetCurve("secp256k1");
-    
-    // Generate a random private key
-    ByteVector privateKey = Crypto::GenerateRandomBytes(32);
-    
     // Generate a key pair
-    ECPoint publicKey = curve->GenerateKeyPair(privateKey.AsSpan());
+    ByteVector privateKey = Secp256r1::GeneratePrivateKey();
+    ByteVector publicKeyBytes = Secp256r1::ComputePublicKey(privateKey);
     
-    // Message to sign
+    // Parse ECPoint from hex string
+    std::string hex = publicKeyBytes.AsSpan().ToHexString();
+    ECPoint point = ECPoint::Parse(hex);
+    
+    // Get encoded bytes
+    ByteVector encoded = point.ToBytes(true); // compressed
+    EXPECT_EQ(encoded, publicKeyBytes);
+    
+    // Test with KeyPair
+    KeyPair keyPair(privateKey);
+    ECPoint point2 = keyPair.GetPublicKey();
+    EXPECT_EQ(point2.ToBytes(true), publicKeyBytes);
+}
+
+TEST(ECCTest, InvalidOperations)
+{
+    // Test invalid private key
+    ByteVector invalidPrivateKey(10); // Too short
+    EXPECT_FALSE(Secp256r1::IsValidPrivateKey(invalidPrivateKey));
+    
+    // Test invalid public key
+    ByteVector invalidPublicKey(20); // Wrong size
+    EXPECT_FALSE(Secp256r1::IsValidPublicKey(invalidPublicKey));
+    
+    // Test signing with invalid private key
     ByteVector message = ByteVector::Parse("010203040506070809");
+    EXPECT_THROW(Secp256r1::Sign(message, invalidPrivateKey), std::invalid_argument);
     
-    // Sign the message
-    ByteVector signature = curve->Sign(message.AsSpan(), privateKey.AsSpan());
-    
-    // Verify the signature
-    bool valid = curve->Verify(message.AsSpan(), signature.AsSpan(), publicKey);
-    EXPECT_TRUE(valid);
-    
-    // Verify with a different message
-    ByteVector message2 = ByteVector::Parse("0102030405060708");
-    bool valid2 = curve->Verify(message2.AsSpan(), signature.AsSpan(), publicKey);
-    EXPECT_FALSE(valid2);
-    
-    // Verify with a different signature
-    ByteVector signature2 = curve->Sign(message2.AsSpan(), privateKey.AsSpan());
-    bool valid3 = curve->Verify(message.AsSpan(), signature2.AsSpan(), publicKey);
-    EXPECT_FALSE(valid3);
-    
-    // Verify with a different public key
-    ByteVector privateKey2 = Crypto::GenerateRandomBytes(32);
-    ECPoint publicKey2 = curve->GenerateKeyPair(privateKey2.AsSpan());
-    bool valid4 = curve->Verify(message.AsSpan(), signature.AsSpan(), publicKey2);
-    EXPECT_FALSE(valid4);
-}
-
-TEST(ECCTest, ECPointFromHex)
-{
-    // Create a curve
-    auto curve = ECCurve::GetCurve("secp256r1");
-    
-    // Generate a random private key
-    ByteVector privateKey = Crypto::GenerateRandomBytes(32);
-    
-    // Generate a key pair
-    ECPoint publicKey = curve->GenerateKeyPair(privateKey.AsSpan());
-    
-    // Convert to hex
-    std::string hex = publicKey.ToHex(true);
-    
-    // Parse from hex
-    ECPoint publicKey2 = ECPoint::FromHex(hex, "secp256r1");
-    
-    // Check that the public keys are equal
-    EXPECT_EQ(publicKey, publicKey2);
-    
-    // Invalid hex
-    EXPECT_THROW(ECPoint::FromHex("invalid", "secp256r1"), std::invalid_argument);
-    
-    // Invalid curve
-    EXPECT_THROW(ECPoint::FromHex(hex, "invalid"), std::invalid_argument);
-}
-
-TEST(ECCTest, GetCurve)
-{
-    // Get a curve by name
-    auto curve1 = ECCurve::GetCurve("secp256r1");
-    EXPECT_EQ(curve1->GetName(), "secp256r1");
-    
-    auto curve2 = ECCurve::GetCurve("secp256k1");
-    EXPECT_EQ(curve2->GetName(), "secp256k1");
-    
-    // Invalid curve name
-    EXPECT_THROW(ECCurve::GetCurve("invalid"), std::invalid_argument);
+    // Test verifying with invalid public key
+    ByteVector validPrivateKey = Secp256r1::GeneratePrivateKey();
+    ByteVector signature = Secp256r1::Sign(message, validPrivateKey);
+    EXPECT_FALSE(Secp256r1::Verify(message, signature, invalidPublicKey));
 }

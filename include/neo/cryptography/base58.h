@@ -23,6 +23,7 @@ namespace neo::cryptography
          */
         static std::string Encode(const std::vector<uint8_t>& data);
         static std::string Encode(const neo::io::ByteVector& data);
+        static std::string Encode(const neo::io::ByteSpan& data);
         
         /**
          * @brief Decode Base58 string to bytes.
@@ -39,6 +40,10 @@ namespace neo::cryptography
          */
         static std::string EncodeCheck(const std::vector<uint8_t>& data);
         static std::string EncodeCheck(const neo::io::ByteVector& data);
+        static std::string EncodeCheck(const neo::io::ByteSpan& data);
+        
+        // Legacy aliases for compatibility
+        static std::string EncodeWithChecksum(const neo::io::ByteSpan& data) { return EncodeCheck(data); }
         
         /**
          * @brief Decode Base58Check string to bytes (verifies checksum).
@@ -48,6 +53,9 @@ namespace neo::cryptography
          */
         static std::vector<uint8_t> DecodeCheck(const std::string& encoded);
         static neo::io::ByteVector DecodeCheckToByteVector(const std::string& encoded);
+        
+        // Legacy aliases for compatibility
+        static neo::io::ByteVector DecodeWithChecksum(const std::string& encoded) { return DecodeCheckToByteVector(encoded); }
         
         /**
          * @brief Verify if a string is valid Base58.

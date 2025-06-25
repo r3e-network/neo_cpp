@@ -22,6 +22,7 @@ namespace neo::io
          * @brief The size of the UInt160 in bytes.
          */
         static constexpr size_t Size = 20;
+        static constexpr size_t SIZE = 20;  // Backward compatibility
         using value_type = std::array<uint8_t, Size>;
 
         /**

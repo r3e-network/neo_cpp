@@ -65,7 +65,7 @@ namespace neo::smartcontract::native
             std::string data = stream.str();
 
             persistence::StorageKey committeeKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Committee));
-            persistence::StorageItem committeeItem(io::ByteVector(reinterpret_cast<const uint8_t*>(data.data()), data.size())));
+            persistence::StorageItem committeeItem(io::ByteVector(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
             engine.GetSnapshot()->Add(committeeKey, committeeItem);
 
             // Initialize voters count
@@ -81,18 +81,18 @@ namespace neo::smartcontract::native
             std::string gasData = gasStream.str();
 
             persistence::StorageKey gasKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::GasPerBlock));
-            persistence::StorageItem gasItem(io::ByteVector(reinterpret_cast<const uint8_t*>(gasData.data()), gasData.size())));
+            persistence::StorageItem gasItem(io::ByteVector(reinterpret_cast<const uint8_t*>(gasData.data()), gasData.size()));
             engine.GetSnapshot()->Add(gasKey, gasItem);
 
             // Initialize register price
-            int64_t registerPrice = 1000 * 100000000; // 1000 GAS
+            int64_t registerPrice = 1000LL * 100000000LL; // 1000 GAS
             std::ostringstream priceStream;
             io::BinaryWriter priceWriter(priceStream);
             priceWriter.Write(registerPrice);
             std::string priceData = priceStream.str();
 
             persistence::StorageKey priceKey = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::RegisterPrice));
-            persistence::StorageItem priceItem(io::ByteVector(reinterpret_cast<const uint8_t*>(priceData.data()), priceData.size())));
+            persistence::StorageItem priceItem(io::ByteVector(reinterpret_cast<const uint8_t*>(priceData.data()), priceData.size()));
             engine.GetSnapshot()->Add(priceKey, priceItem);
 
             // Mint initial NEO to BFT address
@@ -157,7 +157,7 @@ namespace neo::smartcontract::native
             std::string data = stream.str();
 
             persistence::StorageKey key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Committee));
-            persistence::StorageItem item(io::ByteVector(reinterpret_cast<const uint8_t*>(data.data()), data.size())));
+            persistence::StorageItem item(io::ByteVector(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
             engine.GetSnapshot()->Add(key, item);
         }
 

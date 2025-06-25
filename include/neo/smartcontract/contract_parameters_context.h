@@ -142,7 +142,7 @@ namespace neo::smartcontract
          * @brief Gets the witnesses for the IVerifiable.
          * @return The witnesses for the IVerifiable.
          */
-        std::vector<network::p2p::payloads::Witness> GetWitnesses() const;
+        std::vector<ledger::Witness> GetWitnesses() const;
 
         /**
          * @brief Converts the context from a JSON object.
@@ -168,5 +168,22 @@ namespace neo::smartcontract
          * @return The created context item.
          */
         ContextItem* CreateItem(const Contract& contract);
+
+        /**
+         * @brief Checks if the script is a multi-sig contract.
+         * @param script The script to check.
+         * @param m The minimum required signatures.
+         * @param n The total number of public keys.
+         * @param publicKeys The public keys.
+         * @return True if the script is a multi-sig contract, false otherwise.
+         */
+        bool IsMultiSigContract(const io::ByteVector& script, int& m, int& n, std::vector<cryptography::ecc::ECPoint>& publicKeys) const;
+
+        /**
+         * @brief Creates a multi-sig witness for the specified contract.
+         * @param contract The contract.
+         * @return The created witness.
+         */
+        std::shared_ptr<ledger::Witness> CreateMultiSigWitness(const Contract& contract) const;
     };
 }

@@ -23,12 +23,18 @@ namespace neo::io
          * @brief The size of the UInt256 in bytes.
          */
         static constexpr size_t Size = 32;
+        static constexpr size_t SIZE = 32;  // Backward compatibility
         using value_type = std::array<uint8_t, Size>;
 
         /**
          * @brief Constructs a UInt256 initialized to zero.
          */
         UInt256() : data_() {}
+
+        /**
+         * @brief Virtual destructor.
+         */
+        virtual ~UInt256() = default;
 
         /**
          * @brief Constructs a UInt256 from a ByteSpan.

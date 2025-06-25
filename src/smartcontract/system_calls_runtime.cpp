@@ -86,7 +86,10 @@ namespace neo::smartcontract
             }
             else if (appEngine.GetTransaction())
             {
-                time = appEngine.GetTransaction()->GetTimestamp();
+                // Transactions don't have timestamps in Neo, use system time
+                time = std::chrono::duration_cast<std::chrono::milliseconds>(
+                    std::chrono::system_clock::now().time_since_epoch()
+                ).count();
             }
             else
             {

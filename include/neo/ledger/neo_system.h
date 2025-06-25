@@ -4,7 +4,7 @@
 #include <neo/persistence/data_cache.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/memory_pool.h>
-#include <neo/network/p2p/local_node.h>
+// #include <neo/network/p2p/local_node.h> // Disabled until network module is enabled
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <memory>
 #include <string>

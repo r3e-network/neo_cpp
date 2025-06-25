@@ -184,6 +184,13 @@ namespace neo::persistence
          */
         io::ByteVector ToArray() const;
 
+        /**
+         * @brief Gets the script hash for the contract ID.
+         * @return The script hash (UInt160).
+         * @note This is a placeholder implementation that needs blockchain state access.
+         */
+        io::UInt160 GetScriptHash() const;
+
         // ISerializable implementation
         void Serialize(io::BinaryWriter& writer) const override;
         void Deserialize(io::BinaryReader& reader) override;

@@ -255,6 +255,63 @@ namespace neo::vm
 
     std::string Script::GetOpCodeName(OpCode opcode)
     {
-        return GetOpCodeName(opcode);
+        switch (opcode)
+        {
+            case OpCode::PUSH0: return "PUSH0";
+            case OpCode::PUSHDATA1: return "PUSHDATA1";
+            case OpCode::PUSHDATA2: return "PUSHDATA2";
+            case OpCode::PUSHDATA4: return "PUSHDATA4";
+            case OpCode::PUSHM1: return "PUSHM1";
+            case OpCode::PUSH1: return "PUSH1";
+            case OpCode::PUSH2: return "PUSH2";
+            case OpCode::PUSH3: return "PUSH3";
+            case OpCode::PUSH4: return "PUSH4";
+            case OpCode::PUSH5: return "PUSH5";
+            case OpCode::PUSH6: return "PUSH6";
+            case OpCode::PUSH7: return "PUSH7";
+            case OpCode::PUSH8: return "PUSH8";
+            case OpCode::PUSH9: return "PUSH9";
+            case OpCode::PUSH10: return "PUSH10";
+            case OpCode::PUSH11: return "PUSH11";
+            case OpCode::PUSH12: return "PUSH12";
+            case OpCode::PUSH13: return "PUSH13";
+            case OpCode::PUSH14: return "PUSH14";
+            case OpCode::PUSH15: return "PUSH15";
+            case OpCode::PUSH16: return "PUSH16";
+            case OpCode::NOP: return "NOP";
+            case OpCode::JMP: return "JMP";
+            case OpCode::JMP_L: return "JMP_L";
+            case OpCode::JMPIF: return "JMPIF";
+            case OpCode::JMPIF_L: return "JMPIF_L";
+            case OpCode::JMPIFNOT: return "JMPIFNOT";
+            case OpCode::JMPIFNOT_L: return "JMPIFNOT_L";
+            case OpCode::JMPEQ: return "JMPEQ";
+            case OpCode::JMPEQ_L: return "JMPEQ_L";
+            case OpCode::JMPNE: return "JMPNE";
+            case OpCode::JMPNE_L: return "JMPNE_L";
+            case OpCode::JMPGT: return "JMPGT";
+            case OpCode::JMPGT_L: return "JMPGT_L";
+            case OpCode::JMPGE: return "JMPGE";
+            case OpCode::JMPGE_L: return "JMPGE_L";
+            case OpCode::JMPLT: return "JMPLT";
+            case OpCode::JMPLT_L: return "JMPLT_L";
+            case OpCode::JMPLE: return "JMPLE";
+            case OpCode::JMPLE_L: return "JMPLE_L";
+            case OpCode::CALL: return "CALL";
+            case OpCode::CALL_L: return "CALL_L";
+            case OpCode::CALLA: return "CALLA";
+            case OpCode::CALLT: return "CALLT";
+            case OpCode::ABORT: return "ABORT";
+            case OpCode::ASSERT: return "ASSERT";
+            case OpCode::THROW: return "THROW";
+            case OpCode::TRY: return "TRY";
+            case OpCode::TRY_L: return "TRY_L";
+            case OpCode::ENDTRY: return "ENDTRY";
+            case OpCode::ENDTRY_L: return "ENDTRY_L";
+            case OpCode::ENDFINALLY: return "ENDFINALLY";
+            case OpCode::RET: return "RET";
+            case OpCode::SYSCALL: return "SYSCALL";
+            default: return "UNKNOWN";
+        }
     }
 }

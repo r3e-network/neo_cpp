@@ -20,26 +20,11 @@ target_include_directories(neo_cli_app
 # Link with all required libraries
 target_link_libraries(neo_cli_app
     PRIVATE
-        neo_cli
-        neo_node
-        neo_rpc
-        neo_wallets
-        neo_smartcontract
-        neo_cryptography
-        neo_network
-        neo_persistence
-        neo_ledger
-        neo_io
-        neo_logging
-        neo_consensus
-        neo_plugins
-        nlohmann_json::nlohmann_json
-        Boost::system
-        Boost::filesystem
-        Boost::thread
+        neo_cpp
+        ${BOOST_LIBRARIES}
         OpenSSL::SSL
         OpenSSL::Crypto
-        fmt::fmt
+        nlohmann_json::nlohmann_json
         spdlog::spdlog
 )
 

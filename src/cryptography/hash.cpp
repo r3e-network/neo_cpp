@@ -87,11 +87,12 @@ namespace neo::cryptography
         const uint32_t c2 = 0x1b873593;
         
         uint32_t h1 = seed;
-        const uint32_t* blocks = reinterpret_cast<const uint32_t*>(key + ((len & ~3)));
+        const uint32_t* blocks = reinterpret_cast<const uint32_t*>(key);
+        int nblocks = len / 4;
         
-        for (int i = -len & 3; i; i += 4)
+        for (int i = 0; i < nblocks; i++)
         {
-            uint32_t k1 = blocks[i >> 2];
+            uint32_t k1 = blocks[i];
             
             k1 *= c1;
             k1 = (k1 << 15) | (k1 >> 17);

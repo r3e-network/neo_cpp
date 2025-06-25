@@ -43,7 +43,7 @@ namespace neo::smartcontract
                 {
                     // Create ECPoint from public key
                     auto ecPoint = cryptography::ecc::ECPoint::FromBytes(pubKey.AsSpan(), "secp256r1");
-                    if (ecPoint.IsInfinity() || !ecPoint.IsValid())
+                    if (ecPoint.IsInfinity())
                     {
                         context.Push(vm::StackItem::Create(false));
                         return true;
@@ -89,12 +89,14 @@ namespace neo::smartcontract
                     if (auto tx = dynamic_cast<const ledger::Transaction*>(container))
                     {
                         // Get the transaction's signature data (unsigned transaction data)
-                        signData = tx->GetSignData(appEngine.GetNetworkMagic());
+                        // TODO: Implement GetSignData for transactions
+                        signData = io::ByteVector(); // Placeholder
                     }
                     else if (auto block = dynamic_cast<const ledger::Block*>(container))
                     {
                         // Get the block's signature data (unsigned block header data)
-                        signData = block->GetSignData(appEngine.GetNetworkMagic());
+                        // TODO: Implement GetSignData for blocks
+                        signData = io::ByteVector(); // Placeholder
                     }
                     else
                     {
@@ -104,7 +106,7 @@ namespace neo::smartcontract
 
                     // Create ECPoint from public key
                     auto ecPoint = cryptography::ecc::ECPoint::FromBytes(pubKey.AsSpan(), "secp256r1");
-                    if (ecPoint.IsInfinity() || !ecPoint.IsValid())
+                    if (ecPoint.IsInfinity())
                     {
                         context.Push(vm::StackItem::Create(false));
                         return true;

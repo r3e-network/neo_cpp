@@ -4,7 +4,6 @@
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/gas_token.h>
-#include <neo/smartcontract/script_builder.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/cryptography/hash.h>
@@ -26,7 +25,7 @@ namespace neo::ledger
 
     Blockchain::Blockchain(std::shared_ptr<NeoSystem> system)
         : system_(system)
-        , header_cache_(std::make_shared<HeaderCache>())
+        // , header_cache_(std::make_shared<HeaderCache>())  // Disabled since network module is disabled
         , data_cache_(system->GetStoreView())
         , extensible_whitelist_cached_(false)
         , running_(false)
@@ -87,7 +86,8 @@ namespace neo::ledger
         std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
         uint32_t current_height = GetHeight();
         if (current_height == 0) {
-            return system_->GetGenesisBlock()->GetHash();
+            auto genesis_block = GetBlock(0);
+            return genesis_block ? genesis_block->GetHash() : io::UInt256();
         }
         return system_->GetLedgerContract()->GetBlockHash(data_cache_, current_height);
     }
@@ -134,28 +134,16 @@ namespace neo::ledger
     {
         std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
         
-        // Check header cache first
-        auto header = header_cache_->Get(hash);
-        if (header) {
-            return header;
-        }
-        
-        // Load full block and return header
+        // Header cache disabled - load full block and return header directly
         auto block = GetBlock(hash);
-        return block ? block->GetHeader() : nullptr;
+        return block ? std::make_shared<BlockHeader>(*block) : nullptr;
     }
 
     std::shared_ptr<Header> Blockchain::GetBlockHeader(uint32_t index) const
     {
         std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
         
-        // Check header cache first
-        auto header = header_cache_->Get(index);
-        if (header) {
-            return header;
-        }
-        
-        // Load from storage
+        // Header cache disabled - load from storage directly
         io::UInt256 block_hash = system_->GetLedgerContract()->GetBlockHash(data_cache_, index);
         return block_hash.IsZero() ? nullptr : GetBlockHeader(block_hash);
     }
@@ -181,26 +169,29 @@ namespace neo::ledger
             return true;
         }
         
-        return system_->GetLedgerContract()->ContainsBlock(data_cache_, hash);
+        auto block = system_->GetLedgerContract()->GetBlock(data_cache_, hash);
+        return block != nullptr;
     }
 
     bool Blockchain::ContainsTransaction(const io::UInt256& hash) const
     {
         std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
-        return system_->GetLedgerContract()->ContainsTransaction(data_cache_, hash);
+        auto transaction = system_->GetLedgerContract()->GetTransaction(data_cache_, hash);
+        return transaction != nullptr;
     }
 
     VerifyResult Blockchain::OnNewBlock(std::shared_ptr<Block> block)
     {
-        if (!block || !block->TryGetHash()) {
+        if (!block || block->GetHash() == io::UInt256()) {
             return VerifyResult::Invalid;
         }
 
         std::unique_lock<std::shared_mutex> lock(blockchain_mutex_);
         
-        auto snapshot = data_cache_->CreateSnapshot();
-        uint32_t current_height = system_->GetLedgerContract()->GetCurrentIndex(snapshot);
-        uint32_t header_height = header_cache_->GetLast() ? header_cache_->GetLast()->GetIndex() : current_height;
+        // Use data_cache_ directly instead of snapshot for now
+        uint32_t current_height = system_->GetLedgerContract()->GetCurrentIndex(data_cache_);
+        // Header cache disabled - use current_height
+        uint32_t header_height = current_height;
         
         // Check if block already exists
         if (block->GetIndex() <= current_height) {
@@ -215,12 +206,12 @@ namespace neo::ledger
         
         // Verify block
         if (block->GetIndex() == header_height + 1) {
-            if (!VerifyBlock(block, snapshot)) {
+            if (!VerifyBlock(block, data_cache_)) {
                 return VerifyResult::Invalid;
             }
         } else {
-            auto header = header_cache_->Get(block->GetIndex());
-            if (!header || header->GetHash() != block->GetHash()) {
+            // Header cache disabled - verify block index is sequential
+            if (block->GetIndex() > header_height + 1) {
                 return VerifyResult::Invalid;
             }
         }
@@ -242,10 +233,8 @@ namespace neo::ledger
                 // Would notify network layer here
             }
             
-            // Add header to cache if next expected
-            if (block->GetIndex() == header_height + 1) {
-                header_cache_->Add(block->GetHeader());
-            }
+            // Header cache disabled
+            // Would add header to cache here if enabled
         }
         
         return VerifyResult::Succeed;
@@ -253,6 +242,8 @@ namespace neo::ledger
 
     void Blockchain::OnNewHeaders(const std::vector<std::shared_ptr<Header>>& headers)
     {
+        // Header cache disabled - method temporarily disabled
+        return;
         if (header_cache_->IsFull()) {
             return;
         }

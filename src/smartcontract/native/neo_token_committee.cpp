@@ -188,7 +188,7 @@ namespace neo::smartcontract::native
             vm::ScriptBuilder builder;
             
             // Push m (required signatures count)
-            builder.EmitPush(m);
+            builder.EmitPush(static_cast<int64_t>(m));
             
             // Push all public keys in order
             for (const auto& pubkey : committee)
@@ -198,7 +198,7 @@ namespace neo::smartcontract::native
             }
             
             // Push n (total public keys count)
-            builder.EmitPush(n);
+            builder.EmitPush(static_cast<int64_t>(n));
             
             // Emit CHECKMULTISIG opcode
             builder.EmitSysCall("System.Crypto.CheckMultisig");

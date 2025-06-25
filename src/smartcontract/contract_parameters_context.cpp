@@ -8,11 +8,50 @@
 #include <neo/vm/script.h>
 #include <neo/vm/opcode.h>
 #include <neo/cryptography/crypto.h>
+#include <neo/cryptography/base64.h>
 #include <algorithm>
 #include <sstream>
 
 namespace neo::smartcontract
 {
+    // Helper function to parse ContractParameterType from string
+    ContractParameterType ParseContractParameterType(const std::string& typeStr)
+    {
+        if (typeStr == "Boolean") return ContractParameterType::Boolean;
+        if (typeStr == "Integer") return ContractParameterType::Integer;
+        if (typeStr == "Hash160") return ContractParameterType::Hash160;
+        if (typeStr == "Hash256") return ContractParameterType::Hash256;
+        if (typeStr == "ByteArray") return ContractParameterType::ByteArray;
+        if (typeStr == "PublicKey") return ContractParameterType::PublicKey;
+        if (typeStr == "String") return ContractParameterType::String;
+        if (typeStr == "Array") return ContractParameterType::Array;
+        if (typeStr == "Map") return ContractParameterType::Map;
+        if (typeStr == "InteropInterface") return ContractParameterType::InteropInterface;
+        if (typeStr == "Void") return ContractParameterType::Void;
+        return ContractParameterType::Signature; // Default fallback
+    }
+
+    // Helper function to convert ContractParameterType to string
+    std::string ContractParameterTypeToString(ContractParameterType type)
+    {
+        switch (type)
+        {
+            case ContractParameterType::Signature: return "Signature";
+            case ContractParameterType::Boolean: return "Boolean";
+            case ContractParameterType::Integer: return "Integer";
+            case ContractParameterType::Hash160: return "Hash160";
+            case ContractParameterType::Hash256: return "Hash256";
+            case ContractParameterType::ByteArray: return "ByteArray";
+            case ContractParameterType::PublicKey: return "PublicKey";
+            case ContractParameterType::String: return "String";
+            case ContractParameterType::Array: return "Array";
+            case ContractParameterType::Map: return "Map";
+            case ContractParameterType::InteropInterface: return "InteropInterface";
+            case ContractParameterType::Void: return "Void";
+            default: return "Unknown";
+        }
+    }
+
     ContractParametersContext::ContextItem::ContextItem(const Contract& contract)
         : script(contract.GetScript())
     {
@@ -29,7 +68,7 @@ namespace neo::smartcontract
         auto scriptBase64 = reader.ReadString("script");
         if (!scriptBase64.empty())
         {
-            script = io::ByteVector::FromBase64(scriptBase64);
+            script = cryptography::Base64::Decode(scriptBase64);
         }
 
         // Read parameters
@@ -53,44 +92,48 @@ namespace neo::smartcontract
                 switch (parameter.GetType())
                 {
                     case ContractParameterType::Boolean:
-                        parameter.SetValue(valueJson.get<bool>());
+                        parameter = ContractParameter::CreateBoolean(valueJson.get<bool>());
                         break;
                         
                     case ContractParameterType::Integer:
-                        parameter.SetValue(std::stoll(valueJson.get<std::string>()));
+                        parameter = ContractParameter::CreateInteger(std::stoll(valueJson.get<std::string>()));
                         break;
                         
                     case ContractParameterType::ByteArray:
                     case ContractParameterType::Signature:
                         {
                             std::string base64Str = valueJson.get<std::string>();
-                            auto bytes = Base64Decode(base64Str);
-                            parameter.SetValue(bytes);
+                            auto bytes = cryptography::Base64::Decode(base64Str);
+                            if (parameter.GetType() == ContractParameterType::Signature)
+                                parameter = ContractParameter::CreateSignature(bytes);
+                            else
+                                parameter = ContractParameter::CreateByteArray(bytes);
                         }
                         break;
                         
                     case ContractParameterType::String:
-                        parameter.SetValue(valueJson.get<std::string>());
+                        parameter = ContractParameter::CreateString(valueJson.get<std::string>());
                         break;
                         
                     case ContractParameterType::Hash160:
                         {
                             std::string hashStr = valueJson.get<std::string>();
-                            parameter.SetValue(io::UInt160::Parse(hashStr));
+                            parameter = ContractParameter::CreateHash160(io::UInt160::Parse(hashStr));
                         }
                         break;
                         
                     case ContractParameterType::Hash256:
                         {
                             std::string hashStr = valueJson.get<std::string>();
-                            parameter.SetValue(io::UInt256::Parse(hashStr));
+                            parameter = ContractParameter::CreateHash256(io::UInt256::Parse(hashStr));
                         }
                         break;
                         
                     case ContractParameterType::PublicKey:
                         {
                             std::string pubkeyStr = valueJson.get<std::string>();
-                            parameter.SetValue(cryptography::ecc::ECPoint::Parse(pubkeyStr));
+                            auto ecPoint = cryptography::ecc::ECPoint::Parse(pubkeyStr);
+                            parameter = ContractParameter::CreatePublicKey(ecPoint);
                         }
                         break;
                         
@@ -104,7 +147,7 @@ namespace neo::smartcontract
                                 // For now, create empty parameter
                                 arrayParams.push_back(ContractParameter());
                             }
-                            parameter.SetValue(arrayParams);
+                            parameter = ContractParameter::CreateArray(arrayParams);
                         }
                         break;
                         
@@ -119,10 +162,10 @@ namespace neo::smartcontract
 
         // Read signatures
         auto signaturesObj = reader.ReadObject("signatures");
-        for (const auto& property : signaturesObj.GetProperties())
+        for (const auto& property : signaturesObj.items())
         {
-            auto pubkey = cryptography::ecc::ECPoint::Parse(property.first);
-            auto signature = io::ByteVector::FromBase64(property.second.GetString());
+            auto pubkey = cryptography::ecc::ECPoint::Parse(property.key());
+            auto signature = cryptography::Base64::Decode(property.value().get<std::string>());
             signatures[pubkey] = signature;
         }
     }
@@ -135,11 +178,11 @@ namespace neo::smartcontract
         writer.WritePropertyName("script");
         if (script.IsEmpty())
         {
-            writer.WriteNull();
+            writer.Write("script", "");
         }
         else
         {
-            writer.WriteString(script.ToBase64());
+            writer.Write("script", cryptography::Base64::Encode(script.AsSpan()));
         }
 
         // Write parameters
@@ -152,7 +195,7 @@ namespace neo::smartcontract
             
             // Write parameter type
             writer.WritePropertyName("type");
-            writer.WriteValue(ContractParameterTypeToString(parameter.GetType()));
+            writer.Write("type", ContractParameterTypeToString(parameter.GetType()));
             
             // Write parameter value based on type
             if (parameter.HasValue())
@@ -419,12 +462,12 @@ namespace neo::smartcontract
         return &it->second->signatures;
     }
 
-    std::vector<network::p2p::payloads::Witness> ContractParametersContext::GetWitnesses() const
+    std::vector<ledger::Witness> ContractParametersContext::GetWitnesses() const
     {
         if (!IsCompleted())
             throw std::runtime_error("Witnesses are not ready");
 
-        std::vector<network::p2p::payloads::Witness> witnesses;
+        std::vector<ledger::Witness> witnesses;
         witnesses.reserve(GetScriptHashes().size());
 
         for (size_t i = 0; i < GetScriptHashes().size(); i++)
@@ -728,7 +771,7 @@ namespace neo::smartcontract
 
         // Write network
         writer.WritePropertyName("network");
-        writer.WriteNumber(network);
+        writer.WriteNumber(static_cast<int>(network));
 
         writer.WriteEndObject();
     }

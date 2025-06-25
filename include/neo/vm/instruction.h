@@ -24,7 +24,7 @@ namespace neo::vm
         /**
          * @brief The OpCode of the instruction.
          */
-        const OpCode OpCode;
+        const neo::vm::OpCode opcode;
 
         /**
          * @brief The operand of the instruction.

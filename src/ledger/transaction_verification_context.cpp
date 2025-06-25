@@ -45,15 +45,9 @@ namespace neo::ledger
         // Add transaction hash
         transaction_hashes_.insert(hash);
 
-        // Track used outputs
-        for (const auto& input : transaction->GetInputs()) {
-            auto key = MakeOutputKey(input.GetPrevHash(), input.GetPrevIndex());
-            used_outputs_[key] = hash;
-        }
-
-        // Track account conflicts
+        // Track account conflicts (Neo N3 uses account-based model, not UTXO)
         for (const auto& signer : transaction->GetSigners()) {
-            account_conflicts_[signer.account] = hash;
+            account_conflicts_[signer.GetAccount()] = hash;
         }
     }
 
@@ -73,7 +67,6 @@ namespace neo::ledger
 
     void TransactionVerificationContext::Clear()
     {
-        used_outputs_.clear();
         account_conflicts_.clear();
         transaction_hashes_.clear();
     }
@@ -83,47 +76,23 @@ namespace neo::ledger
         return transaction_hashes_.size();
     }
 
-    std::string TransactionVerificationContext::MakeOutputKey(const io::UInt256& prev_hash, uint32_t index) const
-    {
-        std::ostringstream oss;
-        oss << prev_hash.ToString() << ":" << index;
-        return oss.str();
-    }
 
     bool TransactionVerificationContext::HasOutputConflict(std::shared_ptr<Transaction> transaction) const
     {
-        for (const auto& input : transaction->GetInputs()) {
-            auto key = MakeOutputKey(input.GetPrevHash(), input.GetPrevIndex());
-            if (used_outputs_.find(key) != used_outputs_.end()) {
-                return true;
-            }
-        }
+        // Neo N3 uses account-based model, no UTXO inputs to check
+        // Output conflicts are managed at the account level through signers
         return false;
     }
 
     bool TransactionVerificationContext::HasAccountConflict(std::shared_ptr<Transaction> transaction) const
     {
         for (const auto& signer : transaction->GetSigners()) {
-            if (account_conflicts_.find(signer.account) != account_conflicts_.end()) {
+            if (account_conflicts_.find(signer.GetAccount()) != account_conflicts_.end()) {
                 return true;
             }
         }
         return false;
     }
 
-    // TransactionRemovedEventArgs implementation
-    TransactionRemovedEventArgs::TransactionRemovedEventArgs(std::shared_ptr<Transaction> transaction, TransactionRemovalReason reason)
-        : transaction_(transaction), reason_(reason)
-    {
-    }
-
-    std::shared_ptr<Transaction> TransactionRemovedEventArgs::GetTransaction() const
-    {
-        return transaction_;
-    }
-
-    TransactionRemovalReason TransactionRemovedEventArgs::GetReason() const
-    {
-        return reason_;
-    }
+    // TransactionRemovedEventArgs is implemented in memory_pool.cpp
 }

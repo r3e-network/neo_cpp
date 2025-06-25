@@ -88,7 +88,7 @@ TEST(ContractParameterTest, CreateMethods)
     EXPECT_EQ(param4.GetType(), ContractParameterType::Hash160);
     EXPECT_TRUE(param4.GetValue().has_value());
     EXPECT_EQ(param4.GetValue()->Size(), 20);
-    EXPECT_EQ(ByteVector(ByteSpan(hash160.Data(), hash160.Size())), *param4.GetValue());
+    EXPECT_EQ(ByteVector(ByteSpan(hash160.Data(), UInt160::Size)), *param4.GetValue());
     
     // CreateHash256
     UInt256 hash256 = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
@@ -96,7 +96,7 @@ TEST(ContractParameterTest, CreateMethods)
     EXPECT_EQ(param5.GetType(), ContractParameterType::Hash256);
     EXPECT_TRUE(param5.GetValue().has_value());
     EXPECT_EQ(param5.GetValue()->Size(), 32);
-    EXPECT_EQ(ByteVector(ByteSpan(hash256.Data(), hash256.Size())), *param5.GetValue());
+    EXPECT_EQ(ByteVector(ByteSpan(hash256.Data(), UInt256::Size)), *param5.GetValue());
     
     // CreateByteArray
     ByteVector byteArray = ByteVector::Parse("0102030405");

@@ -276,7 +276,7 @@ namespace neo::ledger
         std::set<std::shared_ptr<PoolItem>> unverified_sorted_transactions_;
         
         // Conflicts tracking
-        std::unordered_map<io::UInt256, std::unordered_set<io::UInt256>> conflicts_;
+        std::unordered_map<io::UInt160, std::unordered_set<io::UInt256>> conflicts_;
         
         // Verification context
         std::unique_ptr<TransactionVerificationContext> verification_context_;

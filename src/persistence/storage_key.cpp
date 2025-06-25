@@ -3,6 +3,31 @@
 #include <algorithm>
 #include <bit>
 
+// Helper function for byte swapping (C++20 compatible)
+namespace {
+    template<typename T>
+    constexpr T byteswap(T value) noexcept {
+        if constexpr (sizeof(T) == 2) {
+            return ((value & 0xFF) << 8) | ((value >> 8) & 0xFF);
+        } else if constexpr (sizeof(T) == 4) {
+            return ((value & 0xFF) << 24) | 
+                   (((value >> 8) & 0xFF) << 16) | 
+                   (((value >> 16) & 0xFF) << 8) | 
+                   ((value >> 24) & 0xFF);
+        } else if constexpr (sizeof(T) == 8) {
+            return ((value & 0xFF) << 56) | 
+                   (((value >> 8) & 0xFF) << 48) | 
+                   (((value >> 16) & 0xFF) << 40) | 
+                   (((value >> 24) & 0xFF) << 32) | 
+                   (((value >> 32) & 0xFF) << 24) | 
+                   (((value >> 40) & 0xFF) << 16) | 
+                   (((value >> 48) & 0xFF) << 8) | 
+                   ((value >> 56) & 0xFF);
+        }
+        return value;
+    }
+}
+
 namespace neo::persistence
 {
     StorageKey::StorageKey() = default;
@@ -93,7 +118,7 @@ namespace neo::persistence
         FillHeader(std::span<uint8_t>(data.Data(), PREFIX_LENGTH), id, prefix);
         
         // Write as big-endian
-        int32_t beValue = static_cast<int32_t>(std::byteswap(static_cast<uint32_t>(bigEndian)));
+        int32_t beValue = static_cast<int32_t>(byteswap(static_cast<uint32_t>(bigEndian)));
         std::memcpy(data.Data() + PREFIX_LENGTH, &beValue, sizeof(int32_t));
         
         return StorageKey(id, io::ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
@@ -105,7 +130,7 @@ namespace neo::persistence
         FillHeader(std::span<uint8_t>(data.Data(), PREFIX_LENGTH), id, prefix);
         
         // Write as big-endian
-        uint32_t beValue = std::byteswap(bigEndian);
+        uint32_t beValue = byteswap(bigEndian);
         std::memcpy(data.Data() + PREFIX_LENGTH, &beValue, sizeof(uint32_t));
         
         return StorageKey(id, io::ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
@@ -117,7 +142,7 @@ namespace neo::persistence
         FillHeader(std::span<uint8_t>(data.Data(), PREFIX_LENGTH), id, prefix);
         
         // Write as big-endian
-        int64_t beValue = static_cast<int64_t>(std::byteswap(static_cast<uint64_t>(bigEndian)));
+        int64_t beValue = static_cast<int64_t>(byteswap(static_cast<uint64_t>(bigEndian)));
         std::memcpy(data.Data() + PREFIX_LENGTH, &beValue, sizeof(int64_t));
         
         return StorageKey(id, io::ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
@@ -129,7 +154,7 @@ namespace neo::persistence
         FillHeader(std::span<uint8_t>(data.Data(), PREFIX_LENGTH), id, prefix);
         
         // Write as big-endian
-        uint64_t beValue = std::byteswap(bigEndian);
+        uint64_t beValue = byteswap(bigEndian);
         std::memcpy(data.Data() + PREFIX_LENGTH, &beValue, sizeof(uint64_t));
         
         return StorageKey(id, io::ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
@@ -180,26 +205,47 @@ namespace neo::persistence
         return cache_;
     }
 
+    io::UInt160 StorageKey::GetScriptHash() const
+    {
+        // TODO: Implement proper contract ID to script hash lookup via ContractManagement
+        // For now, return a placeholder hash derived from the contract ID
+        // In production, this would require access to blockchain state:
+        // 1. Look up ContractManagement storage with key [Prefix_ContractHash, id_]
+        // 2. Return the UInt160 script hash stored at that key
+        
+        // Placeholder implementation: create a deterministic hash from the contract ID
+        io::ByteVector data(20); // UInt160 is 20 bytes
+        auto id_bytes = reinterpret_cast<const uint8_t*>(&id_);
+        for (size_t i = 0; i < 20; ++i)
+        {
+            data[i] = id_bytes[i % sizeof(int32_t)];
+        }
+        return io::UInt160(data.AsSpan());
+    }
+
     void StorageKey::Serialize(io::BinaryWriter& writer) const
     {
         auto data = ToArray();
-        writer.WriteBytes(data.AsSpan());
+        writer.WriteVarBytes(data.AsSpan());
     }
 
     void StorageKey::Deserialize(io::BinaryReader& reader)
     {
-        // Read contract ID
-        id_ = reader.ReadInt32();
-        
-        // Read remaining bytes as key
-        auto remaining = reader.Available();
-        if (remaining > 0)
+        auto data = reader.ReadVarBytes();
+        if (data.Size() >= sizeof(int32_t))
         {
-            key_ = reader.ReadBytes(remaining);
-        }
-        else
-        {
-            key_ = io::ByteVector();
+            // Extract contract ID from the first 4 bytes
+            id_ = *reinterpret_cast<const int32_t*>(data.Data());
+            
+            // Extract the key from the remaining bytes
+            if (data.Size() > sizeof(int32_t))
+            {
+                key_ = io::ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t));
+            }
+            else
+            {
+                key_ = io::ByteVector();
+            }
         }
         
         cacheValid_ = false;

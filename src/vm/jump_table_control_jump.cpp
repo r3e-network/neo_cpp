@@ -131,10 +131,6 @@ namespace neo::vm
         JumpTableControlJump::SYSCALL(engine, instruction);
     }
 
-    void JumpTable::ExecuteJumpOffset(ExecutionEngine& engine, int32_t offset)
-    {
-        JumpTableControlJump::ExecuteJumpOffset(engine, offset);
-    }
 
     // JumpTableControlJump implementations
     void JumpTableControlJump::JMP(ExecutionEngine& engine, const Instruction& instruction)
@@ -281,6 +277,21 @@ namespace neo::vm
         int32_t offset = instruction.TokenI32();
         int32_t position = context.GetInstructionPointer() + offset;
         engine.ExecuteCall(position);
+    }
+
+    void JumpTableControlJump::CALLA(ExecutionEngine& engine, const Instruction& /* instruction */)
+    {
+        auto item = engine.Pop();
+        if (item->GetType() != StackItemType::Pointer)
+            throw InvalidOperationException("Item is not a pointer");
+
+        auto pointerItem = std::dynamic_pointer_cast<PointerItem>(item);
+        engine.ExecuteCall(pointerItem->GetPosition());
+    }
+
+    void JumpTableControlJump::RET(ExecutionEngine& engine, const Instruction& /* instruction */)
+    {
+        engine.ExecuteRet();
     }
 
     void JumpTableControlJump::SYSCALL(ExecutionEngine& engine, const Instruction& instruction)

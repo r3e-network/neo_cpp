@@ -91,7 +91,7 @@ namespace neo::smartcontract
         writer.Write(static_cast<uint16_t>(0));
         
         // Serialize the script
-        writer.WriteVarBytes(script_);
+        writer.WriteVarBytes(script_.AsSpan());
         
         // Get the serialized data
         std::string data = stream.str();
@@ -126,7 +126,7 @@ namespace neo::smartcontract
         writer.Write(static_cast<uint16_t>(0));
         
         // Write the script
-        writer.WriteVarBytes(script_);
+        writer.WriteVarBytes(script_.AsSpan());
         
         // Write the checksum
         writer.Write(checkSum_);
@@ -187,7 +187,7 @@ namespace neo::smartcontract
         writer.WriteStartObject();
         
         writer.WritePropertyName("magic");
-        writer.WriteNumber(Magic);
+        writer.WriteNumber(static_cast<int>(Magic));
         
         writer.WritePropertyName("compiler");
         writer.WriteString(compiler_);
@@ -204,10 +204,10 @@ namespace neo::smartcontract
         writer.WriteEndArray();
         
         writer.WritePropertyName("script");
-        writer.WriteBase64String(script_.Data(), script_.Size());
+        writer.WriteBase64String("script", script_.AsSpan());
         
         writer.WritePropertyName("checksum");
-        writer.WriteNumber(checkSum_);
+        writer.WriteNumber(static_cast<int>(checkSum_));
         
         writer.WriteEndObject();
     }
@@ -223,7 +223,8 @@ namespace neo::smartcontract
         for (size_t i = 0; i < tokensArray.size(); i++)
         {
             MethodToken token;
-            token.DeserializeJson(tokensArray[i]);
+            io::JsonReader tokenReader(tokensArray[i]);
+            token.DeserializeJson(tokenReader);
             tokens_.push_back(token);
         }
         

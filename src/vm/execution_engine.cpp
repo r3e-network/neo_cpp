@@ -73,6 +73,9 @@ namespace neo::vm
 
     void ExecutionEngine::Push(std::shared_ptr<StackItem> item)
     {
+        // Add stack reference before pushing to evaluation stack
+        referenceCounter_.AddStackReference(item);
+        
         // Ensure the item is a proper StackItem shared_ptr
         if (auto boolItem = std::dynamic_pointer_cast<BooleanItem>(item))
         {
@@ -131,7 +134,10 @@ namespace neo::vm
 
     std::shared_ptr<StackItem> ExecutionEngine::Pop()
     {
-        return GetCurrentContext().Pop();
+        auto item = GetCurrentContext().Pop();
+        // Remove stack reference after popping from evaluation stack
+        referenceCounter_.RemoveStackReference(item);
+        return item;
     }
 
     std::shared_ptr<StackItem> ExecutionEngine::Peek(int32_t index) const
@@ -207,20 +213,19 @@ namespace neo::vm
         if (configureContext)
             configureContext(*context);
 
-        LoadContext(*context);
+        LoadContext(context);
         return context;
     }
 
-    void ExecutionEngine::LoadContext(ExecutionContext& context)
+    void ExecutionEngine::LoadContext(std::shared_ptr<ExecutionContext> context)
     {
         if (invocationStack_.size() >= limits_.MaxInvocationStackSize)
             throw InvalidOperationException("MaxInvocationStackSize exceed: " + std::to_string(invocationStack_.size()));
 
-        auto contextPtr = std::shared_ptr<ExecutionContext>(&context, [](ExecutionContext*) {});
-        invocationStack_.push_back(contextPtr);
+        invocationStack_.push_back(context);
 
         if (entryContext_ == nullptr)
-            entryContext_ = contextPtr;
+            entryContext_ = context;
     }
 
     void ExecutionEngine::UnloadContext(ExecutionContext& context)
@@ -328,7 +333,7 @@ namespace neo::vm
             try
             {
                 // Execute the instruction
-                OpCode opcode = instruction.OpCode;
+                OpCode opcode = instruction.opcode;
 
                 // Use the jump table to execute the instruction
                 const auto& handler = jumpTable_[opcode];
@@ -390,13 +395,19 @@ namespace neo::vm
 
     void ExecutionEngine::PostExecuteInstruction(const Instruction& instruction)
     {
-        if (referenceCounter_.Count() < limits_.MaxStackSize)
-            return;
-
-        if (referenceCounter_.CheckZeroReferred() > limits_.MaxStackSize)
-            throw InvalidOperationException("MaxStackSize exceed: " +
-                std::to_string(referenceCounter_.Count()) + "/" +
-                std::to_string(limits_.MaxStackSize));
+        // Check if reference count exceeds limits
+        auto currentCount = referenceCounter_.Count();
+        if (currentCount >= limits_.MaxStackSize)
+        {
+            // Try to clean up unreferenced items
+            auto cleanedCount = referenceCounter_.CheckZeroReferred();
+            if (cleanedCount >= limits_.MaxStackSize)
+            {
+                throw InvalidOperationException("MaxStackSize exceed: " +
+                    std::to_string(cleanedCount) + "/" +
+                    std::to_string(limits_.MaxStackSize));
+            }
+        }
     }
 
     void ExecutionEngine::OnStateChanged()
@@ -493,7 +504,7 @@ namespace neo::vm
         auto& context = GetCurrentContext();
         auto script = context.GetScript();
         auto newContext = CreateContext(script, -1, position);
-        LoadContext(*newContext);
+        LoadContext(newContext);
         return true;
     }
 

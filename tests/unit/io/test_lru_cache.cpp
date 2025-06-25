@@ -15,7 +15,7 @@ TEST(LRUCacheTest, Constructor)
     EXPECT_EQ(cache.Capacity(), 5);
     
     // Constructor with zero capacity should throw
-    EXPECT_THROW(LRUCache<int, std::string>(0), std::invalid_argument);
+    EXPECT_THROW((LRUCache<int, std::string>(0)), std::invalid_argument);
 }
 
 TEST(LRUCacheTest, AddAndGet)
@@ -181,10 +181,10 @@ TEST(LRUCacheTest, ThreadSafety)
                 cache.Add(key, key);
                 
                 // Try to get an item
-                int value;
-                if (cache.TryGet(key, value))
+                auto value = cache.TryGet(key);
+                if (value.has_value())
                 {
-                    EXPECT_EQ(value, key);
+                    EXPECT_EQ(value.value(), key);
                 }
                 
                 // Sleep a bit to increase the chance of race conditions
@@ -208,10 +208,10 @@ TEST(LRUCacheTest, ThreadSafety)
         for (int j = 0; j < 10; j++)
         {
             int key = i * 10 + j;
-            int value;
-            if (cache.TryGet(key, value))
+            auto value = cache.TryGet(key);
+            if (value.has_value())
             {
-                EXPECT_EQ(value, key);
+                EXPECT_EQ(value.value(), key);
             }
         }
     }

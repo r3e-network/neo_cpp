@@ -7,6 +7,7 @@
 #include <mutex>
 #include <unordered_map>
 
+#ifdef NEO_HAS_ROCKSDB
 namespace rocksdb
 {
     class DB;
@@ -14,9 +15,11 @@ namespace rocksdb
     class Snapshot;
     class WriteBatch;
 }
+#endif
 
 namespace neo::persistence
 {
+#ifdef NEO_HAS_ROCKSDB
     /**
      * @brief A RocksDB-based implementation of IStore.
      */
@@ -186,4 +189,5 @@ namespace neo::persistence
         std::unordered_map<std::string, std::shared_ptr<RocksDBStore>> stores_;
         std::mutex mutex_;
     };
+#endif // NEO_HAS_ROCKSDB
 }

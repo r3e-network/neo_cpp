@@ -7,10 +7,9 @@ namespace neo::smartcontract
         : snapshot_(snapshot), prefix_(prefix), currentIndex_(0), currentPair_({io::ByteVector(), io::ByteVector()})
     {
         // Get all matching keys
-        auto iterator = snapshot->Find(prefix);
-        while (iterator->HasNext())
+        auto results = snapshot->Find(&prefix);
+        for (const auto& entry : results)
         {
-            auto entry = iterator->Next();
             entries_.push_back(entry);
         }
     }

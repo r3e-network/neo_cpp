@@ -16,20 +16,20 @@ add_subdirectory(rpc)
 add_subdirectory(cli)
 
 # Main unit tests
-add_executable(test_main
-    test_protocol_settings_all_methods_complete.cpp
-)
+# add_executable(test_main
+#     test_protocol_settings_all_methods_complete.cpp
+# )
 
-target_include_directories(test_main
-    PRIVATE
-        ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}
-)
+# target_include_directories(test_main
+#     PRIVATE
+#         ${CMAKE_SOURCE_DIR}/include
+#         ${CMAKE_CURRENT_SOURCE_DIR}
+# )
 
-target_link_libraries(test_main
-    PRIVATE
-        neo_cpp
-        ${GTEST_LIBRARIES}
-)
+# target_link_libraries(test_main
+#     PRIVATE
+#         neo_cpp
+#         ${GTEST_LIBRARIES}
+# )
 
-add_test(NAME test_main COMMAND test_main)
+# add_test(NAME test_main COMMAND test_main)

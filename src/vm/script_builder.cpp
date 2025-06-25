@@ -118,6 +118,11 @@ namespace neo::vm
         return EmitPush(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
     }
 
+    ScriptBuilder& ScriptBuilder::EmitPush(const char* data)
+    {
+        return EmitPush(std::string(data));
+    }
+
     ScriptBuilder& ScriptBuilder::EmitRaw(const io::ByteSpan& script)
     {
         if (!script.empty())

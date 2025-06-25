@@ -331,6 +331,7 @@ namespace neo::smartcontract
 
     private:
         int32_t id_;
+        uint16_t updateCounter_;
         io::UInt160 scriptHash_;
         io::ByteVector script_;
         std::string manifest_;

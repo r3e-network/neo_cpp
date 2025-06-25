@@ -7,34 +7,21 @@
 namespace neo::smartcontract
 {
     ContractState::ContractState()
-        : id_(0), updateCounter_(0), manifest_(new manifest::ContractManifest())
+        : id_(0), updateCounter_(0), scriptHash_(), script_(), manifest_()
     {
     }
 
-    ContractState::~ContractState()
-    {
-        delete manifest_;
-    }
 
-    uint32_t ContractState::GetId() const
+    int32_t ContractState::GetId() const
     {
         return id_;
     }
 
-    void ContractState::SetId(uint32_t id)
+    void ContractState::SetId(int32_t id)
     {
         id_ = id;
     }
 
-    uint16_t ContractState::GetUpdateCounter() const
-    {
-        return updateCounter_;
-    }
-
-    void ContractState::SetUpdateCounter(uint16_t updateCounter)
-    {
-        updateCounter_ = updateCounter;
-    }
 
     const io::UInt160& ContractState::GetScriptHash() const
     {
@@ -56,48 +43,32 @@ namespace neo::smartcontract
         script_ = script;
     }
 
-    const manifest::ContractManifest& ContractState::GetManifest() const
+    const std::string& ContractState::GetManifest() const
     {
-        return *manifest_;
+        return manifest_;
     }
 
-    void ContractState::SetManifest(const manifest::ContractManifest& manifest)
+    void ContractState::SetManifest(const std::string& manifest)
     {
-        *manifest_ = manifest;
+        manifest_ = manifest;
     }
 
-    void ContractState::SetManifestFromJson(const std::string& manifestJson)
-    {
-        *manifest_ = manifest::ContractManifest::Parse(manifestJson);
-    }
-
-    io::UInt160 ContractState::CalculateHash(const io::UInt160& sender, uint32_t nefChecksum, const std::string& name)
-    {
-        std::ostringstream stream;
-        io::BinaryWriter writer(stream);
-        writer.Write(sender);
-        writer.Write(nefChecksum);
-        writer.WriteVarString(name);
-        std::string data = stream.str();
-        return cryptography::Hash::Hash160(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
-    }
 
     void ContractState::Serialize(io::BinaryWriter& writer) const
     {
         writer.Write(id_);
         writer.Write(updateCounter_);
         writer.Write(scriptHash_);
-        writer.WriteVarBytes(script_.Data(), script_.Size());
-        writer.WriteVarString(manifest_->ToJson());
+        writer.WriteVarBytes(script_.AsSpan());
+        writer.WriteVarString(manifest_);
     }
 
     void ContractState::Deserialize(io::BinaryReader& reader)
     {
-        id_ = reader.ReadUInt32();
+        id_ = reader.ReadInt32();
         updateCounter_ = reader.ReadUInt16();
         scriptHash_ = reader.ReadSerializable<io::UInt160>();
         script_ = reader.ReadVarBytes();
-        std::string manifestJson = reader.ReadVarString();
-        *manifest_ = manifest::ContractManifest::Parse(manifestJson);
+        manifest_ = reader.ReadVarString();
     }
 }

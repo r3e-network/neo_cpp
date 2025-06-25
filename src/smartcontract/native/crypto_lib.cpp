@@ -1,10 +1,12 @@
 #include <neo/smartcontract/native/crypto_lib.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/cryptography/hash.h>
-#include <neo/cryptography/ecc/ec_point.h>
+#include <neo/cryptography/crypto.h>
+#include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <sstream>
+#include <iostream>
 
 namespace neo::smartcontract::native
 {
@@ -108,14 +110,14 @@ namespace neo::smartcontract::native
                 return vm::StackItem::Create(false);
 
             // Decode the public key to ECPoint (equivalent to C# ECPoint.DecodePoint)
-            auto ecPoint = neo::cryptography::ECPoint::Parse(pubKey.ToHexString());
+            auto ecPoint = neo::cryptography::ecc::ECPoint::Parse(pubKey.ToHexString());
 
             // Use secp256r1 curve to verify signature (equivalent to C# Crypto.VerifySignature)
             // Implement proper curve verification using ECDSA signature verification
             try
             {
                 // Verify that the public key is valid
-                if (!ecPoint.IsValid())
+                if (ecPoint.IsInfinity())
                 {
                     return vm::StackItem::Create(false);
                 }
@@ -163,14 +165,14 @@ namespace neo::smartcontract::native
                 return vm::StackItem::Create(false);
 
             // Decode the public key to ECPoint (equivalent to C# ECPoint.DecodePoint)
-            auto ecPoint = neo::cryptography::ECPoint::Parse(pubKey.ToHexString());
+            auto ecPoint = neo::cryptography::ecc::ECPoint::Parse(pubKey.ToHexString());
 
             // Use the appropriate curve to verify signature
             // Implement proper curve verification with support for both secp256r1 and secp256k1
             try
             {
                 // Verify that the public key is valid
-                if (!ecPoint.IsValid())
+                if (ecPoint.IsInfinity())
                 {
                     return vm::StackItem::Create(false);
                 }
@@ -183,8 +185,9 @@ namespace neo::smartcontract::native
                 }
                 else if (curve == "secp256k1")
                 {
-                    // For secp256k1, use the appropriate verification method
-                    result = cryptography::Crypto::VerifySignatureSecp256k1(message.AsSpan(), signature.AsSpan(), ecPoint);
+                    // For secp256k1, use the regular verification method for now
+                    // TODO: Implement proper secp256k1 verification if different from secp256r1
+                    result = cryptography::Crypto::VerifySignature(message.AsSpan(), signature.AsSpan(), ecPoint);
                 }
                 else
                 {

@@ -6,6 +6,7 @@
 #include <neo/io/uint160.h>
 #include <neo/ledger/witness.h>
 #include <neo/ledger/signer.h>
+#include <neo/ledger/transaction_attribute.h>
 #include <neo/ledger/transaction_attribute_type.h>
 #include <neo/network/p2p/payloads/iinventory.h>
 #include <neo/network/p2p/payloads/iverifiable.h>

@@ -126,12 +126,12 @@ namespace neo::network
         , startHeight_(startHeight)
     {
         // Create the TCP server
-        server_ = std::make_unique<TcpServer>(
-            ioContext_,
-            endpoint,
-            [this](std::shared_ptr<TcpConnection> connection) {
-                HandleConnectionAccepted(std::move(connection));
-            });
+        server_ = std::make_unique<TcpServer>(endpoint);
+        
+        // Set the connection accepted callback
+        server_->SetConnectionAcceptedCallback([this](std::shared_ptr<TcpConnection> connection) {
+            HandleConnectionAccepted(std::move(connection));
+        });
 
         // Create the TCP client
         client_ = std::make_unique<TcpClient>(ioContext_);
@@ -390,7 +390,7 @@ namespace neo::network
                 auto payload = message.GetPayload();
                 if (payload)
                 {
-                    auto getAddrPayload = std::dynamic_pointer_cast<GetAddrPayload>(payload);
+                    auto getAddrPayload = std::dynamic_pointer_cast<neo::network::p2p::payloads::GetAddrPayload>(payload);
                     if (getAddrPayload)
                     {
                         // Implement HandleGetAddrMessage in PeerDiscoveryService
@@ -439,7 +439,7 @@ namespace neo::network
             }
 
             // Cast to AddrPayload
-            auto addrPayload = std::dynamic_pointer_cast<AddrPayload>(payload);
+            auto addrPayload = std::dynamic_pointer_cast<neo::network::p2p::payloads::AddrPayload>(payload);
             if (!addrPayload)
             {
                 NEO_LOG(NEO_WARNING, "Failed to cast addr payload from peer: " << peer->GetUserAgent());

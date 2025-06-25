@@ -4,7 +4,9 @@
 #include <vector>
 #include <string>
 #include <cstdint>
+#if __cplusplus >= 202002L
 #include <span>
+#endif
 
 namespace neo::io
 {
@@ -38,11 +40,13 @@ namespace neo::io
          */
         ByteVector(const uint8_t* data, size_t size) : data_(data, data + size) {}
 
+#if __cplusplus >= 202002L
         /**
          * @brief Constructs a ByteVector from a span.
          * @param data The span.
          */
         explicit ByteVector(std::span<const uint8_t> data) : data_(data.begin(), data.end()) {}
+#endif
 
         /**
          * @brief Constructs a ByteVector from a vector.

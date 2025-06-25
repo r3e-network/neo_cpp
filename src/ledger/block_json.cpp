@@ -87,7 +87,7 @@ namespace neo::ledger
 
         for (const auto& txJson : txArray)
         {
-            auto tx = std::make_shared<Transaction>();
+            auto tx = std::make_shared<Neo3Transaction>();
             io::JsonReader txReader(txJson);
             tx->DeserializeJson(txReader);
             transactions_.push_back(tx);

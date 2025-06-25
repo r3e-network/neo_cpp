@@ -1,7 +1,10 @@
 #include <neo/logging/logger.h>
+#include <iostream>
+#if defined(NEO_HAS_SPDLOG) && !defined(NEO_MINIMAL_LOGGING)
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
+#endif
 
 namespace neo::logging
 {
@@ -52,6 +55,12 @@ namespace neo::logging
     }
 
     Logger::Logger(const std::string& name)
+#ifdef NEO_MINIMAL_LOGGING
+        : name_(name)
+    {
+        // Minimal logging implementation - no initialization needed
+    }
+#else
     {
         try
         {
@@ -82,9 +91,13 @@ namespace neo::logging
             logger_ = spdlog::stdout_color_mt(name);
         }
     }
+#endif
 
     void Logger::SetLevel(Level level)
     {
+#ifdef NEO_MINIMAL_LOGGING
+        current_level_ = level;
+#else
         if (!logger_) return;
 
         spdlog::level::level_enum spdlog_level;
@@ -117,35 +130,119 @@ namespace neo::logging
         }
 
         logger_->set_level(spdlog_level);
+#endif
     }
 
     void Logger::Trace(const std::string& message)
     {
+#ifdef NEO_MINIMAL_LOGGING
+        if (current_level_ <= Level::Trace) {
+            std::cout << "[TRACE] " << message << std::endl;
+        }
+#else
         if (logger_) logger_->trace(message);
+#endif
     }
 
     void Logger::Debug(const std::string& message)
     {
+#ifdef NEO_MINIMAL_LOGGING
+        if (current_level_ <= Level::Debug) {
+            std::cout << "[DEBUG] " << message << std::endl;
+        }
+#else
         if (logger_) logger_->debug(message);
+#endif
     }
 
     void Logger::Info(const std::string& message)
     {
+#ifdef NEO_MINIMAL_LOGGING
+        if (current_level_ <= Level::Info) {
+            std::cout << "[INFO] " << message << std::endl;
+        }
+#else
         if (logger_) logger_->info(message);
+#endif
     }
 
     void Logger::Warn(const std::string& message)
     {
+#ifdef NEO_MINIMAL_LOGGING
+        if (current_level_ <= Level::Warn) {
+            std::cout << "[WARN] " << message << std::endl;
+        }
+#else
         if (logger_) logger_->warn(message);
+#endif
     }
 
     void Logger::Error(const std::string& message)
     {
+#ifdef NEO_MINIMAL_LOGGING
+        if (current_level_ <= Level::Error) {
+            std::cout << "[ERROR] " << message << std::endl;
+        }
+#else
         if (logger_) logger_->error(message);
+#endif
     }
 
     void Logger::Critical(const std::string& message)
     {
+#ifdef NEO_MINIMAL_LOGGING
+        if (current_level_ <= Level::Critical) {
+            std::cout << "[CRITICAL] " << message << std::endl;
+        }
+#else
         if (logger_) logger_->critical(message);
+#endif
     }
+
+    void Logger::LogMinimal(Level level, const std::string& message)
+    {
+        const char* level_names[] = {"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "CRITICAL", "OFF"};
+        std::cout << "[" << level_names[static_cast<int>(level)] << "] " << message << std::endl;
+    }
+
+    // Template instantiations
+    template<typename... Args>
+    void Logger::Log(Level level, const std::string& format, Args&&... args)
+    {
+#if defined(NEO_MINIMAL_LOGGING) || !defined(NEO_HAS_SPDLOG)
+        // For minimal logging, just use the format string as-is
+        LogMinimal(level, format);
+#else
+        if (!logger_) return;
+
+        switch (level)
+        {
+            case Level::Trace:
+                logger_->trace(format, std::forward<Args>(args)...);
+                break;
+            case Level::Debug:
+                logger_->debug(format, std::forward<Args>(args)...);
+                break;
+            case Level::Info:
+                logger_->info(format, std::forward<Args>(args)...);
+                break;
+            case Level::Warn:
+                logger_->warn(format, std::forward<Args>(args)...);
+                break;
+            case Level::Error:
+                logger_->error(format, std::forward<Args>(args)...);
+                break;
+            case Level::Critical:
+                logger_->critical(format, std::forward<Args>(args)...);
+                break;
+            default:
+                break;
+        }
+#endif
+    }
+
+    // Explicit template instantiations for common use cases
+    template void Logger::Log<>(Level level, const std::string& format);
+    template void Logger::Log<const char*>(Level level, const std::string& format, const char*&& args);
+    template void Logger::Log<std::string>(Level level, const std::string& format, std::string&& args);
 }

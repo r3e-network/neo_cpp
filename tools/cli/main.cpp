@@ -9,6 +9,11 @@
 #include <cctype>
 #include <cstdio>
 
+// Include Neo headers
+#include <neo/protocol_settings.h>
+#include <neo/ledger/blockchain.h>
+#include <neo/node/neo_system.h>
+
 // Forward declarations for helper functions
 struct Configuration
 {

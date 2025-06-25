@@ -1,13 +1,13 @@
 # Create the ledger library
 add_library(neo_ledger OBJECT
     witness.cpp
-    coin_reference.cpp
-    transaction_output.cpp
+    # coin_reference.cpp - deprecated in Neo N3
+    # transaction_output.cpp - deprecated in Neo N3 (UTXO model)
     transaction_attribute.cpp
-    transaction_basic.cpp
-    transaction_serialization.cpp
-    transaction_verification.cpp
-    transaction_json.cpp
+    # transaction_basic.cpp - deprecated Neo 2.x transaction implementation
+    # transaction_serialization.cpp - deprecated Neo 2.x transaction serialization
+    # transaction_verification.cpp - deprecated Neo 2.x transaction verification
+    # transaction_json.cpp - deprecated Neo 2.x transaction JSON serialization
     block.cpp
     block_json.cpp
     blockchain.cpp

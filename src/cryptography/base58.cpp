@@ -59,6 +59,12 @@ namespace neo::cryptography
         return Encode(vec);
     }
 
+    std::string Base58::Encode(const neo::io::ByteSpan& data)
+    {
+        std::vector<uint8_t> vec(data.Data(), data.Data() + data.Size());
+        return Encode(vec);
+    }
+
     std::vector<uint8_t> Base58::Decode(const std::string& encoded)
     {
         if (encoded.empty()) {
@@ -128,6 +134,12 @@ namespace neo::cryptography
     std::string Base58::EncodeCheck(const neo::io::ByteVector& data)
     {
         std::vector<uint8_t> vec(data.begin(), data.end());
+        return EncodeCheck(vec);
+    }
+
+    std::string Base58::EncodeCheck(const neo::io::ByteSpan& data)
+    {
+        std::vector<uint8_t> vec(data.Data(), data.Data() + data.Size());
         return EncodeCheck(vec);
     }
 

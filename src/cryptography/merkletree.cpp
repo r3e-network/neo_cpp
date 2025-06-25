@@ -17,6 +17,9 @@ namespace neo::cryptography
 
     io::UInt256 MerkleTree::ComputeRoot(std::vector<io::UInt256> hashes)
     {
+        if (hashes.empty())
+            return io::UInt256::Zero();
+            
         if (hashes.size() == 1)
             return hashes[0];
 

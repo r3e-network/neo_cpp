@@ -208,12 +208,25 @@ namespace neo::extensions
     std::vector<std::string> StringExtensions::Split(const std::string& value, char delimiter)
     {
         std::vector<std::string> result;
+        
+        if (value.empty())
+        {
+            result.push_back("");
+            return result;
+        }
+        
         std::stringstream ss(value);
         std::string item;
         
         while (std::getline(ss, item, delimiter))
         {
             result.push_back(item);
+        }
+        
+        // Handle the case where the string ends with the delimiter
+        if (!value.empty() && value.back() == delimiter)
+        {
+            result.push_back("");
         }
         
         return result;

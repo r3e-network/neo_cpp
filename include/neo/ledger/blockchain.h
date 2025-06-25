@@ -1,10 +1,12 @@
 #pragma once
 
-#include <neo/network/p2p/payloads/block.h>
-#include <neo/network/p2p/payloads/header.h>
-#include <neo/network/p2p/payloads/header_cache.h>
+// Network payload includes disabled since network module is disabled
+// #include <neo/network/p2p/payloads/block.h>
+// #include <neo/network/p2p/payloads/header.h>
+// #include <neo/network/p2p/payloads/header_cache.h>
+#include <neo/ledger/block.h>  // For BlockHeader alias
 #include <neo/ledger/transaction.h>
-#include <neo/network/payloads/extensible_payload.h>
+// #include <neo/network/p2p/payloads/extensible_payload.h> // Disabled since network module is disabled
 #include <neo/persistence/data_cache.h>
 #include <neo/config/protocol_settings.h>
 #include <neo/io/uint256.h>
@@ -12,6 +14,7 @@
 #include <neo/io/fixed8.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/vm_types.h>
+#include <neo/ledger/verify_result.h>
 #include <memory>
 #include <mutex>
 #include <shared_mutex>
@@ -31,23 +34,10 @@ namespace neo::ledger
     class NeoSystem;
     class MemoryPool;
 
-    // Type aliases for correct namespace usage
-    using Header = network::p2p::payloads::Header;
-    using Block = network::p2p::payloads::Block;  
-    using HeaderCache = network::p2p::payloads::HeaderCache;
+    // Type aliases - using ledger types since network module is disabled
+    using Header = BlockHeader;  // Use BlockHeader from ledger instead of network payload
+    // Note: Block class is defined in this namespace as neo::ledger::Block
 
-    /**
-     * @brief The result of verifying a block, transaction, or inventory.
-     */
-    enum class VerifyResult
-    {
-        Succeed,
-        AlreadyExists,
-        AlreadyInPool,
-        Invalid,
-        HasConflicts,
-        UnableToVerify
-    };
 
     /**
      * @brief Represents an unverified block list for a specific height.
@@ -104,7 +94,8 @@ namespace neo::ledger
         using CommittedHandler = std::function<void(std::shared_ptr<NeoSystem>, std::shared_ptr<Block>)>;
         using BlockPersistenceHandler = std::function<void(std::shared_ptr<Block>)>;
         using TransactionHandler = std::function<void(std::shared_ptr<Transaction>, VerifyResult)>;
-        using InventoryHandler = std::function<void(std::shared_ptr<IInventory>, VerifyResult)>;
+        // Network module disabled - IInventory handler commented out
+        // using InventoryHandler = std::function<void(std::shared_ptr<network::p2p::payloads::IInventory>, VerifyResult)>;
 
         /**
          * @brief Constructs the Blockchain processing engine.
@@ -252,12 +243,8 @@ namespace neo::ledger
          */
         VerifyResult OnNewTransaction(std::shared_ptr<Transaction> transaction);
 
-        /**
-         * @brief Processes a new extensible payload.
-         * @param payload The extensible payload to process.
-         * @return The verification result.
-         */
-        VerifyResult OnNewExtensiblePayload(std::shared_ptr<network::payloads::ExtensiblePayload> payload);
+        // Network module disabled - ExtensiblePayload methods commented out
+        // VerifyResult OnNewExtensiblePayload(std::shared_ptr<network::p2p::payloads::ExtensiblePayload> payload);
 
         /**
          * @brief Imports blocks into the blockchain.
@@ -276,20 +263,23 @@ namespace neo::ledger
          * @brief Re-verifies inventories that may have become valid.
          * @param inventories The inventories to re-verify.
          */
-        void ReverifyInventories(const std::vector<std::shared_ptr<IInventory>>& inventories);
+        // Network module disabled - IInventory methods commented out
+        // void ReverifyInventories(const std::vector<std::shared_ptr<network::p2p::payloads::IInventory>>& inventories);
 
         // Event registration methods
         void RegisterCommittingHandler(CommittingHandler handler);
         void RegisterCommittedHandler(CommittedHandler handler);
         void RegisterBlockPersistenceHandler(BlockPersistenceHandler handler);
         void RegisterTransactionHandler(TransactionHandler handler);
-        void RegisterInventoryHandler(InventoryHandler handler);
+        // Network module disabled - InventoryHandler registration commented out
+        // void RegisterInventoryHandler(InventoryHandler handler);
 
         /**
          * @brief Gets the header cache.
          * @return The header cache.
          */
-        std::shared_ptr<HeaderCache> GetHeaderCache() const { return header_cache_; }
+        // HeaderCache disabled since network module is disabled
+        // std::shared_ptr<HeaderCache> GetHeaderCache() const { return header_cache_; }
 
         /**
          * @brief Gets the Neo system.
@@ -314,7 +304,8 @@ namespace neo::ledger
         void FireCommittedEvent(std::shared_ptr<Block> block);
         void FireBlockPersistedEvent(std::shared_ptr<Block> block);
         void FireTransactionEvent(std::shared_ptr<Transaction> transaction, VerifyResult result);
-        void FireInventoryEvent(std::shared_ptr<IInventory> inventory, VerifyResult result);
+        // Network module disabled - IInventory methods commented out
+        // void FireInventoryEvent(std::shared_ptr<network::p2p::payloads::IInventory> inventory, VerifyResult result);
 
         // Utility methods
         std::unordered_set<io::UInt160> UpdateExtensibleWitnessWhiteList(std::shared_ptr<persistence::DataCache> snapshot);
@@ -327,7 +318,7 @@ namespace neo::ledger
 
         // Member variables
         std::shared_ptr<NeoSystem> system_;
-        std::shared_ptr<HeaderCache> header_cache_;
+        // std::shared_ptr<HeaderCache> header_cache_;  // Disabled since network module is disabled
         std::shared_ptr<persistence::DataCache> data_cache_;
         
         // Block caches
@@ -343,7 +334,7 @@ namespace neo::ledger
         std::vector<CommittedHandler> committed_handlers_;
         std::vector<BlockPersistenceHandler> block_persistence_handlers_;
         std::vector<TransactionHandler> transaction_handlers_;
-        std::vector<InventoryHandler> inventory_handlers_;
+        // std::vector<InventoryHandler> inventory_handlers_;  // Disabled since network module is disabled
         
         // Threading
         std::atomic<bool> running_;

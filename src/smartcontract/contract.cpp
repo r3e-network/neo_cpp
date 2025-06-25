@@ -82,14 +82,14 @@ namespace neo::smartcontract
     ContractParameter ContractParameter::CreateHash160(const io::UInt160& value)
     {
         ContractParameter parameter(ContractParameterType::Hash160);
-        parameter.SetValue(io::ByteVector(io::ByteSpan(value.Data(), value.Size())));
+        parameter.SetValue(io::ByteVector(io::ByteSpan(value.Data(), value.Size)));
         return parameter;
     }
 
     ContractParameter ContractParameter::CreateHash256(const io::UInt256& value)
     {
         ContractParameter parameter(ContractParameterType::Hash256);
-        parameter.SetValue(io::ByteVector(io::ByteSpan(value.Data(), value.Size())));
+        parameter.SetValue(io::ByteVector(io::ByteSpan(value.Data(), value.Size)));
         return parameter;
     }
 

@@ -225,6 +225,14 @@ namespace neo
          */
         void ValidateHardforkConfiguration() const;
 
+        /**
+         * @brief Ensures all hardforks have entries in the configuration.
+         * @param hardforks The hardfork map to process.
+         * @return Processed hardfork map with all entries.
+         */
+        static std::unordered_map<Hardfork, uint32_t> EnsureOmittedHardforks(
+            const std::unordered_map<Hardfork, uint32_t>& hardforks);
+
     private:
         uint32_t network_;
         uint8_t addressVersion_;
@@ -238,14 +246,6 @@ namespace neo
         uint32_t maxTraceableBlocks_;
         uint64_t initialGasDistribution_;
         std::unordered_map<Hardfork, uint32_t> hardforks_;
-
-        /**
-         * @brief Ensures all hardforks have entries in the configuration.
-         * @param hardforks The hardfork map to process.
-         * @return Processed hardfork map with all entries.
-         */
-        static std::unordered_map<Hardfork, uint32_t> EnsureOmittedHardforks(
-            const std::unordered_map<Hardfork, uint32_t>& hardforks);
 
         /**
          * @brief Validates hardfork configuration for continuity and ordering.

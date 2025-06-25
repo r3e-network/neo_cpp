@@ -207,7 +207,7 @@ namespace neo::ledger
 
         for (int64_t i = 0; i < txCount; i++)
         {
-            auto tx = std::make_shared<Transaction>();
+            auto tx = std::make_shared<Neo3Transaction>();
             tx->Deserialize(reader);
             transactions_.push_back(tx);
         }

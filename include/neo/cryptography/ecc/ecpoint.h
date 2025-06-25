@@ -25,6 +25,11 @@ namespace neo::cryptography::ecc
         ECPoint();
 
         /**
+         * @brief Virtual destructor.
+         */
+        virtual ~ECPoint() = default;
+
+        /**
          * @brief Constructs an ECPoint with the specified curve name.
          * @param curveName The curve name.
          */

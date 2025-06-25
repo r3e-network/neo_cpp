@@ -1,5 +1,6 @@
 # Create the extensions library
 add_library(neo_extensions OBJECT
+    base64.cpp
     byte_extensions.cpp
     string_extensions.cpp
     integer_extensions.cpp

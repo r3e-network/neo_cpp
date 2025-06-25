@@ -21,8 +21,7 @@ target_include_directories(neo_logging
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-# Link dependencies
-find_package(spdlog CONFIG REQUIRED)
+# Link dependencies - spdlog is set up in FindDependencies.cmake
 target_link_libraries(neo_logging
     PUBLIC
         spdlog::spdlog

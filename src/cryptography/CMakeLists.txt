@@ -7,6 +7,7 @@ add_library(neo_cryptography OBJECT
     merkletree.cpp
     base64.cpp
     base64url.cpp
+    lz4.cpp
 )
 
 # Optional BLS12_381 support
