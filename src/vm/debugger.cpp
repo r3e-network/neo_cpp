@@ -5,14 +5,14 @@ namespace neo::vm
     Debugger::Debugger(ExecutionEngine& engine)
         : engine_(engine)
     {
-        initialContextCount_ = engine_.GetInvocationStack().size();
+        initialContextCount_ = static_cast<int>(engine_.GetInvocationStack().size());
     }
 
     VMState Debugger::Execute()
     {
         while (engine_.GetState() == VMState::Break)
         {
-            if (engine_.GetInvocationStack().size() <= initialContextCount_)
+            if (static_cast<int>(engine_.GetInvocationStack().size()) <= initialContextCount_)
                 break;
 
             if (engine_.GetInvocationStack().empty())
@@ -68,7 +68,7 @@ namespace neo::vm
 
         auto& context = engine_.GetCurrentContext();
         int currentPosition = context.GetInstructionPointer();
-        int contextCount = engine_.GetInvocationStack().size();
+        int contextCount = static_cast<int>(engine_.GetInvocationStack().size());
 
         // Execute one instruction
         engine_.Execute();
@@ -77,10 +77,10 @@ namespace neo::vm
         if (engine_.GetState() == VMState::Break)
         {
             // If we're in a different context or at a different position, we're done
-            if (engine_.GetInvocationStack().size() < contextCount)
+            if (static_cast<int>(engine_.GetInvocationStack().size()) < contextCount)
                 return engine_.GetState();
 
-            if (engine_.GetInvocationStack().size() == contextCount && !engine_.GetInvocationStack().empty())
+            if (static_cast<int>(engine_.GetInvocationStack().size()) == contextCount && !engine_.GetInvocationStack().empty())
             {
                 auto& newContext = engine_.GetCurrentContext();
                 int newPosition = newContext.GetInstructionPointer();
@@ -90,7 +90,7 @@ namespace neo::vm
             }
 
             // If we're in a deeper context, continue until we return to the original context
-            while (engine_.GetState() == VMState::Break && engine_.GetInvocationStack().size() > contextCount)
+            while (engine_.GetState() == VMState::Break && static_cast<int>(engine_.GetInvocationStack().size()) > contextCount)
             {
                 engine_.Execute();
             }
@@ -107,10 +107,10 @@ namespace neo::vm
         if (engine_.GetInvocationStack().empty())
             return engine_.GetState();
 
-        int contextCount = engine_.GetInvocationStack().size();
+        int contextCount = static_cast<int>(engine_.GetInvocationStack().size());
 
         // Continue execution until we return to a higher context
-        while (engine_.GetState() == VMState::Break && engine_.GetInvocationStack().size() >= contextCount)
+        while (engine_.GetState() == VMState::Break && static_cast<int>(engine_.GetInvocationStack().size()) >= contextCount)
         {
             engine_.Execute();
         }
