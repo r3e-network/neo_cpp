@@ -187,7 +187,8 @@ namespace neo::io
 
     std::string BinaryReader::ReadString()
     {
-        return std::string(reinterpret_cast<const char*>(ReadVarBytes().Data()));
+        ByteVector bytes = ReadVarBytes();
+        return std::string(reinterpret_cast<const char*>(bytes.Data()), bytes.Size());
     }
 
     std::string BinaryReader::ReadVarString()

@@ -13,7 +13,7 @@ env:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     
     steps:
     - uses: actions/checkout@v4
@@ -44,50 +44,43 @@ jobs:
         cmake -B build \
           -DCMAKE_BUILD_TYPE=Release \
           -DNEO_BUILD_TESTS=ON \
-          -DNEO_BUILD_TOOLS=OFF \
-          -DNEO_BUILD_APPS=OFF \
+          -DNEO_BUILD_TOOLS=ON \
+          -DNEO_BUILD_APPS=ON \
           -DNEO_BUILD_EXAMPLES=OFF \
           -DNEO_USE_VCPKG=OFF \
-          -DCMAKE_CXX_FLAGS="-w" \
+          -DCMAKE_CXX_FLAGS="-Wno-deprecated-declarations -Wno-unused-parameter -Wno-sign-conversion -Wno-overloaded-virtual" \
           -G Ninja
     
-    - name: Build Core and Tests
+    - name: Build Everything
       run: |
-        # Build core library first
-        cmake --build build --target neo_cpp --parallel 4
-        # Build only the simple unit test that we know works
-        cmake --build build --target simple_unit_test --parallel 4
+        # Build everything in parallel
+        cmake --build build --parallel $(nproc)
     
-    - name: List Test Status
+    - name: List All Built Tests
       working-directory: build
       run: |
-        echo "=== Available tests ==="
-        ctest -N | grep "Test #" || echo "No tests found"
+        echo "=== All tests registered with CTest ==="
+        ctest -N | grep "Test #" | sort
         
         echo ""
-        echo "=== Built executables ==="
-        find . -name "*test*" -type f -executable -not -path "*/CMakeFiles/*" | sort || echo "No test executables found"
+        echo "=== All test executables built ==="
+        find . -name "*test*" -type f -executable -not -path "*/CMakeFiles/*" | sort
     
-    - name: Run Simple Unit Test
+    - name: Run All Tests
       working-directory: build
       run: |
-        echo "=== Running simple_unit_test ==="
-        if [ -f "./tests/simple_unit_test" ]; then
-          ./tests/simple_unit_test && echo "✓ simple_unit_test PASSED" || echo "✗ simple_unit_test FAILED"
-        else
-          echo "simple_unit_test not found"
+        echo "=== Running all tests with CTest ==="
+        # Run all tests with detailed output
+        ctest --output-on-failure --timeout 300 -j$(nproc) --verbose
+    
+    - name: Test Summary
+      if: always()
+      working-directory: build
+      run: |
+        echo "=== Test Results Summary ==="
+        ctest --print-labels || true
+        echo ""
+        echo "=== Detailed Test Log ==="
+        if [ -f "Testing/Temporary/LastTest.log" ]; then
+          cat Testing/Temporary/LastTest.log
         fi
-    
-    - name: Run CTest for Available Tests
-      working-directory: build
-      run: |
-        echo "=== Running CTest ==="
-        # Only run tests that actually exist
-        ctest --output-on-failure --timeout 60 -R "simple_unit_test" || echo "CTest completed with errors"
-    
-    - name: Summary
-      run: |
-        echo "=== Build Summary ==="
-        echo "✓ Core library (neo_cpp) built successfully"
-        echo "✓ Basic unit test infrastructure verified"
-        echo "⚠️  Some tests are segfaulting or not built - this is expected in early development"
