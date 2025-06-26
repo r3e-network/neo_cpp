@@ -56,14 +56,10 @@ jobs:
         # Build core library first
         cmake --build build --target neo_cpp --parallel 4
     
-    - name: Build Working Tests
+    - name: Build All Tests
       run: |
-        # Build tests that we know compile successfully
-        cmake --build build --target simple_unit_test --parallel 4 || true
-        cmake --build build --target test_cryptography --parallel 4 || true
-        cmake --build build --target test_io --parallel 4 || true
-        cmake --build build --target test_json --parallel 4 || true
-        cmake --build build --target test_persistence --parallel 4 || true
+        # Build all tests - the fixes should allow them to compile
+        cmake --build build --parallel $(nproc)
     
     - name: List All Built Tests
       working-directory: build
@@ -75,35 +71,12 @@ jobs:
         echo "=== All test executables built ==="
         find . -name "*test*" -type f -executable -not -path "*/CMakeFiles/*" | sort
     
-    - name: Run Available Tests
+    - name: Run All Tests
       working-directory: build
       run: |
-        echo "=== Running available tests ==="
-        # Run each test that was successfully built
-        if [ -f "./tests/simple_unit_test" ]; then
-          echo "Running simple_unit_test..."
-          ./tests/simple_unit_test || echo "simple_unit_test failed"
-        fi
-        
-        if [ -f "./tests/unit/cryptography/test_cryptography" ]; then
-          echo "Running test_cryptography..."
-          ./tests/unit/cryptography/test_cryptography || echo "test_cryptography failed"
-        fi
-        
-        if [ -f "./tests/unit/io/test_io" ]; then
-          echo "Running test_io..."
-          ./tests/unit/io/test_io || echo "test_io failed"
-        fi
-        
-        if [ -f "./tests/unit/json/test_json" ]; then
-          echo "Running test_json..."
-          ./tests/unit/json/test_json || echo "test_json failed"
-        fi
-        
-        if [ -f "./tests/unit/persistence/test_persistence" ]; then
-          echo "Running test_persistence..."
-          ./tests/unit/persistence/test_persistence || echo "test_persistence failed"
-        fi
+        echo "=== Running all tests with CTest ==="
+        # Run all tests
+        ctest --output-on-failure --timeout 300 -j$(nproc) --verbose
     
     - name: Test Summary
       if: always()

@@ -85,7 +85,8 @@ namespace neo::console_service::tests
 
     TEST_F(ConsoleServiceBaseTest, TestHelpCommand)
     {
-        service->OnHelpCommand();
+        // Use OnCommand to test help functionality
+        service->OnCommand("help");
         std::string output = GetOutput();
         
         EXPECT_TRUE(output.find("Base Commands:") != std::string::npos);
@@ -97,7 +98,7 @@ namespace neo::console_service::tests
 
     TEST_F(ConsoleServiceBaseTest, TestHelpSpecificCommand)
     {
-        service->OnHelpCommand("help");
+        service->OnCommand("help help");
         std::string output = GetOutput();
         
         EXPECT_TRUE(output.find("Shows help information") != std::string::npos);
@@ -106,7 +107,7 @@ namespace neo::console_service::tests
 
     TEST_F(ConsoleServiceBaseTest, TestHelpUnknownCommand)
     {
-        service->OnHelpCommand("unknown");
+        service->OnCommand("help unknown");
         std::string output = GetOutput();
         
         EXPECT_TRUE(output.find("Command not found") != std::string::npos);
@@ -115,12 +116,12 @@ namespace neo::console_service::tests
     TEST_F(ConsoleServiceBaseTest, TestClearCommand)
     {
         // Test that clear command doesn't crash
-        EXPECT_NO_THROW(service->OnClear());
+        EXPECT_NO_THROW(service->OnCommand("clear"));
     }
 
     TEST_F(ConsoleServiceBaseTest, TestVersionCommand)
     {
-        service->OnVersion();
+        service->OnCommand("version");
         std::string output = GetOutput();
         
         EXPECT_TRUE(output.find("Neo C++ Node") != std::string::npos);

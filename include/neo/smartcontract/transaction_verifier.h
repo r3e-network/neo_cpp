@@ -151,8 +151,8 @@ namespace neo::smartcontract
          * @param gasConsumed The gas consumed.
          * @param engine The application engine.
          */
-        VerificationOutput(VerificationResult result, const std::string& errorMessage = "", int64_t gasConsumed = 0, std::unique_ptr<ApplicationEngine> engine = nullptr)
-            : result(result), errorMessage(errorMessage), gasConsumed(gasConsumed), engine(std::move(engine))
+        VerificationOutput(VerificationResult result_, const std::string& errorMessage_ = "", int64_t gasConsumed_ = 0, std::unique_ptr<ApplicationEngine> engine_ = nullptr)
+            : result(result_), errorMessage(errorMessage_), gasConsumed(gasConsumed_), engine(std::move(engine_))
         {
         }
     };
