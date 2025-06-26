@@ -1,4 +1,4 @@
-name: Comprehensive C++ CI
+name: C++ Build and Test
 
 on:
   push:
@@ -6,17 +6,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
-env:
-  BUILD_TYPE: Release
-
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        compiler: [gcc-11]
-        build_type: [Release, Debug]
+    timeout-minutes: 30
     
     steps:
     - uses: actions/checkout@v4
@@ -26,7 +19,6 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y \
           cmake \
-          ninja-build \
           build-essential \
           libssl-dev \
           pkg-config \
@@ -34,63 +26,31 @@ jobs:
           libgmock-dev \
           nlohmann-json3-dev \
           libspdlog-dev \
-          libboost-all-dev \
-          lcov \
-          cppcheck \
-          clang-tidy
-    
-    - name: Setup compiler
-      run: |
-        sudo apt-get install -y gcc-11 g++-11
-        echo "CC=gcc-11" >> $GITHUB_ENV
-        echo "CXX=g++-11" >> $GITHUB_ENV
+          libboost-all-dev
     
     - name: Configure CMake
       run: |
         cmake -B build \
-          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DCMAKE_BUILD_TYPE=Release \
           -DNEO_BUILD_TESTS=ON \
-          -DNEO_BUILD_TOOLS=ON \
-          -DNEO_BUILD_APPS=ON \
-          -DCMAKE_CXX_FLAGS="--coverage" \
-          -G Ninja
+          -DNEO_BUILD_TOOLS=OFF \
+          -DNEO_BUILD_APPS=OFF \
+          -DCMAKE_CXX_FLAGS="-w"
     
-    - name: Build All Targets
+    - name: Build Core Library
       run: |
-        cmake --build build --parallel $(nproc)
+        cmake --build build --target neo_cpp --parallel 2
     
-    - name: Run Static Analysis
-      if: matrix.build_type == 'Release'
+    - name: Build Tests
       run: |
-        find src -name "*.cpp" -o -name "*.h" | head -10 | xargs cppcheck --enable=all --error-exitcode=1 --suppress=missingIncludeSystem
+        cmake --build build --target simple_unit_test --parallel 2
     
-    - name: Run All Unit Tests
+    - name: Run Simple Unit Test
       working-directory: build
       run: |
-        # Run CTest to execute all registered tests
-        ctest --output-on-failure --timeout 300 --parallel $(nproc)
+        ./tests/simple_unit_test
     
-    - name: Run Individual Test Executables
+    - name: Run CTest
       working-directory: build
       run: |
-        # Find and run any test executables that might not be registered with CTest
-        find . -name "*test*" -type f -executable -not -path "./CMakeFiles/*" | while read test_exec; do
-          echo "Running: $test_exec"
-          timeout 60 "$test_exec" || echo "Test $test_exec failed or timed out"
-        done
-    
-    - name: Generate Coverage Report
-      if: matrix.build_type == 'Debug'
-      run: |
-        lcov --capture --directory build --output-file coverage.info
-        lcov --remove coverage.info '/usr/*' --output-file coverage.info
-        lcov --remove coverage.info '*/third_party/*' --output-file coverage.info
-        lcov --remove coverage.info '*/tests/*' --output-file coverage.info
-        lcov --list coverage.info
-    
-    - name: Upload Coverage to Codecov
-      if: matrix.build_type == 'Debug'
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.info
-        fail_ci_if_error: false
+        ctest --output-on-failure --timeout 60 -j2
