@@ -1,0 +1,214 @@
+# Neo C++ Production Configuration
+# This file contains the default production configuration
+
+# Node configuration
+node:
+  # Network to connect to: mainnet, testnet, or private
+  network: mainnet
+  
+  # Node name for identification
+  name: "neo-cpp-node"
+  
+  # Maximum number of peers to connect to
+  max_peers: 10
+  
+  # Minimum number of peers required for operation
+  min_peers: 3
+
+# Network configuration
+network:
+  # P2P listening address
+  bind_address: "0.0.0.0"
+  
+  # P2P port
+  port: 10333
+  
+  # Maximum connections
+  max_connections: 100
+  
+  # Connection timeout in seconds
+  connection_timeout: 30
+  
+  # Enable UPnP for automatic port forwarding
+  enable_upnp: false
+
+# RPC configuration
+rpc:
+  # Enable RPC server
+  enabled: true
+  
+  # RPC bind address
+  bind_address: "127.0.0.1"
+  
+  # RPC port
+  port: 10332
+  
+  # Maximum concurrent requests
+  max_concurrent_requests: 100
+  
+  # Maximum request size in bytes
+  max_request_size: 10485760  # 10MB
+  
+  # Request timeout in seconds
+  request_timeout: 30
+  
+  # Enable CORS
+  enable_cors: true
+  
+  # Allowed CORS origins
+  allowed_origins:
+    - "*"
+  
+  # Enable authentication
+  enable_authentication: false
+  
+  # RPC username (if authentication enabled)
+  username: ""
+  
+  # RPC password (if authentication enabled)
+  password: ""
+
+# Database configuration
+database:
+  # Database backend: leveldb or rocksdb
+  backend: rocksdb
+  
+  # Database path
+  path: "./data/chain"
+  
+  # Cache size in MB
+  cache_size: 512
+  
+  # Write buffer size in MB
+  write_buffer_size: 128
+  
+  # Use bloom filters
+  use_bloom_filter: true
+  
+  # Compression enabled
+  compression_enabled: true
+
+# Consensus configuration
+consensus:
+  # Enable consensus participation
+  enabled: false
+  
+  # Private key for consensus (keep secret!)
+  private_key: ""
+  
+  # Block time in seconds
+  block_time: 15
+  
+  # View timeout in seconds
+  view_timeout: 60
+  
+  # Maximum transactions per block
+  max_transactions_per_block: 512
+  
+  # Maximum block size in bytes
+  max_block_size: 262144  # 256KB
+
+# Logging configuration
+logging:
+  # Log level: trace, debug, info, warning, error, critical
+  level: info
+  
+  # Log to console
+  console_output: true
+  
+  # Log to file
+  file_output: true
+  
+  # Log file path
+  log_file_path: "./logs/neo.log"
+  
+  # Maximum log file size in MB
+  max_file_size: 100
+  
+  # Maximum number of log files to keep
+  max_files: 10
+  
+  # Use async logging
+  async_logging: true
+
+# Monitoring configuration
+monitoring:
+  # Enable metrics collection
+  metrics_enabled: true
+  
+  # Metrics export port
+  metrics_port: 9090
+  
+  # Enable health checks
+  health_checks_enabled: true
+  
+  # Health check port
+  health_check_port: 8080
+  
+  # Health check interval in seconds
+  health_check_interval: 30
+
+# Performance tuning
+performance:
+  # Number of worker threads
+  worker_threads: 0  # 0 = auto-detect
+  
+  # Transaction pool size
+  tx_pool_size: 50000
+  
+  # Maximum memory usage in GB
+  max_memory_gb: 8
+  
+  # Enable memory pooling
+  enable_memory_pooling: true
+  
+  # Cache sizes
+  cache:
+    block_cache_size: 1000
+    transaction_cache_size: 10000
+    contract_cache_size: 100
+
+# Security configuration
+security:
+  # Enable TLS for P2P connections
+  enable_tls: false
+  
+  # TLS certificate file
+  tls_cert_file: ""
+  
+  # TLS key file
+  tls_key_file: ""
+  
+  # Enable rate limiting
+  enable_rate_limiting: true
+  
+  # Rate limit requests per second
+  rate_limit_rps: 100
+  
+  # Ban duration for misbehaving peers in seconds
+  ban_duration: 3600
+
+# Backup configuration
+backup:
+  # Enable automatic backups
+  enabled: false
+  
+  # Backup interval in hours
+  interval_hours: 24
+  
+  # Backup path
+  path: "./backups"
+  
+  # Maximum backups to keep
+  max_backups: 7
+
+# Advanced configuration
+advanced:
+  # Enable experimental features
+  experimental_features: false
+  
+  # Custom protocol settings override
+  protocol_settings: {}
+  
+  # Plugin configuration
+  plugins: {}

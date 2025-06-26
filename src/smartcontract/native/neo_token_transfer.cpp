@@ -16,7 +16,7 @@ namespace neo::smartcontract::native
         persistence::StorageKey key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::TotalSupply));
         auto item = snapshot->TryGet(key);
         if (!item)
-            return io::Fixed8(0);
+            return io::Fixed8(static_cast<int64_t>(0));
 
         std::istringstream stream(std::string(reinterpret_cast<const char*>(item->GetValue().Data()), item->GetValue().Size()));
         io::BinaryReader reader(stream);

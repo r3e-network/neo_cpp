@@ -7,6 +7,7 @@
 #include <sstream>
 
 using namespace neo::smartcontract::native;
+using namespace neo::smartcontract;
 using namespace neo::persistence;
 using namespace neo::io;
 using namespace neo::vm;
@@ -22,7 +23,7 @@ protected:
     {
         snapshot = std::make_shared<MemoryStoreView>();
         gasToken = GasToken::GetInstance();
-        engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, 0, false);
+        // engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr);
     }
 };
 

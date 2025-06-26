@@ -1,133 +1,265 @@
 #pragma once
 
-#include <neo/node/neo_system.h>
-#include <neo/io/json.h>
-#include <string>
-#include <memory>
-#include <functional>
-#include <unordered_map>
-#include <thread>
-#include <mutex>
-#include <atomic>
-#include <condition_variable>
+// Include the simplified RPC server for now
+#include <neo/rpc/rpc_server_simple.h>
 
 namespace neo::rpc
 {
     /**
-     * @brief Represents an RPC server.
+     * @brief RPC server configuration
      */
-    class RPCServer
+    struct RpcConfig
     {
+        std::string bind_address{"127.0.0.1"};
+        uint16_t port{10332};
+        size_t max_concurrent_requests{100};
+        size_t max_request_size{10 * 1024 * 1024}; // 10MB
+        std::chrono::seconds request_timeout{30};
+        bool enable_cors{true};
+        std::vector<std::string> allowed_origins{"*"};
+        bool enable_authentication{false};
+        std::string username;
+        std::string password;
+    };
+
+    /**
+     * @brief RPC method handler function type
+     */
+    using RpcMethodHandler = std::function<json::JObject(const json::JArray& params)>;
+
+    /**
+     * @brief JSON-RPC 2.0 server implementation for Neo
+     */
+    class RpcServer
+    {
+    private:
+        RpcConfig config_;
+        std::shared_ptr<core::Logger> logger_;
+        std::atomic<bool> running_{false};
+        std::thread server_thread_;
+        
+        // Method handlers
+        std::unordered_map<std::string, RpcMethodHandler> method_handlers_;
+        
+        // Dependencies
+        std::shared_ptr<persistence::DataCache> blockchain_;
+        std::shared_ptr<network::p2p::LocalNode> local_node_;
+        
+        // Statistics
+        std::atomic<uint64_t> total_requests_{0};
+        std::atomic<uint64_t> failed_requests_{0};
+        
     public:
         /**
-         * @brief Constructs an RPCServer.
-         * @param neoSystem The Neo system.
-         * @param port The port.
-         * @param enableCors Whether to enable CORS.
-         * @param enableAuth Whether to enable authentication.
-         * @param username The username.
-         * @param password The password.
+         * @brief Construct RPC server
+         * @param config Server configuration
          */
-        RPCServer(std::shared_ptr<node::NeoSystem> neoSystem, uint16_t port, bool enableCors = false, bool enableAuth = false, const std::string& username = "", const std::string& password = "");
-
+        explicit RpcServer(const RpcConfig& config);
+        
+        ~RpcServer();
+        
         /**
-         * @brief Destructor.
-         */
-        ~RPCServer();
-
-        /**
-         * @brief Starts the server.
+         * @brief Start the RPC server
          */
         void Start();
-
+        
         /**
-         * @brief Stops the server.
+         * @brief Stop the RPC server
          */
         void Stop();
-
+        
         /**
-         * @brief Checks if the server is running.
-         * @return True if the server is running, false otherwise.
+         * @brief Set blockchain data cache
          */
-        bool IsRunning() const;
-
+        void SetBlockchain(std::shared_ptr<persistence::DataCache> blockchain)
+        {
+            blockchain_ = blockchain;
+        }
+        
         /**
-         * @brief Gets the port.
-         * @return The port.
+         * @brief Set local node for P2P information
          */
-        uint16_t GetPort() const;
-
+        void SetLocalNode(std::shared_ptr<network::p2p::LocalNode> node)
+        {
+            local_node_ = node;
+        }
+        
         /**
-         * @brief Gets the Neo system.
-         * @return The Neo system.
+         * @brief Get server statistics
          */
-        std::shared_ptr<node::NeoSystem> GetNeoSystem() const;
-
-        /**
-         * @brief Registers an RPC method.
-         * @param method The method name.
-         * @param handler The handler.
-         */
-        void RegisterMethod(const std::string& method, std::function<nlohmann::json(const nlohmann::json&)> handler);
-
-        /**
-         * @brief Unregisters an RPC method.
-         * @param method The method name.
-         */
-        void UnregisterMethod(const std::string& method);
-
+        json::JObject GetStatistics() const;
+        
     private:
-        std::shared_ptr<node::NeoSystem> neoSystem_;
-        uint16_t port_;
-        bool enableCors_;
-        bool enableAuth_;
-        std::string username_;
-        std::string password_;
-        std::atomic<bool> running_;
-        std::thread serverThread_;
-        std::mutex mutex_;
-        std::condition_variable condition_;
-        std::unordered_map<std::string, std::function<nlohmann::json(const nlohmann::json&)>> methods_;
-
         /**
-         * @brief Runs the server.
+         * @brief Initialize all RPC method handlers
          */
-        void RunServer();
-
+        void InitializeHandlers();
+        
         /**
-         * @brief Handles an HTTP request.
-         * @param request The request.
-         * @return The response.
+         * @brief Server main loop
          */
-        std::string HandleRequest(const std::string& request);
-
+        void ServerLoop();
+        
         /**
-         * @brief Handles an RPC request.
-         * @param request The request.
-         * @return The response.
+         * @brief Process a single JSON-RPC request
+         * @param request The JSON-RPC request
+         * @return The JSON-RPC response
          */
-        nlohmann::json HandleRPCRequest(const nlohmann::json& request);
-
+        json::JObject ProcessRequest(const json::JObject& request);
+        
         /**
-         * @brief Creates an error response.
-         * @param id The request ID.
-         * @param code The error code.
-         * @param message The error message.
-         * @return The error response.
+         * @brief Validate JSON-RPC request format
+         * @param request The request to validate
+         * @return Error message if invalid, empty string if valid
          */
-        nlohmann::json CreateErrorResponse(const nlohmann::json& id, int32_t code, const std::string& message);
-
+        std::string ValidateRequest(const json::JObject& request);
+        
         /**
-         * @brief Creates a success response.
-         * @param id The request ID.
-         * @param result The result.
-         * @return The success response.
+         * @brief Create JSON-RPC error response
+         * @param id Request ID (can be null)
+         * @param code Error code
+         * @param message Error message
+         * @return Error response object
          */
-        nlohmann::json CreateSuccessResponse(const nlohmann::json& id, const nlohmann::json& result);
-
+        json::JObject CreateErrorResponse(const json::JToken* id, int code, const std::string& message);
+        
         /**
-         * @brief Initializes the RPC methods.
+         * @brief Create JSON-RPC success response
+         * @param id Request ID
+         * @param result Result object
+         * @return Success response object
          */
-        void InitializeMethods();
+        json::JObject CreateSuccessResponse(const json::JToken* id, const json::JToken& result);
+        
+        // RPC Method Implementations
+        
+        /**
+         * @brief Get block by index or hash
+         */
+        json::JObject GetBlock(const json::JArray& params);
+        
+        /**
+         * @brief Get block count
+         */
+        json::JObject GetBlockCount(const json::JArray& params);
+        
+        /**
+         * @brief Get block hash by index
+         */
+        json::JObject GetBlockHash(const json::JArray& params);
+        
+        /**
+         * @brief Get block header by index or hash
+         */
+        json::JObject GetBlockHeader(const json::JArray& params);
+        
+        /**
+         * @brief Get transaction by hash
+         */
+        json::JObject GetTransaction(const json::JArray& params);
+        
+        /**
+         * @brief Get contract state by hash or id
+         */
+        json::JObject GetContractState(const json::JArray& params);
+        
+        /**
+         * @brief Get storage value
+         */
+        json::JObject GetStorage(const json::JArray& params);
+        
+        /**
+         * @brief Get transaction height
+         */
+        json::JObject GetTransactionHeight(const json::JArray& params);
+        
+        /**
+         * @brief Get next block validators
+         */
+        json::JObject GetNextBlockValidators(const json::JArray& params);
+        
+        /**
+         * @brief Get committee members
+         */
+        json::JObject GetCommittee(const json::JArray& params);
+        
+        /**
+         * @brief Invoke contract method (read-only)
+         */
+        json::JObject InvokeFunction(const json::JArray& params);
+        
+        /**
+         * @brief Invoke script (read-only)
+         */
+        json::JObject InvokeScript(const json::JArray& params);
+        
+        /**
+         * @brief Get unclaimed GAS
+         */
+        json::JObject GetUnclaimedGas(const json::JArray& params);
+        
+        /**
+         * @brief List plugins
+         */
+        json::JObject ListPlugins(const json::JArray& params);
+        
+        /**
+         * @brief Send raw transaction
+         */
+        json::JObject SendRawTransaction(const json::JArray& params);
+        
+        /**
+         * @brief Submit new block
+         */
+        json::JObject SubmitBlock(const json::JArray& params);
+        
+        /**
+         * @brief Get connection count
+         */
+        json::JObject GetConnectionCount(const json::JArray& params);
+        
+        /**
+         * @brief Get connected peers
+         */
+        json::JObject GetPeers(const json::JArray& params);
+        
+        /**
+         * @brief Get node version
+         */
+        json::JObject GetVersion(const json::JArray& params);
+        
+        /**
+         * @brief Validate address
+         */
+        json::JObject ValidateAddress(const json::JArray& params);
+    };
+
+    /**
+     * @brief JSON-RPC error codes
+     */
+    enum class RpcError : int
+    {
+        // Standard JSON-RPC 2.0 errors
+        ParseError = -32700,
+        InvalidRequest = -32600,
+        MethodNotFound = -32601,
+        InvalidParams = -32602,
+        InternalError = -32603,
+        
+        // Custom Neo errors
+        InvalidBlockIndex = -100,
+        InvalidBlockHash = -101,
+        InvalidTransactionHash = -102,
+        InvalidContractHash = -103,
+        UnknownBlock = -104,
+        UnknownTransaction = -105,
+        UnknownContract = -106,
+        InsufficientFunds = -107,
+        InvalidSignature = -108,
+        InvalidScript = -109,
+        InvalidAttribute = -110,
+        InvalidWitness = -111,
+        PolicyFailed = -112,
+        Unknown = -113
     };
 }

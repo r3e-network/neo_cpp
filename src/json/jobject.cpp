@@ -24,6 +24,11 @@ namespace neo::json
         return nullptr;
     }
 
+    std::shared_ptr<JToken> JObject::operator[](const char* key) const
+    {
+        return operator[](std::string(key));
+    }
+
     std::string JObject::ToString() const
     {
         std::string output;

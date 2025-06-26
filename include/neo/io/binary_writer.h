@@ -27,6 +27,12 @@ namespace neo::io
         explicit BinaryWriter(std::ostream& stream);
 
         /**
+         * @brief Constructs a BinaryWriter that writes to the specified ByteVector.
+         * @param buffer The ByteVector to write to.
+         */
+        explicit BinaryWriter(ByteVector& buffer);
+
+        /**
          * @brief Writes a boolean value to the stream.
          * @param value The value to write.
          */
@@ -165,6 +171,12 @@ namespace neo::io
         void WriteVarBytes(const ByteSpan& value);
 
         /**
+         * @brief Writes a variable-length byte array to the stream.
+         * @param value The value to write.
+         */
+        void WriteVarBytes(const std::vector<uint8_t>& value);
+
+        /**
          * @brief Writes a string to the stream.
          * @param value The value to write.
          */
@@ -229,6 +241,15 @@ namespace neo::io
         void WriteBytes(const ByteVector& data);
 
     private:
-        std::ostream& stream_;
+        std::ostream* stream_;
+        ByteVector* buffer_;
+        bool owns_stream_;
+
+        /**
+         * @brief Helper method to write raw bytes to either stream or buffer.
+         * @param data Pointer to the data to write.
+         * @param size Number of bytes to write.
+         */
+        void WriteRawBytes(const uint8_t* data, size_t size);
     };
 }

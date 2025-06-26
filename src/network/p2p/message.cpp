@@ -134,27 +134,27 @@ namespace neo::network::p2p
         command_ = static_cast<MessageCommand>(reader.ReadUInt8("command"));
 
         // Deserialize payload based on command matching C# ReflectionCache<MessageCommand>.CreateSerializable
-        if (!payloadData_.empty())
+        if (!payloadRaw_.empty())
         {
             try
             {
-                std::istringstream stream(std::string(reinterpret_cast<const char*>(payloadData_.data()), payloadData_.size()));
-                io::BinaryReader reader(stream);
+                std::istringstream stream(std::string(reinterpret_cast<const char*>(payloadRaw_.Data()), payloadRaw_.Size()));
+                io::BinaryReader binaryReader(stream);
                 
                 switch (command_)
                 {
                     case MessageCommand::Version:
                         {
-                            auto versionPayload = std::make_shared<payloads::VersionPayload>();
-                            versionPayload->Deserialize(reader);
+                            auto versionPayload = std::make_shared<VersionPayload>();
+                            versionPayload->Deserialize(binaryReader);
                             payload_ = versionPayload;
                         }
                         break;
                         
                     case MessageCommand::Addr:
                         {
-                            auto addrPayload = std::make_shared<payloads::AddrPayload>();
-                            addrPayload->Deserialize(reader);
+                            auto addrPayload = std::make_shared<AddrPayload>();
+                            addrPayload->Deserialize(binaryReader);
                             payload_ = addrPayload;
                         }
                         break;
@@ -162,8 +162,8 @@ namespace neo::network::p2p
                     case MessageCommand::Ping:
                     case MessageCommand::Pong:
                         {
-                            auto pingPayload = std::make_shared<payloads::PingPayload>();
-                            pingPayload->Deserialize(reader);
+                            auto pingPayload = std::make_shared<PingPayload>();
+                            pingPayload->Deserialize(binaryReader);
                             payload_ = pingPayload;
                         }
                         break;
@@ -172,8 +172,8 @@ namespace neo::network::p2p
                     case MessageCommand::GetData:
                     case MessageCommand::NotFound:
                         {
-                            auto invPayload = std::make_shared<payloads::InvPayload>();
-                            invPayload->Deserialize(reader);
+                            auto invPayload = std::make_shared<InvPayload>();
+                            invPayload->Deserialize(binaryReader);
                             payload_ = invPayload;
                         }
                         break;
@@ -181,16 +181,16 @@ namespace neo::network::p2p
                     case MessageCommand::GetHeaders:
                     case MessageCommand::GetBlockByIndex:
                         {
-                            auto getBlockPayload = std::make_shared<payloads::GetBlockByIndexPayload>();
-                            getBlockPayload->Deserialize(reader);
+                            auto getBlockPayload = std::make_shared<GetBlockByIndexPayload>();
+                            getBlockPayload->Deserialize(binaryReader);
                             payload_ = getBlockPayload;
                         }
                         break;
                         
                     case MessageCommand::Headers:
                         {
-                            auto headersPayload = std::make_shared<payloads::HeadersPayload>();
-                            headersPayload->Deserialize(reader);
+                            auto headersPayload = std::make_shared<HeadersPayload>();
+                            headersPayload->Deserialize(binaryReader);
                             payload_ = headersPayload;
                         }
                         break;
@@ -198,7 +198,7 @@ namespace neo::network::p2p
                     case MessageCommand::Transaction:
                         {
                             auto transaction = std::make_shared<ledger::Transaction>();
-                            transaction->Deserialize(reader);
+                            transaction->Deserialize(binaryReader);
                             payload_ = transaction;
                         }
                         break;
@@ -206,15 +206,15 @@ namespace neo::network::p2p
                     case MessageCommand::Block:
                         {
                             auto block = std::make_shared<ledger::Block>();
-                            block->Deserialize(reader);
+                            block->Deserialize(binaryReader);
                             payload_ = block;
                         }
                         break;
                         
                     case MessageCommand::Extensible:
                         {
-                            auto extensiblePayload = std::make_shared<payloads::ExtensiblePayload>();
-                            extensiblePayload->Deserialize(reader);
+                            auto extensiblePayload = std::make_shared<ExtensiblePayload>();
+                            extensiblePayload->Deserialize(binaryReader);
                             payload_ = extensiblePayload;
                         }
                         break;
@@ -312,27 +312,27 @@ namespace neo::network::p2p
         }
 
         // Deserialize payload based on command matching C# ReflectionCache<MessageCommand>.CreateSerializable
-        if (!payloadData_.empty())
+        if (!payloadRaw_.empty())
         {
             try
             {
-                std::istringstream stream(std::string(reinterpret_cast<const char*>(payloadData_.data()), payloadData_.size()));
-                io::BinaryReader reader(stream);
+                std::istringstream stream(std::string(reinterpret_cast<const char*>(payloadRaw_.Data()), payloadRaw_.Size()));
+                io::BinaryReader binaryReader(stream);
                 
                 switch (command_)
                 {
                     case MessageCommand::Version:
                         {
-                            auto versionPayload = std::make_shared<payloads::VersionPayload>();
-                            versionPayload->Deserialize(reader);
+                            auto versionPayload = std::make_shared<VersionPayload>();
+                            versionPayload->Deserialize(binaryReader);
                             payload_ = versionPayload;
                         }
                         break;
                         
                     case MessageCommand::Addr:
                         {
-                            auto addrPayload = std::make_shared<payloads::AddrPayload>();
-                            addrPayload->Deserialize(reader);
+                            auto addrPayload = std::make_shared<AddrPayload>();
+                            addrPayload->Deserialize(binaryReader);
                             payload_ = addrPayload;
                         }
                         break;
@@ -340,8 +340,8 @@ namespace neo::network::p2p
                     case MessageCommand::Ping:
                     case MessageCommand::Pong:
                         {
-                            auto pingPayload = std::make_shared<payloads::PingPayload>();
-                            pingPayload->Deserialize(reader);
+                            auto pingPayload = std::make_shared<PingPayload>();
+                            pingPayload->Deserialize(binaryReader);
                             payload_ = pingPayload;
                         }
                         break;
@@ -350,8 +350,8 @@ namespace neo::network::p2p
                     case MessageCommand::GetData:
                     case MessageCommand::NotFound:
                         {
-                            auto invPayload = std::make_shared<payloads::InvPayload>();
-                            invPayload->Deserialize(reader);
+                            auto invPayload = std::make_shared<InvPayload>();
+                            invPayload->Deserialize(binaryReader);
                             payload_ = invPayload;
                         }
                         break;
@@ -359,16 +359,16 @@ namespace neo::network::p2p
                     case MessageCommand::GetHeaders:
                     case MessageCommand::GetBlockByIndex:
                         {
-                            auto getBlockPayload = std::make_shared<payloads::GetBlockByIndexPayload>();
-                            getBlockPayload->Deserialize(reader);
+                            auto getBlockPayload = std::make_shared<GetBlockByIndexPayload>();
+                            getBlockPayload->Deserialize(binaryReader);
                             payload_ = getBlockPayload;
                         }
                         break;
                         
                     case MessageCommand::Headers:
                         {
-                            auto headersPayload = std::make_shared<payloads::HeadersPayload>();
-                            headersPayload->Deserialize(reader);
+                            auto headersPayload = std::make_shared<HeadersPayload>();
+                            headersPayload->Deserialize(binaryReader);
                             payload_ = headersPayload;
                         }
                         break;
@@ -376,7 +376,7 @@ namespace neo::network::p2p
                     case MessageCommand::Transaction:
                         {
                             auto transaction = std::make_shared<ledger::Transaction>();
-                            transaction->Deserialize(reader);
+                            transaction->Deserialize(binaryReader);
                             payload_ = transaction;
                         }
                         break;
@@ -384,15 +384,15 @@ namespace neo::network::p2p
                     case MessageCommand::Block:
                         {
                             auto block = std::make_shared<ledger::Block>();
-                            block->Deserialize(reader);
+                            block->Deserialize(binaryReader);
                             payload_ = block;
                         }
                         break;
                         
                     case MessageCommand::Extensible:
                         {
-                            auto extensiblePayload = std::make_shared<payloads::ExtensiblePayload>();
-                            extensiblePayload->Deserialize(reader);
+                            auto extensiblePayload = std::make_shared<ExtensiblePayload>();
+                            extensiblePayload->Deserialize(binaryReader);
                             payload_ = extensiblePayload;
                         }
                         break;

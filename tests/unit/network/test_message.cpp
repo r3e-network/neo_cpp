@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <neo/network/message.h>
-#include <neo/network/payloads/version_payload.h>
-#include <neo/network/payloads/ping_payload.h>
+#include <neo/network/p2p/payloads/version_payload.h>
+#include <neo/network/p2p/payloads/ping_payload.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
 #include <neo/cryptography/crypto.h>

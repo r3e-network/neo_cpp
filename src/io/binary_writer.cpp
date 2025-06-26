@@ -9,7 +9,12 @@
 namespace neo::io
 {
     BinaryWriter::BinaryWriter(std::ostream& stream)
-        : stream_(stream)
+        : stream_(&stream), buffer_(nullptr), owns_stream_(false)
+    {
+    }
+
+    BinaryWriter::BinaryWriter(ByteVector& buffer)
+        : stream_(nullptr), buffer_(&buffer), owns_stream_(false)
     {
     }
 
@@ -30,7 +35,11 @@ namespace neo::io
 
     void BinaryWriter::Write(uint8_t value)
     {
-        stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
+        if (buffer_) {
+            buffer_->Push(value);
+        } else {
+            stream_->write(reinterpret_cast<const char*>(&value), sizeof(value));
+        }
     }
 
     void BinaryWriter::WriteByte(uint8_t value)
@@ -40,7 +49,7 @@ namespace neo::io
 
     void BinaryWriter::Write(uint16_t value)
     {
-        stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
+        WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
     }
 
     void BinaryWriter::WriteUInt16(uint16_t value)
@@ -50,12 +59,12 @@ namespace neo::io
 
     void BinaryWriter::Write(uint32_t value)
     {
-        stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
+        WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
     }
 
     void BinaryWriter::Write(uint64_t value)
     {
-        stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
+        WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
     }
 
     void BinaryWriter::WriteUInt64(uint64_t value)
@@ -65,22 +74,22 @@ namespace neo::io
 
     void BinaryWriter::Write(int8_t value)
     {
-        stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
+        WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
     }
 
     void BinaryWriter::Write(int16_t value)
     {
-        stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
+        WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
     }
 
     void BinaryWriter::Write(int32_t value)
     {
-        stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
+        WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
     }
 
     void BinaryWriter::Write(int64_t value)
     {
-        stream_.write(reinterpret_cast<const char*>(&value), sizeof(value));
+        WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
     }
 
     void BinaryWriter::WriteInt64(int64_t value)
@@ -90,7 +99,7 @@ namespace neo::io
 
     void BinaryWriter::Write(const ByteSpan& value)
     {
-        stream_.write(reinterpret_cast<const char*>(value.Data()), value.Size());
+        WriteRawBytes(value.Data(), value.Size());
     }
 
     void BinaryWriter::Write(const std::string& value)
@@ -110,7 +119,7 @@ namespace neo::io
 
     void BinaryWriter::Write(const Fixed8& value)
     {
-        Write(value.Value());
+        Write(value.ToString());
     }
 
     void BinaryWriter::Write(const ISerializable& value)
@@ -150,6 +159,12 @@ namespace neo::io
         Write(value);
     }
 
+    void BinaryWriter::WriteVarBytes(const std::vector<uint8_t>& value)
+    {
+        WriteVarInt(value.size());
+        WriteRawBytes(value.data(), value.size());
+    }
+
     void BinaryWriter::WriteString(const std::string& value)
     {
         WriteVarBytes(ByteSpan(reinterpret_cast<const uint8_t*>(value.data()), value.size()));
@@ -175,11 +190,22 @@ namespace neo::io
 
     void BinaryWriter::WriteBytes(const uint8_t* data, size_t size)
     {
-        stream_.write(reinterpret_cast<const char*>(data), size);
+        WriteRawBytes(data, size);
     }
 
     void BinaryWriter::WriteBytes(const ByteVector& data)
     {
         WriteBytes(data.Data(), data.Size());
+    }
+
+    void BinaryWriter::WriteRawBytes(const uint8_t* data, size_t size)
+    {
+        if (buffer_) {
+            for (size_t i = 0; i < size; ++i) {
+                buffer_->Push(data[i]);
+            }
+        } else {
+            stream_->write(reinterpret_cast<const char*>(data), size);
+        }
     }
 }

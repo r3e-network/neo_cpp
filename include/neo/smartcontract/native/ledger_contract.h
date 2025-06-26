@@ -16,6 +16,10 @@ namespace neo::smartcontract::native
      */
     class LedgerContract : public NativeContract
     {
+        // Friend classes for testing
+        friend class NativeContractTest;
+        friend class LedgerContractTest;
+        
     public:
         /**
          * @brief The contract ID.

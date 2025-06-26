@@ -515,7 +515,7 @@ namespace neo::network
 
                 // Send verack message
                 auto verackPayload = std::make_shared<VerAckPayload>();
-                Message verackMessage(MessageCommand::Verack, verackPayload);
+                Message verackMessage(p2p::MessageCommand::Verack, verackPayload);
                 peer->Send(verackMessage);
 
                 NEO_LOG(NEO_DEBUG, "Sent verack to peer");
@@ -552,9 +552,9 @@ namespace neo::network
             try
             {
                 // Randomly select connected peers with listener ports
-                std::vector<std::shared_ptr<RemoteNode>> eligiblePeers;
+                std::vector<std::shared_ptr<P2PPeer>> eligiblePeers;
                 
-                for (const auto& [id, node] : connectedNodes_)
+                for (const auto& [id, node] : peers_)
                 {
                     if (node && node->GetListenerPort() > 0)
                     {
@@ -566,7 +566,7 @@ namespace neo::network
                     return; // No peers to send
                 
                 // Group by address and take first from each group (remove duplicates)
-                std::map<std::string, std::shared_ptr<RemoteNode>> uniquePeers;
+                std::map<std::string, std::shared_ptr<P2PPeer>> uniquePeers;
                 for (const auto& peer : eligiblePeers)
                 {
                     std::string address = peer->GetRemoteEndpoint().GetAddress().ToString();

@@ -142,7 +142,7 @@ TEST(MemoryStoreTest, CreateSnapshot)
     store.Put(key, value1);
     
     // Create a snapshot
-    auto snapshot = store.CreateSnapshot();
+    auto snapshot = store.GetSnapshot();
     
     // Check that the snapshot contains the value
     auto value2 = snapshot->TryGet(key);
@@ -182,7 +182,7 @@ TEST(MemoryStoreTest, SnapshotDelete)
     store.Put(key, value);
     
     // Create a snapshot
-    auto snapshot = store.CreateSnapshot();
+    auto snapshot = store.GetSnapshot();
     
     // Delete the value in the snapshot
     snapshot->Delete(key);
@@ -218,7 +218,7 @@ TEST(MemoryStoreTest, SnapshotFind)
     store.Put(key2, value2);
     
     // Create a snapshot
-    auto snapshot = store.CreateSnapshot();
+    auto snapshot = store.GetSnapshot();
     
     // Add a value to the snapshot
     ByteVector key3 = ByteVector::Parse("0103030405");

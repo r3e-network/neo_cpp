@@ -82,7 +82,7 @@ namespace neo::smartcontract
             uint64_t time = 0;
             if (appEngine.GetPersistingBlock())
             {
-                time = appEngine.GetPersistingBlock()->GetTimestamp();
+                time = static_cast<uint64_t>(appEngine.GetPersistingBlock()->GetTimestamp().time_since_epoch().count() / 1000000);
             }
             else if (appEngine.GetTransaction())
             {
@@ -225,7 +225,7 @@ namespace neo::smartcontract
                     blockMap->Set(vm::StackItem::Create("merkleroot"), vm::StackItem::Create(merkleRootBytes));
 
                     // Add block timestamp
-                    blockMap->Set(vm::StackItem::Create("timestamp"), vm::StackItem::Create(static_cast<int64_t>(block->GetTimestamp())));
+                    blockMap->Set(vm::StackItem::Create("timestamp"), vm::StackItem::Create(static_cast<int64_t>(block->GetTimestamp().time_since_epoch().count() / 1000000)));
 
                     // Add block next consensus
                     auto nextConsensus = block->GetNextConsensus();
@@ -286,9 +286,25 @@ namespace neo::smartcontract
 
     // This function provides the runtime system call handlers
     // The actual registration is handled in application_engine.cpp
-    void RegisterRuntimeSystemCalls(ApplicationEngine& engine)
+    void RegisterRuntimeSystemCalls(ApplicationEngine& /* engine */)
     {
         // System call registration is handled in the ApplicationEngine constructor
         // This function is kept for compatibility but doesn't register calls directly
+        
+        // Suppress unused function warnings by referencing them
+        (void)HandleGetTrigger;
+        (void)HandleCheckWitness;
+        (void)HandleNotify;
+        (void)HandleLog;
+        (void)HandleGetTime;
+        (void)HandleGetPlatform;
+        (void)HandleGetNetwork;
+        (void)HandleGetRandom;
+        (void)HandleGasLeft;
+        (void)HandleGetInvocationCounter;
+        (void)HandleGetScriptContainer;
+        (void)HandleGetExecutingScriptHash;
+        (void)HandleGetCallingScriptHash;
+        (void)HandleGetEntryScriptHash;
     }
 }

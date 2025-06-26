@@ -11,6 +11,10 @@ namespace neo::smartcontract::native
      */
     class StdLib : public NativeContract
     {
+        // Friend classes for testing
+        friend class NativeContractTest;
+        friend class StdLibTest;
+        
     public:
         /**
          * @brief The contract ID.

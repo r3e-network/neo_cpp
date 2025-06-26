@@ -1,229 +1,127 @@
 #pragma once
 
-#include <neo/io/iserializable.h>
-#include <neo/io/ijson_serializable.h>
 #include <neo/io/uint256.h>
 #include <neo/io/uint160.h>
-#include <neo/io/fixed8.h>
-#include <neo/network/p2p/payloads/neo3_transaction.h>
-#include <neo/ledger/block_header.h>
+#include <neo/io/iserializable.h>
+#include <neo/ledger/transaction.h>
 #include <vector>
-#include <memory>
-#include <cstdint>
+#include <chrono>
 
 namespace neo::ledger
 {
-    // Use Neo3Transaction from network namespace
-    using Neo3Transaction = network::p2p::payloads::Neo3Transaction;
-    
     /**
-     * @brief Represents a block in the blockchain.
+     * @brief Represents a block in the Neo blockchain
      */
-    class Block : public io::ISerializable, public io::IJsonSerializable
+    class Block : public io::ISerializable
     {
+    private:
+        uint32_t version_{0};
+        io::UInt256 previous_hash_;
+        io::UInt256 merkle_root_;
+        std::chrono::system_clock::time_point timestamp_;
+        uint32_t index_{0};
+        uint32_t primary_index_{0};
+        io::UInt160 next_consensus_;
+        std::vector<Transaction> transactions_;
+        
     public:
         /**
-         * @brief Constructs an empty Block.
+         * @brief Default constructor
          */
-        Block();
-
+        Block() = default;
+        
         /**
-         * @brief Gets the version.
-         * @return The version.
+         * @brief Get block version
          */
-        uint32_t GetVersion() const;
-
+        uint32_t GetVersion() const { return version_; }
+        
         /**
-         * @brief Sets the version.
-         * @param version The version.
+         * @brief Set block version
          */
-        void SetVersion(uint32_t version);
-
+        void SetVersion(uint32_t version) { version_ = version; }
+        
         /**
-         * @brief Gets the previous block hash.
-         * @return The previous block hash.
+         * @brief Get previous block hash
          */
-        const io::UInt256& GetPrevHash() const;
-
+        const io::UInt256& GetPreviousHash() const { return previous_hash_; }
+        
         /**
-         * @brief Sets the previous block hash.
-         * @param prevHash The previous block hash.
+         * @brief Set previous block hash
          */
-        void SetPrevHash(const io::UInt256& prevHash);
-
+        void SetPreviousHash(const io::UInt256& hash) { previous_hash_ = hash; }
+        
         /**
-         * @brief Gets the merkle root.
-         * @return The merkle root.
+         * @brief Get merkle root
          */
-        const io::UInt256& GetMerkleRoot() const;
-
+        const io::UInt256& GetMerkleRoot() const { return merkle_root_; }
+        
         /**
-         * @brief Sets the merkle root.
-         * @param merkleRoot The merkle root.
+         * @brief Set merkle root
          */
-        void SetMerkleRoot(const io::UInt256& merkleRoot);
-
+        void SetMerkleRoot(const io::UInt256& root) { merkle_root_ = root; }
+        
         /**
-         * @brief Gets the timestamp.
-         * @return The timestamp.
+         * @brief Get block timestamp
          */
-        uint64_t GetTimestamp() const;
-
+        std::chrono::system_clock::time_point GetTimestamp() const { return timestamp_; }
+        
         /**
-         * @brief Sets the timestamp.
-         * @param timestamp The timestamp.
+         * @brief Set block timestamp
          */
-        void SetTimestamp(uint64_t timestamp);
-
+        void SetTimestamp(std::chrono::system_clock::time_point timestamp) { timestamp_ = timestamp; }
+        
         /**
-         * @brief Gets the nonce.
-         * @return The nonce.
+         * @brief Get block index
          */
-        uint64_t GetNonce() const;
-
+        uint32_t GetIndex() const { return index_; }
+        
         /**
-         * @brief Sets the nonce.
-         * @param nonce The nonce.
+         * @brief Set block index
          */
-        void SetNonce(uint64_t nonce);
-
+        void SetIndex(uint32_t index) { index_ = index; }
+        
         /**
-         * @brief Gets the index.
-         * @return The index.
+         * @brief Get primary index
          */
-        uint32_t GetIndex() const;
-
+        uint32_t GetPrimaryIndex() const { return primary_index_; }
+        
         /**
-         * @brief Sets the index.
-         * @param index The index.
+         * @brief Set primary index
          */
-        void SetIndex(uint32_t index);
-
+        void SetPrimaryIndex(uint32_t index) { primary_index_ = index; }
+        
         /**
-         * @brief Gets the primary index.
-         * @return The primary index.
+         * @brief Get next consensus address
          */
-        uint8_t GetPrimaryIndex() const;
-
+        const io::UInt160& GetNextConsensus() const { return next_consensus_; }
+        
         /**
-         * @brief Sets the primary index.
-         * @param primaryIndex The primary index.
+         * @brief Set next consensus address
          */
-        void SetPrimaryIndex(uint8_t primaryIndex);
-
+        void SetNextConsensus(const io::UInt160& address) { next_consensus_ = address; }
+        
         /**
-         * @brief Gets the next consensus.
-         * @return The next consensus.
+         * @brief Get transactions
          */
-        const io::UInt160& GetNextConsensus() const;
-
+        const std::vector<Transaction>& GetTransactions() const { return transactions_; }
+        
         /**
-         * @brief Sets the next consensus.
-         * @param nextConsensus The next consensus.
+         * @brief Add transaction
          */
-        void SetNextConsensus(const io::UInt160& nextConsensus);
-
+        void AddTransaction(const Transaction& tx) { transactions_.push_back(tx); }
+        
         /**
-         * @brief Gets the witness.
-         * @return The witness.
-         */
-        const Witness& GetWitness() const;
-
-        /**
-         * @brief Sets the witness.
-         * @param witness The witness.
-         */
-        void SetWitness(const Witness& witness);
-
-        /**
-         * @brief Gets the transactions.
-         * @return The transactions.
-         */
-        const std::vector<std::shared_ptr<Neo3Transaction>>& GetTransactions() const;
-
-        /**
-         * @brief Sets the transactions.
-         * @param transactions The transactions.
-         */
-        void SetTransactions(const std::vector<std::shared_ptr<Neo3Transaction>>& transactions);
-
-        /**
-         * @brief Gets the hash of the block.
-         * @return The hash of the block.
+         * @brief Get block hash
          */
         io::UInt256 GetHash() const;
-
+        
         /**
-         * @brief Gets the size of the block in bytes.
-         * @return The size of the block in bytes.
+         * @brief Get block size
          */
-        size_t GetSize() const;
-
-        /**
-         * @brief Serializes the Block to a binary writer.
-         * @param writer The binary writer.
-         */
+        uint32_t GetSize() const;
+        
+        // ISerializable implementation
         void Serialize(io::BinaryWriter& writer) const override;
-
-        /**
-         * @brief Deserializes the Block from a binary reader.
-         * @param reader The binary reader.
-         */
         void Deserialize(io::BinaryReader& reader) override;
-
-        /**
-         * @brief Serializes the Block to a JSON writer.
-         * @param writer The JSON writer.
-         */
-        void SerializeJson(io::JsonWriter& writer) const override;
-
-        /**
-         * @brief Deserializes the Block from a JSON reader.
-         * @param reader The JSON reader.
-         */
-        void DeserializeJson(const io::JsonReader& reader) override;
-
-        /**
-         * @brief Rebuilds the merkle root.
-         */
-        void RebuildMerkleRoot();
-
-        /**
-         * @brief Verifies the block.
-         * @return True if the block is valid, false otherwise.
-         */
-        bool Verify() const;
-
-        /**
-         * @brief Verifies the witness.
-         * @return True if the witness is valid, false otherwise.
-         */
-        bool VerifyWitness() const;
-
-        /**
-         * @brief Checks if this Block is equal to another Block.
-         * @param other The other Block.
-         * @return True if the Blocks are equal, false otherwise.
-         */
-        bool operator==(const Block& other) const;
-
-        /**
-         * @brief Checks if this Block is not equal to another Block.
-         * @param other The other Block.
-         * @return True if the Blocks are not equal, false otherwise.
-         */
-        bool operator!=(const Block& other) const;
-
-    private:
-        uint32_t version_;
-        io::UInt256 prevHash_;
-        io::UInt256 merkleRoot_;
-        uint64_t timestamp_;
-        uint64_t nonce_;
-        uint32_t index_;
-        uint8_t primaryIndex_;
-        io::UInt160 nextConsensus_;
-        Witness witness_;
-        std::vector<std::shared_ptr<Neo3Transaction>> transactions_;
     };
 }

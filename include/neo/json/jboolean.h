@@ -65,7 +65,6 @@ namespace neo::json
          */
         bool GetValue() const;
 
-    protected:
         /**
          * @brief Writes this token to JSON output.
          * @param output The output string.
@@ -73,6 +72,8 @@ namespace neo::json
          * @param indent_level The indentation level.
          */
         void WriteJson(std::string& output, bool indented = false, int indent_level = 0) const override;
+
+    protected:
 
     private:
         bool value_;

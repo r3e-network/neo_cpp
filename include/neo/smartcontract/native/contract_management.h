@@ -14,6 +14,10 @@ namespace neo::smartcontract::native
      */
     class ContractManagement : public NativeContract
     {
+        // Friend classes for testing
+        friend class NativeContractTest;
+        friend class ContractManagementTest;
+        
     public:
         /**
          * @brief The contract ID.

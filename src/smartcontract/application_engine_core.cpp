@@ -133,7 +133,7 @@ namespace neo::smartcontract
         {
             for (const auto& signer : tx->GetSigners())
             {
-                if (signer.GetAccount() == hash)
+                if (signer == hash)
                     return true;
             }
         }

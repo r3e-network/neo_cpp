@@ -12,6 +12,10 @@ namespace neo::smartcontract::native
      */
     class GasToken : public FungibleToken
     {
+        // Friend classes for testing
+        friend class NativeContractTest;
+        friend class GasTokenTest;
+        
     public:
         /**
          * @brief The contract ID.

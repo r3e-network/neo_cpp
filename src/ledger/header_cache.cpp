@@ -94,6 +94,44 @@ namespace neo::ledger
         return headers_.size();
     }
 
+    size_t HeaderCache::MaxSize() const
+    {
+        return max_size_;
+    }
+
+    bool HeaderCache::Contains(const io::UInt256& hash) const
+    {
+        std::shared_lock<std::shared_mutex> lock(mutex_);
+        return hash_index_.find(hash) != hash_index_.end();
+    }
+
+    bool HeaderCache::Remove(const io::UInt256& hash)
+    {
+        std::unique_lock<std::shared_mutex> lock(mutex_);
+        
+        auto it = hash_index_.find(hash);
+        if (it == hash_index_.end())
+        {
+            return false;
+        }
+        
+        auto header = it->second;
+        auto index = header->GetIndex();
+        
+        // Remove from all indices
+        hash_index_.erase(it);
+        height_index_.erase(index);
+        
+        // Remove from deque
+        auto deque_it = std::find(headers_.begin(), headers_.end(), header);
+        if (deque_it != headers_.end())
+        {
+            headers_.erase(deque_it);
+        }
+        
+        return true;
+    }
+
     bool HeaderCache::TryRemoveFirst()
     {
         // This method assumes mutex is already locked

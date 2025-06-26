@@ -52,56 +52,23 @@ namespace neo::persistence
         size_t currentIndex_;
     };
 
-    /**
-     * @brief StorageIterator implementation for ClonedCache.
-     */
-    class ClonedCacheIterator : public StorageIterator
-    {
-    public:
-        ClonedCacheIterator(const ClonedCache& cache, const StorageKey& prefix)
-            : cache_(cache), prefix_(prefix), currentIndex_(0)
-        {
-            // Get all items matching the prefix
-            items_ = cache_.Find(&prefix_);
-        }
-
-        bool Valid() const override
-        {
-            return currentIndex_ < items_.size();
-        }
-
-        StorageKey Key() const override
-        {
-            if (!Valid())
-                throw std::runtime_error("Iterator is not valid");
-            return items_[currentIndex_].first;
-        }
-
-        StorageItem Value() const override
-        {
-            if (!Valid())
-                throw std::runtime_error("Iterator is not valid");
-            return items_[currentIndex_].second;
-        }
-
-        void Next() override
-        {
-            if (!Valid())
-                throw std::runtime_error("Iterator is not valid");
-            ++currentIndex_;
-        }
-
-    private:
-        const ClonedCache& cache_;
-        StorageKey prefix_;
-        std::vector<std::pair<StorageKey, StorageItem>> items_;
-        size_t currentIndex_;
-    };
+    // ClonedCacheIterator removed - ClonedCache is now template-only
 
     // StoreCache implementation
     StoreCache::StoreCache(IStore& store)
-        : store_(store)
+        : store_(store), snapshot_(nullptr)
     {
+    }
+
+    StoreCache::StoreCache(std::shared_ptr<IStoreSnapshot> snapshot)
+        : store_(*snapshot), snapshot_(snapshot)
+    {
+        if (!snapshot)
+        {
+            throw std::invalid_argument("Snapshot cannot be null");
+        }
+        // Store the snapshot reference - since IStoreSnapshot inherits from IStore,
+        // we can use it directly as the store reference
     }
 
     std::optional<StorageItem> StoreCache::TryGet(const StorageKey& key) const
@@ -339,7 +306,11 @@ namespace neo::persistence
 
     std::shared_ptr<StoreView> StoreCache::CreateSnapshot()
     {
-        return std::make_shared<ClonedCache>(*this);
+        // For now, return a simple StoreCache copy
+        // In practice, this would create a proper snapshot implementation
+        auto snapshot = std::make_shared<StoreCache>(store_);
+        snapshot->items_ = items_;
+        return snapshot;
     }
 
     void StoreCache::Commit()
@@ -428,242 +399,139 @@ namespace neo::persistence
         return std::make_unique<StorageCacheIterator>(*this, prefix);
     }
 
-    // ClonedCache implementation
-    ClonedCache::ClonedCache(DataCache& innerCache)
-        : innerCache_(innerCache)
+    bool StoreCache::Contains(const StorageKey& key) const
     {
-    }
-
-    std::optional<StorageItem> ClonedCache::TryGet(const StorageKey& key) const
-    {
-        // Check if the key is in the cache
         auto it = items_.find(key);
         if (it != items_.end())
         {
-            if (it->second.second == TrackState::Deleted)
-                return std::nullopt;
-
-            return it->second.first;
+            return it->second.second != TrackState::Deleted;
         }
 
-        // Try to get the key from the inner cache
-        auto innerPtr = innerCache_.TryGet(key);
-        if (innerPtr)
-            return *innerPtr;
-        return std::nullopt;
+        // Check if the key exists in the store
+        io::ByteVector keyBytes = key.ToArray();
+        return store_.Contains(keyBytes);
     }
 
-    std::shared_ptr<StorageItem> ClonedCache::TryGet(const StorageKey& key)
+    TrackState StoreCache::GetTrackState(const StorageKey& key) const
     {
-        // Check if the key is in the cache
         auto it = items_.find(key);
         if (it != items_.end())
         {
-            if (it->second.second == TrackState::Deleted)
-                return nullptr;
-
-            return std::make_shared<StorageItem>(it->second.first);
+            return it->second.second;
         }
-
-        // Try to get the key from the inner cache
-        return innerCache_.TryGet(key);
+        return TrackState::None;
     }
 
-    void ClonedCache::Add(const StorageKey& key, const StorageItem& item)
+    void StoreCache::Update(const StorageKey& key, const StorageItem& item)
     {
         auto it = items_.find(key);
         if (it != items_.end())
         {
-            if (it->second.second == TrackState::Deleted)
+            it->second.first = item;
+            if (it->second.second == TrackState::None)
             {
-                it->second.first = item;
                 it->second.second = TrackState::Changed;
-            }
-            else
-            {
-                throw std::invalid_argument("The key already exists in the cache.");
             }
         }
         else
         {
-            // Check if the key exists in the inner cache
-            auto innerItem = innerCache_.TryGet(key);
-            if (innerItem)
-                throw std::invalid_argument("The key already exists in the inner cache.");
-
-            items_[key] = std::make_pair(item, TrackState::Added);
-        }
-    }
-
-    StorageItem& ClonedCache::Get(const StorageKey& key)
-    {
-        // Check if the key is in the cache
-        auto it = items_.find(key);
-        if (it != items_.end())
-        {
-            if (it->second.second == TrackState::Deleted)
-                throw std::out_of_range("The key was not found in the cache.");
-
-            return it->second.first;
-        }
-
-        // Try to get the key from the inner cache
-        auto innerItem = innerCache_.TryGet(key);
-        if (!innerItem)
-            throw std::out_of_range("The key was not found in the inner cache.");
-
-        // Add to cache
-        auto [it2, inserted] = items_.emplace(key, std::make_pair(*innerItem, TrackState::None));
-
-        return it2->second.first;
-    }
-
-    std::shared_ptr<StorageItem> ClonedCache::GetAndChange(const StorageKey& key, std::function<std::shared_ptr<StorageItem>()> factory)
-    {
-        // Check if the key is in the cache
-        auto it = items_.find(key);
-        if (it != items_.end())
-        {
-            if (it->second.second == TrackState::Deleted)
+            // Check if the key exists in the store
+            io::ByteVector keyBytes = key.ToArray();
+            if (!store_.Contains(keyBytes))
             {
-                if (!factory)
-                    return nullptr;
-
-                auto newItem = factory();
-                it->second.first = *newItem;
-                it->second.second = TrackState::Changed;
-                return std::make_shared<StorageItem>(it->second.first);
+                throw std::out_of_range("Key not found");
             }
-            else if (it->second.second == TrackState::None)
-            {
-                it->second.second = TrackState::Changed;
-            }
-            return std::make_shared<StorageItem>(it->second.first);
-        }
-
-        // Try to get the key from the inner cache
-        auto innerItem = innerCache_.TryGet(key);
-        if (!innerItem)
-        {
-            if (!factory)
-                return nullptr;
-
-            auto newItem = factory();
-            items_[key] = std::make_pair(*newItem, TrackState::Added);
-            return std::make_shared<StorageItem>(items_[key].first);
-        }
-
-        // Add to cache as changed
-        auto [it2, inserted] = items_.emplace(key, std::make_pair(*innerItem, TrackState::Changed));
-        return std::make_shared<StorageItem>(it2->second.first);
-    }
-
-    void ClonedCache::Delete(const StorageKey& key)
-    {
-        auto it = items_.find(key);
-        if (it != items_.end())
-        {
-            if (it->second.second == TrackState::Added)
-                items_.erase(it);
-            else
-                it->second.second = TrackState::Deleted;
-        }
-        else
-        {
-            // Check if the key exists in the inner cache
-            auto innerItem = innerCache_.TryGet(key);
-            if (!innerItem)
-                return;
-
-            // Add to cache as deleted
-            items_[key] = std::make_pair(*innerItem, TrackState::Deleted);
-        }
-    }
-
-    std::vector<std::pair<StorageKey, StorageItem>> ClonedCache::Find(const StorageKey* prefix) const
-    {
-        std::vector<std::pair<StorageKey, StorageItem>> result;
-
-        // Get all items from the inner cache
-        auto innerItems = innerCache_.Find(prefix);
-
-        // Add items from the inner cache
-        for (const auto& item_pair : innerItems)
-        {
-            const auto& key = item_pair.first;
-            const auto& item = item_pair.second;
             
-            // Skip if the key is in the cache
-            auto it = items_.find(key);
-            if (it != items_.end())
-                continue;
-
-            result.push_back(std::make_pair(key, item));
+            items_[key] = std::make_pair(item, TrackState::Changed);
         }
+    }
 
-        // Add items from the cache
+    size_t StoreCache::Count() const
+    {
+        size_t count = 0;
+        
+        // Count items from store that aren't deleted
+        auto storeItems = store_.Find();
+        for (const auto& pair : storeItems)
+        {
+            StorageKey key;
+            key.DeserializeFromArray(pair.first.AsSpan());
+            
+            auto it = items_.find(key);
+            if (it == items_.end() || it->second.second != TrackState::Deleted)
+            {
+                count++;
+            }
+        }
+        
+        // Add items that are added in cache
         for (const auto& [key, pair] : items_)
         {
-            if (pair.second == TrackState::Deleted)
-                continue;
-
-            if (prefix != nullptr)
+            if (pair.second == TrackState::Added)
             {
-                // Check if the key starts with the prefix
-                if (key.GetScriptHash() != prefix->GetScriptHash())
-                    continue;
-
-                if (key.GetKey().Size() < prefix->GetKey().Size())
-                    continue;
-
-                if (!std::equal(prefix->GetKey().Data(), prefix->GetKey().Data() + prefix->GetKey().Size(), key.GetKey().Data()))
-                    continue;
+                count++;
             }
-
-            result.emplace_back(key, pair.first);
         }
+        
+        return count;
+    }
 
+    std::vector<std::pair<StorageKey, std::pair<StorageItem, TrackState>>> StoreCache::GetTrackedItems() const
+    {
+        std::vector<std::pair<StorageKey, std::pair<StorageItem, TrackState>>> result;
+        for (const auto& [key, pair] : items_)
+        {
+            result.emplace_back(key, pair);
+        }
         return result;
     }
 
-    std::shared_ptr<StoreView> ClonedCache::CreateSnapshot()
+    std::vector<std::pair<StorageKey, StorageItem>> StoreCache::GetChangedItems() const
     {
-        return std::make_shared<ClonedCache>(*this);
-    }
-
-    void ClonedCache::Commit()
-    {
-        // Apply changes to the inner cache
+        std::vector<std::pair<StorageKey, StorageItem>> result;
         for (const auto& [key, pair] : items_)
         {
-            switch (pair.second)
+            if (pair.second == TrackState::Changed || pair.second == TrackState::Added)
             {
-                case TrackState::Added:
-                    innerCache_.Add(key, pair.first);
-                    break;
-                case TrackState::Changed:
-                    innerCache_.Get(key).SetValue(pair.first.GetValue());
-                    break;
-                case TrackState::Deleted:
-                    innerCache_.Delete(key);
-                    break;
-                case TrackState::None:
-                    break;
+                result.emplace_back(key, pair.first);
             }
         }
-
-        // Clear the cache
-        items_.clear();
+        return result;
     }
 
-    uint32_t ClonedCache::GetCurrentBlockIndex() const
+    std::vector<StorageKey> StoreCache::GetDeletedItems() const
     {
-        return innerCache_.GetCurrentBlockIndex();
+        std::vector<StorageKey> result;
+        for (const auto& [key, pair] : items_)
+        {
+            if (pair.second == TrackState::Deleted)
+            {
+                result.push_back(key);
+            }
+        }
+        return result;
     }
 
-    std::unique_ptr<StorageIterator> ClonedCache::Seek(const StorageKey& prefix) const
+    bool StoreCache::TryGet(const StorageKey& key, StorageItem& item) const
     {
-        // Implement proper iterator for ClonedCache matching C# DataCache.Find implementation
-        return std::make_unique<ClonedCacheIterator>(*this, prefix);
+        auto optItem = TryGet(key);
+        if (optItem)
+        {
+            item = *optItem;
+            return true;
+        }
+        return false;
     }
+
+    std::shared_ptr<IStoreSnapshot> StoreCache::GetStore() const
+    {
+        return snapshot_;
+    }
+
+    bool StoreCache::IsReadOnly() const
+    {
+        return false; // StoreCache is not read-only by default
+    }
+
+    // ClonedCache implementations removed - ClonedCache is now template-only in cloned_cache.h
 }

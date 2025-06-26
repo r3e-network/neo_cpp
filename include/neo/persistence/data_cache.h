@@ -89,6 +89,12 @@ namespace neo::persistence
          * @param store The store to cache.
          */
         explicit StoreCache(IStore& store);
+        
+        /**
+         * @brief Constructs a StoreCache from a store snapshot.
+         * @param snapshot The store snapshot.
+         */
+        explicit StoreCache(std::shared_ptr<IStoreSnapshot> snapshot);
 
         /**
          * @brief Tries to get a storage item from the cache.
@@ -165,100 +171,76 @@ namespace neo::persistence
          */
         uint32_t GetCurrentBlockIndex() const override;
 
-    private:
-        IStore& store_;
-        std::unordered_map<StorageKey, std::pair<StorageItem, TrackState>> items_;
-    };
-
-    /**
-     * @brief A snapshot of a cache.
-     */
-    class ClonedCache : public DataCache
-    {
-    public:
         /**
-         * @brief Constructs a ClonedCache.
-         * @param innerCache The inner cache.
+         * @brief Checks if a key exists in the cache.
+         * @param key The key to check.
+         * @return True if the key exists, false otherwise.
          */
-        explicit ClonedCache(DataCache& innerCache);
+        bool Contains(const StorageKey& key) const;
 
         /**
-         * @brief Tries to get a storage item from the cache.
-         * @param key The key to look up.
-         * @return The storage item if found, std::nullopt otherwise.
+         * @brief Gets the track state of a key.
+         * @param key The key.
+         * @return The track state.
          */
-        std::optional<StorageItem> TryGet(const StorageKey& key) const override;
+        TrackState GetTrackState(const StorageKey& key) const;
 
         /**
-         * @brief Gets a pointer to a storage item from the cache.
-         * @param key The key to look up.
-         * @return Pointer to the storage item, or nullptr if not found.
-         */
-        std::shared_ptr<StorageItem> TryGet(const StorageKey& key) override;
-
-        /**
-         * @brief Adds a storage item to the cache.
+         * @brief Updates an existing storage item in the cache.
          * @param key The key.
          * @param item The storage item.
          */
-        void Add(const StorageKey& key, const StorageItem& item) override;
+        void Update(const StorageKey& key, const StorageItem& item);
 
         /**
-         * @brief Gets a storage item from the cache.
-         * @param key The key to look up.
-         * @return The storage item.
-         * @throws std::out_of_range if the key is not found.
+         * @brief Gets the number of items in the cache.
+         * @return The number of items.
          */
-        StorageItem& Get(const StorageKey& key) override;
+        size_t Count() const;
 
         /**
-         * @brief Gets a storage item from the cache and marks it as changed.
-         * If the item doesn't exist, the factory function is called to create it.
-         * @param key The key to look up.
-         * @param factory Optional factory function to create the item if it doesn't exist.
-         * @return Pointer to the storage item, or nullptr if not found and no factory provided.
+         * @brief Gets all tracked items.
+         * @return Vector of tracked items with their states.
          */
-        std::shared_ptr<StorageItem> GetAndChange(const StorageKey& key, std::function<std::shared_ptr<StorageItem>()> factory = nullptr) override;
+        std::vector<std::pair<StorageKey, std::pair<StorageItem, TrackState>>> GetTrackedItems() const;
 
         /**
-         * @brief Deletes a storage item from the cache.
+         * @brief Gets all changed items.
+         * @return Vector of changed items.
+         */
+        std::vector<std::pair<StorageKey, StorageItem>> GetChangedItems() const;
+
+        /**
+         * @brief Gets all deleted items.
+         * @return Vector of deleted items.
+         */
+        std::vector<StorageKey> GetDeletedItems() const;
+
+        /**
+         * @brief Tries to get a storage item with output parameter.
          * @param key The key.
+         * @param item The output item.
+         * @return True if found, false otherwise.
          */
-        void Delete(const StorageKey& key) override;
+        bool TryGet(const StorageKey& key, StorageItem& item) const;
 
         /**
-         * @brief Finds all storage items with keys that start with the specified prefix.
-         * @param prefix The prefix to search for. If nullptr, all storage items are returned.
-         * @return The storage items found.
+         * @brief Gets the underlying store.
+         * @return The underlying store.
          */
-        std::vector<std::pair<StorageKey, StorageItem>> Find(const StorageKey* prefix = nullptr) const override;
+        std::shared_ptr<IStoreSnapshot> GetStore() const;
 
         /**
-         * @brief Creates an iterator for storage items with the specified prefix.
-         * @param prefix The prefix.
-         * @return The storage iterator.
+         * @brief Checks if the cache is read-only.
+         * @return True if read-only, false otherwise.
          */
-        std::unique_ptr<StorageIterator> Seek(const StorageKey& prefix) const override;
-
-        /**
-         * @brief Creates a snapshot of the cache.
-         * @return The snapshot.
-         */
-        std::shared_ptr<StoreView> CreateSnapshot() override;
-
-        /**
-         * @brief Commits the changes to the underlying cache.
-         */
-        void Commit() override;
-
-        /**
-         * @brief Gets the current block index.
-         * @return The current block index.
-         */
-        uint32_t GetCurrentBlockIndex() const override;
+        bool IsReadOnly() const;
 
     private:
-        DataCache& innerCache_;
+        IStore& store_;
+        std::shared_ptr<IStoreSnapshot> snapshot_;
         std::unordered_map<StorageKey, std::pair<StorageItem, TrackState>> items_;
     };
+
+    // ClonedCache is now defined as a template in cloned_cache.h
 }

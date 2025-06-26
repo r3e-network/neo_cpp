@@ -51,6 +51,18 @@ namespace neo::persistence
         void Deserialize(io::BinaryReader& reader) override;
 
         /**
+         * @brief Converts the storage item to a byte array.
+         * @return The byte array.
+         */
+        io::ByteVector ToArray() const;
+
+        /**
+         * @brief Deserializes from a byte array.
+         * @param data The byte array.
+         */
+        void DeserializeFromArray(const std::span<const uint8_t>& data);
+
+        /**
          * @brief Checks if this StorageItem is equal to another StorageItem.
          * @param other The other StorageItem.
          * @return True if the StorageItems are equal, false otherwise.

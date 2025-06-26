@@ -10,16 +10,18 @@ namespace neo::persistence::tests
         void SetUp() override
         {
             store = std::make_shared<MemoryStore>();
-            snapshot = store->GetSnapshot();
             
-            // Add some initial data to store
+            // Add some initial data to store first
             StorageKey key1(1, {0x01, 0x02});
             StorageItem item1({0x11, 0x12, 0x13});
-            store->Put(key1, item1);
+            store->Put(key1.ToArray(), item1.ToArray());
             
             StorageKey key2(2, {0x03, 0x04});
             StorageItem item2({0x21, 0x22, 0x23});
-            store->Put(key2, item2);
+            store->Put(key2.ToArray(), item2.ToArray());
+            
+            // Create snapshot after adding data
+            snapshot = store->GetSnapshot();
         }
 
         std::shared_ptr<MemoryStore> store;
@@ -30,7 +32,7 @@ namespace neo::persistence::tests
     {
         StoreCache cache(snapshot);
         
-        EXPECT_EQ(snapshot, cache.GetStore());
+        EXPECT_EQ(snapshot.get(), cache.GetStore().get());
         EXPECT_EQ(snapshot->IsReadOnly(), cache.IsReadOnly());
     }
 
@@ -84,7 +86,7 @@ namespace neo::persistence::tests
         EXPECT_EQ(TrackState::Added, cache.GetTrackState(new_key));
         
         // Should not be in store yet
-        EXPECT_FALSE(snapshot->Contains(new_key));
+        EXPECT_FALSE(snapshot->Contains(new_key.ToArray()));
     }
 
     TEST_F(StoreCacheTest, TestAddExistingKey)
@@ -113,8 +115,10 @@ namespace neo::persistence::tests
         EXPECT_EQ(TrackState::Changed, cache.GetTrackState(key1));
         
         // Store should still have original value
+        auto store_value = snapshot->TryGet(key1.ToArray());
+        EXPECT_TRUE(store_value.has_value());
         StorageItem store_item;
-        EXPECT_TRUE(snapshot->TryGet(key1, store_item));
+        store_item.DeserializeFromArray(store_value->AsSpan());
         EXPECT_EQ(std::vector<uint8_t>({0x11, 0x12, 0x13}), store_item.GetValue());
     }
 
@@ -163,7 +167,7 @@ namespace neo::persistence::tests
         EXPECT_EQ(TrackState::Deleted, cache.GetTrackState(key1));
         
         // Store should still have the item
-        EXPECT_TRUE(snapshot->Contains(key1));
+        EXPECT_TRUE(snapshot->Contains(key1.ToArray()));
     }
 
     TEST_F(StoreCacheTest, TestDeleteAddedItem)
@@ -203,9 +207,24 @@ namespace neo::persistence::tests
         auto tracked_items = cache.GetTrackedItems();
         
         EXPECT_EQ(3, tracked_items.size());
-        EXPECT_EQ(TrackState::Added, tracked_items[new_key]);
-        EXPECT_EQ(TrackState::Changed, tracked_items[key1]);
-        EXPECT_EQ(TrackState::Deleted, tracked_items[key2]);
+        
+        // Find items by iterating through the vector
+        bool found_added = false, found_changed = false, found_deleted = false;
+        for (const auto& [key, item_state] : tracked_items) {
+            if (key.GetId() == new_key.GetId()) {
+                EXPECT_EQ(TrackState::Added, item_state.second);
+                found_added = true;
+            } else if (key.GetId() == key1.GetId()) {
+                EXPECT_EQ(TrackState::Changed, item_state.second);
+                found_changed = true;
+            } else if (key.GetId() == key2.GetId()) {
+                EXPECT_EQ(TrackState::Deleted, item_state.second);
+                found_deleted = true;
+            }
+        }
+        EXPECT_TRUE(found_added);
+        EXPECT_TRUE(found_changed);
+        EXPECT_TRUE(found_deleted);
     }
 
     TEST_F(StoreCacheTest, TestGetChangedItems)

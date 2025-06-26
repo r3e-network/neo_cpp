@@ -1,5 +1,9 @@
 #include <gtest/gtest.h>
 #include <neo/ledger/transaction.h>
+#include <neo/ledger/coin_reference.h>
+#include <neo/ledger/transaction_output.h>
+#include <neo/core/fixed8.h>
+#include <neo/cryptography/hash.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
 #include <sstream>

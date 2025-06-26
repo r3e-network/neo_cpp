@@ -10,6 +10,7 @@
 #include <neo/ledger/transaction_attribute_type.h>
 #include <neo/network/p2p/payloads/iinventory.h>
 #include <neo/network/p2p/payloads/iverifiable.h>
+#include <neo/common/safe_math.h>
 #include <vector>
 #include <memory>
 #include <cstdint>
@@ -115,6 +116,13 @@ namespace neo::network::p2p::payloads
          * @param networkFee The network fee in datoshi.
          */
         void SetNetworkFee(int64_t networkFee);
+        
+        /**
+         * @brief Gets the total fee (system + network) with overflow protection.
+         * @return The total fee in datoshi.
+         * @throws std::overflow_error if the sum would overflow.
+         */
+        int64_t GetTotalFee() const;
 
         /**
          * @brief Gets the valid until block.
@@ -256,6 +264,75 @@ namespace neo::network::p2p::payloads
          * @return True if not equal.
          */
         bool operator!=(const Neo3Transaction& other) const;
+
+        // Neo 2.x compatibility methods for tests
+        enum class Type : uint8_t
+        {
+            MinerTransaction = 0x00,
+            IssueTransaction = 0x01,
+            ClaimTransaction = 0x02,
+            EnrollmentTransaction = 0x20,
+            RegisterTransaction = 0x40,
+            ContractTransaction = 0x80,
+            StateTransaction = 0x90,
+            PublishTransaction = 0xd0,
+            InvocationTransaction = 0xd1
+        };
+
+        /**
+         * @brief Gets the transaction type (Neo 2.x compatibility).
+         * @return The transaction type.
+         */
+        Type GetType() const { return Type::InvocationTransaction; } // Neo 3 transactions are all invocation-like
+
+        /**
+         * @brief Sets the transaction type (Neo 2.x compatibility - no-op in Neo 3).
+         * @param type The transaction type.
+         */
+        void SetType(Type type) { /* No-op in Neo 3 */ }
+
+        // Neo 2.x compatibility - store legacy data for tests
+        mutable std::vector<ledger::TransactionAttribute> legacy_attributes_;
+        mutable std::vector<int> legacy_inputs_;  // Placeholder for CoinReference
+        mutable std::vector<int> legacy_outputs_; // Placeholder for TransactionOutput
+
+        /**
+         * @brief Gets attributes (Neo 2.x compatibility).
+         * @return The attributes as TransactionAttribute objects.
+         */
+        const std::vector<ledger::TransactionAttribute>& GetLegacyAttributes() const { return legacy_attributes_; }
+
+        /**
+         * @brief Sets attributes (Neo 2.x compatibility).
+         * @param attributes The attributes.
+         */
+        void SetAttributes(const std::vector<ledger::TransactionAttribute>& attributes) {
+            legacy_attributes_ = attributes;
+        }
+
+        /**
+         * @brief Gets inputs (Neo 2.x compatibility - empty in Neo 3).
+         * @return Empty vector.
+         */
+        const std::vector<int>& GetInputs() const { return legacy_inputs_; }
+
+        /**
+         * @brief Sets inputs (Neo 2.x compatibility - no-op in Neo 3).
+         * @param inputs The inputs.
+         */
+        void SetInputs(const std::vector<int>& inputs) { legacy_inputs_ = inputs; }
+
+        /**
+         * @brief Gets outputs (Neo 2.x compatibility - empty in Neo 3).
+         * @return Empty vector.
+         */
+        const std::vector<int>& GetOutputs() const { return legacy_outputs_; }
+
+        /**
+         * @brief Sets outputs (Neo 2.x compatibility - no-op in Neo 3).
+         * @param outputs The outputs.
+         */
+        void SetOutputs(const std::vector<int>& outputs) { legacy_outputs_ = outputs; }
 
     private:
         void InvalidateCache() const;

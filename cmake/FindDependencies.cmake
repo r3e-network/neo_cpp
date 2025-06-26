@@ -19,6 +19,10 @@ if(NOT spdlog_FOUND)
     add_library(spdlog::spdlog INTERFACE IMPORTED)
     target_compile_definitions(spdlog::spdlog INTERFACE NEO_MINIMAL_LOGGING)
     message(STATUS "spdlog not found - using minimal logging")
+else()
+    # Add HAS_SPDLOG definition when spdlog is found
+    add_compile_definitions(HAS_SPDLOG)
+    message(STATUS "Found spdlog - using full logging capabilities")
 endif()
 
 find_package(GTest CONFIG QUIET)
@@ -55,6 +59,29 @@ else()
     set(BOOST_LIBRARIES "")
 endif()
 
+# httplib for RPC server
+find_package(httplib CONFIG QUIET)
+if(NOT httplib_FOUND)
+    # Try to find httplib.h in third_party directory
+    find_path(HTTPLIB_INCLUDE_DIR httplib.h 
+        PATHS ${CMAKE_SOURCE_DIR}/third_party/httplib
+        NO_DEFAULT_PATH)
+    if(HTTPLIB_INCLUDE_DIR)
+        message(STATUS "Found httplib header at ${HTTPLIB_INCLUDE_DIR}")
+        set(HTTPLIB_FOUND TRUE)
+        include_directories(${HTTPLIB_INCLUDE_DIR})
+        add_compile_definitions(HAS_HTTPLIB)
+        set(HTTPLIB_LIBRARIES "")
+    else()
+        message(STATUS "httplib not found - RPC server will be disabled")
+        set(HTTPLIB_LIBRARIES "")
+    endif()
+else()
+    message(STATUS "Found httplib - RPC server enabled")
+    set(HTTPLIB_LIBRARIES httplib::httplib)
+    add_compile_definitions(HAS_HTTPLIB)
+endif()
+
 # Common libraries
 set(NEO_COMMON_LIBRARIES
     ${CMAKE_THREAD_LIBS_INIT}
@@ -65,4 +92,5 @@ set(NEO_COMMON_LIBRARIES
     ${LEVELDB_LIBRARIES}
     ${ROCKSDB_LIBRARIES}
     ${BOOST_LIBRARIES}
+    ${HTTPLIB_LIBRARIES}
 )

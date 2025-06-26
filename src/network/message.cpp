@@ -67,7 +67,7 @@ namespace neo::network
             {
                 std::istringstream stream(std::string(reinterpret_cast<const char*>(payloadRaw_.Data()), payloadRaw_.Size()));
                 io::BinaryReader reader(stream);
-                payload_ = PayloadFactory::DeserializePayload(command_, reader);
+                payload_ = p2p::PayloadFactory::DeserializePayload(command_, reader);
             }
             catch (const std::exception& ex)
             {
@@ -192,7 +192,7 @@ namespace neo::network
         // Payload
         if (payload.Size() > 0)
         {
-            writer.Write(payload);
+            writer.WriteBytes(payload);
         }
 
         // Convert to ByteVector
@@ -339,13 +339,14 @@ namespace neo::network
 
         if (payload_)
         {
-            writer.WriteStartObject("payload");
+            writer.WritePropertyName("payload");
+            writer.WriteStartObject();
             payload_->SerializeJson(writer);
             writer.WriteEndObject();
         }
         else
         {
-            writer.Write("payload", nullptr);
+            writer.Write("payload", nlohmann::json(nullptr));
         }
     }
 
@@ -378,7 +379,7 @@ namespace neo::network
         {
             std::istringstream stream(std::string(reinterpret_cast<const char*>(payloadRaw_.Data()), payloadRaw_.Size()));
             io::BinaryReader reader(stream);
-            payload_ = PayloadFactory::DeserializePayload(command_, reader);
+            payload_ = p2p::PayloadFactory::DeserializePayload(command_, reader);
         }
         catch (const std::exception& ex)
         {

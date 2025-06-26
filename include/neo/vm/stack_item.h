@@ -25,6 +25,11 @@ namespace neo::io
     class BinaryWriter;
 }
 
+namespace neo::core
+{
+    class BigDecimal;
+}
+
 namespace neo::vm
 {
     // Forward declarations

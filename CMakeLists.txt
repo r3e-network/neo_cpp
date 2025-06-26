@@ -12,6 +12,12 @@ option(NEO_BUILD_TESTS "Build tests" ON)
 option(NEO_BUILD_EXAMPLES "Build examples" ON)
 option(NEO_BUILD_TOOLS "Build CLI tools" ON)
 option(NEO_BUILD_APPS "Build applications" ON)
+option(NEO_USE_VCPKG "Use vcpkg for dependencies" ON)
+
+# Production build options
+option(NEO_PRODUCTION_BUILD "Enable production optimizations" OFF)
+option(NEO_ENABLE_PROFILING "Enable profiling support" OFF)
+option(NEO_ENABLE_SANITIZERS "Enable address and UB sanitizers" OFF)
 
 # Include CMake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -70,14 +76,14 @@ endif()
 #     add_subdirectory(examples)
 # endif()
 
-# Tools and apps temporarily disabled to focus on core library build
-# if(NEO_BUILD_TOOLS)
-#     add_subdirectory(tools)
-# endif()
+# Tools subdirectory
+if(NEO_BUILD_TOOLS)
+    add_subdirectory(tools)
+endif()
 
-# if(NEO_BUILD_APPS)
-#     add_subdirectory(apps)
-# endif()
+if(NEO_BUILD_APPS)
+    add_subdirectory(apps)
+endif()
 
 # Plugin system (temporarily disabled due to namespace conflicts)
 # add_subdirectory(plugins)

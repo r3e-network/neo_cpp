@@ -66,6 +66,17 @@ namespace neo::json
         }
 
         /**
+         * @brief Gets or sets the properties of the JSON object.
+         * @param key The key of the property to get or set.
+         * @return The property with the specified name.
+         * @throws std::runtime_error if not supported.
+         */
+        virtual std::shared_ptr<JToken> operator[](const char* key) const
+        {
+            return operator[](std::string(key));
+        }
+
+        /**
          * @brief Converts the current JSON token to a boolean value.
          * @return The converted value.
          */

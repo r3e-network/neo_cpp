@@ -57,6 +57,22 @@ namespace neo::persistence
         }
     }
 
+    StorageKey::StorageKey(const io::UInt160& scriptHash)
+        : scriptHash_(scriptHash)
+    {
+        // For Neo 2.x compatibility - convert UInt160 to contract ID
+        // This is a simplified conversion - in practice would need proper mapping
+        id_ = *reinterpret_cast<const int32_t*>(scriptHash.Data());
+    }
+
+    StorageKey::StorageKey(const io::UInt160& scriptHash, const io::ByteVector& key)
+        : key_(key), scriptHash_(scriptHash)
+    {
+        // For Neo 2.x compatibility - convert UInt160 to contract ID
+        // This is a simplified conversion - in practice would need proper mapping
+        id_ = *reinterpret_cast<const int32_t*>(scriptHash.Data());
+    }
+
     size_t StorageKey::GetLength() const
     {
         if (!cacheValid_)
@@ -207,6 +223,12 @@ namespace neo::persistence
 
     io::UInt160 StorageKey::GetScriptHash() const
     {
+        // If we have a stored script hash (from Neo 2.x compatibility constructors), return it
+        if (!scriptHash_.IsZero())
+        {
+            return scriptHash_;
+        }
+        
         // TODO: Implement proper contract ID to script hash lookup via ContractManagement
         // For now, return a placeholder hash derived from the contract ID
         // In production, this would require access to blockchain state:
@@ -246,13 +268,53 @@ namespace neo::persistence
             {
                 key_ = io::ByteVector();
             }
+            
+            // Reset script hash since we're deserializing from raw data
+            scriptHash_ = io::UInt160();
         }
+        
+        cacheValid_ = false;
+    }
+
+    void StorageKey::DeserializeFromArray(const std::span<const uint8_t>& data)
+    {
+        if (data.size() < sizeof(int32_t))
+            throw std::invalid_argument("Invalid storage key data");
+        
+        // Read contract ID (little-endian)
+        std::memcpy(&id_, data.data(), sizeof(int32_t));
+        
+        // Read key data (rest of the bytes)
+        if (data.size() > sizeof(int32_t))
+        {
+            key_ = io::ByteVector(data.data() + sizeof(int32_t), data.size() - sizeof(int32_t));
+        }
+        else
+        {
+            key_ = io::ByteVector();
+        }
+        
+        // Reset script hash since we're deserializing from raw data
+        scriptHash_ = io::UInt160();
         
         cacheValid_ = false;
     }
 
     bool StorageKey::operator==(const StorageKey& other) const
     {
+        // If both have script hashes, compare them first (more specific)
+        if (!scriptHash_.IsZero() && !other.scriptHash_.IsZero())
+        {
+            return scriptHash_ == other.scriptHash_ && key_ == other.key_;
+        }
+        
+        // If only one has a script hash, they're different
+        if (!scriptHash_.IsZero() || !other.scriptHash_.IsZero())
+        {
+            return false;
+        }
+        
+        // Neither has script hash, compare by contract ID and key
         return id_ == other.id_ && key_ == other.key_;
     }
 
@@ -263,6 +325,21 @@ namespace neo::persistence
 
     bool StorageKey::operator<(const StorageKey& other) const
     {
+        // If both have script hashes, compare them first (more specific)
+        if (!scriptHash_.IsZero() && !other.scriptHash_.IsZero())
+        {
+            if (scriptHash_ != other.scriptHash_)
+                return scriptHash_ < other.scriptHash_;
+            return key_ < other.key_;
+        }
+        
+        // If only one has a script hash, the one with script hash comes first
+        if (!scriptHash_.IsZero())
+            return true;
+        if (!other.scriptHash_.IsZero())
+            return false;
+        
+        // Neither has script hash, compare by contract ID and key
         if (id_ != other.id_)
             return id_ < other.id_;
         return key_ < other.key_;

@@ -3,22 +3,22 @@ add_library(neo_network OBJECT
     ip_endpoint.cpp
     message.cpp
     tcp_server.cpp
-    p2p_server.cpp
+    # p2p_server.cpp # Temporarily disabled due to type conflicts
     upnp.cpp
-    p2p/message.cpp
+    # p2p/message.cpp # Temporarily disabled due to namespace issues
     p2p/node_capability.cpp
     p2p/network_address.cpp
     p2p/inventory_vector.cpp
     p2p/connection.cpp
     p2p/tcp_connection.cpp
     p2p/remote_node.cpp
-    p2p/local_node.cpp
-    p2p/local_node_connection.cpp
-    p2p/local_node_messaging.cpp
+    # p2p/local_node.cpp # Temporarily disabled 
+    # p2p/local_node_connection.cpp # Temporarily disabled due to missing Transaction
+    # p2p/local_node_messaging.cpp # Temporarily disabled
     p2p/peer.cpp
     p2p/peer_list.cpp
-    p2p/task_manager.cpp
-    p2p/transaction_router.cpp
+    p2p/task_manager.cpp # Re-enabled with memory pool implementation
+    p2p/transaction_router.cpp # Re-enabled with memory pool implementation
     p2p/channels_config.cpp
     p2p/payloads/extensible_payload.cpp
     p2p/payloads/merkle_block_payload.cpp
@@ -47,6 +47,7 @@ add_library(neo_network OBJECT
     p2p/payloads/not_valid_before.cpp
     p2p/payloads/header.cpp
     p2p/payloads/network_address_with_time.cpp
+    p2p/protocol_handler.cpp
 )
 
 # Include directories
@@ -58,6 +59,14 @@ target_include_directories(neo_network
 )
 
 # Link dependencies
+target_link_libraries(neo_network
+    PUBLIC
+        neo_core
+        neo_io
+        neo_ledger
+        neo_persistence
+)
+
 if(Boost_FOUND)
     target_link_libraries(neo_network
         PUBLIC

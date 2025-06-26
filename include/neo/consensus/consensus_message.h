@@ -1,114 +1,186 @@
 #pragma once
 
-#include <neo/consensus/message_type.h>
 #include <neo/io/iserializable.h>
-#include <neo/io/binary_writer.h>
-#include <neo/io/binary_reader.h>
-#include <neo/io/byte_vector.h>
-#include <neo/protocol_settings.h>
-#include <cstdint>
+#include <neo/io/uint256.h>
+#include <neo/io/uint160.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
+#include <vector>
 #include <memory>
 
 namespace neo::consensus
 {
     /**
-     * @brief Base class for consensus messages.
-     * 
-     * In Neo N3, consensus messages are serialized and sent within
-     * ExtensiblePayload with category "dBFT".
+     * @brief Type of consensus message
+     */
+    enum class ConsensusMessageType : uint8_t
+    {
+        ChangeView = 0x00,
+        PrepareRequest = 0x20,
+        PrepareResponse = 0x21,
+        Commit = 0x30,
+        RecoveryRequest = 0x40,
+        RecoveryMessage = 0x41
+    };
+
+    /**
+     * @brief Base class for all consensus messages
      */
     class ConsensusMessage : public io::ISerializable
     {
-    public:
-        /**
-         * @brief Constructs a ConsensusMessage with the specified type.
-         * @param type The message type.
-         */
-        explicit ConsensusMessage(MessageType type);
-
-        /**
-         * @brief Virtual destructor.
-         */
-        virtual ~ConsensusMessage() = default;
-
-        /**
-         * @brief Gets the message type.
-         * @return The message type.
-         */
-        MessageType GetType() const { return type_; }
-
-        /**
-         * @brief Gets the block index.
-         * @return The block index.
-         */
-        uint32_t GetBlockIndex() const { return blockIndex_; }
-
-        /**
-         * @brief Sets the block index.
-         * @param index The block index.
-         */
-        void SetBlockIndex(uint32_t index) { blockIndex_ = index; }
-
-        /**
-         * @brief Gets the validator index.
-         * @return The validator index.
-         */
-        uint8_t GetValidatorIndex() const { return validatorIndex_; }
-
-        /**
-         * @brief Sets the validator index.
-         * @param index The validator index.
-         */
-        void SetValidatorIndex(uint8_t index) { validatorIndex_ = index; }
-
-        /**
-         * @brief Gets the view number.
-         * @return The view number.
-         */
-        uint8_t GetViewNumber() const { return viewNumber_; }
-
-        /**
-         * @brief Sets the view number.
-         * @param viewNumber The view number.
-         */
-        void SetViewNumber(uint8_t viewNumber) { viewNumber_ = viewNumber; }
-
-        /**
-         * @brief Serializes the message to a binary writer.
-         * @param writer The binary writer.
-         */
-        void Serialize(io::BinaryWriter& writer) const override;
-
-        /**
-         * @brief Deserializes the message from a binary reader.
-         * @param reader The binary reader.
-         */
-        void Deserialize(io::BinaryReader& reader) override;
-
-        /**
-         * @brief Gets the size of the message.
-         * @return The size of the message.
-         */
-        virtual size_t GetSize() const;
-
-        /**
-         * @brief Verifies the message.
-         * @param settings The protocol settings.
-         * @return True if valid, false otherwise.
-         */
-        virtual bool Verify(const ProtocolSettings& settings) const;
-
-        /**
-         * @brief Deserializes a consensus message from data.
-         * @param data The data to deserialize.
-         * @return The deserialized message.
-         */
-        static std::shared_ptr<ConsensusMessage> DeserializeFrom(const io::ByteVector& data);
-
     protected:
-        MessageType type_;
-        uint32_t blockIndex_ = 0;
-        uint8_t validatorIndex_ = 0;
-        uint8_t viewNumber_ = 0;
+        ConsensusMessageType type_;
+        uint32_t view_number_;
+        uint32_t validator_index_;
+        uint32_t block_index_;
+        
+    public:
+        ConsensusMessage(ConsensusMessageType type);
+        
+        ConsensusMessageType GetType() const { return type_; }
+        uint32_t GetViewNumber() const { return view_number_; }
+        uint32_t GetValidatorIndex() const { return validator_index_; }
+        uint32_t GetBlockIndex() const { return block_index_; }
+        
+        void SetViewNumber(uint32_t view) { view_number_ = view; }
+        void SetValidatorIndex(uint32_t index) { validator_index_ = index; }
+        void SetBlockIndex(uint32_t index) { block_index_ = index; }
+        
+        // ISerializable
+        void Serialize(io::BinaryWriter& writer) const override;
+        void Deserialize(io::BinaryReader& reader) override;
+        
+        /**
+         * @brief Create message from type
+         */
+        static std::unique_ptr<ConsensusMessage> CreateFromType(ConsensusMessageType type);
+    };
+
+    /**
+     * @brief View change request message
+     */
+    class ViewChangeMessage : public ConsensusMessage
+    {
+    private:
+        uint32_t new_view_number_;
+        std::chrono::system_clock::time_point timestamp_;
+        
+    public:
+        ViewChangeMessage();
+        
+        uint32_t GetNewViewNumber() const { return new_view_number_; }
+        void SetNewViewNumber(uint32_t view) { new_view_number_ = view; }
+        
+        std::chrono::system_clock::time_point GetTimestamp() const { return timestamp_; }
+        void SetTimestamp(std::chrono::system_clock::time_point time) { timestamp_ = time; }
+        
+        void Serialize(io::BinaryWriter& writer) const override;
+        void Deserialize(io::BinaryReader& reader) override;
+    };
+
+    /**
+     * @brief Prepare request from primary node
+     */
+    class PrepareRequestMessage : public ConsensusMessage
+    {
+    private:
+        uint64_t nonce_;
+        std::chrono::system_clock::time_point timestamp_;
+        std::vector<io::UInt256> transaction_hashes_;
+        
+    public:
+        PrepareRequestMessage();
+        
+        uint64_t GetNonce() const { return nonce_; }
+        void SetNonce(uint64_t nonce) { nonce_ = nonce; }
+        
+        std::chrono::system_clock::time_point GetTimestamp() const { return timestamp_; }
+        void SetTimestamp(std::chrono::system_clock::time_point time) { timestamp_ = time; }
+        
+        const std::vector<io::UInt256>& GetTransactionHashes() const { return transaction_hashes_; }
+        void SetTransactionHashes(const std::vector<io::UInt256>& hashes) { transaction_hashes_ = hashes; }
+        
+        /**
+         * @brief Calculate hash of this prepare request
+         */
+        io::UInt256 GetHash() const;
+        
+        void Serialize(io::BinaryWriter& writer) const override;
+        void Deserialize(io::BinaryReader& reader) override;
+    };
+
+    /**
+     * @brief Prepare response from backup nodes
+     */
+    class PrepareResponseMessage : public ConsensusMessage
+    {
+    private:
+        io::UInt256 prepare_request_hash_;
+        
+    public:
+        PrepareResponseMessage();
+        
+        const io::UInt256& GetPrepareRequestHash() const { return prepare_request_hash_; }
+        void SetPrepareRequestHash(const io::UInt256& hash) { prepare_request_hash_ = hash; }
+        
+        void Serialize(io::BinaryWriter& writer) const override;
+        void Deserialize(io::BinaryReader& reader) override;
+    };
+
+    /**
+     * @brief Commit message with signature
+     */
+    class CommitMessage : public ConsensusMessage
+    {
+    private:
+        std::vector<uint8_t> signature_;
+        
+    public:
+        CommitMessage();
+        
+        const std::vector<uint8_t>& GetSignature() const { return signature_; }
+        void SetSignature(const std::vector<uint8_t>& sig) { signature_ = sig; }
+        
+        void Serialize(io::BinaryWriter& writer) const override;
+        void Deserialize(io::BinaryReader& reader) override;
+    };
+
+    /**
+     * @brief Recovery request message
+     */
+    class RecoveryRequestMessage : public ConsensusMessage
+    {
+    public:
+        RecoveryRequestMessage();
+        
+        void Serialize(io::BinaryWriter& writer) const override;
+        void Deserialize(io::BinaryReader& reader) override;
+    };
+
+    /**
+     * @brief Recovery response message
+     */
+    class RecoveryMessage : public ConsensusMessage
+    {
+    private:
+        std::unique_ptr<ViewChangeMessage> view_change_;
+        std::unique_ptr<PrepareRequestMessage> prepare_request_;
+        std::vector<std::unique_ptr<PrepareResponseMessage>> prepare_responses_;
+        std::vector<std::unique_ptr<CommitMessage>> commits_;
+        
+    public:
+        RecoveryMessage();
+        
+        void SetViewChange(std::unique_ptr<ViewChangeMessage> msg) { view_change_ = std::move(msg); }
+        void SetPrepareRequest(std::unique_ptr<PrepareRequestMessage> msg) { prepare_request_ = std::move(msg); }
+        void AddPrepareResponse(std::unique_ptr<PrepareResponseMessage> msg);
+        void AddCommit(std::unique_ptr<CommitMessage> msg);
+        
+        const ViewChangeMessage* GetViewChange() const { return view_change_.get(); }
+        const PrepareRequestMessage* GetPrepareRequest() const { return prepare_request_.get(); }
+        const std::vector<std::unique_ptr<PrepareResponseMessage>>& GetPrepareResponses() const { return prepare_responses_; }
+        const std::vector<std::unique_ptr<CommitMessage>>& GetCommits() const { return commits_; }
+        
+        void Serialize(io::BinaryWriter& writer) const override;
+        void Deserialize(io::BinaryReader& reader) override;
     };
 }

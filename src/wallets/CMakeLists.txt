@@ -4,6 +4,7 @@ add_subdirectory(nep6)
 # Create the wallets library
 add_library(neo_wallets OBJECT
     wallet.cpp
+    wallet_account.cpp
     wallet_factory.cpp
     asset_descriptor.cpp
     wallet_transaction.cpp

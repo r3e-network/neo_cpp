@@ -164,16 +164,17 @@ namespace neo::smartcontract::native
     std::shared_ptr<vm::StackItem> LedgerContract::BlockToStackItem(std::shared_ptr<ledger::Block> block) const
     {
         // Create block stack item
-        auto result = vm::StackItem::Create(std::vector<std::shared_ptr<vm::StackItem>>{
-            vm::StackItem::Create(block->GetHash()),
-            vm::StackItem::Create(static_cast<int64_t>(block->GetVersion())),
-            vm::StackItem::Create(block->GetPrevHash()),
-            vm::StackItem::Create(block->GetMerkleRoot()),
-            vm::StackItem::Create(static_cast<int64_t>(block->GetTimestamp())),
-            vm::StackItem::Create(static_cast<int64_t>(block->GetIndex())),
-            vm::StackItem::Create(block->GetNextConsensus()),
-            vm::StackItem::Create(static_cast<int64_t>(1)) // Block has single witness
-        });
+        std::vector<std::shared_ptr<vm::StackItem>> items;
+        items.push_back(vm::StackItem::Create(block->GetHash()));
+        items.push_back(vm::StackItem::Create(static_cast<int64_t>(block->GetVersion())));
+        items.push_back(vm::StackItem::Create(block->GetPreviousHash()));
+        items.push_back(vm::StackItem::Create(block->GetMerkleRoot()));
+        items.push_back(vm::StackItem::Create(static_cast<int64_t>(block->GetTimestamp().time_since_epoch().count())));
+        items.push_back(vm::StackItem::Create(static_cast<int64_t>(block->GetIndex())));
+        items.push_back(vm::StackItem::Create(block->GetNextConsensus()));
+        items.push_back(vm::StackItem::Create(static_cast<int64_t>(1))); // Block has single witness
+        
+        auto result = vm::StackItem::Create(items);
 
         return result;
     }
@@ -368,11 +369,11 @@ namespace neo::smartcontract::native
         // Store transactions
         for (const auto& tx : block->GetTransactions())
         {
-            auto txKey = CreateStorageKey(PREFIX_TRANSACTION, io::ByteVector(io::ByteSpan(tx->GetHash().Data(), io::UInt256::Size)));
+            auto txKey = CreateStorageKey(PREFIX_TRANSACTION, io::ByteVector(io::ByteSpan(tx.GetHash().Data(), io::UInt256::Size)));
 
             std::ostringstream txStream;
             io::BinaryWriter txWriter(txStream);
-            tx->Serialize(txWriter);
+            tx.Serialize(txWriter);
             txWriter.Write(block->GetIndex());
             std::string txData = txStream.str();
 

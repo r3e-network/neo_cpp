@@ -1,193 +1,216 @@
 #pragma once
 
 #include <neo/persistence/istore.h>
-#include <neo/io/byte_vector.h>
+#include <neo/core/logging.h>
+#include <rocksdb/db.h>
+#include <rocksdb/write_batch.h>
+#include <rocksdb/options.h>
+#include <rocksdb/table.h>
+#include <rocksdb/filter_policy.h>
 #include <memory>
 #include <string>
 #include <mutex>
-#include <unordered_map>
-
-#ifdef NEO_HAS_ROCKSDB
-namespace rocksdb
-{
-    class DB;
-    class Iterator;
-    class Snapshot;
-    class WriteBatch;
-}
-#endif
 
 namespace neo::persistence
 {
-#ifdef NEO_HAS_ROCKSDB
     /**
-     * @brief A RocksDB-based implementation of IStore.
+     * @brief RocksDB configuration options
      */
-    class RocksDBStore : public IStore
+    struct RocksDbConfig
     {
-    public:
-        /**
-         * @brief Constructs a RocksDBStore.
-         * @param path The path to the RocksDB database.
-         */
-        explicit RocksDBStore(const std::string& path);
+        std::string db_path{"./data/rocksdb"};
+        
+        // Performance options
+        size_t write_buffer_size{128 * 1024 * 1024};        // 128MB
+        int max_write_buffer_number{4};
+        size_t target_file_size_base{128 * 1024 * 1024};    // 128MB
+        int max_background_compactions{4};
+        int max_background_flushes{2};
+        
+        // Cache options
+        size_t block_cache_size{1024 * 1024 * 1024};        // 1GB
+        size_t block_size{16 * 1024};                       // 16KB
+        
+        // Compression
+        bool compression_enabled{true};
+        int compression_level{-1};                           // Default compression
+        
+        // Bloom filter
+        bool use_bloom_filter{true};
+        int bloom_bits_per_key{10};
+        
+        // Write options
+        bool sync_writes{false};
+        bool disable_wal{false};
+        
+        // Read options
+        bool verify_checksums{true};
+        bool fill_cache{true};
+        
+        // Advanced options
+        int num_levels{7};
+        uint64_t max_open_files{5000};
+        bool optimize_for_point_lookup{false};
+        size_t optimize_for_point_lookup_cache_size{0};
+    };
 
-        /**
-         * @brief Destructor.
-         */
-        ~RocksDBStore() override;
-
-        /**
-         * @brief Tries to get a value from the store.
-         * @param key The key to look up.
-         * @return The value if found, std::nullopt otherwise.
-         */
-        std::optional<io::ByteVector> TryGet(const io::ByteVector& key) const override;
-
-        /**
-         * @brief Checks if the store contains a key.
-         * @param key The key to check.
-         * @return True if the key exists, false otherwise.
-         */
-        bool Contains(const io::ByteVector& key) const override;
-
-        /**
-         * @brief Finds all key-value pairs with keys that start with the specified prefix.
-         * @param prefix The prefix to search for. If nullptr, all key-value pairs are returned.
-         * @param direction The direction to seek.
-         * @return The key-value pairs found.
-         */
-        std::vector<std::pair<io::ByteVector, io::ByteVector>> Find(const io::ByteVector* prefix = nullptr, SeekDirection direction = SeekDirection::Forward) const override;
-
-        /**
-         * @brief Puts a value in the store.
-         * @param key The key.
-         * @param value The value.
-         */
-        void Put(const io::ByteVector& key, const io::ByteVector& value) override;
-
-        /**
-         * @brief Puts a value in the store and syncs to disk.
-         * @param key The key.
-         * @param value The value.
-         */
-        void PutSync(const io::ByteVector& key, const io::ByteVector& value) override;
-
-        /**
-         * @brief Deletes a value from the store.
-         * @param key The key.
-         */
-        void Delete(const io::ByteVector& key) override;
-
-        /**
-         * @brief Creates a snapshot of the store.
-         * @return The snapshot.
-         */
-        std::unique_ptr<IStoreSnapshot> CreateSnapshot();
-
+    /**
+     * @brief RocksDB-based persistent storage implementation
+     * 
+     * RocksDB provides better performance than LevelDB for many workloads,
+     * especially for SSD-based storage and concurrent access patterns.
+     */
+    class RocksDbStore : public IStore
+    {
     private:
+        RocksDbConfig config_;
         std::unique_ptr<rocksdb::DB> db_;
-        std::string path_;
-
-        friend class RocksDBSnapshot;
-    };
-
-    /**
-     * @brief A snapshot of a RocksDBStore.
-     */
-    class RocksDBSnapshot : public IStoreSnapshot
-    {
+        std::unique_ptr<rocksdb::Options> options_;
+        std::unique_ptr<rocksdb::BlockBasedTableOptions> table_options_;
+        std::shared_ptr<core::Logger> logger_;
+        mutable std::mutex mutex_;
+        
+        // Column families for different data types
+        std::vector<rocksdb::ColumnFamilyHandle*> cf_handles_;
+        rocksdb::ColumnFamilyHandle* default_cf_{nullptr};
+        rocksdb::ColumnFamilyHandle* blocks_cf_{nullptr};
+        rocksdb::ColumnFamilyHandle* transactions_cf_{nullptr};
+        rocksdb::ColumnFamilyHandle* contracts_cf_{nullptr};
+        rocksdb::ColumnFamilyHandle* storage_cf_{nullptr};
+        
+        // Statistics
+        mutable std::atomic<uint64_t> read_count_{0};
+        mutable std::atomic<uint64_t> write_count_{0};
+        mutable std::atomic<uint64_t> delete_count_{0};
+        
     public:
         /**
-         * @brief Constructs a RocksDBSnapshot.
-         * @param store The store to snapshot.
+         * @brief Construct a new RocksDB store
+         * @param config Configuration options
          */
-        explicit RocksDBSnapshot(RocksDBStore& store);
-
+        explicit RocksDbStore(const RocksDbConfig& config);
+        
+        ~RocksDbStore() override;
+        
         /**
-         * @brief Destructor.
+         * @brief Open the database
+         * @return true if successful
          */
-        ~RocksDBSnapshot() override;
-
+        bool Open();
+        
         /**
-         * @brief Tries to get a value from the store.
-         * @param key The key to look up.
-         * @return The value if found, std::nullopt otherwise.
+         * @brief Close the database
          */
-        std::optional<io::ByteVector> TryGet(const io::ByteVector& key) const override;
-
+        void Close();
+        
         /**
-         * @brief Checks if the store contains a key.
-         * @param key The key to check.
-         * @return True if the key exists, false otherwise.
+         * @brief Check if database is open
          */
-        bool Contains(const io::ByteVector& key) const override;
-
+        bool IsOpen() const { return db_ != nullptr; }
+        
+        // IStore interface implementation
+        void Put(const StorageKey& key, const StorageItem& value) override;
+        std::optional<StorageItem> Get(const StorageKey& key) const override;
+        bool Contains(const StorageKey& key) const override;
+        void Delete(const StorageKey& key) override;
+        std::vector<std::pair<StorageKey, StorageItem>> Find(const io::ByteSpan& keyPrefix) const override;
+        void Clear() override;
+        
         /**
-         * @brief Finds all key-value pairs with keys that start with the specified prefix.
-         * @param prefix The prefix to search for. If nullptr, all key-value pairs are returned.
-         * @param direction The direction to seek.
-         * @return The key-value pairs found.
+         * @brief Batch write operations for efficiency
          */
-        std::vector<std::pair<io::ByteVector, io::ByteVector>> Find(const io::ByteVector* prefix = nullptr, SeekDirection direction = SeekDirection::Forward) const override;
-
+        class WriteBatch
+        {
+        private:
+            rocksdb::WriteBatch batch_;
+            RocksDbStore* store_;
+            
+        public:
+            explicit WriteBatch(RocksDbStore* store) : store_(store) {}
+            
+            void Put(const StorageKey& key, const StorageItem& value);
+            void Delete(const StorageKey& key);
+            bool Commit();
+            void Clear();
+            size_t GetDataSize() const;
+        };
+        
         /**
-         * @brief Puts a value in the store.
-         * @param key The key.
-         * @param value The value.
+         * @brief Create a new write batch
          */
-        void Put(const io::ByteVector& key, const io::ByteVector& value) override;
-
+        std::unique_ptr<WriteBatch> CreateWriteBatch();
+        
         /**
-         * @brief Deletes a value from the store.
-         * @param key The key.
+         * @brief Get database statistics
          */
-        void Delete(const io::ByteVector& key) override;
-
+        std::string GetStatistics() const;
+        
         /**
-         * @brief Commits the changes to the store.
+         * @brief Get detailed database properties
          */
-        void Commit() override;
-
+        std::string GetProperty(const std::string& property) const;
+        
         /**
-         * @brief Gets the underlying store.
-         * @return The underlying store.
+         * @brief Compact the database
          */
-        IStore& GetStore() override;
-
+        void Compact();
+        
+        /**
+         * @brief Create a checkpoint (online backup)
+         * @param checkpoint_path Path to checkpoint directory
+         * @return true if successful
+         */
+        bool CreateCheckpoint(const std::string& checkpoint_path);
+        
+        /**
+         * @brief Flush all memtables to disk
+         */
+        void Flush();
+        
+        /**
+         * @brief Get column family for storage key
+         */
+        rocksdb::ColumnFamilyHandle* GetColumnFamily(const StorageKey& key) const;
+        
     private:
-        RocksDBStore& store_;
-        const rocksdb::Snapshot* snapshot_;
-        std::unique_ptr<rocksdb::WriteBatch> batch_;
+        /**
+         * @brief Initialize column families
+         */
+        bool InitializeColumnFamilies();
+        
+        /**
+         * @brief Convert StorageKey to RocksDB key
+         */
+        std::string ToDbKey(const StorageKey& key) const;
+        
+        /**
+         * @brief Convert RocksDB key to StorageKey
+         */
+        StorageKey FromDbKey(const rocksdb::Slice& key) const;
+        
+        /**
+         * @brief Convert StorageItem to RocksDB value
+         */
+        std::string ToDbValue(const StorageItem& item) const;
+        
+        /**
+         * @brief Convert RocksDB value to StorageItem
+         */
+        StorageItem FromDbValue(const rocksdb::Slice& value) const;
+        
+        /**
+         * @brief Get RocksDB options
+         */
+        rocksdb::Options GetOptions() const;
+        
+        /**
+         * @brief Get read options
+         */
+        rocksdb::ReadOptions GetReadOptions() const;
+        
+        /**
+         * @brief Get write options
+         */
+        rocksdb::WriteOptions GetWriteOptions(bool sync = false) const;
     };
-
-    /**
-     * @brief A RocksDB-based implementation of IStoreProvider.
-     */
-    class RocksDBStoreProvider : public IStoreProvider
-    {
-    public:
-        /**
-         * @brief Constructs a RocksDBStoreProvider.
-         */
-        RocksDBStoreProvider();
-
-        /**
-         * @brief Gets the name of the store provider.
-         * @return The name of the store provider.
-         */
-        std::string GetName() const override;
-
-        /**
-         * @brief Gets a store.
-         * @param path The path to the store.
-         * @return The store.
-         */
-        std::unique_ptr<IStore> GetStore(const std::string& path) override;
-
-    private:
-        std::unordered_map<std::string, std::shared_ptr<RocksDBStore>> stores_;
-        std::mutex mutex_;
-    };
-#endif // NEO_HAS_ROCKSDB
 }

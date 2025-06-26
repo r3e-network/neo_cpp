@@ -1,88 +1,255 @@
 #include <neo/consensus/consensus_message.h>
-#include <neo/consensus/change_view_message.h>
-#include <neo/consensus/commit_message.h>
-#include <neo/consensus/prepare_request.h>
-#include <neo/consensus/prepare_response.h>
-#include <neo/consensus/recovery_message.h>
-#include <neo/consensus/recovery_request.h>
-#include <neo/io/memory_stream.h>
-#include <stdexcept>
+#include <neo/io/binary_writer.h>
+#include <neo/io/binary_reader.h>
+#include <neo/cryptography/hash.h>
 
 namespace neo::consensus
 {
-    ConsensusMessage::ConsensusMessage(MessageType type)
-        : type_(type)
+    // ConsensusMessage base class implementation
+    ConsensusMessage::ConsensusMessage(ConsensusMessageType type)
+        : type_(type), view_number_(0), validator_index_(0), block_index_(0)
     {
     }
 
     void ConsensusMessage::Serialize(io::BinaryWriter& writer) const
     {
-        writer.WriteByte(static_cast<uint8_t>(type_));
-        writer.WriteUInt32(blockIndex_);
-        writer.WriteByte(validatorIndex_);
-        writer.WriteByte(viewNumber_);
+        writer.Write(static_cast<uint8_t>(type_));
+        writer.Write(view_number_);
+        writer.Write(validator_index_);
+        writer.Write(block_index_);
     }
 
     void ConsensusMessage::Deserialize(io::BinaryReader& reader)
     {
-        auto readType = static_cast<MessageType>(reader.ReadByte());
-        if (readType != type_)
-            throw std::runtime_error("Invalid message type");
-        
-        blockIndex_ = reader.ReadUInt32();
-        validatorIndex_ = reader.ReadByte();
-        viewNumber_ = reader.ReadByte();
+        type_ = static_cast<ConsensusMessageType>(reader.ReadByte());
+        view_number_ = reader.ReadUInt32();
+        validator_index_ = reader.ReadUInt32();
+        block_index_ = reader.ReadUInt32();
     }
 
-    size_t ConsensusMessage::GetSize() const
+    std::unique_ptr<ConsensusMessage> ConsensusMessage::CreateFromType(ConsensusMessageType type)
     {
-        return sizeof(uint8_t) +    // Type
-               sizeof(uint32_t) +   // BlockIndex
-               sizeof(uint8_t) +    // ValidatorIndex
-               sizeof(uint8_t);     // ViewNumber
-    }
-
-    bool ConsensusMessage::Verify(const ProtocolSettings& settings) const
-    {
-        return validatorIndex_ < settings.GetValidatorsCount();
-    }
-
-    std::shared_ptr<ConsensusMessage> ConsensusMessage::DeserializeFrom(const io::ByteVector& data)
-    {
-        if (data.IsEmpty())
-            throw std::runtime_error("Empty data");
-        
-        auto type = static_cast<MessageType>(data[0]);
-        
-        std::shared_ptr<ConsensusMessage> message;
         switch (type)
         {
-            case MessageType::ChangeView:
-                message = std::make_shared<ChangeViewMessage>();
-                break;
-            case MessageType::PrepareRequest:
-                message = std::make_shared<PrepareRequest>();
-                break;
-            case MessageType::PrepareResponse:
-                message = std::make_shared<PrepareResponse>();
-                break;
-            case MessageType::Commit:
-                message = std::make_shared<CommitMessage>();
-                break;
-            case MessageType::RecoveryRequest:
-                message = std::make_shared<RecoveryRequest>();
-                break;
-            case MessageType::RecoveryMessage:
-                message = std::make_shared<RecoveryMessage>();
-                break;
-            default:
-                throw std::runtime_error("Unknown message type");
+        case ConsensusMessageType::ChangeView:
+            return std::make_unique<ViewChangeMessage>();
+        case ConsensusMessageType::PrepareRequest:
+            return std::make_unique<PrepareRequestMessage>();
+        case ConsensusMessageType::PrepareResponse:
+            return std::make_unique<PrepareResponseMessage>();
+        case ConsensusMessageType::Commit:
+            return std::make_unique<CommitMessage>();
+        case ConsensusMessageType::RecoveryRequest:
+            return std::make_unique<RecoveryRequestMessage>();
+        case ConsensusMessageType::RecoveryMessage:
+            return std::make_unique<RecoveryMessage>();
+        default:
+            return nullptr;
+        }
+    }
+
+    // ViewChangeMessage implementation
+    ViewChangeMessage::ViewChangeMessage()
+        : ConsensusMessage(ConsensusMessageType::ChangeView), new_view_number_(0)
+    {
+    }
+
+    void ViewChangeMessage::Serialize(io::BinaryWriter& writer) const
+    {
+        ConsensusMessage::Serialize(writer);
+        writer.Write(new_view_number_);
+        writer.Write(static_cast<int64_t>(timestamp_.time_since_epoch().count()));
+    }
+
+    void ViewChangeMessage::Deserialize(io::BinaryReader& reader)
+    {
+        ConsensusMessage::Deserialize(reader);
+        new_view_number_ = reader.ReadUInt32();
+        auto ticks = reader.ReadInt64();
+        timestamp_ = std::chrono::system_clock::time_point(std::chrono::system_clock::duration(ticks));
+    }
+
+    // PrepareRequestMessage implementation
+    PrepareRequestMessage::PrepareRequestMessage()
+        : ConsensusMessage(ConsensusMessageType::PrepareRequest), nonce_(0)
+    {
+    }
+
+    io::UInt256 PrepareRequestMessage::GetHash() const
+    {
+        io::ByteVector buffer;
+        io::BinaryWriter writer(buffer);
+        Serialize(writer);
+        return cryptography::Hash::Hash256(io::ByteSpan(buffer.Data(), buffer.Size()));
+    }
+
+    void PrepareRequestMessage::Serialize(io::BinaryWriter& writer) const
+    {
+        ConsensusMessage::Serialize(writer);
+        writer.Write(nonce_);
+        writer.Write(static_cast<int64_t>(timestamp_.time_since_epoch().count()));
+        writer.Write(static_cast<uint32_t>(transaction_hashes_.size()));
+        for (const auto& hash : transaction_hashes_)
+        {
+            writer.Write(hash);
+        }
+    }
+
+    void PrepareRequestMessage::Deserialize(io::BinaryReader& reader)
+    {
+        ConsensusMessage::Deserialize(reader);
+        nonce_ = reader.ReadUInt64();
+        auto ticks = reader.ReadInt64();
+        timestamp_ = std::chrono::system_clock::time_point(std::chrono::system_clock::duration(ticks));
+        
+        auto count = reader.ReadUInt32();
+        transaction_hashes_.clear();
+        transaction_hashes_.reserve(count);
+        for (uint32_t i = 0; i < count; ++i)
+        {
+            transaction_hashes_.push_back(reader.Read<io::UInt256>());
+        }
+    }
+
+    // PrepareResponseMessage implementation
+    PrepareResponseMessage::PrepareResponseMessage()
+        : ConsensusMessage(ConsensusMessageType::PrepareResponse)
+    {
+    }
+
+    void PrepareResponseMessage::Serialize(io::BinaryWriter& writer) const
+    {
+        ConsensusMessage::Serialize(writer);
+        writer.Write(prepare_request_hash_);
+    }
+
+    void PrepareResponseMessage::Deserialize(io::BinaryReader& reader)
+    {
+        ConsensusMessage::Deserialize(reader);
+        prepare_request_hash_ = reader.Read<io::UInt256>();
+    }
+
+    // CommitMessage implementation
+    CommitMessage::CommitMessage()
+        : ConsensusMessage(ConsensusMessageType::Commit)
+    {
+    }
+
+    void CommitMessage::Serialize(io::BinaryWriter& writer) const
+    {
+        ConsensusMessage::Serialize(writer);
+        writer.WriteVarBytes(signature_);
+    }
+
+    void CommitMessage::Deserialize(io::BinaryReader& reader)
+    {
+        ConsensusMessage::Deserialize(reader);
+        signature_ = reader.ReadVarBytes();
+    }
+
+    // RecoveryRequestMessage implementation
+    RecoveryRequestMessage::RecoveryRequestMessage()
+        : ConsensusMessage(ConsensusMessageType::RecoveryRequest)
+    {
+    }
+
+    void RecoveryRequestMessage::Serialize(io::BinaryWriter& writer) const
+    {
+        ConsensusMessage::Serialize(writer);
+    }
+
+    void RecoveryRequestMessage::Deserialize(io::BinaryReader& reader)
+    {
+        ConsensusMessage::Deserialize(reader);
+    }
+
+    // RecoveryMessage implementation
+    RecoveryMessage::RecoveryMessage()
+        : ConsensusMessage(ConsensusMessageType::RecoveryMessage)
+    {
+    }
+
+    void RecoveryMessage::AddPrepareResponse(std::unique_ptr<PrepareResponseMessage> msg)
+    {
+        prepare_responses_.push_back(std::move(msg));
+    }
+
+    void RecoveryMessage::AddCommit(std::unique_ptr<CommitMessage> msg)
+    {
+        commits_.push_back(std::move(msg));
+    }
+
+    void RecoveryMessage::Serialize(io::BinaryWriter& writer) const
+    {
+        ConsensusMessage::Serialize(writer);
+        
+        // Write view change
+        writer.Write(view_change_ != nullptr);
+        if (view_change_)
+        {
+            view_change_->Serialize(writer);
         }
         
-        io::MemoryStream stream(data);
-        io::BinaryReader reader(stream);
-        message->Deserialize(reader);
+        // Write prepare request
+        writer.Write(prepare_request_ != nullptr);
+        if (prepare_request_)
+        {
+            prepare_request_->Serialize(writer);
+        }
         
-        return message;
+        // Write prepare responses
+        writer.Write(static_cast<uint32_t>(prepare_responses_.size()));
+        for (const auto& response : prepare_responses_)
+        {
+            response->Serialize(writer);
+        }
+        
+        // Write commits
+        writer.Write(static_cast<uint32_t>(commits_.size()));
+        for (const auto& commit : commits_)
+        {
+            commit->Serialize(writer);
+        }
+    }
+
+    void RecoveryMessage::Deserialize(io::BinaryReader& reader)
+    {
+        ConsensusMessage::Deserialize(reader);
+        
+        // Read view change
+        if (reader.ReadBool())
+        {
+            view_change_ = std::make_unique<ViewChangeMessage>();
+            view_change_->Deserialize(reader);
+        }
+        
+        // Read prepare request
+        if (reader.ReadBool())
+        {
+            prepare_request_ = std::make_unique<PrepareRequestMessage>();
+            prepare_request_->Deserialize(reader);
+        }
+        
+        // Read prepare responses
+        auto response_count = reader.ReadUInt32();
+        prepare_responses_.clear();
+        prepare_responses_.reserve(response_count);
+        for (uint32_t i = 0; i < response_count; ++i)
+        {
+            auto response = std::make_unique<PrepareResponseMessage>();
+            response->Deserialize(reader);
+            prepare_responses_.push_back(std::move(response));
+        }
+        
+        // Read commits
+        auto commit_count = reader.ReadUInt32();
+        commits_.clear();
+        commits_.reserve(commit_count);
+        for (uint32_t i = 0; i < commit_count; ++i)
+        {
+            auto commit = std::make_unique<CommitMessage>();
+            commit->Deserialize(reader);
+            commits_.push_back(std::move(commit));
+        }
     }
 }

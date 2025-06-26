@@ -20,6 +20,10 @@ namespace neo::smartcontract::native
      */
     class NeoToken : public NativeContract
     {
+        // Friend classes for testing
+        friend class NativeContractTest;
+        friend class NeoTokenTest;
+        
     public:
         /**
          * @brief Type alias for method handler function.

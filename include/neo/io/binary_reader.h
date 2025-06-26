@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <vector>
 #include <memory>
+#include <limits>
 
 namespace neo::io
 {
@@ -20,11 +21,25 @@ namespace neo::io
     class BinaryReader
     {
     public:
+        static constexpr size_t DEFAULT_MAX_ARRAY_SIZE = 16 * 1024 * 1024;  // 16MB
+        static constexpr size_t DEFAULT_MAX_STRING_SIZE = 1 * 1024 * 1024;  // 1MB
         /**
          * @brief Constructs a BinaryReader that reads from the specified stream.
          * @param stream The stream to read from.
          */
         explicit BinaryReader(std::istream& stream);
+
+        /**
+         * @brief Constructs a BinaryReader that reads from the specified ByteSpan.
+         * @param data The ByteSpan to read from.
+         */
+        explicit BinaryReader(const ByteSpan& data);
+
+        /**
+         * @brief Constructs a BinaryReader that reads from the specified vector.
+         * @param data The vector to read from.
+         */
+        explicit BinaryReader(const std::vector<uint8_t>& data);
 
         /**
          * @brief Reads a boolean value from the stream.
@@ -102,6 +117,7 @@ namespace neo::io
          * @brief Reads a byte array from the stream.
          * @param count The number of bytes to read.
          * @return The value read.
+         * @throws std::out_of_range if count exceeds available bytes.
          */
         ByteVector ReadBytes(size_t count);
 
@@ -221,10 +237,82 @@ namespace neo::io
          * @brief Reads raw bytes from the stream.
          * @param data Pointer to the buffer to read into.
          * @param size Number of bytes to read.
+         * @throws std::out_of_range if size exceeds available bytes.
+         * @throws std::invalid_argument if data is nullptr.
          */
         void ReadBytes(uint8_t* data, size_t size);
 
+        /**
+         * @brief Generic read method for specific types.
+         * @tparam T The type to read.
+         * @return The value read.
+         */
+        template <typename T>
+        T Read()
+        {
+            if constexpr (std::is_same_v<T, UInt160>) {
+                return ReadUInt160();
+            } else if constexpr (std::is_same_v<T, UInt256>) {
+                return ReadUInt256();
+            } else if constexpr (std::is_same_v<T, Fixed8>) {
+                return ReadFixed8();
+            } else if constexpr (std::is_same_v<T, uint8_t>) {
+                return ReadByte();
+            } else if constexpr (std::is_same_v<T, uint16_t>) {
+                return ReadUInt16();
+            } else if constexpr (std::is_same_v<T, uint32_t>) {
+                return ReadUInt32();
+            } else if constexpr (std::is_same_v<T, uint64_t>) {
+                return ReadUInt64();
+            } else if constexpr (std::is_same_v<T, int8_t>) {
+                return ReadInt8();
+            } else if constexpr (std::is_same_v<T, int16_t>) {
+                return ReadInt16();
+            } else if constexpr (std::is_same_v<T, int32_t>) {
+                return ReadInt32();
+            } else if constexpr (std::is_same_v<T, int64_t>) {
+                return ReadInt64();
+            } else if constexpr (std::is_same_v<T, bool>) {
+                return ReadBool();
+            } else if constexpr (std::is_same_v<T, std::string>) {
+                return ReadVarString();
+            } else {
+                static_assert(std::is_base_of_v<ISerializable, T>, "T must be a supported primitive type or derive from ISerializable");
+                return ReadSerializable<T>();
+            }
+        }
+
+        /**
+         * @brief Gets the current position in the stream.
+         * @return The current position.
+         */
+        size_t GetPosition() const;
+
+        /**
+         * @brief Gets the number of bytes available to read.
+         * @return The number of available bytes.
+         */
+        size_t Available() const;
+
+        /**
+         * @brief Checks if enough bytes are available to read.
+         * @param size Number of bytes required.
+         * @throws std::out_of_range if not enough bytes available.
+         */
+        void EnsureAvailable(size_t size) const;
+
     private:
-        std::istream& stream_;
+        std::istream* stream_;
+        const uint8_t* data_;
+        size_t size_;
+        size_t position_;
+        bool owns_stream_;
+
+        /**
+         * @brief Helper method to read raw bytes from either stream or memory.
+         * @param data Pointer to the buffer to read into.
+         * @param size Number of bytes to read.
+         */
+        void ReadRawBytes(uint8_t* data, size_t size);
     };
 }

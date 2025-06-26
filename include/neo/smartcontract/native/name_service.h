@@ -13,6 +13,10 @@ namespace neo::smartcontract::native
      */
     class NameService : public NativeContract
     {
+        // Friend classes for testing
+        friend class NativeContractTest;
+        friend class NameServiceTest;
+        
     public:
         /**
          * @brief The contract ID.

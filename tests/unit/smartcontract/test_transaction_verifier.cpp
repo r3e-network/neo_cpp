@@ -25,14 +25,14 @@ protected:
         store_ = std::make_shared<MemoryStore>();
         
         // Initialize snapshot
-        snapshot_ = std::make_shared<DataCache>(store_);
+        snapshot_ = std::make_shared<StoreCache>(*store_);
         
         // Initialize context
         context_ = VerificationContext(snapshot_);
     }
 
     std::shared_ptr<MemoryStore> store_;
-    std::shared_ptr<DataCache> snapshot_;
+    std::shared_ptr<StoreCache> snapshot_;
     VerificationContext context_;
 };
 

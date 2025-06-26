@@ -22,11 +22,8 @@ namespace neo::io
          * @param capacity The maximum number of items the cache can hold.
          * @throws std::invalid_argument if capacity is zero.
          */
-        explicit LRUCache(size_t capacity)
+        explicit LRUCache(size_t capacity) : capacity_(capacity)
         {
-            if (capacity == 0)
-                throw std::invalid_argument("Capacity must be greater than zero");
-            capacity_ = capacity;
         }
 
         /**
@@ -58,6 +55,10 @@ namespace neo::io
         void Add(const TKey& key, const TValue& value)
         {
             std::lock_guard<std::mutex> lock(mutex_);
+            
+            // If capacity is zero, don't store anything
+            if (capacity_ == 0)
+                return;
             
             auto it = cache_.find(key);
             if (it != cache_.end())
@@ -130,6 +131,47 @@ namespace neo::io
         size_t Capacity() const
         {
             return capacity_;
+        }
+
+        // Alias methods for compatibility
+        /**
+         * @brief Alias for TryGet.
+         * @param key The key to look up.
+         * @return The value if found, std::nullopt otherwise.
+         */
+        std::optional<TValue> Get(const TKey& key)
+        {
+            return TryGet(key);
+        }
+
+        /**
+         * @brief Alias for Add.
+         * @param key The key.
+         * @param value The value.
+         */
+        void Put(const TKey& key, const TValue& value)
+        {
+            Add(key, value);
+        }
+
+        /**
+         * @brief Alias for Count.
+         * @return The number of items in the cache.
+         */
+        size_t Size() const
+        {
+            return Count();
+        }
+
+        /**
+         * @brief Checks if a key exists in the cache.
+         * @param key The key to check.
+         * @return True if the key exists, false otherwise.
+         */
+        bool Contains(const TKey& key) const
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            return cache_.find(key) != cache_.end();
         }
 
     private:

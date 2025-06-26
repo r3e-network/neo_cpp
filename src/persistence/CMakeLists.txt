@@ -1,11 +1,19 @@
 # Create the persistence library
-add_library(neo_persistence OBJECT
+set(PERSISTENCE_SOURCES
     memory_store.cpp
-    rocksdb_store.cpp
+    memory_store_view.cpp
     storage_key.cpp
     storage_item.cpp
     data_cache.cpp
+    store_factory.cpp
 )
+
+# Add RocksDB store only if RocksDB is found
+if(RocksDB_FOUND)
+    list(APPEND PERSISTENCE_SOURCES rocksdb_store.cpp)
+endif()
+
+add_library(neo_persistence OBJECT ${PERSISTENCE_SOURCES})
 
 # Include directories
 target_include_directories(neo_persistence

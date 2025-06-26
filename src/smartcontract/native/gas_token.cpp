@@ -1,9 +1,12 @@
 #include <neo/smartcontract/native/gas_token.h>
+#include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+#include <neo/cryptography/crypto.h>
+#include <iostream>
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -538,7 +541,7 @@ namespace neo::smartcontract::native
                     auto rewardedMember = committee[memberIndex];
                     
                     // Create script hash for the committee member
-                    auto memberScriptHash = cryptography::Crypto::CreateSignatureRedeemScript(rewardedMember).ToScriptHash();
+                    auto memberScriptHash = neo::cryptography::Crypto::CreateSignatureRedeemScript(rewardedMember).ToScriptHash();
                     
                     // Mint GAS reward to the committee member
                     if (gasPerBlock > 0)

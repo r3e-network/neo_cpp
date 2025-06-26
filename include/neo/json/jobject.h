@@ -39,6 +39,13 @@ namespace neo::json
         std::shared_ptr<JToken> operator[](const std::string& key) const override;
 
         /**
+         * @brief Gets or sets the properties of the JSON object.
+         * @param key The key of the property to get or set.
+         * @return The property with the specified name.
+         */
+        std::shared_ptr<JToken> operator[](const char* key) const;
+
+        /**
          * @brief Converts this object to a string representation.
          * @return The JSON string representation.
          */

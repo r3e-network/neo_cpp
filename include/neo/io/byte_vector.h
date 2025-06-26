@@ -226,11 +226,25 @@ namespace neo::io
         bool operator==(const ByteVector& other) const { return data_ == other.data_; }
 
         /**
+         * @brief Checks if this ByteVector is equal to a std::vector<uint8_t>.
+         * @param other The other vector.
+         * @return True if the vectors are equal, false otherwise.
+         */
+        bool operator==(const std::vector<uint8_t>& other) const { return data_ == other; }
+
+        /**
          * @brief Checks if this ByteVector is not equal to another ByteVector.
          * @param other The other ByteVector.
          * @return True if the ByteVectors are not equal, false otherwise.
          */
         bool operator!=(const ByteVector& other) const { return data_ != other.data_; }
+
+        /**
+         * @brief Checks if this ByteVector is not equal to a std::vector<uint8_t>.
+         * @param other The other vector.
+         * @return True if the vectors are not equal, false otherwise.
+         */
+        bool operator!=(const std::vector<uint8_t>& other) const { return data_ != other; }
 
         /**
          * @brief Gets the data as a const reference to std::vector.
@@ -343,6 +357,22 @@ namespace neo::io
     private:
         std::vector<uint8_t> data_;
     };
+
+    /**
+     * @brief Checks if a std::vector<uint8_t> is equal to a ByteVector.
+     * @param lhs The std::vector<uint8_t>.
+     * @param rhs The ByteVector.
+     * @return True if the vectors are equal, false otherwise.
+     */
+    inline bool operator==(const std::vector<uint8_t>& lhs, const ByteVector& rhs) { return rhs == lhs; }
+
+    /**
+     * @brief Checks if a std::vector<uint8_t> is not equal to a ByteVector.
+     * @param lhs The std::vector<uint8_t>.
+     * @param rhs The ByteVector.
+     * @return True if the vectors are not equal, false otherwise.
+     */
+    inline bool operator!=(const std::vector<uint8_t>& lhs, const ByteVector& rhs) { return rhs != lhs; }
 }
 
 // Add hash function for ByteVector to be used with std::unordered_map

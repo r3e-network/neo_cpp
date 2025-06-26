@@ -10,7 +10,6 @@ add_library(neo_io OBJECT
     byte_span.cpp
     uint160.cpp
     uint256.cpp
-    fixed8.cpp
     lru_cache.cpp
     memory_stream.cpp
 )

@@ -31,6 +31,20 @@ namespace neo::persistence
         value_ = reader.ReadVarBytes();
     }
 
+    io::ByteVector StorageItem::ToArray() const
+    {
+        // For StorageItem, ToArray() should return the raw value
+        // This matches the C# implementation where ToArray() returns the value directly
+        return value_;
+    }
+
+    void StorageItem::DeserializeFromArray(const std::span<const uint8_t>& data)
+    {
+        // For StorageItem, DeserializeFromArray() should set the raw value
+        // This matches the C# implementation
+        value_ = io::ByteVector(data.data(), data.size());
+    }
+
     bool StorageItem::operator==(const StorageItem& other) const
     {
         return value_ == other.value_;

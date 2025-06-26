@@ -54,6 +54,19 @@ namespace neo::persistence
         explicit StorageKey(const io::ByteVector& data);
 
         /**
+         * @brief Constructs a StorageKey from a UInt160 script hash (Neo 2.x compatibility).
+         * @param scriptHash The script hash.
+         */
+        explicit StorageKey(const io::UInt160& scriptHash);
+
+        /**
+         * @brief Constructs a StorageKey from a UInt160 script hash and key (Neo 2.x compatibility).
+         * @param scriptHash The script hash.
+         * @param key The key.
+         */
+        StorageKey(const io::UInt160& scriptHash, const io::ByteVector& key);
+
+        /**
          * @brief Gets the contract ID.
          * @return The contract ID.
          */
@@ -195,6 +208,12 @@ namespace neo::persistence
         void Serialize(io::BinaryWriter& writer) const override;
         void Deserialize(io::BinaryReader& reader) override;
 
+        /**
+         * @brief Deserializes from a byte array.
+         * @param data The byte array.
+         */
+        void DeserializeFromArray(const std::span<const uint8_t>& data);
+
         // Comparison operators
         bool operator==(const StorageKey& other) const;
         bool operator!=(const StorageKey& other) const;
@@ -203,6 +222,7 @@ namespace neo::persistence
     private:
         int32_t id_ = 0;
         io::ByteVector key_;
+        io::UInt160 scriptHash_;  // For Neo 2.x compatibility
         mutable io::ByteVector cache_;  // Cached serialized form
         mutable bool cacheValid_ = false;
 

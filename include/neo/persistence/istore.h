@@ -124,6 +124,12 @@ namespace neo::persistence
          * @return The underlying store.
          */
         virtual IStore& GetStore() = 0;
+
+        /**
+         * @brief Checks if the snapshot is read-only.
+         * @return True if read-only, false otherwise.
+         */
+        virtual bool IsReadOnly() const { return false; }
     };
 
     /**

@@ -11,9 +11,22 @@ target_link_libraries(neo_cli_tool PRIVATE neo_core)
 add_executable(neo_gui gui/main.cpp)
 target_link_libraries(neo_gui PRIVATE neo_core)
 
+# RPC server test tool
+add_executable(test_rpc_server test_rpc_server.cpp)
+target_link_libraries(test_rpc_server PRIVATE 
+    neo_rpc 
+    neo_core 
+    neo_io 
+    neo_json 
+    neo_persistence 
+    neo_ledger 
+    neo_smartcontract
+)
+
 # Install
 install(TARGETS
     neo_cli_tool
     neo_gui
+    test_rpc_server
     RUNTIME DESTINATION bin
 )
