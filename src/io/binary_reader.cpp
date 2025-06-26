@@ -232,8 +232,10 @@ namespace neo::io
     {
         if (data_) {
             return position_;
-        } else {
+        } else if (stream_) {
             return static_cast<size_t>(stream_->tellg());
+        } else {
+            return 0;
         }
     }
 
@@ -241,12 +243,14 @@ namespace neo::io
     {
         if (data_) {
             return size_ - position_;
-        } else {
+        } else if (stream_) {
             std::streampos current = stream_->tellg();
             stream_->seekg(0, std::ios::end);
             std::streampos end = stream_->tellg();
             stream_->seekg(current);
             return static_cast<size_t>(end - current);
+        } else {
+            return 0;
         }
     }
 
