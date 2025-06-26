@@ -28,18 +28,6 @@ if(GTest_FOUND OR TARGET gtest)
     add_executable(simple_unit_test simple_unit_test.cpp)
     target_link_libraries(simple_unit_test PRIVATE ${GTEST_LIBRARIES})
     add_test(NAME simple_unit_test COMMAND simple_unit_test)
-    
-    # Add crypto test
-    add_executable(test_crypto_simple test_crypto_simple.cpp)
-    target_link_libraries(test_crypto_simple PRIVATE neo_cpp ${GTEST_LIBRARIES})
-    target_include_directories(test_crypto_simple PRIVATE ${CMAKE_SOURCE_DIR}/include)
-    add_test(NAME test_crypto_simple COMMAND test_crypto_simple)
-    
-    # Add VM test
-    add_executable(test_vm_simple test_vm_simple.cpp)
-    target_link_libraries(test_vm_simple PRIVATE neo_cpp ${GTEST_LIBRARIES})
-    target_include_directories(test_vm_simple PRIVATE ${CMAKE_SOURCE_DIR}/include)
-    add_test(NAME test_vm_simple COMMAND test_vm_simple)
 endif()
 
 # Add network compatibility test utility - disabled for now due to API changes

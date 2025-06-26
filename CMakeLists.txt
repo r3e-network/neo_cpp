@@ -36,36 +36,6 @@ endif()
 # Add subdirectories
 add_subdirectory(src)
 
-# Debug VM executable
-add_executable(debug_vm debug_vm.cpp)
-target_link_libraries(debug_vm PRIVATE neo_cpp)
-target_include_directories(debug_vm PRIVATE ${CMAKE_SOURCE_DIR}/include)
-
-# Debug VM step-by-step executable
-add_executable(debug_vm_step debug_vm_step.cpp)
-target_link_libraries(debug_vm_step PRIVATE neo_cpp)
-target_include_directories(debug_vm_step PRIVATE ${CMAKE_SOURCE_DIR}/include)
-
-# Debug VM trace executable
-add_executable(debug_vm_trace debug_vm_trace.cpp)
-target_link_libraries(debug_vm_trace PRIVATE neo_cpp)
-target_include_directories(debug_vm_trace PRIVATE ${CMAKE_SOURCE_DIR}/include)
-
-# Debug simple VM executable
-add_executable(debug_simple_vm debug_simple_vm.cpp)
-target_link_libraries(debug_simple_vm PRIVATE neo_cpp)
-target_include_directories(debug_simple_vm PRIVATE ${CMAKE_SOURCE_DIR}/include)
-
-# Debug script copy executable
-add_executable(debug_script_copy debug_script_copy.cpp)
-target_link_libraries(debug_script_copy PRIVATE neo_cpp)
-target_include_directories(debug_script_copy PRIVATE ${CMAKE_SOURCE_DIR}/include)
-
-# Debug arithmetic executable
-add_executable(debug_arithmetic debug_arithmetic.cpp)
-target_link_libraries(debug_arithmetic PRIVATE neo_cpp)
-target_include_directories(debug_arithmetic PRIVATE ${CMAKE_SOURCE_DIR}/include)
-
 if(NEO_BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
