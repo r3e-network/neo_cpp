@@ -218,22 +218,22 @@ namespace neo::logging
         switch (level)
         {
             case Level::Trace:
-                logger_->trace(format, std::forward<Args>(args)...);
+                logger_->trace(format.c_str(), std::forward<Args>(args)...);
                 break;
             case Level::Debug:
-                logger_->debug(format, std::forward<Args>(args)...);
+                logger_->debug(format.c_str(), std::forward<Args>(args)...);
                 break;
             case Level::Info:
-                logger_->info(format, std::forward<Args>(args)...);
+                logger_->info(format.c_str(), std::forward<Args>(args)...);
                 break;
             case Level::Warn:
-                logger_->warn(format, std::forward<Args>(args)...);
+                logger_->warn(format.c_str(), std::forward<Args>(args)...);
                 break;
             case Level::Error:
-                logger_->error(format, std::forward<Args>(args)...);
+                logger_->error(format.c_str(), std::forward<Args>(args)...);
                 break;
             case Level::Critical:
-                logger_->critical(format, std::forward<Args>(args)...);
+                logger_->critical(format.c_str(), std::forward<Args>(args)...);
                 break;
             default:
                 break;

@@ -140,37 +140,37 @@ namespace neo::core
     template<typename... Args>
     void Logger::Trace(const std::string& fmt, Args&&... args)
     {
-        logger_->trace(fmt, std::forward<Args>(args)...);
+        logger_->trace(fmt.c_str(), std::forward<Args>(args)...);
     }
 
     template<typename... Args>
     void Logger::Debug(const std::string& fmt, Args&&... args)
     {
-        logger_->debug(fmt, std::forward<Args>(args)...);
+        logger_->debug(fmt.c_str(), std::forward<Args>(args)...);
     }
 
     template<typename... Args>
     void Logger::Info(const std::string& fmt, Args&&... args)
     {
-        logger_->info(fmt, std::forward<Args>(args)...);
+        logger_->info(fmt.c_str(), std::forward<Args>(args)...);
     }
 
     template<typename... Args>
     void Logger::Warning(const std::string& fmt, Args&&... args)
     {
-        logger_->warn(fmt, std::forward<Args>(args)...);
+        logger_->warn(fmt.c_str(), std::forward<Args>(args)...);
     }
 
     template<typename... Args>
     void Logger::Error(const std::string& fmt, Args&&... args)
     {
-        logger_->error(fmt, std::forward<Args>(args)...);
+        logger_->error(fmt.c_str(), std::forward<Args>(args)...);
     }
 
     template<typename... Args>
     void Logger::Critical(const std::string& fmt, Args&&... args)
     {
-        logger_->critical(fmt, std::forward<Args>(args)...);
+        logger_->critical(fmt.c_str(), std::forward<Args>(args)...);
     }
 #else
     // Minimal logging implementation when spdlog is not available
