@@ -78,7 +78,7 @@ private:
     
     // Service management
     std::vector<std::shared_ptr<void>> services_;
-    std::mutex services_mutex_;
+    mutable std::mutex services_mutex_;
     std::vector<ServiceAddedHandler> service_added_handlers_;
     
     // Node startup control

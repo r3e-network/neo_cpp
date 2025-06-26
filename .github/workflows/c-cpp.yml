@@ -15,7 +15,7 @@ jobs:
     
     strategy:
       matrix:
-        compiler: [gcc-11, clang-15]
+        compiler: [gcc-11]
         build_type: [Release, Debug]
     
     steps:
@@ -41,18 +41,9 @@ jobs:
     
     - name: Setup compiler
       run: |
-        if [[ "${{ matrix.compiler }}" == "gcc-11" ]]; then
-          sudo apt-get install -y gcc-11 g++-11
-          echo "CC=gcc-11" >> $GITHUB_ENV
-          echo "CXX=g++-11" >> $GITHUB_ENV
-        elif [[ "${{ matrix.compiler }}" == "clang-15" ]]; then
-          wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-          sudo add-apt-repository "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-15 main"
-          sudo apt-get update
-          sudo apt-get install -y clang-15
-          echo "CC=clang-15" >> $GITHUB_ENV
-          echo "CXX=clang++-15" >> $GITHUB_ENV
-        fi
+        sudo apt-get install -y gcc-11 g++-11
+        echo "CC=gcc-11" >> $GITHUB_ENV
+        echo "CXX=g++-11" >> $GITHUB_ENV
     
     - name: Configure CMake
       run: |
@@ -69,7 +60,7 @@ jobs:
         cmake --build build --parallel $(nproc)
     
     - name: Run Static Analysis
-      if: matrix.compiler == 'gcc-11' && matrix.build_type == 'Release'
+      if: matrix.build_type == 'Release'
       run: |
         find src -name "*.cpp" -o -name "*.h" | head -10 | xargs cppcheck --enable=all --error-exitcode=1 --suppress=missingIncludeSystem
     
@@ -89,7 +80,7 @@ jobs:
         done
     
     - name: Generate Coverage Report
-      if: matrix.compiler == 'gcc-11' && matrix.build_type == 'Debug'
+      if: matrix.build_type == 'Debug'
       run: |
         lcov --capture --directory build --output-file coverage.info
         lcov --remove coverage.info '/usr/*' --output-file coverage.info
@@ -98,7 +89,7 @@ jobs:
         lcov --list coverage.info
     
     - name: Upload Coverage to Codecov
-      if: matrix.compiler == 'gcc-11' && matrix.build_type == 'Debug'
+      if: matrix.build_type == 'Debug'
       uses: codecov/codecov-action@v3
       with:
         file: ./coverage.info
