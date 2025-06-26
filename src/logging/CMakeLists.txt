@@ -27,6 +27,9 @@ target_link_libraries(neo_logging
         spdlog::spdlog
 )
 
+# Define spdlog availability
+target_compile_definitions(neo_logging PUBLIC NEO_HAS_SPDLOG)
+
 # Compiler-specific options
 if(MSVC)
     target_compile_options(neo_logging PRIVATE /W4)
