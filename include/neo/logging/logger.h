@@ -156,10 +156,10 @@ namespace neo::logging
          * @param args Arguments
          */
         template<typename... Args>
-        void Log(Level level, const char* format, Args&&... args);
+        void Log(Level level, const std::string& format, Args&&... args);
 
         // Helper method for minimal logging
-        void LogMinimal(Level level, const char* message);
+        void LogMinimal(Level level, const std::string& message);
 
     private:
 #if defined(NEO_MINIMAL_LOGGING) || !defined(NEO_HAS_SPDLOG)

@@ -4,6 +4,8 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
+#include <fmt/core.h>
+#include <fmt/format.h>
 #endif
 
 namespace neo::logging
@@ -199,7 +201,7 @@ namespace neo::logging
 #endif
     }
 
-    void Logger::LogMinimal(Level level, const char* message)
+    void Logger::LogMinimal(Level level, const std::string& message)
     {
         const char* level_names[] = {"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "CRITICAL", "OFF"};
         std::cout << "[" << level_names[static_cast<int>(level)] << "] " << message << std::endl;
@@ -207,7 +209,7 @@ namespace neo::logging
 
     // Template instantiations
     template<typename... Args>
-    void Logger::Log(Level level, const char* format, Args&&... args)
+    void Logger::Log(Level level, const std::string& format, Args&&... args)
     {
 #if defined(NEO_MINIMAL_LOGGING) || !defined(NEO_HAS_SPDLOG)
         // For minimal logging, just use the format string as-is
@@ -215,25 +217,28 @@ namespace neo::logging
 #else
         if (!logger_) return;
 
+        // Use fmt::vformat to handle dynamic format strings
+        std::string formatted = fmt::vformat(format, fmt::make_format_args(args...));
+
         switch (level)
         {
             case Level::Trace:
-                logger_->trace(format, std::forward<Args>(args)...);
+                logger_->trace(formatted);
                 break;
             case Level::Debug:
-                logger_->debug(format, std::forward<Args>(args)...);
+                logger_->debug(formatted);
                 break;
             case Level::Info:
-                logger_->info(format, std::forward<Args>(args)...);
+                logger_->info(formatted);
                 break;
             case Level::Warn:
-                logger_->warn(format, std::forward<Args>(args)...);
+                logger_->warn(formatted);
                 break;
             case Level::Error:
-                logger_->error(format, std::forward<Args>(args)...);
+                logger_->error(formatted);
                 break;
             case Level::Critical:
-                logger_->critical(format, std::forward<Args>(args)...);
+                logger_->critical(formatted);
                 break;
             default:
                 break;
@@ -242,7 +247,7 @@ namespace neo::logging
     }
 
     // Explicit template instantiations for common use cases
-    template void Logger::Log<>(Level level, const char* format);
-    template void Logger::Log<const char*>(Level level, const char* format, const char*&& args);
-    template void Logger::Log<std::string>(Level level, const char* format, std::string&& args);
+    template void Logger::Log<>(Level level, const std::string& format);
+    template void Logger::Log<const char*>(Level level, const std::string& format, const char*&& args);
+    template void Logger::Log<std::string>(Level level, const std::string& format, std::string&& args);
 }
