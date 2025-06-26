@@ -92,42 +92,42 @@ namespace neo::core
          * @param message Message to log
          */
         template<typename... Args>
-        void Trace(const std::string& fmt, Args&&... args);
+        void Trace(const char* fmt, Args&&... args);
 
         /**
          * @brief Log a debug message
          * @param message Message to log
          */
         template<typename... Args>
-        void Debug(const std::string& fmt, Args&&... args);
+        void Debug(const char* fmt, Args&&... args);
 
         /**
          * @brief Log an info message
          * @param message Message to log
          */
         template<typename... Args>
-        void Info(const std::string& fmt, Args&&... args);
+        void Info(const char* fmt, Args&&... args);
 
         /**
          * @brief Log a warning message
          * @param message Message to log
          */
         template<typename... Args>
-        void Warning(const std::string& fmt, Args&&... args);
+        void Warning(const char* fmt, Args&&... args);
 
         /**
          * @brief Log an error message
          * @param message Message to log
          */
         template<typename... Args>
-        void Error(const std::string& fmt, Args&&... args);
+        void Error(const char* fmt, Args&&... args);
 
         /**
          * @brief Log a critical message
          * @param message Message to log
          */
         template<typename... Args>
-        void Critical(const std::string& fmt, Args&&... args);
+        void Critical(const char* fmt, Args&&... args);
 
         /**
          * @brief Flush the logger
@@ -138,44 +138,44 @@ namespace neo::core
     // Implementation
 #ifdef HAS_SPDLOG
     template<typename... Args>
-    void Logger::Trace(const std::string& fmt, Args&&... args)
+    void Logger::Trace(const char* fmt, Args&&... args)
     {
-        logger_->trace(fmt.c_str(), std::forward<Args>(args)...);
+        logger_->trace(fmt, std::forward<Args>(args)...);
     }
 
     template<typename... Args>
-    void Logger::Debug(const std::string& fmt, Args&&... args)
+    void Logger::Debug(const char* fmt, Args&&... args)
     {
-        logger_->debug(fmt.c_str(), std::forward<Args>(args)...);
+        logger_->debug(fmt, std::forward<Args>(args)...);
     }
 
     template<typename... Args>
-    void Logger::Info(const std::string& fmt, Args&&... args)
+    void Logger::Info(const char* fmt, Args&&... args)
     {
-        logger_->info(fmt.c_str(), std::forward<Args>(args)...);
+        logger_->info(fmt, std::forward<Args>(args)...);
     }
 
     template<typename... Args>
-    void Logger::Warning(const std::string& fmt, Args&&... args)
+    void Logger::Warning(const char* fmt, Args&&... args)
     {
-        logger_->warn(fmt.c_str(), std::forward<Args>(args)...);
+        logger_->warn(fmt, std::forward<Args>(args)...);
     }
 
     template<typename... Args>
-    void Logger::Error(const std::string& fmt, Args&&... args)
+    void Logger::Error(const char* fmt, Args&&... args)
     {
-        logger_->error(fmt.c_str(), std::forward<Args>(args)...);
+        logger_->error(fmt, std::forward<Args>(args)...);
     }
 
     template<typename... Args>
-    void Logger::Critical(const std::string& fmt, Args&&... args)
+    void Logger::Critical(const char* fmt, Args&&... args)
     {
-        logger_->critical(fmt.c_str(), std::forward<Args>(args)...);
+        logger_->critical(fmt, std::forward<Args>(args)...);
     }
 #else
     // Minimal logging implementation when spdlog is not available
     template<typename... Args>
-    void Logger::Trace(const std::string& fmt, Args&&... args)
+    void Logger::Trace(const char* fmt, Args&&... args)
     {
         if (level_ <= LogLevel::Trace)
         {
@@ -185,7 +185,7 @@ namespace neo::core
     }
 
     template<typename... Args>
-    void Logger::Debug(const std::string& fmt, Args&&... args)
+    void Logger::Debug(const char* fmt, Args&&... args)
     {
         if (level_ <= LogLevel::Debug)
         {
@@ -195,7 +195,7 @@ namespace neo::core
     }
 
     template<typename... Args>
-    void Logger::Info(const std::string& fmt, Args&&... args)
+    void Logger::Info(const char* fmt, Args&&... args)
     {
         if (level_ <= LogLevel::Info)
         {
@@ -205,7 +205,7 @@ namespace neo::core
     }
 
     template<typename... Args>
-    void Logger::Warning(const std::string& fmt, Args&&... args)
+    void Logger::Warning(const char* fmt, Args&&... args)
     {
         if (level_ <= LogLevel::Warning)
         {
@@ -215,7 +215,7 @@ namespace neo::core
     }
 
     template<typename... Args>
-    void Logger::Error(const std::string& fmt, Args&&... args)
+    void Logger::Error(const char* fmt, Args&&... args)
     {
         if (level_ <= LogLevel::Error)
         {
@@ -225,7 +225,7 @@ namespace neo::core
     }
 
     template<typename... Args>
-    void Logger::Critical(const std::string& fmt, Args&&... args)
+    void Logger::Critical(const char* fmt, Args&&... args)
     {
         if (level_ <= LogLevel::Critical)
         {

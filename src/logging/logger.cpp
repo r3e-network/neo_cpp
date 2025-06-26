@@ -199,7 +199,7 @@ namespace neo::logging
 #endif
     }
 
-    void Logger::LogMinimal(Level level, const std::string& message)
+    void Logger::LogMinimal(Level level, const char* message)
     {
         const char* level_names[] = {"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "CRITICAL", "OFF"};
         std::cout << "[" << level_names[static_cast<int>(level)] << "] " << message << std::endl;
@@ -207,7 +207,7 @@ namespace neo::logging
 
     // Template instantiations
     template<typename... Args>
-    void Logger::Log(Level level, const std::string& format, Args&&... args)
+    void Logger::Log(Level level, const char* format, Args&&... args)
     {
 #if defined(NEO_MINIMAL_LOGGING) || !defined(NEO_HAS_SPDLOG)
         // For minimal logging, just use the format string as-is
@@ -218,22 +218,22 @@ namespace neo::logging
         switch (level)
         {
             case Level::Trace:
-                logger_->trace(format.c_str(), std::forward<Args>(args)...);
+                logger_->trace(format, std::forward<Args>(args)...);
                 break;
             case Level::Debug:
-                logger_->debug(format.c_str(), std::forward<Args>(args)...);
+                logger_->debug(format, std::forward<Args>(args)...);
                 break;
             case Level::Info:
-                logger_->info(format.c_str(), std::forward<Args>(args)...);
+                logger_->info(format, std::forward<Args>(args)...);
                 break;
             case Level::Warn:
-                logger_->warn(format.c_str(), std::forward<Args>(args)...);
+                logger_->warn(format, std::forward<Args>(args)...);
                 break;
             case Level::Error:
-                logger_->error(format.c_str(), std::forward<Args>(args)...);
+                logger_->error(format, std::forward<Args>(args)...);
                 break;
             case Level::Critical:
-                logger_->critical(format.c_str(), std::forward<Args>(args)...);
+                logger_->critical(format, std::forward<Args>(args)...);
                 break;
             default:
                 break;
@@ -242,7 +242,7 @@ namespace neo::logging
     }
 
     // Explicit template instantiations for common use cases
-    template void Logger::Log<>(Level level, const std::string& format);
-    template void Logger::Log<const char*>(Level level, const std::string& format, const char*&& args);
-    template void Logger::Log<std::string>(Level level, const std::string& format, std::string&& args);
+    template void Logger::Log<>(Level level, const char* format);
+    template void Logger::Log<const char*>(Level level, const char* format, const char*&& args);
+    template void Logger::Log<std::string>(Level level, const char* format, std::string&& args);
 }
