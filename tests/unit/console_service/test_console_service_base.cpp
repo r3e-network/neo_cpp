@@ -26,6 +26,13 @@ namespace neo::console_service::tests
             test_command_called = true;
             last_command = arg;
         }
+
+        // Expose protected methods for testing
+        using ConsoleServiceBase::OnCommand;
+        using ConsoleServiceBase::OnHelpCommand;
+        using ConsoleServiceBase::OnClear;
+        using ConsoleServiceBase::OnVersion;
+        using ConsoleServiceBase::OnExit;
     };
 
     class ConsoleServiceBaseTest : public ::testing::Test
@@ -85,8 +92,7 @@ namespace neo::console_service::tests
 
     TEST_F(ConsoleServiceBaseTest, TestHelpCommand)
     {
-        // Use OnCommand to test help functionality
-        service->OnCommand("help");
+        service->OnHelpCommand();
         std::string output = GetOutput();
         
         EXPECT_TRUE(output.find("Base Commands:") != std::string::npos);
@@ -98,7 +104,7 @@ namespace neo::console_service::tests
 
     TEST_F(ConsoleServiceBaseTest, TestHelpSpecificCommand)
     {
-        service->OnCommand("help help");
+        service->OnHelpCommand("help");
         std::string output = GetOutput();
         
         EXPECT_TRUE(output.find("Shows help information") != std::string::npos);
@@ -107,7 +113,7 @@ namespace neo::console_service::tests
 
     TEST_F(ConsoleServiceBaseTest, TestHelpUnknownCommand)
     {
-        service->OnCommand("help unknown");
+        service->OnHelpCommand("unknown");
         std::string output = GetOutput();
         
         EXPECT_TRUE(output.find("Command not found") != std::string::npos);
@@ -116,12 +122,12 @@ namespace neo::console_service::tests
     TEST_F(ConsoleServiceBaseTest, TestClearCommand)
     {
         // Test that clear command doesn't crash
-        EXPECT_NO_THROW(service->OnCommand("clear"));
+        EXPECT_NO_THROW(service->OnClear());
     }
 
     TEST_F(ConsoleServiceBaseTest, TestVersionCommand)
     {
-        service->OnCommand("version");
+        service->OnVersion();
         std::string output = GetOutput();
         
         EXPECT_TRUE(output.find("Neo C++ Node") != std::string::npos);
