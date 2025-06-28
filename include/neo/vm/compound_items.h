@@ -30,6 +30,12 @@ namespace neo::vm
         ~ArrayItem() override;
 
         /**
+         * @brief Initialize reference counting after construction.
+         * This must be called after the shared_ptr is fully constructed.
+         */
+        void InitializeReferences();
+
+        /**
          * @brief Gets the type of the stack item.
          * @return The type of the stack item.
          */

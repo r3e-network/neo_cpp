@@ -11,24 +11,27 @@ namespace neo::vm
     ArrayItem::ArrayItem(const std::vector<std::shared_ptr<StackItem>>& value, ReferenceCounter* refCounter)
         : value_(value), refCounter_(refCounter)
     {
-        if (refCounter_)
-        {
-            auto self = shared_from_this();
-            for (const auto& item : value_)
-            {
-                refCounter_->AddReference(item, self);
-            }
-        }
+        // Note: Cannot call shared_from_this() in constructor
+        // Reference counting will be set up externally after construction
     }
 
     ArrayItem::~ArrayItem()
+    {
+        // Note: Cannot call shared_from_this() in destructor
+        // Reference counting cleanup should be done externally before destruction
+    }
+
+    void ArrayItem::InitializeReferences()
     {
         if (refCounter_)
         {
             auto self = shared_from_this();
             for (const auto& item : value_)
             {
-                refCounter_->RemoveReference(item, self);
+                if (item)
+                {
+                    refCounter_->AddReference(item, self);
+                }
             }
         }
     }

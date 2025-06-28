@@ -69,6 +69,7 @@ namespace neo::vm
         OperandSizeTable[static_cast<uint8_t>(OpCode::INITSLOT)] = 2;
 
         // Slot
+        OperandSizeTable[static_cast<uint8_t>(OpCode::INITSSLOT)] = 1;
         OperandSizeTable[static_cast<uint8_t>(OpCode::LDSFLD)] = 1;
         OperandSizeTable[static_cast<uint8_t>(OpCode::STSFLD)] = 1;
         OperandSizeTable[static_cast<uint8_t>(OpCode::LDLOC)] = 1;
