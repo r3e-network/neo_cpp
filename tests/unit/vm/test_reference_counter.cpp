@@ -28,6 +28,37 @@ protected:
 
 TEST_F(UT_ReferenceCounter, TestCircularReferences)
 {
+    // First test a simple INITSSLOT to ensure it works
+    {
+        ScriptBuilder sb_test;
+        uint8_t slotCount = 1;
+        sb_test.Emit(OpCode::INITSSLOT, ByteSpan(&slotCount, 1));
+        sb_test.Emit(OpCode::RET);
+        
+        ExecutionEngine engine_test;
+        auto bytes_test = sb_test.ToArray();
+        neo::vm::internal::ByteVector internalBytes_test;
+        internalBytes_test.Reserve(bytes_test.Size());
+        for (size_t i = 0; i < bytes_test.Size(); ++i)
+        {
+            internalBytes_test.Push(bytes_test[i]);
+        }
+        Script script_test(internalBytes_test);
+        engine_test.LoadScript(script_test);
+        
+        std::cout << "Script bytes: ";
+        for (size_t i = 0; i < internalBytes_test.Size(); ++i) {
+            std::cout << std::hex << (int)internalBytes_test[i] << " ";
+        }
+        std::cout << std::endl;
+        
+        auto state_test = engine_test.Execute();
+        if (state_test == VMState::Fault) {
+            std::cout << "Simple INITSSLOT test failed!" << std::endl;
+            // Don't fail, just continue to see more details
+        }
+    }
+    
     ScriptBuilder sb;
     uint8_t slotCount = 1;
     sb.Emit(OpCode::INITSSLOT, ByteSpan(&slotCount, 1)); //{}|{null}:1

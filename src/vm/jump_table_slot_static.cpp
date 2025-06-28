@@ -7,6 +7,7 @@
 #include <neo/vm/primitive_items.h>
 #include <neo/vm/compound_items.h>
 #include <neo/vm/special_items.h>
+#include <stdexcept>
 
 namespace neo::vm
 {
@@ -99,9 +100,23 @@ namespace neo::vm
     // JumpTableSlotStatic implementations
     void JumpTableSlotStatic::INITSSLOT(ExecutionEngine& engine, const Instruction& instruction)
     {
-        auto count = instruction.TokenU8();
-        auto& context = engine.GetCurrentContext();
-        context.InitializeStaticFields(count);
+        try {
+            auto count = instruction.TokenU8();
+            auto& context = engine.GetCurrentContext();
+            context.InitializeStaticFields(count);
+            
+            // Update reference counter for the initialized null items
+            if (engine.GetReferenceCounter()) {
+                for (int i = 0; i < count; i++) {
+                    auto field = context.GetStaticField(i);
+                    if (field) {
+                        engine.GetReferenceCounter()->AddStackReference(field);
+                    }
+                }
+            }
+        } catch (const std::exception& e) {
+            throw std::runtime_error("INITSSLOT failed: " + std::string(e.what()));
+        }
     }
 
     void JumpTableSlotStatic::LDSFLD0(ExecutionEngine& engine, const Instruction& instruction)

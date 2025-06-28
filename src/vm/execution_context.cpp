@@ -109,6 +109,11 @@ namespace neo::vm
             throw std::invalid_argument("Count cannot be negative");
 
         staticFields_.resize(count);
+        // Initialize all fields to null
+        for (int32_t i = 0; i < count; i++)
+        {
+            staticFields_[i] = std::make_shared<NullItem>();
+        }
     }
 
     std::shared_ptr<StackItem> ExecutionContext::GetStaticField(int32_t index) const
