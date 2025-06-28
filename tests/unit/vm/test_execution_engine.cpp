@@ -620,7 +620,7 @@ TEST(ExecutionEngineTest, Execute)
         engine5.LoadScript(script5);
 
         EXPECT_EQ(engine5.Execute(), VMState::Halt);
-        EXPECT_EQ(engine5.GetResultStack().size(), 2); // Should have PUSH1 and PUSH3 results
+        EXPECT_EQ(engine5.GetResultStack().size(), 1); // Only top value (3) when script ends without RET
     }
 }
 

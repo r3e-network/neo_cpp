@@ -268,8 +268,7 @@ TEST(TryCatchTest, ThrowIfNot)
     // The script should halt successfully
     EXPECT_EQ(state, VMState::Halt);
     
-    // FIXME: ASSERTMSG not consuming operands correctly - getting 4 result items instead of 1
-    // The result stack should contain only [2], but currently has all stack items
-    EXPECT_EQ(engine.GetResultStack().size(), 4);
+    // The result stack should contain only [2] - the value pushed after ASSERTMSG
+    EXPECT_EQ(engine.GetResultStack().size(), 1);
     EXPECT_EQ(engine.GetResultStack()[0]->GetInteger(), 2);
 }
