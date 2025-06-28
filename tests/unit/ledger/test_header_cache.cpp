@@ -222,6 +222,12 @@ namespace neo::ledger::tests
         auto updated_header = std::make_shared<BlockHeader>();
         updated_header->SetIndex(header1->GetIndex());
         updated_header->SetTimestamp(9999); // Different timestamp
+        // Set other fields to match header1 to ensure only timestamp differs
+        updated_header->SetPrevHash(header1->GetPrevHash());
+        updated_header->SetMerkleRoot(header1->GetMerkleRoot());
+        updated_header->SetNonce(header1->GetNonce());
+        updated_header->SetPrimaryIndex(header1->GetPrimaryIndex());
+        updated_header->SetNextConsensus(header1->GetNextConsensus());
         
         // Add updated header (should replace original by index)
         cache.Add(updated_header);

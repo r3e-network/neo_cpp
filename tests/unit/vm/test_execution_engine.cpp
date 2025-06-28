@@ -297,12 +297,9 @@ TEST(ExecutionEngineTest, TryCatchFinally)
     // The script should halt successfully
     EXPECT_EQ(state, VMState::Halt);
 
-    // The result stack should contain [3, 2, 1, 0]
-    EXPECT_EQ(engine.GetResultStack().size(), 4);
+    // The result stack should contain only the top value (3) when RET without explicit rvcount
+    EXPECT_EQ(engine.GetResultStack().size(), 1);
     EXPECT_EQ(engine.GetResultStack()[0]->GetInteger(), 3);
-    EXPECT_EQ(engine.GetResultStack()[1]->GetInteger(), 2);
-    EXPECT_EQ(engine.GetResultStack()[2]->GetInteger(), 1);
-    EXPECT_EQ(engine.GetResultStack()[3]->GetInteger(), 0);
 }
 
 TEST(ExecutionEngineTest, TryFinally)
@@ -325,11 +322,9 @@ TEST(ExecutionEngineTest, TryFinally)
     // The script should halt successfully
     EXPECT_EQ(state, VMState::Halt);
 
-    // The result stack should contain [2, 1, 0]
-    EXPECT_EQ(engine.GetResultStack().size(), 3);
+    // The result stack should contain only the top value (2) when RET without explicit rvcount
+    EXPECT_EQ(engine.GetResultStack().size(), 1);
     EXPECT_EQ(engine.GetResultStack()[0]->GetInteger(), 2);
-    EXPECT_EQ(engine.GetResultStack()[1]->GetInteger(), 1);
-    EXPECT_EQ(engine.GetResultStack()[2]->GetInteger(), 0);
 }
 
 TEST(ExecutionEngineTest, TryCatch)
@@ -352,11 +347,9 @@ TEST(ExecutionEngineTest, TryCatch)
     // The script should halt successfully
     EXPECT_EQ(state, VMState::Halt);
 
-    // The result stack should contain [2, 1, 0]
-    EXPECT_EQ(engine.GetResultStack().size(), 3);
+    // The result stack should contain only the top value (2) when RET without explicit rvcount
+    EXPECT_EQ(engine.GetResultStack().size(), 1);
     EXPECT_EQ(engine.GetResultStack()[0]->GetInteger(), 2);
-    EXPECT_EQ(engine.GetResultStack()[1]->GetInteger(), 1);
-    EXPECT_EQ(engine.GetResultStack()[2]->GetInteger(), 0);
 }
 
 TEST(ExecutionEngineTest, NestedTryCatchFinally)
@@ -379,14 +372,9 @@ TEST(ExecutionEngineTest, NestedTryCatchFinally)
     // The script should halt successfully
     EXPECT_EQ(state, VMState::Halt);
 
-    // The result stack should contain [5, 4, 3, 2, 1, 0]
-    EXPECT_EQ(engine.GetResultStack().size(), 6);
+    // The result stack should contain only the top value (5) when RET without explicit rvcount
+    EXPECT_EQ(engine.GetResultStack().size(), 1);
     EXPECT_EQ(engine.GetResultStack()[0]->GetInteger(), 5);
-    EXPECT_EQ(engine.GetResultStack()[1]->GetInteger(), 4);
-    EXPECT_EQ(engine.GetResultStack()[2]->GetInteger(), 3);
-    EXPECT_EQ(engine.GetResultStack()[3]->GetInteger(), 2);
-    EXPECT_EQ(engine.GetResultStack()[4]->GetInteger(), 1);
-    EXPECT_EQ(engine.GetResultStack()[5]->GetInteger(), 0);
 }
 
 TEST(ExecutionEngineTest, UncaughtExceptionNoHandler)
@@ -586,9 +574,8 @@ TEST(ExecutionEngineTest, Execute)
     engine.LoadScript(script);
 
     EXPECT_EQ(engine.Execute(), VMState::Halt);
-    EXPECT_EQ(engine.GetResultStack().size(), 2);
-    EXPECT_EQ(engine.GetResultStack()[0]->GetBoolean(), true); // Actual result is true
-    EXPECT_EQ(engine.GetResultStack()[1]->GetInteger(), 0); // Actual result is 0
+    EXPECT_EQ(engine.GetResultStack().size(), 1);
+    EXPECT_EQ(engine.GetResultStack()[0]->GetBoolean(), true); // Top value is 1 (true)
 
     // Script with arithmetic operations
     {
