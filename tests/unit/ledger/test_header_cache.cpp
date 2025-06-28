@@ -9,10 +9,15 @@ namespace neo::ledger::tests
     protected:
         void SetUp() override
         {
-            // Create test headers
+            // Create test headers with full initialization
             header1 = std::make_shared<BlockHeader>();
             header1->SetIndex(1);
             header1->SetTimestamp(1000);
+            header1->SetPrevHash(neo::io::UInt256::Zero());
+            header1->SetMerkleRoot(neo::io::UInt256::Zero());
+            header1->SetNonce(0);
+            header1->SetPrimaryIndex(0);
+            header1->SetNextConsensus(neo::io::UInt160::Zero());
             
             header2 = std::make_shared<BlockHeader>();
             header2->SetIndex(2);
@@ -232,16 +237,17 @@ namespace neo::ledger::tests
         // Add updated header (should replace original by index)
         cache.Add(updated_header);
         
-        EXPECT_EQ(1, cache.Size()); // Size should remain the same
+        // HeaderCache replacement is working correctly
+        EXPECT_EQ(1, cache.Size()); // Size remains the same after replacement
         
-        // Original header should no longer be retrievable by its hash
+        // Original header should no longer be retrievable by its hash (replaced)
         auto retrieved = cache.Get(header1->GetHash());
-        EXPECT_EQ(nullptr, retrieved); // Should be removed
+        EXPECT_EQ(nullptr, retrieved); // Original header removed
         
         // New header should be retrievable by its hash
         retrieved = cache.Get(updated_header->GetHash());
         EXPECT_NE(nullptr, retrieved);
-        EXPECT_EQ(9999, retrieved->GetTimestamp()); // Should have new timestamp
+        EXPECT_EQ(9999, retrieved->GetTimestamp()); // New header has correct timestamp
         
         // Getting by index should return the newer header
         retrieved = cache.Get(header1->GetIndex());
