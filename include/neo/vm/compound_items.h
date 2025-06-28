@@ -42,6 +42,12 @@ namespace neo::vm
         bool GetBoolean() const override;
 
         /**
+         * @brief Gets the integer value of the stack item.
+         * @return The integer value of the stack item.
+         */
+        int64_t GetInteger() const override;
+
+        /**
          * @brief Gets the array value of the stack item.
          * @return The array value of the stack item.
          */
@@ -142,6 +148,12 @@ namespace neo::vm
         StackItemType GetType() const override;
 
         /**
+         * @brief Gets the boolean value of the stack item.
+         * @return The boolean value of the stack item.
+         */
+        bool GetBoolean() const override;
+
+        /**
          * @brief Gets the count of items in the struct.
          * @return The count of items.
          */
@@ -170,6 +182,17 @@ namespace neo::vm
     };
 
     /**
+     * @brief Custom comparator for StackItem shared_ptr in maps.
+     * Compares pointer addresses for ordering. All actual key comparisons
+     * are done manually using StackItem::Equals() method.
+     */
+    struct StackItemPtrComparator {
+        bool operator()(const std::shared_ptr<StackItem>& lhs, const std::shared_ptr<StackItem>& rhs) const {
+            return lhs.get() < rhs.get();
+        }
+    };
+
+    /**
      * @brief Represents a map stack item.
      */
     class MapItem : public StackItem
@@ -180,7 +203,7 @@ namespace neo::vm
          * @param value The value.
          * @param refCounter The reference counter.
          */
-        explicit MapItem(const std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>>& value = {}, ReferenceCounter* refCounter = nullptr);
+        explicit MapItem(const std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>, StackItemPtrComparator>& value = {}, ReferenceCounter* refCounter = nullptr);
 
         /**
          * @brief Conversion operator to std::shared_ptr<StackItem>.
@@ -210,6 +233,12 @@ namespace neo::vm
          * @return The map value of the stack item.
          */
         std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>> GetMap() const override;
+
+        /**
+         * @brief Gets the size of the map.
+         * @return The size of the map.
+         */
+        size_t GetSize() const;
 
         /**
          * @brief Gets an item from the map.
@@ -258,7 +287,7 @@ namespace neo::vm
         std::shared_ptr<StackItem> DeepCopy(ReferenceCounter* refCounter = nullptr, bool asImmutable = false) const override;
 
     private:
-        std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>> value_;
+        std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>, StackItemPtrComparator> value_;
         ReferenceCounter* refCounter_ = nullptr;
     };
 

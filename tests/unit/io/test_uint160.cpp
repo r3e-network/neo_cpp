@@ -30,7 +30,7 @@ TEST(UInt160Test, Constructor)
     // Invalid size
     uint8_t invalidData[UInt160::Size - 1];
     ByteSpan invalidSpan(invalidData, UInt160::Size - 1);
-    EXPECT_THROW(UInt160(invalidSpan), std::invalid_argument);
+    EXPECT_THROW({ UInt160 temp(invalidSpan); }, std::invalid_argument);
 }
 
 TEST(UInt160Test, AsSpan)
@@ -62,7 +62,7 @@ TEST(UInt160Test, ToHexString)
     UInt160 u(ByteSpan(data, UInt160::Size));
     std::string hex = u.ToHexString();
     
-    EXPECT_EQ(hex, "000102030405060708090a0b0c0d0e0f10111213");
+    EXPECT_EQ(hex, "000102030405060708090A0B0C0D0E0F10111213");
 }
 
 TEST(UInt160Test, Parse)
@@ -82,10 +82,10 @@ TEST(UInt160Test, Parse)
     }
     
     // Invalid hex string (wrong length)
-    EXPECT_THROW(UInt160::Parse("0001020304"), std::invalid_argument);
+    EXPECT_THROW({ UInt160::Parse("0001020304"); }, std::invalid_argument);
     
     // Invalid hex string (non-hex characters)
-    EXPECT_THROW(UInt160::Parse("000102030405060708090a0b0c0d0e0f1011121G"), std::invalid_argument);
+    EXPECT_THROW({ UInt160::Parse("000102030405060708090a0b0c0d0e0f1011121G"); }, std::invalid_argument);
 }
 
 TEST(UInt160Test, TryParse)

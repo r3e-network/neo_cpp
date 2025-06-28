@@ -6,94 +6,82 @@ namespace neo::vm
         : engine_(engine)
     {
         initialContextCount_ = static_cast<int>(engine_.GetInvocationStack().size());
+        // Initialize the engine to Break state for debugging
+        if (engine_.GetState() == VMState::None) {
+            engine_.SetState(VMState::Break);
+        }
     }
 
     VMState Debugger::Execute()
     {
-        while (engine_.GetState() == VMState::Break)
+        // Use the standard Execute method to run until completion
+        engine_.SetState(VMState::None);
+        return engine_.Execute();
+    }
+
+    VMState Debugger::StepInto()
+    {
+        // If not in Break state, initialize to Break for debugging
+        if (engine_.GetState() == VMState::None)
         {
-            if (static_cast<int>(engine_.GetInvocationStack().size()) <= initialContextCount_)
-                break;
+            engine_.SetState(VMState::Break);
+        }
+        
+        if (engine_.GetState() != VMState::Break)
+            return engine_.GetState();
 
-            if (engine_.GetInvocationStack().empty())
-                break;
+        if (engine_.GetInvocationStack().empty())
+        {
+            engine_.SetState(VMState::Halt);
+            return engine_.GetState();
+        }
 
-            auto& context = engine_.GetCurrentContext();
-            int position = context.GetInstructionPointer();
-
-            if (breakpoints_.find(position) != breakpoints_.end())
-                break;
-
-            engine_.Execute();
+        // Execute one instruction
+        engine_.ExecuteNext();
+        
+        // Return to Break state for debugging unless we've halted or faulted
+        if (engine_.GetState() == VMState::None)
+        {
+            engine_.SetState(VMState::Break);
         }
 
         return engine_.GetState();
     }
 
-    VMState Debugger::StepInto()
-    {
-        if (engine_.GetState() != VMState::Break)
-            return engine_.GetState();
-
-        if (engine_.GetInvocationStack().empty())
-            return engine_.GetState();
-
-        auto& context = engine_.GetCurrentContext();
-        int currentPosition = context.GetInstructionPointer();
-
-        // Execute one instruction
-        engine_.Execute();
-
-        // If the state is still Break and the position has changed, we're done
-        if (engine_.GetState() == VMState::Break && !engine_.GetInvocationStack().empty())
-        {
-            auto& newContext = engine_.GetCurrentContext();
-            int newPosition = newContext.GetInstructionPointer();
-
-            if (newContext.GetScript().GetScript() != context.GetScript().GetScript() || newPosition != currentPosition)
-                return engine_.GetState();
-        }
-
-        // Otherwise, continue execution
-        return Execute();
-    }
-
     VMState Debugger::StepOver()
     {
+        // If not in Break state, initialize to Break for debugging
+        if (engine_.GetState() == VMState::None)
+        {
+            engine_.SetState(VMState::Break);
+        }
+        
         if (engine_.GetState() != VMState::Break)
             return engine_.GetState();
 
         if (engine_.GetInvocationStack().empty())
+        {
+            engine_.SetState(VMState::Halt);
             return engine_.GetState();
+        }
 
-        auto& context = engine_.GetCurrentContext();
-        int currentPosition = context.GetInstructionPointer();
         int contextCount = static_cast<int>(engine_.GetInvocationStack().size());
 
         // Execute one instruction
-        engine_.Execute();
-
-        // If the state is still Break, check if we need to continue
-        if (engine_.GetState() == VMState::Break)
+        engine_.ExecuteNext();
+        
+        // If we're in a deeper context, continue until we return to the original context
+        while (engine_.GetState() != VMState::Halt && 
+               engine_.GetState() != VMState::Fault && 
+               static_cast<int>(engine_.GetInvocationStack().size()) > contextCount)
         {
-            // If we're in a different context or at a different position, we're done
-            if (static_cast<int>(engine_.GetInvocationStack().size()) < contextCount)
-                return engine_.GetState();
-
-            if (static_cast<int>(engine_.GetInvocationStack().size()) == contextCount && !engine_.GetInvocationStack().empty())
-            {
-                auto& newContext = engine_.GetCurrentContext();
-                int newPosition = newContext.GetInstructionPointer();
-
-                if (newContext.GetScript().GetScript() != context.GetScript().GetScript() || newPosition != currentPosition)
-                    return engine_.GetState();
-            }
-
-            // If we're in a deeper context, continue until we return to the original context
-            while (engine_.GetState() == VMState::Break && static_cast<int>(engine_.GetInvocationStack().size()) > contextCount)
-            {
-                engine_.Execute();
-            }
+            engine_.ExecuteNext();
+        }
+        
+        // Return to Break state for debugging unless we've halted or faulted
+        if (engine_.GetState() == VMState::None)
+        {
+            engine_.SetState(VMState::Break);
         }
 
         return engine_.GetState();
@@ -101,18 +89,35 @@ namespace neo::vm
 
     VMState Debugger::StepOut()
     {
+        // If not in Break state, initialize to Break for debugging
+        if (engine_.GetState() == VMState::None)
+        {
+            engine_.SetState(VMState::Break);
+        }
+        
         if (engine_.GetState() != VMState::Break)
             return engine_.GetState();
 
         if (engine_.GetInvocationStack().empty())
+        {
+            engine_.SetState(VMState::Halt);
             return engine_.GetState();
+        }
 
         int contextCount = static_cast<int>(engine_.GetInvocationStack().size());
 
         // Continue execution until we return to a higher context
-        while (engine_.GetState() == VMState::Break && static_cast<int>(engine_.GetInvocationStack().size()) >= contextCount)
+        while (engine_.GetState() != VMState::Halt && 
+               engine_.GetState() != VMState::Fault && 
+               static_cast<int>(engine_.GetInvocationStack().size()) >= contextCount)
         {
-            engine_.Execute();
+            engine_.ExecuteNext();
+        }
+        
+        // Return to Break state for debugging unless we've halted or faulted
+        if (engine_.GetState() == VMState::None)
+        {
+            engine_.SetState(VMState::Break);
         }
 
         return engine_.GetState();

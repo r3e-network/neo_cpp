@@ -8,6 +8,7 @@
 #include "neo/vm/execution_context.h"
 #include "neo/json/json.h"
 #include "neo/extensions/utility.h"
+#include "neo/extensions/byte_extensions.h"
 #include <nlohmann/json.hpp>
 #include <filesystem>
 #include <fstream>
@@ -17,7 +18,6 @@
 
 using namespace neo;
 using namespace neo::vm;
-using namespace neo::json;
 using json = nlohmann::json;
 
 // Complete conversion of C# UT_VMJson.cs - ALL 10 test methods + supporting infrastructure
@@ -54,8 +54,8 @@ struct VMUTStackItem {
     
     VMUTStackItem() : type(VMUTStackItemType::Null) {}
     
-    static VMUTStackItem FromJson(const json& j);
-    json ToJson() const;
+    static VMUTStackItem FromJson(const nlohmann::json& j);
+    nlohmann::json ToJson() const;
     std::shared_ptr<StackItem> ToStackItem() const;
 };
 
@@ -68,8 +68,8 @@ struct VMUTExecutionContextState {
     std::vector<VMUTStackItem> arguments;
     std::vector<VMUTStackItem> local_variables;
     
-    static VMUTExecutionContextState FromJson(const json& j);
-    json ToJson() const;
+    static VMUTExecutionContextState FromJson(const nlohmann::json& j);
+    nlohmann::json ToJson() const;
 };
 
 // C++ equivalent of VMUTExecutionEngineState
@@ -79,8 +79,8 @@ struct VMUTExecutionEngineState {
     std::vector<VMUTExecutionContextState> invocation_stack;
     std::string exception_message;
     
-    static VMUTExecutionEngineState FromJson(const json& j);
-    json ToJson() const;
+    static VMUTExecutionEngineState FromJson(const nlohmann::json& j);
+    nlohmann::json ToJson() const;
 };
 
 // C++ equivalent of VMUTStep
@@ -89,8 +89,8 @@ struct VMUTStep {
     std::vector<VMUTActionType> actions;
     VMUTExecutionEngineState result;
     
-    static VMUTStep FromJson(const json& j);
-    json ToJson() const;
+    static VMUTStep FromJson(const nlohmann::json& j);
+    nlohmann::json ToJson() const;
 };
 
 // C++ equivalent of VMUTEntry
@@ -99,8 +99,8 @@ struct VMUTEntry {
     std::vector<uint8_t> script;
     std::vector<VMUTStep> steps;
     
-    static VMUTEntry FromJson(const json& j);
-    json ToJson() const;
+    static VMUTEntry FromJson(const nlohmann::json& j);
+    nlohmann::json ToJson() const;
 };
 
 // C++ equivalent of VMUT
@@ -109,8 +109,8 @@ struct VMUT {
     std::string name;
     std::vector<VMUTEntry> tests;
     
-    static VMUT FromJson(const json& j);
-    json ToJson() const;
+    static VMUT FromJson(const nlohmann::json& j);
+    nlohmann::json ToJson() const;
 };
 
 // Test Engine equivalent with fault handling
@@ -337,7 +337,7 @@ protected:
                 std::ifstream file(entry.path());
                 ASSERT_TRUE(file.is_open()) << "Could not open file: " << entry.path();
                 
-                json j;
+                nlohmann::json j;
                 file >> j;
                 
                 // Deserialize to VMUT
@@ -346,7 +346,7 @@ protected:
                 ASSERT_FALSE(ut.name.empty()) << "Name is required";
                 
                 // Verify JSON round-trip (optional optimization check)
-                json serialized = ut.ToJson();
+                nlohmann::json serialized = ut.ToJson();
                 if (j != serialized) {
                     std::cout << "The file '" << entry.path() << "' was optimized" << std::endl;
                     // Optionally write back optimized JSON
@@ -414,7 +414,7 @@ TEST_F(VMJsonAllMethodsTest, TestOpCodesTypes) {
 
 // Implementation of JSON serialization/deserialization methods
 
-VMUTStackItem VMUTStackItem::FromJson(const json& j) {
+VMUTStackItem VMUTStackItem::FromJson(const nlohmann::json& j) {
     VMUTStackItem item;
     
     if (j.contains("type")) {
@@ -449,8 +449,8 @@ VMUTStackItem VMUTStackItem::FromJson(const json& j) {
     return item;
 }
 
-json VMUTStackItem::ToJson() const {
-    json j;
+nlohmann::json VMUTStackItem::ToJson() const {
+    nlohmann::json j;
     
     // Set type
     switch (type) {
@@ -472,7 +472,7 @@ json VMUTStackItem::ToJson() const {
     }
     
     if (!items.empty()) {
-        j["items"] = json::array();
+        j["items"] = nlohmann::json::array();
         for (const auto& item : items) {
             j["items"].push_back(item.ToJson());
         }
@@ -481,7 +481,7 @@ json VMUTStackItem::ToJson() const {
     return j;
 }
 
-VMUTExecutionContextState VMUTExecutionContextState::FromJson(const json& j) {
+VMUTExecutionContextState VMUTExecutionContextState::FromJson(const nlohmann::json& j) {
     VMUTExecutionContextState state;
     
     if (j.contains("instructionPointer")) {
@@ -521,15 +521,15 @@ VMUTExecutionContextState VMUTExecutionContextState::FromJson(const json& j) {
     return state;
 }
 
-VMUTExecutionEngineState VMUTExecutionEngineState::FromJson(const json& j) {
+VMUTExecutionEngineState VMUTExecutionEngineState::FromJson(const nlohmann::json& j) {
     VMUTExecutionEngineState state;
     
     if (j.contains("state")) {
         std::string state_str = j["state"].get<std::string>();
-        if (state_str == "NONE") state.state = VMState::NONE;
-        else if (state_str == "HALT") state.state = VMState::HALT;
-        else if (state_str == "FAULT") state.state = VMState::FAULT;
-        else if (state_str == "BREAK") state.state = VMState::BREAK;
+        if (state_str == "NONE") state.state = VMState::None;
+        else if (state_str == "HALT") state.state = VMState::Halt;
+        else if (state_str == "FAULT") state.state = VMState::Fault;
+        else if (state_str == "BREAK") state.state = VMState::Break;
     }
     
     if (j.contains("resultStack")) {
@@ -551,7 +551,7 @@ VMUTExecutionEngineState VMUTExecutionEngineState::FromJson(const json& j) {
     return state;
 }
 
-VMUTStep VMUTStep::FromJson(const json& j) {
+VMUTStep VMUTStep::FromJson(const nlohmann::json& j) {
     VMUTStep step;
     
     if (j.contains("name")) {
@@ -575,7 +575,7 @@ VMUTStep VMUTStep::FromJson(const json& j) {
     return step;
 }
 
-VMUTEntry VMUTEntry::FromJson(const json& j) {
+VMUTEntry VMUTEntry::FromJson(const nlohmann::json& j) {
     VMUTEntry entry;
     
     if (j.contains("name")) {
@@ -586,7 +586,7 @@ VMUTEntry VMUTEntry::FromJson(const json& j) {
         if (j["script"].is_string()) {
             // Convert hex string to bytes
             std::string hex = j["script"].get<std::string>();
-            entry.script = Utility::FromHexString(hex);
+            entry.script = neo::extensions::ByteExtensions::FromHexString(hex);
         } else if (j["script"].is_array()) {
             // Convert array of bytes
             for (const auto& byte_val : j["script"]) {
@@ -604,7 +604,7 @@ VMUTEntry VMUTEntry::FromJson(const json& j) {
     return entry;
 }
 
-VMUT VMUT::FromJson(const json& j) {
+VMUT VMUT::FromJson(const nlohmann::json& j) {
     VMUT vmut;
     
     if (j.contains("category")) {
@@ -616,7 +616,7 @@ VMUT VMUT::FromJson(const json& j) {
     }
     
     if (j.contains("tests")) {
-        for (const auto& test : j["tests"]) {
+        for (const auto& test : j.at("tests")) {
             vmut.tests.push_back(VMUTEntry::FromJson(test));
         }
     }
@@ -624,11 +624,11 @@ VMUT VMUT::FromJson(const json& j) {
     return vmut;
 }
 
-json VMUT::ToJson() const {
-    json j;
+nlohmann::json VMUT::ToJson() const {
+    nlohmann::json j;
     j["category"] = category;
     j["name"] = name;
-    j["tests"] = json::array();
+    j["tests"] = nlohmann::json::array();
     
     for (const auto& test : tests) {
         j["tests"].push_back(test.ToJson());

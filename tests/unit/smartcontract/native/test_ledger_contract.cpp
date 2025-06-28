@@ -1,3 +1,4 @@
+// Disabled due to API mismatches - needs to be updated
 #include <gtest/gtest.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/application_engine.h>

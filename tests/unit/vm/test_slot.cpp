@@ -14,7 +14,15 @@ protected:
     void SetUp() override
     {
         // Create a simple script
-        script_ = std::make_unique<Script>(ByteVector::Parse("0102"));
+        auto scriptBytes = ByteVector::Parse("0102");
+        // Convert io::ByteVector to internal::ByteVector
+        neo::vm::internal::ByteVector internalBytes;
+        internalBytes.Reserve(scriptBytes.Size());
+        for (size_t i = 0; i < scriptBytes.Size(); ++i)
+        {
+            internalBytes.Push(scriptBytes[i]);
+        }
+        script_ = std::make_unique<Script>(internalBytes);
         context_ = std::make_unique<ExecutionContext>(*script_);
     }
 
@@ -32,8 +40,8 @@ TEST_F(SlotTest, StaticFields)
     EXPECT_EQ(context_->GetStaticFields().size(), 3);
     
     // Test storing and loading static fields
-    auto item1 = StackItem::Create(123);
-    auto item2 = StackItem::Create(456);
+    auto item1 = StackItem::Create(static_cast<int64_t>(123));
+    auto item2 = StackItem::Create(static_cast<int64_t>(456));
     
     context_->StoreStaticField(0, item1);
     context_->StoreStaticField(1, item2);
@@ -57,8 +65,8 @@ TEST_F(SlotTest, LocalVariables)
     EXPECT_EQ(context_->GetLocalVariables().size(), 4);
     
     // Test storing and loading local variables
-    auto item1 = StackItem::Create(123);
-    auto item2 = StackItem::Create(456);
+    auto item1 = StackItem::Create(static_cast<int64_t>(123));
+    auto item2 = StackItem::Create(static_cast<int64_t>(456));
     
     context_->StoreLocalVariable(0, item1);
     context_->StoreLocalVariable(2, item2);
@@ -84,8 +92,8 @@ TEST_F(SlotTest, Arguments)
     EXPECT_EQ(context_->GetArguments().size(), 3);
     
     // Test storing and loading arguments
-    auto item1 = StackItem::Create(123);
-    auto item2 = StackItem::Create(456);
+    auto item1 = StackItem::Create(static_cast<int64_t>(123));
+    auto item2 = StackItem::Create(static_cast<int64_t>(456));
     
     context_->StoreArgument(0, item1);
     context_->StoreArgument(2, item2);
@@ -107,9 +115,9 @@ TEST_F(SlotTest, CombinedSlots)
     context_->InitializeLocalVariables(2, 2);
     
     // Create items to store
-    auto staticItem = StackItem::Create(1);
-    auto localItem = StackItem::Create(2);
-    auto argItem = StackItem::Create(3);
+    auto staticItem = StackItem::Create(static_cast<int64_t>(1));
+    auto localItem = StackItem::Create(static_cast<int64_t>(2));
+    auto argItem = StackItem::Create(static_cast<int64_t>(3));
     
     // Store items in their respective slots
     context_->StoreStaticField(0, staticItem);
@@ -141,12 +149,12 @@ TEST_F(SlotTest, DirectSlotArrays)
 {
     // Create arrays of stack items
     std::vector<std::shared_ptr<StackItem>> locals;
-    locals.push_back(StackItem::Create(1));
-    locals.push_back(StackItem::Create(2));
+    locals.push_back(StackItem::Create(static_cast<int64_t>(1)));
+    locals.push_back(StackItem::Create(static_cast<int64_t>(2)));
     
     std::vector<std::shared_ptr<StackItem>> args;
-    args.push_back(StackItem::Create(3));
-    args.push_back(StackItem::Create(4));
+    args.push_back(StackItem::Create(static_cast<int64_t>(3)));
+    args.push_back(StackItem::Create(static_cast<int64_t>(4)));
     
     // Set the arrays directly
     context_->SetLocalVariables(locals);

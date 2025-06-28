@@ -2,6 +2,7 @@
 #include <neo/vm/execution_engine.h>
 #include <neo/vm/script.h>
 #include <neo/vm/reference_counter.h>
+#include <neo/vm/stack_item.h>
 #include <neo/io/byte_vector.h>
 #include <vector>
 
@@ -18,7 +19,14 @@ protected:
         
         // Create a simple script to initialize a context with an evaluation stack
         auto scriptBytes = ByteVector::Parse("0102");
-        script_ = std::make_unique<Script>(scriptBytes);
+        // Convert io::ByteVector to internal::ByteVector
+        neo::vm::internal::ByteVector internalBytes;
+        internalBytes.Reserve(scriptBytes.Size());
+        for (size_t i = 0; i < scriptBytes.Size(); ++i)
+        {
+            internalBytes.Push(scriptBytes[i]);
+        }
+        script_ = std::make_unique<Script>(internalBytes);
         
         // Create a context with the script
         context_ = std::make_unique<ExecutionContext>(*script_);
@@ -33,9 +41,9 @@ protected:
 TEST_F(EvaluationStackTest, PushPopPeek)
 {
     // Push some stack items
-    auto item1 = StackItem::Create(123);
-    auto item2 = StackItem::Create(456);
-    auto item3 = StackItem::Create(789);
+    auto item1 = StackItem::Create(static_cast<int64_t>(123));
+    auto item2 = StackItem::Create(static_cast<int64_t>(456));
+    auto item3 = StackItem::Create(static_cast<int64_t>(789));
     
     context_->Push(item1);
     context_->Push(item2);
@@ -79,8 +87,8 @@ TEST_F(EvaluationStackTest, PushPopPeek)
 TEST_F(EvaluationStackTest, ClearStack)
 {
     // Push some stack items
-    auto item1 = StackItem::Create(123);
-    auto item2 = StackItem::Create(456);
+    auto item1 = StackItem::Create(static_cast<int64_t>(123));
+    auto item2 = StackItem::Create(static_cast<int64_t>(456));
     
     context_->Push(item1);
     context_->Push(item2);
@@ -99,9 +107,9 @@ TEST_F(EvaluationStackTest, ClearStack)
 TEST_F(EvaluationStackTest, DifferentTypes)
 {
     // Push different types of stack items
-    auto intItem = StackItem::Create(123);
+    auto intItem = StackItem::Create(static_cast<int64_t>(123));
     auto boolItem = StackItem::Create(true);
-    auto byteStringItem = StackItem::CreateByteString(ByteVector::Parse("010203"));
+    auto byteStringItem = StackItem::Create(ByteVector::Parse("010203"));
     
     context_->Push(intItem);
     context_->Push(boolItem);
@@ -112,8 +120,13 @@ TEST_F(EvaluationStackTest, DifferentTypes)
     
     // Peek at each item and verify its type
     auto peekedItem = context_->Peek();
-    EXPECT_TRUE(peekedItem->IsBuffer());
-    EXPECT_EQ(static_cast<ByteString*>(peekedItem.get())->GetData(), ByteVector::Parse("010203"));
+    EXPECT_EQ(peekedItem->GetType(), StackItemType::ByteString);
+    auto expectedBytes = ByteVector::Parse("010203");
+    // Check byte string content by converting to ByteVector
+    EXPECT_TRUE(peekedItem->IsByteString());
+    auto peekedBytes = peekedItem->GetByteArray();
+    EXPECT_EQ(peekedBytes.Size(), expectedBytes.Size());
+    EXPECT_TRUE(std::equal(peekedBytes.Data(), peekedBytes.Data() + peekedBytes.Size(), expectedBytes.Data()));
     
     peekedItem = context_->Peek(1);
     EXPECT_TRUE(peekedItem->IsBoolean());
@@ -125,7 +138,7 @@ TEST_F(EvaluationStackTest, DifferentTypes)
     
     // Pop each item
     auto poppedItem = context_->Pop();
-    EXPECT_TRUE(poppedItem->IsBuffer());
+    EXPECT_EQ(poppedItem->GetType(), StackItemType::ByteString);
     
     poppedItem = context_->Pop();
     EXPECT_TRUE(poppedItem->IsBoolean());
@@ -138,7 +151,7 @@ TEST_F(EvaluationStackTest, DifferentTypes)
 TEST_F(EvaluationStackTest, ReferenceCount)
 {
     // Create a stack item with reference counter
-    auto item = std::make_shared<Integer>(123, referenceCounter_.get());
+    auto item = StackItem::Create(static_cast<int64_t>(123));
     
     // Initial reference count should be 0
     EXPECT_EQ(referenceCounter_->Count(), 0);

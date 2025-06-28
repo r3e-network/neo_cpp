@@ -400,7 +400,7 @@ namespace neo::vm
 
     std::shared_ptr<StackItem> StackItem::CreateMap()
     {
-        return std::make_shared<MapItem>(std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>>{}, nullptr);
+        return std::make_shared<MapItem>(std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>, StackItemPtrComparator>{}, nullptr);
     }
 
     std::shared_ptr<StackItem> StackItem::CreateByteString(const std::vector<uint8_t>& data)

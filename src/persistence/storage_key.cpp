@@ -247,29 +247,41 @@ namespace neo::persistence
 
     void StorageKey::Serialize(io::BinaryWriter& writer) const
     {
-        auto data = ToArray();
-        writer.WriteVarBytes(data.AsSpan());
+        // Write contract ID
+        writer.Write(id_);
+        
+        // Write key data
+        writer.WriteVarBytes(key_.AsSpan());
+        
+        // Write script hash
+        if (!scriptHash_.IsZero())
+        {
+            writer.WriteBool(true);
+            scriptHash_.Serialize(writer);
+        }
+        else
+        {
+            writer.WriteBool(false);
+        }
     }
 
     void StorageKey::Deserialize(io::BinaryReader& reader)
     {
-        auto data = reader.ReadVarBytes();
-        if (data.Size() >= sizeof(int32_t))
+        // Read contract ID
+        id_ = reader.ReadInt32();
+        
+        // Read key data
+        auto keyData = reader.ReadVarBytes();
+        key_ = io::ByteVector(keyData.Data(), keyData.Size());
+        
+        // Read script hash flag
+        bool hasScriptHash = reader.ReadBool();
+        if (hasScriptHash)
         {
-            // Extract contract ID from the first 4 bytes
-            id_ = *reinterpret_cast<const int32_t*>(data.Data());
-            
-            // Extract the key from the remaining bytes
-            if (data.Size() > sizeof(int32_t))
-            {
-                key_ = io::ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t));
-            }
-            else
-            {
-                key_ = io::ByteVector();
-            }
-            
-            // Reset script hash since we're deserializing from raw data
+            scriptHash_.Deserialize(reader);
+        }
+        else
+        {
             scriptHash_ = io::UInt160();
         }
         
@@ -278,24 +290,70 @@ namespace neo::persistence
 
     void StorageKey::DeserializeFromArray(const std::span<const uint8_t>& data)
     {
-        if (data.size() < sizeof(int32_t))
+        if (data.size() < sizeof(int32_t) + 1) // At least ID + flag byte
             throw std::invalid_argument("Invalid storage key data");
         
-        // Read contract ID (little-endian)
-        std::memcpy(&id_, data.data(), sizeof(int32_t));
+        size_t offset = 0;
         
-        // Read key data (rest of the bytes)
-        if (data.size() > sizeof(int32_t))
+        // Read contract ID (little-endian)
+        std::memcpy(&id_, data.data() + offset, sizeof(int32_t));
+        offset += sizeof(int32_t);
+        
+        // Check if there's a script hash flag at the end
+        bool hasScriptHash = false;
+        size_t keySize = 0;
+        
+        if (data.size() >= offset + 1 + io::UInt160::Size) // enough space for flag + hash
         {
-            key_ = io::ByteVector(data.data() + sizeof(int32_t), data.size() - sizeof(int32_t));
+            // Check if the last part looks like hash flag + hash
+            uint8_t flag = data[data.size() - 1 - io::UInt160::Size];
+            if (flag == 1 && data.size() >= offset + 1 + io::UInt160::Size)
+            {
+                hasScriptHash = true;
+                keySize = data.size() - offset - 1 - io::UInt160::Size;
+            }
+            else if (data[data.size() - 1] == 0) // flag = 0 (no hash)
+            {
+                keySize = data.size() - offset - 1;
+            }
+            else
+            {
+                // Old format - no script hash info
+                keySize = data.size() - offset;
+            }
+        }
+        else if (data.size() > offset && data[data.size() - 1] == 0)
+        {
+            // New format without script hash
+            keySize = data.size() - offset - 1;
+        }
+        else
+        {
+            // Old format - no script hash info
+            keySize = data.size() - offset;
+        }
+        
+        // Read key data
+        if (keySize > 0)
+        {
+            key_ = io::ByteVector(data.data() + offset, keySize);
         }
         else
         {
             key_ = io::ByteVector();
         }
+        offset += keySize;
         
-        // Reset script hash since we're deserializing from raw data
-        scriptHash_ = io::UInt160();
+        // Read script hash if present
+        if (hasScriptHash)
+        {
+            offset += 1; // Skip flag byte
+            scriptHash_ = io::UInt160(io::ByteSpan(data.data() + offset, io::UInt160::Size));
+        }
+        else
+        {
+            scriptHash_ = io::UInt160();
+        }
         
         cacheValid_ = false;
     }
@@ -354,12 +412,44 @@ namespace neo::persistence
 
     io::ByteVector StorageKey::Build() const
     {
-        auto buffer = io::ByteVector(sizeof(int32_t) + key_.Size());
-        std::memcpy(buffer.Data(), &id_, sizeof(int32_t));
+        size_t totalSize = sizeof(int32_t) + key_.Size();
+        bool hasScriptHash = !scriptHash_.IsZero();
+        
+        if (hasScriptHash)
+        {
+            totalSize += 1 + io::UInt160::Size; // 1 byte flag + hash size
+        }
+        else
+        {
+            totalSize += 1; // 1 byte flag
+        }
+        
+        auto buffer = io::ByteVector(totalSize);
+        size_t offset = 0;
+        
+        // Write contract ID
+        std::memcpy(buffer.Data() + offset, &id_, sizeof(int32_t));
+        offset += sizeof(int32_t);
+        
+        // Write key data
         if (!key_.IsEmpty())
         {
-            std::memcpy(buffer.Data() + sizeof(int32_t), key_.Data(), key_.Size());
+            std::memcpy(buffer.Data() + offset, key_.Data(), key_.Size());
+            offset += key_.Size();
         }
+        
+        // Write script hash flag and data
+        if (hasScriptHash)
+        {
+            buffer[offset] = 1; // Has script hash
+            offset += 1;
+            std::memcpy(buffer.Data() + offset, scriptHash_.Data(), io::UInt160::Size);
+        }
+        else
+        {
+            buffer[offset] = 0; // No script hash
+        }
+        
         return buffer;
     }
 }

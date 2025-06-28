@@ -254,9 +254,10 @@ namespace neo::persistence
                     auto existing = inner_->TryGet(key);
                     if (existing)
                     {
-                        // Update existing item - directly modify the inner cache
-                        auto& inner_item = inner_->Get(key);
-                        inner_item = value;
+                        // For StoreCache, we need to properly update the item
+                        // First delete the old item, then add the new one
+                        inner_->Delete(key);
+                        inner_->Add(key, value);
                     }
                     else
                     {

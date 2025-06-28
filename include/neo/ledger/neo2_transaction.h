@@ -20,6 +20,7 @@
 #include <neo/ledger/transaction_attribute.h>
 #include <neo/ledger/coin_reference.h>
 #include <neo/ledger/transaction_output.h>
+#include <neo/io/fixed8.h>
 #include <vector>
 #include <memory>
 #include <cstdint>
@@ -50,6 +51,10 @@ private:
     std::vector<CoinReference> inputs_;
     std::vector<TransactionOutput> outputs_;
     std::vector<Witness> witnesses_;
+    
+    // InvocationTransaction specific fields
+    io::ByteVector script_;
+    io::Fixed8 gas_;
 
 public:
     /**
@@ -128,6 +133,30 @@ public:
      * @param witnesses The witnesses.
      */
     void SetWitnesses(const std::vector<Witness>& witnesses) { witnesses_ = witnesses; }
+    
+    /**
+     * @brief Gets the script (for InvocationTransaction).
+     * @return The script.
+     */
+    const io::ByteVector& GetInvocationScript() const { return script_; }
+    
+    /**
+     * @brief Sets the script (for InvocationTransaction).
+     * @param script The script.
+     */
+    void SetInvocationScript(const io::ByteVector& script) { script_ = script; }
+    
+    /**
+     * @brief Gets the gas (for InvocationTransaction).
+     * @return The gas amount.
+     */
+    io::Fixed8 GetGas() const { return gas_; }
+    
+    /**
+     * @brief Sets the gas (for InvocationTransaction).
+     * @param gas The gas amount.
+     */
+    void SetGas(io::Fixed8 gas) { gas_ = gas; }
 
     // Neo 3.x compatibility methods for native contracts
     /**

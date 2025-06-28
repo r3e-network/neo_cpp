@@ -81,22 +81,22 @@ namespace neo::io::tests
         ByteVector buffer;
         BinaryWriter writer(buffer);
         
-        // Test various VarInt values
-        std::vector<uint64_t> test_values = {
+        // Test various VarInt values (must be within int64_t range for WriteVarInt)
+        std::vector<int64_t> test_values = {
             0, 1, 252, 253, 254, 255, 256,
-            65535, 65536, 4294967295ULL, 4294967296ULL,
-            18446744073709551615ULL
+            65535, 65536, 4294967295LL, 4294967296LL,
+            9223372036854775807LL // INT64_MAX instead of UINT64_MAX
         };
         
-        for (uint64_t value : test_values)
+        for (int64_t value : test_values)
         {
             writer.WriteVarInt(value);
         }
         
         BinaryReader reader(buffer.AsSpan());
-        for (uint64_t expected : test_values)
+        for (int64_t expected : test_values)
         {
-            uint64_t actual = reader.ReadVarInt();
+            int64_t actual = reader.ReadVarInt();
             EXPECT_EQ(expected, actual) << "Failed for value: " << expected;
         }
     }

@@ -5,7 +5,7 @@
 #include <neo/io/byte_vector.h>
 
 using namespace neo::vm;
-using namespace neo::io;
+using ByteVector = neo::vm::internal::ByteVector;
 
 // Test fixture for Debugger tests
 class DebuggerTest : public ::testing::Test
@@ -162,7 +162,7 @@ TEST_F(DebuggerTest, Continue)
     EXPECT_EQ(engine_->GetState(), VMState::Break);
     
     // Continue execution until completion
-    VMState state = debugger_->Continue();
+    VMState state = debugger_->Execute();
     
     // Should now be in HALT state
     EXPECT_EQ(state, VMState::Halt);

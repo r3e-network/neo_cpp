@@ -7,6 +7,7 @@
 #include <neo/ledger/block.h>
 #include <neo/ledger/transaction.h>
 #include <neo/ledger/transaction_verification_context.h>
+#include <neo/ledger/neo_system.h>
 #include <neo/network/p2p/payloads/extensible_payload.h>
 #include <neo/consensus/consensus_message.h>
 #include <neo/consensus/consensus_payload_helper.h>

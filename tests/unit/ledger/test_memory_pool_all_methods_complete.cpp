@@ -50,13 +50,11 @@ protected:
         protocol_settings_.MemoryPoolMaxTransactions = 100;
         
         neo_system_ = std::make_shared<NeoSystem>(protocol_settings_);
-        unit_ = std::make_shared<MemoryPool>(neo_system_);
+        unit_ = std::make_shared<MemoryPool>(protocol_settings_.MemoryPoolMaxTransactions);
         
         // Verify initial state
-        EXPECT_EQ(100, unit_->Capacity());
-        EXPECT_EQ(0, unit_->VerifiedCount());
-        EXPECT_EQ(0, unit_->UnVerifiedCount());
-        EXPECT_EQ(0, unit_->Count());
+        EXPECT_EQ(0, unit_->GetSize());
+        EXPECT_FALSE(unit_->IsFull());
         
         sender_account_ = UInt160::Zero();
     }

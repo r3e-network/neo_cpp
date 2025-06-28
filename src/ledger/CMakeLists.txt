@@ -3,13 +3,15 @@
 # Create ledger library
 add_library(neo_ledger OBJECT
     ledger_dummy.cpp
-    # block.cpp # Temporarily disabled due to transaction dependencies
-    # memory_pool.cpp # Temporarily disabled due to transaction dependencies
-    # neo2_transaction.cpp # Temporarily disabled due to API mismatches
-    # transaction_attribute.cpp # Temporarily disabled
-    # transaction_output.cpp # Temporarily disabled
-    # coin_reference.cpp # Temporarily disabled
-    # witness.cpp # Temporarily disabled
+    block.cpp
+    block_header.cpp
+    header_cache.cpp
+    memory_pool.cpp
+    neo2_transaction.cpp
+    transaction_attribute.cpp
+    transaction_output.cpp
+    coin_reference.cpp
+    witness.cpp
 )
 
 # Set include directories

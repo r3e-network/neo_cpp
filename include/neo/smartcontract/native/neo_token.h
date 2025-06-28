@@ -67,6 +67,12 @@ namespace neo::smartcontract::native
         static constexpr int COMMITTEE_REWARD_RATIO = 10; // 10% of gas per block
 
         /**
+         * @brief Gets the contract ID.
+         * @return The contract ID.
+         */
+        static io::UInt160 GetContractId();
+
+        /**
          * @brief Gets the instance.
          * @return The instance.
          */

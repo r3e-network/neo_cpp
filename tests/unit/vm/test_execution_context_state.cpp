@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <neo/vm/execution_context.h>
 #include <neo/vm/stack_item.h>
+#include <neo/vm/reference_counter.h>
 #include <neo/io/byte_vector.h>
 #include <stack>
 
@@ -18,7 +19,14 @@ public:
 TEST(ExecutionContextStateTest, GetStateTest)
 {
     ByteVector bytes = ByteVector::Parse("0102030405");
-    Script script(bytes);
+    // Convert io::ByteVector to internal::ByteVector
+    neo::vm::internal::ByteVector internalBytes;
+    internalBytes.Reserve(bytes.Size());
+    for (size_t i = 0; i < bytes.Size(); ++i)
+    {
+        internalBytes.Push(bytes[i]);
+    }
+    Script script(internalBytes);
     ReferenceCounter refCounter;
     ExecutionContext context(script, -1);
 

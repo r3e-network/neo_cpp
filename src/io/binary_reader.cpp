@@ -2,21 +2,22 @@
 #include <neo/io/iserializable.h>
 #include <stdexcept>
 #include <cstring>
+#include <sstream>
 
 namespace neo::io
 {
     BinaryReader::BinaryReader(std::istream& stream)
-        : stream_(&stream), data_(nullptr), size_(0), position_(0), owns_stream_(false)
+        : stream_(&stream), data_(nullptr), size_(0), position_(0), owns_stream_(false), using_data_mode_(false)
     {
     }
 
     BinaryReader::BinaryReader(const ByteSpan& data)
-        : stream_(nullptr), data_(data.Data()), size_(data.Size()), position_(0), owns_stream_(false)
+        : stream_(nullptr), data_(data.Data()), size_(data.Size()), position_(0), owns_stream_(false), using_data_mode_(true)
     {
     }
 
     BinaryReader::BinaryReader(const std::vector<uint8_t>& data)
-        : stream_(nullptr), data_(data.data()), size_(data.size()), position_(0), owns_stream_(false)
+        : stream_(nullptr), data_(data.data()), size_(data.size()), position_(0), owns_stream_(false), using_data_mode_(true)
     {
     }
 
@@ -32,9 +33,12 @@ namespace neo::io
 
     uint8_t BinaryReader::ReadUInt8()
     {
-        if (data_) {
+        if (using_data_mode_) {
             if (position_ >= size_)
                 throw std::out_of_range("Unexpected end of data");
+            if (size_ == 0) {
+                throw std::out_of_range("Unexpected end of data");
+            }
             return data_[position_++];
         } else {
             uint8_t value;
@@ -53,7 +57,7 @@ namespace neo::io
 
     uint8_t BinaryReader::PeekUInt8()
     {
-        if (data_) {
+        if (using_data_mode_) {
             if (position_ >= size_)
                 throw std::out_of_range("Unexpected end of data");
             return data_[position_];
@@ -155,7 +159,12 @@ namespace neo::io
             case 0xFE:
                 return ReadUInt32();
             case 0xFF:
-                return ReadUInt64();
+            {
+                uint64_t value = ReadUInt64();
+                if (value > static_cast<uint64_t>(std::numeric_limits<int64_t>::max()))
+                    throw std::out_of_range("VarInt value exceeds int64_t maximum");
+                return static_cast<int64_t>(value);
+            }
             default:
                 return fb;
         }
@@ -172,15 +181,28 @@ namespace neo::io
     ByteVector BinaryReader::ReadVarBytes()
     {
         int64_t count = ReadVarInt();
-        if (count < 0 || count > static_cast<int64_t>(std::numeric_limits<size_t>::max()))
-            throw std::out_of_range("Invalid byte array size");
+        if (count < 0) {
+            throw std::out_of_range("Invalid byte array size: count=" + std::to_string(count) + " (negative)");
+        }
+        // Use the smaller of size_t max and int64_t max for safety
+        constexpr int64_t max_safe_size = std::numeric_limits<int64_t>::max();
+        if (count > max_safe_size) {
+            throw std::out_of_range("Invalid byte array size: count=" + std::to_string(count) + " > max=" + std::to_string(max_safe_size));
+        }
         return ReadBytes(static_cast<size_t>(count));
     }
 
     ByteVector BinaryReader::ReadVarBytes(size_t maxSize)
     {
         int64_t count = ReadVarInt();
-        if (count < 0 || count > static_cast<int64_t>(maxSize))
+        if (count < 0)
+            throw std::out_of_range("Byte array size cannot be negative");
+        
+        int64_t maxSizeInt64 = (maxSize > static_cast<size_t>(std::numeric_limits<int64_t>::max())) 
+                              ? std::numeric_limits<int64_t>::max() 
+                              : static_cast<int64_t>(maxSize);
+        
+        if (count > maxSizeInt64)
             throw std::out_of_range("Byte array size exceeds maximum allowed");
         return ReadBytes(static_cast<size_t>(count));
     }
@@ -231,7 +253,7 @@ namespace neo::io
 
     size_t BinaryReader::GetPosition() const
     {
-        if (data_) {
+        if (using_data_mode_) {
             return position_;
         } else if (stream_) {
             return static_cast<size_t>(stream_->tellg());
@@ -242,13 +264,31 @@ namespace neo::io
 
     size_t BinaryReader::Available() const
     {
-        if (data_) {
+        if (using_data_mode_) {
             return size_ - position_;
         } else if (stream_) {
+            // Save current stream state
             std::streampos current = stream_->tellg();
+            std::ios::iostate old_state = stream_->rdstate();
+            
+            // Check if tellg() failed
+            if (current == std::streampos(-1) || stream_->fail()) {
+                return 0;
+            }
+            
+            // Temporarily seek to end to get size
             stream_->seekg(0, std::ios::end);
             std::streampos end = stream_->tellg();
+            
+            // Restore original position and state
+            stream_->clear(old_state);
             stream_->seekg(current);
+            
+            // Check if operations succeeded
+            if (end == std::streampos(-1) || current == std::streampos(-1)) {
+                return 0;
+            }
+            
             return static_cast<size_t>(end - current);
         } else {
             return 0;
@@ -257,8 +297,16 @@ namespace neo::io
 
     void BinaryReader::EnsureAvailable(size_t size) const
     {
-        if (size > Available())
-            throw std::out_of_range("Not enough bytes available to read");
+        // Simplified approach: instead of complex Available() calculation,
+        // let the actual read operation handle insufficient data
+        // This avoids the stream seeking issues in Available()
+        
+        // Only check for data mode, skip stream mode checking
+        if (using_data_mode_) {
+            if (size > (size_ - position_))
+                throw std::out_of_range("Not enough bytes available to read");
+        }
+        // For stream mode, let the stream->read() handle the error checking
     }
 
     void BinaryReader::ReadRawBytes(uint8_t* data, size_t size)
@@ -268,8 +316,10 @@ namespace neo::io
             
         EnsureAvailable(size);
         
-        if (data_) {
-            std::memcpy(data, data_ + position_, size);
+        if (using_data_mode_) {
+            if (size > 0 && data_) {
+                std::memcpy(data, data_ + position_, size);
+            }
             position_ += size;
         } else {
             stream_->read(reinterpret_cast<char*>(data), size);

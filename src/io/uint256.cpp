@@ -41,10 +41,10 @@ namespace neo::io
             return false;
         }
         
-        // Parse hex string (big-endian to little-endian)
+        // Parse hex string
         for (size_t i = 0; i < Size; ++i)
         {
-            std::string byteStr = cleanHex.substr((Size - 1 - i) * 2, 2);
+            std::string byteStr = cleanHex.substr(i * 2, 2);
             char* endPtr;
             unsigned long byteVal = std::strtoul(byteStr.c_str(), &endPtr, 16);
             

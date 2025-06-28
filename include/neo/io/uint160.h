@@ -37,8 +37,9 @@ namespace neo::io
          */
         explicit UInt160(const ByteSpan& data)
         {
-            if (data.Size() != Size)
-                throw std::invalid_argument("Invalid UInt160 size");
+            if (data.Size() != Size) {
+                throw std::invalid_argument("Invalid UInt160 size: expected " + std::to_string(Size) + " but got " + std::to_string(data.Size()));
+            }
             std::memcpy(data_.data(), data.Data(), Size);
         }
 

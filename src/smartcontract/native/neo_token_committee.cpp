@@ -1,4 +1,5 @@
 #include <neo/smartcontract/native/neo_token_committee.h>
+#include <neo/smartcontract/native/neo_token_candidate.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/script_builder.h>

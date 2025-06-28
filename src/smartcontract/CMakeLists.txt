@@ -5,6 +5,7 @@ add_subdirectory(native)
 add_library(neo_smartcontract OBJECT
     contract.cpp
     contract_state.cpp
+    application_engine.cpp
     application_engine_core.cpp
     application_engine_system_calls.cpp
     system_calls_runtime.cpp

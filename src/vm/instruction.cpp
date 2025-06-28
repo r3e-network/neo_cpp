@@ -1,6 +1,7 @@
 #include <neo/vm/instruction.h>
 #include <neo/vm/exceptions.h>
 #include <cstring>
+#include <iostream>
 
 namespace neo::vm
 {
@@ -98,9 +99,14 @@ namespace neo::vm
     }
 
     Instruction::Instruction(const internal::ByteSpan& script, int ip)
-        : opcode(static_cast<vm::OpCode>(script[ip++])), Operand()
+        : opcode([&script, &ip]() -> vm::OpCode {
+            if (ip < 0 || ip >= static_cast<int>(script.Size()))
+                throw BadScriptException("Instruction pointer out of bounds");
+            return static_cast<vm::OpCode>(script[ip]);
+        }()), Operand()
     {
         InitializeOperandSizeTables();
+        ip++; // Move past the opcode
 
         int operandSizePrefix = OperandSizePrefixTable[static_cast<uint8_t>(opcode)];
         int operandSize = 0;

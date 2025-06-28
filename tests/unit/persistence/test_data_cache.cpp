@@ -159,13 +159,14 @@ TEST(DataCacheTest, ClonedCache)
     auto storeCachePtr = std::make_shared<StoreCache>(std::move(storeCache));
     ClonedCache<StorageKey, StorageItem> clonedCache(storeCachePtr);
     
-    // Add the item to cloned cache first
-    clonedCache.Add(storageKey, storageItem);
-    
-    // Try to get the key
+    // Try to get the existing key from inner cache through cloned cache
     StorageItem item;
     EXPECT_TRUE(clonedCache.TryGet(storageKey, item));
     EXPECT_EQ(item.GetValue(), value);
+    
+    // Add a new item to cloned cache 
+    StorageKey storageKey2(scriptHash, ByteVector::Parse("0102030406"));
+    clonedCache.Add(storageKey2, storageItem);
     
     // Modify the item
     ByteVector value2 = ByteVector::Parse("1112131415");
@@ -185,10 +186,10 @@ TEST(DataCacheTest, ClonedCache)
     // Commit the cloned cache
     clonedCache.Commit();
     
-    // After commit, the changes should be applied (though current implementation just clears)
-    // For now, just verify the cloned cache is still accessible
+    // After commit, the cloned cache should still be able to access the inner cache
     StorageItem item5;
-    EXPECT_FALSE(clonedCache.TryGet(storageKey, item5)); // Should be false after commit clears
+    EXPECT_TRUE(clonedCache.TryGet(storageKey, item5)); // Should still find item in inner cache
+    EXPECT_EQ(item5.GetValue(), value2); // Should have updated value after commit
 }
 
 TEST(DataCacheTest, ClonedCacheFind)
@@ -214,10 +215,6 @@ TEST(DataCacheTest, ClonedCacheFind)
     // Create a cloned cache
     auto storeCachePtr = std::make_shared<StoreCache>(std::move(storeCache));
     ClonedCache<StorageKey, StorageItem> clonedCache(storeCachePtr);
-    
-    // Add items to the cloned cache first
-    clonedCache.Add(storageKey1, storageItem1);
-    clonedCache.Add(storageKey2, storageItem2);
     
     // Add an additional item to the cloned cache
     StorageKey storageKey3(scriptHash, ByteVector::Parse("0103030405"));

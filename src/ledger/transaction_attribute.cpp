@@ -65,6 +65,11 @@ namespace neo::ledger
         }
         else if (usage_ == Usage::Script)
         {
+            // Script attribute should be exactly 20 bytes (UInt160)
+            if (data_.Size() != 20)
+            {
+                throw std::invalid_argument("Script attribute data must be exactly 20 bytes");
+            }
             writer.Write(data_.AsSpan());
         }
         else if (usage_ == Usage::DescriptionUrl)
@@ -116,6 +121,11 @@ namespace neo::ledger
 
             data_ = io::ByteVector(oracleData);
         }
+        // Legacy Neo 2.x attribute handling - check Script first due to value collision with NotValidBefore
+        else if (usage_ == Usage::Script)
+        {
+            data_ = reader.ReadBytes(20);
+        }
         else if (usage_ == Usage::NotValidBefore)
         {
             // NotValidBefore: read uint32 height
@@ -131,7 +141,6 @@ namespace neo::ledger
             // NotaryAssisted: read byte NKeys
             data_ = reader.ReadBytes(1);
         }
-        // Legacy Neo 2.x attribute handling
         else if (usage_ == Usage::ContractHash || usage_ == Usage::Vote ||
             (static_cast<uint8_t>(usage_) >= static_cast<uint8_t>(Usage::Hash1) &&
              static_cast<uint8_t>(usage_) <= static_cast<uint8_t>(Usage::Hash15)))
@@ -141,10 +150,6 @@ namespace neo::ledger
         else if (usage_ == Usage::ECDH02 || usage_ == Usage::ECDH03)
         {
             data_ = reader.ReadBytes(33);
-        }
-        else if (usage_ == Usage::Script)
-        {
-            data_ = reader.ReadBytes(20);
         }
         else if (usage_ == Usage::DescriptionUrl)
         {

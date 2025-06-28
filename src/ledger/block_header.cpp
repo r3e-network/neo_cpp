@@ -17,14 +17,15 @@ namespace neo::ledger
 
     BlockHeader::BlockHeader(const Block& block)
         : version_(block.GetVersion()),
-          prevHash_(block.GetPrevHash()),
+          prevHash_(block.GetPreviousHash()),
           merkleRoot_(block.GetMerkleRoot()),
-          timestamp_(block.GetTimestamp()),
-          nonce_(block.GetNonce()),
+          timestamp_(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(
+              block.GetTimestamp().time_since_epoch()).count())),
+          nonce_(0), // Block doesn't have nonce
           index_(block.GetIndex()),
-          primaryIndex_(block.GetPrimaryIndex()),
+          primaryIndex_(static_cast<uint8_t>(block.GetPrimaryIndex())),
           nextConsensus_(block.GetNextConsensus()),
-          witness_(block.GetWitness())
+          witness_() // Block doesn't have witness
     {
     }
 
@@ -134,7 +135,7 @@ namespace neo::ledger
         writer.Write(nextConsensus_);
 
         std::string data = stream.str();
-        return cryptography::Hash::Sha256(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
+        return cryptography::Hash::Hash256(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
     }
 
     int BlockHeader::GetSize() const

@@ -146,7 +146,12 @@ namespace neo::vm
 
     bool ByteStringItem::GetBoolean() const
     {
-        return value_.Size() > 0;
+        for (size_t i = 0; i < value_.Size(); i++)
+        {
+            if (value_.Data()[i] != 0)
+                return true;
+        }
+        return false;  // Empty or all zeros
     }
 
     int64_t ByteStringItem::GetInteger() const

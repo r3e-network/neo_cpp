@@ -60,14 +60,15 @@ public:
                 Instruction instruction(script, ip);
                 
                 // Add opcode name
-                array.push_back(OpCodeToString(instruction.GetOpCode()));
+                array.push_back(OpCodeToString(instruction.opcode));
                 
                 // Add any operand data
-                if (!instruction.GetOperand().empty()) {
-                    array.push_back("0x" + BytesToHexString(instruction.GetOperand()));
+                if (!instruction.Operand.IsEmpty()) {
+                    std::vector<uint8_t> operandVec(instruction.Operand.begin(), instruction.Operand.end());
+                    array.push_back("0x" + BytesToHexString(operandVec));
                 }
                 
-                ip += instruction.GetSize();
+                ip += instruction.Size();
             }
         } catch (const std::exception&) {
             // If parsing fails, just add remaining bytes as hex

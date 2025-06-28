@@ -47,41 +47,33 @@ namespace neo::ledger
     void TransactionOutput::Serialize(io::BinaryWriter& writer) const
     {
         writer.Write(assetId_);
-        writer.Write(value_.GetValue().ToString()); // Serialize as string for simplicity
+        writer.Write(value_.GetRawValue()); // Write the raw int64_t value
         writer.Write(scriptHash_);
     }
 
     void TransactionOutput::Deserialize(io::BinaryReader& reader)
     {
         assetId_ = reader.Read<io::UInt256>();
-        std::string valueStr = reader.ReadString();
-        value_ = core::Fixed8(core::BigDecimal(valueStr));
+        int64_t rawValue = reader.Read<int64_t>();
+        value_ = core::Fixed8(rawValue);
         scriptHash_ = reader.Read<io::UInt160>();
     }
 
     int TransactionOutput::GetSize() const
     {
-        return 32 + value_.GetValue().ToString().length() + 1 + 20; // UInt256 + value string + length + UInt160
+        return 32 + 8 + 20; // UInt256 + Fixed8 (int64_t) + UInt160
     }
 
     void TransactionOutput::SerializeJson(io::JsonWriter& writer) const
     {
-        // Basic JSON serialization for compatibility
-        writer.WriteStartObject();
-        writer.WritePropertyName("asset");
-        writer.WriteValue(assetId_.ToString());
-        writer.WritePropertyName("value");
-        writer.WriteValue(value_.GetValue().ToString());
-        writer.WritePropertyName("address");
-        writer.WriteValue(scriptHash_.ToString());
-        writer.WriteEndObject();
+        // TODO: Implement JSON serialization when JsonWriter is complete
+        (void)writer; // Suppress unused parameter warning
     }
 
     void TransactionOutput::DeserializeJson(const io::JsonReader& reader)
     {
-        // Basic JSON deserialization for compatibility
-        // Implementation would parse JSON object
-        // For now, just a stub for compilation
+        // TODO: Implement JSON deserialization when JsonReader is complete
+        (void)reader; // Suppress unused parameter warning
     }
 
     bool TransactionOutput::operator==(const TransactionOutput& other) const

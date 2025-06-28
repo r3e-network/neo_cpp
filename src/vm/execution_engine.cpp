@@ -16,22 +16,22 @@ namespace neo::vm
 
     // ExecutionEngine implementation
     ExecutionEngine::ExecutionEngine()
-        : state_(VMState::Break), jumpTable_(defaultJumpTable), jumping_(false), limits_(ExecutionEngineLimits::Default)
+        : state_(VMState::None), jumpTable_(defaultJumpTable), jumping_(false), limits_(ExecutionEngineLimits::Default)
     {
     }
 
     ExecutionEngine::ExecutionEngine(const JumpTable& jumpTable)
-        : state_(VMState::Break), jumpTable_(jumpTable), jumping_(false), limits_(ExecutionEngineLimits::Default)
+        : state_(VMState::None), jumpTable_(jumpTable), jumping_(false), limits_(ExecutionEngineLimits::Default)
     {
     }
 
     ExecutionEngine::ExecutionEngine(const ExecutionEngineLimits& limits)
-        : state_(VMState::Break), jumpTable_(defaultJumpTable), jumping_(false), limits_(limits)
+        : state_(VMState::None), jumpTable_(defaultJumpTable), jumping_(false), limits_(limits)
     {
     }
 
     ExecutionEngine::ExecutionEngine(const JumpTable& jumpTable, const ExecutionEngineLimits& limits)
-        : state_(VMState::Break), jumpTable_(jumpTable), jumping_(false), limits_(limits)
+        : state_(VMState::None), jumpTable_(jumpTable), jumping_(false), limits_(limits)
     {
     }
 
@@ -447,15 +447,30 @@ namespace neo::vm
 
     bool ExecutionEngine::ExecuteRet()
     {
-        if (invocationStack_.size() <= 1)
-        {
-            SetState(VMState::Halt);
-            return false;
-        }
-
         auto& context = GetCurrentContext();
         auto rvcount = context.GetRVCount();
         auto evaluationStack = context.GetEvaluationStack();
+
+        if (invocationStack_.size() <= 1)
+        {
+            // For the last context (main script), move evaluation stack to result stack
+            // When rvcount is -1 (default), return only the top value if any
+            if (rvcount == -1 && !evaluationStack.empty())
+            {
+                // Return only the top value
+                resultStack_.push_back(evaluationStack.back());
+            }
+            else
+            {
+                // Return all values from evaluation stack in reverse order
+                for (auto it = evaluationStack.rbegin(); it != evaluationStack.rend(); ++it)
+                {
+                    resultStack_.push_back(*it);
+                }
+            }
+            SetState(VMState::Halt);
+            return false;
+        }
 
         // Extract the return values based on rvcount
         if (rvcount >= 0)
@@ -543,18 +558,3 @@ namespace neo::vm
     }
 }
 
-// Implementation of SystemCall constructor
-neo::vm::SystemCall::SystemCall(const std::string& name, std::function<bool(ExecutionEngine&)> handler)
-    : name_(name), handler_(handler)
-{
-}
-
-const std::string& neo::vm::SystemCall::GetName() const
-{
-    return name_;
-}
-
-const std::function<bool(neo::vm::ExecutionEngine&)>& neo::vm::SystemCall::GetHandler() const
-{
-    return handler_;
-}

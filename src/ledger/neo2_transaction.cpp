@@ -19,7 +19,7 @@
 namespace neo::ledger {
 
 Neo2Transaction::Neo2Transaction()
-    : type_(Type::ContractTransaction), version_(0) {
+    : type_(Type::ContractTransaction), version_(0), gas_(0) {
 }
 
 io::UInt256 Neo2Transaction::GetHash() const {
@@ -57,26 +57,26 @@ int Neo2Transaction::GetSize() const {
     size += sizeof(uint8_t); // type
     size += sizeof(uint8_t); // version
     
-    // Attributes
-    size += io::BinaryWriter::GetVarIntSize(attributes_.size());
+    // Attributes - estimate varint size (1-9 bytes)
+    size += 1; // Assume 1 byte for count
     for (const auto& attr : attributes_) {
-        size += attr.GetSize();
+        size += 1 + attr.GetData().Size(); // usage + data
     }
     
     // Inputs
-    size += io::BinaryWriter::GetVarIntSize(inputs_.size());
+    size += 1; // Assume 1 byte for count
     for (const auto& input : inputs_) {
         size += input.GetSize();
     }
     
     // Outputs
-    size += io::BinaryWriter::GetVarIntSize(outputs_.size());
+    size += 1; // Assume 1 byte for count
     for (const auto& output : outputs_) {
         size += output.GetSize();
     }
     
     // Witnesses
-    size += io::BinaryWriter::GetVarIntSize(witnesses_.size());
+    size += 1; // Assume 1 byte for count
     for (const auto& witness : witnesses_) {
         size += witness.GetSize();
     }

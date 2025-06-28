@@ -6,7 +6,7 @@
 #include <neo/smartcontract/native/neo_token_vote.h>
 #include <neo/smartcontract/native/neo_token_transfer.h>
 #include <neo/smartcontract/native/neo_token_persistence.h>
-#include <neo/smartcontract/native/gas_token.h>
+// #include <neo/smartcontract/native/gas_token.h> // Temporarily disabled
 #include <neo/smartcontract/application_engine.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/persistence/storage_item.h>
@@ -19,6 +19,14 @@
 
 namespace neo::smartcontract::native
 {
+    io::UInt160 NeoToken::GetContractId()
+    {
+        // Return the NEO token contract hash
+        // This should be a well-known hash for the NEO contract
+        static const io::UInt160 neoContractHash = io::UInt160::Parse("ef4073a0f2b305a38ec4050e4d3d28bc40ea63f5");
+        return neoContractHash;
+    }
+
     std::shared_ptr<NeoToken> NeoToken::GetInstance()
     {
         static std::shared_ptr<NeoToken> instance = std::make_shared<NeoToken>();

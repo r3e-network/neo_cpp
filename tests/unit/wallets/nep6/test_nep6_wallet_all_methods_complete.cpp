@@ -10,7 +10,7 @@
 #include "neo/cryptography/ecc/ecpoint.h"
 #include "neo/cryptography/ecc/eccurve.h"
 #include "neo/cryptography/crypto.h"
-#include "neo/cryptography/helper.h"
+// #include "neo/cryptography/helper.h" // Missing header
 #include "neo/io/uint160.h"
 #include "neo/io/binary_reader.h"
 #include "neo/io/binary_writer.h"

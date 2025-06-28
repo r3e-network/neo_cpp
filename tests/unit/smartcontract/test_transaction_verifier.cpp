@@ -19,7 +19,7 @@ protected:
     void SetUp() override
     {
         // Initialize logging
-        logging::Log().SetMinimumLogLevel(logging::LogLevel::Debug);
+        // logging::Log().SetMinimumLogLevel(logging::LogLevel::Debug); // TODO: Update to new logging API
         
         // Initialize store
         store_ = std::make_shared<MemoryStore>();
@@ -28,12 +28,12 @@ protected:
         snapshot_ = std::make_shared<StoreCache>(*store_);
         
         // Initialize context
-        context_ = VerificationContext(snapshot_);
+        context_ = std::make_unique<VerificationContext>(snapshot_);
     }
 
     std::shared_ptr<MemoryStore> store_;
     std::shared_ptr<StoreCache> snapshot_;
-    VerificationContext context_;
+    std::unique_ptr<VerificationContext> context_;
 };
 
 TEST_F(TransactionVerifierTests, VerifyTransaction_EmptyTransaction_Succeeds)
@@ -42,7 +42,7 @@ TEST_F(TransactionVerifierTests, VerifyTransaction_EmptyTransaction_Succeeds)
     Transaction transaction;
     
     // Act
-    auto result = Verifier().VerifyTransaction(transaction, context_);
+    auto result = Verifier().VerifyTransaction(transaction, *context_);
     
     // Assert
     EXPECT_EQ(VerificationResult::Succeed, result.result);
@@ -55,7 +55,7 @@ TEST_F(TransactionVerifierTests, VerifySignature_EmptyTransaction_Succeeds)
     Transaction transaction;
     
     // Act
-    auto result = Verifier().VerifySignature(transaction, context_);
+    auto result = Verifier().VerifySignature(transaction, *context_);
     
     // Assert
     EXPECT_EQ(VerificationResult::Succeed, result.result);
@@ -68,7 +68,7 @@ TEST_F(TransactionVerifierTests, VerifyWitness_EmptyTransaction_Succeeds)
     Transaction transaction;
     
     // Act
-    auto result = Verifier().VerifyWitness(transaction, context_);
+    auto result = Verifier().VerifyWitness(transaction, *context_);
     
     // Assert
     EXPECT_EQ(VerificationResult::Succeed, result.result);
@@ -81,7 +81,7 @@ TEST_F(TransactionVerifierTests, VerifyNetworkFee_EmptyTransaction_Succeeds)
     Transaction transaction;
     
     // Act
-    auto result = Verifier().VerifyNetworkFee(transaction, context_);
+    auto result = Verifier().VerifyNetworkFee(transaction, *context_);
     
     // Assert
     EXPECT_EQ(VerificationResult::Succeed, result.result);
@@ -94,7 +94,7 @@ TEST_F(TransactionVerifierTests, VerifySystemFee_EmptyTransaction_Succeeds)
     Transaction transaction;
     
     // Act
-    auto result = Verifier().VerifySystemFee(transaction, context_);
+    auto result = Verifier().VerifySystemFee(transaction, *context_);
     
     // Assert
     EXPECT_EQ(VerificationResult::Succeed, result.result);
@@ -107,7 +107,7 @@ TEST_F(TransactionVerifierTests, CalculateNetworkFee_EmptyTransaction_ReturnsZer
     Transaction transaction;
     
     // Act
-    auto networkFee = Verifier().CalculateNetworkFee(transaction, context_);
+    auto networkFee = Verifier().CalculateNetworkFee(transaction, *context_);
     
     // Assert
     EXPECT_EQ(0, networkFee);
@@ -119,7 +119,7 @@ TEST_F(TransactionVerifierTests, CalculateSystemFee_EmptyTransaction_ReturnsZero
     Transaction transaction;
     
     // Act
-    auto systemFee = Verifier().CalculateSystemFee(transaction, context_);
+    auto systemFee = Verifier().CalculateSystemFee(transaction, *context_);
     
     // Assert
     EXPECT_EQ(0, systemFee);

@@ -307,6 +307,7 @@ namespace neo::io
         size_t size_;
         size_t position_;
         bool owns_stream_;
+        bool using_data_mode_;
 
         /**
          * @brief Helper method to read raw bytes from either stream or memory.

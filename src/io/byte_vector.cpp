@@ -74,7 +74,7 @@ namespace neo::io
 
     std::string ByteVector::ToHexString(const ByteSpan& span)
     {
-        static const char* hexChars = "0123456789abcdef";
+        static const char* hexChars = "0123456789ABCDEF";
         std::string result;
         result.reserve(span.Size() * 2);
 

@@ -4,7 +4,8 @@
 // #include <neo/network/p2p/payloads/block.h>
 // #include <neo/network/p2p/payloads/header.h>
 // #include <neo/network/p2p/payloads/header_cache.h>
-#include <neo/ledger/block.h>  // For BlockHeader alias
+#include <neo/ledger/block.h>
+#include <neo/ledger/block_header.h>
 #include <neo/ledger/transaction.h>
 // #include <neo/network/p2p/payloads/extensible_payload.h> // Disabled since network module is disabled
 #include <neo/persistence/data_cache.h>

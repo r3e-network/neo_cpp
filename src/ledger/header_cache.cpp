@@ -24,13 +24,32 @@ namespace neo::ledger
         auto hash = header->GetHash();
         auto index = header->GetIndex();
         
-        // Check if already exists
+        // Check if already exists by hash
         if (hash_index_.find(hash) != hash_index_.end())
         {
             return false;
         }
         
-        // Add to all indices
+        // Check if a header with the same index already exists
+        auto height_it = height_index_.find(index);
+        if (height_it != height_index_.end())
+        {
+            // Replace the existing header with the same index
+            auto old_header = height_it->second;
+            auto old_hash = old_header->GetHash();
+            
+            // Remove old header from hash index
+            hash_index_.erase(old_hash);
+            
+            // Remove old header from deque
+            auto deque_it = std::find(headers_.begin(), headers_.end(), old_header);
+            if (deque_it != headers_.end())
+            {
+                headers_.erase(deque_it);
+            }
+        }
+        
+        // Add new header to all indices
         headers_.push_back(header);
         hash_index_[hash] = header;
         height_index_[index] = header;

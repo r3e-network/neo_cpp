@@ -7,7 +7,7 @@ namespace neo::io
     std::string ByteSpan::ToHexString() const
     {
         std::ostringstream oss;
-        oss << std::hex << std::setfill('0');
+        oss << std::hex << std::uppercase << std::setfill('0');
         
         for (size_t i = 0; i < size_; i++)
         {

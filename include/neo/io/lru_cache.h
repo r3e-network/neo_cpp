@@ -24,6 +24,8 @@ namespace neo::io
          */
         explicit LRUCache(size_t capacity) : capacity_(capacity)
         {
+            if (capacity == 0)
+                throw std::invalid_argument("Capacity must be greater than zero");
         }
 
         /**

@@ -1,5 +1,7 @@
 #include "vm_json_test_base.h"
 #include <neo/vm/stack_item.h>
+#include <neo/vm/compound_items.h>
+#include <neo/vm/primitive_items.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <sstream>
@@ -15,7 +17,7 @@ namespace neo::vm::tests
         case VMUTStackItemType::Boolean:
             return StackItem::Create(value.get<bool>());
         case VMUTStackItemType::Integer:
-            return StackItem::Create(std::stoll(value.get<std::string>()));
+            return StackItem::Create(static_cast<int64_t>(std::stoll(value.get<std::string>())));
         case VMUTStackItemType::ByteString:
         {
             std::string hexString = value.get<std::string>();
@@ -260,8 +262,10 @@ namespace neo::vm::tests
                 return false;
         }
 
-        // Check script
-        if (script != context.GetScript().GetScript())
+        // Check script - convert to io::ByteVector for comparison
+        const auto& vmScript = context.GetScript().GetScript();
+        io::ByteVector scriptCopy(vmScript.Data(), vmScript.Size());
+        if (script != scriptCopy)
             return false;
 
         return true;
@@ -293,7 +297,7 @@ namespace neo::vm::tests
 
         for (size_t i = 0; i < invocationStack.size(); i++)
         {
-            if (!invocationStack[i].Equals(engine.GetInvocationStack()[i]))
+            if (!invocationStack[i].Equals(*engine.GetInvocationStack()[i]))
                 return false;
         }
 
@@ -331,7 +335,15 @@ namespace neo::vm::tests
 
         if (!script.IsEmpty())
         {
-            engine.LoadScript(script);
+            // Convert io::ByteVector to internal::ByteVector
+            internal::ByteVector internalBytes;
+            internalBytes.Reserve(script.Size());
+            for (size_t i = 0; i < script.Size(); ++i)
+            {
+                internalBytes.Push(script[i]);
+            }
+            Script scriptObj(internalBytes);
+            engine.LoadScript(scriptObj);
         }
 
         for (const auto& step : steps)

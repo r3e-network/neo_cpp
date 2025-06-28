@@ -9,6 +9,8 @@
 #include <neo/network/p2p/payloads/headers_payload.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
+#include <neo/ledger/block_header.h>
+#include <neo/network/ip_address.h>
 #include <sstream>
 #include <vector>
 
@@ -245,19 +247,19 @@ TEST(P2PPayloadsTest, AddrPayload_Serialize_Deserialize)
     deserializedPayload.Deserialize(reader);
 
     // Check the deserialized payload
-    EXPECT_EQ(deserializedPayload.GetAddresses().size(), 2);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[0].GetTimestamp(), 123456789);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[0].GetAddress().ToString(), "127.0.0.1");
-    EXPECT_EQ(deserializedPayload.GetAddresses()[0].GetCapabilities().size(), 1);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[0].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
-    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddresses()[0].GetCapabilities()[0]).GetPort(), 10333);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[1].GetTimestamp(), 987654321);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[1].GetAddress().ToString(), "192.168.1.1");
-    EXPECT_EQ(deserializedPayload.GetAddresses()[1].GetCapabilities().size(), 2);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[1].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
-    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddresses()[1].GetCapabilities()[0]).GetPort(), 20333);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[1].GetCapabilities()[1].GetType(), NodeCapabilityType::FullNode);
-    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetAddresses()[1].GetCapabilities()[1]).GetStartHeight(), 12345);
+    EXPECT_EQ(deserializedPayload.GetAddressList().size(), 2);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetTimestamp(), 123456789);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetAddress().ToString(), "127.0.0.1");
+    EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities().size(), 1);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
+    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[0].GetCapabilities()[0]).GetPort(), 10333);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetTimestamp(), 987654321);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetAddress().ToString(), "192.168.1.1");
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities().size(), 2);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
+    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[0]).GetPort(), 20333);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[1].GetType(), NodeCapabilityType::FullNode);
+    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[1]).GetStartHeight(), 12345);
 }
 
 TEST(P2PPayloadsTest, AddrPayload_SerializeJson_DeserializeJson)
@@ -299,27 +301,27 @@ TEST(P2PPayloadsTest, AddrPayload_SerializeJson_DeserializeJson)
     deserializedPayload.DeserializeFromJson(json);
 
     // Check the deserialized payload
-    EXPECT_EQ(deserializedPayload.GetAddresses().size(), 2);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[0].GetTimestamp(), 123456789);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[0].GetAddress().ToString(), "127.0.0.1");
-    EXPECT_EQ(deserializedPayload.GetAddresses()[0].GetCapabilities().size(), 1);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[0].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
-    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddresses()[0].GetCapabilities()[0]).GetPort(), 10333);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[1].GetTimestamp(), 987654321);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[1].GetAddress().ToString(), "192.168.1.1");
-    EXPECT_EQ(deserializedPayload.GetAddresses()[1].GetCapabilities().size(), 2);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[1].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
-    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddresses()[1].GetCapabilities()[0]).GetPort(), 20333);
-    EXPECT_EQ(deserializedPayload.GetAddresses()[1].GetCapabilities()[1].GetType(), NodeCapabilityType::FullNode);
-    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetAddresses()[1].GetCapabilities()[1]).GetStartHeight(), 12345);
+    EXPECT_EQ(deserializedPayload.GetAddressList().size(), 2);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetTimestamp(), 123456789);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetAddress().ToString(), "127.0.0.1");
+    EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities().size(), 1);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
+    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[0].GetCapabilities()[0]).GetPort(), 10333);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetTimestamp(), 987654321);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetAddress().ToString(), "192.168.1.1");
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities().size(), 2);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
+    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[0]).GetPort(), 20333);
+    EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[1].GetType(), NodeCapabilityType::FullNode);
+    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[1]).GetStartHeight(), 12345);
 }
 
 TEST(P2PPayloadsTest, InvPayload_Serialize_Deserialize)
 {
     // Create an inv payload
-    std::vector<io::UInt256> hashes;
-    hashes.push_back(io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"));
-    hashes.push_back(io::UInt256::Parse("FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210"));
+    std::vector<neo::io::UInt256> hashes;
+    hashes.push_back(neo::io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"));
+    hashes.push_back(neo::io::UInt256::Parse("FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210"));
 
     InvPayload payload(InventoryType::Block, hashes);
 
@@ -346,9 +348,9 @@ TEST(P2PPayloadsTest, InvPayload_Serialize_Deserialize)
 TEST(P2PPayloadsTest, GetDataPayload_Serialize_Deserialize)
 {
     // Create a getdata payload
-    std::vector<io::UInt256> hashes;
-    hashes.push_back(io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"));
-    hashes.push_back(io::UInt256::Parse("FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210"));
+    std::vector<neo::io::UInt256> hashes;
+    hashes.push_back(neo::io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"));
+    hashes.push_back(neo::io::UInt256::Parse("FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210"));
 
     GetDataPayload payload(InventoryType::Block, hashes);
 
@@ -375,10 +377,11 @@ TEST(P2PPayloadsTest, GetDataPayload_Serialize_Deserialize)
 TEST(P2PPayloadsTest, GetBlocksPayload_Serialize_Deserialize)
 {
     // Create a getblocks payload
-    io::UInt256 hashStart = io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    neo::io::UInt256 hashStart = neo::io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
     uint16_t count = 500;
 
-    GetBlocksPayload payload(hashStart, count);
+    GetBlocksPayload payload(hashStart);
+    payload.SetCount(count);
 
     // Serialize the payload
     std::ostringstream stream;
@@ -425,20 +428,20 @@ TEST(P2PPayloadsTest, GetBlockByIndexPayload_Serialize_Deserialize)
 TEST(P2PPayloadsTest, HeadersPayload_Serialize_Deserialize)
 {
     // Create a headers payload
-    std::vector<std::shared_ptr<ledger::BlockHeader>> headers;
+    std::vector<std::shared_ptr<neo::ledger::BlockHeader>> headers;
 
-    auto header1 = std::make_shared<ledger::BlockHeader>();
+    auto header1 = std::make_shared<neo::ledger::BlockHeader>();
     header1->SetVersion(0);
-    header1->SetPrevHash(io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"));
-    header1->SetMerkleRoot(io::UInt256::Parse("FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210"));
+    header1->SetPrevHash(neo::io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"));
+    header1->SetMerkleRoot(neo::io::UInt256::Parse("FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210"));
     header1->SetTimestamp(123456789);
     header1->SetIndex(1);
     headers.push_back(header1);
 
-    auto header2 = std::make_shared<ledger::BlockHeader>();
+    auto header2 = std::make_shared<neo::ledger::BlockHeader>();
     header2->SetVersion(0);
     header2->SetPrevHash(header1->GetHash());
-    header2->SetMerkleRoot(io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"));
+    header2->SetMerkleRoot(neo::io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"));
     header2->SetTimestamp(987654321);
     header2->SetIndex(2);
     headers.push_back(header2);

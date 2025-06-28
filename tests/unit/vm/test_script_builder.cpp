@@ -41,9 +41,9 @@ TEST_F(UT_ScriptBuilder, TestEmit)
     // Test basic emit
     {
         ScriptBuilder script;
-        ASSERT_EQ(0, script.GetLength());
+        ASSERT_EQ(0, script.ToArray().size());
         script.Emit(OpCode::NOP);
-        ASSERT_EQ(1, script.GetLength());
+        ASSERT_EQ(1, script.ToArray().size());
 
         std::vector<uint8_t> expected = {0x21}; // NOP opcode
         AssertAreEqual(expected, script.ToArray());
@@ -69,7 +69,7 @@ TEST_F(UT_ScriptBuilder, TestNullAndEmpty)
     script.EmitPush(empty);
     
     // Expected: PUSHDATA1 followed by 0 (length)
-    std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSHDATA1, 0};
+    std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHDATA1), 0};
     AssertAreEqual(expected, script.ToArray());
 }
 
@@ -78,9 +78,9 @@ TEST_F(UT_ScriptBuilder, TestBigInteger)
     // Test negative integer
     {
         ScriptBuilder script;
-        ASSERT_EQ(0, script.GetLength());
-        script.EmitPush(-100000);
-        ASSERT_EQ(5, script.GetLength());
+        ASSERT_EQ(0, script.ToArray().size());
+        script.EmitPush(static_cast<int64_t>(-100000));
+        ASSERT_EQ(5, script.ToArray().size());
 
         std::vector<uint8_t> expected = {2, 96, 121, 254, 255}; // 2 is PUSHINT32 prefix, followed by -100000 in little-endian
         AssertAreEqual(expected, script.ToArray());
@@ -89,9 +89,9 @@ TEST_F(UT_ScriptBuilder, TestBigInteger)
     // Test positive integer
     {
         ScriptBuilder script;
-        ASSERT_EQ(0, script.GetLength());
-        script.EmitPush(100000);
-        ASSERT_EQ(5, script.GetLength());
+        ASSERT_EQ(0, script.ToArray().size());
+        script.EmitPush(static_cast<int64_t>(100000));
+        ASSERT_EQ(5, script.ToArray().size());
 
         std::vector<uint8_t> expected = {2, 160, 134, 1, 0}; // 2 is PUSHINT32 prefix, followed by 100000 in little-endian
         AssertAreEqual(expected, script.ToArray());
@@ -104,7 +104,7 @@ TEST_F(UT_ScriptBuilder, TestEmitSysCall)
     script.EmitSysCall(0xE393C875);
     
     // SYSCALL followed by the syscall hash in little-endian
-    std::vector<uint8_t> expected = {(uint8_t)OpCode::SYSCALL, 0x75, 0xC8, 0x93, 0xE3};
+    std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::SYSCALL), 0x75, 0xC8, 0x93, 0xE3};
     AssertAreEqual(expected, script.ToArray());
 }
 
@@ -115,7 +115,7 @@ TEST_F(UT_ScriptBuilder, TestEmitCall)
         ScriptBuilder script;
         script.EmitCall(0);
         
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::CALL, 0};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::CALL), 0};
         AssertAreEqual(expected, script.ToArray());
     }
     
@@ -125,11 +125,11 @@ TEST_F(UT_ScriptBuilder, TestEmitCall)
         script.EmitCall(12345);
         
         // CALL_L followed by the offset in little-endian
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::CALL_L};
-        BinaryWriter writer;
-        writer.WriteInt32(12345);
-        auto bytes = writer.ToArray();
-        expected.insert(expected.end(), bytes.begin(), bytes.end());
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::CALL_L)};
+        ByteVector buffer;
+        BinaryWriter writer(buffer);
+        writer.Write(static_cast<int32_t>(12345));
+        expected.insert(expected.end(), buffer.begin(), buffer.end());
         
         AssertAreEqual(expected, script.ToArray());
     }
@@ -140,11 +140,11 @@ TEST_F(UT_ScriptBuilder, TestEmitCall)
         script.EmitCall(-12345);
         
         // CALL_L followed by the offset in little-endian
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::CALL_L};
-        BinaryWriter writer;
-        writer.WriteInt32(-12345);
-        auto bytes = writer.ToArray();
-        expected.insert(expected.end(), bytes.begin(), bytes.end());
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::CALL_L)};
+        ByteVector buffer;
+        BinaryWriter writer(buffer);
+        writer.Write(static_cast<int32_t>(-12345));
+        expected.insert(expected.end(), buffer.begin(), buffer.end());
         
         AssertAreEqual(expected, script.ToArray());
     }
@@ -157,7 +157,7 @@ TEST_F(UT_ScriptBuilder, TestEmitJump)
     int32_t offset_i32 = std::numeric_limits<int32_t>::max();
 
     // Test valid jump opcodes with max offsets
-    for (int op = (int)OpCode::JMP; op <= (int)OpCode::JMPLE_L; op++)
+    for (int op = static_cast<int>(OpCode::JMP); op <= static_cast<int>(OpCode::JMPLE_L); op++)
     {
         ScriptBuilder script;
         OpCode opcode = static_cast<OpCode>(op);
@@ -168,31 +168,34 @@ TEST_F(UT_ScriptBuilder, TestEmitJump)
         std::vector<uint8_t> expected;
         if (op % 2 == 0) // Short form (JMP, JMPIF, etc.)
         {
-            expected = {(uint8_t)opcode, (uint8_t)offset_i8, (uint8_t)((int)opcode + 1)};
+            expected = {static_cast<uint8_t>(opcode), static_cast<uint8_t>(offset_i8), static_cast<uint8_t>(static_cast<int>(opcode) + 1)};
             
             // Append int32 in little-endian
-            BinaryWriter writer;
-            writer.WriteInt32(offset_i32);
-            auto bytes = writer.ToArray();
+            ByteVector buffer;
+            BinaryWriter writer(buffer);
+            writer.Write(offset_i32);
+            auto bytes = buffer;
             expected.insert(expected.end(), bytes.begin(), bytes.end());
         }
         else // Long form (JMP_L, JMPIF_L, etc.)
         {
-            expected = {(uint8_t)opcode};
+            expected = {static_cast<uint8_t>(opcode)};
             
             // Append int8 as int32 in little-endian
-            BinaryWriter writer;
-            writer.WriteInt32((int32_t)offset_i8);
-            auto bytes = writer.ToArray();
+            ByteVector buffer;
+            BinaryWriter writer(buffer);
+            writer.Write(static_cast<int32_t>(offset_i8));
+            auto bytes = buffer;
             expected.insert(expected.end(), bytes.begin(), bytes.end());
             
             // Append opcode again
-            expected.push_back((uint8_t)opcode);
+            expected.push_back(static_cast<uint8_t>(opcode));
             
             // Append int32 in little-endian
-            BinaryWriter writer2;
-            writer2.WriteInt32(offset_i32);
-            auto bytes2 = writer2.ToArray();
+            ByteVector buffer2;
+            BinaryWriter writer2(buffer2);
+            writer2.Write(offset_i32);
+            auto bytes2 = buffer2;
             expected.insert(expected.end(), bytes2.begin(), bytes2.end());
         }
         
@@ -213,25 +216,25 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBigInteger)
     for (int i = -1; i <= 16; i++)
     {
         ScriptBuilder script;
-        script.EmitPush(i);
+        script.EmitPush(static_cast<int64_t>(i));
         
-        std::vector<uint8_t> expected = {(uint8_t)(OpCode::PUSH0 + i)};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(static_cast<int>(OpCode::PUSH0) + i)};
         AssertAreEqual(expected, script.ToArray());
     }
     
     // Test -1 (should be PUSHM1)
     {
         ScriptBuilder script;
-        script.EmitPush(-1);
+        script.EmitPush(static_cast<int64_t>(-1));
         
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSHM1};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHM1)};
         AssertAreEqual(expected, script.ToArray());
     }
     
     // Test int8_t min/max
     {
         ScriptBuilder script;
-        script.EmitPush(std::numeric_limits<int8_t>::min());
+        script.EmitPush(static_cast<int64_t>(std::numeric_limits<int8_t>::min()));
         
         std::vector<uint8_t> expected = {0x00, 0x80}; // PUSHINT8 followed by -128
         AssertAreEqual(expected, script.ToArray());
@@ -239,7 +242,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBigInteger)
     
     {
         ScriptBuilder script;
-        script.EmitPush(std::numeric_limits<int8_t>::max());
+        script.EmitPush(static_cast<int64_t>(std::numeric_limits<int8_t>::max()));
         
         std::vector<uint8_t> expected = {0x00, 0x7f}; // PUSHINT8 followed by 127
         AssertAreEqual(expected, script.ToArray());
@@ -248,7 +251,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBigInteger)
     // Test int16_t min/max
     {
         ScriptBuilder script;
-        script.EmitPush(std::numeric_limits<int16_t>::min());
+        script.EmitPush(static_cast<int64_t>(std::numeric_limits<int16_t>::min()));
         
         // PUSHINT16 followed by -32768 in little-endian
         std::vector<uint8_t> expected = {0x01, 0x00, 0x80};
@@ -257,7 +260,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBigInteger)
     
     {
         ScriptBuilder script;
-        script.EmitPush(std::numeric_limits<int16_t>::max());
+        script.EmitPush(static_cast<int64_t>(std::numeric_limits<int16_t>::max()));
         
         // PUSHINT16 followed by 32767 in little-endian
         std::vector<uint8_t> expected = {0x01, 0xff, 0x7f};
@@ -267,7 +270,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBigInteger)
     // Test int32_t min/max
     {
         ScriptBuilder script;
-        script.EmitPush(std::numeric_limits<int32_t>::min());
+        script.EmitPush(static_cast<int64_t>(std::numeric_limits<int32_t>::min()));
         
         // PUSHINT32 followed by -2147483648 in little-endian
         std::vector<uint8_t> expected = {0x02, 0x00, 0x00, 0x00, 0x80};
@@ -276,7 +279,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBigInteger)
     
     {
         ScriptBuilder script;
-        script.EmitPush(std::numeric_limits<int32_t>::max());
+        script.EmitPush(static_cast<int64_t>(std::numeric_limits<int32_t>::max()));
         
         // PUSHINT32 followed by 2147483647 in little-endian
         std::vector<uint8_t> expected = {0x02, 0xff, 0xff, 0xff, 0x7f};
@@ -286,7 +289,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBigInteger)
     // Test int64_t min/max
     {
         ScriptBuilder script;
-        script.EmitPush(std::numeric_limits<int64_t>::min());
+        script.EmitPush(static_cast<int64_t>(std::numeric_limits<int64_t>::min()));
         
         // PUSHINT64 followed by -9223372036854775808 in little-endian
         std::vector<uint8_t> expected = {0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80};
@@ -295,7 +298,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBigInteger)
     
     {
         ScriptBuilder script;
-        script.EmitPush(std::numeric_limits<int64_t>::max());
+        script.EmitPush(static_cast<int64_t>(std::numeric_limits<int64_t>::max()));
         
         // PUSHINT64 followed by 9223372036854775807 in little-endian
         std::vector<uint8_t> expected = {0x03, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f};
@@ -311,7 +314,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushString)
         script.EmitPush("");
         
         // PUSHDATA1 followed by length 0
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSHDATA1, 0};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHDATA1), 0};
         AssertAreEqual(expected, script.ToArray());
     }
     
@@ -322,7 +325,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushString)
         script.EmitPush(str);
         
         // PUSHDATA1 followed by length 5 and UTF-8 bytes of "Hello"
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSHDATA1, 5, 'H', 'e', 'l', 'l', 'o'};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHDATA1), 5, 'H', 'e', 'l', 'l', 'o'};
         AssertAreEqual(expected, script.ToArray());
     }
     
@@ -340,7 +343,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushString)
         }
         
         // PUSHDATA1 followed by length of UTF-8 bytes and the bytes themselves
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSHDATA1, (uint8_t)utf8Bytes.size()};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHDATA1), static_cast<uint8_t>(utf8Bytes.size())};
         expected.insert(expected.end(), utf8Bytes.begin(), utf8Bytes.end());
         
         // Note: This test might not work correctly because of UTF-8 encoding in C++
@@ -356,7 +359,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBoolean)
         script.EmitPush(true);
         
         // PUSH1 (true)
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSH1};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSH1)};
         AssertAreEqual(expected, script.ToArray());
     }
     
@@ -366,7 +369,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBoolean)
         script.EmitPush(false);
         
         // PUSH0 (false)
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSH0};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSH0)};
         AssertAreEqual(expected, script.ToArray());
     }
 }
@@ -380,7 +383,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushByteArray)
         script.EmitPush(data);
         
         // PUSHDATA1 followed by length 0
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSHDATA1, 0};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHDATA1), 0};
         AssertAreEqual(expected, script.ToArray());
     }
     
@@ -391,7 +394,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushByteArray)
         script.EmitPush(data);
         
         // PUSHDATA1 followed by length 5 and the bytes
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSHDATA1, 5, 1, 2, 3, 4, 5};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHDATA1), 5, 1, 2, 3, 4, 5};
         AssertAreEqual(expected, script.ToArray());
     }
     
@@ -402,7 +405,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushByteArray)
         script.EmitPush(data);
         
         // PUSHDATA1 followed by length 75 and the bytes
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSHDATA1, 75};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHDATA1), 75};
         expected.insert(expected.end(), data.begin(), data.end());
         AssertAreEqual(expected, script.ToArray());
     }
@@ -414,7 +417,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushByteArray)
         script.EmitPush(data);
         
         // PUSHDATA2 followed by length 256 in little-endian and the bytes
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSHDATA2, 0x00, 0x01};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHDATA2), 0x00, 0x01};
         expected.insert(expected.end(), data.begin(), data.end());
         AssertAreEqual(expected, script.ToArray());
     }
@@ -428,7 +431,7 @@ TEST_F(UT_ScriptBuilder, TestEmitPushByteArray)
         script.EmitPush(data);
         
         // PUSHDATA4 followed by length 65536 in little-endian and the bytes
-        std::vector<uint8_t> expected = {(uint8_t)OpCode::PUSHDATA4, 0x00, 0x00, 0x01, 0x00};
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHDATA4, 0x00, 0x00, 0x01, 0x00};
         expected.insert(expected.end(), data.begin(), data.end());
         AssertAreEqual(expected, script.ToArray());
     }

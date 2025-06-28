@@ -218,19 +218,29 @@ namespace neo::ledger::tests
         cache.Add(header1);
         auto original = cache.Get(header1->GetHash());
         
-        // Create new header with same hash but different data
+        // Create new header with same index but different timestamp (different hash)
         auto updated_header = std::make_shared<BlockHeader>();
         updated_header->SetIndex(header1->GetIndex());
         updated_header->SetTimestamp(9999); // Different timestamp
         
-        // Add updated header (should replace original)
+        // Add updated header (should replace original by index)
         cache.Add(updated_header);
         
         EXPECT_EQ(1, cache.Size()); // Size should remain the same
         
+        // Original header should no longer be retrievable by its hash
         auto retrieved = cache.Get(header1->GetHash());
+        EXPECT_EQ(nullptr, retrieved); // Should be removed
+        
+        // New header should be retrievable by its hash
+        retrieved = cache.Get(updated_header->GetHash());
         EXPECT_NE(nullptr, retrieved);
-        EXPECT_EQ(9999, retrieved->GetTimestamp()); // Should have updated timestamp
+        EXPECT_EQ(9999, retrieved->GetTimestamp()); // Should have new timestamp
+        
+        // Getting by index should return the newer header
+        retrieved = cache.Get(header1->GetIndex());
+        EXPECT_NE(nullptr, retrieved);
+        EXPECT_EQ(9999, retrieved->GetTimestamp()); // Should return the newer header
     }
 
     TEST_F(HeaderCacheTest, TestCapacityOne)

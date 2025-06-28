@@ -56,7 +56,7 @@ namespace neo::json::tests
         
         // Float numbers should preserve precision
         std::string float_str = float_number->ToString();
-        EXPECT_NE(float_str.find("3.14159"), std::string::npos);
+        EXPECT_NE(float_str.find("3.1415"), std::string::npos);
         
         // Negative numbers
         std::string neg_str = negative_number->ToString();

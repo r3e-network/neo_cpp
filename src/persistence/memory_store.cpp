@@ -39,8 +39,7 @@ namespace neo::persistence
         for (const auto& [key, value] : store_)
         {
             if (prefix == nullptr ||
-                (direction == SeekDirection::Forward && key.Size() >= prefix->Size() && std::equal(prefix->Data(), prefix->Data() + prefix->Size(), key.Data())) ||
-                (direction == SeekDirection::Backward && key.Size() <= prefix->Size() && std::equal(key.Data(), key.Data() + key.Size(), prefix->Data())))
+                (key.Size() >= prefix->Size() && std::equal(prefix->Data(), prefix->Data() + prefix->Size(), key.Data())))
             {
                 result.emplace_back(key, value);
             }
@@ -139,8 +138,7 @@ namespace neo::persistence
                 continue;
 
             if (prefix == nullptr ||
-                (direction == SeekDirection::Forward && key.Size() >= prefix->Size() && std::equal(prefix->Data(), prefix->Data() + prefix->Size(), key.Data())) ||
-                (direction == SeekDirection::Backward && key.Size() <= prefix->Size() && std::equal(key.Data(), key.Data() + key.Size(), prefix->Data())))
+                (key.Size() >= prefix->Size() && std::equal(prefix->Data(), prefix->Data() + prefix->Size(), key.Data())))
             {
                 result.emplace_back(key, value);
             }
@@ -150,8 +148,7 @@ namespace neo::persistence
         for (const auto& [key, value] : changes_)
         {
             if (prefix == nullptr ||
-                (direction == SeekDirection::Forward && key.Size() >= prefix->Size() && std::equal(prefix->Data(), prefix->Data() + prefix->Size(), key.Data())) ||
-                (direction == SeekDirection::Backward && key.Size() <= prefix->Size() && std::equal(key.Data(), key.Data() + key.Size(), prefix->Data())))
+                (key.Size() >= prefix->Size() && std::equal(prefix->Data(), prefix->Data() + prefix->Size(), key.Data())))
             {
                 result.emplace_back(key, value);
             }

@@ -5,6 +5,7 @@
 #include <neo/vm/script.h>
 #include <neo/vm/stack_item.h>
 #include <neo/ledger/transaction.h>
+#include <neo/cryptography/hash.h>
 
 using namespace neo::smartcontract;
 using namespace neo::persistence;
@@ -18,7 +19,7 @@ protected:
     void SetUp() override
     {
         store_ = std::make_shared<MemoryStore>();
-        snapshot_ = std::make_shared<StoreCache>(store_);
+        snapshot_ = std::make_shared<StoreCache>(*store_);
         transaction_ = std::make_shared<Transaction>();
         engine_ = std::make_shared<ApplicationEngine>(TriggerType::Application, transaction_.get(), snapshot_);
     }
@@ -57,7 +58,9 @@ TEST_F(ApplicationEngineTest, LoadScript)
     EXPECT_EQ(engine_->GetEntryScriptHash(), scriptHash);
     
     // Check the script
-    EXPECT_EQ(engine_->GetCurrentContext().GetScript().GetScript(), script);
+    auto actualScript = engine_->GetCurrentContext().GetScript().GetScript();
+    EXPECT_EQ(actualScript.Size(), script.size());
+    EXPECT_TRUE(std::equal(actualScript.begin(), actualScript.end(), script.Data()));
 }
 
 TEST_F(ApplicationEngineTest, Execute)
@@ -171,7 +174,7 @@ TEST_F(ApplicationEngineTest, StorageOperations)
     // Check the storage
     StorageKey key(engine_->GetEntryScriptHash(), ByteVector(ByteSpan(reinterpret_cast<const uint8_t*>("key"), 3)));
     auto item = snapshot_->TryGet(key);
-    EXPECT_TRUE(item.has_value());
+    EXPECT_TRUE(item != nullptr);
     EXPECT_EQ(std::string(reinterpret_cast<const char*>(item->GetValue().Data()), item->GetValue().Size()), "value");
 }
 
@@ -193,8 +196,8 @@ TEST_F(ApplicationEngineTest, Notifications)
     
     // Check the notifications
     EXPECT_EQ(engine_->GetNotifications().size(), 1);
-    EXPECT_EQ(engine_->GetNotifications()[0].first, engine_->GetEntryScriptHash());
-    EXPECT_EQ(engine_->GetNotifications()[0].second.size(), 2);
-    EXPECT_EQ(engine_->GetNotifications()[0].second[0]->GetString(), "key");
-    EXPECT_EQ(engine_->GetNotifications()[0].second[1]->GetString(), "value");
+    EXPECT_EQ(engine_->GetNotifications()[0].script_hash, engine_->GetEntryScriptHash());
+    EXPECT_EQ(engine_->GetNotifications()[0].state.size(), 2);
+    EXPECT_EQ(engine_->GetNotifications()[0].state[0]->GetString(), "key");
+    EXPECT_EQ(engine_->GetNotifications()[0].state[1]->GetString(), "value");
 }

@@ -193,6 +193,13 @@ namespace neo::smartcontract
         bool CheckWitness(const io::UInt256& hash) const;
 
         /**
+         * @brief Internal witness checking method.
+         * @param hash The hash.
+         * @return True if the witness is valid, false otherwise.
+         */
+        bool CheckWitnessInternal(const io::UInt160& hash) const;
+
+        /**
          * @brief Creates a contract.
          * @param script The script.
          * @param manifest The manifest.

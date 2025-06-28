@@ -3,6 +3,8 @@
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
 #include <neo/cryptography/ecc/secp256r1.h>
+#include <neo/cryptography/ecc/keypair.h>
+#include <neo/cryptography/hash.h>
 #include <sstream>
 
 using namespace neo::smartcontract;
@@ -107,10 +109,10 @@ TEST(ContractParameterTest, CreateMethods)
     
     // CreatePublicKey
     auto keyPair = Secp256r1::GenerateKeyPair();
-    auto param7 = ContractParameter::CreatePublicKey(keyPair.PublicKey);
+    auto param7 = ContractParameter::CreatePublicKey(keyPair.PublicKey());
     EXPECT_EQ(param7.GetType(), ContractParameterType::PublicKey);
     EXPECT_TRUE(param7.GetValue().has_value());
-    EXPECT_EQ(*param7.GetValue(), keyPair.PublicKey.ToArray());
+    EXPECT_EQ(*param7.GetValue(), keyPair.PublicKey().ToArray());
     
     // CreateString
     std::string str = "Hello, world!";
@@ -229,7 +231,7 @@ TEST(ContractTest, Serialization)
 TEST(ContractTest, CreateSignatureContract)
 {
     auto keyPair = Secp256r1::GenerateKeyPair();
-    Contract contract = Contract::CreateSignatureContract(keyPair.PublicKey);
+    Contract contract = Contract::CreateSignatureContract(keyPair.PublicKey());
     
     EXPECT_FALSE(contract.GetScript().IsEmpty());
     EXPECT_EQ(contract.GetParameterList().size(), 1);
@@ -243,9 +245,9 @@ TEST(ContractTest, CreateMultiSigContract)
     auto keyPair3 = Secp256r1::GenerateKeyPair();
     
     std::vector<ECPoint> pubKeys = {
-        keyPair1.PublicKey,
-        keyPair2.PublicKey,
-        keyPair3.PublicKey
+        keyPair1.PublicKey(),
+        keyPair2.PublicKey(),
+        keyPair3.PublicKey()
     };
     
     Contract contract = Contract::CreateMultiSigContract(2, pubKeys);

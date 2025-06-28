@@ -2,13 +2,9 @@
 #include <gmock/gmock.h>
 #include "neo/smartcontract/json_serializer.h"
 #include "neo/json/json.h"
-#include "neo/vm/types/array.h"
-#include "neo/vm/types/map.h"
-#include "neo/vm/types/boolean.h"
-#include "neo/vm/types/integer.h"
-#include "neo/vm/types/byte_string.h"
-#include "neo/vm/types/null.h"
-#include "neo/vm/types/struct.h"
+#include "neo/vm/compound_items.h"
+#include "neo/vm/primitive_items.h"
+#include "neo/vm/special_items.h"
 #include "neo/persistence/data_cache.h"
 #include "neo/ledger/blockchain.h"
 #include <memory>

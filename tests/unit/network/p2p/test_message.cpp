@@ -5,6 +5,7 @@
 #include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
+#include <neo/io/byte_vector.h>
 #include <sstream>
 #include <memory>
 

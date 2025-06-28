@@ -9,13 +9,13 @@ add_library(neo_native_contracts OBJECT
     ledger_contract.cpp
     neo_token.cpp
     neo_token_account.cpp
-    # neo_token_candidate.cpp # Temporarily disabled due to GetContractId issues
-    # neo_token_committee.cpp # Temporarily disabled due to complex dependencies
-    # neo_token_gas.cpp # Temporarily disabled due to complex dependencies
+    # neo_token_candidate.cpp # Temporarily disabled - circular dependency with committee
+    # neo_token_committee.cpp # Temporarily disabled - circular dependency with candidate  
+    # neo_token_gas.cpp # Temporarily disabled - depends on committee
     neo_token_vote.cpp
     neo_token_transfer.cpp
     neo_token_persistence.cpp
-    # gas_token.cpp # Temporarily disabled due to complex dependency issues
+    # gas_token.cpp # Temporarily disabled - depends on disabled native contracts
     policy_contract.cpp
     # oracle_contract.cpp # Temporarily disabled
     # oracle_contract_requests.cpp # Temporarily disabled

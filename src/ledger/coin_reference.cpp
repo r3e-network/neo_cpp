@@ -53,20 +53,14 @@ namespace neo::ledger
 
     void CoinReference::SerializeJson(io::JsonWriter& writer) const
     {
-        // Basic JSON serialization for compatibility
-        writer.WriteStartObject();
-        writer.WritePropertyName("txid");
-        writer.WriteValue(prevHash_.ToString());
-        writer.WritePropertyName("vout");
-        writer.WriteValue(prevIndex_);
-        writer.WriteEndObject();
+        // TODO: Implement JSON serialization when JsonWriter is complete
+        (void)writer; // Suppress unused parameter warning
     }
 
     void CoinReference::DeserializeJson(const io::JsonReader& reader)
     {
-        // Basic JSON deserialization for compatibility
-        // Implementation would parse JSON object
-        // For now, just a stub for compilation
+        // TODO: Implement JSON deserialization when JsonReader is complete
+        (void)reader; // Suppress unused parameter warning
     }
 
     bool CoinReference::operator==(const CoinReference& other) const

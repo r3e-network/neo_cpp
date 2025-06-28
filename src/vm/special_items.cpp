@@ -85,7 +85,7 @@ namespace neo::vm
     // NullItem implementation
     StackItemType NullItem::GetType() const
     {
-        return StackItemType::Any;
+        return StackItemType::Null;
     }
 
     bool NullItem::GetBoolean() const

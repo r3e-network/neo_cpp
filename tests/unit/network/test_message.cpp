@@ -4,26 +4,27 @@
 #include <neo/network/p2p/payloads/ping_payload.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
+#include <neo/io/byte_vector.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/lz4.h>
 #include <sstream>
 #include <memory>
 
 using namespace neo::network;
+using namespace neo::network::p2p;
 using namespace neo::io;
 
 // Helper function to create a test version payload
 std::shared_ptr<payloads::VersionPayload> CreateTestVersionPayload()
 {
+    std::vector<NodeCapability> capabilities;
+    capabilities.push_back(ServerCapability(NodeCapabilityType::TcpServer, 10333));
+    capabilities.push_back(FullNodeCapability(0));
+    
     auto payload = std::make_shared<payloads::VersionPayload>();
+    *payload = payloads::VersionPayload::Create(0x4F454E, 123456, "/Neo:3.0/", capabilities);
     payload->SetVersion(0);
-    payload->SetServices(1);
     payload->SetTimestamp(12345678);
-    payload->SetPort(10333);
-    payload->SetNonce(123456);
-    payload->SetUserAgent("/Neo:3.0/");
-    payload->SetStartHeight(0);
-    payload->SetRelay(true);
     return payload;
 }
 
@@ -45,7 +46,7 @@ TEST(MessageTest, Serialize_Deserialize)
     auto msg = Message::Create(MessageCommand::Ping, payload);
     
     // Convert to byte array
-    io::ByteVector buffer = msg.ToArray();
+    neo::io::ByteVector buffer = msg.ToArray();
     
     // Deserialize back into a message
     Message copy;
@@ -72,7 +73,7 @@ TEST(MessageTest, Serialize_Deserialize_WithoutPayload)
     auto msg = Message::Create(MessageCommand::GetAddr);
     
     // Convert to byte array
-    io::ByteVector buffer = msg.ToArray();
+    neo::io::ByteVector buffer = msg.ToArray();
     
     // Deserialize back into a message
     Message copy;
@@ -92,7 +93,7 @@ TEST(MessageTest, ToArray)
     auto msg = Message::Create(MessageCommand::Ping, payload);
     
     // Convert to byte array
-    io::ByteVector buffer = msg.ToArray();
+    neo::io::ByteVector buffer = msg.ToArray();
     
     // Check that the size is correct
     EXPECT_EQ(payload->GetSize() + 3, msg.GetSize());
@@ -105,7 +106,7 @@ TEST(MessageTest, ToArray_WithoutPayload)
     auto msg = Message::Create(MessageCommand::GetAddr);
     
     // Convert to byte array
-    io::ByteVector buffer = msg.ToArray();
+    neo::io::ByteVector buffer = msg.ToArray();
     
     // Should not throw any exceptions
 }
@@ -139,11 +140,11 @@ TEST(MessageTest, MultipleSizes)
 {
     // Create a message without payload for testing
     auto msg = Message::Create(MessageCommand::GetAddr);
-    io::ByteVector buffer = msg.ToArray();
+    neo::io::ByteVector buffer = msg.ToArray();
     
     // Test with empty buffer - should fail
     {
-        io::ByteVector emptyBuffer;
+        neo::io::ByteVector emptyBuffer;
         Message copy;
         bool success = copy.FromArray(emptyBuffer);
         EXPECT_FALSE(success);
@@ -162,7 +163,7 @@ TEST(MessageTest, MultipleSizes)
     {
         // Create a buffer with a huge payload size
         std::ostringstream stream;
-        io::BinaryWriter writer(stream);
+        neo::io::BinaryWriter writer(stream);
         
         // Magic (4 bytes)
         writer.Write(Message::MainNetMagic);
@@ -171,7 +172,7 @@ TEST(MessageTest, MultipleSizes)
         std::string commandName = "getaddr";
         char commandBytes[12] = {0};
         std::strncpy(commandBytes, commandName.c_str(), std::min(commandName.size(), size_t(12)));
-        writer.Write(io::ByteSpan(reinterpret_cast<const uint8_t*>(commandBytes), 12));
+        writer.Write(neo::io::ByteSpan(reinterpret_cast<const uint8_t*>(commandBytes), 12));
         
         // Payload size - set to max value to trigger exception (4 bytes)
         writer.Write(static_cast<uint32_t>(0xFFFFFFFF));
@@ -184,7 +185,7 @@ TEST(MessageTest, MultipleSizes)
         
         // Convert to ByteVector
         std::string data = stream.str();
-        io::ByteVector hugeBuffer(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
+        neo::io::ByteVector hugeBuffer(neo::io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
         
         // Try to deserialize - should fail due to max size check
         Message copy;
@@ -200,7 +201,7 @@ TEST(MessageTest, Serialize_Deserialize_ByteString)
     auto msg = Message::Create(MessageCommand::Ping, payload);
     
     // Convert to byte array
-    io::ByteVector buffer = msg.ToArray();
+    neo::io::ByteVector buffer = msg.ToArray();
     
     // Deserialize back into a message
     Message copy;
@@ -225,7 +226,7 @@ TEST(MessageTest, Serialize_Deserialize_ByteString_WithoutPayload)
     auto msg = Message::Create(MessageCommand::GetAddr);
     
     // Convert to byte array
-    io::ByteVector buffer = msg.ToArray();
+    neo::io::ByteVector buffer = msg.ToArray();
     
     // Deserialize back into a message
     Message copy;
@@ -247,16 +248,11 @@ TEST(MessageTest, JsonSerialization)
     Message message(MessageCommand::Version, payload);
     
     // Serialize to JSON
-    std::ostringstream stream;
-    io::JsonWriter writer(stream);
-    message.SerializeJson(writer);
-    std::string jsonString = stream.str();
+    nlohmann::json json = message.ToJson();
     
     // Deserialize from JSON
-    std::istringstream inputStream(jsonString);
-    io::JsonReader reader(inputStream);
     Message deserializedMessage;
-    deserializedMessage.DeserializeJson(reader);
+    deserializedMessage.DeserializeFromJson(json);
     
     // Check the deserialized message
     EXPECT_EQ(deserializedMessage.GetCommand(), MessageCommand::Version);

@@ -42,7 +42,7 @@ TEST(WitnessTest, Serialization)
     Witness witness(invocationScript, verificationScript);
     
     // Serialize
-    std::stringstream stream;
+    std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     witness.Serialize(writer);
     
@@ -107,7 +107,7 @@ TEST(CoinReferenceTest, Serialization)
     CoinReference coinRef(prevHash, prevIndex);
     
     // Serialize
-    std::stringstream stream;
+    std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     coinRef.Serialize(writer);
     
@@ -176,7 +176,7 @@ TEST(TransactionOutputTest, Serialization)
     TransactionOutput output(assetId, value, scriptHash);
     
     // Serialize
-    std::stringstream stream;
+    std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     output.Serialize(writer);
     
@@ -253,7 +253,7 @@ TEST(TransactionAttributeTest, Serialization)
     TransactionAttribute attribute(usage, data);
     
     // Serialize
-    std::stringstream stream;
+    std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     attribute.Serialize(writer);
     
@@ -316,7 +316,7 @@ TEST(TransactionTest, Serialization)
     
     // Add attributes
     TransactionAttribute::Usage usage = TransactionAttribute::Usage::Script;
-    ByteVector data = ByteVector::Parse("0102030405");
+    ByteVector data = ByteVector::Parse("0102030405060708090a0b0c0d0e0f1011121314"); // 20 bytes for Script
     TransactionAttribute attribute(usage, data);
     tx.SetAttributes({attribute});
     
@@ -340,7 +340,7 @@ TEST(TransactionTest, Serialization)
     tx.SetWitnesses({witness});
     
     // Serialize
-    std::stringstream stream;
+    std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     tx.Serialize(writer);
     
@@ -377,7 +377,7 @@ TEST(TransactionTest, GetHash)
     
     // Add attributes
     TransactionAttribute::Usage usage = TransactionAttribute::Usage::Script;
-    ByteVector data = ByteVector::Parse("0102030405");
+    ByteVector data = ByteVector::Parse("0102030405060708090a0b0c0d0e0f1011121314"); // 20 bytes for Script
     TransactionAttribute attribute(usage, data);
     tx.SetAttributes({attribute});
     

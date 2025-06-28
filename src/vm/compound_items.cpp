@@ -3,6 +3,7 @@
 #include <neo/vm/exceptions.h>
 #include <stdexcept>
 #include <algorithm>
+#include <set>
 
 namespace neo::vm
 {
@@ -40,6 +41,11 @@ namespace neo::vm
     bool ArrayItem::GetBoolean() const
     {
         return true;
+    }
+
+    int64_t ArrayItem::GetInteger() const
+    {
+        return 0;
     }
 
     std::vector<std::shared_ptr<StackItem>> ArrayItem::GetArray() const
@@ -144,6 +150,11 @@ namespace neo::vm
         return StackItemType::Struct;
     }
 
+    bool StructItem::GetBoolean() const
+    {
+        return !value_.empty();
+    }
+
     std::shared_ptr<StructItem> StructItem::Clone() const
     {
         std::vector<std::shared_ptr<StackItem>> clonedValue;
@@ -190,17 +201,34 @@ namespace neo::vm
         if (value_.size() != otherArray.size())
             return false;
 
-        for (size_t i = 0; i < value_.size(); i++)
+        // Use a static thread_local set to track visited pairs to prevent infinite recursion
+        static thread_local std::set<std::pair<const StackItem*, const StackItem*>> visitedPairs;
+        
+        // Check if we're already comparing this pair
+        auto thisPair = std::make_pair(this, &other);
+        auto reversePair = std::make_pair(&other, this);
+        
+        if (visitedPairs.count(thisPair) || visitedPairs.count(reversePair))
+            return true; // Assume equal if we're in a circular reference
+        
+        // Add this pair to the visited set
+        visitedPairs.insert(thisPair);
+        
+        bool result = true;
+        for (size_t i = 0; i < value_.size() && result; i++)
         {
             if (!value_[i]->Equals(*otherArray[i]))
-                return false;
+                result = false;
         }
-
-        return true;
+        
+        // Remove this pair from the visited set
+        visitedPairs.erase(thisPair);
+        
+        return result;
     }
 
     // MapItem implementation
-    MapItem::MapItem(const std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>>& value, ReferenceCounter* refCounter)
+    MapItem::MapItem(const std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>, StackItemPtrComparator>& value, ReferenceCounter* refCounter)
         : value_(value), refCounter_(refCounter)
     {
         if (refCounter_)
@@ -239,7 +267,14 @@ namespace neo::vm
 
     std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>> MapItem::GetMap() const
     {
-        return value_;
+        // GetMap() is not well-supported for MapItem due to comparison issues
+        // This method should ideally not be used - use Get() for individual items
+        throw std::runtime_error("GetMap() is not supported for MapItem - use GetSize() and Get() methods instead");
+    }
+
+    size_t MapItem::GetSize() const
+    {
+        return value_.size();
     }
 
     std::optional<std::shared_ptr<StackItem>> MapItem::Get(const std::shared_ptr<StackItem>& key) const
@@ -278,7 +313,7 @@ namespace neo::vm
             }
         }
 
-        value_[key] = value;
+        value_.insert(std::make_pair(key, value));
     }
 
     void MapItem::Remove(const std::shared_ptr<StackItem>& key)
@@ -327,13 +362,13 @@ namespace neo::vm
 
     std::shared_ptr<StackItem> MapItem::DeepCopy(ReferenceCounter* refCounter, bool asImmutable) const
     {
-        std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>> newMap;
+        std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>, StackItemPtrComparator> newMap;
 
         for (const auto& [key, val] : value_)
         {
             auto newKey = key->DeepCopy(refCounter, asImmutable);
             auto newVal = val->DeepCopy(refCounter, asImmutable);
-            newMap[newKey] = newVal;
+            newMap.insert(std::make_pair(newKey, newVal));
         }
 
         return std::make_shared<MapItem>(newMap, refCounter);

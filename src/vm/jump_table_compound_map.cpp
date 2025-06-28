@@ -25,7 +25,7 @@ namespace neo::vm
     void JumpTableCompoundMap::NEWMAP(ExecutionEngine& engine, const Instruction& instruction)
     {
         (void)instruction; // Suppress unused parameter warning
-        auto map = std::make_shared<MapItem>(std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>>{}, engine.GetReferenceCounter());
+        auto map = std::make_shared<MapItem>(std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>, StackItemPtrComparator>{}, engine.GetReferenceCounter());
         engine.Push(map);
     }
 
@@ -42,12 +42,12 @@ namespace neo::vm
         if (size * 2 > static_cast<int64_t>(stack.size()))
             throw InvalidOperationException("Stack underflow during PACKMAP operation");
 
-        std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>> items;
+        std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>, StackItemPtrComparator> items;
         for (int64_t i = 0; i < size; i++)
         {
             auto value = engine.Pop();
             auto key = engine.Pop();
-            items[key] = value;
+            items.insert(std::make_pair(key, value));
         }
 
         auto map = std::make_shared<MapItem>(items, engine.GetReferenceCounter());

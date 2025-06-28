@@ -114,6 +114,13 @@ namespace neo::persistence
         }
         else
         {
+            // Check if the key exists in the underlying store
+            io::ByteVector keyBytes = key.ToArray();
+            if (store_.Contains(keyBytes))
+            {
+                throw std::invalid_argument("The key already exists in the store.");
+            }
+            
             items_[key] = std::make_pair(item, TrackState::Added);
         }
     }
@@ -249,15 +256,30 @@ namespace neo::persistence
         std::vector<std::pair<StorageKey, StorageItem>> result;
 
         // Get all items from the store
-        io::ByteVector prefixBytes;
-        if (prefix != nullptr)
-            prefixBytes = prefix->ToArray();
-
         std::vector<std::pair<io::ByteVector, io::ByteVector>> storeItems;
         if (prefix != nullptr)
+        {
+            // For prefix search, we need to construct a prefix that matches the ToArray format
+            // Build a partial key that includes contract ID and key prefix
+            io::ByteVector prefixBytes;
+            
+            // Add contract ID (4 bytes)
+            int32_t contractId = *reinterpret_cast<const int32_t*>(prefix->GetScriptHash().Data());
+            prefixBytes.Resize(sizeof(int32_t));
+            std::memcpy(prefixBytes.Data(), &contractId, sizeof(int32_t));
+            
+            // Add key data prefix
+            const auto& keyData = prefix->GetKey();
+            size_t oldSize = prefixBytes.Size();
+            prefixBytes.Resize(oldSize + keyData.Size());
+            std::memcpy(prefixBytes.Data() + oldSize, keyData.Data(), keyData.Size());
+            
             storeItems = store_.Find(&prefixBytes);
+        }
         else
+        {
             storeItems = store_.Find();
+        }
 
         // Deserialize the items
         for (const auto& pair : storeItems)
@@ -315,13 +337,25 @@ namespace neo::persistence
 
     void StoreCache::Commit()
     {
-        // Create a snapshot of the store
-        auto memoryStore = dynamic_cast<MemoryStore*>(&store_);
-        if (!memoryStore)
-            throw std::runtime_error("The store is not a MemoryStore.");
+        // Check if we already have a snapshot or if we're working with a store directly
+        IStoreSnapshot* snapshot = nullptr;
+        std::unique_ptr<IStoreSnapshot> ownedSnapshot;
+        
+        if (snapshot_)
+        {
+            // We're working with a snapshot
+            snapshot = snapshot_.get();
+        }
+        else
+        {
+            // Create a snapshot of the store
+            auto memoryStore = dynamic_cast<MemoryStore*>(&store_);
+            if (!memoryStore)
+                throw std::runtime_error("The store is not a MemoryStore.");
 
-        auto storeSnapshot = memoryStore->GetSnapshot();
-        auto snapshot = dynamic_cast<IStoreSnapshot*>(storeSnapshot.release());
+            ownedSnapshot = memoryStore->GetSnapshot();
+            snapshot = ownedSnapshot.get();
+        }
 
         // Apply changes
         for (const auto& [key, pair] : items_)

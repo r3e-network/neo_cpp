@@ -153,13 +153,8 @@ namespace neo::io::tests
 
     TEST_F(CachingTest, TestLRUCacheZeroCapacity)
     {
-        LRUCache<int, std::string> cache(0);
-        
-        // Should not store anything
-        cache.Put(1, "one");
-        EXPECT_EQ(0, cache.Size());
-        EXPECT_FALSE(cache.Contains(1));
-        EXPECT_FALSE(cache.Get(1).has_value());
+        // Constructor with zero capacity should throw
+        EXPECT_THROW((LRUCache<int, std::string>(0)), std::invalid_argument);
     }
 
     TEST_F(CachingTest, TestLRUCacheCapacityOne)

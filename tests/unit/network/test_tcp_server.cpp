@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <neo/network/tcp_server.h>
 #include <neo/network/message.h>
-#include <neo/network/payloads/version_payload.h>
+#include <neo/network/p2p/payloads/version_payload.h>
 #include <neo/network/ip_endpoint.h>
 #include <neo/logging/logger.h>
 #include <thread>
@@ -12,6 +12,7 @@
 #include <set>
 
 using namespace neo::network;
+using namespace neo::network::p2p;
 using namespace neo::io;
 
 // Helper function to create a test message

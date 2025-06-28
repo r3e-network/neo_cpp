@@ -1,4 +1,5 @@
 #include <neo/smartcontract/native/neo_token_candidate.h>
+#include <neo/smartcontract/native/neo_token_committee.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/script_builder.h>
@@ -299,7 +300,7 @@ namespace neo::smartcontract::native
         else
         {
             // Default register price: 1000 GAS (in datoshi units)
-            return 1000 * 100000000; // 1000 GAS
+            return 1000LL * 100000000LL; // 1000 GAS
         }
     }
 
@@ -319,13 +320,8 @@ namespace neo::smartcontract::native
         // Check if caller is committee using proper committee address verification
         try
         {
-            // Get the NEO token contract to retrieve committee address
-            auto neoContract = engine.GetNativeContract(NeoToken::GetContractId());
-            if (!neoContract)
-                throw std::runtime_error("NEO contract not found");
-            
-            // Get committee address from NEO contract
-            io::UInt160 committeeAddress = neoContract->GetCommitteeAddress(engine.GetSnapshot());
+            // Get committee address from NEO token contract
+            io::UInt160 committeeAddress = NeoTokenCommittee::GetCommitteeAddress(token, engine.GetSnapshot());
             
             // Check if the committee address has witnessed the current transaction
             if (!engine.CheckWitnessInternal(committeeAddress))

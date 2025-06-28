@@ -29,13 +29,7 @@ namespace neo::io
             cleanHex = cleanHex.substr(2);
         }
         
-        // Pad with leading zeros if necessary
-        if (cleanHex.size() < Size * 2)
-        {
-            cleanHex = std::string(Size * 2 - cleanHex.size(), '0') + cleanHex;
-        }
-        
-        // Check length
+        // Check length - must be exactly 40 hex characters for UInt160
         if (cleanHex.size() != Size * 2)
         {
             return false;

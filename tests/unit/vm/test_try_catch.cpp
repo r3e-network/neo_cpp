@@ -28,7 +28,14 @@ TEST(TryCatchTest, BasicTryCatch)
     bytes.Push(static_cast<uint8_t>(OpCode::ENDTRY));
     bytes.Push(static_cast<uint8_t>(OpCode::PUSH2));
     
-    Script script(bytes);
+    // Convert io::ByteVector to internal::ByteVector
+    neo::vm::internal::ByteVector internalBytes;
+    internalBytes.Reserve(bytes.Size());
+    for (size_t i = 0; i < bytes.Size(); ++i)
+    {
+        internalBytes.Push(bytes[i]);
+    }
+    Script script(internalBytes);
     ExecutionEngine engine;
     engine.LoadScript(script);
     
@@ -61,7 +68,14 @@ TEST(TryCatchTest, TryFinally)
     bytes.Push(static_cast<uint8_t>(OpCode::ENDFINALLY));
     bytes.Push(static_cast<uint8_t>(OpCode::PUSH2));
     
-    Script script(bytes);
+    // Convert io::ByteVector to internal::ByteVector
+    neo::vm::internal::ByteVector internalBytes;
+    internalBytes.Reserve(bytes.Size());
+    for (size_t i = 0; i < bytes.Size(); ++i)
+    {
+        internalBytes.Push(bytes[i]);
+    }
+    Script script(internalBytes);
     ExecutionEngine engine;
     engine.LoadScript(script);
     
@@ -102,7 +116,14 @@ TEST(TryCatchTest, TryCatchFinally)
     bytes.Push(static_cast<uint8_t>(OpCode::ENDFINALLY));
     bytes.Push(static_cast<uint8_t>(OpCode::PUSH3));
     
-    Script script(bytes);
+    // Convert io::ByteVector to internal::ByteVector
+    neo::vm::internal::ByteVector internalBytes;
+    internalBytes.Reserve(bytes.Size());
+    for (size_t i = 0; i < bytes.Size(); ++i)
+    {
+        internalBytes.Push(bytes[i]);
+    }
+    Script script(internalBytes);
     ExecutionEngine engine;
     engine.LoadScript(script);
     
@@ -149,7 +170,14 @@ TEST(TryCatchTest, NestedTryCatch)
     bytes.Push(static_cast<uint8_t>(OpCode::ENDTRY));
     bytes.Push(static_cast<uint8_t>(OpCode::PUSH4));
     
-    Script script(bytes);
+    // Convert io::ByteVector to internal::ByteVector
+    neo::vm::internal::ByteVector internalBytes;
+    internalBytes.Reserve(bytes.Size());
+    for (size_t i = 0; i < bytes.Size(); ++i)
+    {
+        internalBytes.Push(bytes[i]);
+    }
+    Script script(internalBytes);
     ExecutionEngine engine;
     engine.LoadScript(script);
     
@@ -175,7 +203,14 @@ TEST(TryCatchTest, IsNull)
     bytes.Push(static_cast<uint8_t>(OpCode::PUSHNULL));
     bytes.Push(static_cast<uint8_t>(OpCode::ISNULL));
     
-    Script script(bytes);
+    // Convert io::ByteVector to internal::ByteVector
+    neo::vm::internal::ByteVector internalBytes;
+    internalBytes.Reserve(bytes.Size());
+    for (size_t i = 0; i < bytes.Size(); ++i)
+    {
+        internalBytes.Push(bytes[i]);
+    }
+    Script script(internalBytes);
     ExecutionEngine engine;
     engine.LoadScript(script);
     
@@ -209,7 +244,14 @@ TEST(TryCatchTest, ThrowIfNot)
     bytes.Push(static_cast<uint8_t>(OpCode::ASSERTMSG));
     bytes.Push(static_cast<uint8_t>(OpCode::PUSH2));
     
-    Script script(bytes);
+    // Convert io::ByteVector to internal::ByteVector
+    neo::vm::internal::ByteVector internalBytes;
+    internalBytes.Reserve(bytes.Size());
+    for (size_t i = 0; i < bytes.Size(); ++i)
+    {
+        internalBytes.Push(bytes[i]);
+    }
+    Script script(internalBytes);
     ExecutionEngine engine;
     engine.LoadScript(script);
     
