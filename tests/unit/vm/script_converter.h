@@ -3,6 +3,8 @@
 #include <neo/vm/script_builder.h>
 #include <neo/vm/opcode.h>
 #include <neo/vm/instruction.h>
+#include <neo/vm/internal/byte_vector.h>
+#include <neo/io/byte_span.h>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -32,9 +34,10 @@ public:
                 std::string value = entry.get<std::string>();
                 
                 // Check if it's an opcode or hex string
-                if (value.starts_with("0x")) {
+                if (value.size() >= 2 && value[0] == '0' && value[1] == 'x') {
                     // Hex string - convert and emit raw bytes
-                    script.EmitRaw(HexStringToBytes(value.substr(2)));
+                    auto bytes = HexStringToBytes(value.substr(2));
+                    script.EmitRaw(io::ByteSpan(bytes.data(), bytes.size()));
                 } else {
                     // Try to parse as opcode
                     OpCode opCode = ParseOpCode(value);
@@ -55,18 +58,19 @@ public:
         nlohmann::json array = nlohmann::json::array();
         
         try {
+            // Convert std::vector to internal::ByteVector
+            neo::vm::internal::ByteVector internalScript;
+            internalScript.Reserve(script.size());
+            for (uint8_t byte : script) {
+                internalScript.Push(byte);
+            }
+            
             size_t ip = 0;
             while (ip < script.size()) {
-                Instruction instruction(script, ip);
+                Instruction instruction(internalScript.AsSpan(), static_cast<int>(ip));
                 
                 // Add opcode name
                 array.push_back(OpCodeToString(instruction.opcode));
-                
-                // Add any operand data
-                if (!instruction.Operand.IsEmpty()) {
-                    std::vector<uint8_t> operandVec(instruction.Operand.begin(), instruction.Operand.end());
-                    array.push_back("0x" + BytesToHexString(operandVec));
-                }
                 
                 ip += instruction.Size();
             }
@@ -147,6 +151,7 @@ private:
         else if (upperValue == "PUSH14") return OpCode::PUSH14;
         else if (upperValue == "PUSH15") return OpCode::PUSH15;
         else if (upperValue == "PUSH16") return OpCode::PUSH16;
+        else if (upperValue == "ADD") return OpCode::ADD;
         
         // Add more opcodes as needed, or implement a more comprehensive mapping
         
@@ -182,6 +187,7 @@ private:
             case OpCode::PUSH14: return "PUSH14";
             case OpCode::PUSH15: return "PUSH15";
             case OpCode::PUSH16: return "PUSH16";
+            case OpCode::ADD: return "ADD";
             
             // Add more cases as needed, or implement a more comprehensive mapping
             

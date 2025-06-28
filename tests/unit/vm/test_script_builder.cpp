@@ -205,8 +205,8 @@ TEST_F(UT_ScriptBuilder, TestEmitJump)
     // Test invalid jump opcode
     {
         ScriptBuilder script;
-        EXPECT_THROW(script.EmitJump(OpCode::NOP, offset_i8), std::out_of_range);
-        EXPECT_THROW(script.EmitJump(OpCode::NOP, offset_i32), std::out_of_range);
+        EXPECT_THROW(script.EmitJump(OpCode::NOP, offset_i8), std::invalid_argument);
+        EXPECT_THROW(script.EmitJump(OpCode::NOP, offset_i32), std::invalid_argument);
     }
 }
 
@@ -358,8 +358,8 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBoolean)
         ScriptBuilder script;
         script.EmitPush(true);
         
-        // PUSH1 (true)
-        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSH1)};
+        // PUSHT (true)
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHT)};
         AssertAreEqual(expected, script.ToArray());
     }
     
@@ -368,8 +368,8 @@ TEST_F(UT_ScriptBuilder, TestEmitPushBoolean)
         ScriptBuilder script;
         script.EmitPush(false);
         
-        // PUSH0 (false)
-        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSH0)};
+        // PUSHF (false)
+        std::vector<uint8_t> expected = {static_cast<uint8_t>(OpCode::PUSHF)};
         AssertAreEqual(expected, script.ToArray());
     }
 }

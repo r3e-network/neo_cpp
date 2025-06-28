@@ -7,8 +7,10 @@
 #include <neo/vm/opcode.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/compound_items.h>
+#include <neo/io/byte_span.h>
 
 using namespace neo::vm;
+using namespace neo::io;
 
 class UT_ReferenceCounter : public testing::Test
 {
@@ -27,7 +29,8 @@ protected:
 TEST_F(UT_ReferenceCounter, TestCircularReferences)
 {
     ScriptBuilder sb;
-    sb.Emit(OpCode::INITSSLOT, std::vector<uint8_t>{1}); //{}|{null}:1
+    uint8_t slotCount = 1;
+    sb.Emit(OpCode::INITSSLOT, ByteSpan(&slotCount, 1)); //{}|{null}:1
     sb.EmitPush(static_cast<int64_t>(0)); //{0}|{null}:2
     sb.Emit(OpCode::NEWARRAY); //{A[]}|{null}:2
     sb.Emit(OpCode::DUP); //{A[],A[]}|{null}:3
@@ -71,7 +74,11 @@ TEST_F(UT_ReferenceCounter, TestCircularReferences)
     Script script(internalBytes);
     engine.LoadScript(script);
     
-    ASSERT_EQ(VMState::Break, debugger.StepInto());
+    auto state = debugger.StepInto();
+    if (state == VMState::Fault) {
+        std::cout << "Faulted on first instruction (INITSSLOT)!" << std::endl;
+    }
+    ASSERT_EQ(VMState::Break, state);
     ASSERT_EQ(1, engine.GetReferenceCounter()->Count());
     ASSERT_EQ(VMState::Break, debugger.StepInto());
     ASSERT_EQ(2, engine.GetReferenceCounter()->Count());
@@ -136,7 +143,8 @@ TEST_F(UT_ReferenceCounter, TestCircularReferences)
 TEST_F(UT_ReferenceCounter, TestRemoveReferrer)
 {
     ScriptBuilder sb;
-    sb.Emit(OpCode::INITSSLOT, std::vector<uint8_t>{1}); //{}|{null}:1
+    uint8_t slotCount = 1;
+    sb.Emit(OpCode::INITSSLOT, ByteSpan(&slotCount, 1)); //{}|{null}:1
     sb.EmitPush(static_cast<int64_t>(0)); //{0}|{null}:2
     sb.Emit(OpCode::NEWARRAY); //{A[]}|{null}:2
     sb.Emit(OpCode::DUP); //{A[],A[]}|{null}:3
