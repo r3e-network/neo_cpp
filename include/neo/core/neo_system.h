@@ -90,6 +90,7 @@ private:
     // Node startup control
     std::atomic<int> suspend_count_{0};
     std::mutex start_message_mutex_;
+    std::unique_ptr<network::p2p::ChannelsConfig> start_message_;
     
     // Threading
     std::vector<std::thread> worker_threads_;

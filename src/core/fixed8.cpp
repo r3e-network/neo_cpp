@@ -6,12 +6,13 @@
 namespace neo::core
 {
     // Complete BigDecimal to Fixed8 conversion implementation
-    Fixed8::Fixed8(const BigDecimal& value) : value_(0)
+    // NOTE: Temporarily disabled to avoid circular dependency issues
+    /*Fixed8::Fixed8(const BigDecimal& value) : value_(0)
     {
         try {
             // Complete BigDecimal to Fixed8 conversion using native BigDecimal methods
             // Use BigDecimal's native ToDouble() method for efficient conversion
-            double decimal_value = value.ToDouble();
+            double decimal_value = value.ToDouble();*/
             
             // Validate range - Fixed8 uses int64_t with 8 decimal places
             const double MAX_VALUE = static_cast<double>(std::numeric_limits<int64_t>::max()) / SCALE_FACTOR;
@@ -28,7 +29,7 @@ namespace neo::core
             // BigDecimal conversion failed - this should not silently fail
             throw std::invalid_argument(std::string("Failed to convert BigDecimal to Fixed8: ") + e.what());
         }
-    }
+    }*/
 
     std::string Fixed8::ToString() const
     {

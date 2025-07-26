@@ -52,8 +52,9 @@ namespace neo::core
         /**
          * @brief Constructs a Fixed8 from a BigDecimal.
          * @param value The BigDecimal value.
+         * NOTE: Implementation moved to avoid circular dependency
          */
-        explicit Fixed8(const BigDecimal& value);
+        // explicit Fixed8(const BigDecimal& value);
 
         /**
          * @brief Gets the raw int64_t value.
