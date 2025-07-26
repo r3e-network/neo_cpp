@@ -12,7 +12,7 @@ namespace neo::core
         try {
             // Complete BigDecimal to Fixed8 conversion using native BigDecimal methods
             // Use BigDecimal's native ToDouble() method for efficient conversion
-            double decimal_value = value.ToDouble();*/
+            double decimal_value = value.ToDouble();
             
             // Validate range - Fixed8 uses int64_t with 8 decimal places
             const double MAX_VALUE = static_cast<double>(std::numeric_limits<int64_t>::max()) / SCALE_FACTOR;
