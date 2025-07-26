@@ -7,7 +7,7 @@ find_package(Boost REQUIRED)
 add_library(neo_core OBJECT
     big_decimal.cpp
     fixed8.cpp
-    neo_system_simple.cpp
+    neo_system.cpp
     logging.cpp
     ../protocol_settings.cpp
     ../protocol_settings_json.cpp
