@@ -46,6 +46,12 @@ namespace neo {
         }
     }
     
+    namespace cryptography {
+        namespace ecc {
+            class ECPoint;
+        }
+    }
+    
     namespace ledger {
         class Blockchain;
     }
