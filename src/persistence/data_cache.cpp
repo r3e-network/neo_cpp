@@ -443,12 +443,10 @@ namespace neo::persistence
                     io::BinaryReader reader(ss);
                     
                     // Read the hash (UInt256 - 32 bytes)
-                    io::UInt256 hash;
-                    reader.Read(hash.Data(), 32);
+                    io::UInt256 hash = reader.Read<io::UInt256>();
                     
                     // Read the index (uint32_t - 4 bytes) in little-endian format
-                    uint32_t index;
-                    reader.Read(reinterpret_cast<uint8_t*>(&index), sizeof(uint32_t));
+                    uint32_t index = reader.Read<uint32_t>();
                     
                     // Convert from little-endian if necessary (Neo uses little-endian)
                     #if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__

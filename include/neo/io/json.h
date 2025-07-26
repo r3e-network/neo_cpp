@@ -53,9 +53,9 @@ namespace neo::io
             }
             
             // Ensure the array is large enough
-            if (index >= data_.size()) {
-                // Resize array to accommodate the index
-                data_.resize(index + 1, nlohmann::json::value_t::null);
+            while (index >= data_.size()) {
+                // Add null elements until we reach the desired index
+                data_.push_back(nullptr);
             }
             
             // Return a JsonValue that wraps a reference to the actual array element
@@ -63,8 +63,10 @@ namespace neo::io
             
             // Use placement new to create a JsonValue wrapper that maintains reference to the element
             // Create a reference wrapper that shares the same underlying json object
-            cached_elements_[index] = JsonValue(data_[index]);
-            return cached_elements_[index];
+            if (!cached_elements_[index]) {
+                cached_elements_[index] = std::make_unique<JsonValue>(data_[index]);
+            }
+            return *cached_elements_[index];
         }
         
         // Object operations
@@ -154,7 +156,7 @@ namespace neo::io
         
     private:
         json data_;
-        mutable std::unordered_map<size_t, JsonValue> cached_elements_; // Cache for array element references
+        mutable std::unordered_map<size_t, std::unique_ptr<JsonValue>> cached_elements_; // Cache for array element references
     };
     
     // Type aliases for compatibility

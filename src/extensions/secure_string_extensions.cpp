@@ -307,10 +307,10 @@ namespace neo::extensions
         
         // Convert hash to hex string for SecureString
         std::string hexResult;
-        hexResult.reserve(hash.Size() * 2);
+        hexResult.reserve(io::UInt256::Size * 2);
         const char* hexChars = "0123456789abcdef";
         
-        for (size_t i = 0; i < hash.Size(); ++i)
+        for (size_t i = 0; i < io::UInt256::Size; ++i)
         {
             uint8_t byte = hash.Data()[i];
             hexResult.push_back(hexChars[byte >> 4]);
