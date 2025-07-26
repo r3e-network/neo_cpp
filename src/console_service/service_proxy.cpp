@@ -12,6 +12,7 @@
 #include <neo/vm/stack_item.h>
 #include <neo/smartcontract/trigger_type.h>
 #include <sstream>
+#include <iostream>
 
 namespace neo::console_service
 {
@@ -38,32 +39,19 @@ namespace neo::console_service
                 return blockchain->GetHeight();
             }
             
-            // Alternative: Get height from data cache if blockchain is not available
-            auto data_cache = neoSystem_->GetDataCache();
-            if (data_cache) {
-                auto ledger_contract = neoSystem_->GetLedgerContract();
-                if (ledger_contract) {
-                    return ledger_contract->GetCurrentIndex(*data_cache);
-                }
-            }
-            
-            // Alternative: Get height from snapshot
-            auto snapshot = neoSystem_->GetSnapshot();
-            if (snapshot) {
-                return snapshot->GetCurrentBlockIndex();
-            }
-            
-            // No blockchain data available
-            return 0;
+            // Get height from NeoSystem directly
+            return neoSystem_->GetCurrentBlockHeight();
         }
         catch (const std::exception& e)
         {
-            LOG_ERROR("Failed to get blockchain height: {}", e.what());
+            // Log error - LOG_ERROR not available in this context
+            std::cerr << "Failed to get blockchain height: " << e.what() << std::endl;
             return 0;
         }
         catch (const std::bad_alloc& e)
         {
-            LOG_ERROR("Memory allocation failed getting blockchain height: {}", e.what());
+            // Log error - LOG_ERROR not available in this context
+            std::cerr << "Memory allocation failed getting blockchain height: " << e.what() << std::endl;
             return 0;
         }
     }
@@ -85,7 +73,7 @@ namespace neo::console_service
             
             // Approach 1: Via local node if available
             if (auto localNode = neoSystem_->GetLocalNode()) {
-                return localNode->GetConnectedCount();
+                return localNode->GetConnectedPeersCount();
             }
             
             // Approach 2: Via P2P server if available  
@@ -94,8 +82,9 @@ namespace neo::console_service
             }
             
             // Approach 3: Via network manager if available
-            if (auto networkManager = neoSystem_->GetNetworkManager()) {
-                return networkManager->GetPeerCount();
+            // Get peer count from P2P server
+            if (auto p2pServer = neoSystem_->GetP2PServer()) {
+                return p2pServer->GetConnectedPeersCount();
             }
             
             // Fallback: Check if system has any network services running
@@ -110,7 +99,7 @@ namespace neo::console_service
         catch (const std::exception& e)
         {
             // Log error but don't throw - return 0 as safe fallback
-            LOG_WARNING("Failed to get peer count from Neo system: {}", e.what());
+            std::cerr << "Warning: Failed to get peer count from Neo system: " << e.what() << std::endl;
             return 0;
         }
     }
@@ -139,14 +128,7 @@ namespace neo::console_service
             // Start the Neo node services
             this->NotifyEvent("Node starting...");
             
-            // Create default channels configuration for node startup
-            auto channelsConfig = std::make_unique<network::p2p::ChannelsConfig>();
-            channelsConfig->enable_p2p = true;
-            channelsConfig->enable_rpc = true;
-            channelsConfig->enable_consensus = false; // Start without consensus initially
-            channelsConfig->enable_plugins = true;
-            channelsConfig->tcp_port = neoSystem_->GetProtocolSettings()->GetDefaultP2PPort();
-            channelsConfig->max_connections = 10;
+            // Neo node configuration is handled internally by NeoSystem
             
             // Start the Neo system with configuration
             if (neoSystem_->IsRunning()) {
@@ -160,8 +142,7 @@ namespace neo::console_service
                 return false;
             }
             
-            // Start network node with channels configuration
-            neoSystem_->start_node(std::move(channelsConfig));
+            // Network services are started as part of the system startup
             
             // Verify startup was successful
             if (neoSystem_->IsRunning()) {
@@ -197,10 +178,11 @@ namespace neo::console_service
             
             // Perform graceful shutdown
             // 1. Suspend any pending node startup first
-            neoSystem_->suspend_node_startup();
+            // Suspend operations - not directly supported in current interface
+            // TODO: Implement proper suspend/resume functionality
             
             // 2. Stop the Neo system components
-            neoSystem_->stop();
+            neoSystem_->Stop();
             
             // 3. Verify shutdown was successful  
             // Note: stop() should be synchronous, but we add a brief verification
@@ -289,7 +271,7 @@ namespace neo::console_service
                                 }
                                 
                                 // If no specific handler found, fall back to generic command execution
-                                LOG_DEBUG("No specific handler found for command: {}", cmd);
+                                // Debug: No specific handler found for command
                                 return ExecuteGenericCommand(cmd, args);
                                 
                                 // Check if it's a blockchain query command

@@ -72,10 +72,11 @@ namespace neo::persistence
         // Register memory store provider
         register_store_provider("memory", std::make_shared<MemoryStoreProvider>());
         
-#ifdef NEO_HAS_ROCKSDB
-        // Register RocksDB store provider if available
-        register_store_provider("rocksdb", std::make_shared<RocksDBStoreProvider>());
-#endif
+// TODO: Implement RocksDB provider when NEO_HAS_ROCKSDB is defined
+// #ifdef NEO_HAS_ROCKSDB
+//         // Register RocksDB store provider if available
+//         register_store_provider("rocksdb", std::make_shared<RocksDBStoreProvider>());
+// #endif
         
         initialized_ = true;
     }

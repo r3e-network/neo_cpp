@@ -1,6 +1,8 @@
 #pragma once
 
 #include <neo/persistence/istore.h>
+#include <neo/persistence/storage_key.h>
+#include <neo/persistence/storage_item.h>
 #include <neo/core/logging.h>
 #include <leveldb/db.h>
 #include <leveldb/write_batch.h>

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <neo/persistence/istore.h>
+#include <neo/persistence/storage_key.h>
+#include <neo/persistence/storage_item.h>
 #include <neo/core/logging.h>
 #include <rocksdb/db.h>
 #include <rocksdb/write_batch.h>
@@ -109,12 +111,11 @@ namespace neo::persistence
         bool IsOpen() const { return db_ != nullptr; }
         
         // IStore interface implementation
-        void Put(const StorageKey& key, const StorageItem& value) override;
-        std::optional<StorageItem> Get(const StorageKey& key) const override;
-        bool Contains(const StorageKey& key) const override;
-        void Delete(const StorageKey& key) override;
-        std::vector<std::pair<StorageKey, StorageItem>> Find(const io::ByteSpan& keyPrefix) const override;
-        void Clear() override;
+        void Put(const io::ByteVector& key, const io::ByteVector& value) override;
+        void Delete(const io::ByteVector& key) override;
+        std::optional<io::ByteVector> TryGet(const io::ByteVector& key) const override;
+        bool Contains(const io::ByteVector& key) const override;
+        std::vector<std::pair<io::ByteVector, io::ByteVector>> Find(const io::ByteVector* prefix = nullptr, SeekDirection direction = SeekDirection::Forward) const override;
         
         /**
          * @brief Batch write operations for efficiency
@@ -128,8 +129,8 @@ namespace neo::persistence
         public:
             explicit WriteBatch(RocksDbStore* store) : store_(store) {}
             
-            void Put(const StorageKey& key, const StorageItem& value);
-            void Delete(const StorageKey& key);
+            void Put(const io::ByteVector& key, const io::ByteVector& value);
+            void Delete(const io::ByteVector& key);
             bool Commit();
             void Clear();
             size_t GetDataSize() const;
@@ -170,7 +171,7 @@ namespace neo::persistence
         /**
          * @brief Get column family for storage key
          */
-        rocksdb::ColumnFamilyHandle* GetColumnFamily(const StorageKey& key) const;
+        rocksdb::ColumnFamilyHandle* GetColumnFamily(const io::ByteVector& key) const;
         
     private:
         /**
@@ -179,24 +180,24 @@ namespace neo::persistence
         bool InitializeColumnFamilies();
         
         /**
-         * @brief Convert StorageKey to RocksDB key
+         * @brief Convert ByteVector to RocksDB key
          */
-        std::string ToDbKey(const StorageKey& key) const;
+        std::string ToDbKey(const io::ByteVector& key) const;
         
         /**
-         * @brief Convert RocksDB key to StorageKey
+         * @brief Convert RocksDB key to ByteVector
          */
-        StorageKey FromDbKey(const rocksdb::Slice& key) const;
+        io::ByteVector FromDbKey(const rocksdb::Slice& key) const;
         
         /**
-         * @brief Convert StorageItem to RocksDB value
+         * @brief Convert ByteVector to RocksDB value
          */
-        std::string ToDbValue(const StorageItem& item) const;
+        std::string ToDbValue(const io::ByteVector& value) const;
         
         /**
-         * @brief Convert RocksDB value to StorageItem
+         * @brief Convert RocksDB value to ByteVector
          */
-        StorageItem FromDbValue(const rocksdb::Slice& value) const;
+        io::ByteVector FromDbValue(const rocksdb::Slice& value) const;
         
         /**
          * @brief Get RocksDB options
