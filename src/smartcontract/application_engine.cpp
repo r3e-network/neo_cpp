@@ -8,9 +8,9 @@
 #include <neo/smartcontract/native/policy_contract.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/role_management.h>
-#include <spdlog/spdlog.h>
+#include <iostream>
 
-#define LOG_ERROR(msg, ...) spdlog::error(msg, ##__VA_ARGS__)
+#define LOG_ERROR(msg, ...) std::cerr << "ERROR: " << msg << std::endl
 #include <neo/smartcontract/native/oracle_contract.h>
 #include <neo/smartcontract/native/notary.h>
 #include <neo/smartcontract/native/name_service.h>
@@ -18,7 +18,8 @@
 #include <neo/smartcontract/native/std_lib.h>
 #include <neo/smartcontract/contract_state.h>
 #include <neo/cryptography/hash.h>
-#include <neo/io/memory_reader.h>
+#include <neo/io/binary_reader.h>
+#include <sstream>
 
 namespace neo::smartcontract
 {
@@ -395,7 +396,8 @@ namespace neo::smartcontract
         
         // Deserialize contract state
         ContractState contractState;
-        io::MemoryReader reader(contractItem->GetBytes());
+        std::istringstream stream(std::string(contractItem->GetBytes().begin(), contractItem->GetBytes().end()));
+        io::BinaryReader reader(stream);
         contractState.Deserialize(reader);
         
         // Check if contract has the method
