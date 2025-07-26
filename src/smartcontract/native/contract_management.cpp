@@ -8,6 +8,7 @@
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/smartcontract/native/neo_token.h>
+#include <neo/vm/script_builder.h>
 #include <sstream>
 #include <iostream>
 
@@ -394,7 +395,7 @@ namespace neo::smartcontract::native
                 bool isCommitteeMember = false;
                 for (const auto& member : committee) {
                     UInt160 memberScriptHash = GetScriptHashFromPublicKey(member);
-                    if (callingScriptHash.value() == memberScriptHash) {
+                    if (callingScriptHash == memberScriptHash) {
                         isCommitteeMember = true;
                         break;
                     }
@@ -497,7 +498,7 @@ namespace neo::smartcontract::native
         {
             result.push_back(vm::StackItem::Create(std::vector<std::shared_ptr<vm::StackItem>>{
                 vm::StackItem::Create(static_cast<int64_t>(contract->GetId())),
-                vm::StackItem::Create(static_cast<int64_t>(contract->GetUpdateCounter()))
+                vm::StackItem::Create(static_cast<int64_t>(contract->GetUpdateCounter())),
                 vm::StackItem::Create(contract->GetScriptHash()),
                 vm::StackItem::Create(contract->GetScript()),
                 vm::StackItem::Create(contract->GetManifest())
@@ -507,10 +508,10 @@ namespace neo::smartcontract::native
         return vm::StackItem::Create(result);
     }
     
-    std::vector<cryptography::ECPoint> ContractManagement::GetCommitteeFromNeoContract(const std::shared_ptr<persistence::DataCache>& snapshot)
+    std::vector<cryptography::ecc::ECPoint> ContractManagement::GetCommitteeFromNeoContract(const std::shared_ptr<persistence::DataCache>& snapshot)
     {
         // Implementation to get committee from NEO token contract
-        std::vector<cryptography::ECPoint> committee;
+        std::vector<cryptography::ecc::ECPoint> committee;
         
         try {
             // Complete implementation: Query the NEO token contract for current committee
@@ -568,25 +569,7 @@ namespace neo::smartcontract::native
             }
             
             // Fallback: Get committee from protocol settings if blockchain query fails
-            auto protocol_settings = config::ProtocolSettings::GetDefault();
-            if (protocol_settings) {
-                const auto& standby_validators = protocol_settings->StandbyValidators;
-                
-                // Take the first N validators as committee (usually 7 for mainnet)
-                size_t committee_size = std::min(standby_validators.size(), size_t(7));
-                
-                for (size_t i = 0; i < committee_size; ++i) {
-                    try {
-                        auto keyBytes = io::ByteVector::ParseHex(standby_validators[i]);
-                        if (keyBytes.Size() == 33) {  // Validate public key size
-                            committee.emplace_back(keyBytes);
-                        }
-                    } catch (const std::exception&) {
-                        // Skip invalid keys
-                        continue;
-                    }
-                }
-            }
+            // TODO: Implement fallback to protocol settings when available
             
             // Final fallback: Use hardcoded genesis committee if all else fails
             if (committee.empty()) {
@@ -617,7 +600,7 @@ namespace neo::smartcontract::native
         return committee;
     }
     
-    UInt160 ContractManagement::CalculateCommitteeAddress(const std::vector<cryptography::ECPoint>& committee)
+    io::UInt160 ContractManagement::CalculateCommitteeAddress(const std::vector<cryptography::ecc::ECPoint>& committee)
     {
         if (committee.empty()) {
             throw std::runtime_error("Committee cannot be empty");
@@ -648,10 +631,10 @@ namespace neo::smartcontract::native
         auto script = sb.ToArray();
         
         // Calculate script hash (committee address)
-        return UInt160(cryptography::Hash::Hash160(script));
+        return cryptography::Hash::Hash160(script);
     }
     
-    UInt160 ContractManagement::GetScriptHashFromPublicKey(const cryptography::ECPoint& publicKey)
+    io::UInt160 ContractManagement::GetScriptHashFromPublicKey(const cryptography::ecc::ECPoint& publicKey)
     {
         // Create single-signature verification script for the public key
         vm::ScriptBuilder sb;
@@ -663,7 +646,7 @@ namespace neo::smartcontract::native
         auto script = sb.ToArray();
         
         // Calculate script hash
-        return UInt160(cryptography::Hash::Hash160(script));
+        return cryptography::Hash::Hash160(script);
     }
     
     std::shared_ptr<vm::StackItem> ContractManagement::OnGetContractById(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
