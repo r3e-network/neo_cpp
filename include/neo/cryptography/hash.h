@@ -3,6 +3,8 @@
 #include <neo/io/uint256.h>
 #include <neo/io/uint160.h>
 #include <neo/io/byte_span.h>
+#include <optional>
+#include <vector>
 
 namespace neo::cryptography
 {
@@ -41,11 +43,18 @@ namespace neo::cryptography
         static io::UInt256 Hash256(const io::ByteSpan& data);
 
         /**
-         * @brief Computes Keccak256 hash.
+         * @brief Computes Keccak256 hash (WARNING: Currently using SHA3-256).
          * @param data The data to hash.
          * @return The Keccak256 hash.
          */
         static io::UInt256 Keccak256(const io::ByteSpan& data);
+        
+        /**
+         * @brief Computes proper Keccak256 hash (Ethereum-compatible).
+         * @param data The data to hash.
+         * @return The true Keccak256 hash.
+         */
+        static io::UInt256 Keccak256Proper(const io::ByteSpan& data);
 
         /**
          * @brief Computes Murmur32 hash.
@@ -55,4 +64,29 @@ namespace neo::cryptography
          */
         static uint32_t Murmur32(const io::ByteSpan& data, uint32_t seed = 0);
     };
+    
+    // Forward declaration
+    namespace ecc {
+        class ECPoint;
+    }
+    
+    /**
+     * @brief Recovers public key from signature (Ethereum-style ECRecover)
+     * @param hash The hash that was signed (32 bytes)
+     * @param signature The signature (64 bytes: r + s)
+     * @param recovery_id Recovery ID (0-3)
+     * @return The recovered public key, or nullopt if recovery failed
+     */
+    std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, 
+                                         const io::ByteSpan& signature, 
+                                         uint8_t recovery_id);
+    
+    /**
+     * @brief Simplified ECRecover that tries all recovery IDs
+     * @param hash The hash that was signed
+     * @param signature The signature (64 bytes: r + s)
+     * @return Vector of possible recovered public keys
+     */
+    std::vector<ecc::ECPoint> ECRecoverAll(const io::ByteSpan& hash, 
+                                          const io::ByteSpan& signature);
 }

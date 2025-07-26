@@ -292,22 +292,46 @@ namespace neo::network::p2p
                 message->SetCommand(neo::network::MessageCommand::GetData);
                 message->SetPayload(getDataPayload);
                 
-                // TODO: Need to integrate with P2P server to get connected peers
-                // auto peers = localNode_->GetConnectedPeers();
-                // TODO: Implement peer communication and pending request tracking
-                // bool requestSent = false;
-                // 
-                // for (const auto& peer : peers)
-                // {
-                //     // Send to any connected peer (transactions are more widely available)
-                //     peer->SendMessage(message);
-                //     requestSent = true;
-                //     
-                //     // Add to pending requests to track timeout
-                //     pendingTxRequests_[hash] = {
-                //         std::chrono::steady_clock::now(),
-                //         peer->GetId()
-                //     };
+                // Complete implementation: Integrate with P2P server to get connected peers
+                bool requestSent = false;
+                
+                try {
+                    auto peers = localNode_->GetConnectedPeers();
+                    
+                    // Complete implementation: Peer communication and pending request tracking
+                    for (const auto& peer : peers) {
+                        if (peer && peer->IsConnected()) {
+                            // Send GetData request to connected peer
+                            peer->SendMessage(message);
+                            requestSent = true;
+                            
+                            // Add to pending requests to track timeout
+                            pendingTxRequests_[hash] = {
+                                std::chrono::steady_clock::now(),
+                                peer->GetId(),
+                                3 // Max retry attempts
+                            };
+                        
+                            LOG_DEBUG("Sent transaction request {} to peer {}", 
+                                     hash.ToString(), peer->GetId().ToString());
+                            
+                            // Only send to first available peer for transactions
+                            break;
+                        }
+                    }
+                    
+                    if (!requestSent) {
+                        LOG_WARNING("No connected peers available to request transaction {}", 
+                                   hash.ToString());
+                        
+                        // Mark as failed so it can be retried later
+                        MarkTransactionRequestFailed(hash);
+                    }
+                    
+                } catch (const std::exception& e) {
+                    LOG_ERROR("Error requesting transaction {}: {}", hash.ToString(), e.what());
+                    MarkTransactionRequestFailed(hash);
+                }
                 //     
                 //     // Send to multiple peers for better chance of getting the transaction
                 //     if (requestSent && pendingTxRequests_.size() >= 3)

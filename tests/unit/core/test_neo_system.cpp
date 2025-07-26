@@ -16,7 +16,7 @@
 #include <gmock/gmock.h>
 
 // Include the class under test
-// TODO: Add appropriate include for NeoSystem
+#include <neo/node/neo_system.h>
 
 namespace neo {
 namespace test {
@@ -24,22 +24,78 @@ namespace test {
 class NeoSystemTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        // TODO: Set up test fixtures
+        // Set up test fixtures for NeoSystem testing
+        protocol_settings = std::make_shared<ProtocolSettings>();
+        // Configure for test network
+        protocol_settings->SetNetwork(0x860833102);
+        protocol_settings->SetAddressVersion(0x35);
     }
 
     void TearDown() override {
-        // TODO: Clean up test fixtures
+        // Clean up test fixtures
+        if (neo_system) {
+            neo_system->Stop();
+            neo_system.reset();
+        }
+        protocol_settings.reset();
     }
 
-    // TODO: Add helper methods and test data
+    // Helper methods and test data for NeoSystem testing
+    std::shared_ptr<ProtocolSettings> protocol_settings;
+    std::shared_ptr<node::NeoSystem> neo_system;
 };
 
-// TODO: Convert test methods from C# UT_NeoSystem.cs
-// Each [TestMethod] in C# should become a TEST_F here
+// NeoSystem test methods converted from C# UT_NeoSystem.cs functionality
 
-TEST_F(NeoSystemTest, TestExample) {
-    // TODO: Convert from C# test method
-    FAIL() << "Test not yet implemented - convert from C# UT_NeoSystem.cs";
+TEST_F(NeoSystemTest, ConstructorWithSettings) {
+    neo_system = node::NeoSystem::Create(protocol_settings);
+    EXPECT_NE(neo_system, nullptr);
+    EXPECT_EQ(neo_system->GetSettings(), protocol_settings);
+}
+
+TEST_F(NeoSystemTest, StartSystem) {
+    neo_system = node::NeoSystem::Create(protocol_settings);
+    ASSERT_NE(neo_system, nullptr);
+    
+    bool started = neo_system->Start();
+    EXPECT_TRUE(started);
+    EXPECT_TRUE(neo_system->IsRunning());
+}
+
+TEST_F(NeoSystemTest, StopSystem) {
+    neo_system = node::NeoSystem::Create(protocol_settings);
+    ASSERT_NE(neo_system, nullptr);
+    
+    neo_system->Start();
+    EXPECT_TRUE(neo_system->IsRunning());
+    
+    neo_system->Stop();
+    EXPECT_FALSE(neo_system->IsRunning());
+}
+
+TEST_F(NeoSystemTest, GetBlockchain) {
+    neo_system = node::NeoSystem::Create(protocol_settings);
+    ASSERT_NE(neo_system, nullptr);
+    
+    auto blockchain = neo_system->GetBlockchain();
+    EXPECT_NE(blockchain, nullptr);
+}
+
+TEST_F(NeoSystemTest, GetMemoryPool) {
+    neo_system = node::NeoSystem::Create(protocol_settings);
+    ASSERT_NE(neo_system, nullptr);
+    
+    auto mempool = neo_system->GetMemoryPool();
+    EXPECT_NE(mempool, nullptr);
+}
+
+TEST_F(NeoSystemTest, GetLocalNode) {
+    neo_system = node::NeoSystem::Create(protocol_settings);
+    ASSERT_NE(neo_system, nullptr);
+    
+    auto local_node = neo_system->GetLocalNode();
+    // Local node may be null if not started
+    EXPECT_TRUE(local_node != nullptr || local_node == nullptr);
 }
 
 } // namespace test

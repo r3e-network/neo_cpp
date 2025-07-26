@@ -172,48 +172,168 @@ namespace neo::ledger::tests
     {
         HeaderCache cache(1000);
         
-        // This is a basic test for thread safety
-        // In a real scenario, we would use multiple threads
+        // Complete multi-threading implementation for real thread safety testing
+        // Use multiple threads to concurrently access the cache
         
-        std::vector<std::shared_ptr<BlockHeader>> headers;
-        for (int i = 0; i < 100; ++i)
-        {
-            auto header = std::make_shared<BlockHeader>();
-            header->SetIndex(i);
-            header->SetTimestamp(1000 + i);
-            headers.push_back(header);
-        }
+        const int num_threads = 8;
+        const int headers_per_thread = 50;
+        std::vector<std::shared_ptr<BlockHeader>> all_headers;
         
-        // Add all headers
-        for (const auto& header : headers)
+        // Pre-create headers for all threads
+        for (int thread_id = 0; thread_id < num_threads; ++thread_id)
         {
-            cache.Add(header);
-        }
-        
-        // Verify all are accessible
-        for (const auto& header : headers)
-        {
-            EXPECT_TRUE(cache.Contains(header->GetHash()));
-        }
-        
-        // Remove some headers
-        for (size_t i = 0; i < headers.size(); i += 2)
-        {
-            cache.Remove(headers[i]->GetHash());
-        }
-        
-        // Verify correct headers remain
-        for (size_t i = 0; i < headers.size(); ++i)
-        {
-            if (i % 2 == 0)
+            for (int i = 0; i < headers_per_thread; ++i)
             {
-                EXPECT_FALSE(cache.Contains(headers[i]->GetHash()));
-            }
-            else
-            {
-                EXPECT_TRUE(cache.Contains(headers[i]->GetHash()));
+                auto header = std::make_shared<BlockHeader>();
+                header->SetIndex(thread_id * headers_per_thread + i);
+                header->SetTimestamp(1000 + thread_id * headers_per_thread + i);
+                all_headers.push_back(header);
             }
         }
+        
+        std::vector<std::thread> threads;
+        std::atomic<int> successful_adds(0);
+        std::atomic<int> successful_lookups(0);
+        std::atomic<int> successful_removes(0);
+        std::mutex test_mutex;
+        std::vector<std::string> thread_errors;
+        
+        // Thread function for concurrent cache operations
+        auto thread_worker = [&](int thread_id) {
+            try {
+                // Phase 1: Add headers
+                for (int i = 0; i < headers_per_thread; ++i) {
+                    int header_index = thread_id * headers_per_thread + i;
+                    auto& header = all_headers[header_index];
+                    
+                    cache.Add(header);
+                    successful_adds.fetch_add(1);
+                    
+                    // Small delay to increase contention
+                    std::this_thread::sleep_for(std::chrono::microseconds(1));
+                }
+                
+                // Phase 2: Concurrent lookups
+                for (int i = 0; i < headers_per_thread; ++i) {
+                    int header_index = thread_id * headers_per_thread + i;
+                    auto& header = all_headers[header_index];
+                    
+                    if (cache.Contains(header->GetHash())) {
+                        successful_lookups.fetch_add(1);
+                    }
+                    
+                    std::this_thread::sleep_for(std::chrono::microseconds(1));
+                }
+                
+                // Phase 3: Remove every other header
+                for (int i = 0; i < headers_per_thread; i += 2) {
+                    int header_index = thread_id * headers_per_thread + i;
+                    auto& header = all_headers[header_index];
+                    
+                    cache.Remove(header->GetHash());
+                    successful_removes.fetch_add(1);
+                    
+                    std::this_thread::sleep_for(std::chrono::microseconds(1));
+                }
+                
+            } catch (const std::exception& e) {
+                std::lock_guard<std::mutex> lock(test_mutex);
+                thread_errors.push_back("Thread " + std::to_string(thread_id) + ": " + e.what());
+            }
+        };
+        
+        // Start all threads
+        for (int i = 0; i < num_threads; ++i) {
+            threads.emplace_back(thread_worker, i);
+        }
+        
+        // Wait for all threads to complete
+        for (auto& thread : threads) {
+            thread.join();
+        }
+        
+        // Verify no errors occurred during concurrent access
+        EXPECT_TRUE(thread_errors.empty()) << "Errors during concurrent access: " 
+                                           << thread_errors.size();
+        if (!thread_errors.empty()) {
+            for (const auto& error : thread_errors) {
+                std::cout << error << std::endl;
+            }
+        }
+        
+        // Verify operation counts
+        EXPECT_EQ(successful_adds.load(), num_threads * headers_per_thread);
+        EXPECT_EQ(successful_lookups.load(), num_threads * headers_per_thread);
+        EXPECT_EQ(successful_removes.load(), num_threads * (headers_per_thread / 2));
+        
+        // Verify final cache state
+        int expected_remaining = num_threads * (headers_per_thread / 2);
+        int actual_remaining = 0;
+        
+        for (size_t i = 0; i < all_headers.size(); ++i) {
+            bool should_exist = (i % 2 == 1); // Only odd-indexed headers should remain
+            bool actually_exists = cache.Contains(all_headers[i]->GetHash());
+            
+            if (should_exist) {
+                EXPECT_TRUE(actually_exists) << "Header " << i << " should exist but doesn't";
+                if (actually_exists) actual_remaining++;
+            } else {
+                EXPECT_FALSE(actually_exists) << "Header " << i << " should not exist but does";
+            }
+        }
+        
+        EXPECT_EQ(actual_remaining, expected_remaining);
+        
+        // Test concurrent access patterns
+        std::atomic<bool> keep_running(true);
+        std::atomic<int> reader_successes(0);
+        std::atomic<int> writer_successes(0);
+        
+        // Reader threads
+        std::vector<std::thread> reader_threads;
+        for (int i = 0; i < 2; ++i) {
+            reader_threads.emplace_back([&]() {
+                while (keep_running.load()) {
+                    for (const auto& header : all_headers) {
+                        if (cache.Contains(header->GetHash())) {
+                            reader_successes.fetch_add(1);
+                        }
+                        std::this_thread::sleep_for(std::chrono::microseconds(10));
+                        if (!keep_running.load()) break;
+                    }
+                }
+            });
+        }
+        
+        // Writer thread
+        std::thread writer_thread([&]() {
+            int write_counter = 0;
+            while (keep_running.load() && write_counter < 50) {
+                auto new_header = std::make_shared<BlockHeader>();
+                new_header->SetIndex(10000 + write_counter);
+                new_header->SetTimestamp(10000 + write_counter);
+                
+                cache.Add(new_header);
+                writer_successes.fetch_add(1);
+                write_counter++;
+                
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            }
+        });
+        
+        // Let concurrent access run for a short time
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        keep_running.store(false);
+        
+        // Wait for all concurrent threads
+        for (auto& reader : reader_threads) {
+            reader.join();
+        }
+        writer_thread.join();
+        
+        // Verify concurrent operations completed successfully
+        EXPECT_GT(reader_successes.load(), 0);
+        EXPECT_GT(writer_successes.load(), 0);
     }
 
     TEST_F(HeaderCacheTest, TestReplaceHeader)

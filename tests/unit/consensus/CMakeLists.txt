@@ -3,6 +3,8 @@ add_executable(test_consensus
     test_consensus_message.cpp
     test_consensus_context.cpp
     test_consensus_service.cpp
+    test_primary_index_calculation.cpp
+    test_witness_assembly.cpp
 )
 
 # Include directories

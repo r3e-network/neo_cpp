@@ -74,7 +74,7 @@ protected:
         try {
             auto json_obj = nlohmann::json::parse(json_request);
             
-            // In real implementation, this would check auth_header
+            // Test authentication header validation
             if (!auth_header.empty() && rpc_server_->IsAuthenticationEnabled()) {
                 if (!rpc_server_->ValidateAuthentication(auth_header)) {
                     return R"({"error":"Unauthorized","code":401})";
@@ -376,10 +376,52 @@ TEST_F(RpcSecurityTest, SessionManagement) {
     // Test session validation
     EXPECT_TRUE(rpc_server_->ValidateSession(session_id));
     
-    // Test session expiry (would need time manipulation in real test)
-    // For now, test manual session invalidation
-    rpc_server_->InvalidateSession(session_id);
-    EXPECT_FALSE(rpc_server_->ValidateSession(session_id));
+    // Complete session expiry test implementation with time manipulation
+    // Test 1: Manual session invalidation
+    std::string manual_session = rpc_server_->CreateSession("admin");
+    EXPECT_TRUE(rpc_server_->ValidateSession(manual_session));
+    rpc_server_->InvalidateSession(manual_session);
+    EXPECT_FALSE(rpc_server_->ValidateSession(manual_session));
+    
+    // Test 2: Time-based session expiry simulation
+    std::string expiry_session = rpc_server_->CreateSession("admin");
+    EXPECT_TRUE(rpc_server_->ValidateSession(expiry_session));
+    
+    // Configure session timeout for testing (e.g., 1 second)
+    rpc_server_->SetSessionTimeout(std::chrono::seconds(1));
+    
+    // Simulate time passage by sleeping
+    std::this_thread::sleep_for(std::chrono::milliseconds(1100));
+    
+    // Check that session has expired due to timeout
+    EXPECT_FALSE(rpc_server_->ValidateSession(expiry_session));
+    
+    // Test 3: Session renewal before expiry
+    std::string renewal_session = rpc_server_->CreateSession("admin");
+    EXPECT_TRUE(rpc_server_->ValidateSession(renewal_session));
+    
+    // Sleep for half the timeout period
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    
+    // Renew the session by using it
+    std::string renewal_response = SendAuthenticatedRequest(request, "admin", "password");
+    auto renewal_json = nlohmann::json::parse(renewal_response);
+    EXPECT_TRUE(renewal_json.contains("result"));
+    
+    // Session should still be valid after activity
+    EXPECT_TRUE(rpc_server_->ValidateSession(renewal_session));
+    
+    // Test 4: Multiple concurrent sessions
+    std::string session_a = rpc_server_->CreateSession("admin");
+    std::string session_b = rpc_server_->CreateSession("admin");
+    EXPECT_TRUE(rpc_server_->ValidateSession(session_a));
+    EXPECT_TRUE(rpc_server_->ValidateSession(session_b));
+    EXPECT_NE(session_a, session_b); // Sessions should be unique
+    
+    // Invalidate one session, other should remain valid
+    rpc_server_->InvalidateSession(session_a);
+    EXPECT_FALSE(rpc_server_->ValidateSession(session_a));
+    EXPECT_TRUE(rpc_server_->ValidateSession(session_b));
 }
 
 // Test brute force protection

@@ -190,9 +190,32 @@ void InteropService::runtime_check_witness(ApplicationEngine& engine) {
         UInt160 script_hash(hash_or_pubkey);
         result = engine.check_witness(script_hash);
     } else if (hash_or_pubkey.size() == 33) {
-        // Public key
-        // TODO: Convert public key to script hash and check
-        result = false; // Placeholder
+        // Public key - convert to script hash and check witness
+        try {
+            // Create ECPoint from public key bytes
+            auto public_key_bytes = io::ByteVector(hash_or_pubkey.data(), hash_or_pubkey.data() + hash_or_pubkey.size());
+            auto ec_point = cryptography::ecc::ECPoint::FromBytes(io::ByteSpan(public_key_bytes.Data(), public_key_bytes.Size()), "secp256r1");
+            
+            // Create verification script for single signature: PUSH(pubkey) + CHECKSIG
+            vm::ScriptBuilder script_builder;
+            script_builder.EmitPush(public_key_bytes);
+            script_builder.EmitSysCall(vm::OpCode::SYSCALL, "System.Crypto.CheckSig");
+            auto verification_script = script_builder.ToArray();
+            
+            // Calculate script hash (Hash160 of verification script)
+            auto script_hash = cryptography::Hash::Hash160(io::ByteSpan(verification_script.data(), verification_script.size()));
+            io::UInt160 script_hash_160(script_hash.Data());
+            
+            // Check witness using the calculated script hash
+            result = engine.check_witness(script_hash_160);
+            
+            LOG_DEBUG("Converted public key to script hash {} and checked witness: {}", 
+                     script_hash_160.ToString(), result);
+                     
+        } catch (const std::exception& e) {
+            LOG_WARNING("Failed to convert public key to script hash: {}", e.what());
+            result = false;
+        }
     }
     
     engine.push(vm::StackItem::create_boolean(result));

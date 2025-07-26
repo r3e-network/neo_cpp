@@ -68,7 +68,7 @@ public:
         descriptor.type = &typeid(T);
         descriptor.name = name;
         descriptor.is_array = std::is_array_v<T>;
-        descriptor.is_interface = false; // TODO: Implement interface detection
+        descriptor.is_interface = std::is_abstract_v<T>; // Complete interface detection - checks for abstract classes (interfaces)
         descriptor.is_enum = std::is_enum_v<T>;
         descriptor.converter = create_converter<T>();
         return descriptor;

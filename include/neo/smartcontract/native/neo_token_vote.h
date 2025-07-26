@@ -28,5 +28,14 @@ namespace neo::smartcontract::native
          * @return The result.
          */
         static std::shared_ptr<vm::StackItem> OnVote(const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
+        
+        /**
+         * @brief Handles the unVote method.
+         * @param token The NEO token.
+         * @param engine The engine.
+         * @param args The arguments.
+         * @return The result.
+         */
+        static std::shared_ptr<vm::StackItem> OnUnVote(const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
     };
 }

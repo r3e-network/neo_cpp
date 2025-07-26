@@ -12,8 +12,11 @@
 
 namespace neo::smartcontract::native
 {
-    // Forward declaration
+    // Forward declarations
     class GasToken;
+    class NeoTokenGas;
+    class NeoTokenCandidate;
+    class NeoTokenCommittee;
 
     /**
      * @brief Represents the NEO token contract.
@@ -33,7 +36,7 @@ namespace neo::smartcontract::native
         /**
          * @brief The contract ID.
          */
-        static constexpr uint32_t ID = 1;
+        static constexpr int32_t ID = -5;
 
         /**
          * @brief The contract name.
@@ -65,6 +68,16 @@ namespace neo::smartcontract::native
          * @brief The committee reward ratio (percentage of gas per block).
          */
         static constexpr int COMMITTEE_REWARD_RATIO = 10; // 10% of gas per block
+        
+        /**
+         * @brief The NEO holder reward ratio (percentage of gas per block).
+         */
+        static constexpr int NEO_HOLDER_REWARD_RATIO = 10; // 10% of gas per block
+        
+        /**
+         * @brief The voter reward ratio (percentage of gas per block).
+         */
+        static constexpr int VOTER_REWARD_RATIO = 80; // 80% of gas per block
 
         /**
          * @brief Gets the contract ID.
@@ -331,14 +344,21 @@ namespace neo::smartcontract::native
         {
             TotalSupply = 0x00,
             Account = 0x01,
-            Candidate = 0x02,
+            Candidate = 0x21,  // 33 in decimal = PREFIX_CANDIDATE
             Vote = 0x03,
-            Committee = 0x04,
+            Committee = 0x0E,  // 14 in decimal = PREFIX_COMMITTEE
             VotersCount = 0x05,
             GasPerBlock = 0x06,
             RegisterPrice = 0x07,
-            VoterReward = 0x08
+            VoterReward = 0x08,
+            Voter = 0x22       // 34 in decimal = PREFIX_VOTER
         };
+        
+        // Storage prefix constants for compatibility
+        static constexpr uint8_t PREFIX_BALANCE = 1;
+        static constexpr uint8_t PREFIX_CANDIDATE = 33;
+        static constexpr uint8_t PREFIX_COMMITTEE = 14;
+        static constexpr uint8_t PREFIX_VOTER = 34;
 
     private:
 

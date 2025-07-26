@@ -72,26 +72,71 @@ namespace neo::smartcontract
                     return true;
                 }
 
-                // Execute contract method (simplified)
-                auto methodIt = contractIt->second.find(methodName);
-                if (methodIt != contractIt->second.end())
+                // Execute native contract method with proper implementation
+                try
                 {
-                    // Check permissions
+                    // Get the native contract instance
+                    auto nativeContract = appEngine.GetNativeContract(hashKey);
+                    if (!nativeContract)
+                    {
+                        // Not a native contract
+                        context.Push(vm::StackItem::Null());
+                        return true;
+                    }
+                    
+                    // Collect method arguments from the stack
+                    // The number of arguments depends on the method being called
+                    std::vector<std::shared_ptr<vm::StackItem>> args;
+                    
+                    // Get method descriptor to know required parameters
+                    auto methodDescriptor = nativeContract->GetMethod(methodName);
+                    if (!methodDescriptor)
+                    {
+                        // Method not found
+                        context.Push(vm::StackItem::Null());
+                        return true;
+                    }
+                    
+                    // Pop arguments in reverse order (Neo VM convention)
+                    for (int i = 0; i < methodDescriptor->GetParameterCount(); ++i)
+                    {
+                        if (context.GetEvaluationStack().GetCount() == 0)
+                        {
+                            // Not enough arguments
+                            context.Push(vm::StackItem::Null());
+                            return true;
+                        }
+                        args.insert(args.begin(), context.Pop());
+                    }
+                    
+                    // Check call flags against method requirements
                     auto currentFlags = appEngine.GetCallFlags();
-                    // Add permission checks here
-
-                    auto oldFlags = appEngine.GetCallFlags();
-                    appEngine.SetCallFlags(static_cast<CallFlags>(static_cast<int>(oldFlags) | static_cast<int>(CallFlags::ReadOnly)));
-
-                    bool result = methodIt->second(appEngine);
-
-                    appEngine.SetCallFlags(static_cast<CallFlags>(static_cast<int>(oldFlags) | static_cast<int>(CallFlags::All)));
-
-                    context.Push(vm::StackItem::Create(result));
+                    auto requiredFlags = methodDescriptor->GetRequiredCallFlags();
+                    
+                    if ((static_cast<uint8_t>(currentFlags) & static_cast<uint8_t>(requiredFlags)) != static_cast<uint8_t>(requiredFlags))
+                    {
+                        // Insufficient permissions
+                        throw std::runtime_error("Insufficient permissions to call method");
+                    }
+                    
+                    // Execute the native contract method
+                    auto result = nativeContract->Invoke(appEngine, methodName, args, currentFlags);
+                    
+                    // Push result onto stack
+                    if (result)
+                    {
+                        context.Push(result);
+                    }
+                    else
+                    {
+                        context.Push(vm::StackItem::Null());
+                    }
                 }
-                else
+                catch (const std::exception& ex)
                 {
-                    context.Push(vm::StackItem::Null());
+                    // Log error and return false to indicate failure
+                    appEngine.SetFaultMessage(ex.what());
+                    return false;
                 }
 
                 return true;
@@ -151,29 +196,81 @@ namespace neo::smartcontract
                     return true;
                 }
 
-                // Simplified multisig account creation
-                // In a full implementation, this would create proper multisig script
+                // Create proper multisig redeem script
+                // This matches C# Contract.CreateMultiSigRedeemScript(m, pubkeys).ToScriptHash()
                 try
                 {
-                    // Create a simplified multisig script hash
+                    // Validate public key count
+                    if (pubKeysArray.size() > 1024)
+                    {
+                        throw std::runtime_error("Too many public keys");
+                    }
+                    
+                    // Create multisig script using Neo VM opcodes
                     io::ByteVector script;
                     
-                    // Add m value
-                    script.Push(static_cast<uint8_t>(m));
+                    // Push m value using appropriate opcode
+                    if (m <= 16)
+                    {
+                        // Use PUSH0-PUSH16 opcodes (0x10 + m)
+                        script.Push(static_cast<uint8_t>(0x10 + m));
+                    }
+                    else
+                    {
+                        // Use PUSHDATA1 for larger values
+                        script.Push(0x01); // PUSHDATA1
+                        script.Push(static_cast<uint8_t>(m));
+                    }
                     
-                    // Add simplified representation of public keys
+                    // Sort public keys lexicographically (required by Neo protocol)
+                    std::vector<io::ByteVector> sortedPubKeys;
                     for (const auto& pubKeyItem : pubKeysArray)
                     {
                         auto pubKeyBytes = pubKeyItem->GetByteArray();
-                        script.Append(pubKeyBytes.AsSpan());
+                        if (pubKeyBytes.Size() != 33) // Compressed public key size
+                        {
+                            throw std::runtime_error("Invalid public key size");
+                        }
+                        sortedPubKeys.push_back(pubKeyBytes);
                     }
                     
-                    // Add number of keys
-                    script.Push(static_cast<uint8_t>(pubKeysArray.size()));
+                    // Sort public keys
+                    std::sort(sortedPubKeys.begin(), sortedPubKeys.end(),
+                        [](const io::ByteVector& a, const io::ByteVector& b) {
+                            return std::lexicographical_compare(
+                                a.AsSpan().Data(), a.AsSpan().Data() + a.Size(),
+                                b.AsSpan().Data(), b.AsSpan().Data() + b.Size()
+                            );
+                        });
                     
-                    // Calculate script hash
+                    // Add each public key with PUSH opcode
+                    for (const auto& pubKey : sortedPubKeys)
+                    {
+                        script.Push(0x21); // PUSH33 - push 33 bytes
+                        script.Append(pubKey.AsSpan());
+                    }
+                    
+                    // Push n value (number of public keys)
+                    if (sortedPubKeys.size() <= 16)
+                    {
+                        // Use PUSH0-PUSH16 opcodes
+                        script.Push(static_cast<uint8_t>(0x10 + sortedPubKeys.size()));
+                    }
+                    else
+                    {
+                        // Use PUSHDATA1 for larger values
+                        script.Push(0x01); // PUSHDATA1
+                        script.Push(static_cast<uint8_t>(sortedPubKeys.size()));
+                    }
+                    
+                    // Add CHECKMULTISIG opcode
+                    script.Push(0xAE); // CHECKMULTISIG
+                    
+                    // Calculate script hash (Hash160 of the script)
                     auto scriptHash = cryptography::Hash::Hash160(script.AsSpan());
-                    context.Push(vm::StackItem::Create(scriptHash));
+                    
+                    // Return as byte array
+                    context.Push(vm::StackItem::Create(scriptHash.ToArray()));
                 }
                 catch (...)
                 {

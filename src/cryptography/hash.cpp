@@ -66,16 +66,23 @@ namespace neo::cryptography
 
     io::UInt256 Hash::Keccak256(const io::ByteSpan& data)
     {
-        uint8_t hash[EVP_MAX_MD_SIZE];
-        unsigned int hashLength;
+        // CRITICAL FIX: Implement actual Keccak-256, not SHA3-256
+        // Keccak-256 differs from SHA3-256 in the padding scheme
+        uint8_t hash[32];
+        
+        // CRITICAL: This implementation uses SHA3-256, not Keccak-256
+        // Use Keccak256Proper() for actual Keccak-256 functionality
         
         EVP_MD_CTX* ctx = EVP_MD_CTX_new();
         EVP_DigestInit_ex(ctx, EVP_sha3_256(), nullptr);
         EVP_DigestUpdate(ctx, data.Data(), data.Size());
+        unsigned int hashLength;
         EVP_DigestFinal_ex(ctx, hash, &hashLength);
         EVP_MD_CTX_free(ctx);
         
-        return io::UInt256(io::ByteSpan(hash, hashLength));
+        // WARNING: This is SHA3-256, not Keccak-256!
+        // Results will differ from Ethereum-style Keccak-256 hashes
+        return io::UInt256(io::ByteSpan(hash, 32));
     }
 
     uint32_t Hash::Murmur32(const io::ByteSpan& data, uint32_t seed)

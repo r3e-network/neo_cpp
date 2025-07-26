@@ -37,8 +37,6 @@ target_link_libraries(neo_smartcontract
         neo_persistence
         neo_ledger
         neo_logging
-        neo_config
-        neo_metrics
-        neo_cache
+        neo_core
         neo_native_contracts
 )

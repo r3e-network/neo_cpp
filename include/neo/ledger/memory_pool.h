@@ -1,6 +1,6 @@
 #pragma once
 
-#include <neo/ledger/transaction.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
 #include <neo/io/uint256.h>
 #include <unordered_map>
 #include <vector>
@@ -16,11 +16,11 @@ namespace neo::ledger
     {
     private:
         mutable std::mutex mutex_;
-        std::unordered_map<io::UInt256, Transaction> transactions_;
+        std::unordered_map<io::UInt256, network::p2p::payloads::Neo3Transaction> transactions_;
         size_t max_capacity_;
         
         // Transaction verification function
-        std::function<bool(const Transaction&)> verifier_;
+        std::function<bool(const network::p2p::payloads::Neo3Transaction&)> verifier_;
         
     public:
         /**
@@ -33,14 +33,14 @@ namespace neo::ledger
          * @brief Set transaction verifier function
          * @param verifier Function to verify transactions
          */
-        void SetVerifier(std::function<bool(const Transaction&)> verifier);
+        void SetVerifier(std::function<bool(const network::p2p::payloads::Neo3Transaction&)> verifier);
         
         /**
          * @brief Try to add transaction to pool
          * @param transaction Transaction to add
          * @return true if transaction was added, false otherwise
          */
-        bool TryAdd(const Transaction& transaction);
+        bool TryAdd(const network::p2p::payloads::Neo3Transaction& transaction);
         
         /**
          * @brief Remove transaction from pool
@@ -60,20 +60,20 @@ namespace neo::ledger
          * @param hash Transaction hash
          * @return Pointer to transaction if found, nullptr otherwise
          */
-        const Transaction* GetTransaction(const io::UInt256& hash) const;
+        const network::p2p::payloads::Neo3Transaction* GetTransaction(const io::UInt256& hash) const;
         
         /**
          * @brief Get all transactions sorted by fee per byte (highest first)
          * @return Vector of transactions sorted by priority
          */
-        std::vector<Transaction> GetSortedTransactions() const;
+        std::vector<network::p2p::payloads::Neo3Transaction> GetSortedTransactions() const;
         
         /**
          * @brief Get transactions for block creation
          * @param max_count Maximum number of transactions to return
          * @return Vector of highest priority transactions
          */
-        std::vector<Transaction> GetTransactionsForBlock(size_t max_count) const;
+        std::vector<network::p2p::payloads::Neo3Transaction> GetTransactionsForBlock(size_t max_count) const;
         
         /**
          * @brief Get current pool size
@@ -117,6 +117,6 @@ namespace neo::ledger
          * @param tx Transaction to calculate priority for
          * @return Priority value (higher is better)
          */
-        double CalculatePriority(const Transaction& tx) const;
+        double CalculatePriority(const network::p2p::payloads::Neo3Transaction& tx) const;
     };
 }

@@ -162,9 +162,76 @@ namespace neo::network::p2p
                         invMessage->SetCommand(MessageCommand::Inv);
                         invMessage->SetPayload(invPayload);
                         
-                        // TODO: Implement peer relay logic
-                        // Note: localNode_, sourcePeerId, and relayedTransactions_ need to be added
-                        // to the class definition or this logic needs to be refactored
+                        // Complete peer relay logic - broadcast transaction to connected peers
+                        if (p2pServer_) {
+                            // Get list of connected peers
+                            auto connected_peers = p2pServer_->GetConnectedPeers();
+                            
+                            // Track relay statistics
+                            int relay_count = 0;
+                            int max_relays = std::min(static_cast<int>(connected_peers.size()), 8); // Limit to 8 peers
+                            
+                            // Create a set to track already relayed transactions to prevent loops
+                            static std::unordered_set<io::UInt256> recently_relayed;
+                            static std::mutex relay_mutex;
+                            
+                            {
+                                std::lock_guard<std::mutex> lock(relay_mutex);
+                                
+                                // Check if already relayed recently
+                                if (recently_relayed.find(transaction->GetHash()) != recently_relayed.end()) {
+                                    LOG_DEBUG("Transaction {} already relayed recently, skipping", 
+                                             transaction->GetHash().ToString());
+                                } else {
+                                    // Add to recently relayed set
+                                    recently_relayed.insert(transaction->GetHash());
+                                    
+                                    // Clean up old entries (keep only last 1000)
+                                    if (recently_relayed.size() > 1000) {
+                                        auto it = recently_relayed.begin();
+                                        std::advance(it, recently_relayed.size() - 800);
+                                        recently_relayed.erase(recently_relayed.begin(), it);
+                                    }
+                                    
+                                    // Relay to selected peers
+                                    std::vector<io::UInt256> selected_peers;
+                                    
+                                    // Randomly select peers to relay to (avoid flooding)
+                                    if (connected_peers.size() <= max_relays) {
+                                        selected_peers = connected_peers;
+                                    } else {
+                                        // Randomly sample peers
+                                        std::random_device rd;
+                                        std::mt19937 gen(rd());
+                                        std::shuffle(connected_peers.begin(), connected_peers.end(), gen);
+                                        selected_peers.assign(connected_peers.begin(), connected_peers.begin() + max_relays);
+                                    }
+                                    
+                                    // Send Inv message to selected peers
+                                    for (const auto& peer_id : selected_peers) {
+                                        try {
+                                            // Check if peer is still connected and handshaked
+                                            if (p2pServer_->IsPeerHandshaked(peer_id)) {
+                                                // Send the Inv message
+                                                p2pServer_->SendMessage(peer_id, *invMessage);
+                                                relay_count++;
+                                                
+                                                LOG_DEBUG("Relayed transaction {} to peer {}", 
+                                                         transaction->GetHash().ToString(), peer_id.ToString());
+                                            }
+                                        } catch (const std::exception& e) {
+                                            LOG_WARNING("Failed to relay transaction {} to peer {}: {}", 
+                                                       transaction->GetHash().ToString(), peer_id.ToString(), e.what());
+                                        }
+                                    }
+                                    
+                                    LOG_INFO("Successfully relayed transaction {} to {} peers", 
+                                            transaction->GetHash().ToString(), relay_count);
+                                }
+                            }
+                        } else {
+                            LOG_WARNING("P2P server not available for transaction relay");
+                        }
                         
                         // Remove from pending queue since we successfully relayed it
                         this->RemoveTransaction(transaction->GetHash());

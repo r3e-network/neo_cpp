@@ -4,6 +4,7 @@ add_executable(test_cryptography
     test_crypto.cpp
     # test_ecc.cpp  # Disabled due to missing Secp256r1 implementation
     test_merkletree.cpp
+    test_ecrecover.cpp
     # test_bls12_381.cpp  # Disabled due to undefined references
     # test_base58.cpp  # Disabled due to missing Hash::Checksum API
     # test_base64url.cpp  # Disabled due to API changes

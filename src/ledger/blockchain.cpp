@@ -188,9 +188,24 @@ namespace neo::ledger
 
         std::unique_lock<std::shared_mutex> lock(blockchain_mutex_);
         
-        // Use data_cache_ directly instead of snapshot for now
-        uint32_t current_height = system_->GetLedgerContract()->GetCurrentIndex(data_cache_);
-        // Header cache disabled - use current_height
+        // Create proper snapshot for blockchain operations to ensure data consistency
+        std::shared_ptr<persistence::DataCache> snapshot;
+        try {
+            // Create a snapshot from the current data cache for read operations
+            snapshot = system_->GetSnapshot();
+            if (!snapshot) {
+                // Fallback to data_cache_ if snapshot creation fails
+                snapshot = data_cache_;
+            }
+        } catch (const std::exception& e) {
+            // Error creating snapshot - use data_cache_ as fallback
+            snapshot = data_cache_;
+        }
+        
+        // Get current height using the snapshot for consistency
+        uint32_t current_height = system_->GetLedgerContract()->GetCurrentIndex(*snapshot);
+        
+        // Use snapshot for header height as well
         uint32_t header_height = current_height;
         
         // Check if block already exists

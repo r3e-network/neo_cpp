@@ -9,9 +9,14 @@
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <cstdint>
 #include <span>
+#include <optional>
+#include <shared_mutex>
 
 namespace neo::persistence
 {
+    // Forward declaration
+    class DataCache;
+
     /**
      * @brief Represents a key in the storage for Neo N3.
      * 
@@ -204,6 +209,37 @@ namespace neo::persistence
          */
         io::UInt160 GetScriptHash() const;
 
+        /**
+         * @brief Creates a storage key with script hash and prefix.
+         * @param scriptHash The script hash.
+         * @param prefix The prefix byte.
+         * @return The storage key.
+         */
+        static StorageKey Create(const io::UInt160& scriptHash, uint8_t prefix);
+
+        /**
+         * @brief Creates a storage key with contract lookup via DataCache.
+         * @param dataCache The data cache for contract lookup.
+         * @param scriptHash The script hash.
+         * @param prefix The prefix byte.
+         * @return The storage key.
+         */
+        static StorageKey CreateWithContract(const DataCache& dataCache, const io::UInt160& scriptHash, uint8_t prefix);
+
+        /**
+         * @brief Resolves the contract ID from script hash using DataCache.
+         * @param dataCache The data cache for contract lookup.
+         * @return The resolved contract ID.
+         */
+        int32_t ResolveContractId(const DataCache& dataCache) const;
+
+        /**
+         * @brief Gets the contract ID.
+         * @return The contract ID.
+         * @throws std::runtime_error if contract ID requires resolution.
+         */
+        int32_t GetContractId() const;
+
         // ISerializable implementation
         void Serialize(io::BinaryWriter& writer) const override;
         void Deserialize(io::BinaryReader& reader) override;
@@ -220,11 +256,12 @@ namespace neo::persistence
         bool operator<(const StorageKey& other) const;
 
     private:
-        int32_t id_ = 0;
+        mutable int32_t id_ = 0;
         io::ByteVector key_;
-        io::UInt160 scriptHash_;  // For Neo 2.x compatibility
+        mutable std::optional<io::UInt160> scriptHash_;  // For Neo 2.x compatibility
         mutable io::ByteVector cache_;  // Cached serialized form
         mutable bool cacheValid_ = false;
+        mutable bool requiresLookup_ = false;  // True if contract ID needs resolution
 
         /**
          * @brief Fills the header (contract ID + prefix) into a span.

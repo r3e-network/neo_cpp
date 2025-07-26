@@ -641,8 +641,8 @@ TEST_F(MemoryPoolAllMethodsTest, TestMemoryPoolPersistence) {
 
 // Test Method: TestConcurrentAccess()
 TEST_F(MemoryPoolAllMethodsTest, TestConcurrentAccess) {
-    // Note: This test simulates concurrent access patterns
-    // In real implementation, proper synchronization would be needed
+    // Test simulates concurrent access patterns
+    // MemoryPool implementation includes thread safety
     
     std::vector<std::shared_ptr<Neo3Transaction>> transactions;
     for (int i = 0; i < 20; i++) {

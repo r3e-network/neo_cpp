@@ -6,7 +6,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add tool executables
 add_executable(neo_cli_tool cli/main.cpp)
-target_link_libraries(neo_cli_tool PRIVATE neo_core)
+target_link_libraries(neo_cli_tool PRIVATE 
+    neo_core 
+    neo_persistence 
+    neo_ledger 
+    neo_rpc 
+    neo_smartcontract
+    neo_cryptography
+    neo_io
+    neo_logging
+    neo_json
+    neo_extensions
+    neo_vm
+)
 
 add_executable(neo_gui gui/main.cpp)
 target_link_libraries(neo_gui PRIVATE neo_core)

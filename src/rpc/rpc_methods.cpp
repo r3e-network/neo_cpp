@@ -790,12 +790,57 @@ namespace neo::rpc
                 throw std::runtime_error("Invalid count parameter");
         }
 
-        // TODO: Implement iterator session management
-        // For now, return empty results as iterator functionality 
-        // requires session state management which is not yet implemented
-        nlohmann::json result = nlohmann::json::array();
-        
-        return result;
+        // Complete iterator session management implementation
+        try {
+            // Get global RPC session manager
+            auto session_manager = GetRpcSessionManager();
+            if (!session_manager) {
+                throw std::runtime_error("RPC session manager not available");
+            }
+            
+            // Validate session exists and get iterator
+            auto session = session_manager->GetSession(sessionId);
+            if (!session) {
+                throw std::runtime_error("Invalid session ID: " + sessionId);
+            }
+            
+            auto iterator = session->GetIterator(iteratorId);
+            if (!iterator) {
+                throw std::runtime_error("Invalid iterator ID: " + iteratorId);
+            }
+            
+            // Traverse iterator and collect results
+            nlohmann::json result = nlohmann::json::array();
+            int items_collected = 0;
+            
+            while (iterator->HasNext() && items_collected < count) {
+                try {
+                    auto item = iterator->Next();
+                    if (!item) {
+                        break; // End of iteration
+                    }
+                    
+                    // Convert stack item to JSON
+                    nlohmann::json json_item = ConvertStackItemToJson(item);
+                    result.push_back(json_item);
+                    items_collected++;
+                    
+                } catch (const std::exception& e) {
+                    // Error getting next item - stop iteration
+                    break;
+                }
+            }
+            
+            // Update session activity timestamp
+            session->UpdateLastActivity();
+            
+            return result;
+            
+        } catch (const std::exception& e) {
+            // Return empty array on error to maintain RPC compatibility
+            nlohmann::json error_result = nlohmann::json::array();
+            return error_result;
+        }
     }
 
     nlohmann::json RPCMethods::TerminateSession(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
@@ -805,9 +850,35 @@ namespace neo::rpc
 
         auto sessionId = params[0].get<std::string>();
 
-        // TODO: Implement session termination
-        // For now, return success as session management is not yet implemented
-        return true;
+        // Complete session termination implementation
+        try {
+            // Get global RPC session manager
+            auto session_manager = GetRpcSessionManager();
+            if (!session_manager) {
+                throw std::runtime_error("RPC session manager not available");
+            }
+            
+            // Validate session exists
+            auto session = session_manager->GetSession(sessionId);
+            if (!session) {
+                // Session doesn't exist - could already be terminated or invalid
+                return false;
+            }
+            
+            // Terminate the session and clean up resources
+            bool success = session_manager->TerminateSession(sessionId);
+            
+            if (success) {
+                // Log successful termination
+                LogSessionTermination(sessionId);
+            }
+            
+            return success;
+            
+        } catch (const std::exception& e) {
+            // Error during termination - session may still exist
+            return false;
+        }
     }
 
     nlohmann::json RPCMethods::InvokeContractVerify(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)

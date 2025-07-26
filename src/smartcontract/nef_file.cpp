@@ -6,6 +6,7 @@
 #include <neo/cryptography/hash.h>
 #include <stdexcept>
 #include <algorithm>
+#include <sstream>
 
 namespace neo::smartcontract
 {

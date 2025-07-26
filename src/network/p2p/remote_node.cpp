@@ -309,8 +309,34 @@ namespace neo::network::p2p
             case MessageCommand::FilterLoad:
                 ProcessFilterLoadMessage(message);
                 break;
+            // Handle additional P2P message types for complete protocol support
+            case MessageCommand::GetBlocks:
+                ProcessGetBlocksMessage(message);
+                break;
+            case MessageCommand::GetData:
+                ProcessGetDataMessage(message);
+                break;
+            case MessageCommand::GetHeaders:
+                ProcessGetHeadersMessage(message);
+                break;
+            case MessageCommand::Headers:
+                ProcessHeadersMessage(message);
+                break;
+            case MessageCommand::GetAddr:
+                ProcessGetAddrMessage(message);
+                break;
+            case MessageCommand::Reject:
+                ProcessRejectMessage(message);
+                break;
+            case MessageCommand::NotFound:
+                ProcessNotFoundMessage(message);
+                break;
             default:
-                // Ignore other messages for now
+                // Log unhandled message types for debugging
+                if (logger_) {
+                    logger_->Debug("RemoteNode", "Received unhandled message type: {}", 
+                        static_cast<int>(message.GetCommand()));
+                }
                 break;
         }
     }

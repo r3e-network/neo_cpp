@@ -246,7 +246,7 @@ private:
      */
     static bool CompareStackItems(const StackItem& a, const StackItem& b) {
         // Implementation would compare stack items based on type and value
-        // This is a simplified version
+        // Uses StackItem's built-in equality comparison
         return a.Equals(b);
     }
 };

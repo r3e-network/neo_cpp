@@ -16,7 +16,7 @@
 #include <gmock/gmock.h>
 
 // Include the class under test
-// TODO: Add appropriate include for MerkleTree
+#include <neo/cryptography/merkle_tree.h>
 
 namespace neo {
 namespace test {
@@ -24,22 +24,65 @@ namespace test {
 class MerkleTreeTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        // TODO: Set up test fixtures
+        // Set up test fixtures for MerkleTree testing
+        single_hash = io::UInt256::Parse("0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
+        hash_list.push_back(io::UInt256::Parse("1111111111111111111111111111111111111111111111111111111111111111"));
+        hash_list.push_back(io::UInt256::Parse("2222222222222222222222222222222222222222222222222222222222222222"));
+        hash_list.push_back(io::UInt256::Parse("3333333333333333333333333333333333333333333333333333333333333333"));
+        hash_list.push_back(io::UInt256::Parse("4444444444444444444444444444444444444444444444444444444444444444"));
     }
 
     void TearDown() override {
-        // TODO: Clean up test fixtures
+        // Clean up test fixtures
+        hash_list.clear();
     }
 
-    // TODO: Add helper methods and test data
+    // Helper methods and test data for MerkleTree testing
+    io::UInt256 single_hash;
+    std::vector<io::UInt256> hash_list;
 };
 
-// TODO: Convert test methods from C# UT_MerkleTree.cs
-// Each [TestMethod] in C# should become a TEST_F here
+// MerkleTree test methods converted from C# UT_MerkleTree.cs functionality
 
-TEST_F(MerkleTreeTest, TestExample) {
-    // TODO: Convert from C# test method
-    FAIL() << "Test not yet implemented - convert from C# UT_MerkleTree.cs";
+TEST_F(MerkleTreeTest, ConstructWithSingleHash) {
+    std::vector<io::UInt256> single_item = {single_hash};
+    auto tree = MerkleTree::ComputeRoot(single_item);
+    EXPECT_EQ(tree, single_hash); // Root of single item should be the item itself
+}
+
+TEST_F(MerkleTreeTest, ConstructWithMultipleHashes) {
+    auto root = MerkleTree::ComputeRoot(hash_list);
+    EXPECT_NE(root, io::UInt256()); // Root should not be empty
+    EXPECT_NE(root, hash_list[0]); // Root should be different from any single hash
+}
+
+TEST_F(MerkleTreeTest, ConstructWithEmptyList) {
+    std::vector<io::UInt256> empty_list;
+    auto root = MerkleTree::ComputeRoot(empty_list);
+    EXPECT_EQ(root, io::UInt256()); // Empty list should produce empty root
+}
+
+TEST_F(MerkleTreeTest, ConstructWithTwoHashes) {
+    std::vector<io::UInt256> two_hashes = {hash_list[0], hash_list[1]};
+    auto root = MerkleTree::ComputeRoot(two_hashes);
+    EXPECT_NE(root, io::UInt256()); // Root should not be empty
+    EXPECT_NE(root, hash_list[0]); // Root should be different from individual hashes
+    EXPECT_NE(root, hash_list[1]);
+}
+
+TEST_F(MerkleTreeTest, DeterministicRoot) {
+    auto root1 = MerkleTree::ComputeRoot(hash_list);
+    auto root2 = MerkleTree::ComputeRoot(hash_list);
+    EXPECT_EQ(root1, root2); // Same input should produce same root
+}
+
+TEST_F(MerkleTreeTest, DifferentOrderDifferentRoot) {
+    std::vector<io::UInt256> reversed_list = hash_list;
+    std::reverse(reversed_list.begin(), reversed_list.end());
+    
+    auto root1 = MerkleTree::ComputeRoot(hash_list);
+    auto root2 = MerkleTree::ComputeRoot(reversed_list);
+    EXPECT_NE(root1, root2); // Different order should produce different root
 }
 
 } // namespace test

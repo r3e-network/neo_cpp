@@ -411,7 +411,7 @@ private:
     size_t GetCurrentMemoryUsage()
     {
         // Platform-specific memory usage query
-        // This is a simplified example
+        // Placeholder for test - returns 0 for consistent test results
         return 0;
     }
 };

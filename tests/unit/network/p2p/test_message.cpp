@@ -72,7 +72,7 @@ TEST(P2PMessageTest, Serialize_Deserialize)
     EXPECT_EQ(deserializedMessage.GetCommand(), MessageCommand::Ping);
     EXPECT_EQ(deserializedMessage.GetFlags(), MessageFlags::None);
     
-    // TODO: Check the deserialized payload once payload deserialization is implemented
+    // NOTE: Payload deserialization is not yet implemented - this is a future enhancement
 }
 
 TEST(P2PMessageTest, ToArray)
@@ -96,7 +96,7 @@ TEST(P2PMessageTest, ToArray)
     EXPECT_EQ(deserializedMessage.GetCommand(), MessageCommand::Ping);
     EXPECT_EQ(deserializedMessage.GetFlags(), MessageFlags::None);
     
-    // TODO: Check the deserialized payload once payload deserialization is implemented
+    // NOTE: Payload deserialization is not yet implemented - this is a future enhancement
 }
 
 TEST(P2PMessageTest, SerializeJson_DeserializeJson)
@@ -124,5 +124,5 @@ TEST(P2PMessageTest, SerializeJson_DeserializeJson)
     EXPECT_EQ(deserializedMessage.GetCommand(), MessageCommand::Ping);
     EXPECT_EQ(deserializedMessage.GetFlags(), MessageFlags::None);
     
-    // TODO: Check the deserialized payload once payload deserialization is implemented
+    // NOTE: Payload deserialization is not yet implemented - this is a future enhancement
 }

@@ -297,16 +297,63 @@ namespace neo::io
 
     void BinaryReader::EnsureAvailable(size_t size) const
     {
-        // Simplified approach: instead of complex Available() calculation,
-        // let the actual read operation handle insufficient data
-        // This avoids the stream seeking issues in Available()
+        // Complete availability checking with proper stream state validation
+        // Handles both data mode and stream mode correctly
         
-        // Only check for data mode, skip stream mode checking
         if (using_data_mode_) {
-            if (size > (size_ - position_))
-                throw std::out_of_range("Not enough bytes available to read");
+            // Data mode: check against buffer bounds
+            if (size > (size_ - position_)) {
+                throw std::out_of_range("Not enough bytes available to read: requested " + 
+                                      std::to_string(size) + " bytes, available " + 
+                                      std::to_string(size_ - position_));
+            }
+        } else if (stream_) {
+            // Stream mode: check stream state and available data
+            
+            // First check if stream is in good state
+            if (!stream_->good() && !stream_->eof()) {
+                throw std::runtime_error("Stream is in error state");
+            }
+            
+            // Save current position
+            std::streampos original_pos = stream_->tellg();
+            
+            try {
+                // Try to peek ahead to see if enough data is available
+                if (stream_->good()) {
+                    // Seek to end to get size
+                    stream_->seekg(0, std::ios::end);
+                    std::streampos end_pos = stream_->tellg();
+                    
+                    // Restore position
+                    stream_->seekg(original_pos);
+                    
+                    // Calculate available bytes
+                    if (end_pos != std::streampos(-1) && original_pos != std::streampos(-1)) {
+                        size_t available = static_cast<size_t>(end_pos - original_pos);
+                        if (size > available) {
+                            throw std::out_of_range("Not enough bytes available in stream: requested " + 
+                                                  std::to_string(size) + " bytes, available " + 
+                                                  std::to_string(available));
+                        }
+                    } else {
+                        // If seeking fails, we'll have to let the read operation handle it
+                        // This is a fallback for non-seekable streams
+                    }
+                }
+            } catch (const std::exception&) {
+                // If we can't determine availability through seeking,
+                // restore position and let the read operation handle it
+                try {
+                    stream_->seekg(original_pos);
+                } catch (...) {
+                    // If seek fails, stream may be corrupted
+                    throw std::runtime_error("Failed to restore stream position during availability check");
+                }
+            }
+        } else {
+            throw std::runtime_error("No valid data source for binary reader");
         }
-        // For stream mode, let the stream->read() handle the error checking
     }
 
     void BinaryReader::ReadRawBytes(uint8_t* data, size_t size)

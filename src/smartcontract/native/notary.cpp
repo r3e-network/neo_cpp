@@ -20,7 +20,7 @@
 namespace neo::smartcontract::native
 {
     Notary::Notary()
-        : NativeContract("Notary", 13)
+        : NativeContract("Notary", ID)
     {
     }
 

@@ -195,8 +195,107 @@ void Neo2Transaction::SerializeJson(io::JsonWriter& writer) const {
 }
 
 void Neo2Transaction::DeserializeJson(const io::JsonReader& reader) {
-    // Implementation would parse JSON and populate fields
-    // For now, just a placeholder
+    // Complete JSON deserialization implementation for Neo2Transaction
+    try {
+        // Start reading the JSON object
+        reader.ReadStartObject();
+        
+        while (reader.Read()) {
+            if (reader.TokenType() == io::JsonToken::EndObject) {
+                break;
+            }
+            
+            if (reader.TokenType() == io::JsonToken::PropertyName) {
+                std::string propertyName = reader.GetString();
+                reader.Read(); // Move to property value
+                
+                if (propertyName == "type") {
+                    type_ = static_cast<Neo2TransactionType>(reader.GetInt32());
+                }
+                else if (propertyName == "version") {
+                    version_ = static_cast<uint8_t>(reader.GetInt32());
+                }
+                else if (propertyName == "nonce") {
+                    nonce_ = reader.GetUInt32();
+                }
+                else if (propertyName == "sysfee") {
+                    // Parse system fee (could be string or number)
+                    if (reader.TokenType() == io::JsonToken::String) {
+                        systemFee_ = Fixed8::Parse(reader.GetString());
+                    } else {
+                        systemFee_ = Fixed8(reader.GetInt64());
+                    }
+                }
+                else if (propertyName == "netfee") {
+                    // Parse network fee (could be string or number)
+                    if (reader.TokenType() == io::JsonToken::String) {
+                        networkFee_ = Fixed8::Parse(reader.GetString());
+                    } else {
+                        networkFee_ = Fixed8(reader.GetInt64());
+                    }
+                }
+                else if (propertyName == "validuntilblock") {
+                    validUntilBlock_ = reader.GetUInt32();
+                }
+                else if (propertyName == "size") {
+                    size_ = reader.GetUInt32();
+                }
+                else if (propertyName == "script") {
+                    // Parse script as hex string
+                    std::string scriptHex = reader.GetString();
+                    script_ = io::FromHexString(scriptHex);
+                }
+                else if (propertyName == "gas") {
+                    // Parse gas (could be string or number)
+                    if (reader.TokenType() == io::JsonToken::String) {
+                        gas_ = Fixed8::Parse(reader.GetString());
+                    } else {
+                        gas_ = Fixed8(reader.GetInt64());
+                    }
+                }
+                else if (propertyName == "txid" || propertyName == "hash") {
+                    // Parse transaction hash
+                    std::string hashHex = reader.GetString();
+                    hash_ = io::UInt256::Parse(hashHex);
+                }
+                else if (propertyName == "attributes") {
+                    // Parse attributes array
+                    reader.ReadStartArray();
+                    attributes_.clear();
+                    
+                    while (reader.Read() && reader.TokenType() != io::JsonToken::EndArray) {
+                        // Parse individual attribute
+                        reader.ReadStartObject();
+                        Neo2TransactionAttribute attr;
+                        
+                        while (reader.Read() && reader.TokenType() != io::JsonToken::EndObject) {
+                            if (reader.TokenType() == io::JsonToken::PropertyName) {
+                                std::string attrProp = reader.GetString();
+                                reader.Read();
+                                
+                                if (attrProp == "usage") {
+                                    attr.usage = static_cast<Neo2TransactionAttributeUsage>(reader.GetInt32());
+                                }
+                                else if (attrProp == "data") {
+                                    std::string dataHex = reader.GetString();
+                                    attr.data = io::FromHexString(dataHex);
+                                }
+                            }
+                        }
+                        
+                        attributes_.push_back(attr);
+                    }
+                }
+                else {
+                    // Skip unknown properties
+                    reader.Skip();
+                }
+            }
+        }
+        
+    } catch (const std::exception& e) {
+        throw std::runtime_error("Failed to deserialize Neo2Transaction from JSON: " + std::string(e.what()));
+    }
 }
 
 bool Neo2Transaction::operator==(const Neo2Transaction& other) const {

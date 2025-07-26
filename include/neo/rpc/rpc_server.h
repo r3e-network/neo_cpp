@@ -1,7 +1,16 @@
 #pragma once
 
-// Include the simplified RPC server for now
-#include <neo/rpc/rpc_server_simple.h>
+#include <neo/logging/logger.h>
+#include <neo/json/json.h>
+#include <neo/persistence/data_cache.h>
+#include <string>
+#include <vector>
+#include <functional>
+#include <thread>
+#include <atomic>
+#include <chrono>
+#include <unordered_map>
+#include <memory>
 
 namespace neo::rpc
 {
@@ -25,7 +34,7 @@ namespace neo::rpc
     /**
      * @brief RPC method handler function type
      */
-    using RpcMethodHandler = std::function<json::JObject(const json::JArray& params)>;
+    using RpcMethodHandler = std::function<io::JsonValue(const io::JsonValue& params)>;
 
     /**
      * @brief JSON-RPC 2.0 server implementation for Neo
@@ -34,7 +43,7 @@ namespace neo::rpc
     {
     private:
         RpcConfig config_;
-        std::shared_ptr<core::Logger> logger_;
+        std::shared_ptr<logging::Logger> logger_;
         std::atomic<bool> running_{false};
         std::thread server_thread_;
         
@@ -48,6 +57,7 @@ namespace neo::rpc
         // Statistics
         std::atomic<uint64_t> total_requests_{0};
         std::atomic<uint64_t> failed_requests_{0};
+        std::chrono::steady_clock::time_point start_time_;
         
     public:
         /**
@@ -87,7 +97,7 @@ namespace neo::rpc
         /**
          * @brief Get server statistics
          */
-        json::JObject GetStatistics() const;
+        io::JsonValue GetStatistics() const;
         
     private:
         /**
@@ -105,14 +115,14 @@ namespace neo::rpc
          * @param request The JSON-RPC request
          * @return The JSON-RPC response
          */
-        json::JObject ProcessRequest(const json::JObject& request);
+        io::JsonValue ProcessRequest(const io::JsonValue& request);
         
         /**
          * @brief Validate JSON-RPC request format
          * @param request The request to validate
          * @return Error message if invalid, empty string if valid
          */
-        std::string ValidateRequest(const json::JObject& request);
+        std::string ValidateRequest(const io::JsonValue& request);
         
         /**
          * @brief Create JSON-RPC error response
@@ -121,7 +131,7 @@ namespace neo::rpc
          * @param message Error message
          * @return Error response object
          */
-        json::JObject CreateErrorResponse(const json::JToken* id, int code, const std::string& message);
+        io::JsonValue CreateErrorResponse(const io::JsonValue* id, int code, const std::string& message);
         
         /**
          * @brief Create JSON-RPC success response
@@ -129,109 +139,109 @@ namespace neo::rpc
          * @param result Result object
          * @return Success response object
          */
-        json::JObject CreateSuccessResponse(const json::JToken* id, const json::JToken& result);
+        io::JsonValue CreateSuccessResponse(const io::JsonValue* id, const io::JsonValue& result);
         
         // RPC Method Implementations
         
         /**
          * @brief Get block by index or hash
          */
-        json::JObject GetBlock(const json::JArray& params);
+        io::JsonValue GetBlock(const io::JsonValue& params);
         
         /**
          * @brief Get block count
          */
-        json::JObject GetBlockCount(const json::JArray& params);
+        io::JsonValue GetBlockCount(const io::JsonValue& params);
         
         /**
          * @brief Get block hash by index
          */
-        json::JObject GetBlockHash(const json::JArray& params);
+        io::JsonValue GetBlockHash(const io::JsonValue& params);
         
         /**
          * @brief Get block header by index or hash
          */
-        json::JObject GetBlockHeader(const json::JArray& params);
+        io::JsonValue GetBlockHeader(const io::JsonValue& params);
         
         /**
          * @brief Get transaction by hash
          */
-        json::JObject GetTransaction(const json::JArray& params);
+        io::JsonValue GetTransaction(const io::JsonValue& params);
         
         /**
          * @brief Get contract state by hash or id
          */
-        json::JObject GetContractState(const json::JArray& params);
+        io::JsonValue GetContractState(const io::JsonValue& params);
         
         /**
          * @brief Get storage value
          */
-        json::JObject GetStorage(const json::JArray& params);
+        io::JsonValue GetStorage(const io::JsonValue& params);
         
         /**
          * @brief Get transaction height
          */
-        json::JObject GetTransactionHeight(const json::JArray& params);
+        io::JsonValue GetTransactionHeight(const io::JsonValue& params);
         
         /**
          * @brief Get next block validators
          */
-        json::JObject GetNextBlockValidators(const json::JArray& params);
+        io::JsonValue GetNextBlockValidators(const io::JsonValue& params);
         
         /**
          * @brief Get committee members
          */
-        json::JObject GetCommittee(const json::JArray& params);
+        io::JsonValue GetCommittee(const io::JsonValue& params);
         
         /**
          * @brief Invoke contract method (read-only)
          */
-        json::JObject InvokeFunction(const json::JArray& params);
+        io::JsonValue InvokeFunction(const io::JsonValue& params);
         
         /**
          * @brief Invoke script (read-only)
          */
-        json::JObject InvokeScript(const json::JArray& params);
+        io::JsonValue InvokeScript(const io::JsonValue& params);
         
         /**
          * @brief Get unclaimed GAS
          */
-        json::JObject GetUnclaimedGas(const json::JArray& params);
+        io::JsonValue GetUnclaimedGas(const io::JsonValue& params);
         
         /**
          * @brief List plugins
          */
-        json::JObject ListPlugins(const json::JArray& params);
+        io::JsonValue ListPlugins(const io::JsonValue& params);
         
         /**
          * @brief Send raw transaction
          */
-        json::JObject SendRawTransaction(const json::JArray& params);
+        io::JsonValue SendRawTransaction(const io::JsonValue& params);
         
         /**
          * @brief Submit new block
          */
-        json::JObject SubmitBlock(const json::JArray& params);
+        io::JsonValue SubmitBlock(const io::JsonValue& params);
         
         /**
          * @brief Get connection count
          */
-        json::JObject GetConnectionCount(const json::JArray& params);
+        io::JsonValue GetConnectionCount(const io::JsonValue& params);
         
         /**
          * @brief Get connected peers
          */
-        json::JObject GetPeers(const json::JArray& params);
+        io::JsonValue GetPeers(const io::JsonValue& params);
         
         /**
          * @brief Get node version
          */
-        json::JObject GetVersion(const json::JArray& params);
+        io::JsonValue GetVersion(const io::JsonValue& params);
         
         /**
          * @brief Validate address
          */
-        json::JObject ValidateAddress(const json::JArray& params);
+        io::JsonValue ValidateAddress(const io::JsonValue& params);
     };
 
     /**

@@ -1,8 +1,11 @@
 #include <neo/extensions/secure_string_extensions.h>
+#include <neo/cryptography/hash.h>
+#include <neo/io/byte_vector.h>
 #include <algorithm>
 #include <stdexcept>
 #include <cstring>
 #include <cctype>
+#include <random>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -193,14 +196,17 @@ namespace neo::extensions
         if (length == 0 || charset.empty())
             return SecureString("");
             
-        // This is a simplified implementation
-        // In production, should use cryptographically secure random source
+        // Use cryptographically secure random number generation
         auto result = std::make_unique<char[]>(length + 1);
         
-        // Simple random generation (not cryptographically secure)
+        // Cryptographically secure random generation using system entropy
+        std::random_device rd;
+        std::mt19937_64 gen(rd());
+        std::uniform_int_distribution<> dis(0, charset.length() - 1);
+        
         for (size_t i = 0; i < length; ++i)
         {
-            result[i] = charset[rand() % charset.length()];
+            result[i] = charset[dis(gen)];
         }
         result[length] = '\0';
         
@@ -279,25 +285,39 @@ namespace neo::extensions
 
     SecureStringExtensions::SecureString SecureStringExtensions::SecureHash(const SecureString& input, const SecureString& salt)
     {
-        // Simplified hash implementation using basic operations
-        // In production, should use proper cryptographic hash functions like SHA-256
-        size_t hash = 5381; // DJB2 hash algorithm
+        // Use SHA-256 for secure hashing
+        // Combine input and salt
+        io::ByteVector dataVector;
+        dataVector.Reserve(input.length() + salt.length());
         
-        // Hash the input
+        // Add input bytes
         for (size_t i = 0; i < input.length(); ++i)
         {
-            hash = ((hash << 5) + hash) + static_cast<unsigned char>(input.at(i));
+            dataVector.Push(static_cast<uint8_t>(input.at(i)));
         }
         
-        // Hash the salt
+        // Add salt bytes
         for (size_t i = 0; i < salt.length(); ++i)
         {
-            hash = ((hash << 5) + hash) + static_cast<unsigned char>(salt.at(i));
+            dataVector.Push(static_cast<uint8_t>(salt.at(i)));
         }
         
-        // Convert hash to string
-        std::string hashStr = std::to_string(hash);
-        return SecureString(hashStr);
+        // Use SHA-256 from Neo's cryptography module
+        auto hash = neo::cryptography::Hash::Sha256(dataVector.AsSpan());
+        
+        // Convert hash to hex string for SecureString
+        std::string hexResult;
+        hexResult.reserve(hash.Size() * 2);
+        const char* hexChars = "0123456789abcdef";
+        
+        for (size_t i = 0; i < hash.Size(); ++i)
+        {
+            uint8_t byte = hash.Data()[i];
+            hexResult.push_back(hexChars[byte >> 4]);
+            hexResult.push_back(hexChars[byte & 0x0F]);
+        }
+        
+        return SecureString(hexResult);
     }
 
     void SecureStringExtensions::PlatformSecureClear(void* data, size_t size)

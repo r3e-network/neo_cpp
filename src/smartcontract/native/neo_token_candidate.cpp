@@ -331,9 +331,8 @@ namespace neo::smartcontract::native
         }
         catch (const std::exception& e)
         {
-            // For now, log the error and allow operation to proceed
-            // This maintains compatibility while proper committee integration is completed
-            std::cerr << "Committee check failed: " << e.what() << std::endl;
+            // Committee authorization failed - MUST deny access for security
+            throw std::runtime_error(std::string("Committee authorization failed for setting register price: ") + e.what());
         }
 
         // Validate register price
@@ -355,4 +354,4 @@ namespace neo::smartcontract::native
 
         return vm::StackItem::Create(true);
     }
-}
+} 

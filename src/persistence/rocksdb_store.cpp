@@ -276,19 +276,60 @@ namespace neo::persistence
         {
             auto store = std::make_shared<RocksDBStore>(path);
             stores_[path] = store;
-            // Create a new RocksDBStore with the same path
-            auto clone = std::make_unique<RocksDBStore>(path + "_clone");
-            // Copy data from the original store to the clone
-            // Note: In production, this would be a snapshot operation
-            return clone;
+            
+            // Create production-ready snapshot using RocksDB snapshot mechanism
+            // This creates an immutable point-in-time view consistent with C# LevelDBStore
+            auto snapshot_store = std::make_unique<RocksDBStore>(path + "_snapshot");
+            
+            // Use RocksDB's built-in snapshot functionality for atomic point-in-time view
+            rocksdb::ReadOptions read_options;
+            read_options.snapshot = store->GetDB()->GetSnapshot();
+            
+            // Copy all key-value pairs from original to snapshot store using iterator
+            auto iterator = store->GetDB()->NewIterator(read_options);
+            rocksdb::WriteBatch batch;
+            
+            for (iterator->SeekToFirst(); iterator->Valid(); iterator->Next()) {
+                batch.Put(iterator->key(), iterator->value());
+            }
+            
+            auto status = snapshot_store->GetDB()->Write(rocksdb::WriteOptions(), &batch);
+            if (!status.ok()) {
+                throw std::runtime_error("Failed to create store snapshot: " + status.ToString());
+            }
+            
+            // Release the snapshot from original store
+            store->GetDB()->ReleaseSnapshot(read_options.snapshot);
+            delete iterator;
+            
+            return snapshot_store;
         }
 
         auto store = it->second;
-        // Create a new RocksDBStore with the same path
-        auto clone = std::make_unique<RocksDBStore>(path + "_clone");
-        // Copy data from the original store to the clone
-        // Note: In production, this would be a snapshot operation
-        return clone;
+        
+        // Create production-ready snapshot for existing store
+        auto snapshot_store = std::make_unique<RocksDBStore>(path + "_snapshot");
+        
+        // Use RocksDB's atomic snapshot mechanism consistent with Neo C# implementation
+        rocksdb::ReadOptions read_options;
+        read_options.snapshot = store->GetDB()->GetSnapshot();
+        
+        auto iterator = store->GetDB()->NewIterator(read_options);
+        rocksdb::WriteBatch batch;
+        
+        for (iterator->SeekToFirst(); iterator->Valid(); iterator->Next()) {
+            batch.Put(iterator->key(), iterator->value());
+        }
+        
+        auto status = snapshot_store->GetDB()->Write(rocksdb::WriteOptions(), &batch);
+        if (!status.ok()) {
+            throw std::runtime_error("Failed to create store snapshot: " + status.ToString());
+        }
+        
+        store->GetDB()->ReleaseSnapshot(read_options.snapshot);
+        delete iterator;
+        
+        return snapshot_store;
     }
 #endif
 }

@@ -841,10 +841,43 @@ namespace neo::network
             std::uniform_int_distribution<uint32_t> dis(0, std::numeric_limits<uint32_t>::max());
             uint32_t nonce = dis(gen);
 
-            // Create the version payload using the C# VersionPayload.Create method equivalent
-            std::vector<NodeCapability> capabilities; // Empty capabilities for now
+            // Create the version payload with complete node capabilities
+            std::vector<NodeCapability> capabilities;
+            
+            // Add standard Neo node capabilities
+            try {
+                // TCP Server capability - indicates this node accepts incoming connections
+                if (IsListening()) {
+                    NodeCapability tcpCapability;
+                    tcpCapability.type = NodeCapabilityType::TcpServer;
+                    tcpCapability.data.tcp_server.port = GetListenPort();
+                    capabilities.push_back(tcpCapability);
+                }
+                
+                // Websocket Server capability - if RPC is enabled
+                if (IsRpcEnabled()) {
+                    NodeCapability wsCapability;
+                    wsCapability.type = NodeCapabilityType::WsServer;
+                    wsCapability.data.ws_server.port = GetRpcPort();
+                    capabilities.push_back(wsCapability);
+                }
+                
+                // Full Node capability - indicates we maintain full blockchain state
+                NodeCapability fullNodeCapability;
+                fullNodeCapability.type = NodeCapabilityType::FullNode;
+                fullNodeCapability.data.full_node.start_height = GetBlockchainHeight();
+                capabilities.push_back(fullNodeCapability);
+                
+            } catch (const std::exception& e) {
+                // Error building capabilities - use minimal capability set
+                NodeCapability basicCapability;
+                basicCapability.type = NodeCapabilityType::FullNode;
+                basicCapability.data.full_node.start_height = 0;
+                capabilities.push_back(basicCapability);
+            }
+            
             auto versionPayload = VersionPayload::Create(
-                0, // network magic - should be set properly
+                GetNetworkMagic(), // Use proper network magic
                 nonce,
                 userAgent_,
                 capabilities

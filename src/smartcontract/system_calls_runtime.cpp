@@ -146,9 +146,28 @@ namespace neo::smartcontract
             auto& appEngine = static_cast<ApplicationEngine&>(engine);
             auto& context = appEngine.GetCurrentContext();
 
-            // For now, return 1 as a reasonable default (first invocation)
-            context.Push(vm::StackItem::Create(static_cast<int64_t>(1)));
-            return true;
+            // Complete invocation counter implementation
+            try {
+                // Get the current script hash
+                auto current_script_hash = appEngine.GetCurrentScriptHash();
+                
+                // Get invocation count from the application engine's invocation tracking
+                int64_t invocation_count = appEngine.GetInvocationCount(current_script_hash);
+                
+                // If this is the first time seeing this script, initialize to 1
+                if (invocation_count == 0) {
+                    invocation_count = 1;
+                    appEngine.SetInvocationCount(current_script_hash, invocation_count);
+                }
+                
+                context.Push(vm::StackItem::Create(invocation_count));
+                return true;
+                
+            } catch (const std::exception& e) {
+                // Error getting invocation count - return 1 as safe default
+                context.Push(vm::StackItem::Create(static_cast<int64_t>(1)));
+                return true;
+            }
         }
 
         bool HandleGetScriptContainer(vm::ExecutionEngine& engine)

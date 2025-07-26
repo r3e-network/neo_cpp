@@ -49,6 +49,16 @@ namespace neo::cryptography::ecc
          */
         static bool IsValidPublicKey(const io::ByteVector& publicKey);
         
+        /**
+         * @brief Check if byte vector is all zeros
+         */
+        static bool IsZero(const io::ByteVector& value);
+        
+        /**
+         * @brief Verify public key is on secp256r1 curve
+         */
+        static bool IsOnCurve(const io::ByteVector& publicKey);
+        
         // Methods that match C# Neo implementation
         
         /**

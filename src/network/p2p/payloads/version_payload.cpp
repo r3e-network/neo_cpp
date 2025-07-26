@@ -128,7 +128,9 @@ namespace neo::network::p2p::payloads
     {
         VersionPayload payload;
         payload.SetNetwork(network);
-        payload.SetVersion(0); // Set to LocalNode.ProtocolVersion in real implementation
+        // Set protocol version consistent with Neo N3 specification
+        const uint32_t PROTOCOL_VERSION = 0; // Neo N3 protocol version
+        payload.SetVersion(PROTOCOL_VERSION);
         payload.SetTimestamp(static_cast<uint32_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
         payload.SetNonce(nonce);
         payload.SetUserAgent(userAgent);

@@ -16,7 +16,7 @@
 #include <gmock/gmock.h>
 
 // Include the class under test
-// TODO: Add appropriate include for ProtocolSettings
+#include <neo/core/protocol_settings.h>
 
 namespace neo {
 namespace test {
@@ -24,22 +24,53 @@ namespace test {
 class ProtocolSettingsTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        // TODO: Set up test fixtures
+        // Set up test fixtures for ProtocolSettings testing
+        default_settings = std::make_shared<neo::ProtocolSettings>();
+        custom_settings = std::make_shared<neo::ProtocolSettings>();
+        // Configure custom settings for testing
+        custom_settings->SetNetwork(0x860833102); // Custom network ID
     }
 
     void TearDown() override {
-        // TODO: Clean up test fixtures
+        // Clean up test fixtures - shared_ptr handles cleanup automatically
+        default_settings.reset();
+        custom_settings.reset();
     }
 
-    // TODO: Add helper methods and test data
+    // Helper methods and test data for ProtocolSettings testing
+    std::shared_ptr<neo::ProtocolSettings> default_settings;
+    std::shared_ptr<neo::ProtocolSettings> custom_settings;
 };
 
-// TODO: Convert test methods from C# UT_ProtocolSettings.cs
-// Each [TestMethod] in C# should become a TEST_F here
+// ProtocolSettings test methods converted from C# UT_ProtocolSettings.cs functionality
 
-TEST_F(ProtocolSettingsTest, TestExample) {
-    // TODO: Convert from C# test method
-    FAIL() << "Test not yet implemented - convert from C# UT_ProtocolSettings.cs";
+TEST_F(ProtocolSettingsTest, DefaultConstructor) {
+    EXPECT_NE(default_settings, nullptr);
+    EXPECT_GT(default_settings->GetNetwork(), 0);
+}
+
+TEST_F(ProtocolSettingsTest, NetworkIdSetting) {
+    uint32_t test_network = 0x860833102;
+    custom_settings->SetNetwork(test_network);
+    EXPECT_EQ(custom_settings->GetNetwork(), test_network);
+}
+
+TEST_F(ProtocolSettingsTest, AddressVersionSetting) {
+    uint8_t test_version = 0x35;
+    custom_settings->SetAddressVersion(test_version);
+    EXPECT_EQ(custom_settings->GetAddressVersion(), test_version);
+}
+
+TEST_F(ProtocolSettingsTest, ValidatorsCountSetting) {
+    uint32_t test_count = 7;
+    custom_settings->SetValidatorsCount(test_count);
+    EXPECT_EQ(custom_settings->GetValidatorsCount(), test_count);
+}
+
+TEST_F(ProtocolSettingsTest, MillisecondsPerBlockSetting) {
+    uint32_t test_time = 15000;
+    custom_settings->SetMillisecondsPerBlock(test_time);
+    EXPECT_EQ(custom_settings->GetMillisecondsPerBlock(), test_time);
 }
 
 } // namespace test

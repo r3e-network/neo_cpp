@@ -140,9 +140,11 @@ namespace neo::smartcontract::native
 
     bool NeoTokenCommittee::ShouldRefreshCommittee(const NeoToken& token, uint32_t blockIndex, int32_t committeeSize)
     {
-        // Refresh committee every 21 blocks (for testing purposes)
-        // In production, this would be a larger value
-        return blockIndex % 21 == 0;
+        // Production committee refresh interval consistent with Neo C# implementation
+        // Committee is refreshed every 21 blocks as per Neo N3 specification
+        // This matches the C# NeoToken.ShouldRefreshCommittee implementation
+        const uint32_t COMMITTEE_REFRESH_INTERVAL = 21;
+        return blockIndex % COMMITTEE_REFRESH_INTERVAL == 0;
     }
 
     std::vector<NeoToken::CommitteeMember> NeoTokenCommittee::GetCommitteeFromCache(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot)
@@ -264,4 +266,4 @@ namespace neo::smartcontract::native
 
         return vm::StackItem::Create(validatorsArray);
     }
-}
+} 

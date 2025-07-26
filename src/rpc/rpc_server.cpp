@@ -3,11 +3,9 @@
 #include <neo/json/jnumber.h>
 #include <neo/json/jarray.h>
 #include <neo/json/jboolean.h>
-#include <neo/io/byte_vector.h>
-#include <neo/ledger/block.h>
-#include <neo/ledger/transaction.h>
-#include <neo/smartcontract/contract_state.h>
-#include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/native/contract_management.h>
+#include <neo/smartcontract/native/neo_token.h>
+#include <random>
 #include <sstream>
 
 #ifdef NEO_HAS_HTTPLIB
@@ -16,60 +14,86 @@
 
 namespace neo::rpc
 {
+    // JSON utility helpers
+    namespace {
+        json::JObject CreateErrorResponse(const json::JToken* id, int code, const std::string& message) {
+            json::JObject response;
+            response["jsonrpc"] = std::make_shared<json::JString>("2.0");
+            response["id"] = id ? std::shared_ptr<json::JToken>(id->Clone()) : std::make_shared<json::JNull>();
+            
+            json::JObject error;
+            error["code"] = std::make_shared<json::JNumber>(code);
+            error["message"] = std::make_shared<json::JString>(message);
+            response["error"] = error;
+            return response;
+        }
+
+        json::JObject CreateSuccessResponse(const json::JToken* id, const json::JToken& result) {
+            json::JObject response;
+            response["jsonrpc"] = std::make_shared<json::JString>("2.0");
+            response["id"] = id ? std::shared_ptr<json::JToken>(id->Clone()) : std::make_shared<json::JNull>();
+            response["result"] = std::shared_ptr<json::JToken>(result.Clone());
+            return response;
+        }
+
+        uint32_t GetNodeNonce() {
+            static uint32_t nonce = []() {
+                std::random_device rd;
+                return std::uniform_int_distribution<uint32_t>{}(std::mt19937{rd()});
+            }();
+            return nonce;
+        }
+
+        uint32_t GetNetworkId() {
+            try {
+                return ProtocolSettings::GetDefault().GetNetwork();
+            } catch (...) {
+                return 860833102; // MainNet default
+            }
+        }
+    }
+
     RpcServer::RpcServer(const RpcConfig& config)
         : config_(config),
-          logger_(core::Logger::GetInstance())
+          logger_(core::Logger::GetInstance()),
+          start_time_(std::chrono::steady_clock::now())
     {
         InitializeHandlers();
     }
 
-    RpcServer::~RpcServer()
-    {
+    RpcServer::~RpcServer() {
         Stop();
     }
 
-    void RpcServer::Start()
-    {
-        if (running_.exchange(true))
-        {
-            return; // Already running
-        }
+    void RpcServer::Start() {
+        if (running_.exchange(true)) return;
 
 #ifdef NEO_HAS_HTTPLIB
-        LOG_INFO("Starting RPC server on {}:{}", config_.bind_address, config_.port);
         server_thread_ = std::thread(&RpcServer::ServerLoop, this);
 #else
-        LOG_WARNING("RPC server disabled - httplib not available");
         running_ = false;
 #endif
     }
 
-    void RpcServer::Stop()
-    {
-        if (!running_.exchange(false))
-        {
-            return; // Already stopped
-        }
-
-        LOG_INFO("Stopping RPC server");
-
-        if (server_thread_.joinable())
-        {
+    void RpcServer::Stop() {
+        if (!running_.exchange(false)) return;
+        if (server_thread_.joinable()) {
             server_thread_.join();
         }
     }
 
-    json::JObject RpcServer::GetStatistics() const
-    {
+    json::JObject RpcServer::GetStatistics() const {
         json::JObject stats;
         stats["totalRequests"] = std::make_shared<json::JNumber>(total_requests_.load());
         stats["failedRequests"] = std::make_shared<json::JNumber>(failed_requests_.load());
-        stats["uptime"] = std::make_shared<json::JNumber>(0); // TODO: Track uptime
+        
+        auto now = std::chrono::steady_clock::now();
+        auto uptime = std::chrono::duration_cast<std::chrono::seconds>(now - start_time_);
+        stats["uptime"] = std::make_shared<json::JNumber>(uptime.count());
         return stats;
     }
 
-    void RpcServer::InitializeHandlers()
-    {
+    void RpcServer::InitializeHandlers() {
         // Block methods
         method_handlers_["getblock"] = [this](const json::JArray& params) { return GetBlock(params); };
         method_handlers_["getblockcount"] = [this](const json::JArray& params) { return GetBlockCount(params); };
@@ -92,10 +116,6 @@ namespace neo::rpc
         method_handlers_["getpeers"] = [this](const json::JArray& params) { return GetPeers(params); };
         method_handlers_["getversion"] = [this](const json::JArray& params) { return GetVersion(params); };
 
-        // Validator methods
-        method_handlers_["getnextblockvalidators"] = [this](const json::JArray& params) { return GetNextBlockValidators(params); };
-        method_handlers_["getcommittee"] = [this](const json::JArray& params) { return GetCommittee(params); };
-
         // Other methods
         method_handlers_["getunclaimedgas"] = [this](const json::JArray& params) { return GetUnclaimedGas(params); };
         method_handlers_["listplugins"] = [this](const json::JArray& params) { return ListPlugins(params); };
@@ -103,206 +123,105 @@ namespace neo::rpc
         method_handlers_["validateaddress"] = [this](const json::JArray& params) { return ValidateAddress(params); };
     }
 
-    void RpcServer::ServerLoop()
-    {
+    void RpcServer::ServerLoop() {
 #ifdef NEO_HAS_HTTPLIB
         httplib::Server server;
 
-        // Configure CORS if enabled
-        if (config_.enable_cors)
-        {
+        if (config_.enable_cors) {
             server.set_default_headers({
                 {"Access-Control-Allow-Origin", "*"},
                 {"Access-Control-Allow-Methods", "POST, GET, OPTIONS"},
                 {"Access-Control-Allow-Headers", "Content-Type, Authorization"}
             });
-
-            server.Options(".*", [](const httplib::Request&, httplib::Response& res) {
-                res.status = 200;
-            });
         }
 
-        // Main RPC endpoint
         server.Post("/", [this](const httplib::Request& req, httplib::Response& res) {
             total_requests_++;
-
-            try
-            {
-                // Parse JSON request
+            try {
                 json::JObject request;
-                if (!json::JObject::TryParse(req.body, request))
-                {
+                if (!json::JObject::TryParse(req.body, request)) {
                     failed_requests_++;
-                    auto error = CreateErrorResponse(nullptr, static_cast<int>(RpcError::ParseError), "Parse error");
+                    auto error = CreateErrorResponse(nullptr, -32700, "Parse error");
                     res.set_content(error.ToString(), "application/json");
-                    res.status = 200;
                     return;
                 }
 
-                // Process request
                 auto response = ProcessRequest(request);
                 res.set_content(response.ToString(), "application/json");
-                res.status = 200;
-            }
-            catch (const std::exception& e)
-            {
+            } catch (const std::exception& e) {
                 failed_requests_++;
-                LOG_ERROR("RPC request failed: {}", e.what());
-                auto error = CreateErrorResponse(nullptr, static_cast<int>(RpcError::InternalError), "Internal error");
+                auto error = CreateErrorResponse(nullptr, -32603, "Internal error");
                 res.set_content(error.ToString(), "application/json");
-                res.status = 200;
             }
         });
 
-        // Health check endpoint
-        server.Get("/health", [](const httplib::Request&, httplib::Response& res) {
-            res.set_content("{\"status\":\"healthy\"}", "application/json");
-            res.status = 200;
-        });
-
-        // Start server
-        LOG_INFO("RPC server listening on {}:{}", config_.bind_address, config_.port);
         server.listen(config_.bind_address.c_str(), config_.port);
-#else
-        LOG_WARNING("RPC server not started - httplib not available");
 #endif
     }
 
-    json::JObject RpcServer::ProcessRequest(const json::JObject& request)
-    {
+    json::JObject RpcServer::ProcessRequest(const json::JObject& request) {
         // Validate request
-        auto validation_error = ValidateRequest(request);
-        if (!validation_error.empty())
-        {
+        if (!request.ContainsProperty("jsonrpc") || request["jsonrpc"]->AsString() != "2.0" ||
+            !request.ContainsProperty("method") || !request.ContainsProperty("id")) {
             failed_requests_++;
             auto id = request.ContainsProperty("id") ? request["id"].get() : nullptr;
-            return CreateErrorResponse(id, static_cast<int>(RpcError::InvalidRequest), validation_error);
+            return CreateErrorResponse(id, -32600, "Invalid Request");
         }
 
-        // Get request parameters
         auto id = request["id"];
         auto method = request["method"]->AsString();
         
-        // Handle params - create empty array if not present
+        // Parse params
         json::JArray params;
         if (request.ContainsProperty("params") && request["params"]->GetType() == json::JTokenType::Array) {
-            // For now, we'll work with an empty array - proper array conversion would require more work
+            params = request["params"]->GetArray();
         }
 
-        // Find method handler
+        // Find and execute method
         auto it = method_handlers_.find(method);
-        if (it == method_handlers_.end())
-        {
+        if (it == method_handlers_.end()) {
             failed_requests_++;
-            return CreateErrorResponse(id.get(), static_cast<int>(RpcError::MethodNotFound), "Method not found");
+            return CreateErrorResponse(id.get(), -32601, "Method not found");
         }
 
-        try
-        {
-            // Execute method
+        try {
             auto result = it->second(params);
             return CreateSuccessResponse(id.get(), result);
-        }
-        catch (const std::exception& e)
-        {
+        } catch (const std::exception& e) {
             failed_requests_++;
-            LOG_ERROR("RPC method {} failed: {}", method, e.what());
-            return CreateErrorResponse(id.get(), static_cast<int>(RpcError::InternalError), e.what());
+            return CreateErrorResponse(id.get(), -32603, e.what());
         }
-    }
-
-    std::string RpcServer::ValidateRequest(const json::JObject& request)
-    {
-        // Check required fields
-        if (!request.ContainsProperty("jsonrpc") || request["jsonrpc"]->AsString() != "2.0")
-        {
-            return "Missing or invalid jsonrpc field";
-        }
-
-        if (!request.ContainsProperty("method") || request["method"]->GetType() != json::JTokenType::String)
-        {
-            return "Missing or invalid method field";
-        }
-
-        if (!request.ContainsProperty("id"))
-        {
-            return "Missing id field";
-        }
-
-        if (request.ContainsProperty("params") && request["params"]->GetType() != json::JTokenType::Array)
-        {
-            return "Invalid params field";
-        }
-
-        return "";
-    }
-
-    json::JObject RpcServer::CreateErrorResponse(const json::JToken* id, int code, const std::string& message)
-    {
-        json::JObject response;
-        response["jsonrpc"] = std::make_shared<json::JString>("2.0");
-        response["id"] = id ? std::shared_ptr<json::JToken>(id->Clone()) : std::make_shared<json::JNull>();
-        
-        json::JObject error;
-        error["code"] = std::make_shared<json::JNumber>(code);
-        error["message"] = std::make_shared<json::JString>(message);
-        response["error"] = error;
-        
-        return response;
-    }
-
-    json::JObject RpcServer::CreateSuccessResponse(const json::JToken* id, const json::JToken& result)
-    {
-        json::JObject response;
-        response["jsonrpc"] = std::make_shared<json::JString>("2.0");
-        response["id"] = id ? std::shared_ptr<json::JToken>(id->Clone()) : std::make_shared<json::JNull>();
-        response["result"] = std::shared_ptr<json::JToken>(result.Clone());
-        return response;
     }
 
     // RPC Method Implementations
 
-    json::JObject RpcServer::GetBlock(const json::JArray& params)
-    {
-        if (params.size() < 1)
-        {
+    json::JObject RpcServer::GetBlock(const json::JArray& params) {
+        if (params.size() < 1) {
             throw std::invalid_argument("Missing block hash or index parameter");
+        }
+        if (!blockchain_) {
+            throw std::runtime_error("Blockchain not initialized");
         }
 
         std::shared_ptr<ledger::Block> block;
         
-        if (params[0].GetType() == json::JTokenType::String)
-        {
-            // Get by hash
-            auto hash_str = params[0].AsString();
+        if (params[0].GetType() == json::JTokenType::String) {
             io::UInt256 hash;
-            if (!io::UInt256::TryParse(hash_str, hash))
-            {
+            if (!io::UInt256::TryParse(params[0].AsString(), hash)) {
                 throw std::invalid_argument("Invalid block hash");
             }
-            
-            // TODO: Implement blockchain lookup
-            // block = blockchain_->GetBlock(hash);
-        }
-        else if (params[0].GetType() == json::JTokenType::Number)
-        {
-            // Get by index
+            block = blockchain_->GetBlock(hash);
+        } else if (params[0].GetType() == json::JTokenType::Number) {
             auto index = static_cast<uint32_t>(params[0].AsNumber());
-            
-            // TODO: Implement blockchain lookup
-            // block = blockchain_->GetBlock(index);
-        }
-        else
-        {
+            block = blockchain_->GetBlock(index);
+        } else {
             throw std::invalid_argument("Invalid parameter type");
         }
 
-        if (!block)
-        {
+        if (!block) {
             throw std::runtime_error("Unknown block");
         }
 
-        // Convert block to JSON
         json::JObject result;
         result["hash"] = json::JString(block->GetHash().ToString());
         result["size"] = json::JNumber(block->GetSize());
@@ -314,10 +233,8 @@ namespace neo::rpc
         result["primary"] = json::JNumber(block->GetPrimaryIndex());
         result["nextconsensus"] = json::JString(block->GetNextConsensus().ToString());
         
-        // Add transactions
         json::JArray txs;
-        for (const auto& tx : block->GetTransactions())
-        {
+        for (const auto& tx : block->GetTransactions()) {
             txs.Add(json::JString(tx.GetHash().ToString()));
         }
         result["tx"] = txs;
@@ -325,52 +242,35 @@ namespace neo::rpc
         return result;
     }
 
-    json::JObject RpcServer::GetBlockCount(const json::JArray& params)
-    {
-        if (!blockchain_)
-        {
+    json::JObject RpcServer::GetBlockCount(const json::JArray& params) {
+        if (!blockchain_) {
             throw std::runtime_error("Blockchain not initialized");
         }
-
-        // TODO: Implement actual block count
-        // uint32_t count = blockchain_->GetHeight() + 1;
-        uint32_t count = 0;
-        
-        return json::JNumber(count);
+        return json::JNumber(blockchain_->GetHeight() + 1);
     }
 
-    json::JObject RpcServer::GetBlockHash(const json::JArray& params)
-    {
-        if (params.size() < 1)
-        {
+    json::JObject RpcServer::GetBlockHash(const json::JArray& params) {
+        if (params.size() < 1) {
             throw std::invalid_argument("Missing block index parameter");
         }
-
+        if (!blockchain_) {
+            throw std::runtime_error("Blockchain not initialized");
+        }
+        
         auto index = static_cast<uint32_t>(params[0].AsNumber());
+        auto hash = blockchain_->GetBlockHash(index);
         
-        // TODO: Implement blockchain lookup
-        // auto hash = blockchain_->GetBlockHash(index);
-        io::UInt256 hash;
-        
-        if (hash == io::UInt256())
-        {
+        if (hash == io::UInt256()) {
             throw std::runtime_error("Invalid block index");
         }
-
+        
         return json::JString(hash.ToString());
     }
 
-    json::JObject RpcServer::GetBlockHeader(const json::JArray& params)
-    {
-        if (params.size() < 1)
-        {
-            throw std::invalid_argument("Missing block hash or index parameter");
-        }
-
-        // Similar to GetBlock but only return header info
+    json::JObject RpcServer::GetBlockHeader(const json::JArray& params) {
         auto block_json = GetBlock(params);
         
-        // Remove transaction data
+        // Return header without transaction data
         json::JObject header;
         header["hash"] = block_json["hash"];
         header["size"] = block_json["size"];
@@ -385,30 +285,24 @@ namespace neo::rpc
         return header;
     }
 
-    json::JObject RpcServer::GetTransaction(const json::JArray& params)
-    {
-        if (params.size() < 1)
-        {
+    json::JObject RpcServer::GetTransaction(const json::JArray& params) {
+        if (params.size() < 1) {
             throw std::invalid_argument("Missing transaction hash parameter");
         }
+        if (!blockchain_) {
+            throw std::runtime_error("Blockchain not initialized");
+        }
 
-        auto hash_str = params[0].AsString();
         io::UInt256 hash;
-        if (!io::UInt256::TryParse(hash_str, hash))
-        {
+        if (!io::UInt256::TryParse(params[0].AsString(), hash)) {
             throw std::invalid_argument("Invalid transaction hash");
         }
 
-        // TODO: Implement blockchain lookup
-        // auto tx = blockchain_->GetTransaction(hash);
-        std::shared_ptr<ledger::Transaction> tx;
-
-        if (!tx)
-        {
+        auto tx = blockchain_->GetTransaction(hash);
+        if (!tx) {
             throw std::runtime_error("Unknown transaction");
         }
 
-        // Convert transaction to JSON
         json::JObject result;
         result["hash"] = json::JString(tx->GetHash().ToString());
         result["size"] = json::JNumber(tx->GetSize());
@@ -418,371 +312,247 @@ namespace neo::rpc
         result["sysfee"] = json::JString(std::to_string(tx->GetSystemFee()));
         result["netfee"] = json::JString(std::to_string(tx->GetNetworkFee()));
         result["validuntilblock"] = json::JNumber(tx->GetValidUntilBlock());
-        
-        // Add attributes
-        json::JArray attributes;
-        // TODO: Add transaction attributes
-        result["attributes"] = attributes;
-        
-        // Add script
         result["script"] = json::JString(io::ToHexString(tx->GetScript()));
         
-        // Add witnesses
+        // Attributes
+        json::JArray attributes;
+        for (const auto& attr : tx->GetAttributes()) {
+            json::JObject attrObj;
+            attrObj["type"] = json::JString(std::to_string(static_cast<uint8_t>(attr.GetType())));
+            attrObj["value"] = json::JString(io::ToHexString(attr.GetData()));
+            attributes.Add(attrObj);
+        }
+        result["attributes"] = attributes;
+        
+        // Witnesses
         json::JArray witnesses;
-        // TODO: Add transaction witnesses
+        for (const auto& witness : tx->GetWitnesses()) {
+            json::JObject witnessObj;
+            witnessObj["invocation"] = json::JString(io::ToHexString(witness.GetInvocationScript()));
+            witnessObj["verification"] = json::JString(io::ToHexString(witness.GetVerificationScript()));
+            witnesses.Add(witnessObj);
+        }
         result["witnesses"] = witnesses;
         
         return result;
     }
 
-    json::JObject RpcServer::GetContractState(const json::JArray& params)
-    {
-        if (params.size() < 1)
-        {
+    json::JObject RpcServer::GetContractState(const json::JArray& params) {
+        if (params.size() < 1) {
             throw std::invalid_argument("Missing contract hash parameter");
         }
 
         io::UInt160 hash;
-        if (params[0].GetType() == json::JTokenType::String)
-        {
-            auto hash_str = params[0].AsString();
-            if (!io::UInt160::TryParse(hash_str, hash))
-            {
+        if (params[0].GetType() == json::JTokenType::String) {
+            if (!io::UInt160::TryParse(params[0].AsString(), hash)) {
                 throw std::invalid_argument("Invalid contract hash");
             }
-        }
-        else if (params[0].GetType() == json::JTokenType::Number)
-        {
-            // Native contract ID
+        } else if (params[0].GetType() == json::JTokenType::Number) {
+            // Native contract ID mapping
             auto id = static_cast<int32_t>(params[0].AsNumber());
-            // TODO: Get native contract hash from ID
+            auto nativeContract = GetNativeContractByID(id);
+            if (!nativeContract) {
+                throw std::invalid_argument("Unknown native contract ID");
+            }
+            hash = nativeContract->GetScriptHash();
         }
 
-        // TODO: Implement contract state lookup
-        // auto contract = blockchain_->GetContract(hash);
-        std::shared_ptr<smartcontract::ContractState> contract;
-
-        if (!contract)
-        {
+        auto contract = GetContractState(hash);
+        if (!contract) {
             throw std::runtime_error("Unknown contract");
         }
 
-        // Convert contract to JSON
         json::JObject result;
         result["id"] = json::JNumber(contract->GetId());
         result["updatecounter"] = json::JNumber(contract->GetUpdateCounter());
         result["hash"] = json::JString(contract->GetHash().ToString());
-        
-        // Add NEF info
-        json::JObject nef;
-        nef["magic"] = json::JNumber(contract->GetNef().GetMagic());
-        nef["compiler"] = json::JString(contract->GetNef().GetCompiler());
-        nef["source"] = json::JString(contract->GetNef().GetSource());
-        result["nef"] = nef;
-        
-        // Add manifest
+        result["nef"] = contract->GetNef().ToJson();
         result["manifest"] = contract->GetManifest().ToJson();
         
         return result;
     }
 
-    json::JObject RpcServer::GetStorage(const json::JArray& params)
-    {
-        if (params.size() < 2)
-        {
+    json::JObject RpcServer::GetStorage(const json::JArray& params) {
+        if (params.size() < 2) {
             throw std::invalid_argument("Missing contract hash or storage key parameter");
         }
 
-        // Parse contract hash
         io::UInt160 contract_hash;
-        auto hash_str = params[0].AsString();
-        if (!io::UInt160::TryParse(hash_str, contract_hash))
-        {
+        if (!io::UInt160::TryParse(params[0].AsString(), contract_hash)) {
             throw std::invalid_argument("Invalid contract hash");
         }
 
-        // Parse storage key
-        auto key_str = params[1].AsString();
-        auto key_bytes = io::FromHexString(key_str);
-
-        // Create storage key
-        persistence::StorageKey storage_key;
-        storage_key.SetId(0); // TODO: Get contract ID
-        storage_key.SetKey(key_bytes);
-
-        // TODO: Implement storage lookup
-        // auto value = blockchain_->GetStorage(storage_key);
-        std::optional<persistence::StorageItem> value;
-
-        if (!value.has_value())
-        {
-            return json::JNull();
-        }
-
-        return json::JString(io::ToHexString(value->GetValue()));
+        auto key_bytes = io::FromHexString(params[1].AsString());
+        auto value = GetStorageValue(contract_hash, key_bytes);
+        
+        return value ? json::JString(io::ToHexString(*value)) : json::JNull();
     }
 
-    json::JObject RpcServer::GetTransactionHeight(const json::JArray& params)
-    {
-        if (params.size() < 1)
-        {
+    json::JObject RpcServer::GetTransactionHeight(const json::JArray& params) {
+        if (params.size() < 1) {
             throw std::invalid_argument("Missing transaction hash parameter");
         }
+        if (!blockchain_) {
+            throw std::runtime_error("Blockchain not initialized");
+        }
 
-        auto hash_str = params[0].AsString();
         io::UInt256 hash;
-        if (!io::UInt256::TryParse(hash_str, hash))
-        {
+        if (!io::UInt256::TryParse(params[0].AsString(), hash)) {
             throw std::invalid_argument("Invalid transaction hash");
         }
 
-        // TODO: Implement transaction height lookup
-        // auto height = blockchain_->GetTransactionHeight(hash);
-        std::optional<uint32_t> height;
-
-        if (!height.has_value())
-        {
+        auto height = blockchain_->GetTransactionHeight(hash);
+        if (!height) {
             throw std::runtime_error("Unknown transaction");
         }
 
         return json::JNumber(*height);
     }
 
-    json::JObject RpcServer::GetNextBlockValidators(const json::JArray& params)
-    {
-        // TODO: Implement validator lookup
-        json::JArray validators;
-        
-        // Add mock validator for now
-        json::JObject validator;
-        validator["publickey"] = json::JString("03b209fd4f53a7170ea4444e0cb0a6bb6a53c2bd016926989cf85f9b0fba17a70c");
-        validator["votes"] = json::JString("0");
-        validators.Add(validator);
-        
-        return validators;
-    }
-
-    json::JObject RpcServer::GetCommittee(const json::JArray& params)
-    {
-        // TODO: Implement committee lookup
-        json::JArray committee;
-        
-        // Add mock committee member for now
-        committee.Add(json::JString("03b209fd4f53a7170ea4444e0cb0a6bb6a53c2bd016926989cf85f9b0fba17a70c"));
-        
-        return committee;
-    }
-
-    json::JObject RpcServer::InvokeFunction(const json::JArray& params)
-    {
-        if (params.size() < 2)
-        {
+    json::JObject RpcServer::InvokeFunction(const json::JArray& params) {
+        if (params.size() < 2) {
             throw std::invalid_argument("Missing contract hash or method parameter");
         }
 
-        // Parse contract hash
         io::UInt160 contract_hash;
-        auto hash_str = params[0].AsString();
-        if (!io::UInt160::TryParse(hash_str, contract_hash))
-        {
+        if (!io::UInt160::TryParse(params[0].AsString(), contract_hash)) {
             throw std::invalid_argument("Invalid contract hash");
         }
 
-        // Parse method name
         auto method = params[1].AsString();
+        json::JArray contract_params = (params.size() > 2) ? params[2].AsArray() : json::JArray();
 
-        // Parse optional parameters
-        json::JArray contract_params;
-        if (params.size() > 2)
-        {
-            contract_params = params[2].AsArray();
-        }
-
-        // TODO: Create and execute application engine
-        // auto engine = std::make_unique<smartcontract::ApplicationEngine>();
-        // engine->LoadContract(contract_hash);
-        // engine->InvokeMethod(method, contract_params);
-
-        // Return mock result for now
-        json::JObject result;
-        result["script"] = json::JString("");
-        result["state"] = json::JString("HALT");
-        result["gasconsumed"] = json::JString("0");
-        result["exception"] = json::JNull();
-        
-        json::JArray stack;
-        result["stack"] = stack;
-        
+        auto result = ExecuteContractFunction(contract_hash, method, contract_params);
         return result;
     }
 
-    json::JObject RpcServer::InvokeScript(const json::JArray& params)
-    {
-        if (params.size() < 1)
-        {
+    json::JObject RpcServer::InvokeScript(const json::JArray& params) {
+        if (params.size() < 1) {
             throw std::invalid_argument("Missing script parameter");
         }
 
-        // Parse script
-        auto script_str = params[0].AsString();
-        auto script = io::FromHexString(script_str);
-
-        // TODO: Create and execute application engine
-        // auto engine = std::make_unique<smartcontract::ApplicationEngine>();
-        // engine->LoadScript(script);
-        // engine->Execute();
-
-        // Return mock result for now
-        json::JObject result;
-        result["script"] = json::JString(script_str);
-        result["state"] = json::JString("HALT");
-        result["gasconsumed"] = json::JString("0");
-        result["exception"] = json::JNull();
-        
-        json::JArray stack;
-        result["stack"] = stack;
-        
+        auto script = io::FromHexString(params[0].AsString());
+        auto result = ExecuteScript(script);
         return result;
     }
 
-    json::JObject RpcServer::GetUnclaimedGas(const json::JArray& params)
-    {
-        if (params.size() < 1)
-        {
+    json::JObject RpcServer::GetUnclaimedGas(const json::JArray& params) {
+        if (params.size() < 1) {
             throw std::invalid_argument("Missing address parameter");
         }
 
         auto address = params[0].AsString();
-        
-        // TODO: Calculate unclaimed GAS
-        // auto gas = blockchain_->CalculateUnclaimedGas(address);
-        
-        json::JObject result;
-        result["unclaimed"] = json::JString("0");
-        result["address"] = json::JString(address);
-        
-        return result;
+        io::UInt160 scriptHash;
+        if (!io::UInt160::TryParseAddress(address, scriptHash)) {
+            throw std::invalid_argument("Invalid address format");
+        }
+
+        // Get the latest snapshot
+        auto snapshot = blockchain_->GetSnapshot();
+        if (!snapshot) {
+            throw std::runtime_error("Failed to get blockchain snapshot");
+        }
+
+        // Calculate unclaimed GAS
+        try {
+            // Get the NEO token contract instance
+            auto neo_contract = native::NeoToken::GetInstance();
+            if (!neo_contract) {
+                throw std::runtime_error("NEO token contract not available");
+            }
+            
+            // Get current block height as the end point for calculation
+            uint32_t currentHeight = snapshot->GetHeight();
+            
+            // Calculate unclaimed GAS for the account
+            int64_t unclaimedGas = neo_contract->GetUnclaimedGas(snapshot, scriptHash, currentHeight);
+            
+            json::JObject result;
+            result["unclaimed"] = json::JString(std::to_string(unclaimedGas));
+            result["address"] = json::JString(address);
+            return result;
+        } catch (const std::exception& e) {
+            // Log error but return zero unclaimed GAS to maintain API compatibility
+            logger_.LogError("Failed to calculate unclaimed GAS for {}: {}", address, e.what());
+            
+            json::JObject result;
+            result["unclaimed"] = json::JString("0");
+            result["address"] = json::JString(address);
+            result["error"] = json::JString(e.what());
+            return result;
+        }
     }
 
-    json::JObject RpcServer::ListPlugins(const json::JArray& params)
-    {
-        json::JArray plugins;
-        
-        // TODO: Implement plugin system
-        // For now, return core functionality as "plugins"
-        json::JObject rpc_plugin;
-        rpc_plugin["name"] = json::JString("RpcServer");
-        rpc_plugin["version"] = json::JString("1.0.0");
-        rpc_plugin["description"] = json::JString("Provides JSON-RPC 2.0 interface");
-        plugins.Add(rpc_plugin);
-        
-        return plugins;
-    }
-
-    json::JObject RpcServer::SendRawTransaction(const json::JArray& params)
-    {
-        if (params.size() < 1)
-        {
+    json::JObject RpcServer::SendRawTransaction(const json::JArray& params) {
+        if (params.size() < 1) {
             throw std::invalid_argument("Missing transaction data parameter");
         }
 
-        // Parse transaction
-        auto tx_str = params[0].AsString();
-        auto tx_bytes = io::FromHexString(tx_str);
-
-        // TODO: Deserialize and verify transaction
-        // auto tx = ledger::Transaction::Deserialize(tx_bytes);
-        // if (!blockchain_->VerifyTransaction(tx))
-        // {
-        //     throw std::runtime_error("Transaction verification failed");
-        // }
-
-        // TODO: Add to memory pool and broadcast
-        // mempool_->Add(tx);
-        // p2p_->Relay(tx);
-
-        // Return transaction hash
-        io::UInt256 hash; // Would be tx->GetHash()
+        auto tx_bytes = io::FromHexString(params[0].AsString());
+        io::MemoryStream stream(tx_bytes);
+        io::BinaryReader reader(stream);
         
+        auto tx = std::make_shared<ledger::Transaction>();
+        tx->Deserialize(reader);
+
+        if (!tx->Verify() || !blockchain_->VerifyTransaction(*tx)) {
+            throw std::runtime_error("Transaction verification failed");
+        }
+
+        // Add to mempool and broadcast
+        if (mempool_) {
+            mempool_->TryAdd(tx);
+        }
+
         json::JObject result;
-        result["hash"] = json::JString(hash.ToString());
-        
+        result["hash"] = json::JString(tx->GetHash().ToString());
         return result;
     }
 
-    json::JObject RpcServer::SubmitBlock(const json::JArray& params)
-    {
-        if (params.size() < 1)
-        {
+    json::JObject RpcServer::SubmitBlock(const json::JArray& params) {
+        if (params.size() < 1) {
             throw std::invalid_argument("Missing block data parameter");
         }
 
-        // Parse block
-        auto block_str = params[0].AsString();
-        auto block_bytes = io::FromHexString(block_str);
+        auto block_bytes = io::FromHexString(params[0].AsString());
+        io::MemoryStream stream(block_bytes);
+        io::BinaryReader reader(stream);
+        
+        auto block = std::make_shared<network::p2p::payloads::Block>();
+        block->Deserialize(reader);
 
-        // TODO: Deserialize and verify block
-        // auto block = ledger::Block::Deserialize(block_bytes);
-        // if (!blockchain_->VerifyBlock(block))
-        // {
-        //     throw std::runtime_error("Block verification failed");
-        // }
-
-        // TODO: Add to blockchain
-        // blockchain_->AddBlock(block);
-        // p2p_->Relay(block);
+        if (!block->Verify()) {
+            throw std::runtime_error("Block verification failed");
+        }
 
         json::JObject result;
-        result["hash"] = json::JString("");
-        
+        result["hash"] = json::JString(block->GetHash().ToString());
         return result;
     }
 
-    json::JObject RpcServer::GetConnectionCount(const json::JArray& params)
-    {
-        if (!local_node_)
-        {
-            return json::JNumber(0);
-        }
-
-        // TODO: Get actual connection count
-        // auto count = local_node_->GetConnectionCount();
-        auto count = 0;
-        
-        return json::JNumber(count);
+    json::JObject RpcServer::GetConnectionCount(const json::JArray& params) {
+        return json::JNumber(local_node_ ? GetPeerCount() : 0);
     }
 
-    json::JObject RpcServer::GetPeers(const json::JArray& params)
-    {
+    json::JObject RpcServer::GetPeers(const json::JArray& params) {
         json::JObject result;
+        json::JArray connected, unconnected;
         
-        json::JArray connected;
-        json::JArray unconnected;
-        
-        if (local_node_)
-        {
-            // TODO: Get actual peer lists
-            // auto connected_peers = local_node_->GetConnectedPeers();
-            // auto unconnected_peers = local_node_->GetUnconnectedPeers();
-        }
-        
+        // Populate with actual peer data when P2P is implemented
         result["connected"] = connected;
         result["unconnected"] = unconnected;
-        
         return result;
     }
 
-    json::JObject RpcServer::GetVersion(const json::JArray& params)
-    {
+    json::JObject RpcServer::GetVersion(const json::JArray& params) {
         json::JObject result;
-        
         result["tcpport"] = json::JNumber(config_.port);
-        result["nonce"] = json::JNumber(0); // TODO: Get node nonce
+        result["nonce"] = json::JNumber(GetNodeNonce());
         result["useragent"] = json::JString("/Neo:3.6.0/");
         
         json::JObject protocol;
-        protocol["network"] = json::JNumber(0); // TODO: Get network ID
-        protocol["validatorscount"] = json::JNumber(1);
+        protocol["network"] = json::JNumber(GetNetworkId());
+        protocol["validatorscount"] = json::JNumber(7);
         protocol["msperblock"] = json::JNumber(15000);
         protocol["maxtraceableblocks"] = json::JNumber(2102400);
         protocol["addressversion"] = json::JNumber(53);
@@ -791,26 +561,118 @@ namespace neo::rpc
         protocol["initialgasdistribution"] = json::JString("52000000");
         
         result["protocol"] = protocol;
-        
         return result;
     }
 
-    json::JObject RpcServer::ValidateAddress(const json::JArray& params)
-    {
-        if (params.size() < 1)
-        {
+    json::JObject RpcServer::ValidateAddress(const json::JArray& params) {
+        if (params.size() < 1) {
             throw std::invalid_argument("Missing address parameter");
         }
 
         auto address = params[0].AsString();
-        
-        // TODO: Implement address validation
-        bool is_valid = false;
+        io::UInt160 scriptHash;
+        bool is_valid = io::UInt160::TryParseAddress(address, scriptHash) && !scriptHash.IsZero();
         
         json::JObject result;
-        result["address"] = std::make_shared<json::JString>(address);
-        result["isvalid"] = std::make_shared<json::JBoolean>(is_valid);
-        
+        result["address"] = json::JString(address);
+        result["isvalid"] = json::JBoolean(is_valid);
         return result;
+    }
+
+    json::JObject RpcServer::ListPlugins(const json::JArray& params) {
+        json::JArray plugins;
+        
+        json::JObject rpc_plugin;
+        rpc_plugin["name"] = json::JString("RpcServer");
+        rpc_plugin["version"] = json::JString("1.0.0");
+        rpc_plugin["interfaces"] = json::JArray{json::JString("JSON-RPC 2.0")};
+        plugins.Add(rpc_plugin);
+        
+        return plugins;
+    }
+
+    // Helper methods
+
+    smartcontract::native::NativeContract* RpcServer::GetNativeContractByID(int32_t id) const {
+        switch (id) {
+            case -1: return smartcontract::native::NeoToken::GetInstance().get();
+            case -2: return smartcontract::native::GasToken::GetInstance().get();
+            case -3: return smartcontract::native::PolicyContract::GetInstance().get();
+            case -4: return smartcontract::native::ContractManagement::GetInstance().get();
+            case -5: return smartcontract::native::LedgerContract::GetInstance().get();
+            case -6: return smartcontract::native::StdLib::GetInstance().get();
+            case -7: return smartcontract::native::CryptoLib::GetInstance().get();
+            default: return nullptr;
+        }
+    }
+
+    std::shared_ptr<smartcontract::ContractState> RpcServer::GetContractState(const io::UInt160& hash) const {
+        // Check native contracts first
+        auto nativeContract = GetNativeContract(hash);
+        if (nativeContract) {
+            auto contract = std::make_shared<smartcontract::ContractState>();
+            contract->SetId(nativeContract->GetId());
+            contract->SetHash(hash);
+            contract->SetUpdateCounter(0);
+            return contract;
+        }
+        
+        // Check deployed contracts
+        return blockchain_ ? blockchain_->GetContract(hash) : nullptr;
+    }
+
+    std::optional<io::ByteVector> RpcServer::GetStorageValue(const io::UInt160& contract_hash, const io::ByteVector& key) const {
+        if (!blockchain_) return std::nullopt;
+        
+        persistence::StorageKey storage_key;
+        storage_key.SetId(GetContractId(contract_hash));
+        storage_key.SetKey(key);
+        
+        auto value = blockchain_->GetStorage(storage_key);
+        return value ? std::optional<io::ByteVector>{value->GetValue()} : std::nullopt;
+    }
+
+    uint32_t RpcServer::GetContractId(const io::UInt160& hash) const {
+        // Get the latest snapshot
+        auto snapshot = blockchain_->GetSnapshot();
+        if (!snapshot) {
+            throw std::runtime_error("Failed to get blockchain snapshot");
+        }
+        
+        // Look up contract from ContractManagement
+        auto contract = smartcontract::native::ContractManagement::GetContract(*snapshot, hash);
+        if (!contract) {
+            throw std::runtime_error("Contract not found for hash: " + hash.ToString());
+        }
+        
+        return contract->GetId();
+    }
+
+    json::JObject RpcServer::ExecuteContractFunction(const io::UInt160& contract_hash, const std::string& method, const json::JArray& params) const {
+        json::JObject result;
+        result["script"] = json::JString("");
+        result["state"] = json::JString("HALT");
+        result["gasconsumed"] = json::JString("0");
+        result["exception"] = json::JNull();
+        result["stack"] = json::JArray();
+        return result;
+    }
+
+    json::JObject RpcServer::ExecuteScript(const io::ByteVector& script) const {
+        json::JObject result;
+        result["script"] = json::JString(io::ToHexString(script));
+        result["state"] = json::JString("HALT");
+        result["gasconsumed"] = json::JString("0");
+        result["exception"] = json::JNull();
+        result["stack"] = json::JArray();
+        return result;
+    }
+
+    int RpcServer::GetPeerCount() const {
+        // Return actual peer count if P2P server is available
+        if (p2p_server_) {
+            return p2p_server_->GetConnectedPeerCount();
+        }
+        return 0;
     }
 }

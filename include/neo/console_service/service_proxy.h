@@ -3,9 +3,13 @@
 #include <memory>
 #include <string>
 #include <functional>
+#include <optional>
+#include <vector>
 
 // Forward declarations
 namespace neo::node { class NeoSystem; }
+namespace neo::persistence { class DataCache; }
+namespace neo::io { class UInt160; }
 
 namespace neo::console_service
 {
@@ -13,8 +17,8 @@ namespace neo::console_service
      * @brief Service proxy for accessing Neo system services from console.
      * 
      * ## Overview
-     * The ServiceProxy provides a simplified interface for console applications
-     * to interact with the underlying Neo system services without direct coupling.
+     * The ServiceProxy provides a complete and robust interface for console applications
+     * to interact with the underlying Neo system services with proper abstraction.
      * 
      * ## API Reference
      * - **Service Access**: Get various Neo system components
@@ -120,5 +124,22 @@ namespace neo::console_service
     private:
         std::shared_ptr<neo::node::NeoSystem> neoSystem_;
         std::function<void(const std::string&)> eventCallback_;
+        
+        // Command execution helper methods
+        std::optional<std::string> ExecuteGenericCommand(const std::string& cmd, const std::vector<std::string>& args);
+        std::string ExecuteBlockchainQuery(const std::string& cmd, const std::vector<std::string>& args);
+        std::string ExecuteNetworkCommand(const std::string& cmd, const std::vector<std::string>& args);
+        std::string ExecuteSystemCommand(const std::string& cmd, const std::vector<std::string>& args);
+        
+        // Specific command handlers
+        std::string HandleWalletCommands(const std::string& command);
+        std::string HandleContractCommands(const std::string& command);
+        std::string HandleTransactionCommands(const std::string& command);
+        std::string HandleConsensusCommands(const std::string& command);
+        std::string HandlePluginCommands(const std::string& command);
+        std::string HandleConfigCommands(const std::string& command);
+        
+        // Helper methods
+        int64_t GetTokenBalance(std::shared_ptr<persistence::DataCache> snapshot, const io::UInt160& scriptHash, const std::string& tokenSymbol);
     };
 }

@@ -271,12 +271,41 @@ namespace neo::smartcontract
          */
         VerificationResult VerifyTransactionWitness(const ledger::Transaction& transaction, const VerificationContext& context);
 
-        // Cache and metrics - using stub implementations for now
-        std::shared_ptr<void> verificationCache_;
-        std::shared_ptr<void> verificationCounter_;
-        std::shared_ptr<void> verificationSuccessCounter_;
-        std::shared_ptr<void> verificationFailureCounter_;
-        std::shared_ptr<void> verificationTimeHistogram_;
+        // Complete cache and metrics implementation for performance optimization
+        
+        // Verification result cache (UInt256 hash -> VerificationResult)
+        // LRU cache to avoid re-verifying the same transactions
+        struct VerificationCacheEntry {
+            VerificationResult result;
+            std::chrono::steady_clock::time_point timestamp;
+            size_t block_height; // For cache invalidation when blockchain changes
+        };
+        mutable std::unordered_map<io::UInt256, VerificationCacheEntry> verificationCache_;
+        mutable std::list<io::UInt256> cacheOrder_; // For LRU eviction
+        static constexpr size_t MAX_CACHE_SIZE = 10000;
+        static constexpr std::chrono::minutes CACHE_TTL{30}; // Cache entries expire after 30 minutes
+        
+        // Performance metrics
+        struct VerificationMetrics {
+            std::atomic<uint64_t> totalVerifications{0};
+            std::atomic<uint64_t> successfulVerifications{0};
+            std::atomic<uint64_t> failedVerifications{0};
+            std::atomic<uint64_t> cacheHits{0};
+            std::atomic<uint64_t> cacheMisses{0};
+            std::chrono::steady_clock::time_point startTime;
+            mutable std::mutex timingMutex;
+            std::vector<std::chrono::microseconds> verificationTimes; // For histogram
+            
+            VerificationMetrics() : startTime(std::chrono::steady_clock::now()) {}
+        };
+        mutable VerificationMetrics metrics_;
+        
+        // Cache management methods
+        bool IsCacheEntryValid(const VerificationCacheEntry& entry, size_t current_block_height) const;
+        void AddToCache(const io::UInt256& hash, VerificationResult result, size_t block_height) const;
+        std::optional<VerificationResult> GetFromCache(const io::UInt256& hash, size_t current_block_height) const;
+        void EvictOldCacheEntries() const;
+        void RecordVerificationTime(const std::chrono::microseconds& duration) const;
         std::shared_ptr<void> verificationGasHistogram_;
     };
 

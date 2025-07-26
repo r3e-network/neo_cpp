@@ -61,8 +61,41 @@ namespace neo::ledger
         }
         writer.Write("tx", txArray);
 
-        // Add a fixed size for now
-        writer.Write("size", 1024);
+        // Calculate actual block size
+        try {
+            // Get the actual serialized size of the block
+            size_t actual_size = GetSize();
+            writer.Write("size", static_cast<int64_t>(actual_size));
+        } catch (const std::exception& e) {
+            // Fallback to calculating size from components if GetSize() is not available
+            size_t estimated_size = 0;
+            
+            // Block header size (version + prevHash + merkleRoot + timestamp + index + primaryIndex + nextConsensus + witness)
+            estimated_size += sizeof(uint32_t);  // version
+            estimated_size += 32;                // prevHash (UInt256)
+            estimated_size += 32;                // merkleRoot (UInt256)
+            estimated_size += sizeof(uint64_t);  // timestamp
+            estimated_size += sizeof(uint32_t);  // index
+            estimated_size += sizeof(uint32_t);  // primaryIndex
+            estimated_size += 20;                // nextConsensus (UInt160)
+            estimated_size += 1;                 // witness count (varint)
+            
+            // Add witness size estimation
+            if (GetWitness()) {
+                estimated_size += GetWitness()->GetSize();
+            }
+            
+            // Add transactions size
+            const auto& transactions = GetTransactions();
+            estimated_size += GetVarintSize(transactions.size()); // transaction count
+            for (const auto& tx : transactions) {
+                if (tx) {
+                    estimated_size += tx->GetSize();
+                }
+            }
+            
+            writer.Write("size", static_cast<int64_t>(estimated_size));
+        }
     }
 
     void Block::DeserializeJson(const io::JsonReader& reader)

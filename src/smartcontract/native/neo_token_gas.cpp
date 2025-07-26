@@ -1,7 +1,9 @@
 #include <neo/smartcontract/native/neo_token_gas.h>
+#include <neo/smartcontract/native/neo_token_account.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/application_engine.h>
-#include <neo/smartcontract/native/neo_token_account.h>
+#include <neo/persistence/storage_key.h>
+#include <neo/persistence/storage_item.h>
 #include <neo/vm/stack_item.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -128,22 +130,56 @@ namespace neo::smartcontract::native
         auto gasPerBlockItem = args[0];
         int64_t gasPerBlock = gasPerBlockItem->GetInteger();
 
-        // Check if caller is committee
-        // Implement proper committee address calculation and witness checking
+        // Complete committee authorization implementation
         try
         {
-            // Committee authorization check temporarily disabled due to missing native contract lookup
-            // TODO: Implement proper committee authorization using NEO token contract
-            // For now, allow operation to proceed (this should be secured in production)
+            // Get current committee members from NEO token contract
+            auto committee = GetCommitteeFromNeoContract(engine.GetSnapshot());
+            if (committee.empty()) {
+                throw std::runtime_error("No committee members found");
+            }
+            
+            // Calculate committee multi-signature address
+            auto committee_address = CalculateCommitteeAddress(committee);
+            
+            // Get the calling script hash
+            auto calling_script_hash = engine.GetCallingScriptHash();
+            
+            // Verify committee authorization through multiple methods
+            bool authorized = false;
+            
+            // Method 1: Check if called by committee multi-sig contract
+            if (calling_script_hash.has_value() && calling_script_hash.value() == committee_address) {
+                authorized = true;
+            }
+            
+            // Method 2: Check witness verification for committee
+            if (!authorized && engine.CheckWitness(committee_address)) {
+                authorized = true;
+            }
+            
+            // Method 3: Check if any committee member has authorized this
+            if (!authorized) {
+                for (const auto& member : committee) {
+                    auto member_script_hash = GetScriptHashFromPublicKey(member);
+                    if (engine.CheckWitness(member_script_hash)) {
+                        authorized = true;
+                        break;
+                    }
+                }
+            }
+            
+            if (!authorized) {
+                throw std::runtime_error("Committee authorization required for NEO gas operations");
+            }
             
             // Committee authorization successful
             std::cout << "Committee authorization verified for NEO gas operations" << std::endl;
         }
         catch (const std::exception& e)
         {
-            // For now, log the error and allow operation to proceed
-            // This maintains compatibility while proper committee integration is completed
-            std::cerr << "Committee check failed for NEO gas operations: " << e.what() << std::endl;
+            // Committee authorization failed - MUST deny access for security
+            throw std::runtime_error(std::string("Committee authorization failed for NEO gas operations: ") + e.what());
         }
 
         try
@@ -178,4 +214,4 @@ namespace neo::smartcontract::native
 
         return vm::StackItem::Create(gas);
     }
-}
+} 

@@ -16,7 +16,7 @@
 #include <gmock/gmock.h>
 
 // Include the class under test
-// TODO: Add appropriate include for ByteArrayEqualityComparer
+#include <neo/extensions/byte_array_equality_comparer.h>
 
 namespace neo {
 namespace test {
@@ -24,22 +24,78 @@ namespace test {
 class ByteArrayEqualityComparerTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        // TODO: Set up test fixtures
+        // Set up test fixtures with various byte array data
+        empty_array = neo::io::ByteVector();
+        single_byte = neo::io::ByteVector::Parse("42");
+        test_data1 = neo::io::ByteVector::Parse("01020304");
+        test_data2 = neo::io::ByteVector::Parse("01020304"); // Same as test_data1
+        test_data3 = neo::io::ByteVector::Parse("01020305"); // Different from test_data1
+        long_data = neo::io::ByteVector::Parse("0123456789abcdef0123456789abcdef");
     }
 
     void TearDown() override {
-        // TODO: Clean up test fixtures
+        // Clean up test fixtures - ByteVector manages its own memory
     }
 
-    // TODO: Add helper methods and test data
+    // Helper methods and test data
+    neo::io::ByteVector empty_array;
+    neo::io::ByteVector single_byte;
+    neo::io::ByteVector test_data1;
+    neo::io::ByteVector test_data2;
+    neo::io::ByteVector test_data3;
+    neo::io::ByteVector long_data;
 };
 
-// TODO: Convert test methods from C# UT_ByteArrayEqualityComparer.cs
-// Each [TestMethod] in C# should become a TEST_F here
+// Complete test methods converted from C# UT_ByteArrayEqualityComparer.cs functionality
 
-TEST_F(ByteArrayEqualityComparerTest, TestExample) {
-    // TODO: Convert from C# test method
-    FAIL() << "Test not yet implemented - convert from C# UT_ByteArrayEqualityComparer.cs";
+TEST_F(ByteArrayEqualityComparerTest, TestEquals_SameData) {
+    // Test that identical byte arrays are considered equal
+    EXPECT_TRUE(neo::extensions::ByteArrayEqualityComparer::Equals(test_data1.AsSpan(), test_data2.AsSpan()));
+    EXPECT_TRUE(neo::extensions::ByteArrayEqualityComparer::Equals(empty_array.AsSpan(), neo::io::ByteVector().AsSpan()));
+    EXPECT_TRUE(neo::extensions::ByteArrayEqualityComparer::Equals(single_byte.AsSpan(), neo::io::ByteVector::Parse("42").AsSpan()));
+}
+
+TEST_F(ByteArrayEqualityComparerTest, TestEquals_DifferentData) {
+    // Test that different byte arrays are not considered equal
+    EXPECT_FALSE(neo::extensions::ByteArrayEqualityComparer::Equals(test_data1.AsSpan(), test_data3.AsSpan()));
+    EXPECT_FALSE(neo::extensions::ByteArrayEqualityComparer::Equals(empty_array.AsSpan(), single_byte.AsSpan()));
+    EXPECT_FALSE(neo::extensions::ByteArrayEqualityComparer::Equals(test_data1.AsSpan(), long_data.AsSpan()));
+}
+
+TEST_F(ByteArrayEqualityComparerTest, TestEquals_DifferentLengths) {
+    // Test that arrays of different lengths are not equal
+    auto short_data = neo::io::ByteVector::Parse("0102");
+    auto long_data = neo::io::ByteVector::Parse("010203");
+    EXPECT_FALSE(neo::extensions::ByteArrayEqualityComparer::Equals(short_data.AsSpan(), long_data.AsSpan()));
+}
+
+TEST_F(ByteArrayEqualityComparerTest, TestGetHashCode_Consistency) {
+    // Test that hash codes are consistent for the same data
+    auto hash1 = neo::extensions::ByteArrayEqualityComparer::GetHashCode(test_data1.AsSpan());
+    auto hash2 = neo::extensions::ByteArrayEqualityComparer::GetHashCode(test_data2.AsSpan());
+    EXPECT_EQ(hash1, hash2);
+}
+
+TEST_F(ByteArrayEqualityComparerTest, TestGetHashCode_Different) {
+    // Test that different data produces different hash codes (probabilistically)
+    auto hash1 = neo::extensions::ByteArrayEqualityComparer::GetHashCode(test_data1.AsSpan());
+    auto hash3 = neo::extensions::ByteArrayEqualityComparer::GetHashCode(test_data3.AsSpan());
+    EXPECT_NE(hash1, hash3);
+}
+
+TEST_F(ByteArrayEqualityComparerTest, TestHashFunctor) {
+    // Test that the Hash functor works correctly
+    neo::extensions::ByteArrayEqualityComparer::Hash hasher;
+    auto hash1 = hasher(test_data1);
+    auto hash2 = hasher(test_data2);
+    EXPECT_EQ(hash1, hash2);
+}
+
+TEST_F(ByteArrayEqualityComparerTest, TestEqualFunctor) {
+    // Test that the Equal functor works correctly
+    neo::extensions::ByteArrayEqualityComparer::Equal comparer;
+    EXPECT_TRUE(comparer(test_data1, test_data2));
+    EXPECT_FALSE(comparer(test_data1, test_data3));
 }
 
 } // namespace test

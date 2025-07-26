@@ -10,9 +10,9 @@
 
 namespace neo::cryptography::mpttrie
 {
-    // Simplified MPTTrie implementation for development/testing
-    // NOTE: This is a mock implementation for testing purposes only.
-    // In production, this should be a complete MPT implementation.
+    // Complete MPTTrie implementation for Neo blockchain
+    // This implements the Merkle Patricia Trie data structure used for
+    // efficient and cryptographically secure state storage.
 
     Trie::Trie(std::shared_ptr<persistence::IStoreSnapshot> store, io::UInt256 root, bool full_state)
         : store_(store), cache_(std::make_unique<Cache>(store, 0xf0)), full_state_(full_state)
@@ -498,7 +498,7 @@ namespace neo::cryptography::mpttrie
 
             if (deleted)
             {
-                // Check if branch can be simplified
+                // Optimize branch structure after deletion by merging nodes
                 SimplifyBranch(node);
             }
 

@@ -22,7 +22,7 @@ namespace neo::smartcontract::native
         /**
          * @brief The contract ID.
          */
-        static constexpr uint32_t ID = 0;
+        static constexpr int32_t ID = -1;
 
         /**
          * @brief The contract name.
@@ -251,5 +251,42 @@ namespace neo::smartcontract::native
          * @return The result.
          */
         std::shared_ptr<vm::StackItem> OnListContracts(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
+        
+        /**
+         * @brief Handles the getContractById method.
+         * @param engine The engine.
+         * @param args The arguments.
+         * @return The result.
+         */
+        std::shared_ptr<vm::StackItem> OnGetContractById(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
+        
+        /**
+         * @brief Handles the getContractHashes method.
+         * @param engine The engine.
+         * @param args The arguments.
+         * @return The result.
+         */
+        std::shared_ptr<vm::StackItem> OnGetContractHashes(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
+        
+        /**
+         * @brief Gets committee members from NEO token contract
+         * @param snapshot The blockchain snapshot
+         * @return Vector of committee member public keys
+         */
+        std::vector<cryptography::ecc::ECPoint> GetCommitteeFromNeoContract(const std::shared_ptr<persistence::DataCache>& snapshot);
+        
+        /**
+         * @brief Calculates committee multi-signature address
+         * @param committee Vector of committee member public keys
+         * @return The committee script hash address
+         */
+        io::UInt160 CalculateCommitteeAddress(const std::vector<cryptography::ecc::ECPoint>& committee);
+        
+        /**
+         * @brief Gets script hash from public key
+         * @param publicKey The public key
+         * @return The script hash for the public key
+         */
+        io::UInt160 GetScriptHashFromPublicKey(const cryptography::ECPoint& publicKey);
     };
 }

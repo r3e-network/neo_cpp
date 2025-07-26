@@ -67,10 +67,31 @@ namespace neo::network::p2p::payloads
 
     bool NotValidBefore::Verify(/* DataCache& snapshot, const Transaction& transaction */) const
     {
-        // The verification logic should check if the current block height is >= height_
-        // For now, return true as this is a placeholder
-        // TODO: Implement actual verification with current block height
-        return true;
+        // Complete verification implementation - check current block height
+        try {
+            if (!system) {
+                return false; // No system context available
+            }
+            
+            // Get current blockchain height
+            auto blockchain = system->GetBlockchain();
+            if (!blockchain) {
+                return false; // Blockchain not available
+            }
+            
+            uint32_t current_height = blockchain->GetHeight();
+            
+            // Verify that current block height is greater than or equal to the required height
+            if (current_height >= height_) {
+                return true; // Transaction is valid (current height meets requirement)
+            } else {
+                return false; // Transaction not yet valid (current height too low)
+            }
+            
+        } catch (const std::exception& e) {
+            // Error during verification - reject as invalid
+            return false;
+        }
     }
 
     int64_t NotValidBefore::CalculateNetworkFee(/* DataCache& snapshot, const Transaction& transaction */) const

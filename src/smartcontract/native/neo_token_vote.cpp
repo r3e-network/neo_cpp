@@ -138,4 +138,28 @@ namespace neo::smartcontract::native
         bool result = Vote(token, engine.GetSnapshot(), account, pubKeys);
         return vm::StackItem::Create(result);
     }
+    
+    std::shared_ptr<vm::StackItem> NeoTokenVote::OnUnVote(const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+    {
+        if (args.size() < 1)
+            throw std::runtime_error("Invalid number of arguments");
+
+        auto accountItem = args[0];
+
+        io::UInt160 account;
+        auto accountBytes = accountItem->GetByteArray();
+        if (accountBytes.Size() != 20)
+            throw std::runtime_error("Invalid account");
+
+        std::memcpy(account.Data(), accountBytes.Data(), 20);
+
+        // Check witness
+        if (!engine.CheckWitness(account))
+            throw std::runtime_error("No authorization");
+
+        // UnVote is equivalent to voting with empty public keys
+        std::vector<cryptography::ecc::ECPoint> emptyPubKeys;
+        bool result = Vote(token, engine.GetSnapshot(), account, emptyPubKeys);
+        return vm::StackItem::Create(result);
+    }
 }

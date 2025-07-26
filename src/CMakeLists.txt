@@ -6,8 +6,10 @@ add_subdirectory(json)
 add_subdirectory(logging)
 add_subdirectory(extensions)
 # add_subdirectory(console_service) # Temporarily disabled
+add_subdirectory(console_service) # Re-enabled after fixing compilation issues
+# add_subdirectory(console_service) # Re-disabled due to missing dependencies
 add_subdirectory(persistence)
-# add_subdirectory(network) # Still has compilation issues - requires significant refactoring
+# add_subdirectory(network) # Temporarily disabled due to compilation issues
 add_subdirectory(ledger)
 add_subdirectory(vm)
 add_subdirectory(smartcontract)
@@ -15,8 +17,7 @@ add_subdirectory(smartcontract)
 # add_subdirectory(plugins) # Temporarily disabled
 add_subdirectory(consensus)
 add_subdirectory(rpc) # Re-enabled with JSON API fixes
-# add_subdirectory(network) # Temporarily disabled due to missing dependencies
-# add_subdirectory(cli) # Temporarily disabled
+# add_subdirectory(cli) # Temporarily disabled due to compilation issues
 
 target_include_directories(neo_core PUBLIC
     $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
@@ -36,9 +37,9 @@ add_library(neo_cpp
     $<TARGET_OBJECTS:neo_json>
     $<TARGET_OBJECTS:neo_logging>
     $<TARGET_OBJECTS:neo_extensions>
-    # $<TARGET_OBJECTS:neo_console_service> # Temporarily disabled
+    # $<TARGET_OBJECTS:neo_console_service> # Re-disabled due to missing dependencies
     $<TARGET_OBJECTS:neo_persistence>
-    # $<TARGET_OBJECTS:neo_network> # Still has compilation issues
+    # $<TARGET_OBJECTS:neo_network> # Temporarily disabled due to compilation issues
     $<TARGET_OBJECTS:neo_ledger>
     $<TARGET_OBJECTS:neo_vm>
     $<TARGET_OBJECTS:neo_smartcontract>
@@ -48,8 +49,7 @@ add_library(neo_cpp
     # $<TARGET_OBJECTS:neo_plugins> # Temporarily disabled
     $<TARGET_OBJECTS:neo_consensus>
     $<TARGET_OBJECTS:neo_rpc> # Re-enabled with JSON API fixes
-    # $<TARGET_OBJECTS:neo_network> # Temporarily disabled
-    # $<TARGET_OBJECTS:neo_cli> # Temporarily disabled
+    # $<TARGET_OBJECTS:neo_cli> # Temporarily disabled due to compilation issues
 )
 
 # Link dependencies

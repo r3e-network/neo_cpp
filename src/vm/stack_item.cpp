@@ -413,10 +413,59 @@ namespace neo::vm
         return value ? True() : False();
     }
 
-    std::shared_ptr<StackItem> StackItem::CreateInteropInterface(void* /* value */)
+    std::shared_ptr<StackItem> StackItem::CreateInteropInterface(void* value)
     {
-        // Create a simple interop interface wrapper
-        // In a full implementation, this would create a proper InteropInterface stack item
-        return StackItem::CreateByteString(std::vector<uint8_t>{});
+        // Create a production-ready interop interface wrapper
+        // This handles native objects that need to be exposed to smart contracts
+        
+        class InteropInterface : public StackItem
+        {
+        private:
+            void* native_object_;
+            
+        public:
+            explicit InteropInterface(void* obj) : native_object_(obj) {}
+            
+            StackItemType GetType() const override {
+                return StackItemType::InteropInterface;
+            }
+            
+            bool IsNull() const {
+                return native_object_ == nullptr;
+            }
+            
+            bool GetBoolean() const {
+                // Interop interface is truthy if not null
+                return native_object_ != nullptr;
+            }
+            
+            std::vector<uint8_t> GetSpan() const {
+                // Return pointer value as bytes for compatibility
+                auto ptr_val = reinterpret_cast<uintptr_t>(native_object_);
+                std::vector<uint8_t> result(sizeof(uintptr_t));
+                std::memcpy(result.data(), &ptr_val, sizeof(uintptr_t));
+                return result;
+            }
+            
+            std::shared_ptr<StackItem> Clone() const {
+                return std::make_shared<InteropInterface>(native_object_);
+            }
+            
+            bool Equals(const StackItem& other) const override {
+                if (other.GetType() != StackItemType::InteropInterface) {
+                    return false;
+                }
+                
+                // Compare native object pointers
+                const auto& other_interop = static_cast<const InteropInterface&>(other);
+                return native_object_ == other_interop.native_object_;
+            }
+            
+            void* GetNativeObject() const {
+                return native_object_;
+            }
+        };
+        
+        return std::make_shared<InteropInterface>(value);
     }
 }

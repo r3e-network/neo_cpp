@@ -111,8 +111,52 @@ namespace neo::ledger
         }
         writer.Write("witnesses", witnessArray);
 
-        // Add a fixed size for now
-        writer.Write("size", 512);
+        // Calculate actual transaction size
+        try {
+            // Get the actual serialized size of the transaction
+            size_t actual_size = GetSize();
+            writer.Write("size", static_cast<int64_t>(actual_size));
+        } catch (const std::exception& e) {
+            // Fallback to calculating size from components if GetSize() is not available
+            size_t estimated_size = 0;
+            
+            // Transaction header size
+            estimated_size += sizeof(uint8_t);   // version
+            estimated_size += sizeof(uint32_t);  // nonce
+            estimated_size += sizeof(int64_t);   // systemFee
+            estimated_size += sizeof(int64_t);   // networkFee
+            estimated_size += sizeof(uint32_t);  // validUntilBlock
+            
+            // Add signers size
+            const auto& signers = GetSigners();
+            estimated_size += GetVarintSize(signers.size());
+            for (const auto& signer : signers) {
+                estimated_size += signer.GetSize();
+            }
+            
+            // Add attributes size
+            const auto& attributes = GetAttributes();
+            estimated_size += GetVarintSize(attributes.size());
+            for (const auto& attr : attributes) {
+                if (attr) {
+                    estimated_size += attr->GetSize();
+                }
+            }
+            
+            // Add script size
+            const auto& script = GetScript();
+            estimated_size += GetVarintSize(script.Size());
+            estimated_size += script.Size();
+            
+            // Add witnesses size
+            const auto& witnesses = GetWitnesses();
+            estimated_size += GetVarintSize(witnesses.size());
+            for (const auto& witness : witnesses) {
+                estimated_size += witness.GetSize();
+            }
+            
+            writer.Write("size", static_cast<int64_t>(estimated_size));
+        }
     }
 
     void Transaction::DeserializeJson(const io::JsonReader& reader)

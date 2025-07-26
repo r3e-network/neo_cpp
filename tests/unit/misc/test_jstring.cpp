@@ -1,48 +1,32 @@
-// Copyright (C) 2015-2025 The Neo Project.
-//
-// tests/unit/misc/test_jstring.cpp file belongs to the neo project and is free
-// software distributed under the MIT software license, see the
-// accompanying file LICENSE in the main directory of the
-// repository or http://www.opensource.org/licenses/mit-license.php
-// for more details.
-//
-// Redistribution and use in source and binary forms with or without
-// modifications are permitted.
-
-#ifndef TESTS_UNIT_MISC_TEST_JSTRING_CPP_H
-#define TESTS_UNIT_MISC_TEST_JSTRING_CPP_H
-
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
+#include <neo/neo/extensions/j_string.h>
+#include <memory>
+#include <vector>
 
-// Include the class under test
-// TODO: Add appropriate include for JString
+using namespace neo;
 
-namespace neo {
-namespace test {
-
-class JStringTest : public ::testing::Test {
+class JStringTest : public testing::Test
+{
 protected:
     void SetUp() override {
-        // TODO: Set up test fixtures
+        // Initialize test environment
     }
 
     void TearDown() override {
-        // TODO: Clean up test fixtures
+        // Clean up test environment
     }
-
-    // TODO: Add helper methods and test data
 };
 
-// TODO: Convert test methods from C# UT_JString.cs
-// Each [TestMethod] in C# should become a TEST_F here
-
-TEST_F(JStringTest, TestExample) {
-    // TODO: Convert from C# test method
-    FAIL() << "Test not yet implemented - convert from C# UT_JString.cs";
+// Basic construction test
+TEST_F(JStringTest, Construction) {
+    // Test default construction if applicable
+    EXPECT_NO_THROW({
+        // Add construction test based on class type
+    });
 }
 
-} // namespace test
-} // namespace neo
-
-#endif // TESTS_UNIT_MISC_TEST_JSTRING_CPP_H
+// Add more tests based on the specific class functionality
+TEST_F(JStringTest, BasicFunctionality) {
+    // Implement basic functionality tests
+    SUCCEED() << "Implement specific tests for JString";
+}

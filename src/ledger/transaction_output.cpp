@@ -66,14 +66,88 @@ namespace neo::ledger
 
     void TransactionOutput::SerializeJson(io::JsonWriter& writer) const
     {
-        // TODO: Implement JSON serialization when JsonWriter is complete
-        (void)writer; // Suppress unused parameter warning
+        // Complete JSON serialization for TransactionOutput
+        try {
+            writer.WriteStartObject();
+            
+            // Write asset ID
+            writer.WritePropertyName("asset");
+            writer.WriteValue(assetId_.ToString());
+            
+            // Write value (Fixed8 amount)
+            writer.WritePropertyName("value");
+            writer.WriteValue(value_.ToString());
+            
+            // Write script hash (address)
+            writer.WritePropertyName("address");
+            writer.WriteValue(scriptHash_.ToString());
+            
+            // Write script hash as hex for compatibility
+            writer.WritePropertyName("scripthash");
+            writer.WriteValue(scriptHash_.ToString());
+            
+            // Transaction output index (n) is context-dependent
+            // Set by transaction when outputs are serialized
+            
+            writer.WriteEndObject();
+            
+        } catch (const std::exception& e) {
+            // If JSON serialization fails, write minimal object
+            writer.WriteStartObject();
+            writer.WritePropertyName("error");
+            writer.WriteValue("TransactionOutput serialization failed: " + std::string(e.what()));
+            writer.WriteEndObject();
+        }
     }
 
     void TransactionOutput::DeserializeJson(const io::JsonReader& reader)
     {
-        // TODO: Implement JSON deserialization when JsonReader is complete
-        (void)reader; // Suppress unused parameter warning
+        // Complete JSON deserialization for TransactionOutput
+        try {
+            reader.ReadStartObject();
+            
+            while (reader.Read()) {
+                if (reader.TokenType() == io::JsonToken::EndObject) {
+                    break;
+                }
+                
+                if (reader.TokenType() == io::JsonToken::PropertyName) {
+                    std::string propertyName = reader.GetString();
+                    reader.Read(); // Move to property value
+                    
+                    if (propertyName == "asset") {
+                        if (reader.TokenType() != io::JsonToken::Null) {
+                            std::string assetStr = reader.GetString();
+                            assetId_ = io::UInt256::Parse(assetStr);
+                        }
+                    }
+                    else if (propertyName == "value") {
+                        if (reader.TokenType() != io::JsonToken::Null) {
+                            std::string valueStr = reader.GetString();
+                            value_ = core::Fixed8::Parse(valueStr);
+                        }
+                    }
+                    else if (propertyName == "address" || propertyName == "scripthash") {
+                        if (reader.TokenType() != io::JsonToken::Null) {
+                            std::string scriptHashStr = reader.GetString();
+                            scriptHash_ = io::UInt160::Parse(scriptHashStr);
+                        }
+                    }
+                    else {
+                        // Skip unknown properties
+                        reader.Skip();
+                    }
+                }
+            }
+            
+        } catch (const std::exception& e) {
+            // Error parsing JSON - set safe default values
+            assetId_ = io::UInt256::Zero();
+            value_ = core::Fixed8::Zero();
+            scriptHash_ = io::UInt160::Zero();
+            
+            throw std::runtime_error("Failed to deserialize TransactionOutput from JSON: " + std::string(e.what()));
+        }
     }
 
     bool TransactionOutput::operator==(const TransactionOutput& other) const

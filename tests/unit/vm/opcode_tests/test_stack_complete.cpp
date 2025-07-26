@@ -500,7 +500,7 @@ TEST_F(StackOpcodeTest, ComplexStackOperations_StackSorting) {
     sb.EmitOpCode(OpCode::ROT);     // Arrange for comparison
     sb.EmitOpCode(OpCode::GT);      // Compare
     // If true, elements are in wrong order - would need conditional swap
-    // This is a simplified version - full sort would need conditional logic
+    // Demonstrates basic comparison - full sort requires branching logic
     
     ExecuteScript(sb.ToByteArray());
     CheckState(VMState::HALT);

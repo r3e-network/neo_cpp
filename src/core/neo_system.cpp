@@ -32,10 +32,18 @@
 
 namespace neo {
 
-// Relay cache implementation
+// Production-ready LRU relay cache implementation consistent with C# version
 class RelayCache {
 private:
-    std::unordered_set<std::string> cache_;
+    struct CacheEntry {
+        std::string hash;
+        std::chrono::steady_clock::time_point access_time;
+        
+        CacheEntry(const std::string& h) : hash(h), access_time(std::chrono::steady_clock::now()) {}
+    };
+    
+    std::unordered_map<std::string, std::list<CacheEntry>::iterator> cache_map_;
+    std::list<CacheEntry> lru_list_;
     std::mutex mutex_;
     size_t max_size_;
 
@@ -44,21 +52,47 @@ public:
 
     bool contains(const std::string& hash_str) {
         std::lock_guard<std::mutex> lock(mutex_);
-        return cache_.find(hash_str) != cache_.end();
+        auto it = cache_map_.find(hash_str);
+        if (it != cache_map_.end()) {
+            // Move to front (most recently used)
+            auto list_it = it->second;
+            list_it->access_time = std::chrono::steady_clock::now();
+            lru_list_.splice(lru_list_.begin(), lru_list_, list_it);
+            return true;
+        }
+        return false;
     }
 
     void add(const std::string& hash_str) {
         std::lock_guard<std::mutex> lock(mutex_);
-        if (cache_.size() >= max_size_) {
-            // Simple eviction - remove first element
-            cache_.erase(cache_.begin());
+        
+        // Check if already exists
+        auto it = cache_map_.find(hash_str);
+        if (it != cache_map_.end()) {
+            // Move to front and update access time
+            auto list_it = it->second;
+            list_it->access_time = std::chrono::steady_clock::now();
+            lru_list_.splice(lru_list_.begin(), lru_list_, list_it);
+            return;
         }
-        cache_.insert(hash_str);
+        
+        // Implement proper LRU eviction consistent with Neo C# RelayCache
+        if (cache_map_.size() >= max_size_) {
+            // Remove least recently used item (back of list)
+            auto lru_entry = lru_list_.back();
+            cache_map_.erase(lru_entry.hash);
+            lru_list_.pop_back();
+        }
+        
+        // Add new entry at front (most recently used)
+        lru_list_.emplace_front(hash_str);
+        cache_map_[hash_str] = lru_list_.begin();
     }
 
     void clear() {
         std::lock_guard<std::mutex> lock(mutex_);
-        cache_.clear();
+        cache_map_.clear();
+        lru_list_.clear();
     }
 };
 

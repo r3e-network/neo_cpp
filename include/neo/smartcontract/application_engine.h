@@ -123,6 +123,12 @@ namespace neo::smartcontract
         io::UInt160 GetCurrentScriptHash() const;
 
         /**
+         * @brief Sets the current script hash context for testing purposes.
+         * @param scriptHash The script hash to set as current context.
+         */
+        void SetCurrentScriptHash(const io::UInt160& scriptHash);
+
+        /**
          * @brief Gets the calling script hash.
          * @return The calling script hash.
          */

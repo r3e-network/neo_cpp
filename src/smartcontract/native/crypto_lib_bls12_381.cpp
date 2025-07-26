@@ -120,17 +120,131 @@ namespace neo::smartcontract::native
 
         bool neg = negItem->GetBoolean();
 
-        // Perform multiplication based on the type of the point
-        // BLS12-381 operations require complex interop object support
-        // This is not implemented yet as it requires significant VM infrastructure
-        throw std::runtime_error("BLS12-381 operations not implemented yet");
+        // Perform scalar multiplication based on the point type
+        try {
+            auto point = static_cast<const BLS12381Point*>(xInterop.get());
+            auto scalar = mul;
+            
+            BLS12381Point result;
+            switch (point->GetType()) {
+                case BLS12381Point::Type::G1Affine:
+                {
+                    auto g1 = point->AsG1Affine();
+                    auto multiplied = g1.Multiply(scalar);
+                    if (neg) {
+                        multiplied = multiplied.Negate();
+                    }
+                    result = BLS12381Point(multiplied);
+                    break;
+                }
+                case BLS12381Point::Type::G1Projective:
+                {
+                    auto g1 = point->AsG1Projective();
+                    auto affine = g1.ToAffine();
+                    auto multiplied = affine.Multiply(scalar);
+                    if (neg) {
+                        multiplied = multiplied.Negate();
+                    }
+                    result = BLS12381Point(multiplied);
+                    break;
+                }
+                case BLS12381Point::Type::G2Affine:
+                {
+                    auto g2 = point->AsG2Affine();
+                    auto multiplied = g2.Multiply(scalar);
+                    if (neg) {
+                        multiplied = multiplied.Negate();
+                    }
+                    result = BLS12381Point(multiplied);
+                    break;
+                }
+                case BLS12381Point::Type::G2Projective:
+                {
+                    auto g2 = point->AsG2Projective();
+                    auto affine = g2.ToAffine();
+                    auto multiplied = affine.Multiply(scalar);
+                    if (neg) {
+                        multiplied = multiplied.Negate();
+                    }
+                    result = BLS12381Point(multiplied);
+                    break;
+                }
+                default:
+                    throw std::invalid_argument("Invalid point type for scalar multiplication");
+            }
+            
+            // Create interop item for the result
+            auto resultInterop = vm::StackItem::CreateInterop(std::make_shared<BLS12381Point>(result));
+            return resultInterop;
+        }
+        catch (const std::exception& e) {
+            throw std::runtime_error("BLS12-381 multiplication failed: " + std::string(e.what()));
+        }
     }
 
     std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Pairing(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
-        // BLS12-381 operations require complex interop object support
-        // This is not implemented yet as it requires significant VM infrastructure
-        throw std::runtime_error("BLS12-381 operations not implemented yet");
+        // Implement BLS12-381 pairing operation
+        if (args.size() < 2)
+            throw std::runtime_error("Invalid arguments - pairing requires 2 points");
+
+        auto pointAItem = args[0];
+        auto pointBItem = args[1];
+
+        if (!pointAItem->IsInterop() || !pointBItem->IsInterop())
+            throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
+
+        auto pointAInterop = pointAItem->GetInterface();
+        auto pointBInterop = pointBItem->GetInterface();
+        
+        if (!pointAInterop || !pointBInterop)
+            throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
+
+        try {
+            auto pointA = static_cast<const BLS12381Point*>(pointAInterop.get());
+            auto pointB = static_cast<const BLS12381Point*>(pointBInterop.get());
+            
+            // Extract G1 and G2 points for pairing
+            cryptography::bls12_381::G1Point g1Point;
+            cryptography::bls12_381::G2Point g2Point;
+            
+            // Get G1 point (can be from pointA or pointB)
+            if (pointA->GetType() == BLS12381Point::Type::G1Affine) {
+                g1Point = pointA->AsG1Affine();
+            } else if (pointA->GetType() == BLS12381Point::Type::G1Projective) {
+                g1Point = pointA->AsG1Projective().ToAffine();
+            } else if (pointB->GetType() == BLS12381Point::Type::G1Affine) {
+                g1Point = pointB->AsG1Affine();
+            } else if (pointB->GetType() == BLS12381Point::Type::G1Projective) {
+                g1Point = pointB->AsG1Projective().ToAffine();
+            } else {
+                throw std::invalid_argument("Pairing requires a G1 point");
+            }
+            
+            // Get G2 point (can be from pointA or pointB)
+            if (pointA->GetType() == BLS12381Point::Type::G2Affine) {
+                g2Point = pointA->AsG2Affine();
+            } else if (pointA->GetType() == BLS12381Point::Type::G2Projective) {
+                g2Point = pointA->AsG2Projective().ToAffine();
+            } else if (pointB->GetType() == BLS12381Point::Type::G2Affine) {
+                g2Point = pointB->AsG2Affine();
+            } else if (pointB->GetType() == BLS12381Point::Type::G2Projective) {
+                g2Point = pointB->AsG2Projective().ToAffine();
+            } else {
+                throw std::invalid_argument("Pairing requires a G2 point");
+            }
+            
+            // Perform the pairing operation
+            auto gtResult = cryptography::bls12_381::Pairing(g1Point, g2Point);
+            auto result = BLS12381Point(gtResult);
+            
+            // Create interop item for the result
+            auto resultInterop = vm::StackItem::CreateInterop(std::make_shared<BLS12381Point>(result));
+            return resultInterop;
+        }
+        catch (const std::exception& e) {
+            throw std::runtime_error("BLS12-381 pairing failed: " + std::string(e.what()));
+        }
     }
 
     io::ByteVector CryptoLib::Serialize(const BLS12381Point& point)

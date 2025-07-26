@@ -16,7 +16,7 @@
 #include <gmock/gmock.h>
 
 // Include the class under test
-// TODO: Add appropriate include for Helper
+#include <neo/core/helper.h>
 
 namespace neo {
 namespace test {
@@ -24,22 +24,56 @@ namespace test {
 class HelperTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        // TODO: Set up test fixtures
+        // Set up test fixtures for Helper testing
+        test_data = io::ByteVector::Parse("0102030405060708");
+        empty_data = io::ByteVector();
+        large_data = io::ByteVector::Parse("0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
     }
 
     void TearDown() override {
-        // TODO: Clean up test fixtures
+        // Clean up test fixtures - ByteVector manages its own memory
     }
 
-    // TODO: Add helper methods and test data
+    // Helper methods and test data for core Helper testing
+    io::ByteVector test_data;
+    io::ByteVector empty_data;
+    io::ByteVector large_data;
 };
 
-// TODO: Convert test methods from C# UT_Helper.cs
-// Each [TestMethod] in C# should become a TEST_F here
+// Helper test methods converted from C# UT_Helper.cs functionality
 
-TEST_F(HelperTest, TestExample) {
-    // TODO: Convert from C# test method
-    FAIL() << "Test not yet implemented - convert from C# UT_Helper.cs";
+TEST_F(HelperTest, ReverseHexString) {
+    std::string hex_input = "0102030405060708";
+    std::string expected = "0807060504030201";
+    std::string result = Helper::ReverseHex(hex_input);
+    EXPECT_EQ(result, expected);
+}
+
+TEST_F(HelperTest, ByteArrayToHexString) {
+    std::string expected = "0102030405060708";
+    std::string result = Helper::ToHexString(test_data);
+    EXPECT_EQ(result, expected);
+}
+
+TEST_F(HelperTest, EmptyByteArrayToHexString) {
+    std::string result = Helper::ToHexString(empty_data);
+    EXPECT_EQ(result, "");
+}
+
+TEST_F(HelperTest, HexStringToByteArray) {
+    std::string hex_input = "0102030405060708";
+    auto result = Helper::FromHexString(hex_input);
+    EXPECT_EQ(result, test_data);
+}
+
+TEST_F(HelperTest, ComputeHash160) {
+    auto hash = Helper::Hash160(test_data);
+    EXPECT_EQ(hash.Size(), 20); // Hash160 should be 20 bytes
+}
+
+TEST_F(HelperTest, ComputeHash256) {
+    auto hash = Helper::Hash256(test_data);
+    EXPECT_EQ(hash.Size(), 32); // Hash256 should be 32 bytes
 }
 
 } // namespace test

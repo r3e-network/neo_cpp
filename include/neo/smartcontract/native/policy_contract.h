@@ -15,7 +15,7 @@ namespace neo::smartcontract::native
         /**
          * @brief The contract ID.
          */
-        static constexpr uint32_t ID = 6;
+        static constexpr int32_t ID = -7;
 
         /**
          * @brief The contract name.
@@ -23,64 +23,55 @@ namespace neo::smartcontract::native
         static constexpr const char* NAME = "PolicyContract";
 
         /**
-         * @brief The storage prefix for max transactions per block.
+         * @brief The storage prefix for blocked accounts.
          */
-        static constexpr uint8_t PREFIX_MAX_TRANSACTIONS_PER_BLOCK = 1;
+        static constexpr uint8_t PREFIX_BLOCKED_ACCOUNT = 15;
 
         /**
          * @brief The storage prefix for fee per byte.
          */
-        static constexpr uint8_t PREFIX_FEE_PER_BYTE = 2;
-
-        /**
-         * @brief The storage prefix for blocked accounts.
-         */
-        static constexpr uint8_t PREFIX_BLOCKED_ACCOUNT = 3;
+        static constexpr uint8_t PREFIX_FEE_PER_BYTE = 10;
 
         /**
          * @brief The storage prefix for execution fee factor.
          */
-        static constexpr uint8_t PREFIX_EXECUTION_FEE_FACTOR = 4;
+        static constexpr uint8_t PREFIX_EXEC_FEE_FACTOR = 18;
 
         /**
          * @brief The storage prefix for storage price.
          */
-        static constexpr uint8_t PREFIX_STORAGE_PRICE = 5;
+        static constexpr uint8_t PREFIX_STORAGE_PRICE = 19;
 
         /**
          * @brief The storage prefix for attribute fee.
          */
-        static constexpr uint8_t PREFIX_ATTRIBUTE_FEE = 6;
+        static constexpr uint8_t PREFIX_ATTRIBUTE_FEE = 20;
 
         /**
          * @brief The storage prefix for milliseconds per block.
          */
-        static constexpr uint8_t PREFIX_MILLISECONDS_PER_BLOCK = 7;
+        static constexpr uint8_t PREFIX_MILLISECONDS_PER_BLOCK = 21;
 
         /**
          * @brief The storage prefix for max valid until block increment.
          */
-        static constexpr uint8_t PREFIX_MAX_VALID_UNTIL_BLOCK_INCREMENT = 8;
+        static constexpr uint8_t PREFIX_MAX_VALID_UNTIL_BLOCK_INCREMENT = 22;
 
         /**
          * @brief The storage prefix for max traceable blocks.
          */
-        static constexpr uint8_t PREFIX_MAX_TRACEABLE_BLOCKS = 9;
-
-        /**
-         * @brief The default max transactions per block.
-         */
-        static constexpr uint32_t DEFAULT_MAX_TRANSACTIONS_PER_BLOCK = 512;
+        static constexpr uint8_t PREFIX_MAX_TRACEABLE_BLOCKS = 23;
 
         /**
          * @brief The default fee per byte.
+         * In the unit of datoshi, 1 datoshi = 1e-8 GAS
          */
-        static constexpr int64_t DEFAULT_FEE_PER_BYTE = 1000;
+        static constexpr uint32_t DEFAULT_FEE_PER_BYTE = 1000;
 
         /**
          * @brief The default execution fee factor.
          */
-        static constexpr uint32_t DEFAULT_EXECUTION_FEE_FACTOR = 30;
+        static constexpr uint32_t DEFAULT_EXEC_FEE_FACTOR = 30;
 
         /**
          * @brief The default storage price.
@@ -98,24 +89,14 @@ namespace neo::smartcontract::native
         static constexpr uint32_t DEFAULT_NOTARY_ASSISTED_ATTRIBUTE_FEE = 1000'0000;
 
         /**
-         * @brief The default milliseconds per block.
+         * @brief The event name for the block generation time changed.
          */
-        static constexpr uint32_t DEFAULT_MILLISECONDS_PER_BLOCK = 15000;
-
-        /**
-         * @brief The default max valid until block increment.
-         */
-        static constexpr uint32_t DEFAULT_MAX_VALID_UNTIL_BLOCK_INCREMENT = 5760;
-
-        /**
-         * @brief The default max traceable blocks.
-         */
-        static constexpr uint32_t DEFAULT_MAX_TRACEABLE_BLOCKS = 2102400;
+        static constexpr const char* MILLISECONDS_PER_BLOCK_CHANGED_EVENT = "MillisecondsPerBlockChanged";
 
         /**
          * @brief The maximum execution fee factor that the committee can set.
          */
-        static constexpr uint32_t MAX_EXECUTION_FEE_FACTOR = 100;
+        static constexpr uint32_t MAX_EXEC_FEE_FACTOR = 100;
 
         /**
          * @brief The maximum attribute fee that the committee can set.
@@ -128,7 +109,7 @@ namespace neo::smartcontract::native
         static constexpr uint32_t MAX_STORAGE_PRICE = 10000000;
 
         /**
-         * @brief The maximum milliseconds per block that the committee can set.
+         * @brief The maximum block generation time that the committee can set in milliseconds.
          */
         static constexpr uint32_t MAX_MILLISECONDS_PER_BLOCK = 30000;
 
@@ -138,21 +119,16 @@ namespace neo::smartcontract::native
         static constexpr uint32_t MAX_MAX_VALID_UNTIL_BLOCK_INCREMENT = 86400;
 
         /**
-         * @brief The maximum max traceable blocks that the committee can set.
+         * @brief The maximum MaxTraceableBlocks value that the committee can set.
+         * It is set to be a year of 15-second blocks.
          */
-        static constexpr uint32_t MAX_MAX_TRACEABLE_BLOCKS = 3000000;
+        static constexpr uint32_t MAX_MAX_TRACEABLE_BLOCKS = 2102400;
 
         /**
          * @brief Constructs a PolicyContract.
          */
         PolicyContract();
 
-        /**
-         * @brief Gets the max transactions per block.
-         * @param snapshot The snapshot.
-         * @return The max transactions per block.
-         */
-        uint32_t GetMaxTransactionsPerBlock(std::shared_ptr<persistence::StoreView> snapshot) const;
 
         /**
          * @brief Gets the fee per byte.
@@ -162,11 +138,11 @@ namespace neo::smartcontract::native
         int64_t GetFeePerByte(std::shared_ptr<persistence::StoreView> snapshot) const;
 
         /**
-         * @brief Gets the execution fee factor.
+         * @brief Gets the execution fee factor. This is a multiplier that can be adjusted by the committee to adjust the system fees for transactions.
          * @param snapshot The snapshot.
          * @return The execution fee factor.
          */
-        uint32_t GetExecutionFeeFactor(std::shared_ptr<persistence::StoreView> snapshot) const;
+        uint32_t GetExecFeeFactor(std::shared_ptr<persistence::StoreView> snapshot) const;
 
         /**
          * @brief Gets the storage price.
@@ -248,22 +224,6 @@ namespace neo::smartcontract::native
 
     private:
         /**
-         * @brief Handles the getMaxTransactionsPerBlock method.
-         * @param engine The engine.
-         * @param args The arguments.
-         * @return The result.
-         */
-        std::shared_ptr<vm::StackItem> OnGetMaxTransactionsPerBlock(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
-
-        /**
-         * @brief Handles the setMaxTransactionsPerBlock method.
-         * @param engine The engine.
-         * @param args The arguments.
-         * @return The result.
-         */
-        std::shared_ptr<vm::StackItem> OnSetMaxTransactionsPerBlock(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
-
-        /**
          * @brief Handles the getFeePerByte method.
          * @param engine The engine.
          * @param args The arguments.
@@ -280,20 +240,20 @@ namespace neo::smartcontract::native
         std::shared_ptr<vm::StackItem> OnSetFeePerByte(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
 
         /**
-         * @brief Handles the getExecutionFeeFactor method.
+         * @brief Handles the getExecFeeFactor method.
          * @param engine The engine.
          * @param args The arguments.
          * @return The result.
          */
-        std::shared_ptr<vm::StackItem> OnGetExecutionFeeFactor(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
+        std::shared_ptr<vm::StackItem> OnGetExecFeeFactor(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
 
         /**
-         * @brief Handles the setExecutionFeeFactor method.
+         * @brief Handles the setExecFeeFactor method.
          * @param engine The engine.
          * @param args The arguments.
          * @return The result.
          */
-        std::shared_ptr<vm::StackItem> OnSetExecutionFeeFactor(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
+        std::shared_ptr<vm::StackItem> OnSetExecFeeFactor(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
 
         /**
          * @brief Handles the getStoragePrice method.

@@ -20,7 +20,7 @@ namespace neo::smartcontract::native
         /**
          * @brief The contract ID.
          */
-        static constexpr uint32_t ID = 2;
+        static constexpr int32_t ID = -6;
 
         /**
          * @brief The contract name.
@@ -52,10 +52,8 @@ namespace neo::smartcontract::native
          */
         static constexpr int64_t FACTOR = 100000000;
 
-        /**
-         * @brief The total supply.
-         */
-        static constexpr int64_t TOTAL_SUPPLY = 100000000 * FACTOR;
+        // Note: GAS doesn't have a fixed total supply - it's mintable/burnable
+        // Total supply is tracked dynamically in storage
 
         /**
          * @brief Constructs a GasToken.

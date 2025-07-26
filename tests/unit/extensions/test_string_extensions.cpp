@@ -168,7 +168,7 @@ namespace neo::extensions::tests
         EXPECT_TRUE(StringExtensions::TryToStrictUtf8String(valid_utf8, result));
         EXPECT_EQ("Hello", result);
         
-        // Test with invalid UTF-8 (this is a simplified test)
+        // Test with invalid UTF-8 bytes for error handling
         std::vector<uint8_t> invalid_utf8 = {0xFF, 0xFE, 0xFD};
         EXPECT_FALSE(StringExtensions::TryToStrictUtf8String(invalid_utf8, result));
     }

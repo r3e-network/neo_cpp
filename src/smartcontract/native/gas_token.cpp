@@ -107,7 +107,7 @@ namespace neo::smartcontract::native
         auto key = GetStorageKey(PREFIX_TOTAL_SUPPLY, io::ByteVector{});
         auto value = GetStorageValue(snapshot, key);
         if (value.IsEmpty())
-            return TOTAL_SUPPLY;
+            return 0; // GAS starts with 0 total supply, minted as needed
 
         return *reinterpret_cast<const int64_t*>(value.Data());
     }
@@ -417,9 +417,8 @@ namespace neo::smartcontract::native
             }
             catch (const std::exception& e)
             {
-                // For now, log the error and allow operation to proceed
-                // This maintains compatibility while proper committee integration is completed
-                std::cerr << "Committee check failed for GAS transfer: " << e.what() << std::endl;
+                // Committee authorization failed - MUST deny access for security
+                throw std::runtime_error(std::string("Committee authorization failed for GAS transfer: ") + e.what());
             }
         }
         catch (const std::exception& e)

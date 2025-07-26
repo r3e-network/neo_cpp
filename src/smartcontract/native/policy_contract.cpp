@@ -1,15 +1,19 @@
 #include <neo/smartcontract/native/policy_contract.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/neo_token.h>
+#include <neo/smartcontract/native/contract_management.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+#include <neo/extensions/biginteger_extensions.h>
+#include <neo/core/biginteger.h>
 #include <sstream>
 #include <iostream>
 
 namespace neo::smartcontract::native
 {
+    using namespace neo::core;
     PolicyContract::PolicyContract()
         : NativeContract(NAME, ID)
     {
@@ -23,12 +27,10 @@ namespace neo::smartcontract::native
 
     void PolicyContract::Initialize()
     {
-        RegisterMethod("getMaxTransactionsPerBlock", CallFlags::ReadStates, std::bind(&PolicyContract::OnGetMaxTransactionsPerBlock, this, std::placeholders::_1, std::placeholders::_2));
-        RegisterMethod("setMaxTransactionsPerBlock", CallFlags::States, std::bind(&PolicyContract::OnSetMaxTransactionsPerBlock, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("getFeePerByte", CallFlags::ReadStates, std::bind(&PolicyContract::OnGetFeePerByte, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("setFeePerByte", CallFlags::States, std::bind(&PolicyContract::OnSetFeePerByte, this, std::placeholders::_1, std::placeholders::_2));
-        RegisterMethod("getExecutionFeeFactor", CallFlags::ReadStates, std::bind(&PolicyContract::OnGetExecutionFeeFactor, this, std::placeholders::_1, std::placeholders::_2));
-        RegisterMethod("setExecutionFeeFactor", CallFlags::States, std::bind(&PolicyContract::OnSetExecutionFeeFactor, this, std::placeholders::_1, std::placeholders::_2));
+        RegisterMethod("getExecFeeFactor", CallFlags::ReadStates, std::bind(&PolicyContract::OnGetExecFeeFactor, this, std::placeholders::_1, std::placeholders::_2));
+        RegisterMethod("setExecFeeFactor", CallFlags::States, std::bind(&PolicyContract::OnSetExecFeeFactor, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("getStoragePrice", CallFlags::ReadStates, std::bind(&PolicyContract::OnGetStoragePrice, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("setStoragePrice", CallFlags::States, std::bind(&PolicyContract::OnSetStoragePrice, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("isBlocked", CallFlags::ReadStates, std::bind(&PolicyContract::OnIsBlocked, this, std::placeholders::_1, std::placeholders::_2));
@@ -37,7 +39,7 @@ namespace neo::smartcontract::native
         RegisterMethod("getAttributeFee", CallFlags::ReadStates, std::bind(&PolicyContract::OnGetAttributeFee, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("setAttributeFee", CallFlags::States, std::bind(&PolicyContract::OnSetAttributeFee, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("getMillisecondsPerBlock", CallFlags::ReadStates, std::bind(&PolicyContract::OnGetMillisecondsPerBlock, this, std::placeholders::_1, std::placeholders::_2));
-        RegisterMethod("setMillisecondsPerBlock", CallFlags::States, std::bind(&PolicyContract::OnSetMillisecondsPerBlock, this, std::placeholders::_1, std::placeholders::_2));
+        RegisterMethod("setMillisecondsPerBlock", CallFlags::States | CallFlags::AllowNotify, std::bind(&PolicyContract::OnSetMillisecondsPerBlock, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("getMaxValidUntilBlockIncrement", CallFlags::ReadStates, std::bind(&PolicyContract::OnGetMaxValidUntilBlockIncrement, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("setMaxValidUntilBlockIncrement", CallFlags::States, std::bind(&PolicyContract::OnSetMaxValidUntilBlockIncrement, this, std::placeholders::_1, std::placeholders::_2));
         RegisterMethod("getMaxTraceableBlocks", CallFlags::ReadStates, std::bind(&PolicyContract::OnGetMaxTraceableBlocks, this, std::placeholders::_1, std::placeholders::_2));
@@ -46,43 +48,45 @@ namespace neo::smartcontract::native
 
     bool PolicyContract::InitializeContract(ApplicationEngine& engine, uint32_t hardfork)
     {
-        if (hardfork == 0)
+        // For base initialization (hardfork == ActiveIn)
+        if (hardfork == 0)  // ActiveIn hardfork
         {
             // Initialize fee per byte (1000 datoshi)
             auto feePerByteKey = GetStorageKey(PREFIX_FEE_PER_BYTE, io::ByteVector{});
-            int64_t feePerByte = DEFAULT_FEE_PER_BYTE;
-            io::ByteVector feePerByteValue(io::ByteSpan(reinterpret_cast<const uint8_t*>(&feePerByte), sizeof(int64_t)));
-            PutStorageValue(engine.GetSnapshot(), feePerByteKey, feePerByteValue);
+            PutStorageValue(engine.GetSnapshot(), feePerByteKey, extensions::BigIntegerExtensions::ToByteArray(BigInteger(DEFAULT_FEE_PER_BYTE)));
 
             // Initialize execution fee factor (30)
-            auto execFeeFactorKey = GetStorageKey(PREFIX_EXECUTION_FEE_FACTOR, io::ByteVector{});
-            uint32_t execFeeFactor = DEFAULT_EXECUTION_FEE_FACTOR;
-            io::ByteVector execFeeFactorValue(io::ByteSpan(reinterpret_cast<const uint8_t*>(&execFeeFactor), sizeof(uint32_t)));
-            PutStorageValue(engine.GetSnapshot(), execFeeFactorKey, execFeeFactorValue);
+            auto execFeeFactorKey = GetStorageKey(PREFIX_EXEC_FEE_FACTOR, io::ByteVector{});
+            PutStorageValue(engine.GetSnapshot(), execFeeFactorKey, extensions::BigIntegerExtensions::ToByteArray(BigInteger(DEFAULT_EXEC_FEE_FACTOR)));
 
             // Initialize storage price (100000)
             auto storagePriceKey = GetStorageKey(PREFIX_STORAGE_PRICE, io::ByteVector{});
-            uint32_t storagePrice = DEFAULT_STORAGE_PRICE;
-            io::ByteVector storagePriceValue(io::ByteSpan(reinterpret_cast<const uint8_t*>(&storagePrice), sizeof(uint32_t)));
-            PutStorageValue(engine.GetSnapshot(), storagePriceKey, storagePriceValue);
-
-            // Initialize milliseconds per block (15000)
+            PutStorageValue(engine.GetSnapshot(), storagePriceKey, extensions::BigIntegerExtensions::ToByteArray(BigInteger(DEFAULT_STORAGE_PRICE)));
+        }
+        
+        // For Echidna hardfork initialization
+        if (hardfork == 1)  // Hardfork::HF_Echidna
+        {
+            // Initialize NotaryAssisted attribute fee
+            io::ByteVector notaryAssistedType{0x20}; // TransactionAttributeType.NotaryAssisted
+            auto notaryAssistedKey = GetStorageKey(PREFIX_ATTRIBUTE_FEE, notaryAssistedType);
+            PutStorageValue(engine.GetSnapshot(), notaryAssistedKey, extensions::BigIntegerExtensions::ToByteArray(BigInteger(DEFAULT_NOTARY_ASSISTED_ATTRIBUTE_FEE)));
+            
+            // Initialize milliseconds per block from protocol settings
             auto millisecondsPerBlockKey = GetStorageKey(PREFIX_MILLISECONDS_PER_BLOCK, io::ByteVector{});
-            uint32_t millisecondsPerBlock = DEFAULT_MILLISECONDS_PER_BLOCK;
-            io::ByteVector millisecondsPerBlockValue(io::ByteSpan(reinterpret_cast<const uint8_t*>(&millisecondsPerBlock), sizeof(uint32_t)));
-            PutStorageValue(engine.GetSnapshot(), millisecondsPerBlockKey, millisecondsPerBlockValue);
-
-            // Initialize max valid until block increment (86400)
+            auto protocolSettings = engine.GetProtocolSettings();
+            uint32_t millisecondsPerBlock = protocolSettings ? protocolSettings->GetMillisecondsPerBlock() : 15000;
+            PutStorageValue(engine.GetSnapshot(), millisecondsPerBlockKey, extensions::BigIntegerExtensions::ToByteArray(BigInteger(millisecondsPerBlock)));
+            
+            // Initialize max valid until block increment from protocol settings
             auto maxValidUntilBlockIncrementKey = GetStorageKey(PREFIX_MAX_VALID_UNTIL_BLOCK_INCREMENT, io::ByteVector{});
-            uint32_t maxValidUntilBlockIncrement = DEFAULT_MAX_VALID_UNTIL_BLOCK_INCREMENT;
-            io::ByteVector maxValidUntilBlockIncrementValue(io::ByteSpan(reinterpret_cast<const uint8_t*>(&maxValidUntilBlockIncrement), sizeof(uint32_t)));
-            PutStorageValue(engine.GetSnapshot(), maxValidUntilBlockIncrementKey, maxValidUntilBlockIncrementValue);
-
-            // Initialize max traceable blocks (2102400)
+            uint32_t maxValidUntilBlockIncrement = protocolSettings ? protocolSettings->GetMaxValidUntilBlockIncrement() : 5760;
+            PutStorageValue(engine.GetSnapshot(), maxValidUntilBlockIncrementKey, extensions::BigIntegerExtensions::ToByteArray(BigInteger(maxValidUntilBlockIncrement)));
+            
+            // Initialize max traceable blocks from protocol settings
             auto maxTraceableBlocksKey = GetStorageKey(PREFIX_MAX_TRACEABLE_BLOCKS, io::ByteVector{});
-            uint32_t maxTraceableBlocks = DEFAULT_MAX_TRACEABLE_BLOCKS;
-            io::ByteVector maxTraceableBlocksValue(io::ByteSpan(reinterpret_cast<const uint8_t*>(&maxTraceableBlocks), sizeof(uint32_t)));
-            PutStorageValue(engine.GetSnapshot(), maxTraceableBlocksKey, maxTraceableBlocksValue);
+            uint32_t maxTraceableBlocks = protocolSettings ? protocolSettings->GetMaxTraceableBlocks() : 2102400;
+            PutStorageValue(engine.GetSnapshot(), maxTraceableBlocksKey, extensions::BigIntegerExtensions::ToByteArray(BigInteger(maxTraceableBlocks)));
         }
 
         return true;
@@ -107,15 +111,6 @@ namespace neo::smartcontract::native
         return true;
     }
 
-    uint32_t PolicyContract::GetMaxTransactionsPerBlock(std::shared_ptr<persistence::StoreView> snapshot) const
-    {
-        auto key = GetStorageKey(PREFIX_MAX_TRANSACTIONS_PER_BLOCK, io::ByteVector{});
-        auto value = GetStorageValue(snapshot, key);
-        if (value.IsEmpty())
-            return DEFAULT_MAX_TRANSACTIONS_PER_BLOCK;
-
-        return *reinterpret_cast<const uint32_t*>(value.Data());
-    }
 
     int64_t PolicyContract::GetFeePerByte(std::shared_ptr<persistence::StoreView> snapshot) const
     {
@@ -124,17 +119,17 @@ namespace neo::smartcontract::native
         if (value.IsEmpty())
             return DEFAULT_FEE_PER_BYTE;
 
-        return *reinterpret_cast<const int64_t*>(value.Data());
+        return static_cast<int64_t>(extensions::BigIntegerExtensions::FromByteArray(value));
     }
 
-    uint32_t PolicyContract::GetExecutionFeeFactor(std::shared_ptr<persistence::StoreView> snapshot) const
+    uint32_t PolicyContract::GetExecFeeFactor(std::shared_ptr<persistence::StoreView> snapshot) const
     {
-        auto key = GetStorageKey(PREFIX_EXECUTION_FEE_FACTOR, io::ByteVector{});
+        auto key = GetStorageKey(PREFIX_EXEC_FEE_FACTOR, io::ByteVector{});
         auto value = GetStorageValue(snapshot, key);
         if (value.IsEmpty())
-            return DEFAULT_EXECUTION_FEE_FACTOR;
+            return DEFAULT_EXEC_FEE_FACTOR;
 
-        return *reinterpret_cast<const uint32_t*>(value.Data());
+        return static_cast<uint32_t>(extensions::BigIntegerExtensions::FromByteArray(value));
     }
 
     uint32_t PolicyContract::GetStoragePrice(std::shared_ptr<persistence::StoreView> snapshot) const
@@ -144,7 +139,7 @@ namespace neo::smartcontract::native
         if (value.IsEmpty())
             return DEFAULT_STORAGE_PRICE;
 
-        return *reinterpret_cast<const uint32_t*>(value.Data());
+        return static_cast<uint32_t>(extensions::BigIntegerExtensions::FromByteArray(value));
     }
 
     bool PolicyContract::IsBlocked(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account) const
@@ -161,7 +156,7 @@ namespace neo::smartcontract::native
         if (value.IsEmpty())
             return attributeType == 0x20 ? DEFAULT_NOTARY_ASSISTED_ATTRIBUTE_FEE : DEFAULT_ATTRIBUTE_FEE; // 0x20 is NotaryAssisted
 
-        return *reinterpret_cast<const uint32_t*>(value.Data());
+        return static_cast<uint32_t>(extensions::BigIntegerExtensions::FromByteArray(value));
     }
 
     uint32_t PolicyContract::GetMillisecondsPerBlock(std::shared_ptr<persistence::StoreView> snapshot) const
@@ -169,9 +164,14 @@ namespace neo::smartcontract::native
         auto key = GetStorageKey(PREFIX_MILLISECONDS_PER_BLOCK, io::ByteVector{});
         auto value = GetStorageValue(snapshot, key);
         if (value.IsEmpty())
-            return DEFAULT_MILLISECONDS_PER_BLOCK;
+        {
+            // Return from protocol settings if available
+            // Note: This would require accessing engine context, which we don't have here
+            // For now, return a reasonable default
+            return 15000;
+        }
 
-        return *reinterpret_cast<const uint32_t*>(value.Data());
+        return static_cast<uint32_t>(extensions::BigIntegerExtensions::FromByteArray(value));
     }
 
     uint32_t PolicyContract::GetMaxValidUntilBlockIncrement(std::shared_ptr<persistence::StoreView> snapshot) const
@@ -179,9 +179,9 @@ namespace neo::smartcontract::native
         auto key = GetStorageKey(PREFIX_MAX_VALID_UNTIL_BLOCK_INCREMENT, io::ByteVector{});
         auto value = GetStorageValue(snapshot, key);
         if (value.IsEmpty())
-            return DEFAULT_MAX_VALID_UNTIL_BLOCK_INCREMENT;
+            return 5760; // Default value
 
-        return *reinterpret_cast<const uint32_t*>(value.Data());
+        return static_cast<uint32_t>(extensions::BigIntegerExtensions::FromByteArray(value));
     }
 
     uint32_t PolicyContract::GetMaxTraceableBlocks(std::shared_ptr<persistence::StoreView> snapshot) const
@@ -189,39 +189,11 @@ namespace neo::smartcontract::native
         auto key = GetStorageKey(PREFIX_MAX_TRACEABLE_BLOCKS, io::ByteVector{});
         auto value = GetStorageValue(snapshot, key);
         if (value.IsEmpty())
-            return DEFAULT_MAX_TRACEABLE_BLOCKS;
+            return 2102400; // Default value
 
-        return *reinterpret_cast<const uint32_t*>(value.Data());
+        return static_cast<uint32_t>(extensions::BigIntegerExtensions::FromByteArray(value));
     }
 
-    std::shared_ptr<vm::StackItem> PolicyContract::OnGetMaxTransactionsPerBlock(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
-    {
-        return vm::StackItem::Create(static_cast<int64_t>(GetMaxTransactionsPerBlock(engine.GetSnapshot())));
-    }
-
-    std::shared_ptr<vm::StackItem> PolicyContract::OnSetMaxTransactionsPerBlock(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
-    {
-        if (args.empty())
-            throw std::runtime_error("Invalid arguments");
-
-        // Check committee witness
-        if (!CheckCommittee(engine))
-            throw std::runtime_error("No authorization");
-
-        auto valueItem = args[0];
-        auto value = valueItem->GetInteger();
-
-        if (value <= 0)
-            throw std::runtime_error("Invalid value");
-
-        // Set max transactions per block
-        auto key = GetStorageKey(PREFIX_MAX_TRANSACTIONS_PER_BLOCK, io::ByteVector{});
-        uint32_t maxTxPerBlock = static_cast<uint32_t>(value);
-        io::ByteVector valueBytes(io::ByteSpan(reinterpret_cast<const uint8_t*>(&maxTxPerBlock), sizeof(uint32_t)));
-        PutStorageValue(engine.GetSnapshot(), key, valueBytes);
-
-        return vm::StackItem::Create(true);
-    }
 
     std::shared_ptr<vm::StackItem> PolicyContract::OnGetFeePerByte(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
@@ -231,54 +203,50 @@ namespace neo::smartcontract::native
     std::shared_ptr<vm::StackItem> PolicyContract::OnSetFeePerByte(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
         if (args.empty())
-            throw std::runtime_error("Invalid arguments");
-
-        // Check committee witness
-        if (!CheckCommittee(engine))
-            throw std::runtime_error("No authorization");
+            throw std::invalid_argument("Invalid arguments");
 
         auto valueItem = args[0];
         auto value = valueItem->GetInteger();
 
-        if (value < 0)
-            throw std::runtime_error("Invalid value");
+        if (value < 0 || value > 100000000) // 1_00000000
+            throw std::out_of_range("Value out of range");
+
+        // Check committee witness
+        if (!CheckCommittee(engine))
+            throw std::runtime_error("Invalid committee signature");
 
         // Set fee per byte
         auto key = GetStorageKey(PREFIX_FEE_PER_BYTE, io::ByteVector{});
-        int64_t feePerByte = value;
-        io::ByteVector valueBytes(io::ByteSpan(reinterpret_cast<const uint8_t*>(&feePerByte), sizeof(int64_t)));
-        PutStorageValue(engine.GetSnapshot(), key, valueBytes);
+        PutStorageValue(engine.GetSnapshot(), key, extensions::BigIntegerExtensions::ToByteArray(value));
 
-        return vm::StackItem::Create(true);
+        return vm::StackItem::Null();
     }
 
-    std::shared_ptr<vm::StackItem> PolicyContract::OnGetExecutionFeeFactor(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+    std::shared_ptr<vm::StackItem> PolicyContract::OnGetExecFeeFactor(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
-        return vm::StackItem::Create(static_cast<int64_t>(GetExecutionFeeFactor(engine.GetSnapshot())));
+        return vm::StackItem::Create(static_cast<int64_t>(GetExecFeeFactor(engine.GetSnapshot())));
     }
 
-    std::shared_ptr<vm::StackItem> PolicyContract::OnSetExecutionFeeFactor(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+    std::shared_ptr<vm::StackItem> PolicyContract::OnSetExecFeeFactor(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
         if (args.empty())
-            throw std::runtime_error("Invalid arguments");
-
-        // Check committee witness
-        if (!CheckCommittee(engine))
-            throw std::runtime_error("No authorization");
+            throw std::invalid_argument("Invalid arguments");
 
         auto valueItem = args[0];
         auto value = valueItem->GetInteger();
 
-        if (value <= 0 || value > MAX_EXECUTION_FEE_FACTOR)
-            throw std::runtime_error("Invalid value");
+        if (value == 0 || value > MAX_EXEC_FEE_FACTOR)
+            throw std::out_of_range("Value out of range");
+
+        // Check committee witness
+        if (!CheckCommittee(engine))
+            throw std::runtime_error("Invalid committee signature");
 
         // Set execution fee factor
-        auto key = GetStorageKey(PREFIX_EXECUTION_FEE_FACTOR, io::ByteVector{});
-        uint32_t executionFeeFactor = static_cast<uint32_t>(value);
-        io::ByteVector valueBytes(io::ByteSpan(reinterpret_cast<const uint8_t*>(&executionFeeFactor), sizeof(uint32_t)));
-        PutStorageValue(engine.GetSnapshot(), key, valueBytes);
+        auto key = GetStorageKey(PREFIX_EXEC_FEE_FACTOR, io::ByteVector{});
+        PutStorageValue(engine.GetSnapshot(), key, extensions::BigIntegerExtensions::ToByteArray(value));
 
-        return vm::StackItem::Create(true);
+        return vm::StackItem::Null();
     }
 
     std::shared_ptr<vm::StackItem> PolicyContract::OnGetStoragePrice(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
@@ -289,25 +257,23 @@ namespace neo::smartcontract::native
     std::shared_ptr<vm::StackItem> PolicyContract::OnSetStoragePrice(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
         if (args.empty())
-            throw std::runtime_error("Invalid arguments");
-
-        // Check committee witness
-        if (!CheckCommittee(engine))
-            throw std::runtime_error("No authorization");
+            throw std::invalid_argument("Invalid arguments");
 
         auto valueItem = args[0];
         auto value = valueItem->GetInteger();
 
-        if (value <= 0 || value > MAX_STORAGE_PRICE)
-            throw std::runtime_error("Invalid value");
+        if (value == 0 || value > MAX_STORAGE_PRICE)
+            throw std::out_of_range("Value out of range");
+
+        // Check committee witness
+        if (!CheckCommittee(engine))
+            throw std::runtime_error("Invalid committee signature");
 
         // Set storage price
         auto key = GetStorageKey(PREFIX_STORAGE_PRICE, io::ByteVector{});
-        uint32_t storagePrice = static_cast<uint32_t>(value);
-        io::ByteVector valueBytes(io::ByteSpan(reinterpret_cast<const uint8_t*>(&storagePrice), sizeof(uint32_t)));
-        PutStorageValue(engine.GetSnapshot(), key, valueBytes);
+        PutStorageValue(engine.GetSnapshot(), key, extensions::BigIntegerExtensions::ToByteArray(value));
 
-        return vm::StackItem::Create(true);
+        return vm::StackItem::Null();
     }
 
     std::shared_ptr<vm::StackItem> PolicyContract::OnIsBlocked(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
@@ -330,11 +296,11 @@ namespace neo::smartcontract::native
     std::shared_ptr<vm::StackItem> PolicyContract::OnBlockAccount(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
         if (args.empty())
-            throw std::runtime_error("Invalid arguments");
+            throw std::invalid_argument("Invalid arguments");
 
         // Check committee witness
         if (!CheckCommittee(engine))
-            throw std::runtime_error("No authorization");
+            throw std::runtime_error("Invalid committee signature");
 
         auto accountItem = args[0];
         auto accountBytes = accountItem->GetByteArray();
@@ -345,13 +311,17 @@ namespace neo::smartcontract::native
         io::UInt160 account;
         std::memcpy(account.Data(), accountBytes.Data(), 20);
 
+        // Check if it's a native contract - cannot block native contracts
+        if (NativeContract::IsNative(account))
+            throw std::runtime_error("It's impossible to block a native contract.");
+
         // Check if account is already blocked
-        if (IsBlocked(engine.GetSnapshot(), account))
+        auto key = GetStorageKey(PREFIX_BLOCKED_ACCOUNT, account);
+        if (!GetStorageValue(engine.GetSnapshot(), key).IsEmpty())
             return vm::StackItem::Create(false);
 
         // Block account
-        auto key = GetStorageKey(PREFIX_BLOCKED_ACCOUNT, account);
-        PutStorageValue(engine.GetSnapshot(), key, io::ByteVector{1});
+        PutStorageValue(engine.GetSnapshot(), key, io::ByteVector{});
 
         return vm::StackItem::Create(true);
     }
@@ -359,11 +329,11 @@ namespace neo::smartcontract::native
     std::shared_ptr<vm::StackItem> PolicyContract::OnUnblockAccount(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
         if (args.empty())
-            throw std::runtime_error("Invalid arguments");
+            throw std::invalid_argument("Invalid arguments");
 
         // Check committee witness
         if (!CheckCommittee(engine))
-            throw std::runtime_error("No authorization");
+            throw std::runtime_error("Invalid committee signature");
 
         auto accountItem = args[0];
         auto accountBytes = accountItem->GetByteArray();
@@ -374,8 +344,12 @@ namespace neo::smartcontract::native
         io::UInt160 account;
         std::memcpy(account.Data(), accountBytes.Data(), 20);
 
-        // Unblock account
+        // Check if account is blocked
         auto key = GetStorageKey(PREFIX_BLOCKED_ACCOUNT, account);
+        if (GetStorageValue(engine.GetSnapshot(), key).IsEmpty())
+            return vm::StackItem::Create(false);
+
+        // Unblock account
         DeleteStorageValue(engine.GetSnapshot(), key);
 
         return vm::StackItem::Create(true);
@@ -395,11 +369,7 @@ namespace neo::smartcontract::native
     std::shared_ptr<vm::StackItem> PolicyContract::OnSetAttributeFee(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
         if (args.size() < 2)
-            throw std::runtime_error("Invalid arguments");
-
-        // Check committee witness
-        if (!CheckCommittee(engine))
-            throw std::runtime_error("No authorization");
+            throw std::invalid_argument("Invalid arguments");
 
         auto attributeTypeItem = args[0];
         auto valueItem = args[1];
@@ -407,16 +377,29 @@ namespace neo::smartcontract::native
         auto attributeType = static_cast<uint8_t>(attributeTypeItem->GetInteger());
         auto value = valueItem->GetInteger();
 
-        if (value < 0 || value > MAX_ATTRIBUTE_FEE)
-            throw std::runtime_error("Invalid value");
+        // Validate attribute type - check if it's a valid TransactionAttributeType
+        // For now, we'll accept common values. Full validation would require checking against enum
+        if (attributeType > 0x20 && attributeType != 0x20) // 0x20 is NotaryAssisted
+            throw std::runtime_error("Unsupported attribute type");
+
+        if (value > MAX_ATTRIBUTE_FEE)
+            throw std::out_of_range("Value out of range");
+
+        // Check committee witness
+        if (!CheckCommittee(engine))
+            throw std::runtime_error("Invalid committee signature");
 
         // Set attribute fee
         auto key = GetStorageKey(PREFIX_ATTRIBUTE_FEE, io::ByteVector{&attributeType, 1});
-        uint32_t attributeFee = static_cast<uint32_t>(value);
-        io::ByteVector valueBytes(io::ByteSpan(reinterpret_cast<const uint8_t*>(&attributeFee), sizeof(uint32_t)));
-        PutStorageValue(engine.GetSnapshot(), key, valueBytes);
+        auto currentValue = GetStorageValue(engine.GetSnapshot(), key);
+        if (currentValue.IsEmpty())
+        {
+            // Create new entry with default value first
+            PutStorageValue(engine.GetSnapshot(), key, extensions::BigIntegerExtensions::ToByteArray(BigInteger(DEFAULT_ATTRIBUTE_FEE)));
+        }
+        PutStorageValue(engine.GetSnapshot(), key, extensions::BigIntegerExtensions::ToByteArray(value));
 
-        return vm::StackItem::Create(true);
+        return vm::StackItem::Null();
     }
 
     std::shared_ptr<vm::StackItem> PolicyContract::OnGetMillisecondsPerBlock(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
@@ -427,78 +410,33 @@ namespace neo::smartcontract::native
     std::shared_ptr<vm::StackItem> PolicyContract::OnSetMillisecondsPerBlock(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
         if (args.empty())
-            throw std::runtime_error("Invalid arguments");
-
-        // Check committee witness
-        if (!CheckCommittee(engine))
-            throw std::runtime_error("No authorization");
+            throw std::invalid_argument("Invalid arguments");
 
         auto valueItem = args[0];
         auto value = valueItem->GetInteger();
 
-        if (value <= 0 || value > MAX_MILLISECONDS_PER_BLOCK)
-            throw std::runtime_error("Invalid value");
+        if (value == 0 || value > MAX_MILLISECONDS_PER_BLOCK)
+            throw std::out_of_range("MillisecondsPerBlock value should be between 1 and " + std::to_string(MAX_MILLISECONDS_PER_BLOCK) + ", got " + value.ToString());
+
+        // Check committee witness
+        if (!CheckCommittee(engine))
+            throw std::runtime_error("invalid committee signature");
 
         // Get old value for event
-        uint32_t oldValue = GetMillisecondsPerBlock(engine.GetSnapshot());
+        auto oldValue = GetMillisecondsPerBlock(engine.GetSnapshot());
 
         // Set milliseconds per block
         auto key = GetStorageKey(PREFIX_MILLISECONDS_PER_BLOCK, io::ByteVector{});
-        uint32_t millisecondsPerBlock = static_cast<uint32_t>(value);
-        io::ByteVector valueBytes(io::ByteSpan(reinterpret_cast<const uint8_t*>(&millisecondsPerBlock), sizeof(uint32_t)));
-        PutStorageValue(engine.GetSnapshot(), key, valueBytes);
+        PutStorageValue(engine.GetSnapshot(), key, extensions::BigIntegerExtensions::ToByteArray(value));
 
-        // Notify event
-        std::vector<std::shared_ptr<vm::StackItem>> state;
+        // Emit event with old and new values
+        std::vector<std::shared_ptr<vm::StackItem>> state = {
+            vm::StackItem::Create(BigInteger(oldValue)),
+            vm::StackItem::Create(value)
+        };
+        engine.SendNotification(GetScriptHash(), MILLISECONDS_PER_BLOCK_CHANGED_EVENT, state);
 
-        // Check hardfork activation for Echidna
-        // Implement hardfork check matching C# ProtocolSettings.IsHardforkEnabled
-        try
-        {
-            auto protocolSettings = engine.GetProtocolSettings();
-            if (protocolSettings)
-            {
-                uint32_t currentHeight = engine.GetCurrentBlockHeight();
-                auto hardforks = protocolSettings->GetHardforks();
-                
-                // Check if Echidna hardfork is enabled at current height
-                bool echidnaEnabled = false;
-                for (const auto& [hardfork, height] : hardforks)
-                {
-                    if (hardfork == Hardfork::HF_Echidna && currentHeight >= height)
-                    {
-                        echidnaEnabled = true;
-                        break;
-                    }
-                }
-                
-                if (!echidnaEnabled)
-                {
-                    // Echidna hardfork not yet activated, use default behavior
-                    state = {
-                        vm::StackItem::Create(static_cast<int64_t>(oldValue)),
-                        vm::StackItem::Create(static_cast<int64_t>(millisecondsPerBlock))
-                    };
-                }
-                else
-                {
-                    state = {
-                        vm::StackItem::Create(static_cast<int64_t>(millisecondsPerBlock))
-                    };
-                }
-            }
-        }
-        catch (...)
-        {
-            // On error, assume hardfork is not enabled
-            state = {
-                vm::StackItem::Create(static_cast<int64_t>(millisecondsPerBlock))
-            };
-        }
-
-        engine.Notify(GetScriptHash(), "MillisecondsPerBlockChanged", state);
-
-        return vm::StackItem::Create(true);
+        return vm::StackItem::Null();
     }
 
     std::shared_ptr<vm::StackItem> PolicyContract::OnGetMaxValidUntilBlockIncrement(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
@@ -509,30 +447,28 @@ namespace neo::smartcontract::native
     std::shared_ptr<vm::StackItem> PolicyContract::OnSetMaxValidUntilBlockIncrement(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
         if (args.empty())
-            throw std::runtime_error("Invalid arguments");
-
-        // Check committee witness
-        if (!CheckCommittee(engine))
-            throw std::runtime_error("No authorization");
+            throw std::invalid_argument("Invalid arguments");
 
         auto valueItem = args[0];
         auto value = valueItem->GetInteger();
 
-        if (value <= 0 || value > MAX_MAX_VALID_UNTIL_BLOCK_INCREMENT)
-            throw std::runtime_error("Invalid value");
+        if (value == 0 || value > MAX_MAX_VALID_UNTIL_BLOCK_INCREMENT)
+            throw std::out_of_range("Value out of range");
 
         // Check if value is less than max traceable blocks
-        uint32_t maxTraceableBlocks = GetMaxTraceableBlocks(engine.GetSnapshot());
-        if (value >= maxTraceableBlocks)
-            throw std::runtime_error("MaxValidUntilBlockIncrement must be lower than MaxTraceableBlocks");
+        auto mtb = GetMaxTraceableBlocks(engine.GetSnapshot());
+        if (value >= mtb)
+            throw std::runtime_error("MaxValidUntilBlockIncrement must be lower than MaxTraceableBlocks (" + value.ToString() + " vs " + std::to_string(mtb) + ")");
+
+        // Check committee witness
+        if (!CheckCommittee(engine))
+            throw std::runtime_error("Invalid committee signature");
 
         // Set max valid until block increment
         auto key = GetStorageKey(PREFIX_MAX_VALID_UNTIL_BLOCK_INCREMENT, io::ByteVector{});
-        uint32_t maxValidUntilBlockIncrement = static_cast<uint32_t>(value);
-        io::ByteVector valueBytes(io::ByteSpan(reinterpret_cast<const uint8_t*>(&maxValidUntilBlockIncrement), sizeof(uint32_t)));
-        PutStorageValue(engine.GetSnapshot(), key, valueBytes);
+        PutStorageValue(engine.GetSnapshot(), key, extensions::BigIntegerExtensions::ToByteArray(value));
 
-        return vm::StackItem::Create(true);
+        return vm::StackItem::Null();
     }
 
     std::shared_ptr<vm::StackItem> PolicyContract::OnGetMaxTraceableBlocks(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
@@ -543,47 +479,46 @@ namespace neo::smartcontract::native
     std::shared_ptr<vm::StackItem> PolicyContract::OnSetMaxTraceableBlocks(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
         if (args.empty())
-            throw std::runtime_error("Invalid arguments");
-
-        // Check committee witness
-        if (!CheckCommittee(engine))
-            throw std::runtime_error("No authorization");
+            throw std::invalid_argument("Invalid arguments");
 
         auto valueItem = args[0];
         auto value = valueItem->GetInteger();
 
-        if (value <= 0 || value > MAX_MAX_TRACEABLE_BLOCKS)
-            throw std::runtime_error("Invalid value");
+        if (value == 0 || value > MAX_MAX_TRACEABLE_BLOCKS)
+            throw std::out_of_range("MaxTraceableBlocks value should be between 1 and " + std::to_string(MAX_MAX_TRACEABLE_BLOCKS) + ", got " + value.ToString());
 
-        uint32_t oldValue = GetMaxTraceableBlocks(engine.GetSnapshot());
-        if (value < oldValue)
-            throw std::runtime_error("New value cannot be less than old value");
+        auto oldVal = GetMaxTraceableBlocks(engine.GetSnapshot());
+        if (value > oldVal)
+            throw std::runtime_error("MaxTraceableBlocks can not be increased (old " + std::to_string(oldVal) + ", new " + value.ToString() + ")");
+
+        auto mVUBIncrement = GetMaxValidUntilBlockIncrement(engine.GetSnapshot());
+        if (value <= mVUBIncrement)
+            throw std::runtime_error("MaxTraceableBlocks must be larger than MaxValidUntilBlockIncrement (" + value.ToString() + " vs " + std::to_string(mVUBIncrement) + ")");
+
+        // Check committee witness
+        if (!CheckCommittee(engine))
+            throw std::runtime_error("Invalid committee signature");
 
         // Set max traceable blocks
         auto key = GetStorageKey(PREFIX_MAX_TRACEABLE_BLOCKS, io::ByteVector{});
-        uint32_t maxTraceableBlocks = static_cast<uint32_t>(value);
-        io::ByteVector valueBytes(io::ByteSpan(reinterpret_cast<const uint8_t*>(&maxTraceableBlocks), sizeof(uint32_t)));
-        PutStorageValue(engine.GetSnapshot(), key, valueBytes);
+        PutStorageValue(engine.GetSnapshot(), key, extensions::BigIntegerExtensions::ToByteArray(value));
 
-        return vm::StackItem::Create(true);
+        return vm::StackItem::Null();
     }
 
     bool PolicyContract::CheckCommittee(ApplicationEngine& engine) const
     {
-        // Implement proper committee checking when NeoToken contract integration is available
-        try
-        {
-            // Committee authorization check temporarily disabled due to missing native contract lookup
-            // TODO: Implement proper committee authorization using NEO token contract
-            // For now, allow operation to proceed (this should be secured in production)
+        try {
+            // Get committee address from NEO token contract
+            auto neoToken = NeoToken::GetInstance();
+            auto committeeAddress = neoToken->GetCommitteeAddress(engine.GetSnapshot());
+            
+            // Check witness for committee address
+            return engine.CheckWitness(committeeAddress);
+            
+        } catch (const std::exception& e) {
+            // Error during committee verification - deny access for security
+            return false;
         }
-        catch (const std::exception& e)
-        {
-            // For now, log the error and allow operation to proceed
-            // This maintains compatibility while proper committee integration is completed
-            std::cerr << "Committee check failed: " << e.what() << std::endl;
-        }
-        
-        return true;
     }
 }

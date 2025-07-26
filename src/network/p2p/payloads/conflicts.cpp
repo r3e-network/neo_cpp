@@ -67,17 +67,58 @@ namespace neo::network::p2p::payloads
     bool Conflicts::Verify(/* DataCache& snapshot, const Transaction& transaction */) const
     {
         // The verification logic should ensure the conflicting transaction
-        // is either in the mempool or on the blockchain
-        // For now, return true as this is a placeholder
-        // TODO: Implement actual verification with mempool/blockchain check
-        return true;
+        // Complete verification implementation - check if hash exists in mempool or blockchain
+        try {
+            if (!system) {
+                return false; // No system context available
+            }
+            
+            // Check if the hash exists in the memory pool
+            auto mempool = system->GetMemoryPool();
+            if (mempool && mempool->ContainsKey(hash_)) {
+                return true; // Hash is in mempool
+            }
+            
+            // Check if the hash exists on the blockchain
+            auto blockchain_contains = system->ContainsTransaction(hash_);
+            if (blockchain_contains == ContainsTransactionType::ExistsInLedger || 
+                blockchain_contains == ContainsTransactionType::ExistsInPool) {
+                return true; // Hash is on blockchain or in pool
+            }
+            
+            // Hash not found in either mempool or blockchain
+            return false;
+            
+        } catch (const std::exception& e) {
+            // Error during verification - reject as invalid
+            return false;
+        }
     }
 
     int64_t Conflicts::CalculateNetworkFee(/* DataCache& snapshot, const Transaction& transaction */) const
     {
-        // Conflicts attribute incurs a network fee
-        // TODO: Get this value from protocol settings
-        return 5000000; // 0.05 GAS in datoshi (typical fee for conflicts)
+        // Conflicts attribute incurs a network fee - get from protocol settings
+        try {
+            // Attempt to get the fee from protocol settings
+            if (auto protocolSettings = neo::ProtocolSettings::GetDefault()) {
+                // Get the conflicts attribute fee from protocol settings
+                auto attributeFees = protocolSettings->GetAttributeFees();
+                auto it = attributeFees.find(static_cast<uint8_t>(ledger::TransactionAttributeType::Conflicts));
+                
+                if (it != attributeFees.end()) {
+                    LOG_DEBUG("Using Conflicts attribute fee from protocol settings: {}", it->second);
+                    return it->second;
+                }
+            }
+            
+            // Fallback to default value if protocol settings not available
+            LOG_DEBUG("Using default Conflicts attribute fee (protocol settings not available)");
+            return 5000000; // 0.05 GAS in datoshi (Neo N3 default fee for conflicts)
+            
+        } catch (const std::exception& e) {
+            LOG_WARNING("Error getting Conflicts fee from protocol settings: {}", e.what());
+            return 5000000; // Safe fallback
+        }
     }
 
     bool Conflicts::operator==(const Conflicts& other) const

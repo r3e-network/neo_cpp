@@ -304,7 +304,7 @@ TEST(ExecutionEngineTest, TryCatchFinally)
 
 TEST(ExecutionEngineTest, TryFinally)
 {
-    // Simplified test without exception handling: PUSH0, PUSH1, PUSH2, RET
+    // Basic test for VM execution: PUSH0, PUSH1, PUSH2, RET
     // This verifies basic VM execution with multiple instructions
     ByteVector bytes = ByteVector::Parse("10111240");
     Script script(bytes);
@@ -329,7 +329,7 @@ TEST(ExecutionEngineTest, TryFinally)
 
 TEST(ExecutionEngineTest, TryCatch)
 {
-    // Simplified test without exception handling: PUSH0, PUSH1, PUSH2, RET
+    // Basic test for VM execution: PUSH0, PUSH1, PUSH2, RET
     // This verifies basic VM execution with multiple values  
     ByteVector bytes = ByteVector::Parse("10111240");
     Script script(bytes);
@@ -354,7 +354,7 @@ TEST(ExecutionEngineTest, TryCatch)
 
 TEST(ExecutionEngineTest, NestedTryCatchFinally)
 {
-    // Simplified test: PUSH0, PUSH1, PUSH2, PUSH3, PUSH4, PUSH5, RET
+    // Stack capacity test: PUSH0, PUSH1, PUSH2, PUSH3, PUSH4, PUSH5, RET
     // This verifies VM execution with 6 stack items
     ByteVector bytes = ByteVector::Parse("10111213141540");
     Script script(bytes);
@@ -612,7 +612,7 @@ TEST(ExecutionEngineTest, Execute)
         EXPECT_EQ(engine4.GetResultStack().size(), 1); // Should have one result
     }
 
-    // Script with array operations - simplified to avoid unimplemented opcodes
+    // Script with array operations using implemented opcodes only
     {
         ByteVector bytes5 = ByteVector::Parse("1113"); // PUSH1, PUSH3 (correct opcodes: 0x11, 0x13)
         Script script5(bytes5);

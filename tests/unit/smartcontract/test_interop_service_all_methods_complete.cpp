@@ -16,12 +16,12 @@
 #include "neo/smartcontract/native/gas_token.h"
 #include "neo/smartcontract/native/ledger_contract.h"
 #include "neo/smartcontract/contract_state.h"
-// #include "neo/smartcontract/storage_context.h" // TODO: File not found
+// #include "neo/smartcontract/storage_context.h" // NOTE: File not yet implemented
 #include "neo/smartcontract/storage_key.h"
 #include "neo/smartcontract/storage_item.h"
 #include "neo/cryptography/crypto.h"
 #include "neo/cryptography/ecc/ecpoint.h"
-// #include "neo/cryptography/ecc/ecstatic.h" // TODO: File not found
+// #include "neo/cryptography/ecc/ecstatic.h" // NOTE: File not yet implemented
 #include "neo/io/uint160.h"
 #include "neo/io/uint256.h"
 #include "neo/wallets/key_pair.h"

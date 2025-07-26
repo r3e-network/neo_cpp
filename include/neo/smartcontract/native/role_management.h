@@ -102,7 +102,7 @@ namespace neo::smartcontract::native
         /**
          * @brief The contract ID.
          */
-        static constexpr uint32_t ID = 8;
+        static constexpr int32_t ID = -8;
 
         /**
          * @brief The contract name.
@@ -112,7 +112,7 @@ namespace neo::smartcontract::native
         /**
          * @brief The storage prefix for roles.
          */
-        static constexpr uint8_t PREFIX_ROLE = 1;
+        static constexpr uint8_t PREFIX_ROLE = 33;
 
         /**
          * @brief Role state constants for committee.

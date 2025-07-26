@@ -24,7 +24,7 @@ namespace neo::smartcontract::native
         /**
          * @brief The contract ID.
          */
-        static constexpr uint32_t ID = 7;
+        static constexpr int32_t ID = -9;
 
         /**
          * @brief The contract name.

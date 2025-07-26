@@ -47,10 +47,60 @@ namespace neo::network::p2p::payloads
 
     bool HighPriority::Verify(/* DataCache& snapshot, const Transaction& transaction */) const
     {
-        // The verification logic should check if the sender is a committee member
-        // For now, return true as this is a placeholder
-        // TODO: Implement actual verification with committee member check
-        return true;
+        // Complete verification implementation - check if sender is a committee member
+        try {
+            if (!system) {
+                return false; // No system context available
+            }
+            
+            // Get current committee members
+            auto snapshot = system->GetSnapshot();
+            if (!snapshot) {
+                return false; // Unable to get blockchain snapshot
+            }
+            
+            // Get committee from NEO token contract
+            auto neo_contract = system->GetNeoContract();
+            if (!neo_contract) {
+                return false; // NEO contract not available
+            }
+            
+            auto committee = neo_contract->GetCommittee(*snapshot);
+            if (committee.empty()) {
+                return false; // No committee members found
+            }
+            
+            // Extract sender script hash from witness or transaction context
+            // For high priority payload, sender verification would be done against
+            // the transaction witness that contains this payload
+            
+            // Get the transaction context from the system
+            auto current_tx = system->GetCurrentTransaction();
+            if (!current_tx) {
+                return false; // No transaction context
+            }
+            
+            // Check if any transaction signer is a committee member
+            const auto& signers = current_tx->GetSigners();
+            for (const auto& signer : signers) {
+                auto signer_script_hash = signer.GetAccount();
+                
+                // Check if this signer corresponds to a committee member
+                for (const auto& committee_member : committee) {
+                    auto member_script_hash = CalculateScriptHashFromPublicKey(committee_member);
+                    if (signer_script_hash == member_script_hash) {
+                        return true; // Sender is a committee member
+                    }
+                }
+            }
+            
+            // No committee member found in signers
+            return false;
+            
+        } catch (const std::exception& e) {
+            // Error during verification - reject as invalid
+            return false;
+        }
     }
 
     int64_t HighPriority::CalculateNetworkFee(/* DataCache& snapshot, const Transaction& transaction */) const

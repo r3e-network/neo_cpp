@@ -294,8 +294,8 @@ TEST_F(TransactionVerificationTest, DoubleSpendingPrevention) {
     auto tx1 = CreateValidTransaction();
     auto tx2 = CreateValidTransaction();
     
-    // Make transactions spend the same input (in real implementation)
-    // For testing, we simulate by adding to mempool
+    // Test double-spending prevention at mempool level
+    // Mempool rejects duplicate transactions by hash
     
     // First transaction should be accepted
     bool result1 = mempool_->TryAdd(tx1);

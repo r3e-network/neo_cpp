@@ -71,7 +71,7 @@ namespace neo::rpc::tests
         })";
 
         std::string hash = rpc_client->GetBestBlockHash();
-        EXPECT_EQ("mock_result", hash);  // Simplified mock returns "mock_result"
+        EXPECT_EQ("mock_result", hash);  // Mock HTTP client returns predefined test response
 
         // Verify the request was made correctly
         EXPECT_EQ("http://localhost:10332", mock_client_ptr->last_url);

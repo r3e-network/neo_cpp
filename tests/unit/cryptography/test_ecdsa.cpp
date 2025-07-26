@@ -195,7 +195,7 @@ TEST_F(ECDSATest, SignatureMalleabilityProtection) {
         0x79, 0xDC, 0xE5, 0x61, 0x7E, 0x31, 0x92, 0xA8
     };
     
-    // Compare s with half_order (simplified check)
+    // Compare s with half_order to verify canonical signature
     bool is_canonical = true;
     for (size_t i = 0; i < 32; ++i) {
         if (s[i] > half_order[i]) {

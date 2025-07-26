@@ -16,7 +16,7 @@
 #include <gmock/gmock.h>
 
 // Include the class under test
-// TODO: Add appropriate include for ByteArrayComparer
+#include <neo/extensions/byte_array_comparer.h>
 
 namespace neo {
 namespace test {
@@ -24,22 +24,85 @@ namespace test {
 class ByteArrayComparerTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        // TODO: Set up test fixtures
+        // Set up test fixtures with various byte array data for comparison testing
+        empty_array = neo::io::ByteVector();
+        single_zero = neo::io::ByteVector::Parse("00");
+        single_one = neo::io::ByteVector::Parse("01");
+        test_data1 = neo::io::ByteVector::Parse("01020304");
+        test_data2 = neo::io::ByteVector::Parse("01020304"); // Same as test_data1
+        test_data3 = neo::io::ByteVector::Parse("01020305"); // Greater than test_data1
+        test_data4 = neo::io::ByteVector::Parse("01020303"); // Less than test_data1
+        shorter_prefix = neo::io::ByteVector::Parse("0102");   // Prefix of test_data1
     }
 
     void TearDown() override {
-        // TODO: Clean up test fixtures
+        // Clean up test fixtures - ByteVector manages its own memory
     }
 
-    // TODO: Add helper methods and test data
+    // Helper methods and test data
+    neo::io::ByteVector empty_array;
+    neo::io::ByteVector single_zero;
+    neo::io::ByteVector single_one;
+    neo::io::ByteVector test_data1;
+    neo::io::ByteVector test_data2;
+    neo::io::ByteVector test_data3;
+    neo::io::ByteVector test_data4;
+    neo::io::ByteVector shorter_prefix;
 };
 
-// TODO: Convert test methods from C# UT_ByteArrayComparer.cs
-// Each [TestMethod] in C# should become a TEST_F here
+// Complete test methods converted from C# UT_ByteArrayComparer.cs functionality
 
-TEST_F(ByteArrayComparerTest, TestExample) {
-    // TODO: Convert from C# test method
-    FAIL() << "Test not yet implemented - convert from C# UT_ByteArrayComparer.cs";
+TEST_F(ByteArrayComparerTest, TestCompare_Equal) {
+    // Test that identical byte arrays compare as equal (result = 0)
+    EXPECT_EQ(0, neo::extensions::ByteArrayComparer::Compare(test_data1.AsSpan(), test_data2.AsSpan()));
+    EXPECT_EQ(0, neo::extensions::ByteArrayComparer::Compare(empty_array.AsSpan(), neo::io::ByteVector().AsSpan()));
+    EXPECT_EQ(0, neo::extensions::ByteArrayComparer::Compare(single_zero.AsSpan(), neo::io::ByteVector::Parse("00").AsSpan()));
+}
+
+TEST_F(ByteArrayComparerTest, TestCompare_LexicographicOrder) {
+    // Test lexicographic ordering: test_data1 < test_data3 (04 < 05)
+    EXPECT_LT(neo::extensions::ByteArrayComparer::Compare(test_data1.AsSpan(), test_data3.AsSpan()), 0);
+    
+    // Test lexicographic ordering: test_data4 < test_data1 (03 < 04)
+    EXPECT_LT(neo::extensions::ByteArrayComparer::Compare(test_data4.AsSpan(), test_data1.AsSpan()), 0);
+    
+    // Test reverse comparisons
+    EXPECT_GT(neo::extensions::ByteArrayComparer::Compare(test_data3.AsSpan(), test_data1.AsSpan()), 0);
+    EXPECT_GT(neo::extensions::ByteArrayComparer::Compare(test_data1.AsSpan(), test_data4.AsSpan()), 0);
+}
+
+TEST_F(ByteArrayComparerTest, TestCompare_DifferentLengths) {
+    // Test that shorter array is less than longer array when shorter is a prefix
+    EXPECT_LT(neo::extensions::ByteArrayComparer::Compare(shorter_prefix.AsSpan(), test_data1.AsSpan()), 0);
+    EXPECT_GT(neo::extensions::ByteArrayComparer::Compare(test_data1.AsSpan(), shorter_prefix.AsSpan()), 0);
+    
+    // Test empty array vs non-empty
+    EXPECT_LT(neo::extensions::ByteArrayComparer::Compare(empty_array.AsSpan(), single_zero.AsSpan()), 0);
+    EXPECT_GT(neo::extensions::ByteArrayComparer::Compare(single_zero.AsSpan(), empty_array.AsSpan()), 0);
+}
+
+TEST_F(ByteArrayComparerTest, TestEquals) {
+    // Test equality method
+    EXPECT_TRUE(neo::extensions::ByteArrayComparer::Equals(test_data1.AsSpan(), test_data2.AsSpan()));
+    EXPECT_FALSE(neo::extensions::ByteArrayComparer::Equals(test_data1.AsSpan(), test_data3.AsSpan()));
+    EXPECT_TRUE(neo::extensions::ByteArrayComparer::Equals(empty_array.AsSpan(), neo::io::ByteVector().AsSpan()));
+}
+
+TEST_F(ByteArrayComparerTest, TestGetHashCode) {
+    // Test that hash codes are consistent for equal data
+    auto hash1 = neo::extensions::ByteArrayComparer::GetHashCode(test_data1.AsSpan());
+    auto hash2 = neo::extensions::ByteArrayComparer::GetHashCode(test_data2.AsSpan());
+    EXPECT_EQ(hash1, hash2);
+    
+    // Test that different data produces different hash codes (probabilistically)
+    auto hash3 = neo::extensions::ByteArrayComparer::GetHashCode(test_data3.AsSpan());
+    EXPECT_NE(hash1, hash3);
+}
+
+TEST_F(ByteArrayComparerTest, TestSingleByteComparison) {
+    // Test single byte comparisons
+    EXPECT_LT(neo::extensions::ByteArrayComparer::Compare(single_zero.AsSpan(), single_one.AsSpan()), 0);
+    EXPECT_GT(neo::extensions::ByteArrayComparer::Compare(single_one.AsSpan(), single_zero.AsSpan()), 0);
 }
 
 } // namespace test

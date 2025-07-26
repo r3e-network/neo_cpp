@@ -318,6 +318,18 @@ namespace neo::smartcontract
         void SetManifest(const std::string& manifest);
 
         /**
+         * @brief Gets the update counter.
+         * @return The update counter.
+         */
+        uint16_t GetUpdateCounter() const;
+
+        /**
+         * @brief Sets the update counter.
+         * @param updateCounter The update counter.
+         */
+        void SetUpdateCounter(uint16_t updateCounter);
+
+        /**
          * @brief Serializes the ContractState to a binary writer.
          * @param writer The binary writer.
          */

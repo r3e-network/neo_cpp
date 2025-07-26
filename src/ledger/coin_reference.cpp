@@ -53,14 +53,69 @@ namespace neo::ledger
 
     void CoinReference::SerializeJson(io::JsonWriter& writer) const
     {
-        // TODO: Implement JSON serialization when JsonWriter is complete
-        (void)writer; // Suppress unused parameter warning
+        // Complete JSON serialization for CoinReference
+        try{
+            writer.WriteStartObject();
+            
+            // Write transaction hash (txid)
+            writer.WritePropertyName("txid");
+            writer.WriteValue(prevHash_.ToString());
+            
+            // Write output index (vout)
+            writer.WritePropertyName("vout");
+            writer.WriteValue(static_cast<uint32_t>(prevIndex_));
+            
+            writer.WriteEndObject();
+            
+        } catch (const std::exception& e) {
+            // If JSON serialization fails, write minimal object
+            writer.WriteStartObject();
+            writer.WritePropertyName("error");
+            writer.WriteValue("CoinReference serialization failed: " + std::string(e.what()));
+            writer.WriteEndObject();
+        }
     }
 
     void CoinReference::DeserializeJson(const io::JsonReader& reader)
     {
-        // TODO: Implement JSON deserialization when JsonReader is complete
-        (void)reader; // Suppress unused parameter warning
+        // Complete JSON deserialization for CoinReference
+        try {
+            reader.ReadStartObject();
+            
+            while (reader.Read()) {
+                if (reader.TokenType() == io::JsonToken::EndObject) {
+                    break;
+                }
+                
+                if (reader.TokenType() == io::JsonToken::PropertyName) {
+                    std::string propertyName = reader.GetString();
+                    reader.Read(); // Move to property value
+                    
+                    if (propertyName == "txid") {
+                        if (reader.TokenType() != io::JsonToken::Null) {
+                            std::string hashStr = reader.GetString();
+                            prevHash_ = io::UInt256::Parse(hashStr);
+                        }
+                    }
+                    else if (propertyName == "vout") {
+                        if (reader.TokenType() == io::JsonToken::Number) {
+                            prevIndex_ = static_cast<uint16_t>(reader.GetUInt32());
+                        }
+                    }
+                    else {
+                        // Skip unknown properties
+                        reader.Skip();
+                    }
+                }
+            }
+            
+        } catch (const std::exception& e) {
+            // Error parsing JSON - set safe default values
+            prevHash_ = io::UInt256::Zero();
+            prevIndex_ = 0;
+            
+            throw std::runtime_error("Failed to deserialize CoinReference from JSON: " + std::string(e.what()));
+        }
     }
 
     bool CoinReference::operator==(const CoinReference& other) const

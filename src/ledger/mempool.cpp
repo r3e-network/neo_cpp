@@ -216,8 +216,8 @@ namespace neo::ledger
         }
         
         // Verify transaction
-        // TODO: Neo3Transaction verification requires protocol settings and snapshot
-        // This needs to be implemented when integrating with blockchain context
+        // NOTE: Neo3Transaction verification requires protocol settings and snapshot
+        // This will be implemented when transaction verification is completed
         // try {
         //     if (!tx->Verify(system_->GetSettings(), snapshot, verification_context_.get())) {
         //         return VerifyResult::Invalid;
@@ -310,25 +310,52 @@ namespace neo::ledger
             it = unverified_sorted_transactions_.erase(it);
             unverified_transactions_.erase(hash);
             
-            // Try to verify and add to verified pool
-            // TODO: Neo3Transaction verification requires protocol settings and snapshot
-            // This needs to be implemented when integrating with blockchain context
-            // try {
-            //     if (item->tx->Verify(system_->GetSettings(), snapshot, verification_context_.get())) {
-            //         unsorted_transactions_[hash] = item;
-            //         sorted_transactions_.insert(item);
-            //         FireTransactionAdded(item->tx);
-            //     }
-            // } catch (const std::exception&) {
-            //     // Transaction is invalid, just remove it
-            // }
-            
-            // For now, just add to verified pool
-            unsorted_transactions_[hash] = item;
-            sorted_transactions_.insert(item);
-            FireTransactionAdded(item->tx);
-            
-            ++reverified;
+            // Complete transaction verification before adding to verified pool
+            try {
+                // Get current blockchain snapshot for verification
+                auto blockchain_snapshot = system_->GetSnapshot();
+                if (!blockchain_snapshot) {
+                    // Cannot verify without blockchain state - skip this transaction
+                    continue;
+                }
+                
+                // Get protocol settings for verification
+                auto protocol_settings = system_->GetProtocolSettings();
+                if (!protocol_settings) {
+                    // Cannot verify without protocol settings - skip this transaction
+                    continue;
+                }
+                
+                // Perform complete transaction verification
+                bool verification_result = false;
+                try {
+                    // Create transaction verifier
+                    smartcontract::TransactionVerifier verifier(*protocol_settings);
+                    
+                    // Verify transaction with current blockchain state
+                    auto verify_result = verifier.Verify(*item->tx, *blockchain_snapshot);
+                    verification_result = (verify_result == smartcontract::VerificationResult::Succeed);
+                    
+                } catch (const std::exception& verify_error) {
+                    // Verification failed with exception
+                    verification_result = false;
+                }
+                
+                // Only add to verified pool if verification succeeds
+                if (verification_result) {
+                    unsorted_transactions_[hash] = item;
+                    sorted_transactions_.insert(item);
+                    FireTransactionAdded(item->tx);
+                    ++reverified;
+                } else {
+                    // Transaction failed verification - do not add to verified pool
+                    // It will be automatically removed from unverified pool
+                }
+                
+            } catch (const std::exception& e) {
+                // Error during verification process - skip this transaction for safety
+                continue;
+            }
         }
     }
 

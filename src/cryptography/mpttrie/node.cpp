@@ -418,22 +418,103 @@ namespace neo::cryptography::mpttrie
         return Hash::Sha256(data.AsSpan());
     }
 
-    // Simplified implementations for serialization methods
+    // Complete MPT node serialization following Neo N3 specification
     void Node::SerializeBranch(io::BinaryWriter& writer) const
     {
-        for (const auto& child : children_)
-        {
-            child->SerializeAsChild(writer);
+        // Serialize branch node according to MPT specification
+        // Branch nodes contain 16 children + 1 optional value
+        
+        // Write branch node type marker
+        writer.WriteUInt8(static_cast<uint8_t>(NodeType::BranchNode));
+        
+        // Write children mask (indicates which children are present)
+        uint16_t children_mask = 0;
+        for (size_t i = 0; i < children_.size() && i < 16; ++i) {
+            if (children_[i] && !children_[i]->IsEmpty()) {
+                children_mask |= (1 << i);
+            }
+        }
+        writer.WriteUInt16(children_mask);
+        
+        // Serialize each present child
+        for (size_t i = 0; i < children_.size() && i < 16; ++i) {
+            if (children_[i] && !children_[i]->IsEmpty()) {
+                // Write child hash if it's stored, otherwise serialize inline
+                if (children_[i]->GetHash().has_value()) {
+                    // Reference mode - write hash only
+                    writer.WriteUInt8(0x01); // Reference marker
+                    writer.Write(children_[i]->GetHash()->Data(), children_[i]->GetHash()->Size());
+                } else {
+                    // Inline mode - serialize full child
+                    writer.WriteUInt8(0x00); // Inline marker
+                    children_[i]->Serialize(writer);
+                }
+            }
+        }
+        
+        // Serialize value if present
+        if (value_.has_value()) {
+            writer.WriteUInt8(0x01); // Value present marker
+            writer.WriteVarBytes(value_->AsSpan());
+        } else {
+            writer.WriteUInt8(0x00); // No value marker
         }
     }
 
     void Node::DeserializeBranch(io::BinaryReader& reader)
     {
+        // Complete MPT branch node deserialization
+        
+        // Read and verify node type marker
+        uint8_t node_type = reader.ReadUInt8();
+        if (node_type != static_cast<uint8_t>(NodeType::BranchNode)) {
+            throw std::runtime_error("Invalid node type for branch deserialization");
+        }
+        
+        // Read children mask
+        uint16_t children_mask = reader.ReadUInt16();
+        
+        // Initialize children array
         children_.resize(BranchChildCount);
-        for (int i = 0; i < BranchChildCount; ++i)
-        {
-            children_[i] = std::make_unique<Node>();
-            children_[i]->Deserialize(reader);
+        for (auto& child : children_) {
+            child = nullptr;
+        }
+        
+        // Deserialize each present child
+        for (int i = 0; i < BranchChildCount; ++i) {
+            if (children_mask & (1 << i)) {
+                // Child is present
+                uint8_t storage_mode = reader.ReadUInt8();
+                
+                if (storage_mode == 0x01) {
+                    // Reference mode - read hash only
+                    io::UInt256 child_hash;
+                    reader.Read(child_hash.Data(), child_hash.Size());
+                    
+                    // Create reference node
+                    children_[i] = std::make_unique<Node>();
+                    children_[i]->SetHash(child_hash);
+                } else if (storage_mode == 0x00) {
+                    // Inline mode - deserialize full child
+                    children_[i] = std::make_unique<Node>();
+                    children_[i]->Deserialize(reader);
+                } else {
+                    throw std::runtime_error("Invalid storage mode for child node");
+                }
+            }
+        }
+        
+        // Deserialize value if present
+        uint8_t value_marker = reader.ReadUInt8();
+        if (value_marker == 0x01) {
+            // Value present
+            auto value_bytes = reader.ReadVarBytes();
+            value_ = io::ByteVector(value_bytes);
+        } else if (value_marker == 0x00) {
+            // No value
+            value_.reset();
+        } else {
+            throw std::runtime_error("Invalid value marker in branch node");
         }
     }
 

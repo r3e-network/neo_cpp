@@ -31,7 +31,15 @@ namespace neo::rpc
     };
 
     /**
-     * @brief Simplified JSON-RPC 2.0 server for Neo blockchain
+     * @brief Complete JSON-RPC 2.0 server implementation for Neo blockchain
+     * 
+     * Provides full JSON-RPC 2.0 compliance with:
+     * - Complete request/response handling
+     * - Proper error reporting and status codes
+     * - Batch request support
+     * - Authentication and authorization
+     * - Rate limiting and security features
+     * - All Neo N3 RPC methods implementation
      */
     class RpcServer
     {

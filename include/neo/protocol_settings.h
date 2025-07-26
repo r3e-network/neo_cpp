@@ -20,6 +20,15 @@ namespace neo
     class ProtocolSettings
     {
     public:
+        // Protocol constants
+        static constexpr uint32_t MAX_TRANSACTION_SIZE = 2097152;         // 2MB
+        static constexpr uint16_t MAX_TRANSACTION_ATTRIBUTES = 16;
+        static constexpr uint16_t MAX_WITNESSES_PER_TX = 16;
+        static constexpr uint32_t MAX_SCRIPT_LENGTH = 65536;              // 64KB
+        static constexpr uint32_t MAX_STACK_SIZE = 2048;
+        static constexpr uint32_t MAX_ITEM_SIZE = 2097152;                // 2MB
+        static constexpr uint32_t MILLISECONDS_PER_BLOCK = 15000;         // 15 seconds
+        static constexpr uint32_t MAX_TRACEABLE_BLOCKS = 2102400;         // ~1 year
         /**
          * @brief Constructs default ProtocolSettings.
          */

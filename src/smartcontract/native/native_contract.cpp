@@ -49,6 +49,13 @@ namespace neo::smartcontract::native
         return it->second.second(engine, args);
     }
 
+    std::shared_ptr<vm::StackItem> NativeContract::Call(ApplicationEngine& engine, const std::string& method, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+    {
+        // Call method with default call flags (ReadStates for most operations)
+        // This matches the C# Neo implementation behavior where Call uses appropriate default flags
+        return Invoke(engine, method, args, CallFlags::ReadStates);
+    }
+
     bool NativeContract::CheckCallFlags(const std::string& method, CallFlags callFlags) const
     {
         auto it = methods_.find(method);

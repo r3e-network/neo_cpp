@@ -278,8 +278,8 @@ TEST_F(ByzantineFaultToleranceTest, CommitPhaseWithByzantineNodes) {
         commit->SetBlockIndex(0);
         commit->SetValidatorIndex(i);
         commit->SetViewNumber(0);
-        // In real implementation, this would be actual signature of block hash
-        commit->SetSignature(std::vector<uint8_t>(64, i)); // Placeholder
+        // Test signature - unique per validator for test identification
+        commit->SetSignature(std::vector<uint8_t>(64, i));
         honest_commits.push_back(commit);
     }
     

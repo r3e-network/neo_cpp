@@ -74,6 +74,15 @@ namespace neo::smartcontract::native
         std::shared_ptr<vm::StackItem> Invoke(ApplicationEngine& engine, const std::string& method, const std::vector<std::shared_ptr<vm::StackItem>>& args, CallFlags callFlags);
 
         /**
+         * @brief Calls a method on the contract (alias for Invoke).
+         * @param engine The engine.
+         * @param method The method.
+         * @param args The arguments.
+         * @return The result.
+         */
+        std::shared_ptr<vm::StackItem> Call(ApplicationEngine& engine, const std::string& method, const std::vector<std::shared_ptr<vm::StackItem>>& args);
+
+        /**
          * @brief Checks if the contract has the specified call flags.
          * @param method The method.
          * @param callFlags The call flags.

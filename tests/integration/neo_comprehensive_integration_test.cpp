@@ -321,8 +321,8 @@ TEST_F(NeoComprehensiveIntegrationTest, Neo3TransactionFormatValidation)
     EXPECT_FALSE(tx.GetSigners().empty()); // Neo N3 has signers
     EXPECT_FALSE(tx.GetScript().empty());  // Neo N3 has script
     
-    // Verify no old format elements (this would be compile-time in real implementation)
-    // The fact that we can create Neo3Transaction without inputs/outputs confirms format
+    // Verify Neo N3 transaction format excludes Neo2 elements like inputs/outputs
+    // Neo3Transaction class structure enforces this at compile-time
     
     // Test sender extraction (first signer)
     auto sender = tx.GetSender();

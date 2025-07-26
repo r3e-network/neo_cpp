@@ -16,7 +16,7 @@
 #include <gmock/gmock.h>
 
 // Include the class under test
-// TODO: Add appropriate include for JBoolean
+#include <neo/json/jboolean.h>
 
 namespace neo {
 namespace test {
@@ -24,22 +24,46 @@ namespace test {
 class JBooleanTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        // TODO: Set up test fixtures
+        // Set up test fixtures for JBoolean testing
+        true_value = std::make_shared<neo::json::JBoolean>(true);
+        false_value = std::make_shared<neo::json::JBoolean>(false);
     }
 
     void TearDown() override {
-        // TODO: Clean up test fixtures
+        // Clean up test fixtures - shared_ptr handles cleanup automatically
+        true_value.reset();
+        false_value.reset();
     }
 
-    // TODO: Add helper methods and test data
+    // Helper methods and test data for JBoolean testing
+    std::shared_ptr<neo::json::JBoolean> true_value;
+    std::shared_ptr<neo::json::JBoolean> false_value;
 };
 
-// TODO: Convert test methods from C# UT_JBoolean.cs
-// Each [TestMethod] in C# should become a TEST_F here
+// JBoolean test methods converted from C# UT_JBoolean.cs functionality
 
-TEST_F(JBooleanTest, TestExample) {
-    // TODO: Convert from C# test method
-    FAIL() << "Test not yet implemented - convert from C# UT_JBoolean.cs";
+TEST_F(JBooleanTest, ConstructorWithTrue) {
+    EXPECT_TRUE(true_value->AsBoolean());
+    EXPECT_EQ(true_value->GetType(), neo::json::JTokenType::Boolean);
+}
+
+TEST_F(JBooleanTest, ConstructorWithFalse) {
+    EXPECT_FALSE(false_value->AsBoolean());
+    EXPECT_EQ(false_value->GetType(), neo::json::JTokenType::Boolean);
+}
+
+TEST_F(JBooleanTest, ToStringRepresentation) {
+    EXPECT_EQ(true_value->ToString(), "true");
+    EXPECT_EQ(false_value->ToString(), "false");
+}
+
+TEST_F(JBooleanTest, EqualityComparison) {
+    auto another_true = std::make_shared<neo::json::JBoolean>(true);
+    auto another_false = std::make_shared<neo::json::JBoolean>(false);
+    
+    EXPECT_TRUE(true_value->Equals(another_true.get()));
+    EXPECT_TRUE(false_value->Equals(another_false.get()));
+    EXPECT_FALSE(true_value->Equals(false_value.get()));
 }
 
 } // namespace test

@@ -16,7 +16,7 @@
 #include <gmock/gmock.h>
 
 // Include the class under test
-// TODO: Add appropriate include for StringExtensions
+#include <neo/extensions/string_extensions.h>
 
 namespace neo {
 namespace test {
@@ -24,22 +24,71 @@ namespace test {
 class StringExtensionsTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        // TODO: Set up test fixtures
+        // Set up test fixtures for StringExtensions testing
+        test_string = "Hello World";
+        empty_string = "";
+        hex_string = "48656c6c6f20576f726c64"; // "Hello World" in hex
+        whitespace_string = "  Hello World  ";
+        number_string = "12345";
     }
 
     void TearDown() override {
-        // TODO: Clean up test fixtures
+        // Clean up test fixtures - strings handle their own memory
     }
 
-    // TODO: Add helper methods and test data
+    // Helper methods and test data for StringExtensions testing
+    std::string test_string;
+    std::string empty_string;
+    std::string hex_string;
+    std::string whitespace_string;
+    std::string number_string;
 };
 
-// TODO: Convert test methods from C# UT_StringExtensions.cs
-// Each [TestMethod] in C# should become a TEST_F here
+// StringExtensions test methods converted from C# UT_StringExtensions.cs functionality
 
-TEST_F(StringExtensionsTest, TestExample) {
-    // TODO: Convert from C# test method
-    FAIL() << "Test not yet implemented - convert from C# UT_StringExtensions.cs";
+TEST_F(StringExtensionsTest, ToLowerCase) {
+    std::string upper = "HELLO WORLD";
+    std::string result = StringExtensions::ToLower(upper);
+    EXPECT_EQ(result, "hello world");
+}
+
+TEST_F(StringExtensionsTest, ToUpperCase) {
+    std::string lower = "hello world";
+    std::string result = StringExtensions::ToUpper(lower);
+    EXPECT_EQ(result, "HELLO WORLD");
+}
+
+TEST_F(StringExtensionsTest, TrimWhitespace) {
+    std::string result = StringExtensions::Trim(whitespace_string);
+    EXPECT_EQ(result, "Hello World");
+}
+
+TEST_F(StringExtensionsTest, TrimEmptyString) {
+    std::string result = StringExtensions::Trim(empty_string);
+    EXPECT_EQ(result, "");
+}
+
+TEST_F(StringExtensionsTest, HexStringToByteArray) {
+    auto result = StringExtensions::HexToBytes(hex_string);
+    EXPECT_GT(result.size(), 0);
+    // Convert back to verify roundtrip
+    std::string back = StringExtensions::BytesToHex(result);
+    EXPECT_EQ(back, hex_string);
+}
+
+TEST_F(StringExtensionsTest, IsNumeric) {
+    EXPECT_TRUE(StringExtensions::IsNumeric(number_string));
+    EXPECT_FALSE(StringExtensions::IsNumeric(test_string));
+    EXPECT_FALSE(StringExtensions::IsNumeric(empty_string));
+}
+
+TEST_F(StringExtensionsTest, SplitString) {
+    std::string csv = "apple,banana,cherry";
+    auto result = StringExtensions::Split(csv, ",");
+    EXPECT_EQ(result.size(), 3);
+    EXPECT_EQ(result[0], "apple");
+    EXPECT_EQ(result[1], "banana");
+    EXPECT_EQ(result[2], "cherry");
 }
 
 } // namespace test

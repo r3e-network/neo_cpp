@@ -9,13 +9,13 @@ namespace neo::ledger
     {
     }
 
-    void MemoryPool::SetVerifier(std::function<bool(const Transaction&)> verifier)
+    void MemoryPool::SetVerifier(std::function<bool(const network::p2p::payloads::Neo3Transaction&)> verifier)
     {
         std::lock_guard<std::mutex> lock(mutex_);
         verifier_ = std::move(verifier);
     }
 
-    bool MemoryPool::TryAdd(const Transaction& transaction)
+    bool MemoryPool::TryAdd(const network::p2p::payloads::Neo3Transaction& transaction)
     {
         std::lock_guard<std::mutex> lock(mutex_);
         
@@ -77,18 +77,18 @@ namespace neo::ledger
         return transactions_.find(hash) != transactions_.end();
     }
 
-    const Transaction* MemoryPool::GetTransaction(const io::UInt256& hash) const
+    const network::p2p::payloads::Neo3Transaction* MemoryPool::GetTransaction(const io::UInt256& hash) const
     {
         std::lock_guard<std::mutex> lock(mutex_);
         auto it = transactions_.find(hash);
         return (it != transactions_.end()) ? &it->second : nullptr;
     }
 
-    std::vector<Transaction> MemoryPool::GetSortedTransactions() const
+    std::vector<network::p2p::payloads::Neo3Transaction> MemoryPool::GetSortedTransactions() const
     {
         std::lock_guard<std::mutex> lock(mutex_);
         
-        std::vector<Transaction> result;
+        std::vector<network::p2p::payloads::Neo3Transaction> result;
         result.reserve(transactions_.size());
         
         for (const auto& pair : transactions_)
@@ -98,14 +98,14 @@ namespace neo::ledger
         
         // Sort by priority (fee per byte, highest first)
         std::sort(result.begin(), result.end(),
-            [this](const Transaction& a, const Transaction& b) {
+            [this](const network::p2p::payloads::Neo3Transaction& a, const network::p2p::payloads::Neo3Transaction& b) {
                 return CalculatePriority(a) > CalculatePriority(b);
             });
         
         return result;
     }
 
-    std::vector<Transaction> MemoryPool::GetTransactionsForBlock(size_t max_count) const
+    std::vector<network::p2p::payloads::Neo3Transaction> MemoryPool::GetTransactionsForBlock(size_t max_count) const
     {
         auto sorted = GetSortedTransactions();
         
@@ -183,7 +183,7 @@ namespace neo::ledger
         }
     }
 
-    double MemoryPool::CalculatePriority(const Transaction& tx) const
+    double MemoryPool::CalculatePriority(const network::p2p::payloads::Neo3Transaction& tx) const
     {
         // Priority is network fee per byte
         // Higher values indicate higher priority

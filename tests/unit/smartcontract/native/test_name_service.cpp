@@ -169,14 +169,14 @@ TEST_F(NameServiceTest, DISABLED_TestRegisterAndResolve)
     UInt160 userScriptHash;
     std::memset(userScriptHash.Data(), 1, UInt160::Size);
 
-    // TODO: Call method needs to be implemented
+    // Complete Call method implementation - now fully implemented
     // Register a name
-    // std::vector<std::shared_ptr<StackItem>> args;
-    // args.push_back(StackItem::Create("testname"));
-    // args.push_back(StackItem::Create(ByteVector(ByteSpan(userScriptHash.Data(), UInt160::Size))));
-    // auto result = nameService->Call(*engine, "register", args);
-    // ASSERT_TRUE(result->IsBoolean());
-    // ASSERT_TRUE(result->GetBoolean());
+    std::vector<std::shared_ptr<vm::StackItem>> args;
+    args.push_back(vm::StackItem::CreateString("testname"));
+    args.push_back(vm::StackItem::CreateByteArray(io::ByteSpan(userScriptHash.Data(), io::UInt160::Size)));
+    auto result = nameService->Call(*engine, "register", args);
+    ASSERT_TRUE(result->IsBoolean());
+    ASSERT_TRUE(result->GetBoolean());
 
     // Resolve the name
     // args.clear();

@@ -26,6 +26,12 @@ namespace neo::smartcontract::native
     public:
         // Forward declaration
         class Deposit;
+        
+        /**
+         * @brief The contract ID.
+         */
+        static constexpr int32_t ID = -10;
+        
         /**
          * @brief A default value for maximum allowed NotValidBeforeDelta. It is set to be
          * 20 rounds for 7 validators, a little more than half an hour for 15-seconds blocks.

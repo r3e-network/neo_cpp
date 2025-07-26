@@ -20,6 +20,16 @@ namespace neo::consensus
         return commitSignature_;
     }
     
+    std::vector<uint8_t> CommitMessage::GetSignature() const
+    {
+        return std::vector<uint8_t>(commitSignature_.begin(), commitSignature_.end());
+    }
+    
+    void CommitMessage::SetSignature(const std::vector<uint8_t>& sig)
+    {
+        commitSignature_ = io::ByteVector(sig.begin(), sig.end());
+    }
+    
     void CommitMessage::Serialize(io::BinaryWriter& writer) const
     {
         ConsensusMessage::Serialize(writer);

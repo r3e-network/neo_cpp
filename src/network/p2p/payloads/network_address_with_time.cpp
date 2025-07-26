@@ -222,9 +222,78 @@ namespace neo::network::p2p::payloads
         }
         else
         {
-            // Assume IPv6 address - simplified parsing for now
-            // TODO: Implement full IPv6 parsing
-            throw std::runtime_error("IPv6 address parsing not fully implemented yet");
+            // Complete IPv6 address parsing implementation
+            // Parse IPv6 address in standard format (e.g., "2001:db8::1" or "::1")
+            
+            try {
+                std::vector<uint16_t> groups(8, 0); // IPv6 has 8 groups of 16-bit values
+                std::string address_str = ipString;
+                
+                // Handle compressed notation (::)
+                size_t double_colon_pos = address_str.find("::");
+                if (double_colon_pos != std::string::npos) {
+                    // Split into parts before and after ::
+                    std::string before = address_str.substr(0, double_colon_pos);
+                    std::string after = address_str.substr(double_colon_pos + 2);
+                    
+                    // Parse groups before ::
+                    std::vector<uint16_t> before_groups;
+                    if (!before.empty()) {
+                        std::stringstream ss(before);
+                        std::string group;
+                        while (std::getline(ss, group, ':')) {
+                            if (!group.empty()) {
+                                before_groups.push_back(static_cast<uint16_t>(std::stoul(group, nullptr, 16)));
+                            }
+                        }
+                    }
+                    
+                    // Parse groups after ::
+                    std::vector<uint16_t> after_groups;
+                    if (!after.empty()) {
+                        std::stringstream ss(after);
+                        std::string group;
+                        while (std::getline(ss, group, ':')) {
+                            if (!group.empty()) {
+                                after_groups.push_back(static_cast<uint16_t>(std::stoul(group, nullptr, 16)));
+                            }
+                        }
+                    }
+                    
+                    // Fill the groups array
+                    for (size_t i = 0; i < before_groups.size(); ++i) {
+                        groups[i] = before_groups[i];
+                    }
+                    for (size_t i = 0; i < after_groups.size(); ++i) {
+                        groups[8 - after_groups.size() + i] = after_groups[i];
+                    }
+                }
+                else {
+                    // No compression - parse all 8 groups
+                    std::stringstream ss(address_str);
+                    std::string group;
+                    size_t index = 0;
+                    while (std::getline(ss, group, ':') && index < 8) {
+                        if (!group.empty()) {
+                            groups[index] = static_cast<uint16_t>(std::stoul(group, nullptr, 16));
+                        }
+                        ++index;
+                    }
+                    
+                    if (index != 8) {
+                        throw std::invalid_argument("Invalid IPv6 address format");
+                    }
+                }
+                
+                // Convert to byte array (network byte order - big endian)
+                for (size_t i = 0; i < 8; ++i) {
+                    address_[i * 2] = static_cast<uint8_t>(groups[i] >> 8);
+                    address_[i * 2 + 1] = static_cast<uint8_t>(groups[i] & 0xFF);
+                }
+                
+            } catch (const std::exception& e) {
+                throw std::runtime_error("Failed to parse IPv6 address: " + std::string(e.what()));
+            }
         }
     }
 

@@ -53,6 +53,15 @@ namespace neo::smartcontract
         manifest_ = manifest;
     }
 
+    uint16_t ContractState::GetUpdateCounter() const
+    {
+        return updateCounter_;
+    }
+
+    void ContractState::SetUpdateCounter(uint16_t updateCounter)
+    {
+        updateCounter_ = updateCounter;
+    }
 
     void ContractState::Serialize(io::BinaryWriter& writer) const
     {

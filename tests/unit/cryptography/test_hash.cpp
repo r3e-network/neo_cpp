@@ -69,16 +69,26 @@ TEST(HashTest, Hash160)
 
 TEST(HashTest, Keccak256)
 {
-    // Note: Current implementation uses SHA3-256, not true Keccak-256
-    // Test vector for SHA3-256 of "abc" 
+    // Test vectors for true Keccak-256 (not SHA3-256)
+    // Test vector for Keccak-256 of "abc"
     ByteVector input = ByteVector::Parse("616263"); // "abc"
     UInt256 hash = Hash::Keccak256(input.AsSpan());
-    EXPECT_EQ(hash.ToHexString(), "3A985DA74FE225B2045C172D6BD390BD855F086E3E9D525B46BFE24511431532");
+    EXPECT_EQ(hash.ToHexString(), "4E03657AEA45A94FC7D47BA826C8D667C0D1E6E33A64A036EC44F58FA12D6C45");
     
-    // Empty input for SHA3-256
+    // Empty input for Keccak-256
     ByteVector empty;
     UInt256 emptyHash = Hash::Keccak256(empty.AsSpan());
-    EXPECT_EQ(emptyHash.ToHexString(), "A7FFC6F8BF1ED76651C14756A061D662F580FF4DE43B49FA82D80A4B80F8434A");
+    EXPECT_EQ(emptyHash.ToHexString(), "C5D2460186F7233C927E7DB2DCC703C0E500B653CA82273B7BFAD8045D85A470");
+    
+    // Additional test vector: "The quick brown fox jumps over the lazy dog"
+    ByteVector fox = ByteVector::Parse("54686520717569636B2062726F776E20666F78206A756D7073206F76657220746865206C617A7920646F67");
+    UInt256 foxHash = Hash::Keccak256(fox.AsSpan());
+    EXPECT_EQ(foxHash.ToHexString(), "4D741B6F1EB29CB2A9B9911C82F56FA8D73B04959D3D9D222895DF6C0B28AA15");
+    
+    // Test vector for single byte 0x00
+    ByteVector single = ByteVector::Parse("00");
+    UInt256 singleHash = Hash::Keccak256(single.AsSpan());
+    EXPECT_EQ(singleHash.ToHexString(), "BC36789E7A1E281436464229828F817D6612F7B477D66591FF96A9E064BCC98A");
 }
 
 TEST(HashTest, Murmur32)

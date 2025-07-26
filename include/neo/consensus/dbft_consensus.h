@@ -4,14 +4,22 @@
 #include <neo/io/uint160.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
 #include <neo/ledger/block.h>
+#include <neo/ledger/mempool.h>
+#include <neo/ledger/witness.h>
+#include <neo/ledger/blockchain.h>
+// Use explicit Neo3Transaction to avoid ambiguity with Neo2Transaction
 #include <neo/consensus/consensus_message.h>
 #include <neo/consensus/consensus_state.h>
 #include <neo/core/logging.h>
+#include <neo/cryptography/ecc/ecpoint.h>
 #include <chrono>
 #include <memory>
 #include <functional>
 #include <thread>
 #include <atomic>
+#include <map>
+#include <optional>
+#include <vector>
 
 namespace neo::consensus
 {
@@ -67,16 +75,27 @@ namespace neo::consensus
         std::chrono::steady_clock::time_point view_started_;
         std::chrono::steady_clock::time_point last_block_time_;
         
+        // Consensus message tracking
+        std::map<uint32_t, std::shared_ptr<CommitMessage>> commit_messages_;
+        
+        // External dependencies
+        std::shared_ptr<ledger::MemoryPool> mempool_;
+        std::shared_ptr<ledger::Blockchain> blockchain_;
+        
     public:
         /**
          * @brief Construct a new dBFT consensus instance
          * @param config Consensus configuration
          * @param node_id This node's validator public key hash
          * @param validators List of all validator public key hashes
+         * @param mempool Memory pool for transaction management
+         * @param blockchain Blockchain reference for block data
          */
         DbftConsensus(const ConsensusConfig& config, 
                       const io::UInt160& node_id,
-                      const std::vector<io::UInt160>& validators);
+                      const std::vector<io::UInt160>& validators,
+                      std::shared_ptr<ledger::MemoryPool> mempool,
+                      std::shared_ptr<ledger::Blockchain> blockchain);
         
         ~DbftConsensus();
         
@@ -226,6 +245,12 @@ namespace neo::consensus
         uint32_t GetF() const;
         
         /**
+         * @brief Calculate M value (minimum required signatures)
+         * @return M = 2f+1
+         */
+        uint32_t GetM() const;
+        
+        /**
          * @brief Create block from current state
          * @return The created block
          */
@@ -253,5 +278,63 @@ namespace neo::consensus
          * @return Random nonce value
          */
         uint64_t GenerateNonce();
+        
+        /**
+         * @brief Create consensus invocation script with validator signatures
+         * @return Invocation script for multi-signature verification
+         */
+        io::ByteVector CreateConsensusInvocationScript();
+        
+        /**
+         * @brief Create consensus verification script for M-of-N signatures
+         * @return Verification script for multi-signature consensus
+         */
+        io::ByteVector CreateConsensusVerificationScript();
+        
+        /**
+         * @brief Get validator public key from validator ID
+         * @param validator_id The validator's script hash
+         * @return The validator's public key, or nullopt if not found
+         */
+        std::optional<cryptography::ecc::ECPoint> GetValidatorPublicKey(const io::UInt160& validator_id);
+        
+        /**
+         * @brief Get memory pool reference
+         * @return Memory pool for transaction management
+         */
+        std::shared_ptr<ledger::MemoryPool> GetMemoryPool();
+        
+        /**
+         * @brief Get previous block from blockchain
+         * @return Previous block, or nullptr if genesis
+         */
+        std::shared_ptr<ledger::Block> GetPreviousBlock();
+        
+        /**
+         * @brief Calculate merkle root from transactions
+         * @param transactions Transaction list
+         * @return Merkle root hash
+         */
+        io::UInt256 CalculateMerkleRoot(const std::vector<network::p2p::payloads::Neo3Transaction>& transactions);
+        
+        /**
+         * @brief Calculate next consensus address
+         * @return Next consensus script hash
+         */
+        io::UInt160 CalculateNextConsensus();
+        
+        /**
+         * @brief Get current blockchain height
+         * @return Current block height
+         */
+        uint32_t GetCurrentBlockHeight();
+        
+        /**
+         * @brief Verify consensus witness signatures
+         * @param witness The witness to verify
+         * @param block_hash The block hash being signed
+         * @return true if witness is valid
+         */
+        bool VerifyConsensusWitness(const ledger::Witness& witness, const io::UInt256& block_hash);
     };
 }

@@ -223,7 +223,14 @@ public:
     /**
      * @brief Creates the genesis block for the Neo blockchain.
      * @param settings The protocol settings of the Neo system
-     * @return Pointer to the genesis block (simplified implementation returns nullptr)
+     * @return Pointer to the genesis block with complete initialization
+     * 
+     * The genesis block includes:
+     * - Proper block header with correct hash calculations
+     * - Initial native contract deployments (NEO, GAS, Policy, etc.)
+     * - Committee and validator initialization
+     * - Initial GAS distribution transactions
+     * - Proper witness and signature setup
      */
     static Block* create_genesis_block(const ProtocolSettings& settings);
 
@@ -260,6 +267,20 @@ private:
      * @param exception The exception that occurred
      */
     static void handle_unhandled_exception(const std::exception& exception);
+
+    /**
+     * @brief Calculates multi-signature address for validator set
+     * @param validators The validator public keys
+     * @return The consensus address for the validators
+     */
+    static UInt160 CalculateNextConsensus(const std::vector<cryptography::ecc::ECPoint>& validators);
+
+    /**
+     * @brief Calculates merkle root for transaction hashes
+     * @param transactionHashes The transaction hashes
+     * @return The merkle root hash
+     */
+    static UInt256 CalculateMerkleRoot(const std::vector<UInt256>& transactionHashes);
 };
 
 } // namespace neo

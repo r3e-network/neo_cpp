@@ -73,6 +73,9 @@ namespace neo::smartcontract::native
         RegisterMethod("vote", CallFlags::States | CallFlags::AllowNotify, std::function<std::shared_ptr<vm::StackItem>(smartcontract::ApplicationEngine&, const std::vector<std::shared_ptr<vm::StackItem>>&)>([this](smartcontract::ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args) {
             return NeoTokenVote::OnVote(*this, engine, args);
         }));
+        RegisterMethod("unVote", CallFlags::States | CallFlags::AllowNotify, std::function<std::shared_ptr<vm::StackItem>(smartcontract::ApplicationEngine&, const std::vector<std::shared_ptr<vm::StackItem>>&)>([this](smartcontract::ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args) {
+            return NeoTokenVote::OnUnVote(*this, engine, args);
+        }));
         RegisterMethod("getGasPerBlock", CallFlags::ReadStates, std::function<std::shared_ptr<vm::StackItem>(smartcontract::ApplicationEngine&, const std::vector<std::shared_ptr<vm::StackItem>>&)>([this](smartcontract::ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args) {
             return NeoTokenGas::OnGetGasPerBlock(*this, engine, args);
         }));

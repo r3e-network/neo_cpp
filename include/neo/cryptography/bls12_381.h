@@ -393,4 +393,48 @@ namespace neo::cryptography::bls12_381
      * @throws std::invalid_argument if the number of public keys and messages is not equal.
      */
     bool VerifyAggregateSignature(const std::vector<G2Point>& publicKeys, const std::vector<io::ByteSpan>& messages, const G1Point& signature);
+
+    /**
+     * @brief Deserializes a G1Point from bytes.
+     * @param data The byte data.
+     * @param out The output G1Point.
+     * @return True if deserialization was successful, false otherwise.
+     */
+    bool DeserializeG1Point(const io::ByteSpan& data, G1Point& out);
+
+    /**
+     * @brief Deserializes a G2Point from bytes.
+     * @param data The byte data.
+     * @param out The output G2Point.
+     * @return True if deserialization was successful, false otherwise.
+     */
+    bool DeserializeG2Point(const io::ByteSpan& data, G2Point& out);
+
+    /**
+     * @brief Gets the G2 generator point.
+     * @return The G2 generator point.
+     */
+    G2Point GetG2Generator();
+
+    /**
+     * @brief Negates a G2 point.
+     * @param point The G2 point to negate.
+     * @return The negated G2 point.
+     */
+    G2Point NegateG2(const G2Point& point);
+
+    /**
+     * @brief Multiplies two GT points.
+     * @param a The first GT point.
+     * @param b The second GT point.
+     * @return The result of the multiplication.
+     */
+    GTPoint MultiplyGT(const GTPoint& a, const GTPoint& b);
+
+    /**
+     * @brief Checks if a GT point is the identity element.
+     * @param point The GT point to check.
+     * @return True if the point is identity, false otherwise.
+     */
+    bool IsIdentityGT(const GTPoint& point);
 }

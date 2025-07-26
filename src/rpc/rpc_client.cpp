@@ -1,9 +1,11 @@
 #include <neo/rpc/rpc_client.h>
+#include <neo/cryptography/base64.h>
 #include <stdexcept>
 #include <sstream>
 #include <thread>
 #include <chrono>
 #include <iostream>
+#include <httplib.h>
 
 namespace neo::rpc
 {
@@ -24,20 +26,86 @@ namespace neo::rpc
 
     std::string SimpleHttpClient::Post(const std::string& url, const std::string& content, const std::map<std::string, std::string>& headers)
     {
-        // Simplified HTTP client implementation
-        // In production, this should use a proper HTTP library like libcurl or cpp-httplib
-
-        // For testing purposes, return a mock response
-        std::string mock_response = R"({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "result": "mock_result"
-        })";
-
-        // Simulate network delay
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-
-        return mock_response;
+        // Parse URL to extract host, port, and path
+        std::string protocol, host, path;
+        int port = 80;
+        
+        size_t protocol_end = url.find("://");
+        if (protocol_end != std::string::npos) {
+            protocol = url.substr(0, protocol_end);
+            size_t host_start = protocol_end + 3;
+            size_t path_start = url.find('/', host_start);
+            
+            if (path_start != std::string::npos) {
+                std::string host_port = url.substr(host_start, path_start - host_start);
+                path = url.substr(path_start);
+                
+                size_t port_start = host_port.find(':');
+                if (port_start != std::string::npos) {
+                    host = host_port.substr(0, port_start);
+                    port = std::stoi(host_port.substr(port_start + 1));
+                } else {
+                    host = host_port;
+                    if (protocol == "https") {
+                        port = 443;
+                    }
+                }
+            } else {
+                std::string host_port = url.substr(host_start);
+                path = "/";
+                
+                size_t port_start = host_port.find(':');
+                if (port_start != std::string::npos) {
+                    host = host_port.substr(0, port_start);
+                    port = std::stoi(host_port.substr(port_start + 1));
+                } else {
+                    host = host_port;
+                    if (protocol == "https") {
+                        port = 443;
+                    }
+                }
+            }
+        } else {
+            throw std::runtime_error("Invalid URL: " + url);
+        }
+        
+        // Create HTTP client
+        std::unique_ptr<httplib::Client> cli;
+        if (protocol == "https") {
+            cli = std::make_unique<httplib::SSLClient>(host, port);
+        } else {
+            cli = std::make_unique<httplib::Client>(host, port);
+        }
+        
+        // Set timeout
+        cli->set_connection_timeout(30, 0);  // 30 seconds
+        cli->set_read_timeout(30, 0);        // 30 seconds
+        cli->set_write_timeout(30, 0);       // 30 seconds
+        
+        // Prepare headers
+        httplib::Headers httplib_headers;
+        for (const auto& [key, value] : headers) {
+            httplib_headers.emplace(key, value);
+        }
+        
+        // Add auth header if set
+        if (!auth_header_.empty()) {
+            httplib_headers.emplace("Authorization", auth_header_);
+        }
+        
+        // Make POST request
+        auto res = cli->Post(path.c_str(), httplib_headers, content, "application/json");
+        
+        // Check response
+        if (!res) {
+            throw std::runtime_error("HTTP request failed: No response from server");
+        }
+        
+        if (res->status != 200) {
+            throw std::runtime_error("HTTP request failed with status " + std::to_string(res->status) + ": " + res->body);
+        }
+        
+        return res->body;
     }
 
     std::future<std::string> SimpleHttpClient::PostAsync(const std::string& url, const std::string& content, const std::map<std::string, std::string>& headers)
@@ -240,9 +308,73 @@ namespace neo::rpc
         nlohmann::json json_params = nlohmann::json::array();
         for (const auto& param : params)
         {
-            // Convert JToken to nlohmann::json
-            // This is a simplified conversion
-            json_params.push_back(param.ToString());
+            // Complete JToken to nlohmann::json conversion
+            // Handle all JToken types properly
+            nlohmann::json json_param;
+            
+            switch (param.GetType())
+            {
+                case json::JTokenType::Null:
+                    json_param = nlohmann::json::value_t::null;
+                    break;
+                    
+                case json::JTokenType::Boolean:
+                    try {
+                        json_param = param.GetBoolean();
+                    } catch (const std::exception&) {
+                        json_param = param.AsBoolean();
+                    }
+                    break;
+                    
+                case json::JTokenType::Number:
+                    try {
+                        json_param = param.GetNumber();
+                    } catch (const std::exception&) {
+                        json_param = param.AsNumber();
+                    }
+                    break;
+                    
+                case json::JTokenType::String:
+                    try {
+                        json_param = param.GetString();
+                    } catch (const std::exception&) {
+                        json_param = param.AsString();
+                    }
+                    break;
+                    
+                case json::JTokenType::Array:
+                    {
+                        // Parse the JSON string representation to preserve array structure
+                        try {
+                            std::string json_str = param.ToString();
+                            json_param = nlohmann::json::parse(json_str);
+                        } catch (const std::exception&) {
+                            // Fallback to empty array
+                            json_param = nlohmann::json::array();
+                        }
+                    }
+                    break;
+                    
+                case json::JTokenType::Object:
+                    {
+                        // Parse the JSON string representation to preserve object structure
+                        try {
+                            std::string json_str = param.ToString();
+                            json_param = nlohmann::json::parse(json_str);
+                        } catch (const std::exception&) {
+                            // Fallback to empty object
+                            json_param = nlohmann::json::object();
+                        }
+                    }
+                    break;
+                    
+                default:
+                    // Unknown type - fallback to string representation
+                    json_param = param.ToString();
+                    break;
+            }
+            
+            json_params.push_back(json_param);
         }
 
         return RpcRequest("2.0", method, json_params, nlohmann::json(next_id_++));

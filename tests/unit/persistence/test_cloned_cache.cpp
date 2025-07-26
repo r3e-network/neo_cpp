@@ -341,12 +341,50 @@ namespace neo::persistence::tests
     {
         // Create read-only inner cache
         auto readonly_inner = std::make_shared<TestDataCache>(snapshot);
-        // For now, assume cache is not read-only since we haven't implemented that
+        // Complete read-only cache behavior test implementation
+        
+        // Configure the inner cache to be read-only
+        readonly_inner->SetReadOnly(true);
         
         ClonedCache<StorageKey, StorageItem> cache(readonly_inner);
         
-        // Since IsReadOnly() returns false in our implementation, skip the read-only tests
-        EXPECT_FALSE(cache.IsReadOnly());
+        // Test that ClonedCache properly reports read-only status based on inner cache
+        EXPECT_TRUE(cache.IsReadOnly());
+        
+        // Test that write operations fail on read-only cache
+        StorageKey readonly_key(999, {0x99});
+        StorageItem readonly_item({0x99});
+        
+        // Attempt to add/update should throw or fail gracefully
+        EXPECT_THROW({
+            cache.Add(readonly_key, readonly_item);
+        }, std::runtime_error);
+        
+        // Attempt to update should throw or fail gracefully
+        EXPECT_THROW({
+            cache.GetAndChange(readonly_key);
+        }, std::runtime_error);
+        
+        // Attempt to delete should throw or fail gracefully
+        EXPECT_THROW({
+            cache.Delete(readonly_key);
+        }, std::runtime_error);
+        
+        // Read operations should still work
+        auto result = cache.TryGet(key1);
+        EXPECT_TRUE(result != nullptr);
+        
+        // Test with read-write cache for comparison
+        auto readwrite_inner = std::make_shared<TestDataCache>(snapshot);
+        readwrite_inner->SetReadOnly(false);
+        ClonedCache<StorageKey, StorageItem> rw_cache(readwrite_inner);
+        
+        EXPECT_FALSE(rw_cache.IsReadOnly());
+        
+        // Write operations should succeed on read-write cache
+        EXPECT_NO_THROW({
+            rw_cache.Add(readonly_key, readonly_item);
+        });
     }
 
     TEST_F(ClonedCacheTest, TestIsolation)
