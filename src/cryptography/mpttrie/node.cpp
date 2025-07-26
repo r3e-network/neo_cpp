@@ -444,7 +444,7 @@ namespace neo::cryptography::mpttrie
                 if (!childHash.IsZero()) {
                     // Reference mode - write hash only
                     writer.WriteByte(0x01); // Reference marker
-                    writer.Write(childHash.Data(), io::UInt256::Size);
+                    writer.WriteBytes(childHash.Data(), io::UInt256::Size);
                 } else {
                     // Inline mode - serialize full child
                     writer.WriteByte(0x00); // Inline marker
@@ -454,7 +454,7 @@ namespace neo::cryptography::mpttrie
         }
         
         // Serialize value if present
-        if (!value_.Empty()) {
+        if (!value_.empty()) {
             writer.WriteByte(0x01); // Value present marker
             writer.WriteVarBytes(value_.AsSpan());
         } else {

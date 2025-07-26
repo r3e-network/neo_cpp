@@ -393,20 +393,19 @@ namespace neo::smartcontract::native
             // auto callingScriptHash = engine.GetCallingScriptHash();
             // if (callingScriptHash != committeeAddress) {
                 // Also check if call is from within a committee member's verification context
-                bool isCommitteeMember = false;
-                for (const auto& member : committee) {
-                    io::UInt160 memberScriptHash = GetScriptHashFromPublicKey(member);
-                    // TODO: Check if calling script matches member
-                    // if (callingScriptHash == memberScriptHash) {
-                        isCommitteeMember = true;
-                        break;
-                    }
-                }
-                
-                if (!isCommitteeMember) {
-                    throw std::runtime_error("Unauthorized: Only committee can set minimum deployment fee");
-                }
-            }
+                // TODO: Implement proper committee member verification
+                // bool isCommitteeMember = false;
+                // for (const auto& member : committee) {
+                //     io::UInt160 memberScriptHash = GetScriptHashFromPublicKey(member);
+                //     if (callingScriptHash == memberScriptHash) {
+                //         isCommitteeMember = true;
+                //         break;
+                //     }
+                // }
+                // 
+                // if (!isCommitteeMember) {
+                //     throw std::runtime_error("Unauthorized: Only committee can set minimum deployment fee");
+                // }
         } catch (const std::exception& e) {
             // Re-throw authorization errors
             throw std::runtime_error(std::string("Committee authorization failed: ") + e.what());
@@ -541,25 +540,7 @@ namespace neo::smartcontract::native
                 }
                 
                 // Call NEO contract's getCommittee method
-                auto committee_result = neo_contract->GetCommittee(*temp_engine);
-                
-                if (committee_result && committee_result->IsArray()) {
-                    const auto& committee_array = committee_result->GetArray();
-                    
-                    for (const auto& item : committee_array) {
-                        if (item && item->IsByteString()) {
-                            try {
-                                auto pubkey_bytes = item->GetByteArray();
-                                if (pubkey_bytes.Size() == 33) {  // Compressed public key size
-                                    committee.emplace_back(pubkey_bytes);
-                                }
-                            } catch (const std::exception&) {
-                                // Skip invalid public key
-                                continue;
-                            }
-                        }
-                    }
-                }
+                committee = neo_contract->GetCommittee(temp_engine->GetSnapshot());
                 
                 // If we got a valid committee from the NEO contract, use it
                 if (!committee.empty()) {
@@ -587,8 +568,7 @@ namespace neo::smartcontract::native
                 
                 for (const auto& keyStr : genesisKeys) {
                     try {
-                        auto keyBytes = io::ByteVector::ParseHex(keyStr);
-                        committee.emplace_back(keyBytes);
+                        committee.push_back(cryptography::ecc::ECPoint::Parse(keyStr));
                     } catch (const std::exception&) {
                         continue;
                     }
@@ -616,16 +596,16 @@ namespace neo::smartcontract::native
         vm::ScriptBuilder sb;
         
         // Push the required signature count
-        sb.EmitPush(static_cast<int>(m));
+        sb.EmitPush(static_cast<int64_t>(m));
         
         // Push all public keys
         for (const auto& pubkey : committee) {
-            auto compressed = pubkey.EncodePoint(true);
-            sb.EmitPush(compressed);
+            auto compressed = pubkey.ToArray();
+            sb.EmitPush(compressed.AsSpan());
         }
         
         // Push the total number of public keys
-        sb.EmitPush(static_cast<int>(committee.size()));
+        sb.EmitPush(static_cast<int64_t>(committee.size()));
         
         // Add CHECKMULTISIG opcode
         // TODO: Use proper system call for multisig
@@ -634,7 +614,7 @@ namespace neo::smartcontract::native
         auto script = sb.ToArray();
         
         // Calculate script hash (committee address)
-        return cryptography::Hash::Hash160(script);
+        return cryptography::Hash::Hash160(script.AsSpan());
     }
     
     io::UInt160 ContractManagement::GetScriptHashFromPublicKey(const cryptography::ecc::ECPoint& publicKey)
@@ -642,14 +622,14 @@ namespace neo::smartcontract::native
         // Create single-signature verification script for the public key
         vm::ScriptBuilder sb;
         
-        auto compressed = publicKey.EncodePoint(true);
-        sb.EmitPush(compressed);
-        sb.Emit(vm::OpCode::CHECKSIG);
+        auto compressed = publicKey.ToArray();
+        sb.EmitPush(compressed.AsSpan());
+        sb.EmitSysCall("System.Crypto.CheckSig");
         
         auto script = sb.ToArray();
         
         // Calculate script hash
-        return cryptography::Hash::Hash160(script);
+        return cryptography::Hash::Hash160(script.AsSpan());
     }
     
     std::shared_ptr<vm::StackItem> ContractManagement::OnGetContractById(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
@@ -658,7 +638,7 @@ namespace neo::smartcontract::native
             throw std::runtime_error("Invalid arguments");
         
         auto idItem = args[0];
-        auto id = idItem->GetBigInteger().ToInt32();
+        auto id = static_cast<int32_t>(idItem->GetInteger());
         
         // Find contract by ID
         auto contracts = ListContracts(engine.GetSnapshot());

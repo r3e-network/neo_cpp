@@ -1,6 +1,8 @@
 #include <neo/ledger/coin_reference.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+#include <neo/io/json_writer.h>
+#include <neo/io/json_reader.h>
 
 namespace neo::ledger
 {
@@ -58,20 +60,17 @@ namespace neo::ledger
             writer.WriteStartObject();
             
             // Write transaction hash (txid)
-            writer.WritePropertyName("txid");
-            writer.WriteValue(prevHash_.ToString());
+            writer.Write("txid", prevHash_.ToString());
             
             // Write output index (vout)
-            writer.WritePropertyName("vout");
-            writer.WriteValue(static_cast<uint32_t>(prevIndex_));
+            writer.Write("vout", static_cast<uint32_t>(prevIndex_));
             
             writer.WriteEndObject();
             
         } catch (const std::exception& e) {
             // If JSON serialization fails, write minimal object
             writer.WriteStartObject();
-            writer.WritePropertyName("error");
-            writer.WriteValue("CoinReference serialization failed: " + std::string(e.what()));
+            writer.Write("error", "CoinReference serialization failed: " + std::string(e.what()));
             writer.WriteEndObject();
         }
     }
@@ -80,34 +79,16 @@ namespace neo::ledger
     {
         // Complete JSON deserialization for CoinReference
         try {
-            reader.ReadStartObject();
-            
-            while (reader.Read()) {
-                if (reader.TokenType() == io::JsonToken::EndObject) {
-                    break;
-                }
-                
-                if (reader.TokenType() == io::JsonToken::PropertyName) {
-                    std::string propertyName = reader.GetString();
-                    reader.Read(); // Move to property value
-                    
-                    if (propertyName == "txid") {
-                        if (reader.TokenType() != io::JsonToken::Null) {
-                            std::string hashStr = reader.GetString();
-                            prevHash_ = io::UInt256::Parse(hashStr);
-                        }
-                    }
-                    else if (propertyName == "vout") {
-                        if (reader.TokenType() == io::JsonToken::Number) {
-                            prevIndex_ = static_cast<uint16_t>(reader.GetUInt32());
-                        }
-                    }
-                    else {
-                        // Skip unknown properties
-                        reader.Skip();
-                    }
-                }
+            // Read transaction hash (txid)
+            std::string txidStr = reader.ReadString("txid");
+            if (!txidStr.empty()) {
+                prevHash_ = io::UInt256::Parse(txidStr);
+            } else {
+                prevHash_ = io::UInt256::Zero();
             }
+            
+            // Read output index (vout)
+            prevIndex_ = static_cast<uint16_t>(reader.ReadUInt32("vout"));
             
         } catch (const std::exception& e) {
             // Error parsing JSON - set safe default values

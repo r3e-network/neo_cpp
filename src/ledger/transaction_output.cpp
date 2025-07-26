@@ -1,4 +1,6 @@
 #include <neo/ledger/transaction_output.h>
+#include <neo/io/json_writer.h>
+#include <neo/io/json_reader.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 
@@ -71,20 +73,16 @@ namespace neo::ledger
             writer.WriteStartObject();
             
             // Write asset ID
-            writer.WritePropertyName("asset");
-            writer.WriteValue(assetId_.ToString());
+            writer.Write("asset", assetId_.ToString());
             
             // Write value (Fixed8 amount)
-            writer.WritePropertyName("value");
-            writer.WriteValue(value_.ToString());
+            writer.Write("value", value_.ToString());
             
             // Write script hash (address)
-            writer.WritePropertyName("address");
-            writer.WriteValue(scriptHash_.ToString());
+            writer.Write("address", scriptHash_.ToString());
             
             // Write script hash as hex for compatibility
-            writer.WritePropertyName("scripthash");
-            writer.WriteValue(scriptHash_.ToString());
+            writer.Write("scripthash", scriptHash_.ToString());
             
             // Transaction output index (n) is context-dependent
             // Set by transaction when outputs are serialized
@@ -94,8 +92,7 @@ namespace neo::ledger
         } catch (const std::exception& e) {
             // If JSON serialization fails, write minimal object
             writer.WriteStartObject();
-            writer.WritePropertyName("error");
-            writer.WriteValue("TransactionOutput serialization failed: " + std::string(e.what()));
+            writer.Write("error", "TransactionOutput serialization failed: " + std::string(e.what()));
             writer.WriteEndObject();
         }
     }
@@ -104,40 +101,31 @@ namespace neo::ledger
     {
         // Complete JSON deserialization for TransactionOutput
         try {
-            reader.ReadStartObject();
+            // Read asset ID
+            std::string assetStr = reader.ReadString("asset");
+            if (!assetStr.empty()) {
+                assetId_ = io::UInt256::Parse(assetStr);
+            } else {
+                assetId_ = io::UInt256::Zero();
+            }
             
-            while (reader.Read()) {
-                if (reader.TokenType() == io::JsonToken::EndObject) {
-                    break;
-                }
-                
-                if (reader.TokenType() == io::JsonToken::PropertyName) {
-                    std::string propertyName = reader.GetString();
-                    reader.Read(); // Move to property value
-                    
-                    if (propertyName == "asset") {
-                        if (reader.TokenType() != io::JsonToken::Null) {
-                            std::string assetStr = reader.GetString();
-                            assetId_ = io::UInt256::Parse(assetStr);
-                        }
-                    }
-                    else if (propertyName == "value") {
-                        if (reader.TokenType() != io::JsonToken::Null) {
-                            std::string valueStr = reader.GetString();
-                            value_ = core::Fixed8::Parse(valueStr);
-                        }
-                    }
-                    else if (propertyName == "address" || propertyName == "scripthash") {
-                        if (reader.TokenType() != io::JsonToken::Null) {
-                            std::string scriptHashStr = reader.GetString();
-                            scriptHash_ = io::UInt160::Parse(scriptHashStr);
-                        }
-                    }
-                    else {
-                        // Skip unknown properties
-                        reader.Skip();
-                    }
-                }
+            // Read value (Fixed8 amount)
+            std::string valueStr = reader.ReadString("value");
+            if (!valueStr.empty()) {
+                value_ = core::Fixed8::Parse(valueStr);
+            } else {
+                value_ = core::Fixed8::Zero();
+            }
+            
+            // Read script hash (address or scripthash)
+            std::string scriptHashStr = reader.ReadString("address");
+            if (scriptHashStr.empty()) {
+                scriptHashStr = reader.ReadString("scripthash");
+            }
+            if (!scriptHashStr.empty()) {
+                scriptHash_ = io::UInt160::Parse(scriptHashStr);
+            } else {
+                scriptHash_ = io::UInt160::Zero();
             }
             
         } catch (const std::exception& e) {

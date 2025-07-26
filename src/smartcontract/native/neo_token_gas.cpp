@@ -1,5 +1,6 @@
 #include <neo/smartcontract/native/neo_token_gas.h>
 #include <neo/smartcontract/native/neo_token_account.h>
+#include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/persistence/storage_key.h>
@@ -7,12 +8,64 @@
 #include <neo/vm/stack_item.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+#include <neo/vm/script_builder.h>
+#include <neo/cryptography/hash.h>
 #include <sstream>
 #include <stdexcept>
 #include <iostream>
 
 namespace neo::smartcontract::native
 {
+    // Helper function to get script hash from public key
+    static io::UInt160 GetScriptHashFromPublicKey(const cryptography::ecc::ECPoint& publicKey)
+    {
+        // Create single-signature verification script for the public key
+        vm::ScriptBuilder sb;
+        
+        auto compressed = publicKey.ToArray();
+        sb.EmitPush(compressed.AsSpan());
+        sb.EmitSysCall("System.Crypto.CheckSig");
+        
+        auto script = sb.ToArray();
+        
+        // Calculate script hash
+        return cryptography::Hash::Hash160(script.AsSpan());
+    }
+    
+    // Helper function to calculate committee multi-sig address
+    static io::UInt160 CalculateCommitteeAddress(const std::vector<cryptography::ecc::ECPoint>& committee)
+    {
+        if (committee.empty()) {
+            throw std::runtime_error("Committee cannot be empty");
+        }
+        
+        // Calculate multi-signature script for committee
+        // Committee requires majority consensus (m = (n/2) + 1)
+        size_t m = (committee.size() / 2) + 1;
+        
+        // Build verification script for m-of-n multisig
+        vm::ScriptBuilder sb;
+        
+        // Push the required signature count
+        sb.EmitPush(static_cast<int64_t>(m));
+        
+        // Push all public keys
+        for (const auto& pubkey : committee) {
+            auto compressed = pubkey.ToArray();
+            sb.EmitPush(compressed.AsSpan());
+        }
+        
+        // Push the total number of public keys
+        sb.EmitPush(static_cast<int64_t>(committee.size()));
+        
+        // Add CHECKMULTISIG system call
+        sb.EmitSysCall("System.Crypto.CheckMultisig");
+        
+        auto script = sb.ToArray();
+        
+        // Calculate script hash (committee address)
+        return cryptography::Hash::Hash160(script.AsSpan());
+    }
     int64_t NeoTokenGas::GetGasPerBlock(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot)
     {
         persistence::StorageKey key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::GasPerBlock));
@@ -134,7 +187,8 @@ namespace neo::smartcontract::native
         try
         {
             // Get current committee members from NEO token contract
-            auto committee = GetCommitteeFromNeoContract(engine.GetSnapshot());
+            auto neo_token = NeoToken::GetInstance();
+            auto committee = neo_token->GetCommittee(engine.GetSnapshot());
             if (committee.empty()) {
                 throw std::runtime_error("No committee members found");
             }
@@ -149,7 +203,7 @@ namespace neo::smartcontract::native
             bool authorized = false;
             
             // Method 1: Check if called by committee multi-sig contract
-            if (calling_script_hash.has_value() && calling_script_hash.value() == committee_address) {
+            if (!calling_script_hash.IsZero() && calling_script_hash == committee_address) {
                 authorized = true;
             }
             

@@ -265,14 +265,10 @@ namespace neo::console_service
                                     return *commandResult;
                                 }
                                 
-                                // If no specific handler found, try Neo system services
-                                if (auto cliService = neoSystem_->get_service<cli::CLI>()) {
-                                    return cliService->ExecuteCommand(command, args);
-                                }
-                                
-                                // If no specific handler found, fall back to generic command execution
-                                // Debug: No specific handler found for command
-                                return ExecuteGenericCommand(cmd, args);
+                                // TODO: Implement CLI service integration
+                                // For now, fall back to generic command execution
+                                auto result = ExecuteGenericCommand(cmd, args);
+                                return result.value_or("Command not found");
                                 
                                 // Check if it's a blockchain query command
                                 if (cmd == "block" || cmd == "tx" || cmd == "account") {
@@ -731,9 +727,9 @@ namespace neo::console_service
             std::shared_ptr<smartcontract::native::NativeContract> tokenContract;
             
             if (tokenSymbol == "NEO") {
-                tokenContract = neoSystem_->GetNeoContract();
+                tokenContract = smartcontract::native::NeoToken::GetInstance();
             } else if (tokenSymbol == "GAS") {
-                tokenContract = neoSystem_->GetGasContract();
+                tokenContract = smartcontract::native::GasToken::GetInstance();
             } else {
                 // Unsupported token
                 return 0;
@@ -760,7 +756,7 @@ namespace neo::console_service
             std::vector<std::shared_ptr<vm::StackItem>> args;
             args.push_back(vm::StackItem::Create(scriptHash));
             
-            auto result = tokenContract->Invoke(*engine, "balanceOf", args);
+            auto result = tokenContract->Invoke(*engine, "balanceOf", args, smartcontract::CallFlags::ReadStates);
             
             if (result && result->IsInteger()) {
                 return result->GetInteger();
@@ -768,7 +764,7 @@ namespace neo::console_service
             
             return 0;
         } catch (const std::exception& e) {
-            LOG_WARNING("Failed to get {} balance: {}", tokenSymbol, e.what());
+            std::cerr << "Failed to get " << tokenSymbol << " balance: " << e.what() << std::endl;
             return 0;
         }
     }

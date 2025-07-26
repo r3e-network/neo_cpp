@@ -22,12 +22,14 @@
 #include <future>
 #include <unordered_set>
 
+// Include necessary headers for complete types
+#include <neo/ledger/memory_pool.h>
+#include <neo/ledger/header_cache.h>
+
 // Forward declarations
 namespace neo {
     class ProtocolSettings;
     class Block;
-    class MemoryPool;
-    class HeaderCache;
     class RelayCache;
     namespace persistence {
         class StoreCache;
@@ -69,7 +71,7 @@ namespace neo {
  * The NeoSystem class is the main orchestrator for a Neo node, managing all core components
  * including the blockchain, network layer, memory pool, and plugin system.
  */
-class NeoSystem {
+class NeoSystem : public std::enable_shared_from_this<NeoSystem> {
 public:
     /**
      * @brief Event handler type for service addition events.
@@ -216,7 +218,7 @@ public:
      * @param hash The hash of the transaction
      * @return The type indicating where the transaction exists
      */
-    ContainsTransactionType contains_transaction(const UInt256& hash) const;
+    ContainsTransactionType contains_transaction(const io::UInt256& hash) const;
 
     /**
      * @brief Determines whether the specified transaction conflicts with some on-chain transaction.
@@ -224,7 +226,7 @@ public:
      * @param signers The list of signer accounts of the transaction
      * @return true if the transaction conflicts with on-chain transaction, false otherwise
      */
-    bool contains_conflict_hash(const UInt256& hash, const std::vector<UInt160>& signers) const;
+    bool contains_conflict_hash(const io::UInt256& hash, const std::vector<io::UInt160>& signers) const;
 
     // Static factory methods
     /**
@@ -239,7 +241,7 @@ public:
      * - Initial GAS distribution transactions
      * - Proper witness and signature setup
      */
-    static Block* create_genesis_block(const ProtocolSettings& settings);
+    static ledger::Block* create_genesis_block(const ProtocolSettings& settings);
 
     /**
      * @brief Initializes the global plugin system.
@@ -291,11 +293,11 @@ private:
 
     // Additional member variables that were missing
     std::unique_ptr<ledger::Blockchain> blockchain_;
-    std::unique_ptr<MemoryPool> mem_pool_;
-    std::unique_ptr<HeaderCache> header_cache_;
+    std::unique_ptr<ledger::MemoryPool> mem_pool_;
+    std::unique_ptr<ledger::HeaderCache> header_cache_;
     std::unique_ptr<network::p2p::LocalNode> local_node_;
     std::unique_ptr<network::p2p::TaskManager> task_manager_;
-    Block* genesis_block_ = nullptr;
+    ledger::Block* genesis_block_ = nullptr;
 };
 
 } // namespace neo

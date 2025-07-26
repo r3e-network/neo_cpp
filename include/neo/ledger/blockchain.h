@@ -29,10 +29,12 @@
 #include <condition_variable>
 #include <queue>
 
+// Forward declaration for NeoSystem
+namespace neo { class NeoSystem; }
+
 namespace neo::ledger
 {
     // Forward declarations
-    class NeoSystem;
     class MemoryPool;
 
     // Type aliases - using ledger types since network module is disabled
@@ -102,7 +104,7 @@ namespace neo::ledger
          * @brief Constructs the Blockchain processing engine.
          * @param system The NeoSystem that contains this blockchain.
          */
-        explicit Blockchain(std::shared_ptr<NeoSystem> system);
+        explicit Blockchain(std::shared_ptr<neo::NeoSystem> system);
 
         /**
          * @brief Destructor.
