@@ -256,7 +256,9 @@ namespace neo::extensions
                 try {
                     int64_t val = std::stoll(value);
                     return BigInteger(val);
-                } catch (...) {
+                } catch (const std::invalid_argument&) {
+                    // Fall through to arbitrary precision parsing
+                } catch (const std::out_of_range&) {
                     // Fall through to arbitrary precision parsing
                 }
             }
@@ -312,8 +314,10 @@ namespace neo::extensions
             throw;
         } catch (const std::overflow_error&) {
             throw;
-        } catch (...) {
-            throw std::invalid_argument("Failed to parse BigInteger from string");
+        } catch (const std::bad_alloc& e) {
+            throw std::runtime_error("Memory allocation failed while parsing BigInteger: " + std::string(e.what()));
+        } catch (const std::exception& e) {
+            throw std::invalid_argument("Failed to parse BigInteger from string: " + std::string(e.what()));
         }
     }
 

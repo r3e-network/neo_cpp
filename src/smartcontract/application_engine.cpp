@@ -8,6 +8,9 @@
 #include <neo/smartcontract/native/policy_contract.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/role_management.h>
+#include <spdlog/spdlog.h>
+
+#define LOG_ERROR(msg, ...) spdlog::error(msg, ##__VA_ARGS__)
 #include <neo/smartcontract/native/oracle_contract.h>
 #include <neo/smartcontract/native/notary.h>
 #include <neo/smartcontract/native/name_service.h>
@@ -49,8 +52,21 @@ namespace neo::smartcontract
             state_ = ExecutionEngine::Execute();
             return state_;
         }
-        catch (...)
+        catch (const std::bad_alloc& e)
         {
+            LOG_ERROR("Memory allocation failed in ApplicationEngine execution: {}", e.what());
+            state_ = neo::vm::VMState::Fault;
+            return state_;
+        }
+        catch (const std::runtime_error& e)
+        {
+            LOG_ERROR("Runtime error in ApplicationEngine execution: {}", e.what());
+            state_ = neo::vm::VMState::Fault;
+            return state_;
+        }
+        catch (const std::exception& e)
+        {
+            LOG_ERROR("Exception in ApplicationEngine execution: {}", e.what());
             state_ = neo::vm::VMState::Fault;
             return state_;
         }

@@ -3,6 +3,7 @@
 #include <neo/json/jnumber.h>
 #include <neo/json/jarray.h>
 #include <neo/json/jboolean.h>
+#include <neo/core/network_config.h>
 // Note: Using nullptr for null values since JNull class doesn't exist
 #include <sstream>
 
@@ -257,7 +258,7 @@ namespace neo::rpc
         
         // Neo protocol settings - using production Neo mainnet values
         json::JObject protocol;
-        protocol.SetProperty("network", std::make_shared<json::JNumber>(860833102)); // Neo N3 mainnet magic
+        protocol.SetProperty("network", std::make_shared<json::JNumber>(core::NetworkConfig::GetNetworkMagic("mainnet"))); // Neo N3 mainnet magic
         protocol.SetProperty("validatorscount", std::make_shared<json::JNumber>(7)); // Neo consensus validators
         protocol.SetProperty("msperblock", std::make_shared<json::JNumber>(15000)); // 15 second block time
         protocol.SetProperty("maxvaliduntilblockincrementdelta", std::make_shared<json::JNumber>(86400)); // 24 hour validity

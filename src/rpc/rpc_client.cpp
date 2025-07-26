@@ -1,5 +1,6 @@
 #include <neo/rpc/rpc_client.h>
 #include <neo/cryptography/base64.h>
+#include <neo/core/safe_conversions.h>
 #include <stdexcept>
 #include <sstream>
 #include <thread>
@@ -43,7 +44,11 @@ namespace neo::rpc
                 size_t port_start = host_port.find(':');
                 if (port_start != std::string::npos) {
                     host = host_port.substr(0, port_start);
-                    port = std::stoi(host_port.substr(port_start + 1));
+                    try {
+                        port = core::SafeConversions::SafeToPort(host_port.substr(port_start + 1));
+                    } catch (const std::exception& e) {
+                        throw std::runtime_error("Invalid port in URL: " + std::string(e.what()));
+                    }
                 } else {
                     host = host_port;
                     if (protocol == "https") {
@@ -57,7 +62,11 @@ namespace neo::rpc
                 size_t port_start = host_port.find(':');
                 if (port_start != std::string::npos) {
                     host = host_port.substr(0, port_start);
-                    port = std::stoi(host_port.substr(port_start + 1));
+                    try {
+                        port = core::SafeConversions::SafeToPort(host_port.substr(port_start + 1));
+                    } catch (const std::exception& e) {
+                        throw std::runtime_error("Invalid port in URL: " + std::string(e.what()));
+                    }
                 } else {
                     host = host_port;
                     if (protocol == "https") {

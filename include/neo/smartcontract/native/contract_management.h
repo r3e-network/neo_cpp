@@ -287,6 +287,6 @@ namespace neo::smartcontract::native
          * @param publicKey The public key
          * @return The script hash for the public key
          */
-        io::UInt160 GetScriptHashFromPublicKey(const cryptography::ECPoint& publicKey);
+        io::UInt160 GetScriptHashFromPublicKey(const cryptography::ecc::ECPoint& publicKey);
     };
 }

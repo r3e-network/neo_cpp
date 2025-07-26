@@ -219,10 +219,29 @@ namespace neo::console_service
 
     void ConsoleHelper::Clear()
     {
+        // Use ANSI escape sequence instead of system() calls for security
+        // This works on Windows 10+, macOS, and Linux terminals
+        std::cout << "\033[2J\033[H" << std::flush;
+        
+        // Fallback for older Windows versions
 #ifdef _WIN32
-        system("cls");
-#else
-        system("clear");
+        // Try Windows Console API first
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        if (hConsole != INVALID_HANDLE_VALUE) {
+            CONSOLE_SCREEN_BUFFER_INFO csbi;
+            if (GetConsoleScreenBufferInfo(hConsole, &csbi)) {
+                DWORD cellCount = csbi.dwSize.X * csbi.dwSize.Y;
+                COORD homeCoords = {0, 0};
+                DWORD count;
+                
+                // Fill with spaces
+                FillConsoleOutputCharacter(hConsole, ' ', cellCount, homeCoords, &count);
+                // Reset attributes
+                FillConsoleOutputAttribute(hConsole, csbi.wAttributes, cellCount, homeCoords, &count);
+                // Move cursor to top-left
+                SetConsoleCursorPosition(hConsole, homeCoords);
+            }
+        }
 #endif
     }
 

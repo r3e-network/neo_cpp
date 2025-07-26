@@ -128,11 +128,9 @@ namespace neo::cli
 
     void ConsoleHelper::Clear()
     {
-#ifdef _WIN32
-        system("cls");
-#else
-        system("clear");
-#endif
+        // Use ANSI escape sequence instead of system() calls for security
+        // This works on Windows 10+, macOS, and Linux terminals
+        std::cout << "\033[2J\033[H" << std::flush;
     }
 
     void ConsoleHelper::SetColor(int color)

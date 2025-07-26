@@ -56,8 +56,14 @@ namespace neo::console_service
             // No blockchain data available
             return 0;
         }
-        catch (...)
+        catch (const std::exception& e)
         {
+            LOG_ERROR("Failed to get blockchain height: {}", e.what());
+            return 0;
+        }
+        catch (const std::bad_alloc& e)
+        {
+            LOG_ERROR("Memory allocation failed getting blockchain height: {}", e.what());
             return 0;
         }
     }
@@ -139,7 +145,7 @@ namespace neo::console_service
             channelsConfig->enable_rpc = true;
             channelsConfig->enable_consensus = false; // Start without consensus initially
             channelsConfig->enable_plugins = true;
-            channelsConfig->tcp_port = 10333; // Default Neo P2P port
+            channelsConfig->tcp_port = neoSystem_->GetProtocolSettings()->GetDefaultP2PPort();
             channelsConfig->max_connections = 10;
             
             // Start the Neo system with configuration

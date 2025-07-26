@@ -9,6 +9,8 @@ namespace neo::cli
 {
     /**
      * @brief Type converter function.
+     * @warning Returns raw pointer - caller MUST take ownership and delete.
+     *          Consider using SafeTypeConverters for RAII safety.
      */
     using TypeConverter = std::function<void*(const std::vector<std::string>&, bool)>;
 

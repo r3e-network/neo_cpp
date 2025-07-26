@@ -1,4 +1,5 @@
 #include <neo/console_service/console_service_base.h>
+#include <neo/core/safe_conversions.h>
 #include <iostream>
 #include <sstream>
 #include <algorithm>
@@ -306,11 +307,11 @@ namespace neo::console_service
             return CommandToken::ReadString(args, consume_all);
         });
 
-        // Register int handler
+        // Register int handler with safe conversion
         RegisterCommandHandler<int>([](std::vector<std::shared_ptr<CommandToken>>& args, bool consume_all) -> int {
             (void)consume_all; // Suppress unused parameter warning
             std::string str = CommandToken::ReadString(args, false);
-            return std::stoi(str);
+            return neo::core::SafeConversions::SafeToInt32(str);
         });
 
         // Register bool handler

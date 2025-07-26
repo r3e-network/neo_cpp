@@ -7,6 +7,10 @@
 #include <cstddef>
 #include <cstdint>
 #include <span>
+#include <spdlog/spdlog.h>
+
+#define LOG_ERROR(msg, ...) spdlog::error(msg, ##__VA_ARGS__)
+#define LOG_DEBUG(msg, ...) spdlog::debug(msg, ##__VA_ARGS__)
 
 namespace neo::cryptography::mpttrie
 {
@@ -213,8 +217,19 @@ namespace neo::cryptography::mpttrie
                     return false;
             }
         }
-        catch (...)
+        catch (const std::bad_alloc& e)
         {
+            LOG_ERROR("Memory allocation failed in Trie::TryGetInternal: {}", e.what());
+            return false;
+        }
+        catch (const std::runtime_error& e)
+        {
+            LOG_DEBUG("Runtime error in Trie::TryGetInternal: {}", e.what());
+            return false;
+        }
+        catch (const std::exception& e)
+        {
+            LOG_DEBUG("Exception in Trie::TryGetInternal: {}", e.what());
             return false;
         }
     }

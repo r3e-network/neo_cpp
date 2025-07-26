@@ -1,57 +1,45 @@
 {
   "ApplicationConfiguration": {
-    "Logger": {
-      "Path": "Logs",
-      "ConsoleOutput": true,
-      "Active": true
-    },
-    "Storage": {
-      "Engine": "RocksDBStore",
-      "Path": "./TestNetChain"
+    "Network": "testnet",
+    "DataPath": "./testnet-data",
+    "Logging": {
+      "Level": "info",
+      "Path": "./testnet-data/logs",
+      "ConsoleOutput": true
     },
     "P2P": {
       "Port": 20333,
-      "WsPort": 20334,
-      "MinDesiredConnections": 10,
-      "MaxConnections": 40,
-      "MaxConnectionsPerAddress": 3
+      "MaxConnections": 10,
+      "MinDesiredConnections": 4,
+      "SeedNodes": [
+        "seed1.neo.org:20333",
+        "seed2.neo.org:20333",
+        "seed3.neo.org:20333",
+        "seed4.neo.org:20333",
+        "seed5.neo.org:20333"
+      ]
     },
     "RPC": {
       "Port": 20332,
-      "SslPort": 20331,
       "BindAddress": "127.0.0.1",
-      "SslCert": "",
-      "SslCertPassword": "",
-      "MaxGasInvoke": "50",
-      "MaxFee": "0.1",
-      "MaxIteratorResultItems": 100,
-      "MaxStackSize": 2048,
-      "MaxNep17Transfers": 100,
-      "MaxValidUntilBlockIncrement": 5760,
-      "DisabledMethods": []
+      "EnableCors": true,
+      "MaxConcurrentConnections": 40,
+      "MaxIteratorResultItems": 100
     },
-    "UnlockWallet": {
-      "Path": "",
-      "Password": "",
-      "IsActive": false
+    "Consensus": {
+      "Enabled": false,
+      "WalletPath": "",
+      "WalletPassword": ""
     },
-    "Plugins": [
-      {
-        "Name": "RpcSecurity",
-        "Path": "Plugins/RpcSecurity.dll"
-      },
-      {
-        "Name": "ApplicationLogs",
-        "Path": "Plugins/ApplicationLogs.dll"
-      },
-      {
-        "Name": "StateService",
-        "Path": "Plugins/StateService.dll"
-      }
-    ]
+    "Storage": {
+      "Engine": "RocksDB",
+      "Path": "./testnet-data/chain"
+    }
   },
   "ProtocolConfiguration": {
     "Magic": 894710606,
+    "AddressVersion": 53,
+    "Network": "testnet",
     "MillisecondsPerBlock": 15000,
     "MaxTransactionsPerBlock": 512,
     "MemoryPoolMaxTransactions": 50000,

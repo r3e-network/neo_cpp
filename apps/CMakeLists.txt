@@ -4,6 +4,9 @@ add_subdirectory(node)
 # Add the CLI subdirectory
 add_subdirectory(cli)
 
+# Add the neo-cli subdirectory
+add_subdirectory(neo-cli)
+
 # Create simple neo node application
 add_executable(simple_neo_node simple_neo_node.cpp)
 target_link_libraries(simple_neo_node PRIVATE neo_cpp)

@@ -765,8 +765,19 @@ namespace neo::rpc
             
             result["isvalid"] = true;
         }
-        catch (...)
+        catch (const std::invalid_argument& e)
         {
+            LOG_DEBUG("Address validation failed: {}", e.what());
+            result["isvalid"] = false;
+        }
+        catch (const std::runtime_error& e)
+        {
+            LOG_DEBUG("Runtime error during address validation: {}", e.what());
+            result["isvalid"] = false;
+        }
+        catch (const std::exception& e)
+        {
+            LOG_DEBUG("Exception during address validation: {}", e.what());
             result["isvalid"] = false;
         }
 

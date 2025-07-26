@@ -305,8 +305,19 @@ namespace neo::smartcontract
                     }
                     context.Push(vm::StackItem::Create(result));
                 }
+                catch (const std::bad_alloc& e)
+                {
+                    LOG_ERROR("Memory allocation failed in BLS verification: {}", e.what());
+                    context.Push(vm::StackItem::Create(false));
+                }
+                catch (const std::runtime_error& e)
+                {
+                    LOG_ERROR("Runtime error in BLS verification: {}", e.what());
+                    context.Push(vm::StackItem::Create(false));
+                }
                 catch (...)
                 {
+                    LOG_ERROR("Unknown error in BLS verification");
                     context.Push(vm::StackItem::Create(false));
                 }
                 return true;
@@ -375,8 +386,19 @@ namespace neo::smartcontract
 
                     context.Push(vm::StackItem::Create(result));
                 }
-                catch (...)
+                catch (const std::bad_alloc& e)
                 {
+                    LOG_ERROR("Memory allocation failed in Base58 encode: {}", e.what());
+                    context.Push(vm::StackItem::Create(""));
+                }
+                catch (const std::runtime_error& e)
+                {
+                    LOG_ERROR("Runtime error in Base58 encode: {}", e.what());
+                    context.Push(vm::StackItem::Create(""));
+                }
+                catch (const std::exception& e)
+                {
+                    LOG_ERROR("Exception in Base58 encode: {}", e.what());
                     context.Push(vm::StackItem::Create(""));
                 }
                 return true;
@@ -461,8 +483,19 @@ namespace neo::smartcontract
                     io::ByteVector resultBytes(finalResult);
                     context.Push(vm::StackItem::Create(resultBytes));
                 }
-                catch (...)
+                catch (const std::bad_alloc& e)
                 {
+                    LOG_ERROR("Memory allocation failed in Base58 decode: {}", e.what());
+                    context.Push(vm::StackItem::Create(io::ByteVector()));
+                }
+                catch (const std::runtime_error& e)
+                {
+                    LOG_ERROR("Runtime error in Base58 decode: {}", e.what());
+                    context.Push(vm::StackItem::Create(io::ByteVector()));
+                }
+                catch (const std::exception& e)
+                {
+                    LOG_ERROR("Exception in Base58 decode: {}", e.what());
                     context.Push(vm::StackItem::Create(io::ByteVector()));
                 }
                 return true;

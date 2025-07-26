@@ -4,6 +4,9 @@
 #include <openssl/ec.h>
 #include <openssl/ecdsa.h>
 #include <openssl/bn.h>
+#include <spdlog/spdlog.h>
+
+#define LOG_ERROR(msg, ...) spdlog::error(msg, ##__VA_ARGS__)
 
 namespace neo::cryptography
 {
@@ -173,8 +176,14 @@ namespace neo::cryptography
             if (recovered_point) EC_POINT_free(recovered_point);
             if (ec_key) EC_KEY_free(ec_key);
             
-        } catch (...) {
-            // Cleanup on exception
+        } catch (const std::bad_alloc& e) {
+            LOG_ERROR("Memory allocation failed in ECRecover: {}", e.what());
+            goto cleanup;
+        } catch (const std::runtime_error& e) {
+            LOG_ERROR("Runtime error in ECRecover: {}", e.what());
+            goto cleanup;
+        } catch (const std::exception& e) {
+            LOG_ERROR("Exception in ECRecover: {}", e.what());
             goto cleanup;
         }
         

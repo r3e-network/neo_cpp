@@ -44,7 +44,7 @@ namespace {
     class ContractIdCache {
     private:
         mutable std::shared_mutex mutex_;
-        std::unordered_map<io::UInt160, int32_t> cache_;
+        std::unordered_map<neo::io::UInt160, int32_t> cache_;
         static constexpr size_t MAX_CACHE_SIZE = 1000;
 
     public:
@@ -53,7 +53,7 @@ namespace {
             return instance;
         }
 
-        std::optional<int32_t> Get(const io::UInt160& hash) const {
+        std::optional<int32_t> Get(const neo::io::UInt160& hash) const {
             std::shared_lock lock(mutex_);
             auto it = cache_.find(hash);
             if (it != cache_.end()) {
@@ -62,7 +62,7 @@ namespace {
             return std::nullopt;
         }
 
-        void Put(const io::UInt160& hash, int32_t id) {
+        void Put(const neo::io::UInt160& hash, int32_t id) {
             std::unique_lock lock(mutex_);
             
             // Evict oldest entries if cache is full
@@ -248,7 +248,7 @@ namespace neo::persistence
         return StorageKey(id, io::ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
     }
 
-    StorageKey StorageKey::Create(int32_t id, uint8_t prefix, std::span<const uint8_t> content)
+    StorageKey StorageKey::Create(int32_t id, uint8_t prefix, const std::span<const uint8_t>& content)
     {
         auto data = io::ByteVector(PREFIX_LENGTH + content.size());
         FillHeader(std::span<uint8_t>(data.Data(), PREFIX_LENGTH), id, prefix);
@@ -283,12 +283,8 @@ namespace neo::persistence
         return id_;
     }
 
-    const io::ByteVector& StorageKey::GetKey() const
-    {
-        return key_;
-    }
 
-    io::ByteVector StorageKey::ToByteArray() const
+    io::ByteVector StorageKey::ToArray() const
     {
         if (!cacheValid_)
         {
@@ -300,14 +296,14 @@ namespace neo::persistence
 
     void StorageKey::Serialize(io::BinaryWriter& writer) const
     {
-        auto data = ToByteArray();
+        auto data = ToArray();
         writer.Write(data.AsSpan());
     }
 
     void StorageKey::Deserialize(io::BinaryReader& reader)
     {
-        reader.Read(id_);
-        auto remaining = reader.Remaining();
+        id_ = reader.Read<int32_t>();
+        auto remaining = reader.Available();
         if (remaining > 0)
         {
             key_ = reader.ReadBytes(remaining);
@@ -332,9 +328,18 @@ namespace neo::persistence
         return key_ < other.key_;
     }
 
-    StorageKey StorageKey::CreateSearchPrefix(int32_t id, uint8_t prefix)
+    io::ByteVector StorageKey::CreateSearchPrefix(int32_t id, const std::span<const uint8_t>& prefix)
     {
-        return Create(id, prefix);
+        io::ByteVector result;
+        result.Reserve(sizeof(int32_t) + prefix.size());
+        
+        // Append contract ID in little-endian format
+        result.Append(io::ByteSpan(reinterpret_cast<const uint8_t*>(&id), sizeof(int32_t)));
+        
+        // Append prefix bytes
+        result.Append(io::ByteSpan(prefix.data(), prefix.size()));
+        
+        return result;
     }
 
     io::ByteVector StorageKey::Build() const

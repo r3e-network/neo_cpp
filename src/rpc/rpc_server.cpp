@@ -5,6 +5,7 @@
 #include <neo/json/jboolean.h>
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/neo_token.h>
+#include <neo/core/network_config.h>
 #include <random>
 #include <sstream>
 
@@ -47,8 +48,12 @@ namespace neo::rpc
         uint32_t GetNetworkId() {
             try {
                 return ProtocolSettings::GetDefault().GetNetwork();
-            } catch (...) {
-                return 860833102; // MainNet default
+            } catch (const std::exception& e) {
+                LOG_WARNING("Failed to get network ID from protocol settings: {}", e.what());
+                return core::NetworkConfig::GetNetworkMagic("mainnet"); // MainNet default
+            } catch (const std::bad_alloc& e) {
+                LOG_ERROR("Memory allocation failed getting network ID: {}, using MainNet default", e.what());
+                return core::NetworkConfig::GetNetworkMagic("mainnet"); // MainNet default
             }
         }
     }

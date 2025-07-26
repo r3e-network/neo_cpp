@@ -346,9 +346,12 @@ namespace neo::io
                 // restore position and let the read operation handle it
                 try {
                     stream_->seekg(original_pos);
-                } catch (...) {
+                } catch (const std::ios_base::failure& e) {
                     // If seek fails, stream may be corrupted
-                    throw std::runtime_error("Failed to restore stream position during availability check");
+                    throw std::runtime_error("Failed to restore stream position during availability check: " + std::string(e.what()));
+                } catch (const std::exception& e) {
+                    // Other stream errors
+                    throw std::runtime_error("Stream error during position restore: " + std::string(e.what()));
                 }
             }
         } else {

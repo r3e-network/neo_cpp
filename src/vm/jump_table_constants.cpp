@@ -47,13 +47,9 @@ namespace neo::vm
             
             // Create BigInteger from little-endian byte array
             // Neo VM uses little-endian format for integer representation
-            auto bigint_item = StackItem::CreateBigInteger(bytes);
-            if (!bigint_item) {
-                // Fallback: create as byte array if BigInteger creation fails
-                bigint_item = StackItem::Create(bytes);
-            }
-            
-            engine.Push(bigint_item);
+            // For now, push as byte array until BigInteger support is complete
+            auto item = StackItem::Create(bytes);
+            engine.Push(item);
             
         } catch (const std::exception& e) {
             // Error creating BigInteger - fall back to byte array representation
@@ -76,13 +72,9 @@ namespace neo::vm
             
             // Create BigInteger from little-endian byte array
             // Neo VM uses little-endian format for integer representation
-            auto bigint_item = StackItem::CreateBigInteger(bytes);
-            if (!bigint_item) {
-                // Fallback: create as byte array if BigInteger creation fails
-                bigint_item = StackItem::Create(bytes);
-            }
-            
-            engine.Push(bigint_item);
+            // For now, push as byte array until BigInteger support is complete
+            auto item = StackItem::Create(bytes);
+            engine.Push(item);
             
         } catch (const std::exception& e) {
             // Error creating BigInteger - fall back to byte array representation
