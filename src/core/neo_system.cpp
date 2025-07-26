@@ -14,6 +14,7 @@
 #include "neo/ledger/block.h"
 #include "neo/ledger/blockchain.h"
 #include "neo/ledger/memory_pool.h"
+#include "neo/ledger/header_cache.h"
 #include "neo/network/p2p/local_node.h"
 #include "neo/network/p2p/task_manager.h"
 #include "neo/network/p2p/channels_config.h"
@@ -25,6 +26,10 @@
 #include "neo/common/contains_transaction_type.h"
 #include "neo/smartcontract/native/native_contract.h"
 #include "neo/smartcontract/native/ledger_contract.h"
+#include "neo/smartcontract/contract.h"
+#include "neo/core/logging.h"
+#include "neo/plugins/plugin.h"
+#include "neo/vm/opcode.h"
 
 #include <stdexcept>
 #include <algorithm>
@@ -122,7 +127,7 @@ NeoSystem::NeoSystem(std::unique_ptr<ProtocolSettings> settings,
     try {
         // Initialize core components
         genesis_block_ = create_genesis_block(*settings_);
-        store_ = storage_provider_->get_store(storage_path);
+        store_ = storage_provider_->GetStore(storage_path);
         header_cache_ = std::make_unique<HeaderCache>();
         mem_pool_ = std::make_unique<MemoryPool>(*this);
         
@@ -137,10 +142,10 @@ NeoSystem::NeoSystem(std::unique_ptr<ProtocolSettings> settings,
         // Initialize blockchain
         blockchain_->initialize();
         
-        logging::Logger::info("NeoSystem initialized successfully");
+        LOG_INFO("NeoSystem initialized successfully");
         
     } catch (const std::exception& e) {
-        logging::Logger::error("Failed to initialize NeoSystem: {}", e.what());
+        LOG_ERROR("Failed to initialize NeoSystem: {}", e.what());
         throw;
     }
 }
@@ -170,7 +175,7 @@ void NeoSystem::start_worker_threads() {
                 blockchain_->process_pending_operations();
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
             } catch (const std::exception& e) {
-                logging::Logger::error("Blockchain worker thread error: {}", e.what());
+                LOG_ERROR("Blockchain worker thread error: {}", e.what());
             }
         }
     });
@@ -182,7 +187,7 @@ void NeoSystem::start_worker_threads() {
                 local_node_->process_pending_operations();
                 std::this_thread::sleep_for(std::chrono::milliseconds(50));
             } catch (const std::exception& e) {
-                logging::Logger::error("Network worker thread error: {}", e.what());
+                LOG_ERROR("Network worker thread error: {}", e.what());
             }
         }
     });
@@ -219,7 +224,7 @@ void NeoSystem::add_service(std::shared_ptr<void> service) {
         try {
             handler(service);
         } catch (const std::exception& e) {
-            logging::Logger::error("Service added handler error: {}", e.what());
+            LOG_ERROR("Service added handler error: {}", e.what());
         }
     }
 }
@@ -335,12 +340,12 @@ bool NeoSystem::contains_conflict_hash(const UInt256& hash, const std::vector<UI
         *store_view, hash, signers, max_traceable_blocks);
 }
 
-std::unique_ptr<Block> NeoSystem::create_genesis_block(const ProtocolSettings& settings) {
-    auto block = std::make_unique<Block>();
+Block* NeoSystem::create_genesis_block(const ProtocolSettings& settings) {
+    auto block = new ledger::Block();
     
     // Set header fields
-    block->header().prev_hash = UInt256::zero();
-    block->header().merkle_root = UInt256::zero();
+    block->header().prev_hash = io::UInt256::zero();
+    block->header().merkle_root = io::UInt256::zero();
     
     // Genesis block timestamp: July 15, 2016 15:08:21 UTC
     auto genesis_time = std::chrono::system_clock::from_time_t(1468594101);
