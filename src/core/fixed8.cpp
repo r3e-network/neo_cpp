@@ -6,7 +6,7 @@
 namespace neo::core
 {
     // Complete BigDecimal to Fixed8 conversion implementation
-    Fixed8::Fixed8(const neo::BigDecimal& value) : value_(0)
+    Fixed8::Fixed8(const BigDecimal& value) : value_(0)
     {
         try {
             // Complete BigDecimal to Fixed8 conversion using native BigDecimal methods

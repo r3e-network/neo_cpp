@@ -287,6 +287,32 @@ private:
      * @return The merkle root hash
      */
     static UInt256 CalculateMerkleRoot(const std::vector<UInt256>& transactionHashes);
+
+    // Member variables
+    std::unique_ptr<ProtocolSettings> settings_;
+    std::shared_ptr<persistence::IStoreProvider> storage_provider_;
+    std::shared_ptr<persistence::IStore> store_;
+    std::unique_ptr<ledger::Blockchain> blockchain_;
+    std::unique_ptr<MemoryPool> mem_pool_;
+    std::unique_ptr<HeaderCache> header_cache_;
+    std::unique_ptr<RelayCache> relay_cache_;
+    std::unique_ptr<network::p2p::LocalNode> local_node_;
+    std::unique_ptr<network::p2p::TaskManager> task_manager_;
+    Block* genesis_block_ = nullptr;
+    
+    // Service management
+    mutable std::mutex services_mutex_;
+    std::vector<std::shared_ptr<void>> services_;
+    
+    // System state
+    std::atomic<bool> initialized_{false};
+    std::atomic<bool> stopped_{false};
+    std::future<void> blockchain_worker_;
+    std::future<void> network_worker_;
+    
+    // Event handling
+    std::unordered_set<std::function<void(const Block&)>> block_processed_handlers_;
+    std::unordered_set<std::function<void(const std::string&, const std::string&)>> service_added_handlers_;
 };
 
 } // namespace neo

@@ -105,7 +105,7 @@ NeoSystem::NeoSystem(std::unique_ptr<ProtocolSettings> settings,
 }
 
 NeoSystem::NeoSystem(std::unique_ptr<ProtocolSettings> settings,
-                     std::shared_ptr<IStoreProvider> storage_provider,
+                     std::shared_ptr<persistence::IStoreProvider> storage_provider,
                      const std::string& storage_path)
     : settings_(std::move(settings))
     , storage_provider_(std::move(storage_provider))
