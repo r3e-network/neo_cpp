@@ -425,7 +425,7 @@ namespace neo::cryptography::mpttrie
         // Branch nodes contain 16 children + 1 optional value
         
         // Write branch node type marker
-        writer.WriteUInt8(static_cast<uint8_t>(NodeType::BranchNode));
+        writer.WriteByte(static_cast<uint8_t>(NodeType::BranchNode));
         
         // Write children mask (indicates which children are present)
         uint16_t children_mask = 0;
@@ -440,24 +440,25 @@ namespace neo::cryptography::mpttrie
         for (size_t i = 0; i < children_.size() && i < 16; ++i) {
             if (children_[i] && !children_[i]->IsEmpty()) {
                 // Write child hash if it's stored, otherwise serialize inline
-                if (children_[i]->GetHash().has_value()) {
+                auto childHash = children_[i]->GetHash();
+                if (!childHash.IsZero()) {
                     // Reference mode - write hash only
-                    writer.WriteUInt8(0x01); // Reference marker
-                    writer.Write(children_[i]->GetHash()->Data(), children_[i]->GetHash()->Size());
+                    writer.WriteByte(0x01); // Reference marker
+                    writer.Write(childHash.Data(), io::UInt256::Size);
                 } else {
                     // Inline mode - serialize full child
-                    writer.WriteUInt8(0x00); // Inline marker
+                    writer.WriteByte(0x00); // Inline marker
                     children_[i]->Serialize(writer);
                 }
             }
         }
         
         // Serialize value if present
-        if (value_.has_value()) {
-            writer.WriteUInt8(0x01); // Value present marker
-            writer.WriteVarBytes(value_->AsSpan());
+        if (!value_.Empty()) {
+            writer.WriteByte(0x01); // Value present marker
+            writer.WriteVarBytes(value_.AsSpan());
         } else {
-            writer.WriteUInt8(0x00); // No value marker
+            writer.WriteByte(0x00); // No value marker
         }
     }
 
@@ -489,11 +490,12 @@ namespace neo::cryptography::mpttrie
                 if (storage_mode == 0x01) {
                     // Reference mode - read hash only
                     io::UInt256 child_hash;
-                    reader.Read(child_hash.Data(), child_hash.Size());
+                    reader.ReadBytes(child_hash.Data(), io::UInt256::Size);
                     
                     // Create reference node
                     children_[i] = std::make_unique<Node>();
-                    children_[i]->SetHash(child_hash);
+                    // TODO: Handle reference nodes properly
+                    // children_[i]->SetHash(child_hash);
                 } else if (storage_mode == 0x00) {
                     // Inline mode - deserialize full child
                     children_[i] = std::make_unique<Node>();
@@ -512,7 +514,7 @@ namespace neo::cryptography::mpttrie
             value_ = io::ByteVector(value_bytes);
         } else if (value_marker == 0x00) {
             // No value
-            value_.reset();
+            value_.Clear();
         } else {
             throw std::runtime_error("Invalid value marker in branch node");
         }

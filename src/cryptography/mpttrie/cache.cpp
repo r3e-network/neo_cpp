@@ -139,7 +139,7 @@ namespace neo::cryptography::mpttrie
                         trackable->node->Serialize(writer);
                         
                         // Store in database
-                        store_->Put(key, stream.ToArray());
+                        store_->Put(key, stream.ToByteVector());
                     }
                     break;
                 }

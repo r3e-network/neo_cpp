@@ -7,10 +7,10 @@
 #include <cstddef>
 #include <cstdint>
 #include <span>
-#include <spdlog/spdlog.h>
+#include <iostream>
 
-#define LOG_ERROR(msg, ...) spdlog::error(msg, ##__VA_ARGS__)
-#define LOG_DEBUG(msg, ...) spdlog::debug(msg, ##__VA_ARGS__)
+#define LOG_ERROR(msg, ...) std::cerr << "ERROR: " << msg << std::endl
+#define LOG_DEBUG(msg, ...) // Debug logging disabled
 
 namespace neo::cryptography::mpttrie
 {
