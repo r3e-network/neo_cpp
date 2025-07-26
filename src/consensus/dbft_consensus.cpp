@@ -1,6 +1,7 @@
 #include <neo/consensus/dbft_consensus.h>
 #include <neo/consensus/consensus_message.h>
 #include <neo/ledger/block.h>
+#include <neo/core/neo_system.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/hash.h>
 #include <neo/common/safe_math.h>
@@ -679,7 +680,7 @@ namespace neo::consensus
             block->UpdateHash();
             
             LOG_INFO("Created block {} with {} transactions, hash: {}", 
-                    block->GetIndex(), transactions.size(), block->GetHash().ToString());
+                    block->GetIndex(), block_transactions.size(), block->GetHash().ToString());
             
             return block;
             
@@ -821,7 +822,7 @@ namespace neo::consensus
         for (size_t i = 0; i < validators_.size(); i++) {
             auto sig_it = signatures.find(static_cast<uint32_t>(i));
             if (sig_it != signatures.end()) {
-                builder.EmitPush(sig_it->second);
+                builder.EmitPush(io::ByteSpan(sig_it->second.Data(), sig_it->second.Size()));
             } else {
                 // Push null for missing signatures
                 builder.Emit(vm::OpCode::PUSHNULL);
@@ -848,17 +849,18 @@ namespace neo::consensus
             // Get the public key for this validator
             auto validator_key = GetValidatorPublicKey(validator_id);
             if (validator_key) {
-                builder.EmitPush(validator_key->EncodePoint(true)); // Compressed format
+                builder.EmitPush(io::ByteSpan(validator_key->ToArray().Data(), validator_key->ToArray().Size())); // Compressed format
             } else {
                 // Fallback: create a placeholder key based on the hash
                 // This should not happen in normal operation
-                io::ByteVector placeholder(33, 0x02); // Compressed point prefix
-                std::memcpy(placeholder.data() + 1, validator_id.Data(), 20);
+                std::vector<uint8_t> placeholder_bytes(33, 0x02); // Compressed point prefix
+                std::memcpy(placeholder_bytes.data() + 1, validator_id.Data(), 20);
                 // Fill remaining bytes with pattern based on validator ID
                 for (size_t i = 21; i < 33; i++) {
-                    placeholder[i] = validator_id.Data()[(i - 21) % 20];
+                    placeholder_bytes[i] = validator_id.Data()[(i - 21) % 20];
                 }
-                builder.EmitPush(placeholder);
+                io::ByteVector placeholder(placeholder_bytes.data(), placeholder_bytes.size());
+                builder.EmitPush(io::ByteSpan(placeholder.Data(), placeholder.Size()));
             }
         }
         
@@ -866,7 +868,7 @@ namespace neo::consensus
         builder.EmitPush(static_cast<int64_t>(n));
         
         // Emit CHECKMULTISIG opcode
-        builder.Emit(vm::OpCode::CHECKMULTISIG);
+        builder.EmitSysCall("System.Crypto.CheckMultisig");
         
         return builder.ToArray();
     }
@@ -884,7 +886,7 @@ namespace neo::consensus
                 return std::nullopt;
             }
             
-            auto snapshot = blockchain_->GetSnapshot();
+            auto snapshot = blockchain_->GetSystem()->get_snapshot_cache();
             if (!snapshot) {
                 LOG_ERROR("Cannot get blockchain snapshot");
                 return std::nullopt;
@@ -935,11 +937,13 @@ namespace neo::consensus
             
             // Use SHA256 of validator_id as x coordinate (first 32 bytes)
             auto x_coord = cryptography::Hash::Sha256(io::ByteSpan(validator_id.Data(), 20));
-            std::memcpy(key_data.data() + 1, x_coord.Data(), 32);
+            std::memcpy(key_data.Data() + 1, x_coord.Data(), 32);
             
-            cryptography::ecc::ECPoint fallback_key;
-            if (fallback_key.DecodePoint(io::ByteSpan(key_data.data(), key_data.size()))) {
-                return fallback_key;
+            try {
+                auto fallback_key = cryptography::ecc::ECPoint::FromBytes(io::ByteSpan(key_data.Data(), key_data.Size()));
+                return std::make_optional(fallback_key);
+            } catch (const std::exception&) {
+                // Failed to create ECPoint from data
             }
             
             return std::nullopt;
@@ -1009,16 +1013,18 @@ namespace neo::consensus
                 for (size_t i = 0; i < hashes.size(); i += 2) {
                     if (i + 1 < hashes.size()) {
                         // Hash pair of nodes
-                        io::ByteVector combined;
-                        combined.insert(combined.end(), hashes[i].Data(), hashes[i].Data() + 32);
-                        combined.insert(combined.end(), hashes[i + 1].Data(), hashes[i + 1].Data() + 32);
-                        next_level.push_back(cryptography::Hash::Hash256(combined));
+                        std::vector<uint8_t> combined_bytes;
+                        combined_bytes.insert(combined_bytes.end(), hashes[i].Data(), hashes[i].Data() + 32);
+                        combined_bytes.insert(combined_bytes.end(), hashes[i + 1].Data(), hashes[i + 1].Data() + 32);
+                        io::ByteVector combined(combined_bytes.data(), combined_bytes.size());
+                        next_level.push_back(cryptography::Hash::Hash256(io::ByteSpan(combined.Data(), combined.Size())));
                     } else {
                         // Odd number of nodes, hash with itself
-                        io::ByteVector combined;
-                        combined.insert(combined.end(), hashes[i].Data(), hashes[i].Data() + 32);
-                        combined.insert(combined.end(), hashes[i].Data(), hashes[i].Data() + 32);
-                        next_level.push_back(cryptography::Hash::Hash256(combined));
+                        std::vector<uint8_t> combined_bytes;
+                        combined_bytes.insert(combined_bytes.end(), hashes[i].Data(), hashes[i].Data() + 32);
+                        combined_bytes.insert(combined_bytes.end(), hashes[i].Data(), hashes[i].Data() + 32);
+                        io::ByteVector combined(combined_bytes.data(), combined_bytes.size());
+                        next_level.push_back(cryptography::Hash::Hash256(io::ByteSpan(combined.Data(), combined.Size())));
                     }
                 }
                 
@@ -1050,23 +1056,24 @@ namespace neo::consensus
             for (const auto& validator_id : validators_) {
                 auto validator_key = GetValidatorPublicKey(validator_id);
                 if (validator_key) {
-                    builder.EmitPush(validator_key->EncodePoint(true));
+                    builder.EmitPush(io::ByteSpan(validator_key->ToArray().Data(), validator_key->ToArray().Size()));
                 } else {
                     // Fallback: use placeholder based on validator ID
-                    io::ByteVector placeholder(33, 0x02);
-                    std::memcpy(placeholder.data() + 1, validator_id.Data(), 20);
+                    std::vector<uint8_t> placeholder_bytes(33, 0x02);
+                    std::memcpy(placeholder_bytes.data() + 1, validator_id.Data(), 20);
                     for (size_t i = 21; i < 33; i++) {
-                        placeholder[i] = validator_id.Data()[(i - 21) % 20];
+                        placeholder_bytes[i] = validator_id.Data()[(i - 21) % 20];
                     }
-                    builder.EmitPush(placeholder);
+                    io::ByteVector placeholder(placeholder_bytes.data(), placeholder_bytes.size());
+                    builder.EmitPush(io::ByteSpan(placeholder.Data(), placeholder.Size()));
                 }
             }
             
             builder.EmitPush(static_cast<int64_t>(validators_.size()));
-            builder.Emit(vm::OpCode::CHECKMULTISIG);
+            builder.EmitSysCall("System.Crypto.CheckMultisig");
             
             auto script = builder.ToArray();
-            return cryptography::Hash::Hash160(script);
+            return cryptography::Hash::Hash160(io::ByteSpan(script.Data(), script.Size()));
             
         } catch (const std::exception& e) {
             LOG_ERROR("Error calculating next consensus: {}", e.what());
@@ -1113,7 +1120,7 @@ namespace neo::consensus
                     // Push data
                     size_t length = opcode;
                     if (pos + length <= invocation_script.size()) {
-                        signatures.emplace_back(invocation_script.data() + pos, invocation_script.data() + pos + length);
+                        signatures.push_back(io::ByteVector(invocation_script.Data() + pos, length));
                         pos += length;
                     } else {
                         LOG_WARNING("Invalid invocation script format");

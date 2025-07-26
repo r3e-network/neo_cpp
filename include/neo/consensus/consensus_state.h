@@ -158,6 +158,21 @@ namespace neo::consensus
         std::vector<network::p2p::payloads::Neo3Transaction> GetTransactionsForBlock(size_t max_count) const;
         
         /**
+         * @brief Get timestamp
+         */
+        std::chrono::system_clock::time_point GetTimestamp() const;
+        
+        /**
+         * @brief Get nonce
+         */
+        uint64_t GetNonce() const;
+        
+        /**
+         * @brief Get all transactions
+         */
+        std::vector<network::p2p::payloads::Neo3Transaction> GetTransactions() const;
+        
+        /**
          * @brief Get all commits for block creation
          */
         std::unordered_map<uint32_t, std::vector<uint8_t>> GetCommits() const;

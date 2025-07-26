@@ -207,4 +207,22 @@ namespace neo::consensus
         
         // Keep transaction pool and view number
     }
+    
+    std::chrono::system_clock::time_point ConsensusState::GetTimestamp() const
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return timestamp_;
+    }
+    
+    uint64_t ConsensusState::GetNonce() const
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return nonce_;
+    }
+    
+    std::vector<network::p2p::payloads::Neo3Transaction> ConsensusState::GetTransactions() const
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return proposed_transactions_;
+    }
 }

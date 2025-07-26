@@ -4,6 +4,7 @@
 #include <neo/io/uint160.h>
 #include <neo/io/iserializable.h>
 #include <neo/ledger/transaction.h>
+#include <neo/ledger/witness.h>
 #include <vector>
 #include <chrono>
 
@@ -19,10 +20,14 @@ namespace neo::ledger
         io::UInt256 previous_hash_;
         io::UInt256 merkle_root_;
         std::chrono::system_clock::time_point timestamp_;
+        uint64_t nonce_{0};
         uint32_t index_{0};
         uint32_t primary_index_{0};
         io::UInt160 next_consensus_;
+        Witness witness_;
         std::vector<Transaction> transactions_;
+        mutable io::UInt256 hash_;  // Cached hash
+        mutable bool hash_calculated_{false};
         
     public:
         /**
@@ -111,9 +116,39 @@ namespace neo::ledger
         void AddTransaction(const Transaction& tx) { transactions_.push_back(tx); }
         
         /**
+         * @brief Get nonce
+         */
+        uint64_t GetNonce() const { return nonce_; }
+        
+        /**
+         * @brief Set nonce
+         */
+        void SetNonce(uint64_t nonce) { nonce_ = nonce; hash_calculated_ = false; }
+        
+        /**
+         * @brief Get witness
+         */
+        const Witness& GetWitness() const { return witness_; }
+        
+        /**
+         * @brief Set witness
+         */
+        void SetWitness(const Witness& witness) { witness_ = witness; }
+        
+        /**
          * @brief Get block hash
          */
         io::UInt256 GetHash() const;
+        
+        /**
+         * @brief Calculate hash (force recalculation)
+         */
+        io::UInt256 CalculateHash() const;
+        
+        /**
+         * @brief Update hash (force recalculation and cache)
+         */
+        void UpdateHash() { hash_ = CalculateHash(); hash_calculated_ = true; }
         
         /**
          * @brief Get block size
