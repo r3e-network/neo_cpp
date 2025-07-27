@@ -7,6 +7,6 @@
 
 namespace neo::smartcontract
 {
-    // Alias the persistence storage item for smart contract use
-    using StorageItem = neo::persistence::StorageItem;
-}
+// Alias the persistence storage item for smart contract use
+using StorageItem = neo::persistence::StorageItem;
+}  // namespace neo::smartcontract

@@ -3,5 +3,5 @@
 // Implementation is in command_token.cpp
 namespace neo::console_service
 {
-    // CommandStringToken implementation is in command_token.cpp
+// CommandStringToken implementation is in command_token.cpp
 }

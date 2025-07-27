@@ -7,6 +7,6 @@
 
 namespace neo::ledger
 {
-    // Alias for Neo2Transaction to maintain compatibility with tests
-    using Transaction = Neo2Transaction;
-}
+// Alias for Neo2Transaction to maintain compatibility with tests
+using Transaction = Neo2Transaction;
+}  // namespace neo::ledger

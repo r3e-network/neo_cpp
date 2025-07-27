@@ -7,6 +7,6 @@
 
 namespace neo::network::payloads
 {
-    // Alias the ledger transaction as network payload transaction
-    using Transaction = neo::ledger::Transaction;
-}
+// Alias the ledger transaction as network payload transaction
+using Transaction = neo::ledger::Transaction;
+}  // namespace neo::network::payloads

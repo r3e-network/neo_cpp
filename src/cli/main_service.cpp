@@ -1,384 +1,393 @@
-#include <neo/cli/main_service.h>
-#include <neo/cli/type_converters.h>
-#include <neo/io/uint256.h>
-#include <neo/io/uint160.h>
-#include <neo/cryptography/ecc/ec_point.h>
-#include <neo/smartcontract/native/neo_token.h>
-#include <neo/smartcontract/native/gas_token.h>
-#include <neo/smartcontract/native/policy_contract.h>
-#include <neo/smartcontract/native/contract_management.h>
-#include <neo/settings.h>
-#include <iostream>
-#include <sstream>
 #include <algorithm>
 #include <cctype>
 #include <chrono>
+#include <iostream>
+#include <neo/cli/main_service.h>
+#include <neo/cli/type_converters.h>
+#include <neo/cryptography/ecc/ec_point.h>
+#include <neo/io/uint160.h>
+#include <neo/io/uint256.h>
+#include <neo/settings.h>
+#include <neo/smartcontract/native/contract_management.h>
+#include <neo/smartcontract/native/gas_token.h>
+#include <neo/smartcontract/native/neo_token.h>
+#include <neo/smartcontract/native/policy_contract.h>
+#include <sstream>
 #include <thread>
 
 namespace neo::cli
 {
-    MainService::MainService()
-        : running_(false)
+MainService::MainService() : running_(false)
+{
+    InitializeTypeConverters();
+    InitializeCommands();
+}
+
+void MainService::InitializeTypeConverters()
+{
+    // Register all default type converters from the TypeConverters class
+    auto& converters = TypeConverters::Instance();
+
+    // Copy all converters to our local map
+    for (const auto& [typeName, converter] : converters.GetAllConverters())
     {
-        InitializeTypeConverters();
-        InitializeCommands();
+        RegisterTypeConverter(typeName, converter);
     }
+}
 
-    void MainService::InitializeTypeConverters()
-    {
-        // Register all default type converters from the TypeConverters class
-        auto& converters = TypeConverters::Instance();
-
-        // Copy all converters to our local map
-        for (const auto& [typeName, converter] : converters.GetAllConverters())
+void MainService::InitializeCommands()
+{
+    // Base Commands
+    RegisterCommand(
+        "help",
+        [this](const std::vector<std::string>& args)
         {
-            RegisterTypeConverter(typeName, converter);
-        }
-    }
-
-    void MainService::InitializeCommands()
-    {
-        // Base Commands
-        RegisterCommand("help", [this](const std::vector<std::string>& args) {
             if (args.empty())
                 OnHelp();
             else
                 OnHelp(args[0]);
             return true;
-        }, "Base");
+        },
+        "Base");
 
-        RegisterCommand("exit", [this](const std::vector<std::string>& args) {
+    RegisterCommand(
+        "exit",
+        [this](const std::vector<std::string>& args)
+        {
             OnExit();
             return true;
-        }, "Base");
+        },
+        "Base");
 
-        RegisterCommand("clear", [this](const std::vector<std::string>& args) {
+    RegisterCommand(
+        "clear",
+        [this](const std::vector<std::string>& args)
+        {
             OnClear();
             return true;
-        }, "Base");
+        },
+        "Base");
 
-        RegisterCommand("version", [this](const std::vector<std::string>& args) {
+    RegisterCommand(
+        "version",
+        [this](const std::vector<std::string>& args)
+        {
             OnVersion();
             return true;
-        }, "Base");
+        },
+        "Base");
 
-        // Initialize command groups
-        InitializeBlockchainCommands();
-        InitializeNodeCommands();
-        InitializeWalletCommands();
-    }
+    // Initialize command groups
+    InitializeBlockchainCommands();
+    InitializeNodeCommands();
+    InitializeWalletCommands();
+}
 
-    MainService::~MainService()
+MainService::~MainService()
+{
+    Stop();
+}
+
+void MainService::Run(const std::vector<std::string>& args)
+{
+    if (args.empty())
     {
+        // Interactive mode
+        CommandLineOptions options;
+        Start(options);
+        RunConsole();
         Stop();
     }
-
-    void MainService::Run(const std::vector<std::string>& args)
+    else
     {
-        if (args.empty())
+        // Command line mode
+        OnStartWithCommandLine(args);
+    }
+}
+
+void MainService::Start(const CommandLineOptions& options)
+{
+    if (neoSystem_)
+        return;
+
+    // Load settings
+    Settings settings = Settings::Load(options.Config.empty() ? "config.json" : options.Config);
+
+    // Override settings from command line
+    if (!options.DbEngine.empty())
+        settings.Storage.Engine = options.DbEngine;
+    if (!options.DbPath.empty())
+        settings.Storage.Path = options.DbPath;
+
+    // Create Neo system
+    neoSystem_ = std::make_shared<node::NeoSystem>(settings.Protocol, settings.Storage.Engine, settings.Storage.Path);
+
+    // Initialize native contracts
+    auto contractManagement = smartcontract::native::ContractManagement::GetInstance();
+    contractManagement->Initialize();
+
+    auto neoToken = smartcontract::native::NeoToken::GetInstance();
+    neoToken->Initialize();
+
+    auto gasToken = smartcontract::native::GasToken::GetInstance();
+    gasToken->Initialize();
+
+    auto policyContract = smartcontract::native::PolicyContract::GetInstance();
+    policyContract->Initialize();
+
+    // Start RPC server if enabled
+    if (settings.RPC.Enabled)
+    {
+        rpcServer_ = std::make_shared<rpc::RPCServer>(neoSystem_, settings.RPC.Port);
+        rpcServer_->Start();
+    }
+
+    // Start Neo system
+    neoSystem_->Start();
+
+    // Open wallet if specified
+    if (!options.Wallet.empty())
+    {
+        OnOpenWallet(options.Wallet, options.Password);
+    }
+
+    running_ = true;
+}
+
+void MainService::Stop()
+{
+    if (!running_)
+        return;
+
+    running_ = false;
+
+    // Stop console thread
+    if (consoleThread_.joinable())
+        consoleThread_.join();
+
+    // Close wallet
+    currentWallet_.reset();
+
+    // Stop RPC server
+    if (rpcServer_)
+    {
+        rpcServer_->Stop();
+        rpcServer_.reset();
+    }
+
+    // Stop Neo system
+    if (neoSystem_)
+    {
+        neoSystem_->Stop();
+        neoSystem_.reset();
+    }
+}
+
+void MainService::RegisterCommand(const std::string& name, const CommandHandler& handler, const std::string& category)
+{
+    commands_[name] = handler;
+
+    if (!category.empty())
+    {
+        commandsByCategory_[category][name] = handler;
+    }
+}
+
+void MainService::RegisterTypeConverter(const std::string& typeName, const TypeConverter& converter)
+{
+    typeConverters_[typeName] = converter;
+}
+
+std::shared_ptr<node::NeoSystem> MainService::GetNeoSystem() const
+{
+    return neoSystem_;
+}
+
+std::shared_ptr<wallets::Wallet> MainService::GetCurrentWallet() const
+{
+    return currentWallet_;
+}
+
+void MainService::OnCommand(const std::string& command)
+{
+    if (command.empty())
+        return;
+
+    // Parse command and arguments
+    std::istringstream iss(command);
+    std::string cmd;
+    iss >> cmd;
+
+    std::vector<std::string> args;
+    std::string arg;
+    while (iss >> arg)
+    {
+        args.push_back(arg);
+    }
+
+    // Find command handler
+    auto it = commands_.find(cmd);
+    if (it != commands_.end())
+    {
+        try
         {
-            // Interactive mode
-            CommandLineOptions options;
-            Start(options);
-            RunConsole();
-            Stop();
+            it->second(args);
         }
-        else
+        catch (const std::exception& ex)
         {
-            // Command line mode
-            OnStartWithCommandLine(args);
+            ConsoleHelper::Error(ex.what());
+        }
+    }
+    else
+    {
+        ConsoleHelper::Error("Command not found: " + cmd);
+    }
+}
+
+void MainService::OnStartWithCommandLine(const std::vector<std::string>& args)
+{
+    // Parse command line options
+    CommandLineOptions options;
+
+    for (size_t i = 0; i < args.size(); i++)
+    {
+        if (args[i] == "-c" || args[i] == "--config")
+        {
+            if (i + 1 < args.size())
+                options.Config = args[++i];
+        }
+        else if (args[i] == "-w" || args[i] == "--wallet")
+        {
+            if (i + 1 < args.size())
+                options.Wallet = args[++i];
+        }
+        else if (args[i] == "-p" || args[i] == "--password")
+        {
+            if (i + 1 < args.size())
+                options.Password = args[++i];
+        }
+        else if (args[i] == "--db-engine")
+        {
+            if (i + 1 < args.size())
+                options.DbEngine = args[++i];
+        }
+        else if (args[i] == "--db-path")
+        {
+            if (i + 1 < args.size())
+                options.DbPath = args[++i];
+        }
+        else if (args[i] == "--noverify")
+        {
+            options.NoVerify = true;
+        }
+        else if (args[i] == "--plugins")
+        {
+            while (i + 1 < args.size() && args[i + 1][0] != '-')
+            {
+                options.Plugins.push_back(args[++i]);
+            }
+        }
+        else if (args[i] == "--verbose")
+        {
+            if (i + 1 < args.size())
+                options.Verbose = std::stoi(args[++i]);
         }
     }
 
-    void MainService::Start(const CommandLineOptions& options)
+    // Start the service
+    Start(options);
+}
+
+void MainService::OnHelp(const std::string& category)
+{
+    if (!category.empty())
     {
-        if (neoSystem_)
-            return;
-
-        // Load settings
-        Settings settings = Settings::Load(options.Config.empty() ? "config.json" : options.Config);
-
-        // Override settings from command line
-        if (!options.DbEngine.empty())
-            settings.Storage.Engine = options.DbEngine;
-        if (!options.DbPath.empty())
-            settings.Storage.Path = options.DbPath;
-
-        // Create Neo system
-        neoSystem_ = std::make_shared<node::NeoSystem>(settings.Protocol, settings.Storage.Engine, settings.Storage.Path);
-
-        // Initialize native contracts
-        auto contractManagement = smartcontract::native::ContractManagement::GetInstance();
-        contractManagement->Initialize();
-
-        auto neoToken = smartcontract::native::NeoToken::GetInstance();
-        neoToken->Initialize();
-
-        auto gasToken = smartcontract::native::GasToken::GetInstance();
-        gasToken->Initialize();
-
-        auto policyContract = smartcontract::native::PolicyContract::GetInstance();
-        policyContract->Initialize();
-
-        // Start RPC server if enabled
-        if (settings.RPC.Enabled)
+        auto it = commandsByCategory_.find(category);
+        if (it != commandsByCategory_.end())
         {
-            rpcServer_ = std::make_shared<rpc::RPCServer>(neoSystem_, settings.RPC.Port);
-            rpcServer_->Start();
-        }
-
-        // Start Neo system
-        neoSystem_->Start();
-
-        // Open wallet if specified
-        if (!options.Wallet.empty())
-        {
-            OnOpenWallet(options.Wallet, options.Password);
-        }
-
-        running_ = true;
-    }
-
-    void MainService::Stop()
-    {
-        if (!running_)
-            return;
-
-        running_ = false;
-
-        // Stop console thread
-        if (consoleThread_.joinable())
-            consoleThread_.join();
-
-        // Close wallet
-        currentWallet_.reset();
-
-        // Stop RPC server
-        if (rpcServer_)
-        {
-            rpcServer_->Stop();
-            rpcServer_.reset();
-        }
-
-        // Stop Neo system
-        if (neoSystem_)
-        {
-            neoSystem_->Stop();
-            neoSystem_.reset();
-        }
-    }
-
-    void MainService::RegisterCommand(const std::string& name, const CommandHandler& handler, const std::string& category)
-    {
-        commands_[name] = handler;
-
-        if (!category.empty())
-        {
-            commandsByCategory_[category][name] = handler;
-        }
-    }
-
-    void MainService::RegisterTypeConverter(const std::string& typeName, const TypeConverter& converter)
-    {
-        typeConverters_[typeName] = converter;
-    }
-
-    std::shared_ptr<node::NeoSystem> MainService::GetNeoSystem() const
-    {
-        return neoSystem_;
-    }
-
-    std::shared_ptr<wallets::Wallet> MainService::GetCurrentWallet() const
-    {
-        return currentWallet_;
-    }
-
-    void MainService::OnCommand(const std::string& command)
-    {
-        if (command.empty())
-            return;
-
-        // Parse command and arguments
-        std::istringstream iss(command);
-        std::string cmd;
-        iss >> cmd;
-
-        std::vector<std::string> args;
-        std::string arg;
-        while (iss >> arg)
-        {
-            args.push_back(arg);
-        }
-
-        // Find command handler
-        auto it = commands_.find(cmd);
-        if (it != commands_.end())
-        {
-            try
-            {
-                it->second(args);
-            }
-            catch (const std::exception& ex)
-            {
-                ConsoleHelper::Error(ex.what());
-            }
-        }
-        else
-        {
-            ConsoleHelper::Error("Command not found: " + cmd);
-        }
-    }
-
-    void MainService::OnStartWithCommandLine(const std::vector<std::string>& args)
-    {
-        // Parse command line options
-        CommandLineOptions options;
-
-        for (size_t i = 0; i < args.size(); i++)
-        {
-            if (args[i] == "-c" || args[i] == "--config")
-            {
-                if (i + 1 < args.size())
-                    options.Config = args[++i];
-            }
-            else if (args[i] == "-w" || args[i] == "--wallet")
-            {
-                if (i + 1 < args.size())
-                    options.Wallet = args[++i];
-            }
-            else if (args[i] == "-p" || args[i] == "--password")
-            {
-                if (i + 1 < args.size())
-                    options.Password = args[++i];
-            }
-            else if (args[i] == "--db-engine")
-            {
-                if (i + 1 < args.size())
-                    options.DbEngine = args[++i];
-            }
-            else if (args[i] == "--db-path")
-            {
-                if (i + 1 < args.size())
-                    options.DbPath = args[++i];
-            }
-            else if (args[i] == "--noverify")
-            {
-                options.NoVerify = true;
-            }
-            else if (args[i] == "--plugins")
-            {
-                while (i + 1 < args.size() && args[i + 1][0] != '-')
-                {
-                    options.Plugins.push_back(args[++i]);
-                }
-            }
-            else if (args[i] == "--verbose")
-            {
-                if (i + 1 < args.size())
-                    options.Verbose = std::stoi(args[++i]);
-            }
-        }
-
-        // Start the service
-        Start(options);
-    }
-
-    void MainService::OnHelp(const std::string& category)
-    {
-        if (!category.empty())
-        {
-            auto it = commandsByCategory_.find(category);
-            if (it != commandsByCategory_.end())
-            {
-                ConsoleHelper::Info(category + " Commands:");
-                for (const auto& [name, handler] : it->second)
-                {
-                    ConsoleHelper::Info("  " + name);
-                }
-            }
-            else
-            {
-                ConsoleHelper::Error("Category not found: " + category);
-            }
-            return;
-        }
-
-        // Show all categories
-        ConsoleHelper::Info("Categories:");
-        for (const auto& [category, commands] : commandsByCategory_)
-        {
-            ConsoleHelper::Info("  " + category);
-        }
-
-        // Show commands without category
-        std::vector<std::string> uncategorizedCommands;
-        for (const auto& [name, handler] : commands_)
-        {
-            bool found = false;
-            for (const auto& [category, commands] : commandsByCategory_)
-            {
-                if (commands.find(name) != commands.end())
-                {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found)
-            {
-                uncategorizedCommands.push_back(name);
-            }
-        }
-
-        if (!uncategorizedCommands.empty())
-        {
-            ConsoleHelper::Info("Uncategorized Commands:");
-            for (const auto& name : uncategorizedCommands)
+            ConsoleHelper::Info(category + " Commands:");
+            for (const auto& [name, handler] : it->second)
             {
                 ConsoleHelper::Info("  " + name);
             }
         }
-    }
-
-    void MainService::OnExit()
-    {
-        running_ = false;
-    }
-
-    void MainService::OnClear()
-    {
-#ifdef _WIN32
-        system("cls");
-#else
-        system("clear");
-#endif
-    }
-
-    void MainService::OnVersion()
-    {
-        ConsoleHelper::Info("Neo C++ CLI v1.0.0");
-    }
-
-
-
-
-
-
-
-    void MainService::RunConsole()
-    {
-        // Print welcome message
-        ConsoleHelper::Info("Neo C++ CLI v1.0.0");
-        ConsoleHelper::Info("Type 'help' for a list of commands");
-
-        // Run console loop
-        running_ = true;
-        while (running_)
+        else
         {
-            std::string command = ConsoleHelper::ReadLine("neo> ");
-            if (command.empty())
-                continue;
+            ConsoleHelper::Error("Category not found: " + category);
+        }
+        return;
+    }
 
-            OnCommand(command);
+    // Show all categories
+    ConsoleHelper::Info("Categories:");
+    for (const auto& [category, commands] : commandsByCategory_)
+    {
+        ConsoleHelper::Info("  " + category);
+    }
+
+    // Show commands without category
+    std::vector<std::string> uncategorizedCommands;
+    for (const auto& [name, handler] : commands_)
+    {
+        bool found = false;
+        for (const auto& [category, commands] : commandsByCategory_)
+        {
+            if (commands.find(name) != commands.end())
+            {
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+        {
+            uncategorizedCommands.push_back(name);
+        }
+    }
+
+    if (!uncategorizedCommands.empty())
+    {
+        ConsoleHelper::Info("Uncategorized Commands:");
+        for (const auto& name : uncategorizedCommands)
+        {
+            ConsoleHelper::Info("  " + name);
         }
     }
 }
+
+void MainService::OnExit()
+{
+    running_ = false;
+}
+
+void MainService::OnClear()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+void MainService::OnVersion()
+{
+    ConsoleHelper::Info("Neo C++ CLI v1.0.0");
+}
+
+void MainService::RunConsole()
+{
+    // Print welcome message
+    ConsoleHelper::Info("Neo C++ CLI v1.0.0");
+    ConsoleHelper::Info("Type 'help' for a list of commands");
+
+    // Run console loop
+    running_ = true;
+    while (running_)
+    {
+        std::string command = ConsoleHelper::ReadLine("neo> ");
+        if (command.empty())
+            continue;
+
+        OnCommand(command);
+    }
+}
+}  // namespace neo::cli

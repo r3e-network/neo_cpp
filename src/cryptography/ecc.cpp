@@ -6,14 +6,14 @@
 // Suppress OpenSSL deprecation warnings for compatibility
 #ifdef _MSC_VER
 #pragma warning(push)
-#pragma warning(disable: 4996) // OpenSSL deprecation warnings
+#pragma warning(disable : 4996)  // OpenSSL deprecation warnings
 #endif
 
+#include <openssl/bn.h>
 #include <openssl/ec.h>
 #include <openssl/ecdsa.h>
-#include <openssl/obj_mac.h>
-#include <openssl/bn.h>
 #include <openssl/err.h>
+#include <openssl/obj_mac.h>
 
 #ifdef _MSC_VER
 #pragma warning(pop)
@@ -24,6 +24,6 @@
 
 namespace neo::cryptography
 {
-    // This file provides ECC utility functions
-    // The main ECC implementations are in the ecc subdirectory
+// This file provides ECC utility functions
+// The main ECC implementations are in the ecc subdirectory
 }

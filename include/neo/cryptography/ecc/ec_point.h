@@ -5,6 +5,6 @@
 
 namespace neo::cryptography
 {
-    // Alias ECPoint from ecc namespace for backward compatibility
-    using ECPoint = neo::cryptography::ecc::ECPoint;
-}
+// Alias ECPoint from ecc namespace for backward compatibility
+using ECPoint = neo::cryptography::ecc::ECPoint;
+}  // namespace neo::cryptography

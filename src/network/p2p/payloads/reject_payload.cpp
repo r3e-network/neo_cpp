@@ -2,5 +2,5 @@
 
 namespace neo::network::p2p::payloads
 {
-    // Currently empty - methods are inline in header
+// Currently empty - methods are inline in header
 }

@@ -5,6 +5,6 @@
 
 namespace neo::ledger
 {
-    // Alias for compatibility
-    using MemPool = MemoryPool;
-}
+// Alias for compatibility
+using MemPool = MemoryPool;
+}  // namespace neo::ledger

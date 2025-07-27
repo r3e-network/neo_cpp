@@ -12,102 +12,111 @@
 #ifndef NEO_CORE_NEO_SYSTEM_H
 #define NEO_CORE_NEO_SYSTEM_H
 
-#include <memory>
-#include <string>
-#include <vector>
-#include <functional>
 #include <atomic>
-#include <mutex>
-#include <thread>
+#include <functional>
 #include <future>
+#include <memory>
+#include <mutex>
+#include <string>
+#include <thread>
 #include <unordered_set>
+#include <vector>
 
 // Include necessary headers for complete types
-#include <neo/ledger/memory_pool.h>
 #include <neo/ledger/header_cache.h>
+#include <neo/ledger/memory_pool.h>
 
 // Forward declarations
-namespace neo {
-    class ProtocolSettings;
-    class Block;
-    class RelayCache;
-    namespace persistence {
-        class StoreCache;
-        class IStore;
-        class IStoreProvider;
-    }
-    class UInt256;
-    class UInt160;
-    enum class ContainsTransactionType;
-    
-    namespace network {
-        namespace p2p {
-            class LocalNode;
-            class TaskManager;
-            class ChannelsConfig;
-        }
-    }
-    
-    namespace cryptography {
-        namespace ecc {
-            class ECPoint;
-        }
-    }
-    
-    namespace ledger {
-        class Blockchain;
-    }
-    
-    namespace plugins {
-        class Plugin;
-    }
+namespace neo
+{
+class ProtocolSettings;
+class Block;
+class RelayCache;
+namespace persistence
+{
+class StoreCache;
+class IStore;
+class IStoreProvider;
+}  // namespace persistence
+class UInt256;
+class UInt160;
+enum class ContainsTransactionType;
+
+namespace network
+{
+namespace p2p
+{
+class LocalNode;
+class TaskManager;
+class ChannelsConfig;
+}  // namespace p2p
+}  // namespace network
+
+namespace cryptography
+{
+namespace ecc
+{
+class ECPoint;
+}
+}  // namespace cryptography
+
+namespace ledger
+{
+class Blockchain;
 }
 
-namespace neo {
+namespace plugins
+{
+class Plugin;
+}
+}  // namespace neo
+
+namespace neo
+{
 
 /**
  * @brief Represents the basic unit that contains all the components required for running of a NEO node.
- * 
+ *
  * The NeoSystem class is the main orchestrator for a Neo node, managing all core components
  * including the blockchain, network layer, memory pool, and plugin system.
  */
-class NeoSystem : public std::enable_shared_from_this<NeoSystem> {
-public:
+class NeoSystem : public std::enable_shared_from_this<NeoSystem>
+{
+  public:
     /**
      * @brief Event handler type for service addition events.
      */
     using ServiceAddedHandler = std::function<void(const std::shared_ptr<void>&)>;
 
-private:
+  private:
     std::unique_ptr<ProtocolSettings> settings_;
     std::unique_ptr<persistence::IStore> store_;
     std::shared_ptr<persistence::IStoreProvider> storage_provider_;
     std::unique_ptr<RelayCache> relay_cache_;
-    
+
     // Service management
     std::vector<std::shared_ptr<void>> services_;
     mutable std::mutex services_mutex_;
     std::vector<ServiceAddedHandler> service_added_handlers_;
-    
+
     // Node startup control
     std::atomic<int> suspend_count_{0};
     std::mutex start_message_mutex_;
     std::unique_ptr<network::p2p::ChannelsConfig> start_message_;
-    
+
     // Threading
     std::vector<std::thread> worker_threads_;
     std::atomic<bool> shutdown_requested_{false};
 
-public:
+  public:
     /**
      * @brief Constructs a NeoSystem with the specified settings and storage provider.
      * @param settings The protocol settings for this Neo system
      * @param storage_provider_name The name of the storage provider to use (default: "memory")
      * @param storage_path The path for persistent storage (ignored for memory provider)
      */
-    explicit NeoSystem(std::unique_ptr<ProtocolSettings> settings,
-                      const std::string& storage_provider_name = "memory",
-                      const std::string& storage_path = "");
+    explicit NeoSystem(std::unique_ptr<ProtocolSettings> settings, const std::string& storage_provider_name = "memory",
+                       const std::string& storage_path = "");
 
     /**
      * @brief Constructs a NeoSystem with the specified settings and storage provider.
@@ -115,8 +124,7 @@ public:
      * @param storage_provider The storage provider to use
      * @param storage_path The path for persistent storage
      */
-    NeoSystem(std::unique_ptr<ProtocolSettings> settings,
-              std::shared_ptr<persistence::IStoreProvider> storage_provider,
+    NeoSystem(std::unique_ptr<ProtocolSettings> settings, std::shared_ptr<persistence::IStoreProvider> storage_provider,
               const std::string& storage_path = "");
 
     /**
@@ -135,7 +143,10 @@ public:
      * @brief Gets the protocol settings of this Neo system.
      * @return Reference to the protocol settings
      */
-    const ProtocolSettings& settings() const { return *settings_; }
+    const ProtocolSettings& settings() const
+    {
+        return *settings_;
+    }
 
     /**
      * @brief Gets a readonly view of the store.
@@ -156,12 +167,16 @@ public:
      * @param filter Optional filter function to select specific service
      * @return Shared pointer to the service, or nullptr if not found
      */
-    template<typename T>
-    std::shared_ptr<T> get_service(std::function<bool(const T&)> filter = nullptr) const {
+    template <typename T>
+    std::shared_ptr<T> get_service(std::function<bool(const T&)> filter = nullptr) const
+    {
         std::lock_guard<std::mutex> lock(services_mutex_);
-        for (const auto& service : services_) {
-            if (auto typed_service = std::dynamic_pointer_cast<T>(service)) {
-                if (!filter || filter(*typed_service)) {
+        for (const auto& service : services_)
+        {
+            if (auto typed_service = std::dynamic_pointer_cast<T>(service))
+            {
+                if (!filter || filter(*typed_service))
+                {
                     return typed_service;
                 }
             }
@@ -211,18 +226,24 @@ public:
      * @return A store cache for read/write operations
      */
     std::unique_ptr<persistence::StoreCache> get_snapshot_cache();
-    
+
     /**
      * @brief Gets the underlying store.
      * @return Pointer to the store
      */
-    persistence::IStore* GetStore() const { return store_.get(); }
-    
+    persistence::IStore* GetStore() const
+    {
+        return store_.get();
+    }
+
     /**
      * @brief Gets the memory pool.
      * @return Pointer to the memory pool
      */
-    ledger::MemoryPool* GetMemPool() const { return mem_pool_.get(); }
+    ledger::MemoryPool* GetMemPool() const
+    {
+        return mem_pool_.get();
+    }
 
     // Transaction operations
     /**
@@ -245,7 +266,7 @@ public:
      * @brief Creates the genesis block for the Neo blockchain.
      * @param settings The protocol settings of the Neo system
      * @return Pointer to the genesis block with complete initialization
-     * 
+     *
      * The genesis block includes:
      * - Proper block header with correct hash calculations
      * - Initial native contract deployments (NEO, GAS, Policy, etc.)
@@ -260,7 +281,7 @@ public:
      */
     static void initialize_plugins();
 
-private:
+  private:
     /**
      * @brief Initializes all core components.
      */
@@ -312,6 +333,6 @@ private:
     ledger::Block* genesis_block_ = nullptr;
 };
 
-} // namespace neo
+}  // namespace neo
 
-#endif // NEO_CORE_NEO_SYSTEM_H
+#endif  // NEO_CORE_NEO_SYSTEM_H

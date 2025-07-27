@@ -1,15 +1,18 @@
-#include <neo/cli/main_service.h>
 #include <neo/cli/console_helper.h>
-#include <neo/smartcontract/native/neo_token.h>
+#include <neo/cli/main_service.h>
 #include <neo/smartcontract/native/gas_token.h>
+#include <neo/smartcontract/native/neo_token.h>
 #include <neo/wallets/wallet.h>
 
 namespace neo::cli
 {
-    void MainService::InitializeWalletCommands()
-    {
-        // Wallet Commands
-        RegisterCommand("openwallet", [this](const std::vector<std::string>& args) {
+void MainService::InitializeWalletCommands()
+{
+    // Wallet Commands
+    RegisterCommand(
+        "openwallet",
+        [this](const std::vector<std::string>& args)
+        {
             if (args.empty())
             {
                 ConsoleHelper::Error("Missing argument: path");
@@ -28,89 +31,98 @@ namespace neo::cli
 
             OnOpenWallet(args[0], password);
             return true;
-        }, "Wallet");
+        },
+        "Wallet");
 
-        RegisterCommand("closewallet", [this](const std::vector<std::string>& args) {
+    RegisterCommand(
+        "closewallet",
+        [this](const std::vector<std::string>& args)
+        {
             OnCloseWallet();
             return true;
-        }, "Wallet");
+        },
+        "Wallet");
 
-        RegisterCommand("showbalance", [this](const std::vector<std::string>& args) {
+    RegisterCommand(
+        "showbalance",
+        [this](const std::vector<std::string>& args)
+        {
             OnShowBalance();
             return true;
-        }, "Wallet");
-    }
+        },
+        "Wallet");
+}
 
-    void MainService::OnOpenWallet(const std::string& path, const std::string& password)
+void MainService::OnOpenWallet(const std::string& path, const std::string& password)
+{
+    try
     {
-        try
+        // Close current wallet if open
+        if (currentWallet_)
         {
-            // Close current wallet if open
-            if (currentWallet_)
-            {
-                currentWallet_.reset();
-            }
-
-            // Open wallet
-            currentWallet_ = wallets::Wallet::Open(path, password);
-
-            ConsoleHelper::Info("Wallet opened: " + path);
+            currentWallet_.reset();
         }
-        catch (const std::exception& ex)
-        {
-            ConsoleHelper::Error(ex.what());
-        }
+
+        // Open wallet
+        currentWallet_ = wallets::Wallet::Open(path, password);
+
+        ConsoleHelper::Info("Wallet opened: " + path);
     }
-
-    void MainService::OnCloseWallet()
+    catch (const std::exception& ex)
     {
-        if (!currentWallet_)
-        {
-            ConsoleHelper::Error("No wallet is open");
-            return;
-        }
-
-        currentWallet_.reset();
-        ConsoleHelper::Info("Wallet closed");
-    }
-
-    void MainService::OnShowBalance()
-    {
-        if (!currentWallet_)
-        {
-            ConsoleHelper::Error("No wallet is open");
-            return;
-        }
-
-        if (!neoSystem_)
-        {
-            ConsoleHelper::Error("Neo system not initialized");
-            return;
-        }
-
-        try
-        {
-            auto accounts = currentWallet_->GetAccounts();
-
-            for (const auto& account : accounts)
-            {
-                ConsoleHelper::Info("Account: " + account->GetScriptHash().ToString());
-
-                // Get NEO balance
-                auto neoToken = smartcontract::native::NeoToken::GetInstance();
-                auto neoBalance = neoToken->BalanceOf(neoSystem_->GetSnapshot(), account->GetScriptHash());
-
-                // Get GAS balance
-                auto gasToken = smartcontract::native::GasToken::GetInstance();
-                auto gasBalance = gasToken->BalanceOf(neoSystem_->GetSnapshot(), account->GetScriptHash());
-
-                ConsoleHelper::Info("  NEO: " + std::to_string(neoBalance));
-                ConsoleHelper::Info("  GAS: " + std::to_string(gasBalance));
-            }
-        }
-        catch (const std::exception& ex)
-        {
-            ConsoleHelper::Error(ex.what());
-        }
+        ConsoleHelper::Error(ex.what());
     }
 }
+
+void MainService::OnCloseWallet()
+{
+    if (!currentWallet_)
+    {
+        ConsoleHelper::Error("No wallet is open");
+        return;
+    }
+
+    currentWallet_.reset();
+    ConsoleHelper::Info("Wallet closed");
+}
+
+void MainService::OnShowBalance()
+{
+    if (!currentWallet_)
+    {
+        ConsoleHelper::Error("No wallet is open");
+        return;
+    }
+
+    if (!neoSystem_)
+    {
+        ConsoleHelper::Error("Neo system not initialized");
+        return;
+    }
+
+    try
+    {
+        auto accounts = currentWallet_->GetAccounts();
+
+        for (const auto& account : accounts)
+        {
+            ConsoleHelper::Info("Account: " + account->GetScriptHash().ToString());
+
+            // Get NEO balance
+            auto neoToken = smartcontract::native::NeoToken::GetInstance();
+            auto neoBalance = neoToken->BalanceOf(neoSystem_->GetSnapshot(), account->GetScriptHash());
+
+            // Get GAS balance
+            auto gasToken = smartcontract::native::GasToken::GetInstance();
+            auto gasBalance = gasToken->BalanceOf(neoSystem_->GetSnapshot(), account->GetScriptHash());
+
+            ConsoleHelper::Info("  NEO: " + std::to_string(neoBalance));
+            ConsoleHelper::Info("  GAS: " + std::to_string(gasBalance));
+        }
+    }
+    catch (const std::exception& ex)
+    {
+        ConsoleHelper::Error(ex.what());
+    }
+}
+}  // namespace neo::cli

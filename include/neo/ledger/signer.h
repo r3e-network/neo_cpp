@@ -1,139 +1,139 @@
 #pragma once
 
-#include <neo/io/iserializable.h>
-#include <neo/io/ijson_serializable.h>
-#include <neo/io/uint160.h>
-#include <neo/io/binary_writer.h>
-#include <neo/io/binary_reader.h>
-#include <neo/io/json_writer.h>
-#include <neo/io/json_reader.h>
-#include <neo/cryptography/ecc/ecpoint.h>
-#include <vector>
 #include <cstdint>
+#include <neo/cryptography/ecc/ecpoint.h>
+#include <neo/io/binary_reader.h>
+#include <neo/io/binary_writer.h>
+#include <neo/io/ijson_serializable.h>
+#include <neo/io/iserializable.h>
+#include <neo/io/json_reader.h>
+#include <neo/io/json_writer.h>
+#include <neo/io/uint160.h>
+#include <vector>
 
 namespace neo::ledger
 {
+/**
+ * @brief Represents witness scopes for a signer.
+ */
+enum class WitnessScope : uint8_t
+{
+    None = 0x00,
+    CalledByEntry = 0x01,
+    CustomContracts = 0x10,
+    CustomGroups = 0x20,
+    WitnessRules = 0x40,
+    Global = 0x80
+};
+
+/**
+ * @brief Represents a transaction signer.
+ */
+class Signer : public io::ISerializable, public io::IJsonSerializable
+{
+  public:
     /**
-     * @brief Represents witness scopes for a signer.
+     * @brief Constructs an empty Signer.
      */
-    enum class WitnessScope : uint8_t
-    {
-        None = 0x00,
-        CalledByEntry = 0x01,
-        CustomContracts = 0x10,
-        CustomGroups = 0x20,
-        WitnessRules = 0x40,
-        Global = 0x80
-    };
+    Signer();
 
     /**
-     * @brief Represents a transaction signer.
+     * @brief Constructs a Signer with the specified account and scopes.
+     * @param account The account.
+     * @param scopes The witness scopes.
      */
-    class Signer : public io::ISerializable, public io::IJsonSerializable
-    {
-    public:
-        /**
-         * @brief Constructs an empty Signer.
-         */
-        Signer();
+    Signer(const io::UInt160& account, WitnessScope scopes);
 
-        /**
-         * @brief Constructs a Signer with the specified account and scopes.
-         * @param account The account.
-         * @param scopes The witness scopes.
-         */
-        Signer(const io::UInt160& account, WitnessScope scopes);
+    /**
+     * @brief Gets the account.
+     * @return The account.
+     */
+    const io::UInt160& GetAccount() const;
 
-        /**
-         * @brief Gets the account.
-         * @return The account.
-         */
-        const io::UInt160& GetAccount() const;
+    /**
+     * @brief Sets the account.
+     * @param account The account.
+     */
+    void SetAccount(const io::UInt160& account);
 
-        /**
-         * @brief Sets the account.
-         * @param account The account.
-         */
-        void SetAccount(const io::UInt160& account);
+    /**
+     * @brief Gets the witness scopes.
+     * @return The witness scopes.
+     */
+    WitnessScope GetScopes() const;
 
-        /**
-         * @brief Gets the witness scopes.
-         * @return The witness scopes.
-         */
-        WitnessScope GetScopes() const;
+    /**
+     * @brief Sets the witness scopes.
+     * @param scopes The witness scopes.
+     */
+    void SetScopes(WitnessScope scopes);
 
-        /**
-         * @brief Sets the witness scopes.
-         * @param scopes The witness scopes.
-         */
-        void SetScopes(WitnessScope scopes);
+    /**
+     * @brief Gets the allowed contracts.
+     * @return The allowed contracts.
+     */
+    const std::vector<io::UInt160>& GetAllowedContracts() const;
 
-        /**
-         * @brief Gets the allowed contracts.
-         * @return The allowed contracts.
-         */
-        const std::vector<io::UInt160>& GetAllowedContracts() const;
+    /**
+     * @brief Sets the allowed contracts.
+     * @param allowedContracts The allowed contracts.
+     */
+    void SetAllowedContracts(const std::vector<io::UInt160>& allowedContracts);
 
-        /**
-         * @brief Sets the allowed contracts.
-         * @param allowedContracts The allowed contracts.
-         */
-        void SetAllowedContracts(const std::vector<io::UInt160>& allowedContracts);
+    /**
+     * @brief Gets the allowed groups.
+     * @return The allowed groups.
+     */
+    const std::vector<cryptography::ecc::ECPoint>& GetAllowedGroups() const;
 
-        /**
-         * @brief Gets the allowed groups.
-         * @return The allowed groups.
-         */
-        const std::vector<cryptography::ecc::ECPoint>& GetAllowedGroups() const;
+    /**
+     * @brief Sets the allowed groups.
+     * @param allowedGroups The allowed groups.
+     */
+    void SetAllowedGroups(const std::vector<cryptography::ecc::ECPoint>& allowedGroups);
 
-        /**
-         * @brief Sets the allowed groups.
-         * @param allowedGroups The allowed groups.
-         */
-        void SetAllowedGroups(const std::vector<cryptography::ecc::ECPoint>& allowedGroups);
+    /**
+     * @brief Serializes the Signer to a binary writer.
+     * @param writer The binary writer.
+     */
+    void Serialize(io::BinaryWriter& writer) const override;
 
-        /**
-         * @brief Serializes the Signer to a binary writer.
-         * @param writer The binary writer.
-         */
-        void Serialize(io::BinaryWriter& writer) const override;
+    /**
+     * @brief Deserializes the Signer from a binary reader.
+     * @param reader The binary reader.
+     */
+    void Deserialize(io::BinaryReader& reader) override;
 
-        /**
-         * @brief Deserializes the Signer from a binary reader.
-         * @param reader The binary reader.
-         */
-        void Deserialize(io::BinaryReader& reader) override;
+    /**
+     * @brief Serializes the Signer to a JSON writer.
+     * @param writer The JSON writer.
+     */
+    void SerializeJson(io::JsonWriter& writer) const override;
 
-        /**
-         * @brief Serializes the Signer to a JSON writer.
-         * @param writer The JSON writer.
-         */
-        void SerializeJson(io::JsonWriter& writer) const override;
+    /**
+     * @brief Deserializes the Signer from a JSON reader.
+     * @param reader The JSON reader.
+     */
+    void DeserializeJson(const io::JsonReader& reader) override;
 
-        /**
-         * @brief Deserializes the Signer from a JSON reader.
-         * @param reader The JSON reader.
-         */
-        void DeserializeJson(const io::JsonReader& reader) override;
+    /**
+     * @brief Checks if this Signer is equal to another Signer.
+     * @param other The other Signer.
+     * @return True if the Signers are equal, false otherwise.
+     */
+    bool operator==(const Signer& other) const;
 
-        /**
-         * @brief Checks if this Signer is equal to another Signer.
-         * @param other The other Signer.
-         * @return True if the Signers are equal, false otherwise.
-         */
-        bool operator==(const Signer& other) const;
+    /**
+     * @brief Checks if this Signer is not equal to another Signer.
+     * @param other The other Signer.
+     * @return True if the Signers are not equal, false otherwise.
+     */
+    bool operator!=(const Signer& other) const;
 
-        /**
-         * @brief Checks if this Signer is not equal to another Signer.
-         * @param other The other Signer.
-         * @return True if the Signers are not equal, false otherwise.
-         */
-        bool operator!=(const Signer& other) const;
-
-    private:
-        io::UInt160 account_;
-        WitnessScope scopes_;
-        std::vector<io::UInt160> allowedContracts_;
-        std::vector<cryptography::ecc::ECPoint> allowedGroups_;
-    };
-} 
+  private:
+    io::UInt160 account_;
+    WitnessScope scopes_;
+    std::vector<io::UInt160> allowedContracts_;
+    std::vector<cryptography::ecc::ECPoint> allowedGroups_;
+};
+}  // namespace neo::ledger

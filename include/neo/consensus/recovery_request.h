@@ -4,6 +4,6 @@
 
 namespace neo::consensus
 {
-    // RecoveryRequest is an alias for RecoveryRequestMessage to maintain backward compatibility
-    using RecoveryRequest = RecoveryRequestMessage;
-}
+// RecoveryRequest is an alias for RecoveryRequestMessage to maintain backward compatibility
+using RecoveryRequest = RecoveryRequestMessage;
+}  // namespace neo::consensus

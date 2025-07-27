@@ -1,40 +1,36 @@
-#include <neo/network/peer_discovery_service.h>
-#include <neo/network/network_address.h>
-#include <neo/network/p2p_server.h>
-#include <neo/network/p2p_peer.h>
+#include <algorithm>
+#include <boost/asio/connect.hpp>
+#include <boost/asio/ip/tcp.hpp>
+#include <chrono>
+#include <fstream>
+#include <neo/io/binary_reader.h>
+#include <neo/io/binary_writer.h>
+#include <neo/logging/logger.h>
 #include <neo/network/message.h>
+#include <neo/network/network_address.h>
 #include <neo/network/p2p/message_command.h>
+#include <neo/network/p2p_peer.h>
+#include <neo/network/p2p_server.h>
 #include <neo/network/payloads/addr_payload.h>
 #include <neo/network/payloads/get_addr_payload.h>
-#include <neo/logging/logger.h>
-#include <neo/io/binary_writer.h>
-#include <neo/io/binary_reader.h>
-#include <fstream>
-#include <sstream>
+#include <neo/network/peer_discovery_service.h>
 #include <random>
-#include <algorithm>
-#include <chrono>
-#include <boost/asio/ip/tcp.hpp>
-#include <boost/asio/connect.hpp>
+#include <sstream>
 
-namespace neo::network {
+namespace neo::network
+{
 
 using namespace std::chrono_literals;
 
 static constexpr auto DISCOVERY_INTERVAL = 5min;
-static constexpr auto PEER_EXPIRATION = 7 * 24h; // 7 days
+static constexpr auto PEER_EXPIRATION = 7 * 24h;  // 7 days
 static constexpr auto RECONNECT_DELAY = 5min;
 static constexpr auto MAX_FAILED_ATTEMPTS = 5;
 static constexpr auto MAX_ADDRS_TO_SEND = 1000;
 
-PeerDiscoveryService::PeerDiscoveryService(
-    boost::asio::io_context& ioContext,
-    std::shared_ptr<P2PServer> p2pServer,
-    size_t maxPeers)
-    : ioContext_(ioContext)
-    , p2pServer_(std::move(p2pServer))
-    , discoveryTimer_(ioContext)
-    , maxPeers_(maxPeers)
+PeerDiscoveryService::PeerDiscoveryService(boost::asio::io_context& ioContext, std::shared_ptr<P2PServer> p2pServer,
+                                           size_t maxPeers)
+    : ioContext_(ioContext), p2pServer_(std::move(p2pServer)), discoveryTimer_(ioContext), maxPeers_(maxPeers)
 {
     if (!p2pServer_)
     {
@@ -44,7 +40,8 @@ PeerDiscoveryService::PeerDiscoveryService(
 
 void PeerDiscoveryService::Start()
 {
-    if (running_) return;
+    if (running_)
+        return;
 
     running_ = true;
     LoadKnownPeers();
@@ -55,7 +52,8 @@ void PeerDiscoveryService::Start()
 
 void PeerDiscoveryService::Stop()
 {
-    if (!running_) return;
+    if (!running_)
+        return;
 
     running_ = false;
     boost::system::error_code ec;
@@ -72,7 +70,8 @@ void PeerDiscoveryService::Stop()
 
 void PeerDiscoveryService::AddSeedNodes(const std::vector<NetworkAddress>& seedNodes)
 {
-    if (seedNodes.empty()) return;
+    if (seedNodes.empty())
+        return;
 
     std::lock_guard<std::mutex> lock(mutex_);
 
@@ -82,11 +81,9 @@ void PeerDiscoveryService::AddSeedNodes(const std::vector<NetworkAddress>& seedN
         std::string endpoint = seed.GetAddress() + ":" + std::to_string(seed.GetPort());
 
         // Check if already in seed nodes
-        if (std::find_if(seedNodes_.begin(), seedNodes_.end(),
-            [&seed](const NetworkAddress& addr) {
-                return addr.GetAddress() == seed.GetAddress() &&
-                       addr.GetPort() == seed.GetPort();
-            }) == seedNodes_.end())
+        if (std::find_if(seedNodes_.begin(), seedNodes_.end(), [&seed](const NetworkAddress& addr)
+                         { return addr.GetAddress() == seed.GetAddress() && addr.GetPort() == seed.GetPort(); }) ==
+            seedNodes_.end())
         {
             seedNodes_.push_back(seed);
         }
@@ -95,7 +92,7 @@ void PeerDiscoveryService::AddSeedNodes(const std::vector<NetworkAddress>& seedN
         if (knownPeers_.find(endpoint) == knownPeers_.end())
         {
             knownPeers_.emplace(endpoint, PeerInfo{seed, std::chrono::system_clock::now(),
-                                                std::chrono::system_clock::time_point{}, 0, false});
+                                                   std::chrono::system_clock::time_point{}, 0, false});
             NEO_LOG(DEBUG, "P2P") << "Added seed node to known peers: " << endpoint;
         }
     }
@@ -145,7 +142,8 @@ void PeerDiscoveryService::AddKnownPeer(const NetworkAddress& address)
 
 void PeerDiscoveryService::AddKnownPeers(const std::vector<NetworkAddress>& addresses)
 {
-    if (addresses.empty()) return;
+    if (addresses.empty())
+        return;
 
     size_t added = 0;
     for (const auto& addr : addresses)
@@ -235,7 +233,8 @@ void PeerDiscoveryService::DiscoverPeers()
             try
             {
                 auto peer = peers[i];
-                if (!peer || !peer->IsConnected()) continue;
+                if (!peer || !peer->IsConnected())
+                    continue;
 
                 // Create and send getaddr message
                 auto getAddrPayload = std::make_shared<GetAddrPayload>();
@@ -339,13 +338,14 @@ void PeerDiscoveryService::AttemptConnections()
 
         // Sort by last seen (newest first) and then by failed attempts (fewest first)
         std::sort(candidates.begin(), candidates.end(),
-            [](const auto& a, const auto& b) {
-                // Prefer peers we've seen more recently
-                if (a.second.GetTimestamp() != b.second.GetTimestamp())
-                    return a.second.GetTimestamp() > b.second.GetTimestamp();
-                // Then prefer peers with fewer failed attempts
-                return a.second.GetServices() < b.second.GetServices();
-            });
+                  [](const auto& a, const auto& b)
+                  {
+                      // Prefer peers we've seen more recently
+                      if (a.second.GetTimestamp() != b.second.GetTimestamp())
+                          return a.second.GetTimestamp() > b.second.GetTimestamp();
+                      // Then prefer peers with fewer failed attempts
+                      return a.second.GetServices() < b.second.GetServices();
+                  });
 
         // Limit the number of candidates to process
         candidates.resize(std::min<size_t>(needed * 2, candidates.size()));
@@ -396,8 +396,7 @@ void PeerDiscoveryService::AttemptConnections()
         }
         catch (const std::exception& ex)
         {
-            NEO_LOG(WARNING, "P2P") << "Failed to connect to peer " << endpoint
-                                   << ": " << ex.what();
+            NEO_LOG(WARNING, "P2P") << "Failed to connect to peer " << endpoint << ": " << ex.what();
 
             // Update failed attempts
             std::lock_guard<std::mutex> lock(mutex_);
@@ -447,7 +446,7 @@ std::string PeerDiscoveryService::GetEndpointString(const IPEndPoint& endpoint)
 }
 
 void PeerDiscoveryService::HandleGetAddrMessage(const std::shared_ptr<P2PPeer>& peer,
-                                               const std::shared_ptr<GetAddrPayload>& /*payload*/)
+                                                const std::shared_ptr<GetAddrPayload>& /*payload*/)
 {
     if (!peer || !p2pServer_)
     {
@@ -467,12 +466,9 @@ void PeerDiscoveryService::HandleGetAddrMessage(const std::shared_ptr<P2PPeer>& 
         {
             auto endpoint = connectedPeer->GetConnection()->GetRemoteEndpoint();
             addresses.emplace_back(
-                std::chrono::duration_cast<std::chrono::seconds>(
-                    connectedPeer->GetLastSeen().time_since_epoch()).count(),
-                connectedPeer->GetServices(),
-                endpoint.GetAddress().ToString(),
-                endpoint.GetPort()
-            );
+                std::chrono::duration_cast<std::chrono::seconds>(connectedPeer->GetLastSeen().time_since_epoch())
+                    .count(),
+                connectedPeer->GetServices(), endpoint.GetAddress().ToString(), endpoint.GetPort());
         }
     }
 
@@ -483,7 +479,8 @@ void PeerDiscoveryService::HandleGetAddrMessage(const std::shared_ptr<P2PPeer>& 
 
         for (const auto& [endpoint, peerInfo] : knownPeers_)
         {
-            if (count >= MAX_ADDRS_TO_SEND) break;
+            if (count >= MAX_ADDRS_TO_SEND)
+                break;
             if (!peerInfo.connected)  // Don't include already connected peers (they're already included above)
             {
                 addresses.push_back(peerInfo.address);
@@ -518,14 +515,13 @@ void PeerDiscoveryService::HandleGetAddrMessage(const std::shared_ptr<P2PPeer>& 
     }
     catch (const std::exception& ex)
     {
-        NEO_LOG(ERROR, "P2P") << "Failed to send Addr message to peer "
-                             << peer->GetUserAgent() << ": " << ex.what();
+        NEO_LOG(ERROR, "P2P") << "Failed to send Addr message to peer " << peer->GetUserAgent() << ": " << ex.what();
         peer->Disconnect();
     }
 }
 
 void PeerDiscoveryService::HandleAddrMessage(const std::shared_ptr<P2PPeer>& peer,
-                                            const std::shared_ptr<AddrPayload>& payload)
+                                             const std::shared_ptr<AddrPayload>& payload)
 {
     if (!peer || !payload || !p2pServer_)
     {
@@ -541,7 +537,7 @@ void PeerDiscoveryService::HandleAddrMessage(const std::shared_ptr<P2PPeer>& pee
     }
 
     NEO_LOG(DEBUG, "P2P") << "Processing Addr message with " << addresses.size()
-                         << " addresses from peer: " << peer->GetUserAgent();
+                          << " addresses from peer: " << peer->GetUserAgent();
 
     // Process the received addresses
     std::vector<NetworkAddress> validAddresses;
@@ -556,8 +552,7 @@ void PeerDiscoveryService::HandleAddrMessage(const std::shared_ptr<P2PPeer>& pee
 
         // Skip our own address
         auto endpoint = p2pServer_->GetEndpoint();
-        if (addr.GetAddress() == endpoint.GetAddress().ToString() &&
-            addr.GetPort() == endpoint.GetPort())
+        if (addr.GetAddress() == endpoint.GetAddress().ToString() && addr.GetPort() == endpoint.GetPort())
         {
             NEO_LOG(DEBUG, "P2P") << "Skipping our own address: " << addr.GetAddress() << ":" << addr.GetPort();
             continue;
@@ -568,7 +563,7 @@ void PeerDiscoveryService::HandleAddrMessage(const std::shared_ptr<P2PPeer>& pee
         {
             validAddresses.push_back(addr);
             NEO_LOG(DEBUG, "P2P") << "Discovered peer: " << addr.GetAddress() << ":" << addr.GetPort()
-                                 << " (services: 0x" << std::hex << addr.GetServices() << std::dec << ")";
+                                  << " (services: 0x" << std::hex << addr.GetServices() << std::dec << ")";
         }
     }
 
@@ -576,13 +571,11 @@ void PeerDiscoveryService::HandleAddrMessage(const std::shared_ptr<P2PPeer>& pee
     if (!validAddresses.empty())
     {
         AddKnownPeers(validAddresses);
-        NEO_LOG(INFO, "P2P") << "Added " << validAddresses.size()
-                             << " new peers from Addr message";
+        NEO_LOG(INFO, "P2P") << "Added " << validAddresses.size() << " new peers from Addr message";
     }
     else
     {
-        NEO_LOG(DEBUG, "P2P") << "No valid addresses found in Addr message from peer: "
-                             << peer->GetUserAgent();
+        NEO_LOG(DEBUG, "P2P") << "No valid addresses found in Addr message from peer: " << peer->GetUserAgent();
     }
 }
 
@@ -592,14 +585,13 @@ void PeerDiscoveryService::CleanupOldPeers()
     auto now = std::chrono::system_clock::now();
     size_t removed = 0;
 
-    for (auto it = knownPeers_.begin(); it != knownPeers_.end(); )
+    for (auto it = knownPeers_.begin(); it != knownPeers_.end();)
     {
         const auto& peerInfo = it->second;
         bool shouldRemove = false;
 
         // Remove peers we haven't seen in a while and aren't connected to
-        if (!peerInfo.connected &&
-            now - peerInfo.lastSeen > PEER_EXPIRATION &&
+        if (!peerInfo.connected && now - peerInfo.lastSeen > PEER_EXPIRATION &&
             now - peerInfo.lastAttempt > RECONNECT_DELAY * (1 << std::min<size_t>(peerInfo.failedAttempts, 8)))
         {
             shouldRemove = true;
@@ -612,10 +604,10 @@ void PeerDiscoveryService::CleanupOldPeers()
 
         if (shouldRemove)
         {
-            NEO_LOG(DEBUG, "P2P") << "Removing stale peer: " << it->first
-                                 << " (last seen: " << std::chrono::duration_cast<std::chrono::hours>(
-                                    now - peerInfo.lastSeen).count() << "h ago, "
-                                 << "failed attempts: " << peerInfo.failedAttempts << ")";
+            NEO_LOG(DEBUG, "P2P") << "Removing stale peer: " << it->first << " (last seen: "
+                                  << std::chrono::duration_cast<std::chrono::hours>(now - peerInfo.lastSeen).count()
+                                  << "h ago, "
+                                  << "failed attempts: " << peerInfo.failedAttempts << ")";
             it = knownPeers_.erase(it);
             removed++;
         }
@@ -634,7 +626,8 @@ void PeerDiscoveryService::CleanupOldPeers()
 
 void PeerDiscoveryService::ScheduleNextDiscovery()
 {
-    if (!running_) return;
+    if (!running_)
+        return;
 
     discoveryTimer_.expires_after(DISCOVERY_INTERVAL);
     discoveryTimer_.async_wait(
@@ -710,14 +703,12 @@ void PeerDiscoveryService::LoadKnownPeers()
             NetworkAddress addr;
             addr.Deserialize(reader);
 
-            std::chrono::system_clock::time_point lastSeen{
-                std::chrono::system_clock::duration{reader.Read<int64_t>()}};
+            std::chrono::system_clock::time_point lastSeen{std::chrono::system_clock::duration{reader.Read<int64_t>()}};
 
             uint32_t failedAttempts = reader.Read<uint32_t>();
 
             std::string endpoint = addr.GetAddress() + ":" + std::to_string(addr.GetPort());
-            knownPeers_.emplace(endpoint,
-                PeerInfo{std::move(addr), lastSeen, {}, failedAttempts, false});
+            knownPeers_.emplace(endpoint, PeerInfo{std::move(addr), lastSeen, {}, failedAttempts, false});
         }
 
         NEO_LOG(INFO, "P2P") << "Loaded " << count << " known peers from disk";
@@ -728,4 +719,4 @@ void PeerDiscoveryService::LoadKnownPeers()
     }
 }
 
-} // namespace neo::network
+}  // namespace neo::network

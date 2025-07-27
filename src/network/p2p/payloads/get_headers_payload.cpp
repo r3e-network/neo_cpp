@@ -2,14 +2,13 @@
 
 namespace neo::network::p2p::payloads
 {
-    GetHeadersPayload::GetHeadersPayload(const io::UInt256& hashStart, int16_t count)
-        : GetBlocksPayload(hashStart)
-    {
-        SetCount(count);
-    }
-    
-    GetHeadersPayload GetHeadersPayload::Create(const io::UInt256& hashStart, int16_t count)
-    {
-        return GetHeadersPayload(hashStart, count);
-    }
+GetHeadersPayload::GetHeadersPayload(const io::UInt256& hashStart, int16_t count) : GetBlocksPayload(hashStart)
+{
+    SetCount(count);
 }
+
+GetHeadersPayload GetHeadersPayload::Create(const io::UInt256& hashStart, int16_t count)
+{
+    return GetHeadersPayload(hashStart, count);
+}
+}  // namespace neo::network::p2p::payloads

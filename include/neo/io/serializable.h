@@ -4,8 +4,8 @@
 
 namespace neo::io
 {
-    /**
-     * @brief Alias for ISerializable.
-     */
-    using Serializable = ISerializable;
-}
+/**
+ * @brief Alias for ISerializable.
+ */
+using Serializable = ISerializable;
+}  // namespace neo::io

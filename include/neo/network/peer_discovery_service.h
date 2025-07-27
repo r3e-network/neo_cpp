@@ -1,22 +1,23 @@
 #pragma once
 
-#include <neo/network/network_address.h>
-#include <neo/io/iserializable.h>
-#include <neo/io/ijson_serializable.h>
-#include <neo/logging/logger.h>
 #include <boost/asio/io_context.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/steady_timer.hpp>
+#include <chrono>
 #include <memory>
+#include <mutex>
+#include <neo/io/ijson_serializable.h>
+#include <neo/io/iserializable.h>
+#include <neo/logging/logger.h>
+#include <neo/network/network_address.h>
+#include <random>
 #include <string>
-#include <vector>
 #include <unordered_map>
 #include <unordered_set>
-#include <mutex>
-#include <chrono>
-#include <random>
+#include <vector>
 
-namespace neo::network {
+namespace neo::network
+{
 
 class P2PServer;
 
@@ -25,17 +26,14 @@ class P2PServer;
  */
 class PeerDiscoveryService : public std::enable_shared_from_this<PeerDiscoveryService>
 {
-public:
+  public:
     /**
      * @brief Constructs a PeerDiscoveryService.
      * @param ioContext The IO context.
      * @param p2pServer The P2P server.
      * @param maxPeers The maximum number of peers to connect to.
      */
-    PeerDiscoveryService(
-        boost::asio::io_context& ioContext,
-        std::shared_ptr<P2PServer> p2pServer,
-        size_t maxPeers = 8);
+    PeerDiscoveryService(boost::asio::io_context& ioContext, std::shared_ptr<P2PServer> p2pServer, size_t maxPeers = 8);
 
     /**
      * @brief Starts the peer discovery service.
@@ -99,7 +97,7 @@ public:
      * @param payload The GetAddr payload.
      */
     void HandleGetAddrMessage(const std::shared_ptr<class P2PPeer>& peer,
-                             const std::shared_ptr<class GetAddrPayload>& payload);
+                              const std::shared_ptr<class GetAddrPayload>& payload);
 
     /**
      * @brief Handles an Addr message from a peer.
@@ -107,9 +105,9 @@ public:
      * @param payload The Addr payload.
      */
     void HandleAddrMessage(const std::shared_ptr<class P2PPeer>& peer,
-                          const std::shared_ptr<class AddrPayload>& payload);
+                           const std::shared_ptr<class AddrPayload>& payload);
 
-private:
+  private:
     struct PeerInfo
     {
         NetworkAddress address;
@@ -143,4 +141,4 @@ private:
     std::mt19937 rng_{std::random_device{}()};
 };
 
-} // namespace neo::network
+}  // namespace neo::network

@@ -8,6 +8,6 @@
 // Re-export the main types for convenience
 namespace neo::json
 {
-    using JsonReader = io::JsonReader;
-    using JsonWriter = io::JsonWriter;
-} 
+using JsonReader = io::JsonReader;
+using JsonWriter = io::JsonWriter;
+}  // namespace neo::json

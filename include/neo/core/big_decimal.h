@@ -12,29 +12,31 @@
 #ifndef NEO_CORE_BIG_DECIMAL_H
 #define NEO_CORE_BIG_DECIMAL_H
 
-#include <string>
-#include <cstdint>
-#include <compare>
-#include <optional>
 #include <boost/multiprecision/cpp_int.hpp>
+#include <compare>
+#include <cstdint>
+#include <optional>
+#include <string>
 
-namespace neo {
+namespace neo
+{
 
 /**
  * @brief Represents a fixed-point number of arbitrary precision.
- * 
+ *
  * This class provides a decimal number representation with arbitrary precision
  * using a BigInteger value and a fixed number of decimal places.
  */
-class BigDecimal {
-public:
+class BigDecimal
+{
+  public:
     using BigInteger = boost::multiprecision::cpp_int;
 
-private:
+  private:
     BigInteger value_;
     uint8_t decimals_;
 
-public:
+  public:
     /**
      * @brief Default constructor - creates a BigDecimal with value 0 and 0 decimals.
      */
@@ -65,23 +67,31 @@ public:
      * @param value The integer value to convert
      * @param decimals The number of decimal places for this number (default: 0)
      */
-    template<typename T>
-    BigDecimal(T value, uint8_t decimals = 0) 
+    template <typename T>
+    BigDecimal(T value, uint8_t decimals = 0)
         requires std::is_integral_v<T>
-        : value_(value), decimals_(decimals) {}
+        : value_(value), decimals_(decimals)
+    {
+    }
 
     // Accessors
     /**
      * @brief Gets the BigInteger value of the number.
      * @return The BigInteger value
      */
-    const BigInteger& value() const { return value_; }
+    const BigInteger& value() const
+    {
+        return value_;
+    }
 
     /**
      * @brief Gets the number of decimal places for this number.
      * @return The number of decimal places
      */
-    uint8_t decimals() const { return decimals_; }
+    uint8_t decimals() const
+    {
+        return decimals_;
+    }
 
     /**
      * @brief Gets the sign of the number.
@@ -150,7 +160,7 @@ public:
     // Hash support
     std::size_t hash() const;
 
-private:
+  private:
     /**
      * @brief Normalizes two BigDecimals to have the same number of decimal places.
      * @param left The first BigDecimal
@@ -167,16 +177,19 @@ private:
     static BigInteger pow10(int exponent);
 };
 
-} // namespace neo
+}  // namespace neo
 
 // Hash specialization for std::hash
-namespace std {
-    template<>
-    struct hash<neo::BigDecimal> {
-        std::size_t operator()(const neo::BigDecimal& bd) const {
-            return bd.hash();
-        }
-    };
-}
+namespace std
+{
+template <>
+struct hash<neo::BigDecimal>
+{
+    std::size_t operator()(const neo::BigDecimal& bd) const
+    {
+        return bd.hash();
+    }
+};
+}  // namespace std
 
-#endif // NEO_CORE_BIG_DECIMAL_H
+#endif  // NEO_CORE_BIG_DECIMAL_H

@@ -2,6 +2,6 @@
 
 namespace neo::vm
 {
-    // Initialize static members
-    const ExecutionEngineLimits ExecutionEngineLimits::Default;
-}
+// Initialize static members
+const ExecutionEngineLimits ExecutionEngineLimits::Default;
+}  // namespace neo::vm

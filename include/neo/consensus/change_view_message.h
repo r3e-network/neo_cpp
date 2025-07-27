@@ -4,6 +4,6 @@
 
 namespace neo::consensus
 {
-    // ChangeViewMessage is an alias for ViewChangeMessage to maintain backward compatibility
-    using ChangeViewMessage = ViewChangeMessage;
-}
+// ChangeViewMessage is an alias for ViewChangeMessage to maintain backward compatibility
+using ChangeViewMessage = ViewChangeMessage;
+}  // namespace neo::consensus

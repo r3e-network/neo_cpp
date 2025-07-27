@@ -1,103 +1,115 @@
-#include <neo/cli/main_service.h>
 #include <neo/cli/console_helper.h>
+#include <neo/cli/main_service.h>
 
 namespace neo::cli
 {
-    void MainService::InitializeNodeCommands()
-    {
-        // Node Commands
-        RegisterCommand("showstate", [this](const std::vector<std::string>& args) {
+void MainService::InitializeNodeCommands()
+{
+    // Node Commands
+    RegisterCommand(
+        "showstate",
+        [this](const std::vector<std::string>& args)
+        {
             OnShowState();
             return true;
-        }, "Node");
+        },
+        "Node");
 
-        RegisterCommand("showpool", [this](const std::vector<std::string>& args) {
+    RegisterCommand(
+        "showpool",
+        [this](const std::vector<std::string>& args)
+        {
             OnShowPool();
             return true;
-        }, "Node");
+        },
+        "Node");
 
-        RegisterCommand("showpeers", [this](const std::vector<std::string>& args) {
+    RegisterCommand(
+        "showpeers",
+        [this](const std::vector<std::string>& args)
+        {
             OnShowPeers();
             return true;
-        }, "Node");
+        },
+        "Node");
+}
+
+void MainService::OnShowState()
+{
+    if (!neoSystem_)
+    {
+        ConsoleHelper::Error("Neo system not initialized");
+        return;
     }
 
-    void MainService::OnShowState()
+    try
     {
-        if (!neoSystem_)
-        {
-            ConsoleHelper::Error("Neo system not initialized");
-            return;
-        }
+        auto height = neoSystem_->GetBlockchain().GetCurrentBlockIndex();
+        auto hash = neoSystem_->GetBlockchain().GetCurrentBlockHash();
+        auto headerHeight = neoSystem_->GetBlockchain().GetCurrentHeaderIndex();
+        auto headerHash = neoSystem_->GetBlockchain().GetCurrentHeaderHash();
+        auto peerCount = neoSystem_->GetLocalNode().GetConnectedCount();
+        auto memoryPoolSize = neoSystem_->GetMemPool().GetCount();
 
-        try
-        {
-            auto height = neoSystem_->GetBlockchain().GetCurrentBlockIndex();
-            auto hash = neoSystem_->GetBlockchain().GetCurrentBlockHash();
-            auto headerHeight = neoSystem_->GetBlockchain().GetCurrentHeaderIndex();
-            auto headerHash = neoSystem_->GetBlockchain().GetCurrentHeaderHash();
-            auto peerCount = neoSystem_->GetLocalNode().GetConnectedCount();
-            auto memoryPoolSize = neoSystem_->GetMemPool().GetCount();
-
-            ConsoleHelper::Info("State:");
-            ConsoleHelper::Info("  Block Height: " + std::to_string(height));
-            ConsoleHelper::Info("  Block Hash: " + hash.ToString());
-            ConsoleHelper::Info("  Header Height: " + std::to_string(headerHeight));
-            ConsoleHelper::Info("  Header Hash: " + headerHash.ToString());
-            ConsoleHelper::Info("  Connected Peers: " + std::to_string(peerCount));
-            ConsoleHelper::Info("  Memory Pool Size: " + std::to_string(memoryPoolSize));
-        }
-        catch (const std::exception& ex)
-        {
-            ConsoleHelper::Error(ex.what());
-        }
+        ConsoleHelper::Info("State:");
+        ConsoleHelper::Info("  Block Height: " + std::to_string(height));
+        ConsoleHelper::Info("  Block Hash: " + hash.ToString());
+        ConsoleHelper::Info("  Header Height: " + std::to_string(headerHeight));
+        ConsoleHelper::Info("  Header Hash: " + headerHash.ToString());
+        ConsoleHelper::Info("  Connected Peers: " + std::to_string(peerCount));
+        ConsoleHelper::Info("  Memory Pool Size: " + std::to_string(memoryPoolSize));
     }
-
-    void MainService::OnShowPool()
+    catch (const std::exception& ex)
     {
-        if (!neoSystem_)
-        {
-            ConsoleHelper::Error("Neo system not initialized");
-            return;
-        }
-
-        try
-        {
-            auto transactions = neoSystem_->GetMemPool().GetTransactions();
-
-            ConsoleHelper::Info("Memory Pool Transactions: " + std::to_string(transactions.size()));
-            for (const auto& tx : transactions)
-            {
-                ConsoleHelper::Info("  " + tx->GetHash().ToString());
-            }
-        }
-        catch (const std::exception& ex)
-        {
-            ConsoleHelper::Error(ex.what());
-        }
-    }
-
-    void MainService::OnShowPeers()
-    {
-        if (!neoSystem_)
-        {
-            ConsoleHelper::Error("Neo system not initialized");
-            return;
-        }
-
-        try
-        {
-            auto peers = neoSystem_->GetLocalNode().GetConnectedNodes();
-
-            ConsoleHelper::Info("Connected Peers: " + std::to_string(peers.size()));
-            for (const auto& peer : peers)
-            {
-                ConsoleHelper::Info("  " + peer->GetRemoteEndPoint().ToString());
-            }
-        }
-        catch (const std::exception& ex)
-        {
-            ConsoleHelper::Error(ex.what());
-        }
+        ConsoleHelper::Error(ex.what());
     }
 }
+
+void MainService::OnShowPool()
+{
+    if (!neoSystem_)
+    {
+        ConsoleHelper::Error("Neo system not initialized");
+        return;
+    }
+
+    try
+    {
+        auto transactions = neoSystem_->GetMemPool().GetTransactions();
+
+        ConsoleHelper::Info("Memory Pool Transactions: " + std::to_string(transactions.size()));
+        for (const auto& tx : transactions)
+        {
+            ConsoleHelper::Info("  " + tx->GetHash().ToString());
+        }
+    }
+    catch (const std::exception& ex)
+    {
+        ConsoleHelper::Error(ex.what());
+    }
+}
+
+void MainService::OnShowPeers()
+{
+    if (!neoSystem_)
+    {
+        ConsoleHelper::Error("Neo system not initialized");
+        return;
+    }
+
+    try
+    {
+        auto peers = neoSystem_->GetLocalNode().GetConnectedNodes();
+
+        ConsoleHelper::Info("Connected Peers: " + std::to_string(peers.size()));
+        for (const auto& peer : peers)
+        {
+            ConsoleHelper::Info("  " + peer->GetRemoteEndPoint().ToString());
+        }
+    }
+    catch (const std::exception& ex)
+    {
+        ConsoleHelper::Error(ex.what());
+    }
+}
+}  // namespace neo::cli

@@ -3,5 +3,5 @@
 // Implementation is in trie.cpp
 namespace neo::cryptography::mpttrie
 {
-    // TryDeleteInternal implementation is in trie.cpp
+// TryDeleteInternal implementation is in trie.cpp
 }

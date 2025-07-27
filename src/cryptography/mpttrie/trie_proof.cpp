@@ -3,5 +3,5 @@
 // Implementation is in trie.cpp
 namespace neo::cryptography::mpttrie
 {
-    // GetProofInternal implementation is in trie.cpp
+// GetProofInternal implementation is in trie.cpp
 }

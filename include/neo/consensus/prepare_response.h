@@ -4,6 +4,6 @@
 
 namespace neo::consensus
 {
-    // PrepareResponse is an alias for PrepareResponseMessage to maintain backward compatibility
-    using PrepareResponse = PrepareResponseMessage;
-}
+// PrepareResponse is an alias for PrepareResponseMessage to maintain backward compatibility
+using PrepareResponse = PrepareResponseMessage;
+}  // namespace neo::consensus

@@ -4,6 +4,6 @@
 
 namespace neo::consensus
 {
-    // PrepareRequest is an alias for PrepareRequestMessage to maintain backward compatibility
-    using PrepareRequest = PrepareRequestMessage;
-}
+// PrepareRequest is an alias for PrepareRequestMessage to maintain backward compatibility
+using PrepareRequest = PrepareRequestMessage;
+}  // namespace neo::consensus

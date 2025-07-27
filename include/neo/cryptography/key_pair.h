@@ -6,5 +6,5 @@
 // Type alias for compatibility
 namespace neo::cryptography
 {
-    using KeyPair = neo::wallets::KeyPair;
-} 
+using KeyPair = neo::wallets::KeyPair;
+}

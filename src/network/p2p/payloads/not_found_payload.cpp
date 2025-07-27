@@ -2,5 +2,5 @@
 
 namespace neo::network::p2p::payloads
 {
-    // Currently empty - NotFoundPayload inherits all functionality from InvPayload
+// Currently empty - NotFoundPayload inherits all functionality from InvPayload
 }

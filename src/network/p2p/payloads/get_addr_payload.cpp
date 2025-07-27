@@ -2,28 +2,28 @@
 
 namespace neo::network::p2p::payloads
 {
-    void GetAddrPayload::Serialize(io::BinaryWriter& writer) const
-    {
-        (void)writer; // Suppress unused parameter warning
-        // GetAddr message has no payload data
-    }
-
-    void GetAddrPayload::Deserialize(io::BinaryReader& reader)
-    {
-        (void)reader; // Suppress unused parameter warning
-        // GetAddr message has no payload data
-    }
-    
-    void GetAddrPayload::SerializeJson(io::JsonWriter& writer) const
-    {
-        // Empty object since there's no data
-        writer.WriteStartObject();
-        writer.WriteEndObject();
-    }
-    
-    void GetAddrPayload::DeserializeJson(const io::JsonReader& reader)
-    {
-        (void)reader; // Suppress unused parameter warning
-        // No data to read
-    }
+void GetAddrPayload::Serialize(io::BinaryWriter& writer) const
+{
+    (void)writer;  // Suppress unused parameter warning
+    // GetAddr message has no payload data
 }
+
+void GetAddrPayload::Deserialize(io::BinaryReader& reader)
+{
+    (void)reader;  // Suppress unused parameter warning
+    // GetAddr message has no payload data
+}
+
+void GetAddrPayload::SerializeJson(io::JsonWriter& writer) const
+{
+    // Empty object since there's no data
+    writer.WriteStartObject();
+    writer.WriteEndObject();
+}
+
+void GetAddrPayload::DeserializeJson(const io::JsonReader& reader)
+{
+    (void)reader;  // Suppress unused parameter warning
+    // No data to read
+}
+}  // namespace neo::network::p2p::payloads

@@ -4,32 +4,32 @@
 
 namespace neo::network::p2p::payloads
 {
+/**
+ * @brief Represents a get headers payload.
+ *
+ * This message is used to request headers from a peer.
+ */
+class GetHeadersPayload : public GetBlocksPayload
+{
+  public:
     /**
-     * @brief Represents a get headers payload.
-     * 
-     * This message is used to request headers from a peer.
+     * @brief Constructs a GetHeadersPayload.
      */
-    class GetHeadersPayload : public GetBlocksPayload
-    {
-    public:
-        /**
-         * @brief Constructs a GetHeadersPayload.
-         */
-        GetHeadersPayload() = default;
+    GetHeadersPayload() = default;
 
-        /**
-         * @brief Constructs a GetHeadersPayload with the specified parameters.
-         * @param hashStart The start hash.
-         * @param count The count.
-         */
-        GetHeadersPayload(const io::UInt256& hashStart, int16_t count = -1);
-        
-        /**
-         * @brief Creates a new GetHeadersPayload with the specified parameters.
-         * @param hashStart The start hash.
-         * @param count The count.
-         * @return The created payload.
-         */
-        static GetHeadersPayload Create(const io::UInt256& hashStart, int16_t count = -1);
-    };
-}
+    /**
+     * @brief Constructs a GetHeadersPayload with the specified parameters.
+     * @param hashStart The start hash.
+     * @param count The count.
+     */
+    GetHeadersPayload(const io::UInt256& hashStart, int16_t count = -1);
+
+    /**
+     * @brief Creates a new GetHeadersPayload with the specified parameters.
+     * @param hashStart The start hash.
+     * @param count The count.
+     * @return The created payload.
+     */
+    static GetHeadersPayload Create(const io::UInt256& hashStart, int16_t count = -1);
+};
+}  // namespace neo::network::p2p::payloads

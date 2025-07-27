@@ -1,42 +1,42 @@
 #pragma once
 
-#include <neo/network/p2p/payloads/ipayload.h>
-#include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
+#include <neo/io/binary_writer.h>
+#include <neo/network/p2p/payloads/ipayload.h>
 #include <string>
 
 namespace neo::network::p2p::payloads
 {
+/**
+ * @brief Represents a reject payload.
+ *
+ * This payload is used to indicate rejection of an inventory.
+ * Note: Currently the Neo N3 protocol defines this message command
+ * but doesn't specify a payload structure. This implementation
+ * provides a placeholder that can be extended if needed.
+ */
+class RejectPayload : public IPayload
+{
+  public:
     /**
-     * @brief Represents a reject payload.
-     * 
-     * This payload is used to indicate rejection of an inventory.
-     * Note: Currently the Neo N3 protocol defines this message command
-     * but doesn't specify a payload structure. This implementation
-     * provides a placeholder that can be extended if needed.
+     * @brief Constructs an empty RejectPayload.
      */
-    class RejectPayload : public IPayload
+    RejectPayload() = default;
+
+    // IPayload implementation
+    void Serialize(io::BinaryWriter& writer) const override
     {
-    public:
-        /**
-         * @brief Constructs an empty RejectPayload.
-         */
-        RejectPayload() = default;
+        // Currently empty - no data to serialize
+    }
 
-        // IPayload implementation
-        void Serialize(io::BinaryWriter& writer) const override
-        {
-            // Currently empty - no data to serialize
-        }
+    void Deserialize(io::BinaryReader& reader) override
+    {
+        // Currently empty - no data to deserialize
+    }
 
-        void Deserialize(io::BinaryReader& reader) override
-        {
-            // Currently empty - no data to deserialize
-        }
-
-        size_t GetSize() const override
-        {
-            return 0; // Empty payload
-        }
-    };
-}
+    size_t GetSize() const override
+    {
+        return 0;  // Empty payload
+    }
+};
+}  // namespace neo::network::p2p::payloads

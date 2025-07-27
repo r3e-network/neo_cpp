@@ -5,5 +5,5 @@
 // Redirect to the main settings file
 namespace neo::config
 {
-    using Settings = neo::Settings;
-} 
+using Settings = neo::Settings;
+}

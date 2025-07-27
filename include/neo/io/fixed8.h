@@ -14,13 +14,15 @@
 
 #include "neo/core/fixed8.h"
 
-namespace neo {
-namespace io {
+namespace neo
+{
+namespace io
+{
 
 // Compatibility alias for tests that expect Fixed8 in io namespace
 using Fixed8 = neo::core::Fixed8;
 
-} // namespace io
-} // namespace neo
+}  // namespace io
+}  // namespace neo
 
-#endif // NEO_IO_FIXED8_H
+#endif  // NEO_IO_FIXED8_H

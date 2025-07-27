@@ -2,81 +2,81 @@
 
 namespace neo::network::p2p::payloads
 {
-    HighPriority::HighPriority()
-    {
-    }
+HighPriority::HighPriority() {}
 
-    ledger::TransactionAttribute::Usage HighPriority::GetType() const
-    {
-        return ledger::TransactionAttribute::Usage::HighPriority;
-    }
+ledger::TransactionAttribute::Usage HighPriority::GetType() const
+{
+    return ledger::TransactionAttribute::Usage::HighPriority;
+}
 
-    bool HighPriority::AllowMultiple() const
-    {
-        return false; // Only one HighPriority attribute is allowed per transaction
-    }
+bool HighPriority::AllowMultiple() const
+{
+    return false;  // Only one HighPriority attribute is allowed per transaction
+}
 
-    int HighPriority::GetSize() const
-    {
-        return sizeof(uint8_t); // Only the type byte, no additional data
-    }
+int HighPriority::GetSize() const
+{
+    return sizeof(uint8_t);  // Only the type byte, no additional data
+}
 
-    void HighPriority::Serialize(io::BinaryWriter& writer) const
-    {
-        writer.Write(static_cast<uint8_t>(GetType()));
-        // HighPriority has no additional data to serialize
-    }
+void HighPriority::Serialize(io::BinaryWriter& writer) const
+{
+    writer.Write(static_cast<uint8_t>(GetType()));
+    // HighPriority has no additional data to serialize
+}
 
-    void HighPriority::Deserialize(io::BinaryReader& reader)
-    {
-        // Type is already read by the caller
-        // HighPriority has no additional data to deserialize
-    }
+void HighPriority::Deserialize(io::BinaryReader& reader)
+{
+    // Type is already read by the caller
+    // HighPriority has no additional data to deserialize
+}
 
-    void HighPriority::SerializeJson(io::JsonWriter& writer) const
-    {
-        writer.WriteStartObject();
-        writer.WriteProperty("type", "HighPriority");
-        writer.WriteEndObject();
-    }
+void HighPriority::SerializeJson(io::JsonWriter& writer) const
+{
+    writer.WriteStartObject();
+    writer.WriteProperty("type", "HighPriority");
+    writer.WriteEndObject();
+}
 
-    void HighPriority::DeserializeJson(const io::JsonReader& reader)
-    {
-        // HighPriority has no additional data to deserialize from JSON
-    }
+void HighPriority::DeserializeJson(const io::JsonReader& reader)
+{
+    // HighPriority has no additional data to deserialize from JSON
+}
 
-    bool HighPriority::Verify(/* DataCache& snapshot, const Transaction& transaction */) const
+bool HighPriority::Verify(/* DataCache& snapshot, const Transaction& transaction */) const
+{
+    // Simplified verification for HighPriority attribute
+    // In the real implementation, this would verify that the sender is a committee member
+    try
     {
-        // Simplified verification for HighPriority attribute
-        // In the real implementation, this would verify that the sender is a committee member
-        try {
-            // For now, always return true as this is a stub implementation
-            // Real verification would check:
-            // 1. If sender is a committee member
-            // 2. If the transaction meets high priority criteria
-            // 3. If the current network state allows high priority transactions
-            return true;
-            
-        } catch (const std::exception& e) {
-            // Error during verification - reject as invalid
-            return false;
-        }
-    }
-
-    int64_t HighPriority::CalculateNetworkFee(/* DataCache& snapshot, const Transaction& transaction */) const
-    {
-        // HighPriority attribute does not incur additional network fees
-        return 0;
-    }
-
-    bool HighPriority::operator==(const HighPriority& other) const
-    {
-        // HighPriority has no data, so all instances are equal
+        // For now, always return true as this is a stub implementation
+        // Real verification would check:
+        // 1. If sender is a committee member
+        // 2. If the transaction meets high priority criteria
+        // 3. If the current network state allows high priority transactions
         return true;
     }
-
-    bool HighPriority::operator!=(const HighPriority& other) const
+    catch (const std::exception& e)
     {
-        return false; // All HighPriority instances are equal
+        // Error during verification - reject as invalid
+        return false;
     }
-} 
+}
+
+int64_t HighPriority::CalculateNetworkFee(/* DataCache& snapshot, const Transaction& transaction */) const
+{
+    // HighPriority attribute does not incur additional network fees
+    return 0;
+}
+
+bool HighPriority::operator==(const HighPriority& other) const
+{
+    // HighPriority has no data, so all instances are equal
+    return true;
+}
+
+bool HighPriority::operator!=(const HighPriority& other) const
+{
+    return false;  // All HighPriority instances are equal
+}
+}  // namespace neo::network::p2p::payloads

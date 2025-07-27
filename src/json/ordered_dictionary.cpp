@@ -5,5 +5,5 @@
 
 namespace neo::json
 {
-    // Template instantiation for common types can be added here if needed
+// Template instantiation for common types can be added here if needed
 }
