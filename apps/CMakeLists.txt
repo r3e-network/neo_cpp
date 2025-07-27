@@ -53,7 +53,7 @@ target_link_libraries(bls_demo PRIVATE neo_cryptography neo_io neo_extensions ne
 target_include_directories(bls_demo PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Create minimal neo node (reduced dependencies)
-add_executable(minimal_neo_node minimal_neo_node.cpp)
+add_executable(minimal_neo_node minimal_neo_node_fixed.cpp)
 target_link_libraries(minimal_neo_node PRIVATE neo_cryptography neo_io neo_extensions neo_core neo_persistence neo_smartcontract neo_vm neo_native_contracts)
 target_include_directories(minimal_neo_node PRIVATE ${CMAKE_SOURCE_DIR}/include)
 

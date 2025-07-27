@@ -34,12 +34,12 @@ int main()
         
         // Test 4: Basic operations
         std::cout << "Test 4: Testing store operations... ";
-        auto key = persistence::StorageKey(0, io::ByteVector{0x01, 0x02});
-        auto value = persistence::StorageItem(io::ByteVector{0x03, 0x04});
+        auto key = io::ByteVector{0x01, 0x02};
+        auto value = io::ByteVector{0x03, 0x04};
         store.Put(key, value);
         
         auto retrieved = store.TryGet(key);
-        if (retrieved && retrieved->GetValue() == value.GetValue()) {
+        if (retrieved && *retrieved == value) {
             std::cout << "OK\n";
             LOG_INFO("Store operations successful");
         } else {
