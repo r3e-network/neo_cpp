@@ -3,10 +3,9 @@ add_subdirectory(nep6)
 
 # Create the wallets unit tests
 add_executable(test_wallets
-    test_wallets_minimal.cpp
+    test_asset_descriptor.cpp
     # These tests have API mismatches and are temporarily disabled:
     # test_wallet.cpp
-    # test_asset_descriptor.cpp
     # test_wallet_transaction.cpp
     # test_verification_contract.cpp
     # test_helper.cpp

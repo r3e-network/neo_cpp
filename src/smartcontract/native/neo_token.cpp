@@ -107,6 +107,16 @@ namespace neo::smartcontract::native
         return NeoTokenTransfer::GetTotalSupply(*this, snapshot);
     }
 
+    std::string NeoToken::Symbol() const
+    {
+        return SYMBOL;
+    }
+
+    uint8_t NeoToken::Decimals() const
+    {
+        return DECIMALS;
+    }
+
     io::Fixed8 NeoToken::GetBalance(std::shared_ptr<persistence::DataCache> snapshot, const io::UInt160& account) const
     {
         return NeoTokenAccount::GetBalance(*this, snapshot, account);

@@ -48,7 +48,7 @@ namespace neo::persistence
          * @param key The key to look up.
          * @return Pointer to the storage item, or nullptr if not found.
          */
-        virtual std::shared_ptr<StorageItem> TryGet(const StorageKey& key) = 0;
+        virtual std::shared_ptr<StorageItem> TryGet(const StorageKey& key) override = 0;
 
         /**
          * @brief Gets a storage item from the cache and marks it as changed.
@@ -57,7 +57,7 @@ namespace neo::persistence
          * @param factory Optional factory function to create the item if it doesn't exist.
          * @return Pointer to the storage item, or nullptr if not found and no factory provided.
          */
-        virtual std::shared_ptr<StorageItem> GetAndChange(const StorageKey& key, std::function<std::shared_ptr<StorageItem>()> factory = nullptr) = 0;
+        virtual std::shared_ptr<StorageItem> GetAndChange(const StorageKey& key, std::function<std::shared_ptr<StorageItem>()> factory = nullptr) override = 0;
 
 
 

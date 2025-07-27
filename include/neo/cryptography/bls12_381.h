@@ -354,6 +354,21 @@ namespace neo::cryptography::bls12_381
     GTPoint MultiPairing(const std::vector<G1Point>& ps, const std::vector<G2Point>& qs);
 
     /**
+     * @brief Computes the Miller loop for a pair of points.
+     * @param p The G1Point.
+     * @param q The G2Point.
+     * @return The result of the Miller loop computation.
+     */
+    GTPoint MillerLoop(const G1Point& p, const G2Point& q);
+
+    /**
+     * @brief Performs the final exponentiation step of GT.
+     * @param f The result from Miller loop.
+     * @return The final GT result.
+     */
+    GTPoint Gt(const GTPoint& f);
+
+    /**
      * @brief Verifies a BLS signature.
      * @param publicKey The public key (G2Point).
      * @param message The message.
@@ -437,4 +452,31 @@ namespace neo::cryptography::bls12_381
      * @return True if the point is identity, false otherwise.
      */
     bool IsIdentityGT(const GTPoint& point);
+
+    /**
+     * @brief Hashes a message to a G1 point.
+     * @param message The message to hash.
+     * @return The resulting G1 point.
+     */
+    G1Point HashToG1(const io::ByteSpan& message);
+
+    /**
+     * @brief Doubles a G1 point.
+     * @param point The G1 point to double.
+     * @return The doubled G1 point.
+     */
+    G1Point G1PointDouble(const G1Point& point);
+
+    /**
+     * @brief Negates a G1 point.
+     * @param point The G1 point to negate.
+     * @return The negated G1 point.
+     */
+    G1Point G1PointNegate(const G1Point& point);
+
+    /**
+     * @brief Gets the identity element for GT.
+     * @return The GT identity element.
+     */
+    GTPoint GTPointIdentity();
 }

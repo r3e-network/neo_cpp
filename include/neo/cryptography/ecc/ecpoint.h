@@ -211,6 +211,46 @@ namespace neo::cryptography::ecc
          */
         void Deserialize(io::BinaryReader& reader) override;
 
+        /**
+         * @brief Adds another ECPoint to this ECPoint.
+         * @param other The other ECPoint.
+         * @return The result of the addition.
+         */
+        ECPoint Add(const ECPoint& other) const;
+
+        /**
+         * @brief Multiplies this ECPoint by a scalar.
+         * @param scalar The scalar value.
+         * @return The result of the multiplication.
+         */
+        ECPoint Multiply(const io::UInt256& scalar) const;
+
+        /**
+         * @brief Negates this ECPoint.
+         * @return The negated ECPoint.
+         */
+        ECPoint Negate() const;
+
+        /**
+         * @brief Operator overload for ECPoint addition.
+         * @param other The other ECPoint.
+         * @return The result of the addition.
+         */
+        ECPoint operator+(const ECPoint& other) const { return Add(other); }
+
+        /**
+         * @brief Operator overload for ECPoint scalar multiplication.
+         * @param scalar The scalar value.
+         * @return The result of the multiplication.
+         */
+        ECPoint operator*(const io::UInt256& scalar) const { return Multiply(scalar); }
+
+        /**
+         * @brief Operator overload for ECPoint negation.
+         * @return The negated ECPoint.
+         */
+        ECPoint operator-() const { return Negate(); }
+
     private:
         std::string curveName_;
         bool isInfinity_;

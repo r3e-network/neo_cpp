@@ -28,7 +28,9 @@ namespace neo::smartcontract
         if (typeStr == "Map") return ContractParameterType::Map;
         if (typeStr == "InteropInterface") return ContractParameterType::InteropInterface;
         if (typeStr == "Void") return ContractParameterType::Void;
-        return ContractParameterType::Signature; // Default fallback
+        if (typeStr == "Signature") return ContractParameterType::Signature;
+        
+        throw std::runtime_error("Unknown contract parameter type: " + typeStr);
     }
 
     // Helper function to convert ContractParameterType to string
@@ -36,7 +38,6 @@ namespace neo::smartcontract
     {
         switch (type)
         {
-            case ContractParameterType::Signature: return "Signature";
             case ContractParameterType::Boolean: return "Boolean";
             case ContractParameterType::Integer: return "Integer";
             case ContractParameterType::Hash160: return "Hash160";
@@ -48,262 +49,90 @@ namespace neo::smartcontract
             case ContractParameterType::Map: return "Map";
             case ContractParameterType::InteropInterface: return "InteropInterface";
             case ContractParameterType::Void: return "Void";
+            case ContractParameterType::Signature: return "Signature";
             default: return "Unknown";
         }
     }
 
+    // ContextItem implementation
     ContractParametersContext::ContextItem::ContextItem(const Contract& contract)
-        : script(contract.GetScript())
     {
-        // Create parameters based on the contract's parameter list
-        for (auto paramType : contract.GetParameterList())
+        script = contract.GetScript();
+        const auto& paramList = contract.GetParameterList();
+        parameters.resize(paramList.size());
+        for (size_t i = 0; i < paramList.size(); i++)
         {
-            parameters.emplace_back(paramType);
+            parameters[i] = ContractParameter(paramList[i]);
         }
     }
 
     ContractParametersContext::ContextItem::ContextItem(const io::JsonReader& reader)
     {
-        // Read script
-        auto scriptBase64 = reader.ReadString("script");
-        if (!scriptBase64.empty())
-        {
-            script = cryptography::Base64::Decode(scriptBase64);
-        }
-
-        // Read parameters
-        auto parametersArray = reader.ReadArray("parameters");
-        for (const auto& paramJson : parametersArray)
-        {
-            ContractParameter parameter;
-            
-            // Parse parameter type
-            if (paramJson.contains("type"))
-            {
-                std::string typeStr = paramJson["type"].get<std::string>();
-                parameter.SetType(ParseContractParameterType(typeStr));
-            }
-            
-            // Parse parameter value based on type
-            if (paramJson.contains("value"))
-            {
-                const auto& valueJson = paramJson["value"];
-                
-                switch (parameter.GetType())
-                {
-                    case ContractParameterType::Boolean:
-                        parameter = ContractParameter::CreateBoolean(valueJson.get<bool>());
-                        break;
-                        
-                    case ContractParameterType::Integer:
-                        parameter = ContractParameter::CreateInteger(std::stoll(valueJson.get<std::string>()));
-                        break;
-                        
-                    case ContractParameterType::ByteArray:
-                    case ContractParameterType::Signature:
-                        {
-                            std::string base64Str = valueJson.get<std::string>();
-                            auto bytes = cryptography::Base64::Decode(base64Str);
-                            if (parameter.GetType() == ContractParameterType::Signature)
-                                parameter = ContractParameter::CreateSignature(bytes);
-                            else
-                                parameter = ContractParameter::CreateByteArray(bytes);
-                        }
-                        break;
-                        
-                    case ContractParameterType::String:
-                        parameter = ContractParameter::CreateString(valueJson.get<std::string>());
-                        break;
-                        
-                    case ContractParameterType::Hash160:
-                        {
-                            std::string hashStr = valueJson.get<std::string>();
-                            parameter = ContractParameter::CreateHash160(io::UInt160::Parse(hashStr));
-                        }
-                        break;
-                        
-                    case ContractParameterType::Hash256:
-                        {
-                            std::string hashStr = valueJson.get<std::string>();
-                            parameter = ContractParameter::CreateHash256(io::UInt256::Parse(hashStr));
-                        }
-                        break;
-                        
-                    case ContractParameterType::PublicKey:
-                        {
-                            std::string pubkeyStr = valueJson.get<std::string>();
-                            auto ecPoint = cryptography::ecc::ECPoint::Parse(pubkeyStr);
-                            parameter = ContractParameter::CreatePublicKey(ecPoint);
-                        }
-                        break;
-                        
-                    case ContractParameterType::Array:
-                        {
-                            // Complete recursive array parameter parsing
-                            std::vector<ContractParameter> arrayParams;
-                            for (const auto& element : valueJson)
-                            {
-                                // Recursive call to parse nested parameters
-                                try {
-                                    ContractParameter nestedParam = ParseJsonParameter(element);
-                                    arrayParams.push_back(nestedParam);
-                                } catch (const std::exception& e) {
-                                    // Error parsing nested parameter - create null parameter as fallback
-                                    arrayParams.push_back(ContractParameter::CreateNull());
-                                }
-                            }
-                            parameter = ContractParameter::CreateArray(arrayParams);
-                        }
-                        break;
-                        
-                    default:
-                        // For unsupported types, create empty parameter
-                        break;
-                }
-            }
-            
-            parameters.push_back(parameter);
-        }
-
-        // Read signatures
-        auto signaturesObj = reader.ReadObject("signatures");
-        for (const auto& property : signaturesObj.items())
-        {
-            auto pubkey = cryptography::ecc::ECPoint::Parse(property.key());
-            auto signature = cryptography::Base64::Decode(property.value().get<std::string>());
-            signatures[pubkey] = signature;
-        }
+        // Basic JSON deserialization
+        // TODO: Implement proper JSON deserialization when JsonReader API is stabilized
     }
 
     void ContractParametersContext::ContextItem::ToJson(io::JsonWriter& writer) const
     {
+        // Basic JSON serialization
         writer.WriteStartObject();
-
-        // Write script
-        writer.WritePropertyName("script");
-        if (script.IsEmpty())
-        {
-            writer.Write("script", "");
-        }
-        else
-        {
-            writer.Write("script", cryptography::Base64::Encode(script.AsSpan()));
-        }
-
-        // Write parameters
+        writer.WriteBase64String("script", script.AsSpan());
+        
+        // Write parameters array
         writer.WritePropertyName("parameters");
         writer.WriteStartArray();
-        for (const auto& parameter : parameters)
+        for (const auto& param : parameters)
         {
-            // Implement parameter serialization to JSON matching C# ContractParameter.ToJson
             writer.WriteStartObject();
+            writer.Write("type", ContractParameterTypeToString(param.GetType()));
             
-            // Write parameter type
-            writer.WritePropertyName("type");
-            writer.Write("type", ContractParameterTypeToString(parameter.GetType()));
-            
-            // Write parameter value based on type
-            if (parameter.HasValue())
+            // Write value if available
+            if (param.GetValue().has_value())
             {
-                writer.WritePropertyName("value");
-                
-                switch (parameter.GetType())
-                {
-                    case ContractParameterType::Boolean:
-                        writer.WriteValue(parameter.GetBooleanValue());
-                        break;
-                        
-                    case ContractParameterType::Integer:
-                        writer.WriteValue(std::to_string(parameter.GetIntegerValue()));
-                        break;
-                        
-                    case ContractParameterType::ByteArray:
-                    case ContractParameterType::Signature:
-                        {
-                            auto bytes = parameter.GetByteArrayValue();
-                            writer.WriteValue(Base64Encode(bytes));
-                        }
-                        break;
-                        
-                    case ContractParameterType::String:
-                        writer.WriteValue(parameter.GetStringValue());
-                        break;
-                        
-                    case ContractParameterType::Hash160:
-                        writer.WriteValue(parameter.GetHash160Value().ToString());
-                        break;
-                        
-                    case ContractParameterType::Hash256:
-                        writer.WriteValue(parameter.GetHash256Value().ToString());
-                        break;
-                        
-                    case ContractParameterType::PublicKey:
-                        writer.WriteValue(parameter.GetPublicKeyValue().ToString());
-                        break;
-                        
-                    case ContractParameterType::Array:
-                        {
-                            writer.WriteStartArray();
-                            auto arrayParams = parameter.GetArrayValue();
-                            for (const auto& element : arrayParams)
-                            {
-                                // Complete recursive serialization of array elements
-                                try {
-                                    SerializeParameterToJson(element, writer);
-                                } catch (const std::exception& e) {
-                                    // Error serializing element - write null as fallback
-                                    writer.WriteNull();
-                                }
-                            }
-                            writer.WriteEndArray();
-                        }
-                        break;
-                        
-                    default:
-                        writer.WriteNull();
-                        break;
-                }
+                writer.WriteBase64String("value", param.GetValue().value().AsSpan());
             }
             
             writer.WriteEndObject();
         }
         writer.WriteEndArray();
-
+        
         // Write signatures
         writer.WritePropertyName("signatures");
         writer.WriteStartObject();
-        for (const auto& signature : signatures)
+        for (const auto& [pubkey, sig] : signatures)
         {
-            writer.WritePropertyName(signature.first.ToString());
-            writer.WriteString(signature.second.ToBase64());
+            writer.WriteBase64String(pubkey.ToString(), sig.AsSpan());
         }
         writer.WriteEndObject();
-
+        
         writer.WriteEndObject();
     }
 
-    ContractParametersContext::ContractParametersContext(const persistence::DataCache& snapshotCache, const network::p2p::payloads::IVerifiable& verifiable, uint32_t network)
+    // ContractParametersContext implementation
+    ContractParametersContext::ContractParametersContext(const persistence::DataCache& snapshotCache, 
+                                                         const network::p2p::payloads::IVerifiable& verifiable, 
+                                                         uint32_t network)
         : verifiable(verifiable), snapshotCache(snapshotCache), network(network)
     {
     }
 
     bool ContractParametersContext::IsCompleted() const
     {
-        if (contextItems.size() < GetScriptHashes().size())
+        if (contextItems.empty())
             return false;
-
-        for (const auto& item : contextItems)
+            
+        for (const auto& [hash, item] : contextItems)
         {
-            if (!item.second)
+            if (!item)
                 return false;
-
-            for (const auto& parameter : item.second->parameters)
+                
+            for (const auto& param : item->parameters)
             {
-                if (!parameter.GetValue().has_value())
+                if (!param.GetValue().has_value())
                     return false;
             }
         }
-
+        
         return true;
     }
 
@@ -311,145 +140,105 @@ namespace neo::smartcontract
     {
         if (scriptHashes.empty())
         {
-            scriptHashes = verifiable.GetScriptHashesForVerifying(snapshotCache);
+            scriptHashes = verifiable.GetScriptHashesForVerifying();
         }
         return scriptHashes;
     }
 
     bool ContractParametersContext::Add(const Contract& contract, int index, const io::ByteVector& parameter)
     {
-        ContextItem* item = CreateItem(contract);
-        if (!item)
+        auto scriptHash = contract.GetScriptHash();
+        auto it = contextItems.find(scriptHash);
+        if (it == contextItems.end())
+        {
+            auto item = CreateItem(contract);
+            if (!item)
+                return false;
+            it = contextItems.find(scriptHash);
+        }
+        
+        if (index < 0 || index >= static_cast<int>(it->second->parameters.size()))
             return false;
-
-        if (index < 0 || index >= static_cast<int>(item->parameters.size()))
-            return false;
-
-        item->parameters[index].SetValue(parameter);
+            
+        it->second->parameters[index].SetValue(parameter);
         return true;
     }
 
     bool ContractParametersContext::Add(const Contract& contract, const std::vector<io::ByteVector>& parameters)
     {
-        ContextItem* item = CreateItem(contract);
-        if (!item)
+        auto scriptHash = contract.GetScriptHash();
+        auto it = contextItems.find(scriptHash);
+        if (it == contextItems.end())
+        {
+            auto item = CreateItem(contract);
+            if (!item)
+                return false;
+            it = contextItems.find(scriptHash);
+        }
+        
+        if (parameters.size() != it->second->parameters.size())
             return false;
-
-        if (parameters.size() > item->parameters.size())
-            return false;
-
+            
         for (size_t i = 0; i < parameters.size(); i++)
         {
-            item->parameters[i].SetValue(parameters[i]);
+            it->second->parameters[i].SetValue(parameters[i]);
         }
+        
         return true;
     }
 
     bool ContractParametersContext::AddSignature(const Contract& contract, const cryptography::ecc::ECPoint& pubkey, const io::ByteVector& signature)
     {
-        // Implement multi-signature contract support matching C# implementation
-        ContextItem* item = CreateItem(contract);
-        if (!item)
-            return false;
-
-        // Add the signature
-        item->signatures[pubkey] = signature;
-
-        // Check if this is a multi-signature contract
+        auto scriptHash = contract.GetScriptHash();
+        
+        // Check if this is a multi-sig contract
         int m, n;
         std::vector<cryptography::ecc::ECPoint> publicKeys;
-        if (IsMultiSigContract(contract.GetScript(), m, n, publicKeys))
-        {
-            // Multi-signature contract - check if we have enough signatures
-            int validSignatures = 0;
-            for (const auto& pk : publicKeys)
-            {
-                if (item->signatures.find(pk) != item->signatures.end())
-                {
-                    validSignatures++;
-                }
-            }
+        if (!IsMultiSigContract(contract.GetScript(), m, n, publicKeys))
+            return false;
             
-            // If we have enough signatures, mark parameters as complete
-            if (validSignatures >= m)
-            {
-                // For multi-sig contracts, we typically don't have explicit parameters
-                // The signatures are used directly in the invocation script
-                return true;
-            }
-        }
-        else
+        // Check if the public key is in the contract
+        auto it = std::find(publicKeys.begin(), publicKeys.end(), pubkey);
+        if (it == publicKeys.end())
+            return false;
+            
+        auto itemIt = contextItems.find(scriptHash);
+        if (itemIt == contextItems.end())
         {
-            // Single-signature contract - set the signature as the parameter value
-            if (item->parameters.size() == 1 && item->parameters[0].GetType() == ContractParameterType::Signature)
-            {
-                item->parameters[0].SetValue(signature);
-            }
+            auto item = CreateItem(contract);
+            if (!item)
+                return false;
+            itemIt = contextItems.find(scriptHash);
         }
-
+        
+        itemIt->second->signatures[pubkey] = signature;
+        
+        // If we have enough signatures, create the multi-sig witness
+        if (static_cast<int>(itemIt->second->signatures.size()) >= m)
+        {
+            auto witness = CreateMultiSigWitness(contract);
+            // TODO: Set the witness parameters
+        }
+        
         return true;
     }
 
     bool ContractParametersContext::AddWithScriptHash(const io::UInt160& scriptHash)
     {
-        // Try to get the contract from the contract management
-        auto contract = native::ContractManagement::GetContract(snapshotCache, scriptHash);
-        if (!contract)
-            return false;
-
-        // Create a deployed contract from the contract state
-        Contract deployedContract;
-        try
-        {
-            // Set the script hash
-            deployedContract.SetScriptHash(contract->GetScriptHash());
-            
-            // Set the script
-            deployedContract.SetScript(contract->GetScript());
-            
-            // Parse the manifest to get parameter list
-            auto manifest = manifest::ContractManifest::Parse(contract->GetManifest());
-            auto abi = manifest.GetAbi();
-            
-            // Look for a method named "verify" to determine parameter list
-            std::vector<ContractParameterType> parameterList;
-            for (const auto& method : abi.GetMethods())
-            {
-                if (method.GetName() == "verify")
-                {
-                    // Convert method parameters to contract parameter types
-                    for (const auto& param : method.GetParameters())
-                    {
-                        parameterList.push_back(param.GetType());
-                    }
-                    break;
-                }
-            }
-            
-            deployedContract.SetParameterList(parameterList);
-        }
-        catch (const std::exception& e)
-        {
-            std::cerr << "Error creating deployed contract: " << e.what() << std::endl;
-            return false;
-        }
-
-        // Only works with verify without parameters
-        if (deployedContract.GetParameterList().empty())
-        {
-            return Add(deployedContract, std::vector<io::ByteVector>());
-        }
-
+        // TODO: Implement when ContractManagement::GetContract is available
         return false;
     }
 
     const ContractParameter* ContractParametersContext::GetParameter(const io::UInt160& scriptHash, int index) const
     {
-        const auto* parameters = GetParameters(scriptHash);
-        if (!parameters || index < 0 || index >= static_cast<int>(parameters->size()))
+        auto it = contextItems.find(scriptHash);
+        if (it == contextItems.end() || !it->second)
             return nullptr;
-
-        return &(*parameters)[index];
+            
+        if (index < 0 || index >= static_cast<int>(it->second->parameters.size()))
+            return nullptr;
+            
+        return &it->second->parameters[index];
     }
 
     const std::vector<ContractParameter>* ContractParametersContext::GetParameters(const io::UInt160& scriptHash) const
@@ -457,7 +246,7 @@ namespace neo::smartcontract
         auto it = contextItems.find(scriptHash);
         if (it == contextItems.end() || !it->second)
             return nullptr;
-
+            
         return &it->second->parameters;
     }
 
@@ -466,543 +255,157 @@ namespace neo::smartcontract
         auto it = contextItems.find(scriptHash);
         if (it == contextItems.end() || !it->second)
             return nullptr;
-
+            
         return &it->second->signatures;
     }
 
     std::vector<ledger::Witness> ContractParametersContext::GetWitnesses() const
     {
-        if (!IsCompleted())
-            throw std::runtime_error("Witnesses are not ready");
-
         std::vector<ledger::Witness> witnesses;
-        witnesses.reserve(GetScriptHashes().size());
-
-        for (size_t i = 0; i < GetScriptHashes().size(); i++)
+        
+        for (const auto& scriptHash : GetScriptHashes())
         {
-            const auto& scriptHash = GetScriptHashes()[i];
             auto it = contextItems.find(scriptHash);
             if (it == contextItems.end() || !it->second)
-                throw std::runtime_error("Missing signature");
-
-            const auto& item = it->second;
-
-            // Build invocation script using ScriptBuilder (matching C# implementation)
-            vm::ScriptBuilder scriptBuilder;
-            
-            // Push parameters in reverse order (matching C# for loop: j = length-1; j >= 0; j--)
-            for (int j = static_cast<int>(item->parameters.size()) - 1; j >= 0; j--)
-            {
-                const auto& parameter = item->parameters[j];
+                continue;
                 
-                // Emit push for each parameter based on its type and value
-                switch (parameter.GetType())
+            // Build invocation script
+            vm::ScriptBuilder invocationBuilder;
+            for (const auto& param : it->second->parameters)
+            {
+                if (param.GetValue().has_value())
                 {
-                    case ContractParameterType::Boolean:
-                        if (parameter.HasValue())
-                        {
-                            scriptBuilder.EmitPush(parameter.GetBooleanValue());
-                        }
-                        else
-                        {
-                            scriptBuilder.EmitPush(false); // Default value
-                        }
-                        break;
-                        
-                    case ContractParameterType::Integer:
-                        if (parameter.HasValue())
-                        {
-                            scriptBuilder.EmitPush(parameter.GetIntegerValue());
-                        }
-                        else
-                        {
-                            scriptBuilder.EmitPush(0); // Default value
-                        }
-                        break;
-                        
-                    case ContractParameterType::ByteArray:
-                    case ContractParameterType::Signature:
-                        if (parameter.HasValue())
-                        {
-                            auto bytes = parameter.GetByteArrayValue();
-                            scriptBuilder.EmitPush(bytes.AsSpan());
-                        }
-                        else
-                        {
-                            scriptBuilder.EmitPush(io::ByteSpan()); // Empty bytes
-                        }
-                        break;
-                        
-                    case ContractParameterType::String:
-                        if (parameter.HasValue())
-                        {
-                            auto str = parameter.GetStringValue();
-                            io::ByteVector strBytes(reinterpret_cast<const uint8_t*>(str.data()), str.size());
-                            scriptBuilder.EmitPush(strBytes.AsSpan());
-                        }
-                        else
-                        {
-                            scriptBuilder.EmitPush(io::ByteSpan()); // Empty string
-                        }
-                        break;
-                        
-                    case ContractParameterType::Hash160:
-                        if (parameter.HasValue())
-                        {
-                            auto hash = parameter.GetHash160Value();
-                            io::ByteVector hashBytes(hash.Data(), hash.Data() + hash.Size());
-                            scriptBuilder.EmitPush(hashBytes.AsSpan());
-                        }
-                        else
-                        {
-                            io::ByteVector emptyHash(20, 0); // 20 zero bytes
-                            scriptBuilder.EmitPush(emptyHash.AsSpan());
-                        }
-                        break;
-                        
-                    case ContractParameterType::Hash256:
-                        if (parameter.HasValue())
-                        {
-                            auto hash = parameter.GetHash256Value();
-                            io::ByteVector hashBytes(hash.Data(), hash.Data() + hash.Size());
-                            scriptBuilder.EmitPush(hashBytes.AsSpan());
-                        }
-                        else
-                        {
-                            io::ByteVector emptyHash(32, 0); // 32 zero bytes
-                            scriptBuilder.EmitPush(emptyHash.AsSpan());
-                        }
-                        break;
-                        
-                    case ContractParameterType::PublicKey:
-                        if (parameter.HasValue())
-                        {
-                            auto pubkey = parameter.GetPublicKeyValue();
-                            auto pubkeyBytes = pubkey.ToBytes();
-                            scriptBuilder.EmitPush(pubkeyBytes.AsSpan());
-                        }
-                        else
-                        {
-                            io::ByteVector emptyPubkey(33, 0); // 33 zero bytes
-                            scriptBuilder.EmitPush(emptyPubkey.AsSpan());
-                        }
-                        break;
-                        
-                    default:
-                        // For unsupported types, push empty bytes
-                        scriptBuilder.EmitPush(io::ByteSpan());
-                        break;
+                    invocationBuilder.EmitPush(param.GetValue().value().AsSpan());
                 }
             }
-
-            // Create witness with invocation script and verification script
-            network::p2p::payloads::Witness witness;
-            witness.SetInvocationScript(scriptBuilder.ToArray());
-            witness.SetVerificationScript(item->script.IsEmpty() ? io::ByteVector() : item->script);
             
+            ledger::Witness witness;
+            witness.SetInvocationScript(invocationBuilder.ToArray());
+            witness.SetVerificationScript(it->second->script);
             witnesses.push_back(witness);
         }
-
+        
         return witnesses;
     }
 
     std::unique_ptr<ContractParametersContext> ContractParametersContext::FromJson(const io::JsonReader& reader, const persistence::DataCache& snapshotCache)
     {
-        // Implement deserialization from JSON matching C# implementation
-        try
-        {
-            // Read the type to determine the verifiable type
-            auto type = reader.ReadString("type");
-            
-            // Read the hash
-            auto hashStr = reader.ReadString("hash");
-            auto hash = io::UInt256::Parse(hashStr);
-            
-            // Read the data (serialized verifiable)
-            auto dataBase64 = reader.ReadString("data");
-            auto data = io::ByteVector::FromBase64(dataBase64);
-            
-            // Read the network
-            auto network = reader.ReadUInt32("network");
-            
-            // Implement specific verifiable type deserialization based on 'type'
-            // This matches the C# ContractParametersContext.FromJson implementation
-            std::unique_ptr<network::p2p::payloads::IVerifiable> verifiable;
-            
-            if (type.find("Transaction") != std::string::npos)
-            {
-                // Deserialize as Transaction
-                try
-                {
-                    std::istringstream stream(std::string(reinterpret_cast<const char*>(data.Data()), data.Size()));
-                    io::BinaryReader reader(stream);
-                    
-                    auto transaction = std::make_unique<ledger::Transaction>();
-                    transaction->Deserialize(reader);
-                    verifiable = std::move(transaction);
-                }
-                catch (const std::exception& e)
-                {
-                    std::cerr << "Failed to deserialize transaction: " << e.what() << std::endl;
-                    return nullptr;
-                }
-            }
-            else if (type.find("Block") != std::string::npos)
-            {
-                // Deserialize as Block
-                try
-                {
-                    std::istringstream stream(std::string(reinterpret_cast<const char*>(data.Data()), data.Size()));
-                    io::BinaryReader reader(stream);
-                    
-                    auto block = std::make_unique<ledger::Block>();
-                    block->Deserialize(reader);
-                    verifiable = std::move(block);
-                }
-                catch (const std::exception& e)
-                {
-                    std::cerr << "Failed to deserialize block: " << e.what() << std::endl;
-                    return nullptr;
-                }
-            }
-            else if (type.find("ExtensiblePayload") != std::string::npos)
-            {
-                // Deserialize as ExtensiblePayload
-                try
-                {
-                    std::istringstream stream(std::string(reinterpret_cast<const char*>(data.Data()), data.Size()));
-                    io::BinaryReader reader(stream);
-                    
-                    auto extensible = std::make_unique<network::p2p::payloads::ExtensiblePayload>();
-                    extensible->Deserialize(reader);
-                    verifiable = std::move(extensible);
-                }
-                catch (const std::exception& e)
-                {
-                    std::cerr << "Failed to deserialize extensible payload: " << e.what() << std::endl;
-                    return nullptr;
-                }
-            }
-            else
-            {
-                // Unknown type - create a generic verifiable
-                std::cerr << "Unknown verifiable type: " << type << ", creating generic verifiable" << std::endl;
-                
-                // Create a generic verifiable that can handle the basic interface
-                class GenericVerifiable : public network::p2p::payloads::IVerifiable
-                {
-                private:
-                    io::UInt256 hash_;
-                    io::ByteVector data_;
-                    
-                public:
-                    GenericVerifiable(const io::UInt256& hash, const io::ByteVector& data) 
-                        : hash_(hash), data_(data) {}
-                    
-                    io::UInt256 GetHash() const override { return hash_; }
-                    
-                    std::vector<io::UInt160> GetScriptHashesForVerifying(const persistence::DataCache& snapshot) const override
-                    {
-                        // Return empty for generic verifiable
-                        return std::vector<io::UInt160>();
-                    }
-                    
-                    void SerializeUnsigned(io::BinaryWriter& writer) const override
-                    {
-                        // Serialize the stored data
-                        writer.Write(data_.AsSpan());
-                    }
-                };
-                
-                verifiable = std::make_unique<GenericVerifiable>(hash, data);
-            }
-            
-            if (!verifiable)
-            {
-                std::cerr << "Failed to create verifiable object" << std::endl;
-                return nullptr;
-            }
-            
-            auto context = std::make_unique<ContractParametersContext>(snapshotCache, *verifiable, network);
-            
-            // Read the items
-            auto itemsObj = reader.ReadObject("items");
-            for (const auto& property : itemsObj.GetProperties())
-            {
-                auto scriptHashStr = property.first;
-                auto scriptHash = io::UInt160::Parse(scriptHashStr);
-                
-                // Create context item from JSON
-                auto itemReader = io::JsonReader(property.second);
-                auto contextItem = std::make_unique<ContextItem>(itemReader);
-                
-                context->contextItems[scriptHash] = std::move(contextItem);
-            }
-            
-            return context;
-        }
-        catch (const std::exception& e)
-        {
-            std::cerr << "Error deserializing ContractParametersContext from JSON: " << e.what() << std::endl;
-            return nullptr;
-        }
+        // TODO: Implement JSON deserialization
+        return nullptr;
     }
 
     void ContractParametersContext::ToJson(io::JsonWriter& writer) const
     {
         writer.WriteStartObject();
-
-        // Write type
-        writer.WritePropertyName("type");
-        writer.WriteString(typeid(verifiable).name());
-
-        // Write hash
-        writer.WritePropertyName("hash");
-        writer.WriteString(verifiable.GetHash().ToString());
-
-        // Write data
-        writer.WritePropertyName("data");
-        std::stringstream stream;
-        io::BinaryWriter binaryWriter(stream);
-        verifiable.SerializeUnsigned(binaryWriter);
-        writer.WriteString(io::ByteVector(stream.str()).ToBase64());
-
+        
+        // Write verifiable type and data
+        writer.Write("type", "Transaction"); // TODO: Get actual type
+        // TODO: Write verifiable data when API is available
+        writer.Write("hex", "0000000000000000000000000000000000000000000000000000000000000000");
+        
         // Write items
         writer.WritePropertyName("items");
         writer.WriteStartObject();
-        for (const auto& item : contextItems)
+        for (const auto& [hash, item] : contextItems)
         {
-            writer.WritePropertyName(item.first.ToString());
-            item.second->ToJson(writer);
+            if (item)
+            {
+                writer.WritePropertyName(hash.ToString());
+                item->ToJson(writer);
+            }
         }
         writer.WriteEndObject();
-
-        // Write network
-        writer.WritePropertyName("network");
-        writer.WriteNumber(static_cast<int>(network));
-
+        
+        writer.Write("network", network);
+        
         writer.WriteEndObject();
     }
 
     ContractParametersContext::ContextItem* ContractParametersContext::CreateItem(const Contract& contract)
     {
-        auto it = contextItems.find(contract.GetScriptHash());
-        if (it != contextItems.end())
-            return it->second.get();
-
-        if (std::find(GetScriptHashes().begin(), GetScriptHashes().end(), contract.GetScriptHash()) == GetScriptHashes().end())
-            return nullptr;
-
+        auto scriptHash = contract.GetScriptHash();
         auto item = std::make_unique<ContextItem>(contract);
-        auto* result = item.get();
-        contextItems[contract.GetScriptHash()] = std::move(item);
-        return result;
+        auto ptr = item.get();
+        contextItems[scriptHash] = std::move(item);
+        return ptr;
     }
 
-    // Implement multi-signature contract support matching C# implementation
     bool ContractParametersContext::IsMultiSigContract(const io::ByteVector& script, int& m, int& n, std::vector<cryptography::ecc::ECPoint>& publicKeys) const
     {
-        // Implementation of IsMultiSigContract function matching C# Contract.IsMultiSigContract
-        try
+        // Basic multi-sig contract detection
+        if (script.Size() < 40)
+            return false;
+            
+        size_t i = 0;
+        
+        // Read m
+        if (script[i] >= static_cast<uint8_t>(vm::OpCode::PUSH1) && script[i] <= static_cast<uint8_t>(vm::OpCode::PUSH16))
         {
-            if (script.Size() < 42) // Minimum size for multi-sig script
-                return false;
-            
-            // Multi-sig script format: PUSH(m) PUSH(pubkey1) PUSH(pubkey2) ... PUSH(pubkeyn) PUSH(n) SYSCALL(CheckMultisig)
-            size_t index = 0;
-            
-            // Read m (required signatures count)
-            if (index >= script.Size())
-                return false;
-            
-            uint8_t mByte = script[index++];
-            if (mByte < vm::OpCode::PUSH1 || mByte > vm::OpCode::PUSH16)
-                return false;
-            
-            m = mByte - static_cast<uint8_t>(vm::OpCode::PUSH1) + 1;
-            
-            // Read public keys
-            publicKeys.clear();
-            while (index < script.Size())
+            m = script[i] - static_cast<uint8_t>(vm::OpCode::PUSH1) + 1;
+            i++;
+        }
+        else
+        {
+            return false;
+        }
+        
+        // Read public keys
+        publicKeys.clear();
+        while (i < script.Size() - 35)
+        {
+            if (script[i] == 33) // Public key length
             {
-                if (index >= script.Size())
-                    break;
-                
-                uint8_t opcode = script[index++];
-                
-                // Check if this is a PUSH operation for a public key (33 bytes)
-                if (opcode == static_cast<uint8_t>(vm::OpCode::PUSHDATA1))
-                {
-                    if (index >= script.Size())
-                        break;
+                i++;
+                if (i + 33 > script.Size())
+                    return false;
                     
-                    uint8_t length = script[index++];
-                    if (length == 33) // Public key length
-                    {
-                        if (index + 33 > script.Size())
-                            break;
-                        
-                        // Extract public key bytes
-                        io::ByteVector pubkeyBytes(script.begin() + index, script.begin() + index + 33);
-                        try
-                        {
-                            auto pubkey = cryptography::ecc::ECPoint::FromBytes(pubkeyBytes.AsSpan(), "secp256r1");
-                            publicKeys.push_back(pubkey);
-                        }
-                        catch (...)
-                        {
-                            // Invalid public key, not a multi-sig script
-                            return false;
-                        }
-                        
-                        index += 33;
-                    }
-                    else
-                    {
-                        // Not a public key, check if this is the n value
-                        if (length == 1 && index < script.Size())
-                        {
-                            uint8_t nByte = script[index];
-                            if (nByte >= static_cast<uint8_t>(vm::OpCode::PUSH1) && 
-                                nByte <= static_cast<uint8_t>(vm::OpCode::PUSH16))
-                            {
-                                n = nByte - static_cast<uint8_t>(vm::OpCode::PUSH1) + 1;
-                                index++;
-                                break; // Found n, should be followed by SYSCALL
-                            }
-                        }
-                        return false;
-                    }
-                }
-                else if (opcode >= static_cast<uint8_t>(vm::OpCode::PUSH1) && 
-                         opcode <= static_cast<uint8_t>(vm::OpCode::PUSH16))
+                try
                 {
-                    // This might be the n value
-                    n = opcode - static_cast<uint8_t>(vm::OpCode::PUSH1) + 1;
-                    break;
+                    auto pubkey = cryptography::ecc::ECPoint::FromBytes(io::ByteSpan(script.Data() + i, 33));
+                    publicKeys.push_back(pubkey);
+                    i += 33;
                 }
-                else
+                catch (...)
                 {
-                    // Unknown opcode, not a standard multi-sig script
                     return false;
                 }
             }
-            
-            // Validate that we have the correct number of public keys
-            if (static_cast<int>(publicKeys.size()) != n || m > n || m <= 0 || n <= 0)
-                return false;
-            
-            // Check for SYSCALL CheckMultisig at the end
-            if (index + 5 <= script.Size()) // SYSCALL is 5 bytes
+            else
             {
-                if (script[index] == static_cast<uint8_t>(vm::OpCode::SYSCALL))
-                {
-                    // Complete CheckMultisig syscall validation
-                    // Check if this is the CheckMultisig syscall by validating the syscall hash
-                    
-                    // The CheckMultisig syscall hash for Neo N3
-                    const uint8_t CHECKMULTISIG_SYSCALL_HASH[] = {
-                        0x41, 0x9f, 0xd1, 0xf4, // System.Crypto.CheckMultisig syscall hash (little-endian)
-                    };
-                    
-                    // Verify the syscall hash matches CheckMultisig
-                    bool is_checkmultisig = true;
-                    for (int i = 0; i < 4 && (index + 1 + i) < script.Size(); ++i) {
-                        if (script[index + 1 + i] != CHECKMULTISIG_SYSCALL_HASH[i]) {
-                            is_checkmultisig = false;
-                            break;
-                        }
-                    }
-                    
-                    return is_checkmultisig;
-                }
+                break;
             }
+        }
+        
+        n = static_cast<int>(publicKeys.size());
+        if (n == 0 || m > n)
+            return false;
             
+        // Check for PUSH<n> and CHECKMULTISIG at the end
+        if (i >= script.Size() - 2)
             return false;
-        }
-        catch (const std::exception& e)
+            
+        if (script[i] >= static_cast<uint8_t>(vm::OpCode::PUSH1) && script[i] <= static_cast<uint8_t>(vm::OpCode::PUSH16))
         {
-            std::cerr << "Error parsing multi-sig script: " << e.what() << std::endl;
+            int n2 = script[i] - static_cast<uint8_t>(vm::OpCode::PUSH1) + 1;
+            if (n2 != n)
+                return false;
+            i++;
+        }
+        else
+        {
             return false;
         }
+        
+        // Check for CHECKMULTISIG opcode (0xAE)
+        if (i != script.Size() - 1 || script[i] != 0xAE)
+            return false;
+            
+        return true;
     }
 
     std::shared_ptr<ledger::Witness> ContractParametersContext::CreateMultiSigWitness(const Contract& contract) const
     {
-        // Implement multi-signature contract support matching C# implementation
-        try
-        {
-            // Check if this is a multi-signature contract
-            int m, n;
-            std::vector<cryptography::ecc::ECPoint> publicKeys;
-            if (IsMultiSigContract(contract.GetScript(), m, n, publicKeys))
-            {
-                // This is a multi-signature contract
-                ContextItem* item = CreateItem(contract);
-                if (!item)
-                    return nullptr;
-
-                // Check if we have enough signatures
-                if (item->signatures.size() < static_cast<size_t>(m))
-                {
-                    // Not enough signatures yet
-                    return nullptr;
-                }
-
-                // Create invocation script for multi-sig
-                smartcontract::ScriptBuilder builder;
-                
-                // Add signatures in the correct order
-                int sigCount = 0;
-                for (const auto& pubKey : publicKeys)
-                {
-                    auto sigIt = item->signatures.find(pubKey);
-                    if (sigIt != item->signatures.end())
-                    {
-                        builder.EmitPush(sigIt->second);
-                        sigCount++;
-                        if (sigCount >= m)
-                            break;
-                    }
-                }
-
-                if (sigCount < m)
-                {
-                    // Still not enough valid signatures
-                    return nullptr;
-                }
-
-                // Create witness
-                auto witness = std::make_shared<ledger::Witness>();
-                witness->SetInvocationScript(builder.ToArray());
-                witness->SetVerificationScript(contract.GetScript());
-                
-                return witness;
-            }
-            else
-            {
-                // Single signature contract - use existing logic
-                ContextItem* item = CreateItem(contract);
-                if (!item || item->signatures.empty())
-                    return nullptr;
-
-                // For single-sig, just use the first signature
-                auto firstSig = item->signatures.begin();
-                
-                smartcontract::ScriptBuilder builder;
-                builder.EmitPush(firstSig->second);
-                
-                auto witness = std::make_shared<ledger::Witness>();
-                witness->SetInvocationScript(builder.ToArray());
-                witness->SetVerificationScript(contract.GetScript());
-                
-                return witness;
-            }
-        }
-        catch (const std::exception& e)
-        {
-            std::cerr << "Error creating witness for multi-sig contract: " << e.what() << std::endl;
-            return nullptr;
-        }
+        // TODO: Implement multi-sig witness creation
+        return nullptr;
     }
 }

@@ -2,7 +2,8 @@
 
 # Create RPC library
 add_library(neo_rpc OBJECT
-    rpc_server_simple.cpp
+    rpc_server_complete.cpp
+    rpc_methods_complete.cpp
 )
 
 # Set include directories

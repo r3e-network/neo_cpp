@@ -10,8 +10,14 @@ target_link_libraries(neo_cli_tool PRIVATE
     neo_core 
     neo_persistence 
     neo_ledger 
+    neo_blockchain
     neo_rpc 
     neo_smartcontract
+    neo_native_contracts
+    neo_network
+    neo_node
+    neo_wallets
+    # neo_wallets_nep6  # Disabled - has too many dependencies
     neo_cryptography
     neo_io
     neo_logging
@@ -33,6 +39,7 @@ target_link_libraries(test_rpc_server PRIVATE
     neo_persistence 
     neo_ledger 
     neo_smartcontract
+    neo_native_contracts
 )
 
 # Install

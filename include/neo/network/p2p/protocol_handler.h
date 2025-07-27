@@ -2,17 +2,23 @@
 
 #include <neo/core/logging.h>
 #include <neo/network/p2p/message.h>
-#include <neo/network/p2p/payloads/version.h>
-#include <neo/network/p2p/payloads/addr.h>
-#include <neo/network/p2p/payloads/ping.h>
-#include <neo/network/p2p/payloads/headers.h>
-#include <neo/network/p2p/payloads/block.h>
-#include <neo/network/p2p/payloads/transaction.h>
-#include <neo/network/p2p/payloads/inventory.h>
+#include <neo/network/p2p/payloads/version_payload.h>
+#include <neo/network/p2p/payloads/addr_payload.h>
+#include <neo/network/p2p/payloads/ping_payload.h>
+#include <neo/network/p2p/payloads/headers_payload.h>
+#include <neo/network/p2p/payloads/block_payload.h>
+#include <neo/network/p2p/payloads/transaction_payload.h>
+#include <neo/network/p2p/payloads/inv_payload.h>
+#include <neo/network/p2p/payloads/get_headers_payload.h>
+#include <neo/network/p2p/payloads/get_blocks_payload.h>
+#include <neo/network/p2p/payloads/get_block_by_index_payload.h>
+#include <neo/network/p2p/payloads/get_data_payload.h>
+#include <neo/network/p2p/payloads/iinventory.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/ledger/memory_pool.h>
 #include <functional>
 #include <memory>
+#include <unordered_set>
 
 namespace neo::network::p2p
 {
@@ -132,22 +138,22 @@ namespace neo::network::p2p
         
     private:
         // Message handlers
-        void HandleVersion(const io::UInt256& peer_id, const VersionPayload& payload);
+        void HandleVersion(const io::UInt256& peer_id, const payloads::VersionPayload& payload);
         void HandleVerack(const io::UInt256& peer_id);
         void HandleGetAddr(const io::UInt256& peer_id);
-        void HandleAddr(const io::UInt256& peer_id, const AddrPayload& payload);
-        void HandlePing(const io::UInt256& peer_id, const PingPayload& payload);
-        void HandlePong(const io::UInt256& peer_id, const PongPayload& payload);
-        void HandleGetHeaders(const io::UInt256& peer_id, const GetHeadersPayload& payload);
-        void HandleHeaders(const io::UInt256& peer_id, const HeadersPayload& payload);
-        void HandleGetBlocks(const io::UInt256& peer_id, const GetBlocksPayload& payload);
-        void HandleGetData(const io::UInt256& peer_id, const GetDataPayload& payload);
-        void HandleGetBlockByIndex(const io::UInt256& peer_id, const GetBlockByIndexPayload& payload);
-        void HandleInv(const io::UInt256& peer_id, const InvPayload& payload);
-        void HandleBlock(const io::UInt256& peer_id, const BlockPayload& payload);
-        void HandleTransaction(const io::UInt256& peer_id, const TransactionPayload& payload);
+        void HandleAddr(const io::UInt256& peer_id, const payloads::AddrPayload& payload);
+        void HandlePing(const io::UInt256& peer_id, const payloads::PingPayload& payload);
+        void HandlePong(const io::UInt256& peer_id, const payloads::PingPayload& payload);  // Note: Pong uses PingPayload
+        void HandleGetHeaders(const io::UInt256& peer_id, const payloads::GetHeadersPayload& payload);
+        void HandleHeaders(const io::UInt256& peer_id, const payloads::HeadersPayload& payload);
+        void HandleGetBlocks(const io::UInt256& peer_id, const payloads::GetBlocksPayload& payload);
+        void HandleGetData(const io::UInt256& peer_id, const payloads::InvPayload& payload);  // GetData uses InvPayload format
+        void HandleGetBlockByIndex(const io::UInt256& peer_id, const payloads::GetBlockByIndexPayload& payload);
+        void HandleInv(const io::UInt256& peer_id, const payloads::InvPayload& payload);
+        void HandleBlock(const io::UInt256& peer_id, const payloads::BlockPayload& payload);
+        void HandleTransaction(const io::UInt256& peer_id, const payloads::TransactionPayload& payload);
         void HandleMempool(const io::UInt256& peer_id);
-        void HandleNotFound(const io::UInt256& peer_id, const NotFoundPayload& payload);
+        void HandleNotFound(const io::UInt256& peer_id, const payloads::InvPayload& payload);  // NotFound uses InvPayload format
         
         /**
          * @brief Check if peer is handshaked
@@ -172,7 +178,7 @@ namespace neo::network::p2p
         /**
          * @brief Relay inventory
          */
-        void RelayInventory(InventoryType type, const io::UInt256& hash, const io::UInt256& source_peer);
+        void RelayInventory(payloads::InventoryType type, const io::UInt256& hash, const io::UInt256& source_peer);
         
         /**
          * @brief Send reject message

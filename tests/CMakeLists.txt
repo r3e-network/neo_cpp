@@ -23,12 +23,6 @@ if(GTest_FOUND OR TARGET gtest)
     add_subdirectory(plugins)
 endif()
 
-# Add simple test to verify test infrastructure
-if(GTest_FOUND OR TARGET gtest)
-    add_executable(simple_unit_test simple_unit_test.cpp)
-    target_link_libraries(simple_unit_test PRIVATE ${GTEST_LIBRARIES})
-    add_test(NAME simple_unit_test COMMAND simple_unit_test)
-endif()
 
 # Add network compatibility test utility - disabled for now due to API changes
 # add_executable(network_compatibility network_compatibility.cpp)

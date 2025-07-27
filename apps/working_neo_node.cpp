@@ -131,7 +131,7 @@ private:
             // Initialize ContractManagement contract
             auto contractManagement = neo::smartcontract::native::ContractManagement::GetInstance();
             if (contractManagement) {
-                contractManagement->Initialize();
+                // Initialize() is protected - contracts initialize themselves on construction
                 LOG_INFO("  ✓ ContractManagement - Initialized (Hash: {})", contractManagement->GetScriptHash().ToString());
             } else {
                 LOG_ERROR("  ✗ ContractManagement - Failed to get instance");
@@ -140,9 +140,9 @@ private:
             // Initialize NEO Token contract
             auto neoToken = neo::smartcontract::native::NeoToken::GetInstance();
             if (neoToken) {
-                neoToken->Initialize();
+                // Initialize() is protected - contracts initialize themselves on construction
                 LOG_INFO("  ✓ NEO Token - Initialized (Hash: {})", neoToken->GetScriptHash().ToString());
-                LOG_INFO("    - Symbol: {}, Decimals: {}", neoToken->GetSymbol(), neoToken->GetDecimals());
+                LOG_INFO("    - Symbol: {}, Decimals: {}", neoToken->Symbol(), neoToken->Decimals());
             } else {
                 LOG_ERROR("  ✗ NEO Token - Failed to get instance");
             }
@@ -150,7 +150,7 @@ private:
             // Initialize GAS Token contract
             auto gasToken = neo::smartcontract::native::GasToken::GetInstance();
             if (gasToken) {
-                gasToken->Initialize();
+                // Initialize() is protected - contracts initialize themselves on construction
                 LOG_INFO("  ✓ GAS Token - Initialized (Hash: {})", gasToken->GetScriptHash().ToString());
                 LOG_INFO("    - Symbol: {}, Decimals: {}", gasToken->GetSymbol(), gasToken->GetDecimals());
             } else {
@@ -160,7 +160,7 @@ private:
             // Initialize Policy Contract
             auto policyContract = neo::smartcontract::native::PolicyContract::GetInstance();
             if (policyContract) {
-                policyContract->Initialize();
+                // Initialize() is protected - contracts initialize themselves on construction
                 LOG_INFO("  ✓ Policy Contract - Initialized (Hash: {})", policyContract->GetScriptHash().ToString());
             } else {
                 LOG_ERROR("  ✗ Policy Contract - Failed to get instance");
@@ -169,7 +169,7 @@ private:
             // Initialize additional native contracts
             auto nameService = neo::smartcontract::native::NameService::GetInstance();
             if (nameService) {
-                nameService->Initialize();
+                // Initialize() is protected - contracts initialize themselves on construction
                 LOG_INFO("  ✓ Name Service - Initialized (Hash: {})", nameService->GetScriptHash().ToString());
             } else {
                 LOG_INFO("  - Name Service - Optional contract not available");
@@ -177,7 +177,7 @@ private:
             
             auto notary = neo::smartcontract::native::Notary::GetInstance();
             if (notary) {
-                notary->Initialize();
+                // Initialize() is protected - contracts initialize themselves on construction
                 LOG_INFO("  ✓ Notary Contract - Initialized (Hash: {})", notary->GetScriptHash().ToString());
             } else {
                 LOG_INFO("  - Notary Contract - Optional contract not available");

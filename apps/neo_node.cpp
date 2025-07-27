@@ -176,7 +176,7 @@ private:
                     } catch (const std::exception& e) {
                         LOG_ERROR("Failed to load wallet keypair: {}", e.what());
                         LOG_INFO("Falling back to temporary keypair generation");
-                        consensus_keypair = std::make_unique<cryptography::ecc::KeyPair>(cryptography::ecc::Secp256r1::GenerateKeyPair());
+                        consensus_keypair = cryptography::ecc::KeyPair::Generate();
                     }
                 } else {
                     // Generate secure keypair for testing/development
@@ -191,22 +191,22 @@ private:
                 
                 // Initialize consensus service with complete dBFT implementation
                 try {
-                    consensus_ = CreateConsensusService(
-                        neo_system_,
-                        std::move(consensus_keypair),
-                        config.consensus
-                    );
+                    // TODO: Consensus service disabled - requires neo_system_ integration
+                    // consensus_ = CreateConsensusService(
+                    //     neo_system_,
+                    //     std::move(consensus_keypair),
+                    //     config.consensus
+                    // );
                     
-                    if (!consensus_) {
-                        throw std::runtime_error("Failed to create consensus service");
-                    }
+                    // if (!consensus_) {
+                    //     throw std::runtime_error("Failed to create consensus service");
+                    // }
                     
-                    // Start consensus service
-                    consensus_->Start();
+                    // // Start consensus service
+                    // consensus_->Start();
                     
-                    LOG_INFO("dBFT consensus service fully initialized and active");
-                    LOG_INFO("Consensus node ready for block production and validation");
-                    LOG_INFO("Consensus address: {}", consensus_->GetConsensusAddress().ToString());
+                    LOG_INFO("Consensus service temporarily disabled in simplified node");
+                    LOG_INFO("Node running as observer only");
                     
                 } catch (const std::exception& e) {
                     LOG_ERROR("Failed to initialize consensus service: {}", e.what());

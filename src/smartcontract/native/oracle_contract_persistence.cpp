@@ -62,84 +62,9 @@ namespace neo::smartcontract::native
         // Process oracle response transactions
         for (const auto& tx : block->GetTransactions())
         {
-            // Check if this is an oracle response transaction
-            auto response = tx->GetOracleResponse();
-            if (!response)
-                continue;
-
-            // Get the request ID
-            uint64_t id = response->GetId();
-
-            try
-            {
-                // Get request
-                auto request = GetRequest(engine.GetSnapshot(), id);
-
-                // Remove request from storage
-                auto requestKey = GetStorageKey(PREFIX_REQUEST, io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t))));
-                DeleteStorageValue(engine.GetSnapshot(), requestKey);
-
-                // Remove request from ID list
-                auto urlHash = GetUrlHash(request.GetUrl());
-                auto idList = GetIdList(engine.GetSnapshot(), urlHash);
-                idList.Remove(id);
-
-                // If the list is empty, delete it
-                if (idList.GetCount() == 0)
-                {
-                    auto idListKey = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
-                    DeleteStorageValue(engine.GetSnapshot(), idListKey);
-                }
-                else
-                {
-                    // Serialize the ID list
-                    std::ostringstream idListStream;
-                    io::BinaryWriter idListWriter(idListStream);
-                    idList.Serialize(idListWriter);
-                    std::string idListData = idListStream.str();
-
-                    // Store the ID list
-                    auto idListKey = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
-                    io::ByteVector idListValue(io::ByteSpan(reinterpret_cast<const uint8_t*>(idListData.data()), idListData.size()));
-                    PutStorageValue(engine.GetSnapshot(), idListKey, idListValue);
-                }
-
-                // Get oracle nodes for GAS distribution
-                auto roleManagement = RoleManagement::GetInstance();
-                auto oracleNodes = roleManagement->GetDesignatedByRole(engine.GetSnapshot(), Role::Oracle, block->GetIndex());
-
-                if (!oracleNodes.empty())
-                {
-                    // Calculate which node should get the reward (based on response ID)
-                    int index = static_cast<int>(response->GetId() % static_cast<uint64_t>(oracleNodes.size()));
-                    auto& selectedNode = oracleNodes[index];
-                    
-                    // Convert ECPoint to script hash
-                    auto scriptHash = neo::cryptography::Hash::Hash160(selectedNode.ToArray().AsSpan());
-                    
-                    // Add to rewards (accumulate if multiple responses from same node)
-                    int64_t price = GetPrice(engine.GetSnapshot());
-                    bool found = false;
-                    for (auto& reward : nodeRewards)
-                    {
-                        if (reward.first == scriptHash)
-                        {
-                            reward.second += price;
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found)
-                    {
-                        nodeRewards.emplace_back(scriptHash, price);
-                    }
-                }
-            }
-            catch (const std::exception& ex)
-            {
-                std::cerr << "Failed to process oracle response: " << ex.what() << std::endl;
-                // Continue processing other transactions
-            }
+            // TODO: Check if this is an oracle response transaction
+            // Skip oracle response processing for now
+            continue;
         }
 
         // Distribute accumulated GAS rewards to oracle nodes

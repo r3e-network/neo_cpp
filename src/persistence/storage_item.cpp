@@ -54,4 +54,11 @@ namespace neo::persistence
     {
         return !(*this == other);
     }
+
+    bool StorageItem::IsConstant() const
+    {
+        // In the current implementation, storage items are not marked as constant
+        // This could be extended in the future to support read-only storage
+        return false;
+    }
 }

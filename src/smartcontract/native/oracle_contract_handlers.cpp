@@ -170,61 +170,16 @@ namespace neo::smartcontract::native
 
     std::shared_ptr<vm::StackItem> OracleContract::OnFinish(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
-        // Get the transaction
-        auto scriptContainer = engine.GetScriptContainer();
-        auto tx = dynamic_cast<const ledger::Transaction*>(scriptContainer);
-        if (!tx)
-            throw std::runtime_error("Not a transaction");
-
-        // Get oracle response attribute
-        auto response = tx->GetOracleResponse();
-        if (!response)
-            throw std::runtime_error("Oracle response was not found");
-
-        // Get the request
-        auto request = GetRequest(engine.GetSnapshot(), response->GetId());
-
-        // Send notification with response ID and original txid
-        std::vector<std::shared_ptr<vm::StackItem>> notificationArgs;
-        notificationArgs.push_back(vm::StackItem::Create(static_cast<int64_t>(response->GetId())));
-        notificationArgs.push_back(vm::StackItem::Create(io::ByteVector(request.GetOriginalTxid().AsSpan())));
-        engine.Notify(GetScriptHash(), "OracleResponse", notificationArgs);
-
-        // Prepare callback arguments
-        std::vector<std::shared_ptr<vm::StackItem>> callbackArgs;
-        callbackArgs.push_back(vm::StackItem::Create(request.GetUrl()));
-        callbackArgs.push_back(vm::StackItem::Create(request.GetUserData()));
-        callbackArgs.push_back(vm::StackItem::Create(static_cast<int64_t>(response->GetCode())));
-        callbackArgs.push_back(vm::StackItem::Create(std::string(reinterpret_cast<const char*>(response->GetResult().Data()), response->GetResult().Size())));
-
-        // Set gas limit for callback
-        engine.AddGas(request.GetGasForResponse());
-
-        // Call callback contract
-        try
-        {
-            engine.CallContract(request.GetCallbackContract(), request.GetCallbackMethod(), callbackArgs, CallFlags::All);
-        }
-        catch (const std::exception& ex)
-        {
-            std::cerr << "Callback failed: " << ex.what() << std::endl;
-            // Continue execution even if callback fails
-        }
-
-        return vm::StackItem::Create(true);
+        // TODO: Implement oracle response finishing
+        // This requires GetOracleResponse method in transactions
+        throw std::runtime_error("Oracle response handling not implemented");
     }
 
     std::shared_ptr<vm::StackItem> OracleContract::OnVerify(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
     {
-        // Check if this is a valid oracle response transaction
-        auto scriptContainer = engine.GetScriptContainer();
-        auto tx = dynamic_cast<const ledger::Transaction*>(scriptContainer);
-        if (!tx)
-            return vm::StackItem::Create(false);
-
-        // Check for oracle response attribute
-        auto response = tx->GetOracleResponse();
-        return vm::StackItem::Create(response != nullptr);
+        // TODO: Implement oracle response verification
+        // This requires GetOracleResponse method in transactions
+        return vm::StackItem::Create(false);
     }
 
     bool OracleContract::CheckCommittee(ApplicationEngine& engine) const
@@ -262,20 +217,8 @@ namespace neo::smartcontract::native
         if (!tx)
             return io::UInt256();
 
-        // Get the oracle response attribute
-        auto response = tx->GetOracleResponse();
-        if (!response)
-            return tx->GetHash();
-
-        // Get the request and return its original txid
-        try
-        {
-            auto request = GetRequest(engine.GetSnapshot(), response->GetId());
-            return request.GetOriginalTxid();
-        }
-        catch (const std::exception&)
-        {
-            return tx->GetHash();
-        }
+        // TODO: Implement oracle response attribute handling
+        // For now, return the transaction hash
+        return tx->GetHash();
     }
 }

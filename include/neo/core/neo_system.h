@@ -211,6 +211,18 @@ public:
      * @return A store cache for read/write operations
      */
     std::unique_ptr<persistence::StoreCache> get_snapshot_cache();
+    
+    /**
+     * @brief Gets the underlying store.
+     * @return Pointer to the store
+     */
+    persistence::IStore* GetStore() const { return store_.get(); }
+    
+    /**
+     * @brief Gets the memory pool.
+     * @return Pointer to the memory pool
+     */
+    ledger::MemoryPool* GetMemPool() const { return mem_pool_.get(); }
 
     // Transaction operations
     /**

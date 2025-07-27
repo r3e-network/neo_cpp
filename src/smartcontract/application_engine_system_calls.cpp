@@ -65,5 +65,6 @@ namespace neo::smartcontract
         RegisterContractSystemCalls(*this);
         RegisterCryptoSystemCalls(*this);
         RegisterJsonSystemCalls(*this);
+        RegisterBinarySystemCalls(*this);
     }
 }

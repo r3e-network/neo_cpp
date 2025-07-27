@@ -16,38 +16,13 @@
 #include <vector>
 #include <functional>
 #include <cstdint>
+#include <neo/smartcontract/call_flags.h>
 
 namespace neo {
 namespace smartcontract {
 
 class ApplicationEngine;
 class InteropParameterDescriptor;
-
-/**
- * @brief Represents the call flags for interop services.
- */
-enum class CallFlags : uint8_t {
-    None = 0,
-    ReadStates = 0b00000001,
-    WriteStates = 0b00000010,
-    AllowCall = 0b00000100,
-    AllowNotify = 0b00001000,
-    States = ReadStates | WriteStates,
-    ReadOnly = ReadStates | AllowCall,
-    All = States | AllowCall | AllowNotify
-};
-
-inline CallFlags operator|(CallFlags a, CallFlags b) {
-    return static_cast<CallFlags>(static_cast<uint8_t>(a) | static_cast<uint8_t>(b));
-}
-
-inline CallFlags operator&(CallFlags a, CallFlags b) {
-    return static_cast<CallFlags>(static_cast<uint8_t>(a) & static_cast<uint8_t>(b));
-}
-
-inline bool operator!=(CallFlags a, CallFlags b) {
-    return static_cast<uint8_t>(a) != static_cast<uint8_t>(b);
-}
 
 /**
  * @brief Represents a descriptor for an interoperable service.

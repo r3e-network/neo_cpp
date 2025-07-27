@@ -328,6 +328,22 @@ namespace neo::persistence
         return key_ < other.key_;
     }
 
+    bool StorageKey::Equals(const StorageKey& other) const
+    {
+        return *this == other;
+    }
+
+    int StorageKey::CompareTo(const StorageKey& other) const
+    {
+        if (id_ < other.id_) return -1;
+        if (id_ > other.id_) return 1;
+        
+        if (key_ < other.key_) return -1;
+        if (key_ > other.key_) return 1;
+        
+        return 0;
+    }
+
     io::ByteVector StorageKey::CreateSearchPrefix(int32_t id, const std::span<const uint8_t>& prefix)
     {
         io::ByteVector result;
@@ -372,5 +388,63 @@ namespace neo::persistence
         
         // Write prefix
         data[4] = prefix;
+    }
+
+    void StorageKey::DeserializeFromArray(const std::span<const uint8_t>& data)
+    {
+        if (data.size() < 4) {
+            throw std::invalid_argument("Data too short for contract ID");
+        }
+        
+        // Read contract ID (little-endian)
+        id_ = static_cast<int32_t>(data[0]) |
+              (static_cast<int32_t>(data[1]) << 8) |
+              (static_cast<int32_t>(data[2]) << 16) |
+              (static_cast<int32_t>(data[3]) << 24);
+        
+        // Read key data
+        if (data.size() > 4) {
+            key_.Clear();
+            key_.Reserve(data.size() - 4);
+            for (size_t i = 4; i < data.size(); ++i) {
+                key_.Push(data[i]);
+            }
+        } else {
+            key_.Clear();
+        }
+        
+        // Reset cached values
+        cacheValid_ = false;
+        scriptHash_.reset();
+        requiresLookup_ = false;
+    }
+
+    io::UInt160 StorageKey::GetScriptHash() const
+    {
+        if (scriptHash_.has_value()) {
+            return scriptHash_.value();
+        }
+        
+        // For Neo N3, we need to resolve contract ID to script hash
+        // This would normally require blockchain state access
+        // For now, we'll create a placeholder implementation
+        
+        // Convert contract ID to a UInt160 as a placeholder
+        // In a real implementation, this would query the ContractManagement contract
+        io::ByteVector hashData(20);
+        
+        // Use contract ID as part of the hash
+        hashData[0] = static_cast<uint8_t>(id_ & 0xFF);
+        hashData[1] = static_cast<uint8_t>((id_ >> 8) & 0xFF);
+        hashData[2] = static_cast<uint8_t>((id_ >> 16) & 0xFF);
+        hashData[3] = static_cast<uint8_t>((id_ >> 24) & 0xFF);
+        
+        // Fill remaining bytes with a pattern based on contract ID
+        for (size_t i = 4; i < 20; ++i) {
+            hashData[i] = static_cast<uint8_t>((id_ + i) & 0xFF);
+        }
+        
+        scriptHash_ = io::UInt160(hashData.AsSpan());
+        return scriptHash_.value();
     }
 }

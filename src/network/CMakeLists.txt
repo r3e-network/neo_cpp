@@ -1,26 +1,27 @@
 # Create the network library
 add_library(neo_network OBJECT
+    stubs.cpp  # Temporary stubs for linking
     ip_endpoint.cpp
     message.cpp
     tcp_server.cpp
     # p2p_server.cpp # Temporarily disabled due to type conflicts
     upnp.cpp
-    # p2p/message.cpp # Temporarily disabled due to namespace issues
+    # p2p/message.cpp # Temporarily disabled - needs major refactoring
     p2p/node_capability.cpp
     p2p/network_address.cpp
     p2p/inventory_vector.cpp
     p2p/connection.cpp
     p2p/tcp_connection.cpp
     p2p/remote_node.cpp
-    # p2p/local_node.cpp # Temporarily disabled 
+    p2p/local_node.cpp
     # p2p/local_node_connection.cpp # Temporarily disabled due to missing Transaction
     # p2p/local_node_messaging.cpp # Temporarily disabled
     p2p/peer.cpp
     p2p/peer_list.cpp
-    p2p/task_manager.cpp # Re-enabled with memory pool implementation
-    p2p/transaction_router.cpp # Re-enabled with memory pool implementation
+    # p2p/task_manager.cpp # Disabled - needs major refactoring
+    # p2p/transaction_router.cpp # Disabled - needs major refactoring
     p2p/channels_config.cpp
-    p2p/payloads/extensible_payload.cpp
+    # p2p/payloads/extensible_payload.cpp # Disabled - has compilation errors
     p2p/payloads/merkle_block_payload.cpp
     p2p/payloads/oracle_response.cpp
     p2p/payloads/addr_payload.cpp
@@ -32,7 +33,7 @@ add_library(neo_network OBJECT
     p2p/payloads/version_payload.cpp
     p2p/payloads/verack_payload.cpp
     p2p/payloads/transaction_payload.cpp
-    p2p/payloads/block_payload.cpp
+    # p2p/payloads/block_payload.cpp # Disabled - missing SerializeJson
     p2p/payloads/filter_load_payload.cpp
     p2p/payloads/filter_add_payload.cpp
     p2p/payloads/filter_clear_payload.cpp

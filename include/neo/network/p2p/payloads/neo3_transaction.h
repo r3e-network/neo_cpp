@@ -53,7 +53,7 @@ namespace neo::network::p2p::payloads
         int64_t networkFee_; // In the unit of datoshi, 1 datoshi = 1e-8 GAS
         uint32_t validUntilBlock_;
         std::vector<ledger::Signer> signers_;
-        std::vector<std::shared_ptr<ledger::TransactionAttributeBase>> attributes_;
+        std::vector<std::shared_ptr<ledger::TransactionAttribute>> attributes_;
         io::ByteVector script_;
         std::vector<ledger::Witness> witnesses_;
 
@@ -68,6 +68,11 @@ namespace neo::network::p2p::payloads
          * @brief Constructs an empty Neo3Transaction.
          */
         Neo3Transaction();
+
+        /**
+         * @brief Destructor.
+         */
+        ~Neo3Transaction() override;
 
         /**
          * @brief Gets the version.
@@ -152,13 +157,13 @@ namespace neo::network::p2p::payloads
          * @brief Gets the attributes.
          * @return The attributes.
          */
-        const std::vector<std::shared_ptr<ledger::TransactionAttributeBase>>& GetAttributes() const;
+        const std::vector<std::shared_ptr<ledger::TransactionAttribute>>& GetAttributes() const;
 
         /**
          * @brief Sets the attributes.
          * @param attributes The attributes.
          */
-        void SetAttributes(const std::vector<std::shared_ptr<ledger::TransactionAttributeBase>>& attributes);
+        void SetAttributes(const std::vector<std::shared_ptr<ledger::TransactionAttribute>>& attributes);
 
         /**
          * @brief Gets the script.
@@ -339,8 +344,14 @@ namespace neo::network::p2p::payloads
         void CalculateHash() const;
         void CalculateSize() const;
         
+        // Helper methods for size calculation
+        int GetVarIntSize(size_t value) const;
+        int GetSignerSize(const ledger::Signer& signer) const;
+        int GetAttributeSize(const ledger::TransactionAttribute& attr) const;
+        int GetWitnessSize(const ledger::Witness& witness) const;
+        
         // Helper methods for deserialization
-        static std::vector<std::shared_ptr<ledger::TransactionAttributeBase>> DeserializeAttributes(
+        static std::vector<ledger::TransactionAttribute> DeserializeAttributes(
             io::BinaryReader& reader, int maxCount);
         static std::vector<ledger::Signer> DeserializeSigners(
             io::BinaryReader& reader, int maxCount);

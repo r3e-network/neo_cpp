@@ -7,24 +7,13 @@ add_library(neo_cryptography OBJECT
     merkletree.cpp
     base64.cpp
     base64url.cpp
+    base58.cpp
     lz4.cpp
 )
 
-# Optional BLS12_381 support
-option(ENABLE_BLS12_381 "Enable BLS12_381 cryptography support" OFF)
-if(ENABLE_BLS12_381)
-    target_sources(neo_cryptography PRIVATE bls12_381.cpp)
-    target_compile_definitions(neo_cryptography PUBLIC NEO_ENABLE_BLS12_381)
-
-    # Try to find blst library
-    find_library(BLST_LIBRARY blst)
-    if(BLST_LIBRARY)
-        target_link_libraries(neo_cryptography PUBLIC ${BLST_LIBRARY})
-        target_compile_definitions(neo_cryptography PRIVATE HAVE_BLST)
-    else()
-        message(WARNING "blst library not found, using mock BLS12_381 implementation")
-    endif()
-endif()
+# BLS12_381 support (always enabled for Neo compatibility)
+target_sources(neo_cryptography PRIVATE bls12_381_complete.cpp)
+target_compile_definitions(neo_cryptography PUBLIC NEO_ENABLE_BLS12_381)
 
 # Add MPTTrie subdirectory
 add_subdirectory(mpttrie)

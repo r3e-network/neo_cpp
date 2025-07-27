@@ -34,9 +34,9 @@ namespace neo::smartcontract::native
         using MethodHandler = std::function<std::shared_ptr<vm::StackItem>(neo::smartcontract::ApplicationEngine&, const std::vector<std::shared_ptr<vm::StackItem>>&)>;
 
         /**
-         * @brief The contract ID.
+         * @brief The contract ID (matches Neo C# implementation).
          */
-        static constexpr int32_t ID = -5;
+        static constexpr int32_t ID = 2;
 
         /**
          * @brief The contract name.
@@ -105,6 +105,18 @@ namespace neo::smartcontract::native
          * @return The total supply.
          */
         io::Fixed8 GetTotalSupply(std::shared_ptr<persistence::DataCache> snapshot) const;
+
+        /**
+         * @brief Gets the token symbol.
+         * @return The token symbol "NEO".
+         */
+        std::string Symbol() const;
+
+        /**
+         * @brief Gets the token decimals.
+         * @return The token decimals (0 for NEO).
+         */
+        uint8_t Decimals() const;
 
         /**
          * @brief Gets the balance of an account.

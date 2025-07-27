@@ -1,8 +1,9 @@
 #pragma once
 
 #include <neo/logging/logger.h>
-#include <neo/json/json.h>
+#include <neo/io/json.h>
 #include <neo/persistence/data_cache.h>
+#include <neo/network/p2p/local_node.h>
 #include <string>
 #include <vector>
 #include <functional>

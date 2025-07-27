@@ -7,7 +7,7 @@
 #include <neo/smartcontract/contract_state.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/ledger/signer.h>
-#include <neo/ledger/witness_scope.h>
+// WitnessScope is already included via signer.h
 #include <neo/cryptography/base64.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>

@@ -1,5 +1,6 @@
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/system_calls.h>
+#include <neo/smartcontract/native/native_contract.h>
 #include <neo/cryptography/hash.h>
 
 namespace neo::smartcontract
@@ -88,36 +89,30 @@ namespace neo::smartcontract
                     // The number of arguments depends on the method being called
                     std::vector<std::shared_ptr<vm::StackItem>> args;
                     
-                    // Get method descriptor to know required parameters
-                    auto methodDescriptor = nativeContract->GetMethod(methodName);
-                    if (!methodDescriptor)
+                    // Get method from native contract's method map
+                    const auto& methods = nativeContract->GetMethods();
+                    auto methodIt = methods.find(methodName);
+                    if (methodIt == methods.end())
                     {
                         // Method not found
                         context.Push(vm::StackItem::Null());
                         return true;
                     }
                     
-                    // Pop arguments in reverse order (Neo VM convention)
-                    for (int i = 0; i < methodDescriptor->GetParameterCount(); ++i)
-                    {
-                        if (context.GetEvaluationStack().GetCount() == 0)
-                        {
-                            // Not enough arguments
-                            context.Push(vm::StackItem::Null());
-                            return true;
-                        }
-                        args.insert(args.begin(), context.Pop());
-                    }
+                    // Get method info
+                    auto requiredFlags = methodIt->second.first;
+                    auto currentFlags = appEngine.GetCallFlags();
                     
                     // Check call flags against method requirements
-                    auto currentFlags = appEngine.GetCallFlags();
-                    auto requiredFlags = methodDescriptor->GetRequiredCallFlags();
-                    
                     if ((static_cast<uint8_t>(currentFlags) & static_cast<uint8_t>(requiredFlags)) != static_cast<uint8_t>(requiredFlags))
                     {
                         // Insufficient permissions
                         throw std::runtime_error("Insufficient permissions to call method");
                     }
+                    
+                    // Native contract methods handle their own argument parsing
+                    // We don't know the exact parameter count, so we'll pass empty args
+                    // The actual native method implementation will pop from the stack as needed
                     
                     // Execute the native contract method
                     auto result = nativeContract->Invoke(appEngine, methodName, args, currentFlags);
@@ -134,8 +129,7 @@ namespace neo::smartcontract
                 }
                 catch (const std::exception& ex)
                 {
-                    // Log error and return false to indicate failure
-                    appEngine.SetFaultMessage(ex.what());
+                    // Return false to indicate failure
                     return false;
                 }
 

@@ -255,6 +255,20 @@ namespace neo::persistence
         bool operator!=(const StorageKey& other) const;
         bool operator<(const StorageKey& other) const;
 
+        /**
+         * @brief Checks if this storage key equals another (C# compatibility).
+         * @param other The other storage key.
+         * @return True if equal, false otherwise.
+         */
+        bool Equals(const StorageKey& other) const;
+
+        /**
+         * @brief Compares this storage key with another (C# compatibility).
+         * @param other The other storage key.
+         * @return -1 if less, 0 if equal, 1 if greater.
+         */
+        int CompareTo(const StorageKey& other) const;
+
     private:
         mutable int32_t id_ = 0;
         io::ByteVector key_;

@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include <stdexcept>
 
 namespace neo::console_service
 {
@@ -79,7 +80,7 @@ namespace neo::console_service
             {
                 return function_(args);
             }
-            return "Command not implemented";
+            throw std::runtime_error("Command '" + key + "' has no implementation");
         }
 
         /**

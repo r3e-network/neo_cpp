@@ -33,4 +33,10 @@ namespace neo::smartcontract
      * @param engine The application engine to register the system calls with.
      */
     void RegisterJsonSystemCalls(ApplicationEngine& engine);
+
+    /**
+     * @brief Registers all binary-related system calls.
+     * @param engine The application engine to register the system calls with.
+     */
+    void RegisterBinarySystemCalls(ApplicationEngine& engine);
 }

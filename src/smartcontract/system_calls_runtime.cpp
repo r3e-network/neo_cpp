@@ -301,29 +301,112 @@ namespace neo::smartcontract
             context.Push(vm::StackItem::Create(hashBytes));
             return true;
         }
+
+        bool HandleGetNotifications(vm::ExecutionEngine& engine)
+        {
+            auto& appEngine = static_cast<ApplicationEngine&>(engine);
+            auto& context = appEngine.GetCurrentContext();
+
+            // Get all notifications from the execution context
+            auto notifications = appEngine.GetNotifications();
+            
+            // Create an array to hold notifications
+            auto arrayItem = vm::StackItem::CreateArray();
+            auto array = std::dynamic_pointer_cast<vm::ArrayItem>(arrayItem);
+            
+            for (const auto& notification : notifications)
+            {
+                // Create a map for each notification
+                auto notifMap = vm::StackItem::CreateMap();
+                auto map = std::dynamic_pointer_cast<vm::MapItem>(notifMap);
+                
+                // Add script hash
+                std::vector<uint8_t> hashVector(notification.script_hash.Data(), 
+                                              notification.script_hash.Data() + io::UInt160::Size);
+                io::ByteVector hashBytes(hashVector.data(), hashVector.size());
+                map->Set(vm::StackItem::Create("scripthash"), vm::StackItem::Create(hashBytes));
+                
+                // Add event name
+                map->Set(vm::StackItem::Create("eventname"), vm::StackItem::Create(notification.event_name));
+                
+                // Add state (convert vector to array item)
+                auto stateArray = vm::StackItem::CreateArray();
+                auto stateArrayPtr = std::dynamic_pointer_cast<vm::ArrayItem>(stateArray);
+                for (const auto& item : notification.state)
+                {
+                    stateArrayPtr->Add(item);
+                }
+                map->Set(vm::StackItem::Create("state"), stateArray);
+                
+                array->Add(notifMap);
+            }
+            
+            context.Push(arrayItem);
+            return true;
+        }
+
+        bool HandleBurnGas(vm::ExecutionEngine& engine)
+        {
+            auto& appEngine = static_cast<ApplicationEngine&>(engine);
+            auto& context = appEngine.GetCurrentContext();
+
+            auto gasItem = context.Pop();
+            auto gas = gasItem->GetInteger();
+            
+            if (gas < 0)
+            {
+                // Invalid gas amount
+                return false;
+            }
+            
+            // Check if we have enough gas
+            if (appEngine.GetGasLeft() < gas)
+            {
+                // Not enough gas available
+                return false;
+            }
+            
+            // Burn the specified amount of gas by adding it to consumed
+            appEngine.AddGas(gas);
+            
+            return true;
+        }
+
+        bool HandleGetAddressVersion(vm::ExecutionEngine& engine)
+        {
+            auto& appEngine = static_cast<ApplicationEngine&>(engine);
+            auto& context = appEngine.GetCurrentContext();
+
+            // Neo address version byte is always 0x35 (53 in decimal)
+            // This is defined in the Neo protocol
+            constexpr uint8_t NEO_ADDRESS_VERSION = 0x35;
+            
+            context.Push(vm::StackItem::Create(static_cast<int64_t>(NEO_ADDRESS_VERSION)));
+            return true;
+        }
     }
 
     // This function provides the runtime system call handlers
     // The actual registration is handled in application_engine.cpp
-    void RegisterRuntimeSystemCalls(ApplicationEngine& /* engine */)
+    void RegisterRuntimeSystemCalls(ApplicationEngine& engine)
     {
-        // System call registration is handled in the ApplicationEngine constructor
-        // This function is kept for compatibility but doesn't register calls directly
-        
-        // Suppress unused function warnings by referencing them
-        (void)HandleGetTrigger;
-        (void)HandleCheckWitness;
-        (void)HandleNotify;
-        (void)HandleLog;
-        (void)HandleGetTime;
-        (void)HandleGetPlatform;
-        (void)HandleGetNetwork;
-        (void)HandleGetRandom;
-        (void)HandleGasLeft;
-        (void)HandleGetInvocationCounter;
-        (void)HandleGetScriptContainer;
-        (void)HandleGetExecutingScriptHash;
-        (void)HandleGetCallingScriptHash;
-        (void)HandleGetEntryScriptHash;
+        // Register System.Runtime.* system calls
+        engine.RegisterSystemCall("System.Runtime.GetTrigger", HandleGetTrigger, 250, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.CheckWitness", HandleCheckWitness, 1000, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.Notify", HandleNotify, 300, CallFlags::AllowNotify);
+        engine.RegisterSystemCall("System.Runtime.Log", HandleLog, 300, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.GetTime", HandleGetTime, 250, CallFlags::ReadStates);
+        engine.RegisterSystemCall("System.Runtime.Platform", HandleGetPlatform, 250, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.GetNetwork", HandleGetNetwork, 250, CallFlags::ReadStates);
+        engine.RegisterSystemCall("System.Runtime.GetRandom", HandleGetRandom, 250, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.GasLeft", HandleGasLeft, 400, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.GetInvocationCounter", HandleGetInvocationCounter, 400, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.GetScriptContainer", HandleGetScriptContainer, 250, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.GetExecutingScriptHash", HandleGetExecutingScriptHash, 400, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.GetCallingScriptHash", HandleGetCallingScriptHash, 400, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.GetEntryScriptHash", HandleGetEntryScriptHash, 400, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.GetNotifications", HandleGetNotifications, 800, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.BurnGas", HandleBurnGas, 400, CallFlags::None);
+        engine.RegisterSystemCall("System.Runtime.GetAddressVersion", HandleGetAddressVersion, 250, CallFlags::None);
     }
 }

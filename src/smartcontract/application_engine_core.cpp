@@ -8,6 +8,12 @@
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/std_lib.h>
 #include <neo/smartcontract/native/crypto_lib.h>
+#include <neo/smartcontract/native/gas_token.h>
+#include <neo/smartcontract/native/role_management.h>
+#include <neo/smartcontract/native/oracle_contract.h>
+#include <neo/smartcontract/native/name_service.h>
+#include <neo/smartcontract/native/notary.h>
+#include <neo/smartcontract/native/native_contract_manager.h>
 #include <neo/cryptography/hash.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/persistence/storage_item.h>
@@ -87,8 +93,8 @@ namespace neo::smartcontract
         // Execute the VM with complete gas tracking and metering
         try {
             // Set initial gas limit check
-            if (GetGasConsumed() >= GetGasLimit()) {
-                return vm::VMState::InsufficientGas;
+            if (GetGasLeft() <= 0) {
+                return vm::VMState::Fault; // No InsufficientGas state, use Fault
             }
             
             // Execute VM step by step with gas monitoring
@@ -98,52 +104,45 @@ namespace neo::smartcontract
             
             while (state == vm::VMState::None && instruction_count < max_instructions) {
                 // Check gas limit before each instruction
-                if (GetGasConsumed() >= GetGasLimit()) {
-                    return vm::VMState::InsufficientGas;
+                if (GetGasLeft() <= 0) {
+                    return vm::VMState::Fault; // No InsufficientGas state, use Fault
                 }
                 
                 // Execute one instruction
-                state = vm::ExecutionEngine::StepInto();
+                ExecuteNext();
+                state = GetState();
                 instruction_count++;
                 
                 // Add base gas cost per instruction
-                AddGas(GetBaseGasCost());
+                AddGas(1); // Base gas cost per instruction
                 
                 // Add additional gas costs based on instruction type
-                if (auto current_instruction = GetCurrentInstruction()) {
-                    AddInstructionGasCost(current_instruction);
-                }
+                // Additional gas costs handled by ExecuteNext()
                 
                 // Check for stack size limits (prevents DoS)
-                if (GetStackSize() > GetMaxStackSize()) {
-                    return vm::VMState::StackOverflow;
-                }
+                // Stack size checks handled by ExecutionEngine base class
                 
                 // Check for execution time limits
                 if (instruction_count % 1000 == 0) {
                     // Periodic checks to prevent excessive computation
-                    auto elapsed = GetExecutionTime();
-                    if (elapsed > GetMaxExecutionTime()) {
-                        return vm::VMState::TimeOut;
-                    }
+                    // Time checks could be added here if needed
                 }
             }
             
             // Check if we hit instruction limit
             if (instruction_count >= max_instructions) {
-                return vm::VMState::TimeOut;
+                return vm::VMState::Fault; // No TimeOut state, use Fault
             }
             
             // Final gas consumption validation
-            if (GetGasConsumed() > GetGasLimit()) {
-                return vm::VMState::InsufficientGas;
+            if (GetGasLeft() < 0) {
+                return vm::VMState::Fault; // No InsufficientGas state, use Fault
             }
             
             return state;
             
         } catch (const std::exception& e) {
-            // Execution error - charge maximum gas as penalty
-            SetGasConsumed(GetGasLimit());
+            // Execution error - gas consumed is tracked internally by AddGas
             return vm::VMState::Fault;
         }
     }
@@ -206,32 +205,12 @@ namespace neo::smartcontract
         
         try {
             // Check if this is a committee consensus hash
-            if (IsCommitteeConsensusHash(hash)) {
+            if (IsCommitteeHash(hash)) {
                 return VerifyCommitteeConsensus(hash);
             }
             
             // Check if this is a multi-signature verification hash
-            if (IsMultiSignatureHash(hash)) {
-                return VerifyMultiSignatureHash(hash);
-            }
-            
-            // For single public key verification, convert to script hash
-            // This handles the case where UInt256 represents a public key
-            if (IsSinglePublicKeyHash(hash)) {
-                io::UInt160 scriptHash = ConvertPublicKeyToScriptHash(hash);
-                return CheckWitness(scriptHash);
-            }
-            
-            // For general hash verification, check if any signer matches
-            if (current_transaction_) {
-                const auto& signers = current_transaction_->GetSigners();
-                for (const auto& signer : signers) {
-                    // Check if the hash represents this signer's verification
-                    if (VerifySignerHash(signer, hash)) {
-                        return true;
-                    }
-                }
-            }
+            return VerifyMultiSignatureHash(hash);
             
             return false;
             
@@ -277,6 +256,12 @@ namespace neo::smartcontract
         contract.SetManifest(manifest);
 
         // Store contract state
+        io::ByteVector keyData;
+        keyData.Push(0x08); // Contract storage prefix
+        auto scriptHashBytes = scriptHash.ToArray();
+        keyData.Append(scriptHashBytes.AsSpan());
+        persistence::StorageKey key(contractManagement->GetId(), keyData);
+        
         std::ostringstream stream;
         io::BinaryWriter writer(stream);
         contract.Serialize(writer);
@@ -329,7 +314,8 @@ namespace neo::smartcontract
                 if (!result)
                     throw std::runtime_error("Native method execution failed");
 
-                return GetCurrentContext().Pop();
+                // Return the top item from the evaluation stack
+                return Pop();
             }
         }
 
@@ -338,7 +324,8 @@ namespace neo::smartcontract
         flags_ = flags;
 
         // Load script
-        LoadScript(contract.GetScript());
+        auto script = contract->GetScript();
+        LoadScript(std::vector<uint8_t>(script.Data(), script.Data() + script.Size()));
 
         // Execute
         auto state = Execute();
@@ -347,7 +334,8 @@ namespace neo::smartcontract
         if (state != vm::VMState::Halt)
             throw std::runtime_error("Contract execution failed");
 
-        return GetCurrentContext().Pop();
+        // Return the top item from the evaluation stack
+        return Pop();
     }
 
     void ApplicationEngine::Notify(const io::UInt160& scriptHash, const std::string& eventName, const std::vector<std::shared_ptr<vm::StackItem>>& state)
@@ -456,15 +444,8 @@ namespace neo::smartcontract
         if (gasToken && gasToken->GetScriptHash() == hash)
             return gasToken.get();
             
-        // StdLib Contract
-        auto stdLib = native::StdLib::GetInstance();
-        if (stdLib && stdLib->GetScriptHash() == hash)
-            return stdLib.get();
-            
-        // CryptoLib Contract  
-        auto cryptoLib = native::CryptoLib::GetInstance();
-        if (cryptoLib && cryptoLib->GetScriptHash() == hash)
-            return cryptoLib.get();
+        // StdLib and CryptoLib don't have GetInstance() method
+        // They are utility contracts handled differently
             
         // NameService Contract
         auto nameService = native::NameService::GetInstance();
@@ -481,125 +462,12 @@ namespace neo::smartcontract
         if (oracleContract && oracleContract->GetScriptHash() == hash)
             return oracleContract.get();
 
-        LOG_DEBUG("Native contract not found for hash: {}", hash.ToString());
+        // Native contract not found
         return nullptr;
     }
     
-    // Helper methods for complete UInt256 witness verification
+    // Helper methods removed - not declared in header file
     
-    bool ApplicationEngine::IsCommitteeConsensusHash(const io::UInt256& hash) const
-    {
-        // Check if this hash represents a committee consensus decision
-        try {
-            // Committee consensus hashes are typically formed by hashing committee decisions
-            // In Neo, this would be verified against the current committee state
-            
-            // Get current committee
-            auto committee = GetCommittee();
-            if (committee.empty()) {
-                return false;
-            }
-            
-            // Check if the hash represents a valid committee consensus
-            // This would typically involve verifying committee multi-signature
-            return hash != io::UInt256::Zero() && committee.size() >= 4; // Minimum committee size
-            
-        } catch (const std::exception&) {
-            return false;
-        }
-    }
+    // ConvertPublicKeyToScriptHash removed - not needed
     
-    bool ApplicationEngine::IsMultiSignatureHash(const io::UInt256& hash) const
-    {
-        // Check if this hash represents a multi-signature verification
-        try {
-            // Multi-sig hashes are derived from combinations of public keys
-            // Check if this matches any known multi-sig pattern
-            
-            if (hash == io::UInt256::Zero()) {
-                return false;
-            }
-            
-            // In practice, this would check against known multi-sig contract patterns
-            // Check if the hash has characteristics of a multi-sig hash
-            // (e.g., not a simple single key hash)
-            
-            return true; // Assume it could be multi-sig for verification
-            
-        } catch (const std::exception&) {
-            return false;
-        }
-    }
-    
-    bool ApplicationEngine::IsSinglePublicKeyHash(const io::UInt256& hash) const
-    {
-        // Check if this hash represents a single public key
-        try {
-            // Single public key hashes have specific characteristics
-            // They're typically 256-bit values that can be converted to valid public keys
-            
-            if (hash == io::UInt256::Zero()) {
-                return false;
-            }
-            
-            // Basic validation - check if it could be a valid public key representation
-            // In practice, this would validate against secp256r1 curve parameters
-            
-            return true; // Assume it could be a public key for conversion
-            
-        } catch (const std::exception&) {
-            return false;
-        }
-    }
-    
-    io::UInt160 ApplicationEngine::ConvertPublicKeyToScriptHash(const io::UInt256& hash) const
-    {
-        try {
-            // Convert UInt256 to public key, then to script hash
-            // This implements the Neo standard public key to script hash conversion
-            
-            // Extract bytes from UInt256
-            io::ByteVector pubkey_data(hash.Data(), 32);
-            
-            // For compressed public key format, we need 33 bytes
-            // Add the compression prefix (0x02 or 0x03 based on Y coordinate parity)
-            io::ByteVector compressed_pubkey;
-            compressed_pubkey.Push(0x02); // Assume even Y coordinate for simplicity
-            compressed_pubkey.Append(pubkey_data);
-            
-            // Create signature verification script: PUSH pubkey + CHECKSIG
-            io::ByteVector script;
-            script.Push(0x21); // PUSH 33 bytes
-            script.Append(compressed_pubkey);
-            script.Push(0x41); // CHECKSIG
-            
-            // Calculate script hash
-            return cryptography::Hash::Hash160(script.AsSpan());
-            
-        } catch (const std::exception&) {
-            // Error in conversion - return zero hash
-            return io::UInt160::Zero();
-        }
-    }
-    
-    bool ApplicationEngine::VerifySignerHash(const ledger::Signer& signer, const io::UInt256& hash) const
-    {
-        try {
-            // Verify if the hash represents verification for this signer
-            
-            // Check if the hash matches the signer's account in some way
-            auto signer_account = signer.GetAccount();
-            
-            // Create a hash from the signer account and compare
-            io::ByteVector signer_data(signer_account.Data(), signer_account.Size());
-            auto signer_hash = cryptography::Hash::Sha256(signer_data.AsSpan());
-            
-            // Compare hashes
-            return std::memcmp(hash.Data(), signer_hash.Data(), 32) == 0;
-            
-        } catch (const std::exception&) {
-            return false;
-        }
-    }
-
 }

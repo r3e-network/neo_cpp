@@ -15,52 +15,65 @@ namespace neo::cryptography
     io::UInt256 Hash::Sha256(const io::ByteSpan& data)
     {
         uint8_t hash[SHA256_DIGEST_LENGTH];
-        SHA256_CTX ctx;
-        SHA256_Init(&ctx);
-        SHA256_Update(&ctx, data.Data(), data.Size());
-        SHA256_Final(hash, &ctx);
+        EVP_MD_CTX* ctx = EVP_MD_CTX_new();
+        EVP_DigestInit_ex(ctx, EVP_sha256(), nullptr);
+        EVP_DigestUpdate(ctx, data.Data(), data.Size());
+        unsigned int hashLength;
+        EVP_DigestFinal_ex(ctx, hash, &hashLength);
+        EVP_MD_CTX_free(ctx);
         return io::UInt256(io::ByteSpan(hash, SHA256_DIGEST_LENGTH));
     }
 
     io::UInt160 Hash::Ripemd160(const io::ByteSpan& data)
     {
         uint8_t hash[RIPEMD160_DIGEST_LENGTH];
-        RIPEMD160_CTX ctx;
-        RIPEMD160_Init(&ctx);
-        RIPEMD160_Update(&ctx, data.Data(), data.Size());
-        RIPEMD160_Final(hash, &ctx);
+        EVP_MD_CTX* ctx = EVP_MD_CTX_new();
+        EVP_DigestInit_ex(ctx, EVP_ripemd160(), nullptr);
+        EVP_DigestUpdate(ctx, data.Data(), data.Size());
+        unsigned int hashLength;
+        EVP_DigestFinal_ex(ctx, hash, &hashLength);
+        EVP_MD_CTX_free(ctx);
         return io::UInt160(io::ByteSpan(hash, RIPEMD160_DIGEST_LENGTH));
     }
 
     io::UInt256 Hash::Hash256(const io::ByteSpan& data)
     {
         uint8_t hash[SHA256_DIGEST_LENGTH];
-        SHA256_CTX ctx;
-        SHA256_Init(&ctx);
-        SHA256_Update(&ctx, data.Data(), data.Size());
-        SHA256_Final(hash, &ctx);
+        EVP_MD_CTX* ctx = EVP_MD_CTX_new();
         
-        SHA256_Init(&ctx);
-        SHA256_Update(&ctx, hash, SHA256_DIGEST_LENGTH);
-        SHA256_Final(hash, &ctx);
+        // First SHA256
+        EVP_DigestInit_ex(ctx, EVP_sha256(), nullptr);
+        EVP_DigestUpdate(ctx, data.Data(), data.Size());
+        unsigned int hashLength;
+        EVP_DigestFinal_ex(ctx, hash, &hashLength);
         
+        // Second SHA256
+        EVP_DigestInit_ex(ctx, EVP_sha256(), nullptr);
+        EVP_DigestUpdate(ctx, hash, SHA256_DIGEST_LENGTH);
+        EVP_DigestFinal_ex(ctx, hash, &hashLength);
+        
+        EVP_MD_CTX_free(ctx);
         return io::UInt256(io::ByteSpan(hash, SHA256_DIGEST_LENGTH));
     }
 
     io::UInt160 Hash::Hash160(const io::ByteSpan& data)
     {
         uint8_t hash[SHA256_DIGEST_LENGTH];
-        SHA256_CTX sha256;
-        SHA256_Init(&sha256);
-        SHA256_Update(&sha256, data.Data(), data.Size());
-        SHA256_Final(hash, &sha256);
+        EVP_MD_CTX* ctx = EVP_MD_CTX_new();
         
+        // First SHA256
+        EVP_DigestInit_ex(ctx, EVP_sha256(), nullptr);
+        EVP_DigestUpdate(ctx, data.Data(), data.Size());
+        unsigned int hashLength;
+        EVP_DigestFinal_ex(ctx, hash, &hashLength);
+        
+        // Then RIPEMD160
         uint8_t ripemd[RIPEMD160_DIGEST_LENGTH];
-        RIPEMD160_CTX ripemd160;
-        RIPEMD160_Init(&ripemd160);
-        RIPEMD160_Update(&ripemd160, hash, SHA256_DIGEST_LENGTH);
-        RIPEMD160_Final(ripemd, &ripemd160);
+        EVP_DigestInit_ex(ctx, EVP_ripemd160(), nullptr);
+        EVP_DigestUpdate(ctx, hash, SHA256_DIGEST_LENGTH);
+        EVP_DigestFinal_ex(ctx, ripemd, &hashLength);
         
+        EVP_MD_CTX_free(ctx);
         return io::UInt160(io::ByteSpan(ripemd, RIPEMD160_DIGEST_LENGTH));
     }
 

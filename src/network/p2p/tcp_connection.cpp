@@ -1,6 +1,7 @@
 #include <neo/network/p2p/tcp_connection.h>
 #include <neo/network/p2p/message.h>
 #include <neo/io/byte_vector.h>
+#include <neo/core/logging.h>
 #include <boost/asio.hpp>
 #include <memory>
 #include <mutex>
@@ -90,8 +91,10 @@ namespace neo::network::p2p
             {
                 socket_.close();
             }
-            catch (const std::exception&)
+            catch (const std::exception& e)
             {
+                // Log the error but don't prevent disconnection
+                LOG_WARNING("Error while closing socket: {}", e.what());
             }
 
             OnDisconnected();

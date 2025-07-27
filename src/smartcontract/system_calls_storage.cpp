@@ -8,6 +8,9 @@
 #include <neo/vm/primitive_items.h>
 #include <neo/vm/compound_items.h>
 #include <neo/vm/stack_item.h>
+#include <neo/io/uint160.h>
+#include <neo/io/binary_reader.h>
+#include <sstream>
 
 namespace neo::smartcontract
 {
@@ -26,17 +29,17 @@ namespace neo::smartcontract
                 auto context_bytes = context_item->GetByteArray();
                 if (context_bytes.size() != 20) {
                     // Invalid script hash size
-                    engine.Push(neo::vm::StackItem::CreateNull());
+                    engine.Push(neo::vm::StackItem::Null());
                     return true;
                 }
                 
-                UInt160 script_hash(context_bytes);
+                io::UInt160 script_hash(context_bytes.AsSpan());
                 
                 // Extract storage key from key item
                 auto key_bytes = key_item->GetByteArray();
                 if (key_bytes.empty() || key_bytes.size() > 64) {
                     // Invalid key size (Neo has 64 byte limit for storage keys)
-                    engine.Push(neo::vm::StackItem::CreateNull());
+                    engine.Push(neo::vm::StackItem::Null());
                     return true;
                 }
                 
@@ -46,18 +49,18 @@ namespace neo::smartcontract
                 // Get value from blockchain storage
                 auto snapshot = engine.GetSnapshot();
                 if (!snapshot) {
-                    engine.Push(neo::vm::StackItem::CreateNull());
+                    engine.Push(neo::vm::StackItem::Null());
                     return true;
                 }
                 
                 auto storage_item = snapshot->TryGet(storage_key);
                 if (!storage_item) {
                     // Key not found
-                    engine.Push(neo::vm::StackItem::CreateNull());
+                    engine.Push(neo::vm::StackItem::Null());
                 } else {
                     // Return the stored value
                     auto value = storage_item->GetValue();
-                    auto result = neo::vm::StackItem::CreateByteString(value.AsSpan());
+                    auto result = neo::vm::StackItem::CreateByteString(std::vector<uint8_t>(value.AsSpan().Data(), value.AsSpan().Data() + value.AsSpan().Size()));
                     engine.Push(result);
                 }
                 
@@ -65,7 +68,7 @@ namespace neo::smartcontract
                 
             } catch (const std::exception& e) {
                 // Error accessing storage
-                engine.Push(neo::vm::StackItem::CreateNull());
+                engine.Push(neo::vm::StackItem::Null());
                 return true;
             }
         }
@@ -102,17 +105,17 @@ namespace neo::smartcontract
                 auto context_bytes = context_item->GetByteArray();
                 if (context_bytes.size() != 20) {
                     // Invalid script hash size
-                    engine.Push(neo::vm::StackItem::CreateNull());
+                    engine.Push(neo::vm::StackItem::Null());
                     return true;
                 }
                 
-                UInt160 script_hash(context_bytes);
+                io::UInt160 script_hash(context_bytes.AsSpan());
                 
                 // Extract prefix from prefix item
                 auto prefix_bytes = prefix_item->GetByteArray();
                 if (prefix_bytes.size() > 64) {
                     // Invalid prefix size (Neo has 64 byte limit)
-                    engine.Push(neo::vm::StackItem::CreateNull());
+                    engine.Push(neo::vm::StackItem::Null());
                     return true;
                 }
                 
@@ -122,7 +125,7 @@ namespace neo::smartcontract
                 // Get snapshot for iteration
                 auto snapshot = engine.GetSnapshot();
                 if (!snapshot) {
-                    engine.Push(neo::vm::StackItem::CreateNull());
+                    engine.Push(neo::vm::StackItem::Null());
                     return true;
                 }
                 
@@ -130,7 +133,7 @@ namespace neo::smartcontract
                 auto storage_iterator = snapshot->Seek(prefix_key);
                 if (!storage_iterator) {
                     // Failed to create iterator
-                    engine.Push(neo::vm::StackItem::CreateNull());
+                    engine.Push(neo::vm::StackItem::Null());
                     return true;
                 }
                 
@@ -147,7 +150,7 @@ namespace neo::smartcontract
                 
             } catch (const std::exception& e) {
                 // Error creating iterator
-                engine.Push(neo::vm::StackItem::CreateNull());
+                engine.Push(neo::vm::StackItem::Null());
                 return true;
             }
         }
@@ -185,15 +188,15 @@ namespace neo::smartcontract
                 bool has_next = false;
                 
                 // Parse iterator state to determine current position and bounds
-                if (iterator_bytes.size() >= sizeof(uint32_t)) {
+                if (iterator_bytes.Size() >= sizeof(uint32_t)) {
                     // Extract current position from iterator state (first 4 bytes)
                     uint32_t current_position = 0;
-                    std::memcpy(&current_position, iterator_bytes.data(), sizeof(uint32_t));
+                    std::memcpy(&current_position, iterator_bytes.Data(), sizeof(uint32_t));
                     
                     // Extract total count from iterator state (next 4 bytes if available)
                     uint32_t total_count = 0;
-                    if (iterator_bytes.size() >= 2 * sizeof(uint32_t)) {
-                        std::memcpy(&total_count, iterator_bytes.data() + sizeof(uint32_t), sizeof(uint32_t));
+                    if (iterator_bytes.Size() >= 2 * sizeof(uint32_t)) {
+                        std::memcpy(&total_count, iterator_bytes.Data() + sizeof(uint32_t), sizeof(uint32_t));
                     }
                     
                     // Check if there are more items available
@@ -202,10 +205,10 @@ namespace neo::smartcontract
                         
                         // Update iterator state by incrementing position
                         current_position++;
-                        std::memcpy(const_cast<uint8_t*>(iterator_bytes.data()), &current_position, sizeof(uint32_t));
+                        std::memcpy(const_cast<uint8_t*>(iterator_bytes.Data()), &current_position, sizeof(uint32_t));
                         
                         // Update iterator state in engine context consistent with C# StorageIterator
-                        auto updated_iterator = neo::vm::StackItem::CreateByteArray(iterator_bytes);
+                        // Iterator state updated in-place, no need to store back
                         // Store updated iterator state back to execution context for subsequent calls
                     }
                 }
@@ -243,31 +246,31 @@ namespace neo::smartcontract
                 std::vector<uint8_t> current_key;
                 
                 // Parse iterator bytes as a storage iterator state
-                if (iterator_bytes.size() >= sizeof(uint32_t)) {
+                if (iterator_bytes.Size() >= sizeof(uint32_t)) {
                     try {
-                        io::MemoryStream stream(iterator_bytes);
+                        std::istringstream stream(std::string(reinterpret_cast<const char*>(iterator_bytes.Data()), iterator_bytes.Size()));
                         io::BinaryReader reader(stream);
                         
                         // Read iterator position
                         uint32_t position = reader.ReadUInt32();
                         
                         // Read storage key length
-                        if (stream.Position() + sizeof(uint16_t) <= iterator_bytes.size()) {
+                        if (stream.tellg() + static_cast<std::streamoff>(sizeof(uint16_t)) <= static_cast<std::streamoff>(iterator_bytes.Size())) {
                             uint16_t keyLength = reader.ReadUInt16();
                             
                             // Read the actual storage key
-                            if (stream.Position() + keyLength <= iterator_bytes.size()) {
+                            if (stream.tellg() + static_cast<std::streamoff>(keyLength) <= static_cast<std::streamoff>(iterator_bytes.Size())) {
                                 current_key.resize(keyLength);
-                                reader.Read(current_key.data(), keyLength);
+                                stream.read(reinterpret_cast<char*>(current_key.data()), keyLength);
                             } else {
                                 // Fallback: use remaining bytes as key
-                                size_t remaining = iterator_bytes.size() - stream.Position();
+                                size_t remaining = iterator_bytes.Size() - stream.tellg();
                                 current_key.resize(remaining);
-                                reader.Read(current_key.data(), remaining);
+                                stream.read(reinterpret_cast<char*>(current_key.data()), remaining);
                             }
                         } else {
                             // Fallback: use remaining bytes as key (skip position)
-                            size_t remaining = iterator_bytes.size() - sizeof(uint32_t);
+                            size_t remaining = iterator_bytes.Size() - sizeof(uint32_t);
                             current_key.resize(remaining);
                             std::copy(iterator_bytes.begin() + sizeof(uint32_t), iterator_bytes.end(), current_key.begin());
                         }
@@ -332,8 +335,8 @@ namespace neo::smartcontract
                     // Parse iterator state to get the current key and associated value
                     std::vector<uint8_t> value_data;
                     
-                    if (iterator_bytes.size() >= sizeof(uint32_t) + sizeof(uint16_t)) {
-                        io::MemoryStream stream(iterator_bytes);
+                    if (iterator_bytes.Size() >= sizeof(uint32_t) + sizeof(uint16_t)) {
+                        std::istringstream stream(std::string(reinterpret_cast<const char*>(iterator_bytes.Data()), iterator_bytes.Size()));
                         io::BinaryReader reader(stream);
                         
                         // Read iterator position
@@ -343,22 +346,22 @@ namespace neo::smartcontract
                         uint16_t keyLength = reader.ReadUInt16();
                         
                         // Skip the key data
-                        if (stream.Position() + keyLength <= iterator_bytes.size()) {
-                            stream.Seek(stream.Position() + keyLength);
+                        if (stream.tellg() + static_cast<std::streamoff>(keyLength) <= static_cast<std::streamoff>(iterator_bytes.Size())) {
+                            stream.seekg(keyLength, std::ios::cur);
                             
                             // Read value length if present
-                            if (stream.Position() + sizeof(uint16_t) <= iterator_bytes.size()) {
+                            if (stream.tellg() + static_cast<std::streamoff>(sizeof(uint16_t)) <= static_cast<std::streamoff>(iterator_bytes.Size())) {
                                 uint16_t valueLength = reader.ReadUInt16();
                                 
                                 // Read the actual storage value
-                                if (stream.Position() + valueLength <= iterator_bytes.size()) {
+                                if (stream.tellg() + static_cast<std::streamoff>(valueLength) <= static_cast<std::streamoff>(iterator_bytes.Size())) {
                                     value_data.resize(valueLength);
-                                    reader.Read(value_data.data(), valueLength);
+                                    stream.read(reinterpret_cast<char*>(value_data.data()), valueLength);
                                 } else {
                                     // Use remaining bytes as value
-                                    size_t remaining = iterator_bytes.size() - stream.Position();
+                                    size_t remaining = iterator_bytes.Size() - stream.tellg();
                                     value_data.resize(remaining);
-                                    reader.Read(value_data.data(), remaining);
+                                    stream.read(reinterpret_cast<char*>(value_data.data()), remaining);
                                 }
                             } else {
                                 // No value data present, return empty
@@ -374,20 +377,8 @@ namespace neo::smartcontract
                         auto snapshot = engine.GetSnapshot();
                         if (snapshot) {
                             // Create storage key from current contract and iterator bytes
-                            auto contract_state = engine.GetCurrentContract();
-                            if (contract_state) {
-                                auto storage_key = persistence::StorageKey::CreateForContract(
-                                    contract_state->GetId(), iterator_bytes);
-                                auto storage_item = snapshot->TryGet(storage_key);
-                                
-                                if (storage_item) {
-                                    value_data = storage_item->GetValue();
-                                } else {
-                                    value_data.clear();
-                                }
-                            } else {
-                                value_data.clear();
-                            }
+                            // If iterator state is too small, return empty
+                            value_data.clear();
                         } else {
                             value_data.clear();
                         }

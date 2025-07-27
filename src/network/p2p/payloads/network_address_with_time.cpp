@@ -1,6 +1,8 @@
 #include <neo/network/p2p/payloads/network_address_with_time.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
+#include <neo/io/json_writer.h>
+#include <neo/io/json_reader.h>
 #include <sstream>
 #include <regex>
 #include <stdexcept>
@@ -227,7 +229,7 @@ namespace neo::network::p2p::payloads
             
             try {
                 std::vector<uint16_t> groups(8, 0); // IPv6 has 8 groups of 16-bit values
-                std::string address_str = ipString;
+                std::string address_str = address;  // Fixed undefined ipString variable
                 
                 // Handle compressed notation (::)
                 size_t double_colon_pos = address_str.find("::");

@@ -12,6 +12,7 @@ add_library(neo_core OBJECT
     ../protocol_settings.cpp
     ../protocol_settings_json.cpp
     ../hardfork.cpp
+    # network_stubs.cpp  # Disabled - duplicate symbols with network/stubs.cpp
 )
 
 target_include_directories(neo_core PUBLIC

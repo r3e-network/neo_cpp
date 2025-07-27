@@ -128,7 +128,7 @@ namespace neo::smartcontract::native
         {
             // Call PostTransfer
             io::UInt160 nullAddress;
-            std::memset(nullAddress.Data(), 0, nullAddress.Size);
+            std::memset(nullAddress.Data(), 0, 20); // UInt160 is always 20 bytes
 
             PostTransfer(engine, nullAddress, account, amount, vm::StackItem::Null(), callOnPayment);
         }
@@ -181,7 +181,7 @@ namespace neo::smartcontract::native
         {
             // Call PostTransfer
             io::UInt160 nullAddress;
-            std::memset(nullAddress.Data(), 0, nullAddress.Size);
+            std::memset(nullAddress.Data(), 0, 20); // UInt160 is always 20 bytes
 
             PostTransfer(engine, account, nullAddress, amount, vm::StackItem::Null(), false);
         }
@@ -205,7 +205,7 @@ namespace neo::smartcontract::native
             return true;
 
         // Check if the recipient is a contract
-        auto contractManagement = engine.GetNativeContract(ContractManagement::GetScriptHash());
+        auto contractManagement = dynamic_cast<ContractManagement*>(engine.GetNativeContract(ContractManagement::GetInstance()->GetScriptHash()));
         if (!contractManagement)
             return true;
 
@@ -219,7 +219,7 @@ namespace neo::smartcontract::native
         args.push_back(vm::StackItem::Create(amount));
         args.push_back(data);
 
-        engine.CallContract(to, "onNEP17Payment", args);
+        engine.CallContract(to, "onNEP17Payment", args, CallFlags::All);
 
         return true;
     }

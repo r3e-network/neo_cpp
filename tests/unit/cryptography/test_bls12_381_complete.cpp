@@ -1,504 +1,469 @@
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
-#include "neo/cryptography/bls12_381.h"
-#include "neo/cryptography/bls12_381/fp.h"
-#include "neo/cryptography/bls12_381/fp2.h"
-#include "neo/cryptography/bls12_381/fp6.h"
-#include "neo/cryptography/bls12_381/fp12.h"
-#include "neo/cryptography/bls12_381/g1.h"
-#include "neo/cryptography/bls12_381/g2.h"
-#include "neo/cryptography/bls12_381/gt.h"
-#include "neo/cryptography/bls12_381/pairing.h"
-#include <random>
+#include <neo/cryptography/bls12_381.h>
+#include <neo/cryptography/crypto.h>
+#include <neo/cryptography/hash.h>
+#include <neo/io/byte_vector.h>
+#include <chrono>
 #include <vector>
 
+using namespace neo::cryptography;
 using namespace neo::cryptography::bls12_381;
+using namespace neo::io;
 
-class BLS12_381CompleteTest : public ::testing::Test {
+class BLS12381CompleteTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        rng_.seed(42); // Fixed seed for reproducible tests
+        // Any setup needed
     }
-    
-    std::mt19937 rng_;
-    
-    // Test vectors from C# implementation
-    const std::string fp_one_hex = "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001";
-    const std::string fp_zero_hex = "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-    const std::string fp_p_hex = "0x1a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab";
+
+    void TearDown() override {
+        // Any cleanup needed
+    }
 };
 
-// Field Element Fp Tests
-TEST_F(BLS12_381CompleteTest, FpConstruction) {
-    Fp zero = Fp::Zero();
-    Fp one = Fp::One();
+// Test G1Point construction and serialization
+TEST_F(BLS12381CompleteTest, G1PointConstruction) {
+    // Test infinity point
+    G1Point infinity;
+    EXPECT_TRUE(infinity.IsInfinity());
     
-    EXPECT_TRUE(zero.IsZero());
-    EXPECT_FALSE(one.IsZero());
-    EXPECT_EQ(one.ToHexString(), fp_one_hex);
+    // Test generator
+    G1Point generator = G1Point::Generator();
+    EXPECT_FALSE(generator.IsInfinity());
+    
+    // Test compressed serialization
+    ByteVector compressed = generator.ToBytes(true);
+    EXPECT_EQ(compressed.Size(), 48);
+    EXPECT_TRUE((compressed[0] & 0x80) != 0); // Compression flag set
+    
+    // Test uncompressed serialization
+    ByteVector uncompressed = generator.ToBytes(false);
+    EXPECT_EQ(uncompressed.Size(), 96);
+    EXPECT_FALSE((uncompressed[0] & 0x80) != 0); // No compression flag
+    
+    // Test deserialization
+    G1Point fromCompressed(compressed.AsSpan());
+    G1Point fromUncompressed(uncompressed.AsSpan());
+    EXPECT_EQ(generator, fromCompressed);
+    EXPECT_EQ(generator, fromUncompressed);
+    
+    // Test hex conversion
+    std::string hex = generator.ToHex(true);
+    G1Point fromHex = G1Point::FromHex(hex);
+    EXPECT_EQ(generator, fromHex);
 }
 
-TEST_F(BLS12_381CompleteTest, FpArithmetic) {
-    Fp a = Fp::FromInteger(5);
-    Fp b = Fp::FromInteger(7);
+// Test G1Point arithmetic operations
+TEST_F(BLS12381CompleteTest, G1PointArithmetic) {
+    G1Point g = G1Point::Generator();
+    G1Point infinity;
     
-    // Addition
-    Fp sum = a + b;
-    EXPECT_EQ(sum, Fp::FromInteger(12));
+    // Test addition with infinity
+    EXPECT_EQ(g.Add(infinity), g);
+    EXPECT_EQ(infinity.Add(g), g);
+    EXPECT_EQ(infinity.Add(infinity), infinity);
     
-    // Subtraction
-    Fp diff = b - a;
-    EXPECT_EQ(diff, Fp::FromInteger(2));
+    // Test point doubling
+    G1Point doubled = g.Add(g);
+    EXPECT_NE(doubled, g);
+    EXPECT_FALSE(doubled.IsInfinity());
     
-    // Multiplication
-    Fp prod = a * b;
-    EXPECT_EQ(prod, Fp::FromInteger(35));
+    // Test scalar multiplication
+    ByteVector scalar2 = ByteVector(32);
+    scalar2[31] = 2; // Little-endian 2
+    G1Point multiplied = g.Multiply(scalar2.AsSpan());
+    EXPECT_EQ(multiplied, doubled);
     
-    // Division
-    Fp quot = b / a;
-    Fp expected = b * a.Inverse();
-    EXPECT_EQ(quot, expected);
+    // Test multiplication by zero
+    ByteVector scalar0 = ByteVector(32); // All zeros
+    G1Point zero = g.Multiply(scalar0.AsSpan());
+    EXPECT_TRUE(zero.IsInfinity());
+    
+    // Test multiplication by one
+    ByteVector scalar1 = ByteVector(32);
+    scalar1[31] = 1;
+    G1Point one = g.Multiply(scalar1.AsSpan());
+    EXPECT_EQ(one, g);
 }
 
-TEST_F(BLS12_381CompleteTest, FpSquareAndPower) {
-    Fp x = Fp::FromInteger(3);
+// Test G2Point construction and serialization
+TEST_F(BLS12381CompleteTest, G2PointConstruction) {
+    // Test infinity point
+    G2Point infinity;
+    EXPECT_TRUE(infinity.IsInfinity());
     
-    // Square
-    Fp x_squared = x.Square();
-    EXPECT_EQ(x_squared, Fp::FromInteger(9));
+    // Test generator
+    G2Point generator = G2Point::Generator();
+    EXPECT_FALSE(generator.IsInfinity());
     
-    // Power
-    Fp x_cubed = x.Pow(3);
-    EXPECT_EQ(x_cubed, Fp::FromInteger(27));
+    // Test compressed serialization
+    ByteVector compressed = generator.ToBytes(true);
+    EXPECT_EQ(compressed.Size(), 96);
+    EXPECT_TRUE((compressed[0] & 0x80) != 0); // Compression flag set
     
-    // Square root
-    Fp sqrt_9 = x_squared.Sqrt();
-    EXPECT_TRUE(sqrt_9 == x || sqrt_9 == -x);
+    // Test uncompressed serialization
+    ByteVector uncompressed = generator.ToBytes(false);
+    EXPECT_EQ(uncompressed.Size(), 192);
+    EXPECT_FALSE((uncompressed[0] & 0x80) != 0); // No compression flag
+    
+    // Test deserialization
+    G2Point fromCompressed(compressed.AsSpan());
+    G2Point fromUncompressed(uncompressed.AsSpan());
+    EXPECT_EQ(generator, fromCompressed);
+    EXPECT_EQ(generator, fromUncompressed);
+    
+    // Test hex conversion
+    std::string hex = generator.ToHex(true);
+    G2Point fromHex = G2Point::FromHex(hex);
+    EXPECT_EQ(generator, fromHex);
 }
 
-TEST_F(BLS12_381CompleteTest, FpInverse) {
-    Fp x = Fp::FromInteger(7);
-    Fp x_inv = x.Inverse();
+// Test G2Point arithmetic operations
+TEST_F(BLS12381CompleteTest, G2PointArithmetic) {
+    G2Point g = G2Point::Generator();
+    G2Point infinity;
     
-    Fp product = x * x_inv;
-    EXPECT_EQ(product, Fp::One());
+    // Test addition with infinity
+    EXPECT_EQ(g.Add(infinity), g);
+    EXPECT_EQ(infinity.Add(g), g);
+    EXPECT_EQ(infinity.Add(infinity), infinity);
+    
+    // Test point doubling
+    G2Point doubled = g.Add(g);
+    EXPECT_NE(doubled, g);
+    EXPECT_FALSE(doubled.IsInfinity());
+    
+    // Test scalar multiplication
+    ByteVector scalar2 = ByteVector(32);
+    scalar2[31] = 2;
+    G2Point multiplied = g.Multiply(scalar2.AsSpan());
+    EXPECT_EQ(multiplied, doubled);
+    
+    // Test multiplication by zero
+    ByteVector scalar0 = ByteVector(32);
+    G2Point zero = g.Multiply(scalar0.AsSpan());
+    EXPECT_TRUE(zero.IsInfinity());
 }
 
-TEST_F(BLS12_381CompleteTest, FpNegation) {
-    Fp x = Fp::FromInteger(5);
-    Fp neg_x = -x;
-    
-    Fp sum = x + neg_x;
-    EXPECT_EQ(sum, Fp::Zero());
-}
-
-TEST_F(BLS12_381CompleteTest, FpFromBytes) {
-    std::vector<uint8_t> bytes(48, 0);
-    bytes[47] = 1; // Little-endian representation of 1
-    
-    Fp x = Fp::FromBytes(bytes);
-    EXPECT_EQ(x, Fp::One());
-}
-
-TEST_F(BLS12_381CompleteTest, FpToBytes) {
-    Fp x = Fp::FromInteger(255);
-    auto bytes = x.ToBytes();
-    
-    EXPECT_EQ(bytes.size(), 48);
-    EXPECT_EQ(bytes[47], 255);
-    for (size_t i = 0; i < 47; i++) {
-        EXPECT_EQ(bytes[i], 0);
-    }
-}
-
-// Field Element Fp2 Tests
-TEST_F(BLS12_381CompleteTest, Fp2Construction) {
-    Fp2 zero = Fp2::Zero();
-    Fp2 one = Fp2::One();
-    
-    EXPECT_TRUE(zero.IsZero());
-    EXPECT_FALSE(one.IsZero());
-    EXPECT_EQ(one.C0(), Fp::One());
-    EXPECT_EQ(one.C1(), Fp::Zero());
-}
-
-TEST_F(BLS12_381CompleteTest, Fp2Arithmetic) {
-    Fp2 a(Fp::FromInteger(1), Fp::FromInteger(2));
-    Fp2 b(Fp::FromInteger(3), Fp::FromInteger(4));
-    
-    // Addition: (1 + 2i) + (3 + 4i) = 4 + 6i
-    Fp2 sum = a + b;
-    EXPECT_EQ(sum.C0(), Fp::FromInteger(4));
-    EXPECT_EQ(sum.C1(), Fp::FromInteger(6));
-    
-    // Subtraction: (3 + 4i) - (1 + 2i) = 2 + 2i
-    Fp2 diff = b - a;
-    EXPECT_EQ(diff.C0(), Fp::FromInteger(2));
-    EXPECT_EQ(diff.C1(), Fp::FromInteger(2));
-    
-    // Multiplication: (1 + 2i)(3 + 4i) = 3 + 4i + 6i + 8i² = 3 + 10i - 8 = -5 + 10i
-    Fp2 prod = a * b;
-    // Note: i² = -1 in Fp2
-}
-
-TEST_F(BLS12_381CompleteTest, Fp2SquareAndInverse) {
-    Fp2 x(Fp::FromInteger(2), Fp::FromInteger(3));
-    
-    // Square
-    Fp2 x_squared = x.Square();
-    Fp2 x_squared_alt = x * x;
-    EXPECT_EQ(x_squared, x_squared_alt);
-    
-    // Inverse
-    Fp2 x_inv = x.Inverse();
-    Fp2 product = x * x_inv;
-    EXPECT_EQ(product, Fp2::One());
-}
-
-TEST_F(BLS12_381CompleteTest, Fp2Conjugate) {
-    Fp2 x(Fp::FromInteger(5), Fp::FromInteger(7));
-    Fp2 x_conj = x.Conjugate();
-    
-    EXPECT_EQ(x_conj.C0(), Fp::FromInteger(5));
-    EXPECT_EQ(x_conj.C1(), -Fp::FromInteger(7));
-}
-
-// Field Element Fp6 Tests
-TEST_F(BLS12_381CompleteTest, Fp6Construction) {
-    Fp6 zero = Fp6::Zero();
-    Fp6 one = Fp6::One();
-    
-    EXPECT_TRUE(zero.IsZero());
-    EXPECT_FALSE(one.IsZero());
-}
-
-TEST_F(BLS12_381CompleteTest, Fp6Arithmetic) {
-    Fp2 a0(Fp::FromInteger(1), Fp::FromInteger(2));
-    Fp2 a1(Fp::FromInteger(3), Fp::FromInteger(4));
-    Fp2 a2(Fp::FromInteger(5), Fp::FromInteger(6));
-    Fp6 a(a0, a1, a2);
-    
-    Fp2 b0(Fp::FromInteger(7), Fp::FromInteger(8));
-    Fp2 b1(Fp::FromInteger(9), Fp::FromInteger(10));
-    Fp2 b2(Fp::FromInteger(11), Fp::FromInteger(12));
-    Fp6 b(b0, b1, b2);
-    
-    // Addition
-    Fp6 sum = a + b;
-    EXPECT_EQ(sum.C0(), a0 + b0);
-    EXPECT_EQ(sum.C1(), a1 + b1);
-    EXPECT_EQ(sum.C2(), a2 + b2);
-    
-    // Multiplication
-    Fp6 prod = a * b;
-    EXPECT_NE(prod, Fp6::Zero());
-}
-
-// Field Element Fp12 Tests
-TEST_F(BLS12_381CompleteTest, Fp12Construction) {
-    Fp12 zero = Fp12::Zero();
-    Fp12 one = Fp12::One();
-    
-    EXPECT_TRUE(zero.IsZero());
-    EXPECT_FALSE(one.IsZero());
-}
-
-TEST_F(BLS12_381CompleteTest, Fp12Arithmetic) {
-    Fp12 a = Fp12::Random(rng_);
-    Fp12 b = Fp12::Random(rng_);
-    
-    // Addition
-    Fp12 sum = a + b;
-    Fp12 sum_alt = b + a; // Commutativity
-    EXPECT_EQ(sum, sum_alt);
-    
-    // Multiplication
-    Fp12 prod = a * b;
-    Fp12 prod_alt = b * a; // Commutativity
-    EXPECT_EQ(prod, prod_alt);
-    
-    // Inverse
-    Fp12 a_inv = a.Inverse();
-    Fp12 identity = a * a_inv;
-    EXPECT_EQ(identity, Fp12::One());
-}
-
-TEST_F(BLS12_381CompleteTest, Fp12Exponentiation) {
-    Fp12 base = Fp12::Random(rng_);
-    
-    // x^0 = 1
-    Fp12 result = base.Pow(0);
-    EXPECT_EQ(result, Fp12::One());
-    
-    // x^1 = x
-    result = base.Pow(1);
-    EXPECT_EQ(result, base);
-    
-    // x^2 = x * x
-    result = base.Pow(2);
-    EXPECT_EQ(result, base * base);
-}
-
-// G1 Point Tests
-TEST_F(BLS12_381CompleteTest, G1Construction) {
-    G1 identity = G1::Identity();
-    G1 generator = G1::Generator();
-    
+// Test GTPoint construction and operations
+TEST_F(BLS12381CompleteTest, GTPointOperations) {
+    // Test identity element
+    GTPoint identity;
     EXPECT_TRUE(identity.IsIdentity());
-    EXPECT_FALSE(generator.IsIdentity());
-    EXPECT_TRUE(generator.IsOnCurve());
+    
+    // Test serialization
+    ByteVector bytes = identity.ToBytes();
+    EXPECT_EQ(bytes.Size(), 576);
+    
+    // Test deserialization
+    GTPoint fromBytes(bytes.AsSpan());
+    EXPECT_EQ(identity, fromBytes);
+    
+    // Test hex conversion
+    std::string hex = identity.ToHex();
+    GTPoint fromHex = GTPoint::FromHex(hex);
+    EXPECT_EQ(identity, fromHex);
 }
 
-TEST_F(BLS12_381CompleteTest, G1PointArithmetic) {
-    G1 g = G1::Generator();
-    G1 identity = G1::Identity();
+// Test pairing operations
+TEST_F(BLS12381CompleteTest, PairingOperations) {
+    G1Point g1 = G1Point::Generator();
+    G2Point g2 = G2Point::Generator();
     
-    // Addition with identity
-    G1 sum = g + identity;
-    EXPECT_EQ(sum, g);
+    // Test basic pairing
+    GTPoint e_g1_g2 = Pairing(g1, g2);
+    EXPECT_FALSE(e_g1_g2.IsIdentity());
     
-    // Scalar multiplication
-    G1 g2 = g * Scalar::FromInteger(2);
-    G1 g2_alt = g + g;
-    EXPECT_EQ(g2, g2_alt);
+    // Test pairing with infinity
+    G1Point inf1;
+    G2Point inf2;
+    GTPoint e_inf1 = Pairing(inf1, g2);
+    GTPoint e_inf2 = Pairing(g1, inf2);
+    EXPECT_TRUE(e_inf1.IsIdentity());
+    EXPECT_TRUE(e_inf2.IsIdentity());
     
-    // Negation
-    G1 neg_g = -g;
-    G1 zero = g + neg_g;
-    EXPECT_TRUE(zero.IsIdentity());
+    // Test multi-pairing
+    std::vector<G1Point> g1s = {g1, g1};
+    std::vector<G2Point> g2s = {g2, g2};
+    GTPoint multi = MultiPairing(g1s, g2s);
+    EXPECT_FALSE(multi.IsIdentity());
+    
+    // Test GT multiplication
+    GTPoint product = e_g1_g2.Multiply(e_g1_g2);
+    EXPECT_NE(product, e_g1_g2);
+    
+    // Test GT exponentiation
+    ByteVector exp = ByteVector(32);
+    exp[31] = 2;
+    GTPoint power = e_g1_g2.Pow(exp.AsSpan());
+    EXPECT_EQ(power, product);
 }
 
-TEST_F(BLS12_381CompleteTest, G1Serialization) {
-    G1 g = G1::Generator();
-    
-    // Serialize
-    auto bytes = g.ToBytes();
-    EXPECT_EQ(bytes.size(), 48); // Compressed format
-    
-    // Deserialize
-    G1 g_deserialized = G1::FromBytes(bytes);
-    EXPECT_EQ(g, g_deserialized);
-}
-
-TEST_F(BLS12_381CompleteTest, G1MultiScalarMul) {
-    std::vector<G1> points = {
-        G1::Generator(),
-        G1::Generator() * Scalar::FromInteger(2),
-        G1::Generator() * Scalar::FromInteger(3)
-    };
-    
-    std::vector<Scalar> scalars = {
-        Scalar::FromInteger(1),
-        Scalar::FromInteger(2),
-        Scalar::FromInteger(3)
-    };
-    
-    // 1*G + 2*(2G) + 3*(3G) = G + 4G + 9G = 14G
-    G1 result = G1::MultiScalarMul(points, scalars);
-    G1 expected = G1::Generator() * Scalar::FromInteger(14);
-    EXPECT_EQ(result, expected);
-}
-
-// G2 Point Tests
-TEST_F(BLS12_381CompleteTest, G2Construction) {
-    G2 identity = G2::Identity();
-    G2 generator = G2::Generator();
-    
-    EXPECT_TRUE(identity.IsIdentity());
-    EXPECT_FALSE(generator.IsIdentity());
-    EXPECT_TRUE(generator.IsOnCurve());
-}
-
-TEST_F(BLS12_381CompleteTest, G2PointArithmetic) {
-    G2 g = G2::Generator();
-    G2 identity = G2::Identity();
-    
-    // Addition
-    G2 sum = g + identity;
-    EXPECT_EQ(sum, g);
-    
-    // Scalar multiplication
-    G2 g3 = g * Scalar::FromInteger(3);
-    G2 g3_alt = g + g + g;
-    EXPECT_EQ(g3, g3_alt);
-}
-
-TEST_F(BLS12_381CompleteTest, G2Serialization) {
-    G2 g = G2::Generator();
-    
-    // Serialize
-    auto bytes = g.ToBytes();
-    EXPECT_EQ(bytes.size(), 96); // Compressed format for G2
-    
-    // Deserialize
-    G2 g_deserialized = G2::FromBytes(bytes);
-    EXPECT_EQ(g, g_deserialized);
-}
-
-// GT (Fp12) Tests for Pairing Results
-TEST_F(BLS12_381CompleteTest, GTOperations) {
-    GT a = GT::Random(rng_);
-    GT b = GT::Random(rng_);
-    
-    // Multiplication
-    GT prod = a * b;
-    GT prod_alt = b * a;
-    EXPECT_EQ(prod, prod_alt);
-    
-    // Exponentiation
-    GT a_squared = a.Pow(2);
-    GT a_squared_alt = a * a;
-    EXPECT_EQ(a_squared, a_squared_alt);
-}
-
-// Pairing Tests
-TEST_F(BLS12_381CompleteTest, PairingBilinearity) {
-    G1 p = G1::Generator();
-    G2 q = G2::Generator();
-    
-    Scalar a = Scalar::FromInteger(5);
-    Scalar b = Scalar::FromInteger(7);
-    
-    // e(aP, bQ) = e(P, Q)^(ab)
-    GT pairing1 = Pairing::Pair(p * a, q * b);
-    GT pairing2 = Pairing::Pair(p, q).Pow(a * b);
-    EXPECT_EQ(pairing1, pairing2);
-    
-    // e(P, Q + R) = e(P, Q) * e(P, R)
-    G2 r = G2::Generator() * Scalar::FromInteger(3);
-    GT pairing3 = Pairing::Pair(p, q + r);
-    GT pairing4 = Pairing::Pair(p, q) * Pairing::Pair(p, r);
-    EXPECT_EQ(pairing3, pairing4);
-}
-
-TEST_F(BLS12_381CompleteTest, PairingMulti) {
-    std::vector<G1> g1_points = {
-        G1::Generator(),
-        G1::Generator() * Scalar::FromInteger(2)
-    };
-    
-    std::vector<G2> g2_points = {
-        G2::Generator(),
-        G2::Generator() * Scalar::FromInteger(3)
-    };
-    
-    // Multi-pairing
-    GT result1 = Pairing::PairMulti(g1_points, g2_points);
-    
-    // Should equal e(G1, G2) * e(2*G1, 3*G2)
-    GT result2 = Pairing::Pair(g1_points[0], g2_points[0]) * 
-                 Pairing::Pair(g1_points[1], g2_points[1]);
-    
-    EXPECT_EQ(result1, result2);
-}
-
-TEST_F(BLS12_381CompleteTest, PairingIdentity) {
-    G1 p = G1::Generator();
-    G2 q = G2::Generator();
-    G1 identity1 = G1::Identity();
-    G2 identity2 = G2::Identity();
-    
-    // e(0, Q) = 1
-    GT pairing1 = Pairing::Pair(identity1, q);
-    EXPECT_EQ(pairing1, GT::One());
-    
-    // e(P, 0) = 1
-    GT pairing2 = Pairing::Pair(p, identity2);
-    EXPECT_EQ(pairing2, GT::One());
-}
-
-// Signature Scheme Tests
-TEST_F(BLS12_381CompleteTest, BLSSignature) {
+// Test BLS signature scheme
+TEST_F(BLS12381CompleteTest, BLSSignatures) {
     // Generate key pair
-    Scalar sk = Scalar::Random(rng_);
-    G2 pk = G2::Generator() * sk;
+    ByteVector privateKey = Crypto::GenerateRandomBytes(32);
+    G2Point publicKey = GeneratePublicKey(privateKey.AsSpan());
     
-    // Message to sign
-    std::vector<uint8_t> message = {1, 2, 3, 4, 5};
+    // Test message signing and verification
+    ByteVector message = ByteVector::Parse("48656c6c6f20426c6f636b636861696e"); // "Hello Blockchain"
+    G1Point signature = Sign(privateKey.AsSpan(), message.AsSpan());
     
-    // Hash to curve
-    G1 h = G1::HashToCurve(message);
+    // Verify correct signature
+    EXPECT_TRUE(VerifySignature(publicKey, message.AsSpan(), signature));
     
-    // Sign: σ = sk * H(m)
-    G1 signature = h * sk;
+    // Verify with wrong message
+    ByteVector wrongMessage = ByteVector::Parse("48656c6c6f20576f726c64"); // "Hello World"
+    EXPECT_FALSE(VerifySignature(publicKey, wrongMessage.AsSpan(), signature));
     
-    // Verify: e(H(m), pk) = e(σ, G2)
-    GT lhs = Pairing::Pair(h, pk);
-    GT rhs = Pairing::Pair(signature, G2::Generator());
-    
-    EXPECT_EQ(lhs, rhs);
+    // Verify with wrong public key
+    ByteVector wrongPrivateKey = Crypto::GenerateRandomBytes(32);
+    G2Point wrongPublicKey = GeneratePublicKey(wrongPrivateKey.AsSpan());
+    EXPECT_FALSE(VerifySignature(wrongPublicKey, message.AsSpan(), signature));
 }
 
-TEST_F(BLS12_381CompleteTest, BLSAggregateSignature) {
-    // Multiple signers
-    std::vector<Scalar> sks = {
-        Scalar::Random(rng_),
-        Scalar::Random(rng_),
-        Scalar::Random(rng_)
-    };
+// Test aggregate signatures
+TEST_F(BLS12381CompleteTest, AggregateSignatures) {
+    // Generate multiple key pairs
+    std::vector<ByteVector> privateKeys;
+    std::vector<G2Point> publicKeys;
+    std::vector<ByteVector> messages;
+    std::vector<G1Point> signatures;
     
-    std::vector<G2> pks;
-    for (const auto& sk : sks) {
-        pks.push_back(G2::Generator() * sk);
+    for (int i = 0; i < 3; i++) {
+        privateKeys.push_back(Crypto::GenerateRandomBytes(32));
+        publicKeys.push_back(GeneratePublicKey(privateKeys[i].AsSpan()));
+        
+        ByteVector msg(32);
+        msg[0] = static_cast<uint8_t>(i);
+        messages.push_back(msg);
+        
+        signatures.push_back(Sign(privateKeys[i].AsSpan(), messages[i].AsSpan()));
     }
     
-    // Common message
-    std::vector<uint8_t> message = {1, 2, 3, 4, 5};
-    G1 h = G1::HashToCurve(message);
-    
-    // Individual signatures
-    std::vector<G1> signatures;
-    for (const auto& sk : sks) {
-        signatures.push_back(h * sk);
-    }
-    
-    // Aggregate signature
-    G1 agg_sig = signatures[0] + signatures[1] + signatures[2];
-    
-    // Aggregate public key
-    G2 agg_pk = pks[0] + pks[1] + pks[2];
+    // Aggregate signatures
+    G1Point aggregateSig = AggregateSignatures(signatures);
     
     // Verify aggregate signature
-    GT lhs = Pairing::Pair(h, agg_pk);
-    GT rhs = Pairing::Pair(agg_sig, G2::Generator());
-    
-    EXPECT_EQ(lhs, rhs);
-}
-
-// Edge Cases and Error Handling
-TEST_F(BLS12_381CompleteTest, InvalidPointDeserialization) {
-    // Invalid G1 point (not on curve)
-    std::vector<uint8_t> invalid_g1(48, 0xFF);
-    EXPECT_THROW(G1::FromBytes(invalid_g1), std::invalid_argument);
-    
-    // Invalid G2 point (not on curve)
-    std::vector<uint8_t> invalid_g2(96, 0xFF);
-    EXPECT_THROW(G2::FromBytes(invalid_g2), std::invalid_argument);
-}
-
-TEST_F(BLS12_381CompleteTest, ScalarModularArithmetic) {
-    // Test scalar arithmetic modulo r (order of G1/G2)
-    Scalar max = Scalar::FromHexString("0x73eda753299d7d483339d80809a1d80553bda402fffe5bfeffffffff00000000");
-    Scalar one = Scalar::One();
-    
-    // max + 1 should wrap around to 0
-    Scalar result = max + one;
-    EXPECT_EQ(result, Scalar::Zero());
-}
-
-// Performance benchmarks (optional)
-TEST_F(BLS12_381CompleteTest, DISABLED_PairingBenchmark) {
-    G1 p = G1::Generator();
-    G2 q = G2::Generator();
-    
-    auto start = std::chrono::high_resolution_clock::now();
-    
-    for (int i = 0; i < 100; i++) {
-        GT result = Pairing::Pair(p, q);
+    std::vector<io::ByteSpan> messageSpans;
+    for (const auto& msg : messages) {
+        messageSpans.push_back(msg.AsSpan());
     }
     
-    auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    EXPECT_TRUE(VerifyAggregateSignature(publicKeys, messageSpans, aggregateSig));
     
-    std::cout << "100 pairings took: " << duration.count() << " ms" << std::endl;
+    // Verify with wrong order
+    std::vector<G2Point> wrongOrderKeys = {publicKeys[1], publicKeys[0], publicKeys[2]};
+    EXPECT_FALSE(VerifyAggregateSignature(wrongOrderKeys, messageSpans, aggregateSig));
+    
+    // Test empty signature aggregation
+    EXPECT_THROW(AggregateSignatures({}), std::invalid_argument);
+}
+
+// Test hash-to-curve functionality
+TEST_F(BLS12381CompleteTest, HashToG1) {
+    // Test basic hash-to-curve
+    ByteVector message1 = ByteVector::Parse("746573745f6d657373616765"); // "test_message"
+    G1Point point1 = HashToG1(message1.AsSpan());
+    EXPECT_FALSE(point1.IsInfinity());
+    
+    // Test different messages produce different points
+    ByteVector message2 = ByteVector::Parse("6f746865725f6d657373616765"); // "other_message"
+    G1Point point2 = HashToG1(message2.AsSpan());
+    EXPECT_FALSE(point2.IsInfinity());
+    EXPECT_NE(point1, point2);
+    
+    // Test same message produces same point
+    G1Point point1_again = HashToG1(message1.AsSpan());
+    EXPECT_EQ(point1, point1_again);
+}
+
+// Test helper functions
+TEST_F(BLS12381CompleteTest, HelperFunctions) {
+    // Test GetG2Generator
+    G2Point gen = GetG2Generator();
+    EXPECT_EQ(gen, G2Point::Generator());
+    
+    // Test NegateG2
+    G2Point g2 = G2Point::Generator();
+    G2Point neg = NegateG2(g2);
+    EXPECT_NE(neg, g2);
+    
+    // Negating infinity should return infinity
+    G2Point inf;
+    G2Point negInf = NegateG2(inf);
+    EXPECT_TRUE(negInf.IsInfinity());
+    
+    // Test MultiplyGT
+    G1Point g1 = G1Point::Generator();
+    GTPoint gt = Pairing(g1, g2);
+    GTPoint product = MultiplyGT(gt, gt);
+    EXPECT_EQ(product, gt.Multiply(gt));
+    
+    // Test IsIdentityGT
+    GTPoint identity;
+    EXPECT_TRUE(IsIdentityGT(identity));
+    EXPECT_FALSE(IsIdentityGT(gt));
+    
+    // Test deserialization functions
+    ByteVector g1Bytes = g1.ToBytes(true);
+    ByteVector g2Bytes = g2.ToBytes(true);
+    
+    G1Point deserializedG1;
+    G2Point deserializedG2;
+    
+    EXPECT_TRUE(DeserializeG1Point(g1Bytes.AsSpan(), deserializedG1));
+    EXPECT_EQ(deserializedG1, g1);
+    
+    EXPECT_TRUE(DeserializeG2Point(g2Bytes.AsSpan(), deserializedG2));
+    EXPECT_EQ(deserializedG2, g2);
+    
+    // Test invalid deserialization
+    ByteVector invalidData(10); // Too small
+    G1Point invalidG1;
+    G2Point invalidG2;
+    
+    EXPECT_FALSE(DeserializeG1Point(invalidData.AsSpan(), invalidG1));
+    EXPECT_FALSE(DeserializeG2Point(invalidData.AsSpan(), invalidG2));
+}
+
+// Test edge cases and error handling
+TEST_F(BLS12381CompleteTest, EdgeCases) {
+    // Test invalid data sizes
+    ByteVector tooSmall(10);
+    EXPECT_THROW(G1Point(tooSmall.AsSpan()), std::invalid_argument);
+    EXPECT_THROW(G2Point(tooSmall.AsSpan()), std::invalid_argument);
+    
+    ByteVector wrongSize(500);
+    EXPECT_THROW(GTPoint(wrongSize.AsSpan()), std::invalid_argument);
+    
+    // Test mismatched vector sizes in multi-pairing
+    std::vector<G1Point> g1s = {G1Point::Generator()};
+    std::vector<G2Point> g2s = {G2Point::Generator(), G2Point::Generator()};
+    EXPECT_THROW(MultiPairing(g1s, g2s), std::invalid_argument);
+    
+    // Test mismatched sizes in aggregate signature verification
+    std::vector<G2Point> pubKeys = {G2Point::Generator()};
+    std::vector<io::ByteSpan> messages;
+    G1Point sig = G1Point::Generator();
+    EXPECT_THROW(VerifyAggregateSignature(pubKeys, messages, sig), std::invalid_argument);
+}
+
+// Performance benchmarks (disabled by default)
+TEST_F(BLS12381CompleteTest, DISABLED_PerformanceBenchmarks) {
+    const int iterations = 100;
+    
+    // Benchmark G1 scalar multiplication
+    G1Point g1 = G1Point::Generator();
+    ByteVector scalar = Crypto::GenerateRandomBytes(32);
+    
+    auto start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < iterations; i++) {
+        G1Point result = g1.Multiply(scalar.AsSpan());
+    }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    
+    std::cout << "G1 scalar multiplication: " 
+              << duration.count() / iterations << " µs per operation" << std::endl;
+    
+    // Benchmark pairing
+    G2Point g2 = G2Point::Generator();
+    
+    start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < iterations; i++) {
+        GTPoint result = Pairing(g1, g2);
+    }
+    end = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    
+    std::cout << "Pairing: " 
+              << duration.count() / iterations << " µs per operation" << std::endl;
+    
+    // Benchmark signature verification
+    ByteVector privateKey = Crypto::GenerateRandomBytes(32);
+    G2Point publicKey = GeneratePublicKey(privateKey.AsSpan());
+    ByteVector message = Crypto::GenerateRandomBytes(32);
+    G1Point signature = Sign(privateKey.AsSpan(), message.AsSpan());
+    
+    start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < iterations; i++) {
+        bool valid = VerifySignature(publicKey, message.AsSpan(), signature);
+    }
+    end = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    
+    std::cout << "Signature verification: " 
+              << duration.count() / iterations << " µs per operation" << std::endl;
+}
+
+// Test Neo protocol compatibility
+TEST_F(BLS12381CompleteTest, NeoProtocolCompatibility) {
+    // Test that serialization formats match Neo protocol expectations
+    G1Point g1 = G1Point::Generator();
+    G2Point g2 = G2Point::Generator();
+    
+    // Compressed sizes must match Neo protocol
+    EXPECT_EQ(g1.ToBytes(true).Size(), 48);
+    EXPECT_EQ(g2.ToBytes(true).Size(), 96);
+    
+    // Uncompressed sizes must match Neo protocol
+    EXPECT_EQ(g1.ToBytes(false).Size(), 96);
+    EXPECT_EQ(g2.ToBytes(false).Size(), 192);
+    
+    // GT size must match Neo protocol
+    GTPoint gt = Pairing(g1, g2);
+    EXPECT_EQ(gt.ToBytes().Size(), 576);
+    
+    // Test infinity point encoding
+    G1Point inf1;
+    ByteVector infBytes1 = inf1.ToBytes(true);
+    EXPECT_EQ(infBytes1[0] & 0xC0, 0xC0); // Compression + infinity flags
+    
+    G2Point inf2;
+    ByteVector infBytes2 = inf2.ToBytes(true);
+    EXPECT_EQ(infBytes2[0] & 0xC0, 0xC0); // Compression + infinity flags
+}
+
+// Test field arithmetic consistency
+TEST_F(BLS12381CompleteTest, FieldArithmeticConsistency) {
+    // Test that point operations maintain field properties
+    G1Point g = G1Point::Generator();
+    
+    // Test associativity: (g + g) + g = g + (g + g)
+    G1Point left = g.Add(g).Add(g);
+    G1Point right = g.Add(g.Add(g));
+    EXPECT_EQ(left, right);
+    
+    // Test scalar multiplication distributivity
+    ByteVector scalar1 = ByteVector(32);
+    ByteVector scalar2 = ByteVector(32);
+    scalar1[31] = 3;
+    scalar2[31] = 4;
+    
+    // 3g + 4g should equal 7g
+    G1Point sum = g.Multiply(scalar1.AsSpan()).Add(g.Multiply(scalar2.AsSpan()));
+    
+    ByteVector scalar7 = ByteVector(32);
+    scalar7[31] = 7;
+    G1Point product = g.Multiply(scalar7.AsSpan());
+    
+    EXPECT_EQ(sum, product);
+}
+
+// Test extension methods
+TEST_F(BLS12381CompleteTest, ExtensionMethods) {
+    // Test G1PointDouble
+    G1Point g = G1Point::Generator();
+    G1Point doubled1 = G1PointDouble(g);
+    G1Point doubled2 = g.Add(g);
+    EXPECT_EQ(doubled1, doubled2);
+    
+    // Test G1PointNegate
+    G1Point neg = G1PointNegate(g);
+    EXPECT_NE(neg, g);
+    
+    // Test GTPointIdentity
+    GTPoint identity = GTPointIdentity();
+    EXPECT_TRUE(identity.IsIdentity());
 }

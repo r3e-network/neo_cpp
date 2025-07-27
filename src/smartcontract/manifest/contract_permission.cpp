@@ -185,6 +185,7 @@ namespace neo::smartcontract::manifest
             methods_.clear();
             break;
         case 1:
+        {
             isMethodsWildcard_ = false;
             uint64_t count = reader.ReadVarInt();
             methods_.resize(count);
@@ -193,6 +194,7 @@ namespace neo::smartcontract::manifest
                 methods_[i] = reader.ReadVarString();
             }
             break;
+        }
         default:
             throw std::runtime_error("Invalid contract permission methods type");
         }

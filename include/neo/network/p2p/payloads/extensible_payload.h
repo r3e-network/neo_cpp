@@ -131,8 +131,8 @@ namespace neo::network::p2p::payloads
          * @param snapshot The data cache snapshot.
          * @return True if valid, false otherwise.
          */
-        bool Verify(std::shared_ptr<config::ProtocolSettings> settings,
-                   std::shared_ptr<persistence::DataCache> snapshot) const;
+        bool Verify(std::shared_ptr<neo::config::ProtocolSettings> settings,
+                   std::shared_ptr<neo::persistence::DataCache> snapshot) const;
 
         /**
          * @brief Checks if the payload is valid for the specified block index.

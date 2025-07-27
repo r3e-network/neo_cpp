@@ -48,7 +48,7 @@ namespace neo::smartcontract::native
             return io::UInt160{};
 
         io::UInt160 owner;
-        std::memcpy(owner.Data(), value.Data(), owner.Size);
+        std::memcpy(owner.Data(), value.Data(), 20); // UInt160 is always 20 bytes
         return owner;
     }
 
@@ -78,15 +78,19 @@ namespace neo::smartcontract::native
     {
         std::vector<io::ByteVector> tokens;
         auto prefix = GetStorageKey(PREFIX_TOKEN, io::ByteVector{});
-        auto iterator = snapshot->Seek(prefix, persistence::SeekDirection::Forward);
-        while (iterator->Next())
+        persistence::StorageKey storagePrefix(prefix);
+        auto iterator = snapshot->Seek(storagePrefix); // Remove SeekDirection parameter
+        while (iterator->Valid())
         {
-            auto key = iterator->GetKey();
-            if (!key.StartsWith(prefix))
+            auto key = iterator->Key();
+            auto keyBytes = key.ToArray();
+            if (keyBytes.Size() < prefix.Size() || !std::equal(prefix.begin(), prefix.end(), keyBytes.begin()))
                 break;
 
-            auto tokenId = key.GetData().SubVector(prefix.Size());
+            std::vector<uint8_t> tokenData(keyBytes.begin() + prefix.Size(), keyBytes.end());
+            io::ByteVector tokenId(tokenData);
             tokens.push_back(tokenId);
+            iterator->Next();
         }
 
         return tokens;
@@ -96,15 +100,19 @@ namespace neo::smartcontract::native
     {
         std::vector<io::ByteVector> tokens;
         auto prefix = GetStorageKey(PREFIX_ACCOUNT_TOKEN, account);
-        auto iterator = snapshot->Seek(prefix, persistence::SeekDirection::Forward);
-        while (iterator->Next())
+        persistence::StorageKey storagePrefix(prefix);
+        auto iterator = snapshot->Seek(storagePrefix); // Remove SeekDirection parameter
+        while (iterator->Valid())
         {
-            auto key = iterator->GetKey();
-            if (!key.StartsWith(prefix))
+            auto key = iterator->Key();
+            auto keyBytes = key.ToArray();
+            if (keyBytes.Size() < prefix.Size() || !std::equal(prefix.begin(), prefix.end(), keyBytes.begin()))
                 break;
 
-            auto tokenId = key.GetData().SubVector(prefix.Size());
+            std::vector<uint8_t> tokenData(keyBytes.begin() + prefix.Size(), keyBytes.end());
+            io::ByteVector tokenId(tokenData);
             tokens.push_back(tokenId);
+            iterator->Next();
         }
 
         return tokens;
@@ -123,7 +131,7 @@ namespace neo::smartcontract::native
 
         // Update owner
         auto ownerKey = GetStorageKey(PREFIX_OWNER, tokenId);
-        io::ByteVector ownerValue(io::ByteSpan(to.Data(), to.Size()));
+        io::ByteVector ownerValue(io::ByteSpan(to.Data(), 20)); // UInt160 is always 20 bytes
         PutStorageValue(snapshot, ownerKey, ownerValue);
 
         // Update from balance
@@ -149,14 +157,14 @@ namespace neo::smartcontract::native
 
         // Remove token from from's account
         io::ByteVector fromAccountData;
-        fromAccountData.insert(fromAccountData.end(), from.Data(), from.Data() + from.Size);
+        fromAccountData.insert(fromAccountData.end(), from.Data(), from.Data() + 20); // UInt160 is always 20 bytes
         fromAccountData.insert(fromAccountData.end(), tokenId.begin(), tokenId.end());
         auto fromTokenKey = GetStorageKey(PREFIX_ACCOUNT_TOKEN, fromAccountData);
         DeleteStorageValue(snapshot, fromTokenKey);
 
         // Add token to to's account
         io::ByteVector toAccountData;
-        toAccountData.insert(toAccountData.end(), to.Data(), to.Data() + to.Size);
+        toAccountData.insert(toAccountData.end(), to.Data(), to.Data() + 20);
         toAccountData.insert(toAccountData.end(), tokenId.begin(), tokenId.end());
         auto toTokenKey = GetStorageKey(PREFIX_ACCOUNT_TOKEN, toAccountData);
         PutStorageValue(snapshot, toTokenKey, io::ByteVector{});
@@ -191,7 +199,7 @@ namespace neo::smartcontract::native
 
         // Update owner
         auto ownerKey = GetStorageKey(PREFIX_OWNER, tokenId);
-        io::ByteVector ownerValue(io::ByteSpan(owner.Data(), owner.Size()));
+        io::ByteVector ownerValue(io::ByteSpan(owner.Data(), 20));
         PutStorageValue(snapshot, ownerKey, ownerValue);
 
         // Update properties
@@ -228,7 +236,7 @@ namespace neo::smartcontract::native
 
         // Add token to owner's account
         io::ByteVector accountData;
-        accountData.insert(accountData.end(), owner.Data(), owner.Data() + owner.Size);
+        accountData.insert(accountData.end(), owner.Data(), owner.Data() + 20);
         accountData.insert(accountData.end(), tokenId.begin(), tokenId.end());
         auto accountTokenKey = GetStorageKey(PREFIX_ACCOUNT_TOKEN, accountData);
         PutStorageValue(snapshot, accountTokenKey, io::ByteVector{});
@@ -245,7 +253,7 @@ namespace neo::smartcontract::native
         {
             // Call PostTransfer
             io::UInt160 nullAddress;
-            std::memset(nullAddress.Data(), 0, nullAddress.Size);
+            std::memset(nullAddress.Data(), 0, 20);
 
             PostTransfer(engine, nullAddress, owner, 1, tokenId, data, callOnPayment);
         }
@@ -295,7 +303,7 @@ namespace neo::smartcontract::native
 
         // Remove token from owner's account
         io::ByteVector accountData;
-        accountData.insert(accountData.end(), owner.Data(), owner.Data() + owner.Size);
+        accountData.insert(accountData.end(), owner.Data(), owner.Data() + 20);
         accountData.insert(accountData.end(), tokenId.begin(), tokenId.end());
         auto accountTokenKey = GetStorageKey(PREFIX_ACCOUNT_TOKEN, accountData);
         DeleteStorageValue(snapshot, accountTokenKey);
@@ -321,7 +329,7 @@ namespace neo::smartcontract::native
         {
             // Call PostTransfer
             io::UInt160 nullAddress;
-            std::memset(nullAddress.Data(), 0, nullAddress.Size);
+            std::memset(nullAddress.Data(), 0, 20);
 
             PostTransfer(engine, owner, nullAddress, 1, tokenId, vm::StackItem::Null(), false);
         }
@@ -346,7 +354,7 @@ namespace neo::smartcontract::native
             return true;
 
         // Check if the recipient is a contract
-        auto contractManagement = engine.GetNativeContract(ContractManagement::GetScriptHash());
+        auto contractManagement = dynamic_cast<ContractManagement*>(engine.GetNativeContract(ContractManagement::GetInstance()->GetScriptHash()));
         if (!contractManagement)
             return true;
 
@@ -364,7 +372,7 @@ namespace neo::smartcontract::native
         args.push_back(vm::StackItem::Create(tokenId));
         args.push_back(data);
 
-        engine.CallContract(to, "onNEP11Payment", args);
+        engine.CallContract(to, "onNEP11Payment", args, CallFlags::All);
 
         return true;
     }

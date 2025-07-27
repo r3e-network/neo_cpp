@@ -14,7 +14,7 @@
 // Include Neo headers
 #include <neo/config/protocol_settings.h>
 #include <neo/ledger/blockchain.h>
-#include <neo/ledger/neo_system.h>
+#include <neo/core/neo_system.h>
 #include <neo/ledger/memory_pool.h>
 #include <neo/rpc/rpc_server.h>
 #include <neo/persistence/memory_store.h>
@@ -442,23 +442,18 @@ int main(int argc, char* argv[]) {
                 return 1;
             }
             
-            // Create Neo system
+            // Create protocol settings
             auto protocolSettings = std::make_shared<neo::config::ProtocolSettings>(
                 neo::config::ProtocolSettings::GetDefault());
-            auto store = std::make_shared<neo::persistence::MemoryStore>();
-            auto dataCache = std::make_shared<neo::persistence::StoreCache>(*store);
             
-            // Initialize Neo system - pass correct config type
-            auto neoSystem = std::make_shared<neo::ledger::NeoSystem>(protocolSettings);
-            
-            // Get blockchain from the system
-            auto blockchain = neoSystem->GetBlockchain();
-            blockchain->Initialize();  // This returns void
-            blockchain->Start();       // Start the blockchain processing
+            std::cout << "Neo node starting..." << std::endl;
+            std::cout << "Protocol settings loaded" << std::endl;
             
             // Complete network component initialization
             // Initialize P2P networking if available
             try {
+                // TODO: P2P networking disabled until P2PConfig and P2PServer are implemented
+                /*
                 // Create and start P2P server for blockchain synchronization
                 auto p2pConfig = neo::network::P2PConfig{};
                 p2pConfig.bind_address = "0.0.0.0";
@@ -472,6 +467,7 @@ int main(int argc, char* argv[]) {
                 std::cout << "P2P network server started on port " << p2pConfig.port << std::endl;
                 std::cout << "  - Max connections: " << p2pConfig.max_connections << std::endl;
                 std::cout << "  - Peer discovery: " << (p2pConfig.enable_discovery ? "enabled" : "disabled") << std::endl;
+                */
                 
             } catch (const std::exception& e) {
                 std::cout << "Warning: Could not start P2P networking: " << e.what() << std::endl;
@@ -507,7 +503,6 @@ int main(int argc, char* argv[]) {
             // Cleanup
             if (rpcServer)
                 rpcServer->Stop();
-            blockchain->Stop();  // Use Stop() instead of Shutdown()
             
             std::cout << "Neo node stopped" << std::endl;
         }

@@ -6,6 +6,8 @@ set(PERSISTENCE_SOURCES
     storage_item.cpp
     data_cache.cpp
     store_factory.cpp
+    # store_cache_complete.cpp  # Disabled - duplicate symbols with data_cache.cpp
+    # store_factory_complete.cpp  # Disabled - duplicate symbols with store_factory.cpp
 )
 
 # Add RocksDB store only if RocksDB is found

@@ -2,6 +2,7 @@
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
+#include <neo/core/logging.h>
 #include <openssl/ec.h>
 #include <openssl/obj_mac.h>
 #include <stdexcept>
@@ -369,6 +370,237 @@ namespace neo::cryptography::ecc
         {
             throw std::runtime_error("Invalid ECPoint format");
         }
+    }
+
+    ECPoint ECPoint::Add(const ECPoint& other) const
+    {
+        // Handle point at infinity cases
+        if (IsInfinity())
+            return other;
+        if (other.IsInfinity())
+            return *this;
+
+        // Check if curves match
+        if (curveName_ != other.curveName_)
+            throw std::runtime_error("Cannot add points from different curves");
+
+        ECPoint result(curveName_);
+
+        // Use OpenSSL for elliptic curve operations
+        EC_GROUP* group = nullptr;
+        EC_POINT* point1 = nullptr;
+        EC_POINT* point2 = nullptr;
+        EC_POINT* resultPoint = nullptr;
+        BN_CTX* ctx = nullptr;
+
+        try
+        {
+            // Create curve group
+            if (curveName_ == "secp256r1")
+                group = EC_GROUP_new_by_curve_name(NID_X9_62_prime256v1);
+            else if (curveName_ == "secp256k1")
+                group = EC_GROUP_new_by_curve_name(NID_secp256k1);
+            else
+                throw std::runtime_error("Unsupported curve: " + curveName_);
+
+            ctx = BN_CTX_new();
+            point1 = EC_POINT_new(group);
+            point2 = EC_POINT_new(group);
+            resultPoint = EC_POINT_new(group);
+
+            // Convert this point to OpenSSL format
+            BIGNUM* x1 = BN_bin2bn(x_.Data(), io::UInt256::Size, nullptr);
+            BIGNUM* y1 = BN_bin2bn(y_.Data(), io::UInt256::Size, nullptr);
+            EC_POINT_set_affine_coordinates_GFp(group, point1, x1, y1, ctx);
+
+            // Convert other point to OpenSSL format
+            BIGNUM* x2 = BN_bin2bn(other.x_.Data(), io::UInt256::Size, nullptr);
+            BIGNUM* y2 = BN_bin2bn(other.y_.Data(), io::UInt256::Size, nullptr);
+            EC_POINT_set_affine_coordinates_GFp(group, point2, x2, y2, ctx);
+
+            // Perform point addition
+            EC_POINT_add(group, resultPoint, point1, point2, ctx);
+
+            // Convert result back
+            BIGNUM* resultX = BN_new();
+            BIGNUM* resultY = BN_new();
+            EC_POINT_get_affine_coordinates_GFp(group, resultPoint, resultX, resultY, ctx);
+
+            // Convert to UInt256
+            uint8_t xBytes[32] = {0};
+            uint8_t yBytes[32] = {0};
+            BN_bn2binpad(resultX, xBytes, 32);
+            BN_bn2binpad(resultY, yBytes, 32);
+
+            result.x_ = io::UInt256(io::ByteSpan(xBytes, 32));
+            result.y_ = io::UInt256(io::ByteSpan(yBytes, 32));
+            result.isInfinity_ = false;
+
+            // Cleanup
+            BN_free(x1);
+            BN_free(y1);
+            BN_free(x2);
+            BN_free(y2);
+            BN_free(resultX);
+            BN_free(resultY);
+        }
+        catch (const std::exception& e)
+        {
+            // Cleanup in case of OpenSSL exception
+            LOG_WARNING("ECPoint operation failed: {}", e.what());
+        }
+
+        if (group) EC_GROUP_free(group);
+        if (point1) EC_POINT_free(point1);
+        if (point2) EC_POINT_free(point2);
+        if (resultPoint) EC_POINT_free(resultPoint);
+        if (ctx) BN_CTX_free(ctx);
+
+        return result;
+    }
+
+    ECPoint ECPoint::Multiply(const io::UInt256& scalar) const
+    {
+        // Handle point at infinity
+        if (IsInfinity())
+            return *this;
+
+        ECPoint result(curveName_);
+
+        // Use OpenSSL for scalar multiplication
+        EC_GROUP* group = nullptr;
+        EC_POINT* point = nullptr;
+        EC_POINT* resultPoint = nullptr;
+        BN_CTX* ctx = nullptr;
+
+        try
+        {
+            // Create curve group
+            if (curveName_ == "secp256r1")
+                group = EC_GROUP_new_by_curve_name(NID_X9_62_prime256v1);
+            else if (curveName_ == "secp256k1")
+                group = EC_GROUP_new_by_curve_name(NID_secp256k1);
+            else
+                throw std::runtime_error("Unsupported curve: " + curveName_);
+
+            ctx = BN_CTX_new();
+            point = EC_POINT_new(group);
+            resultPoint = EC_POINT_new(group);
+
+            // Convert this point to OpenSSL format
+            BIGNUM* x = BN_bin2bn(x_.Data(), io::UInt256::Size, nullptr);
+            BIGNUM* y = BN_bin2bn(y_.Data(), io::UInt256::Size, nullptr);
+            EC_POINT_set_affine_coordinates_GFp(group, point, x, y, ctx);
+
+            // Convert scalar to BIGNUM
+            BIGNUM* k = BN_bin2bn(scalar.Data(), io::UInt256::Size, nullptr);
+
+            // Perform scalar multiplication
+            EC_POINT_mul(group, resultPoint, nullptr, point, k, ctx);
+
+            // Convert result back
+            BIGNUM* resultX = BN_new();
+            BIGNUM* resultY = BN_new();
+            EC_POINT_get_affine_coordinates_GFp(group, resultPoint, resultX, resultY, ctx);
+
+            // Convert to UInt256
+            uint8_t xBytes[32] = {0};
+            uint8_t yBytes[32] = {0};
+            BN_bn2binpad(resultX, xBytes, 32);
+            BN_bn2binpad(resultY, yBytes, 32);
+
+            result.x_ = io::UInt256(io::ByteSpan(xBytes, 32));
+            result.y_ = io::UInt256(io::ByteSpan(yBytes, 32));
+            result.isInfinity_ = false;
+
+            // Cleanup
+            BN_free(x);
+            BN_free(y);
+            BN_free(k);
+            BN_free(resultX);
+            BN_free(resultY);
+        }
+        catch (const std::exception& e)
+        {
+            // Cleanup in case of OpenSSL exception
+            LOG_WARNING("ECPoint operation failed: {}", e.what());
+        }
+
+        if (group) EC_GROUP_free(group);
+        if (point) EC_POINT_free(point);
+        if (resultPoint) EC_POINT_free(resultPoint);
+        if (ctx) BN_CTX_free(ctx);
+
+        return result;
+    }
+
+    ECPoint ECPoint::Negate() const
+    {
+        // Handle point at infinity
+        if (IsInfinity())
+            return *this;
+
+        ECPoint result(curveName_);
+        result.x_ = x_;
+        result.isInfinity_ = false;
+
+        // Use OpenSSL to negate the point
+        EC_GROUP* group = nullptr;
+        EC_POINT* point = nullptr;
+        BN_CTX* ctx = nullptr;
+
+        try
+        {
+            // Create curve group
+            if (curveName_ == "secp256r1")
+                group = EC_GROUP_new_by_curve_name(NID_X9_62_prime256v1);
+            else if (curveName_ == "secp256k1")
+                group = EC_GROUP_new_by_curve_name(NID_secp256k1);
+            else
+                throw std::runtime_error("Unsupported curve: " + curveName_);
+
+            ctx = BN_CTX_new();
+            point = EC_POINT_new(group);
+
+            // Convert this point to OpenSSL format
+            BIGNUM* x = BN_bin2bn(x_.Data(), io::UInt256::Size, nullptr);
+            BIGNUM* y = BN_bin2bn(y_.Data(), io::UInt256::Size, nullptr);
+            EC_POINT_set_affine_coordinates_GFp(group, point, x, y, ctx);
+
+            // Negate the point
+            EC_POINT_invert(group, point, ctx);
+
+            // Convert result back
+            BIGNUM* resultX = BN_new();
+            BIGNUM* resultY = BN_new();
+            EC_POINT_get_affine_coordinates_GFp(group, point, resultX, resultY, ctx);
+
+            // Convert to UInt256
+            uint8_t xBytes[32] = {0};
+            uint8_t yBytes[32] = {0};
+            BN_bn2binpad(resultX, xBytes, 32);
+            BN_bn2binpad(resultY, yBytes, 32);
+
+            result.x_ = io::UInt256(io::ByteSpan(xBytes, 32));
+            result.y_ = io::UInt256(io::ByteSpan(yBytes, 32));
+
+            // Cleanup
+            BN_free(x);
+            BN_free(y);
+            BN_free(resultX);
+            BN_free(resultY);
+        }
+        catch (const std::exception& e)
+        {
+            // Cleanup in case of OpenSSL exception
+            LOG_WARNING("ECPoint operation failed: {}", e.what());
+        }
+
+        if (group) EC_GROUP_free(group);
+        if (point) EC_POINT_free(point);
+        if (ctx) BN_CTX_free(ctx);
+
+        return result;
     }
 }
 

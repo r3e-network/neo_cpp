@@ -1,14 +1,13 @@
 # Create the native contracts unit tests
 add_executable(test_native_contracts
-    test_native_contracts_minimal.cpp
     test_neo_token_rewards.cpp
     test_gas_token_total_supply.cpp
+    test_contract_management.cpp
+    test_crypto_lib.cpp
+    test_gas_token.cpp
+    test_name_service.cpp
     # These tests have API mismatches and are temporarily disabled:
     # test_native_contracts.cpp
-    # test_name_service.cpp
-    # test_contract_management.cpp
-    # test_crypto_lib.cpp
-    # test_gas_token.cpp
     # test_ledger_contract.cpp
     # test_neo_token.cpp
     # test_neo_token_all_methods_complete.cpp

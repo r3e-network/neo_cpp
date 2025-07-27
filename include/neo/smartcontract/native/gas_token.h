@@ -20,7 +20,7 @@ namespace neo::smartcontract::native
         /**
          * @brief The contract ID.
          */
-        static constexpr int32_t ID = -6;
+        static constexpr int32_t ID = 3;
 
         /**
          * @brief The contract name.
@@ -109,7 +109,7 @@ namespace neo::smartcontract::native
          * @param amount The amount to transfer.
          * @return True if the transfer was successful, false otherwise.
          */
-        bool Transfer(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& from, const io::UInt160& to, int64_t amount);
+        bool Transfer(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& from, const io::UInt160& to, int64_t amount) override;
 
         /**
          * @brief Transfers tokens between accounts with callback.
@@ -121,7 +121,7 @@ namespace neo::smartcontract::native
          * @param callOnPayment Whether to call the onNEP17Payment callback.
          * @return True if the transfer was successful, false otherwise.
          */
-        bool Transfer(ApplicationEngine& engine, const io::UInt160& from, const io::UInt160& to, int64_t amount, std::shared_ptr<vm::StackItem> data, bool callOnPayment);
+        bool Transfer(ApplicationEngine& engine, const io::UInt160& from, const io::UInt160& to, int64_t amount, std::shared_ptr<vm::StackItem> data, bool callOnPayment) override;
 
         /**
          * @brief Mints tokens to an account.
@@ -130,7 +130,7 @@ namespace neo::smartcontract::native
          * @param amount The amount to mint.
          * @return True if the minting was successful, false otherwise.
          */
-        bool Mint(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account, int64_t amount);
+        bool Mint(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account, int64_t amount) override;
 
         /**
          * @brief Mints tokens to an account with callback.
@@ -140,7 +140,7 @@ namespace neo::smartcontract::native
          * @param callOnPayment Whether to call the onNEP17Payment callback.
          * @return True if the minting was successful, false otherwise.
          */
-        bool Mint(ApplicationEngine& engine, const io::UInt160& account, int64_t amount, bool callOnPayment);
+        bool Mint(ApplicationEngine& engine, const io::UInt160& account, int64_t amount, bool callOnPayment) override;
 
         /**
          * @brief Burns tokens from an account.
@@ -149,7 +149,7 @@ namespace neo::smartcontract::native
          * @param amount The amount to burn.
          * @return True if the burning was successful, false otherwise.
          */
-        bool Burn(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account, int64_t amount);
+        bool Burn(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account, int64_t amount) override;
 
         /**
          * @brief Burns tokens from an account with callback.
@@ -158,7 +158,7 @@ namespace neo::smartcontract::native
          * @param amount The amount to burn.
          * @return True if the burning was successful, false otherwise.
          */
-        bool Burn(ApplicationEngine& engine, const io::UInt160& account, int64_t amount);
+        bool Burn(ApplicationEngine& engine, const io::UInt160& account, int64_t amount) override;
 
         /**
          * @brief Handles post-transfer operations.
@@ -170,7 +170,7 @@ namespace neo::smartcontract::native
          * @param callOnPayment Whether to call the onNEP17Payment callback.
          * @return True if the post-transfer was successful, false otherwise.
          */
-        bool PostTransfer(ApplicationEngine& engine, const io::UInt160& from, const io::UInt160& to, int64_t amount, std::shared_ptr<vm::StackItem> data, bool callOnPayment);
+        bool PostTransfer(ApplicationEngine& engine, const io::UInt160& from, const io::UInt160& to, int64_t amount, std::shared_ptr<vm::StackItem> data, bool callOnPayment) override;
 
         /**
          * @brief Gets the instance.

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <neo/ledger/transaction_attribute_type.h>
+#include <neo/ledger/transaction_attribute.h>
 #include <neo/io/uint256.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
@@ -12,7 +12,7 @@ namespace neo::network::p2p::payloads
     /**
      * @brief Indicates that the transaction conflicts with the specified transaction hash.
      */
-    class Conflicts : public ledger::TransactionAttributeBase
+    class Conflicts : public ledger::TransactionAttribute
     {
     private:
         io::UInt256 hash_;
@@ -45,19 +45,19 @@ namespace neo::network::p2p::payloads
          * @brief Gets the transaction attribute type.
          * @return The type.
          */
-        ledger::TransactionAttributeType GetType() const override;
+        ledger::TransactionAttribute::Usage GetType() const;
 
         /**
          * @brief Checks if multiple instances of this attribute are allowed.
          * @return True, as multiple Conflicts attributes are allowed.
          */
-        bool AllowMultiple() const override;
+        bool AllowMultiple() const;
 
         /**
          * @brief Gets the size of the attribute.
          * @return The size in bytes.
          */
-        int GetSize() const override;
+        int GetSize() const;
 
         /**
          * @brief Serializes the attribute to a binary writer.
@@ -89,7 +89,7 @@ namespace neo::network::p2p::payloads
          * @param transaction The transaction containing this attribute.
          * @return True if valid.
          */
-        bool Verify(/* DataCache& snapshot, const Transaction& transaction */) const override;
+        bool Verify(/* DataCache& snapshot, const Transaction& transaction */) const;
 
         /**
          * @brief Calculates the network fee for this attribute.
@@ -97,7 +97,7 @@ namespace neo::network::p2p::payloads
          * @param transaction The transaction containing this attribute.
          * @return The network fee.
          */
-        int64_t CalculateNetworkFee(/* DataCache& snapshot, const Transaction& transaction */) const override;
+        int64_t CalculateNetworkFee(/* DataCache& snapshot, const Transaction& transaction */) const;
 
         /**
          * @brief Checks if this attribute equals another.

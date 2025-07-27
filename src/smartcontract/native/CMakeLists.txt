@@ -1,4 +1,4 @@
-# Create the native contracts library - SIMPLIFIED FOR WORKING BUILD
+# Create the native contracts library
 add_library(neo_native_contracts OBJECT
     native_contract.cpp
     native_contract_manager.cpp
@@ -15,15 +15,22 @@ add_library(neo_native_contracts OBJECT
     neo_token_candidate.cpp
     neo_token_committee.cpp
     policy_contract.cpp
-    # Temporarily disable complex contracts to avoid circular dependencies
-    # gas_token.cpp # Disabled - complex dependencies
-    # oracle_contract.cpp # Disabled - complex dependencies
-    # oracle_contract_handlers.cpp # Disabled - complex dependencies
-    # role_management.cpp # Disabled - complex dependencies
-    # fungible_token.cpp # Disabled - complex dependencies
+    gas_token.cpp
+    oracle_contract.cpp
+    # oracle_contract_handlers.cpp  # Disabled - duplicate symbols with oracle_contract.cpp
+    # oracle_contract_persistence.cpp  # Disabled - duplicate symbols with oracle_contract.cpp
+    # oracle_contract_requests.cpp  # Disabled - duplicate symbols with oracle_contract.cpp
+    role_management.cpp
+    notary.cpp
+    name_service.cpp
+    name_service_operations.cpp
+    name_service_records.cpp
+    fungible_token.cpp
+    non_fungible_token.cpp
     hash_index_state.cpp
     id_list.cpp
     node_list.cpp
+    account_state.cpp
     neo_account_state.cpp
     oracle_request.cpp
 )

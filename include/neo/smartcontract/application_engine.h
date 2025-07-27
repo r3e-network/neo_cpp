@@ -8,6 +8,7 @@
 #include <neo/persistence/data_cache.h>
 #include <neo/ledger/transaction.h>
 #include <neo/ledger/block.h>
+#include <neo/ledger/signer.h>
 #include <neo/smartcontract/contract.h>
 #include <neo/smartcontract/trigger_type.h>
 #include <neo/smartcontract/call_flags.h>
@@ -388,6 +389,20 @@ namespace neo::smartcontract
          * @return The network magic value.
          */
         uint32_t GetNetworkMagic() const;
+        
+        /**
+         * @brief Gets the invocation count for a script.
+         * @param scriptHash The script hash.
+         * @return The invocation count.
+         */
+        int64_t GetInvocationCount(const io::UInt160& scriptHash) const;
+        
+        /**
+         * @brief Sets the invocation count for a script.
+         * @param scriptHash The script hash.
+         * @param count The invocation count.
+         */
+        void SetInvocationCount(const io::UInt160& scriptHash, int64_t count);
 
     // These members are made protected to allow access from system call implementations
     protected:
@@ -424,6 +439,7 @@ namespace neo::smartcontract
         ProtocolSettings protocolSettings_;
         std::string exception_;
         std::vector<io::UInt160> scriptHashes_; // Stack of script hashes for context tracking
+        std::unordered_map<io::UInt160, int64_t> invocationCounts_; // Track invocation counts per script
 
         std::unordered_map<std::string, SystemCallDescriptor> systemCalls_;
 
@@ -431,5 +447,20 @@ namespace neo::smartcontract
          * @brief Registers all system calls.
          */
         void RegisterSystemCalls();
+        
+        // Helper methods for witness verification
+        bool IsCalledByEntry() const;
+        bool IsInAllowedContracts(const ledger::Signer& signer, const io::UInt160& calling_script) const;
+        bool IsInAllowedGroups(const ledger::Signer& signer, const io::UInt160& calling_script) const;
+        bool IsCommitteeHash(const io::UInt256& hash) const;
+        bool VerifyCommitteeConsensus(const io::UInt256& hash) const;
+        bool VerifyMultiSignatureHash(const io::UInt256& hash) const;
+        
+        // Helper methods for contract operations
+        std::vector<cryptography::ecc::ECPoint> GetCommittee() const;
+        io::UInt160 GetScriptHashFromPublicKey(const cryptography::ecc::ECPoint& pubkey) const;
+        std::shared_ptr<ContractState> GetContract(const io::UInt160& scriptHash) const;
+        io::ByteVector CreateCommitteeMultiSigScript(const std::vector<cryptography::ecc::ECPoint>& committee) const;
+        bool IsMultiSignatureContract(const io::ByteVector& script) const;
     };
 }

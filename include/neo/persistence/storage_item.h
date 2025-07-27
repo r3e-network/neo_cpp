@@ -182,6 +182,12 @@ namespace neo::persistence
             }
         }
 
+        /**
+         * @brief Checks if this storage item is constant (C# compatibility).
+         * @return Always false in this implementation.
+         */
+        bool IsConstant() const;
+
     private:
         io::ByteVector value_;
         mutable std::shared_ptr<void> interoperable_obj_;

@@ -2,6 +2,7 @@
 
 # Create ledger library
 add_library(neo_ledger OBJECT
+    stubs.cpp  # Temporary stubs for linking
     ledger_dummy.cpp
     block.cpp
     block_header.cpp
@@ -12,6 +13,8 @@ add_library(neo_ledger OBJECT
     transaction_output.cpp
     coin_reference.cpp
     witness.cpp
+    signer.cpp
+    blockchain_complete.cpp
 )
 
 # Set include directories

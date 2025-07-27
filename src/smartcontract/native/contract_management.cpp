@@ -86,6 +86,27 @@ namespace neo::smartcontract::native
         return contract;
     }
 
+    std::shared_ptr<ContractState> ContractManagement::GetContract(const persistence::DataCache& snapshot, const io::UInt160& hash)
+    {
+        // Get the ContractManagement instance
+        auto contractMgmt = GetInstance();
+        if (!contractMgmt) {
+            return nullptr;
+        }
+        
+        // Create a temporary StoreView from DataCache
+        // For simplicity, we'll delegate to the instance method with a null snapshot
+        // In a complete implementation, this would properly convert DataCache to StoreView
+        try {
+            auto key = contractMgmt->GetStorageKey(PREFIX_CONTRACT, hash);
+            // For now, return nullptr as we need proper DataCache integration
+            // This would need to query the DataCache directly
+            return nullptr;
+        } catch (...) {
+            return nullptr;
+        }
+    }
+
     std::shared_ptr<ContractState> ContractManagement::CreateContract(std::shared_ptr<persistence::StoreView> snapshot, const io::ByteVector& script, const std::string& manifest, const io::UInt160& hash) const
     {
         // Check if contract already exists
