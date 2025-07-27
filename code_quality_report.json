@@ -1,0 +1,2145 @@
+{
+  "summary": {
+    "total_files_analyzed": 778,
+    "total_todos_fixmes": 317,
+    "total_not_implemented": 1,
+    "total_long_functions": 8,
+    "total_large_files": 10,
+    "files_missing_guards": 1,
+    "files_duplicate_guards": 1
+  },
+  "todos_and_fixmes": {
+    "src/consensus/dbft_consensus.cpp": [
+      {
+        "line": 104,
+        "type": "BUG",
+        "message": "(\"Consensus not running, ignoring message\");",
+        "full_line": "LOG_DEBUG(\"Consensus not running, ignoring message\");"
+      },
+      {
+        "line": 112,
+        "type": "BUG",
+        "message": "(\"Ignoring message for block height {} (current: {})\", message.GetBlockIndex(), current_block_index);",
+        "full_line": "LOG_DEBUG(\"Ignoring message for block height {} (current: {})\", message.GetBlockIndex(), current_block_index);"
+      },
+      {
+        "line": 127,
+        "type": "BUG",
+        "message": "(\"Ignoring message for old view {} (current: {})\", message.GetViewNumber(), current_view);",
+        "full_line": "LOG_DEBUG(\"Ignoring message for old view {} (current: {})\", message.GetViewNumber(), current_view);"
+      },
+      {
+        "line": 158,
+        "type": "BUG",
+        "message": "(\"Memory pool not available\");",
+        "full_line": "LOG_DEBUG(\"Memory pool not available\");"
+      },
+      {
+        "line": 256,
+        "type": "BUG",
+        "message": "(\"Starting new consensus round\");",
+        "full_line": "LOG_DEBUG(\"Starting new consensus round\");"
+      },
+      {
+        "line": 332,
+        "type": "BUG",
+        "message": "(\"Processing prepare request from validator {}\", message.GetValidatorIndex());",
+        "full_line": "LOG_DEBUG(\"Processing prepare request from validator {}\", message.GetValidatorIndex());"
+      },
+      {
+        "line": 375,
+        "type": "BUG",
+        "message": "(\"Found transaction {} in memory pool\", tx_hash.ToString());",
+        "full_line": "LOG_DEBUG(\"Found transaction {} in memory pool\", tx_hash.ToString());"
+      },
+      {
+        "line": 380,
+        "type": "BUG",
+        "message": "(\"Verified {} transactions for consensus\", txs.size());",
+        "full_line": "LOG_DEBUG(\"Verified {} transactions for consensus\", txs.size());"
+      },
+      {
+        "line": 395,
+        "type": "BUG",
+        "message": "(\"Sending prepare response\");",
+        "full_line": "LOG_DEBUG(\"Sending prepare response\");"
+      },
+      {
+        "line": 416,
+        "type": "BUG",
+        "message": "(\"Processing prepare response from validator {}\", message.GetValidatorIndex());",
+        "full_line": "LOG_DEBUG(\"Processing prepare response from validator {}\", message.GetValidatorIndex());"
+      },
+      {
+        "line": 436,
+        "type": "BUG",
+        "message": "(\"Sending commit\");",
+        "full_line": "LOG_DEBUG(\"Sending commit\");"
+      },
+      {
+        "line": 497,
+        "type": "BUG",
+        "message": "(\"Processing commit from validator {}\", message.GetValidatorIndex());",
+        "full_line": "LOG_DEBUG(\"Processing commit from validator {}\", message.GetValidatorIndex());"
+      },
+      {
+        "line": 536,
+        "type": "BUG",
+        "message": "(\"Verified signature from validator {}\", message.GetValidatorIndex());",
+        "full_line": "LOG_DEBUG(\"Verified signature from validator {}\", message.GetValidatorIndex());"
+      },
+      {
+        "line": 587,
+        "type": "BUG",
+        "message": "(\"Processing view change from validator {}\", message.GetValidatorIndex());",
+        "full_line": "LOG_DEBUG(\"Processing view change from validator {}\", message.GetValidatorIndex());"
+      },
+      {
+        "line": 787,
+        "type": "BUG",
+        "message": "(\"Block {} verification passed\", block->GetIndex());",
+        "full_line": "LOG_DEBUG(\"Block {} verification passed\", block->GetIndex());"
+      },
+      {
+        "line": 799,
+        "type": "BUG",
+        "message": "(\"Resetting consensus state\");",
+        "full_line": "LOG_DEBUG(\"Resetting consensus state\");"
+      },
+      {
+        "line": 969,
+        "type": "BUG",
+        "message": "(\"Generating deterministic key for validator {}\", validator_id.ToString());",
+        "full_line": "LOG_DEBUG(\"Generating deterministic key for validator {}\", validator_id.ToString());"
+      }
+    ],
+    "src/consensus/consensus_context.cpp": [
+      {
+        "line": 231,
+        "type": "BUG",
+        "message": "(\"Could not get previous block timestamp: {}\", e.what());",
+        "full_line": "LOG_DEBUG(\"Could not get previous block timestamp: {}\", e.what());"
+      },
+      {
+        "line": 359,
+        "type": "BUG",
+        "message": "(",
+        "full_line": "LOG_DEBUG("
+      },
+      {
+        "line": 420,
+        "type": "BUG",
+        "message": "(\"Calculated merkle root for {} transactions: {}\", hashes.size(), merkle_root.ToString());",
+        "full_line": "LOG_DEBUG(\"Calculated merkle root for {} transactions: {}\", hashes.size(), merkle_root.ToString());"
+      },
+      {
+        "line": 459,
+        "type": "BUG",
+        "message": "(\"Saved consensus state for block {} view {} ({} bytes)\", Block->GetIndex(), ViewNumber,",
+        "full_line": "LOG_DEBUG(\"Saved consensus state for block {} view {} ({} bytes)\", Block->GetIndex(), ViewNumber,"
+      },
+      {
+        "line": 613,
+        "type": "BUG",
+        "message": "(\"Serialized consensus context for block {} view {}\", Block->GetIndex(), ViewNumber);",
+        "full_line": "LOG_DEBUG(\"Serialized consensus context for block {} view {}\", Block->GetIndex(), ViewNumber);"
+      },
+      {
+        "line": 730,
+        "type": "BUG",
+        "message": "(\"Restored complete preparation payload for validator {} at index {}\", payloadValidatorIndex,",
+        "full_line": "LOG_DEBUG(\"Restored complete preparation payload for validator {} at index {}\", payloadValidatorIndex,"
+      },
+      {
+        "line": 779,
+        "type": "BUG",
+        "message": "(\"Restored complete commit payload for validator {} at index {}\", payloadValidatorIndex, i);",
+        "full_line": "LOG_DEBUG(\"Restored complete commit payload for validator {} at index {}\", payloadValidatorIndex, i);"
+      },
+      {
+        "line": 827,
+        "type": "BUG",
+        "message": "(\"Restored complete change view payload for validator {} at index {}\", payloadValidatorIndex,",
+        "full_line": "LOG_DEBUG(\"Restored complete change view payload for validator {} at index {}\", payloadValidatorIndex,"
+      }
+    ],
+    "src/ledger/blockchain_complete.cpp": [
+      {
+        "line": 289,
+        "type": "BUG",
+        "message": "(\"Processing header: {} at height {}\", header->GetHash().ToString(), header->GetIndex());",
+        "full_line": "LOG_DEBUG(\"Processing header: {} at height {}\", header->GetHash().ToString(), header->GetIndex());"
+      },
+      {
+        "line": 302,
+        "type": "TODO",
+        "message": "Convert Neo2Transaction to Neo3Transaction",
+        "full_line": "// TODO: Convert Neo2Transaction to Neo3Transaction"
+      },
+      {
+        "line": 342,
+        "type": "TODO",
+        "message": "Convert Neo2Transaction to Neo3Transaction before adding to pool",
+        "full_line": "// TODO: Convert Neo2Transaction to Neo3Transaction before adding to pool"
+      }
+    ],
+    "src/ledger/transaction_verification.cpp": [
+      {
+        "line": 123,
+        "type": "BUG",
+        "message": "ging",
+        "full_line": "// Log verification failure for debugging"
+      }
+    ],
+    "src/core/big_decimal.cpp": [
+      {
+        "line": 150,
+        "type": "TODO",
+        "message": "uble() const",
+        "full_line": "double BigDecimal::ToDouble() const"
+      }
+    ],
+    "src/core/logging.cpp": [
+      {
+        "line": 102,
+        "type": "BUG",
+        "message": ")",
+        "full_line": "if (level_ <= LogLevel::Debug)"
+      },
+      {
+        "line": 104,
+        "type": "BUG",
+        "message": "(\"Starting operation: {}\", operation_);",
+        "full_line": "LOG_DEBUG(\"Starting operation: {}\", operation_);"
+      },
+      {
+        "line": 113,
+        "type": "BUG",
+        "message": ")",
+        "full_line": "if (level_ <= LogLevel::Debug)"
+      },
+      {
+        "line": 115,
+        "type": "BUG",
+        "message": "(\"Operation '{}' completed in {} \u00b5s\", operation_, duration);",
+        "full_line": "LOG_DEBUG(\"Operation '{}' completed in {} \u00b5s\", operation_, duration);"
+      },
+      {
+        "line": 131,
+        "type": "BUG",
+        "message": ":",
+        "full_line": "case LogLevel::Debug:"
+      },
+      {
+        "line": 132,
+        "type": "BUG",
+        "message": "(\"{}\", full_message);",
+        "full_line": "LOG_DEBUG(\"{}\", full_message);"
+      }
+    ],
+    "src/core/fixed8.cpp": [
+      {
+        "line": 14,
+        "type": "TODO",
+        "message": "uble() method for efficient conversion",
+        "full_line": "// Use BigDecimal's native ToDouble() method for efficient conversion"
+      },
+      {
+        "line": 15,
+        "type": "TODO",
+        "message": "uble();",
+        "full_line": "double decimal_value = value.ToDouble();"
+      }
+    ],
+    "src/core/neo_system.cpp": [
+      {
+        "line": 146,
+        "type": "TODO",
+        "message": "Fix plugin system integration",
+        "full_line": "// TODO: Fix plugin system integration"
+      },
+      {
+        "line": 345,
+        "type": "TODO",
+        "message": "Fix plugin system",
+        "full_line": "// TODO: Fix plugin system"
+      },
+      {
+        "line": 355,
+        "type": "TODO",
+        "message": "Fix HeaderCache incomplete type",
+        "full_line": "// TODO: Fix HeaderCache incomplete type"
+      },
+      {
+        "line": 368,
+        "type": "TODO",
+        "message": "Check if IStore has a close method",
+        "full_line": "// TODO: Check if IStore has a close method"
+      },
+      {
+        "line": 397,
+        "type": "TODO",
+        "message": "Implement ledger transaction checking",
+        "full_line": "// TODO: Implement ledger transaction checking"
+      },
+      {
+        "line": 406,
+        "type": "TODO",
+        "message": "Implement proper conflict hash checking",
+        "full_line": "// TODO: Implement proper conflict hash checking"
+      },
+      {
+        "line": 429,
+        "type": "TODO",
+        "message": "Set proper next consensus address",
+        "full_line": "// TODO: Set proper next consensus address"
+      },
+      {
+        "line": 443,
+        "type": "TODO",
+        "message": "Fix plugin system",
+        "full_line": "// TODO: Fix plugin system"
+      },
+      {
+        "line": 451,
+        "type": "BUG",
+        "message": "(\"Stopping {}\", component_name);",
+        "full_line": "LOG_DEBUG(\"Stopping {}\", component_name);"
+      },
+      {
+        "line": 453,
+        "type": "BUG",
+        "message": "(\"{} stopped\", component_name);",
+        "full_line": "LOG_DEBUG(\"{} stopped\", component_name);"
+      }
+    ],
+    "src/network/p2p_server.cpp": [
+      {
+        "line": 445,
+        "type": "BUG",
+        "message": ", \"Received Addr message with \" << addrPayload->GetAddresses().size()",
+        "full_line": "NEO_LOG(NEO_DEBUG, \"Received Addr message with \" << addrPayload->GetAddresses().size()"
+      },
+      {
+        "line": 516,
+        "type": "BUG",
+        "message": ", \"Sent verack to peer\");",
+        "full_line": "NEO_LOG(NEO_DEBUG, \"Sent verack to peer\");"
+      },
+      {
+        "line": 627,
+        "type": "BUG",
+        "message": ", \"Received verack from peer: \" << peer->GetUserAgent());",
+        "full_line": "NEO_LOG(NEO_DEBUG, \"Received verack from peer: \" << peer->GetUserAgent());"
+      },
+      {
+        "line": 797,
+        "type": "BUG",
+        "message": ", \"Received ping from peer: \" << peer->GetUserAgent());",
+        "full_line": "NEO_LOG(NEO_DEBUG, \"Received ping from peer: \" << peer->GetUserAgent());"
+      },
+      {
+        "line": 803,
+        "type": "BUG",
+        "message": ", \"Sent pong to peer: \" << peer->GetUserAgent());",
+        "full_line": "NEO_LOG(NEO_DEBUG, \"Sent pong to peer: \" << peer->GetUserAgent());"
+      },
+      {
+        "line": 816,
+        "type": "BUG",
+        "message": ", \"Received pong from peer: \" << peer->GetUserAgent());",
+        "full_line": "NEO_LOG(NEO_DEBUG, \"Received pong from peer: \" << peer->GetUserAgent());"
+      },
+      {
+        "line": 887,
+        "type": "BUG",
+        "message": ", \"Sent version message to peer\");",
+        "full_line": "NEO_LOG(NEO_DEBUG, \"Sent version message to peer\");"
+      },
+      {
+        "line": 900,
+        "type": "BUG",
+        "message": ", \"Requesting addresses from peer: \" << peer->GetUserAgent());",
+        "full_line": "NEO_LOG(NEO_DEBUG, \"Requesting addresses from peer: \" << peer->GetUserAgent());"
+      },
+      {
+        "line": 906,
+        "type": "BUG",
+        "message": ", \"Sent getaddr to peer: \" << peer->GetUserAgent());",
+        "full_line": "NEO_LOG(NEO_DEBUG, \"Sent getaddr to peer: \" << peer->GetUserAgent());"
+      }
+    ],
+    "src/network/tcp_client.cpp": [
+      {
+        "line": 30,
+        "type": "BUG",
+        "message": "(\"Network\", \"Client IO thread \" + std::to_string(i) + \" started\");",
+        "full_line": "logging::Logger::Instance().Debug(\"Network\", \"Client IO thread \" + std::to_string(i) + \" started\");"
+      },
+      {
+        "line": 32,
+        "type": "BUG",
+        "message": "(\"Network\", \"Client IO thread \" + std::to_string(i) + \" stopped\");",
+        "full_line": "logging::Logger::Instance().Debug(\"Network\", \"Client IO thread \" + std::to_string(i) + \" stopped\");"
+      }
+    ],
+    "src/network/tcp_server.cpp": [
+      {
+        "line": 83,
+        "type": "BUG",
+        "message": "(\"Network\", \"IO thread \" + std::to_string(i) + \" started\");",
+        "full_line": "logging::Logger::Instance().Debug(\"Network\", \"IO thread \" + std::to_string(i) + \" started\");"
+      },
+      {
+        "line": 85,
+        "type": "BUG",
+        "message": "(\"Network\", \"IO thread \" + std::to_string(i) + \" stopped\");",
+        "full_line": "logging::Logger::Instance().Debug(\"Network\", \"IO thread \" + std::to_string(i) + \" stopped\");"
+      },
+      {
+        "line": 116,
+        "type": "BUG",
+        "message": "(\"Network\", \"TcpServer already stopped\");",
+        "full_line": "logging::Logger::Instance().Debug(\"Network\", \"TcpServer already stopped\");"
+      },
+      {
+        "line": 129,
+        "type": "BUG",
+        "message": "(\"Network\", \"Acceptor closed\");",
+        "full_line": "logging::Logger::Instance().Debug(\"Network\", \"Acceptor closed\");"
+      },
+      {
+        "line": 162,
+        "type": "BUG",
+        "message": "(\"Network\", \"Work guard reset\");",
+        "full_line": "logging::Logger::Instance().Debug(\"Network\", \"Work guard reset\");"
+      },
+      {
+        "line": 171,
+        "type": "BUG",
+        "message": "(\"Network\", \"IO context stopped\");",
+        "full_line": "logging::Logger::Instance().Debug(\"Network\", \"IO context stopped\");"
+      },
+      {
+        "line": 195,
+        "type": "BUG",
+        "message": "(\"Network\", \"All IO threads joined\");",
+        "full_line": "logging::Logger::Instance().Debug(\"Network\", \"All IO threads joined\");"
+      },
+      {
+        "line": 297,
+        "type": "BUG",
+        "message": "(\"Network\", \"Removed connection to \" + endpoint);",
+        "full_line": "logging::Logger::Instance().Debug(\"Network\", \"Removed connection to \" + endpoint);"
+      }
+    ],
+    "src/network/peer_discovery_service.cpp": [
+      {
+        "line": 96,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Added seed node to known peers: \" << endpoint;",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Added seed node to known peers: \" << endpoint;"
+      },
+      {
+        "line": 119,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Added new peer to known peers: \" << endpoint;",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Added new peer to known peers: \" << endpoint;"
+      },
+      {
+        "line": 130,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Resetting failed attempts for peer: \" << endpoint;",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Resetting failed attempts for peer: \" << endpoint;"
+      },
+      {
+        "line": 177,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Added \" << added << \" new peers from address message\";",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Added \" << added << \" new peers from address message\";"
+      },
+      {
+        "line": 210,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Starting peer discovery...\";",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Starting peer discovery...\";"
+      },
+      {
+        "line": 244,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Requested addresses from peer: \"",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Requested addresses from peer: \""
+      },
+      {
+        "line": 291,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Already connected to \" << connectedCount << \" peers, not connecting to more\";",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Already connected to \" << connectedCount << \" peers, not connecting to more\";"
+      },
+      {
+        "line": 297,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Attempting to connect to \" << needed << \" more peers\";",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Attempting to connect to \" << needed << \" more peers\";"
+      },
+      {
+        "line": 360,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Found \" << candidates.size() << \" candidate peers to connect to\";",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Found \" << candidates.size() << \" candidate peers to connect to\";"
+      },
+      {
+        "line": 382,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Attempting to connect to peer: \" << endpoint;",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Attempting to connect to peer: \" << endpoint;"
+      },
+      {
+        "line": 457,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Processing GetAddr request from peer: \" << peer->GetUserAgent();",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Processing GetAddr request from peer: \" << peer->GetUserAgent();"
+      },
+      {
+        "line": 495,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"No addresses to send in response to GetAddr\";",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"No addresses to send in response to GetAddr\";"
+      },
+      {
+        "line": 514,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Sent \" << addresses.size() << \" addresses to peer: \" << peer->GetUserAgent();",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Sent \" << addresses.size() << \" addresses to peer: \" << peer->GetUserAgent();"
+      },
+      {
+        "line": 535,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Received empty Addr message from peer: \" << peer->GetUserAgent();",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Received empty Addr message from peer: \" << peer->GetUserAgent();"
+      },
+      {
+        "line": 539,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Processing Addr message with \" << addresses.size()",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Processing Addr message with \" << addresses.size()"
+      },
+      {
+        "line": 549,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Skipping invalid address from peer: \" << peer->GetUserAgent();",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Skipping invalid address from peer: \" << peer->GetUserAgent();"
+      },
+      {
+        "line": 557,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Skipping our own address: \" << addr.GetAddress() << \":\" << addr.GetPort();",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Skipping our own address: \" << addr.GetAddress() << \":\" << addr.GetPort();"
+      },
+      {
+        "line": 565,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Discovered peer: \" << addr.GetAddress() << \":\" << addr.GetPort()",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Discovered peer: \" << addr.GetAddress() << \":\" << addr.GetPort()"
+      },
+      {
+        "line": 578,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"No valid addresses found in Addr message from peer: \" << peer->GetUserAgent();",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"No valid addresses found in Addr message from peer: \" << peer->GetUserAgent();"
+      },
+      {
+        "line": 607,
+        "type": "BUG",
+        "message": ", \"P2P\") << \"Removing stale peer: \" << it->first << \" (last seen: \"",
+        "full_line": "NEO_LOG(DEBUG, \"P2P\") << \"Removing stale peer: \" << it->first << \" (last seen: \""
+      }
+    ],
+    "src/cli/safe_type_converters.cpp": [
+      {
+        "line": 178,
+        "type": "TODO",
+        "message": "uble(args[0]);",
+        "full_line": "return core::SafeConversions::SafeToDouble(args[0]);"
+      }
+    ],
+    "src/vm/debugger.cpp": [
+      {
+        "line": 1,
+        "type": "BUG",
+        "message": "ger.h>",
+        "full_line": "#include <neo/vm/debugger.h>"
+      },
+      {
+        "line": 5,
+        "type": "BUG",
+        "message": "ger::Debugger(ExecutionEngine& engine) : engine_(engine)",
+        "full_line": "Debugger::Debugger(ExecutionEngine& engine) : engine_(engine)"
+      },
+      {
+        "line": 8,
+        "type": "BUG",
+        "message": "ging",
+        "full_line": "// Initialize the engine to Break state for debugging"
+      },
+      {
+        "line": 15,
+        "type": "BUG",
+        "message": "ger::Execute()",
+        "full_line": "VMState Debugger::Execute()"
+      },
+      {
+        "line": 22,
+        "type": "BUG",
+        "message": "ger::StepInto()",
+        "full_line": "VMState Debugger::StepInto()"
+      },
+      {
+        "line": 24,
+        "type": "BUG",
+        "message": "ging",
+        "full_line": "// If not in Break state, initialize to Break for debugging"
+      },
+      {
+        "line": 42,
+        "type": "BUG",
+        "message": "ging unless we've halted or faulted",
+        "full_line": "// Return to Break state for debugging unless we've halted or faulted"
+      },
+      {
+        "line": 51,
+        "type": "BUG",
+        "message": "ger::StepOver()",
+        "full_line": "VMState Debugger::StepOver()"
+      },
+      {
+        "line": 53,
+        "type": "BUG",
+        "message": "ging",
+        "full_line": "// If not in Break state, initialize to Break for debugging"
+      },
+      {
+        "line": 80,
+        "type": "BUG",
+        "message": "ging unless we've halted or faulted",
+        "full_line": "// Return to Break state for debugging unless we've halted or faulted"
+      },
+      {
+        "line": 89,
+        "type": "BUG",
+        "message": "ger::StepOut()",
+        "full_line": "VMState Debugger::StepOut()"
+      },
+      {
+        "line": 91,
+        "type": "BUG",
+        "message": "ging",
+        "full_line": "// If not in Break state, initialize to Break for debugging"
+      },
+      {
+        "line": 115,
+        "type": "BUG",
+        "message": "ging unless we've halted or faulted",
+        "full_line": "// Return to Break state for debugging unless we've halted or faulted"
+      },
+      {
+        "line": 124,
+        "type": "BUG",
+        "message": "ger::AddBreakPoint(int position)",
+        "full_line": "void Debugger::AddBreakPoint(int position)"
+      },
+      {
+        "line": 129,
+        "type": "BUG",
+        "message": "ger::RemoveBreakPoint(int position)",
+        "full_line": "void Debugger::RemoveBreakPoint(int position)"
+      },
+      {
+        "line": 134,
+        "type": "BUG",
+        "message": "ger::ClearBreakPoints()",
+        "full_line": "void Debugger::ClearBreakPoints()"
+      }
+    ],
+    "src/vm/execution_engine.cpp": [
+      {
+        "line": 330,
+        "type": "BUG",
+        "message": "ging)",
+        "full_line": "// Pre-execute instruction hook (for debugging)"
+      },
+      {
+        "line": 354,
+        "type": "BUG",
+        "message": "ging)",
+        "full_line": "// Post-execute instruction hook (for debugging)"
+      }
+    ],
+    "src/persistence/store_factory.cpp": [
+      {
+        "line": 75,
+        "type": "TODO",
+        "message": "Implement RocksDB provider when NEO_HAS_ROCKSDB is defined",
+        "full_line": "// TODO: Implement RocksDB provider when NEO_HAS_ROCKSDB is defined"
+      }
+    ],
+    "src/smartcontract/transaction_verifier.cpp": [
+      {
+        "line": 15,
+        "type": "BUG",
+        "message": "(fmt, ...) ((void)0)",
+        "full_line": "#define LOG_DEBUG(fmt, ...) ((void)0)"
+      },
+      {
+        "line": 161,
+        "type": "TODO",
+        "message": "Implement multi-signature verification",
+        "full_line": "// TODO: Implement multi-signature verification"
+      },
+      {
+        "line": 169,
+        "type": "TODO",
+        "message": "Implement script verification",
+        "full_line": "// TODO: Implement script verification"
+      },
+      {
+        "line": 183,
+        "type": "TODO",
+        "message": "Implement multi-signature parameter parsing",
+        "full_line": "// TODO: Implement multi-signature parameter parsing"
+      },
+      {
+        "line": 191,
+        "type": "TODO",
+        "message": "Implement witness scope verification",
+        "full_line": "// TODO: Implement witness scope verification"
+      },
+      {
+        "line": 228,
+        "type": "BUG",
+        "message": "(\"Using cached verification result for tx {}\", cacheKey);",
+        "full_line": "LOG_DEBUG(\"Using cached verification result for tx {}\", cacheKey);"
+      },
+      {
+        "line": 233,
+        "type": "BUG",
+        "message": "(\"Cache miss for transaction verification: {}\", cacheKey);",
+        "full_line": "LOG_DEBUG(\"Cache miss for transaction verification: {}\", cacheKey);"
+      },
+      {
+        "line": 240,
+        "type": "BUG",
+        "message": "(\"Using cached verification result for tx {}\", cacheKey);",
+        "full_line": "LOG_DEBUG(\"Using cached verification result for tx {}\", cacheKey);"
+      },
+      {
+        "line": 253,
+        "type": "BUG",
+        "message": "(\"Cache miss for transaction verification: {}\", cacheKey);",
+        "full_line": "LOG_DEBUG(\"Cache miss for transaction verification: {}\", cacheKey);"
+      },
+      {
+        "line": 322,
+        "type": "BUG",
+        "message": "(\"Recorded gas consumption in histogram: {} gas units\", totalGasConsumed);",
+        "full_line": "LOG_DEBUG(\"Recorded gas consumption in histogram: {} gas units\", totalGasConsumed);"
+      },
+      {
+        "line": 339,
+        "type": "BUG",
+        "message": "(\"Cached verification result for transaction: {}\", transaction.GetHash().ToString());",
+        "full_line": "LOG_DEBUG(\"Cached verification result for transaction: {}\", transaction.GetHash().ToString());"
+      },
+      {
+        "line": 390,
+        "type": "BUG",
+        "message": "(\"TransactionVerifier\",",
+        "full_line": "neo::logging::Logger::GetDefault().Debug(\"TransactionVerifier\","
+      },
+      {
+        "line": 443,
+        "type": "TODO",
+        "message": "Get network from protocol settings",
+        "full_line": "uint32_t network = 0;  // TODO: Get network from protocol settings"
+      },
+      {
+        "line": 495,
+        "type": "BUG",
+        "message": "(\"TransactionVerifier\",",
+        "full_line": "neo::logging::Logger::GetDefault().Debug(\"TransactionVerifier\","
+      },
+      {
+        "line": 578,
+        "type": "BUG",
+        "message": "(\"TransactionVerifier\", \"Verifying network fee for transaction \" +",
+        "full_line": "neo::logging::Logger::GetDefault().Debug(\"TransactionVerifier\", \"Verifying network fee for transaction \" +"
+      },
+      {
+        "line": 608,
+        "type": "BUG",
+        "message": "(\"TransactionVerifier\", \"Verifying system fee for transaction \" +",
+        "full_line": "neo::logging::Logger::GetDefault().Debug(\"TransactionVerifier\", \"Verifying system fee for transaction \" +"
+      },
+      {
+        "line": 683,
+        "type": "BUG",
+        "message": "(",
+        "full_line": "neo::logging::Logger::GetDefault().Debug("
+      },
+      {
+        "line": 844,
+        "type": "TODO",
+        "message": "Get network from protocol settings",
+        "full_line": "uint32_t network = 0;  // TODO: Get network from protocol settings"
+      },
+      {
+        "line": 916,
+        "type": "BUG",
+        "message": "(\"Signature verification failed - script returned false\");",
+        "full_line": "neo::logging::Logger::GetDefault().Debug(\"Signature verification failed - script returned false\");"
+      },
+      {
+        "line": 920,
+        "type": "BUG",
+        "message": "(\"Signature verification passed - script execution successful\");",
+        "full_line": "neo::logging::Logger::GetDefault().Debug(\"Signature verification passed - script execution successful\");"
+      },
+      {
+        "line": 969,
+        "type": "TODO",
+        "message": "Verify witness signature for specific signer",
+        "full_line": "// TODO: Verify witness signature for specific signer"
+      },
+      {
+        "line": 988,
+        "type": "BUG",
+        "message": "(\"All witness verifications passed successfully\");",
+        "full_line": "neo::logging::Logger::GetDefault().Debug(\"All witness verifications passed successfully\");"
+      },
+      {
+        "line": 1009,
+        "type": "BUG",
+        "message": "(\"Stub: AddToCache called for hash {}\", hash.ToString());",
+        "full_line": "LOG_DEBUG(\"Stub: AddToCache called for hash {}\", hash.ToString());"
+      },
+      {
+        "line": 1016,
+        "type": "BUG",
+        "message": "(\"Stub: GetFromCache called for hash {}\", hash.ToString());",
+        "full_line": "LOG_DEBUG(\"Stub: GetFromCache called for hash {}\", hash.ToString());"
+      },
+      {
+        "line": 1023,
+        "type": "BUG",
+        "message": "(\"Stub: RecordVerificationTime called with duration {} us\", duration.count());",
+        "full_line": "LOG_DEBUG(\"Stub: RecordVerificationTime called with duration {} us\", duration.count());"
+      }
+    ],
+    "src/smartcontract/binary_serializer.cpp": [
+      {
+        "line": 15,
+        "type": "TODO",
+        "message": "Implement proper serialization when VM API is stabilized",
+        "full_line": "// TODO: Implement proper serialization when VM API is stabilized"
+      },
+      {
+        "line": 36,
+        "type": "TODO",
+        "message": "Implement proper deserialization when VM API is stabilized",
+        "full_line": "// TODO: Implement proper deserialization when VM API is stabilized"
+      },
+      {
+        "line": 51,
+        "type": "TODO",
+        "message": "Implement proper serialization for each type",
+        "full_line": "// TODO: Implement proper serialization for each type"
+      },
+      {
+        "line": 62,
+        "type": "TODO",
+        "message": "Implement proper deserialization for each type",
+        "full_line": "// TODO: Implement proper deserialization for each type"
+      }
+    ],
+    "src/smartcontract/interop_service.cpp": [
+      {
+        "line": 117,
+        "type": "TODO",
+        "message": "Implement when available",
+        "full_line": "// TODO: Implement when available"
+      },
+      {
+        "line": 137,
+        "type": "TODO",
+        "message": "Implement logging",
+        "full_line": "// TODO: Implement logging"
+      },
+      {
+        "line": 142,
+        "type": "TODO",
+        "message": "Implement notification",
+        "full_line": "// TODO: Implement notification"
+      },
+      {
+        "line": 157,
+        "type": "TODO",
+        "message": "Implement gas burning",
+        "full_line": "// TODO: Implement gas burning"
+      },
+      {
+        "line": 179,
+        "type": "TODO",
+        "message": "Implement contract call",
+        "full_line": "// TODO: Implement contract call"
+      },
+      {
+        "line": 184,
+        "type": "TODO",
+        "message": "Implement native contract call",
+        "full_line": "// TODO: Implement native contract call"
+      },
+      {
+        "line": 204,
+        "type": "TODO",
+        "message": "Implement native contract persist",
+        "full_line": "// TODO: Implement native contract persist"
+      },
+      {
+        "line": 209,
+        "type": "TODO",
+        "message": "Implement native contract post persist",
+        "full_line": "// TODO: Implement native contract post persist"
+      },
+      {
+        "line": 240,
+        "type": "TODO",
+        "message": "Implement storage put",
+        "full_line": "// TODO: Implement storage put"
+      },
+      {
+        "line": 245,
+        "type": "TODO",
+        "message": "Implement storage delete",
+        "full_line": "// TODO: Implement storage delete"
+      }
+    ],
+    "src/smartcontract/json_serializer.cpp": [
+      {
+        "line": 53,
+        "type": "TODO",
+        "message": "Implement proper serialization when VM API is stabilized",
+        "full_line": "// TODO: Implement proper serialization when VM API is stabilized"
+      },
+      {
+        "line": 84,
+        "type": "TODO",
+        "message": "Implement proper deserialization when VM API is stabilized",
+        "full_line": "// TODO: Implement proper deserialization when VM API is stabilized"
+      }
+    ],
+    "src/smartcontract/system_calls_crypto.cpp": [
+      {
+        "line": 985,
+        "type": "TODO",
+        "message": "Implement proper SWU mapping",
+        "full_line": "bool success1 = true;  // TODO: Implement proper SWU mapping"
+      },
+      {
+        "line": 986,
+        "type": "TODO",
+        "message": "Implement proper SWU mapping",
+        "full_line": "bool success2 = true;  // TODO: Implement proper SWU mapping"
+      },
+      {
+        "line": 1089,
+        "type": "TODO",
+        "message": "Implement proper BLS pairing verification",
+        "full_line": "// TODO: Implement proper BLS pairing verification"
+      }
+    ],
+    "src/smartcontract/contract_parameters_context.cpp": [
+      {
+        "line": 97,
+        "type": "TODO",
+        "message": "Implement proper JSON deserialization when JsonReader API is stabilized",
+        "full_line": "// TODO: Implement proper JSON deserialization when JsonReader API is stabilized"
+      },
+      {
+        "line": 246,
+        "type": "TODO",
+        "message": "Set the witness parameters",
+        "full_line": "// TODO: Set the witness parameters"
+      },
+      {
+        "line": 254,
+        "type": "TODO",
+        "message": "Implement when ContractManagement::GetContract is available",
+        "full_line": "// TODO: Implement when ContractManagement::GetContract is available"
+      },
+      {
+        "line": 321,
+        "type": "TODO",
+        "message": "Implement JSON deserialization",
+        "full_line": "// TODO: Implement JSON deserialization"
+      },
+      {
+        "line": 330,
+        "type": "TODO",
+        "message": "Get actual type",
+        "full_line": "writer.Write(\"type\", \"Transaction\");  // TODO: Get actual type"
+      },
+      {
+        "line": 331,
+        "type": "TODO",
+        "message": "Write verifiable data when API is available",
+        "full_line": "// TODO: Write verifiable data when API is available"
+      },
+      {
+        "line": 437,
+        "type": "TODO",
+        "message": "Implement multi-sig witness creation",
+        "full_line": "// TODO: Implement multi-sig witness creation"
+      }
+    ],
+    "src/rpc/rpc_methods.cpp": [
+      {
+        "line": 772,
+        "type": "BUG",
+        "message": "(\"Address validation failed: {}\", e.what());",
+        "full_line": "LOG_DEBUG(\"Address validation failed: {}\", e.what());"
+      },
+      {
+        "line": 777,
+        "type": "BUG",
+        "message": "(\"Runtime error during address validation: {}\", e.what());",
+        "full_line": "LOG_DEBUG(\"Runtime error during address validation: {}\", e.what());"
+      },
+      {
+        "line": 782,
+        "type": "BUG",
+        "message": "(\"Exception during address validation: {}\", e.what());",
+        "full_line": "LOG_DEBUG(\"Exception during address validation: {}\", e.what());"
+      }
+    ],
+    "src/logging/logger.cpp": [
+      {
+        "line": 24,
+        "type": "BUG",
+        "message": "(const std::string& category, const std::string& message)",
+        "full_line": "void Logger::Debug(const std::string& category, const std::string& message)"
+      },
+      {
+        "line": 26,
+        "type": "BUG",
+        "message": "(\"[\" + category + \"] \" + message);",
+        "full_line": "Debug(\"[\" + category + \"] \" + message);"
+      },
+      {
+        "line": 111,
+        "type": "BUG",
+        "message": ":",
+        "full_line": "case Level::Debug:"
+      },
+      {
+        "line": 112,
+        "type": "BUG",
+        "message": ";",
+        "full_line": "spdlog_level = spdlog::level::debug;"
+      },
+      {
+        "line": 151,
+        "type": "BUG",
+        "message": "(const std::string& message)",
+        "full_line": "void Logger::Debug(const std::string& message)"
+      },
+      {
+        "line": 154,
+        "type": "BUG",
+        "message": ")",
+        "full_line": "if (current_level_ <= Level::Debug)"
+      },
+      {
+        "line": 156,
+        "type": "BUG",
+        "message": "] \" << message << std::endl;",
+        "full_line": "std::cout << \"[DEBUG] \" << message << std::endl;"
+      },
+      {
+        "line": 160,
+        "type": "BUG",
+        "message": "(message);",
+        "full_line": "logger_->debug(message);"
+      },
+      {
+        "line": 218,
+        "type": "BUG",
+        "message": "\", \"INFO\", \"WARN\", \"ERROR\", \"CRITICAL\", \"OFF\"};",
+        "full_line": "const char* level_names[] = {\"TRACE\", \"DEBUG\", \"INFO\", \"WARN\", \"ERROR\", \"CRITICAL\", \"OFF\"};"
+      },
+      {
+        "line": 241,
+        "type": "BUG",
+        "message": ":",
+        "full_line": "case Level::Debug:"
+      },
+      {
+        "line": 242,
+        "type": "BUG",
+        "message": "(formatted);",
+        "full_line": "logger_->debug(formatted);"
+      }
+    ],
+    "src/console_service/service_proxy.cpp": [
+      {
+        "line": 190,
+        "type": "TODO",
+        "message": "Implement proper suspend/resume functionality",
+        "full_line": "// TODO: Implement proper suspend/resume functionality"
+      },
+      {
+        "line": 291,
+        "type": "TODO",
+        "message": "Implement CLI service integration",
+        "full_line": "// TODO: Implement CLI service integration"
+      }
+    ],
+    "src/smartcontract/native/policy_contract.cpp": [
+      {
+        "line": 357,
+        "type": "TODO",
+        "message": "Implement proper native contract checking",
+        "full_line": "// TODO: Implement proper native contract checking"
+      }
+    ],
+    "src/smartcontract/native/oracle_contract_persistence.cpp": [
+      {
+        "line": 65,
+        "type": "TODO",
+        "message": "Check if this is an oracle response transaction",
+        "full_line": "// TODO: Check if this is an oracle response transaction"
+      }
+    ],
+    "src/smartcontract/native/oracle_contract.cpp": [
+      {
+        "line": 136,
+        "type": "TODO",
+        "message": "Process oracle response",
+        "full_line": "// TODO: Process oracle response"
+      },
+      {
+        "line": 156,
+        "type": "TODO",
+        "message": "Implement OracleRequest deserialization",
+        "full_line": "// TODO: Implement OracleRequest deserialization"
+      },
+      {
+        "line": 167,
+        "type": "TODO",
+        "message": "Implement IdList deserialization",
+        "full_line": "// TODO: Implement IdList deserialization"
+      },
+      {
+        "line": 181,
+        "type": "TODO",
+        "message": "Implement request deserialization from storage",
+        "full_line": "// TODO: Implement request deserialization from storage"
+      },
+      {
+        "line": 254,
+        "type": "TODO",
+        "message": "Implement OracleRequest serialization",
+        "full_line": "// TODO: Implement OracleRequest serialization"
+      },
+      {
+        "line": 290,
+        "type": "TODO",
+        "message": "Implement IdList serialization",
+        "full_line": "// TODO: Implement IdList serialization"
+      },
+      {
+        "line": 313,
+        "type": "TODO",
+        "message": "Implement IdList serialization",
+        "full_line": "// TODO: Implement IdList serialization"
+      },
+      {
+        "line": 331,
+        "type": "TODO",
+        "message": "Implement IdList deserialization",
+        "full_line": "// TODO: Implement IdList deserialization"
+      }
+    ],
+    "src/smartcontract/native/notary.cpp": [
+      {
+        "line": 92,
+        "type": "TODO",
+        "message": "Extract nKeys from NotaryAssisted attribute data",
+        "full_line": "// TODO: Extract nKeys from NotaryAssisted attribute data"
+      },
+      {
+        "line": 259,
+        "type": "TODO",
+        "message": "Extract nKeys from NotaryAssisted attribute data",
+        "full_line": "// TODO: Extract nKeys from NotaryAssisted attribute data"
+      },
+      {
+        "line": 272,
+        "type": "TODO",
+        "message": "Implement GetHashData",
+        "full_line": "// TODO: Implement GetHashData"
+      },
+      {
+        "line": 322,
+        "type": "TODO",
+        "message": "Fix TransactionAttributeType namespace",
+        "full_line": "// TODO: Fix TransactionAttributeType namespace"
+      },
+      {
+        "line": 344,
+        "type": "TODO",
+        "message": "Fix StoreView to DataCache conversion",
+        "full_line": "// TODO: Fix StoreView to DataCache conversion"
+      },
+      {
+        "line": 352,
+        "type": "TODO",
+        "message": "Fix TransactionAttributeType namespace",
+        "full_line": "// TODO: Fix TransactionAttributeType namespace"
+      },
+      {
+        "line": 412,
+        "type": "TODO",
+        "message": "Fix ReferenceCounter type conversion",
+        "full_line": "// TODO: Fix ReferenceCounter type conversion"
+      }
+    ],
+    "src/smartcontract/native/oracle_contract_handlers.cpp": [
+      {
+        "line": 180,
+        "type": "TODO",
+        "message": "Implement oracle response finishing",
+        "full_line": "// TODO: Implement oracle response finishing"
+      },
+      {
+        "line": 188,
+        "type": "TODO",
+        "message": "Implement oracle response verification",
+        "full_line": "// TODO: Implement oracle response verification"
+      },
+      {
+        "line": 229,
+        "type": "TODO",
+        "message": "Implement oracle response attribute handling",
+        "full_line": "// TODO: Implement oracle response attribute handling"
+      }
+    ],
+    "src/smartcontract/native/role_management.cpp": [
+      {
+        "line": 273,
+        "type": "TODO",
+        "message": "Implement IsAuthorizedForRoleDesignation",
+        "full_line": "// TODO: Implement IsAuthorizedForRoleDesignation"
+      },
+      {
+        "line": 342,
+        "type": "TODO",
+        "message": "Implement ValidateRoleSpecificConstraints",
+        "full_line": "// TODO: Implement ValidateRoleSpecificConstraints"
+      },
+      {
+        "line": 346,
+        "type": "TODO",
+        "message": "Implement IsCriticalRole and ValidateCriticalRoleAssignment",
+        "full_line": "// TODO: Implement IsCriticalRole and ValidateCriticalRoleAssignment"
+      },
+      {
+        "line": 422,
+        "type": "TODO",
+        "message": "Define hardfork detection",
+        "full_line": "// TODO: Define hardfork detection"
+      }
+    ],
+    "src/smartcontract/native/crypto_lib.cpp": [
+      {
+        "line": 460,
+        "type": "TODO",
+        "message": "Implement secp256k1-specific verification",
+        "full_line": "// TODO: Implement secp256k1-specific verification"
+      }
+    ],
+    "src/smartcontract/native/contract_management.cpp": [
+      {
+        "line": 419,
+        "type": "TODO",
+        "message": "Implement proper committee authorization check",
+        "full_line": "// TODO: Implement proper committee authorization check"
+      },
+      {
+        "line": 423,
+        "type": "TODO",
+        "message": "Implement proper committee member verification",
+        "full_line": "// TODO: Implement proper committee member verification"
+      },
+      {
+        "line": 592,
+        "type": "TODO",
+        "message": "Implement fallback to protocol settings when available",
+        "full_line": "// TODO: Implement fallback to protocol settings when available"
+      },
+      {
+        "line": 655,
+        "type": "TODO",
+        "message": "Use proper system call for multisig",
+        "full_line": "// TODO: Use proper system call for multisig"
+      }
+    ],
+    "src/smartcontract/native/gas_token.cpp": [
+      {
+        "line": 200,
+        "type": "TODO",
+        "message": "Parse manifest JSON and check for onNEP17Payment method",
+        "full_line": "// TODO: Parse manifest JSON and check for onNEP17Payment method"
+      },
+      {
+        "line": 465,
+        "type": "TODO",
+        "message": "Implement NotaryAssisted attribute handling for proper fee calculation",
+        "full_line": "// TODO: Implement NotaryAssisted attribute handling for proper fee calculation"
+      }
+    ],
+    "src/smartcontract/manifest/contract_manifest.cpp": [
+      {
+        "line": 85,
+        "type": "TODO",
+        "message": "Implement ToStackItem method when StackItem is available",
+        "full_line": "// TODO: Implement ToStackItem method when StackItem is available"
+      },
+      {
+        "line": 89,
+        "type": "TODO",
+        "message": "Add groups member and validation",
+        "full_line": "// TODO: Add groups member and validation"
+      },
+      {
+        "line": 102,
+        "type": "TODO",
+        "message": "Validate ABI when IsValid method is implemented in ContractAbi",
+        "full_line": "// TODO: Validate ABI when IsValid method is implemented in ContractAbi"
+      },
+      {
+        "line": 146,
+        "type": "TODO",
+        "message": "Parse other fields when their classes are properly implemented",
+        "full_line": "// TODO: Parse other fields when their classes are properly implemented"
+      },
+      {
+        "line": 164,
+        "type": "TODO",
+        "message": "Serialize other fields when their classes are properly implemented",
+        "full_line": "// TODO: Serialize other fields when their classes are properly implemented"
+      }
+    ],
+    "src/network/p2p/task_manager_complete.cpp": [
+      {
+        "line": 67,
+        "type": "BUG",
+        "message": "(\"TaskManager worker thread started\");",
+        "full_line": "LOG_DEBUG(\"TaskManager worker thread started\");"
+      },
+      {
+        "line": 93,
+        "type": "BUG",
+        "message": "(\"TaskManager worker thread stopped\");",
+        "full_line": "LOG_DEBUG(\"TaskManager worker thread stopped\");"
+      }
+    ],
+    "src/network/p2p/task_manager.cpp": [
+      {
+        "line": 314,
+        "type": "BUG",
+        "message": "(\"Sent transaction request {} to peer {}\", hash.ToString(), peer->GetId().ToString());",
+        "full_line": "LOG_DEBUG(\"Sent transaction request {} to peer {}\", hash.ToString(), peer->GetId().ToString());"
+      }
+    ],
+    "src/network/p2p/message.cpp": [
+      {
+        "line": 207,
+        "type": "TODO",
+        "message": "Wrap transaction in a payload type",
+        "full_line": "// TODO: Wrap transaction in a payload type"
+      },
+      {
+        "line": 216,
+        "type": "TODO",
+        "message": "Wrap block in a payload type",
+        "full_line": "// TODO: Wrap block in a payload type"
+      },
+      {
+        "line": 227,
+        "type": "TODO",
+        "message": "ExtensiblePayload needs to implement IPayload",
+        "full_line": "// TODO: ExtensiblePayload needs to implement IPayload"
+      },
+      {
+        "line": 389,
+        "type": "TODO",
+        "message": "Wrap transaction in a payload type",
+        "full_line": "// TODO: Wrap transaction in a payload type"
+      },
+      {
+        "line": 398,
+        "type": "TODO",
+        "message": "Wrap block in a payload type",
+        "full_line": "// TODO: Wrap block in a payload type"
+      },
+      {
+        "line": 409,
+        "type": "TODO",
+        "message": "ExtensiblePayload needs to implement IPayload",
+        "full_line": "// TODO: ExtensiblePayload needs to implement IPayload"
+      }
+    ],
+    "src/network/p2p/protocol_handler.cpp": [
+      {
+        "line": 16,
+        "type": "BUG",
+        "message": "(\"OnPeerConnected stub: peer={} outbound={}\", peer_id.ToString(), is_outbound);",
+        "full_line": "LOG_DEBUG(\"OnPeerConnected stub: peer={} outbound={}\", peer_id.ToString(), is_outbound);"
+      },
+      {
+        "line": 21,
+        "type": "BUG",
+        "message": "(\"OnPeerDisconnected stub: peer={}\", peer_id.ToString());",
+        "full_line": "LOG_DEBUG(\"OnPeerDisconnected stub: peer={}\", peer_id.ToString());"
+      },
+      {
+        "line": 26,
+        "type": "BUG",
+        "message": "(\"HandleMessage stub: peer={} command={}\", peer_id.ToString(), static_cast<uint8_t>(message.GetCommand()));",
+        "full_line": "LOG_DEBUG(\"HandleMessage stub: peer={} command={}\", peer_id.ToString(), static_cast<uint8_t>(message.GetCommand()));"
+      },
+      {
+        "line": 31,
+        "type": "BUG",
+        "message": "(\"SendHandshake stub: peer={}\", peer_id.ToString());",
+        "full_line": "LOG_DEBUG(\"SendHandshake stub: peer={}\", peer_id.ToString());"
+      },
+      {
+        "line": 36,
+        "type": "BUG",
+        "message": "(\"RequestBlocks stub: peer={} count={}\", peer_id.ToString(), hashes.size());",
+        "full_line": "LOG_DEBUG(\"RequestBlocks stub: peer={} count={}\", peer_id.ToString(), hashes.size());"
+      },
+      {
+        "line": 41,
+        "type": "BUG",
+        "message": "(\"RequestTransactions stub: peer={} count={}\", peer_id.ToString(), hashes.size());",
+        "full_line": "LOG_DEBUG(\"RequestTransactions stub: peer={} count={}\", peer_id.ToString(), hashes.size());"
+      },
+      {
+        "line": 46,
+        "type": "BUG",
+        "message": "(\"BroadcastBlock stub\");",
+        "full_line": "LOG_DEBUG(\"BroadcastBlock stub\");"
+      },
+      {
+        "line": 51,
+        "type": "BUG",
+        "message": "(\"BroadcastTransaction stub\");",
+        "full_line": "LOG_DEBUG(\"BroadcastTransaction stub\");"
+      },
+      {
+        "line": 67,
+        "type": "BUG",
+        "message": "(\"HandleVersion stub\");",
+        "full_line": "LOG_DEBUG(\"HandleVersion stub\");"
+      },
+      {
+        "line": 72,
+        "type": "BUG",
+        "message": "(\"HandleVerack stub\");",
+        "full_line": "LOG_DEBUG(\"HandleVerack stub\");"
+      },
+      {
+        "line": 77,
+        "type": "BUG",
+        "message": "(\"HandleGetAddr stub\");",
+        "full_line": "LOG_DEBUG(\"HandleGetAddr stub\");"
+      },
+      {
+        "line": 82,
+        "type": "BUG",
+        "message": "(\"HandleAddr stub\");",
+        "full_line": "LOG_DEBUG(\"HandleAddr stub\");"
+      },
+      {
+        "line": 87,
+        "type": "BUG",
+        "message": "(\"HandlePing stub\");",
+        "full_line": "LOG_DEBUG(\"HandlePing stub\");"
+      },
+      {
+        "line": 92,
+        "type": "BUG",
+        "message": "(\"HandlePong stub\");",
+        "full_line": "LOG_DEBUG(\"HandlePong stub\");"
+      },
+      {
+        "line": 97,
+        "type": "BUG",
+        "message": "(\"HandleGetHeaders stub\");",
+        "full_line": "LOG_DEBUG(\"HandleGetHeaders stub\");"
+      },
+      {
+        "line": 102,
+        "type": "BUG",
+        "message": "(\"HandleHeaders stub\");",
+        "full_line": "LOG_DEBUG(\"HandleHeaders stub\");"
+      },
+      {
+        "line": 107,
+        "type": "BUG",
+        "message": "(\"HandleGetBlocks stub\");",
+        "full_line": "LOG_DEBUG(\"HandleGetBlocks stub\");"
+      },
+      {
+        "line": 112,
+        "type": "BUG",
+        "message": "(\"HandleGetData stub\");",
+        "full_line": "LOG_DEBUG(\"HandleGetData stub\");"
+      },
+      {
+        "line": 117,
+        "type": "BUG",
+        "message": "(\"HandleGetBlockByIndex stub\");",
+        "full_line": "LOG_DEBUG(\"HandleGetBlockByIndex stub\");"
+      },
+      {
+        "line": 122,
+        "type": "BUG",
+        "message": "(\"HandleInv stub\");",
+        "full_line": "LOG_DEBUG(\"HandleInv stub\");"
+      },
+      {
+        "line": 127,
+        "type": "BUG",
+        "message": "(\"HandleBlock stub\");",
+        "full_line": "LOG_DEBUG(\"HandleBlock stub\");"
+      },
+      {
+        "line": 132,
+        "type": "BUG",
+        "message": "(\"HandleTransaction stub\");",
+        "full_line": "LOG_DEBUG(\"HandleTransaction stub\");"
+      },
+      {
+        "line": 137,
+        "type": "BUG",
+        "message": "(\"HandleMempool stub\");",
+        "full_line": "LOG_DEBUG(\"HandleMempool stub\");"
+      },
+      {
+        "line": 142,
+        "type": "BUG",
+        "message": "(\"HandleNotFound stub\");",
+        "full_line": "LOG_DEBUG(\"HandleNotFound stub\");"
+      },
+      {
+        "line": 153,
+        "type": "BUG",
+        "message": "(\"RelayInventory stub: type={} hash={}\", static_cast<uint8_t>(type), hash.ToString());",
+        "full_line": "LOG_DEBUG(\"RelayInventory stub: type={} hash={}\", static_cast<uint8_t>(type), hash.ToString());"
+      }
+    ],
+    "src/network/p2p/transaction_router.cpp": [
+      {
+        "line": 187,
+        "type": "BUG",
+        "message": "(\"Transaction {} already relayed recently, skipping\",",
+        "full_line": "LOG_DEBUG(\"Transaction {} already relayed recently, skipping\","
+      },
+      {
+        "line": 233,
+        "type": "BUG",
+        "message": "(\"Relayed transaction {} to peer {}\",",
+        "full_line": "LOG_DEBUG(\"Relayed transaction {} to peer {}\","
+      }
+    ],
+    "src/network/p2p/remote_node.cpp": [
+      {
+        "line": 323,
+        "type": "BUG",
+        "message": "ging",
+        "full_line": "// Log unhandled message types for debugging"
+      },
+      {
+        "line": 324,
+        "type": "BUG",
+        "message": "(\"RemoteNode received unhandled message type: {}\", static_cast<int>(message.GetCommand()));",
+        "full_line": "LOG_DEBUG(\"RemoteNode received unhandled message type: {}\", static_cast<int>(message.GetCommand()));"
+      }
+    ],
+    "src/network/p2p/payloads/neo3_transaction.cpp": [
+      {
+        "line": 430,
+        "type": "BUG",
+        "message": "(\"Successfully deserialized Neo3Transaction from JSON\");",
+        "full_line": "LOG_DEBUG(\"Successfully deserialized Neo3Transaction from JSON\");"
+      },
+      {
+        "line": 486,
+        "type": "BUG",
+        "message": "(\"Calculated transaction hash: {}\", hash_.ToString());",
+        "full_line": "LOG_DEBUG(\"Calculated transaction hash: {}\", hash_.ToString());"
+      }
+    ],
+    "src/cryptography/mpttrie/node.cpp": [
+      {
+        "line": 499,
+        "type": "TODO",
+        "message": "Handle reference nodes properly",
+        "full_line": "// TODO: Handle reference nodes properly"
+      }
+    ],
+    "src/cryptography/mpttrie/trie.cpp": [
+      {
+        "line": 13,
+        "type": "BUG",
+        "message": "(msg, ...)  // Debug logging disabled",
+        "full_line": "#define LOG_DEBUG(msg, ...)  // Debug logging disabled"
+      },
+      {
+        "line": 228,
+        "type": "BUG",
+        "message": "(\"Runtime error in Trie::TryGetInternal: {}\", e.what());",
+        "full_line": "LOG_DEBUG(\"Runtime error in Trie::TryGetInternal: {}\", e.what());"
+      },
+      {
+        "line": 233,
+        "type": "BUG",
+        "message": "(\"Exception in Trie::TryGetInternal: {}\", e.what());",
+        "full_line": "LOG_DEBUG(\"Exception in Trie::TryGetInternal: {}\", e.what());"
+      }
+    ],
+    "src/cryptography/ecc/keypair.cpp": [
+      {
+        "line": 107,
+        "type": "BUG",
+        "message": "(\"Successfully created script hash using alternative method\");",
+        "full_line": "LOG_DEBUG(\"Successfully created script hash using alternative method\");"
+      }
+    ],
+    "include/neo/settings.h": [
+      {
+        "line": 61,
+        "type": "BUG",
+        "message": ", 4=Trace",
+        "full_line": "int LogLevel = 2;                 // 0=Error, 1=Warning, 2=Info, 3=Debug, 4=Trace"
+      },
+      {
+        "line": 198,
+        "type": "BUG",
+        "message": "ging",
+        "full_line": "* @return String representation for debugging"
+      }
+    ],
+    "include/neo/core/big_decimal.h": [
+      {
+        "line": 121,
+        "type": "TODO",
+        "message": "uble() const;",
+        "full_line": "double ToDouble() const;"
+      }
+    ],
+    "include/neo/core/fixed8.h": [
+      {
+        "line": 81,
+        "type": "TODO",
+        "message": "uble() const",
+        "full_line": "double ToDouble() const"
+      }
+    ],
+    "include/neo/core/safe_conversions.h": [
+      {
+        "line": 256,
+        "type": "TODO",
+        "message": "uble(const std::string& str)",
+        "full_line": "static double SafeToDouble(const std::string& str)"
+      },
+      {
+        "line": 376,
+        "type": "TODO",
+        "message": "uble(const std::string& str)",
+        "full_line": "static std::optional<double> TryToDouble(const std::string& str)"
+      },
+      {
+        "line": 380,
+        "type": "TODO",
+        "message": "uble(str);",
+        "full_line": "return SafeToDouble(str);"
+      }
+    ],
+    "include/neo/core/logging.h": [
+      {
+        "line": 31,
+        "type": "BUG",
+        "message": "= 1,",
+        "full_line": "Debug = 1,"
+      },
+      {
+        "line": 100,
+        "type": "BUG",
+        "message": "message",
+        "full_line": "* @brief Log a debug message"
+      },
+      {
+        "line": 104,
+        "type": "BUG",
+        "message": "(const std::string& fmt, Args&&... args);",
+        "full_line": "void Debug(const std::string& fmt, Args&&... args);"
+      },
+      {
+        "line": 149,
+        "type": "BUG",
+        "message": "(const std::string& fmt, Args&&... args)",
+        "full_line": "void Logger::Debug(const std::string& fmt, Args&&... args)"
+      },
+      {
+        "line": 151,
+        "type": "BUG",
+        "message": "(fmt::vformat(fmt, fmt::make_format_args(args...)));",
+        "full_line": "logger_->debug(fmt::vformat(fmt, fmt::make_format_args(args...)));"
+      },
+      {
+        "line": 190,
+        "type": "BUG",
+        "message": "(const std::string& fmt, Args&&... args)",
+        "full_line": "void Logger::Debug(const std::string& fmt, Args&&... args)"
+      },
+      {
+        "line": 192,
+        "type": "BUG",
+        "message": ")",
+        "full_line": "if (level_ <= LogLevel::Debug)"
+      },
+      {
+        "line": 195,
+        "type": "BUG",
+        "message": "] \" << fmt << std::endl;",
+        "full_line": "std::cout << \"[DEBUG] \" << fmt << std::endl;"
+      },
+      {
+        "line": 242,
+        "type": "BUG",
+        "message": "(...) neo::core::Logger::GetInstance()->Debug(__VA_ARGS__)",
+        "full_line": "#define LOG_DEBUG(...) neo::core::Logger::GetInstance()->Debug(__VA_ARGS__)"
+      },
+      {
+        "line": 259,
+        "type": "BUG",
+        "message": ");",
+        "full_line": "explicit PerfLogger(const std::string& operation, LogLevel level = LogLevel::Debug);"
+      }
+    ],
+    "include/neo/common/compiler_config.h": [
+      {
+        "line": 111,
+        "type": "BUG",
+        "message": "ging macros",
+        "full_line": "// Debugging macros"
+      },
+      {
+        "line": 113,
+        "type": "BUG",
+        "message": "1",
+        "full_line": "#define NEO_DEBUG 1"
+      },
+      {
+        "line": 125,
+        "type": "BUG",
+        "message": "0",
+        "full_line": "#define NEO_DEBUG 0"
+      }
+    ],
+    "include/neo/common/logging.h": [
+      {
+        "line": 14,
+        "type": "BUG",
+        "message": "= 0,",
+        "full_line": "DEBUG = 0,"
+      },
+      {
+        "line": 52,
+        "type": "BUG",
+        "message": "neo::common::LogLevel::DEBUG",
+        "full_line": "#define NEO_DEBUG neo::common::LogLevel::DEBUG"
+      }
+    ],
+    "include/neo/vm/evaluation_stack.h": [
+      {
+        "line": 132,
+        "type": "BUG",
+        "message": "ging)",
+        "full_line": "* @brief Convert stack to vector (for debugging)"
+      }
+    ],
+    "include/neo/vm/debugger.h": [
+      {
+        "line": 9,
+        "type": "BUG",
+        "message": "ger for the VM.",
+        "full_line": "* @brief Represents a debugger for the VM."
+      },
+      {
+        "line": 11,
+        "type": "BUG",
+        "message": "ger",
+        "full_line": "class Debugger"
+      },
+      {
+        "line": 15,
+        "type": "BUG",
+        "message": "ger class.",
+        "full_line": "* @brief Initializes a new instance of the Debugger class."
+      },
+      {
+        "line": 16,
+        "type": "BUG",
+        "message": ".",
+        "full_line": "* @param engine The execution engine to debug."
+      },
+      {
+        "line": 18,
+        "type": "BUG",
+        "message": "ger(ExecutionEngine& engine);",
+        "full_line": "Debugger(ExecutionEngine& engine);"
+      }
+    ],
+    "include/neo/vm/slot.h": [
+      {
+        "line": 79,
+        "type": "BUG",
+        "message": "ging)",
+        "full_line": "* @brief Get all items (for debugging)"
+      }
+    ],
+    "include/neo/persistence/storage_item.h": [
+      {
+        "line": 154,
+        "type": "BUG",
+        "message": "ging but not fail",
+        "full_line": "// This should be logged for debugging but not fail"
+      }
+    ],
+    "include/neo/rpc/rpc_validation.h": [
+      {
+        "line": 310,
+        "type": "TODO",
+        "message": "uble(gas);",
+        "full_line": "double amount = core::SafeConversions::SafeToDouble(gas);"
+      }
+    ],
+    "include/neo/logging/logger.h": [
+      {
+        "line": 35,
+        "type": "BUG",
+        "message": "= 1,",
+        "full_line": "Debug = 1,"
+      },
+      {
+        "line": 81,
+        "type": "BUG",
+        "message": "message",
+        "full_line": "* @brief Log a debug message"
+      },
+      {
+        "line": 84,
+        "type": "BUG",
+        "message": "(const std::string& message);",
+        "full_line": "void Debug(const std::string& message);"
+      },
+      {
+        "line": 87,
+        "type": "BUG",
+        "message": "message with category",
+        "full_line": "* @brief Log a debug message with category"
+      },
+      {
+        "line": 91,
+        "type": "BUG",
+        "message": "(const std::string& category, const std::string& message);",
+        "full_line": "void Debug(const std::string& category, const std::string& message);"
+      },
+      {
+        "line": 175,
+        "type": "BUG",
+        "message": "(msg) neo::logging::Logger::GetDefault().Debug(msg)",
+        "full_line": "#define NEO_LOG_DEBUG(msg) neo::logging::Logger::GetDefault().Debug(msg)"
+      }
+    ],
+    "include/nlohmann/json.hpp": [
+      {
+        "line": 2422,
+        "type": "BUG",
+        "message": "s/737/",
+        "full_line": "// std::filesystem does not work on MinGW GCC 8: https://sourceforge.net/p/mingw-w64/bugs/737/"
+      },
+      {
+        "line": 2928,
+        "type": "BUG",
+        "message": "https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105200)",
+        "full_line": "// (see GCC bug https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105200)"
+      },
+      {
+        "line": 4385,
+        "type": "BUG",
+        "message": "prone-throw-keyword-missing)",
+        "full_line": "exception(int id_, const char* what_arg) : id(id_), m(what_arg) {} // NOLINT(bugprone-throw-keyword-missing)"
+      },
+      {
+        "line": 5415,
+        "type": "BUG",
+        "message": "issue",
+        "full_line": "* allocated value (e.g., a string). See bug issue"
+      },
+      {
+        "line": 7597,
+        "type": "BUG",
+        "message": "prone-inc-dec-in-conditions)",
+        "full_line": "if (JSON_HEDLEY_LIKELY(*range <= current && current <= *(++range))) // NOLINT(bugprone-inc-dec-in-conditions)"
+      },
+      {
+        "line": 7705,
+        "type": "XXX",
+        "message": "x entry",
+        "full_line": "// expect next \\uxxxx entry"
+      },
+      {
+        "line": 7757,
+        "type": "XXX",
+        "message": "xxxx (ASCII)",
+        "full_line": "// 1-byte characters: 0xxxxxxx (ASCII)"
+      },
+      {
+        "line": 7762,
+        "type": "XXX",
+        "message": "xx 10xxxxxx",
+        "full_line": "// 2-byte characters: 110xxxxx 10xxxxxx"
+      },
+      {
+        "line": 7768,
+        "type": "XXX",
+        "message": "x 10xxxxxx 10xxxxxx",
+        "full_line": "// 3-byte characters: 1110xxxx 10xxxxxx 10xxxxxx"
+      },
+      {
+        "line": 7775,
+        "type": "XXX",
+        "message": "10xxxxxx 10xxxxxx 10xxxxxx",
+        "full_line": "// 4-byte characters: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx"
+      },
+      {
+        "line": 10997,
+        "type": "TODO",
+        "message": "(niels): may we ignore N here?",
+        "full_line": "get();  // TODO(niels): may we ignore N here?"
+      },
+      {
+        "line": 11185,
+        "type": "BUG",
+        "message": "prone-signed-char-misuse,cert-str34-c): number is not a char",
+        "full_line": "result = static_cast<std::size_t>(number); // NOLINT(bugprone-signed-char-misuse,cert-str34-c): number is not a char"
+      },
+      {
+        "line": 13015,
+        "type": "BUG",
+        "message": "build. For more",
+        "full_line": "occurring on msvc v19.0 compiler (VS 2015) debug build. For more"
+      },
+      {
+        "line": 18110,
+        "type": "XXX",
+        "message": "X` sequences, and the result consists",
+        "full_line": "in the output are escaped with `\\uXXXX` sequences, and the result consists"
+      },
+      {
+        "line": 18395,
+        "type": "XXX",
+        "message": "X sequences",
+        "full_line": "\\uXXXX sequences"
+      },
+      {
+        "line": 18502,
+        "type": "XXX",
+        "message": "x\\uxxxx\\0\") for one code point",
+        "full_line": "// written (\"\\uxxxx\\uxxxx\\0\") for one code point"
+      },
+      {
+        "line": 18561,
+        "type": "XXX",
+        "message": "x\\uxxxx\\0\") for one code point",
+        "full_line": "// written (\"\\uxxxx\\uxxxx\\0\") for one code point"
+      },
+      {
+        "line": 20125,
+        "type": "BUG",
+        "message": "prone-exception-escape)",
+        "full_line": "basic_json(std::nullptr_t = nullptr) noexcept // NOLINT(bugprone-exception-escape)"
+      },
+      {
+        "line": 20137,
+        "type": "BUG",
+        "message": "prone-forwarding-reference-overload,bugprone-exception-escape)",
+        "full_line": "basic_json(CompatibleType && val) noexcept(noexcept( // NOLINT(bugprone-forwarding-reference-overload,bugprone-exception-escape)"
+      },
+      {
+        "line": 22793,
+        "type": "BUG",
+        "message": "prone-exception-escape,cppcoreguidelines-noexcept-swap,performance-noexcept-swap)",
+        "full_line": "void swap(array_t& other) // NOLINT(bugprone-exception-escape,cppcoreguidelines-noexcept-swap,performance-noexcept-swap)"
+      },
+      {
+        "line": 22809,
+        "type": "BUG",
+        "message": "prone-exception-escape,cppcoreguidelines-noexcept-swap,performance-noexcept-swap)",
+        "full_line": "void swap(object_t& other) // NOLINT(bugprone-exception-escape,cppcoreguidelines-noexcept-swap,performance-noexcept-swap)"
+      },
+      {
+        "line": 22825,
+        "type": "BUG",
+        "message": "prone-exception-escape,cppcoreguidelines-noexcept-swap,performance-noexcept-swap)",
+        "full_line": "void swap(string_t& other) // NOLINT(bugprone-exception-escape,cppcoreguidelines-noexcept-swap,performance-noexcept-swap)"
+      },
+      {
+        "line": 22841,
+        "type": "BUG",
+        "message": "prone-exception-escape,cppcoreguidelines-noexcept-swap,performance-noexcept-swap)",
+        "full_line": "void swap(binary_t& other) // NOLINT(bugprone-exception-escape,cppcoreguidelines-noexcept-swap,performance-noexcept-swap)"
+      },
+      {
+        "line": 22857,
+        "type": "BUG",
+        "message": "prone-exception-escape)",
+        "full_line": "void swap(typename binary_t::container_type& other) // NOLINT(bugprone-exception-escape)"
+      },
+      {
+        "line": 23525,
+        "type": "BUG",
+        "message": "ging purposes)",
+        "full_line": "/// a pointer to a parent value (for debugging purposes)"
+      }
+    ]
+  },
+  "not_implemented": {
+    "src/smartcontract/native/oracle_contract_handlers.cpp": [
+      {
+        "line": 182,
+        "code": "throw std::runtime_error(\"Oracle response handling not implemented\");"
+      }
+    ]
+  },
+  "header_guard_issues": {
+    "duplicate_guards": [
+      "include/neo/common/compiler_config.h"
+    ],
+    "missing_guards": [
+      "include/neo/network/payloads/extensible_payload.h"
+    ]
+  },
+  "long_functions": {
+    "src/cryptography/bls12_381.cpp": [
+      {
+        "function": "InvertFp",
+        "start_line": 1472,
+        "length": 134
+      }
+    ],
+    "src/vm/opcode.cpp": [
+      {
+        "function": "GetOpCodeName",
+        "start_line": 7,
+        "length": 203
+      }
+    ],
+    "src/smartcontract/system_calls_storage.cpp": [
+      {
+        "function": "IteratorValue",
+        "start_line": 345,
+        "length": 126
+      }
+    ],
+    "src/smartcontract/system_calls_json.cpp": [
+      {
+        "function": "RegisterJsonSystemCallsImpl",
+        "start_line": 11,
+        "length": 344
+      }
+    ],
+    "src/smartcontract/system_calls_crypto.cpp": [
+      {
+        "function": "RegisterCryptoSystemCallsImpl",
+        "start_line": 21,
+        "length": 722
+      },
+      {
+        "function": "MapToG1SSWU",
+        "start_line": 952,
+        "length": 108
+      },
+      {
+        "function": "ApplySWUMapping",
+        "start_line": 1120,
+        "length": 160
+      }
+    ],
+    "src/smartcontract/system_calls_contract.cpp": [
+      {
+        "function": "RegisterContractSystemCallsImpl",
+        "start_line": 12,
+        "length": 286
+      }
+    ]
+  },
+  "large_files": [
+    {
+      "file": "include/nlohmann/json.hpp",
+      "lines": 24766
+    },
+    {
+      "file": "src/cryptography/bls12_381.cpp",
+      "lines": 1792
+    },
+    {
+      "file": "src/smartcontract/system_calls_crypto.cpp",
+      "lines": 1631
+    },
+    {
+      "file": "src/extensions/biginteger_extensions.cpp",
+      "lines": 1524
+    },
+    {
+      "file": "src/rpc/rpc_methods.cpp",
+      "lines": 1266
+    },
+    {
+      "file": "src/consensus/dbft_consensus.cpp",
+      "lines": 1242
+    },
+    {
+      "file": "src/smartcontract/native/crypto_lib.cpp",
+      "lines": 1142
+    },
+    {
+      "file": "include/neo/vm/opcode.h",
+      "lines": 1030
+    },
+    {
+      "file": "src/smartcontract/transaction_verifier.cpp",
+      "lines": 1027
+    },
+    {
+      "file": "src/network/p2p_server.cpp",
+      "lines": 1008
+    }
+  ]
+}
