@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <functional>
+#include <list>
 #include <memory>
 #include <mutex>
 #include <unordered_map>
