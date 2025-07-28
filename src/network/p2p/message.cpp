@@ -224,8 +224,7 @@ void Message::DeserializeJson(const io::JsonReader& reader)
                 {
                     auto extensiblePayload = std::make_shared<payloads::ExtensiblePayload>();
                     extensiblePayload->Deserialize(binaryReader);
-                    // TODO: ExtensiblePayload needs to implement IPayload
-                    // payload_ = extensiblePayload;
+                    payload_ = extensiblePayload;
                 }
                 break;
 
@@ -406,8 +405,7 @@ void Message::DecompressPayload()
                 {
                     auto extensiblePayload = std::make_shared<payloads::ExtensiblePayload>();
                     extensiblePayload->Deserialize(binaryReader);
-                    // TODO: ExtensiblePayload needs to implement IPayload
-                    // payload_ = extensiblePayload;
+                    payload_ = extensiblePayload;
                 }
                 break;
 

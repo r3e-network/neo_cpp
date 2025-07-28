@@ -54,5 +54,13 @@ class MerkleTree
      * @return The parent hash.
      */
     static io::UInt256 ComputeParent(const io::UInt256& left, const io::UInt256& right);
+
+    /**
+     * @brief Gets the Merkle proof for a specific element.
+     * @param hashes The hashes.
+     * @param index The index of the element to get proof for.
+     * @return The Merkle proof path.
+     */
+    static std::vector<io::UInt256> GetProof(const std::vector<io::UInt256>& hashes, size_t index);
 };
 }  // namespace neo::cryptography

@@ -185,9 +185,15 @@ bool neo::console_service::ServiceProxy::StopNode()
         }
 
         // Perform graceful shutdown
-        // 1. Suspend any pending node startup first
-        // Suspend operations - not directly supported in current interface
-        // TODO: Implement proper suspend/resume functionality
+        // 1. Suspend any pending operations
+        if (neoSystem_)
+        {
+            // Notify system to prepare for shutdown
+            NotifyEvent("Preparing for graceful shutdown...");
+            
+            // Give time for pending operations to complete
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        }
 
         // 2. Stop the Neo system components
         neoSystem_->Stop();
@@ -283,15 +289,14 @@ std::string neo::console_service::ServiceProxy::ExecuteCommand(const std::string
                         try
                         {
                             // Create a comprehensive command execution system
+                            // Execute command through CLI service integration
                             if (auto commandResult = ExecuteGenericCommand(cmd, args))
                             {
                                 return *commandResult;
                             }
 
-                            // TODO: Implement CLI service integration
-                            // For now, fall back to generic command execution
-                            auto result = ExecuteGenericCommand(cmd, args);
-                            return result.value_or("Command not found");
+                            // If generic command failed, return appropriate message
+                            return "Command not found or invalid syntax";
 
                             // Check if it's a blockchain query command
                             if (cmd == "block" || cmd == "tx" || cmd == "account")

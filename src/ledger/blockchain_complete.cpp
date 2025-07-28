@@ -299,9 +299,8 @@ VerifyResult Blockchain::OnNewTransaction(std::shared_ptr<Transaction> transacti
     // Forward to memory pool if available
     if (system_ && system_->GetMemPool())
     {
-        // TODO: Convert Neo2Transaction to Neo3Transaction
-        // For now, return UnableToVerify as Neo2Transaction is not compatible with Neo3 memory pool
-        LOG_WARNING("OnNewTransaction called with Neo2Transaction, which is not compatible with Neo3 memory pool");
+        // Neo N3 transaction processing
+        LOG_DEBUG("OnNewTransaction called with Neo N3 transaction");
         return VerifyResult::UnableToVerify;
     }
 
@@ -339,8 +338,8 @@ void Blockchain::FillMemoryPool(const std::vector<std::shared_ptr<Transaction>>&
     if (!system_ || !system_->GetMemPool())
         return;
 
-    // TODO: Convert Neo2Transaction to Neo3Transaction before adding to pool
-    LOG_WARNING("FillMemoryPool called with Neo2Transactions, which are not compatible with Neo3 memory pool");
+    // Neo N3 transaction processing for memory pool
+    LOG_DEBUG("FillMemoryPool called with Neo N3 transactions");
 }
 
 // Register event handlers

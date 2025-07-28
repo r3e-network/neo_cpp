@@ -266,6 +266,8 @@ class NeoCorrectnessChecker:
             self.cpp_root / 'src/smartcontract/system_calls_contract.cpp',
             self.cpp_root / 'src/smartcontract/system_calls_storage.cpp',
             self.cpp_root / 'src/smartcontract/system_calls_crypto.cpp',
+            self.cpp_root / 'src/smartcontract/system_calls_binary.cpp',
+            self.cpp_root / 'src/smartcontract/system_calls_json.cpp',
         ]
         
         all_syscall_content = ""

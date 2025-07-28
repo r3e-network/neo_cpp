@@ -7,7 +7,7 @@
 #include <neo/ledger/mempool.h>
 #include <neo/ledger/witness.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
-// Use explicit Neo3Transaction to avoid ambiguity with Neo2Transaction
+// Using Neo N3 transactions for consensus
 #include <atomic>
 #include <chrono>
 #include <functional>

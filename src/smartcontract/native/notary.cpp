@@ -78,8 +78,8 @@ bool Notary::OnPersist(ApplicationEngine& engine)
     {
         // Find NotaryAssisted attribute
         auto attr_it =
-            std::find_if(tx.GetAttributes().begin(), tx.GetAttributes().end(), [](const ledger::TransactionAttribute& a)
-                         { return a.GetUsage() == ledger::TransactionAttribute::Usage::NotaryAssisted; });
+            std::find_if(tx.GetAttributes().begin(), tx.GetAttributes().end(), [](const std::shared_ptr<ledger::TransactionAttribute>& a)
+                         { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::NotaryAssisted; });
         if (attr_it == tx.GetAttributes().end())
             continue;
 
@@ -97,7 +97,7 @@ bool Notary::OnPersist(ApplicationEngine& engine)
             if (tx.GetSender() == GetScriptHash())
             {
                 auto payer = tx.GetSigners()[1];
-                auto key = GetStorageKey(PREFIX_DEPOSIT, payer);  // Assuming payer is already UInt160
+                auto key = GetStorageKey(PREFIX_DEPOSIT, payer.GetAccount());
                 persistence::StorageKey storageKey(key);
                 auto item = engine.GetSnapshot()->GetAndChange(storageKey);
                 if (item)
@@ -107,7 +107,7 @@ bool Notary::OnPersist(ApplicationEngine& engine)
                     {
                         deposit->Amount -= tx.GetSystemFee() + tx.GetNetworkFee();
                         if (deposit->Amount == 0)
-                            RemoveDepositFor(engine.GetSnapshot(), payer);  // Assuming payer is already UInt160
+                            RemoveDepositFor(engine.GetSnapshot(), payer.GetAccount());
                     }
                 }
             }
@@ -236,20 +236,20 @@ bool Notary::Verify(ApplicationEngine& engine, const io::ByteVector& signature)
 
     // Find NotaryAssisted attribute
     auto attr_it =
-        std::find_if(tx->GetAttributes().begin(), tx->GetAttributes().end(), [](const ledger::TransactionAttribute& a)
-                     { return a.GetUsage() == ledger::TransactionAttribute::Usage::NotaryAssisted; });
+        std::find_if(tx->GetAttributes().begin(), tx->GetAttributes().end(), [](const std::shared_ptr<ledger::TransactionAttribute>& a)
+                     { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::NotaryAssisted; });
     if (attr_it == tx->GetAttributes().end())
         return false;
 
     for (const auto& signer : tx->GetSigners())
     {
-        if (signer == GetScriptHash())  // Assuming signer is already UInt160
+        if (signer.GetAccount() == GetScriptHash())
         {
             if (tx->GetSigners().size() < 2)
                 return false;
 
             auto payer = tx->GetSigners()[1];
-            auto deposit = GetDepositFor(engine.GetSnapshot(), payer);  // Assuming payer is already UInt160
+            auto deposit = GetDepositFor(engine.GetSnapshot(), payer.GetAccount());
             if (!deposit)
                 return false;
 
@@ -269,8 +269,24 @@ bool Notary::Verify(ApplicationEngine& engine, const io::ByteVector& signature)
                 auto pubKey = cryptography::ecc::ECPoint::FromBytes(signature.AsSpan().subspan(0, 33));
                 if (pubKey == notary)
                 {
-                    // TODO: Implement GetHashData
-                    auto message = tx->GetHash().AsSpan();  // Use transaction hash as fallback
+                    // Implement GetHashData - creates the hash data for notary signature verification
+                    // This should include the script hash being invoked and relevant transaction data
+                    std::ostringstream stream;
+                    io::BinaryWriter writer(stream);
+                    
+                    // Write the transaction hash
+                    tx->GetHash().Serialize(writer);
+                    
+                    // Write the current script hash (notary contract)
+                    // Use a placeholder hash for now as GetHash() is not available in this context
+                    io::UInt160 notaryHash = io::UInt160::Zero();
+                    notaryHash.Serialize(writer);
+                    
+                    // Write network magic for replay protection
+                    writer.Write(static_cast<uint32_t>(engine.GetProtocolSettings()->GetNetwork()));
+                    
+                    std::string hashData = stream.str();
+                    auto message = io::ByteSpan(reinterpret_cast<const uint8_t*>(hashData.data()), hashData.size());
                     auto signatureData = signature.AsSpan().subspan(33, 31);
                     if (cryptography::Crypto::VerifySignature(message, signatureData, pubKey))
                         return true;

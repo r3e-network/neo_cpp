@@ -12,6 +12,7 @@
 #include "neo/core/neo_system.h"
 #include "neo/common/contains_transaction_type.h"
 #include "neo/core/logging.h"
+#include "neo/cryptography/hash.h"
 #include "neo/io/uint160.h"
 #include "neo/io/uint256.h"
 #include "neo/ledger/block.h"
@@ -394,8 +395,16 @@ ContainsTransactionType NeoSystem::contains_transaction(const io::UInt256& hash)
 
     // Check ledger
     auto store_view = this->store_view();
-    // TODO: Implement ledger transaction checking
-    // For now, assume transaction doesn't exist in ledger
+    // Check if transaction exists in blockchain storage
+    if (store_view)
+    {
+        // Create storage key for transaction
+        auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x01), hash); // -4 is Ledger contract ID
+        if (store_view->Contains(key))
+        {
+            return ContainsTransactionType::ExistsInLedger;
+        }
+    }
 
     return ContainsTransactionType::NotExist;
 }
@@ -403,8 +412,22 @@ ContainsTransactionType NeoSystem::contains_transaction(const io::UInt256& hash)
 bool NeoSystem::contains_conflict_hash(const io::UInt256& hash, const std::vector<io::UInt160>& signers) const
 {
     auto store_view = this->store_view();
-    // TODO: Implement proper conflict hash checking
-    // For now, return false
+    if (!store_view)
+    {
+        return false;
+    }
+    
+    // Check if the conflict hash exists for any of the signers
+    for (const auto& signer : signers)
+    {
+        // Create storage key for conflict hash
+        auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x03), hash, signer); // -4 is Ledger contract ID, 0x03 is conflict prefix
+        if (store_view->Contains(key))
+        {
+            return true;
+        }
+    }
+    
     return false;
 }
 
@@ -425,10 +448,24 @@ ledger::Block* NeoSystem::create_genesis_block(const ProtocolSettings& settings)
     block->SetIndex(0);
     block->SetPrimaryIndex(0);
 
-    // Set next consensus address
-    // TODO: Set proper next consensus address
-    // For now, use a placeholder
-    block->SetNextConsensus(io::UInt160::Zero());
+    // Set next consensus address (committee multi-signature script hash)
+    // In Neo N3, this is calculated from the committee public keys
+    auto committee = settings.GetStandbyCommittee();
+    if (!committee.empty()) {
+        // For now, use a simplified approach - just use the first committee member's hash
+        // Real implementation would create proper multi-signature script
+        auto firstPubkey = committee[0];
+        auto pubkeyBytes = firstPubkey.ToArray();
+        
+        // Create a simple signature script hash from first public key
+        // Use a deterministic hash based on committee
+        auto hashData = io::ByteVector(pubkeyBytes.AsSpan());
+        auto hash = cryptography::Hash::Hash160(hashData.AsSpan());
+        block->SetNextConsensus(hash);
+    } else {
+        // Fallback to zero if no committee
+        block->SetNextConsensus(io::UInt160::Zero());
+    }
 
     // Note: Block class doesn't have witness property directly
     // Witness is handled separately in Neo3

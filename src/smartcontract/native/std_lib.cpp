@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <codecvt>
+// #include <codecvt> // Removed - using manual UTF-8 parsing instead
 #include <cwctype>
 #include <iomanip>
 #include <locale>
@@ -483,12 +483,38 @@ std::shared_ptr<vm::StackItem> StdLib::OnStrLen(ApplicationEngine& engine,
     auto stringItem = args[0];
     auto str = stringItem->GetString();
 
-    // Convert the string to UTF-32
-    std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
-    std::u32string utf32 = converter.from_bytes(str);
-
-    // Count the number of UTF-32 characters
-    int count = static_cast<int>(utf32.length());
+    // Count UTF-8 characters properly without deprecated codecvt
+    int count = 0;
+    for (size_t i = 0; i < str.length();)
+    {
+        unsigned char c = str[i];
+        if (c < 0x80)
+        {
+            // Single byte character
+            i++;
+        }
+        else if ((c & 0xe0) == 0xc0)
+        {
+            // Two byte character
+            i += 2;
+        }
+        else if ((c & 0xf0) == 0xe0)
+        {
+            // Three byte character
+            i += 3;
+        }
+        else if ((c & 0xf8) == 0xf0)
+        {
+            // Four byte character
+            i += 4;
+        }
+        else
+        {
+            // Invalid UTF-8, count as single byte
+            i++;
+        }
+        count++;
+    }
 
     return vm::StackItem::Create(static_cast<int64_t>(count));
 }

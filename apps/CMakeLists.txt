@@ -34,7 +34,7 @@ target_include_directories(testnet_node PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Create complete testnet node
 add_executable(neo_testnet_complete neo_testnet_complete.cpp)
-target_link_libraries(neo_testnet_complete PRIVATE neo_logging neo_cryptography neo_io neo_extensions neo_core)
+target_link_libraries(neo_testnet_complete PRIVATE neo_cpp)
 target_include_directories(neo_testnet_complete PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Create standalone testnet node (minimal dependencies)

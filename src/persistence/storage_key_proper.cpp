@@ -16,6 +16,8 @@
 #include <neo/persistence/storage_key.h>
 #include <neo/smartcontract/native/contract_management.h>
 
+using namespace neo::io;
+
 // Helper function for byte swapping (C++20 compatible)
 namespace
 {
@@ -45,7 +47,7 @@ class ContractIdCache
 {
   private:
     mutable std::shared_mutex mutex_;
-    std::unordered_map<io::UInt160, int32_t> cache_;
+    std::unordered_map<UInt160, int32_t> cache_;
     static constexpr size_t MAX_CACHE_SIZE = 1000;
 
   public:
@@ -55,7 +57,7 @@ class ContractIdCache
         return instance;
     }
 
-    std::optional<int32_t> Get(const io::UInt160& hash) const
+    std::optional<int32_t> Get(const UInt160& hash) const
     {
         std::shared_lock lock(mutex_);
         auto it = cache_.find(hash);
@@ -66,7 +68,7 @@ class ContractIdCache
         return std::nullopt;
     }
 
-    void Put(const io::UInt160& hash, int32_t id)
+    void Put(const UInt160& hash, int32_t id)
     {
         std::unique_lock lock(mutex_);
 
@@ -255,7 +257,7 @@ StorageKey StorageKey::Create(int32_t id, uint8_t prefix, uint32_t bigEndian)
     return StorageKey(id, io::ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
 }
 
-StorageKey StorageKey::Create(int32_t id, uint8_t prefix, std::span<const uint8_t> content)
+StorageKey StorageKey::Create(int32_t id, uint8_t prefix, const std::span<const uint8_t>& content)
 {
     auto data = io::ByteVector(PREFIX_LENGTH + content.size());
     FillHeader(std::span<uint8_t>(data.Data(), PREFIX_LENGTH), id, prefix);
@@ -297,7 +299,7 @@ const io::ByteVector& StorageKey::GetKey() const
     return key_;
 }
 
-io::ByteVector StorageKey::ToByteArray() const
+io::ByteVector StorageKey::ToArray() const
 {
     if (!cacheValid_)
     {
@@ -309,17 +311,18 @@ io::ByteVector StorageKey::ToByteArray() const
 
 void StorageKey::Serialize(io::BinaryWriter& writer) const
 {
-    auto data = ToByteArray();
+    auto data = ToArray();
     writer.Write(data.AsSpan());
 }
 
 void StorageKey::Deserialize(io::BinaryReader& reader)
 {
-    reader.Read(id_);
-    auto remaining = reader.Remaining();
-    if (remaining > 0)
+    id_ = reader.ReadInt32();
+    auto available = reader.Available();
+    if (available > 0)
     {
-        key_ = reader.ReadBytes(remaining);
+        key_.Resize(available);
+        reader.ReadBytes(key_.Data(), available);
     }
     cacheValid_ = false;
 }
@@ -341,10 +344,6 @@ bool StorageKey::operator<(const StorageKey& other) const
     return key_ < other.key_;
 }
 
-StorageKey StorageKey::CreateSearchPrefix(int32_t id, uint8_t prefix)
-{
-    return Create(id, prefix);
-}
 
 io::ByteVector StorageKey::Build() const
 {
@@ -377,4 +376,48 @@ void StorageKey::FillHeader(std::span<uint8_t> data, int32_t id, uint8_t prefix)
     // Write prefix
     data[4] = prefix;
 }
+
+void StorageKey::DeserializeFromArray(const std::span<const uint8_t>& data)
+{
+    if (data.size() < 4)
+    {
+        throw std::invalid_argument("Data too short for contract ID");
+    }
+    // Read contract ID (little-endian)
+    id_ = static_cast<int32_t>(data[0]) | (static_cast<int32_t>(data[1]) << 8) | 
+          (static_cast<int32_t>(data[2]) << 16) | (static_cast<int32_t>(data[3]) << 24);
+    
+    // Read key data (if any)
+    if (data.size() > 4)
+    {
+        key_ = ByteVector(data.data() + 4, data.size() - 4);
+    }
+    else
+    {
+        key_.Clear();
+    }
+}
+
+UInt160 StorageKey::GetScriptHash() const
+{
+    // For Neo N3, we need to resolve contract ID to script hash
+    // This would normally require blockchain state access
+    // For now, we'll create a placeholder implementation that returns a valid UInt160
+    return UInt160::Zero();
+}
+
+StorageKey StorageKey::Create(int32_t id, uint8_t prefix, const io::UInt256& hash, const io::UInt160& signer)
+{
+    auto data = ByteVector(PREFIX_LENGTH + UInt256::SIZE + UInt160::SIZE);
+    FillHeader(std::span<uint8_t>(data.Data(), PREFIX_LENGTH), id, prefix);
+    
+    // Write hash and signer
+    MemoryStream stream(data.Data() + PREFIX_LENGTH, UInt256::SIZE + UInt160::SIZE);
+    BinaryWriter writer(stream);
+    hash.Serialize(writer);
+    signer.Serialize(writer);
+    
+    return StorageKey(id, ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
+}
+
 }  // namespace neo::persistence

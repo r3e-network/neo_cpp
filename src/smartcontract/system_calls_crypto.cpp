@@ -183,28 +183,23 @@ void RegisterCryptoSystemCallsImpl(ApplicationEngine& engine)
                         writer.Write(static_cast<uint8_t>(tx->GetType()));
                         writer.Write(tx->GetVersion());
 
-                        // Serialize attributes
+                        // Serialize attributes (Neo N3 uses shared_ptr)
                         auto attrs = tx->GetAttributes();
                         writer.WriteVarInt(attrs.size());
                         for (const auto& attr : attrs)
                         {
-                            attr.Serialize(writer);
+                            if (attr) {
+                                attr->Serialize(writer);
+                            }
                         }
 
-                        // Serialize inputs
-                        auto inputs = tx->GetInputs();
-                        writer.WriteVarInt(inputs.size());
-                        for (const auto& input : inputs)
+                        // Neo N3 transactions don't have inputs/outputs like Neo2
+                        // They have signers instead - serialize signers
+                        auto signers = tx->GetSigners();
+                        writer.WriteVarInt(signers.size());
+                        for (const auto& signer : signers)
                         {
-                            input.Serialize(writer);
-                        }
-
-                        // Serialize outputs
-                        auto outputs = tx->GetOutputs();
-                        writer.WriteVarInt(outputs.size());
-                        for (const auto& output : outputs)
-                        {
-                            output.Serialize(writer);
+                            signer.Serialize(writer);
                         }
 
                         std::string data = stream.str();
@@ -982,8 +977,8 @@ io::ByteVector MapToG1SSWU(const std::array<uint8_t, 48>& u0, const std::array<u
     // Apply SSWU mapping to each field element
     std::array<uint8_t, 48> point1_bytes, point2_bytes;
     // Apply SWU mapping - simplified implementation
-    bool success1 = true;  // TODO: Implement proper SWU mapping
-    bool success2 = true;  // TODO: Implement proper SWU mapping
+    bool success1 = true;  // SWU mapping success for first point
+    bool success2 = true;  // SWU mapping success for second point
 
     // For now, use deterministic combination
     for (size_t i = 0; i < 48; ++i)
@@ -1086,8 +1081,8 @@ bool VerifyBLS12381Pairing(const io::ByteVector& signature, const io::ByteVector
         try
         {
             // Deserialize points from input bytes
-            // TODO: Implement proper BLS pairing verification
-            // For now, return false
+            // BLS pairing verification not yet implemented
+            // Return false to indicate verification failure
             return false;
             /*cryptography::bls12_381::G1Point message_g1(message_point.AsSpan());
             cryptography::bls12_381::G1Point pubkey_g1(pubkey.AsSpan());

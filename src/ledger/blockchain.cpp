@@ -6,7 +6,7 @@
 #include <neo/io/binary_writer.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/memory_pool.h>
-#include <neo/ledger/neo_system.h>
+#include <neo/core/neo_system.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/neo_token.h>

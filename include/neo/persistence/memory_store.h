@@ -34,6 +34,14 @@ class MemoryStore : public IStore
     std::optional<io::ByteVector> TryGet(const io::ByteVector& key) const override;
 
     /**
+     * @brief Gets a value from the store.
+     * @param key The key to look up.
+     * @return The value.
+     * @throws std::runtime_error if the key is not found.
+     */
+    io::ByteVector Get(const io::ByteVector& key) const;
+
+    /**
      * @brief Checks if the store contains a key.
      * @param key The key to check.
      * @return True if the key exists, false otherwise.
@@ -67,6 +75,15 @@ class MemoryStore : public IStore
      * @return The snapshot.
      */
     std::unique_ptr<IStoreSnapshot> GetSnapshot();
+
+    /**
+     * @brief Seeks all key-value pairs with keys that start with the specified prefix.
+     * @param prefix The prefix to search for.
+     * @param direction The direction to seek.
+     * @return The key-value pairs found.
+     */
+    std::vector<std::pair<io::ByteVector, io::ByteVector>>
+    Seek(const io::ByteVector& prefix, SeekDirection direction = SeekDirection::Forward) const;
 
   private:
     std::unordered_map<io::ByteVector, io::ByteVector> store_;

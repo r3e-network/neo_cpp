@@ -77,6 +77,23 @@ std::unique_ptr<IStoreSnapshot> MemoryStore::GetSnapshot()
     return std::make_unique<MemorySnapshot>(*this);
 }
 
+std::vector<std::pair<io::ByteVector, io::ByteVector>> MemoryStore::Seek(const io::ByteVector& prefix,
+                                                                         SeekDirection direction) const
+{
+    // Seek is an alias for Find with a prefix
+    return Find(&prefix, direction);
+}
+
+io::ByteVector MemoryStore::Get(const io::ByteVector& key) const
+{
+    auto value = TryGet(key);
+    if (!value.has_value())
+    {
+        throw std::runtime_error("Key not found");
+    }
+    return value.value();
+}
+
 // MemorySnapshot implementation
 MemorySnapshot::MemorySnapshot(MemoryStore& store) : store_(store)
 {

@@ -1,20 +1,19 @@
 # Neo Ledger Module
 
-# Create ledger library
+# Create ledger library with minimal working files
 add_library(neo_ledger OBJECT
     stubs.cpp  # Temporary stubs for linking
     ledger_dummy.cpp
+    blockchain_stubs.cpp  # Minimal blockchain stubs
     block.cpp
     block_header.cpp
     header_cache.cpp
     memory_pool.cpp
-    neo2_transaction.cpp
     transaction_attribute.cpp
     transaction_output.cpp
     coin_reference.cpp
     witness.cpp
     signer.cpp
-    blockchain_complete.cpp
 )
 
 # Set include directories

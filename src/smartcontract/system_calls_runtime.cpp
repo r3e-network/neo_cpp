@@ -393,6 +393,21 @@ bool HandleGetAddressVersion(vm::ExecutionEngine& engine)
     context.Push(vm::StackItem::Create(static_cast<int64_t>(NEO_ADDRESS_VERSION)));
     return true;
 }
+
+bool HandleLoadScript(vm::ExecutionEngine& engine)
+{
+    auto& appEngine = static_cast<ApplicationEngine&>(engine);
+    auto& context = appEngine.GetCurrentContext();
+    
+    // Get the script from the stack
+    auto scriptItem = context.Pop();
+    auto scriptBytes = scriptItem->GetByteArray();
+    
+    // Load the script into the engine
+    appEngine.LoadScript(std::vector<uint8_t>(scriptBytes.Data(), scriptBytes.Data() + scriptBytes.Size()));
+    
+    return true;
+}
 }  // namespace
 
 // This function provides the runtime system call handlers
@@ -418,5 +433,6 @@ void RegisterRuntimeSystemCalls(ApplicationEngine& engine)
     engine.RegisterSystemCall("System.Runtime.GetNotifications", HandleGetNotifications, 800, CallFlags::None);
     engine.RegisterSystemCall("System.Runtime.BurnGas", HandleBurnGas, 400, CallFlags::None);
     engine.RegisterSystemCall("System.Runtime.GetAddressVersion", HandleGetAddressVersion, 250, CallFlags::None);
+    engine.RegisterSystemCall("System.Runtime.LoadScript", HandleLoadScript, 500, CallFlags::AllowCall);
 }
 }  // namespace neo::smartcontract

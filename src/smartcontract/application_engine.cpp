@@ -165,32 +165,24 @@ void ApplicationEngine::AddGas(int64_t gas)
 bool ApplicationEngine::CheckWitness(const io::UInt160& scriptHash) const
 {
     // Complete witness verification implementation for script hash
-    // Get transaction from container if trigger is Application
-    // Try Neo3Transaction first, then fall back to Neo2Transaction
-    const network::p2p::payloads::Neo3Transaction* neo3tx = nullptr;
-    const ledger::Transaction* neo2tx = nullptr;
+    // Get transaction from container if trigger is Application (Neo N3 only)
+    const ledger::Transaction* transaction = nullptr;
 
     if (trigger_ == TriggerType::Application && container_)
     {
-        neo3tx = dynamic_cast<const network::p2p::payloads::Neo3Transaction*>(container_);
-        if (!neo3tx)
-        {
-            neo2tx = dynamic_cast<const ledger::Transaction*>(container_);
-        }
+        transaction = dynamic_cast<const ledger::Transaction*>(container_);
     }
 
-    if (!neo3tx && !neo2tx)
+    if (!transaction)
     {
         return false;  // No transaction context
     }
 
     try
     {
-        // For Neo3 transactions, check signers
-        if (neo3tx)
-        {
-            const auto& signers = neo3tx->GetSigners();
-            for (const auto& signer : signers)
+        // Check signers (Neo N3 transaction)
+        const auto& signers = transaction->GetSigners();
+        for (const auto& signer : signers)
             {
                 if (signer.GetAccount() == scriptHash)
                 {
@@ -234,27 +226,8 @@ bool ApplicationEngine::CheckWitness(const io::UInt160& scriptHash) const
             }
 
             return false;  // Script hash not authorized
-        }
 
-        // For Neo2 transactions, use witness verification
-        if (neo2tx)
-        {
-            // Neo2 doesn't have signers, just check witness
-            const auto& witnesses = neo2tx->GetWitnesses();
-            for (const auto& witness : witnesses)
-            {
-                // Basic witness verification for Neo2
-                if (witness.GetVerificationScript().Size() > 0)
-                {
-                    auto witnessHash = cryptography::Hash::Hash160(witness.GetVerificationScript().AsSpan());
-                    if (witnessHash == scriptHash)
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-
+        // Neo N3 transactions use signers for witness verification (handled above)
         return false;
     }
     catch (const std::exception&)
@@ -734,11 +707,11 @@ bool ApplicationEngine::VerifyCommitteeConsensus(const io::UInt256& hash) const
         size_t committee_signatures = 0;
         size_t required_signatures = (committee.size() / 2) + 1;  // Majority
 
-        // For Neo3 transactions
-        const auto* neo3tx = dynamic_cast<const network::p2p::payloads::Neo3Transaction*>(tx);
-        if (neo3tx)
+        // Neo N3 transaction
+        const auto* transaction = dynamic_cast<const ledger::Transaction*>(tx);
+        if (transaction)
         {
-            const auto& signers = neo3tx->GetSigners();
+            const auto& signers = transaction->GetSigners();
             for (const auto& member : committee)
             {
                 io::UInt160 member_script_hash = GetScriptHashFromPublicKey(member);
@@ -792,11 +765,11 @@ bool ApplicationEngine::VerifyMultiSignatureHash(const io::UInt256& hash) const
             return false;
         }
 
-        // For Neo3 transactions
-        const auto* neo3tx = dynamic_cast<const network::p2p::payloads::Neo3Transaction*>(tx);
-        if (neo3tx)
+        // Neo N3 transaction
+        const auto* transaction = dynamic_cast<const ledger::Transaction*>(tx);
+        if (transaction)
         {
-            const auto& signers = neo3tx->GetSigners();
+            const auto& signers = transaction->GetSigners();
             if (signers.empty())
             {
                 return false;

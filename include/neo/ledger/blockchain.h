@@ -362,16 +362,4 @@ class Blockchain
     static constexpr uint32_t MaxUnverifiedBlocks = 10000;
 };
 
-/**
- * @brief Interface for blockchain inventory items.
- */
-class IInventory
-{
-  public:
-    virtual ~IInventory() = default;
-    virtual io::UInt256 GetHash() const = 0;
-    virtual bool Verify(std::shared_ptr<config::ProtocolSettings> settings,
-                        std::shared_ptr<persistence::DataCache> snapshot) const = 0;
-};
-
 }  // namespace neo::ledger

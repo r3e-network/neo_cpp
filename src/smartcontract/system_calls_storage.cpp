@@ -169,6 +169,36 @@ bool StorageFind(ApplicationEngine& engine)
     }
 }
 
+bool StorageGetContext(ApplicationEngine& engine)
+{
+    // Get the storage context for the calling contract
+    try
+    {
+        // Get the calling script hash
+        auto scriptHash = engine.GetCallingScriptHash();
+        
+        // Create storage context as script hash bytes
+        io::ByteVector contextBytes;
+        contextBytes.insert(contextBytes.end(), scriptHash.Data(), scriptHash.Data() + 20);
+        engine.Push(vm::StackItem::Create(contextBytes));
+        
+        return true;
+    }
+    catch (const std::exception&)
+    {
+        engine.Push(vm::StackItem::Null());
+        return false;
+    }
+}
+
+bool StorageGetReadOnlyContext(ApplicationEngine& engine)
+{
+    // Get the read-only storage context for the calling contract
+    // In NEO, read-only context is the same as regular context,
+    // but operations are restricted at the system call level
+    return StorageGetContext(engine);
+}
+
 bool StorageAsReadOnly(ApplicationEngine& engine)
 {
     // Basic storage as read-only implementation
@@ -473,6 +503,20 @@ bool IteratorValue(ApplicationEngine& engine)
 // This function will be called from the RegisterSystemCalls method in application_engine_system_calls.cpp
 void RegisterStorageSystemCalls(ApplicationEngine& engine)
 {
+    engine.RegisterSystemCall("System.Storage.GetContext",
+                              [](neo::vm::ExecutionEngine& vm_engine)
+                              {
+                                  auto& app_engine = static_cast<ApplicationEngine&>(vm_engine);
+                                  return StorageGetContext(app_engine);
+                              });
+
+    engine.RegisterSystemCall("System.Storage.GetReadOnlyContext",
+                              [](neo::vm::ExecutionEngine& vm_engine)
+                              {
+                                  auto& app_engine = static_cast<ApplicationEngine&>(vm_engine);
+                                  return StorageGetReadOnlyContext(app_engine);
+                              });
+
     engine.RegisterSystemCall("System.Storage.Get",
                               [](neo::vm::ExecutionEngine& vm_engine)
                               {

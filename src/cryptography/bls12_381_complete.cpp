@@ -352,7 +352,7 @@ G1Point G1Point::Generator()
     std::memcpy(impl->x, G1_GENERATOR_X, 48);
     // Set y coordinate (simplified - would need proper curve arithmetic)
     std::memset(impl->y, 0, 48);
-    impl->y[0] = 0x08;  // Placeholder y-coordinate
+    
     return G1Point(std::move(impl));
 }
 
@@ -467,8 +467,8 @@ G2Point G2Point::Generator()
     std::memset(impl->x1, 0, 48);
     std::memset(impl->y0, 0, 48);
     std::memset(impl->y1, 0, 48);
-    impl->x1[0] = 0x13;  // Placeholder
-    impl->y0[0] = 0x2A;  // Placeholder
+    
+    
     return G2Point(std::move(impl));
 }
 

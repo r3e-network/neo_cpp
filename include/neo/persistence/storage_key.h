@@ -84,10 +84,7 @@ class StorageKey : public io::ISerializable
      * @brief Gets the key.
      * @return The key.
      */
-    const io::ByteVector& GetKey() const
-    {
-        return key_;
-    }
+    const io::ByteVector& GetKey() const;
 
     /**
      * @brief Gets the total length of the storage key.

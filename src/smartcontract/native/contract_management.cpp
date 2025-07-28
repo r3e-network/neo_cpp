@@ -416,23 +416,24 @@ ContractManagement::OnSetMinimumDeploymentFee(ApplicationEngine& engine,
         io::UInt160 committeeAddress = CalculateCommitteeAddress(committee);
 
         // Verify the calling script hash matches the committee address
-        // TODO: Implement proper committee authorization check
-        // auto callingScriptHash = engine.GetCallingScriptHash();
-        // if (callingScriptHash != committeeAddress) {
-        // Also check if call is from within a committee member's verification context
-        // TODO: Implement proper committee member verification
-        // bool isCommitteeMember = false;
-        // for (const auto& member : committee) {
-        //     io::UInt160 memberScriptHash = GetScriptHashFromPublicKey(member);
-        //     if (callingScriptHash == memberScriptHash) {
-        //         isCommitteeMember = true;
-        //         break;
-        //     }
-        // }
-        //
-        // if (!isCommitteeMember) {
-        //     throw std::runtime_error("Unauthorized: Only committee can set minimum deployment fee");
-        // }
+        // Implement proper committee authorization check
+        auto callingScriptHash = engine.GetCallingScriptHash();
+        if (callingScriptHash != committeeAddress) {
+            // Also check if call is from within a committee member's verification context
+            // Implement proper committee member verification
+            bool isCommitteeMember = false;
+            for (const auto& member : committee) {
+                io::UInt160 memberScriptHash = GetScriptHashFromPublicKey(member);
+                if (callingScriptHash == memberScriptHash) {
+                    isCommitteeMember = true;
+                    break;
+                }
+            }
+            
+            if (!isCommitteeMember) {
+                throw std::runtime_error("Only committee can perform this operation");
+            }
+        }
     }
     catch (const std::exception& e)
     {
@@ -589,7 +590,8 @@ ContractManagement::GetCommitteeFromNeoContract(const std::shared_ptr<persistenc
         }
 
         // Fallback: Get committee from protocol settings if blockchain query fails
-        // TODO: Implement fallback to protocol settings when available
+        // Since we don't have access to an engine here, we'll skip protocol settings
+        // and go directly to the hardcoded fallback
 
         // Final fallback: Use hardcoded genesis committee if all else fails
         if (committee.empty())
