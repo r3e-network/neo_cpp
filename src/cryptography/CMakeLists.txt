@@ -4,6 +4,8 @@ add_library(neo_cryptography OBJECT
     crypto.cpp
     ecc.cpp
     ecc/ecpoint.cpp
+    ecc/ecdsa.cpp
+    ecrecover.cpp
     merkletree.cpp
     base64.cpp
     base64url.cpp
