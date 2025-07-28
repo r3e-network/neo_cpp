@@ -230,6 +230,11 @@ class StoreCache : public DataCache
      */
     std::shared_ptr<IStoreSnapshot> GetStore() const;
 
+    /**
+     * @brief Checks if the cache is read-only.
+     * @return True if read-only, false otherwise.
+     */
+    bool IsReadOnly() const override;
 
   private:
     IStore& store_;
