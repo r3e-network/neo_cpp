@@ -51,7 +51,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     const EC_GROUP* group = EC_KEY_get0_group(ec_key.get());
     if (!group)
     {
-        LOG_error("Failed to get EC_GROUP");
+        LOG_ERROR("Failed to get EC_GROUP");
         return std::nullopt;
     }
 
@@ -63,14 +63,14 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
 
     if (!r || !s || !order || !x)
     {
-        LOG_error("Failed to allocate BIGNUMs");
+        LOG_ERROR("Failed to allocate BIGNUMs");
         return std::nullopt;
     }
 
     // Get curve order
     if (!EC_GROUP_get_order(group, order.get(), nullptr))
     {
-        LOG_error("Failed to get curve order");
+        LOG_ERROR("Failed to get curve order");
         return std::nullopt;
     }
 
@@ -79,7 +79,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     {
         if (!BN_add(x.get(), r.get(), order.get()))
         {
-            LOG_error("Failed to add order to r");
+            LOG_ERROR("Failed to add order to r");
             return std::nullopt;
         }
     }
@@ -87,7 +87,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     {
         if (!BN_copy(x.get(), r.get()))
         {
-            LOG_error("Failed to copy r to x");
+            LOG_ERROR("Failed to copy r to x");
             return std::nullopt;
         }
     }
@@ -96,21 +96,21 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     ECPointPtr recovered_point(EC_POINT_new(group));
     if (!recovered_point)
     {
-        LOG_error("Failed to create recovered_point");
+        LOG_ERROR("Failed to create recovered_point");
         return std::nullopt;
     }
 
     // Set x coordinate and determine y
     if (!EC_POINT_set_compressed_coordinates_GFp(group, recovered_point.get(), x.get(), recovery_id & 1, nullptr))
     {
-        LOG_error("Failed to set compressed coordinates");
+        LOG_ERROR("Failed to set compressed coordinates");
         return std::nullopt;
     }
 
     // Verify the point is valid
     if (!EC_POINT_is_on_curve(group, recovered_point.get(), nullptr))
     {
-        LOG_error("Recovered point is not on curve");
+        LOG_ERROR("Recovered point is not on curve");
         return std::nullopt;
     }
 
@@ -124,7 +124,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
 
     if (!r_inv || !e || !point1 || !point2 || !result)
     {
-        LOG_error("Failed to allocate recovery objects");
+        LOG_ERROR("Failed to allocate recovery objects");
         return std::nullopt;
     }
 
@@ -132,7 +132,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     BN_CTX* ctx = BN_CTX_new();
     if (!ctx)
     {
-        LOG_error("Failed to create BN_CTX");
+        LOG_ERROR("Failed to create BN_CTX");
         return std::nullopt;
     }
 
