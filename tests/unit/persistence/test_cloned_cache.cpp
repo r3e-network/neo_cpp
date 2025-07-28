@@ -378,8 +378,9 @@ namespace neo::persistence::tests
         }, std::runtime_error);
         
         // Read operations should still work
-        auto result = cache.TryGet(key1);
-        EXPECT_TRUE(result != nullptr);
+        StorageItem result_item;
+        bool found = cache.TryGet(key1, result_item);
+        EXPECT_TRUE(found);
         
         // Test with read-write cache for comparison
         auto readwrite_inner = std::make_shared<TestDataCache>(snapshot);
