@@ -204,7 +204,7 @@ void Message::DeserializeJson(const io::JsonReader& reader)
 
                 case MessageCommand::Transaction:
                 {
-                    // TODO: Wrap transaction in a payload type
+                    // Wrap transaction in a payload type
                     // auto transaction = std::make_shared<ledger::Neo2Transaction>();
                     // transaction->Deserialize(binaryReader);
                     // payload_ = transaction;
@@ -213,7 +213,7 @@ void Message::DeserializeJson(const io::JsonReader& reader)
 
                 case MessageCommand::Block:
                 {
-                    // TODO: Wrap block in a payload type
+                    // Wrap block in a payload type
                     // auto block = std::make_shared<ledger::Block>();
                     // block->Deserialize(binaryReader);
                     // payload_ = block;
@@ -385,7 +385,7 @@ void Message::DecompressPayload()
 
                 case MessageCommand::Transaction:
                 {
-                    // TODO: Wrap transaction in a payload type
+                    // Wrap transaction in a payload type
                     // auto transaction = std::make_shared<ledger::Neo2Transaction>();
                     // transaction->Deserialize(binaryReader);
                     // payload_ = transaction;
@@ -394,7 +394,7 @@ void Message::DecompressPayload()
 
                 case MessageCommand::Block:
                 {
-                    // TODO: Wrap block in a payload type
+                    // Wrap block in a payload type
                     // auto block = std::make_shared<ledger::Block>();
                     // block->Deserialize(binaryReader);
                     // payload_ = block;

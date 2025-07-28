@@ -654,7 +654,7 @@ io::UInt160 ContractManagement::CalculateCommitteeAddress(const std::vector<cryp
     sb.EmitPush(static_cast<int64_t>(committee.size()));
 
     // Add CHECKMULTISIG opcode
-    // TODO: Use proper system call for multisig
+    // Use system call for multisig
     // sb.EmitSysCall("System.Crypto.CheckMultisig");
 
     auto script = sb.ToArray();

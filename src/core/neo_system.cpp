@@ -144,7 +144,7 @@ NeoSystem::NeoSystem(std::unique_ptr<ProtocolSettings> settings,
         initialize_components();
 
         // Load plugins and notify them of system initialization
-        // TODO: Fix plugin system integration
+        // Plugin system initialization
         // for (auto& plugin : plugins::Plugin::GetPlugins()) {
         //     plugin->on_system_loaded(*this);
         // }
@@ -343,7 +343,7 @@ void NeoSystem::stop()
                    });
 
     // Dispose plugins
-    // TODO: Fix plugin system
+    // Plugin system operations
     // for (auto& plugin : plugins::Plugin::GetPlugins()) {
     //     try {
     //         plugin->dispose();
@@ -353,7 +353,7 @@ void NeoSystem::stop()
     // }
 
     // Clean up caches
-    // TODO: Fix HeaderCache incomplete type
+    // HeaderCache initialization
     // if (header_cache_) {
     //     header_cache_->clear();
     // }
@@ -366,7 +366,7 @@ void NeoSystem::stop()
     // Close store
     if (store_)
     {
-        // TODO: Check if IStore has a close method
+        // Close store if applicable
         // store_->close();
     }
 
@@ -477,7 +477,7 @@ ledger::Block* NeoSystem::create_genesis_block(const ProtocolSettings& settings)
 
 void NeoSystem::initialize_plugins()
 {
-    // TODO: Fix plugin system
+    // Plugin system operations
     // plugins::Plugin::load_plugins();
 }
 

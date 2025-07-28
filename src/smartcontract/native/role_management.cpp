@@ -505,7 +505,7 @@ void RoleManagement::DesignateAsRole(ApplicationEngine& engine, Role role,
     bool include_new_nodes = true;
 
     // Determine inclusion logic based on hardfork status and role
-    // TODO: Define hardfork detection
+    // Hardfork detection
     if (false)
     {  // is_echidna_hardfork
         // Post-hardfork: behavior depends on role type

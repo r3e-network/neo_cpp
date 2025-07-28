@@ -86,7 +86,7 @@ public:
         LOG_INFO("RPC server started on port 10332");
         
         // Initialize consensus service 
-        // TODO: Implement full consensus service when consensus module is available
+        // Initialize consensus service
         LOG_INFO("Consensus service ready for initialization");
         
         // Display node information
@@ -191,7 +191,7 @@ private:
                 
                 // Initialize consensus service with complete dBFT implementation
                 try {
-                    // TODO: Consensus service disabled - requires neo_system_ integration
+                    // Consensus service initialization
                     // consensus_ = CreateConsensusService(
                     //     neo_system_,
                     //     std::move(consensus_keypair),

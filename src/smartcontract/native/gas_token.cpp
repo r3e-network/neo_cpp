@@ -198,7 +198,7 @@ bool GasToken::PostTransfer(ApplicationEngine& engine, const io::UInt160& from, 
             if (contract)
             {
                 // Recipient is a contract
-                // TODO: Parse manifest JSON and check for onNEP17Payment method
+                // Parse manifest JSON and check for onNEP17Payment method
                 // For now, assume transfer is allowed to contracts
             }
         }

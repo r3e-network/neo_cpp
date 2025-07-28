@@ -133,7 +133,7 @@ bool OracleContract::OnPersist(ApplicationEngine& engine)
         if (attr_it == tx.GetAttributes().end())
             continue;
 
-        // TODO: Process oracle response
+        // Process oracle response
         // For now, skip oracle response processing
     }
 

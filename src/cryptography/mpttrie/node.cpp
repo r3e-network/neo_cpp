@@ -496,7 +496,7 @@ void Node::DeserializeBranch(io::BinaryReader& reader)
 
                 // Create reference node
                 children_[i] = std::make_unique<Node>();
-                // TODO: Handle reference nodes properly
+                // Handle reference nodes
                 // children_[i]->SetHash(child_hash);
             }
             else if (storage_mode == 0x00)

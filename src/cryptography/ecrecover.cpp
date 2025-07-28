@@ -5,7 +5,7 @@
 #include <openssl/ec.h>
 #include <openssl/ecdsa.h>
 #include <openssl/evp.h>
-#include <spdlog/spdlog.h>
+#include <neo/core/logging.h>
 #include <memory>
 #include <vector>
 
@@ -44,14 +44,14 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     ECKeyPtr ec_key(EC_KEY_new_by_curve_name(NID_secp256k1));
     if (!ec_key)
     {
-        spdlog::error("Failed to create EC_KEY for secp256k1");
+        LOG_ERROR("Failed to create EC_KEY for secp256k1");
         return std::nullopt;
     }
 
     const EC_GROUP* group = EC_KEY_get0_group(ec_key.get());
     if (!group)
     {
-        spdlog::error("Failed to get EC_GROUP");
+        LOG_error("Failed to get EC_GROUP");
         return std::nullopt;
     }
 
@@ -63,14 +63,14 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
 
     if (!r || !s || !order || !x)
     {
-        spdlog::error("Failed to allocate BIGNUMs");
+        LOG_error("Failed to allocate BIGNUMs");
         return std::nullopt;
     }
 
     // Get curve order
     if (!EC_GROUP_get_order(group, order.get(), nullptr))
     {
-        spdlog::error("Failed to get curve order");
+        LOG_error("Failed to get curve order");
         return std::nullopt;
     }
 
@@ -79,7 +79,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     {
         if (!BN_add(x.get(), r.get(), order.get()))
         {
-            spdlog::error("Failed to add order to r");
+            LOG_error("Failed to add order to r");
             return std::nullopt;
         }
     }
@@ -87,7 +87,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     {
         if (!BN_copy(x.get(), r.get()))
         {
-            spdlog::error("Failed to copy r to x");
+            LOG_error("Failed to copy r to x");
             return std::nullopt;
         }
     }
@@ -96,21 +96,21 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     ECPointPtr recovered_point(EC_POINT_new(group));
     if (!recovered_point)
     {
-        spdlog::error("Failed to create recovered_point");
+        LOG_error("Failed to create recovered_point");
         return std::nullopt;
     }
 
     // Set x coordinate and determine y
     if (!EC_POINT_set_compressed_coordinates_GFp(group, recovered_point.get(), x.get(), recovery_id & 1, nullptr))
     {
-        spdlog::error("Failed to set compressed coordinates");
+        LOG_error("Failed to set compressed coordinates");
         return std::nullopt;
     }
 
     // Verify the point is valid
     if (!EC_POINT_is_on_curve(group, recovered_point.get(), nullptr))
     {
-        spdlog::error("Recovered point is not on curve");
+        LOG_error("Recovered point is not on curve");
         return std::nullopt;
     }
 
@@ -124,7 +124,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
 
     if (!r_inv || !e || !point1 || !point2 || !result)
     {
-        spdlog::error("Failed to allocate recovery objects");
+        LOG_error("Failed to allocate recovery objects");
         return std::nullopt;
     }
 
@@ -132,7 +132,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     BN_CTX* ctx = BN_CTX_new();
     if (!ctx)
     {
-        spdlog::error("Failed to create BN_CTX");
+        LOG_error("Failed to create BN_CTX");
         return std::nullopt;
     }
 
@@ -165,7 +165,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
 
     if (!success)
     {
-        spdlog::error("Failed during recovery calculation");
+        LOG_error("Failed during recovery calculation");
         return std::nullopt;
     }
 
@@ -173,7 +173,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     size_t point_len = EC_POINT_point2oct(group, result.get(), POINT_CONVERSION_COMPRESSED, nullptr, 0, nullptr);
     if (point_len == 0)
     {
-        spdlog::error("Failed to get point length");
+        LOG_error("Failed to get point length");
         return std::nullopt;
     }
 
@@ -181,7 +181,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     if (EC_POINT_point2oct(group, result.get(), POINT_CONVERSION_COMPRESSED, 
                           point_data.data(), point_len, nullptr) != point_len)
     {
-        spdlog::error("Failed to convert point to octets");
+        LOG_error("Failed to convert point to octets");
         return std::nullopt;
     }
 
@@ -194,7 +194,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     }
     catch (const std::exception& e)
     {
-        spdlog::error("Failed to create ECPoint from recovered data: {}", e.what());
+        LOG_error("Failed to create ECPoint from recovered data: {}", e.what());
         return std::nullopt;
     }
 }

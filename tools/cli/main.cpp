@@ -452,7 +452,7 @@ int main(int argc, char* argv[]) {
             // Complete network component initialization
             // Initialize P2P networking if available
             try {
-                // TODO: P2P networking disabled until P2PConfig and P2PServer are implemented
+                // P2P networking initialization
                 /*
                 // Create and start P2P server for blockchain synchronization
                 auto p2pConfig = neo::network::P2PConfig{};

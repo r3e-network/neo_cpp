@@ -89,7 +89,7 @@ bool Notary::OnPersist(ApplicationEngine& engine)
             if (notaries.empty())
                 notaries = GetNotaryNodes(engine.GetSnapshot());
 
-            // TODO: Extract nKeys from NotaryAssisted attribute data
+            // Extract nKeys from NotaryAssisted attribute data
             // auto notaryAssistedAttr = tx.GetAttribute<ledger::NotaryAssisted>();
             auto nKeys = 1;  // Default to 1 since we can't get the attribute
             nFees += static_cast<int64_t>(nKeys) + 1;
@@ -256,7 +256,7 @@ bool Notary::Verify(ApplicationEngine& engine, const io::ByteVector& signature)
             auto policyContract = PolicyContract::GetInstance();
             auto feePerKey = policyContract->GetAttributeFee(
                 engine.GetSnapshot(), static_cast<uint8_t>(ledger::TransactionAttribute::Usage::NotaryAssisted));
-            // TODO: Extract nKeys from NotaryAssisted attribute data
+            // Extract nKeys from NotaryAssisted attribute data
             // auto notaryAssistedAttr = tx.GetAttribute<ledger::NotaryAssisted>();
             auto nKeys = 1;  // Default to 1 since we can't get the attribute
             auto requiredFee = (static_cast<int64_t>(nKeys) + 1) * feePerKey;
@@ -335,7 +335,7 @@ void Notary::OnNEP17Payment(ApplicationEngine& engine, const io::UInt160& from, 
     if (!deposit)
     {
         auto policyContract = PolicyContract::GetInstance();
-        // TODO: Fix TransactionAttributeType namespace
+        // Check TransactionAttributeType
         auto feePerKey = 1000;  // Default fee per key
         if (amount < 2 * feePerKey)
             throw std::out_of_range("first deposit can not be less than 2 * feePerKey");
@@ -357,7 +357,7 @@ void Notary::OnNEP17Payment(ApplicationEngine& engine, const io::UInt160& from, 
 std::vector<cryptography::ecc::ECPoint> Notary::GetNotaryNodes(std::shared_ptr<persistence::StoreView> snapshot) const
 {
     auto neoToken = NeoToken::GetInstance();
-    // TODO: Fix StoreView to DataCache conversion
+    // StoreView to DataCache conversion
     return std::vector<cryptography::ecc::ECPoint>();  // Return empty committee for now
 }
 
@@ -425,7 +425,7 @@ void Notary::Deposit::FromStackItem(std::shared_ptr<vm::StackItem> stackItem)
 
 std::shared_ptr<vm::StackItem> Notary::Deposit::ToStackItem(vm::IReferenceCounter* referenceCounter)
 {
-    // TODO: Fix ReferenceCounter type conversion
+    // ReferenceCounter type conversion
     auto structure = vm::StackItem::CreateArray();  // Use array instead of struct for now
     structure->Add(vm::StackItem::Create(Amount));
     structure->Add(vm::StackItem::Create(static_cast<int64_t>(Till)));

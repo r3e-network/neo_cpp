@@ -103,6 +103,37 @@ class ConsensusService
      */
     std::shared_ptr<node::NeoSystem> GetNeoSystem() const;
 
+    /**
+     * @brief Handles received prepare request message.
+     * @param request The prepare request message.
+     */
+    void OnPrepareRequestReceived(const PrepareRequest& request);
+
+    /**
+     * @brief Handles received prepare response message.
+     * @param response The prepare response message.
+     */
+    void OnPrepareResponseReceived(const PrepareResponse& response);
+
+    /**
+     * @brief Handles received change view message.
+     * @param message The change view message.
+     */
+    void OnChangeViewReceived(const ChangeViewMessage& message);
+
+    /**
+     * @brief Handles received commit message.
+     * @param commit The commit message.
+     */
+    void OnCommitReceived(const CommitMessage& commit);
+
+    /**
+     * @brief Validates a block.
+     * @param block The block to validate.
+     * @return True if the block is valid, false otherwise.
+     */
+    bool ValidateBlock(std::shared_ptr<ledger::Block> block);
+
   private:
     std::shared_ptr<node::NeoSystem> neoSystem_;
     cryptography::ecc::KeyPair keyPair_;
