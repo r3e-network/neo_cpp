@@ -344,7 +344,7 @@ TEST_F(BLS12381CompleteTest, EdgeCases) {
     
     // Test mismatched sizes in aggregate signature verification
     std::vector<G2Point> pubKeys = {G2Point::Generator()};
-    std::vector<io::ByteSpan> messages;
+    std::vector<neo::io::ByteSpan> messages;
     G1Point sig = G1Point::Generator();
     EXPECT_THROW(VerifyAggregateSignature(pubKeys, messages, sig), std::invalid_argument);
 }
