@@ -2,7 +2,9 @@
 #include <gtest/gtest.h>
 #include <neo/smartcontract/native/crypto_lib.h>
 #include <neo/smartcontract/application_engine.h>
-#include <neo/persistence/memory_store_view.h>
+#include <neo/smartcontract/trigger_type.h>
+#include <neo/persistence/memory_store.h>
+#include <neo/persistence/data_cache.h>
 #include <neo/cryptography/hash.h>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/bls12_381.h>
@@ -20,15 +22,17 @@ using namespace neo::cryptography;
 class CryptoLibTest : public ::testing::Test
 {
 protected:
-    std::shared_ptr<MemoryStoreView> snapshot;
+    std::shared_ptr<MemoryStore> store;
+    std::shared_ptr<DataCache> snapshot;
     std::shared_ptr<CryptoLib> cryptoLib;
-    std::shared_ptr<smartcontract::ApplicationEngine> engine;
+    std::shared_ptr<ApplicationEngine> engine;
 
     void SetUp() override
     {
-        snapshot = std::make_shared<MemoryStoreView>();
+        store = std::make_shared<MemoryStore>();
+        snapshot = std::make_shared<StoreCache>(*store);
         cryptoLib = std::make_shared<CryptoLib>();
-        engine = std::make_shared<smartcontract::ApplicationEngine>(smartcontract::TriggerType::Application, nullptr, snapshot, 0, false);
+        engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0LL);
     }
 };
 
