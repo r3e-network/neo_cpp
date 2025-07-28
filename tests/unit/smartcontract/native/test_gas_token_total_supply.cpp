@@ -2,7 +2,8 @@
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/trigger_type.h>
-#include <neo/persistence/memory_store_view.h>
+#include <neo/persistence/memory_store.h>
+#include <neo/persistence/data_cache.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/io/binary_writer.h>
@@ -17,13 +18,15 @@ using namespace neo::vm;
 class GasTokenTotalSupplyTest : public ::testing::Test
 {
 protected:
-    std::shared_ptr<MemoryStoreView> snapshot;
+    std::shared_ptr<MemoryStore> store;
+    std::shared_ptr<DataCache> snapshot;
     std::shared_ptr<GasToken> gasToken;
     std::shared_ptr<ApplicationEngine> engine;
     
     void SetUp() override
     {
-        snapshot = std::make_shared<MemoryStoreView>();
+        store = std::make_shared<MemoryStore>();
+        snapshot = std::make_shared<StoreCache>(*store);
         gasToken = GasToken::GetInstance();
         engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0LL);
     }
@@ -33,7 +36,7 @@ protected:
 TEST_F(GasTokenTotalSupplyTest, TestEmptyStorageReturnsZero)
 {
     // Fresh snapshot should have no data
-    auto totalSupply = gasToken->GetTotalSupply(snapshot);
+    auto totalSupply = gasToken->GetTotalSupply(std::static_pointer_cast<StoreView>(snapshot));
     
     // Should return 0, not some hardcoded constant
     EXPECT_EQ(totalSupply, 0);
@@ -60,7 +63,7 @@ TEST_F(GasTokenTotalSupplyTest, TestInitializedTotalSupply)
     snapshot->Commit();
     
     // Now GetTotalSupply should return the stored value
-    auto totalSupply = gasToken->GetTotalSupply(snapshot);
+    auto totalSupply = gasToken->GetTotalSupply(std::static_pointer_cast<StoreView>(snapshot));
     EXPECT_EQ(totalSupply, initial_supply);
 }
 
@@ -83,7 +86,7 @@ TEST_F(GasTokenTotalSupplyTest, TestConsistentReads)
     
     // Multiple reads should return the same value
     for (int i = 0; i < 10; ++i) {
-        auto totalSupply = gasToken->GetTotalSupply(snapshot);
+        auto totalSupply = gasToken->GetTotalSupply(std::static_pointer_cast<StoreView>(snapshot));
         EXPECT_EQ(totalSupply, test_supply);
     }
 }
@@ -102,7 +105,7 @@ TEST_F(GasTokenTotalSupplyTest, TestMalformedStorageData)
     
     // Should handle gracefully (implementation dependent - might throw or return 0)
     try {
-        auto totalSupply = gasToken->GetTotalSupply(snapshot);
+        auto totalSupply = gasToken->GetTotalSupply(std::static_pointer_cast<StoreView>(snapshot));
         // If it doesn't throw, it should return 0
         EXPECT_EQ(totalSupply, 0);
     } catch (const std::exception& e) {
@@ -127,7 +130,7 @@ TEST_F(GasTokenTotalSupplyTest, TestBoundaryValues)
         snapshot->Add(key, item);
         snapshot->Commit();
         
-        auto totalSupply = gasToken->GetTotalSupply(snapshot);
+        auto totalSupply = gasToken->GetTotalSupply(std::static_pointer_cast<StoreView>(snapshot));
         EXPECT_EQ(totalSupply, INT64_MAX);
     }
     
@@ -142,7 +145,7 @@ TEST_F(GasTokenTotalSupplyTest, TestBoundaryValues)
         snapshot->Add(key, item);
         snapshot->Commit();
         
-        auto totalSupply = gasToken->GetTotalSupply(snapshot);
+        auto totalSupply = gasToken->GetTotalSupply(std::static_pointer_cast<StoreView>(snapshot));
         EXPECT_EQ(totalSupply, 0);
     }
 }
@@ -155,8 +158,9 @@ TEST_F(GasTokenTotalSupplyTest, TestNoHardcodedConstant)
     
     // Create multiple fresh snapshots and verify they all return 0
     for (int i = 0; i < 5; ++i) {
-        auto freshSnapshot = std::make_shared<MemoryStoreView>();
-        auto totalSupply = gasToken->GetTotalSupply(freshSnapshot);
+        auto freshStore = std::make_shared<MemoryStore>();
+        auto freshSnapshot = std::make_shared<StoreCache>(*freshStore);
+        auto totalSupply = gasToken->GetTotalSupply(std::static_pointer_cast<StoreView>(freshSnapshot));
         
         // Should be 0, not some hardcoded value like 30_000_000 * Fixed8.One
         EXPECT_EQ(totalSupply, 0) << "Iteration " << i << " returned non-zero for empty storage";

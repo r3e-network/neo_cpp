@@ -3,7 +3,8 @@
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/trigger_type.h>
-#include <neo/persistence/memory_store_view.h>
+#include <neo/persistence/memory_store.h>
+#include <neo/persistence/data_cache.h>
 #include <neo/ledger/block.h>
 #include <neo/core/fixed8.h>
 
@@ -17,14 +18,16 @@ using namespace neo::core;
 class NeoTokenRewardsTest : public ::testing::Test
 {
 protected:
-    std::shared_ptr<MemoryStoreView> snapshot;
+    std::shared_ptr<MemoryStore> store;
+    std::shared_ptr<DataCache> snapshot;
     std::shared_ptr<NeoToken> neoToken;
     std::shared_ptr<GasToken> gasToken;
     std::shared_ptr<ApplicationEngine> engine;
     
     void SetUp() override
     {
-        snapshot = std::make_shared<MemoryStoreView>();
+        store = std::make_shared<MemoryStore>();
+        snapshot = std::make_shared<StoreCache>(*store);
         neoToken = NeoToken::GetInstance();
         gasToken = GasToken::GetInstance();
         engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0LL);
