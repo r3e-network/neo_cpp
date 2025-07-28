@@ -245,7 +245,7 @@ TEST_F(BLS12381CompleteTest, AggregateSignatures) {
     G1Point aggregateSig = AggregateSignatures(signatures);
     
     // Verify aggregate signature
-    std::vector<io::ByteSpan> messageSpans;
+    std::vector<neo::io::ByteSpan> messageSpans;
     for (const auto& msg : messages) {
         messageSpans.push_back(msg.AsSpan());
     }
