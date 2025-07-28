@@ -69,6 +69,12 @@ class DataCache : public StoreView
      * @return The current block index.
      */
     virtual uint32_t GetCurrentBlockIndex() const = 0;
+
+    /**
+     * @brief Checks if the cache is read-only.
+     * @return True if read-only, false otherwise.
+     */
+    virtual bool IsReadOnly() const = 0;
 };
 
 /**
@@ -224,11 +230,6 @@ class StoreCache : public DataCache
      */
     std::shared_ptr<IStoreSnapshot> GetStore() const;
 
-    /**
-     * @brief Checks if the cache is read-only.
-     * @return True if read-only, false otherwise.
-     */
-    bool IsReadOnly() const;
 
   private:
     IStore& store_;

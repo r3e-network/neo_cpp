@@ -116,13 +116,18 @@ namespace neo::persistence::tests
             return count;
         }
         
-        bool IsReadOnly() const {
-            return false; // For testing, assume not read-only
+        bool IsReadOnly() const override {
+            return read_only_;
+        }
+        
+        void SetReadOnly(bool value) {
+            read_only_ = value;
         }
         
     private:
         std::shared_ptr<IStoreSnapshot> snapshot_;
         std::unordered_map<StorageKey, std::pair<StorageItem, TrackState>> items_;
+        bool read_only_ = false;
     };
 
     class ClonedCacheTest : public ::testing::Test
@@ -134,12 +139,14 @@ namespace neo::persistence::tests
             snapshot = store->GetSnapshot();
             inner_cache = std::make_shared<TestDataCache>(snapshot);
             
+            // Initialize member keys
+            key1 = StorageKey(1, {0x01, 0x02});
+            key2 = StorageKey(2, {0x03, 0x04});
+            
             // Add some initial data to inner cache
-            StorageKey key1(1, {0x01, 0x02});
             StorageItem item1({0x11, 0x12, 0x13});
             inner_cache->Add(key1, item1);
             
-            StorageKey key2(2, {0x03, 0x04});
             StorageItem item2({0x21, 0x22, 0x23});
             inner_cache->Add(key2, item2);
             
@@ -149,6 +156,8 @@ namespace neo::persistence::tests
         std::shared_ptr<MemoryStore> store;
         std::shared_ptr<IStoreSnapshot> snapshot;
         std::shared_ptr<TestDataCache> inner_cache;
+        StorageKey key1;
+        StorageKey key2;
     };
 
     TEST_F(ClonedCacheTest, TestConstructor)
@@ -361,9 +370,7 @@ namespace neo::persistence::tests
         }, std::runtime_error);
         
         // Attempt to update should throw or fail gracefully
-        EXPECT_THROW({
-            cache.GetAndChange(readonly_key);
-        }, std::runtime_error);
+        // Note: ClonedCache doesn't have GetAndChange method
         
         // Attempt to delete should throw or fail gracefully
         EXPECT_THROW({
