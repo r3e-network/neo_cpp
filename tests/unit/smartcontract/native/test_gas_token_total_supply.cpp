@@ -25,7 +25,7 @@ protected:
     {
         snapshot = std::make_shared<MemoryStoreView>();
         gasToken = GasToken::GetInstance();
-        engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0);
+        engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0LL);
     }
 };
 
@@ -54,7 +54,7 @@ TEST_F(GasTokenTotalSupplyTest, TestInitializedTotalSupply)
     BinaryWriter writer(stream);
     writer.Write(initial_supply);
     std::string data = stream.str();
-    StorageItem item(ByteVector(data.begin(), data.end()));
+    StorageItem item(ByteVector(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
     
     snapshot->Add(key, item);
     snapshot->Commit();
@@ -76,7 +76,7 @@ TEST_F(GasTokenTotalSupplyTest, TestConsistentReads)
     BinaryWriter writer(stream2);
     writer.Write(test_supply);
     std::string data2 = stream2.str();
-    StorageItem item(ByteVector(data2.begin(), data2.end()));
+    StorageItem item(ByteVector(reinterpret_cast<const uint8_t*>(data2.data()), data2.size()));
     
     snapshot->Add(key, item);
     snapshot->Commit();
@@ -122,7 +122,7 @@ TEST_F(GasTokenTotalSupplyTest, TestBoundaryValues)
         BinaryWriter writer(stream3);
         writer.Write(INT64_MAX);
         std::string data3 = stream3.str();
-        StorageItem item(ByteVector(data3.begin(), data3.end()));
+        StorageItem item(ByteVector(reinterpret_cast<const uint8_t*>(data3.data()), data3.size()));
         
         snapshot->Add(key, item);
         snapshot->Commit();
@@ -137,7 +137,7 @@ TEST_F(GasTokenTotalSupplyTest, TestBoundaryValues)
         BinaryWriter writer(stream4);
         writer.Write(int64_t(0));
         std::string data4 = stream4.str();
-        StorageItem item(ByteVector(data4.begin(), data4.end()));
+        StorageItem item(ByteVector(reinterpret_cast<const uint8_t*>(data4.data()), data4.size()));
         
         snapshot->Add(key, item);
         snapshot->Commit();

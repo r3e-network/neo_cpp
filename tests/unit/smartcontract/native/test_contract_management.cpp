@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/trigger_type.h>
 #include <neo/persistence/memory_store_view.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -20,13 +21,13 @@ class ContractManagementTest : public ::testing::Test
 protected:
     std::shared_ptr<MemoryStoreView> snapshot;
     std::shared_ptr<ContractManagement> contractManagement;
-    std::shared_ptr<smartcontract::ApplicationEngine> engine;
+    std::shared_ptr<ApplicationEngine> engine;
     
     void SetUp() override
     {
         snapshot = std::make_shared<MemoryStoreView>();
         contractManagement = ContractManagement::GetInstance();
-        engine = std::make_shared<smartcontract::ApplicationEngine>(smartcontract::TriggerType::Application, nullptr, snapshot, 0, false);
+        engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0LL);
     }
 };
 

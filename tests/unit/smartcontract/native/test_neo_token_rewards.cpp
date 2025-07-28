@@ -27,7 +27,7 @@ protected:
         snapshot = std::make_shared<MemoryStoreView>();
         neoToken = NeoToken::GetInstance();
         gasToken = GasToken::GetInstance();
-        engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0);
+        engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0LL);
     }
 };
 
