@@ -90,15 +90,11 @@ TEST(BlockTest, Serialization)
     EXPECT_EQ(block2.GetTransactions()[0].GetType(), Transaction::Type::InvocationTransaction);
     EXPECT_EQ(block2.GetTransactions()[0].GetVersion(), 1);
     EXPECT_EQ(block2.GetTransactions()[0].GetAttributes().size(), 1);
-    EXPECT_EQ(block2.GetTransactions()[0].GetAttributes()[0].GetUsage(), usage);
-    EXPECT_EQ(block2.GetTransactions()[0].GetAttributes()[0].GetData(), data);
-    EXPECT_EQ(block2.GetTransactions()[0].GetInputs().size(), 1);
-    EXPECT_EQ(block2.GetTransactions()[0].GetInputs()[0].GetPrevHash(), prevHash);
-    EXPECT_EQ(block2.GetTransactions()[0].GetInputs()[0].GetPrevIndex(), prevIndex);
-    EXPECT_EQ(block2.GetTransactions()[0].GetOutputs().size(), 1);
-    EXPECT_EQ(block2.GetTransactions()[0].GetOutputs()[0].GetAssetId(), assetId);
-    EXPECT_EQ(block2.GetTransactions()[0].GetOutputs()[0].GetValue(), value);
-    EXPECT_EQ(block2.GetTransactions()[0].GetOutputs()[0].GetScriptHash(), scriptHash);
+    EXPECT_EQ(block2.GetTransactions()[0].GetAttributes()[0]->GetUsage(), usage);
+    EXPECT_EQ(block2.GetTransactions()[0].GetAttributes()[0]->GetData(), data);
+    // Neo 3 doesn't have inputs/outputs
+    EXPECT_EQ(block2.GetTransactions()[0].GetInputs().size(), 0);
+    EXPECT_EQ(block2.GetTransactions()[0].GetOutputs().size(), 0);
     EXPECT_EQ(block2.GetTransactions()[0].GetWitnesses().size(), 1);
     EXPECT_EQ(block2.GetTransactions()[0].GetWitnesses()[0].GetInvocationScript(), txInvocationScript);
     EXPECT_EQ(block2.GetTransactions()[0].GetWitnesses()[0].GetVerificationScript(), txVerificationScript);
