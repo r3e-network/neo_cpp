@@ -354,15 +354,11 @@ TEST(TransactionTest, Serialization)
     EXPECT_EQ(tx2.GetType(), Transaction::Type::InvocationTransaction);
     EXPECT_EQ(tx2.GetVersion(), 1);
     EXPECT_EQ(tx2.GetAttributes().size(), 1);
-    EXPECT_EQ(tx2.GetAttributes()[0].GetUsage(), usage);
-    EXPECT_EQ(tx2.GetAttributes()[0].GetData(), data);
-    EXPECT_EQ(tx2.GetInputs().size(), 1);
-    EXPECT_EQ(tx2.GetInputs()[0].GetPrevHash(), prevHash);
-    EXPECT_EQ(tx2.GetInputs()[0].GetPrevIndex(), prevIndex);
-    EXPECT_EQ(tx2.GetOutputs().size(), 1);
-    EXPECT_EQ(tx2.GetOutputs()[0].GetAssetId(), assetId);
-    EXPECT_EQ(tx2.GetOutputs()[0].GetValue(), value);
-    EXPECT_EQ(tx2.GetOutputs()[0].GetScriptHash(), scriptHash);
+    EXPECT_EQ(tx2.GetAttributes()[0]->GetUsage(), usage);
+    EXPECT_EQ(tx2.GetAttributes()[0]->GetData(), data);
+    // Neo 3 doesn't have inputs/outputs, these are now empty
+    EXPECT_EQ(tx2.GetInputs().size(), 0);
+    EXPECT_EQ(tx2.GetOutputs().size(), 0);
     EXPECT_EQ(tx2.GetWitnesses().size(), 1);
     EXPECT_EQ(tx2.GetWitnesses()[0].GetInvocationScript(), invocationScript);
     EXPECT_EQ(tx2.GetWitnesses()[0].GetVerificationScript(), verificationScript);
@@ -409,7 +405,9 @@ TEST(TransactionTest, GetHash)
     writer.WriteVarInt(tx.GetAttributes().size());
     for (const auto& attr : tx.GetAttributes())
     {
-        attr.Serialize(writer);
+        if (attr) {
+            attr->Serialize(writer);
+        }
     }
     
     // Neo 3 doesn't have inputs/outputs in the traditional sense
