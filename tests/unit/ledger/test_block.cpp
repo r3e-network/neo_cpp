@@ -56,18 +56,9 @@ TEST(BlockTest, Serialization)
     TransactionAttribute attribute(usage, data);
     tx.SetAttributes({attribute});
     
-    // Add inputs
-    UInt256 prevHash = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
-    uint16_t prevIndex = 123;
-    CoinReference input(prevHash, prevIndex);
-    tx.SetInputs({input});
-    
-    // Add outputs
-    UInt256 assetId = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
-    Fixed8 value(123);
-    UInt160 scriptHash = UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314");
-    TransactionOutput output(assetId, value, scriptHash);
-    tx.SetOutputs({output});
+    // Neo 3 doesn't have inputs/outputs, set empty
+    tx.SetInputs({});
+    tx.SetOutputs({});
     
     // Add witnesses
     ByteVector txInvocationScript = ByteVector::Parse("0102030405");
