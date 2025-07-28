@@ -4,7 +4,7 @@
 #include <neo/smartcontract/application_engine.h>
 #include <neo/persistence/memory_store_view.h>
 #include <neo/ledger/block.h>
-#include <neo/fixed8.h>
+#include <neo/core/fixed8.h>
 
 using namespace neo::smartcontract::native;
 using namespace neo::persistence;

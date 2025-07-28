@@ -82,6 +82,10 @@ public:
     std::unique_ptr<StorageIterator> Seek(const StorageKey& prefix) const override {
         return nullptr; // Return null for mock
     }
+    
+    bool IsReadOnly() const override {
+        return false; // Mock is read-write
+    }
 };
 
 class MockTransaction : public IVerifiable
