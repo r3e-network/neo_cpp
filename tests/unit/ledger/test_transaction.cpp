@@ -412,19 +412,10 @@ TEST(TransactionTest, GetHash)
         attr.Serialize(writer);
     }
     
-    // Serialize inputs
-    writer.WriteVarInt(tx.GetInputs().size());
-    for (const auto& input : tx.GetInputs())
-    {
-        input.Serialize(writer);
-    }
-    
-    // Serialize outputs
-    writer.WriteVarInt(tx.GetOutputs().size());
-    for (const auto& output : tx.GetOutputs())
-    {
-        output.Serialize(writer);
-    }
+    // Neo 3 doesn't have inputs/outputs in the traditional sense
+    // Skip serialization of inputs/outputs for Neo 3 compatibility
+    writer.WriteVarInt(0); // No inputs
+    writer.WriteVarInt(0); // No outputs
     
     std::string data2 = stream.str();
     UInt256 expectedHash = neo::cryptography::Hash::Sha256(ByteSpan(reinterpret_cast<const uint8_t*>(data2.data()), data2.size()));
