@@ -11,6 +11,7 @@
 
 #include <algorithm>
 #include <bit>
+#include <mutex>
 #include <neo/io/memory_stream.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/persistence/storage_key.h>
