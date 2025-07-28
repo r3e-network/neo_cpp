@@ -2,14 +2,17 @@
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/trigger_type.h>
 #include <neo/persistence/memory_store_view.h>
 #include <neo/ledger/block.h>
 #include <neo/core/fixed8.h>
 
 using namespace neo::smartcontract::native;
+using namespace neo::smartcontract;
 using namespace neo::persistence;
 using namespace neo::ledger;
 using namespace neo::vm;
+using namespace neo::core;
 
 class NeoTokenRewardsTest : public ::testing::Test
 {
