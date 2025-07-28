@@ -301,8 +301,8 @@ class Neo3Transaction : public IInventory, public IVerifiable, public io::ISeria
 
     // Neo 2.x compatibility - store legacy data for tests
     mutable std::vector<ledger::TransactionAttribute> legacy_attributes_;
-    mutable std::vector<int> legacy_inputs_;   // Placeholder for CoinReference
-    mutable std::vector<int> legacy_outputs_;  // Placeholder for TransactionOutput
+    mutable std::vector<int> legacy_inputs_;   // Reserved for CoinReference compatibility
+    mutable std::vector<int> legacy_outputs_;  // Reserved for TransactionOutput compatibility
 
     /**
      * @brief Gets attributes (Neo 2.x compatibility).

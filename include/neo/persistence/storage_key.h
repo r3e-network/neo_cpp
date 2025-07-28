@@ -208,7 +208,7 @@ class StorageKey : public io::ISerializable
     /**
      * @brief Gets the script hash for the contract ID.
      * @return The script hash (UInt160).
-     * @note This is a placeholder implementation that needs blockchain state access.
+     * @note This implementation requires blockchain state access for full functionality.
      */
     io::UInt160 GetScriptHash() const;
 

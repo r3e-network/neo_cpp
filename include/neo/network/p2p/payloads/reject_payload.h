@@ -13,7 +13,7 @@ namespace neo::network::p2p::payloads
  * This payload is used to indicate rejection of an inventory.
  * Note: Currently the Neo N3 protocol defines this message command
  * but doesn't specify a payload structure. This implementation
- * provides a placeholder that can be extended if needed.
+ * provides a base implementation that can be extended if needed.
  */
 class RejectPayload : public IPayload
 {

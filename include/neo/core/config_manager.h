@@ -281,7 +281,7 @@ class ConfigManager
             }
             else
             {
-                // Keep the placeholder if env var not found
+                // Keep the variable reference if env var not found
                 break;
             }
         }

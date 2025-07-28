@@ -165,7 +165,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
 
     if (!success)
     {
-        LOG_error("Failed during recovery calculation");
+        LOG_ERROR("Failed during recovery calculation");
         return std::nullopt;
     }
 
@@ -173,7 +173,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     size_t point_len = EC_POINT_point2oct(group, result.get(), POINT_CONVERSION_COMPRESSED, nullptr, 0, nullptr);
     if (point_len == 0)
     {
-        LOG_error("Failed to get point length");
+        LOG_ERROR("Failed to get point length");
         return std::nullopt;
     }
 
@@ -181,7 +181,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     if (EC_POINT_point2oct(group, result.get(), POINT_CONVERSION_COMPRESSED, 
                           point_data.data(), point_len, nullptr) != point_len)
     {
-        LOG_error("Failed to convert point to octets");
+        LOG_ERROR("Failed to convert point to octets");
         return std::nullopt;
     }
 
@@ -194,7 +194,7 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     }
     catch (const std::exception& e)
     {
-        LOG_error("Failed to create ECPoint from recovered data: {}", e.what());
+        LOG_ERROR("Failed to create ECPoint from recovered data: {}", e.what());
         return std::nullopt;
     }
 }
