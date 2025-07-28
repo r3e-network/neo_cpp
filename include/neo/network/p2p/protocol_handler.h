@@ -18,6 +18,7 @@
 #include <neo/network/p2p/payloads/transaction_payload.h>
 #include <neo/network/p2p/payloads/version_payload.h>
 #include <neo/persistence/data_cache.h>
+#include <queue>
 #include <unordered_set>
 
 namespace neo::network::p2p
