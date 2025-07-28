@@ -27,7 +27,7 @@ protected:
         snapshot = std::make_shared<MemoryStoreView>();
         neoToken = NeoToken::GetInstance();
         gasToken = GasToken::GetInstance();
-        engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, 0, false);
+        engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0);
     }
 };
 
@@ -119,7 +119,7 @@ TEST_F(NeoTokenRewardsTest, TestRewardPrecision)
         999,        // Three digits
         1001,       // Just above 1000
         12345,      // Random amount
-        Fixed8::One // 1 GAS
+        100000000   // 1 GAS (Fixed8.One equivalent)
     };
     
     for (int64_t amount : test_amounts) {

@@ -6,6 +6,7 @@
 #include <neo/persistence/storage_key.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/io/binary_writer.h>
+#include <sstream>
 
 using namespace neo::smartcontract::native;
 using namespace neo::smartcontract;
@@ -24,7 +25,7 @@ protected:
     {
         snapshot = std::make_shared<MemoryStoreView>();
         gasToken = GasToken::GetInstance();
-        engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, 0, false);
+        engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0);
     }
 };
 
@@ -49,11 +50,13 @@ TEST_F(GasTokenTotalSupplyTest, TestInitializedTotalSupply)
     StorageKey key(gasToken->GetId(), ByteVector{11}); // Prefix 11 is for TotalSupply in NEP-17
     
     // Store the total supply
-    BinaryWriter writer;
+    std::ostringstream stream;
+    BinaryWriter writer(stream);
     writer.Write(initial_supply);
-    StorageItem item(writer.ToVector());
+    std::string data = stream.str();
+    StorageItem item(ByteVector(data.begin(), data.end()));
     
-    snapshot->Put(key, item);
+    snapshot->Add(key, item);
     snapshot->Commit();
     
     // Now GetTotalSupply should return the stored value
@@ -69,11 +72,13 @@ TEST_F(GasTokenTotalSupplyTest, TestConsistentReads)
     
     StorageKey key(gasToken->GetId(), ByteVector{11});
     
-    BinaryWriter writer;
+    std::ostringstream stream2;
+    BinaryWriter writer(stream2);
     writer.Write(test_supply);
-    StorageItem item(writer.ToVector());
+    std::string data2 = stream2.str();
+    StorageItem item(ByteVector(data2.begin(), data2.end()));
     
-    snapshot->Put(key, item);
+    snapshot->Add(key, item);
     snapshot->Commit();
     
     // Multiple reads should return the same value
@@ -92,7 +97,7 @@ TEST_F(GasTokenTotalSupplyTest, TestMalformedStorageData)
     // Store invalid data (not enough bytes for int64)
     StorageItem item(ByteVector{1, 2, 3}); // Only 3 bytes, need 8
     
-    snapshot->Put(key, item);
+    snapshot->Add(key, item);
     snapshot->Commit();
     
     // Should handle gracefully (implementation dependent - might throw or return 0)
@@ -113,11 +118,13 @@ TEST_F(GasTokenTotalSupplyTest, TestBoundaryValues)
     
     // Test maximum possible supply
     {
-        BinaryWriter writer;
+        std::ostringstream stream3;
+        BinaryWriter writer(stream3);
         writer.Write(INT64_MAX);
-        StorageItem item(writer.ToVector());
+        std::string data3 = stream3.str();
+        StorageItem item(ByteVector(data3.begin(), data3.end()));
         
-        snapshot->Put(key, item);
+        snapshot->Add(key, item);
         snapshot->Commit();
         
         auto totalSupply = gasToken->GetTotalSupply(snapshot);
@@ -126,11 +133,13 @@ TEST_F(GasTokenTotalSupplyTest, TestBoundaryValues)
     
     // Test minimum possible supply (0)
     {
-        BinaryWriter writer;
+        std::ostringstream stream4;
+        BinaryWriter writer(stream4);
         writer.Write(int64_t(0));
-        StorageItem item(writer.ToVector());
+        std::string data4 = stream4.str();
+        StorageItem item(ByteVector(data4.begin(), data4.end()));
         
-        snapshot->Put(key, item);
+        snapshot->Add(key, item);
         snapshot->Commit();
         
         auto totalSupply = gasToken->GetTotalSupply(snapshot);
@@ -147,7 +156,7 @@ TEST_F(GasTokenTotalSupplyTest, TestNoHardcodedConstant)
     // Create multiple fresh snapshots and verify they all return 0
     for (int i = 0; i < 5; ++i) {
         auto freshSnapshot = std::make_shared<MemoryStoreView>();
-        auto totalSupply = gasToken->GetTotalSupply(*freshSnapshot);
+        auto totalSupply = gasToken->GetTotalSupply(freshSnapshot);
         
         // Should be 0, not some hardcoded value like 30_000_000 * Fixed8.One
         EXPECT_EQ(totalSupply, 0) << "Iteration " << i << " returned non-zero for empty storage";
