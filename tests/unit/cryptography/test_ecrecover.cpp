@@ -95,7 +95,7 @@ TEST_F(ECRecoverTest, TestEdgeCases)
 {
     // Test with zero message hash
     {
-        ByteVector zeroHash(32, 0); // 32 zero bytes
+        ByteVector zeroHash(32); // 32 zero bytes (default initialized)
         ByteVector signature(64);
         
         // Should either throw or return a valid point
@@ -112,10 +112,17 @@ TEST_F(ECRecoverTest, TestEdgeCases)
     
     // Test with maximum values
     {
-        ByteVector maxHash;
-        maxHash.resize(32, 0xFF);
-        ByteVector maxSig;
-        maxSig.resize(64, 0xFF);
+        ByteVector maxHash(32);
+        // Fill with 0xFF
+        for (size_t i = 0; i < 32; ++i) {
+            maxHash[i] = 0xFF;
+        }
+        
+        ByteVector maxSig(64);
+        // Fill with 0xFF
+        for (size_t i = 0; i < 64; ++i) {
+            maxSig[i] = 0xFF;
+        }
         
         // Should handle gracefully
         try {
