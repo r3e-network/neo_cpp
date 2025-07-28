@@ -7,6 +7,7 @@
 #include <neo/io/memory_stream.h>
 #include <neo/ledger/witness.h>
 #include <neo/logging/logger.h>
+#include <neo/protocol_settings.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/system_call_exception.h>
 #include <neo/smartcontract/transaction_verifier.h>
@@ -612,7 +613,7 @@ VerificationOutput TransactionVerifier::VerifySignature(const ledger::Transactio
                 signDataBytes.Reserve(sizeof(uint32_t) + io::UInt256::Size);
 
                 // Write network magic (little-endian)
-                uint32_t network = engine->GetProtocolSettings()->Network();
+                uint32_t network = ProtocolSettings::GetDefault().GetNetwork();
                 signDataBytes.Push(static_cast<uint8_t>(network & 0xFF));
                 signDataBytes.Push(static_cast<uint8_t>((network >> 8) & 0xFF));
                 signDataBytes.Push(static_cast<uint8_t>((network >> 16) & 0xFF));
@@ -1013,7 +1014,7 @@ VerificationResult TransactionVerifier::VerifyTransactionSignature(const ledger:
         signDataBytes.Reserve(sizeof(uint32_t) + io::UInt256::Size);
 
         // Write network magic (little-endian)
-        uint32_t network = engine->GetProtocolSettings()->Network();
+        uint32_t network = ProtocolSettings::GetDefault().GetNetwork();
         signDataBytes.Push(static_cast<uint8_t>(network & 0xFF));
         signDataBytes.Push(static_cast<uint8_t>((network >> 8) & 0xFF));
         signDataBytes.Push(static_cast<uint8_t>((network >> 16) & 0xFF));
