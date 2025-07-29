@@ -68,7 +68,7 @@ class CircuitBreaker
             RecordSuccess(startTime);
             return result;
         }
-        catch (...)
+        catch (const std::exception&)
         {
             RecordFailure(startTime);
             throw;
@@ -323,12 +323,17 @@ class CircuitBreaker
 
     void CleanOldMetrics()
     {
-        // Implement rolling window cleanup if needed
-        // For now, we'll reset periodically
+        // Reset metrics periodically based on window size
         auto now = std::chrono::steady_clock::now();
         if (now - lastMetricsReset_ > config_.windowSize)
         {
+            // Preserve min/max values while resetting counters
+            auto prevMin = metrics_.minResponseTime;
+            auto prevMax = metrics_.maxResponseTime;
+
             metrics_ = Metrics{};
+            metrics_.minResponseTime = prevMin;
+            metrics_.maxResponseTime = prevMax;
             lastMetricsReset_ = now;
         }
     }

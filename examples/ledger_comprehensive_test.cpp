@@ -1,15 +1,15 @@
-#include <iostream>
 #include <gtest/gtest.h>
-#include <neo/ledger/block.h>
-#include <neo/ledger/transaction.h>
-#include <neo/ledger/blockchain.h>
-#include <neo/ledger/mempool.h>
-#include <neo/io/binary_reader.h>
-#include <neo/io/binary_writer.h>
+#include <iostream>
+#include <memory>
 #include <neo/cryptography/hash.h>
 #include <neo/cryptography/merkletree.h>
+#include <neo/io/binary_reader.h>
+#include <neo/io/binary_writer.h>
+#include <neo/ledger/block.h>
+#include <neo/ledger/blockchain.h>
+#include <neo/ledger/mempool.h>
+#include <neo/ledger/transaction.h>
 #include <sstream>
-#include <memory>
 #include <vector>
 
 using namespace neo::ledger;
@@ -17,10 +17,11 @@ using namespace neo::io;
 using namespace neo::cryptography;
 
 // Test Witness
-TEST(LedgerComprehensiveTest, Witness) {
+TEST(LedgerComprehensiveTest, Witness)
+{
     // Create a Witness
-    ByteVector invocationScript = { 0x01, 0x02, 0x03 };
-    ByteVector verificationScript = { 0x04, 0x05, 0x06 };
+    ByteVector invocationScript = {0x01, 0x02, 0x03};
+    ByteVector verificationScript = {0x04, 0x05, 0x06};
     Witness witness(invocationScript, verificationScript);
 
     // Check the properties
@@ -50,20 +51,21 @@ TEST(LedgerComprehensiveTest, Witness) {
     EXPECT_FALSE(witness != deserializedWitness);
 
     // Test with different invocation script
-    ByteVector differentInvocationScript = { 0x01, 0x02, 0x04 };
+    ByteVector differentInvocationScript = {0x01, 0x02, 0x04};
     Witness differentWitness1(differentInvocationScript, verificationScript);
     EXPECT_FALSE(witness == differentWitness1);
     EXPECT_TRUE(witness != differentWitness1);
 
     // Test with different verification script
-    ByteVector differentVerificationScript = { 0x04, 0x05, 0x07 };
+    ByteVector differentVerificationScript = {0x04, 0x05, 0x07};
     Witness differentWitness2(invocationScript, differentVerificationScript);
     EXPECT_FALSE(witness == differentWitness2);
     EXPECT_TRUE(witness != differentWitness2);
 }
 
 // Test CoinReference
-TEST(LedgerComprehensiveTest, CoinReference) {
+TEST(LedgerComprehensiveTest, CoinReference)
+{
     // Create a CoinReference
     UInt256 prevHash = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     uint16_t prevIndex = 123;
@@ -104,7 +106,8 @@ TEST(LedgerComprehensiveTest, CoinReference) {
 }
 
 // Test TransactionOutput
-TEST(LedgerComprehensiveTest, TransactionOutput) {
+TEST(LedgerComprehensiveTest, TransactionOutput)
+{
     // Create a TransactionOutput
     UInt256 assetId = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     Fixed8 value(123000000);
@@ -155,21 +158,24 @@ TEST(LedgerComprehensiveTest, TransactionOutput) {
 }
 
 // Test Transaction
-TEST(LedgerComprehensiveTest, Transaction) {
+TEST(LedgerComprehensiveTest, Transaction)
+{
     // Create a Transaction
     Transaction tx;
     tx.SetType(Transaction::Type::ContractTransaction);
     tx.SetVersion(0);
 
     // Add attributes
-    TransactionAttribute attribute(TransactionAttribute::Usage::Script, ByteVector{ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14 });
-    std::vector<TransactionAttribute> attributes = { attribute };
+    TransactionAttribute attribute(TransactionAttribute::Usage::Script,
+                                   ByteVector{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
+                                              0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14});
+    std::vector<TransactionAttribute> attributes = {attribute};
     tx.SetAttributes(attributes);
 
     // Add inputs
     UInt256 prevHash = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     CoinReference input(prevHash, 0);
-    std::vector<CoinReference> inputs = { input };
+    std::vector<CoinReference> inputs = {input};
     tx.SetInputs(inputs);
 
     // Add outputs
@@ -177,14 +183,14 @@ TEST(LedgerComprehensiveTest, Transaction) {
     Fixed8 value(123000000);
     UInt160 scriptHash = UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314");
     TransactionOutput output(assetId, value, scriptHash);
-    std::vector<TransactionOutput> outputs = { output };
+    std::vector<TransactionOutput> outputs = {output};
     tx.SetOutputs(outputs);
 
     // Add witnesses
-    ByteVector invocationScript = { 0x01, 0x02, 0x03 };
-    ByteVector verificationScript = { 0x04, 0x05, 0x06 };
+    ByteVector invocationScript = {0x01, 0x02, 0x03};
+    ByteVector verificationScript = {0x04, 0x05, 0x06};
     Witness witness(invocationScript, verificationScript);
-    std::vector<Witness> witnesses = { witness };
+    std::vector<Witness> witnesses = {witness};
     tx.SetWitnesses(witnesses);
 
     // Check the properties
@@ -224,7 +230,8 @@ TEST(LedgerComprehensiveTest, Transaction) {
     EXPECT_FALSE(tx != deserializedTx);
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     std::cout << "Running Ledger comprehensive test..." << std::endl;
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

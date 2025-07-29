@@ -23,7 +23,7 @@ static bool IsAuthorizedForRoleDesignation(ApplicationEngine& engine, Role role)
 {
     // Check if the transaction is signed by committee members
     auto committees = NeoToken::GetInstance()->GetCommittee(engine.GetSnapshot());
-    
+
     // For critical roles, require committee consensus
     if (role == Role::Oracle || role == Role::StateValidator || role == Role::NeoFSAlphabetNode)
     {
@@ -40,7 +40,7 @@ static bool IsAuthorizedForRoleDesignation(ApplicationEngine& engine, Role role)
         }
         return false;
     }
-    
+
     // For other roles, allow if signed by any committee member
     return true;
 }
@@ -57,7 +57,7 @@ static void ValidateRoleSpecificConstraints(Role role, const std::vector<cryptog
                 throw std::invalid_argument("Oracle role cannot have more than 16 nodes");
             }
             break;
-            
+
         case Role::StateValidator:
             // State validators must be odd number for consensus
             if (nodes.size() % 2 == 0)
@@ -65,7 +65,7 @@ static void ValidateRoleSpecificConstraints(Role role, const std::vector<cryptog
                 throw std::invalid_argument("State validator count must be odd for consensus");
             }
             break;
-            
+
         case Role::NeoFSAlphabetNode:
             // NeoFS alphabet nodes have specific requirements
             if (nodes.size() < 4 || nodes.size() > 16)
@@ -73,7 +73,7 @@ static void ValidateRoleSpecificConstraints(Role role, const std::vector<cryptog
                 throw std::invalid_argument("NeoFS alphabet nodes must be between 4 and 16");
             }
             break;
-            
+
         default:
             // No specific constraints for other roles
             break;
@@ -87,20 +87,19 @@ static bool IsCriticalRole(Role role)
 }
 
 // Helper function to validate critical role assignment
-static void ValidateCriticalRoleAssignment(ApplicationEngine& engine, Role role, 
-                                         const std::vector<cryptography::ecc::ECPoint>& nodes, 
-                                         uint32_t index)
+static void ValidateCriticalRoleAssignment(ApplicationEngine& engine, Role role,
+                                           const std::vector<cryptography::ecc::ECPoint>& nodes, uint32_t index)
 {
     // For critical roles, ensure proper governance
     if (!IsCriticalRole(role))
     {
         return;
     }
-    
+
     // Additional validation for critical roles
     // Could include checking voting results, time locks, etc.
     auto snapshot = engine.GetSnapshot();
-    
+
     // Example: Check if there's a minimum time between role changes
     if (index > 1)
     {

@@ -1,12 +1,13 @@
-#include <neo/cryptography/ecrecover.h>
+#include <memory>
+#include <neo/core/logging.h>
 #include <neo/cryptography/ecc/ecpoint.h>
+#include <neo/cryptography/ecrecover.h>
 #include <neo/cryptography/hash.h>
 #include <openssl/bn.h>
 #include <openssl/ec.h>
 #include <openssl/ecdsa.h>
 #include <openssl/evp.h>
-#include <neo/core/logging.h>
-#include <memory>
+#include <stdexcept>
 #include <vector>
 
 namespace neo::cryptography
@@ -15,29 +16,49 @@ namespace neo::cryptography
 // RAII wrapper for BIGNUM
 struct BNDeleter
 {
-    void operator()(BIGNUM* bn) const { if (bn) BN_free(bn); }
+    void operator()(BIGNUM* bn) const
+    {
+        if (bn)
+            BN_free(bn);
+    }
 };
 using BNPtr = std::unique_ptr<BIGNUM, BNDeleter>;
 
 // RAII wrapper for EC_POINT
 struct ECPointDeleter
 {
-    void operator()(EC_POINT* point) const { if (point) EC_POINT_free(point); }
+    void operator()(EC_POINT* point) const
+    {
+        if (point)
+            EC_POINT_free(point);
+    }
 };
 using ECPointPtr = std::unique_ptr<EC_POINT, ECPointDeleter>;
 
 // RAII wrapper for EC_KEY
 struct ECKeyDeleter
 {
-    void operator()(EC_KEY* key) const { if (key) EC_KEY_free(key); }
+    void operator()(EC_KEY* key) const
+    {
+        if (key)
+            EC_KEY_free(key);
+    }
 };
 using ECKeyPtr = std::unique_ptr<EC_KEY, ECKeyDeleter>;
 
 std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSpan& signature, uint8_t recovery_id)
 {
-    if (hash.Size() != 32 || signature.Size() != 64 || recovery_id > 3)
+    if (hash.Size() != 32)
     {
-        return std::nullopt;
+        throw std::invalid_argument("Hash must be 32 bytes");
+    }
+    if (signature.Size() != 64)
+    {
+        throw std::invalid_argument("Signature must be 64 bytes");
+    }
+    if (recovery_id > 3)
+    {
+        throw std::invalid_argument("Recovery ID must be 0-3");
     }
 
     // Create secp256k1 curve (Ethereum uses secp256k1, not secp256r1)
@@ -178,8 +199,8 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     }
 
     std::vector<uint8_t> point_data(point_len);
-    if (EC_POINT_point2oct(group, result.get(), POINT_CONVERSION_COMPRESSED, 
-                          point_data.data(), point_len, nullptr) != point_len)
+    if (EC_POINT_point2oct(group, result.get(), POINT_CONVERSION_COMPRESSED, point_data.data(), point_len, nullptr) !=
+        point_len)
     {
         LOG_ERROR("Failed to convert point to octets");
         return std::nullopt;
@@ -199,4 +220,4 @@ std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSp
     }
 }
 
-} // namespace neo::cryptography
+}  // namespace neo::cryptography

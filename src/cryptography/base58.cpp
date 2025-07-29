@@ -197,7 +197,11 @@ bool Base58::IsValid(const std::string& str)
         Decode(str);
         return true;
     }
-    catch (...)
+    catch (const std::invalid_argument&)
+    {
+        return false;
+    }
+    catch (const std::runtime_error&)
     {
         return false;
     }
@@ -210,7 +214,11 @@ bool Base58::IsValidCheck(const std::string& str)
         DecodeCheck(str);
         return true;
     }
-    catch (...)
+    catch (const std::invalid_argument&)
+    {
+        return false;
+    }
+    catch (const std::runtime_error&)
     {
         return false;
     }

@@ -1,11 +1,11 @@
 // Disabled due to API mismatches - needs to be updated
 #include <gtest/gtest.h>
-#include <neo/smartcontract/native/fungible_token.h>
-#include <neo/smartcontract/application_engine.h>
-#include <neo/persistence/memory_store_view.h>
-#include <neo/io/uint160.h>
-#include <neo/vm/stack_item.h>
 #include <memory>
+#include <neo/io/uint160.h>
+#include <neo/persistence/memory_store_view.h>
+#include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/native/fungible_token.h>
+#include <neo/vm/stack_item.h>
 
 using namespace neo;
 using namespace neo::smartcontract;
@@ -17,11 +17,8 @@ using namespace neo::vm;
 // Mock FungibleToken implementation for testing
 class MockFungibleToken : public FungibleToken
 {
-public:
-    MockFungibleToken()
-        : FungibleToken("Mock", 100)
-    {
-    }
+  public:
+    MockFungibleToken() : FungibleToken("Mock", 100) {}
 
     std::string GetSymbol() const override
     {
@@ -42,7 +39,7 @@ public:
 
 class FungibleTokenTest : public ::testing::Test
 {
-protected:
+  protected:
     std::shared_ptr<MemoryStoreView> snapshot;
     std::shared_ptr<MockFungibleToken> token;
     std::shared_ptr<ApplicationEngine> engine;

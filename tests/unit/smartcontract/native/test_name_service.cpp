@@ -1,12 +1,12 @@
 // Disabled due to API mismatches - needs to be updated
 #include <gtest/gtest.h>
-#include <neo/smartcontract/native/name_service.h>
-#include <neo/smartcontract/application_engine.h>
-#include <neo/smartcontract/native/gas_token.h>
-#include <neo/smartcontract/native/neo_token.h>
-#include <neo/persistence/memory_store_view.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+#include <neo/persistence/memory_store_view.h>
+#include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/native/gas_token.h>
+#include <neo/smartcontract/native/name_service.h>
+#include <neo/smartcontract/native/neo_token.h>
 #include <sstream>
 
 using namespace neo::smartcontract::native;
@@ -17,7 +17,7 @@ using namespace neo::vm;
 
 class NameServiceTest : public ::testing::Test
 {
-protected:
+  protected:
     std::shared_ptr<MemoryStoreView> snapshot;
     std::shared_ptr<NameService> nameService;
     std::shared_ptr<smartcontract::ApplicationEngine> engine;
@@ -26,7 +26,8 @@ protected:
     {
         snapshot = std::make_shared<MemoryStoreView>();
         nameService = NameService::GetInstance();
-        engine = std::make_shared<smartcontract::ApplicationEngine>(smartcontract::TriggerType::Application, nullptr, snapshot, 0, false);
+        engine = std::make_shared<smartcontract::ApplicationEngine>(smartcontract::TriggerType::Application, nullptr,
+                                                                    snapshot, 0, false);
     }
 };
 

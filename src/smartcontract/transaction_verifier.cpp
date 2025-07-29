@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <chrono>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/ecpoint.h>
@@ -5,6 +6,7 @@
 #include <neo/io/binary_reader.h>
 #include <neo/io/json.h>
 #include <neo/io/memory_stream.h>
+#include <neo/ledger/signer.h>
 #include <neo/ledger/witness.h>
 #include <neo/logging/logger.h>
 #include <neo/protocol_settings.h>
@@ -13,9 +15,7 @@
 #include <neo/smartcontract/transaction_verifier.h>
 #include <neo/smartcontract/trigger_type.h>
 #include <neo/vm/vm_state.h>
-#include <algorithm>
 #include <sstream>
-#include <neo/ledger/signer.h>
 
 // Define LOG macros if not defined
 #ifndef LOG_DEBUG
@@ -176,26 +176,26 @@ static VerificationResult VerifyMultiSignatureContract(const ledger::Transaction
 {
     // Parse multi-signature parameters from verification script
     auto params = ParseMultiSignatureParams(witness.GetVerificationScript());
-    
+
     if (params.m <= 0 || params.m > params.n || params.n > 16)
     {
         return VerificationResult::InvalidSignature;
     }
-    
+
     // Verify that we have enough valid signatures
     try
     {
         io::MemoryStream stream(witness.GetInvocationScript());
         io::BinaryReader reader(stream);
-        
+
         int validSignatures = 0;
         std::vector<io::ByteVector> signatures;
-        
+
         // Read all signatures from invocation script
         while (stream.GetPosition() < stream.GetLength())
         {
             auto opcode = reader.ReadByte();
-            if (opcode == 0x40) // PUSHDATA1 with 64 bytes (signature)
+            if (opcode == 0x40)  // PUSHDATA1 with 64 bytes (signature)
             {
                 auto size = reader.ReadByte();
                 if (size == 64)
@@ -204,7 +204,7 @@ static VerificationResult VerifyMultiSignatureContract(const ledger::Transaction
                 }
             }
         }
-        
+
         // Verify each signature against public keys
         auto messageHash = transaction.GetHash();
         for (const auto& signature : signatures)
@@ -212,21 +212,19 @@ static VerificationResult VerifyMultiSignatureContract(const ledger::Transaction
             for (const auto& publicKey : params.publicKeys)
             {
                 auto hashBytes = messageHash.ToArray();
-                if (cryptography::Crypto::VerifySignature(
-                    io::ByteSpan(hashBytes.Data(), hashBytes.Size()), 
-                    io::ByteSpan(signature.Data(), signature.Size()), 
-                    publicKey))
+                if (cryptography::Crypto::VerifySignature(io::ByteSpan(hashBytes.Data(), hashBytes.Size()),
+                                                          io::ByteSpan(signature.Data(), signature.Size()), publicKey))
                 {
                     validSignatures++;
                     if (validSignatures >= params.m)
                     {
                         return VerificationResult::Succeed;
                     }
-                    break; // Move to next signature
+                    break;  // Move to next signature
                 }
             }
         }
-        
+
         return validSignatures >= params.m ? VerificationResult::Succeed : VerificationResult::InvalidSignature;
     }
     catch (const std::exception&)
@@ -243,21 +241,19 @@ static VerificationResult VerifyScriptContract(const ledger::Transaction& transa
     try
     {
         // Create application engine for script verification
-        auto engine = std::make_unique<ApplicationEngine>(
-            TriggerType::Verification,
-            nullptr, // No container for verification
-            context.snapshot
-        );
-        
+        auto engine = std::make_unique<ApplicationEngine>(TriggerType::Verification,
+                                                          nullptr,  // No container for verification
+                                                          context.snapshot);
+
         // Load invocation script first (parameters)
         engine->LoadScript(witness.GetInvocationScript());
-        
+
         // Load verification script (code)
         engine->LoadScript(witness.GetVerificationScript());
-        
+
         // Execute the scripts
         engine->Execute();
-        
+
         // Check if execution succeeded and returned true
         if (engine->GetState() == vm::VMState::Halt)
         {
@@ -267,7 +263,7 @@ static VerificationResult VerifyScriptContract(const ledger::Transaction& transa
                 return VerificationResult::Succeed;
             }
         }
-        
+
         return VerificationResult::InvalidSignature;
     }
     catch (const std::exception&)
@@ -280,55 +276,55 @@ static VerificationResult VerifyScriptContract(const ledger::Transaction& transa
 static MultiSigParams ParseMultiSignatureParams(const io::ByteVector& script)
 {
     MultiSigParams params{0, 0, {}};
-    
+
     try
     {
         io::MemoryStream stream(script);
         io::BinaryReader reader(stream);
-        
+
         // Read m (minimum signatures required)
         auto firstByte = reader.ReadByte();
-        if (firstByte >= 0x51 && firstByte <= 0x60) // PUSH1 to PUSH16
+        if (firstByte >= 0x51 && firstByte <= 0x60)  // PUSH1 to PUSH16
         {
             params.m = firstByte - 0x50;
         }
         else
         {
-            return params; // Invalid format
+            return params;  // Invalid format
         }
-        
+
         // Read public keys
-        while (stream.GetPosition() < stream.GetLength() - 2) // Leave room for n and CHECKMULTISIG
+        while (stream.GetPosition() < stream.GetLength() - 2)  // Leave room for n and CHECKMULTISIG
         {
             auto opcode = reader.ReadByte();
-            if (opcode == 0x21) // PUSHDATA1 with 33 bytes (compressed public key)
+            if (opcode == 0x21)  // PUSHDATA1 with 33 bytes (compressed public key)
             {
                 auto keyBytes = reader.ReadBytes(33);
                 // Create ECPoint from byte array
-                params.publicKeys.push_back(cryptography::ecc::ECPoint::FromBytes(
-                    io::ByteSpan(keyBytes.Data(), keyBytes.Size())));
+                params.publicKeys.push_back(
+                    cryptography::ecc::ECPoint::FromBytes(io::ByteSpan(keyBytes.Data(), keyBytes.Size())));
             }
             else
             {
                 break;
             }
         }
-        
+
         // Read n (total number of public keys)
         auto nByte = reader.ReadByte();
-        if (nByte >= 0x51 && nByte <= 0x60) // PUSH1 to PUSH16
+        if (nByte >= 0x51 && nByte <= 0x60)  // PUSH1 to PUSH16
         {
             params.n = nByte - 0x50;
         }
-        
+
         // Verify CHECKMULTISIG opcode
         auto lastByte = reader.ReadByte();
-        if (lastByte != 0xBB) // CHECKMULTISIG
+        if (lastByte != 0xBB)  // CHECKMULTISIG
         {
             params.m = params.n = 0;
             params.publicKeys.clear();
         }
-        
+
         // Validate parameters
         if (params.n != static_cast<int>(params.publicKeys.size()))
         {
@@ -341,7 +337,7 @@ static MultiSigParams ParseMultiSignatureParams(const io::ByteVector& script)
         params.m = params.n = 0;
         params.publicKeys.clear();
     }
-    
+
     return params;
 }
 
@@ -352,15 +348,15 @@ static bool VerifyWitnessScope(const ledger::Transaction& transaction, const io:
     // Neo N3 transaction witness scope verification
     // This checks the actual witness scopes for Neo N3
     const auto& signers = transaction.GetSigners();
-    
+
     // Check if signer is in the transaction
-    auto signerIt = std::find_if(signers.begin(), signers.end(), 
+    auto signerIt = std::find_if(signers.begin(), signers.end(),
                                  [&signer](const ledger::Signer& s) { return s.GetAccount() == signer; });
     if (signerIt == signers.end())
     {
-        return false; // Signer not found
+        return false;  // Signer not found
     }
-    
+
     // For Neo2 compatibility, assume global scope for all signers
     return true;
 }
@@ -1139,9 +1135,31 @@ VerificationResult TransactionVerifier::VerifyTransactionWitness(const ledger::T
                 const auto& witness = witnesses[i];
 
                 // Verify witness signature matches signer account
-                // TODO: Verify witness signature for specific signer
-                // For now, just succeed
-                auto verification_result = VerificationResult::Succeed;
+                auto script_hash = witness.VerificationScript.ScriptHash();
+                bool signature_valid = false;
+
+                try
+                {
+                    // Verify the witness signature using crypto verification
+                    std::vector<uint8_t> verification_data;
+                    verification_data.insert(verification_data.end(), tx.Hash().begin(), tx.Hash().end());
+
+                    // Execute verification script with invocation script
+                    vm::ExecutionContext ctx;
+                    ctx.LoadScript(witness.InvocationScript);
+                    ctx.LoadScript(witness.VerificationScript);
+
+                    // Execute and check result
+                    auto result = ctx.Execute();
+                    signature_valid = (result.State == vm::VMState::Halt && !result.EvaluationStack.empty() &&
+                                       result.EvaluationStack.top()->IsTrue());
+                }
+                catch (const std::exception& e)
+                {
+                    signature_valid = false;
+                }
+
+                auto verification_result = signature_valid ? VerificationResult::Succeed : VerificationResult::Fail;
                 if (verification_result != VerificationResult::Succeed)
                 {
                     neo::logging::Logger::GetDefault().Error("Witness verification failed for signer {}",

@@ -178,59 +178,61 @@ std::shared_ptr<vm::StackItem> OracleContract::OnFinish(ApplicationEngine& engin
                                                         const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     // Oracle finish implementation based on C# reference
-    if (engine.GetInvocationStack().size() != 2) {
+    if (engine.GetInvocationStack().size() != 2)
+    {
         throw std::invalid_argument("Invalid invocation stack size");
     }
-    
-    if (engine.GetInvocationCounter() != 1) {
+
+    if (engine.GetInvocationCounter() != 1)
+    {
         throw std::invalid_argument("Invalid invocation counter");
     }
-    
+
     // Get the transaction from script container
     auto* tx = dynamic_cast<ledger::Transaction*>(engine.GetScriptContainer());
-    if (!tx) {
+    if (!tx)
+    {
         throw std::invalid_argument("Invalid script container");
     }
-    
+
     // Get oracle response attribute
     ledger::OracleResponse* response = nullptr;
-    for (const auto& attr : tx->GetAttributes()) {
-        if (auto oracle_attr = dynamic_cast<ledger::OracleResponse*>(attr.get())) {
+    for (const auto& attr : tx->GetAttributes())
+    {
+        if (auto oracle_attr = dynamic_cast<ledger::OracleResponse*>(attr.get()))
+        {
             response = oracle_attr;
             break;
         }
     }
-    
-    if (!response) {
+
+    if (!response)
+    {
         throw std::invalid_argument("Oracle response not found");
     }
-    
+
     // Get the original request
     auto request = GetRequest(engine.GetSnapshotCache(), response->GetId());
-    if (!request) {
+    if (!request)
+    {
         throw std::invalid_argument("Oracle request not found");
     }
-    
+
     // Send notification
     std::vector<std::shared_ptr<vm::StackItem>> notification_args;
     notification_args.push_back(vm::StackItem::Create(response->GetId()));
     notification_args.push_back(vm::StackItem::Create(request->GetOriginalTxid().ToByteVector()));
-    
+
     engine.SendNotification(GetHash(), "OracleResponse", notification_args);
-    
+
     // Deserialize user data
-    auto userData = BinarySerializer::Deserialize(request->GetUserData(), engine.GetLimits(), engine.GetReferenceCounter());
-    
+    auto userData =
+        BinarySerializer::Deserialize(request->GetUserData(), engine.GetLimits(), engine.GetReferenceCounter());
+
     // Call the callback contract
-    return engine.CallFromNativeContractAsync(
-        GetHash(),
-        request->GetCallbackContract(),
-        request->GetCallbackMethod(),
-        request->GetUrl(),
-        userData,
-        static_cast<int>(response->GetCode()),
-        response->GetResult()
-    );
+    return engine.CallFromNativeContractAsync(GetHash(), request->GetCallbackContract(), request->GetCallbackMethod(),
+                                              request->GetUrl(), userData, static_cast<int>(response->GetCode()),
+                                              response->GetResult());
 }
 
 std::shared_ptr<vm::StackItem> OracleContract::OnVerify(ApplicationEngine& engine,
@@ -238,29 +240,34 @@ std::shared_ptr<vm::StackItem> OracleContract::OnVerify(ApplicationEngine& engin
 {
     // Oracle verification: check if the transaction has a valid oracle response
     auto* tx = dynamic_cast<ledger::Transaction*>(engine.GetScriptContainer());
-    if (!tx) {
+    if (!tx)
+    {
         return vm::StackItem::Create(false);
     }
-    
+
     // Check for oracle response attribute
     ledger::OracleResponse* response = nullptr;
-    for (const auto& attr : tx->GetAttributes()) {
-        if (auto oracle_attr = dynamic_cast<ledger::OracleResponse*>(attr.get())) {
+    for (const auto& attr : tx->GetAttributes())
+    {
+        if (auto oracle_attr = dynamic_cast<ledger::OracleResponse*>(attr.get()))
+        {
             response = oracle_attr;
             break;
         }
     }
-    
-    if (!response) {
+
+    if (!response)
+    {
         return vm::StackItem::Create(false);
     }
-    
+
     // Verify the request exists and is valid
     auto request = GetRequest(engine.GetSnapshotCache(), response->GetId());
-    if (!request) {
+    if (!request)
+    {
         return vm::StackItem::Create(false);
     }
-    
+
     // Check if the response is from a designated oracle node
     // This would normally check role management for oracle designation
     // For now, we'll accept any properly formed response
@@ -323,7 +330,7 @@ io::UInt256 OracleContract::GetOriginalTxid(ApplicationEngine& engine) const
             }
         }
     }
-    
+
     // No Oracle response attribute found, return the current transaction hash
     return tx->GetHash();
 }

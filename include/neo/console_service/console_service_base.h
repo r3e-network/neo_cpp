@@ -122,6 +122,20 @@ class ConsoleServiceBase
      */
     void OnExit();
 
+#ifdef _WIN32
+    /**
+     * @brief Installs the service as a Windows service.
+     * @return True if installation was successful.
+     */
+    bool InstallWindowsService();
+
+    /**
+     * @brief Uninstalls the Windows service.
+     * @return True if uninstallation was successful.
+     */
+    bool UninstallWindowsService();
+#endif
+
   private:
     static constexpr int HistorySize = 100;
 

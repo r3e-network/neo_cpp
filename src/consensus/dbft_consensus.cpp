@@ -884,17 +884,10 @@ io::ByteVector DbftConsensus::CreateConsensusVerificationScript()
         }
         else
         {
-            // Fallback: create a placeholder key based on the hash
-            // This should not happen in normal operation
-            std::vector<uint8_t> placeholder_bytes(33, 0x02);  // Compressed point prefix
-            std::memcpy(placeholder_bytes.data() + 1, validator_id.Data(), 20);
-            // Fill remaining bytes with pattern based on validator ID
-            for (size_t i = 21; i < 33; i++)
-            {
-                placeholder_bytes[i] = validator_id.Data()[(i - 21) % 20];
-            }
-            io::ByteVector placeholder(placeholder_bytes.data(), placeholder_bytes.size());
-            builder.EmitPush(io::ByteSpan(placeholder.Data(), placeholder.Size()));
+            // Validator public key not found in cache
+            // Log error and throw exception as this is critical for consensus
+            LOG_ERROR("Validator public key not found for ID: {}", validator_id.ToString());
+            throw std::runtime_error("Missing validator public key for consensus multi-signature script");
         }
     }
 
@@ -1119,15 +1112,10 @@ io::UInt160 DbftConsensus::CalculateNextConsensus()
             }
             else
             {
-                // Fallback: use placeholder based on validator ID
-                std::vector<uint8_t> placeholder_bytes(33, 0x02);
-                std::memcpy(placeholder_bytes.data() + 1, validator_id.Data(), 20);
-                for (size_t i = 21; i < 33; i++)
-                {
-                    placeholder_bytes[i] = validator_id.Data()[(i - 21) % 20];
-                }
-                io::ByteVector placeholder(placeholder_bytes.data(), placeholder_bytes.size());
-                builder.EmitPush(io::ByteSpan(placeholder.Data(), placeholder.Size()));
+                // Missing validator public key - this is a critical error
+                LOG_ERROR("Validator public key not found for ID: {} in consensus script generation",
+                          validator_id.ToString());
+                throw std::runtime_error("Missing validator public key for consensus script");
             }
         }
 

@@ -155,6 +155,22 @@ JumpTable::JumpTable()
                [this](ExecutionEngine& engine, const Instruction& instruction) { MAX(engine, instruction); });
     SetHandler(OpCode::WITHIN,
                [this](ExecutionEngine& engine, const Instruction& instruction) { WITHIN(engine, instruction); });
+    SetHandler(OpCode::SIGN,
+               [this](ExecutionEngine& engine, const Instruction& instruction) { SIGN(engine, instruction); });
+    SetHandler(OpCode::ABS,
+               [this](ExecutionEngine& engine, const Instruction& instruction) { ABS(engine, instruction); });
+    SetHandler(OpCode::NEGATE,
+               [this](ExecutionEngine& engine, const Instruction& instruction) { NEGATE(engine, instruction); });
+    SetHandler(OpCode::INC,
+               [this](ExecutionEngine& engine, const Instruction& instruction) { INC(engine, instruction); });
+    SetHandler(OpCode::DEC,
+               [this](ExecutionEngine& engine, const Instruction& instruction) { DEC(engine, instruction); });
+    SetHandler(OpCode::NZ,
+               [this](ExecutionEngine& engine, const Instruction& instruction) { NZ(engine, instruction); });
+    SetHandler(OpCode::MODMUL,
+               [this](ExecutionEngine& engine, const Instruction& instruction) { MODMUL(engine, instruction); });
+    SetHandler(OpCode::MODPOW,
+               [this](ExecutionEngine& engine, const Instruction& instruction) { MODPOW(engine, instruction); });
 
     // Compound type operations
     SetHandler(OpCode::PACK, JumpTableCompound::PACK);

@@ -1,24 +1,27 @@
 #include <gtest/gtest.h>
-#include <neo/neo/extensions/neotokenextensions.h>
 #include <memory>
+#include <neo/neo/extensions/neotokenextensions.h>
 #include <vector>
 
 using namespace neo;
 
 class NeotokenextensionsTest : public testing::Test
 {
-protected:
-    void SetUp() override {
+  protected:
+    void SetUp() override
+    {
         // Initialize test environment
     }
 
-    void TearDown() override {
+    void TearDown() override
+    {
         // Clean up test environment
     }
 };
 
 // Basic construction test
-TEST_F(NeotokenextensionsTest, Construction) {
+TEST_F(NeotokenextensionsTest, Construction)
+{
     // Test default construction if applicable
     EXPECT_NO_THROW({
         // Add construction test based on class type
@@ -26,7 +29,8 @@ TEST_F(NeotokenextensionsTest, Construction) {
 }
 
 // Add more tests based on the specific class functionality
-TEST_F(NeotokenextensionsTest, BasicFunctionality) {
+TEST_F(NeotokenextensionsTest, BasicFunctionality)
+{
     // Implement basic functionality tests
     SUCCEED() << "Implement specific tests for Neotokenextensions";
 }

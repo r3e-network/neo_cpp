@@ -4,8 +4,8 @@
 
 namespace neo::ledger
 {
-// Temporary alias to facilitate migration from old Transaction to Neo3Transaction
-// This allows us to update the codebase incrementally
+// Type alias for Neo3 transaction compatibility
+// This maintains backward compatibility while using the Neo3 transaction structure
 using Transaction = network::p2p::payloads::Neo3Transaction;
 
 // Also bring in the inventory and verifiable interfaces

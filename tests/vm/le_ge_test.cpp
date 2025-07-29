@@ -1,8 +1,8 @@
+#include <iostream>
+#include <neo/vm/execution_engine.h>
 #include <neo/vm/opcode.h>
 #include <neo/vm/script_builder.h>
-#include <neo/vm/execution_engine.h>
 #include <neo/vm/stack_item.h>
-#include <iostream>
 
 using namespace neo::vm;
 
@@ -13,7 +13,7 @@ int main()
         ScriptBuilder builder;
         builder.EmitPush(static_cast<int64_t>(10));  // Push 10
         builder.EmitPush(static_cast<int64_t>(5));   // Push 5
-        builder.Emit(OpCode::LE);  // 10 <= 5 should be false
+        builder.Emit(OpCode::LE);                    // 10 <= 5 should be false
 
         ExecutionEngine engine;
         auto script = builder.ToScript();
@@ -41,7 +41,7 @@ int main()
         ScriptBuilder builder;
         builder.EmitPush(static_cast<int64_t>(5));  // Push 5
         builder.EmitPush(static_cast<int64_t>(5));  // Push 5
-        builder.Emit(OpCode::LE);  // 5 <= 5 should be true
+        builder.Emit(OpCode::LE);                   // 5 <= 5 should be true
 
         ExecutionEngine engine;
         auto script = builder.ToScript();
@@ -69,7 +69,7 @@ int main()
         ScriptBuilder builder;
         builder.EmitPush(static_cast<int64_t>(5));   // Push 5
         builder.EmitPush(static_cast<int64_t>(10));  // Push 10
-        builder.Emit(OpCode::GE);  // 5 >= 10 should be false
+        builder.Emit(OpCode::GE);                    // 5 >= 10 should be false
 
         ExecutionEngine engine;
         auto script = builder.ToScript();
@@ -97,7 +97,7 @@ int main()
         ScriptBuilder builder;
         builder.EmitPush(static_cast<int64_t>(5));  // Push 5
         builder.EmitPush(static_cast<int64_t>(5));  // Push 5
-        builder.Emit(OpCode::GE);  // 5 >= 5 should be true
+        builder.Emit(OpCode::GE);                   // 5 >= 5 should be true
 
         ExecutionEngine engine;
         auto script = builder.ToScript();

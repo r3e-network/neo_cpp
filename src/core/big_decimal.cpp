@@ -189,7 +189,11 @@ std::optional<BigDecimal> BigDecimal::try_parse(const std::string& s, uint8_t de
             exponent = std::stoi(match[2].str());
             input = match[1].str();
         }
-        catch (...)
+        catch (const std::invalid_argument&)
+        {
+            return std::nullopt;
+        }
+        catch (const std::out_of_range&)
         {
             return std::nullopt;
         }
@@ -232,7 +236,11 @@ std::optional<BigDecimal> BigDecimal::try_parse(const std::string& s, uint8_t de
         BigInteger value(input);
         return BigDecimal(value, decimals);
     }
-    catch (...)
+    catch (const std::invalid_argument&)
+    {
+        return std::nullopt;
+    }
+    catch (const std::runtime_error&)
     {
         return std::nullopt;
     }

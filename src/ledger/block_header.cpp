@@ -187,7 +187,11 @@ bool BlockHeader::VerifyWitness() const
         // Verify the multi-signature
         return VerifyMultiSignatureWitness(witness_);
     }
-    catch (...)
+    catch (const std::runtime_error&)
+    {
+        return false;
+    }
+    catch (const std::invalid_argument&)
     {
         return false;
     }
@@ -372,7 +376,15 @@ bool BlockHeader::VerifyMultiSignatureWitness(const Witness& witness) const
 
         return validSignatures >= m;
     }
-    catch (...)
+    catch (const std::runtime_error&)
+    {
+        return false;
+    }
+    catch (const std::invalid_argument&)
+    {
+        return false;
+    }
+    catch (const std::out_of_range&)
     {
         return false;
     }

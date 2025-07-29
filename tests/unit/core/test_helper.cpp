@@ -12,25 +12,30 @@
 #ifndef TESTS_UNIT_CORE_TEST_HELPER_CPP_H
 #define TESTS_UNIT_CORE_TEST_HELPER_CPP_H
 
-#include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 // Include the class under test
 #include <neo/core/helper.h>
 
-namespace neo {
-namespace test {
+namespace neo
+{
+namespace test
+{
 
-class HelperTest : public ::testing::Test {
-protected:
-    void SetUp() override {
+class HelperTest : public ::testing::Test
+{
+  protected:
+    void SetUp() override
+    {
         // Set up test fixtures for Helper testing
         test_data = io::ByteVector::Parse("0102030405060708");
         empty_data = io::ByteVector();
         large_data = io::ByteVector::Parse("0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
     }
 
-    void TearDown() override {
+    void TearDown() override
+    {
         // Clean up test fixtures - ByteVector manages its own memory
     }
 
@@ -42,41 +47,47 @@ protected:
 
 // Helper test methods converted from C# UT_Helper.cs functionality
 
-TEST_F(HelperTest, ReverseHexString) {
+TEST_F(HelperTest, ReverseHexString)
+{
     std::string hex_input = "0102030405060708";
     std::string expected = "0807060504030201";
     std::string result = Helper::ReverseHex(hex_input);
     EXPECT_EQ(result, expected);
 }
 
-TEST_F(HelperTest, ByteArrayToHexString) {
+TEST_F(HelperTest, ByteArrayToHexString)
+{
     std::string expected = "0102030405060708";
     std::string result = Helper::ToHexString(test_data);
     EXPECT_EQ(result, expected);
 }
 
-TEST_F(HelperTest, EmptyByteArrayToHexString) {
+TEST_F(HelperTest, EmptyByteArrayToHexString)
+{
     std::string result = Helper::ToHexString(empty_data);
     EXPECT_EQ(result, "");
 }
 
-TEST_F(HelperTest, HexStringToByteArray) {
+TEST_F(HelperTest, HexStringToByteArray)
+{
     std::string hex_input = "0102030405060708";
     auto result = Helper::FromHexString(hex_input);
     EXPECT_EQ(result, test_data);
 }
 
-TEST_F(HelperTest, ComputeHash160) {
+TEST_F(HelperTest, ComputeHash160)
+{
     auto hash = Helper::Hash160(test_data);
-    EXPECT_EQ(hash.Size(), 20); // Hash160 should be 20 bytes
+    EXPECT_EQ(hash.Size(), 20);  // Hash160 should be 20 bytes
 }
 
-TEST_F(HelperTest, ComputeHash256) {
+TEST_F(HelperTest, ComputeHash256)
+{
     auto hash = Helper::Hash256(test_data);
-    EXPECT_EQ(hash.Size(), 32); // Hash256 should be 32 bytes
+    EXPECT_EQ(hash.Size(), 32);  // Hash256 should be 32 bytes
 }
 
-} // namespace test
-} // namespace neo
+}  // namespace test
+}  // namespace neo
 
-#endif // TESTS_UNIT_CORE_TEST_HELPER_CPP_H
+#endif  // TESTS_UNIT_CORE_TEST_HELPER_CPP_H

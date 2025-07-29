@@ -384,7 +384,7 @@ class PolicyContract : public NativeContract
      * @return True if the committee witness is present, false otherwise.
      */
     bool CheckCommittee(ApplicationEngine& engine) const;
-    
+
     /**
      * @brief Checks if the given script hash belongs to a native contract.
      * @param scriptHash The script hash to check.

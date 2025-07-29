@@ -1,14 +1,14 @@
 // Disabled due to API mismatches - needs to be updated
 #include <gtest/gtest.h>
-#include <neo/smartcontract/native/role_management.h>
-#include <neo/smartcontract/native/neo_token.h>
-#include <neo/smartcontract/application_engine.h>
-#include <neo/persistence/memory_store_view.h>
+#include <memory>
 #include <neo/cryptography/ecc/ecpoint.h>
-#include <neo/vm/stack_item.h>
 #include <neo/ledger/block.h>
 #include <neo/ledger/header.h>
-#include <memory>
+#include <neo/persistence/memory_store_view.h>
+#include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/native/neo_token.h>
+#include <neo/smartcontract/native/role_management.h>
+#include <neo/vm/stack_item.h>
 #include <vector>
 
 using namespace neo;
@@ -21,7 +21,7 @@ using namespace neo::ledger;
 
 class RoleManagementTest : public ::testing::Test
 {
-protected:
+  protected:
     std::shared_ptr<MemoryStoreView> snapshot;
     std::shared_ptr<RoleManagement> roleManagement;
     std::shared_ptr<NeoToken> neoToken;
@@ -166,9 +166,9 @@ TEST_F(RoleManagementTest, TestOnDesignateAsRoleWithEchidnaHardfork)
 
     // Track notifications
     std::vector<std::tuple<io::UInt160, std::string, std::shared_ptr<StackItem>>> notifications;
-    engine.SetNotificationCallback([&notifications](const io::UInt160& scriptHash, const std::string& eventName, const std::shared_ptr<StackItem>& state) {
-        notifications.emplace_back(scriptHash, eventName, state);
-    });
+    engine.SetNotificationCallback([&notifications](const io::UInt160& scriptHash, const std::string& eventName,
+                                                    const std::shared_ptr<StackItem>& state)
+                                   { notifications.emplace_back(scriptHash, eventName, state); });
 
     // Call OnDesignateAsRole
     auto result = roleManagement->Call(engine, "designateAsRole", args);
@@ -184,7 +184,7 @@ TEST_F(RoleManagementTest, TestOnDesignateAsRoleWithEchidnaHardfork)
     auto state = std::get<2>(notifications[0]);
     ASSERT_TRUE(state->IsArray());
     auto stateArray = state->GetArray();
-    ASSERT_EQ(stateArray.size(), 4); // role, index, oldNodes, newNodes
+    ASSERT_EQ(stateArray.size(), 4);  // role, index, oldNodes, newNodes
 
     // Check role
     ASSERT_TRUE(stateArray[0]->IsInteger());

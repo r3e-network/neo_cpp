@@ -176,12 +176,12 @@ bool StorageGetContext(ApplicationEngine& engine)
     {
         // Get the calling script hash
         auto scriptHash = engine.GetCallingScriptHash();
-        
+
         // Create storage context as script hash bytes
         io::ByteVector contextBytes;
         contextBytes.insert(contextBytes.end(), scriptHash.Data(), scriptHash.Data() + 20);
         engine.Push(vm::StackItem::Create(contextBytes));
-        
+
         return true;
     }
     catch (const std::exception&)

@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
-#include <neo/ledger/block.h>
-#include <neo/ledger/transaction.h>
+#include <memory>
+#include <neo/cryptography/hash.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
-#include <neo/cryptography/hash.h>
-#include <memory>
+#include <neo/ledger/block.h>
+#include <neo/ledger/transaction.h>
 
 using namespace neo::ledger;
 using namespace neo::io;
@@ -52,7 +52,8 @@ TEST(LedgerJsonSerializationTest, CoinReferenceSerializeDeserialize)
     deserialized.DeserializeFromJson(json);
 
     // Verify deserialized values
-    EXPECT_EQ(deserialized.GetPrevHash().ToHexString(), "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    EXPECT_EQ(deserialized.GetPrevHash().ToHexString(),
+              "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
     EXPECT_EQ(deserialized.GetPrevIndex(), 123);
 }
 
@@ -77,7 +78,8 @@ TEST(LedgerJsonSerializationTest, TransactionOutputSerializeDeserialize)
     deserialized.DeserializeFromJson(json);
 
     // Verify deserialized values
-    EXPECT_EQ(deserialized.GetAssetId().ToHexString(), "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    EXPECT_EQ(deserialized.GetAssetId().ToHexString(),
+              "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
     EXPECT_EQ(deserialized.GetValue().ToString(), "123.45");
     EXPECT_EQ(deserialized.GetScriptHash().ToHexString(), "0123456789ABCDEF0123456789ABCDEF01234567");
 }
@@ -203,7 +205,8 @@ TEST(LedgerJsonSerializationTest, BlockSerializeDeserialize)
 
     // Verify deserialized values
     EXPECT_EQ(deserialized.GetVersion(), 0);
-    EXPECT_EQ(deserialized.GetPrevHash().ToHexString(), "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    EXPECT_EQ(deserialized.GetPrevHash().ToHexString(),
+              "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
     EXPECT_EQ(deserialized.GetTimestamp(), 1234567890);
     EXPECT_EQ(deserialized.GetIndex(), 123);
     EXPECT_EQ(deserialized.GetTransactions().size(), 1);

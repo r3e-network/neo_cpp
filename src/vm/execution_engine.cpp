@@ -359,7 +359,26 @@ void ExecutionEngine::ExecuteNext()
 
         jumping_ = false;
     }
-    // Catch all exceptions, not just std::exception
+    catch (const std::runtime_error& e)
+    {
+        // Set the state to fault on runtime errors
+        OnFault();
+    }
+    catch (const std::invalid_argument& e)
+    {
+        // Set the state to fault on invalid arguments
+        OnFault();
+    }
+    catch (const std::out_of_range& e)
+    {
+        // Set the state to fault on out of range errors
+        OnFault();
+    }
+    catch (const std::exception& e)
+    {
+        // Set the state to fault on standard exceptions
+        OnFault();
+    }
     catch (...)
     {
         // Set the state to fault on any unhandled exception
@@ -430,6 +449,11 @@ void ExecutionEngine::OnFault(std::exception_ptr ex)
         {
             // Create a ByteString with the exception message
             uncaughtException_ = StackItem::Create(e.what());
+        }
+        catch (const std::bad_alloc&)
+        {
+            // Create a ByteString for memory allocation failures
+            uncaughtException_ = StackItem::Create("Out of memory");
         }
         catch (...)
         {

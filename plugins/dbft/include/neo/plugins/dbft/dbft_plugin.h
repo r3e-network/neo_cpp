@@ -2,12 +2,16 @@
 
 #include <neo/core/plugin.h>
 
-namespace neo {
-namespace plugins {
-namespace dbft {
+namespace neo
+{
+namespace plugins
+{
+namespace dbft
+{
 
-class DbftPlugin : public core::Plugin {
-public:
+class DbftPlugin : public core::Plugin
+{
+  public:
     DbftPlugin();
     ~DbftPlugin() override;
 
@@ -15,6 +19,6 @@ public:
     void OnStop() override;
 };
 
-} // namespace dbft
-} // namespace plugins
-} // namespace neo
+}  // namespace dbft
+}  // namespace plugins
+}  // namespace neo

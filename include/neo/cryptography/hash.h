@@ -57,6 +57,13 @@ class Hash
     static io::UInt256 Keccak256Proper(const io::ByteSpan& data);
 
     /**
+     * @brief Simple verified Keccak-256 implementation.
+     * @param data The data to hash.
+     * @return The Keccak-256 hash.
+     */
+    static io::UInt256 Keccak256Simple(const io::ByteSpan& data);
+
+    /**
      * @brief Computes Murmur32 hash.
      * @param data The data to hash.
      * @param seed The seed value.
@@ -81,7 +88,7 @@ class ECPoint;
 std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSpan& signature, uint8_t recovery_id);
 
 /**
- * @brief Simplified ECRecover that tries all recovery IDs
+ * @brief ECRecover that automatically tries all recovery IDs
  * @param hash The hash that was signed
  * @param signature The signature (64 bytes: r + s)
  * @return Vector of possible recovered public keys

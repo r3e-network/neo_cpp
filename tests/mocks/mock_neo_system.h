@@ -1,12 +1,14 @@
 #pragma once
 
-#include <gmock/gmock.h>
 #include "neo/node/neo_system.h"
+#include <gmock/gmock.h>
 
-namespace neo::tests {
+namespace neo::tests
+{
 
-class MockNeoSystem : public node::NeoSystem {
-public:
+class MockNeoSystem : public node::NeoSystem
+{
+  public:
     MOCK_METHOD(std::shared_ptr<ProtocolSettings>, GetSettings, (), (const, override));
     MOCK_METHOD(std::shared_ptr<ledger::Blockchain>, GetBlockchain, (), (const, override));
     MOCK_METHOD(std::shared_ptr<ledger::MemoryPool>, GetMemoryPool, (), (const, override));
@@ -17,4 +19,4 @@ public:
     MOCK_METHOD(bool, IsRunning, (), (const, override));
 };
 
-} // namespace neo::tests
+}  // namespace neo::tests

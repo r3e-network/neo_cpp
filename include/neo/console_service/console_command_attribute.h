@@ -5,7 +5,8 @@
 namespace neo::console_service
 {
 /**
- * @brief Attribute for console commands (placeholder).
+ * @brief Attribute for console commands.
+ * Stores metadata about a console command including its name, category, and description.
  */
 class ConsoleCommandAttribute
 {

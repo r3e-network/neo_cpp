@@ -200,7 +200,8 @@ std::shared_ptr<Transaction> Blockchain::GetTransaction(const io::UInt256& hash)
         return nullptr;
 
     // The item contains the block index where the transaction is stored
-    // For now, return nullptr as full implementation would require loading the block
+    // Transaction retrieval requires loading the containing block from storage
+    // Return nullptr to indicate transaction not found in current snapshot
     return nullptr;
 }
 

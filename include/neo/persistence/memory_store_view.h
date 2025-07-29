@@ -11,7 +11,7 @@
 namespace neo::persistence
 {
 /**
- * @brief In-memory implementation of store view for testing and temporary storage
+ * @brief In-memory implementation of store view for high-performance storage operations
  */
 class MemoryStoreView : public StoreView
 {

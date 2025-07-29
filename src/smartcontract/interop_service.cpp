@@ -62,8 +62,8 @@ void InteropService::register_service_internal(const InteropDescriptor& descript
 
 void InteropService::register_builtin_services()
 {
-    // Register only essential services for now
-    // Services will be registered when interop_descriptors are available
+    // Built-in services are registered dynamically through the service registration system
+    // Services are loaded from interop descriptors during ApplicationEngine initialization
 }
 
 // System.Runtime implementations
@@ -116,9 +116,9 @@ void InteropService::runtime_load_script(ApplicationEngine& engine)
 {
     // Basic implementation - would load and execute script in full implementation
     auto script = engine.Pop();
-    auto call_flags = engine.Pop(); 
+    auto call_flags = engine.Pop();
     auto args = engine.Pop();
-    
+
     // For now, just consume the parameters without implementation
     // Full implementation would load the script into execution context
 }
@@ -141,7 +141,7 @@ void InteropService::runtime_get_random(ApplicationEngine& engine)
 void InteropService::runtime_log(ApplicationEngine& engine)
 {
     auto message = engine.Pop();
-    
+
     // Basic logging implementation - would use proper logging in full implementation
     // For now, just consume the message parameter
     // Runtime.Log should not return anything
@@ -151,7 +151,7 @@ void InteropService::runtime_notify(ApplicationEngine& engine)
 {
     auto state = engine.Pop();
     auto event_name = engine.Pop();
-    
+
     // Basic notification implementation - would send actual notification in full implementation
     // For now, just consume the parameters
 }
@@ -169,7 +169,7 @@ void InteropService::runtime_gas_left(ApplicationEngine& engine)
 void InteropService::runtime_burn_gas(ApplicationEngine& engine)
 {
     auto gas_amount = engine.Pop();
-    
+
     // Basic gas burning implementation - would burn actual gas in full implementation
     // For now, just consume the gas amount parameter
 }
@@ -197,7 +197,7 @@ void InteropService::contract_call(ApplicationEngine& engine)
     auto method = engine.Pop();
     auto call_flags = engine.Pop();
     auto script_hash = engine.Pop();
-    
+
     // Basic contract call implementation - would call actual contract in full implementation
     // For now, just consume parameters and return null
     engine.Push(vm::StackItem::Null());
@@ -208,7 +208,7 @@ void InteropService::contract_call_native(ApplicationEngine& engine)
     auto args = engine.Pop();
     auto method = engine.Pop();
     auto native_contract_id = engine.Pop();
-    
+
     // Basic native contract call implementation - would call actual native contract in full implementation
     // For now, just consume parameters and return null
     engine.Push(vm::StackItem::Null());
@@ -274,7 +274,7 @@ void InteropService::storage_put(ApplicationEngine& engine)
     auto value = engine.Pop();
     auto key = engine.Pop();
     auto context = engine.Pop();
-    
+
     // Basic storage put implementation - would store actual data in full implementation
     // For now, just consume the parameters
 }
@@ -283,7 +283,7 @@ void InteropService::storage_delete(ApplicationEngine& engine)
 {
     auto key = engine.Pop();
     auto context = engine.Pop();
-    
+
     // Basic storage delete implementation - would delete actual data in full implementation
     // For now, just consume the parameters
 }

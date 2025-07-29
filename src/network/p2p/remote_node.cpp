@@ -311,13 +311,13 @@ void RemoteNode::OnMessageReceived(const Message& message)
             break;
         // Handle additional P2P message types for complete protocol support
         case MessageCommand::GetAddr:
-            // ProcessGetAddrMessage(message); // Not implemented yet
+            ProcessGetAddrMessage(message);
             break;
         case MessageCommand::Reject:
-            // ProcessRejectMessage(message); // Not implemented yet
+            ProcessRejectMessage(message);
             break;
         case MessageCommand::NotFound:
-            // ProcessNotFoundMessage(message); // Not implemented yet
+            ProcessNotFoundMessage(message);
             break;
         default:
             // Log unhandled message types for debugging
@@ -634,4 +634,58 @@ void RemoteNode::ProcessFilterLoadMessage(const Message& message)
         localNode_->OnFilterLoadMessageReceived(this, *payload);
     }
 }
+
+void RemoteNode::ProcessGetAddrMessage(const Message& message)
+{
+    // Only process getaddr message if we've handshaked
+    if (!handshaked_)
+        return;
+
+    // GetAddr message has no payload, just respond with addr message
+    // containing known peer addresses
+    if (localNode_)
+    {
+        localNode_->OnGetAddrMessageReceived(this);
+    }
+}
+
+void RemoteNode::ProcessRejectMessage(const Message& message)
+{
+    // Only process reject message if we've handshaked
+    if (!handshaked_)
+        return;
+
+    // Get the reject payload
+    auto payload = std::dynamic_pointer_cast<payloads::RejectPayload>(message.GetPayload());
+    if (!payload)
+        return;
+
+    // Log the rejection for debugging
+    LOG_WARNING("RemoteNode received reject message: {}", payload->GetReason());
+
+    // Notify the local node that we've received a reject message
+    if (localNode_)
+    {
+        localNode_->OnRejectMessageReceived(this, *payload);
+    }
+}
+
+void RemoteNode::ProcessNotFoundMessage(const Message& message)
+{
+    // Only process notfound message if we've handshaked
+    if (!handshaked_)
+        return;
+
+    // Get the notfound payload (similar to inv payload)
+    auto payload = std::dynamic_pointer_cast<payloads::InvPayload>(message.GetPayload());
+    if (!payload)
+        return;
+
+    // Notify the local node that we've received a notfound message
+    if (localNode_)
+    {
+        localNode_->OnNotFoundMessageReceived(this, *payload);
+    }
+}
+
 }  // namespace neo::network::p2p

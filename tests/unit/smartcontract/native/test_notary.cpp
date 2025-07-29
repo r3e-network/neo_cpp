@@ -1,18 +1,18 @@
 // Disabled due to API mismatches - needs to be updated
 #include <gtest/gtest.h>
-#include <neo/smartcontract/native/notary.h>
-#include <neo/smartcontract/native/gas_token.h>
-#include <neo/smartcontract/native/neo_token.h>
-#include <neo/smartcontract/native/policy_contract.h>
-#include <neo/smartcontract/native/ledger_contract.h>
-#include <neo/smartcontract/application_engine.h>
-#include <neo/persistence/memory_store_view.h>
+#include <memory>
+#include <neo/io/uint160.h>
+#include <neo/network/payloads/notary_assisted.h>
 #include <neo/network/payloads/transaction.h>
 #include <neo/network/payloads/transaction_attribute.h>
-#include <neo/network/payloads/notary_assisted.h>
-#include <neo/io/uint160.h>
+#include <neo/persistence/memory_store_view.h>
+#include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/native/gas_token.h>
+#include <neo/smartcontract/native/ledger_contract.h>
+#include <neo/smartcontract/native/neo_token.h>
+#include <neo/smartcontract/native/notary.h>
+#include <neo/smartcontract/native/policy_contract.h>
 #include <neo/vm/stack_item.h>
-#include <memory>
 
 using namespace neo;
 using namespace neo::smartcontract;
@@ -24,7 +24,7 @@ using namespace neo::network::payloads;
 
 class NotaryTest : public ::testing::Test
 {
-protected:
+  protected:
     std::shared_ptr<MemoryStoreView> snapshot;
     std::shared_ptr<Notary> notary;
     std::shared_ptr<GasToken> gasToken;
@@ -66,7 +66,8 @@ protected:
 
         // Set current block index
         auto key = ledgerContract->GetStorageKey(LedgerContract::PREFIX_BLOCK_STATE, io::ByteVector{});
-        auto value = io::ByteVector::FromHexString("0000000000000000000000000000000000000000000000000000000000000000e703000000000000");
+        auto value = io::ByteVector::FromHexString(
+            "0000000000000000000000000000000000000000000000000000000000000000e703000000000000");
         snapshot->Put(key, std::make_shared<StorageItem>(value));
     }
 };
@@ -190,7 +191,7 @@ TEST_F(NotaryTest, TestOnPersist)
     tx->SetSender(notary->GetScriptHash());
     tx->SetSystemFee(1000);
     tx->SetNetworkFee(2000);
-    
+
     // Add signers
     std::vector<Signer> signers;
     signers.push_back(Signer(notary->GetScriptHash()));
@@ -209,7 +210,9 @@ TEST_F(NotaryTest, TestOnPersist)
 
     // Set committee
     std::vector<ECPoint> committee;
-    committee.push_back(ECPoint::FromBytes(ByteVector::FromHexString("03b209fd4f53a7170ea4444e0cb0a6bb6a53c2bd016926989cf85f9b0fba17a70c").AsSpan(), ECCurve::Secp256r1));
+    committee.push_back(ECPoint::FromBytes(
+        ByteVector::FromHexString("03b209fd4f53a7170ea4444e0cb0a6bb6a53c2bd016926989cf85f9b0fba17a70c").AsSpan(),
+        ECCurve::Secp256r1));
     neoToken->SetCommittee(snapshot, committee);
 
     // Call OnPersist

@@ -78,7 +78,8 @@ bool Notary::OnPersist(ApplicationEngine& engine)
     {
         // Find NotaryAssisted attribute
         auto attr_it =
-            std::find_if(tx.GetAttributes().begin(), tx.GetAttributes().end(), [](const std::shared_ptr<ledger::TransactionAttribute>& a)
+            std::find_if(tx.GetAttributes().begin(), tx.GetAttributes().end(),
+                         [](const std::shared_ptr<ledger::TransactionAttribute>& a)
                          { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::NotaryAssisted; });
         if (attr_it == tx.GetAttributes().end())
             continue;
@@ -235,9 +236,9 @@ bool Notary::Verify(ApplicationEngine& engine, const io::ByteVector& signature)
         return false;
 
     // Find NotaryAssisted attribute
-    auto attr_it =
-        std::find_if(tx->GetAttributes().begin(), tx->GetAttributes().end(), [](const std::shared_ptr<ledger::TransactionAttribute>& a)
-                     { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::NotaryAssisted; });
+    auto attr_it = std::find_if(tx->GetAttributes().begin(), tx->GetAttributes().end(),
+                                [](const std::shared_ptr<ledger::TransactionAttribute>& a)
+                                { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::NotaryAssisted; });
     if (attr_it == tx->GetAttributes().end())
         return false;
 
@@ -273,18 +274,18 @@ bool Notary::Verify(ApplicationEngine& engine, const io::ByteVector& signature)
                     // This should include the script hash being invoked and relevant transaction data
                     std::ostringstream stream;
                     io::BinaryWriter writer(stream);
-                    
+
                     // Write the transaction hash
                     tx->GetHash().Serialize(writer);
-                    
+
                     // Write the current script hash (notary contract)
                     // Use a placeholder hash for now as GetHash() is not available in this context
                     io::UInt160 notaryHash = io::UInt160::Zero();
                     notaryHash.Serialize(writer);
-                    
+
                     // Write network magic for replay protection
                     writer.Write(static_cast<uint32_t>(engine.GetProtocolSettings()->GetNetwork()));
-                    
+
                     std::string hashData = stream.str();
                     auto message = io::ByteSpan(reinterpret_cast<const uint8_t*>(hashData.data()), hashData.size());
                     auto signatureData = signature.AsSpan().subspan(33, 31);
@@ -365,9 +366,9 @@ int64_t Notary::CalculateNotaryReward(std::shared_ptr<persistence::StoreView> sn
                                       int nNotaries) const
 {
     auto policyContract = PolicyContract::GetInstance();
-    // TODO: Fix TransactionAttributeType namespace
-    auto feePerKey = 1000;  // Default fee per key
-    return nFees * feePerKey / nNotaries;
+    auto attributeFee = policyContract->GetAttributeFee(
+        snapshot, static_cast<uint8_t>(ledger::TransactionAttribute::Usage::NotaryAssisted));
+    return nFees * attributeFee / nNotaries;
 }
 
 std::shared_ptr<Notary::Deposit> Notary::GetDepositFor(std::shared_ptr<persistence::StoreView> snapshot,

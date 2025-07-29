@@ -360,7 +360,8 @@ std::shared_ptr<vm::StackItem> PolicyContract::OnBlockAccount(ApplicationEngine&
 
     // Check if it's a native contract - cannot block native contracts
     // Native contracts have specific known hashes we can check
-    if (IsNativeContract(account)) {
+    if (IsNativeContract(account))
+    {
         throw std::runtime_error("Cannot block native contracts");
     }
 
@@ -600,41 +601,41 @@ bool PolicyContract::IsNativeContract(const io::UInt160& scriptHash) const
     auto neoToken = NeoToken::GetInstance();
     if (neoToken && neoToken->GetScriptHash() == scriptHash)
         return true;
-        
+
     auto gasToken = GasToken::GetInstance();
     if (gasToken && gasToken->GetScriptHash() == scriptHash)
         return true;
-    
+
     // System contracts
     auto contractManagement = ContractManagement::GetInstance();
     if (contractManagement && contractManagement->GetScriptHash() == scriptHash)
         return true;
-        
+
     auto policyContract = PolicyContract::GetInstance();
     if (policyContract && policyContract->GetScriptHash() == scriptHash)
         return true;
-        
+
     auto ledgerContract = LedgerContract::GetInstance();
     if (ledgerContract && ledgerContract->GetScriptHash() == scriptHash)
         return true;
-        
+
     auto roleManagement = RoleManagement::GetInstance();
     if (roleManagement && roleManagement->GetScriptHash() == scriptHash)
         return true;
-    
-    // Service contracts  
+
+    // Service contracts
     auto oracleContract = OracleContract::GetInstance();
     if (oracleContract && oracleContract->GetScriptHash() == scriptHash)
         return true;
-        
+
     auto notary = Notary::GetInstance();
     if (notary && notary->GetScriptHash() == scriptHash)
         return true;
-        
+
     auto nameService = NameService::GetInstance();
     if (nameService && nameService->GetScriptHash() == scriptHash)
         return true;
-    
+
     return false;
 }
 

@@ -1,15 +1,15 @@
+#include <filesystem>
 #include <gtest/gtest.h>
-#include <neo/plugins/state_service_plugin.h>
+#include <memory>
+#include <neo/io/uint256.h>
+#include <neo/ledger/block.h>
 #include <neo/node/node.h>
-#include <neo/rpc/rpc_server.h>
 #include <neo/persistence/memory_store.h>
 #include <neo/persistence/store_provider.h>
-#include <neo/ledger/block.h>
-#include <neo/io/uint256.h>
-#include <memory>
+#include <neo/plugins/state_service_plugin.h>
+#include <neo/rpc/rpc_server.h>
 #include <string>
 #include <unordered_map>
-#include <filesystem>
 
 using namespace neo::plugins;
 using namespace neo::node;
@@ -20,7 +20,7 @@ using namespace neo::io;
 
 class StateServicePluginTest : public ::testing::Test
 {
-protected:
+  protected:
     std::shared_ptr<Node> node_;
     std::shared_ptr<RPCServer> rpcServer_;
     std::unordered_map<std::string, std::string> settings_;
@@ -31,7 +31,7 @@ protected:
         // Create temporary directory
         tempDir_ = std::filesystem::temp_directory_path().string() + "/neo_test_state";
         std::filesystem::create_directories(tempDir_);
-        
+
         // Create node
         auto store = std::make_shared<MemoryStore>();
         auto storeProvider = std::make_shared<StoreProvider>(store);
@@ -43,7 +43,7 @@ protected:
     {
         rpcServer_.reset();
         node_.reset();
-        
+
         // Remove temporary directory
         std::filesystem::remove_all(tempDir_);
     }
@@ -62,7 +62,7 @@ TEST_F(StateServicePluginTest, Constructor)
 TEST_F(StateServicePluginTest, Initialize)
 {
     StateServicePlugin plugin;
-    
+
     // Initialize plugin
     bool result = plugin.Initialize(node_, rpcServer_, settings_);
     EXPECT_TRUE(result);
@@ -72,12 +72,10 @@ TEST_F(StateServicePluginTest, Initialize)
 TEST_F(StateServicePluginTest, InitializeWithSettings)
 {
     StateServicePlugin plugin;
-    
+
     // Set settings
-    std::unordered_map<std::string, std::string> settings = {
-        {"StatePath", tempDir_}
-    };
-    
+    std::unordered_map<std::string, std::string> settings = {{"StatePath", tempDir_}};
+
     // Initialize plugin
     bool result = plugin.Initialize(node_, rpcServer_, settings);
     EXPECT_TRUE(result);
@@ -87,20 +85,18 @@ TEST_F(StateServicePluginTest, InitializeWithSettings)
 TEST_F(StateServicePluginTest, StartStop)
 {
     StateServicePlugin plugin;
-    
+
     // Set settings
-    std::unordered_map<std::string, std::string> settings = {
-        {"StatePath", tempDir_}
-    };
-    
+    std::unordered_map<std::string, std::string> settings = {{"StatePath", tempDir_}};
+
     // Initialize plugin
     plugin.Initialize(node_, rpcServer_, settings);
-    
+
     // Start plugin
     bool result1 = plugin.Start();
     EXPECT_TRUE(result1);
     EXPECT_TRUE(plugin.IsRunning());
-    
+
     // Stop plugin
     bool result2 = plugin.Stop();
     EXPECT_TRUE(result2);
@@ -110,27 +106,25 @@ TEST_F(StateServicePluginTest, StartStop)
 TEST_F(StateServicePluginTest, GetStateRoot)
 {
     StateServicePlugin plugin;
-    
+
     // Set settings
-    std::unordered_map<std::string, std::string> settings = {
-        {"StatePath", tempDir_}
-    };
-    
+    std::unordered_map<std::string, std::string> settings = {{"StatePath", tempDir_}};
+
     // Initialize plugin
     plugin.Initialize(node_, rpcServer_, settings);
-    
+
     // Start plugin
     plugin.Start();
-    
+
     // Get state root for non-existent block
     uint32_t index = 0;
     auto stateRoot1 = plugin.GetStateRoot(index);
     EXPECT_EQ(stateRoot1, nullptr);
-    
+
     UInt256 hash;
     auto stateRoot2 = plugin.GetStateRoot(hash);
     EXPECT_EQ(stateRoot2, nullptr);
-    
+
     // Stop plugin
     plugin.Stop();
 }

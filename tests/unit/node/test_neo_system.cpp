@@ -1,11 +1,11 @@
-#include <neo/node/neo_system.h>
-#include <neo/persistence/memory_store.h>
-#include <neo/config/protocol_settings.h>
-#include <neo/network/p2p/channels_config.h>
-#include <neo/network/ip_endpoint.h>
-#include <neo/network/ip_address.h>
 #include <gtest/gtest.h>
 #include <memory>
+#include <neo/config/protocol_settings.h>
+#include <neo/network/ip_address.h>
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/channels_config.h>
+#include <neo/node/neo_system.h>
+#include <neo/persistence/memory_store.h>
 
 using namespace neo::node;
 using namespace neo::persistence;
@@ -15,15 +15,15 @@ using namespace neo::network::p2p;
 
 class UT_NeoSystem : public testing::Test
 {
-protected:
+  protected:
     void SetUp() override
     {
         // Create protocol settings
         settings = std::make_unique<ProtocolSettings>();
         settings->SetAddressVersion(0x35);
-        settings->SetStandbyCommittee({ "03b209fd4f53a7170ea4444e0cb0a6bb6a53c2bd016926989cf85f9b0fba17a70c" });
+        settings->SetStandbyCommittee({"03b209fd4f53a7170ea4444e0cb0a6bb6a53c2bd016926989cf85f9b0fba17a70c"});
         settings->SetValidatorsCount(1);
-        settings->SetSeedList({ "localhost:20333" });
+        settings->SetSeedList({"localhost:20333"});
         settings->SetNetwork(0x4F454E);
         settings->SetMillisecondsPerBlock(15000);
         settings->SetMaxTransactionsPerBlock(512);
@@ -122,7 +122,7 @@ TEST_F(UT_NeoSystem, TestStartNode)
     config.SetMaxConnectionsPerAddress(3);
     config.SetMaxKnownAddresses(1000);
     config.SetMaxKnownHashes(1000);
-    config.SetSeedList({ IPEndPoint(IPAddress::Parse("127.0.0.1"), 20333) });
+    config.SetSeedList({IPEndPoint(IPAddress::Parse("127.0.0.1"), 20333)});
 
     // Start the node
     system->StartNode(config);

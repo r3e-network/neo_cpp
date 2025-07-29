@@ -76,6 +76,23 @@ const std::vector<NodeCapability>& VersionPayload::GetCapabilities() const
     return capabilities_;
 }
 
+uint32_t VersionPayload::GetStartHeight() const
+{
+    for (const auto& capability : capabilities_)
+    {
+        if (capability.GetType() == NodeCapabilityType::FullNode)
+        {
+            // Cast to FullNodeCapability to access start height
+            const auto* fullNodeCap = dynamic_cast<const FullNodeCapability*>(&capability);
+            if (fullNodeCap)
+            {
+                return fullNodeCap->GetStartHeight();
+            }
+        }
+    }
+    return 0;  // Return 0 if no FullNode capability found
+}
+
 void VersionPayload::SetCapabilities(const std::vector<NodeCapability>& capabilities)
 {
     capabilities_ = capabilities;

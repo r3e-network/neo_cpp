@@ -1,20 +1,20 @@
 #include <gtest/gtest.h>
-#include <neo/network/ip_endpoint.h>
-#include <neo/network/message.h>
-#include <neo/network/p2p/message_command.h>
-#include <neo/network/p2p/message_flags.h>
-#include <neo/network/p2p/inventory_vector.h>
-#include <neo/network/p2p/network_address.h>
-#include <neo/network/p2p/node_capability.h>
-#include <neo/network/p2p/payloads/version_payload.h>
-#include <neo/network/p2p/payloads/addr_payload.h>
-#include <neo/network/p2p/payloads/inv_payload.h>
-#include <neo/network/p2p/payloads/ping_payload.h>
-#include <neo/network/p2p/payloads/headers_payload.h>
-#include <neo/network/p2p/payloads/get_blocks_payload.h>
-#include <neo/network/p2p/payloads/get_block_by_index_payload.h>
 #include <iostream>
 #include <memory>
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/message.h>
+#include <neo/network/p2p/inventory_vector.h>
+#include <neo/network/p2p/message_command.h>
+#include <neo/network/p2p/message_flags.h>
+#include <neo/network/p2p/network_address.h>
+#include <neo/network/p2p/node_capability.h>
+#include <neo/network/p2p/payloads/addr_payload.h>
+#include <neo/network/p2p/payloads/get_block_by_index_payload.h>
+#include <neo/network/p2p/payloads/get_blocks_payload.h>
+#include <neo/network/p2p/payloads/headers_payload.h>
+#include <neo/network/p2p/payloads/inv_payload.h>
+#include <neo/network/p2p/payloads/ping_payload.h>
+#include <neo/network/p2p/payloads/version_payload.h>
 #include <vector>
 
 using namespace neo::network;
@@ -25,7 +25,7 @@ using namespace neo::io;
 // Test suite for Network module
 class NetworkComprehensiveTest : public ::testing::Test
 {
-protected:
+  protected:
     void SetUp() override
     {
         // Set up common test resources

@@ -36,3 +36,34 @@ target_link_libraries(test_native_contracts
 
 # Add test
 add_test(NAME test_native_contracts COMMAND test_native_contracts)
+
+# New comprehensive native contract tests
+add_executable(test_native_contracts_complete
+    test_contract_management_complete.cpp
+    test_neo_token_complete.cpp
+    test_gas_token_complete.cpp
+    test_policy_contract_complete.cpp
+    test_oracle_contract_complete.cpp
+    test_role_management_complete.cpp
+    test_crypto_lib_complete.cpp
+    test_std_lib_complete.cpp
+    test_ledger_contract_complete.cpp
+    test_notary_complete.cpp
+)
+
+# Include directories
+target_include_directories(test_native_contracts_complete
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# Link dependencies
+target_link_libraries(test_native_contracts_complete
+    PRIVATE
+        neo_cpp
+        ${GTEST_LIBRARIES}
+)
+
+# Add test
+add_test(NAME test_native_contracts_complete COMMAND test_native_contracts_complete)

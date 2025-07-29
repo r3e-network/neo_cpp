@@ -398,14 +398,14 @@ bool HandleLoadScript(vm::ExecutionEngine& engine)
 {
     auto& appEngine = static_cast<ApplicationEngine&>(engine);
     auto& context = appEngine.GetCurrentContext();
-    
+
     // Get the script from the stack
     auto scriptItem = context.Pop();
     auto scriptBytes = scriptItem->GetByteArray();
-    
+
     // Load the script into the engine
     appEngine.LoadScript(std::vector<uint8_t>(scriptBytes.Data(), scriptBytes.Data() + scriptBytes.Size()));
-    
+
     return true;
 }
 }  // namespace

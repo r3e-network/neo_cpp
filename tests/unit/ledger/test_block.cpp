@@ -1,18 +1,18 @@
+#include <chrono>
 #include <gtest/gtest.h>
-#include <neo/ledger/block.h>
-#include <neo/ledger/block_header.h>
-#include <neo/ledger/witness.h>
-#include <neo/ledger/transaction_attribute.h>
-#include <neo/ledger/coin_reference.h>
-#include <neo/ledger/transaction_output.h>
-#include <neo/io/binary_writer.h>
-#include <neo/io/binary_reader.h>
-#include <neo/io/byte_vector.h>
-#include <neo/io/fixed8.h>
 #include <neo/cryptography/hash.h>
 #include <neo/cryptography/merkle_tree.h>
+#include <neo/io/binary_reader.h>
+#include <neo/io/binary_writer.h>
+#include <neo/io/byte_vector.h>
+#include <neo/io/fixed8.h>
+#include <neo/ledger/block.h>
+#include <neo/ledger/block_header.h>
+#include <neo/ledger/coin_reference.h>
+#include <neo/ledger/transaction_attribute.h>
+#include <neo/ledger/transaction_output.h>
+#include <neo/ledger/witness.h>
 #include <sstream>
-#include <chrono>
 
 using namespace neo::ledger;
 using namespace neo::io;
@@ -41,48 +41,50 @@ TEST(BlockTest, Serialization)
     block.SetTimestamp(std::chrono::system_clock::from_time_t(123456789));
     block.SetIndex(1);
     block.SetNextConsensus(UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
-    
+
     // Note: Block doesn't have SetWitness method in Neo N3
     // Witnesses are part of transactions, not blocks
-    
+
     // Add a transaction
     Transaction tx;
     tx.SetType(Transaction::Type::InvocationTransaction);
     tx.SetVersion(1);
-    
+
     // Add attributes
     TransactionAttribute::Usage usage = TransactionAttribute::Usage::Script;
-    ByteVector data = ByteVector::Parse("0102030405060708090a0b0c0d0e0f1011121314"); // 20 bytes for Script
+    ByteVector data = ByteVector::Parse("0102030405060708090a0b0c0d0e0f1011121314");  // 20 bytes for Script
     TransactionAttribute attribute(usage, data);
     tx.SetAttributes({attribute});
-    
+
     // Neo 3 doesn't have inputs/outputs, set empty
     tx.SetInputs({});
     tx.SetOutputs({});
-    
+
     // Add witnesses
     ByteVector txInvocationScript = ByteVector::Parse("0102030405");
     ByteVector txVerificationScript = ByteVector::Parse("0607080910");
     Witness txWitness(txInvocationScript, txVerificationScript);
     tx.SetWitnesses({txWitness});
-    
+
     block.AddTransaction(tx);
-    
+
     // Serialize
     std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     block.Serialize(writer);
-    
+
     // Deserialize
     stream.seekg(0);
     BinaryReader reader(stream);
     Block block2;
     block2.Deserialize(reader);
-    
+
     // Check
     EXPECT_EQ(block2.GetVersion(), 1);
-    EXPECT_EQ(block2.GetPreviousHash(), UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"));
-    EXPECT_EQ(block2.GetMerkleRoot(), UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40"));
+    EXPECT_EQ(block2.GetPreviousHash(),
+              UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"));
+    EXPECT_EQ(block2.GetMerkleRoot(),
+              UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40"));
     EXPECT_EQ(block2.GetTimestamp(), std::chrono::system_clock::from_time_t(123456789));
     EXPECT_EQ(block2.GetIndex(), 1);
     EXPECT_EQ(block2.GetNextConsensus(), UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
@@ -110,14 +112,14 @@ TEST(BlockTest, GetHash)
     block.SetTimestamp(std::chrono::system_clock::from_time_t(123456789));
     block.SetIndex(1);
     block.SetNextConsensus(UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
-    
+
     // Get the hash
     UInt256 hash = block.GetHash();
-    
+
     // Verify the hash
     std::ostringstream stream;
     BinaryWriter writer(stream);
-    
+
     // Serialize the block header
     writer.Write(block.GetVersion());
     writer.Write(block.GetPreviousHash());
@@ -126,10 +128,10 @@ TEST(BlockTest, GetHash)
     writer.Write(block.GetIndex());
     writer.Write(block.GetPrimaryIndex());
     writer.Write(block.GetNextConsensus());
-    
+
     std::string data = stream.str();
     UInt256 expectedHash = Hash::Hash256(ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
-    
+
     EXPECT_EQ(hash, expectedHash);
 }
 
@@ -149,7 +151,7 @@ TEST(BlockHeaderTest, Constructor)
     EXPECT_EQ(header1.GetTimestamp(), 0);
     EXPECT_EQ(header1.GetIndex(), 0);
     EXPECT_EQ(header1.GetNextConsensus(), UInt160());
-    
+
     // Block constructor
     Block block;
     block.SetVersion(1);
@@ -158,14 +160,16 @@ TEST(BlockHeaderTest, Constructor)
     block.SetTimestamp(std::chrono::system_clock::from_time_t(123456789));
     block.SetIndex(1);
     block.SetNextConsensus(UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
-    
+
     // Note: Block doesn't have SetWitness method in Neo N3
     // Witnesses are part of transactions, not blocks
-    
+
     BlockHeader header2(block);
     EXPECT_EQ(header2.GetVersion(), 1);
-    EXPECT_EQ(header2.GetPrevHash(), UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"));
-    EXPECT_EQ(header2.GetMerkleRoot(), UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40"));
+    EXPECT_EQ(header2.GetPrevHash(),
+              UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"));
+    EXPECT_EQ(header2.GetMerkleRoot(),
+              UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40"));
     EXPECT_EQ(header2.GetTimestamp(), 123456789);
     EXPECT_EQ(header2.GetIndex(), 1);
     EXPECT_EQ(header2.GetNextConsensus(), UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
@@ -182,28 +186,30 @@ TEST(BlockHeaderTest, Serialization)
     header.SetTimestamp(123456789);
     header.SetIndex(1);
     header.SetNextConsensus(UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
-    
+
     // Add a witness
     ByteVector invocationScript = ByteVector::Parse("0102030405");
     ByteVector verificationScript = ByteVector::Parse("0607080910");
     Witness witness(invocationScript, verificationScript);
     header.SetWitness(witness);
-    
+
     // Serialize
     std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     header.Serialize(writer);
-    
+
     // Deserialize
     stream.seekg(0);
     BinaryReader reader(stream);
     BlockHeader header2;
     header2.Deserialize(reader);
-    
+
     // Check
     EXPECT_EQ(header2.GetVersion(), 1);
-    EXPECT_EQ(header2.GetPrevHash(), UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"));
-    EXPECT_EQ(header2.GetMerkleRoot(), UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40"));
+    EXPECT_EQ(header2.GetPrevHash(),
+              UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"));
+    EXPECT_EQ(header2.GetMerkleRoot(),
+              UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40"));
     EXPECT_EQ(header2.GetTimestamp(), 123456789);
     EXPECT_EQ(header2.GetIndex(), 1);
     EXPECT_EQ(header2.GetNextConsensus(), UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
@@ -220,14 +226,14 @@ TEST(BlockHeaderTest, GetHash)
     header.SetTimestamp(123456789);
     header.SetIndex(1);
     header.SetNextConsensus(UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
-    
+
     // Get the hash
     UInt256 hash = header.GetHash();
-    
+
     // Verify the hash
     std::ostringstream stream;
     BinaryWriter writer(stream);
-    
+
     // Serialize the block header
     writer.Write(header.GetVersion());
     writer.Write(header.GetPrevHash());
@@ -237,10 +243,10 @@ TEST(BlockHeaderTest, GetHash)
     writer.Write(header.GetIndex());
     writer.Write(header.GetPrimaryIndex());
     writer.Write(header.GetNextConsensus());
-    
+
     std::string data = stream.str();
     UInt256 expectedHash = Hash::Hash256(ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
-    
+
     EXPECT_EQ(hash, expectedHash);
 }
 
@@ -254,13 +260,13 @@ TEST(BlockHeaderTest, Equality)
     header1.SetTimestamp(123456789);
     header1.SetIndex(1);
     header1.SetNextConsensus(UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
-    
+
     // Add a witness
     ByteVector invocationScript = ByteVector::Parse("0102030405");
     ByteVector verificationScript = ByteVector::Parse("0607080910");
     Witness witness(invocationScript, verificationScript);
     header1.SetWitness(witness);
-    
+
     // Create an identical block header
     BlockHeader header2;
     header2.SetVersion(1);
@@ -270,7 +276,7 @@ TEST(BlockHeaderTest, Equality)
     header2.SetIndex(1);
     header2.SetNextConsensus(UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
     header2.SetWitness(witness);
-    
+
     // Create a block header with different version
     BlockHeader header3;
     header3.SetVersion(2);
@@ -280,10 +286,10 @@ TEST(BlockHeaderTest, Equality)
     header3.SetIndex(1);
     header3.SetNextConsensus(UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
     header3.SetWitness(witness);
-    
+
     EXPECT_TRUE(header1 == header2);
     EXPECT_FALSE(header1 == header3);
-    
+
     EXPECT_FALSE(header1 != header2);
     EXPECT_TRUE(header1 != header3);
 }

@@ -1,7 +1,7 @@
 #include <neo/smartcontract/binary_serializer.h>
+#include <neo/vm/compound_items.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/stack_item_types.h>
-#include <neo/vm/compound_items.h>
 #include <sstream>
 #include <stdexcept>
 
@@ -12,7 +12,7 @@ io::ByteVector BinarySerializer::Serialize(std::shared_ptr<vm::StackItem> item, 
     // Serialize the stack item to binary format
     std::ostringstream stream;
     io::BinaryWriter writer(stream);
-    
+
     int64_t itemCount = 0;
     SerializeStackItem(writer, item, maxSize, maxItems, itemCount);
 
@@ -149,15 +149,15 @@ std::shared_ptr<vm::StackItem> BinarySerializer::DeserializeStackItem(io::Binary
             auto count = reader.ReadVarInt();
             if (static_cast<int64_t>(count) > maxItems - itemCount)
                 throw std::runtime_error("Array size exceeds maximum items");
-                
+
             std::vector<std::shared_ptr<vm::StackItem>> array;
             array.reserve(count);
-            
+
             for (uint64_t i = 0; i < count; ++i)
             {
                 array.push_back(DeserializeStackItem(reader, maxSize, maxItems, itemCount));
             }
-            
+
             // Both Array and Struct use the same creation method
             return vm::StackItem::Create(array);
         }
@@ -167,16 +167,16 @@ std::shared_ptr<vm::StackItem> BinarySerializer::DeserializeStackItem(io::Binary
             auto count = reader.ReadVarInt();
             if (static_cast<int64_t>(count) > (maxItems - itemCount) / 2)
                 throw std::runtime_error("Map size exceeds maximum items");
-                
+
             std::map<std::shared_ptr<vm::StackItem>, std::shared_ptr<vm::StackItem>, vm::StackItemPtrComparator> map;
-            
+
             for (uint64_t i = 0; i < count; ++i)
             {
                 auto key = DeserializeStackItem(reader, maxSize, maxItems, itemCount);
                 auto value = DeserializeStackItem(reader, maxSize, maxItems, itemCount);
                 map[key] = value;
             }
-            
+
             return std::make_shared<vm::MapItem>(map);
         }
 

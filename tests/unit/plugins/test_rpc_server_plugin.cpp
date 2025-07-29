@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
-#include <neo/plugins/rpc_server_plugin.h>
+#include <memory>
 #include <neo/node/node.h>
-#include <neo/rpc/rpc_server.h>
 #include <neo/persistence/memory_store.h>
 #include <neo/persistence/store_provider.h>
-#include <memory>
+#include <neo/plugins/rpc_server_plugin.h>
+#include <neo/rpc/rpc_server.h>
 #include <string>
 #include <unordered_map>
 
@@ -15,7 +15,7 @@ using namespace neo::persistence;
 
 class RpcServerPluginTest : public ::testing::Test
 {
-protected:
+  protected:
     std::shared_ptr<Node> node_;
     std::shared_ptr<RPCServer> rpcServer_;
     std::unordered_map<std::string, std::string> settings_;
@@ -49,7 +49,7 @@ TEST_F(RpcServerPluginTest, Constructor)
 TEST_F(RpcServerPluginTest, Initialize)
 {
     RpcServerPlugin plugin;
-    
+
     // Initialize plugin
     bool result = plugin.Initialize(node_, rpcServer_, settings_);
     EXPECT_TRUE(result);
@@ -59,16 +59,14 @@ TEST_F(RpcServerPluginTest, Initialize)
 TEST_F(RpcServerPluginTest, InitializeWithSettings)
 {
     RpcServerPlugin plugin;
-    
+
     // Set settings
-    std::unordered_map<std::string, std::string> settings = {
-        {"Port", "10333"},
-        {"EnableCors", "true"},
-        {"EnableAuth", "true"},
-        {"Username", "neo"},
-        {"Password", "password"}
-    };
-    
+    std::unordered_map<std::string, std::string> settings = {{"Port", "10333"},
+                                                             {"EnableCors", "true"},
+                                                             {"EnableAuth", "true"},
+                                                             {"Username", "neo"},
+                                                             {"Password", "password"}};
+
     // Initialize plugin
     bool result = plugin.Initialize(node_, rpcServer_, settings);
     EXPECT_TRUE(result);
@@ -78,15 +76,15 @@ TEST_F(RpcServerPluginTest, InitializeWithSettings)
 TEST_F(RpcServerPluginTest, StartStop)
 {
     RpcServerPlugin plugin;
-    
+
     // Initialize plugin
     plugin.Initialize(node_, rpcServer_, settings_);
-    
+
     // Start plugin
     bool result1 = plugin.Start();
     EXPECT_TRUE(result1);
     EXPECT_TRUE(plugin.IsRunning());
-    
+
     // Stop plugin
     bool result2 = plugin.Stop();
     EXPECT_TRUE(result2);
@@ -96,18 +94,16 @@ TEST_F(RpcServerPluginTest, StartStop)
 TEST_F(RpcServerPluginTest, RegisterMethod)
 {
     RpcServerPlugin plugin;
-    
+
     // Initialize plugin
     plugin.Initialize(node_, rpcServer_, settings_);
-    
+
     // Register method
-    plugin.RegisterMethod("test", [](const nlohmann::json& params) {
-        return "test";
-    });
-    
+    plugin.RegisterMethod("test", [](const nlohmann::json& params) { return "test"; });
+
     // Start plugin
     plugin.Start();
-    
+
     // Stop plugin
     plugin.Stop();
 }

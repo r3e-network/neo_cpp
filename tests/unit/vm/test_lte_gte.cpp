@@ -1,17 +1,17 @@
 #include <gtest/gtest.h>
+#include <neo/io/byte_vector.h>
+#include <neo/vm/execution_engine.h>
 #include <neo/vm/opcode.h>
 #include <neo/vm/script.h>
 #include <neo/vm/script_builder.h>
-#include <neo/vm/execution_engine.h>
 #include <neo/vm/stack_item.h>
-#include <neo/io/byte_vector.h>
 
 using namespace neo::vm;
 using namespace neo::io;
 
 class LteGteTest : public ::testing::Test
 {
-protected:
+  protected:
     void SetUp() override
     {
         // Common setup for all tests
@@ -81,8 +81,8 @@ TEST_F(LteGteTest, LteOperation)
 
         ExecutionEngine engine;
         engine.LoadScript(builder.ToScript());
-        EXPECT_EQ(engine.Execute(), VMState::Fault); // Null comparisons currently fault
-        EXPECT_EQ(engine.GetResultStack().size(), 0); // No results on fault
+        EXPECT_EQ(engine.Execute(), VMState::Fault);   // Null comparisons currently fault
+        EXPECT_EQ(engine.GetResultStack().size(), 0);  // No results on fault
     }
 
     // Test case 5: 1 <= null should be false (currently faults)
@@ -95,8 +95,8 @@ TEST_F(LteGteTest, LteOperation)
 
         ExecutionEngine engine;
         engine.LoadScript(builder.ToScript());
-        EXPECT_EQ(engine.Execute(), VMState::Fault); // Null comparisons currently fault
-        EXPECT_EQ(engine.GetResultStack().size(), 0); // No results on fault
+        EXPECT_EQ(engine.Execute(), VMState::Fault);   // Null comparisons currently fault
+        EXPECT_EQ(engine.GetResultStack().size(), 0);  // No results on fault
     }
 }
 
@@ -158,8 +158,8 @@ TEST_F(LteGteTest, GteOperation)
 
         ExecutionEngine engine;
         engine.LoadScript(builder.ToScript());
-        EXPECT_EQ(engine.Execute(), VMState::Fault); // Null comparisons currently fault
-        EXPECT_EQ(engine.GetResultStack().size(), 0); // No results on fault
+        EXPECT_EQ(engine.Execute(), VMState::Fault);   // Null comparisons currently fault
+        EXPECT_EQ(engine.GetResultStack().size(), 0);  // No results on fault
     }
 
     // Test case 5: 1 >= null should be false (currently faults)
@@ -172,7 +172,7 @@ TEST_F(LteGteTest, GteOperation)
 
         ExecutionEngine engine;
         engine.LoadScript(builder.ToScript());
-        EXPECT_EQ(engine.Execute(), VMState::Fault); // Null comparisons currently fault
-        EXPECT_EQ(engine.GetResultStack().size(), 0); // No results on fault
+        EXPECT_EQ(engine.Execute(), VMState::Fault);   // Null comparisons currently fault
+        EXPECT_EQ(engine.GetResultStack().size(), 0);  // No results on fault
     }
 }

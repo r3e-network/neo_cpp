@@ -1,15 +1,15 @@
 #include "vm_json_test_base.h"
-#include <neo/vm/execution_engine.h>
-#include <neo/vm/debugger.h>
-#include <gtest/gtest.h>
 #include <filesystem>
+#include <gtest/gtest.h>
+#include <neo/vm/debugger.h>
+#include <neo/vm/execution_engine.h>
 
 using namespace neo::vm;
 using namespace neo::vm::tests;
 
 class UT_VMJson : public VMJsonTestBase
 {
-protected:
+  protected:
     void SetUp() override
     {
         // Create test directories if they don't exist

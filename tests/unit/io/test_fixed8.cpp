@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <neo/io/fixed8.h>
 #include <limits>
+#include <neo/io/fixed8.h>
 
 using namespace neo::io;
 
@@ -44,63 +44,63 @@ TEST(Fixed8Test, ToString)
 
 TEST(Fixed8Test, Addition)
 {
-    Fixed8 f1(100000000); // 1.0
-    Fixed8 f2(200000000); // 2.0
-    
+    Fixed8 f1(100000000);  // 1.0
+    Fixed8 f2(200000000);  // 2.0
+
     Fixed8 sum = f1 + f2;
-    EXPECT_EQ(sum.Value(), 300000000); // 3.0
-    
+    EXPECT_EQ(sum.Value(), 300000000);  // 3.0
+
     // Overflow
     Fixed8 max = Fixed8::MaxValue();
     EXPECT_THROW(max + Fixed8(1), std::overflow_error);
-    
+
     Fixed8 min = Fixed8::MinValue();
     EXPECT_THROW(min + Fixed8(-1), std::overflow_error);
 }
 
 TEST(Fixed8Test, Subtraction)
 {
-    Fixed8 f1(300000000); // 3.0
-    Fixed8 f2(100000000); // 1.0
-    
+    Fixed8 f1(300000000);  // 3.0
+    Fixed8 f2(100000000);  // 1.0
+
     Fixed8 diff = f1 - f2;
-    EXPECT_EQ(diff.Value(), 200000000); // 2.0
-    
+    EXPECT_EQ(diff.Value(), 200000000);  // 2.0
+
     // Overflow
     Fixed8 max = Fixed8::MaxValue();
     EXPECT_THROW(max - Fixed8(-1), std::overflow_error);
-    
+
     Fixed8 min = Fixed8::MinValue();
     EXPECT_THROW(min - Fixed8(1), std::overflow_error);
 }
 
 TEST(Fixed8Test, Multiplication)
 {
-    Fixed8 f1(200000000); // 2.0
-    Fixed8 f2(300000000); // 3.0
-    
+    Fixed8 f1(200000000);  // 2.0
+    Fixed8 f2(300000000);  // 3.0
+
     Fixed8 product = f1 * f2;
-    EXPECT_EQ(product.Value(), 600000000); // 6.0
-    
+    EXPECT_EQ(product.Value(), 600000000);  // 6.0
+
     // Overflow
     Fixed8 max = Fixed8::MaxValue();
     EXPECT_THROW(max * Fixed8(2), std::overflow_error);
-    
+
     Fixed8 min = Fixed8::MinValue();
     EXPECT_THROW(min * Fixed8(2), std::overflow_error);
 }
 
 TEST(Fixed8Test, Division)
 {
-    Fixed8 f1(600000000); // 6.0
-    Fixed8 f2(200000000); // 2.0
-    
+    Fixed8 f1(600000000);  // 6.0
+    Fixed8 f2(200000000);  // 2.0
+
     Fixed8 quotient = f1 / f2;
-    EXPECT_EQ(quotient.Value(), 300000000); // 3.0
-    
+    EXPECT_EQ(quotient.Value(), 300000000);  // 3.0
+
     // Division by zero
     EXPECT_THROW(f1 / Fixed8(0), std::invalid_argument);
-    
+
     // Overflow
     Fixed8 min = Fixed8::MinValue();
     EXPECT_THROW(min / Fixed8(-1), std::overflow_error);
@@ -108,28 +108,28 @@ TEST(Fixed8Test, Division)
 
 TEST(Fixed8Test, Comparison)
 {
-    Fixed8 f1(100000000); // 1.0
-    Fixed8 f2(200000000); // 2.0
-    Fixed8 f3(100000000); // 1.0
-    
+    Fixed8 f1(100000000);  // 1.0
+    Fixed8 f2(200000000);  // 2.0
+    Fixed8 f3(100000000);  // 1.0
+
     EXPECT_TRUE(f1 == f3);
     EXPECT_FALSE(f1 == f2);
-    
+
     EXPECT_TRUE(f1 != f2);
     EXPECT_FALSE(f1 != f3);
-    
+
     EXPECT_TRUE(f1 < f2);
     EXPECT_FALSE(f2 < f1);
     EXPECT_FALSE(f1 < f3);
-    
+
     EXPECT_TRUE(f1 <= f2);
     EXPECT_TRUE(f1 <= f3);
     EXPECT_FALSE(f2 <= f1);
-    
+
     EXPECT_TRUE(f2 > f1);
     EXPECT_FALSE(f1 > f2);
     EXPECT_FALSE(f1 > f3);
-    
+
     EXPECT_TRUE(f2 >= f1);
     EXPECT_TRUE(f1 >= f3);
     EXPECT_FALSE(f1 >= f2);
@@ -139,10 +139,10 @@ TEST(Fixed8Test, FromDecimal)
 {
     Fixed8 f1 = Fixed8::FromDecimal(1.23456789);
     EXPECT_EQ(f1.Value(), 123456789);
-    
+
     Fixed8 f2 = Fixed8::FromDecimal(-1.23456789);
     EXPECT_EQ(f2.Value(), -123456789);
-    
+
     // Overflow
     EXPECT_THROW(Fixed8::FromDecimal(std::numeric_limits<double>::max()), std::overflow_error);
     EXPECT_THROW(Fixed8::FromDecimal(std::numeric_limits<double>::lowest()), std::overflow_error);
@@ -152,13 +152,13 @@ TEST(Fixed8Test, Constants)
 {
     Fixed8 zero = Fixed8::Zero();
     EXPECT_EQ(zero.Value(), 0);
-    
+
     Fixed8 one = Fixed8::One();
     EXPECT_EQ(one.Value(), Fixed8::Decimals);
-    
+
     Fixed8 max = Fixed8::MaxValue();
     EXPECT_EQ(max.Value(), INT64_MAX);
-    
+
     Fixed8 min = Fixed8::MinValue();
     EXPECT_EQ(min.Value(), INT64_MIN);
 }

@@ -46,9 +46,17 @@ io::UInt160 Helper::ToScriptHash(const std::string& address, uint8_t address_ver
         }
         return io::UInt160(hash_bytes.AsSpan());
     }
-    catch (...)
+    catch (const std::invalid_argument&)
     {
-        throw std::invalid_argument("Invalid address");
+        throw;
+    }
+    catch (const std::runtime_error&)
+    {
+        throw std::invalid_argument("Invalid address format");
+    }
+    catch (const std::exception& e)
+    {
+        throw std::invalid_argument("Invalid address: " + std::string(e.what()));
     }
 }
 
@@ -129,7 +137,11 @@ bool Helper::IsValidAddress(const std::string& address, uint8_t address_version)
         ToScriptHash(address, address_version);
         return true;
     }
-    catch (...)
+    catch (const std::invalid_argument&)
+    {
+        return false;
+    }
+    catch (const std::runtime_error&)
     {
         return false;
     }

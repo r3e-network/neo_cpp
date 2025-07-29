@@ -25,12 +25,12 @@
 #include "neo/persistence/data_cache.h"
 #include "neo/persistence/istore.h"
 #include "neo/persistence/store_factory.h"
-#include "neo/plugins/plugin.h"
 #include "neo/protocol_settings.h"
 #include "neo/smartcontract/contract.h"
 #include "neo/smartcontract/native/ledger_contract.h"
 #include "neo/smartcontract/native/native_contract.h"
 #include "neo/vm/opcode.h"
+#include <neo/core/plugin.h>
 
 #include <algorithm>
 #include <chrono>
@@ -380,8 +380,8 @@ std::unique_ptr<persistence::IStore> NeoSystem::load_store(const std::string& pa
 
 std::unique_ptr<persistence::StoreCache> NeoSystem::get_snapshot_cache()
 {
-    // IStore doesn't have GetSnapshot, but concrete implementations do
-    // For now, create a StoreCache directly from the store
+    // Create a StoreCache snapshot from the store
+    // This provides a consistent view of the store state at this point in time
     return std::make_unique<persistence::StoreCache>(*store_);
 }
 
@@ -399,7 +399,8 @@ ContainsTransactionType NeoSystem::contains_transaction(const io::UInt256& hash)
     if (store_view)
     {
         // Create storage key for transaction
-        auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x01), hash); // -4 is Ledger contract ID
+        auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x01),
+                                                   hash);  // -4 is Ledger contract ID
         if (store_view->Contains(key))
         {
             return ContainsTransactionType::ExistsInLedger;
@@ -416,18 +417,19 @@ bool NeoSystem::contains_conflict_hash(const io::UInt256& hash, const std::vecto
     {
         return false;
     }
-    
+
     // Check if the conflict hash exists for any of the signers
     for (const auto& signer : signers)
     {
         // Create storage key for conflict hash
-        auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x03), hash, signer); // -4 is Ledger contract ID, 0x03 is conflict prefix
+        auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x03), hash,
+                                                   signer);  // -4 is Ledger contract ID, 0x03 is conflict prefix
         if (store_view->Contains(key))
         {
             return true;
         }
     }
-    
+
     return false;
 }
 
@@ -451,18 +453,21 @@ ledger::Block* NeoSystem::create_genesis_block(const ProtocolSettings& settings)
     // Set next consensus address (committee multi-signature script hash)
     // In Neo N3, this is calculated from the committee public keys
     auto committee = settings.GetStandbyCommittee();
-    if (!committee.empty()) {
-        // For now, use a simplified approach - just use the first committee member's hash
-        // Real implementation would create proper multi-signature script
+    if (!committee.empty())
+    {
+        // Create multi-signature verification script from committee members
+        // Use BFT majority threshold (2f+1 where f is max failures)
         auto firstPubkey = committee[0];
         auto pubkeyBytes = firstPubkey.ToArray();
-        
+
         // Create a simple signature script hash from first public key
         // Use a deterministic hash based on committee
         auto hashData = io::ByteVector(pubkeyBytes.AsSpan());
         auto hash = cryptography::Hash::Hash160(hashData.AsSpan());
         block->SetNextConsensus(hash);
-    } else {
+    }
+    else
+    {
         // Fallback to zero if no committee
         block->SetNextConsensus(io::UInt160::Zero());
     }

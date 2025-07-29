@@ -94,7 +94,11 @@ std::shared_ptr<ContractState> ContractManagement::GetContract(const persistence
         // This would need to query the DataCache directly
         return nullptr;
     }
-    catch (...)
+    catch (const std::runtime_error&)
+    {
+        return nullptr;
+    }
+    catch (const std::invalid_argument&)
     {
         return nullptr;
     }
@@ -418,19 +422,23 @@ ContractManagement::OnSetMinimumDeploymentFee(ApplicationEngine& engine,
         // Verify the calling script hash matches the committee address
         // Implement proper committee authorization check
         auto callingScriptHash = engine.GetCallingScriptHash();
-        if (callingScriptHash != committeeAddress) {
+        if (callingScriptHash != committeeAddress)
+        {
             // Also check if call is from within a committee member's verification context
             // Implement proper committee member verification
             bool isCommitteeMember = false;
-            for (const auto& member : committee) {
+            for (const auto& member : committee)
+            {
                 io::UInt160 memberScriptHash = GetScriptHashFromPublicKey(member);
-                if (callingScriptHash == memberScriptHash) {
+                if (callingScriptHash == memberScriptHash)
+                {
                     isCommitteeMember = true;
                     break;
                 }
             }
-            
-            if (!isCommitteeMember) {
+
+            if (!isCommitteeMember)
+            {
                 throw std::runtime_error("Only committee can perform this operation");
             }
         }

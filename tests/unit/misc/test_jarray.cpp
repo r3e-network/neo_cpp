@@ -12,18 +12,22 @@
 #ifndef TESTS_UNIT_MISC_TEST_JARRAY_CPP_H
 #define TESTS_UNIT_MISC_TEST_JARRAY_CPP_H
 
-#include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 // Include the class under test
 #include <neo/json/jarray.h>
 
-namespace neo {
-namespace test {
+namespace neo
+{
+namespace test
+{
 
-class JArrayTest : public ::testing::Test {
-protected:
-    void SetUp() override {
+class JArrayTest : public ::testing::Test
+{
+  protected:
+    void SetUp() override
+    {
         // Set up test fixtures for JArray testing
         empty_array = std::make_shared<neo::json::JArray>();
         sample_array = std::make_shared<neo::json::JArray>();
@@ -32,7 +36,8 @@ protected:
         sample_array->Add(std::make_shared<neo::json::JBoolean>(true));
     }
 
-    void TearDown() override {
+    void TearDown() override
+    {
         // Clean up test fixtures - shared_ptr handles cleanup automatically
         empty_array.reset();
         sample_array.reset();
@@ -45,48 +50,53 @@ protected:
 
 // JArray test methods converted from C# UT_JArray.cs functionality
 
-TEST_F(JArrayTest, ConstructorCreatesEmptyArray) {
+TEST_F(JArrayTest, ConstructorCreatesEmptyArray)
+{
     EXPECT_EQ(empty_array->Count(), 0);
     EXPECT_TRUE(empty_array->IsEmpty());
 }
 
-TEST_F(JArrayTest, AddItemIncreasesCount) {
+TEST_F(JArrayTest, AddItemIncreasesCount)
+{
     EXPECT_EQ(empty_array->Count(), 0);
     empty_array->Add(std::make_shared<neo::json::JString>("test"));
     EXPECT_EQ(empty_array->Count(), 1);
     EXPECT_FALSE(empty_array->IsEmpty());
 }
 
-TEST_F(JArrayTest, AccessItemsByIndex) {
+TEST_F(JArrayTest, AccessItemsByIndex)
+{
     ASSERT_EQ(sample_array->Count(), 3);
-    
+
     auto item0 = sample_array->Get(0);
     ASSERT_NE(item0, nullptr);
     EXPECT_EQ(item0->GetType(), neo::json::JTokenType::String);
-    
+
     auto item1 = sample_array->Get(1);
     ASSERT_NE(item1, nullptr);
     EXPECT_EQ(item1->GetType(), neo::json::JTokenType::Number);
-    
+
     auto item2 = sample_array->Get(2);
     ASSERT_NE(item2, nullptr);
     EXPECT_EQ(item2->GetType(), neo::json::JTokenType::Boolean);
 }
 
-TEST_F(JArrayTest, RemoveItemDecreasesCount) {
+TEST_F(JArrayTest, RemoveItemDecreasesCount)
+{
     ASSERT_EQ(sample_array->Count(), 3);
     sample_array->RemoveAt(1);
     EXPECT_EQ(sample_array->Count(), 2);
 }
 
-TEST_F(JArrayTest, ClearRemovesAllItems) {
+TEST_F(JArrayTest, ClearRemovesAllItems)
+{
     ASSERT_GT(sample_array->Count(), 0);
     sample_array->Clear();
     EXPECT_EQ(sample_array->Count(), 0);
     EXPECT_TRUE(sample_array->IsEmpty());
 }
 
-} // namespace test
-} // namespace neo
+}  // namespace test
+}  // namespace neo
 
-#endif // TESTS_UNIT_MISC_TEST_JARRAY_CPP_H
+#endif  // TESTS_UNIT_MISC_TEST_JARRAY_CPP_H

@@ -311,7 +311,7 @@ class SafeConversions
         {
             return SafeToInt32(str);
         }
-        catch (...)
+        catch (const std::exception&)
         {
             return std::nullopt;
         }
@@ -328,7 +328,7 @@ class SafeConversions
         {
             return SafeToUInt32(str);
         }
-        catch (...)
+        catch (const std::exception&)
         {
             return std::nullopt;
         }
@@ -345,7 +345,7 @@ class SafeConversions
         {
             return SafeToInt64(str);
         }
-        catch (...)
+        catch (const std::exception&)
         {
             return std::nullopt;
         }
@@ -362,7 +362,7 @@ class SafeConversions
         {
             return SafeToUInt64(str);
         }
-        catch (...)
+        catch (const std::exception&)
         {
             return std::nullopt;
         }
@@ -373,13 +373,34 @@ class SafeConversions
      * @param str Input string
      * @return Optional containing value if successful
      */
+    static bool IsValidNeoAddress(const std::string& address)
+    {
+        // Validate NEO address format and checksum
+        if (address.length() != 34)
+            return false;
+        if (address[0] != 'N')
+            return false;
+
+        // Validate base58 characters
+        const std::string base58_chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+        for (char c : address)
+        {
+            if (base58_chars.find(c) == std::string::npos)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     static std::optional<double> TryToDouble(const std::string& str)
     {
         try
         {
             return SafeToDouble(str);
         }
-        catch (...)
+        catch (const std::exception&)
         {
             return std::nullopt;
         }

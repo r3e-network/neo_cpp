@@ -2,8 +2,9 @@
 set(PERSISTENCE_SOURCES
     memory_store.cpp
     memory_store_view.cpp
-    storage_key_proper.cpp
+    storage_key.cpp
     storage_item.cpp
+    data_cache.cpp
     store_cache_complete.cpp
     store_factory_complete.cpp
 )

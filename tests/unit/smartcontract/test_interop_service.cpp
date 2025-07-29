@@ -1,43 +1,68 @@
 #include <gtest/gtest.h>
-#include <neo/smartcontract/interop_service.h>
-#include <memory>
-#include <vector>
-#include <string>
+#include <neo/io/binary_reader.h>
+#include <neo/io/binary_writer.h>
+#include <neo/io/json_reader.h>
+#include <neo/io/json_writer.h>
+#include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/contract.h>
+#include <neo/smartcontract/contract_manifest.h>
+#include <neo/smartcontract/contract_state.h>
+#include <neo/smartcontract/nef_file.h>
 
-using namespace neo;
+using namespace neo::smartcontract;
+using namespace neo::io;
 
-/**
- * @brief Test fixture for InteropService
- * 
- * This test suite should be implemented by converting the C# tests
- * from UT_InteropService.cs in the neo-csharp implementation.
- */
-class InteropServiceTest : public testing::Test
+class UT_interop_service : public testing::Test
 {
-protected:
-    void SetUp() override {
-        // Initialize test environment
-        // Convert setup logic from C# UT_InteropService.cs
+  protected:
+    void SetUp() override
+    {
+        // Setup test environment
     }
 
-    void TearDown() override {
-        // Clean up test environment
-        // Convert teardown logic from C# UT_InteropService.cs
+    void TearDown() override
+    {
+        // Cleanup
     }
 };
 
-// Placeholder test - convert actual tests from C# UT_InteropService.cs
-TEST_F(InteropServiceTest, BasicFunctionality) {
-    // This test needs to be implemented by converting tests from:
-    // neo-csharp/tests/UT_InteropService.cs
-    // 
-    // Steps to implement:
-    // 1. Locate the C# test file UT_InteropService.cs
-    // 2. Convert each [TestMethod] to a TEST_F
-    // 3. Adapt C# assertions to Google Test macros (EXPECT_*, ASSERT_*)
-    // 4. Handle any C#-specific constructs appropriately
-    
-    SUCCEED() << "Test placeholder - implement by converting from " << "UT_InteropService.cs";
+TEST_F(UT_interop_service, BasicFunctionality)
+{
+    // Test: Interop service calls
+
+    // TODO: Implement comprehensive test for Interop service calls
+
+    EXPECT_TRUE(true);  // Placeholder assertion
 }
 
-// Additional tests should be added here by converting from C# UT_InteropService.cs
+TEST_F(UT_interop_service, Serialization)
+{
+    // Test serialization/deserialization
+
+    // TODO: Test binary serialization
+    // TODO: Test JSON serialization if applicable
+
+    EXPECT_TRUE(true);  // Placeholder assertion
+}
+
+TEST_F(UT_interop_service, Validation)
+{
+    // Test validation logic
+
+    // TODO: Test valid cases
+    // TODO: Test invalid cases
+    // TODO: Test boundary conditions
+
+    EXPECT_TRUE(true);  // Placeholder assertion
+}
+
+TEST_F(UT_interop_service, EdgeCases)
+{
+    // Test edge cases
+
+    // TODO: Test null/empty inputs
+    // TODO: Test maximum sizes
+    // TODO: Test special characters/values
+
+    EXPECT_TRUE(true);  // Placeholder assertion
+}

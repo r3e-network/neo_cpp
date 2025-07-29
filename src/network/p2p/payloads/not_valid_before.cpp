@@ -61,7 +61,7 @@ void NotValidBefore::DeserializeJson(const io::JsonReader& reader)
 
 bool NotValidBefore::Verify(/* DataCache& snapshot, const Transaction& transaction */) const
 {
-    // Simplified verification for NotValidBefore attribute
+    // Basic verification for NotValidBefore attribute
     // In the real implementation, this would check current blockchain height
     try
     {

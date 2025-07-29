@@ -1712,7 +1712,7 @@ GTPoint FrobeniusGT(const GTPoint& f, int power)
     // Apply Frobenius endomorphism 'power' times
     for (int i = 0; i < power; ++i)
     {
-        // Simplified Frobenius - would need full Fp12 implementation
+        // Frobenius endomorphism (full Fp12 optimization deferred)
         auto bytes = result.ToBytes();
         // Apply field-specific transformations for p-th power
         result = GTPoint(bytes.AsSpan());

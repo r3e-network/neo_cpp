@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
+#include <neo/io/byte_vector.h>
+#include <neo/io/fixed8.h>
+#include <neo/io/ijson_serializable.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
-#include <neo/io/ijson_serializable.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
-#include <neo/io/fixed8.h>
-#include <neo/io/byte_vector.h>
 #include <string>
 
 using namespace neo::io;
@@ -13,7 +13,7 @@ using namespace neo::io;
 // Test class that implements IJsonSerializable
 class TestObject : public IJsonSerializable
 {
-public:
+  public:
     bool boolValue = false;
     uint8_t uint8Value = 0;
     uint16_t uint16Value = 0;
@@ -70,21 +70,13 @@ public:
 
     bool operator==(const TestObject& other) const
     {
-        return boolValue == other.boolValue &&
-               uint8Value == other.uint8Value &&
-               uint16Value == other.uint16Value &&
-               uint32Value == other.uint32Value &&
-               uint64Value == other.uint64Value &&
-               int8Value == other.int8Value &&
-               int16Value == other.int16Value &&
-               int32Value == other.int32Value &&
-               int64Value == other.int64Value &&
+        return boolValue == other.boolValue && uint8Value == other.uint8Value && uint16Value == other.uint16Value &&
+               uint32Value == other.uint32Value && uint64Value == other.uint64Value && int8Value == other.int8Value &&
+               int16Value == other.int16Value && int32Value == other.int32Value && int64Value == other.int64Value &&
                stringValue == other.stringValue &&
                bytesValue.AsSpan().ToHexString() == other.bytesValue.AsSpan().ToHexString() &&
-               uint160Value == other.uint160Value &&
-               uint256Value == other.uint256Value &&
-               fixed8Value == other.fixed8Value &&
-               children.size() == other.children.size();
+               uint160Value == other.uint160Value && uint256Value == other.uint256Value &&
+               fixed8Value == other.fixed8Value && children.size() == other.children.size();
     }
 };
 
@@ -154,7 +146,8 @@ TEST(JsonSerializationTest, SerializeDeserialize)
     EXPECT_EQ(deserialized.stringValue, "Hello, world!");
     EXPECT_EQ(deserialized.bytesValue.AsSpan().ToHexString(), "0123456789ABCDEF");
     EXPECT_EQ(deserialized.uint160Value.ToHexString(), "0123456789ABCDEF0123456789ABCDEF01234567");
-    EXPECT_EQ(deserialized.uint256Value.ToHexString(), "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    EXPECT_EQ(deserialized.uint256Value.ToHexString(),
+              "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
     EXPECT_EQ(deserialized.fixed8Value.ToString(), "123.45678");
     EXPECT_EQ(deserialized.children.size(), 1);
     EXPECT_EQ(deserialized.children[0].boolValue, false);
@@ -175,10 +168,10 @@ TEST(JsonSerializationTest, DefaultValues)
 {
     // Create an empty JSON object
     nlohmann::json json = nlohmann::json::object();
-    
+
     // Create a JsonReader
     JsonReader reader(json);
-    
+
     // Test default values
     EXPECT_EQ(reader.ReadBool("nonexistent"), false);
     EXPECT_EQ(reader.ReadBool("nonexistent", true), true);

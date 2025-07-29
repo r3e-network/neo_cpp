@@ -27,7 +27,24 @@ target_link_libraries(neo_cli_tool PRIVATE
 )
 
 add_executable(neo_gui gui/main.cpp)
-target_link_libraries(neo_gui PRIVATE neo_core)
+target_link_libraries(neo_gui PRIVATE 
+    neo_core 
+    neo_persistence 
+    neo_ledger 
+    neo_blockchain
+    neo_rpc 
+    neo_smartcontract
+    neo_native_contracts
+    neo_network
+    neo_node
+    neo_wallets
+    neo_cryptography
+    neo_io
+    neo_logging
+    neo_json
+    neo_extensions
+    neo_vm
+)
 
 # RPC server test tool
 add_executable(test_rpc_server test_rpc_server.cpp)

@@ -47,7 +47,7 @@ class ConnectionPool
                     available_.push(conn);
                 }
             }
-            catch (...)
+            catch (const std::exception&)
             {
                 // Log but continue
             }
@@ -104,7 +104,7 @@ class ConnectionPool
                         return conn;
                     }
                 }
-                catch (...)
+                catch (const std::exception&)
                 {
                     // Failed to create connection
                 }
@@ -234,7 +234,7 @@ class ConnectionPool
                         currentSize++;
                     }
                 }
-                catch (...)
+                catch (const std::exception&)
                 {
                     break;
                 }

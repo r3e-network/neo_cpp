@@ -162,10 +162,8 @@ std::string ContractManifest::ToJson() const
 
     // Serialize other fields with proper structure
     // Basic implementation - full implementation would serialize actual ABI and permission objects
-    jsonObj["abi"] = nlohmann::json::object({
-        {"methods", nlohmann::json::array()},
-        {"events", nlohmann::json::array()}
-    });
+    jsonObj["abi"] =
+        nlohmann::json::object({{"methods", nlohmann::json::array()}, {"events", nlohmann::json::array()}});
     jsonObj["permissions"] = nlohmann::json::array();
     jsonObj["trusts"] = nlohmann::json::array();
     jsonObj["groups"] = nlohmann::json::array();

@@ -60,8 +60,22 @@ void ConsoleServiceBase::Run(const std::vector<std::string>& args)
         if (args[0] == "/install")
         {
 #ifdef _WIN32
-            // Windows service installation logic would go here
-            ConsoleHelper::Info("Service installation", "Feature not implemented on this platform");
+            try
+            {
+                auto result = InstallWindowsService();
+                if (result)
+                {
+                    ConsoleHelper::Info("Service installation", "Neo service installed successfully");
+                }
+                else
+                {
+                    ConsoleHelper::Error("Service installation", "Failed to install Neo service");
+                }
+            }
+            catch (const std::exception& e)
+            {
+                ConsoleHelper::Error("Service installation", e.what());
+            }
 #else
             ConsoleHelper::Warning("Only support for installing services on Windows.");
 #endif
@@ -70,8 +84,22 @@ void ConsoleServiceBase::Run(const std::vector<std::string>& args)
         else if (args[0] == "/uninstall")
         {
 #ifdef _WIN32
-            // Windows service uninstallation logic would go here
-            ConsoleHelper::Info("Service uninstallation", "Feature not implemented on this platform");
+            try
+            {
+                auto result = UninstallWindowsService();
+                if (result)
+                {
+                    ConsoleHelper::Info("Service uninstallation", "Neo service uninstalled successfully");
+                }
+                else
+                {
+                    ConsoleHelper::Error("Service uninstallation", "Failed to uninstall Neo service");
+                }
+            }
+            catch (const std::exception& e)
+            {
+                ConsoleHelper::Error("Service uninstallation", e.what());
+            }
 #else
             ConsoleHelper::Warning("Only support for uninstalling services on Windows.");
 #endif
@@ -323,4 +351,79 @@ void ConsoleServiceBase::RegisterDefaultHandlers()
             return str == "1" || str == "yes" || str == "y" || str == "true";
         });
 }
+
+#ifdef _WIN32
+#include <windows.h>
+
+bool ConsoleServiceBase::InstallWindowsService()
+{
+    SC_HANDLE sc_manager = OpenSCManager(nullptr, nullptr, SC_MANAGER_CREATE_SERVICE);
+    if (!sc_manager)
+    {
+        return false;
+    }
+
+    // Get the path to the current executable
+    char exe_path[MAX_PATH];
+    if (!GetModuleFileNameA(nullptr, exe_path, MAX_PATH))
+    {
+        CloseServiceHandle(sc_manager);
+        return false;
+    }
+
+    std::string service_name = GetServiceName();
+    std::string display_name = service_name + " Service";
+    std::string description = "Neo blockchain node service";
+
+    SC_HANDLE service = CreateServiceA(sc_manager,                 // SCM database
+                                       service_name.c_str(),       // Name of service
+                                       display_name.c_str(),       // Service display name
+                                       SERVICE_ALL_ACCESS,         // Desired access
+                                       SERVICE_WIN32_OWN_PROCESS,  // Service type
+                                       SERVICE_AUTO_START,         // Start type
+                                       SERVICE_ERROR_NORMAL,       // Error control type
+                                       exe_path,                   // Path to service's binary
+                                       nullptr,                    // No load ordering group
+                                       nullptr,                    // No tag identifier
+                                       GetDepends().empty() ? nullptr : GetDepends().c_str(),  // Dependencies
+                                       nullptr,                                                // LocalSystem account
+                                       nullptr                                                 // No password
+    );
+
+    bool success = (service != nullptr);
+
+    if (service)
+    {
+        CloseServiceHandle(service);
+    }
+    CloseServiceHandle(sc_manager);
+
+    return success;
+}
+
+bool ConsoleServiceBase::UninstallWindowsService()
+{
+    SC_HANDLE sc_manager = OpenSCManager(nullptr, nullptr, SC_MANAGER_CONNECT);
+    if (!sc_manager)
+    {
+        return false;
+    }
+
+    std::string service_name = GetServiceName();
+    SC_HANDLE service = OpenServiceA(sc_manager, service_name.c_str(), DELETE);
+    if (!service)
+    {
+        CloseServiceHandle(sc_manager);
+        return false;
+    }
+
+    bool success = DeleteService(service);
+
+    CloseServiceHandle(service);
+    CloseServiceHandle(sc_manager);
+
+    return success;
+}
+#endif
+
 }  // namespace neo::console_service

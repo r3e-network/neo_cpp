@@ -6,7 +6,8 @@
 using namespace neo::vm;
 using namespace neo::smartcontract;
 
-int main() {
+int main()
+{
     // Create a simple script that calls a system runtime function
     std::vector<uint8_t> script_bytes = {
         static_cast<uint8_t>(OpCode::SYSCALL),  // System call
@@ -26,12 +27,15 @@ int main() {
     auto result = engine.Execute();
 
     // Check the result
-    if (result == VMState::HALT) {
+    if (result == VMState::HALT)
+    {
         // Get the result from the evaluation stack
         auto stack_item = engine.GetEvaluationStack().Pop();
-        
+
         std::cout << "Execution succeeded" << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << "Execution failed with state: " << static_cast<int>(result) << std::endl;
     }
 

@@ -1,12 +1,14 @@
 #pragma once
 
-#include <gmock/gmock.h>
 #include "neo/protocol_settings.h"
+#include <gmock/gmock.h>
 
-namespace neo::tests {
+namespace neo::tests
+{
 
-class MockProtocolSettings : public ProtocolSettings {
-public:
+class MockProtocolSettings : public ProtocolSettings
+{
+  public:
     MOCK_METHOD(uint32_t, GetNetwork, (), (const, override));
     MOCK_METHOD(uint32_t, GetMagic, (), (const, override));
     MOCK_METHOD(int, GetMaxConnections, (), (const, override));
@@ -21,4 +23,4 @@ public:
     MOCK_METHOD(const std::vector<cryptography::ECPoint>&, GetStandbyCommittee, (), (const, override));
 };
 
-} // namespace neo::tests
+}  // namespace neo::tests

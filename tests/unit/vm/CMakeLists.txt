@@ -1,3 +1,6 @@
+# Add subdirectory for opcode tests
+add_subdirectory(opcodes)
+
 # Create the VM unit tests
 add_executable(test_vm
     test_stack_item.cpp

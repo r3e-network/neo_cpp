@@ -82,8 +82,8 @@ class MemoryStore : public IStore
      * @param direction The direction to seek.
      * @return The key-value pairs found.
      */
-    std::vector<std::pair<io::ByteVector, io::ByteVector>>
-    Seek(const io::ByteVector& prefix, SeekDirection direction = SeekDirection::Forward) const;
+    std::vector<std::pair<io::ByteVector, io::ByteVector>> Seek(const io::ByteVector& prefix,
+                                                                SeekDirection direction = SeekDirection::Forward) const;
 
   private:
     std::unordered_map<io::ByteVector, io::ByteVector> store_;

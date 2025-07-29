@@ -1,8 +1,8 @@
 #include <neo/cryptography/base64.h>
 #include <neo/smartcontract/json_serializer.h>
+#include <neo/vm/compound_items.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/stack_item_types.h>
-#include <neo/vm/compound_items.h>
 #include <nlohmann/json.hpp>
 #include <stdexcept>
 
@@ -89,8 +89,7 @@ nlohmann::json JsonSerializer::SerializeStackItem(std::shared_ptr<vm::StackItem>
             {
                 // Use base64 encoded key for complex key types
                 std::string keyStr;
-                if (key->GetType() == vm::StackItemType::ByteString || 
-                    key->GetType() == vm::StackItemType::Buffer)
+                if (key->GetType() == vm::StackItemType::ByteString || key->GetType() == vm::StackItemType::Buffer)
                 {
                     auto keyBytes = key->GetByteArray();
                     keyStr = cryptography::Base64::Encode(keyBytes.AsSpan());
@@ -148,14 +147,20 @@ std::shared_ptr<vm::StackItem> JsonSerializer::DeserializeStackItem(const nlohma
     else if (json.is_string())
     {
         std::string str = json.get<std::string>();
-        
+
         // Try to decode as base64 first (for byte arrays)
         try
         {
             auto bytes = cryptography::Base64::Decode(str);
             return vm::StackItem::Create(bytes);
         }
-        catch (...)
+        catch (const std::invalid_argument&)
+        {
+            // If base64 decoding fails, treat as regular string
+            io::ByteVector bytes(reinterpret_cast<const uint8_t*>(str.data()), str.size());
+            return vm::StackItem::Create(bytes);
+        }
+        catch (const std::runtime_error&)
         {
             // If base64 decoding fails, treat as regular string
             io::ByteVector bytes(reinterpret_cast<const uint8_t*>(str.data()), str.size());
@@ -175,19 +180,19 @@ std::shared_ptr<vm::StackItem> JsonSerializer::DeserializeStackItem(const nlohma
     {
         // Create a map from JSON object
         std::map<std::shared_ptr<vm::StackItem>, std::shared_ptr<vm::StackItem>, vm::StackItemPtrComparator> map;
-        
+
         for (auto it = json.begin(); it != json.end(); ++it)
         {
             // Create key from string
             io::ByteVector keyBytes(reinterpret_cast<const uint8_t*>(it.key().data()), it.key().size());
             auto key = vm::StackItem::Create(keyBytes);
-            
+
             // Deserialize value
             auto value = DeserializeStackItem(it.value(), maxSize, maxItems, itemCount);
-            
+
             map[key] = value;
         }
-        
+
         return std::make_shared<vm::MapItem>(map);
     }
     else

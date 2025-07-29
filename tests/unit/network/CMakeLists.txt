@@ -32,3 +32,34 @@ target_link_libraries(test_network
 # Add test
 add_test(NAME test_network COMMAND test_network)
 endif()  # End of disabled network tests
+
+# New network tests (placeholders for missing functionality)
+add_executable(test_network_new
+    test_message_serialization.cpp
+    test_peer_discovery.cpp
+    test_connection_management.cpp
+    test_protocol_negotiation.cpp
+    test_malformed_messages.cpp
+    test_p2p_capabilities.cpp
+    test_network_addresses.cpp
+    test_message_flooding.cpp
+    test_peer_reputation.cpp
+    test_network_latency.cpp
+)
+
+# Include directories
+target_include_directories(test_network_new
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# Link dependencies
+target_link_libraries(test_network_new
+    PRIVATE
+        neo_cpp
+        ${GTEST_LIBRARIES}
+)
+
+# Add test
+add_test(NAME test_network_new COMMAND test_network_new)

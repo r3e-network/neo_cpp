@@ -15,11 +15,13 @@ StoreCache::StoreCache(IStore& store) : store_(store), snapshot_(nullptr)
     }
 }
 
-StoreCache::StoreCache(std::shared_ptr<IStoreSnapshot> snapshot)
-    : store_(*snapshot)  // This is a workaround - proper implementation would not need store_
-      ,
-      snapshot_(snapshot)
+StoreCache::StoreCache(std::shared_ptr<IStoreSnapshot> snapshot) : store_(*snapshot), snapshot_(snapshot)
 {
+    // Ensure snapshot is valid
+    if (!snapshot_)
+    {
+        throw std::invalid_argument("Snapshot cannot be null");
+    }
 }
 
 std::optional<StorageItem> StoreCache::TryGet(const StorageKey& key) const
@@ -89,11 +91,21 @@ void StoreCache::Add(const StorageKey& key, const StorageItem& item)
         }
         else
         {
-            it->second.first = item;
+            // Key already exists and is not deleted
+            throw std::invalid_argument("Key already exists");
         }
     }
     else
     {
+        // Check if key exists in snapshot
+        if (snapshot_)
+        {
+            auto keyArray = key.ToArray();
+            if (snapshot_->Contains(keyArray))
+            {
+                throw std::invalid_argument("Key already exists in store");
+            }
+        }
         items_[key] = {item, TrackState::Added};
     }
 }
@@ -359,6 +371,10 @@ void StoreCache::Update(const StorageKey& key, const StorageItem& item)
     auto it = items_.find(key);
     if (it != items_.end())
     {
+        if (it->second.second == TrackState::Deleted)
+        {
+            throw std::out_of_range("Cannot update deleted key");
+        }
         it->second.first = item;
         if (it->second.second == TrackState::None)
         {
@@ -374,7 +390,8 @@ void StoreCache::Update(const StorageKey& key, const StorageItem& item)
         }
         else
         {
-            items_[key] = {item, TrackState::Added};
+            // Key doesn't exist anywhere
+            throw std::out_of_range("Key not found");
         }
     }
 }

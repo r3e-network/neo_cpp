@@ -1,42 +1,45 @@
 #include <gtest/gtest.h>
-#include <neo/smartcontract/native/crypto_lib.h>
 #include <memory>
-#include <vector>
+#include <neo/smartcontract/native/crypto_lib.h>
 #include <string>
+#include <vector>
 
 using namespace neo;
 
 /**
  * @brief Test fixture for CryptoLib
- * 
+ *
  * This test suite should be implemented by converting the C# tests
  * from UT_CryptoLib.cs in the neo-csharp implementation.
  */
 class CryptoLibTest : public testing::Test
 {
-protected:
-    void SetUp() override {
+  protected:
+    void SetUp() override
+    {
         // Initialize test environment
         // Convert setup logic from C# UT_CryptoLib.cs
     }
 
-    void TearDown() override {
+    void TearDown() override
+    {
         // Clean up test environment
         // Convert teardown logic from C# UT_CryptoLib.cs
     }
 };
 
 // Placeholder test - convert actual tests from C# UT_CryptoLib.cs
-TEST_F(CryptoLibTest, BasicFunctionality) {
+TEST_F(CryptoLibTest, BasicFunctionality)
+{
     // This test needs to be implemented by converting tests from:
     // neo-csharp/tests/UT_CryptoLib.cs
-    // 
+    //
     // Steps to implement:
     // 1. Locate the C# test file UT_CryptoLib.cs
     // 2. Convert each [TestMethod] to a TEST_F
     // 3. Adapt C# assertions to Google Test macros (EXPECT_*, ASSERT_*)
     // 4. Handle any C#-specific constructs appropriately
-    
+
     SUCCEED() << "Test placeholder - implement by converting from " << "UT_CryptoLib.cs";
 }
 

@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
+#include <neo/io/byte_vector.h>
 #include <neo/vm/debugger.h>
 #include <neo/vm/execution_engine.h>
 #include <neo/vm/script.h>
-#include <neo/io/byte_vector.h>
 
 using namespace neo::vm;
 using ByteVector = neo::vm::internal::ByteVector;
@@ -10,7 +10,7 @@ using ByteVector = neo::vm::internal::ByteVector;
 // Test fixture for Debugger tests
 class DebuggerTest : public ::testing::Test
 {
-protected:
+  protected:
     void SetUp() override
     {
         // Create a simple script with PUSH1, PUSH2, ADD operations
@@ -29,44 +29,44 @@ TEST_F(DebuggerTest, StepInto)
 {
     // Load script into engine
     engine_->LoadScript(script_);
-    
+
     // Initially in BREAK state
     EXPECT_EQ(engine_->GetState(), VMState::Break);
-    
+
     // Step into first instruction (PUSH1)
     VMState state = debugger_->StepInto();
-    
+
     // Should still be in BREAK state
     EXPECT_EQ(state, VMState::Break);
-    
+
     // Stack should have one item with value 1
     EXPECT_EQ(engine_->GetCurrentContext().GetEvaluationStack().size(), 1);
     EXPECT_EQ(engine_->GetCurrentContext().Peek()->GetInteger(), 1);
-    
+
     // Step into second instruction (PUSH2)
     state = debugger_->StepInto();
-    
+
     // Should still be in BREAK state
     EXPECT_EQ(state, VMState::Break);
-    
+
     // Stack should have two items with values 1 and 2
     EXPECT_EQ(engine_->GetCurrentContext().GetEvaluationStack().size(), 2);
     EXPECT_EQ(engine_->GetCurrentContext().Peek()->GetInteger(), 2);
     EXPECT_EQ(engine_->GetCurrentContext().Peek(1)->GetInteger(), 1);
-    
+
     // Step into third instruction (ADD)
     state = debugger_->StepInto();
-    
+
     // Should still be in BREAK state
     EXPECT_EQ(state, VMState::Break);
-    
+
     // Stack should have one item with value 3 (1+2)
     EXPECT_EQ(engine_->GetCurrentContext().GetEvaluationStack().size(), 1);
     EXPECT_EQ(engine_->GetCurrentContext().Peek()->GetInteger(), 3);
-    
+
     // Script is now complete, stepping again should halt
     state = debugger_->StepInto();
-    
+
     // Should now be in HALT state
     EXPECT_EQ(state, VMState::Halt);
 }
@@ -163,17 +163,17 @@ TEST_F(DebuggerTest, Continue)
 {
     // Load script into engine
     engine_->LoadScript(script_);
-    
+
     // Initially in BREAK state
     EXPECT_EQ(engine_->GetState(), VMState::Break);
-    
+
     // Continue execution until completion
     VMState state = debugger_->Execute();
-    
+
     // Should now be in HALT state
     EXPECT_EQ(state, VMState::Halt);
-    
+
     // Stack should have one item with value 3 (1+2)
     EXPECT_EQ(engine_->GetResultStack().size(), 1);
     EXPECT_EQ(engine_->GetResultStack()[0]->GetInteger(), 3);
-} 
+}

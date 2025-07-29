@@ -190,7 +190,7 @@ bool neo::console_service::ServiceProxy::StopNode()
         {
             // Notify system to prepare for shutdown
             NotifyEvent("Preparing for graceful shutdown...");
-            
+
             // Give time for pending operations to complete
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
         }

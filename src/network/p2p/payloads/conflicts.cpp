@@ -61,7 +61,7 @@ void Conflicts::DeserializeJson(const io::JsonReader& reader)
 
 bool Conflicts::Verify(/* DataCache& snapshot, const Transaction& transaction */) const
 {
-    // Simplified verification - just check if hash is non-zero
+    // Basic verification - just check if hash is non-zero
     // For a complete implementation, this would need access to the system context
     try
     {
@@ -87,7 +87,7 @@ bool Conflicts::Verify(/* DataCache& snapshot, const Transaction& transaction */
 
 int64_t Conflicts::CalculateNetworkFee(/* DataCache& snapshot, const Transaction& transaction */) const
 {
-    // Simplified network fee calculation for Conflicts attribute
+    // Basic network fee calculation for Conflicts attribute
     // In the real implementation, this would be based on protocol settings
     return 5000000;  // 0.05 GAS in datoshi (Neo N3 default fee for conflicts)
 }

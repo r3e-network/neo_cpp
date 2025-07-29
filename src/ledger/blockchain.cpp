@@ -1,12 +1,12 @@
 #include <algorithm>
 #include <chrono>
 #include <iostream>
+#include <neo/core/neo_system.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/memory_pool.h>
-#include <neo/core/neo_system.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/neo_token.h>

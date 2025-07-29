@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
-#include <neo/smartcontract/native/policy_contract.h>
-#include <neo/smartcontract/native/neo_token.h>
-#include <neo/smartcontract/application_engine.h>
-#include <neo/persistence/memory_store_view.h>
 #include <neo/core/biginteger.h>
 #include <neo/extensions/biginteger_extensions.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+#include <neo/persistence/memory_store_view.h>
+#include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/native/neo_token.h>
+#include <neo/smartcontract/native/policy_contract.h>
 #include <sstream>
 
 using namespace neo::smartcontract::native;
@@ -19,7 +19,7 @@ using namespace neo::extensions;
 
 class PolicyContractTest : public ::testing::Test
 {
-protected:
+  protected:
     std::shared_ptr<MemoryStoreView> snapshot;
     std::shared_ptr<PolicyContract> policyContract;
     std::shared_ptr<NeoToken> neoToken;
@@ -45,7 +45,7 @@ TEST_F(PolicyContractTest, TestGetFeePerByte)
 {
     // Initialize the contract
     policyContract->InitializeContract(*engine, 0);
-    
+
     // Default value should be 1000
     ASSERT_EQ(policyContract->GetFeePerByte(snapshot), PolicyContract::DEFAULT_FEE_PER_BYTE);
 
@@ -62,7 +62,7 @@ TEST_F(PolicyContractTest, TestGetExecFeeFactor)
 {
     // Initialize the contract
     policyContract->InitializeContract(*engine, 0);
-    
+
     // Default value should be 30
     ASSERT_EQ(policyContract->GetExecFeeFactor(snapshot), PolicyContract::DEFAULT_EXEC_FEE_FACTOR);
 
@@ -79,7 +79,7 @@ TEST_F(PolicyContractTest, TestGetStoragePrice)
 {
     // Initialize the contract
     policyContract->InitializeContract(*engine, 0);
-    
+
     // Default value should be 100000
     ASSERT_EQ(policyContract->GetStoragePrice(snapshot), PolicyContract::DEFAULT_STORAGE_PRICE);
 
@@ -197,7 +197,8 @@ TEST_F(PolicyContractTest, TestInitializeContract)
     ASSERT_EQ(policyContract->GetExecutionFeeFactor(snapshot), PolicyContract::DEFAULT_EXECUTION_FEE_FACTOR);
     ASSERT_EQ(policyContract->GetStoragePrice(snapshot), PolicyContract::DEFAULT_STORAGE_PRICE);
     ASSERT_EQ(policyContract->GetMillisecondsPerBlock(snapshot), PolicyContract::DEFAULT_MILLISECONDS_PER_BLOCK);
-    ASSERT_EQ(policyContract->GetMaxValidUntilBlockIncrement(snapshot), PolicyContract::DEFAULT_MAX_VALID_UNTIL_BLOCK_INCREMENT);
+    ASSERT_EQ(policyContract->GetMaxValidUntilBlockIncrement(snapshot),
+              PolicyContract::DEFAULT_MAX_VALID_UNTIL_BLOCK_INCREMENT);
     ASSERT_EQ(policyContract->GetMaxTraceableBlocks(snapshot), PolicyContract::DEFAULT_MAX_TRACEABLE_BLOCKS);
 }
 
@@ -220,7 +221,8 @@ TEST_F(PolicyContractTest, TestOnPersist)
     ASSERT_EQ(policyContract->GetExecutionFeeFactor(snapshot), PolicyContract::DEFAULT_EXECUTION_FEE_FACTOR);
     ASSERT_EQ(policyContract->GetStoragePrice(snapshot), PolicyContract::DEFAULT_STORAGE_PRICE);
     ASSERT_EQ(policyContract->GetMillisecondsPerBlock(snapshot), PolicyContract::DEFAULT_MILLISECONDS_PER_BLOCK);
-    ASSERT_EQ(policyContract->GetMaxValidUntilBlockIncrement(snapshot), PolicyContract::DEFAULT_MAX_VALID_UNTIL_BLOCK_INCREMENT);
+    ASSERT_EQ(policyContract->GetMaxValidUntilBlockIncrement(snapshot),
+              PolicyContract::DEFAULT_MAX_VALID_UNTIL_BLOCK_INCREMENT);
     ASSERT_EQ(policyContract->GetMaxTraceableBlocks(snapshot), PolicyContract::DEFAULT_MAX_TRACEABLE_BLOCKS);
 }
 
@@ -229,7 +231,6 @@ TEST_F(PolicyContractTest, TestPostPersist)
     // Call PostPersist
     ASSERT_TRUE(policyContract->PostPersist(*engine));
 }
-
 
 int main(int argc, char** argv)
 {

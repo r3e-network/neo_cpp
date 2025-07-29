@@ -104,14 +104,14 @@ ContractParametersContext::ContextItem::ContextItem(const io::JsonReader& reader
             scriptHash = io::UInt160::FromString(scriptHashStr);
         }
     }
-    
+
     // Read parameters if present
     if (reader.HasKey("parameters"))
     {
         // Read parameters array
         parameters.clear();
     }
-    
+
     // Read signatures if present
     if (reader.HasKey("signatures"))
     {
@@ -277,20 +277,20 @@ bool ContractParametersContext::AddWithScriptHash(const io::UInt160& scriptHash)
     // Check if already exists
     if (contextItems_.find(scriptHash) != contextItems_.end())
         return false;
-        
+
     // Try to get contract from contract management
     auto contract = native::ContractManagement::GetContract(*snapshotCache_, scriptHash);
     if (!contract)
         return false;
-        
+
     // Create context item from contract
     auto item = std::make_unique<ContextItem>();
     item->scriptHash = scriptHash;
-    
+
     // Extract parameter types from contract manifest
     // For now, assume standard verification parameters
     contextItems_[scriptHash] = std::move(item);
-    
+
     return true;
 }
 
@@ -359,28 +359,28 @@ ContractParametersContext::FromJson(const io::JsonReader& reader, const persiste
 {
     auto context = std::make_unique<ContractParametersContext>();
     context->snapshotCache_ = &snapshotCache;
-    
+
     // Read verifiable type
     if (reader.HasKey("type"))
     {
         std::string type = reader.ReadString("type");
         // Store type for later use
     }
-    
+
     // Read verifiable hex data
     if (reader.HasKey("hex"))
     {
         std::string hexData = reader.ReadString("hex");
         // Parse and set verifiable from hex
     }
-    
+
     // Read items
     if (reader.HasKey("items"))
     {
         // Read context items map
         context->contextItems_.clear();
     }
-    
+
     return context;
 }
 
@@ -396,7 +396,7 @@ void ContractParametersContext::ToJson(io::JsonWriter& writer) const
         verifiableType = "Block";
     }
     writer.Write("type", verifiableType);
-    
+
     // Write verifiable data as hex
     if (verifiable_)
     {
@@ -404,7 +404,7 @@ void ContractParametersContext::ToJson(io::JsonWriter& writer) const
         io::BinaryWriter binaryWriter(stream);
         verifiable_->Serialize(binaryWriter);
         std::string data = stream.str();
-        
+
         // Convert to hex string
         std::string hexData;
         hexData.reserve(data.size() * 2);
@@ -526,26 +526,26 @@ std::shared_ptr<ledger::Witness> ContractParametersContext::CreateMultiSigWitnes
 {
     // Create witness with multi-sig invocation script
     auto witness = std::make_shared<ledger::Witness>();
-    
+
     // Get context item for this contract
     auto it = contextItems_.find(contract.GetScriptHash());
     if (it == contextItems_.end())
         return nullptr;
-        
+
     const auto& item = it->second;
-    
+
     // Build invocation script with signatures
     vm::ScriptBuilder invocationBuilder;
-    
+
     // Add signatures in order
     for (const auto& [pubKey, signature] : item->signatures)
     {
         invocationBuilder.EmitPush(signature);
     }
-    
+
     witness->SetInvocationScript(invocationBuilder.ToArray());
     witness->SetVerificationScript(contract.GetScript());
-    
+
     return witness;
 }
 }  // namespace neo::smartcontract

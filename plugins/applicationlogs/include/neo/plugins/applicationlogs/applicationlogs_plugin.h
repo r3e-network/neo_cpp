@@ -3,23 +3,27 @@
 #include <neo/plugins/plugin_base.h>
 #include <string>
 
-namespace neo {
-namespace plugins {
-namespace applicationlogs {
+namespace neo
+{
+namespace plugins
+{
+namespace applicationlogs
+{
 
-class ApplicationLogsPlugin : public PluginBase {
-public:
+class ApplicationLogsPlugin : public PluginBase
+{
+  public:
     ApplicationLogsPlugin(const std::string& path);
     ~ApplicationLogsPlugin() override;
 
-protected:
+  protected:
     bool OnStart() override;
     bool OnStop() override;
 
-private:
+  private:
     std::string path_;
 };
 
-} // namespace applicationlogs
-} // namespace plugins
-} // namespace neo
+}  // namespace applicationlogs
+}  // namespace plugins
+}  // namespace neo

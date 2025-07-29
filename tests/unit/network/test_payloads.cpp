@@ -1,17 +1,17 @@
 #include <gtest/gtest.h>
-#include <neo/network/p2p/payloads/transaction_payload.h>
+#include <neo/io/binary_reader.h>
+#include <neo/io/binary_writer.h>
 #include <neo/network/p2p/payloads/block_payload.h>
 #include <neo/network/p2p/payloads/consensus_payload.h>
-#include <neo/network/p2p/payloads/filter_load_payload.h>
 #include <neo/network/p2p/payloads/filter_add_payload.h>
+#include <neo/network/p2p/payloads/filter_load_payload.h>
 #include <neo/network/p2p/payloads/merkle_block_payload.h>
-#include <neo/io/binary_writer.h>
-#include <neo/io/binary_reader.h>
+#include <neo/network/p2p/payloads/transaction_payload.h>
 // #include <neo/network/payload_factory.h>  // PayloadFactory not implemented
-#include <neo/network/payload_type.h>
+#include <neo/io/uint256.h>
 #include <neo/ledger/block.h>
 #include <neo/ledger/transaction.h>
-#include <neo/io/uint256.h>
+#include <neo/network/payload_type.h>
 #include <sstream>
 #include <vector>
 

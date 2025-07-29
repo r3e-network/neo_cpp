@@ -1,23 +1,23 @@
+#include <chrono>
+#include <csignal>
+#include <fstream>
+#include <iostream>
+#include <neo/cryptography/ecc/keypair.h>
+#include <neo/cryptography/ecc/secp256r1.h>
+#include <neo/io/json.h>
+#include <neo/node/consensus.h>
 #include <neo/node/node.h>
 #include <neo/node/rpc_server.h>
-#include <neo/node/consensus.h>
 #include <neo/persistence/rocksdb_store.h>
 #include <neo/persistence/store_provider.h>
-#include <neo/cryptography/ecc/secp256r1.h>
-#include <neo/cryptography/ecc/keypair.h>
-#include <neo/wallets/wallet.h>
-#include <neo/wallets/wallet_manager.h>
 #include <neo/plugins/plugin.h>
 #include <neo/plugins/rpc_plugin.h>
 #include <neo/plugins/statistics_plugin.h>
-#include <neo/io/json.h>
-#include <iostream>
-#include <fstream>
+#include <neo/wallets/wallet.h>
+#include <neo/wallets/wallet_manager.h>
 #include <string>
-#include <unordered_map>
-#include <csignal>
 #include <thread>
-#include <chrono>
+#include <unordered_map>
 
 using namespace neo;
 using namespace neo::node;

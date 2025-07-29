@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
-#include <neo/ledger/transaction.h>
-#include <neo/ledger/coin_reference.h>
-#include <neo/ledger/transaction_output.h>
 #include <neo/core/fixed8.h>
 #include <neo/cryptography/hash.h>
-#include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
+#include <neo/io/binary_writer.h>
+#include <neo/ledger/coin_reference.h>
+#include <neo/ledger/transaction.h>
+#include <neo/ledger/transaction_output.h>
 #include <sstream>
 
 using namespace neo::ledger;
@@ -17,7 +17,7 @@ TEST(WitnessTest, Constructor)
     Witness witness1;
     EXPECT_EQ(witness1.GetInvocationScript(), ByteVector());
     EXPECT_EQ(witness1.GetVerificationScript(), ByteVector());
-    
+
     // Parameter constructor
     ByteVector invocationScript = ByteVector::Parse("0102030405");
     ByteVector verificationScript = ByteVector::Parse("0607080910");
@@ -40,18 +40,18 @@ TEST(WitnessTest, Serialization)
     ByteVector invocationScript = ByteVector::Parse("0102030405");
     ByteVector verificationScript = ByteVector::Parse("0607080910");
     Witness witness(invocationScript, verificationScript);
-    
+
     // Serialize
     std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     witness.Serialize(writer);
-    
+
     // Deserialize
     stream.seekg(0);
     BinaryReader reader(stream);
     Witness witness2;
     witness2.Deserialize(reader);
-    
+
     // Check
     EXPECT_EQ(witness2.GetInvocationScript(), invocationScript);
     EXPECT_EQ(witness2.GetVerificationScript(), verificationScript);
@@ -62,23 +62,23 @@ TEST(WitnessTest, Equality)
     ByteVector invocationScript1 = ByteVector::Parse("0102030405");
     ByteVector verificationScript1 = ByteVector::Parse("0607080910");
     Witness witness1(invocationScript1, verificationScript1);
-    
+
     ByteVector invocationScript2 = ByteVector::Parse("0102030405");
     ByteVector verificationScript2 = ByteVector::Parse("0607080910");
     Witness witness2(invocationScript2, verificationScript2);
-    
+
     ByteVector invocationScript3 = ByteVector::Parse("1112131415");
     ByteVector verificationScript3 = ByteVector::Parse("0607080910");
     Witness witness3(invocationScript3, verificationScript3);
-    
+
     ByteVector invocationScript4 = ByteVector::Parse("0102030405");
     ByteVector verificationScript4 = ByteVector::Parse("1617181920");
     Witness witness4(invocationScript4, verificationScript4);
-    
+
     EXPECT_TRUE(witness1 == witness2);
     EXPECT_FALSE(witness1 == witness3);
     EXPECT_FALSE(witness1 == witness4);
-    
+
     EXPECT_FALSE(witness1 != witness2);
     EXPECT_TRUE(witness1 != witness3);
     EXPECT_TRUE(witness1 != witness4);
@@ -90,7 +90,7 @@ TEST(CoinReferenceTest, Constructor)
     CoinReference coinRef1;
     EXPECT_EQ(coinRef1.GetPrevHash(), UInt256());
     EXPECT_EQ(coinRef1.GetPrevIndex(), 0);
-    
+
     // Parameter constructor
     UInt256 prevHash = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     uint16_t prevIndex = 123;
@@ -105,18 +105,18 @@ TEST(CoinReferenceTest, Serialization)
     UInt256 prevHash = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     uint16_t prevIndex = 123;
     CoinReference coinRef(prevHash, prevIndex);
-    
+
     // Serialize
     std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     coinRef.Serialize(writer);
-    
+
     // Deserialize
     stream.seekg(0);
     BinaryReader reader(stream);
     CoinReference coinRef2;
     coinRef2.Deserialize(reader);
-    
+
     // Check
     EXPECT_EQ(coinRef2.GetPrevHash(), prevHash);
     EXPECT_EQ(coinRef2.GetPrevIndex(), prevIndex);
@@ -127,23 +127,23 @@ TEST(CoinReferenceTest, Equality)
     UInt256 prevHash1 = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     uint16_t prevIndex1 = 123;
     CoinReference coinRef1(prevHash1, prevIndex1);
-    
+
     UInt256 prevHash2 = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     uint16_t prevIndex2 = 123;
     CoinReference coinRef2(prevHash2, prevIndex2);
-    
+
     UInt256 prevHash3 = UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40");
     uint16_t prevIndex3 = 123;
     CoinReference coinRef3(prevHash3, prevIndex3);
-    
+
     UInt256 prevHash4 = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     uint16_t prevIndex4 = 456;
     CoinReference coinRef4(prevHash4, prevIndex4);
-    
+
     EXPECT_TRUE(coinRef1 == coinRef2);
     EXPECT_FALSE(coinRef1 == coinRef3);
     EXPECT_FALSE(coinRef1 == coinRef4);
-    
+
     EXPECT_FALSE(coinRef1 != coinRef2);
     EXPECT_TRUE(coinRef1 != coinRef3);
     EXPECT_TRUE(coinRef1 != coinRef4);
@@ -156,7 +156,7 @@ TEST(TransactionOutputTest, Constructor)
     EXPECT_EQ(output1.GetAssetId(), UInt256());
     EXPECT_EQ(output1.GetValue(), Fixed8(0));
     EXPECT_EQ(output1.GetScriptHash(), UInt160());
-    
+
     // Parameter constructor
     UInt256 assetId = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     Fixed8 value(123);
@@ -174,18 +174,18 @@ TEST(TransactionOutputTest, Serialization)
     Fixed8 value(123);
     UInt160 scriptHash = UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314");
     TransactionOutput output(assetId, value, scriptHash);
-    
+
     // Serialize
     std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     output.Serialize(writer);
-    
+
     // Deserialize
     stream.seekg(0);
     BinaryReader reader(stream);
     TransactionOutput output2;
     output2.Deserialize(reader);
-    
+
     // Check
     EXPECT_EQ(output2.GetAssetId(), assetId);
     EXPECT_EQ(output2.GetValue(), value);
@@ -198,32 +198,32 @@ TEST(TransactionOutputTest, Equality)
     Fixed8 value1(123);
     UInt160 scriptHash1 = UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314");
     TransactionOutput output1(assetId1, value1, scriptHash1);
-    
+
     UInt256 assetId2 = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     Fixed8 value2(123);
     UInt160 scriptHash2 = UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314");
     TransactionOutput output2(assetId2, value2, scriptHash2);
-    
+
     UInt256 assetId3 = UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40");
     Fixed8 value3(123);
     UInt160 scriptHash3 = UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314");
     TransactionOutput output3(assetId3, value3, scriptHash3);
-    
+
     UInt256 assetId4 = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     Fixed8 value4(456);
     UInt160 scriptHash4 = UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314");
     TransactionOutput output4(assetId4, value4, scriptHash4);
-    
+
     UInt256 assetId5 = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     Fixed8 value5(123);
     UInt160 scriptHash5 = UInt160::Parse("2122232425262728292a2b2c2d2e2f3031323334");
     TransactionOutput output5(assetId5, value5, scriptHash5);
-    
+
     EXPECT_TRUE(output1 == output2);
     EXPECT_FALSE(output1 == output3);
     EXPECT_FALSE(output1 == output4);
     EXPECT_FALSE(output1 == output5);
-    
+
     EXPECT_FALSE(output1 != output2);
     EXPECT_TRUE(output1 != output3);
     EXPECT_TRUE(output1 != output4);
@@ -236,7 +236,7 @@ TEST(TransactionAttributeTest, Constructor)
     TransactionAttribute attribute1;
     EXPECT_EQ(attribute1.GetUsage(), TransactionAttribute::Usage::ContractHash);
     EXPECT_EQ(attribute1.GetData(), ByteVector());
-    
+
     // Parameter constructor
     TransactionAttribute::Usage usage = TransactionAttribute::Usage::Script;
     ByteVector data = ByteVector::Parse("0102030405");
@@ -251,18 +251,18 @@ TEST(TransactionAttributeTest, Serialization)
     TransactionAttribute::Usage usage = TransactionAttribute::Usage::Script;
     ByteVector data = ByteVector::Parse("0102030405060708090a0b0c0d0e0f1011121314");
     TransactionAttribute attribute(usage, data);
-    
+
     // Serialize
     std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     attribute.Serialize(writer);
-    
+
     // Deserialize
     stream.seekg(0);
     BinaryReader reader(stream);
     TransactionAttribute attribute2;
     attribute2.Deserialize(reader);
-    
+
     // Check
     EXPECT_EQ(attribute2.GetUsage(), usage);
     EXPECT_EQ(attribute2.GetData(), data);
@@ -273,23 +273,23 @@ TEST(TransactionAttributeTest, Equality)
     TransactionAttribute::Usage usage1 = TransactionAttribute::Usage::Script;
     ByteVector data1 = ByteVector::Parse("0102030405");
     TransactionAttribute attribute1(usage1, data1);
-    
+
     TransactionAttribute::Usage usage2 = TransactionAttribute::Usage::Script;
     ByteVector data2 = ByteVector::Parse("0102030405");
     TransactionAttribute attribute2(usage2, data2);
-    
+
     TransactionAttribute::Usage usage3 = TransactionAttribute::Usage::Vote;
     ByteVector data3 = ByteVector::Parse("0102030405");
     TransactionAttribute attribute3(usage3, data3);
-    
+
     TransactionAttribute::Usage usage4 = TransactionAttribute::Usage::Script;
     ByteVector data4 = ByteVector::Parse("0607080910");
     TransactionAttribute attribute4(usage4, data4);
-    
+
     EXPECT_TRUE(attribute1 == attribute2);
     EXPECT_FALSE(attribute1 == attribute3);
     EXPECT_FALSE(attribute1 == attribute4);
-    
+
     EXPECT_FALSE(attribute1 != attribute2);
     EXPECT_TRUE(attribute1 != attribute3);
     EXPECT_TRUE(attribute1 != attribute4);
@@ -313,43 +313,43 @@ TEST(TransactionTest, Serialization)
     Transaction tx;
     tx.SetType(Transaction::Type::InvocationTransaction);
     tx.SetVersion(1);
-    
+
     // Add attributes
     TransactionAttribute::Usage usage = TransactionAttribute::Usage::Script;
-    ByteVector data = ByteVector::Parse("0102030405060708090a0b0c0d0e0f1011121314"); // 20 bytes for Script
+    ByteVector data = ByteVector::Parse("0102030405060708090a0b0c0d0e0f1011121314");  // 20 bytes for Script
     TransactionAttribute attribute(usage, data);
     tx.SetAttributes({attribute});
-    
+
     // Add inputs
     UInt256 prevHash = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     uint16_t prevIndex = 123;
     CoinReference input(prevHash, prevIndex);
     tx.SetInputs({});
-    
+
     // Add outputs
     UInt256 assetId = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     Fixed8 value(123);
     UInt160 scriptHash = UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314");
     TransactionOutput output(assetId, value, scriptHash);
     tx.SetOutputs({});
-    
+
     // Add witnesses
     ByteVector invocationScript = ByteVector::Parse("0102030405");
     ByteVector verificationScript = ByteVector::Parse("0607080910");
     Witness witness(invocationScript, verificationScript);
     tx.SetWitnesses({witness});
-    
+
     // Serialize
     std::stringstream stream(std::ios::in | std::ios::out | std::ios::binary);
     BinaryWriter writer(stream);
     tx.Serialize(writer);
-    
+
     // Deserialize
     stream.seekg(0);
     BinaryReader reader(stream);
     Transaction tx2;
     tx2.Deserialize(reader);
-    
+
     // Check
     EXPECT_EQ(tx2.GetType(), Transaction::Type::InvocationTransaction);
     EXPECT_EQ(tx2.GetVersion(), 1);
@@ -370,54 +370,56 @@ TEST(TransactionTest, GetHash)
     Transaction tx;
     tx.SetType(Transaction::Type::InvocationTransaction);
     tx.SetVersion(1);
-    
+
     // Add attributes
     TransactionAttribute::Usage usage = TransactionAttribute::Usage::Script;
-    ByteVector data = ByteVector::Parse("0102030405060708090a0b0c0d0e0f1011121314"); // 20 bytes for Script
+    ByteVector data = ByteVector::Parse("0102030405060708090a0b0c0d0e0f1011121314");  // 20 bytes for Script
     TransactionAttribute attribute(usage, data);
     tx.SetAttributes({attribute});
-    
+
     // Add inputs
     UInt256 prevHash = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     uint16_t prevIndex = 123;
     CoinReference input(prevHash, prevIndex);
     tx.SetInputs({});
-    
+
     // Add outputs
     UInt256 assetId = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     Fixed8 value(123);
     UInt160 scriptHash = UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314");
     TransactionOutput output(assetId, value, scriptHash);
     tx.SetOutputs({});
-    
+
     // Get the hash
     UInt256 hash = tx.GetHash();
-    
+
     // Verify the hash
     std::ostringstream stream;
     BinaryWriter writer(stream);
-    
+
     // Serialize the transaction without witnesses
     writer.Write(static_cast<uint8_t>(tx.GetType()));
     writer.Write(tx.GetVersion());
-    
+
     // Serialize attributes
     writer.WriteVarInt(tx.GetAttributes().size());
     for (const auto& attr : tx.GetAttributes())
     {
-        if (attr) {
+        if (attr)
+        {
             attr->Serialize(writer);
         }
     }
-    
+
     // Neo 3 doesn't have inputs/outputs in the traditional sense
     // Skip serialization of inputs/outputs for Neo 3 compatibility
-    writer.WriteVarInt(0); // No inputs
-    writer.WriteVarInt(0); // No outputs
-    
+    writer.WriteVarInt(0);  // No inputs
+    writer.WriteVarInt(0);  // No outputs
+
     std::string data2 = stream.str();
-    UInt256 expectedHash = neo::cryptography::Hash::Sha256(ByteSpan(reinterpret_cast<const uint8_t*>(data2.data()), data2.size()));
-    
+    UInt256 expectedHash =
+        neo::cryptography::Hash::Sha256(ByteSpan(reinterpret_cast<const uint8_t*>(data2.data()), data2.size()));
+
     EXPECT_EQ(hash, expectedHash);
 }
 
@@ -427,29 +429,29 @@ TEST(TransactionTest, Equality)
     Transaction tx1;
     tx1.SetType(Transaction::Type::InvocationTransaction);
     tx1.SetVersion(1);
-    
+
     // Add attributes
     TransactionAttribute::Usage usage1 = TransactionAttribute::Usage::Script;
     ByteVector data1 = ByteVector::Parse("0102030405");
     TransactionAttribute attribute1(usage1, data1);
     tx1.SetAttributes({attribute1});
-    
+
     // Add inputs
     UInt256 prevHash1 = UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20");
     uint16_t prevIndex1 = 123;
     CoinReference input1(prevHash1, prevIndex1);
     tx1.SetInputs({});
-    
+
     // Neo 3 doesn't have outputs, so we skip SetOutputs
     // For Neo 2 compatibility testing, use empty outputs
     tx1.SetOutputs({});
-    
+
     // Add witnesses
     ByteVector invocationScript1 = ByteVector::Parse("0102030405");
     ByteVector verificationScript1 = ByteVector::Parse("0607080910");
     Witness witness1(invocationScript1, verificationScript1);
     tx1.SetWitnesses({witness1});
-    
+
     // Create an identical transaction
     Transaction tx2;
     tx2.SetType(Transaction::Type::InvocationTransaction);
@@ -458,7 +460,7 @@ TEST(TransactionTest, Equality)
     tx2.SetInputs({});
     tx2.SetOutputs({});
     tx2.SetWitnesses({witness1});
-    
+
     // Create a transaction with different type
     Transaction tx3;
     tx3.SetType(Transaction::Type::ContractTransaction);
@@ -467,7 +469,7 @@ TEST(TransactionTest, Equality)
     tx3.SetInputs({});
     tx3.SetOutputs({});
     tx3.SetWitnesses({witness1});
-    
+
     // Create a transaction with different version
     Transaction tx4;
     tx4.SetType(Transaction::Type::InvocationTransaction);
@@ -476,11 +478,11 @@ TEST(TransactionTest, Equality)
     tx4.SetInputs({});
     tx4.SetOutputs({});
     tx4.SetWitnesses({witness1});
-    
+
     EXPECT_TRUE(tx1 == tx2);
     EXPECT_FALSE(tx1 == tx3);
     EXPECT_FALSE(tx1 == tx4);
-    
+
     EXPECT_FALSE(tx1 != tx2);
     EXPECT_TRUE(tx1 != tx3);
     EXPECT_TRUE(tx1 != tx4);

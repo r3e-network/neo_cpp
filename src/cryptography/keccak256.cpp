@@ -20,13 +20,9 @@ constexpr std::array<uint64_t, KECCAK_ROUNDS> RC = {
     0x8000000000008003ULL, 0x8000000000008002ULL, 0x8000000000000080ULL, 0x000000000000800aULL, 0x800000008000000aULL,
     0x8000000080008081ULL, 0x8000000000008080ULL, 0x0000000080000001ULL, 0x8000000080008008ULL};
 
-// Rotation offsets for rho step
-constexpr std::array<int, 25> rho_offsets = {1,  3,  6,  10, 15, 21, 28, 36, 45, 55, 2,  14,
-                                             27, 41, 56, 8,  25, 43, 62, 18, 39, 61, 20, 44};
-
-// Pi step permutation
-constexpr std::array<int, 25> pi_indices = {10, 7,  11, 17, 18, 3, 5,  16, 8,  21, 24, 4,
-                                            15, 23, 19, 13, 12, 2, 20, 14, 22, 9,  6,  1};
+// Rotation offsets for rho step - corrected values
+constexpr std::array<int, 25> rho_offsets = {0,  1,  62, 28, 27, 36, 44, 6,  55, 20, 3,  10, 43,
+                                             25, 39, 41, 45, 15, 21, 8,  18, 2,  61, 56, 14};
 
 inline uint64_t rotl64(uint64_t n, int c)
 {
@@ -40,17 +36,15 @@ void keccakf(uint64_t state[25])
     for (int round = 0; round < KECCAK_ROUNDS; round++)
     {
         // Theta step
-        C[0] = state[0] ^ state[5] ^ state[10] ^ state[15] ^ state[20];
-        C[1] = state[1] ^ state[6] ^ state[11] ^ state[16] ^ state[21];
-        C[2] = state[2] ^ state[7] ^ state[12] ^ state[17] ^ state[22];
-        C[3] = state[3] ^ state[8] ^ state[13] ^ state[18] ^ state[23];
-        C[4] = state[4] ^ state[9] ^ state[14] ^ state[19] ^ state[24];
+        for (int i = 0; i < 5; i++)
+        {
+            C[i] = state[i] ^ state[i + 5] ^ state[i + 10] ^ state[i + 15] ^ state[i + 20];
+        }
 
-        D[0] = C[4] ^ rotl64(C[1], 1);
-        D[1] = C[0] ^ rotl64(C[2], 1);
-        D[2] = C[1] ^ rotl64(C[3], 1);
-        D[3] = C[2] ^ rotl64(C[4], 1);
-        D[4] = C[3] ^ rotl64(C[0], 1);
+        for (int i = 0; i < 5; i++)
+        {
+            D[i] = C[(i + 4) % 5] ^ rotl64(C[(i + 1) % 5], 1);
+        }
 
         for (int i = 0; i < 25; i++)
         {
@@ -58,31 +52,31 @@ void keccakf(uint64_t state[25])
         }
 
         // Rho and Pi steps
-        B[0] = state[0];
-        for (int i = 1; i < 25; i++)
+        uint64_t current = state[1];
+        int x = 1, y = 0;
+        for (int t = 0; t < 24; t++)
         {
-            B[i] = rotl64(state[i], rho_offsets[i - 1]);
-        }
-
-        for (int i = 0; i < 25; i++)
-        {
-            state[i] = B[pi_indices[i]];
+            int index = x + 5 * y;
+            uint64_t temp = state[index];
+            state[index] = rotl64(current, ((t + 1) * (t + 2) / 2) % 64);
+            current = temp;
+            int newX = y;
+            int newY = (2 * x + 3 * y) % 5;
+            x = newX;
+            y = newY;
         }
 
         // Chi step
-        for (int i = 0; i < 25; i += 5)
+        for (int y = 0; y < 5; y++)
         {
-            C[0] = state[i];
-            C[1] = state[i + 1];
-            C[2] = state[i + 2];
-            C[3] = state[i + 3];
-            C[4] = state[i + 4];
-
-            state[i] = C[0] ^ ((~C[1]) & C[2]);
-            state[i + 1] = C[1] ^ ((~C[2]) & C[3]);
-            state[i + 2] = C[2] ^ ((~C[3]) & C[4]);
-            state[i + 3] = C[3] ^ ((~C[4]) & C[0]);
-            state[i + 4] = C[4] ^ ((~C[0]) & C[1]);
+            for (int x = 0; x < 5; x++)
+            {
+                B[x] = state[x + 5 * y];
+            }
+            for (int x = 0; x < 5; x++)
+            {
+                state[x + 5 * y] = B[x] ^ ((~B[(x + 1) % 5]) & B[(x + 2) % 5]);
+            }
         }
 
         // Iota step

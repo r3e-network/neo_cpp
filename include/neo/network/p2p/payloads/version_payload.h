@@ -149,6 +149,12 @@ class VersionPayload : public IPayload
     void DeserializeJson(const io::JsonReader& reader) override;
 
     /**
+     * @brief Gets the start height from the FullNode capability.
+     * @return The start height if a FullNode capability exists, 0 otherwise.
+     */
+    uint32_t GetStartHeight() const;
+
+    /**
      * @brief Gets the size of the payload.
      * @return The size of the payload.
      */

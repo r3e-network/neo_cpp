@@ -15,4 +15,4 @@ namespace neo::cryptography
  */
 std::optional<ecc::ECPoint> ECRecover(const io::ByteSpan& hash, const io::ByteSpan& signature, uint8_t recovery_id);
 
-} // namespace neo::cryptography
+}  // namespace neo::cryptography

@@ -334,9 +334,8 @@ bool ClonedCache<TKey, TValue>::IsReadOnly() const
         return true;
     }
 
-    // For cloned caches, they are typically used for isolated reads
-    // but can be written to for temporary operations
-    // Return false to allow modifications in the clone
+    // Cloned caches provide isolated read/write operations
+    // They maintain isolation from the parent cache until committed
     return false;
 }
 

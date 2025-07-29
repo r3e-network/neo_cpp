@@ -316,6 +316,17 @@ class RpcValidation
             {  // 10 billion GAS max
                 throw std::invalid_argument("Gas amount too large");
             }
+
+            // Validate decimal places (max 8 for GAS)
+            std::size_t decimal_pos = gas.find('.');
+            if (decimal_pos != std::string::npos)
+            {
+                std::size_t decimals = gas.length() - decimal_pos - 1;
+                if (decimals > 8)
+                {
+                    throw std::invalid_argument("GAS amount has too many decimal places (max 8)");
+                }
+            }
         }
         catch (const std::runtime_error& e)
         {

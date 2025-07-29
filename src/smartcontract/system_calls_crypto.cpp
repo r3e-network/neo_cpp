@@ -10,6 +10,7 @@
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/system_calls.h>
 #include <neo/vm/stack_item.h>
+#include <neo/vm/vm_constants.h>
 #include <sstream>
 
 namespace neo::smartcontract
@@ -188,7 +189,8 @@ void RegisterCryptoSystemCallsImpl(ApplicationEngine& engine)
                         writer.WriteVarInt(attrs.size());
                         for (const auto& attr : attrs)
                         {
-                            if (attr) {
+                            if (attr)
+                            {
                                 attr->Serialize(writer);
                             }
                         }

@@ -1,17 +1,18 @@
-#include <iostream>
-#include <string>
 #include <chrono>
 #include <iomanip>
+#include <iostream>
+#include <string>
 
-namespace neo_gui {
+namespace neo_gui
+{
 
 /**
  * @brief Neo C++ GUI Application
- * 
+ *
  * ## Overview
  * Basic console-based interface for the Neo C++ blockchain node.
  * Provides node information, status monitoring, and basic controls.
- * 
+ *
  * ## Usage Examples
  * ```
  * neo-gui
@@ -20,58 +21,58 @@ namespace neo_gui {
  * > exit
  * ```
  */
-class NeoGUI 
+class NeoGUI
 {
-public:
+  public:
     void Run()
     {
         ShowWelcome();
         ShowMenu();
-        
+
         std::string command;
-        while (true) 
+        while (true)
         {
             std::cout << "\nneo-gui> ";
             std::getline(std::cin, command);
-            
-            if (command == "exit" || command == "quit") 
+
+            if (command == "exit" || command == "quit")
             {
                 std::cout << "Goodbye!" << std::endl;
                 break;
             }
-            else if (command == "help") 
+            else if (command == "help")
             {
                 ShowHelp();
             }
-            else if (command == "status") 
+            else if (command == "status")
             {
                 ShowStatus();
             }
-            else if (command == "info") 
+            else if (command == "info")
             {
                 ShowNodeInfo();
             }
-            else if (command == "version") 
+            else if (command == "version")
             {
                 ShowVersion();
             }
-            else if (command == "peers") 
+            else if (command == "peers")
             {
                 ShowPeers();
             }
-            else if (command == "blockchain") 
+            else if (command == "blockchain")
             {
                 ShowBlockchain();
             }
-            else if (command == "clear") 
+            else if (command == "clear")
             {
                 ClearScreen();
             }
-            else if (command == "menu") 
+            else if (command == "menu")
             {
                 ShowMenu();
             }
-            else if (!command.empty()) 
+            else if (!command.empty())
             {
                 std::cout << "Unknown command: " << command << std::endl;
                 std::cout << "Type 'help' for available commands." << std::endl;
@@ -79,22 +80,22 @@ public:
         }
     }
 
-private:
-    void ShowWelcome() 
+  private:
+    void ShowWelcome()
     {
         std::cout << "========================================" << std::endl;
         std::cout << "          Neo C++ GUI Interface        " << std::endl;
         std::cout << "========================================" << std::endl;
         std::cout << "Neo Blockchain Node Management Console" << std::endl;
         std::cout << "Version: 1.0.0-dev (C++ Implementation)" << std::endl;
-        
+
         auto now = std::chrono::system_clock::now();
         auto time_t = std::chrono::system_clock::to_time_t(now);
         std::cout << "Started: " << std::put_time(std::localtime(&time_t), "%Y-%m-%d %H:%M:%S") << std::endl;
         std::cout << std::endl;
     }
 
-    void ShowMenu() 
+    void ShowMenu()
     {
         std::cout << "Available Commands:" << std::endl;
         std::cout << "  help       - Show this help message" << std::endl;
@@ -108,7 +109,7 @@ private:
         std::cout << "  exit       - Exit the application" << std::endl;
     }
 
-    void ShowHelp() 
+    void ShowHelp()
     {
         std::cout << "Neo C++ GUI Help" << std::endl;
         std::cout << "================" << std::endl;
@@ -118,7 +119,7 @@ private:
         ShowMenu();
     }
 
-    void ShowStatus() 
+    void ShowStatus()
     {
         std::cout << "Node Status" << std::endl;
         std::cout << "===========" << std::endl;
@@ -127,13 +128,13 @@ private:
         std::cout << "Sync Status: Synchronized" << std::endl;
         std::cout << "Memory Usage: ~150 MB" << std::endl;
         std::cout << "CPU Usage: 5.2%" << std::endl;
-        
+
         auto now = std::chrono::system_clock::now();
         auto time_t = std::chrono::system_clock::to_time_t(now);
         std::cout << "Last Updated: " << std::put_time(std::localtime(&time_t), "%Y-%m-%d %H:%M:%S") << std::endl;
     }
 
-    void ShowNodeInfo() 
+    void ShowNodeInfo()
     {
         std::cout << "Node Information" << std::endl;
         std::cout << "================" << std::endl;
@@ -146,7 +147,7 @@ private:
         std::cout << "WebSocket Port: 10334" << std::endl;
     }
 
-    void ShowVersion() 
+    void ShowVersion()
     {
         std::cout << "Version Information" << std::endl;
         std::cout << "===================" << std::endl;
@@ -154,7 +155,7 @@ private:
         std::cout << "Protocol Version: 3.6.0" << std::endl;
         std::cout << "VM Version: 3.6.0" << std::endl;
         std::cout << "Build Date: " << __DATE__ << " " << __TIME__ << std::endl;
-        std::cout << "Compiler: " << 
+        std::cout << "Compiler: " <<
 #ifdef _MSC_VER
             "MSVC " << _MSC_VER
 #elif defined(__GNUC__)
@@ -164,10 +165,10 @@ private:
 #else
             "Unknown"
 #endif
-            << std::endl;
+                  << std::endl;
     }
 
-    void ShowPeers() 
+    void ShowPeers()
     {
         std::cout << "Peer Connections" << std::endl;
         std::cout << "================" << std::endl;
@@ -181,7 +182,7 @@ private:
         std::cout << "  • [Additional peers...]" << std::endl;
     }
 
-    void ShowBlockchain() 
+    void ShowBlockchain()
     {
         std::cout << "Blockchain Information" << std::endl;
         std::cout << "======================" << std::endl;
@@ -194,7 +195,7 @@ private:
         std::cout << "Total Supply GAS: 52,000,000" << std::endl;
     }
 
-    void ClearScreen() 
+    void ClearScreen()
     {
 #ifdef _WIN32
         system("cls");
@@ -205,20 +206,20 @@ private:
     }
 };
 
-} // namespace neo_gui
+}  // namespace neo_gui
 
-int main() 
+int main()
 {
-    try 
+    try
     {
         neo_gui::NeoGUI gui;
         gui.Run();
     }
-    catch (const std::exception& e) 
+    catch (const std::exception& e)
     {
         std::cerr << "Error: " << e.what() << std::endl;
         return 1;
     }
-    
+
     return 0;
 }

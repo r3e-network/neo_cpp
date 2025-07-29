@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
+#include <neo/io/byte_vector.h>
 #include <neo/vm/execution_engine.h>
 #include <neo/vm/script.h>
-#include <neo/io/byte_vector.h>
 
 using namespace neo::vm;
 using namespace neo::io;
@@ -16,19 +16,19 @@ TEST(LeaveTest, LeaveFromTry)
     // ENDTRY (3D 00)
     // PUSH3 (13) - execution should continue here
     // RET (40)
-    
+
     auto scriptBytes = ByteVector::Parse("0C080F114202123D001340");
-    
+
     // Create an execution engine
     auto engine = std::make_unique<ExecutionEngine>();
-    
+
     // Load and execute the script
     engine->LoadScript(Script(scriptBytes));
     VMState state = engine->Execute();
-    
+
     // Verify the execution was successful
     EXPECT_EQ(state, VMState::Halt);
-    
+
     // Check the result stack - should have [3, 1] (PUSH3, PUSH1)
     auto resultStack = engine->GetResultStack();
     EXPECT_EQ(resultStack.size(), 2);
@@ -50,19 +50,19 @@ TEST(LeaveTest, LeaveFromCatch)
     // ENDTRY (3D 00)
     // PUSH5 (15) - execution should continue here
     // RET (40)
-    
+
     auto scriptBytes = ByteVector::Parse("0C080F113A12131342023D001540");
-    
+
     // Create an execution engine
     auto engine = std::make_unique<ExecutionEngine>();
-    
+
     // Load and execute the script
     engine->LoadScript(Script(scriptBytes));
     VMState state = engine->Execute();
-    
+
     // Verify the execution was successful
     EXPECT_EQ(state, VMState::Halt);
-    
+
     // Check the result stack - should have [5, 3, 1] (PUSH5, PUSH3, PUSH1)
     auto resultStack = engine->GetResultStack();
     EXPECT_EQ(resultStack.size(), 3);
@@ -83,19 +83,19 @@ TEST(LeaveTest, LeaveFromFinally)
     // ENDFINALLY (3F)
     // PUSH4 (14) - execution should continue here
     // RET (40)
-    
+
     auto scriptBytes = ByteVector::Parse("0C0008111242021340");
-    
+
     // Create an execution engine
     auto engine = std::make_unique<ExecutionEngine>();
-    
+
     // Load and execute the script
     engine->LoadScript(Script(scriptBytes));
     VMState state = engine->Execute();
-    
+
     // Verify the execution was successful
     EXPECT_EQ(state, VMState::Halt);
-    
+
     // Check the result stack - should have [4, 2, 1] (PUSH4, PUSH2, PUSH1)
     auto resultStack = engine->GetResultStack();
     EXPECT_EQ(resultStack.size(), 3);
@@ -114,19 +114,19 @@ TEST(LeaveTest, LeaveLongDistance)
     // ENDTRY (3D 00)
     // PUSH3 (13) - execution should continue here
     // RET (40)
-    
+
     auto scriptBytes = ByteVector::Parse("0C0A0F1144040000003D001340");
-    
+
     // Create an execution engine
     auto engine = std::make_unique<ExecutionEngine>();
-    
+
     // Load and execute the script
     engine->LoadScript(Script(scriptBytes));
     VMState state = engine->Execute();
-    
+
     // Verify the execution was successful
     EXPECT_EQ(state, VMState::Halt);
-    
+
     // Check the result stack - should have [3, 1] (PUSH3, PUSH1)
     auto resultStack = engine->GetResultStack();
     EXPECT_EQ(resultStack.size(), 2);
@@ -148,23 +148,23 @@ TEST(LeaveTest, NestedTryLeave)
     // ENDTRY (3D 00)
     // PUSH5 (15) - execution should continue here
     // RET (40)
-    
+
     auto scriptBytes = ByteVector::Parse("0C14001130132143D001440");
-    
+
     // Create an execution engine
     auto engine = std::make_unique<ExecutionEngine>();
-    
+
     // Load and execute the script
     engine->LoadScript(Script(scriptBytes));
     VMState state = engine->Execute();
-    
+
     // Verify the execution was successful
     EXPECT_EQ(state, VMState::Halt);
-    
+
     // Check the result stack - should have [5, 2, 1] (PUSH5, PUSH2, PUSH1)
     auto resultStack = engine->GetResultStack();
     EXPECT_EQ(resultStack.size(), 3);
     EXPECT_EQ(resultStack[0]->GetInteger(), 5);
     EXPECT_EQ(resultStack[1]->GetInteger(), 2);
     EXPECT_EQ(resultStack[2]->GetInteger(), 1);
-} 
+}

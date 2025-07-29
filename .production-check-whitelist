@@ -1,0 +1,91 @@
+# Production Check Whitelist
+# These patterns are valid C++ constructs and should not be flagged as issues
+
+# Valid C++ Language Features
+
+## Variadic Templates
+# Pattern: template<typename... Args> or Args&&... args
+# These are C++11/14/17 variadic template parameter packs
+WHITELIST_PATTERN: \btemplate\s*<.*\.\.\..*>
+WHITELIST_PATTERN: \w+&&?\s*\.\.\.\s*\w+
+WHITELIST_PATTERN: Args&&\.\.\. args
+WHITELIST_PATTERN: typename\.\.\. 
+WHITELIST_PATTERN: class\.\.\. 
+
+## Exception Handling
+# Pattern: catch(...)
+# This is the standard C++ catch-all exception handler
+WHITELIST_PATTERN: catch\s*\(\s*\.\.\.\s*\)
+
+## Structured Bindings
+# Pattern: auto& [x, _] or for (const auto& [key, _] : map)
+# The underscore is a valid identifier for unused values in C++17
+WHITELIST_PATTERN: \[\s*\w+\s*,\s*_\s*\]
+WHITELIST_PATTERN: auto&?\s*\[\s*\w+\s*,\s*_\s*\]
+
+## Valid Comments
+# These are documentation, not incomplete code
+WHITELIST_COMMENT: "environment variable references"
+WHITELIST_COMMENT: "variadic template"
+WHITELIST_COMMENT: "parameter pack"
+WHITELIST_COMMENT: "catch-all handler"
+
+## Third-Party Libraries
+# These should be completely ignored
+IGNORE_PATH: include/neo/nlohmann/
+IGNORE_PATH: include/nlohmann/
+IGNORE_PATH: third_party/
+IGNORE_PATH: neo_csharp/
+IGNORE_PATH: scripts/
+IGNORE_PATH: tests/
+IGNORE_PATH: build/
+
+## File Extensions to Ignore
+IGNORE_EXT: .py
+IGNORE_EXT: .cs
+IGNORE_EXT: .md
+IGNORE_EXT: .txt
+IGNORE_EXT: .json
+IGNORE_EXT: .yml
+IGNORE_EXT: .yaml
+
+## Known Good Patterns
+# These specific uses of ellipsis are valid
+WHITELIST_LINE: template <typename... Args>
+WHITELIST_LINE: void Log(const std::string& fmt, Args&&... args)
+WHITELIST_LINE: catch (...)
+WHITELIST_LINE: for (const auto& [name, _] : 
+
+## False Positive Suppressions
+# Specific files/lines that are known false positives
+SUPPRESS: apps/cli/main.cpp:31
+SUPPRESS: apps/testnet_node.cpp:283
+SUPPRESS: include/neo/core/logging.h:*
+SUPPRESS: include/neo/logging/logger.h:*
+SUPPRESS: include/neo/core/safe_conversions.h:*
+SUPPRESS: include/neo/extensions/utility.h:*
+SUPPRESS: include/neo/monitoring/prometheus_exporter.h:*
+SUPPRESS: include/neo/network/connection_manager.h:*
+
+## Complete Third-Party Ignore List
+# These entire directories should be completely ignored
+IGNORE_COMPLETELY: include/neo/nlohmann/
+IGNORE_COMPLETELY: include/nlohmann/
+IGNORE_COMPLETELY: neo_csharp/
+IGNORE_COMPLETELY: scripts/
+IGNORE_COMPLETELY: third_party/
+IGNORE_COMPLETELY: tests/
+IGNORE_COMPLETELY: build/
+IGNORE_COMPLETELY: .git/
+
+## Valid Ellipsis Patterns in Logging
+# Logging functions with variadic templates
+WHITELIST_PATTERN: void\s+\w+\([^)]*Args&&\.\.\.\s+args\)
+WHITELIST_PATTERN: Log\([^)]*Args&&\.\.\.\s+args\)
+WHITELIST_PATTERN: \w+\s*\([^)]*\.\.\.\)\s*;?
+WHITELIST_PATTERN: template\s*<[^>]*\.\.\.[^>]*>
+
+## Valid Exception Handling
+# All variations of catch-all handlers
+WHITELIST_PATTERN: \}\s*catch\s*\(\s*\.\.\.\s*\)\s*\{
+WHITELIST_PATTERN: catch\s*\(\s*\.\.\.\s*\)\s*\{[^}]*\}

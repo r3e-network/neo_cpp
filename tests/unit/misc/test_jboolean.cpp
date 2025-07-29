@@ -12,24 +12,29 @@
 #ifndef TESTS_UNIT_MISC_TEST_JBOOLEAN_CPP_H
 #define TESTS_UNIT_MISC_TEST_JBOOLEAN_CPP_H
 
-#include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 // Include the class under test
 #include <neo/json/jboolean.h>
 
-namespace neo {
-namespace test {
+namespace neo
+{
+namespace test
+{
 
-class JBooleanTest : public ::testing::Test {
-protected:
-    void SetUp() override {
+class JBooleanTest : public ::testing::Test
+{
+  protected:
+    void SetUp() override
+    {
         // Set up test fixtures for JBoolean testing
         true_value = std::make_shared<neo::json::JBoolean>(true);
         false_value = std::make_shared<neo::json::JBoolean>(false);
     }
 
-    void TearDown() override {
+    void TearDown() override
+    {
         // Clean up test fixtures - shared_ptr handles cleanup automatically
         true_value.reset();
         false_value.reset();
@@ -42,31 +47,35 @@ protected:
 
 // JBoolean test methods converted from C# UT_JBoolean.cs functionality
 
-TEST_F(JBooleanTest, ConstructorWithTrue) {
+TEST_F(JBooleanTest, ConstructorWithTrue)
+{
     EXPECT_TRUE(true_value->AsBoolean());
     EXPECT_EQ(true_value->GetType(), neo::json::JTokenType::Boolean);
 }
 
-TEST_F(JBooleanTest, ConstructorWithFalse) {
+TEST_F(JBooleanTest, ConstructorWithFalse)
+{
     EXPECT_FALSE(false_value->AsBoolean());
     EXPECT_EQ(false_value->GetType(), neo::json::JTokenType::Boolean);
 }
 
-TEST_F(JBooleanTest, ToStringRepresentation) {
+TEST_F(JBooleanTest, ToStringRepresentation)
+{
     EXPECT_EQ(true_value->ToString(), "true");
     EXPECT_EQ(false_value->ToString(), "false");
 }
 
-TEST_F(JBooleanTest, EqualityComparison) {
+TEST_F(JBooleanTest, EqualityComparison)
+{
     auto another_true = std::make_shared<neo::json::JBoolean>(true);
     auto another_false = std::make_shared<neo::json::JBoolean>(false);
-    
+
     EXPECT_TRUE(true_value->Equals(another_true.get()));
     EXPECT_TRUE(false_value->Equals(another_false.get()));
     EXPECT_FALSE(true_value->Equals(false_value.get()));
 }
 
-} // namespace test
-} // namespace neo
+}  // namespace test
+}  // namespace neo
 
-#endif // TESTS_UNIT_MISC_TEST_JBOOLEAN_CPP_H
+#endif  // TESTS_UNIT_MISC_TEST_JBOOLEAN_CPP_H

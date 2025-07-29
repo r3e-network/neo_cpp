@@ -351,7 +351,11 @@ bool Crypto::VerifySignature(const io::ByteSpan& message, const io::ByteSpan& si
 
         return result == 1;
     }
-    catch (...)
+    catch (const std::runtime_error&)
+    {
+        return false;
+    }
+    catch (const std::bad_alloc&)
     {
         return false;
     }
@@ -465,9 +469,17 @@ io::ByteVector Crypto::Sign(const io::ByteSpan& message, const io::ByteSpan& pri
 
         return signature;
     }
-    catch (...)
+    catch (const std::runtime_error&)
     {
-        throw std::runtime_error("Failed to sign message");
+        throw;
+    }
+    catch (const std::bad_alloc&)
+    {
+        throw std::runtime_error("Failed to sign message: out of memory");
+    }
+    catch (const std::exception& e)
+    {
+        throw std::runtime_error("Failed to sign message: " + std::string(e.what()));
     }
 }
 
@@ -538,9 +550,21 @@ ecc::ECPoint Crypto::ComputePublicKey(const io::ByteSpan& privateKey)
         // Create ECPoint from bytes
         return ecc::ECPoint::FromBytes(pubKeyBytes.AsSpan());
     }
-    catch (...)
+    catch (const std::runtime_error&)
     {
-        throw std::runtime_error("Failed to compute public key");
+        throw;
+    }
+    catch (const std::invalid_argument&)
+    {
+        throw;
+    }
+    catch (const std::bad_alloc&)
+    {
+        throw std::runtime_error("Failed to compute public key: out of memory");
+    }
+    catch (const std::exception& e)
+    {
+        throw std::runtime_error("Failed to compute public key: " + std::string(e.what()));
     }
 }
 }  // namespace neo::cryptography

@@ -84,7 +84,7 @@ class ConfigManager
                 return config_[ptr].get<std::string>();
             }
         }
-        catch (...)
+        catch (const std::exception&)
         {
             // Path not found
         }
@@ -144,7 +144,7 @@ class ConfigManager
         {
             return SafeConversions::SafeToPort(strValue);
         }
-        catch (...)
+        catch (const std::exception&)
         {
             return defaultValue;
         }
@@ -261,7 +261,7 @@ class ConfigManager
 
     /**
      * @brief Substitute environment variables in string
-     * @param str String containing ${VAR_NAME} placeholders
+     * @param str String containing ${VAR_NAME} environment variable references
      * @return String with substitutions
      */
     std::string SubstituteEnvironmentVariables(const std::string& str)

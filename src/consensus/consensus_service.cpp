@@ -270,25 +270,25 @@ uint16_t ConsensusService::GetPrimaryIndex(uint8_t viewNumber) const
 void ConsensusService::OnPrepareRequestReceived(const PrepareRequest& request)
 {
     std::lock_guard<std::mutex> lock(mutex_);
-    
+
     if (!context_ || request.GetValidatorIndex() != GetPrimaryIndex())
         return;
-        
+
     // Verify prepare request
     if (request.GetTimestamp() <= lastBlockTime_)
         return;
-        
+
     // Process the prepare request
     context_->SetPrepareRequest(std::make_shared<PrepareRequest>(request));
-    
+
     // Send prepare response if we agree
     if (context_->IsPrepareResponseSent())
         return;
-        
+
     auto response = std::make_shared<PrepareResponse>();
     response->SetBlockHash(request.GetBlockHash());
     response->SetValidatorIndex(GetValidatorIndex());
-    
+
     SignAndBroadcast(response);
     context_->SetPrepareResponseSent(true);
 }
@@ -296,13 +296,13 @@ void ConsensusService::OnPrepareRequestReceived(const PrepareRequest& request)
 void ConsensusService::OnPrepareResponseReceived(const PrepareResponse& response)
 {
     std::lock_guard<std::mutex> lock(mutex_);
-    
+
     if (!context_)
         return;
-        
+
     // Add prepare response to context
     context_->AddPrepareResponse(response);
-    
+
     // Check if we have enough prepare responses
     if (context_->GetPrepareResponseCount() >= context_->GetM())
     {
@@ -311,7 +311,7 @@ void ConsensusService::OnPrepareResponseReceived(const PrepareResponse& response
             auto commit = std::make_shared<CommitMessage>();
             commit->SetValidatorIndex(GetValidatorIndex());
             commit->SetSignature(SignBlock(context_->GetBlock()));
-            
+
             SignAndBroadcast(commit);
             context_->SetCommitSent(true);
         }
@@ -321,13 +321,13 @@ void ConsensusService::OnPrepareResponseReceived(const PrepareResponse& response
 void ConsensusService::OnChangeViewReceived(const ChangeViewMessage& message)
 {
     std::lock_guard<std::mutex> lock(mutex_);
-    
+
     if (!context_)
         return;
-        
+
     // Add change view to context
     context_->AddChangeView(message);
-    
+
     // Check if we need to change view
     if (context_->GetChangeViewCount() >= context_->GetM())
     {
@@ -342,13 +342,13 @@ void ConsensusService::OnChangeViewReceived(const ChangeViewMessage& message)
 void ConsensusService::OnCommitReceived(const CommitMessage& commit)
 {
     std::lock_guard<std::mutex> lock(mutex_);
-    
+
     if (!context_)
         return;
-        
+
     // Add commit to context
     context_->AddCommit(commit);
-    
+
     // Check if we have enough commits
     if (context_->GetCommitCount() >= context_->GetM())
     {
@@ -357,7 +357,7 @@ void ConsensusService::OnCommitReceived(const CommitMessage& commit)
         if (block && ValidateBlock(block))
         {
             PersistBlock(block);
-            Initialize(); // Reset for next round
+            Initialize();  // Reset for next round
         }
     }
 }
@@ -366,27 +366,27 @@ bool ConsensusService::ValidateBlock(std::shared_ptr<ledger::Block> block)
 {
     if (!block)
         return false;
-        
+
     // Verify block timestamp
     if (block->GetTimestamp() <= lastBlockTime_)
         return false;
-        
+
     // Verify block index
     if (block->GetIndex() != GetBlockIndex())
         return false;
-        
+
     // Verify merkle root
     auto merkleRoot = block->ComputeMerkleRoot();
     if (merkleRoot != block->GetMerkleRoot())
         return false;
-        
+
     // Verify transactions
     for (const auto& tx : block->GetTransactions())
     {
         if (!neoSystem_->GetBlockchain().VerifyTransaction(tx))
             return false;
     }
-    
+
     return true;
 }
 

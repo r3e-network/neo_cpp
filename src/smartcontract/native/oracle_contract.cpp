@@ -128,7 +128,8 @@ bool OracleContract::OnPersist(ApplicationEngine& engine)
     {
         // Find OracleResponse attribute
         auto attr_it =
-            std::find_if(tx.GetAttributes().begin(), tx.GetAttributes().end(), [](const std::shared_ptr<ledger::TransactionAttribute>& a)
+            std::find_if(tx.GetAttributes().begin(), tx.GetAttributes().end(),
+                         [](const std::shared_ptr<ledger::TransactionAttribute>& a)
                          { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::OracleResponse; });
         if (attr_it == tx.GetAttributes().end())
             continue;
@@ -184,19 +185,19 @@ OracleContract::GetRequests(std::shared_ptr<persistence::StoreView> snapshot) co
 
     // Iterate through all request keys in storage
     auto prefix = GetStorageKey(PREFIX_REQUEST, io::ByteVector{});
-    
+
     // In a full implementation, we would iterate through storage with the prefix
     // For now, we implement a minimal version that works with the existing storage system
-    try 
+    try
     {
         // Get the current request ID to know how many requests exist
         auto idKey = GetStorageKey(PREFIX_REQUEST_ID, io::ByteVector{});
         auto idValue = GetStorageValue(snapshot, idKey);
-        
+
         if (idValue.Size() >= sizeof(uint64_t))
         {
             uint64_t currentId = *reinterpret_cast<const uint64_t*>(idValue.Data());
-            
+
             // Check each request ID up to the current one
             for (uint64_t id = 1; id <= currentId; id++)
             {
@@ -324,7 +325,7 @@ void OracleContract::AddRequestToIdList(std::shared_ptr<persistence::StoreView> 
     idList.Add(id);
 
     auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
-    // Basic IdList serialization - stores minimal data for now  
+    // Basic IdList serialization - stores minimal data for now
     // Full implementation would serialize the complete ID list
     auto data = io::ByteVector(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t));
     PutStorageValue(snapshot, key, data);
@@ -357,7 +358,8 @@ void OracleContract::RemoveRequestFromIdList(std::shared_ptr<persistence::StoreV
                 writer.Write(listId);
             }
             std::string serialized = stream.str();
-            auto data = io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(serialized.data()), serialized.size()));
+            auto data =
+                io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(serialized.data()), serialized.size()));
             PutStorageValue(snapshot, keyBytes, data);
         }
     }
@@ -524,9 +526,9 @@ std::shared_ptr<vm::StackItem> OracleContract::OnVerify(ApplicationEngine& engin
         return vm::StackItem::Create(false);
 
     // Check if transaction has OracleResponse attribute
-    auto attr_it =
-        std::find_if(tx->GetAttributes().begin(), tx->GetAttributes().end(), [](const std::shared_ptr<ledger::TransactionAttribute>& a)
-                     { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::OracleResponse; });
+    auto attr_it = std::find_if(tx->GetAttributes().begin(), tx->GetAttributes().end(),
+                                [](const std::shared_ptr<ledger::TransactionAttribute>& a)
+                                { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::OracleResponse; });
 
     if (attr_it == tx->GetAttributes().end())
         return vm::StackItem::Create(false);

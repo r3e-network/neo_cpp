@@ -16,7 +16,12 @@ bool StringExtensions::TryToStrictUtf8String(std::span<const uint8_t> bytes, std
         value = ToStrictUtf8String(bytes);
         return true;
     }
-    catch (...)
+    catch (const std::invalid_argument&)
+    {
+        value.clear();
+        return false;
+    }
+    catch (const std::runtime_error&)
     {
         value.clear();
         return false;

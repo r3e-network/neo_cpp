@@ -12,18 +12,22 @@
 #ifndef TESTS_UNIT_MISC_TEST_JNUMBER_CPP_H
 #define TESTS_UNIT_MISC_TEST_JNUMBER_CPP_H
 
-#include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 // Include the class under test
 #include <neo/json/jnumber.h>
 
-namespace neo {
-namespace test {
+namespace neo
+{
+namespace test
+{
 
-class JNumberTest : public ::testing::Test {
-protected:
-    void SetUp() override {
+class JNumberTest : public ::testing::Test
+{
+  protected:
+    void SetUp() override
+    {
         // Set up test fixtures for JNumber testing
         zero_number = std::make_shared<neo::json::JNumber>(0);
         positive_number = std::make_shared<neo::json::JNumber>(42);
@@ -31,7 +35,8 @@ protected:
         float_number = std::make_shared<neo::json::JNumber>(3.14);
     }
 
-    void TearDown() override {
+    void TearDown() override
+    {
         // Clean up test fixtures - shared_ptr handles cleanup automatically
         zero_number.reset();
         positive_number.reset();
@@ -48,33 +53,38 @@ protected:
 
 // JNumber test methods converted from C# UT_JNumber.cs functionality
 
-TEST_F(JNumberTest, ConstructorWithInteger) {
+TEST_F(JNumberTest, ConstructorWithInteger)
+{
     EXPECT_EQ(positive_number->AsInt(), 42);
     EXPECT_EQ(positive_number->GetType(), neo::json::JTokenType::Number);
 }
 
-TEST_F(JNumberTest, ConstructorWithNegativeInteger) {
+TEST_F(JNumberTest, ConstructorWithNegativeInteger)
+{
     EXPECT_EQ(negative_number->AsInt(), -17);
     EXPECT_EQ(negative_number->GetType(), neo::json::JTokenType::Number);
 }
 
-TEST_F(JNumberTest, ConstructorWithZero) {
+TEST_F(JNumberTest, ConstructorWithZero)
+{
     EXPECT_EQ(zero_number->AsInt(), 0);
     EXPECT_EQ(zero_number->GetType(), neo::json::JTokenType::Number);
 }
 
-TEST_F(JNumberTest, ConstructorWithFloat) {
+TEST_F(JNumberTest, ConstructorWithFloat)
+{
     EXPECT_NEAR(float_number->AsDouble(), 3.14, 0.001);
     EXPECT_EQ(float_number->GetType(), neo::json::JTokenType::Number);
 }
 
-TEST_F(JNumberTest, ToStringRepresentation) {
+TEST_F(JNumberTest, ToStringRepresentation)
+{
     EXPECT_EQ(positive_number->ToString(), "42");
     EXPECT_EQ(negative_number->ToString(), "-17");
     EXPECT_EQ(zero_number->ToString(), "0");
 }
 
-} // namespace test
-} // namespace neo
+}  // namespace test
+}  // namespace neo
 
-#endif // TESTS_UNIT_MISC_TEST_JNUMBER_CPP_H
+#endif  // TESTS_UNIT_MISC_TEST_JNUMBER_CPP_H

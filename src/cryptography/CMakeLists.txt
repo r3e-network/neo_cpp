@@ -11,6 +11,8 @@ add_library(neo_cryptography OBJECT
     base64url.cpp
     base58.cpp
     lz4.cpp
+    keccak256.cpp
+    keccak256_simple.cpp
 )
 
 # BLS12_381 support (always enabled for Neo compatibility)

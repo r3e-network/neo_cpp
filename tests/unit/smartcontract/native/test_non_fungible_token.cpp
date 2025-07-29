@@ -1,11 +1,11 @@
 // Disabled due to API mismatches - needs to be updated
 #include <gtest/gtest.h>
-#include <neo/smartcontract/native/non_fungible_token.h>
-#include <neo/smartcontract/application_engine.h>
-#include <neo/persistence/memory_store_view.h>
-#include <neo/io/uint160.h>
-#include <neo/vm/stack_item.h>
 #include <memory>
+#include <neo/io/uint160.h>
+#include <neo/persistence/memory_store_view.h>
+#include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/native/non_fungible_token.h>
+#include <neo/vm/stack_item.h>
 
 using namespace neo;
 using namespace neo::smartcontract;
@@ -17,11 +17,8 @@ using namespace neo::vm;
 // Mock NonFungibleToken implementation for testing
 class MockNonFungibleToken : public NonFungibleToken
 {
-public:
-    MockNonFungibleToken()
-        : NonFungibleToken("Mock", 100)
-    {
-    }
+  public:
+    MockNonFungibleToken() : NonFungibleToken("Mock", 100) {}
 
     std::string GetSymbol() const override
     {
@@ -34,12 +31,15 @@ public:
         return instance;
     }
 
-    bool MintToken(std::shared_ptr<persistence::StoreView> snapshot, const io::ByteVector& tokenId, const io::UInt160& owner, const std::map<std::string, std::shared_ptr<vm::StackItem>>& properties)
+    bool MintToken(std::shared_ptr<persistence::StoreView> snapshot, const io::ByteVector& tokenId,
+                   const io::UInt160& owner, const std::map<std::string, std::shared_ptr<vm::StackItem>>& properties)
     {
         return Mint(snapshot, tokenId, owner, properties);
     }
 
-    bool MintToken(ApplicationEngine& engine, const io::ByteVector& tokenId, const io::UInt160& owner, const std::map<std::string, std::shared_ptr<vm::StackItem>>& properties, std::shared_ptr<vm::StackItem> data, bool callOnPayment)
+    bool MintToken(ApplicationEngine& engine, const io::ByteVector& tokenId, const io::UInt160& owner,
+                   const std::map<std::string, std::shared_ptr<vm::StackItem>>& properties,
+                   std::shared_ptr<vm::StackItem> data, bool callOnPayment)
     {
         return Mint(engine, tokenId, owner, properties, data, callOnPayment);
     }
@@ -57,7 +57,7 @@ public:
 
 class NonFungibleTokenTest : public ::testing::Test
 {
-protected:
+  protected:
     std::shared_ptr<MemoryStoreView> snapshot;
     std::shared_ptr<MockNonFungibleToken> token;
     std::shared_ptr<ApplicationEngine> engine;

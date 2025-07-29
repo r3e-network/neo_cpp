@@ -1,16 +1,16 @@
 #include <gtest/gtest.h>
-#include <neo/network/p2p/payloads/version_payload.h>
-#include <neo/network/p2p/payloads/ping_payload.h>
-#include <neo/network/p2p/payloads/addr_payload.h>
-#include <neo/network/p2p/payloads/inv_payload.h>
-#include <neo/network/p2p/payloads/get_data_payload.h>
-#include <neo/network/p2p/payloads/get_blocks_payload.h>
-#include <neo/network/p2p/payloads/get_block_by_index_payload.h>
-#include <neo/network/p2p/payloads/headers_payload.h>
-#include <neo/io/binary_writer.h>
 #include <neo/io/binary_reader.h>
+#include <neo/io/binary_writer.h>
 #include <neo/ledger/block_header.h>
 #include <neo/network/ip_address.h>
+#include <neo/network/p2p/payloads/addr_payload.h>
+#include <neo/network/p2p/payloads/get_block_by_index_payload.h>
+#include <neo/network/p2p/payloads/get_blocks_payload.h>
+#include <neo/network/p2p/payloads/get_data_payload.h>
+#include <neo/network/p2p/payloads/headers_payload.h>
+#include <neo/network/p2p/payloads/inv_payload.h>
+#include <neo/network/p2p/payloads/ping_payload.h>
+#include <neo/network/p2p/payloads/version_payload.h>
 #include <sstream>
 #include <vector>
 
@@ -30,15 +30,15 @@ TEST(P2PPayloadsTest, VersionPayload_Serialize_Deserialize)
     payload.SetVersion(0);
 
     // Verify initial values (matching C# implementation)
-    EXPECT_EQ(payload.GetNetwork(), 7630401); // Magic number
+    EXPECT_EQ(payload.GetNetwork(), 7630401);  // Magic number
     EXPECT_EQ(payload.GetVersion(), 0);
     EXPECT_EQ(payload.GetNonce(), 123456);
     EXPECT_EQ(payload.GetUserAgent(), "Neo C++ Node");
-    EXPECT_TRUE(payload.GetAllowCompression()); // Should be true without DisableCompressionCapability
+    EXPECT_TRUE(payload.GetAllowCompression());  // Should be true without DisableCompressionCapability
     EXPECT_EQ(payload.GetCapabilities().size(), 2);
 
     // Verify size calculation
-    EXPECT_GT(payload.GetSize(), 0); // Size should be greater than 0
+    EXPECT_GT(payload.GetSize(), 0);  // Size should be greater than 0
 
     // Serialize the payload
     std::ostringstream stream;
@@ -75,21 +75,21 @@ TEST(P2PPayloadsTest, VersionPayload_DisableCompression)
 
     // Create the payload
     VersionPayload payload = VersionPayload::Create(7630401, 123456, "Neo C++ Node", capabilities);
-    
+
     // Verify that AllowCompression is false with DisableCompressionCapability
     EXPECT_FALSE(payload.GetAllowCompression());
-    
+
     // Serialize and deserialize
     std::ostringstream stream;
     BinaryWriter writer(stream);
     payload.Serialize(writer);
     std::string data = stream.str();
-    
+
     std::istringstream inputStream(data);
     BinaryReader reader(inputStream);
     VersionPayload deserializedPayload;
     deserializedPayload.Deserialize(reader);
-    
+
     // Check that AllowCompression is still false
     EXPECT_FALSE(deserializedPayload.GetAllowCompression());
 }
@@ -160,34 +160,34 @@ TEST(P2PPayloadsTest, PingPayload_Serialize_Deserialize)
     EXPECT_EQ(deserializedPayload.GetLastBlockIndex(), 12345);
     EXPECT_EQ(deserializedPayload.GetNonce(), 67890);
     EXPECT_EQ(deserializedPayload.GetTimestamp(), 123456789);
-    
+
     // Check the size matches C# implementation
-    EXPECT_EQ(payload.GetSize(), 12); // 4 bytes each for LastBlockIndex, Timestamp, and Nonce
+    EXPECT_EQ(payload.GetSize(), 12);  // 4 bytes each for LastBlockIndex, Timestamp, and Nonce
 }
 
 TEST(P2PPayloadsTest, PingPayload_CreateWithNonce)
 {
     // Create a ping payload using Create method with two parameters
     PingPayload payload = PingPayload::Create(12345, 67890);
-    payload.SetTimestamp(123456789); // Override timestamp for testing
-    
+    payload.SetTimestamp(123456789);  // Override timestamp for testing
+
     // Verify fields
     EXPECT_EQ(payload.GetLastBlockIndex(), 12345);
     EXPECT_EQ(payload.GetNonce(), 67890);
     EXPECT_EQ(payload.GetTimestamp(), 123456789);
-    
+
     // Test serialization
     std::ostringstream stream;
     BinaryWriter writer(stream);
     payload.Serialize(writer);
     std::string data = stream.str();
-    
+
     // Deserialize and verify
     std::istringstream inputStream(data);
     BinaryReader reader(inputStream);
     PingPayload deserializedPayload;
     deserializedPayload.Deserialize(reader);
-    
+
     EXPECT_EQ(deserializedPayload.GetLastBlockIndex(), 12345);
     EXPECT_EQ(deserializedPayload.GetNonce(), 67890);
     EXPECT_EQ(deserializedPayload.GetTimestamp(), 123456789);
@@ -252,14 +252,20 @@ TEST(P2PPayloadsTest, AddrPayload_Serialize_Deserialize)
     EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetAddress().ToString(), "127.0.0.1");
     EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities().size(), 1);
     EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
-    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[0].GetCapabilities()[0]).GetPort(), 10333);
+    EXPECT_EQ(
+        static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[0].GetCapabilities()[0]).GetPort(),
+        10333);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetTimestamp(), 987654321);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetAddress().ToString(), "192.168.1.1");
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities().size(), 2);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
-    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[0]).GetPort(), 20333);
+    EXPECT_EQ(
+        static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[0]).GetPort(),
+        20333);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[1].GetType(), NodeCapabilityType::FullNode);
-    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[1]).GetStartHeight(), 12345);
+    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[1])
+                  .GetStartHeight(),
+              12345);
 }
 
 TEST(P2PPayloadsTest, AddrPayload_SerializeJson_DeserializeJson)
@@ -306,14 +312,20 @@ TEST(P2PPayloadsTest, AddrPayload_SerializeJson_DeserializeJson)
     EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetAddress().ToString(), "127.0.0.1");
     EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities().size(), 1);
     EXPECT_EQ(deserializedPayload.GetAddressList()[0].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
-    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[0].GetCapabilities()[0]).GetPort(), 10333);
+    EXPECT_EQ(
+        static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[0].GetCapabilities()[0]).GetPort(),
+        10333);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetTimestamp(), 987654321);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetAddress().ToString(), "192.168.1.1");
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities().size(), 2);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[0].GetType(), NodeCapabilityType::TcpServer);
-    EXPECT_EQ(static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[0]).GetPort(), 20333);
+    EXPECT_EQ(
+        static_cast<const ServerCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[0]).GetPort(),
+        20333);
     EXPECT_EQ(deserializedPayload.GetAddressList()[1].GetCapabilities()[1].GetType(), NodeCapabilityType::FullNode);
-    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[1]).GetStartHeight(), 12345);
+    EXPECT_EQ(static_cast<const FullNodeCapability&>(deserializedPayload.GetAddressList()[1].GetCapabilities()[1])
+                  .GetStartHeight(),
+              12345);
 }
 
 TEST(P2PPayloadsTest, InvPayload_Serialize_Deserialize)
@@ -340,9 +352,11 @@ TEST(P2PPayloadsTest, InvPayload_Serialize_Deserialize)
     // Check the deserialized payload
     EXPECT_EQ(deserializedPayload.GetInventories().size(), 2);
     EXPECT_EQ(deserializedPayload.GetInventories()[0].GetType(), InventoryType::Block);
-    EXPECT_EQ(deserializedPayload.GetInventories()[0].GetHash().ToHexString(), "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    EXPECT_EQ(deserializedPayload.GetInventories()[0].GetHash().ToHexString(),
+              "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
     EXPECT_EQ(deserializedPayload.GetInventories()[1].GetType(), InventoryType::Block);
-    EXPECT_EQ(deserializedPayload.GetInventories()[1].GetHash().ToHexString(), "FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210");
+    EXPECT_EQ(deserializedPayload.GetInventories()[1].GetHash().ToHexString(),
+              "FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210");
 }
 
 TEST(P2PPayloadsTest, GetDataPayload_Serialize_Deserialize)
@@ -369,15 +383,18 @@ TEST(P2PPayloadsTest, GetDataPayload_Serialize_Deserialize)
     // Check the deserialized payload
     EXPECT_EQ(deserializedPayload.GetInventories().size(), 2);
     EXPECT_EQ(deserializedPayload.GetInventories()[0].GetType(), InventoryType::Block);
-    EXPECT_EQ(deserializedPayload.GetInventories()[0].GetHash().ToHexString(), "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    EXPECT_EQ(deserializedPayload.GetInventories()[0].GetHash().ToHexString(),
+              "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
     EXPECT_EQ(deserializedPayload.GetInventories()[1].GetType(), InventoryType::Block);
-    EXPECT_EQ(deserializedPayload.GetInventories()[1].GetHash().ToHexString(), "FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210");
+    EXPECT_EQ(deserializedPayload.GetInventories()[1].GetHash().ToHexString(),
+              "FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210");
 }
 
 TEST(P2PPayloadsTest, GetBlocksPayload_Serialize_Deserialize)
 {
     // Create a getblocks payload
-    neo::io::UInt256 hashStart = neo::io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    neo::io::UInt256 hashStart =
+        neo::io::UInt256::Parse("0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
     uint16_t count = 500;
 
     GetBlocksPayload payload(hashStart);
@@ -396,7 +413,8 @@ TEST(P2PPayloadsTest, GetBlocksPayload_Serialize_Deserialize)
     deserializedPayload.Deserialize(reader);
 
     // Check the deserialized payload
-    EXPECT_EQ(deserializedPayload.GetHashStart().ToHexString(), "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    EXPECT_EQ(deserializedPayload.GetHashStart().ToHexString(),
+              "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
     EXPECT_EQ(deserializedPayload.GetCount(), 500);
 }
 
@@ -463,13 +481,16 @@ TEST(P2PPayloadsTest, HeadersPayload_Serialize_Deserialize)
     // Check the deserialized payload
     EXPECT_EQ(deserializedPayload.GetHeaders().size(), 2);
     EXPECT_EQ(deserializedPayload.GetHeaders()[0]->GetVersion(), 0);
-    EXPECT_EQ(deserializedPayload.GetHeaders()[0]->GetPrevHash().ToHexString(), "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
-    EXPECT_EQ(deserializedPayload.GetHeaders()[0]->GetMerkleRoot().ToHexString(), "FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210");
+    EXPECT_EQ(deserializedPayload.GetHeaders()[0]->GetPrevHash().ToHexString(),
+              "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    EXPECT_EQ(deserializedPayload.GetHeaders()[0]->GetMerkleRoot().ToHexString(),
+              "FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210");
     EXPECT_EQ(deserializedPayload.GetHeaders()[0]->GetTimestamp(), 123456789);
     EXPECT_EQ(deserializedPayload.GetHeaders()[0]->GetIndex(), 1);
     EXPECT_EQ(deserializedPayload.GetHeaders()[1]->GetVersion(), 0);
     EXPECT_EQ(deserializedPayload.GetHeaders()[1]->GetPrevHash(), header1->GetHash());
-    EXPECT_EQ(deserializedPayload.GetHeaders()[1]->GetMerkleRoot().ToHexString(), "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    EXPECT_EQ(deserializedPayload.GetHeaders()[1]->GetMerkleRoot().ToHexString(),
+              "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
     EXPECT_EQ(deserializedPayload.GetHeaders()[1]->GetTimestamp(), 987654321);
     EXPECT_EQ(deserializedPayload.GetHeaders()[1]->GetIndex(), 2);
 }

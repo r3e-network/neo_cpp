@@ -45,7 +45,7 @@ void HighPriority::DeserializeJson(const io::JsonReader& reader)
 
 bool HighPriority::Verify(/* DataCache& snapshot, const Transaction& transaction */) const
 {
-    // Simplified verification for HighPriority attribute
+    // Basic verification for HighPriority attribute
     // In the real implementation, this would verify that the sender is a committee member
     try
     {

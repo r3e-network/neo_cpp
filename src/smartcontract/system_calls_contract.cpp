@@ -2,6 +2,7 @@
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/native_contract.h>
 #include <neo/smartcontract/system_calls.h>
+#include <neo/vm/vm_constants.h>
 
 namespace neo::smartcontract
 {
@@ -180,7 +181,12 @@ void RegisterContractSystemCallsImpl(ApplicationEngine& engine)
 
                 context.Push(vm::StackItem::Create(scriptHash.ToArray()));
             }
-            catch (...)
+            catch (const std::runtime_error&)
+            {
+                // On error, push null
+                context.Push(vm::StackItem::Null());
+            }
+            catch (const std::invalid_argument&)
             {
                 // On error, push null
                 context.Push(vm::StackItem::Null());
@@ -225,10 +231,10 @@ void RegisterContractSystemCallsImpl(ApplicationEngine& engine)
                 io::ByteVector script;
 
                 // Push m value using appropriate opcode
-                if (m <= 16)
+                if (m <= vm::VMConstants::MAX_DIRECT_PUSH_VALUE)
                 {
                     // Use PUSH0-PUSH16 opcodes (0x10 + m)
-                    script.Push(static_cast<uint8_t>(0x10 + m));
+                    script.Push(static_cast<uint8_t>(vm::VMConstants::PUSH0_OPCODE + m));
                 }
                 else
                 {
@@ -265,10 +271,10 @@ void RegisterContractSystemCallsImpl(ApplicationEngine& engine)
                 }
 
                 // Push n value (number of public keys)
-                if (sortedPubKeys.size() <= 16)
+                if (sortedPubKeys.size() <= vm::VMConstants::MAX_DIRECT_PUSH_VALUE)
                 {
                     // Use PUSH0-PUSH16 opcodes
-                    script.Push(static_cast<uint8_t>(0x10 + sortedPubKeys.size()));
+                    script.Push(static_cast<uint8_t>(vm::VMConstants::PUSH0_OPCODE + sortedPubKeys.size()));
                 }
                 else
                 {
@@ -286,7 +292,15 @@ void RegisterContractSystemCallsImpl(ApplicationEngine& engine)
                 // Return as byte array
                 context.Push(vm::StackItem::Create(scriptHash.ToArray()));
             }
-            catch (...)
+            catch (const std::runtime_error&)
+            {
+                context.Push(vm::StackItem::Null());
+            }
+            catch (const std::invalid_argument&)
+            {
+                context.Push(vm::StackItem::Null());
+            }
+            catch (const std::out_of_range&)
             {
                 context.Push(vm::StackItem::Null());
             }

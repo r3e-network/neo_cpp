@@ -1,22 +1,22 @@
 // Disabled due to API mismatches - needs to be updated
 #include <gtest/gtest.h>
-#include <neo/smartcontract/native/native_contract.h>
-#include <neo/smartcontract/native/native_contract_manager.h>
-#include <neo/smartcontract/native/contract_management.h>
-#include <neo/smartcontract/native/std_lib.h>
-#include <neo/smartcontract/native/crypto_lib.h>
-#include <neo/smartcontract/native/ledger_contract.h>
-#include <neo/smartcontract/native/neo_token.h>
-#include <neo/smartcontract/native/gas_token.h>
-#include <neo/smartcontract/native/policy_contract.h>
-#include <neo/smartcontract/native/oracle_contract.h>
-#include <neo/smartcontract/native/role_management.h>
-#include <neo/smartcontract/native/name_service.h>
-#include <neo/smartcontract/application_engine.h>
-#include <neo/persistence/memory_store.h>
-#include <neo/persistence/data_cache.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+#include <neo/persistence/data_cache.h>
+#include <neo/persistence/memory_store.h>
+#include <neo/smartcontract/application_engine.h>
+#include <neo/smartcontract/native/contract_management.h>
+#include <neo/smartcontract/native/crypto_lib.h>
+#include <neo/smartcontract/native/gas_token.h>
+#include <neo/smartcontract/native/ledger_contract.h>
+#include <neo/smartcontract/native/name_service.h>
+#include <neo/smartcontract/native/native_contract.h>
+#include <neo/smartcontract/native/native_contract_manager.h>
+#include <neo/smartcontract/native/neo_token.h>
+#include <neo/smartcontract/native/oracle_contract.h>
+#include <neo/smartcontract/native/policy_contract.h>
+#include <neo/smartcontract/native/role_management.h>
+#include <neo/smartcontract/native/std_lib.h>
 #include <sstream>
 
 using namespace neo::smartcontract::native;
@@ -28,7 +28,7 @@ using namespace neo::ledger;
 
 class NativeContractTest : public ::testing::Test
 {
-protected:
+  protected:
     void SetUp() override
     {
         store = std::make_shared<MemoryStore>();
@@ -44,10 +44,10 @@ protected:
 TEST_F(NativeContractTest, NativeContractManager)
 {
     auto& manager = NativeContractManager::GetInstance();
-    
+
     // Check if all native contracts are registered
     EXPECT_EQ(manager.GetContracts().size(), 10);
-    
+
     // Check if contracts can be retrieved by name
     EXPECT_NE(manager.GetContract(ContractManagement::NAME), nullptr);
     EXPECT_NE(manager.GetContract(StdLib::NAME), nullptr);
@@ -59,7 +59,7 @@ TEST_F(NativeContractTest, NativeContractManager)
     EXPECT_NE(manager.GetContract(OracleContract::NAME), nullptr);
     EXPECT_NE(manager.GetContract(RoleManagement::NAME), nullptr);
     EXPECT_NE(manager.GetContract(NameService::NAME), nullptr);
-    
+
     // Check if contracts can be retrieved by ID
     EXPECT_NE(manager.GetContract(ContractManagement::ID), nullptr);
     EXPECT_NE(manager.GetContract(StdLib::ID), nullptr);
@@ -71,7 +71,7 @@ TEST_F(NativeContractTest, NativeContractManager)
     EXPECT_NE(manager.GetContract(OracleContract::ID), nullptr);
     EXPECT_NE(manager.GetContract(RoleManagement::ID), nullptr);
     EXPECT_NE(manager.GetContract(NameService::ID), nullptr);
-    
+
     // Check if contracts can be retrieved by script hash
     EXPECT_NE(manager.GetContract(manager.GetContract(ContractManagement::NAME)->GetScriptHash()), nullptr);
     EXPECT_NE(manager.GetContract(manager.GetContract(StdLib::NAME)->GetScriptHash()), nullptr);
@@ -88,14 +88,14 @@ TEST_F(NativeContractTest, NativeContractManager)
 TEST_F(NativeContractTest, DISABLED_ContractManagement)
 {
     auto contract = std::make_shared<ContractManagement>();
-    
+
     // Check contract properties
     EXPECT_EQ(contract->GetName(), ContractManagement::NAME);
     EXPECT_EQ(contract->GetId(), ContractManagement::ID);
-    
+
     // Initialize contract - temporarily disabled due to protected access
     // contract->Initialize();
-    
+
     // Check if methods are registered
     EXPECT_TRUE(contract->CheckCallFlags("deploy", CallFlags::All));
     EXPECT_TRUE(contract->CheckCallFlags("update", CallFlags::All));
@@ -106,14 +106,14 @@ TEST_F(NativeContractTest, DISABLED_ContractManagement)
 TEST_F(NativeContractTest, DISABLED_StdLib)
 {
     auto contract = std::make_shared<StdLib>();
-    
+
     // Check contract properties
     EXPECT_EQ(contract->GetName(), StdLib::NAME);
     EXPECT_EQ(contract->GetId(), StdLib::ID);
-    
+
     // Initialize contract - temporarily disabled due to protected access
     // contract->Initialize();
-    
+
     // Check if methods are registered
     EXPECT_TRUE(contract->CheckCallFlags("serialize", CallFlags::None));
     EXPECT_TRUE(contract->CheckCallFlags("deserialize", CallFlags::None));
@@ -134,14 +134,14 @@ TEST_F(NativeContractTest, DISABLED_StdLib)
 TEST_F(NativeContractTest, DISABLED_CryptoLib)
 {
     auto contract = std::make_shared<CryptoLib>();
-    
+
     // Check contract properties
     EXPECT_EQ(contract->GetName(), CryptoLib::NAME);
     EXPECT_EQ(contract->GetId(), CryptoLib::ID);
-    
+
     // Initialize contract - temporarily disabled due to protected access
     // contract->Initialize();
-    
+
     // Check if methods are registered
     EXPECT_TRUE(contract->CheckCallFlags("sha256", CallFlags::None));
     EXPECT_TRUE(contract->CheckCallFlags("ripemd160", CallFlags::None));
@@ -154,14 +154,14 @@ TEST_F(NativeContractTest, DISABLED_CryptoLib)
 TEST_F(NativeContractTest, DISABLED_LedgerContract)
 {
     auto contract = std::make_shared<LedgerContract>();
-    
+
     // Check contract properties
     EXPECT_EQ(contract->GetName(), LedgerContract::NAME);
     EXPECT_EQ(contract->GetId(), LedgerContract::ID);
-    
+
     // Initialize contract - temporarily disabled due to protected access
     // contract->Initialize();
-    
+
     // Check if methods are registered
     EXPECT_TRUE(contract->CheckCallFlags("getHash", CallFlags::ReadStates));
     EXPECT_TRUE(contract->CheckCallFlags("getBlock", CallFlags::ReadStates));
@@ -174,14 +174,14 @@ TEST_F(NativeContractTest, DISABLED_LedgerContract)
 TEST_F(NativeContractTest, DISABLED_NeoToken)
 {
     auto contract = std::make_shared<NeoToken>();
-    
+
     // Check contract properties
     EXPECT_EQ(contract->GetName(), NeoToken::NAME);
     EXPECT_EQ(contract->GetId(), NeoToken::ID);
-    
+
     // Initialize contract - temporarily disabled due to protected access
     // contract->Initialize();
-    
+
     // Check if methods are registered
     EXPECT_TRUE(contract->CheckCallFlags("symbol", CallFlags::ReadStates));
     EXPECT_TRUE(contract->CheckCallFlags("decimals", CallFlags::ReadStates));
@@ -193,14 +193,14 @@ TEST_F(NativeContractTest, DISABLED_NeoToken)
 TEST_F(NativeContractTest, DISABLED_GasToken)
 {
     auto contract = std::make_shared<GasToken>();
-    
+
     // Check contract properties
     EXPECT_EQ(contract->GetName(), GasToken::NAME);
     EXPECT_EQ(contract->GetId(), GasToken::ID);
-    
+
     // Initialize contract - temporarily disabled due to protected access
     // contract->Initialize();
-    
+
     // Check if methods are registered
     EXPECT_TRUE(contract->CheckCallFlags("symbol", CallFlags::ReadStates));
     EXPECT_TRUE(contract->CheckCallFlags("decimals", CallFlags::ReadStates));
@@ -212,14 +212,14 @@ TEST_F(NativeContractTest, DISABLED_GasToken)
 TEST_F(NativeContractTest, DISABLED_PolicyContract)
 {
     auto contract = std::make_shared<PolicyContract>();
-    
+
     // Check contract properties
     EXPECT_EQ(contract->GetName(), PolicyContract::NAME);
     EXPECT_EQ(contract->GetId(), PolicyContract::ID);
-    
+
     // Initialize contract - temporarily disabled due to protected access
     // contract->Initialize();
-    
+
     // Check if methods are registered
     EXPECT_TRUE(contract->CheckCallFlags("getMaxTransactionsPerBlock", CallFlags::ReadStates));
     EXPECT_TRUE(contract->CheckCallFlags("setMaxTransactionsPerBlock", CallFlags::States));
@@ -237,14 +237,14 @@ TEST_F(NativeContractTest, DISABLED_PolicyContract)
 TEST_F(NativeContractTest, DISABLED_OracleContract)
 {
     auto contract = std::make_shared<OracleContract>();
-    
+
     // Check contract properties
     EXPECT_EQ(contract->GetName(), OracleContract::NAME);
     EXPECT_EQ(contract->GetId(), OracleContract::ID);
-    
+
     // Initialize contract - temporarily disabled due to protected access
     // contract->Initialize();
-    
+
     // Check if methods are registered
     EXPECT_TRUE(contract->CheckCallFlags("getPrice", CallFlags::ReadStates));
     EXPECT_TRUE(contract->CheckCallFlags("setPrice", CallFlags::States));
@@ -257,14 +257,14 @@ TEST_F(NativeContractTest, DISABLED_OracleContract)
 TEST_F(NativeContractTest, DISABLED_RoleManagement)
 {
     auto contract = std::make_shared<RoleManagement>();
-    
+
     // Check contract properties
     EXPECT_EQ(contract->GetName(), RoleManagement::NAME);
     EXPECT_EQ(contract->GetId(), RoleManagement::ID);
-    
+
     // Initialize contract - temporarily disabled due to protected access
     // contract->Initialize();
-    
+
     // Check if methods are registered
     EXPECT_TRUE(contract->CheckCallFlags("getDesignatedByRole", CallFlags::ReadStates));
     EXPECT_TRUE(contract->CheckCallFlags("designateAsRole", CallFlags::States));
@@ -273,14 +273,14 @@ TEST_F(NativeContractTest, DISABLED_RoleManagement)
 TEST_F(NativeContractTest, DISABLED_NameService)
 {
     auto contract = std::make_shared<NameService>();
-    
+
     // Check contract properties - use base class method explicitly
     EXPECT_EQ(contract->NativeContract::GetName(), NameService::NAME);
     EXPECT_EQ(contract->GetId(), NameService::ID);
-    
+
     // Initialize contract - temporarily disabled due to protected access
     // contract->Initialize();
-    
+
     // Check if methods are registered
     EXPECT_TRUE(contract->CheckCallFlags("getPrice", CallFlags::ReadStates));
     EXPECT_TRUE(contract->CheckCallFlags("setPrice", CallFlags::States));

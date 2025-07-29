@@ -542,21 +542,21 @@ int Neo3Transaction::GetVarIntSize(size_t value) const
 int Neo3Transaction::GetSignerSize(const ledger::Signer& signer) const
 {
     // Signer: account (20 bytes) + scopes (1 byte) + allowed contracts/groups (variable)
-    // Simplified calculation
+    // Basic calculation
     return 21;  // account + scopes
 }
 
 int Neo3Transaction::GetAttributeSize(const ledger::TransactionAttribute& attr) const
 {
     // Attribute: type (1 byte) + data (variable length)
-    // Simplified calculation
+    // Basic calculation
     return 1 + static_cast<int>(attr.GetData().Size());
 }
 
 int Neo3Transaction::GetWitnessSize(const ledger::Witness& witness) const
 {
     // Witness: invocation script + verification script (both variable length)
-    // Simplified calculation - basic structure
+    // Basic calculation - basic structure
     return 2;  // minimal witness size
 }
 

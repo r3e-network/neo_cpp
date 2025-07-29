@@ -127,8 +127,8 @@ StorageKey::StorageKey(const io::UInt160& scriptHash) : scriptHash_(scriptHash)
     }
     else
     {
-        // If not in cache, use a temporary invalid ID
-        // The actual lookup should be done through DataCache context
+        // Contract not found in cache - mark for later resolution
+        // ID will be resolved when accessed through DataCache context
         id_ = -1;
         requiresLookup_ = true;
     }
@@ -147,8 +147,8 @@ StorageKey::StorageKey(const io::UInt160& scriptHash, const io::ByteVector& key)
     }
     else
     {
-        // If not in cache, use a temporary invalid ID
-        // The actual lookup should be done through DataCache context
+        // Contract not found in cache - mark for later resolution
+        // ID will be resolved when accessed through DataCache context
         id_ = -1;
         requiresLookup_ = true;
     }
@@ -266,6 +266,46 @@ StorageKey StorageKey::Create(int32_t id, uint8_t prefix, const std::span<const 
     return StorageKey(id, io::ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
 }
 
+StorageKey StorageKey::Create(int32_t id, uint8_t prefix, int64_t bigEndian)
+{
+    auto data = io::ByteVector(PREFIX_LENGTH + sizeof(int64_t));
+    FillHeader(std::span<uint8_t>(data.Data(), PREFIX_LENGTH), id, prefix);
+
+    // Write as big-endian
+    int64_t beValue = static_cast<int64_t>(byteswap(static_cast<uint64_t>(bigEndian)));
+    std::memcpy(data.Data() + PREFIX_LENGTH, &beValue, sizeof(int64_t));
+
+    return StorageKey(id, io::ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
+}
+
+StorageKey StorageKey::Create(int32_t id, uint8_t prefix, uint64_t bigEndian)
+{
+    auto data = io::ByteVector(PREFIX_LENGTH + sizeof(uint64_t));
+    FillHeader(std::span<uint8_t>(data.Data(), PREFIX_LENGTH), id, prefix);
+
+    // Write as big-endian
+    uint64_t beValue = byteswap(bigEndian);
+    std::memcpy(data.Data() + PREFIX_LENGTH, &beValue, sizeof(uint64_t));
+
+    return StorageKey(id, io::ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
+}
+
+io::ByteVector StorageKey::CreateSearchPrefix(int32_t id, const std::span<const uint8_t>& prefix)
+{
+    io::ByteVector result(sizeof(int32_t) + prefix.size());
+
+    // Write contract ID (little-endian)
+    result[0] = static_cast<uint8_t>(id & 0xFF);
+    result[1] = static_cast<uint8_t>((id >> 8) & 0xFF);
+    result[2] = static_cast<uint8_t>((id >> 16) & 0xFF);
+    result[3] = static_cast<uint8_t>((id >> 24) & 0xFF);
+
+    // Copy prefix
+    std::copy(prefix.begin(), prefix.end(), result.Data() + sizeof(int32_t));
+
+    return result;
+}
+
 StorageKey StorageKey::Create(const io::UInt160& scriptHash, uint8_t prefix)
 {
     StorageKey key(scriptHash);
@@ -330,6 +370,13 @@ void StorageKey::Deserialize(io::BinaryReader& reader)
 
 bool StorageKey::operator==(const StorageKey& other) const
 {
+    // If both have script hashes, compare them
+    if (scriptHash_.has_value() && other.scriptHash_.has_value())
+    {
+        return scriptHash_.value() == other.scriptHash_.value() && key_ == other.key_;
+    }
+
+    // Otherwise compare contract IDs
     return id_ == other.id_ && key_ == other.key_;
 }
 
@@ -340,11 +387,19 @@ bool StorageKey::operator!=(const StorageKey& other) const
 
 bool StorageKey::operator<(const StorageKey& other) const
 {
+    // If both have script hashes, compare them first
+    if (scriptHash_.has_value() && other.scriptHash_.has_value())
+    {
+        if (scriptHash_.value() != other.scriptHash_.value())
+            return scriptHash_.value() < other.scriptHash_.value();
+        return key_ < other.key_;
+    }
+
+    // Otherwise compare contract IDs
     if (id_ != other.id_)
         return id_ < other.id_;
     return key_ < other.key_;
 }
-
 
 io::ByteVector StorageKey::Build() const
 {
@@ -385,9 +440,9 @@ void StorageKey::DeserializeFromArray(const std::span<const uint8_t>& data)
         throw std::invalid_argument("Data too short for contract ID");
     }
     // Read contract ID (little-endian)
-    id_ = static_cast<int32_t>(data[0]) | (static_cast<int32_t>(data[1]) << 8) | 
-          (static_cast<int32_t>(data[2]) << 16) | (static_cast<int32_t>(data[3]) << 24);
-    
+    id_ = static_cast<int32_t>(data[0]) | (static_cast<int32_t>(data[1]) << 8) | (static_cast<int32_t>(data[2]) << 16) |
+          (static_cast<int32_t>(data[3]) << 24);
+
     // Read key data (if any)
     if (data.size() > 4)
     {
@@ -401,9 +456,14 @@ void StorageKey::DeserializeFromArray(const std::span<const uint8_t>& data)
 
 UInt160 StorageKey::GetScriptHash() const
 {
-    // For Neo N3, we need to resolve contract ID to script hash
-    // This would normally require blockchain state access
-    // For now, we'll create a placeholder implementation that returns a valid UInt160
+    // If we have a stored script hash, return it
+    if (scriptHash_.has_value())
+    {
+        return scriptHash_.value();
+    }
+
+    // Contract ID not found in stored script hashes
+    // Return zero hash to indicate contract not found
     return UInt160::Zero();
 }
 
@@ -411,14 +471,28 @@ StorageKey StorageKey::Create(int32_t id, uint8_t prefix, const io::UInt256& has
 {
     auto data = ByteVector(PREFIX_LENGTH + UInt256::SIZE + UInt160::SIZE);
     FillHeader(std::span<uint8_t>(data.Data(), PREFIX_LENGTH), id, prefix);
-    
+
     // Write hash and signer
     MemoryStream stream(data.Data() + PREFIX_LENGTH, UInt256::SIZE + UInt160::SIZE);
     BinaryWriter writer(stream);
     hash.Serialize(writer);
     signer.Serialize(writer);
-    
+
     return StorageKey(id, ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
+}
+
+bool StorageKey::Equals(const StorageKey& other) const
+{
+    return *this == other;
+}
+
+int StorageKey::CompareTo(const StorageKey& other) const
+{
+    if (*this < other)
+        return -1;
+    if (other < *this)
+        return 1;
+    return 0;
 }
 
 }  // namespace neo::persistence

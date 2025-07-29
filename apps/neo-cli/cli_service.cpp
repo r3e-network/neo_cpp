@@ -3,46 +3,50 @@
 #include "plugins/plugin_manager.h"
 #include "services/console_service_neo.h"
 
-#include <neo/core/neo_system.h>
-#include <neo/core/logging.h>
-#include <neo/core/config_manager.h>
-#include <neo/core/shutdown_manager.h>
+#include <neo/consensus/dbft_consensus.h>
 #include <neo/core/circuit_breaker.h>
-#include <neo/persistence/rocksdb_store.h>
+#include <neo/core/config_manager.h>
+#include <neo/core/logging.h>
+#include <neo/core/neo_system.h>
+#include <neo/core/shutdown_manager.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/memory_pool.h>
-#include <neo/network/p2p_server.h>
-#include <neo/network/connection_manager.h>
-#include <neo/rpc/rpc_server.h>
-#include <neo/rpc/rate_limiter.h>
-#include <neo/consensus/dbft_consensus.h>
-#include <neo/wallets/nep6/nep6_wallet.h>
-#include <neo/monitoring/prometheus_exporter.h>
 #include <neo/monitoring/health_check.h>
+#include <neo/monitoring/prometheus_exporter.h>
+#include <neo/network/connection_manager.h>
+#include <neo/network/p2p_server.h>
+#include <neo/persistence/rocksdb_store.h>
+#include <neo/rpc/rate_limiter.h>
+#include <neo/rpc/rpc_server.h>
+#include <neo/wallets/nep6/nep6_wallet.h>
 
-#include <iostream>
-#include <fstream>
 #include <chrono>
+#include <fstream>
 #include <iomanip>
+#include <iostream>
 #include <sstream>
 
-namespace neo::cli {
+namespace neo::cli
+{
 
 CLIService::CLIService(const std::filesystem::path& config_path, const std::string& network)
-    : config_path_(config_path), network_(network) {
+    : config_path_(config_path), network_(network)
+{
 }
 
-CLIService::~CLIService() {
+CLIService::~CLIService()
+{
     Stop();
 }
 
-void CLIService::Initialize() {
+void CLIService::Initialize()
+{
     // Load configuration with environment variable support
     LoadConfiguration();
-    
+
     // Setup graceful shutdown
     SetupShutdownHandlers();
-    
+
     // Initialize core components
     InitializeLogging();
     InitializeMetrics();
@@ -50,93 +54,110 @@ void CLIService::Initialize() {
     InitializeStorage();
     InitializeNeoSystem();
     InitializeNetwork();
-    
-    if (rpc_enabled_) {
+
+    if (rpc_enabled_)
+    {
         InitializeRPC();
     }
-    
-    if (consensus_enabled_) {
+
+    if (consensus_enabled_)
+    {
         InitializeConsensus();
     }
-    
+
     InitializeConsole();
     RegisterCommands();
     LoadPlugins();
-    
+
     // Start monitoring services
     StartMonitoring();
 }
 
-void CLIService::Start() {
-    if (running_) return;
-    
+void CLIService::Start()
+{
+    if (running_)
+        return;
+
     running_ = true;
-    
+
     // Start P2P server
-    if (p2p_server_) {
+    if (p2p_server_)
+    {
         p2p_server_->Start();
         std::cout << "P2P server started on port " << config_["P2P"]["Port"].get<uint16_t>() << std::endl;
     }
-    
+
     // Start RPC server
-    if (rpc_server_ && rpc_enabled_) {
+    if (rpc_server_ && rpc_enabled_)
+    {
         rpc_server_->Start();
         std::cout << "RPC server started on port " << config_["RPC"]["Port"].get<uint16_t>() << std::endl;
     }
-    
+
     // Start consensus
-    if (consensus_ && consensus_enabled_) {
+    if (consensus_ && consensus_enabled_)
+    {
         consensus_->Start();
         std::cout << "Consensus service started" << std::endl;
     }
-    
+
     // Start status display thread
     status_thread_ = std::thread(&CLIService::StatusLoop, this);
 }
 
-void CLIService::Run() {
-    if (!console_service_) {
+void CLIService::Run()
+{
+    if (!console_service_)
+    {
         throw std::runtime_error("Console service not initialized");
     }
-    
+
     DisplayHelp();
-    
+
     // Main command loop
-    while (running_) {
+    while (running_)
+    {
         console_service_->ProcessCommands();
     }
 }
 
-void CLIService::Stop() {
-    if (!running_) return;
-    
+void CLIService::Stop()
+{
+    if (!running_)
+        return;
+
     running_ = false;
-    
+
     // Stop status thread
-    if (status_thread_.joinable()) {
+    if (status_thread_.joinable())
+    {
         status_thread_.join();
     }
-    
+
     // Stop consensus
-    if (consensus_) {
+    if (consensus_)
+    {
         consensus_->Stop();
     }
-    
+
     // Stop RPC server
-    if (rpc_server_) {
+    if (rpc_server_)
+    {
         rpc_server_->Stop();
     }
-    
+
     // Stop P2P server
-    if (p2p_server_) {
+    if (p2p_server_)
+    {
         p2p_server_->Stop();
     }
-    
+
     // Close wallet
     CloseWallet();
 }
 
-void CLIService::DisplayBanner() {
+void CLIService::DisplayBanner()
+{
     std::cout << R"(
      _   _ ______ ___        _____   _       _____ 
     | \ | |  ____/ _ \      / ____| | |     |_   _|
@@ -154,31 +175,36 @@ void CLIService::DisplayBanner() {
     std::cout << std::endl;
 }
 
-void CLIService::DisplayStatus() {
-    if (!neo_system_ || !GetBlockchain()) return;
-    
+void CLIService::DisplayStatus()
+{
+    if (!neo_system_ || !GetBlockchain())
+        return;
+
     auto blockchain = GetBlockchain();
     auto mempool = GetMemoryPool();
     auto p2p = GetP2PServer();
-    
+
     std::cout << "\nNode Status:" << std::endl;
     std::cout << "  Height: " << blockchain->GetHeight() << std::endl;
     std::cout << "  Header Height: " << blockchain->GetHeaderHeight() << std::endl;
     std::cout << "  Connected Peers: " << (p2p ? p2p->GetConnectedCount() : 0) << std::endl;
     std::cout << "  Memory Pool: " << (mempool ? mempool->GetCount() : 0) << " transactions" << std::endl;
-    
-    if (consensus_ && consensus_enabled_) {
+
+    if (consensus_ && consensus_enabled_)
+    {
         std::cout << "  Consensus: Active" << std::endl;
     }
-    
-    if (current_wallet_) {
+
+    if (current_wallet_)
+    {
         std::cout << "  Wallet: " << current_wallet_->GetName() << " (opened)" << std::endl;
     }
-    
+
     std::cout << std::endl;
 }
 
-void CLIService::DisplayHelp() {
+void CLIService::DisplayHelp()
+{
     std::cout << "\nAvailable commands:" << std::endl;
     std::cout << "  help              - Show this help message" << std::endl;
     std::cout << "  status            - Display node status" << std::endl;
@@ -188,268 +214,232 @@ void CLIService::DisplayHelp() {
     std::cout << "  show pool         - Show memory pool" << std::endl;
     std::cout << "  plugins           - List loaded plugins" << std::endl;
     std::cout << "  exit              - Exit the application" << std::endl;
-    
-    if (command_registry_) {
+
+    if (command_registry_)
+    {
         command_registry_->DisplayHelp();
     }
-    
+
     std::cout << std::endl;
 }
 
-ledger::Blockchain* CLIService::GetBlockchain() {
+ledger::Blockchain* CLIService::GetBlockchain()
+{
     return neo_system_ ? neo_system_->GetBlockchain() : nullptr;
 }
 
-ledger::MemoryPool* CLIService::GetMemoryPool() {
+ledger::MemoryPool* CLIService::GetMemoryPool()
+{
     return neo_system_ ? neo_system_->GetMemoryPool() : nullptr;
 }
 
-bool CLIService::OpenWallet(const std::filesystem::path& path, const std::string& password) {
-    try {
+bool CLIService::OpenWallet(const std::filesystem::path& path, const std::string& password)
+{
+    try
+    {
         CloseWallet();
-        
+
         current_wallet_ = std::make_unique<wallets::NEP6Wallet>(path);
         current_wallet_->Unlock(password);
-        
+
         std::cout << "Wallet opened successfully: " << path << std::endl;
         return true;
-        
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e)
+    {
         std::cerr << "Failed to open wallet: " << e.what() << std::endl;
         current_wallet_.reset();
         return false;
     }
 }
 
-void CLIService::CloseWallet() {
-    if (current_wallet_) {
+void CLIService::CloseWallet()
+{
+    if (current_wallet_)
+    {
         current_wallet_.reset();
         std::cout << "Wallet closed" << std::endl;
     }
 }
 
-void CLIService::LoadPlugins() {
-    if (!plugin_manager_) {
+void CLIService::LoadPlugins()
+{
+    if (!plugin_manager_)
+    {
         plugin_manager_ = std::make_unique<PluginManager>(this);
     }
-    
+
     // Load plugins from configuration
-    if (config_.contains("Plugins")) {
-        for (const auto& plugin_config : config_["Plugins"]) {
+    if (config_.contains("Plugins"))
+    {
+        for (const auto& plugin_config : config_["Plugins"])
+        {
             std::string name = plugin_config["Name"];
             std::filesystem::path path = plugin_config["Path"];
-            
-            if (plugin_manager_->LoadPlugin(name, path)) {
+
+            if (plugin_manager_->LoadPlugin(name, path))
+            {
                 std::cout << "Loaded plugin: " << name << std::endl;
             }
         }
     }
 }
 
-void CLIService::LoadConfiguration() {
+void CLIService::LoadConfiguration()
+{
     // Use ConfigManager for environment variable support
     auto& configManager = core::ConfigManager::GetInstance();
-    
-    try {
+
+    try
+    {
         configManager.LoadFromFile(config_path_);
         config_ = configManager.GetJson();
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e)
+    {
         std::cerr << "Warning: " << e.what() << std::endl;
         std::cerr << "Using default configuration" << std::endl;
-    
-    // Default configuration based on network
-    if (network_ == "mainnet") {
-        config_ = {
-            {"Network", "mainnet"},
-            {"Magic", 860833102},
-            {"P2P", {
-                {"Port", 10333},
-                {"WsPort", 10334}
-            }},
-            {"RPC", {
-                {"Port", 10332},
-                {"SslPort", 10331},
-                {"MaxGasInvoke", "50"}
-            }},
-            {"Storage", {
-                {"Engine", "RocksDBStore"},
-                {"Path", "./Chain"}
-            }},
-            {"Consensus", {
-                {"Enabled", false},
-                {"UnlockWallet", {
-                    {"Path", ""},
-                    {"Password", ""}
-                }}
-            }},
-            {"Logging", {
-                {"Path", "./Logs"},
-                {"ConsoleOutput", true}
-            }}
-        };
-    } else if (network_ == "testnet") {
-        config_ = {
-            {"Network", "testnet"},
-            {"Magic", 894710606},
-            {"P2P", {
-                {"Port", 20333},
-                {"WsPort", 20334}
-            }},
-            {"RPC", {
-                {"Port", 20332},
-                {"SslPort", 20331},
-                {"MaxGasInvoke", "50"}
-            }},
-            {"Storage", {
-                {"Engine", "RocksDBStore"},
-                {"Path", "./TestNetChain"}
-            }},
-            {"Consensus", {
-                {"Enabled", false},
-                {"UnlockWallet", {
-                    {"Path", ""},
-                    {"Password", ""}
-                }}
-            }},
-            {"Logging", {
-                {"Path", "./Logs"},
-                {"ConsoleOutput", true}
-            }}
-        };
-    } else {
-        // Private network
-        config_ = {
-            {"Network", "privnet"},
-            {"Magic", 1951352142},
-            {"P2P", {
-                {"Port", 30333},
-                {"WsPort", 30334}
-            }},
-            {"RPC", {
-                {"Port", 30332},
-                {"SslPort", 30331},
-                {"MaxGasInvoke", "50"}
-            }},
-            {"Storage", {
-                {"Engine", "RocksDBStore"},
-                {"Path", "./PrivNetChain"}
-            }},
-            {"Consensus", {
-                {"Enabled", false},
-                {"UnlockWallet", {
-                    {"Path", ""},
-                    {"Password", ""}
-                }}
-            }},
-            {"Logging", {
-                {"Path", "./Logs"},
-                {"ConsoleOutput", true}
-            }}
-        };
-    }
-}
 
-void CLIService::InitializeLogging() {
-    auto log_path = config_["Logging"]["Path"].get<std::string>();
-    auto console_output = config_["Logging"]["ConsoleOutput"].get<bool>();
-    
-    // Create log directory if it doesn't exist
-    std::filesystem::create_directories(log_path);
-    
-    // Initialize logging system
-    core::LogManager::Initialize(log_path, console_output);
-}
-
-void CLIService::InitializeStorage() {
-    auto engine = config_["Storage"]["Engine"].get<std::string>();
-    auto path = config_["Storage"]["Path"].get<std::string>();
-    
-    if (engine == "RocksDBStore") {
-        store_ = std::make_unique<persistence::RocksDBStore>(path);
-    } else {
-        throw std::runtime_error("Unknown storage engine: " + engine);
-    }
-}
-
-void CLIService::InitializeNeoSystem() {
-    auto magic = config_["Magic"].get<uint32_t>();
-    
-    // Create protocol settings
-    auto settings = std::make_shared<core::ProtocolSettings>();
-    settings->SetNetwork(magic);
-    
-    // Create Neo system
-    neo_system_ = std::make_unique<core::NeoSystem>(settings, store_.get());
-}
-
-void CLIService::InitializeNetwork() {
-    auto port = config_["P2P"]["Port"].get<uint16_t>();
-    auto ws_port = config_["P2P"]["WsPort"].get<uint16_t>();
-    
-    p2p_server_ = std::make_unique<network::P2PServer>(
-        neo_system_.get(),
-        port,
-        ws_port
-    );
-}
-
-void CLIService::InitializeRPC() {
-    auto port = config_["RPC"]["Port"].get<uint16_t>();
-    auto ssl_port = config_["RPC"]["SslPort"].get<uint16_t>();
-    auto max_gas = config_["RPC"]["MaxGasInvoke"].get<std::string>();
-    
-    rpc_server_ = std::make_unique<rpc::RpcServer>(
-        neo_system_.get(),
-        port,
-        ssl_port
-    );
-    
-    // Configure RPC settings
-    rpc_server_->SetMaxGasInvoke(std::stoull(max_gas));
-}
-
-void CLIService::InitializeConsensus() {
-    consensus_ = std::make_unique<consensus::DbftConsensus>(
-        neo_system_.get(),
-        current_wallet_.get()
-    );
-    
-    // Auto-unlock wallet for consensus if configured
-    auto wallet_path = config_["Consensus"]["UnlockWallet"]["Path"].get<std::string>();
-    auto wallet_password = config_["Consensus"]["UnlockWallet"]["Password"].get<std::string>();
-    
-    if (!wallet_path.empty() && !wallet_password.empty()) {
-        OpenWallet(wallet_path, wallet_password);
-    }
-}
-
-void CLIService::InitializeConsole() {
-    console_service_ = std::make_unique<ConsoleServiceNeo>(this);
-    command_registry_ = std::make_unique<CommandRegistry>(this);
-}
-
-void CLIService::RegisterCommands() {
-    if (!command_registry_) return;
-    
-    // Register built-in commands
-    command_registry_->RegisterBuiltinCommands();
-}
-
-void CLIService::StatusLoop() {
-    auto last_display = std::chrono::steady_clock::now();
-    
-    while (running_) {
-        auto now = std::chrono::steady_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - last_display);
-        
-        // Update status every 30 seconds
-        if (elapsed.count() >= 30) {
-            DisplayStatus();
-            last_display = now;
+        // Default configuration based on network
+        if (network_ == "mainnet")
+        {
+            config_ = {{"Network", "mainnet"},
+                       {"Magic", 860833102},
+                       {"P2P", {{"Port", 10333}, {"WsPort", 10334}}},
+                       {"RPC", {{"Port", 10332}, {"SslPort", 10331}, {"MaxGasInvoke", "50"}}},
+                       {"Storage", {{"Engine", "RocksDBStore"}, {"Path", "./Chain"}}},
+                       {"Consensus", {{"Enabled", false}, {"UnlockWallet", {{"Path", ""}, {"Password", ""}}}}},
+                       {"Logging", {{"Path", "./Logs"}, {"ConsoleOutput", true}}}};
         }
-        
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        else if (network_ == "testnet")
+        {
+            config_ = {{"Network", "testnet"},
+                       {"Magic", 894710606},
+                       {"P2P", {{"Port", 20333}, {"WsPort", 20334}}},
+                       {"RPC", {{"Port", 20332}, {"SslPort", 20331}, {"MaxGasInvoke", "50"}}},
+                       {"Storage", {{"Engine", "RocksDBStore"}, {"Path", "./TestNetChain"}}},
+                       {"Consensus", {{"Enabled", false}, {"UnlockWallet", {{"Path", ""}, {"Password", ""}}}}},
+                       {"Logging", {{"Path", "./Logs"}, {"ConsoleOutput", true}}}};
+        }
+        else
+        {
+            // Private network
+            config_ = {{"Network", "privnet"},
+                       {"Magic", 1951352142},
+                       {"P2P", {{"Port", 30333}, {"WsPort", 30334}}},
+                       {"RPC", {{"Port", 30332}, {"SslPort", 30331}, {"MaxGasInvoke", "50"}}},
+                       {"Storage", {{"Engine", "RocksDBStore"}, {"Path", "./PrivNetChain"}}},
+                       {"Consensus", {{"Enabled", false}, {"UnlockWallet", {{"Path", ""}, {"Password", ""}}}}},
+                       {"Logging", {{"Path", "./Logs"}, {"ConsoleOutput", true}}}};
+        }
     }
-}
 
-} // namespace neo::cli
+    void CLIService::InitializeLogging()
+    {
+        auto log_path = config_["Logging"]["Path"].get<std::string>();
+        auto console_output = config_["Logging"]["ConsoleOutput"].get<bool>();
+
+        // Create log directory if it doesn't exist
+        std::filesystem::create_directories(log_path);
+
+        // Initialize logging system
+        core::LogManager::Initialize(log_path, console_output);
+    }
+
+    void CLIService::InitializeStorage()
+    {
+        auto engine = config_["Storage"]["Engine"].get<std::string>();
+        auto path = config_["Storage"]["Path"].get<std::string>();
+
+        if (engine == "RocksDBStore")
+        {
+            store_ = std::make_unique<persistence::RocksDBStore>(path);
+        }
+        else
+        {
+            throw std::runtime_error("Unknown storage engine: " + engine);
+        }
+    }
+
+    void CLIService::InitializeNeoSystem()
+    {
+        auto magic = config_["Magic"].get<uint32_t>();
+
+        // Create protocol settings
+        auto settings = std::make_shared<core::ProtocolSettings>();
+        settings->SetNetwork(magic);
+
+        // Create Neo system
+        neo_system_ = std::make_unique<core::NeoSystem>(settings, store_.get());
+    }
+
+    void CLIService::InitializeNetwork()
+    {
+        auto port = config_["P2P"]["Port"].get<uint16_t>();
+        auto ws_port = config_["P2P"]["WsPort"].get<uint16_t>();
+
+        p2p_server_ = std::make_unique<network::P2PServer>(neo_system_.get(), port, ws_port);
+    }
+
+    void CLIService::InitializeRPC()
+    {
+        auto port = config_["RPC"]["Port"].get<uint16_t>();
+        auto ssl_port = config_["RPC"]["SslPort"].get<uint16_t>();
+        auto max_gas = config_["RPC"]["MaxGasInvoke"].get<std::string>();
+
+        rpc_server_ = std::make_unique<rpc::RpcServer>(neo_system_.get(), port, ssl_port);
+
+        // Configure RPC settings
+        rpc_server_->SetMaxGasInvoke(std::stoull(max_gas));
+    }
+
+    void CLIService::InitializeConsensus()
+    {
+        consensus_ = std::make_unique<consensus::DbftConsensus>(neo_system_.get(), current_wallet_.get());
+
+        // Auto-unlock wallet for consensus if configured
+        auto wallet_path = config_["Consensus"]["UnlockWallet"]["Path"].get<std::string>();
+        auto wallet_password = config_["Consensus"]["UnlockWallet"]["Password"].get<std::string>();
+
+        if (!wallet_path.empty() && !wallet_password.empty())
+        {
+            OpenWallet(wallet_path, wallet_password);
+        }
+    }
+
+    void CLIService::InitializeConsole()
+    {
+        console_service_ = std::make_unique<ConsoleServiceNeo>(this);
+        command_registry_ = std::make_unique<CommandRegistry>(this);
+    }
+
+    void CLIService::RegisterCommands()
+    {
+        if (!command_registry_)
+            return;
+
+        // Register built-in commands
+        command_registry_->RegisterBuiltinCommands();
+    }
+
+    void CLIService::StatusLoop()
+    {
+        auto last_display = std::chrono::steady_clock::now();
+
+        while (running_)
+        {
+            auto now = std::chrono::steady_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - last_display);
+
+            // Update status every 30 seconds
+            if (elapsed.count() >= 30)
+            {
+                DisplayStatus();
+                last_display = now;
+            }
+
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+    }
+
+}  // namespace neo::cli

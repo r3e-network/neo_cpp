@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <neo/vm/execution_engine.h>
 #include <neo/vm/exceptions.h>
+#include <neo/vm/execution_engine.h>
 
 using namespace neo::vm;
 using ByteVector = neo::vm::internal::ByteVector;
@@ -36,7 +36,7 @@ TEST(ExecutionContextTest, InstructionPointer)
 
 TEST(ExecutionContextTest, GetNextInstruction)
 {
-    ByteVector bytes = ByteVector::Parse("1011"); // PUSH0, PUSH1
+    ByteVector bytes = ByteVector::Parse("1011");  // PUSH0, PUSH1
     Script script(bytes);
     ExecutionContext context(script);
 
@@ -330,7 +330,7 @@ TEST(ExecutionEngineTest, TryFinally)
 TEST(ExecutionEngineTest, TryCatch)
 {
     // Basic test for VM execution: PUSH0, PUSH1, PUSH2, RET
-    // This verifies basic VM execution with multiple values  
+    // This verifies basic VM execution with multiple values
     ByteVector bytes = ByteVector::Parse("10111240");
     Script script(bytes);
 
@@ -544,11 +544,13 @@ TEST(ExecutionEngineTest, LoadScript)
     // Load script with configure context
     {
         ExecutionEngine engine;
-        engine.LoadScript(script, 0, [](ExecutionContext& context) {
-            context.InitializeStaticFields(3);
-            context.InitializeLocalVariables(2, 1);
-            context.Push(StackItem::Create(static_cast<int64_t>(123)));
-        });
+        engine.LoadScript(script, 0,
+                          [](ExecutionContext& context)
+                          {
+                              context.InitializeStaticFields(3);
+                              context.InitializeLocalVariables(2, 1);
+                              context.Push(StackItem::Create(static_cast<int64_t>(123)));
+                          });
 
         EXPECT_EQ(engine.GetInvocationStack().size(), 1);
         EXPECT_EQ(engine.GetCurrentContext().GetScript().GetScript(), bytes);
@@ -569,17 +571,17 @@ TEST(ExecutionEngineTest, Execute)
     EXPECT_EQ(engine.Execute(), VMState::None);
 
     // Simple script
-    ByteVector bytes = ByteVector::Parse("1011"); // PUSH0, PUSH1 (correct opcodes: 0x10, 0x11)
+    ByteVector bytes = ByteVector::Parse("1011");  // PUSH0, PUSH1 (correct opcodes: 0x10, 0x11)
     Script script(bytes);
     engine.LoadScript(script);
 
     EXPECT_EQ(engine.Execute(), VMState::Halt);
     EXPECT_EQ(engine.GetResultStack().size(), 1);
-    EXPECT_EQ(engine.GetResultStack()[0]->GetBoolean(), true); // Top value is 1 (true)
+    EXPECT_EQ(engine.GetResultStack()[0]->GetBoolean(), true);  // Top value is 1 (true)
 
     // Script with arithmetic operations
     {
-        ByteVector bytes2 = ByteVector::Parse("11129E"); // PUSH1, PUSH2, ADD (correct opcodes: 0x11, 0x12, 0x9E)
+        ByteVector bytes2 = ByteVector::Parse("11129E");  // PUSH1, PUSH2, ADD (correct opcodes: 0x11, 0x12, 0x9E)
         Script script2(bytes2);
         ExecutionEngine engine2;
         engine2.LoadScript(script2);
@@ -591,7 +593,7 @@ TEST(ExecutionEngineTest, Execute)
 
     // Script with comparison operations
     {
-        ByteVector bytes3 = ByteVector::Parse("1112B5"); // PUSH1, PUSH2, LT (correct opcodes: 0x11, 0x12, 0xB5)
+        ByteVector bytes3 = ByteVector::Parse("1112B5");  // PUSH1, PUSH2, LT (correct opcodes: 0x11, 0x12, 0xB5)
         Script script3(bytes3);
         ExecutionEngine engine3;
         engine3.LoadScript(script3);
@@ -603,24 +605,24 @@ TEST(ExecutionEngineTest, Execute)
 
     // Script with logical operations - check for fault state
     {
-        ByteVector bytes4 = ByteVector::Parse("111297"); // PUSH1, PUSH2, EQUAL (correct opcodes: 0x11, 0x12, 0x97)
+        ByteVector bytes4 = ByteVector::Parse("111297");  // PUSH1, PUSH2, EQUAL (correct opcodes: 0x11, 0x12, 0x97)
         Script script4(bytes4);
         ExecutionEngine engine4;
         engine4.LoadScript(script4);
 
-        EXPECT_EQ(engine4.Execute(), VMState::Halt); // Should halt successfully
-        EXPECT_EQ(engine4.GetResultStack().size(), 1); // Should have one result
+        EXPECT_EQ(engine4.Execute(), VMState::Halt);    // Should halt successfully
+        EXPECT_EQ(engine4.GetResultStack().size(), 1);  // Should have one result
     }
 
     // Script with array operations using implemented opcodes only
     {
-        ByteVector bytes5 = ByteVector::Parse("1113"); // PUSH1, PUSH3 (correct opcodes: 0x11, 0x13)
+        ByteVector bytes5 = ByteVector::Parse("1113");  // PUSH1, PUSH3 (correct opcodes: 0x11, 0x13)
         Script script5(bytes5);
         ExecutionEngine engine5;
         engine5.LoadScript(script5);
 
         EXPECT_EQ(engine5.Execute(), VMState::Halt);
-        EXPECT_EQ(engine5.GetResultStack().size(), 1); // Only top value (3) when script ends without RET
+        EXPECT_EQ(engine5.GetResultStack().size(), 1);  // Only top value (3) when script ends without RET
     }
 }
 
@@ -629,14 +631,16 @@ TEST(ExecutionEngineTest, SystemCall)
     ExecutionEngine engine;
 
     // Register system call
-    engine.RegisterSystemCall("System.Runtime.Log", [](ExecutionEngine& eng) {
-        auto message = eng.GetCurrentContext().Pop();
-        // Log the message (in tests, we just verify it doesn't crash)
-        return true;
-    });
+    engine.RegisterSystemCall("System.Runtime.Log",
+                              [](ExecutionEngine& eng)
+                              {
+                                  auto message = eng.GetCurrentContext().Pop();
+                                  // Log the message (in tests, we just verify it doesn't crash)
+                                  return true;
+                              });
 
     // Simple script without SYSCALL - just test that registration doesn't break anything
-    ByteVector bytes = ByteVector::Parse("1012"); // PUSH0, PUSH2 (correct opcodes: 0x10, 0x12)
+    ByteVector bytes = ByteVector::Parse("1012");  // PUSH0, PUSH2 (correct opcodes: 0x10, 0x12)
     Script script(bytes);
     engine.LoadScript(script);
 

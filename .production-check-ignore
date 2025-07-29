@@ -1,0 +1,77 @@
+# Files to ignore during production readiness checks
+# These are third-party libraries, generated files, or reference implementations
+
+# Third-party libraries and external dependencies
+include/neo/nlohmann/
+include/nlohmann/
+third_party/
+external/
+vendor/
+libs/
+
+# C# reference code (not part of C++ implementation)
+neo_csharp/
+*.cs
+
+# Python scripts (tooling, not production code)
+scripts/
+*.py
+
+# Configuration and validation files
+.production-*
+validate_*.py
+fix_*.py
+check_*.py
+
+# Build and generated files
+build/
+cmake-build-*/
+.build/
+*.o
+*.a
+*.so
+*.dylib
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*~
+
+# Documentation
+docs/
+*.md
+
+# Test files that may contain test-specific patterns
+tests/
+test/
+*_test.cpp
+*_tests.cpp
+*_test.h
+*_tests.h
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+.DS_Store
+Thumbs.db
+
+# Version control
+.git/
+.gitignore
+.gitmodules
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Docker
+Dockerfile*
+docker-compose*
+
+# Package files
+package.json
+package-lock.json
+*.lock
