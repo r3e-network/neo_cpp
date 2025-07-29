@@ -296,10 +296,10 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::FromString(const std::str
             uint64_t carry = 0;
             for (size_t j = 0; j < result.words.size(); ++j)
             {
-                uint64_t temp = result.words[j] * 10 + carry;
-                result.words[j] = temp;
-                result.words[j] = temp % 10000000000000000000ULL;  // Store result modulo 10^19
-                carry = temp / 10000000000000000000ULL;            // Carry is quotient
+                uint64_t product = result.words[j] * 10 + carry;
+                result.words[j] = product;
+                result.words[j] = product % 10000000000000000000ULL;  // Store result modulo 10^19
+                carry = product / 10000000000000000000ULL;            // Carry is quotient
             }
 
             // Add remaining carry as new words
@@ -1368,9 +1368,9 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::GreatestCommonDivisor(con
         // Euclidean algorithm
         while (b != 0)
         {
-            uint64_t temp = b;
+            uint64_t remainder = b;
             b = a % b;
-            a = temp;
+            a = remainder;
         }
 
         return BigInteger(static_cast<int64_t>(a));
@@ -1389,9 +1389,9 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::GreatestCommonDivisor(con
     // Euclidean algorithm
     while (!b.IsZero())
     {
-        BigInteger temp = b;
+        BigInteger divisor = b;
         b = Modulo(a, b);
-        a = temp;
+        a = divisor;
     }
 
     return a;
@@ -1431,9 +1431,9 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::LeftShift(const BigIntege
         uint64_t carry = 0;
         for (size_t i = wordShift; i < result.size(); ++i)
         {
-            uint64_t temp = result[i];
-            result[i] = (temp << bitShift) | carry;
-            carry = temp >> (64 - bitShift);  // Bits that overflow to next word
+            uint64_t currentWord = result[i];
+            result[i] = (currentWord << bitShift) | carry;
+            carry = currentWord >> (64 - bitShift);  // Bits that overflow to next word
         }
     }
 
@@ -1489,9 +1489,9 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::RightShift(const BigInteg
         uint64_t carry = 0;
         for (int i = result.size() - 1; i >= 0; --i)
         {
-            uint64_t temp = result[i];
-            result[i] = (temp >> bitShift) | (carry << (64 - bitShift));
-            carry = temp & ((1ULL << bitShift) - 1);
+            uint64_t shiftedWord = result[i];
+            result[i] = (shiftedWord >> bitShift) | (carry << (64 - bitShift));
+            carry = shiftedWord & ((1ULL << bitShift) - 1);
         }
     }
 

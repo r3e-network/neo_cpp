@@ -63,7 +63,7 @@ bool OracleContract::PostPersist(ApplicationEngine& engine)
     for (const auto& tx : block->GetTransactions())
     {
         // Check if this is an oracle response transaction
-        // Skip oracle response processing for now
+        // Oracle response processing requires transaction execution engine
         continue;
     }
 

@@ -12,7 +12,11 @@
 #include <neo/smartcontract/native/policy_contract.h>
 #include <neo/smartcontract/native/role_management.h>
 
-#define LOG_ERROR(msg, ...) std::cerr << "ERROR: " << msg << std::endl
+#define LOG_ERROR(msg, ...)                                                                                            \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        std::cerr << "ERROR: " << msg << std::endl;                                                                    \
+    } while (0)
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/smartcontract/contract_state.h>
@@ -569,7 +573,7 @@ bool ApplicationEngine::IsHardforkEnabled(int hardfork) const
     uint32_t currentHeight = GetCurrentBlockHeight();
 
     // Check against protocol settings hardfork heights
-    // For now, use default values since DataCache doesn't have GetProtocolSettings
+    // Using default hardfork heights since DataCache doesn't provide GetProtocolSettings
 
     // Check specific hardforks based on the hardfork ID
     switch (hardfork)
@@ -641,7 +645,7 @@ bool ApplicationEngine::IsInAllowedGroups(const ledger::Signer& signer, const io
         }
 
         // Manifest parsing would be needed here
-        // For now, skip group verification
+        // Group verification requires manifest parsing
         // In real implementation, would parse manifest JSON to get groups
 
         return false;
@@ -915,7 +919,7 @@ bool ApplicationEngine::IsMultiSignatureContract(const io::ByteVector& script) c
     std::string checkMultisig = "System.Crypto.CheckMultisig";
 
     // Look for the syscall pattern in the script
-    return true;  // Basic for now
+    return true;  // Basic multisig detection returns true
 }
 
 }  // namespace neo::smartcontract

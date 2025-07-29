@@ -207,7 +207,7 @@ uint32_t PolicyContract::GetMillisecondsPerBlock(std::shared_ptr<persistence::St
     {
         // Return from protocol settings if available
         // Note: This would require accessing engine context, which we don't have here
-        // For now, return a reasonable default
+        // Return reasonable default value
         return 15000;
     }
 
@@ -431,7 +431,7 @@ PolicyContract::OnSetAttributeFee(ApplicationEngine& engine, const std::vector<s
     auto value = valueItem->GetInteger();
 
     // Validate attribute type - check if it's a valid TransactionAttributeType
-    // For now, we'll accept common values. Full validation would require checking against enum
+    // Accept common values until full enum validation is implemented
     if (attributeType > 0x20 && attributeType != 0x20)  // 0x20 is NotaryAssisted
         throw std::runtime_error("Unsupported attribute type");
 

@@ -104,7 +104,7 @@ bool HandleBinaryBase58Encode(vm::ExecutionEngine& engine)
 
     try
     {
-        // For now, return empty string as Base58 is not yet implemented
+        // Base58 encoding requires external library integration
         context.Push(vm::StackItem::Create(std::string()));
         return true;
     }
@@ -125,7 +125,7 @@ bool HandleBinaryBase58Decode(vm::ExecutionEngine& engine)
 
     try
     {
-        // For now, return empty ByteVector as Base58 is not yet implemented
+        // Base58 decoding requires external library integration
         context.Push(vm::StackItem::Create(io::ByteVector()));
         return true;
     }

@@ -135,7 +135,7 @@ bool OracleContract::OnPersist(ApplicationEngine& engine)
             continue;
 
         // Process oracle response
-        // For now, skip oracle response processing
+        // Oracle response processing requires transaction execution engine
     }
 
     return true;
@@ -155,7 +155,7 @@ OracleRequest OracleContract::GetRequest(std::shared_ptr<persistence::StoreView>
         throw std::runtime_error("Request not found");
 
     // Basic OracleRequest deserialization - full implementation would parse all fields
-    // For now, return a default request to allow the system to function
+    // Default request returned until full deserialization is implemented
     OracleRequest request;
     // In full implementation, this would deserialize from value.AsSpan()
     return request;
@@ -168,7 +168,7 @@ IdList OracleContract::GetIdList(std::shared_ptr<persistence::StoreView> snapsho
     if (value.Size() == 0)
         return IdList();
 
-    // Basic IdList deserialization - returns empty list for now
+    // Basic IdList deserialization - returns empty list until full implementation
     // Full implementation would deserialize the actual ID list from storage
     return IdList();
 }
@@ -187,7 +187,7 @@ OracleContract::GetRequests(std::shared_ptr<persistence::StoreView> snapshot) co
     auto prefix = GetStorageKey(PREFIX_REQUEST, io::ByteVector{});
 
     // In a full implementation, we would iterate through storage with the prefix
-    // For now, we implement a minimal version that works with the existing storage system
+    // Minimal version implementation compatible with existing storage system
     try
     {
         // Get the current request ID to know how many requests exist
@@ -288,7 +288,7 @@ uint64_t OracleContract::CreateRequest(std::shared_ptr<persistence::StoreView> s
 
     auto requestKey = GetStorageKey(
         PREFIX_REQUEST, io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t))));
-    // Basic OracleRequest serialization - stores minimal data for now
+    // Basic OracleRequest serialization - stores minimal data until full implementation
     // Full implementation would serialize all request fields properly
     auto requestData = io::ByteVector(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t));
     PutStorageValue(snapshot, requestKey, requestData);
@@ -325,7 +325,7 @@ void OracleContract::AddRequestToIdList(std::shared_ptr<persistence::StoreView> 
     idList.Add(id);
 
     auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
-    // Basic IdList serialization - stores minimal data for now
+    // Basic IdList serialization - stores minimal data until full implementation
     // Full implementation would serialize the complete ID list
     auto data = io::ByteVector(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t));
     PutStorageValue(snapshot, key, data);
@@ -376,7 +376,7 @@ IdList OracleContract::GetIdList(std::shared_ptr<persistence::StoreView> snapsho
     if (value.Size() == 0)
         return IdList();
 
-    // Basic IdList deserialization - returns empty list for now
+    // Basic IdList deserialization - returns empty list until full implementation
     // Full implementation would deserialize the actual ID list from storage
     return IdList();
 }

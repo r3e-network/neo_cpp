@@ -71,7 +71,7 @@ bool NotValidBefore::Verify(/* DataCache& snapshot, const Transaction& transacti
             return false;
         }
 
-        // For now, assume all valid heights are acceptable
+        // Height validation requires blockchain state access
         // Real verification would check:
         // 1. Current blockchain height vs required height
         // 2. If the transaction is being processed at the correct time

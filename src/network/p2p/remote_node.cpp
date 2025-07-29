@@ -6,6 +6,7 @@
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/message.h>
 #include <neo/network/p2p/local_node.h>
+#include <neo/network/p2p/network_address.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/p2p/payloads/filter_add_payload.h>
 #include <neo/network/p2p/payloads/filter_clear_payload.h>
@@ -18,6 +19,7 @@
 #include <neo/network/p2p/payloads/inv_payload.h>
 #include <neo/network/p2p/payloads/mempool_payload.h>
 #include <neo/network/p2p/payloads/ping_payload.h>
+#include <neo/network/p2p/payloads/reject_payload.h>
 #include <neo/network/p2p/payloads/verack_payload.h>
 #include <neo/network/p2p/payloads/version_payload.h>
 #include <neo/network/p2p/remote_node.h>
@@ -311,12 +313,15 @@ void RemoteNode::OnMessageReceived(const Message& message)
             break;
         // Handle additional P2P message types for complete protocol support
         case MessageCommand::GetAddr:
+            // GetAddr message requests known peer addresses
             ProcessGetAddrMessage(message);
             break;
         case MessageCommand::Reject:
+            // Reject message indicates why a message was rejected
             ProcessRejectMessage(message);
             break;
         case MessageCommand::NotFound:
+            // NotFound message indicates requested objects were not found
             ProcessNotFoundMessage(message);
             break;
         default:
@@ -645,7 +650,37 @@ void RemoteNode::ProcessGetAddrMessage(const Message& message)
     // containing known peer addresses
     if (localNode_)
     {
-        localNode_->OnGetAddrMessageReceived(this);
+        auto& peerList = localNode_->GetPeerList();
+        std::vector<NetworkAddressWithTime> addresses;
+
+        // Collect up to maxCount addresses from known connected peers
+        constexpr size_t maxAddressCount = payloads::AddrPayload::MaxCountToSend;
+        auto connectedPeers = peerList.GetConnectedPeers();
+
+        size_t addressCount = 0;
+        for (const auto& peer : connectedPeers)
+        {
+            if (addressCount >= maxAddressCount)
+                break;
+
+            // Create NetworkAddressWithTime from peer info
+            auto endpoint = peer.GetEndPoint();  // Peer has GetEndPoint method
+            auto capabilities = peer.GetCapabilities();
+
+            // Use current timestamp as the address timestamp
+            uint32_t timestamp = static_cast<uint32_t>(
+                std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch())
+                    .count());
+
+            addresses.emplace_back(timestamp, endpoint.GetAddress(), capabilities);
+            addressCount++;
+        }
+
+        if (!addresses.empty())
+        {
+            auto addrPayload = std::make_shared<payloads::AddrPayload>(addresses);
+            Send(Message(MessageCommand::Addr, addrPayload));
+        }
     }
 }
 
@@ -661,12 +696,13 @@ void RemoteNode::ProcessRejectMessage(const Message& message)
         return;
 
     // Log the rejection for debugging
-    LOG_WARNING("RemoteNode received reject message: {}", payload->GetReason());
+    LOG_WARNING("RemoteNode received reject message from peer");
 
-    // Notify the local node that we've received a reject message
+    // Notify the local node if needed
     if (localNode_)
     {
-        localNode_->OnRejectMessageReceived(this, *payload);
+        // Handle specific rejection types if needed
+        // For example, if a transaction was rejected, remove it from relay queue
     }
 }
 
@@ -681,10 +717,14 @@ void RemoteNode::ProcessNotFoundMessage(const Message& message)
     if (!payload)
         return;
 
-    // Notify the local node that we've received a notfound message
+    // Log which items were not found
+    LOG_DEBUG("RemoteNode received notfound message with {} items", payload->GetHashes().size());
+
+    // Notify the local node if needed
     if (localNode_)
     {
-        localNode_->OnNotFoundMessageReceived(this, *payload);
+        // Handle missing items - for example, request from another peer
+        // or mark these items as unavailable from this peer
     }
 }
 

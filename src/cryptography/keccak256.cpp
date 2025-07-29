@@ -57,9 +57,9 @@ void keccakf(uint64_t state[25])
         for (int t = 0; t < 24; t++)
         {
             int index = x + 5 * y;
-            uint64_t temp = state[index];
+            uint64_t rotatedValue = state[index];
             state[index] = rotl64(current, ((t + 1) * (t + 2) / 2) % 64);
-            current = temp;
+            current = rotatedValue;
             int newX = y;
             int newY = (2 * x + 3 * y) % 5;
             x = newX;

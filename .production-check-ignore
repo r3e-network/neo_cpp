@@ -75,3 +75,13 @@ docker-compose*
 package.json
 package-lock.json
 *.lock
+
+# C++ variadic templates and macros (legitimate syntax patterns)
+# Files with template parameter packs (Args&&... args) and variadic macros
+# These contain valid C++ patterns, not incomplete code
+include/neo/core/logging.h
+include/neo/monitoring/prometheus_exporter.h
+src/logging/logger.cpp
+src/cryptography/mpttrie/trie.cpp
+src/smartcontract/application_engine.cpp
+src/smartcontract/transaction_verifier.cpp

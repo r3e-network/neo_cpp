@@ -229,5 +229,8 @@ class RemoteNode
     void ProcessFilterAddMessage(const Message& message);
     void ProcessFilterClearMessage(const Message& message);
     void ProcessFilterLoadMessage(const Message& message);
+    void ProcessGetAddrMessage(const Message& message);
+    void ProcessRejectMessage(const Message& message);
+    void ProcessNotFoundMessage(const Message& message);
 };
 }  // namespace neo::network::p2p

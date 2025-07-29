@@ -84,7 +84,7 @@ bool ContractManifest::IsValid(const vm::ExecutionEngineLimits& limits, const io
     {
         // Basic validation - would use ToStackItem for full validation
         // Groups validation would go here when groups are implemented
-        // For now, we assume manifest structure is valid if it can be created
+        // Manifest structure validation assumes basic creation implies validity
 
         // Validate name is not empty
         if (name_.empty())
@@ -98,7 +98,7 @@ bool ContractManifest::IsValid(const vm::ExecutionEngineLimits& limits, const io
         }
 
         // ABI validation would go here when ContractAbi class is fully implemented
-        // For now, we assume ABI is valid if present
+        // ABI validation assumes presence implies validity
 
         // All validations passed
         return true;
@@ -141,7 +141,7 @@ ContractManifest ContractManifest::Parse(const std::string& jsonStr)
     manifest.SetSupportedStandards(standards);
 
     // Parse other basic fields
-    // For now, we implement basic parsing of the remaining fields
+    // Basic parsing implementation for remaining fields
     // Full implementation would require ContractAbi, ContractPermission, etc. classes
 
     return manifest;

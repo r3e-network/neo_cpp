@@ -66,7 +66,7 @@ void keccakf(uint64_t st[25])
 void keccak(const uint8_t* in, size_t inlen, uint8_t* md, int mdlen)
 {
     uint64_t st[25];
-    uint8_t temp[144];
+    uint8_t buffer[144];
     size_t rsiz, rsizw;
 
     rsiz = 200 - 2 * mdlen;
@@ -81,13 +81,13 @@ void keccak(const uint8_t* in, size_t inlen, uint8_t* md, int mdlen)
         keccakf(st);
     }
 
-    memcpy(temp, in, inlen);
-    temp[inlen++] = 0x01;
-    memset(temp + inlen, 0, rsiz - inlen);
-    temp[rsiz - 1] |= 0x80;
+    memcpy(buffer, in, inlen);
+    buffer[inlen++] = 0x01;
+    memset(buffer + inlen, 0, rsiz - inlen);
+    buffer[rsiz - 1] |= 0x80;
 
     for (size_t i = 0; i < rsizw; i++)
-        st[i] ^= ((uint64_t*)temp)[i];
+        st[i] ^= ((uint64_t*)buffer)[i];
 
     keccakf(st);
 

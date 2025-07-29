@@ -1,3 +1,4 @@
+#include <neo/core/protocol_constants.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -222,7 +223,7 @@ Contract Contract::CreateMultiSigContract(int m, const std::vector<cryptography:
     std::vector<uint8_t> script;
 
     // Push m
-    if (m >= 1 && m <= 16)
+    if (m >= 1 && m <= core::ProtocolConstants::MaxTransactionWitnesses)
     {
         script.push_back(static_cast<uint8_t>(OpCode::PUSH1) + (m - 1));
     }
@@ -243,7 +244,7 @@ Contract Contract::CreateMultiSigContract(int m, const std::vector<cryptography:
     }
 
     // Push n
-    if (pubKeys.size() >= 1 && pubKeys.size() <= 16)
+    if (pubKeys.size() >= 1 && pubKeys.size() <= core::ProtocolConstants::MaxTransactionWitnesses)
     {
         script.push_back(static_cast<uint8_t>(OpCode::PUSH1) + (pubKeys.size() - 1));
     }

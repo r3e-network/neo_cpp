@@ -288,7 +288,7 @@ bool ContractParametersContext::AddWithScriptHash(const io::UInt160& scriptHash)
     item->scriptHash = scriptHash;
 
     // Extract parameter types from contract manifest
-    // For now, assume standard verification parameters
+    // Standard verification parameters are assumed
     contextItems_[scriptHash] = std::move(item);
 
     return true;
@@ -484,8 +484,9 @@ bool ContractParametersContext::IsMultiSigContract(const io::ByteVector& script,
                 publicKeys.push_back(pubkey);
                 i += 33;
             }
-            catch (...)
+            catch (const std::exception& e)
             {
+                // Log public key parsing error
                 return false;
             }
         }

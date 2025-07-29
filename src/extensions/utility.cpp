@@ -266,8 +266,14 @@ bool Utility::TryParse<int>(const std::string& str, int& result)
         result = std::stoi(str, &pos);
         return pos == str.length();
     }
-    catch (...)
+    catch (const std::invalid_argument& e)
     {
+        // Invalid string format for numeric conversion
+        return false;
+    }
+    catch (const std::out_of_range& e)
+    {
+        // Number out of range for target type
         return false;
     }
 }
@@ -281,8 +287,14 @@ bool Utility::TryParse<long>(const std::string& str, long& result)
         result = std::stol(str, &pos);
         return pos == str.length();
     }
-    catch (...)
+    catch (const std::invalid_argument& e)
     {
+        // Invalid string format for numeric conversion
+        return false;
+    }
+    catch (const std::out_of_range& e)
+    {
+        // Number out of range for target type
         return false;
     }
 }
@@ -296,8 +308,14 @@ bool Utility::TryParse<long long>(const std::string& str, long long& result)
         result = std::stoll(str, &pos);
         return pos == str.length();
     }
-    catch (...)
+    catch (const std::invalid_argument& e)
     {
+        // Invalid string format for numeric conversion
+        return false;
+    }
+    catch (const std::out_of_range& e)
+    {
+        // Number out of range for target type
         return false;
     }
 }
@@ -308,14 +326,20 @@ bool Utility::TryParse<unsigned int>(const std::string& str, unsigned int& resul
     try
     {
         size_t pos;
-        unsigned long temp = std::stoul(str, &pos);
-        if (pos != str.length() || temp > std::numeric_limits<unsigned int>::max())
+        unsigned long parsedValue = std::stoul(str, &pos);
+        if (pos != str.length() || parsedValue > std::numeric_limits<unsigned int>::max())
             return false;
-        result = static_cast<unsigned int>(temp);
+        result = static_cast<unsigned int>(parsedValue);
         return true;
     }
-    catch (...)
+    catch (const std::invalid_argument& e)
     {
+        // Invalid string format for numeric conversion
+        return false;
+    }
+    catch (const std::out_of_range& e)
+    {
+        // Number out of range for target type
         return false;
     }
 }
@@ -329,8 +353,14 @@ bool Utility::TryParse<float>(const std::string& str, float& result)
         result = std::stof(str, &pos);
         return pos == str.length();
     }
-    catch (...)
+    catch (const std::invalid_argument& e)
     {
+        // Invalid string format for numeric conversion
+        return false;
+    }
+    catch (const std::out_of_range& e)
+    {
+        // Number out of range for target type
         return false;
     }
 }
@@ -344,8 +374,14 @@ bool Utility::TryParse<double>(const std::string& str, double& result)
         result = std::stod(str, &pos);
         return pos == str.length();
     }
-    catch (...)
+    catch (const std::invalid_argument& e)
     {
+        // Invalid string format for numeric conversion
+        return false;
+    }
+    catch (const std::out_of_range& e)
+    {
+        // Number out of range for target type
         return false;
     }
 }

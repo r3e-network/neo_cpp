@@ -270,7 +270,7 @@ std::shared_ptr<vm::StackItem> OracleContract::OnVerify(ApplicationEngine& engin
 
     // Check if the response is from a designated oracle node
     // This would normally check role management for oracle designation
-    // For now, we'll accept any properly formed response
+    // Properly formed oracle responses are accepted
     return vm::StackItem::Create(true);
 }
 

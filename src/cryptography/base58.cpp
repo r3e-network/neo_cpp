@@ -28,25 +28,25 @@ std::string Base58::Encode(const std::vector<uint8_t>& data)
     }
 
     // Convert to base 58
-    std::vector<uint8_t> temp(data.begin() + leadingZeros, data.end());
+    std::vector<uint8_t> workingBuffer(data.begin() + leadingZeros, data.end());
     std::vector<uint8_t> result;
 
-    while (!temp.empty())
+    while (!workingBuffer.empty())
     {
         uint32_t remainder = 0;
-        for (size_t i = 0; i < temp.size(); ++i)
+        for (size_t i = 0; i < workingBuffer.size(); ++i)
         {
-            uint32_t value = remainder * 256 + temp[i];
-            temp[i] = static_cast<uint8_t>(value / 58);
+            uint32_t value = remainder * 256 + workingBuffer[i];
+            workingBuffer[i] = static_cast<uint8_t>(value / 58);
             remainder = value % 58;
         }
 
         result.push_back(static_cast<uint8_t>(remainder));
 
         // Remove leading zeros
-        while (!temp.empty() && temp[0] == 0)
+        while (!workingBuffer.empty() && workingBuffer[0] == 0)
         {
-            temp.erase(temp.begin());
+            workingBuffer.erase(workingBuffer.begin());
         }
     }
 

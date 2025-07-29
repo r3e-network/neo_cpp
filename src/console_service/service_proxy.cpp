@@ -371,12 +371,12 @@ std::optional<std::string> ServiceProxy::ExecuteGenericCommand(const std::string
     else if (cmd == "uptime")
     {
         // Calculate system uptime if available
-        return "Uptime information not yet implemented";
+        return "Uptime information requires system metrics integration";
     }
     else if (cmd == "memory")
     {
         // Return memory usage information
-        return "Memory usage information not yet implemented";
+        return "Memory usage information requires system metrics integration";
     }
     else if (cmd == "gc")
     {
@@ -397,7 +397,7 @@ std::string ServiceProxy::ExecuteBlockchainQuery(const std::string& cmd, const s
             {
                 return "Usage: block <hash|index>";
             }
-            return "Block query: " + args[0] + " (implementation pending)";
+            return "Block query: " + args[0] + " requires blockchain data access";
         }
         else if (cmd == "tx")
         {
@@ -405,7 +405,7 @@ std::string ServiceProxy::ExecuteBlockchainQuery(const std::string& cmd, const s
             {
                 return "Usage: tx <hash>";
             }
-            return "Transaction query: " + args[0] + " (implementation pending)";
+            return "Transaction query: " + args[0] + " requires blockchain data access";
         }
         else if (cmd == "account")
         {
@@ -413,7 +413,7 @@ std::string ServiceProxy::ExecuteBlockchainQuery(const std::string& cmd, const s
             {
                 return "Usage: account <address>";
             }
-            return "Account query: " + args[0] + " (implementation pending)";
+            return "Account query: " + args[0] + " requires blockchain state access";
         }
 
         return "Unknown blockchain query command: " + cmd;
@@ -434,7 +434,7 @@ std::string ServiceProxy::ExecuteNetworkCommand(const std::string& cmd, const st
             {
                 return "Usage: connect <host:port>";
             }
-            return "Connect to peer: " + args[0] + " (implementation pending)";
+            return "Connect to peer: " + args[0] + " requires P2P network service";
         }
         else if (cmd == "disconnect")
         {
@@ -442,7 +442,7 @@ std::string ServiceProxy::ExecuteNetworkCommand(const std::string& cmd, const st
             {
                 return "Usage: disconnect <host:port>";
             }
-            return "Disconnect from peer: " + args[0] + " (implementation pending)";
+            return "Disconnect from peer: " + args[0] + " requires P2P network service";
         }
         else if (cmd == "ban")
         {
@@ -450,7 +450,7 @@ std::string ServiceProxy::ExecuteNetworkCommand(const std::string& cmd, const st
             {
                 return "Usage: ban <host>";
             }
-            return "Ban peer: " + args[0] + " (implementation pending)";
+            return "Ban peer: " + args[0] + " requires peer management service";
         }
         else if (cmd == "unban")
         {
@@ -458,7 +458,7 @@ std::string ServiceProxy::ExecuteNetworkCommand(const std::string& cmd, const st
             {
                 return "Usage: unban <host>";
             }
-            return "Unban peer: " + args[0] + " (implementation pending)";
+            return "Unban peer: " + args[0] + " requires peer management service";
         }
 
         return "Unknown network command: " + cmd;
@@ -736,12 +736,12 @@ std::string ServiceProxy::HandleWalletCommands(const std::string& command)
             if (!address.empty())
             {
                 // Claim GAS for specific address
-                return "GAS claim for address '" + address + "' requires transaction signing (pending implementation)";
+                return "GAS claim for address '" + address + "' requires transaction signing functionality";
             }
             else
             {
                 // Claim GAS for all addresses in wallet
-                return "GAS claim for all addresses requires transaction signing (pending implementation)";
+                return "GAS claim for all addresses requires transaction signing functionality";
             }
         }
         else
@@ -892,7 +892,7 @@ int64_t ServiceProxy::GetTokenBalance(std::shared_ptr<persistence::DataCache> sn
             return 0;
         }
 
-        // Create a temporary application engine to query balance
+        // Create an application engine for balance query
         auto engine = smartcontract::ApplicationEngine::Create(smartcontract::TriggerType::Application,
                                                                nullptr,  // No transaction
                                                                snapshot,

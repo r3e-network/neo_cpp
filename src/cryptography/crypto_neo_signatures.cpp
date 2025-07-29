@@ -271,8 +271,14 @@ bool VerifyMessageHash(const io::UInt256& messageHash, const io::ByteSpan& signa
 
         return result == 1;
     }
+    catch (const std::exception& e)
+    {
+        // Log cryptographic verification error
+        return false;
+    }
     catch (...)
     {
+        // Handle unexpected system errors
         return false;
     }
 }
@@ -423,8 +429,14 @@ bool ValidatePublicKey(const io::ByteSpan& publicKey)
 
         return result == 1;
     }
+    catch (const std::exception& e)
+    {
+        // Log cryptographic verification error
+        return false;
+    }
     catch (...)
     {
+        // Handle unexpected system errors
         return false;
     }
 }

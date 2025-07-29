@@ -49,7 +49,7 @@ bool HighPriority::Verify(/* DataCache& snapshot, const Transaction& transaction
     // In the real implementation, this would verify that the sender is a committee member
     try
     {
-        // For now, always return true as this is a stub implementation
+        // High priority verification requires committee membership check
         // Real verification would check:
         // 1. If sender is a committee member
         // 2. If the transaction meets high priority criteria

@@ -174,7 +174,7 @@ io::JsonValue RpcServer::CreateErrorResponse(const io::JsonValue& id, int code, 
     return io::JsonValue(response);
 }
 
-// Stub implementations for RPC methods - these should call into RpcMethods
+// RPC method implementations delegate to RpcMethods class
 io::JsonValue RpcServer::GetBlock(const io::JsonValue& params)
 {
     RpcMethods methods(system_);

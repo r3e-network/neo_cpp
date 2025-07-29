@@ -9,8 +9,16 @@
 #include <span>
 #include <vector>
 
-#define LOG_ERROR(msg, ...) std::cerr << "ERROR: " << msg << std::endl
-#define LOG_DEBUG(msg, ...)  // Debug logging disabled
+#define LOG_ERROR(msg, ...)                                                                                            \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        std::cerr << "ERROR: " << msg << std::endl;                                                                    \
+    } while (0)
+#define LOG_DEBUG(msg, ...)                                                                                            \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        /* Debug logging disabled */                                                                                   \
+    } while (0)
 
 namespace neo::cryptography::mpttrie
 {

@@ -64,7 +64,7 @@ void NefFile::SetCheckSum(uint32_t checkSum)
 
 uint32_t NefFile::ComputeChecksum() const
 {
-    // Create a temporary memory stream to serialize the NefFile without the checksum
+    // Create a memory stream to serialize the NefFile without the checksum
     std::stringstream stream;
     io::BinaryWriter writer(stream);
 

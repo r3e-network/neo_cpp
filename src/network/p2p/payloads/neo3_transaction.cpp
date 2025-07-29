@@ -279,10 +279,30 @@ void Neo3Transaction::SerializeJson(io::JsonWriter& writer) const
     {
         try
         {
-            // Complete base64 encoding implementation
-            // Simple base64 encoding (stub implementation)
-            // For production, use a proper base64 library
-            scriptBase64 = "";
+            // Base64 encoding implementation
+            static const std::string base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                                    "abcdefghijklmnopqrstuvwxyz"
+                                                    "0123456789+/";
+
+            std::string result;
+            const uint8_t* data = script_.Data();
+            size_t len = script_.Size();
+
+            for (size_t i = 0; i < len; i += 3)
+            {
+                uint32_t octet_a = i < len ? data[i] : 0;
+                uint32_t octet_b = i + 1 < len ? data[i + 1] : 0;
+                uint32_t octet_c = i + 2 < len ? data[i + 2] : 0;
+
+                uint32_t triple = (octet_a << 16) | (octet_b << 8) | octet_c;
+
+                result += base64_chars[(triple >> 18) & 0x3F];
+                result += base64_chars[(triple >> 12) & 0x3F];
+                result += i + 1 < len ? base64_chars[(triple >> 6) & 0x3F] : '=';
+                result += i + 2 < len ? base64_chars[triple & 0x3F] : '=';
+            }
+
+            scriptBase64 = result;
         }
         catch (const std::exception& e)
         {
@@ -386,8 +406,7 @@ void Neo3Transaction::DeserializeJson(const io::JsonReader& reader)
 
             if (!scriptBase64.empty())
             {
-                // Simple base64 decoding (stub implementation)
-                // For production, use a proper base64 library
+                // Production base64 decoding using standard implementation
                 try
                 {
                     auto scriptBytes = reader.ReadBase64String("script");

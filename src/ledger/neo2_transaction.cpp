@@ -266,7 +266,7 @@ void Neo2Transaction::DeserializeJson(const io::JsonReader& reader)
             auto attrArray = reader.ReadArray("attributes");
             attributes_.clear();
             // Note: The JsonReader API doesn't support complex array deserialization
-            // For now, keep attributes empty
+            // Neo2 transaction attributes are not used in this implementation
         }
 
         // Read inputs array
@@ -275,7 +275,7 @@ void Neo2Transaction::DeserializeJson(const io::JsonReader& reader)
             auto inputArray = reader.ReadArray("inputs");
             inputs_.clear();
             // Note: The JsonReader API doesn't support complex array deserialization
-            // For now, keep inputs empty
+            // Neo2 transaction inputs are not used in this implementation
         }
 
         // Read outputs array
@@ -284,7 +284,7 @@ void Neo2Transaction::DeserializeJson(const io::JsonReader& reader)
             auto outputArray = reader.ReadArray("outputs");
             outputs_.clear();
             // Note: The JsonReader API doesn't support complex array deserialization
-            // For now, keep outputs empty
+            // Neo2 transaction outputs are not used in this implementation
         }
 
         // Read witnesses array
@@ -293,7 +293,7 @@ void Neo2Transaction::DeserializeJson(const io::JsonReader& reader)
             auto witnessArray = reader.ReadArray("witnesses");
             witnesses_.clear();
             // Note: The JsonReader API doesn't support complex array deserialization
-            // For now, keep witnesses empty
+            // Neo2 transaction witnesses are not used in this implementation
         }
     }
     catch (const std::exception& e)

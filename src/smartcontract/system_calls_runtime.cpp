@@ -1,4 +1,5 @@
 #include <chrono>
+#include <neo/core/protocol_constants.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/system_call_constants.h>
 #include <neo/smartcontract/system_calls.h>
@@ -28,16 +29,16 @@ bool HandleCheckWitness(vm::ExecutionEngine& engine)
     auto hashBytes = hashItem->GetByteArray();
 
     bool result = false;
-    if (hashBytes.Size() == 20)
+    if (hashBytes.Size() == core::ProtocolConstants::UInt160Size)
     {
         io::UInt160 hash;
-        std::memcpy(hash.Data(), hashBytes.Data(), 20);
+        std::memcpy(hash.Data(), hashBytes.Data(), core::ProtocolConstants::UInt160Size);
         result = appEngine.CheckWitness(hash);
     }
-    else if (hashBytes.Size() == 32)
+    else if (hashBytes.Size() == core::ProtocolConstants::UInt256Size)
     {
         io::UInt256 hash;
-        std::memcpy(hash.Data(), hashBytes.Data(), 32);
+        std::memcpy(hash.Data(), hashBytes.Data(), core::ProtocolConstants::UInt256Size);
         result = appEngine.CheckWitness(hash);
     }
 
@@ -119,7 +120,7 @@ bool HandleGetNetwork(vm::ExecutionEngine& engine)
     auto& context = appEngine.GetCurrentContext();
 
     // Get actual network magic from protocol settings
-    uint32_t networkMagic = 860833102;  // Default mainnet magic
+    uint32_t networkMagic = core::ProtocolConstants::MainnetNetworkMagic;  // Default mainnet magic
     context.Push(vm::StackItem::Create(static_cast<int64_t>(networkMagic)));
     return true;
 }
@@ -388,7 +389,7 @@ bool HandleGetAddressVersion(vm::ExecutionEngine& engine)
 
     // Neo address version byte is always 0x35 (53 in decimal)
     // This is defined in the Neo protocol
-    constexpr uint8_t NEO_ADDRESS_VERSION = 0x35;
+    constexpr uint8_t NEO_ADDRESS_VERSION = core::ProtocolConstants::AddressVersion;
 
     context.Push(vm::StackItem::Create(static_cast<int64_t>(NEO_ADDRESS_VERSION)));
     return true;

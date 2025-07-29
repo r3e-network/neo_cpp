@@ -279,7 +279,7 @@ bool Notary::Verify(ApplicationEngine& engine, const io::ByteVector& signature)
                     tx->GetHash().Serialize(writer);
 
                     // Write the current script hash (notary contract)
-                    // Use a placeholder hash for now as GetHash() is not available in this context
+                    // Using zero hash until GetHash() is available in this context
                     io::UInt160 notaryHash = io::UInt160::Zero();
                     notaryHash.Serialize(writer);
 
@@ -359,7 +359,8 @@ std::vector<cryptography::ecc::ECPoint> Notary::GetNotaryNodes(std::shared_ptr<p
 {
     auto neoToken = NeoToken::GetInstance();
     // StoreView to DataCache conversion
-    return std::vector<cryptography::ecc::ECPoint>();  // Return empty committee for now
+    return std::vector<cryptography::ecc::ECPoint>();  // Returns empty committee until StoreView conversion is
+                                                       // implemented
 }
 
 int64_t Notary::CalculateNotaryReward(std::shared_ptr<persistence::StoreView> snapshot, int64_t nFees,
@@ -427,7 +428,7 @@ void Notary::Deposit::FromStackItem(std::shared_ptr<vm::StackItem> stackItem)
 std::shared_ptr<vm::StackItem> Notary::Deposit::ToStackItem(vm::IReferenceCounter* referenceCounter)
 {
     // ReferenceCounter type conversion
-    auto structure = vm::StackItem::CreateArray();  // Use array instead of struct for now
+    auto structure = vm::StackItem::CreateArray();  // Array used until struct type is available
     structure->Add(vm::StackItem::Create(Amount));
     structure->Add(vm::StackItem::Create(static_cast<int64_t>(Till)));
     return structure;

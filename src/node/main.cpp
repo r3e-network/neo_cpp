@@ -120,7 +120,7 @@ int main(int argc, char* argv[])
     }
     catch (...)
     {
-        std::cerr << "Unknown fatal error occurred" << std::endl;
+        std::cerr << "System fatal error occurred" << std::endl;
         return 1;
     }
 }

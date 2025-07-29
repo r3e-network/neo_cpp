@@ -40,6 +40,7 @@ add_library(neo_vm OBJECT
     jump_table_exception.cpp
     reference_counter.cpp
     debugger.cpp
+    syscalls.cpp
 )
 
 # Include directories

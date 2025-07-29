@@ -1,3 +1,4 @@
+#include <neo/core/protocol_constants.h>
 #include <neo/cryptography/hash.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/native_contract.h>
@@ -30,11 +31,11 @@ void RegisterContractSystemCallsImpl(ApplicationEngine& engine)
             auto hashBytes = hashItem->GetByteArray();
             auto flags = static_cast<CallFlags>(flagsItem->GetInteger());
 
-            if (hashBytes.Size() != 20)
+            if (hashBytes.Size() != core::ProtocolConstants::UInt160Size)
                 throw std::runtime_error("Invalid script hash");
 
             io::UInt160 hash;
-            std::memcpy(hash.Data(), hashBytes.Data(), 20);
+            std::memcpy(hash.Data(), hashBytes.Data(), core::ProtocolConstants::UInt160Size);
 
             auto result = appEngine.CallContract(hash, method, args, flags);
             context.Push(result);
@@ -70,14 +71,14 @@ void RegisterContractSystemCallsImpl(ApplicationEngine& engine)
             auto& contracts = appEngine.GetContracts();
 
             // Create UInt160 from byte array
-            if (contractHash.Size() != 20)
+            if (contractHash.Size() != core::ProtocolConstants::UInt160Size)
             {
                 context.Push(vm::StackItem::Null());
                 return true;
             }
 
             io::UInt160 hashKey;
-            std::memcpy(hashKey.Data(), contractHash.AsSpan().Data(), 20);
+            std::memcpy(hashKey.Data(), contractHash.AsSpan().Data(), core::ProtocolConstants::UInt160Size);
 
             auto contractIt = contracts.find(hashKey);
             if (contractIt == contracts.end())  // Fixed: compare with end() instead of 0
@@ -222,7 +223,7 @@ void RegisterContractSystemCallsImpl(ApplicationEngine& engine)
             try
             {
                 // Validate public key count
-                if (pubKeysArray.size() > 1024)
+                if (pubKeysArray.size() > core::ProtocolConstants::MaxArraySize)
                 {
                     throw std::runtime_error("Too many public keys");
                 }
@@ -248,7 +249,7 @@ void RegisterContractSystemCallsImpl(ApplicationEngine& engine)
                 for (const auto& pubKeyItem : pubKeysArray)
                 {
                     auto pubKeyBytes = pubKeyItem->GetByteArray();
-                    if (pubKeyBytes.Size() != 33)  // Compressed public key size
+                    if (pubKeyBytes.Size() != core::ProtocolConstants::ECPointSize)  // Compressed public key size
                     {
                         throw std::runtime_error("Invalid public key size");
                     }

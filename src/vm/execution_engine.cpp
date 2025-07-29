@@ -245,39 +245,35 @@ void ExecutionEngine::UnloadContext(ExecutionContext& context)
         if (!staticFields.empty() && (currentContext == nullptr || staticFields != currentContext->GetStaticFields()))
         {
             // Clear references for static fields
-            // Create a non-const copy to modify
-            auto staticFieldsCopy = staticFields;
-            for (auto& item : staticFieldsCopy)
+            for (const auto& item : staticFields)
             {
                 if (item != nullptr)
                 {
-                    // Remove references from the reference counter
-                    item = nullptr;
+                    // Remove stack reference from the reference counter
+                    referenceCounter_.RemoveStackReference(item);
                 }
             }
         }
 
         // Clear references for local variables
-        // Create a non-const copy to modify
-        auto localVariablesCopy = context.GetLocalVariables();
-        for (auto& item : localVariablesCopy)
+        const auto& localVariables = context.GetLocalVariables();
+        for (const auto& item : localVariables)
         {
             if (item != nullptr)
             {
-                // Remove references from the reference counter
-                item = nullptr;
+                // Remove stack reference from the reference counter
+                referenceCounter_.RemoveStackReference(item);
             }
         }
 
         // Clear references for arguments
-        // Create a non-const copy to modify
-        auto argumentsCopy = context.GetArguments();
-        for (auto& item : argumentsCopy)
+        const auto& arguments = context.GetArguments();
+        for (const auto& item : arguments)
         {
             if (item != nullptr)
             {
-                // Remove references from the reference counter
-                item = nullptr;
+                // Remove stack reference from the reference counter
+                referenceCounter_.RemoveStackReference(item);
             }
         }
     }
@@ -315,6 +311,8 @@ void ExecutionEngine::ExecuteNext()
     if (invocationStack_.empty())
     {
         SetState(VMState::Halt);
+        // Clean up any remaining zero-referenced items when execution completes
+        referenceCounter_.CheckZeroReferred();
         return;
     }
 
@@ -381,7 +379,7 @@ void ExecutionEngine::ExecuteNext()
     }
     catch (...)
     {
-        // Set the state to fault on any unhandled exception
+        // Set the state to fault on any unhandled system exception
         OnFault();
     }
 }
@@ -457,8 +455,8 @@ void ExecutionEngine::OnFault(std::exception_ptr ex)
         }
         catch (...)
         {
-            // Create a ByteString with a generic message for unknown exceptions
-            uncaughtException_ = StackItem::Create("Unknown exception");
+            // Create a ByteString with a generic message for system exceptions
+            uncaughtException_ = StackItem::Create("System exception");
         }
     }
 }
@@ -492,6 +490,8 @@ bool ExecutionEngine::ExecuteRet()
             }
         }
         SetState(VMState::Halt);
+        // Clean up any remaining zero-referenced items when execution completes
+        referenceCounter_.CheckZeroReferred();
         return false;
     }
 

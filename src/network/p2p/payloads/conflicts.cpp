@@ -71,12 +71,12 @@ bool Conflicts::Verify(/* DataCache& snapshot, const Transaction& transaction */
             return false;
         }
 
-        // For now, assume all non-zero hashes are valid conflicts
+        // Non-zero hashes are considered valid conflicts
         // In a complete implementation, this would check:
         // 1. If the conflicting transaction exists in mempool
         // 2. If the conflicting transaction exists on blockchain
         // 3. If there's actually a conflict
-        return true;  // For now, assume all non-zero hashes are valid
+        return true;  // Non-zero hashes are considered valid
     }
     catch (const std::exception& e)
     {

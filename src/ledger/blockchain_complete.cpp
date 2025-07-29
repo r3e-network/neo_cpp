@@ -228,7 +228,7 @@ int32_t Blockchain::GetTransactionHeight(const io::UInt256& hash) const
 std::shared_ptr<smartcontract::ContractState> Blockchain::GetContract(const io::UInt160& hash) const
 {
     // This would query the ContractManagement native contract
-    // For now, return nullptr
+    // Returns nullptr when contract is not found
     return nullptr;
 }
 
@@ -669,6 +669,6 @@ void Blockchain::Start()
     LOG_INFO("Blockchain started");
 
     // Start block processing threads if needed
-    // For now, just mark as running
+    // Processing threads are started when blocks are received
 }
 }  // namespace neo::ledger

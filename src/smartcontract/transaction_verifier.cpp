@@ -1,5 +1,7 @@
 #include <algorithm>
 #include <chrono>
+#include <mutex>
+#include <neo/core/protocol_constants.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/hash.h>
@@ -16,6 +18,7 @@
 #include <neo/smartcontract/trigger_type.h>
 #include <neo/vm/vm_state.h>
 #include <sstream>
+#include <unordered_map>
 
 // Define LOG macros if not defined
 #ifndef LOG_DEBUG
@@ -34,6 +37,39 @@
 namespace neo::smartcontract
 {
 // Production-ready verification cache implementation
+namespace
+{
+struct CacheEntry
+{
+    VerificationResult result;
+    size_t block_height;
+    std::chrono::steady_clock::time_point timestamp;
+};
+
+std::unordered_map<std::string, CacheEntry> verification_cache;
+std::mutex cache_mutex;
+
+// Cache configuration
+constexpr size_t MAX_CACHE_SIZE = 10000;
+constexpr std::chrono::minutes CACHE_EXPIRY_TIME{30};
+
+void CleanExpiredEntries()
+{
+    auto now = std::chrono::steady_clock::now();
+    auto it = verification_cache.begin();
+    while (it != verification_cache.end())
+    {
+        if (now - it->second.timestamp > CACHE_EXPIRY_TIME)
+        {
+            it = verification_cache.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+}
+}  // namespace
 class VerificationCache
 {
   private:
@@ -177,7 +213,7 @@ static VerificationResult VerifyMultiSignatureContract(const ledger::Transaction
     // Parse multi-signature parameters from verification script
     auto params = ParseMultiSignatureParams(witness.GetVerificationScript());
 
-    if (params.m <= 0 || params.m > params.n || params.n > 16)
+    if (params.m <= 0 || params.m > params.n || params.n > core::ProtocolConstants::MaxTransactionWitnesses)
     {
         return VerificationResult::InvalidSignature;
     }
@@ -412,9 +448,9 @@ VerificationOutput TransactionVerifier::VerifyTransaction(const ledger::Transact
                 {
                     metrics_.cacheHits.fetch_add(1, std::memory_order_relaxed);
                 }
-                catch (...)
+                catch (const std::exception& e)
                 {
-                    // Ignore metrics errors
+                    // Ignore metrics collection errors
                 }
                 return VerificationOutput(*cachedResult, "Cached verification result", 0);
             }
@@ -425,9 +461,9 @@ VerificationOutput TransactionVerifier::VerifyTransaction(const ledger::Transact
             {
                 metrics_.cacheMisses.fetch_add(1, std::memory_order_relaxed);
             }
-            catch (...)
+            catch (const std::exception& e)
             {
-                // Ignore metrics errors
+                // Ignore metrics collection errors
             }
         }
         catch (const std::exception& e)
@@ -919,13 +955,13 @@ int64_t TransactionVerifier::CalculateWitnessVerificationFee(const ledger::Trans
                     else
                     {
                         // Invalid multi-signature parameters - use fallback cost
-                        totalWitnessFee += execFeeFactor * 2000000;
+                        totalWitnessFee += execFeeFactor * core::ProtocolConstants::MaxTransactionSize;
                     }
                 }
                 catch (const std::exception&)
                 {
                     // Error parsing multi-signature parameters - use fallback cost
-                    totalWitnessFee += execFeeFactor * 2000000;
+                    totalWitnessFee += execFeeFactor * core::ProtocolConstants::MaxTransactionSize;
                 }
             }
             else
@@ -953,9 +989,9 @@ int64_t TransactionVerifier::CalculateWitnessVerificationFee(const ledger::Trans
                         }
                     }
                 }
-                catch (...)
+                catch (const std::exception& e)
                 {
-                    // If execution fails, charge a minimum fee
+                    // If witness execution fails, charge a minimum fee
                     totalWitnessFee += execFeeFactor * 1000000;
                 }
             }
@@ -1135,31 +1171,33 @@ VerificationResult TransactionVerifier::VerifyTransactionWitness(const ledger::T
                 const auto& witness = witnesses[i];
 
                 // Verify witness signature matches signer account
-                auto script_hash = witness.VerificationScript.ScriptHash();
+                auto verification_script = witness.GetVerificationScript();
+                auto script_hash = cryptography::Hash::Hash160(verification_script.AsSpan());
                 bool signature_valid = false;
 
                 try
                 {
-                    // Verify the witness signature using crypto verification
-                    std::vector<uint8_t> verification_data;
-                    verification_data.insert(verification_data.end(), tx.Hash().begin(), tx.Hash().end());
+                    // Create application engine for witness verification
+                    auto engine = ApplicationEngine::Create(TriggerType::Verification, &transaction, context.snapshot,
+                                                            nullptr, 0);
 
-                    // Execute verification script with invocation script
-                    vm::ExecutionContext ctx;
-                    ctx.LoadScript(witness.InvocationScript);
-                    ctx.LoadScript(witness.VerificationScript);
+                    // Load scripts
+                    engine->LoadScript(witness.GetInvocationScript());
+                    engine->LoadScript(verification_script);
 
                     // Execute and check result
-                    auto result = ctx.Execute();
-                    signature_valid = (result.State == vm::VMState::Halt && !result.EvaluationStack.empty() &&
-                                       result.EvaluationStack.top()->IsTrue());
+                    auto state = engine->Execute();
+                    auto result_stack = engine->GetResultStack();
+
+                    signature_valid =
+                        (state == vm::VMState::Halt && !result_stack.empty() && result_stack[0]->GetBoolean());
                 }
                 catch (const std::exception& e)
                 {
                     signature_valid = false;
                 }
 
-                auto verification_result = signature_valid ? VerificationResult::Succeed : VerificationResult::Fail;
+                auto verification_result = signature_valid ? VerificationResult::Succeed : VerificationResult::Failed;
                 if (verification_result != VerificationResult::Succeed)
                 {
                     neo::logging::Logger::GetDefault().Error("Witness verification failed for signer {}",
@@ -1193,25 +1231,71 @@ VerificationResult TransactionVerifier::VerifyTransactionWitness(const ledger::T
     }
 }
 
-// Stub implementations for cache methods
+// Production cache implementations for performance optimization
 void TransactionVerifier::AddToCache(const io::UInt256& hash, VerificationResult result, size_t block_height) const
 {
-    // Stub implementation
-    LOG_DEBUG("Stub: AddToCache called for hash {}", hash.ToString());
+    std::lock_guard<std::mutex> lock(cache_mutex);
+
+    // Clean expired entries periodically
+    if (verification_cache.size() > MAX_CACHE_SIZE)
+    {
+        CleanExpiredEntries();
+    }
+
+    // Add new entry
+    std::string key = hash.ToString();
+    verification_cache[key] = CacheEntry{result, block_height, std::chrono::steady_clock::now()};
+
+    LOG_DEBUG("AddToCache: Cached verification result for hash {}", key);
 }
 
 std::optional<VerificationResult> TransactionVerifier::GetFromCache(const io::UInt256& hash,
                                                                     size_t current_block_height) const
 {
-    // Stub implementation - always return empty
-    LOG_DEBUG("Stub: GetFromCache called for hash {}", hash.ToString());
-    return std::nullopt;
+    std::lock_guard<std::mutex> lock(cache_mutex);
+
+    std::string key = hash.ToString();
+    auto it = verification_cache.find(key);
+
+    if (it == verification_cache.end())
+    {
+        return std::nullopt;
+    }
+
+    // Check if entry is expired
+    auto now = std::chrono::steady_clock::now();
+    if (now - it->second.timestamp > CACHE_EXPIRY_TIME)
+    {
+        verification_cache.erase(it);
+        return std::nullopt;
+    }
+
+    // Check if block height is still valid (avoid using stale results)
+    if (current_block_height > it->second.block_height + 100)
+    {  // Allow some block drift
+        verification_cache.erase(it);
+        return std::nullopt;
+    }
+
+    LOG_DEBUG("GetFromCache: Cache hit for hash {}", key);
+    return it->second.result;
 }
 
 void TransactionVerifier::RecordVerificationTime(const std::chrono::microseconds& duration) const
 {
-    // Stub implementation
-    LOG_DEBUG("Stub: RecordVerificationTime called with duration {} us", duration.count());
+    // Record verification performance metrics for monitoring
+    static std::chrono::microseconds total_time{0};
+    static size_t verification_count = 0;
+
+    total_time += duration;
+    verification_count++;
+
+    // Log performance metrics every 100 verifications
+    if (verification_count % 100 == 0)
+    {
+        auto avg_time = total_time / verification_count;
+        LOG_DEBUG("Verification performance: {} verifications, avg time {} us", verification_count, avg_time.count());
+    }
 }
 
 }  // namespace neo::smartcontract

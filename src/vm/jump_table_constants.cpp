@@ -48,7 +48,7 @@ void JumpTableConstants::PUSHINT128(ExecutionEngine& engine, const Instruction& 
 
         // Create BigInteger from little-endian byte array
         // Neo VM uses little-endian format for integer representation
-        // For now, push as byte array until BigInteger support is complete
+        // Push as byte array until BigInteger integration is available
         auto item = StackItem::Create(bytes);
         engine.Push(item);
     }
@@ -75,7 +75,7 @@ void JumpTableConstants::PUSHINT256(ExecutionEngine& engine, const Instruction& 
 
         // Create BigInteger from little-endian byte array
         // Neo VM uses little-endian format for integer representation
-        // For now, push as byte array until BigInteger support is complete
+        // Push as byte array until BigInteger integration is available
         auto item = StackItem::Create(bytes);
         engine.Push(item);
     }

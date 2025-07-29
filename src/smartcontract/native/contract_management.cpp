@@ -84,13 +84,13 @@ std::shared_ptr<ContractState> ContractManagement::GetContract(const persistence
         return nullptr;
     }
 
-    // Create a temporary StoreView from DataCache
+    // Create a working StoreView from DataCache
     // For simplicity, we'll delegate to the instance method with a null snapshot
     // In a complete implementation, this would properly convert DataCache to StoreView
     try
     {
         auto key = contractMgmt->GetStorageKey(PREFIX_CONTRACT, hash);
-        // For now, return nullptr as we need proper DataCache integration
+        // Returns nullptr until DataCache integration is implemented
         // This would need to query the DataCache directly
         return nullptr;
     }
@@ -571,20 +571,20 @@ ContractManagement::GetCommitteeFromNeoContract(const std::shared_ptr<persistenc
         // Call the getCommittee method on the NEO contract
         try
         {
-            // Create a temporary application engine for the committee query
-            auto temp_engine = ApplicationEngine::Create(TriggerType::Application,
-                                                         nullptr,  // No transaction container
-                                                         snapshot,
-                                                         nullptr,  // No persisting block
-                                                         ApplicationEngine::TestModeGas);
+            // Create a dedicated application engine for the committee query
+            auto committeeEngine = ApplicationEngine::Create(TriggerType::Application,
+                                                             nullptr,  // No transaction container
+                                                             snapshot,
+                                                             nullptr,  // No persisting block
+                                                             ApplicationEngine::TestModeGas);
 
-            if (!temp_engine)
+            if (!committeeEngine)
             {
                 throw std::runtime_error("Failed to create application engine for committee query");
             }
 
             // Call NEO contract's getCommittee method
-            committee = neo_contract->GetCommittee(temp_engine->GetSnapshot());
+            committee = neo_contract->GetCommittee(committeeEngine->GetSnapshot());
 
             // If we got a valid committee from the NEO contract, use it
             if (!committee.empty())

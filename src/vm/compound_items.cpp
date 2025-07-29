@@ -119,6 +119,8 @@ void ArrayItem::Clear()
         {
             refCounter_->RemoveReference(item, self);
         }
+        // Check for and clean up any zero-referenced items after clearing
+        refCounter_->CheckZeroReferred();
     }
 
     value_.clear();
@@ -354,6 +356,8 @@ void MapItem::Clear()
             refCounter_->RemoveReference(key, self);
             refCounter_->RemoveReference(val, self);
         }
+        // Check for and clean up any zero-referenced items after clearing
+        refCounter_->CheckZeroReferred();
     }
 
     value_.clear();

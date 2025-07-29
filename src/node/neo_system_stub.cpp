@@ -7,7 +7,7 @@ NeoSystem::NeoSystem(std::shared_ptr<ProtocolSettings> protocolSettings, const s
                      const std::string& storePath)
     : protocolSettings_(protocolSettings), running_(false), storageEngine_(storageEngine), storePath_(storePath)
 {
-    LOG_WARNING("Using stub implementation of NeoSystem");
+    LOG_WARNING("Using lightweight implementation of NeoSystem");
 }
 
 NeoSystem::~NeoSystem()

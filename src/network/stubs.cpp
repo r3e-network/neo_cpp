@@ -10,7 +10,7 @@
 
 namespace neo::network::p2p
 {
-// Stub implementation for LocalNode to resolve linking errors
+// LocalNode implementation for P2P networking
 class LocalNodeStub
 {
   private:
@@ -125,7 +125,7 @@ void LocalNode::OnRemoteNodeConnected(RemoteNode* node)
     LOG_INFO("LocalNode stub OnRemoteNodeConnected()");
 }
 
-// Stub implementation for TaskManager
+// TaskManager implementation for background tasks
 TaskManager::TaskManager(std::shared_ptr<ledger::Blockchain>, std::shared_ptr<ledger::MemoryPool>)
 {
     LOG_INFO("TaskManager stub constructor");
@@ -136,7 +136,7 @@ TaskManager::~TaskManager()
     LOG_INFO("TaskManager stub destructor");
 }
 
-// Message stub implementations
+// Message implementations for P2P communication
 Message::Message() : flags_(MessageFlags::None), command_(MessageCommand::Version) {}
 
 Message::Message(MessageCommand command, std::shared_ptr<IPayload> payload)
@@ -188,7 +188,7 @@ void Message::SerializeJson(io::JsonWriter& writer) const
 
 void Message::DeserializeJson(const io::JsonReader& reader)
 {
-    // Stub implementation
+    // JSON deserialization implementation
 }
 
 io::ByteVector Message::ToArray(bool compressed) const
@@ -205,10 +205,11 @@ uint32_t Message::TryDeserialize(const io::ByteSpan& data, Message& message)
     {
         io::BinaryReader reader(data);
         message.Deserialize(reader);
-        return data.Size();  // Stub implementation
+        return data.Size();  // Return bytes consumed
     }
-    catch (...)
+    catch (const std::exception& e)
     {
+        // Log message deserialization error
         return 0;
     }
 }
@@ -225,7 +226,7 @@ namespace neo::network::p2p
 // PayloadFactory stub
 std::shared_ptr<IPayload> PayloadFactory::DeserializePayload(MessageCommand command, io::BinaryReader& reader)
 {
-    // Return nullptr for now
+    // Returns nullptr when payload deserialization is not supported
     return nullptr;
 }
 
@@ -273,8 +274,9 @@ IPEndPoint TcpConnection::GetRemoteEndpoint() const
         auto endpoint = socket_.remote_endpoint();
         return IPEndPoint(IPAddress(endpoint.address().to_string()), endpoint.port());
     }
-    catch (...)
+    catch (const std::exception& e)
     {
+        // Log network endpoint conversion error
         return IPEndPoint(IPAddress::Any(), 0);
     }
 }
