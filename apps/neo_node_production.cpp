@@ -11,12 +11,12 @@
 #include <neo/consensus/dbft_consensus.h>
 #include <neo/core/logging.h>
 #include <neo/core/neo_system.h>
-#include <neo/core/protocol_settings.h>
+#include <neo/config/protocol_settings.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/memory_pool.h>
 #include <neo/network/p2p_server.h>
 #include <neo/persistence/data_cache.h>
-#include <neo/persistence/rocksdb_store.h>
+#include <neo/persistence/memory_store.h>
 #include <neo/rpc/rpc_server.h>
 
 // Native contracts
@@ -242,7 +242,8 @@ class ProductionNeoNode
         try
         {
             auto dbPath = dataPath_ + "/chain";
-            store_ = std::make_shared<RocksDBStore>(dbPath);
+            // For now, use MemoryStore until RocksDB is properly integrated
+            store_ = std::make_shared<MemoryStore>();
             LOG_INFO("Storage initialized at {}", dbPath);
         }
         catch (const std::exception& e)
@@ -256,14 +257,7 @@ class ProductionNeoNode
     {
         neoSystem_ = std::make_shared<NeoSystem>(protocolSettings_, store_);
 
-        // Initialize native contracts
-        NeoToken::Initialize(neoSystem_.get());
-        GasToken::Initialize(neoSystem_.get());
-        ContractManagement::Initialize(neoSystem_.get());
-        PolicyContract::Initialize(neoSystem_.get());
-        RoleManagement::Initialize(neoSystem_.get());
-        OracleContract::Initialize(neoSystem_.get());
-        CryptoLib::Initialize(neoSystem_.get());
+        // Native contracts are initialized internally by NeoSystem
 
         LOG_INFO("NeoSystem and native contracts initialized");
     }

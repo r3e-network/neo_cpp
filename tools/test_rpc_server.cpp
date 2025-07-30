@@ -1,7 +1,7 @@
 #include <chrono>
 #include <iostream>
 #include <neo/core/logging.h>
-#include <neo/rpc/rpc_server_simple.h>
+#include <neo/rpc/rpc_server.h>
 #include <thread>
 
 using namespace neo::rpc;
@@ -59,8 +59,8 @@ int main()
             if (++counter % 10 == 0)
             {
                 auto stats = server.GetStatistics();
-                std::cout << "Stats - Total Requests: " << stats["totalRequests"]->AsNumber()
-                          << ", Failed: " << stats["failedRequests"]->AsNumber() << "\n";
+                std::cout << "Stats - Total Requests: " << stats["totalRequests"].GetInt64()
+                          << ", Failed: " << stats["failedRequests"].GetInt64() << "\n";
             }
         }
     }

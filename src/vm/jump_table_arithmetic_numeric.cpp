@@ -158,6 +158,11 @@ void JumpTable::NZ(ExecutionEngine& engine, const Instruction& instruction)
 // JumpTableArithmeticNumeric implementations
 void JumpTableArithmeticNumeric::ADD(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(x1 + x2));
@@ -165,6 +170,11 @@ void JumpTableArithmeticNumeric::ADD(ExecutionEngine& engine, const Instruction&
 
 void JumpTableArithmeticNumeric::SUB(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(x1 - x2));
@@ -172,6 +182,11 @@ void JumpTableArithmeticNumeric::SUB(ExecutionEngine& engine, const Instruction&
 
 void JumpTableArithmeticNumeric::MUL(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(x1 * x2));
@@ -179,6 +194,11 @@ void JumpTableArithmeticNumeric::MUL(ExecutionEngine& engine, const Instruction&
 
 void JumpTableArithmeticNumeric::DIV(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x2 = engine.Pop()->GetInteger();
     if (x2 == 0)
         throw DivideByZeroException();
@@ -188,6 +208,11 @@ void JumpTableArithmeticNumeric::DIV(ExecutionEngine& engine, const Instruction&
 
 void JumpTableArithmeticNumeric::MOD(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x2 = engine.Pop()->GetInteger();
     if (x2 == 0)
         throw DivideByZeroException();
@@ -197,6 +222,11 @@ void JumpTableArithmeticNumeric::MOD(ExecutionEngine& engine, const Instruction&
 
 void JumpTableArithmeticNumeric::POW(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto exponent = engine.Pop()->GetInteger();
     auto value = engine.Pop()->GetInteger();
 
@@ -233,6 +263,11 @@ void JumpTableArithmeticNumeric::POW(ExecutionEngine& engine, const Instruction&
 
 void JumpTableArithmeticNumeric::SQRT(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x = engine.Pop()->GetInteger();
     if (x < 0)
         throw InvalidOperationException("Cannot calculate square root of negative number");
@@ -242,6 +277,11 @@ void JumpTableArithmeticNumeric::SQRT(ExecutionEngine& engine, const Instruction
 
 void JumpTableArithmeticNumeric::SHL(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto shift = engine.Pop()->GetInteger();
     auto value = engine.Pop()->GetInteger();
 
@@ -256,6 +296,11 @@ void JumpTableArithmeticNumeric::SHL(ExecutionEngine& engine, const Instruction&
 
 void JumpTableArithmeticNumeric::SHR(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto shift = engine.Pop()->GetInteger();
     auto value = engine.Pop()->GetInteger();
 
@@ -270,12 +315,22 @@ void JumpTableArithmeticNumeric::SHR(ExecutionEngine& engine, const Instruction&
 
 void JumpTableArithmeticNumeric::NOT(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x = engine.Pop()->GetBoolean();
     engine.Push(StackItem::Create(!x));
 }
 
 void JumpTableArithmeticNumeric::BOOLAND(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x2 = engine.Pop()->GetBoolean();
     auto x1 = engine.Pop()->GetBoolean();
     engine.Push(StackItem::Create(x1 && x2));
@@ -283,6 +338,11 @@ void JumpTableArithmeticNumeric::BOOLAND(ExecutionEngine& engine, const Instruct
 
 void JumpTableArithmeticNumeric::BOOLOR(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x2 = engine.Pop()->GetBoolean();
     auto x1 = engine.Pop()->GetBoolean();
     engine.Push(StackItem::Create(x1 || x2));
@@ -290,6 +350,11 @@ void JumpTableArithmeticNumeric::BOOLOR(ExecutionEngine& engine, const Instructi
 
 void JumpTableArithmeticNumeric::NUMEQUAL(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(x1 == x2));
@@ -297,6 +362,11 @@ void JumpTableArithmeticNumeric::NUMEQUAL(ExecutionEngine& engine, const Instruc
 
 void JumpTableArithmeticNumeric::NUMNOTEQUAL(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(x1 != x2));
@@ -304,34 +374,114 @@ void JumpTableArithmeticNumeric::NUMNOTEQUAL(ExecutionEngine& engine, const Inst
 
 void JumpTableArithmeticNumeric::LT(ExecutionEngine& engine, const Instruction& instruction)
 {
-    auto x2 = engine.Pop()->GetInteger();
-    auto x1 = engine.Pop()->GetInteger();
+    auto item2 = engine.Pop();
+    auto item1 = engine.Pop();
+    
+    // Check for invalid types for numeric comparison
+    auto type1 = item1->GetType();
+    auto type2 = item2->GetType();
+    
+    // Only allow Integer, Boolean, and Null types for numeric comparison
+    if ((type1 != StackItemType::Integer && type1 != StackItemType::Boolean && type1 != StackItemType::Null) ||
+        (type2 != StackItemType::Integer && type2 != StackItemType::Boolean && type2 != StackItemType::Null)) {
+        throw std::runtime_error("Invalid comparison operation");
+    }
+    
+    // Handle null values - treat null as integer 0
+    int64_t x2 = (item2->GetType() == StackItemType::Null) ? 0 : item2->GetInteger();
+    int64_t x1 = (item1->GetType() == StackItemType::Null) ? 0 : item1->GetInteger();
+    
     engine.Push(StackItem::Create(x1 < x2));
 }
 
 void JumpTableArithmeticNumeric::GT(ExecutionEngine& engine, const Instruction& instruction)
 {
-    auto x2 = engine.Pop()->GetInteger();
-    auto x1 = engine.Pop()->GetInteger();
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
+    auto item2 = engine.Pop();
+    auto item1 = engine.Pop();
+    
+    // Check for invalid types for numeric comparison
+    auto type1 = item1->GetType();
+    auto type2 = item2->GetType();
+    
+    // Only allow Integer, Boolean, and Null types for numeric comparison
+    if ((type1 != StackItemType::Integer && type1 != StackItemType::Boolean && type1 != StackItemType::Null) ||
+        (type2 != StackItemType::Integer && type2 != StackItemType::Boolean && type2 != StackItemType::Null)) {
+        throw std::runtime_error("Invalid comparison operation");
+    }
+    
+    // Handle null values - treat null as integer 0
+    int64_t x2 = (item2->GetType() == StackItemType::Null) ? 0 : item2->GetInteger();
+    int64_t x1 = (item1->GetType() == StackItemType::Null) ? 0 : item1->GetInteger();
+    
     engine.Push(StackItem::Create(x1 > x2));
 }
 
 void JumpTableArithmeticNumeric::LE(ExecutionEngine& engine, const Instruction& instruction)
 {
-    auto x2 = engine.Pop()->GetInteger();
-    auto x1 = engine.Pop()->GetInteger();
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
+    auto item2 = engine.Pop();
+    auto item1 = engine.Pop();
+    
+    // Check for invalid types for numeric comparison
+    auto type1 = item1->GetType();
+    auto type2 = item2->GetType();
+    
+    // Only allow Integer, Boolean, and Null types for numeric comparison
+    if ((type1 != StackItemType::Integer && type1 != StackItemType::Boolean && type1 != StackItemType::Null) ||
+        (type2 != StackItemType::Integer && type2 != StackItemType::Boolean && type2 != StackItemType::Null)) {
+        throw std::runtime_error("Invalid comparison operation");
+    }
+    
+    // Handle null values - treat null as integer 0
+    int64_t x2 = (item2->GetType() == StackItemType::Null) ? 0 : item2->GetInteger();
+    int64_t x1 = (item1->GetType() == StackItemType::Null) ? 0 : item1->GetInteger();
+    
     engine.Push(StackItem::Create(x1 <= x2));
 }
 
 void JumpTableArithmeticNumeric::GE(ExecutionEngine& engine, const Instruction& instruction)
 {
-    auto x2 = engine.Pop()->GetInteger();
-    auto x1 = engine.Pop()->GetInteger();
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
+    auto item2 = engine.Pop();
+    auto item1 = engine.Pop();
+    
+    // Check for invalid types for numeric comparison
+    auto type1 = item1->GetType();
+    auto type2 = item2->GetType();
+    
+    // Only allow Integer, Boolean, and Null types for numeric comparison
+    if ((type1 != StackItemType::Integer && type1 != StackItemType::Boolean && type1 != StackItemType::Null) ||
+        (type2 != StackItemType::Integer && type2 != StackItemType::Boolean && type2 != StackItemType::Null)) {
+        throw std::runtime_error("Invalid comparison operation");
+    }
+    
+    // Handle null values - treat null as integer 0
+    int64_t x2 = (item2->GetType() == StackItemType::Null) ? 0 : item2->GetInteger();
+    int64_t x1 = (item1->GetType() == StackItemType::Null) ? 0 : item1->GetInteger();
+    
     engine.Push(StackItem::Create(x1 >= x2));
 }
 
 void JumpTableArithmeticNumeric::MIN(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(std::min(x1, x2)));
@@ -339,6 +489,11 @@ void JumpTableArithmeticNumeric::MIN(ExecutionEngine& engine, const Instruction&
 
 void JumpTableArithmeticNumeric::MAX(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(std::max(x1, x2)));
@@ -346,6 +501,11 @@ void JumpTableArithmeticNumeric::MAX(ExecutionEngine& engine, const Instruction&
 
 void JumpTableArithmeticNumeric::WITHIN(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 3) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto b = engine.Pop()->GetInteger();
     auto a = engine.Pop()->GetInteger();
     auto x = engine.Pop()->GetInteger();
@@ -354,6 +514,11 @@ void JumpTableArithmeticNumeric::WITHIN(ExecutionEngine& engine, const Instructi
 
 void JumpTableArithmeticNumeric::SIGN(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x = engine.Pop()->GetInteger();
     int64_t sign = (x > 0) ? 1 : ((x < 0) ? -1 : 0);
     engine.Push(StackItem::Create(sign));
@@ -361,30 +526,55 @@ void JumpTableArithmeticNumeric::SIGN(ExecutionEngine& engine, const Instruction
 
 void JumpTableArithmeticNumeric::ABS(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(std::abs(x)));
 }
 
 void JumpTableArithmeticNumeric::NEGATE(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(-x));
 }
 
 void JumpTableArithmeticNumeric::INC(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(x + 1));
 }
 
 void JumpTableArithmeticNumeric::DEC(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(x - 1));
 }
 
 void JumpTableArithmeticNumeric::MODMUL(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 3) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto modulus = engine.Pop()->GetInteger();
     if (modulus <= 0)
         throw InvalidOperationException("Modulus must be positive");
@@ -411,6 +601,11 @@ void JumpTableArithmeticNumeric::MODMUL(ExecutionEngine& engine, const Instructi
 
 void JumpTableArithmeticNumeric::MODPOW(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 3) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto modulus = engine.Pop()->GetInteger();
     if (modulus <= 0)
         throw InvalidOperationException("Modulus must be positive");
@@ -439,6 +634,11 @@ void JumpTableArithmeticNumeric::MODPOW(ExecutionEngine& engine, const Instructi
 
 void JumpTableArithmeticNumeric::NZ(ExecutionEngine& engine, const Instruction& instruction)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x = engine.Pop()->GetInteger();
     engine.Push(StackItem::Create(x != 0));
 }

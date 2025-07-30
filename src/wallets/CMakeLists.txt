@@ -29,6 +29,5 @@ target_link_libraries(neo_wallets
     PUBLIC
         neo_cryptography
         neo_io
-        neo_smartcontract
         nlohmann_json::nlohmann_json
 )

@@ -19,6 +19,11 @@ class Witness : public io::ISerializable, public io::IJsonSerializable
      * @brief Constructs an empty Witness.
      */
     Witness();
+    
+    /**
+     * @brief Virtual destructor.
+     */
+    virtual ~Witness() = default;
 
     /**
      * @brief Constructs a Witness with the specified invocation and verification scripts.

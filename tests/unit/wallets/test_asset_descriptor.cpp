@@ -17,22 +17,61 @@ class MockDataCache : public DataCache
   public:
     MockDataCache() {}
 
-    // Implement required virtual methods
-    void Put(const UInt160& key, const ByteVector& value) override {}
-    bool TryGet(const UInt160& key, ByteVector& value) const override
+    // Implement required virtual methods from StoreView
+    std::optional<StorageItem> TryGet(const StorageKey& key) const override
     {
-        return false;
+        return std::nullopt;
     }
-    bool Contains(const UInt160& key) const override
+    
+    std::shared_ptr<StorageItem> TryGet(const StorageKey& key) override
     {
-        return false;
+        return nullptr;
     }
-    void Delete(const UInt160& key) override {}
-    std::vector<UInt160> GetKeys() const override
+    
+    std::shared_ptr<StorageItem> GetAndChange(const StorageKey& key, std::function<std::shared_ptr<StorageItem>()> factory = nullptr) override
+    {
+        if (factory)
+            return factory();
+        return nullptr;
+    }
+    
+    void Add(const StorageKey& key, const StorageItem& item) override {}
+    
+    void Delete(const StorageKey& key) override {}
+    
+    std::vector<std::pair<StorageKey, StorageItem>> Find(const StorageKey* prefix = nullptr) const override
     {
         return {};
     }
+    
+    std::unique_ptr<StorageIterator> Seek(const StorageKey& prefix) const override
+    {
+        return nullptr;
+    }
+    
     void Commit() override {}
+    
+    std::shared_ptr<StoreView> CreateSnapshot() override
+    {
+        return std::make_shared<MockDataCache>();
+    }
+    
+    // Implement required virtual methods from DataCache
+    StorageItem& Get(const StorageKey& key) override
+    {
+        static StorageItem item;
+        return item;
+    }
+    
+    uint32_t GetCurrentBlockIndex() const override
+    {
+        return 0;
+    }
+    
+    bool IsReadOnly() const override
+    {
+        return false;
+    }
 };
 
 class UT_AssetDescriptor : public testing::Test

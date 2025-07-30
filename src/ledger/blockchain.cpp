@@ -10,6 +10,7 @@
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/neo_token.h>
+#include <neo/smartcontract/native/contract_management.h>
 #include <stdexcept>
 
 namespace neo::ledger
@@ -188,6 +189,12 @@ bool Blockchain::ContainsTransaction(const io::UInt256& hash) const
     return transaction != nullptr;
 }
 
+std::shared_ptr<smartcontract::ContractState> Blockchain::GetContract(const io::UInt160& hash) const
+{
+    std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
+    return smartcontract::native::ContractManagement::GetContract(*data_cache_, hash);
+}
+
 VerifyResult Blockchain::OnNewBlock(std::shared_ptr<Block> block)
 {
     if (!block || block->GetHash() == io::UInt256())
@@ -357,32 +364,7 @@ VerifyResult Blockchain::OnNewTransaction(std::shared_ptr<Transaction> transacti
     return system_->GetMemoryPool()->TryAdd(transaction, data_cache_);
 }
 
-VerifyResult Blockchain::OnNewExtensiblePayload(std::shared_ptr<network::payloads::ExtensiblePayload> payload)
-{
-    if (!payload || !payload->TryGetHash())
-    {
-        return VerifyResult::Invalid;
-    }
-
-    std::unique_lock<std::shared_mutex> lock(blockchain_mutex_);
-
-    auto snapshot = data_cache_->CreateSnapshot();
-
-    // Update whitelist if needed
-    if (!extensible_whitelist_cached_)
-    {
-        extensible_witness_whitelist_ = UpdateExtensibleWitnessWhiteList(snapshot);
-        extensible_whitelist_cached_ = true;
-    }
-
-    if (!payload->Verify(system_->GetSettings(), snapshot, extensible_witness_whitelist_))
-    {
-        return VerifyResult::Invalid;
-    }
-
-    system_->GetRelayCache()->Add(payload);
-    return VerifyResult::Succeed;
-}
+// ExtensiblePayload method removed - network module is disabled
 
 bool Blockchain::ImportBlocks(const ImportData& import_data)
 {
@@ -456,25 +438,7 @@ void Blockchain::FillMemoryPool(const std::vector<std::shared_ptr<Transaction>>&
     }
 }
 
-void Blockchain::ReverifyInventories(const std::vector<std::shared_ptr<IInventory>>& inventories)
-{
-    for (const auto& inventory : inventories)
-    {
-        // Process inventory without relaying
-        if (auto block = std::dynamic_pointer_cast<Block>(inventory))
-        {
-            OnNewBlock(block);
-        }
-        else if (auto transaction = std::dynamic_pointer_cast<Transaction>(inventory))
-        {
-            OnNewTransaction(transaction);
-        }
-        else if (auto payload = std::dynamic_pointer_cast<network::payloads::ExtensiblePayload>(inventory))
-        {
-            OnNewExtensiblePayload(payload);
-        }
-    }
-}
+// ReverifyInventories method removed - network module is disabled
 
 // Event registration methods
 void Blockchain::RegisterCommittingHandler(CommittingHandler handler)
@@ -501,11 +465,7 @@ void Blockchain::RegisterTransactionHandler(TransactionHandler handler)
     transaction_handlers_.push_back(std::move(handler));
 }
 
-void Blockchain::RegisterInventoryHandler(InventoryHandler handler)
-{
-    std::lock_guard<std::mutex> lock(event_mutex_);
-    inventory_handlers_.push_back(std::move(handler));
-}
+// RegisterInventoryHandler method removed - network module is disabled
 
 void Blockchain::ProcessingThreadFunction()
 {

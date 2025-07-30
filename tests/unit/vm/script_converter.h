@@ -194,8 +194,42 @@ class ScriptConverter
             return OpCode::PUSH15;
         else if (upperValue == "PUSH16")
             return OpCode::PUSH16;
+        else if (upperValue == "PUSHNULL")
+            return OpCode::PUSHNULL;
         else if (upperValue == "ADD")
             return OpCode::ADD;
+        else if (upperValue == "GE")
+            return OpCode::GE;
+        else if (upperValue == "GT")
+            return OpCode::GT;
+        else if (upperValue == "LE")
+            return OpCode::LE;
+        else if (upperValue == "LT")
+            return OpCode::LT;
+        else if (upperValue == "NUMEQUAL")
+            return OpCode::NUMEQUAL;
+        else if (upperValue == "NUMNOTEQUAL")
+            return OpCode::NUMNOTEQUAL;
+        else if (upperValue == "NOT")
+            return OpCode::NOT;
+        else if (upperValue == "SIGN")
+            return OpCode::SIGN;
+        else if (upperValue == "POW")
+            return OpCode::POW;
+        else if (upperValue == "SQRT")
+            return OpCode::SQRT;
+        else if (upperValue == "MODMUL")
+            return OpCode::MODMUL;
+        else if (upperValue == "MODPOW")
+            return OpCode::MODPOW;
+        else if (upperValue == "SHL")
+            return OpCode::SHL;
+        else if (upperValue == "SHR")
+            return OpCode::SHR;
+        else if (upperValue == "NEWARRAY0")
+            return OpCode::NEWARRAY0;
+        else if (upperValue == "RET")
+            return OpCode::RET;
 
         // Add more opcodes as needed, or implement a more comprehensive mapping
 
@@ -255,8 +289,42 @@ class ScriptConverter
                 return "PUSH15";
             case OpCode::PUSH16:
                 return "PUSH16";
+            case OpCode::PUSHNULL:
+                return "PUSHNULL";
             case OpCode::ADD:
                 return "ADD";
+            case OpCode::GE:
+                return "GE";
+            case OpCode::GT:
+                return "GT";
+            case OpCode::LE:
+                return "LE";
+            case OpCode::LT:
+                return "LT";
+            case OpCode::NUMEQUAL:
+                return "NUMEQUAL";
+            case OpCode::NUMNOTEQUAL:
+                return "NUMNOTEQUAL";
+            case OpCode::NOT:
+                return "NOT";
+            case OpCode::SIGN:
+                return "SIGN";
+            case OpCode::POW:
+                return "POW";
+            case OpCode::SQRT:
+                return "SQRT";
+            case OpCode::MODMUL:
+                return "MODMUL";
+            case OpCode::MODPOW:
+                return "MODPOW";
+            case OpCode::SHL:
+                return "SHL";
+            case OpCode::SHR:
+                return "SHR";
+            case OpCode::NEWARRAY0:
+                return "NEWARRAY0";
+            case OpCode::RET:
+                return "RET";
 
                 // Add more cases as needed, or implement a more comprehensive mapping
 

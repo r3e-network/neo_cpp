@@ -1,5 +1,6 @@
 // Disabled due to API mismatches - needs to be updated
 #include <gtest/gtest.h>
+#include <algorithm>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -88,7 +89,8 @@ TEST_F(ContractManagementTest, TestGetMinimumDeploymentFee)
         ASSERT_GE(calculated_fee, 10 * 100000000);  // At least 10 GAS
 
         // Test fee scaling with script size
-        ByteVector large_script(1000, 0x01);  // 1KB script
+        ByteVector large_script(1000);  // 1KB script
+        std::fill(large_script.begin(), large_script.end(), 0x01);
         // CalculateDeploymentFee doesn't exist - using minimum fee
         auto large_fee = calculated_fee;
 

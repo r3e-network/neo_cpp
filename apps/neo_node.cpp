@@ -1,7 +1,7 @@
 #include <neo/core/logging.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/persistence/memory_store.h>
-#include <neo/rpc/rpc_server_simple.h>
+#include <neo/rpc/rpc_server.h>
 // #include <neo/ledger/memory_pool.h> // Temporarily disabled
 // #include <neo/consensus/consensus_service.h>
 #include <neo/smartcontract/native/neo_token.h>

@@ -414,11 +414,11 @@ void ExecutionEngine::PostExecuteInstruction(const Instruction& instruction)
 {
     // Check if reference count exceeds limits
     auto currentCount = referenceCounter_.Count();
-    if (currentCount >= limits_.MaxStackSize)
+    if (currentCount > limits_.MaxStackSize)
     {
         // Try to clean up unreferenced items
         auto cleanedCount = referenceCounter_.CheckZeroReferred();
-        if (cleanedCount >= limits_.MaxStackSize)
+        if (cleanedCount > limits_.MaxStackSize)
         {
             throw InvalidOperationException("MaxStackSize exceed: " + std::to_string(cleanedCount) + "/" +
                                             std::to_string(limits_.MaxStackSize));

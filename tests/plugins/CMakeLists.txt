@@ -7,8 +7,8 @@ add_executable(plugins_tests
 target_link_libraries(plugins_tests
     PRIVATE
         neo_cpp
-        gtest
-        gtest_main
+        GTest::gtest
+        GTest::gtest_main
 )
 
 # Include directories

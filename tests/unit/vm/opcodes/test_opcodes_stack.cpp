@@ -1,5 +1,7 @@
 #include <fstream>
 #include <gtest/gtest.h>
+#include <iomanip>
+#include <sstream>
 #include <neo/io/byte_span.h>
 #include <neo/vm/execution_engine.h>
 #include <neo/vm/opcode.h>
@@ -11,6 +13,26 @@
 using namespace neo::vm;
 using namespace neo::io;
 using json = nlohmann::json;
+
+// Helper functions for hex conversion
+std::string ByteArrayToHex(const ByteVector& bytes) {
+    std::stringstream ss;
+    ss << std::hex << std::setfill('0');
+    for (uint8_t byte : bytes) {
+        ss << std::setw(2) << static_cast<int>(byte);
+    }
+    return ss.str();
+}
+
+ByteVector ParseHex(const std::string& hex) {
+    ByteVector result;
+    for (size_t i = 0; i < hex.length(); i += 2) {
+        std::string byteString = hex.substr(i, 2);
+        uint8_t byte = static_cast<uint8_t>(std::stoul(byteString, nullptr, 16));
+        result.Push(byte);
+    }
+    return result;
+}
 
 class UT_OpCodes_Stack : public testing::Test
 {
@@ -36,8 +58,26 @@ class UT_OpCodes_Stack : public testing::Test
         {
             ExecutionEngine engine;
 
-            // Load script
-            auto scriptHex = test["script"].get<std::string>();
+            // Load script - handle both string and array formats
+            std::string scriptHex;
+            if (test["script"].is_string()) {
+                scriptHex = test["script"].get<std::string>();
+            } else if (test["script"].is_array()) {
+                // Convert opcode array to hex string
+                ScriptBuilder builder;
+                for (const auto& op : test["script"]) {
+                    std::string opName = op.get<std::string>();
+                    // Map opcode name to actual opcode
+                    if (opName == "DEPTH") builder.Emit(OpCode::DEPTH);
+                    else if (opName == "DROP") builder.Emit(OpCode::DROP);
+                    else if (opName == "SWAP") builder.Emit(OpCode::SWAP);
+                    else if (opName == "TUCK") builder.Emit(OpCode::TUCK);
+                    else if (opName == "OVER") builder.Emit(OpCode::OVER);
+                    // Add more opcodes as needed
+                }
+                auto scriptArray = builder.ToArray();
+                scriptHex = ByteArrayToHex(scriptArray);
+            }
             auto scriptBytes = ParseHex(scriptHex);
             Script script(scriptBytes);
             engine.LoadScript(script);

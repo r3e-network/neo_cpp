@@ -84,21 +84,28 @@ std::shared_ptr<ContractState> ContractManagement::GetContract(const persistence
         return nullptr;
     }
 
-    // Create a working StoreView from DataCache
-    // For simplicity, we'll delegate to the instance method with a null snapshot
-    // In a complete implementation, this would properly convert DataCache to StoreView
     try
     {
+        // Create storage key for contract lookup
         auto key = contractMgmt->GetStorageKey(PREFIX_CONTRACT, hash);
-        // Returns nullptr until DataCache integration is implemented
-        // This would need to query the DataCache directly
-        return nullptr;
+        persistence::StorageKey storageKey(contractMgmt->GetId(), key);
+        
+        // Query the DataCache directly (need to cast away const for GetAndChange)
+        auto storageItem = const_cast<persistence::DataCache&>(snapshot).GetAndChange(storageKey);
+        if (!storageItem || storageItem->GetValue().IsEmpty())
+        {
+            return nullptr;
+        }
+        
+        // Deserialize the contract from storage
+        auto& value = storageItem->GetValue();
+        std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
+        io::BinaryReader reader(stream);
+        auto contract = std::make_shared<ContractState>();
+        contract->Deserialize(reader);
+        return contract;
     }
-    catch (const std::runtime_error&)
-    {
-        return nullptr;
-    }
-    catch (const std::invalid_argument&)
+    catch (const std::exception&)
     {
         return nullptr;
     }

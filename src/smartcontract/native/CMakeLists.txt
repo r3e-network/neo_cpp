@@ -50,4 +50,5 @@ target_link_libraries(neo_native_contracts
         neo_persistence
         neo_cryptography
         neo_vm
+        neo_wallets
 )

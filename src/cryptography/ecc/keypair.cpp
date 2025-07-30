@@ -3,6 +3,7 @@
 #include <neo/cryptography/hash.h>
 #include <stdexcept>
 #include <string>
+#include <iostream>
 
 namespace neo::cryptography::ecc
 {
@@ -71,7 +72,7 @@ io::UInt160 KeyPair::GetScriptHash() const
     catch (const std::exception& e)
     {
         // Enhanced error recovery with proper script construction
-        LOG_ERROR("Primary script creation failed: {}. Attempting alternative construction method.", e.what());
+        std::cerr << "Primary script creation failed: " << e.what() << ". Attempting alternative construction method." << std::endl;
 
         try
         {
@@ -104,13 +105,12 @@ io::UInt160 KeyPair::GetScriptHash() const
             io::ByteSpan scriptSpan(verificationScript.data(), verificationScript.size());
             auto result = Hash::Hash160(scriptSpan);
 
-            LOG_DEBUG("Successfully created script hash using alternative method");
+            std::cout << "Successfully created script hash using alternative method" << std::endl;
             return result;
         }
         catch (const std::exception& innerE)
         {
-            LOG_ERROR("Alternative script construction also failed: {}. This indicates a serious cryptographic error.",
-                      innerE.what());
+            std::cerr << "Alternative script construction also failed: " << innerE.what() << ". This indicates a serious cryptographic error." << std::endl;
             throw std::runtime_error("Failed to generate script hash: " + std::string(innerE.what()));
         }
     }

@@ -21,7 +21,7 @@ add_library(neo_network OBJECT
     # p2p/task_manager.cpp # Disabled - needs major refactoring
     # p2p/transaction_router.cpp # Disabled - needs major refactoring
     p2p/channels_config.cpp
-    # p2p/payloads/extensible_payload.cpp # Disabled - has compilation errors
+    p2p/payloads/extensible_payload.cpp
     p2p/payloads/merkle_block_payload.cpp
     p2p/payloads/oracle_response.cpp
     p2p/payloads/addr_payload.cpp
@@ -33,7 +33,7 @@ add_library(neo_network OBJECT
     p2p/payloads/version_payload.cpp
     p2p/payloads/verack_payload.cpp
     p2p/payloads/transaction_payload.cpp
-    # p2p/payloads/block_payload.cpp # Disabled - missing SerializeJson
+    p2p/payloads/block_payload.cpp
     p2p/payloads/filter_load_payload.cpp
     p2p/payloads/filter_add_payload.cpp
     p2p/payloads/filter_clear_payload.cpp
@@ -66,6 +66,7 @@ target_link_libraries(neo_network
         neo_io
         neo_ledger
         neo_persistence
+        neo_logging
 )
 
 if(Boost_FOUND)

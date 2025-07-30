@@ -11,8 +11,8 @@ add_executable(test_json
 target_link_libraries(test_json
     PRIVATE
         neo_cpp
-        gtest
-        gtest_main
+        GTest::gtest
+        GTest::gtest_main
         nlohmann_json::nlohmann_json
 )
 

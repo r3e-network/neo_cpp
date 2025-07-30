@@ -25,7 +25,8 @@ TEST_F(IntegerExtensionsTest, TestGetVarSize)
     EXPECT_EQ(1, IntegerExtensions::GetVarSize(static_cast<uint32_t>(100)));
     EXPECT_EQ(1, IntegerExtensions::GetVarSize(static_cast<int64_t>(100)));
     EXPECT_EQ(1, IntegerExtensions::GetVarSize(static_cast<uint64_t>(100)));
-    EXPECT_EQ(1, IntegerExtensions::GetVarSize(static_cast<size_t>(100)));
+    // size_t is typically uint64_t on 64-bit systems
+    EXPECT_EQ(1, IntegerExtensions::GetVarSize(static_cast<uint64_t>(100)));
 }
 
 TEST_F(IntegerExtensionsTest, TestToLittleEndianBytes16)
@@ -63,10 +64,10 @@ TEST_F(IntegerExtensionsTest, TestFromLittleEndianBytes16)
     std::vector<uint8_t> bytes = {0x34, 0x12};
 
     int16_t result = IntegerExtensions::FromLittleEndianBytes16(bytes);
-    EXPECT_EQ(0x1234, result);
+    EXPECT_EQ(static_cast<int16_t>(0x1234), result);
 
     uint16_t uresult = IntegerExtensions::FromLittleEndianBytesU16(bytes);
-    EXPECT_EQ(0x1234, uresult);
+    EXPECT_EQ(static_cast<uint16_t>(0x1234), uresult);
 }
 
 TEST_F(IntegerExtensionsTest, TestFromLittleEndianBytes32)
@@ -74,10 +75,10 @@ TEST_F(IntegerExtensionsTest, TestFromLittleEndianBytes32)
     std::vector<uint8_t> bytes = {0x78, 0x56, 0x34, 0x12};
 
     int32_t result = IntegerExtensions::FromLittleEndianBytes32(bytes);
-    EXPECT_EQ(0x12345678, result);
+    EXPECT_EQ(static_cast<int32_t>(0x12345678), result);
 
     uint32_t uresult = IntegerExtensions::FromLittleEndianBytesU32(bytes);
-    EXPECT_EQ(0x12345678, uresult);
+    EXPECT_EQ(static_cast<uint32_t>(0x12345678), uresult);
 }
 
 TEST_F(IntegerExtensionsTest, TestFromLittleEndianBytes64)
@@ -85,10 +86,10 @@ TEST_F(IntegerExtensionsTest, TestFromLittleEndianBytes64)
     std::vector<uint8_t> bytes = {0xF0, 0xDE, 0xBC, 0x9A, 0x78, 0x56, 0x34, 0x12};
 
     int64_t result = IntegerExtensions::FromLittleEndianBytes64(bytes);
-    EXPECT_EQ(0x123456789ABCDEF0, result);
+    EXPECT_EQ(static_cast<int64_t>(0x123456789ABCDEF0), result);
 
     uint64_t uresult = IntegerExtensions::FromLittleEndianBytesU64(bytes);
-    EXPECT_EQ(0x123456789ABCDEF0, uresult);
+    EXPECT_EQ(static_cast<uint64_t>(0x123456789ABCDEF0), uresult);
 }
 
 TEST_F(IntegerExtensionsTest, TestFromLittleEndianBytesWithOffset)
@@ -96,7 +97,7 @@ TEST_F(IntegerExtensionsTest, TestFromLittleEndianBytesWithOffset)
     std::vector<uint8_t> bytes = {0x00, 0x00, 0x78, 0x56, 0x34, 0x12, 0x00, 0x00};
 
     int32_t result = IntegerExtensions::FromLittleEndianBytes32(bytes, 2);
-    EXPECT_EQ(0x12345678, result);
+    EXPECT_EQ(static_cast<int32_t>(0x12345678), result);
 }
 
 TEST_F(IntegerExtensionsTest, TestFromLittleEndianBytesOutOfRange)
@@ -162,8 +163,8 @@ TEST_F(IntegerExtensionsTest, TestIsLittleEndian)
     // On big-endian systems, the conversion should still work correctly
     if (is_little)
     {
-        EXPECT_EQ(0x34, bytes[0]);
-        EXPECT_EQ(0x12, bytes[1]);
+        EXPECT_EQ(static_cast<uint8_t>(0x34), bytes[0]);
+        EXPECT_EQ(static_cast<uint8_t>(0x12), bytes[1]);
     }
 }
 

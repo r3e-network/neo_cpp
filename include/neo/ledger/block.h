@@ -34,6 +34,11 @@ class Block : public io::ISerializable
      * @brief Default constructor
      */
     Block() = default;
+    
+    /**
+     * @brief Virtual destructor
+     */
+    virtual ~Block() = default;
 
     /**
      * @brief Get block version

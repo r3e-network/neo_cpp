@@ -22,6 +22,11 @@ class Header : public io::ISerializable, public io::IJsonSerializable
      * @brief Constructs an empty Header.
      */
     Header();
+    
+    /**
+     * @brief Virtual destructor.
+     */
+    virtual ~Header() = default;
 
     /**
      * @brief Gets the version of the block.

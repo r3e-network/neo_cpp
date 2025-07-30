@@ -5,7 +5,7 @@
 #include <neo/io/json_writer.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/contract.h>
-#include <neo/smartcontract/contract_manifest.h>
+#include <neo/smartcontract/manifest/contract_manifest.h>
 #include <neo/smartcontract/contract_state.h>
 #include <neo/smartcontract/nef_file.h>
 

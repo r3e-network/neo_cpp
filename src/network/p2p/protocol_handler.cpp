@@ -348,4 +348,10 @@ void ProtocolHandler::RelayInventory(payloads::InventoryType type, const io::UIn
 
 // SendReject is not in the public interface
 
+void ProtocolHandler::SendReject(const io::UInt256& peer_id, const std::string& message, const std::string& reason)
+{
+    LOG_DEBUG("SendReject: peer={} message={} reason={}", peer_id.ToString(), message, reason);
+    // Implementation stub - would send a reject message to the peer
+}
+
 }  // namespace neo::network::p2p

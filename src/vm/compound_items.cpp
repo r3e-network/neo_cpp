@@ -141,7 +141,9 @@ std::shared_ptr<StackItem> ArrayItem::DeepCopy(ReferenceCounter* refCounter, boo
         newItems.push_back(item->DeepCopy(refCounter, asImmutable));
     }
 
-    return std::make_shared<ArrayItem>(newItems, refCounter);
+    auto result = std::make_shared<ArrayItem>(newItems, refCounter);
+    result->InitializeReferences();
+    return result;
 }
 
 // StructItem implementation
@@ -191,7 +193,9 @@ std::shared_ptr<StackItem> StructItem::DeepCopy(ReferenceCounter* refCounter, bo
         newItems.push_back(item->DeepCopy(refCounter, asImmutable));
     }
 
-    return std::make_shared<StructItem>(newItems, refCounter);
+    auto result = std::make_shared<StructItem>(newItems, refCounter);
+    result->InitializeReferences();
+    return result;
 }
 
 bool StructItem::Equals(const StackItem& other) const
@@ -237,15 +241,8 @@ MapItem::MapItem(const std::map<std::shared_ptr<StackItem>, std::shared_ptr<Stac
                  ReferenceCounter* refCounter)
     : value_(value), refCounter_(refCounter)
 {
-    if (refCounter_)
-    {
-        auto self = shared_from_this();
-        for (const auto& [key, val] : value_)
-        {
-            refCounter_->AddReference(key, self);
-            refCounter_->AddReference(val, self);
-        }
-    }
+    // Note: Cannot call shared_from_this() in constructor
+    // Reference counting will be set up externally after construction
 }
 
 MapItem::~MapItem()
@@ -257,6 +254,19 @@ MapItem::~MapItem()
         {
             refCounter_->RemoveReference(key, self);
             refCounter_->RemoveReference(val, self);
+        }
+    }
+}
+
+void MapItem::InitializeReferences()
+{
+    if (refCounter_)
+    {
+        auto self = shared_from_this();
+        for (const auto& [key, val] : value_)
+        {
+            refCounter_->AddReference(key, self);
+            refCounter_->AddReference(val, self);
         }
     }
 }
@@ -379,6 +389,8 @@ std::shared_ptr<StackItem> MapItem::DeepCopy(ReferenceCounter* refCounter, bool 
         newMap.insert(std::make_pair(newKey, newVal));
     }
 
-    return std::make_shared<MapItem>(newMap, refCounter);
+    auto result = std::make_shared<MapItem>(newMap, refCounter);
+    result->InitializeReferences();
+    return result;
 }
 }  // namespace neo::vm

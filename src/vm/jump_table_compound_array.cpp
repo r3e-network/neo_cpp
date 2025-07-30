@@ -127,6 +127,7 @@ void JumpTableCompoundArray::PACK(ExecutionEngine& engine, const Instruction& in
     }
 
     auto array = std::make_shared<ArrayItem>(items, engine.GetReferenceCounter());
+    array->InitializeReferences();
     engine.Push(array);
 }
 
@@ -176,6 +177,7 @@ void JumpTableCompoundArray::NEWARRAY(ExecutionEngine& engine, const Instruction
 
     std::vector<std::shared_ptr<StackItem>> items(size, StackItem::Null());
     auto array = std::make_shared<ArrayItem>(items, engine.GetReferenceCounter());
+    array->InitializeReferences();
     engine.Push(array);
 }
 
@@ -208,6 +210,7 @@ void JumpTableCompoundArray::NEWARRAY_T(ExecutionEngine& engine, const Instructi
     }
 
     auto array = std::make_shared<ArrayItem>(items, engine.GetReferenceCounter());
+    array->InitializeReferences();
     engine.Push(array);
 }
 
@@ -216,6 +219,7 @@ void JumpTableCompoundArray::NEWSTRUCT0(ExecutionEngine& engine, const Instructi
     (void)instruction;  // Suppress unused parameter warning
     auto structItem =
         std::make_shared<StructItem>(std::vector<std::shared_ptr<StackItem>>{}, engine.GetReferenceCounter());
+    // No need to call InitializeReferences for empty struct
     engine.Push(structItem);
 }
 
@@ -228,6 +232,7 @@ void JumpTableCompoundArray::NEWSTRUCT(ExecutionEngine& engine, const Instructio
 
     std::vector<std::shared_ptr<StackItem>> items(size, StackItem::Null());
     auto structItem = std::make_shared<StructItem>(items, engine.GetReferenceCounter());
+    structItem->InitializeReferences();
     engine.Push(structItem);
 }
 
@@ -615,6 +620,7 @@ void JumpTableCompoundArray::PACKSTRUCT(ExecutionEngine& engine, const Instructi
     }
 
     auto structItem = std::make_shared<StructItem>(items, engine.GetReferenceCounter());
+    structItem->InitializeReferences();
     engine.Push(structItem);
 }
 }  // namespace neo::vm

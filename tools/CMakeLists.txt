@@ -53,10 +53,18 @@ target_link_libraries(test_rpc_server PRIVATE
     neo_core 
     neo_io 
     neo_json 
+    neo_logging
     neo_persistence 
     neo_ledger 
+    neo_blockchain
     neo_smartcontract
     neo_native_contracts
+    neo_network
+    neo_node
+    neo_cryptography
+    neo_extensions
+    neo_vm
+    neo_wallets
 )
 
 # Install

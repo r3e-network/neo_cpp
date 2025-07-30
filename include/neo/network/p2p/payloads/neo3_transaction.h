@@ -179,13 +179,13 @@ class Neo3Transaction : public IInventory, public IVerifiable, public io::ISeria
      * @brief Gets the witnesses.
      * @return The witnesses.
      */
-    const std::vector<ledger::Witness>& GetWitnesses() const;
+    const std::vector<ledger::Witness>& GetWitnesses() const override;
 
     /**
      * @brief Sets the witnesses.
      * @param witnesses The witnesses.
      */
-    void SetWitnesses(const std::vector<ledger::Witness>& witnesses);
+    void SetWitnesses(const std::vector<ledger::Witness>& witnesses) override;
 
     /**
      * @brief Gets the sender (first signer).

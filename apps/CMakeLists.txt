@@ -29,7 +29,7 @@ target_include_directories(test_bls12_381 PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Create testnet node
 add_executable(testnet_node testnet_node.cpp)
-target_link_libraries(testnet_node PRIVATE neo_logging neo_core neo_rpc neo_persistence neo_cryptography neo_io)
+target_link_libraries(testnet_node PRIVATE neo_logging neo_core neo_rpc neo_persistence neo_cryptography neo_io neo_extensions)
 target_include_directories(testnet_node PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Create complete testnet node
@@ -39,7 +39,7 @@ target_include_directories(neo_testnet_complete PRIVATE ${CMAKE_SOURCE_DIR}/incl
 
 # Create standalone testnet node (minimal dependencies)
 add_executable(neo_testnet_standalone neo_testnet_standalone.cpp)
-target_link_libraries(neo_testnet_standalone PRIVATE neo_cryptography neo_io neo_extensions neo_core neo_persistence neo_ledger neo_blockchain neo_smartcontract neo_native_contracts neo_network neo_node neo_vm)
+target_link_libraries(neo_testnet_standalone PRIVATE neo_cryptography neo_io neo_extensions neo_core neo_logging neo_persistence neo_ledger neo_blockchain neo_smartcontract neo_native_contracts neo_network neo_node neo_vm neo_wallets neo_json)
 target_include_directories(neo_testnet_standalone PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Create crypto demo (minimal dependencies)
@@ -54,7 +54,7 @@ target_include_directories(bls_demo PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Create minimal neo node (reduced dependencies)
 add_executable(minimal_neo_node minimal_neo_node_fixed.cpp)
-target_link_libraries(minimal_neo_node PRIVATE neo_cryptography neo_io neo_extensions neo_core neo_persistence neo_smartcontract neo_vm neo_native_contracts)
+target_link_libraries(minimal_neo_node PRIVATE neo_cryptography neo_io neo_extensions neo_core neo_logging neo_persistence neo_ledger neo_blockchain neo_network neo_wallets neo_smartcontract neo_vm neo_native_contracts)
 target_include_directories(minimal_neo_node PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Create simple test node application

@@ -19,11 +19,21 @@ void JumpTable::DEPTH(ExecutionEngine& engine, const Instruction&)
 
 void JumpTable::DROP(ExecutionEngine& engine, const Instruction&)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     engine.Pop();
 }
 
 void JumpTable::NIP(ExecutionEngine& engine, const Instruction&)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x = engine.Pop();
     engine.Pop();
     engine.Push(x);
@@ -31,6 +41,11 @@ void JumpTable::NIP(ExecutionEngine& engine, const Instruction&)
 
 void JumpTable::XDROP(ExecutionEngine& engine, const Instruction&)
 {
+    // Check stack size before first pop
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto n = engine.Pop()->GetInteger();
     if (n < 0)
         throw InvalidOperationException("Negative index for XDROP");
@@ -63,21 +78,41 @@ void JumpTable::CLEAR(ExecutionEngine& engine, const Instruction&)
 
 void JumpTable::DUP(ExecutionEngine& engine, const Instruction&)
 {
+    // Check stack size before peeking
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x = engine.Peek(0);
     engine.Push(x);
 }
 
 void JumpTable::OVER(ExecutionEngine& engine, const Instruction&)
 {
+    // Check stack size before peeking
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x = engine.Peek(1);
     engine.Push(x);
 }
 
 void JumpTable::PICK(ExecutionEngine& engine, const Instruction&)
 {
+    // Check stack size before first pop
+    if (engine.GetCurrentContext().GetStackSize() < 1) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto n = engine.Pop()->GetInteger();
     if (n < 0)
         throw InvalidOperationException("Negative index for PICK");
+
+    // Check if we have enough items for the peek
+    if (engine.GetCurrentContext().GetStackSize() < static_cast<int32_t>(n + 1)) {
+        throw std::runtime_error("Stack underflow");
+    }
 
     auto x = engine.Peek(static_cast<int32_t>(n));
     engine.Push(x);
@@ -85,6 +120,11 @@ void JumpTable::PICK(ExecutionEngine& engine, const Instruction&)
 
 void JumpTable::TUCK(ExecutionEngine& engine, const Instruction&)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x1 = engine.Pop();
     auto x2 = engine.Pop();
     engine.Push(x1);
@@ -94,6 +134,11 @@ void JumpTable::TUCK(ExecutionEngine& engine, const Instruction&)
 
 void JumpTable::SWAP(ExecutionEngine& engine, const Instruction&)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 2) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x1 = engine.Pop();
     auto x2 = engine.Pop();
     engine.Push(x1);
@@ -102,6 +147,11 @@ void JumpTable::SWAP(ExecutionEngine& engine, const Instruction&)
 
 void JumpTable::ROT(ExecutionEngine& engine, const Instruction&)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 3) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x1 = engine.Pop();
     auto x2 = engine.Pop();
     auto x3 = engine.Pop();
@@ -143,6 +193,11 @@ void JumpTable::ROLL(ExecutionEngine& engine, const Instruction&)
 
 void JumpTable::REVERSE3(ExecutionEngine& engine, const Instruction&)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 3) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x1 = engine.Pop();
     auto x2 = engine.Pop();
     auto x3 = engine.Pop();
@@ -153,6 +208,11 @@ void JumpTable::REVERSE3(ExecutionEngine& engine, const Instruction&)
 
 void JumpTable::REVERSE4(ExecutionEngine& engine, const Instruction&)
 {
+    // Check stack size before popping
+    if (engine.GetCurrentContext().GetStackSize() < 4) {
+        throw std::runtime_error("Stack underflow");
+    }
+    
     auto x1 = engine.Pop();
     auto x2 = engine.Pop();
     auto x3 = engine.Pop();

@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include <neo/ledger/block_header.h>
 #include <neo/ledger/header_cache.h>
+#include <thread>
+#include <chrono>
 
 namespace neo::ledger::tests
 {

@@ -147,8 +147,29 @@ class FieldElement
                 }
 
                 // Multiply and accumulate
-                __uint128_t product = static_cast<__uint128_t>(a_word) * b_word;
-                __uint128_t carry = 0;
+                // Use portable 64-bit multiplication
+                uint64_t lo, hi;
+                // Multiply two 64-bit numbers to get 128-bit result
+                lo = a_word * b_word;
+                hi = __builtin_umulh(a_word, b_word);  // High 64 bits of multiplication
+                
+                // If __builtin_umulh is not available, use manual method:
+                #ifndef __builtin_umulh
+                uint32_t a_lo = a_word & 0xFFFFFFFF;
+                uint32_t a_hi = a_word >> 32;
+                uint32_t b_lo = b_word & 0xFFFFFFFF;
+                uint32_t b_hi = b_word >> 32;
+                
+                uint64_t p0 = (uint64_t)a_lo * b_lo;
+                uint64_t p1 = (uint64_t)a_lo * b_hi;
+                uint64_t p2 = (uint64_t)a_hi * b_lo;
+                uint64_t p3 = (uint64_t)a_hi * b_hi;
+                
+                uint64_t cy = (p0 >> 32) + (p1 & 0xFFFFFFFF) + (p2 & 0xFFFFFFFF);
+                hi = p3 + (p1 >> 32) + (p2 >> 32) + (cy >> 32);
+                lo = (cy << 32) | (p0 & 0xFFFFFFFF);
+                #endif
+                uint64_t carry = 0;
 
                 // Add to productBuffer with carry propagation
                 size_t idx = i + j;
@@ -808,9 +829,13 @@ io::ByteVector FieldSquareInGT(const std::array<uint8_t, GTPoint::Size>& element
         }
 
         // Square in Fp2
-        __uint128_t square_low = static_cast<__uint128_t>(low) * low;
-        __uint128_t square_high = static_cast<__uint128_t>(high) * high;
-        __uint128_t cross = 2 * static_cast<__uint128_t>(low) * high;
+        // Use portable 64-bit multiplication for squaring
+        uint64_t square_low_lo = low * low;
+        uint64_t square_low_hi = 0;  // high part of low*low
+        uint64_t square_high_lo = high * high;
+        uint64_t square_high_hi = 0;  // high part of high*high
+        uint64_t cross_lo = 2 * (low * high);
+        uint64_t cross_hi = 0;  // high part of 2*low*high
 
         // Store result with reduction
         for (size_t j = 0; j < 8; ++j)

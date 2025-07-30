@@ -36,6 +36,11 @@ class Signer : public io::ISerializable, public io::IJsonSerializable
      * @brief Constructs an empty Signer.
      */
     Signer();
+    
+    /**
+     * @brief Virtual destructor.
+     */
+    virtual ~Signer() = default;
 
     /**
      * @brief Constructs a Signer with the specified account and scopes.

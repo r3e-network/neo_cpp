@@ -22,6 +22,11 @@ class BlockPayload : public IPayload
      * @brief Constructs an empty BlockPayload.
      */
     BlockPayload();
+    
+    /**
+     * @brief Virtual destructor.
+     */
+    virtual ~BlockPayload();
 
     /**
      * @brief Constructs a BlockPayload with the specified block.

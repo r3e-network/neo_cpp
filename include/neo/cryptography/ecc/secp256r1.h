@@ -86,6 +86,21 @@ class Secp256r1
     static std::string ToWIF(const io::ByteVector& privateKey, bool compressed = true);
 
     /**
+     * @brief Decrypt private key from WIF format
+     */
+    static io::ByteVector DecryptPrivateKey(const std::string& wif);
+
+    /**
+     * @brief Decrypt private key from NEP2 format
+     */
+    static io::ByteVector DecryptPrivateKey(const std::string& nep2, const std::string& passphrase);
+
+    /**
+     * @brief Decrypt private key from NEP2 format with custom scrypt parameters
+     */
+    static io::ByteVector DecryptPrivateKey(const std::string& nep2, const std::string& passphrase, int scryptN, int scryptR, int scryptP);
+
+    /**
      * @brief Convert private key to NEP2 format (encrypted)
      */
     static std::string ToNEP2(const io::ByteVector& privateKey, const std::string& passphrase, int scryptN = 16384,

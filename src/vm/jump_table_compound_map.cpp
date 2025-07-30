@@ -53,6 +53,7 @@ void JumpTableCompoundMap::PACKMAP(ExecutionEngine& engine, const Instruction& i
     }
 
     auto map = std::make_shared<MapItem>(items, engine.GetReferenceCounter());
+    map->InitializeReferences();
     engine.Push(map);
 }
 }  // namespace neo::vm

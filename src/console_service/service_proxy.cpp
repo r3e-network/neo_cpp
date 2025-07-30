@@ -46,12 +46,6 @@ uint32_t ServiceProxy::GetBlockchainHeight() const
         std::cerr << "Failed to get blockchain height: " << e.what() << std::endl;
         return 0;
     }
-    catch (const std::bad_alloc& e)
-    {
-        // Log error - LOG_ERROR not available in this context
-        std::cerr << "Memory allocation failed getting blockchain height: " << e.what() << std::endl;
-        return 0;
-    }
 }
 
 bool ServiceProxy::IsNodeRunning() const

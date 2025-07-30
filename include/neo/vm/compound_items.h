@@ -244,6 +244,12 @@ class MapItem : public StackItem
     ~MapItem() override;
 
     /**
+     * @brief Initializes references for the map.
+     * Must be called after construction when the shared_ptr is available.
+     */
+    void InitializeReferences();
+
+    /**
      * @brief Gets the type of the stack item.
      * @return The type of the stack item.
      */

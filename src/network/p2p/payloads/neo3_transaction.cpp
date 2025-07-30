@@ -127,6 +127,12 @@ io::UInt160 Neo3Transaction::GetSender() const
     return signers_[0].GetAccount();
 }
 
+int64_t Neo3Transaction::GetTotalFee() const
+{
+    // Use safe addition to check for overflow
+    return common::SafeMath::Add(systemFee_, networkFee_);
+}
+
 int64_t Neo3Transaction::GetFeePerByte() const
 {
     return GetNetworkFee() / GetSize();
@@ -144,6 +150,15 @@ io::UInt256 Neo3Transaction::GetHash() const
         CalculateHash();
     }
     return hash_;
+}
+
+int Neo3Transaction::GetSize() const
+{
+    if (!sizeCalculated_)
+    {
+        CalculateSize();
+    }
+    return size_;
 }
 
 std::vector<io::UInt160> Neo3Transaction::GetScriptHashesForVerifying() const
@@ -454,25 +469,6 @@ void Neo3Transaction::DeserializeJson(const io::JsonReader& reader)
     }
 }
 
-int Neo3Transaction::GetSize() const
-{
-    if (!sizeCalculated_)
-    {
-        CalculateSize();
-    }
-    return size_;
-}
-
-bool Neo3Transaction::operator==(const Neo3Transaction& other) const
-{
-    return GetHash() == other.GetHash();
-}
-
-bool Neo3Transaction::operator!=(const Neo3Transaction& other) const
-{
-    return !(*this == other);
-}
-
 void Neo3Transaction::InvalidateCache() const
 {
     hashCalculated_ = false;
@@ -632,5 +628,23 @@ std::vector<ledger::Signer> Neo3Transaction::DeserializeSigners(io::BinaryReader
     }
 
     return signers;
+}
+
+bool Neo3Transaction::operator==(const Neo3Transaction& other) const
+{
+    return version_ == other.version_ &&
+           nonce_ == other.nonce_ &&
+           systemFee_ == other.systemFee_ &&
+           networkFee_ == other.networkFee_ &&
+           validUntilBlock_ == other.validUntilBlock_ &&
+           signers_ == other.signers_ &&
+           attributes_ == other.attributes_ &&
+           script_ == other.script_ &&
+           witnesses_ == other.witnesses_;
+}
+
+bool Neo3Transaction::operator!=(const Neo3Transaction& other) const
+{
+    return !(*this == other);
 }
 }  // namespace neo::network::p2p::payloads
