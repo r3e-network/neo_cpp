@@ -54,10 +54,15 @@ jobs:
           -DCMAKE_CXX_FLAGS="-w" \
           -G Ninja
     
+    - name: List Available Targets
+      run: |
+        echo "=== Available build targets ==="
+        cmake --build build --target help | grep -E "neo_" || true
+    
     - name: Build Core Library
       run: |
         # Build core library first
-        cmake --build build --target neo_cpp --parallel 4
+        cmake --build build --target neo_cpp --parallel 4 || cmake --build build --target neo_core --parallel 4
     
     - name: Build All Tests
       run: |
@@ -82,8 +87,9 @@ jobs:
         cmake --build build --target neo_smartcontract --parallel $(nproc) || true
         cmake --build build --target neo_wallets_nep6 --parallel $(nproc) || true
         cmake --build build --target neo_rpc --parallel $(nproc) || true
-        # Build apps (excluding neo_node_production which has issues)
-        cmake --build build --target neo_node_fixed --parallel $(nproc) || true
+        # Build apps
+        cmake --build build --target neo_node_app --parallel $(nproc) || true
+        cmake --build build --target neo_cli_app --parallel $(nproc) || true
         cmake --build build --target neo_gui --parallel $(nproc) || true
         cmake --build build --target neo_cli_tool --parallel $(nproc) || true
         # Now build all tests
@@ -137,37 +143,75 @@ jobs:
         ctest --print-labels || true
         echo ""
         echo "=== Checking core functionality ==="
-        # Count successful test runs
-        SUCCESS_COUNT=0
+        # Run core tests and check results
+        PASSED_TESTS=""
+        FAILED_TESTS=""
+        
+        # Test cryptography
         if [ -f "tests/unit/cryptography/test_cryptography" ]; then
+          echo "Testing cryptography..."
           if ./tests/unit/cryptography/test_cryptography; then
-            SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
-          fi
-        fi
-        if [ -f "tests/unit/io/test_io" ]; then
-          if ./tests/unit/io/test_io; then
-            SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
-          fi
-        fi
-        if [ -f "tests/unit/ledger/test_ledger" ]; then
-          if ./tests/unit/ledger/test_ledger; then
-            SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
-          fi
-        fi
-        if [ -f "tests/unit/persistence/test_persistence" ]; then
-          if ./tests/unit/persistence/test_persistence; then
-            SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
-          fi
-        fi
-        if [ -f "tests/unit/vm/test_vm" ]; then
-          if ./tests/unit/vm/test_vm; then
-            SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
+            PASSED_TESTS="${PASSED_TESTS}cryptography "
+          else
+            FAILED_TESTS="${FAILED_TESTS}cryptography "
           fi
         fi
         
-        echo "=== Core tests passed: $SUCCESS_COUNT ==="
+        # Test IO
+        if [ -f "tests/unit/io/test_io" ]; then
+          echo "Testing IO..."
+          if ./tests/unit/io/test_io; then
+            PASSED_TESTS="${PASSED_TESTS}io "
+          else
+            FAILED_TESTS="${FAILED_TESTS}io "
+          fi
+        fi
+        
+        # Test ledger
+        if [ -f "tests/unit/ledger/test_ledger" ]; then
+          echo "Testing ledger..."
+          if ./tests/unit/ledger/test_ledger; then
+            PASSED_TESTS="${PASSED_TESTS}ledger "
+          else
+            FAILED_TESTS="${FAILED_TESTS}ledger "
+          fi
+        fi
+        
+        # Test persistence
+        if [ -f "tests/unit/persistence/test_persistence" ]; then
+          echo "Testing persistence..."
+          if ./tests/unit/persistence/test_persistence; then
+            PASSED_TESTS="${PASSED_TESTS}persistence "
+          else
+            FAILED_TESTS="${FAILED_TESTS}persistence "
+          fi
+        fi
+        
+        # Test VM
+        if [ -f "tests/unit/vm/test_vm" ]; then
+          echo "Testing VM..."
+          if ./tests/unit/vm/test_vm; then
+            PASSED_TESTS="${PASSED_TESTS}vm "
+          else
+            FAILED_TESTS="${FAILED_TESTS}vm "
+          fi
+        fi
+        
+        echo "=== Test Results ==="
+        echo "Passed: ${PASSED_TESTS:-none}"
+        echo "Failed: ${FAILED_TESTS:-none}"
+        
+        # Count passed tests
+        if [ -n "$PASSED_TESTS" ]; then
+          PASS_COUNT=$(echo "$PASSED_TESTS" | wc -w | tr -d ' ')
+        else
+          PASS_COUNT=0
+        fi
+        
+        echo "Total passed: $PASS_COUNT"
+        
         # Consider build successful if at least 3 core test suites pass
-        if [ $SUCCESS_COUNT -ge 3 ]; then
+        if [ "$PASS_COUNT" -ge "3" ]; then
           echo "✅ Core functionality verified - Build successful!"
           exit 0
         else
