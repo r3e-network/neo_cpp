@@ -115,3 +115,24 @@ jobs:
           echo "⚠️  No tests found to run"
           exit 0
         fi
+    
+    - name: Build Summary
+      if: always()
+      run: |
+        echo "======================================"
+        echo "       NEO C++ BUILD SUMMARY"
+        echo "======================================"
+        echo "Repository: ${{ github.repository }}"
+        echo "Branch: ${{ github.ref_name }}"
+        echo "Commit: ${{ github.sha }}"
+        echo "Workflow: ${{ github.workflow }}"
+        echo "Run ID: ${{ github.run_id }}"
+        echo "======================================"
+        echo "Build Configuration:"
+        echo "  - Build Type: Release"
+        echo "  - Tests: Enabled"
+        echo "  - Tools: Disabled"
+        echo "  - Apps: Disabled"
+        echo "======================================"
+        echo "Status: Check previous steps for details"
+        echo "======================================" 
