@@ -2,15 +2,17 @@
 add_subdirectory(statistics)
 
 # Create the plugins library
-add_library(neo_plugins OBJECT
+add_library(neo_plugins STATIC
     plugin_manager.cpp
     plugin_base.cpp
-    rpc_server_plugin.cpp
-    application_logs_plugin.cpp
-    state_service_plugin.cpp
-    dbft_plugin.cpp
+    # rpc_server_plugin.cpp  # Temporarily disabled due to template issues
+    # rpc_plugin.cpp  # Keep disabled due to missing dependencies
+    # application_logs_plugin.cpp  # Temporarily disabled due to template issues
+    # state_service_plugin.cpp  # Temporarily disabled due to template issues
+    # dbft_plugin.cpp  # Temporarily disabled due to template issues
     plugin_registration.cpp
-    test_plugin.cpp
+    # statistics_plugin.cpp  # Temporarily disabled due to template issues
+    # test_plugin.cpp  # Temporarily disabled due to template issues
 )
 
 # Include directories
@@ -29,4 +31,6 @@ target_link_libraries(neo_plugins
         neo_rpc
         neo_consensus
         neo_wallets
+        neo_logging
+        neo_core
 )

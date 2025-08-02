@@ -112,6 +112,15 @@ class MemoryStream : public std::iostream
     void SetPosition(size_t position);
 
     /**
+     * @brief Seeks to a specific position in the stream.
+     * @param position The position to seek to.
+     */
+    void Seek(size_t position)
+    {
+        SetPosition(position);
+    }
+
+    /**
      * @brief Gets the length of the stream.
      * @return The length of the stream.
      */

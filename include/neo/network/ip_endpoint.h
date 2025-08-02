@@ -27,6 +27,13 @@ class IPEndPoint : public io::ISerializable
     IPEndPoint(const IPAddress& address, uint16_t port);
 
     /**
+     * @brief Constructs an IPEndPoint from an address string and port.
+     * @param address The IP address string.
+     * @param port The port.
+     */
+    IPEndPoint(const std::string& address, uint16_t port);
+
+    /**
      * @brief Gets the IP address.
      * @return The IP address.
      */

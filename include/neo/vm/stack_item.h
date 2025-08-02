@@ -442,6 +442,13 @@ class StackItem : public std::enable_shared_from_this<StackItem>
     static std::shared_ptr<StackItem> CreateBoolean(bool value);
 
     /**
+     * @brief Creates a buffer stack item.
+     * @param data The buffer data.
+     * @return A shared pointer to the created stack item.
+     */
+    static std::shared_ptr<StackItem> CreateBuffer(const io::ByteVector& data);
+
+    /**
      * @brief Sets the value of the stack item.
      * @param value The new value to set.
      */

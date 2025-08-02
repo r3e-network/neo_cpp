@@ -87,7 +87,7 @@ class RecoveryMessage : public ConsensusMessage
      * @brief Gets the message data.
      * @return The message data.
      */
-    io::ByteVector GetData() const override;
+    io::ByteVector GetData() const;
 
   private:
     std::vector<std::shared_ptr<ChangeViewMessage>> changeViewMessages_;

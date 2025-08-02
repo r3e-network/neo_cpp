@@ -3,20 +3,23 @@
 #include <atomic>
 #include <filesystem>
 #include <memory>
+#include <neo/network/connection_manager.h>
+#include <neo/rpc/rate_limiter.h>
 #include <nlohmann/json.hpp>
 #include <string>
 #include <thread>
+#include <boost/asio/io_context.hpp>
 
 namespace neo
 {
 // Forward declarations
-namespace core
+namespace node
 {
 class NeoSystem;
 }
 namespace persistence
 {
-class RocksDBStore;
+class RocksDbStore;
 }
 namespace ledger
 {
@@ -57,8 +60,8 @@ class ConsoleServiceNeo;
 class CLIService
 {
   public:
-    CLIService(const std::filesystem::path& config_path, const std::string& network);
-    ~CLIService();
+    CLIService(const std::filesystem::path& config_path, const std::string& network); // Defined in cpp to handle incomplete types
+    ~CLIService(); // Defined in cpp to handle incomplete types
 
     // Configuration
     void SetRPCEnabled(bool enabled)
@@ -82,7 +85,7 @@ class CLIService
     void DisplayHelp();
 
     // Node access
-    core::NeoSystem* GetNeoSystem()
+    node::NeoSystem* GetNeoSystem()
     {
         return neo_system_.get();
     }
@@ -120,9 +123,9 @@ class CLIService
     bool rpc_enabled_ = true;
     bool consensus_enabled_ = false;
 
-    // Core components
-    std::unique_ptr<core::NeoSystem> neo_system_;
-    std::unique_ptr<persistence::RocksDBStore> store_;
+    // Core components - using shared_ptr to avoid incomplete type issues
+    std::shared_ptr<node::NeoSystem> neo_system_;
+    std::unique_ptr<persistence::RocksDbStore> store_;
     std::unique_ptr<network::P2PServer> p2p_server_;
     std::unique_ptr<rpc::RpcServer> rpc_server_;
     std::unique_ptr<consensus::DbftConsensus> consensus_;
@@ -131,9 +134,12 @@ class CLIService
     std::unique_ptr<CommandRegistry> command_registry_;
     std::unique_ptr<PluginManager> plugin_manager_;
     std::unique_ptr<ConsoleServiceNeo> console_service_;
+    
+    // Network components
+    std::unique_ptr<boost::asio::io_context> io_context_;
 
-    // Wallet
-    std::unique_ptr<wallets::NEP6Wallet> current_wallet_;
+    // Wallet - using shared_ptr to avoid incomplete type issues
+    std::shared_ptr<wallets::NEP6Wallet> current_wallet_;
 
     // State
     std::atomic<bool> running_{false};
@@ -160,3 +166,5 @@ class CLIService
     std::unique_ptr<network::ConnectionLimits> connectionLimits_;
     std::unique_ptr<network::TimeoutManager> timeoutManager_;
 };
+
+}  // namespace neo::cli

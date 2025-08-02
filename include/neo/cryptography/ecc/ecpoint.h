@@ -210,18 +210,6 @@ class ECPoint : public io::ISerializable
      */
     bool operator>=(const ECPoint& other) const;
 
-    // ISerializable implementation
-    /**
-     * @brief Serializes this ECPoint to a binary writer.
-     * @param writer The binary writer.
-     */
-    void Serialize(io::BinaryWriter& writer) const override;
-
-    /**
-     * @brief Deserializes this ECPoint from a binary reader.
-     * @param reader The binary reader.
-     */
-    void Deserialize(io::BinaryReader& reader) override;
 
     /**
      * @brief Adds another ECPoint to this ECPoint.
@@ -271,6 +259,19 @@ class ECPoint : public io::ISerializable
     {
         return Negate();
     }
+
+    // ISerializable implementation
+    /**
+     * @brief Serializes the ECPoint to a binary writer.
+     * @param writer The binary writer.
+     */
+    void Serialize(io::BinaryWriter& writer) const override;
+
+    /**
+     * @brief Deserializes the ECPoint from a binary reader.
+     * @param reader The binary reader.
+     */
+    void Deserialize(io::BinaryReader& reader) override;
 
   private:
     std::string curveName_;

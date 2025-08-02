@@ -51,7 +51,7 @@ class HeadersPayload : public IPayload
      * @brief Gets the size of the payload.
      * @return The size of the payload.
      */
-    int GetSize() const;
+    size_t GetSize() const;
 
     /**
      * @brief Creates a new instance of the HeadersPayload class.
@@ -76,13 +76,13 @@ class HeadersPayload : public IPayload
      * @brief Serializes the HeadersPayload to a JSON writer.
      * @param writer The JSON writer.
      */
-    void SerializeJson(io::JsonWriter& writer) const override;
+    void SerializeJson(io::JsonWriter& writer) const;
 
     /**
      * @brief Deserializes the HeadersPayload from a JSON reader.
      * @param reader The JSON reader.
      */
-    void DeserializeJson(const io::JsonReader& reader) override;
+    void DeserializeJson(const io::JsonReader& reader);
 
   private:
     std::vector<std::shared_ptr<ledger::BlockHeader>> headers_;

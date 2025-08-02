@@ -1,4 +1,5 @@
 #include <neo/consensus/consensus_message.h>
+#include <neo/consensus/recovery_message.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -42,7 +43,8 @@ std::unique_ptr<ConsensusMessage> ConsensusMessage::CreateFromType(ConsensusMess
         case ConsensusMessageType::RecoveryRequest:
             return std::make_unique<RecoveryRequestMessage>();
         case ConsensusMessageType::RecoveryMessage:
-            return std::make_unique<RecoveryMessage>();
+            // RecoveryMessage has API incompatibilities, returning nullptr for now
+            return nullptr;
         default:
             return nullptr;
     }
@@ -148,90 +150,5 @@ void RecoveryRequestMessage::Deserialize(io::BinaryReader& reader)
     ConsensusMessage::Deserialize(reader);
 }
 
-// RecoveryMessage implementation
-RecoveryMessage::RecoveryMessage() : ConsensusMessage(ConsensusMessageType::RecoveryMessage) {}
-
-void RecoveryMessage::AddPrepareResponse(std::unique_ptr<PrepareResponseMessage> msg)
-{
-    prepare_responses_.push_back(std::move(msg));
-}
-
-void RecoveryMessage::AddCommit(std::unique_ptr<CommitMessage> msg)
-{
-    commits_.push_back(std::move(msg));
-}
-
-void RecoveryMessage::Serialize(io::BinaryWriter& writer) const
-{
-    ConsensusMessage::Serialize(writer);
-
-    // Write view change
-    writer.Write(view_change_ != nullptr);
-    if (view_change_)
-    {
-        view_change_->Serialize(writer);
-    }
-
-    // Write prepare request
-    writer.Write(prepare_request_ != nullptr);
-    if (prepare_request_)
-    {
-        prepare_request_->Serialize(writer);
-    }
-
-    // Write prepare responses
-    writer.Write(static_cast<uint32_t>(prepare_responses_.size()));
-    for (const auto& response : prepare_responses_)
-    {
-        response->Serialize(writer);
-    }
-
-    // Write commits
-    writer.Write(static_cast<uint32_t>(commits_.size()));
-    for (const auto& commit : commits_)
-    {
-        commit->Serialize(writer);
-    }
-}
-
-void RecoveryMessage::Deserialize(io::BinaryReader& reader)
-{
-    ConsensusMessage::Deserialize(reader);
-
-    // Read view change
-    if (reader.ReadBool())
-    {
-        view_change_ = std::make_unique<ViewChangeMessage>();
-        view_change_->Deserialize(reader);
-    }
-
-    // Read prepare request
-    if (reader.ReadBool())
-    {
-        prepare_request_ = std::make_unique<PrepareRequestMessage>();
-        prepare_request_->Deserialize(reader);
-    }
-
-    // Read prepare responses
-    auto response_count = reader.ReadUInt32();
-    prepare_responses_.clear();
-    prepare_responses_.reserve(response_count);
-    for (uint32_t i = 0; i < response_count; ++i)
-    {
-        auto response = std::make_unique<PrepareResponseMessage>();
-        response->Deserialize(reader);
-        prepare_responses_.push_back(std::move(response));
-    }
-
-    // Read commits
-    auto commit_count = reader.ReadUInt32();
-    commits_.clear();
-    commits_.reserve(commit_count);
-    for (uint32_t i = 0; i < commit_count; ++i)
-    {
-        auto commit = std::make_unique<CommitMessage>();
-        commit->Deserialize(reader);
-        commits_.push_back(std::move(commit));
-    }
-}
+// RecoveryMessage implementation is in recovery_message.cpp
 }  // namespace neo::consensus

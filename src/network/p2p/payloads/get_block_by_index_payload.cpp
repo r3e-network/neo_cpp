@@ -29,7 +29,7 @@ void GetBlockByIndexPayload::SetCount(uint16_t count)
     count_ = count;
 }
 
-int GetBlockByIndexPayload::GetSize() const
+size_t GetBlockByIndexPayload::GetSize() const
 {
     return sizeof(uint32_t) + sizeof(uint16_t);
 }

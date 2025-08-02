@@ -133,5 +133,8 @@ class Message : public io::ISerializable, public io::IJsonSerializable
 
     void DecompressPayload();
     static bool ShouldCompress(MessageCommand command);
+    static std::string GetCommandString(MessageCommand command);
+    static MessageCommand GetCommandFromString(const std::string& commandStr);
+    static uint32_t CalculatePayloadChecksum(const io::ByteSpan& payload);
 };
 }  // namespace neo::network::p2p

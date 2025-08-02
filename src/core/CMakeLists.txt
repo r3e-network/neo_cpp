@@ -8,7 +8,14 @@ add_library(neo_core OBJECT
     big_decimal.cpp
     fixed8.cpp
     neo_system.cpp
+    neo_system_factory.cpp  # Factory for proper NeoSystem initialization
     logging.cpp
+    exceptions.cpp         # Comprehensive exception framework
+    validation.cpp         # Input validation and security framework
+    error_recovery.cpp     # Error recovery and fault tolerance framework
+    memory_pool.cpp        # Memory pool allocators
+    performance_config.cpp # Performance optimization settings
+    string_intern.cpp      # String interning for efficiency
     ../protocol_settings.cpp
     ../protocol_settings_json.cpp
     ../hardfork.cpp

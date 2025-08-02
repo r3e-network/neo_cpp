@@ -1,4 +1,5 @@
 #include <neo/core/logging.h>
+#include <neo/io/uint256.h>
 #include <neo/node/neo_system.h>
 
 namespace neo::node
@@ -60,6 +61,18 @@ std::shared_ptr<persistence::DataCache> NeoSystem::GetDataCache() const
 {
     LOG_WARNING("Stub: NeoSystem::GetDataCache() returning nullptr");
     return nullptr;
+}
+
+uint32_t NeoSystem::GetCurrentBlockHeight() const
+{
+    LOG_WARNING("Stub: NeoSystem::GetCurrentBlockHeight() returning 0");
+    return 0;
+}
+
+io::UInt256 NeoSystem::GetCurrentBlockHash() const
+{
+    LOG_WARNING("Stub: NeoSystem::GetCurrentBlockHash() returning zero hash");
+    return io::UInt256::Zero();
 }
 
 // Initialize methods

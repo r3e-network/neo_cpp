@@ -7,7 +7,8 @@
 #include <neo/cryptography/ecc/ec_point.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
-#include <neo/settings.h>
+#include <neo/protocol_settings.h>
+#include <neo/rpc/rpc_server.h>
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/neo_token.h>
@@ -110,37 +111,26 @@ void MainService::Start(const CommandLineOptions& options)
     if (neoSystem_)
         return;
 
-    // Load settings
-    Settings settings = Settings::Load(options.Config.empty() ? "config.json" : options.Config);
+    // Create Neo system with default settings
+    // TODO: Load settings from config file
+    std::string dbEngine = options.DbEngine.empty() ? "memory" : options.DbEngine;
+    std::string dbPath = options.DbPath.empty() ? "./data" : options.DbPath;
+    
+    // Create protocol settings (using defaults)
+    ProtocolSettings protocolSettings;
+    
+    neoSystem_ = std::make_shared<node::NeoSystem>(protocolSettings, dbEngine, dbPath);
 
-    // Override settings from command line
-    if (!options.DbEngine.empty())
-        settings.Storage.Engine = options.DbEngine;
-    if (!options.DbPath.empty())
-        settings.Storage.Path = options.DbPath;
+    // Native contracts are initialized internally by NeoSystem
 
-    // Create Neo system
-    neoSystem_ = std::make_shared<node::NeoSystem>(settings.Protocol, settings.Storage.Engine, settings.Storage.Path);
-
-    // Initialize native contracts
-    auto contractManagement = smartcontract::native::ContractManagement::GetInstance();
-    contractManagement->Initialize();
-
-    auto neoToken = smartcontract::native::NeoToken::GetInstance();
-    neoToken->Initialize();
-
-    auto gasToken = smartcontract::native::GasToken::GetInstance();
-    gasToken->Initialize();
-
-    auto policyContract = smartcontract::native::PolicyContract::GetInstance();
-    policyContract->Initialize();
-
-    // Start RPC server if enabled
-    if (settings.RPC.Enabled)
-    {
-        rpcServer_ = std::make_shared<rpc::RPCServer>(neoSystem_, settings.RPC.Port);
-        rpcServer_->Start();
-    }
+    // Start RPC server if enabled (using default config)
+    // TODO: Load RPC config from settings
+    rpc::RpcConfig rpcConfig;
+    rpcConfig.port = 10332; // Default RPC port
+    rpcConfig.max_concurrent_requests = 40;
+    
+    rpcServer_ = std::make_shared<rpc::RpcServer>(rpcConfig);
+    rpcServer_->Start();
 
     // Start Neo system
     neoSystem_->Start();

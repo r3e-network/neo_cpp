@@ -26,11 +26,11 @@ void HeadersPayload::Serialize(io::BinaryWriter& writer) const
     }
 }
 
-int HeadersPayload::GetSize() const
+size_t HeadersPayload::GetSize() const
 {
     // Calculate the size based on headers
     // This matches the C# implementation: Headers.GetVarSize()
-    int size = 0;
+    size_t size = 0;
 
     // VarInt for count
     if (headers_.size() < 0xFD)

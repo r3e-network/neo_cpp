@@ -6,6 +6,7 @@
 #include <neo/ledger/block.h>
 #include <neo/plugins/plugin_base.h>
 #include <neo/smartcontract/application_engine.h>
+#include <neo/vm/vm_state.h>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -18,6 +19,11 @@ namespace neo::plugins
 struct ApplicationLog
 {
     /**
+     * @brief Default constructor.
+     */
+    ApplicationLog() = default;
+
+    /**
      * @brief The transaction hash.
      */
     io::UInt256 TxHash;
@@ -25,22 +31,22 @@ struct ApplicationLog
     /**
      * @brief The application engine state.
      */
-    smartcontract::VMState State;
+    vm::VMState State = vm::VMState::None;
 
     /**
      * @brief The gas consumed.
      */
-    int64_t GasConsumed;
+    int64_t GasConsumed = 0;
 
     /**
-     * @brief The stack.
+     * @brief The stack (simplified).
      */
-    std::vector<std::shared_ptr<smartcontract::vm::StackItem>> Stack;
+    std::vector<std::string> Stack;
 
     /**
-     * @brief The notifications.
+     * @brief The notifications (simplified).
      */
-    std::vector<smartcontract::NotifyEventArgs> Notifications;
+    std::vector<std::string> Notifications;
 
     /**
      * @brief The exception.
@@ -100,7 +106,7 @@ class ApplicationLogsPlugin : public PluginBase
 /**
  * @brief Represents an application logs plugin factory.
  */
-class ApplicationLogsPluginFactory : public PluginFactoryBase<ApplicationLogsPlugin>
-{
-};
+// class ApplicationLogsPluginFactory : public PluginFactoryBase<ApplicationLogsPlugin>
+// {
+// };
 }  // namespace neo::plugins

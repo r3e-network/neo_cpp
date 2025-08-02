@@ -12,7 +12,7 @@
 #include <neo/logging/logger.h>
 #include <neo/network/p2p_server.h>
 #include <neo/network/peer_discovery_service.h>
-#include <neo/persistence/leveldb_store.h>
+#include <neo/persistence/rocksdb_store.h>
 #include <neo/protocol_settings.h>
 #include <neo/rpc/rpc_server.h>
 #include <neo/smartcontract/application_engine.h>

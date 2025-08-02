@@ -337,49 +337,6 @@ bool ECPoint::operator>=(const ECPoint& other) const
     return !(*this < other);
 }
 
-void ECPoint::Serialize(io::BinaryWriter& writer) const
-{
-    auto bytes = ToArray();  // Use compressed format
-    writer.Write(io::ByteSpan(bytes.Data(), bytes.Size()));
-}
-
-void ECPoint::Deserialize(io::BinaryReader& reader)
-{
-    // Read the first byte to determine the format
-    uint8_t prefix = reader.ReadUInt8();
-
-    if (prefix == 0x00)
-    {
-        // Infinity point
-        SetInfinity(true);
-        return;
-    }
-
-    if (prefix == 0x02 || prefix == 0x03)
-    {
-        // Compressed format - read 32 more bytes for X coordinate
-        auto xBytes = reader.ReadBytes(32);
-        io::ByteVector fullData(33);
-        fullData[0] = prefix;
-        std::memcpy(fullData.Data() + 1, xBytes.Data(), 32);
-
-        *this = FromBytes(fullData.AsSpan(), curveName_);
-    }
-    else if (prefix == 0x04)
-    {
-        // Uncompressed format - read 64 more bytes for X and Y coordinates
-        auto xyBytes = reader.ReadBytes(64);
-        io::ByteVector fullData(65);
-        fullData[0] = prefix;
-        std::memcpy(fullData.Data() + 1, xyBytes.Data(), 64);
-
-        *this = FromBytes(fullData.AsSpan(), curveName_);
-    }
-    else
-    {
-        throw std::runtime_error("Invalid ECPoint format");
-    }
-}
 
 ECPoint ECPoint::Add(const ECPoint& other) const
 {
@@ -623,6 +580,19 @@ ECPoint ECPoint::Negate() const
 
     return result;
 }
+
+void ECPoint::Serialize(io::BinaryWriter& writer) const
+{
+    auto data = ToArray();
+    writer.WriteVarBytes(data);
+}
+
+void ECPoint::Deserialize(io::BinaryReader& reader)
+{
+    auto data = reader.ReadVarBytes();
+    *this = FromBytes(data.AsSpan());
+}
+
 }  // namespace neo::cryptography::ecc
 
 #ifdef _MSC_VER

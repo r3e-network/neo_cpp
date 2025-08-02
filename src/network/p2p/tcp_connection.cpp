@@ -61,8 +61,19 @@ bool TcpConnection::Send(const Message& message, bool enableCompression)
     {
         std::lock_guard<std::mutex> lock(sendMutex_);
 
-        // Convert the message to a byte array
+        // Convert the message to a byte array - should now resolve to correct p2p Message ToArray
+        LOG_INFO("TcpConnection::Send - Calling ToArray on message");
         io::ByteVector data = message.ToArray(enableCompression);
+        LOG_INFO("TcpConnection::Send - ToArray returned " + std::to_string(data.Size()) + " bytes");
+        
+        // Log outgoing message bytes for debugging
+        std::string hexBytes;
+        for (size_t i = 0; i < std::min(data.Size(), size_t(32)); ++i) {
+            char hex[4];
+            snprintf(hex, sizeof(hex), "%02x ", data.Data()[i]);
+            hexBytes += hex;
+        }
+        LOG_INFO("Sending message with " + std::to_string(data.Size()) + " bytes, first 32: " + hexBytes);
 
         // Send the data
         boost::asio::async_write(
@@ -87,6 +98,7 @@ void TcpConnection::Disconnect()
 {
     if (connected_.exchange(false))
     {
+        LOG_DEBUG("TcpConnection::Disconnect called - closing socket");
         try
         {
             socket_.close();
@@ -103,9 +115,15 @@ void TcpConnection::Disconnect()
 
 void TcpConnection::StartReceiving()
 {
+    LOG_DEBUG("TcpConnection::StartReceiving called");
     if (connected_)
     {
+        LOG_DEBUG("Starting to receive messages on connected socket");
         DoReceive();
+    }
+    else
+    {
+        LOG_WARNING("Cannot start receiving - socket not connected");
     }
 }
 
@@ -120,14 +138,26 @@ void TcpConnection::HandleReceive(const std::error_code& error, std::size_t byte
 {
     if (error)
     {
+        LOG_DEBUG("HandleReceive error: " + error.message());
         Disconnect();
         return;
     }
+
+    LOG_DEBUG("Received " + std::to_string(bytesTransferred) + " bytes");
 
     if (bytesTransferred > 0)
     {
         // Update the bytes received
         UpdateBytesReceived(bytesTransferred);
+        
+        // Log raw received bytes for debugging
+        std::string hexBytes;
+        for (size_t i = 0; i < std::min(bytesTransferred, size_t(32)); ++i) {
+            char hex[4];
+            snprintf(hex, sizeof(hex), "%02x ", receiveBuffer_.Data()[i]);
+            hexBytes += hex;
+        }
+        LOG_INFO("Received bytes (first 32): " + hexBytes);
 
         // Try to deserialize a message
         Message message;
@@ -135,6 +165,7 @@ void TcpConnection::HandleReceive(const std::error_code& error, std::size_t byte
 
         if (bytesRead > 0)
         {
+            LOG_INFO("Successfully deserialized message, command: " + std::to_string(static_cast<int>(message.GetCommand())));
             // Process the message
             OnMessageReceived(message);
 
@@ -156,6 +187,10 @@ void TcpConnection::HandleReceive(const std::error_code& error, std::size_t byte
                 }
             }
         }
+        else
+        {
+            LOG_INFO("Failed to deserialize message from " + std::to_string(bytesTransferred) + " bytes");
+        }
 
         // Continue receiving
         if (connected_)
@@ -169,7 +204,12 @@ void TcpConnection::HandleSend(const std::error_code& error, std::size_t bytesTr
 {
     if (error)
     {
+        LOG_DEBUG("HandleSend error: " + error.message());
         Disconnect();
+    }
+    else
+    {
+        LOG_DEBUG("Successfully sent " + std::to_string(bytesTransferred) + " bytes");
     }
 }
 }  // namespace neo::network::p2p

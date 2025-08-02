@@ -5,7 +5,7 @@
 #include <functional>
 #include <memory>
 #include <neo/network/ip_endpoint.h>
-#include <neo/network/message.h>
+#include <neo/network/p2p/message.h>
 #include <neo/network/thread_safe_queue.h>
 #include <string>
 
@@ -65,13 +65,13 @@ class TcpConnection : public std::enable_shared_from_this<TcpConnection>
      * @brief Sends a message.
      * @param message The message.
      */
-    void Send(const Message& message);
+    void Send(const p2p::Message& message);
 
     /**
      * @brief Sets the message received callback.
      * @param callback The callback.
      */
-    void SetMessageReceivedCallback(std::function<void(const Message&)> callback);
+    void SetMessageReceivedCallback(std::function<void(const p2p::Message&)> callback);
 
     /**
      * @brief Sets the connection closed callback.
@@ -82,7 +82,7 @@ class TcpConnection : public std::enable_shared_from_this<TcpConnection>
   private:
     boost::asio::ip::tcp::socket socket_;
     std::atomic<bool> running_;
-    std::function<void(const Message&)> messageReceivedCallback_;
+    std::function<void(const p2p::Message&)> messageReceivedCallback_;
     std::function<void()> connectionClosedCallback_;
     std::mutex sendMutex_;
     uint8_t receiveBuffer_[8192];  // Buffer for reading messages

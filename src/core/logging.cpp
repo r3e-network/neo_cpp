@@ -9,7 +9,7 @@ std::mutex Logger::init_mutex_;
 
 Logger::Logger(const std::string& name, const LogConfig& config)
 {
-#ifdef HAS_SPDLOG
+#ifdef NEO_HAS_SPDLOG
     std::vector<spdlog::sink_ptr> sinks;
 
     // Console sink
@@ -78,7 +78,7 @@ std::shared_ptr<Logger> Logger::GetInstance()
 
 void Logger::SetLevel(LogLevel level)
 {
-#ifdef HAS_SPDLOG
+#ifdef NEO_HAS_SPDLOG
     logger_->set_level(static_cast<spdlog::level::level_enum>(level));
 #else
     level_ = level;
@@ -87,7 +87,7 @@ void Logger::SetLevel(LogLevel level)
 
 void Logger::Flush()
 {
-#ifdef HAS_SPDLOG
+#ifdef NEO_HAS_SPDLOG
     logger_->flush();
 #else
     std::cout.flush();

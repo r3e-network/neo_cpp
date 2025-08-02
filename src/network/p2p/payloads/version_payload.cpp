@@ -98,7 +98,7 @@ void VersionPayload::SetCapabilities(const std::vector<NodeCapability>& capabili
     capabilities_ = capabilities;
 }
 
-int VersionPayload::GetSize() const
+size_t VersionPayload::GetSize() const
 {
     // Size calculation matching C# implementation:
     int userAgentSize = static_cast<int>(userAgent_.size() + 1);  // VarString size
@@ -148,7 +148,7 @@ VersionPayload VersionPayload::Create(uint32_t network, uint32_t nonce, const st
     VersionPayload payload;
     payload.SetNetwork(network);
     // Set protocol version consistent with Neo N3 specification
-    const uint32_t PROTOCOL_VERSION = 0;  // Neo N3 protocol version
+    const uint32_t PROTOCOL_VERSION = 3600;  // Neo N3 protocol version (3.6.0)
     payload.SetVersion(PROTOCOL_VERSION);
     payload.SetTimestamp(static_cast<uint32_t>(
         std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));

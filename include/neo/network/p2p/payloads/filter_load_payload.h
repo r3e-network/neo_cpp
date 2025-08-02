@@ -101,13 +101,13 @@ class FilterLoadPayload : public IPayload
      * @brief Serializes the FilterLoadPayload to a JSON writer.
      * @param writer The JSON writer.
      */
-    void SerializeJson(io::JsonWriter& writer) const override;
+    void SerializeJson(io::JsonWriter& writer) const;
 
     /**
      * @brief Deserializes the FilterLoadPayload from a JSON reader.
      * @param reader The JSON reader.
      */
-    void DeserializeJson(const io::JsonReader& reader) override;
+    void DeserializeJson(const io::JsonReader& reader);
 
   private:
     io::ByteVector filter_;

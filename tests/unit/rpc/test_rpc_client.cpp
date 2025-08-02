@@ -128,7 +128,7 @@ TEST_F(RpcClientTest, TestGetBlockByHash)
         })";
 
     auto result = rpc_client->GetBlock("0x1234567890abcdef", true);
-    EXPECT_NO_THROW(result.ToString());
+    EXPECT_NO_THROW(result.dump());
 
     // Verify the request contains the hash parameter
     EXPECT_TRUE(mock_client_ptr->last_content.find("0x1234567890abcdef") != std::string::npos);
@@ -148,7 +148,7 @@ TEST_F(RpcClientTest, TestGetBlockByIndex)
         })";
 
     auto result = rpc_client->GetBlock(12345, true);
-    EXPECT_NO_THROW(result.ToString());
+    EXPECT_NO_THROW(result.dump());
 
     // Verify the request contains the index parameter
     EXPECT_TRUE(mock_client_ptr->last_content.find("12345") != std::string::npos);
@@ -168,7 +168,7 @@ TEST_F(RpcClientTest, TestGetTransaction)
         })";
 
     auto result = rpc_client->GetTransaction("0xabcdef1234567890", true);
-    EXPECT_NO_THROW(result.ToString());
+    EXPECT_NO_THROW(result.dump());
 
     // Verify the request contains the transaction hash
     EXPECT_TRUE(mock_client_ptr->last_content.find("0xabcdef1234567890") != std::string::npos);
@@ -206,11 +206,11 @@ TEST_F(RpcClientTest, TestInvokeFunction)
 
     std::string script_hash = "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5";
     std::string operation = "balanceOf";
-    std::vector<json::JToken> params;
-    params.push_back(json::JString("NZNos2WqwVfNUXNj5VEqvvPzAqze3RXyP3"));
+    nlohmann::json params = nlohmann::json::array();
+    params.push_back("NZNos2WqwVfNUXNj5VEqvvPzAqze3RXyP3");
 
     auto result = rpc_client->InvokeFunction(script_hash, operation, params);
-    EXPECT_NO_THROW(result.ToString());
+    EXPECT_NO_THROW(result.dump());
 
     // Verify the request contains the script hash and operation
     EXPECT_TRUE(mock_client_ptr->last_content.find(script_hash) != std::string::npos);
@@ -232,7 +232,7 @@ TEST_F(RpcClientTest, TestGetVersion)
         })";
 
     auto result = rpc_client->GetVersion();
-    EXPECT_NO_THROW(result.ToString());
+    EXPECT_NO_THROW(result.dump());
 
     // Verify the request was made correctly
     EXPECT_TRUE(mock_client_ptr->last_content.find("getversion") != std::string::npos);
@@ -246,12 +246,12 @@ TEST_F(RpcClientTest, TestRpcSend)
             "result": "test_result"
         })";
 
-    std::vector<json::JToken> params;
-    params.push_back(json::JString("param1"));
-    params.push_back(json::JNumber(42));
+    nlohmann::json params = nlohmann::json::array();
+    params.push_back("param1");
+    params.push_back(42);
 
     auto result = rpc_client->RpcSend("testmethod", params);
-    EXPECT_NO_THROW(result.ToString());
+    EXPECT_NO_THROW(result.dump());
 
     // Verify the request contains the method and parameters
     EXPECT_TRUE(mock_client_ptr->last_content.find("testmethod") != std::string::npos);

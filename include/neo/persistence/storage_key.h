@@ -243,15 +243,24 @@ class StorageKey : public io::ISerializable
      */
     int32_t GetContractId() const;
 
-    // ISerializable implementation
-    void Serialize(io::BinaryWriter& writer) const override;
-    void Deserialize(io::BinaryReader& reader) override;
-
     /**
      * @brief Deserializes from a byte array.
      * @param data The byte array.
      */
     void DeserializeFromArray(const std::span<const uint8_t>& data);
+
+    // ISerializable implementation
+    /**
+     * @brief Serializes the storage key to a binary writer.
+     * @param writer The binary writer.
+     */
+    void Serialize(io::BinaryWriter& writer) const override;
+
+    /**
+     * @brief Deserializes the storage key from a binary reader.
+     * @param reader The binary reader.
+     */
+    void Deserialize(io::BinaryReader& reader) override;
 
     // Comparison operators
     bool operator==(const StorageKey& other) const;

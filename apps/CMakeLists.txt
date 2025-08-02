@@ -2,10 +2,10 @@
 add_subdirectory(node)
 
 # Add the CLI subdirectory
-add_subdirectory(cli)
+# add_subdirectory(cli)  # Commented out due to linker errors
 
 # Add the neo-cli subdirectory
-add_subdirectory(neo-cli)
+# add_subdirectory(neo-cli)  # Commented out due to linker errors
 
 # Create production neo node application
 add_executable(neo_node_app neo_node.cpp)
@@ -13,9 +13,9 @@ target_link_libraries(neo_node_app PRIVATE neo_cpp)
 target_include_directories(neo_node_app PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Create production neo node application
-add_executable(neo_node_production neo_node_production.cpp)
-target_link_libraries(neo_node_production PRIVATE neo_cpp)
-target_include_directories(neo_node_production PRIVATE ${CMAKE_SOURCE_DIR}/include)
+# add_executable(neo_node_production neo_node_production.cpp)
+# target_link_libraries(neo_node_production PRIVATE neo_cpp)
+# target_include_directories(neo_node_production PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # # Create working neo node application  
 # add_executable(working_neo_node working_neo_node.cpp)
@@ -80,7 +80,27 @@ add_executable(neo_functional_node neo_functional_node.cpp)
 target_link_libraries(neo_functional_node PRIVATE neo_cpp)
 target_include_directories(neo_functional_node PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
+# Create safe neo node (no network features to avoid crashes)
+add_executable(neo_node_safe neo_node_safe.cpp)
+target_link_libraries(neo_node_safe PRIVATE neo_cpp)
+target_include_directories(neo_node_safe PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
+# Create production neo node
+add_executable(neo_node_production neo_node_production.cpp)
+target_link_libraries(neo_node_production PRIVATE neo_cpp)
+target_include_directories(neo_node_production PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
+# Create production ready neo node
+add_executable(neo_node_production_ready neo_node_production_ready.cpp)
+target_link_libraries(neo_node_production_ready PRIVATE neo_cpp)
+target_include_directories(neo_node_production_ready PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
+# Create full neo node
+add_executable(neo_node_full neo_node_full.cpp)
+target_link_libraries(neo_node_full PRIVATE neo_cpp)
+target_include_directories(neo_node_full PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
 # Install targets for node executables
-install(TARGETS neo_node_app neo_functional_node
+install(TARGETS neo_node_app neo_functional_node neo_node_safe neo_node_production neo_node_production_ready neo_node_full
     RUNTIME DESTINATION bin
 )

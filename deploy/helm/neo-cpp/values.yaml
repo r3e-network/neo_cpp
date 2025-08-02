@@ -1,0 +1,144 @@
+# Default values for neo-cpp
+replicaCount: 3
+
+image:
+  repository: neo-cpp
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  fsGroup: 1000
+  runAsNonRoot: true
+  runAsUser: 1000
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+
+service:
+  type: LoadBalancer
+  p2p:
+    port: 10332
+    targetPort: 10332
+  rpc:
+    port: 10334
+    targetPort: 10334
+  websocket:
+    port: 10333
+    targetPort: 10333
+
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations: {}
+  hosts:
+    - host: neo-rpc.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+  requests:
+    cpu: 2000m
+    memory: 4Gi
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+persistence:
+  enabled: true
+  storageClass: "fast-ssd"
+  accessMode: ReadWriteOnce
+  size: 500Gi
+  existingClaim: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: In
+          values:
+          - neo-cpp
+      topologyKey: kubernetes.io/hostname
+
+# Neo specific configuration
+neo:
+  network: mainnet
+  logLevel: info
+  config:
+    storage:
+      engine: rocksdb
+      writeBufferSize: 67108864
+      blockCacheSize: 134217728
+    p2p:
+      maxConnections: 100
+      minDesiredConnections: 10
+    rpc:
+      maxConcurrentConnections: 40
+      maxIteratorResultItems: 100
+      maxGasInvoke: 100000000
+
+monitoring:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    interval: 30s
+    path: /metrics
+    port: metrics
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: rpc
+  initialDelaySeconds: 60
+  periodSeconds: 30
+  timeoutSeconds: 10
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: rpc
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+# Additional environment variables
+env: []
+
+# Additional volumes
+volumes: []
+
+# Additional volume mounts
+volumeMounts: []

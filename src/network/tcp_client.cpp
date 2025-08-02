@@ -27,13 +27,13 @@ TcpClient::TcpClient() : running_(false)
             {
                 try
                 {
-                    logging::Logger::Instance().Debug("Network", "Client IO thread " + std::to_string(i) + " started");
+                    neo::logging::Logger::Instance().Debug("Network", "Client IO thread " + std::to_string(i) + " started");
                     ioContextPtr_->run();
-                    logging::Logger::Instance().Debug("Network", "Client IO thread " + std::to_string(i) + " stopped");
+                    neo::logging::Logger::Instance().Debug("Network", "Client IO thread " + std::to_string(i) + " stopped");
                 }
                 catch (const std::exception& e)
                 {
-                    logging::Logger::Instance().Error("Network", std::string("Error in client IO thread ") +
+                    neo::logging::Logger::Instance().Error("Network", std::string("Error in client IO thread ") +
                                                                      std::to_string(i) + ": " + e.what());
                 }
             });
@@ -57,7 +57,7 @@ std::shared_ptr<TcpConnection> TcpClient::Connect(const IPEndPoint& endpoint, ui
     if (!running_)
         throw std::runtime_error("TcpClient is not running");
 
-    logging::Logger::Instance().Info("Network", "Connecting to " + endpoint.ToString());
+    neo::logging::Logger::Instance().Info("Network", "Connecting to " + endpoint.ToString());
 
     // Create a connection
     auto connection = std::make_shared<TcpConnection>(*ioContextPtr_);
@@ -142,13 +142,13 @@ std::shared_ptr<TcpConnection> TcpClient::Connect(const IPEndPoint& endpoint, ui
         // Start the connection
         connection->Start();
 
-        logging::Logger::Instance().Info("Network", "Connected to " + endpoint.ToString());
+        neo::logging::Logger::Instance().Info("Network", "Connected to " + endpoint.ToString());
 
         return connection;
     }
     catch (const std::exception& e)
     {
-        logging::Logger::Instance().Error("Network",
+        neo::logging::Logger::Instance().Error("Network",
                                           std::string("Failed to connect to ") + endpoint.ToString() + ": " + e.what());
 
         // Clean up the connection
@@ -171,7 +171,7 @@ void TcpClient::ConnectAsync(const IPEndPoint& endpoint,
         return;
     }
 
-    logging::Logger::Instance().Info("Network", "Connecting asynchronously to " + endpoint.ToString());
+    neo::logging::Logger::Instance().Info("Network", "Connecting asynchronously to " + endpoint.ToString());
 
     // Create a connection
     auto connection = std::make_shared<TcpConnection>(*ioContextPtr_);
@@ -220,7 +220,7 @@ void TcpClient::ConnectAsync(const IPEndPoint& endpoint,
                     // Start the connection
                     connection->Start();
 
-                    logging::Logger::Instance().Info("Network", "Connected asynchronously to " + endpoint.ToString());
+                    neo::logging::Logger::Instance().Info("Network", "Connected asynchronously to " + endpoint.ToString());
 
                     // Invoke the callback
                     if (callback)
@@ -231,7 +231,7 @@ void TcpClient::ConnectAsync(const IPEndPoint& endpoint,
                 else
                 {
                     // Connection failed
-                    logging::Logger::Instance().Error("Network", std::string("Failed to connect asynchronously to ") +
+                    neo::logging::Logger::Instance().Error("Network", std::string("Failed to connect asynchronously to ") +
                                                                      endpoint.ToString() + ": " + error.message());
 
                     // Invoke the callback with error
@@ -244,7 +244,7 @@ void TcpClient::ConnectAsync(const IPEndPoint& endpoint,
     }
     catch (const std::exception& e)
     {
-        logging::Logger::Instance().Error("Network", std::string("Failed to start async connection to ") +
+        neo::logging::Logger::Instance().Error("Network", std::string("Failed to start async connection to ") +
                                                          endpoint.ToString() + ": " + e.what());
 
         // Invoke the callback with error
@@ -260,7 +260,7 @@ void TcpClient::Stop()
     if (!running_)
         return;
 
-    logging::Logger::Instance().Info("Network", "Stopping TcpClient");
+    neo::logging::Logger::Instance().Info("Network", "Stopping TcpClient");
     running_ = false;
 
     // Close all connections
@@ -274,7 +274,7 @@ void TcpClient::Stop()
             }
             catch (const std::exception& e)
             {
-                logging::Logger::Instance().Warning("Network", std::string("Error closing connection to ") + endpoint +
+                neo::logging::Logger::Instance().Warning("Network", std::string("Error closing connection to ") + endpoint +
                                                                    ": " + e.what());
             }
         }
@@ -304,14 +304,14 @@ void TcpClient::Stop()
                 }
                 catch (const std::exception& e)
                 {
-                    logging::Logger::Instance().Warning("Network", std::string("Error joining IO thread: ") + e.what());
+                    neo::logging::Logger::Instance().Warning("Network", std::string("Error joining IO thread: ") + e.what());
                 }
             }
         }
         ioThreads_.clear();
     }
 
-    logging::Logger::Instance().Info("Network", "TcpClient stopped");
+    neo::logging::Logger::Instance().Info("Network", "TcpClient stopped");
 }
 
 void TcpClient::HandleConnectionClosed(const std::string& endpoint)
@@ -319,6 +319,6 @@ void TcpClient::HandleConnectionClosed(const std::string& endpoint)
     std::lock_guard<std::mutex> lock(connectionsMutex_);
     connections_.erase(endpoint);
 
-    logging::Logger::Instance().Info("Network", "Connection to " + endpoint + " closed");
+    neo::logging::Logger::Instance().Info("Network", "Connection to " + endpoint + " closed");
 }
 }  // namespace neo::network

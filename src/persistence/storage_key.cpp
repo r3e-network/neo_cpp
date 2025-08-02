@@ -352,19 +352,14 @@ io::ByteVector StorageKey::ToArray() const
 
 void StorageKey::Serialize(io::BinaryWriter& writer) const
 {
-    auto data = ToArray();
-    writer.Write(data.AsSpan());
+    writer.Write(id_);
+    writer.WriteVarBytes(key_);
 }
 
 void StorageKey::Deserialize(io::BinaryReader& reader)
 {
     id_ = reader.ReadInt32();
-    auto available = reader.Available();
-    if (available > 0)
-    {
-        key_.Resize(available);
-        reader.ReadBytes(key_.Data(), available);
-    }
+    key_ = reader.ReadVarBytes();
     cacheValid_ = false;
 }
 
@@ -494,5 +489,6 @@ int StorageKey::CompareTo(const StorageKey& other) const
         return 1;
     return 0;
 }
+
 
 }  // namespace neo::persistence

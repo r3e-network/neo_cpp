@@ -29,6 +29,15 @@ class StoreFactory
     static std::shared_ptr<IStoreProvider> get_store_provider(const std::string& provider_name);
 
     /**
+     * @brief Gets a store provider by name with configuration.
+     * @param provider_name The name of the provider ("memory", "rocksdb", etc.)
+     * @param config Configuration parameters for the provider
+     * @return Shared pointer to the store provider, or nullptr if not found
+     */
+    static std::shared_ptr<IStoreProvider> get_store_provider(const std::string& provider_name, 
+                                                              const std::unordered_map<std::string, std::string>& config);
+
+    /**
      * @brief Gets the default store provider.
      * @return Shared pointer to the default store provider (memory)
      */

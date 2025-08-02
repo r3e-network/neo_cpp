@@ -58,6 +58,34 @@ UInt160 UInt160::FromString(const std::string& hex_string)
     return Parse(hex_string);
 }
 
+UInt160 UInt160::FromAddress(const std::string& address)
+{
+    // For now, treat address as a hex string
+    // In a full implementation, this would need Neo address validation and base58 decoding
+    return Parse(address);
+}
+
+std::string UInt160::ToAddress(uint8_t version) const
+{
+    // Create the script hash with version prefix
+    std::vector<uint8_t> addressBytes;
+    addressBytes.push_back(version);
+    for (size_t i = 0; i < Size; ++i)
+    {
+        addressBytes.push_back(data_[i]);
+    }
+    
+    // For now, return as hex string with version prefix
+    // In a full implementation, this would need base58 encoding with checksum
+    std::stringstream ss;
+    ss << std::hex << std::setfill('0');
+    for (uint8_t byte : addressBytes)
+    {
+        ss << std::setw(2) << static_cast<unsigned>(byte);
+    }
+    return ss.str();
+}
+
 bool UInt160::IsZero() const
 {
     for (size_t i = 0; i < Size; ++i)

@@ -65,8 +65,37 @@ void BlockPayload::SerializeJson(io::JsonWriter& writer) const
 
 void BlockPayload::DeserializeJson(const io::JsonReader& reader)
 {
-    // Block doesn't implement IJsonSerializable, so we can't deserialize it from JSON
-    // This would require implementing JSON deserialization for Block
-    throw std::runtime_error("BlockPayload JSON deserialization not implemented");
+    // Create new block and populate from JSON
+    block_ = std::make_shared<ledger::Block>();
+    
+    // Read block properties from JSON using the correct API
+    auto version = reader.ReadUInt32("version");
+    auto previousHashStr = reader.ReadString("previousHash");
+    auto merkleRootStr = reader.ReadString("merkleRoot");
+    auto timestamp = reader.ReadUInt64("timestamp");
+    auto nonce = reader.ReadUInt64("nonce");
+    auto index = reader.ReadUInt32("index");
+    auto primaryIndex = reader.ReadUInt8("primaryIndex");
+    auto nextConsensusStr = reader.ReadString("nextConsensus");
+
+    // Convert strings to appropriate types
+    io::UInt256 previousHash = io::UInt256::Parse(previousHashStr);
+    io::UInt256 merkleRoot = io::UInt256::Parse(merkleRootStr);
+    io::UInt160 nextConsensus = io::UInt160::Parse(nextConsensusStr);
+    
+    // Create timestamp from microseconds
+    auto blockTimestamp = std::chrono::system_clock::time_point{std::chrono::microseconds(timestamp)};
+
+    // Set block properties (assuming Block has appropriate setters or constructor)
+    // Note: This assumes Block class has methods to set these properties
+    // In a real implementation, you'd need to check the actual Block API
+    block_->SetVersion(version);
+    block_->SetPreviousHash(previousHash);
+    block_->SetMerkleRoot(merkleRoot);
+    block_->SetTimestamp(blockTimestamp);
+    block_->SetNonce(nonce);
+    block_->SetIndex(index);
+    block_->SetPrimaryIndex(primaryIndex);
+    block_->SetNextConsensus(nextConsensus);
 }
 }  // namespace neo::network::p2p::payloads

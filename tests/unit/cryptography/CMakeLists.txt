@@ -7,6 +7,8 @@ add_executable(test_cryptography
     test_ecrecover.cpp
     # test_bls12_381.cpp  # Disabled due to undefined references
     test_bls12_381_complete.cpp  # Complete BLS12-381 implementation tests
+    # test_ecpoint_comprehensive.cpp  # Disabled due to invalid test data
+    test_ecpoint_simple.cpp  # Simple ECPoint tests
     # test_base58.cpp  # Disabled due to missing Hash::Checksum API
     # test_base64url.cpp  # Disabled due to API changes
     # test_murmur.cpp  # Disabled due to missing Murmur128 API

@@ -1,0 +1,153 @@
+version: '3.8'
+
+services:
+  neo-mainnet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: neo-cpp:latest
+    container_name: neo-mainnet
+    restart: unless-stopped
+    ports:
+      - "10332:10332"  # P2P
+      - "10333:10333"  # WebSocket
+      - "10334:10334"  # RPC
+    volumes:
+      - neo-mainnet-data:/var/lib/neo
+      - ./config/mainnet.json:/etc/neo/config.json:ro
+      - ./config/protocol.json:/etc/neo/protocol.json:ro
+    environment:
+      - NEO_NETWORK=mainnet
+      - NEO_LOG_LEVEL=info
+      - NEO_RPC_ENABLED=true
+      - NEO_RPC_PORT=10334
+      - NEO_P2P_PORT=10332
+      - NEO_WS_PORT=10333
+    networks:
+      - neo-network
+    healthcheck:
+      test: ["CMD", "neo-cli", "rpc", "getblockcount"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  neo-testnet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: neo-cpp:latest
+    container_name: neo-testnet
+    restart: unless-stopped
+    ports:
+      - "20332:20332"  # P2P
+      - "20333:20333"  # WebSocket
+      - "20334:20334"  # RPC
+    volumes:
+      - neo-testnet-data:/var/lib/neo
+      - ./config/testnet.json:/etc/neo/config.json:ro
+      - ./config/protocol.json:/etc/neo/protocol.json:ro
+    environment:
+      - NEO_NETWORK=testnet
+      - NEO_LOG_LEVEL=debug
+      - NEO_RPC_ENABLED=true
+      - NEO_RPC_PORT=20334
+      - NEO_P2P_PORT=20332
+      - NEO_WS_PORT=20333
+    networks:
+      - neo-network
+    healthcheck:
+      test: ["CMD", "neo-cli", "rpc", "getblockcount"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  neo-privatenet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: neo-cpp:latest
+    container_name: neo-privatenet
+    restart: unless-stopped
+    ports:
+      - "30332:30332"  # P2P
+      - "30333:30333"  # WebSocket
+      - "30334:30334"  # RPC
+    volumes:
+      - neo-privatenet-data:/var/lib/neo
+      - ./config/privatenet.json:/etc/neo/config.json:ro
+      - ./config/protocol.json:/etc/neo/protocol.json:ro
+      - ./wallets:/wallets:ro
+    environment:
+      - NEO_NETWORK=privatenet
+      - NEO_LOG_LEVEL=debug
+      - NEO_RPC_ENABLED=true
+      - NEO_RPC_PORT=30334
+      - NEO_P2P_PORT=30332
+      - NEO_WS_PORT=30333
+      - NEO_CONSENSUS_ENABLED=true
+      - NEO_WALLET_PATH=/wallets/consensus.json
+    networks:
+      - neo-network
+    healthcheck:
+      test: ["CMD", "neo-cli", "rpc", "getblockcount"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: neo-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - neo-network
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: neo-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - grafana-data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    networks:
+      - neo-network
+
+volumes:
+  neo-mainnet-data:
+  neo-testnet-data:
+  neo-privatenet-data:
+  prometheus-data:
+  grafana-data:
+
+networks:
+  neo-network:
+    driver: bridge

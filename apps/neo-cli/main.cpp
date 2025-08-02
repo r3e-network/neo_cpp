@@ -26,8 +26,6 @@
 
 // CLI includes
 #include "cli_service.h"
-#include "commands/command_registry.h"
-#include "plugins/plugin_manager.h"
 #include "services/console_service_neo.h"
 
 using namespace neo;

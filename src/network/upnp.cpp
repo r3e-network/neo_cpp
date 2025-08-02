@@ -100,7 +100,7 @@ bool UPnP::Discover()
             catch (const std::exception& e)
             {
                 // Ignore errors and continue
-                logging::Logger::Instance().Warning("Network",
+                neo::logging::Logger::Instance().Warning("Network",
                                                     std::string("Error receiving UPnP response: ") + e.what());
             }
         }
@@ -109,7 +109,7 @@ bool UPnP::Discover()
     }
     catch (const std::exception& e)
     {
-        logging::Logger::Instance().Error("Network", std::string("Error discovering UPnP device: ") + e.what());
+        neo::logging::Logger::Instance().Error("Network", std::string("Error discovering UPnP device: ") + e.what());
         return false;
     }
 }
@@ -157,7 +157,7 @@ std::string UPnP::GetServiceUrl(const std::string& resp)
 
         if (host.empty() || port.empty() || target.empty())
         {
-            logging::Logger::Instance().Error("Network", "Invalid UPnP device URL: " + resp);
+            neo::logging::Logger::Instance().Error("Network", "Invalid UPnP device URL: " + resp);
             return "";
         }
 
@@ -190,7 +190,7 @@ std::string UPnP::GetServiceUrl(const std::string& resp)
         std::string device_type = pt.get<std::string>("root.device.deviceType", "");
         if (device_type.find("InternetGatewayDevice") == std::string::npos)
         {
-            logging::Logger::Instance().Warning("Network", "UPnP device is not an Internet Gateway Device");
+            neo::logging::Logger::Instance().Warning("Network", "UPnP device is not an Internet Gateway Device");
             return "";
         }
 
@@ -208,7 +208,7 @@ std::string UPnP::GetServiceUrl(const std::string& resp)
 
         if (control_url.empty())
         {
-            logging::Logger::Instance().Warning("Network", "UPnP device does not have a WANIPConnection service");
+            neo::logging::Logger::Instance().Warning("Network", "UPnP device does not have a WANIPConnection service");
             return "";
         }
 
@@ -217,7 +217,7 @@ std::string UPnP::GetServiceUrl(const std::string& resp)
     }
     catch (const std::exception& e)
     {
-        logging::Logger::Instance().Error("Network", std::string("Error getting UPnP service URL: ") + e.what());
+        neo::logging::Logger::Instance().Error("Network", std::string("Error getting UPnP service URL: ") + e.what());
         return "";
     }
 }
@@ -295,7 +295,7 @@ void UPnP::ForwardPort(uint16_t port, const std::string& protocol, const std::st
     // Send the SOAP request
     SOAPRequest(serviceUrl_, soap, "AddPortMapping");
 
-    logging::Logger::Instance().Info("Network",
+    neo::logging::Logger::Instance().Info("Network",
                                      "UPnP port forwarding created for " + protocol + " port " + std::to_string(port));
 }
 
@@ -318,7 +318,7 @@ void UPnP::DeleteForwardingRule(uint16_t port, const std::string& protocol)
     // Send the SOAP request
     SOAPRequest(serviceUrl_, soap, "DeletePortMapping");
 
-    logging::Logger::Instance().Info("Network",
+    neo::logging::Logger::Instance().Info("Network",
                                      "UPnP port forwarding deleted for " + protocol + " port " + std::to_string(port));
 }
 
@@ -435,7 +435,7 @@ std::string UPnP::SOAPRequest(const std::string& url, const std::string& soap, c
     }
     catch (const std::exception& e)
     {
-        logging::Logger::Instance().Error("Network", std::string("Error sending SOAP request: ") + e.what());
+        neo::logging::Logger::Instance().Error("Network", std::string("Error sending SOAP request: ") + e.what());
         throw;
     }
 }

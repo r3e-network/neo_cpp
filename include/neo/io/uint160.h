@@ -155,6 +155,26 @@ class UInt160 : public ISerializable
     }
 
     /**
+     * @brief Checks if this UInt160 is less than or equal to another UInt160.
+     * @param other The other UInt160.
+     * @return True if this UInt160 is less than or equal to the other UInt160, false otherwise.
+     */
+    bool operator<=(const UInt160& other) const
+    {
+        return !(*this > other);
+    }
+
+    /**
+     * @brief Checks if this UInt160 is greater than or equal to another UInt160.
+     * @param other The other UInt160.
+     * @return True if this UInt160 is greater than or equal to the other UInt160, false otherwise.
+     */
+    bool operator>=(const UInt160& other) const
+    {
+        return !(*this < other);
+    }
+
+    /**
      * @brief Parses a hexadecimal string into a UInt160.
      * @param hex The hexadecimal string.
      * @return The parsed UInt160.

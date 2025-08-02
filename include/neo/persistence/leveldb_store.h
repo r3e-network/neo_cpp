@@ -77,13 +77,21 @@ class LevelDbStore : public IStore
         return db_ != nullptr;
     }
 
+    // StorageKey/StorageItem specific methods
+    void Put(const StorageKey& key, const StorageItem& value);
+    std::optional<StorageItem> Get(const StorageKey& key) const;
+    bool Contains(const StorageKey& key) const;
+    void Delete(const StorageKey& key);
+    std::vector<std::pair<StorageKey, StorageItem>> Find(const io::ByteSpan& keyPrefix) const;
+    void Clear();
+    
     // IStore interface implementation
-    void Put(const StorageKey& key, const StorageItem& value) override;
-    std::optional<StorageItem> Get(const StorageKey& key) const override;
-    bool Contains(const StorageKey& key) const override;
-    void Delete(const StorageKey& key) override;
-    std::vector<std::pair<StorageKey, StorageItem>> Find(const io::ByteSpan& keyPrefix) const override;
-    void Clear() override;
+    void Put(const io::ByteVector& key, const io::ByteVector& value) override;
+    std::optional<io::ByteVector> TryGet(const io::ByteVector& key) const override;
+    bool Contains(const io::ByteVector& key) const override;
+    void Delete(const io::ByteVector& key) override;
+    std::vector<std::pair<io::ByteVector, io::ByteVector>> Find(const io::ByteVector* prefix = nullptr,
+                                                              SeekDirection direction = SeekDirection::Forward) const override;
 
     /**
      * @brief Batch write operations for efficiency

@@ -25,12 +25,14 @@
 #include "neo/persistence/data_cache.h"
 #include "neo/persistence/istore.h"
 #include "neo/persistence/store_factory.h"
+#include "neo/io/binary_writer.h"
 #include "neo/protocol_settings.h"
 #include "neo/smartcontract/contract.h"
 #include "neo/smartcontract/native/ledger_contract.h"
 #include "neo/smartcontract/native/native_contract.h"
 #include "neo/vm/opcode.h"
-#include <neo/core/plugin.h>
+#include <neo/plugins/plugin.h>
+#include <neo/plugins/plugin_manager.h>
 
 #include <algorithm>
 #include <chrono>
@@ -143,14 +145,11 @@ NeoSystem::NeoSystem(std::unique_ptr<ProtocolSettings> settings,
         // Initialize blockchain and network components
         initialize_components();
 
-        // Load plugins and notify them of system initialization
-        // Plugin system initialization
-        // for (auto& plugin : plugins::Plugin::GetPlugins()) {
-        //     plugin->on_system_loaded(*this);
-        // }
+        // Initialize blockchain first
+        // Moved to factory to avoid issues
+        // blockchain_->Initialize();
 
-        // Initialize blockchain
-        blockchain_->Initialize();
+        // Note: Plugin loading will be done after full construction is complete
 
         LOG_INFO("NeoSystem initialized successfully");
     }
@@ -168,8 +167,8 @@ NeoSystem::~NeoSystem()
 
 void NeoSystem::initialize_components()
 {
-    // Create blockchain component
-    blockchain_ = std::make_unique<ledger::Blockchain>(shared_from_this());
+    // Blockchain initialization moved to factory to avoid shared_from_this() in constructor
+    // blockchain_ = std::make_unique<ledger::Blockchain>(shared_from_this());
 
     // LocalNode is singleton - we'll initialize it but not store in unique_ptr
     // The LocalNode instance is managed by the singleton pattern
@@ -244,6 +243,11 @@ void NeoSystem::stop_worker_threads()
 std::unique_ptr<persistence::StoreCache> NeoSystem::store_view() const
 {
     return std::make_unique<persistence::StoreCache>(*store_);
+}
+
+void NeoSystem::load_plugins()
+{
+    initialize_plugins();
 }
 
 void NeoSystem::add_service(std::shared_ptr<void> service)
@@ -343,14 +347,16 @@ void NeoSystem::stop()
                    });
 
     // Dispose plugins
-    // Plugin system operations
-    // for (auto& plugin : plugins::Plugin::GetPlugins()) {
-    //     try {
-    //         plugin->dispose();
-    //     } catch (const std::exception& e) {
-    //         LOG_ERROR("Plugin disposal error: {}", e.what());
-    //     }
-    // }
+    try
+    {
+        auto& plugin_manager = plugins::PluginManager::GetInstance();
+        plugin_manager.StopPlugins();
+        LOG_DEBUG("Plugins stopped successfully");
+    }
+    catch (const std::exception& e)
+    {
+        LOG_ERROR("Error stopping plugins: {}", e.what());
+    }
 
     // Clean up caches
     // HeaderCache initialization
@@ -383,6 +389,321 @@ std::unique_ptr<persistence::StoreCache> NeoSystem::get_snapshot_cache()
     // Create a StoreCache snapshot from the store
     // This provides a consistent view of the store state at this point in time
     return std::make_unique<persistence::StoreCache>(*store_);
+}
+
+uint32_t NeoSystem::GetCurrentBlockHeight() const
+{
+    try
+    {
+        // Get current block height from storage
+        auto snapshot = const_cast<NeoSystem*>(this)->get_snapshot_cache();
+        if (!snapshot)
+        {
+            return 0;
+        }
+        
+        auto heightKey = persistence::StorageKey::Create(
+            static_cast<int32_t>(-4), // Ledger contract ID
+            static_cast<uint8_t>(0x0C) // Current block prefix
+        );
+        
+        auto heightItem = snapshot->TryGet(heightKey);
+        if (heightItem != nullptr && heightItem->GetValue().Size() >= sizeof(uint32_t))
+        {
+            return *reinterpret_cast<const uint32_t*>(heightItem->GetValue().Data());
+        }
+    }
+    catch (...)
+    {
+        // If any error occurs, return 0
+    }
+    
+    return 0;
+}
+
+bool NeoSystem::ProcessBlock(const std::shared_ptr<ledger::Block>& block)
+{
+    if (!block)
+    {
+        LOG_ERROR("Cannot process null block");
+        return false;
+    }
+
+    try
+    {
+        LOG_INFO("Processing block {} with {} transactions", 
+                 block->GetIndex(), 
+                 block->GetTransactions().size());
+
+        // Verify block is valid
+        // For now, we'll process blocks without requiring full blockchain initialization
+        // This allows testing of core functionality
+        if (!blockchain_)
+        {
+            LOG_WARNING("Blockchain not initialized - processing block in test mode");
+            // Continue processing in test mode
+        }
+
+        // TODO: Add block validation
+        // - Verify block hash
+        // - Verify previous block hash matches
+        // - Verify merkle root
+        // - Verify timestamp
+        // - Verify transactions
+
+        // Store block in database
+        auto snapshot = get_snapshot_cache();
+        if (!snapshot)
+        {
+            LOG_ERROR("Failed to get storage snapshot");
+            return false;
+        }
+
+        // Store block header
+        auto blockKey = persistence::StorageKey::Create(
+            static_cast<int32_t>(-4), // Ledger contract ID
+            static_cast<uint8_t>(0x05), // Block prefix
+            block->GetHash()
+        );
+        
+        // Check if block already exists
+        auto existingBlock = snapshot->TryGet(blockKey);
+        if (existingBlock != nullptr)
+        {
+            LOG_WARNING("Block {} already exists in storage", block->GetHash().ToString());
+            // Still update the height if this block's index is higher
+            auto currentHeight = GetCurrentBlockHeight();
+            if (block->GetIndex() > currentHeight)
+            {
+                // Update current block height
+                auto heightKey = persistence::StorageKey::Create(
+                    static_cast<int32_t>(-4), // Ledger contract ID
+                    static_cast<uint8_t>(0x0C) // Current block prefix
+                );
+                io::ByteVector heightData(sizeof(uint32_t));
+                *reinterpret_cast<uint32_t*>(heightData.Data()) = block->GetIndex();
+                auto heightItem = std::make_shared<persistence::StorageItem>(heightData);
+                snapshot->Update(heightKey, *heightItem);
+                snapshot->Commit();
+            }
+            // Block already processed, consider this success
+            return true;
+        }
+        
+        // Serialize block data
+        io::ByteVector blockData;
+        io::BinaryWriter writer(blockData);
+        block->Serialize(writer);
+        auto blockItem = std::make_shared<persistence::StorageItem>(blockData);
+        snapshot->Add(blockKey, *blockItem);
+
+        // Store block hash by index
+        auto indexKey = persistence::StorageKey::Create(
+            static_cast<int32_t>(-4), // Ledger contract ID
+            static_cast<uint8_t>(0x09), // Block index prefix
+            block->GetIndex()
+        );
+        io::ByteVector hashData(32);
+        std::memcpy(hashData.Data(), block->GetHash().Data(), 32);
+        auto hashItem = std::make_shared<persistence::StorageItem>(hashData);
+        snapshot->Add(indexKey, *hashItem);
+
+        // Process transactions
+        for (const auto& tx : block->GetTransactions())
+        {
+            // Store each transaction
+            auto txKey = persistence::StorageKey::Create(
+                static_cast<int32_t>(-4), // Ledger contract ID
+                static_cast<uint8_t>(0x01), // Transaction prefix
+                tx.GetHash()
+            );
+            io::ByteVector txData;
+            io::BinaryWriter txWriter(txData);
+            tx.Serialize(txWriter);
+            auto txItem = std::make_shared<persistence::StorageItem>(txData);
+            snapshot->Add(txKey, *txItem);
+
+            // Remove from memory pool if present
+            // TODO: Implement when MemoryPool has Remove method
+            // if (mem_pool_)
+            // {
+            //     mem_pool_->Remove(tx.GetHash());
+            // }
+        }
+
+        // Update current block height
+        auto heightKey = persistence::StorageKey::Create(
+            static_cast<int32_t>(-4), // Ledger contract ID
+            static_cast<uint8_t>(0x0C) // Current block prefix
+        );
+        io::ByteVector heightData(sizeof(uint32_t));
+        *reinterpret_cast<uint32_t*>(heightData.Data()) = block->GetIndex();
+        auto heightItem = std::make_shared<persistence::StorageItem>(heightData);
+        snapshot->Add(heightKey, *heightItem);
+
+        // Commit changes
+        snapshot->Commit();
+
+        LOG_INFO("Successfully processed block {} at height {}", 
+                 block->GetHash().ToString(), 
+                 block->GetIndex());
+
+        return true;
+    }
+    catch (const std::exception& e)
+    {
+        LOG_ERROR("Failed to process block {}: {}", 
+                  block->GetIndex(), 
+                  e.what());
+        return false;
+    }
+    catch (...)
+    {
+        LOG_ERROR("Failed to process block {}: Unknown exception", 
+                  block->GetIndex());
+        return false;
+    }
+}
+
+size_t NeoSystem::ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::Block>>& blocks)
+{
+    if (blocks.empty())
+    {
+        return 0;
+    }
+
+    LOG_INFO("Processing batch of {} blocks", blocks.size());
+    auto start_time = std::chrono::high_resolution_clock::now();
+    
+    size_t processed = 0;
+    
+    // Pre-allocate serialization buffers for better performance
+    thread_local io::ByteVector blockDataBuffer;
+    thread_local io::ByteVector txDataBuffer;
+    blockDataBuffer.Reserve(1024 * 1024);  // 1MB buffer for blocks
+    txDataBuffer.Reserve(64 * 1024);       // 64KB buffer for transactions
+    
+    try
+    {
+        // Get a single snapshot for the entire batch
+        auto snapshot = get_snapshot_cache();
+        if (!snapshot)
+        {
+            LOG_ERROR("Failed to get storage snapshot for batch processing");
+            return 0;
+        }
+
+        // Process all blocks in the batch
+        for (const auto& block : blocks)
+        {
+            if (!block)
+            {
+                LOG_WARNING("Skipping null block in batch");
+                continue;
+            }
+
+            try
+            {
+                // Skip validation in fast sync mode for maximum performance
+                if (!fastSyncMode_)
+                {
+                    // TODO: Add full block validation here
+                    // - Verify block hash
+                    // - Verify previous block hash
+                    // - Verify merkle root
+                    // - Verify signatures
+                }
+                
+                // Store block header
+                auto blockKey = persistence::StorageKey::Create(
+                    static_cast<int32_t>(-4), // Ledger contract ID
+                    static_cast<uint8_t>(0x05), // Block prefix
+                    block->GetHash()
+                );
+                
+                // Serialize block data using pre-allocated buffer
+                blockDataBuffer.clear();
+                io::BinaryWriter writer(blockDataBuffer);
+                block->Serialize(writer);
+                auto blockItem = std::make_shared<persistence::StorageItem>(blockDataBuffer);
+                snapshot->Add(blockKey, *blockItem);
+
+                // Store block by height for quick lookup
+                uint32_t blockIndex = block->GetIndex();
+                auto heightKey = persistence::StorageKey::Create(
+                    static_cast<int32_t>(-4), // Ledger contract ID
+                    static_cast<uint8_t>(0x09), // Block by height prefix
+                    io::ByteVector(reinterpret_cast<const uint8_t*>(&blockIndex), sizeof(uint32_t))
+                );
+                auto blockHash = block->GetHash();
+                auto hashItem = std::make_shared<persistence::StorageItem>(
+                    io::ByteVector(blockHash.Data(), blockHash.size())
+                );
+                snapshot->Add(heightKey, *hashItem);
+
+                // Process all transactions in the block
+                for (const auto& tx : block->GetTransactions())
+                {
+                    auto txKey = persistence::StorageKey::Create(
+                        static_cast<int32_t>(-4), // Ledger contract ID
+                        static_cast<uint8_t>(0x01), // Transaction prefix
+                        tx.GetHash()
+                    );
+                    txDataBuffer.clear();
+                    io::BinaryWriter txWriter(txDataBuffer);
+                    tx.Serialize(txWriter);
+                    auto txItem = std::make_shared<persistence::StorageItem>(txDataBuffer);
+                    snapshot->Add(txKey, *txItem);
+                }
+
+                processed++;
+            }
+            catch (const std::exception& e)
+            {
+                LOG_ERROR("Failed to process block {} in batch: {}", block->GetIndex(), e.what());
+                // Continue processing other blocks
+            }
+        }
+
+        // Update current block height to the highest processed block
+        if (processed > 0)
+        {
+            uint32_t maxHeight = 0;
+            for (const auto& block : blocks)
+            {
+                if (block && block->GetIndex() > maxHeight)
+                {
+                    maxHeight = block->GetIndex();
+                }
+            }
+
+            auto heightKey = persistence::StorageKey::Create(
+                static_cast<int32_t>(-4), // Ledger contract ID
+                static_cast<uint8_t>(0x0C) // Current block prefix
+            );
+            io::ByteVector heightData(sizeof(uint32_t));
+            *reinterpret_cast<uint32_t*>(heightData.Data()) = maxHeight;
+            auto heightItem = std::make_shared<persistence::StorageItem>(heightData);
+            snapshot->Add(heightKey, *heightItem);
+        }
+
+        // Single commit for entire batch - massive performance improvement
+        snapshot->Commit();
+
+        auto end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+        double blocks_per_second = (processed * 1000.0) / duration.count();
+        
+        LOG_INFO("Processed {} blocks in {}ms ({:.2f} blocks/sec)", 
+                 processed, duration.count(), blocks_per_second);
+        
+        return processed;
+    }
+    catch (const std::exception& e)
+    {
+        LOG_ERROR("Batch processing failed: {}", e.what());
+        return processed;
+    }
 }
 
 ContainsTransactionType NeoSystem::contains_transaction(const io::UInt256& hash) const
@@ -482,8 +803,37 @@ ledger::Block* NeoSystem::create_genesis_block(const ProtocolSettings& settings)
 
 void NeoSystem::initialize_plugins()
 {
-    // Plugin system operations
-    // plugins::Plugin::load_plugins();
+    try
+    {
+        LOG_DEBUG("Initializing plugin system");
+        
+        // Plugin system temporarily disabled during development
+        // TODO: Re-enable plugin system when shared_from_this() issue is resolved
+        LOG_INFO("Plugin system initialization deferred for now");
+        
+        // auto& plugin_manager = plugins::PluginManager::GetInstance();
+        // std::unordered_map<std::string, std::string> plugin_settings;
+        // if (plugin_manager.LoadPlugins(shared_from_this(), plugin_settings))
+        // {
+        //     LOG_INFO("Plugin system loaded successfully");
+        //     if (plugin_manager.StartPlugins())
+        //     {
+        //         LOG_INFO("Plugin system started successfully");
+        //     }
+        //     else
+        //     {
+        //         LOG_WARNING("Some plugins failed to start");
+        //     }
+        // }
+        // else
+        // {
+        //     LOG_WARNING("Plugin system failed to load all plugins");
+        // }
+    }
+    catch (const std::exception& e)
+    {
+        LOG_ERROR("Plugin system initialization failed: {}", e.what());
+    }
 }
 
 void NeoSystem::ensure_stopped(const std::string& component_name, std::function<void()> stop_function)

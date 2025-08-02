@@ -252,9 +252,12 @@ TEST_F(UT_malformed_messages, ErrorHandling_MemoryCorruption)
 
     // Pattern: Valid header followed by size field claiming huge payload
     // followed by insufficient data
-    maliciousData.insert(maliciousData.end(), {0x01, 0x02, 0x03, 0x04});  // Some header-like data
-    maliciousData.insert(maliciousData.end(), {0xFF, 0xFF, 0xFF, 0xFF});  // Claim huge size
-    maliciousData.insert(maliciousData.end(), {0x05, 0x06, 0x07, 0x08});  // Insufficient actual data
+    std::initializer_list<uint8_t> header = {0x01, 0x02, 0x03, 0x04};  // Some header-like data
+    maliciousData.insert(maliciousData.end(), header.begin(), header.end());
+    std::initializer_list<uint8_t> size = {0xFF, 0xFF, 0xFF, 0xFF};  // Claim huge size
+    maliciousData.insert(maliciousData.end(), size.begin(), size.end());
+    std::initializer_list<uint8_t> data = {0x05, 0x06, 0x07, 0x08};  // Insufficient actual data
+    maliciousData.insert(maliciousData.end(), data.begin(), data.end());
 
     Message message;
     EXPECT_NO_THROW({

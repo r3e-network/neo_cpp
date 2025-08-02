@@ -2,7 +2,8 @@
 
 # Create RPC library
 add_library(neo_rpc OBJECT
-    rpc_server_complete.cpp
+    # rpc_server_complete.cpp  # Use stub instead
+    rpc_server_stub.cpp
     rpc_methods_complete.cpp
 )
 

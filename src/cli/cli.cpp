@@ -7,7 +7,7 @@
 
 namespace neo::cli
 {
-CLI::CLI(std::shared_ptr<node::NeoSystem> neoSystem, std::shared_ptr<rpc::RPCServer> rpcServer)
+CLI::CLI(std::shared_ptr<node::NeoSystem> neoSystem, std::shared_ptr<rpc::RpcServer> rpcServer)
     : neoSystem_(neoSystem), rpcServer_(rpcServer), running_(false)
 {
     commandHandler_ = std::make_shared<CommandHandler>(neoSystem, rpcServer);
@@ -50,7 +50,7 @@ std::shared_ptr<node::NeoSystem> CLI::GetNeoSystem() const
     return neoSystem_;
 }
 
-std::shared_ptr<rpc::RPCServer> CLI::GetRPCServer() const
+std::shared_ptr<rpc::RpcServer> CLI::GetRPCServer() const
 {
     return rpcServer_;
 }

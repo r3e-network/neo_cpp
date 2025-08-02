@@ -4,7 +4,7 @@
 namespace neo::plugins::statistics
 {
 StatisticsPlugin::StatisticsPlugin()
-    : Plugin("Statistics"), running_(false), blockCount_(0), transactionCount_(0), peerCount_(0), memoryPoolSize_(0),
+    : running_(false), blockCount_(0), transactionCount_(0), peerCount_(0), memoryPoolSize_(0),
       interval_(10), enableRPC_(true)
 {
 }
@@ -12,6 +12,11 @@ StatisticsPlugin::StatisticsPlugin()
 StatisticsPlugin::~StatisticsPlugin()
 {
     Stop();
+}
+
+std::string StatisticsPlugin::GetName() const
+{
+    return "Statistics";
 }
 
 std::string StatisticsPlugin::GetDescription() const
@@ -29,11 +34,10 @@ std::string StatisticsPlugin::GetAuthor() const
     return "Neo C++ Team";
 }
 
-bool StatisticsPlugin::Initialize(std::shared_ptr<node::Node> node, std::shared_ptr<rpc::RPCServer> rpcServer,
+bool StatisticsPlugin::Initialize(std::shared_ptr<node::NeoSystem> neoSystem,
                                   const std::unordered_map<std::string, std::string>& settings)
 {
-    node_ = node;
-    rpcServer_ = rpcServer;
+    neoSystem_ = neoSystem;
 
     // Parse settings
     for (const auto& [key, value] : settings)
@@ -56,12 +60,11 @@ bool StatisticsPlugin::Initialize(std::shared_ptr<node::Node> node, std::shared_
         }
     }
 
-    // Register RPC methods
-    if (enableRPC_ && rpcServer_)
-    {
-        rpcServer_->RegisterMethod("getstatistics",
-                                   [this](const nlohmann::json& params) { return HandleGetStatistics(params); });
-    }
+    // RPC registration would be handled by the RPC system
+    // if (enableRPC_)
+    // {
+    //     // Register RPC methods through the RPC system
+    // }
 
     return true;
 }
@@ -89,11 +92,11 @@ bool StatisticsPlugin::Stop()
     if (statisticsThread_.joinable())
         statisticsThread_.join();
 
-    // Unregister RPC methods
-    if (enableRPC_ && rpcServer_)
-    {
-        rpcServer_->UnregisterMethod("getstatistics");
-    }
+    // RPC cleanup would be handled by the RPC system
+    // if (enableRPC_)
+    // {
+    //     // Unregister RPC methods
+    // }
 
     std::cout << "Statistics plugin stopped" << std::endl;
 
@@ -111,17 +114,21 @@ void StatisticsPlugin::CollectStatistics()
     {
         try
         {
-            // Collect block count
-            blockCount_ = node_->GetBlockchain()->GetCurrentBlockIndex() + 1;
-
-            // Collect transaction count
-            transactionCount_ = 0;  // This would require a database query
-
-            // Collect peer count
-            peerCount_ = node_->GetP2PServer()->GetConnectedPeers().size();
-
-            // Collect memory pool size
-            memoryPoolSize_ = node_->GetMemoryPool()->GetTransactions().size();
+            // Collect basic statistics from NeoSystem
+            if (neoSystem_)
+            {
+                // Block count would come from blockchain
+                blockCount_ = 0;  // Would need GetCurrentBlockHeight() method
+                
+                // Transaction count would come from database
+                transactionCount_ = 0;
+                
+                // Peer count would come from network
+                peerCount_ = 0;
+                
+                // Memory pool size would come from mempool
+                memoryPoolSize_ = 0;
+            }
 
             // Log statistics
             std::cout << "Statistics: " << std::endl;
@@ -143,10 +150,10 @@ void StatisticsPlugin::CollectStatistics()
 nlohmann::json StatisticsPlugin::HandleGetStatistics(const nlohmann::json& params)
 {
     nlohmann::json result;
-    result["blockCount"] = blockCount_;
-    result["transactionCount"] = transactionCount_;
-    result["peerCount"] = peerCount_;
-    result["memoryPoolSize"] = memoryPoolSize_;
+    result["blockCount"] = blockCount_.load();
+    result["transactionCount"] = transactionCount_.load();
+    result["peerCount"] = peerCount_.load();
+    result["memoryPoolSize"] = memoryPoolSize_.load();
     return result;
 }
 }  // namespace neo::plugins::statistics

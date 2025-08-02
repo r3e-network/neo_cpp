@@ -57,7 +57,7 @@ class GetBlockByIndexPayload : public IPayload
      * @brief Gets the size of the payload.
      * @return The size of the payload.
      */
-    int GetSize() const;
+    size_t GetSize() const;
 
     /**
      * @brief Creates a new GetBlockByIndexPayload with the specified parameters.
@@ -83,13 +83,13 @@ class GetBlockByIndexPayload : public IPayload
      * @brief Serializes the GetBlockByIndexPayload to a JSON writer.
      * @param writer The JSON writer.
      */
-    void SerializeJson(io::JsonWriter& writer) const override;
+    void SerializeJson(io::JsonWriter& writer) const;
 
     /**
      * @brief Deserializes the GetBlockByIndexPayload from a JSON reader.
      * @param reader The JSON reader.
      */
-    void DeserializeJson(const io::JsonReader& reader) override;
+    void DeserializeJson(const io::JsonReader& reader);
 
   private:
     uint32_t indexStart_;

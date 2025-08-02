@@ -80,6 +80,14 @@ class NeoToken : public NativeContract
      */
     static constexpr int VOTER_REWARD_RATIO = 80;  // 80% of gas per block
 
+    // Storage prefixes (matching C# implementation)
+    static constexpr uint8_t PREFIX_VOTERS_COUNT = 1;
+    static constexpr uint8_t PREFIX_CANDIDATE = 33;
+    static constexpr uint8_t PREFIX_COMMITTEE = 14;
+    static constexpr uint8_t PREFIX_GAS_PER_BLOCK = 29;
+    static constexpr uint8_t PREFIX_REGISTER_PRICE = 13;
+    static constexpr uint8_t PREFIX_VOTER_REWARD_PER_COMMITTEE = 23;
+
     /**
      * @brief Gets the contract ID.
      * @return The contract ID.
@@ -379,8 +387,6 @@ class NeoToken : public NativeContract
 
     // Storage prefix constants for compatibility
     static constexpr uint8_t PREFIX_BALANCE = 1;
-    static constexpr uint8_t PREFIX_CANDIDATE = 33;
-    static constexpr uint8_t PREFIX_COMMITTEE = 14;
     static constexpr uint8_t PREFIX_VOTER = 34;
 
   private:

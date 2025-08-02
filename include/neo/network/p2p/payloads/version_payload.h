@@ -140,13 +140,13 @@ class VersionPayload : public IPayload
      * @brief Serializes the VersionPayload to a JSON writer.
      * @param writer The JSON writer.
      */
-    void SerializeJson(io::JsonWriter& writer) const override;
+    void SerializeJson(io::JsonWriter& writer) const;
 
     /**
      * @brief Deserializes the VersionPayload from a JSON reader.
      * @param reader The JSON reader.
      */
-    void DeserializeJson(const io::JsonReader& reader) override;
+    void DeserializeJson(const io::JsonReader& reader);
 
     /**
      * @brief Gets the start height from the FullNode capability.
@@ -158,7 +158,7 @@ class VersionPayload : public IPayload
      * @brief Gets the size of the payload.
      * @return The size of the payload.
      */
-    int GetSize() const;
+    size_t GetSize() const;
 
   private:
     uint32_t network_;

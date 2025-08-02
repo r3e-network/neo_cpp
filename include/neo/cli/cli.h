@@ -25,7 +25,7 @@ class CLI
      * @param neoSystem The Neo system.
      * @param rpcServer The RPC server.
      */
-    CLI(std::shared_ptr<node::NeoSystem> neoSystem, std::shared_ptr<rpc::RPCServer> rpcServer);
+    CLI(std::shared_ptr<node::NeoSystem> neoSystem, std::shared_ptr<rpc::RpcServer> rpcServer);
 
     /**
      * @brief Destructor.
@@ -58,7 +58,7 @@ class CLI
      * @brief Gets the RPC server.
      * @return The RPC server.
      */
-    std::shared_ptr<rpc::RPCServer> GetRPCServer() const;
+    std::shared_ptr<rpc::RpcServer> GetRPCServer() const;
 
     /**
      * @brief Gets the wallet.
@@ -102,7 +102,7 @@ class CLI
 
   private:
     std::shared_ptr<node::NeoSystem> neoSystem_;
-    std::shared_ptr<rpc::RPCServer> rpcServer_;
+    std::shared_ptr<rpc::RpcServer> rpcServer_;
     std::shared_ptr<CommandHandler> commandHandler_;
     std::atomic<bool> running_;
     std::thread cliThread_;

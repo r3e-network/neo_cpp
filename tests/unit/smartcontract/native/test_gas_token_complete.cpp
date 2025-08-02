@@ -12,6 +12,7 @@ using namespace neo::smartcontract::native;
 using namespace neo::smartcontract;
 using namespace neo::persistence;
 using namespace neo::vm;
+using namespace neo::io;
 
 class UT_GasToken_Complete : public testing::Test
 {
@@ -23,7 +24,7 @@ class UT_GasToken_Complete : public testing::Test
     void SetUp() override
     {
         store = std::make_shared<MemoryStore>();
-        snapshot = std::make_shared<StoreCache>(store);
+        snapshot = std::make_shared<StoreCache>(*store);
         engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0);
     }
 
@@ -41,22 +42,29 @@ TEST_F(UT_GasToken_Complete, Mint)
     auto contract = std::make_shared<GasToken>();
 
     // Setup test data
-    std::vector<std::shared_ptr<StackItem>> args;
-    // TODO: Add appropriate arguments for Mint
+    UInt160 account = UInt160::Parse("0x0000000000000000000000000000000000000000");
+    int64_t amount = 1000000;
 
     // Execute method
     try
     {
-        auto result = contract->OnMint(*engine, args);
+        auto result = contract->Mint(snapshot, account, amount);
 
         // Verify result
-        EXPECT_TRUE(result != nullptr);
-        // TODO: Add specific assertions for Mint result
+        EXPECT_TRUE(result);
+        
+        // Verify that balance increased by checking BalanceOf
+        auto balance = contract->GetBalance(snapshot, account);
+        EXPECT_EQ(balance, amount); // Should equal the minted amount
+        
+        // Verify total supply increased
+        auto totalSupply = contract->GetTotalSupply(snapshot);
+        EXPECT_GE(totalSupply, amount); // Should be at least the minted amount
     }
     catch (const std::exception& e)
     {
         // Handle expected exceptions
-        // TODO: Add appropriate exception handling tests
+        FAIL() << "Unexpected exception: " << e.what();
     }
 }
 
@@ -65,9 +73,9 @@ TEST_F(UT_GasToken_Complete, Mint_InvalidArgs)
     // Test Mint with invalid arguments
     auto contract = std::make_shared<GasToken>();
 
-    // Test with wrong number of arguments
-    std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnMint(*engine, emptyArgs), std::exception);
+    // Test invalid mint with negative amount
+    UInt160 account = UInt160::Parse("0x0000000000000000000000000000000000000000");
+    EXPECT_THROW(contract->Mint(snapshot, account, -1), std::exception);
 
     // TODO: Add more invalid argument tests
 }
@@ -89,22 +97,29 @@ TEST_F(UT_GasToken_Complete, Burn)
     auto contract = std::make_shared<GasToken>();
 
     // Setup test data
-    std::vector<std::shared_ptr<StackItem>> args;
-    // TODO: Add appropriate arguments for Burn
+    UInt160 account = UInt160::Parse("0x0000000000000000000000000000000000000000");
+    int64_t amount = 1000000;
 
     // Execute method
     try
     {
-        auto result = contract->OnBurn(*engine, args);
+        auto result = contract->Burn(snapshot, account, amount);
 
         // Verify result
-        EXPECT_TRUE(result != nullptr);
-        // TODO: Add specific assertions for Burn result
+        EXPECT_FALSE(result);  // Should fail as account has no balance
+        
+        // Verify that balance remains zero (no tokens were burned)
+        auto balance = contract->GetBalance(snapshot, account);
+        EXPECT_EQ(balance, 0); // Should still be zero
+        
+        // Verify total supply unchanged
+        auto totalSupply = contract->GetTotalSupply(snapshot);
+        EXPECT_GE(totalSupply, 0); // Should be non-negative
     }
     catch (const std::exception& e)
     {
         // Handle expected exceptions
-        // TODO: Add appropriate exception handling tests
+        FAIL() << "Unexpected exception: " << e.what();
     }
 }
 
@@ -113,9 +128,9 @@ TEST_F(UT_GasToken_Complete, Burn_InvalidArgs)
     // Test Burn with invalid arguments
     auto contract = std::make_shared<GasToken>();
 
-    // Test with wrong number of arguments
-    std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnBurn(*engine, emptyArgs), std::exception);
+    // Test invalid burn with negative amount
+    UInt160 account = UInt160::Parse("0x0000000000000000000000000000000000000000");
+    EXPECT_THROW(contract->Burn(snapshot, account, -1), std::exception);
 
     // TODO: Add more invalid argument tests
 }
@@ -137,22 +152,24 @@ TEST_F(UT_GasToken_Complete, BalanceOf)
     auto contract = std::make_shared<GasToken>();
 
     // Setup test data
-    std::vector<std::shared_ptr<StackItem>> args;
-    // TODO: Add appropriate arguments for BalanceOf
+    UInt160 account = UInt160::Parse("0x0000000000000000000000000000000000000000");
 
     // Execute method
     try
     {
-        auto result = contract->OnBalanceOf(*engine, args);
+        auto balance = contract->GetBalance(snapshot, account);
 
         // Verify result
-        EXPECT_TRUE(result != nullptr);
-        // TODO: Add specific assertions for BalanceOf result
+        EXPECT_GE(balance, 0);
+        EXPECT_EQ(balance, 0); // New account should have zero balance
+        
+        // Verify the result type and value range
+        EXPECT_LE(balance, std::numeric_limits<int64_t>::max()); // Should be within valid range
     }
     catch (const std::exception& e)
     {
         // Handle expected exceptions
-        // TODO: Add appropriate exception handling tests
+        FAIL() << "Unexpected exception: " << e.what();
     }
 }
 
@@ -161,9 +178,10 @@ TEST_F(UT_GasToken_Complete, BalanceOf_InvalidArgs)
     // Test BalanceOf with invalid arguments
     auto contract = std::make_shared<GasToken>();
 
-    // Test with wrong number of arguments
-    std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnBalanceOf(*engine, emptyArgs), std::exception);
+    // GetBalance doesn't throw on non-existent account, it returns 0
+    UInt160 account = UInt160::Parse("0x1111111111111111111111111111111111111111");
+    auto balance = contract->GetBalance(snapshot, account);
+    EXPECT_EQ(balance, 0);
 
     // TODO: Add more invalid argument tests
 }
@@ -185,22 +203,28 @@ TEST_F(UT_GasToken_Complete, Transfer)
     auto contract = std::make_shared<GasToken>();
 
     // Setup test data
-    std::vector<std::shared_ptr<StackItem>> args;
-    // TODO: Add appropriate arguments for Transfer
+    UInt160 from = UInt160::Parse("0x0000000000000000000000000000000000000000");
+    UInt160 to = UInt160::Parse("0x1111111111111111111111111111111111111111");
+    int64_t amount = 1000000;
 
     // Execute method
     try
     {
-        auto result = contract->OnTransfer(*engine, args);
+        auto result = contract->Transfer(snapshot, from, to, amount);
 
         // Verify result
-        EXPECT_TRUE(result != nullptr);
-        // TODO: Add specific assertions for Transfer result
+        EXPECT_FALSE(result);  // Should fail as from account has no balance
+        
+        // Verify balances unchanged after failed transfer
+        auto fromBalance = contract->GetBalance(snapshot, from);
+        auto toBalance = contract->GetBalance(snapshot, to);
+        EXPECT_EQ(fromBalance, 0); // Should still be zero
+        EXPECT_EQ(toBalance, 0); // Should still be zero
     }
     catch (const std::exception& e)
     {
         // Handle expected exceptions
-        // TODO: Add appropriate exception handling tests
+        FAIL() << "Unexpected exception: " << e.what();
     }
 }
 
@@ -209,9 +233,10 @@ TEST_F(UT_GasToken_Complete, Transfer_InvalidArgs)
     // Test Transfer with invalid arguments
     auto contract = std::make_shared<GasToken>();
 
-    // Test with wrong number of arguments
-    std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnTransfer(*engine, emptyArgs), std::exception);
+    // Test invalid transfer with negative amount
+    UInt160 from = UInt160::Parse("0x0000000000000000000000000000000000000000");
+    UInt160 to = UInt160::Parse("0x1111111111111111111111111111111111111111");
+    EXPECT_THROW(contract->Transfer(snapshot, from, to, -1), std::exception);
 
     // TODO: Add more invalid argument tests
 }

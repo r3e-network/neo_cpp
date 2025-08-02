@@ -408,7 +408,8 @@ class ConnectionLimits
         size_t maxConnectionsPerWindow = 100;
     };
 
-    explicit ConnectionLimits(const Config& config = Config{}) : config_(config) {}
+    explicit ConnectionLimits(const Config& config) : config_(config) {}
+    explicit ConnectionLimits() : config_(Config{}) {}
 
     /**
      * @brief Check if a new connection is allowed

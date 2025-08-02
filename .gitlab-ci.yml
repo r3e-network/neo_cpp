@@ -1,0 +1,211 @@
+stages:
+  - build
+  - test
+  - analyze
+  - package
+  - deploy
+
+variables:
+  CMAKE_BUILD_TYPE: "Release"
+  GIT_SUBMODULE_STRATEGY: recursive
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+
+.build_template: &build_definition
+  stage: build
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq build-essential cmake ninja-build libboost-all-dev libssl-dev
+  script:
+    - mkdir -p build
+    - cd build
+    - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -DNEO_BUILD_TESTS=ON
+    - ninja
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 hour
+
+build:gcc:
+  <<: *build_definition
+  image: gcc:11
+  variables:
+    CC: gcc
+    CXX: g++
+
+build:clang:
+  <<: *build_definition
+  image: silkeh/clang:13
+  variables:
+    CC: clang
+    CXX: clang++
+
+test:unit:
+  stage: test
+  needs: ["build:gcc"]
+  image: gcc:11
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq libboost-all-dev libssl-dev
+  script:
+    - cd build
+    - ctest --output-on-failure --verbose
+  artifacts:
+    reports:
+      junit: build/test-results/*.xml
+    when: always
+
+test:integration:
+  stage: test
+  needs: ["build:gcc"]
+  image: gcc:11
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq libboost-all-dev libssl-dev
+  script:
+    - cd build
+    - ./tests/integration/run_integration_tests.sh
+  allow_failure: true
+
+coverage:
+  stage: test
+  needs: ["build:gcc"]
+  image: gcc:11
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq libboost-all-dev libssl-dev lcov
+  script:
+    - cd build
+    - cmake .. -DNEO_ENABLE_COVERAGE=ON
+    - make
+    - ctest
+    - lcov --capture --directory . --output-file coverage.info
+    - lcov --remove coverage.info '/usr/*' '*/test/*' --output-file coverage.info
+    - lcov --list coverage.info
+  coverage: '/\s*lines\.+:\s*([0-9.]+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: build/coverage.xml
+
+static_analysis:
+  stage: analyze
+  image: ubuntu:22.04
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq clang-tidy cppcheck python3-pip
+    - pip3 install cpplint
+  script:
+    - find src include -name '*.cpp' -o -name '*.h' | xargs clang-tidy
+    - cppcheck --enable=all --suppress=missingIncludeSystem --xml --xml-version=2 src include 2> cppcheck.xml
+    - cpplint --recursive --extensions=cpp,h src include
+  artifacts:
+    reports:
+      codequality: cppcheck.xml
+
+security_scan:
+  stage: analyze
+  image: 
+    name: aquasec/trivy:latest
+    entrypoint: [""]
+  script:
+    - trivy fs --no-progress --format json --output trivy-report.json .
+  artifacts:
+    reports:
+      container_scanning: trivy-report.json
+
+license_scan:
+  stage: analyze
+  image: golang:latest
+  before_script:
+    - go install github.com/google/go-licenses@latest
+  script:
+    - go-licenses check ./...
+  allow_failure: true
+
+build_docker:
+  stage: package
+  needs: ["test:unit"]
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
+  only:
+    - main
+    - develop
+    - tags
+
+build_packages:
+  stage: package
+  needs: ["test:unit"]
+  image: ubuntu:22.04
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq build-essential cmake ninja-build libboost-all-dev libssl-dev
+  script:
+    - mkdir -p build-package
+    - cd build-package
+    - cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DNEO_BUILD_TESTS=OFF
+    - ninja
+    - cpack -G DEB
+    - cpack -G RPM
+    - cpack -G TGZ
+  artifacts:
+    paths:
+      - build-package/*.deb
+      - build-package/*.rpm
+      - build-package/*.tar.gz
+    expire_in: 1 week
+  only:
+    - tags
+
+deploy_staging:
+  stage: deploy
+  needs: ["build_docker"]
+  image: 
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
+  script:
+    - kubectl config use-context $K8S_CONTEXT_STAGING
+    - kubectl set image deployment/neo-node neo-node=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA -n neo-staging
+    - kubectl rollout status deployment/neo-node -n neo-staging
+  environment:
+    name: staging
+    url: https://staging.neo.example.com
+  only:
+    - develop
+
+deploy_production:
+  stage: deploy
+  needs: ["build_docker", "build_packages"]
+  image: 
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
+  script:
+    - kubectl config use-context $K8S_CONTEXT_PRODUCTION
+    - kubectl set image deployment/neo-node neo-node=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA -n neo-production
+    - kubectl rollout status deployment/neo-node -n neo-production
+  environment:
+    name: production
+    url: https://neo.example.com
+  when: manual
+  only:
+    - tags
+
+pages:
+  stage: deploy
+  needs: ["coverage"]
+  script:
+    - mkdir -p public
+    - mv build/docs/html/* public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - main

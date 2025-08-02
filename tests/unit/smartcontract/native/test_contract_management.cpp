@@ -133,10 +133,10 @@ TEST_F(ContractManagementTest, DISABLED_TestDeployAndGetContract)
 
     // Complete Call method implementation - now fully implemented
     // Deploy the contract
-    std::vector<std::shared_ptr<vm::StackItem>> args;
-    args.push_back(vm::StackItem::CreateByteArray(script.AsSpan()));
+    std::vector<std::shared_ptr<neo::vm::StackItem>> args;
+    args.push_back(neo::vm::StackItem::CreateByteString(std::vector<uint8_t>(script.begin(), script.end())));
     args.push_back(
-        vm::StackItem::CreateByteArray(ByteSpan(reinterpret_cast<const uint8_t*>(manifest.data()), manifest.size())));
+        neo::vm::StackItem::CreateByteString(std::vector<uint8_t>(manifest.begin(), manifest.end())));
     auto deployResult = contractManagement->Call(*engine, "deploy", args);
 
     // When Call is implemented, check the result
@@ -229,10 +229,4 @@ TEST_F(ContractManagementTest, DISABLED_TestPostPersist)
 {
     // PostPersist doesn't exist in ContractManagement
     // This test is disabled
-}
-
-int main(int argc, char** argv)
-{
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 }

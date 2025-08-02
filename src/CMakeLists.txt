@@ -15,11 +15,11 @@ add_subdirectory(blockchain)
 add_subdirectory(vm)
 add_subdirectory(smartcontract)
 add_subdirectory(wallets)
-# add_subdirectory(plugins) # Temporarily disabled
+add_subdirectory(plugins) # Re-enabled after fixing compilation errors
 add_subdirectory(consensus)
 add_subdirectory(rpc) # Re-enabled with JSON API fixes
 add_subdirectory(node) # Add node directory for neo::node::NeoSystem
-# add_subdirectory(cli) # Temporarily disabled due to compilation issues
+# add_subdirectory(cli) # Disabled due to API mismatches
 
 target_include_directories(neo_core PUBLIC
     $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
@@ -48,12 +48,14 @@ add_library(neo_cpp
     $<TARGET_OBJECTS:neo_smartcontract>
     $<TARGET_OBJECTS:neo_native_contracts>
     $<TARGET_OBJECTS:neo_wallets>
-    # $<TARGET_OBJECTS:neo_wallets_nep6> # Disabled - has too many dependencies
-    # $<TARGET_OBJECTS:neo_plugins> # Temporarily disabled
+    $<TARGET_OBJECTS:neo_wallets_nep6> # Re-enabled - required by tests
+    $<TARGET_OBJECTS:neo_plugins> # Re-enabled after fixing compilation errors
+    $<TARGET_OBJECTS:neo_logging> # Ensure logging is included
+    # $<TARGET_OBJECTS:neo_statistics_plugin> # Disabled due to compilation errors
     $<TARGET_OBJECTS:neo_consensus>
     $<TARGET_OBJECTS:neo_node> # Add node library for neo::node::NeoSystem
     $<TARGET_OBJECTS:neo_rpc> # Re-enabled with JSON API fixes
-    # $<TARGET_OBJECTS:neo_cli> # Temporarily disabled due to compilation issues
+    # $<TARGET_OBJECTS:neo_cli> # Disabled due to API mismatches
 )
 
 # Link dependencies

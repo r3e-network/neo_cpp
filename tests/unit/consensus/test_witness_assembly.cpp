@@ -3,24 +3,32 @@
 #include <neo/consensus/dbft_consensus.h>
 #include <neo/io/byte_vector.h>
 #include <neo/ledger/witness.h>
-#include <neo/vm/op_code.h>
+#include <neo/vm/opcode.h>
 #include <neo/vm/script_builder.h>
+#include <neo/cryptography/ecc/ecpoint.h>
+#include <neo/wallets/key_pair.h>
+#include <neo/io/memory_stream.h>
+#include <neo/io/binary_writer.h>
 
 using namespace neo::consensus;
 using namespace neo::ledger;
 using namespace neo::vm;
+using namespace neo::cryptography::ecc;
+using namespace neo::wallets;
 using namespace neo::io;
 
 class WitnessAssemblyTest : public ::testing::Test
 {
   protected:
-    std::shared_ptr<ledger::MemoryPool> mempool_;
-    std::shared_ptr<ledger::Blockchain> blockchain_;
+    std::shared_ptr<neo::ledger::MemoryPool> mempool_;
+    std::shared_ptr<neo::ledger::Blockchain> blockchain_;
 
     void SetUp() override
     {
-        mempool_ = std::make_shared<ledger::MemoryPool>();
-        blockchain_ = std::make_shared<ledger::Blockchain>();
+        mempool_ = std::make_shared<neo::ledger::MemoryPool>();
+        // Blockchain requires NeoSystem parameter - use nullptr for test
+        // blockchain_ = std::make_shared<ledger::Blockchain>(nullptr);
+        blockchain_ = nullptr;  // Disable blockchain for test
     }
 };
 
@@ -28,10 +36,12 @@ class WitnessAssemblyTest : public ::testing::Test
 TEST_F(WitnessAssemblyTest, TestCreateConsensusInvocationScript)
 {
     // Create a consensus instance with 7 validators
-    std::vector<io::UInt160> validators;
+    std::vector<neo::io::UInt160> validators;
     for (int i = 0; i < 7; ++i)
     {
-        validators.push_back(io::UInt160::Random());
+        neo::io::UInt160 validator;
+        std::memset(validator.Data(), i + 1, neo::io::UInt160::Size);
+        validators.push_back(validator);
     }
 
     ConsensusConfig config;
@@ -39,20 +49,25 @@ TEST_F(WitnessAssemblyTest, TestCreateConsensusInvocationScript)
 
     // Simulate commit messages from validators
     std::map<uint32_t, ByteVector> signatures;
-    signatures[0] = ByteVector(64, 0x01);  // Validator 0 signature
-    signatures[2] = ByteVector(64, 0x02);  // Validator 2 signature
-    signatures[4] = ByteVector(64, 0x04);  // Validator 4 signature
-    signatures[5] = ByteVector(64, 0x05);  // Validator 5 signature
+    signatures[0] = ByteVector(64);  // Validator 0 signature
+    signatures[2] = ByteVector(64);  // Validator 2 signature
+    signatures[4] = ByteVector(64);  // Validator 4 signature
+    signatures[5] = ByteVector(64);  // Validator 5 signature
+    // Fill with test data
+    std::fill(signatures[0].begin(), signatures[0].end(), 0x01);
+    std::fill(signatures[2].begin(), signatures[2].end(), 0x02);
+    std::fill(signatures[4].begin(), signatures[4].end(), 0x04);
+    std::fill(signatures[5].begin(), signatures[5].end(), 0x05);
     // Validators 1, 3, 6 didn't sign
 
     // The invocation script should push signatures in order, with NULL for missing ones
     ScriptBuilder expectedBuilder;
-    expectedBuilder.EmitPush(signatures[0]);  // Validator 0
+    expectedBuilder.EmitPush(neo::io::ByteSpan(signatures[0].Data(), signatures[0].Size()));  // Validator 0
     expectedBuilder.Emit(OpCode::PUSHNULL);   // Validator 1 (missing)
-    expectedBuilder.EmitPush(signatures[2]);  // Validator 2
+    expectedBuilder.EmitPush(neo::io::ByteSpan(signatures[2].Data(), signatures[2].Size()));  // Validator 2
     expectedBuilder.Emit(OpCode::PUSHNULL);   // Validator 3 (missing)
-    expectedBuilder.EmitPush(signatures[4]);  // Validator 4
-    expectedBuilder.EmitPush(signatures[5]);  // Validator 5
+    expectedBuilder.EmitPush(neo::io::ByteSpan(signatures[4].Data(), signatures[4].Size()));  // Validator 4
+    expectedBuilder.EmitPush(neo::io::ByteSpan(signatures[5].Data(), signatures[5].Size()));  // Validator 5
     expectedBuilder.Emit(OpCode::PUSHNULL);   // Validator 6 (missing)
 
     // Note: The actual test would need to set up commit messages in the consensus
@@ -63,14 +78,14 @@ TEST_F(WitnessAssemblyTest, TestCreateConsensusInvocationScript)
 TEST_F(WitnessAssemblyTest, TestCreateConsensusVerificationScript)
 {
     // Create validators
-    std::vector<io::UInt160> validators;
+    std::vector<neo::io::UInt160> validators;
     std::vector<ECPoint> validatorKeys;
 
     for (int i = 0; i < 7; ++i)
     {
         auto keyPair = KeyPair::Generate();
-        validators.push_back(keyPair.GetScriptHash());
-        validatorKeys.push_back(keyPair.GetPublicKey());
+        validators.push_back(keyPair->GetScriptHash());
+        validatorKeys.push_back(keyPair->GetPublicKey());
     }
 
     // M = 2f + 1 = 2*2 + 1 = 5 (for 7 validators, f = 2)
@@ -78,16 +93,22 @@ TEST_F(WitnessAssemblyTest, TestCreateConsensusVerificationScript)
 
     // Expected verification script structure
     ScriptBuilder expectedBuilder;
-    expectedBuilder.EmitPush(m);  // Push M
+    expectedBuilder.EmitPush(static_cast<int64_t>(m));  // Push M
 
     // Push all validator public keys
     for (const auto& key : validatorKeys)
     {
-        expectedBuilder.EmitPush(key.GetEncoded());
+        // Use Serialize method to get byte representation
+        neo::io::MemoryStream stream;
+        neo::io::BinaryWriter writer(stream);
+        key.Serialize(writer);
+        const auto& bytes = stream.GetData();
+        expectedBuilder.EmitPush(neo::io::ByteSpan(bytes.data(), bytes.size()));
     }
 
-    expectedBuilder.EmitPush(validatorKeys.size());  // Push N
-    expectedBuilder.Emit(OpCode::CHECKMULTISIG);
+    expectedBuilder.EmitPush(static_cast<int64_t>(validatorKeys.size()));  // Push N
+    // CHECKMULTISIG would be a SYSCALL in Neo VM
+    expectedBuilder.EmitSysCall(0x41766428);  // Neo.Crypto.CheckMultisig syscall
 
     // The verification script should be a standard M-of-N multisig script
 }
@@ -120,7 +141,8 @@ TEST_F(WitnessAssemblyTest, TestWitnessWithDifferentSignatureCombinations)
         {
             if (testCase.hasSignature[i])
             {
-                signatures[i] = ByteVector(64, i + 1);  // Unique signature per validator
+                signatures[i] = ByteVector(64);  // Unique signature per validator
+                std::fill(signatures[i].begin(), signatures[i].end(), i + 1);
                 signatureCount++;
             }
         }
@@ -142,7 +164,9 @@ TEST_F(WitnessAssemblyTest, TestWitnessAssemblyEdgeCases)
 {
     // Test with single validator (M = 1, N = 1)
     {
-        std::vector<io::UInt160> singleValidator = {io::UInt160::Random()};
+        neo::io::UInt160 validator;
+        std::memset(validator.Data(), 1, neo::io::UInt160::Size);
+        std::vector<neo::io::UInt160> singleValidator = {validator};
         ConsensusConfig config;
         DbftConsensus consensus(config, singleValidator[0], singleValidator, mempool_, blockchain_);
 
@@ -152,10 +176,12 @@ TEST_F(WitnessAssemblyTest, TestWitnessAssemblyEdgeCases)
 
     // Test with maximum validators (21)
     {
-        std::vector<io::UInt160> maxValidators;
+        std::vector<neo::io::UInt160> maxValidators;
         for (int i = 0; i < 21; ++i)
         {
-            maxValidators.push_back(io::UInt160::Random());
+            neo::io::UInt160 validator;
+            std::memset(validator.Data(), i + 1, neo::io::UInt160::Size);
+            maxValidators.push_back(validator);
         }
 
         ConsensusConfig config;
@@ -170,17 +196,21 @@ TEST_F(WitnessAssemblyTest, TestWitnessAssemblyEdgeCases)
 TEST_F(WitnessAssemblyTest, TestWitnessScriptSizeLimits)
 {
     // Create validators
-    std::vector<io::UInt160> validators;
+    std::vector<neo::io::UInt160> validators;
     for (int i = 0; i < 7; ++i)
     {
-        validators.push_back(io::UInt160::Random());
+        neo::io::UInt160 validator;
+        std::memset(validator.Data(), i + 1, neo::io::UInt160::Size);
+        validators.push_back(validator);
     }
 
     // Create full signature set
     ScriptBuilder invocationBuilder;
     for (int i = 0; i < 7; ++i)
     {
-        invocationBuilder.EmitPush(ByteVector(64, i));  // 64-byte signatures
+        ByteVector signature(64);
+        std::fill(signature.begin(), signature.end(), i);
+        invocationBuilder.EmitPush(neo::io::ByteSpan(signature.Data(), signature.Size()));  // 64-byte signatures
     }
 
     auto invocationScript = invocationBuilder.ToArray();
@@ -192,15 +222,18 @@ TEST_F(WitnessAssemblyTest, TestWitnessScriptSizeLimits)
 
     // Verification script with 7 public keys
     ScriptBuilder verificationBuilder;
-    verificationBuilder.EmitPush(5);  // M
+    verificationBuilder.EmitPush(static_cast<int64_t>(5));  // M
 
     for (int i = 0; i < 7; ++i)
     {
-        verificationBuilder.EmitPush(ByteVector(33, i));  // 33-byte compressed public keys
+        ByteVector pubKey(33);
+        std::fill(pubKey.begin(), pubKey.end(), i);
+        verificationBuilder.EmitPush(neo::io::ByteSpan(pubKey.Data(), pubKey.Size()));  // 33-byte compressed public keys
     }
 
-    verificationBuilder.EmitPush(7);  // N
-    verificationBuilder.Emit(OpCode::CHECKMULTISIG);
+    verificationBuilder.EmitPush(static_cast<int64_t>(7));  // N
+    // CHECKMULTISIG would be a SYSCALL in Neo VM
+    verificationBuilder.EmitSysCall(0x41766428);  // Neo.Crypto.CheckMultisig syscall
 
     auto verificationScript = verificationBuilder.ToArray();
 
@@ -215,10 +248,12 @@ TEST_F(WitnessAssemblyTest, TestFullWitnessAssembly)
     // This test would verify that CreateConsensusInvocationScript and
     // CreateConsensusVerificationScript work together to create a valid witness
 
-    std::vector<io::UInt160> validators;
+    std::vector<neo::io::UInt160> validators;
     for (int i = 0; i < 7; ++i)
     {
-        validators.push_back(io::UInt160::Random());
+        neo::io::UInt160 validator;
+        std::memset(validator.Data(), i + 1, neo::io::UInt160::Size);
+        validators.push_back(validator);
     }
 
     ConsensusConfig config;

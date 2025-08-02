@@ -1,0 +1,156 @@
+---
+- name: Deploy Neo C++ Node
+  hosts: neo_nodes
+  become: yes
+  vars:
+    neo_version: "{{ neo_version | default('latest') }}"
+    neo_network: "{{ neo_network | default('mainnet') }}"
+    neo_user: neo
+    neo_group: neo
+    neo_home: /opt/neo-cpp
+    neo_data_dir: /var/lib/neo
+    neo_log_dir: /var/log/neo
+    neo_config_dir: /etc/neo
+
+  tasks:
+    - name: Install system dependencies
+      package:
+        name:
+          - libboost-all-dev
+          - libssl-dev
+          - librocksdb-dev
+          - libsnappy-dev
+          - liblz4-dev
+          - libzstd-dev
+        state: present
+
+    - name: Create neo user
+      user:
+        name: "{{ neo_user }}"
+        group: "{{ neo_group }}"
+        system: yes
+        shell: /bin/false
+        home: "{{ neo_home }}"
+        create_home: no
+
+    - name: Create directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ neo_user }}"
+        group: "{{ neo_group }}"
+        mode: '0755'
+      loop:
+        - "{{ neo_home }}"
+        - "{{ neo_home }}/bin"
+        - "{{ neo_data_dir }}"
+        - "{{ neo_log_dir }}"
+        - "{{ neo_config_dir }}"
+
+    - name: Download Neo C++ release
+      unarchive:
+        src: "https://github.com/neo-project/neo-cpp/releases/download/{{ neo_version }}/neo-cpp-{{ neo_version }}-linux-amd64.tar.gz"
+        dest: "{{ neo_home }}"
+        remote_src: yes
+        owner: "{{ neo_user }}"
+        group: "{{ neo_group }}"
+      when: neo_version != "latest"
+
+    - name: Copy configuration file
+      template:
+        src: config.json.j2
+        dest: "{{ neo_config_dir }}/config.json"
+        owner: "{{ neo_user }}"
+        group: "{{ neo_group }}"
+        mode: '0644'
+      notify: restart neo-node
+
+    - name: Copy systemd service files
+      copy:
+        src: "{{ item }}"
+        dest: /etc/systemd/system/
+        mode: '0644'
+      loop:
+        - systemd/neo-node.service
+        - systemd/neo-node.timer
+        - systemd/neo-node-health.service
+      notify: reload systemd
+
+    - name: Configure firewall
+      ufw:
+        rule: allow
+        port: "{{ item.port }}"
+        proto: tcp
+        comment: "{{ item.comment }}"
+      loop:
+        - { port: 10332, comment: "Neo P2P" }
+        - { port: 10334, comment: "Neo RPC" }
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Configure sysctl for performance
+      sysctl:
+        name: "{{ item.key }}"
+        value: "{{ item.value }}"
+        state: present
+        reload: yes
+      loop:
+        - { key: 'net.core.somaxconn', value: '1024' }
+        - { key: 'net.ipv4.tcp_max_syn_backlog', value: '2048' }
+        - { key: 'net.ipv4.tcp_fin_timeout', value: '30' }
+        - { key: 'vm.swappiness', value: '10' }
+
+    - name: Set resource limits
+      pam_limits:
+        domain: "{{ neo_user }}"
+        limit_type: "{{ item.type }}"
+        limit_item: nofile
+        value: "{{ item.value }}"
+      loop:
+        - { type: 'soft', value: '65536' }
+        - { type: 'hard', value: '65536' }
+
+    - name: Enable and start services
+      systemd:
+        name: "{{ item }}"
+        enabled: yes
+        state: started
+        daemon_reload: yes
+      loop:
+        - neo-node.service
+        - neo-node.timer
+
+    - name: Wait for node to sync
+      uri:
+        url: "http://localhost:10334"
+        method: POST
+        body_format: json
+        body:
+          jsonrpc: "2.0"
+          method: "getblockcount"
+          params: []
+          id: 1
+        status_code: 200
+      register: result
+      until: result.json.result > 0
+      retries: 30
+      delay: 10
+
+    - name: Configure log rotation
+      template:
+        src: logrotate.conf.j2
+        dest: /etc/logrotate.d/neo
+        mode: '0644'
+
+    - name: Setup monitoring
+      include_tasks: monitoring.yml
+      when: enable_monitoring | default(false)
+
+  handlers:
+    - name: reload systemd
+      systemd:
+        daemon_reload: yes
+
+    - name: restart neo-node
+      systemd:
+        name: neo-node.service
+        state: restarted

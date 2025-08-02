@@ -1,4 +1,4 @@
-#include "main_service.h"
+#include <neo/cli/main_service.h>
 #include <exception>
 #include <iostream>
 #include <string>

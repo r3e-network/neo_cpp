@@ -10,6 +10,9 @@
 
 namespace neo::network::p2p
 {
+// Forward declaration  
+class Message;
+
 /**
  * @brief Represents a connection to a remote node.
  */

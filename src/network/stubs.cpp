@@ -10,6 +10,10 @@
 
 namespace neo::network::p2p
 {
+// LocalNode implementation has been moved to local_node.cpp
+// Commenting out stubs to avoid duplicate symbols
+
+/*
 // LocalNode implementation for P2P networking
 class LocalNodeStub
 {
@@ -124,6 +128,7 @@ void LocalNode::OnRemoteNodeConnected(RemoteNode* node)
 {
     LOG_INFO("LocalNode stub OnRemoteNodeConnected()");
 }
+*/
 
 // TaskManager implementation for background tasks
 TaskManager::TaskManager(std::shared_ptr<ledger::Blockchain>, std::shared_ptr<ledger::MemoryPool>)
@@ -136,88 +141,7 @@ TaskManager::~TaskManager()
     LOG_INFO("TaskManager stub destructor");
 }
 
-// Message implementations for P2P communication
-Message::Message() : flags_(MessageFlags::None), command_(MessageCommand::Version) {}
-
-Message::Message(MessageCommand command, std::shared_ptr<IPayload> payload)
-    : flags_(MessageFlags::None), command_(command), payload_(payload)
-{
-}
-
-MessageCommand Message::GetCommand() const
-{
-    return command_;
-}
-MessageFlags Message::GetFlags() const
-{
-    return flags_;
-}
-std::shared_ptr<IPayload> Message::GetPayload() const
-{
-    return payload_;
-}
-
-uint32_t Message::GetSize() const
-{
-    return 24;  // Stub size
-}
-
-void Message::Serialize(io::BinaryWriter& writer) const
-{
-    writer.Write(static_cast<uint32_t>(0x00746E41));  // Magic
-    writer.Write(static_cast<uint8_t>(command_));
-    writer.Write(static_cast<uint8_t>(flags_));
-    writer.WriteVarInt(0);  // Empty payload
-}
-
-void Message::Deserialize(io::BinaryReader& reader)
-{
-    uint32_t magic = reader.ReadUInt32();
-    command_ = static_cast<MessageCommand>(reader.ReadUInt8());
-    flags_ = static_cast<MessageFlags>(reader.ReadUInt8());
-    payloadRaw_ = reader.ReadVarBytes(PayloadMaxSize);
-}
-
-void Message::SerializeJson(io::JsonWriter& writer) const
-{
-    writer.WriteStartObject();
-    writer.WriteProperty("command", static_cast<int>(command_));
-    writer.WriteProperty("flags", static_cast<int>(flags_));
-    writer.WriteEndObject();
-}
-
-void Message::DeserializeJson(const io::JsonReader& reader)
-{
-    // JSON deserialization implementation
-}
-
-io::ByteVector Message::ToArray(bool compressed) const
-{
-    io::ByteVector result;
-    io::BinaryWriter writer(result);
-    Serialize(writer);
-    return result;
-}
-
-uint32_t Message::TryDeserialize(const io::ByteSpan& data, Message& message)
-{
-    try
-    {
-        io::BinaryReader reader(data);
-        message.Deserialize(reader);
-        return data.Size();  // Return bytes consumed
-    }
-    catch (const std::exception& e)
-    {
-        // Log message deserialization error
-        return 0;
-    }
-}
-
-Message Message::Create(MessageCommand command, std::shared_ptr<IPayload> payload)
-{
-    return Message(command, payload);
-}
+// Message implementations moved to message_simple.cpp - stubs removed to avoid conflicts
 }  // namespace neo::network::p2p
 
 namespace neo::network::p2p

@@ -82,7 +82,7 @@ class MainService
 
   private:
     std::shared_ptr<node::NeoSystem> neoSystem_;
-    std::shared_ptr<rpc::RPCServer> rpcServer_;
+    std::shared_ptr<rpc::RpcServer> rpcServer_;
     std::shared_ptr<wallets::Wallet> currentWallet_;
     std::atomic<bool> running_;
     std::thread consoleThread_;

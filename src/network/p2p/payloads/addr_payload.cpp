@@ -17,11 +17,11 @@ void AddrPayload::SetAddressList(const std::vector<NetworkAddressWithTime>& addr
     addressList_ = addresses;
 }
 
-int AddrPayload::GetSize() const
+size_t AddrPayload::GetSize() const
 {
     // Calculate the size based on addresses
     // This matches the C# implementation: AddressList.GetVarSize()
-    int size = 0;
+    size_t size = 0;
 
     // VarInt for count
     if (addressList_.size() < 0xFD)

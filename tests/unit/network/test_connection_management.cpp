@@ -13,6 +13,7 @@
 
 using namespace neo::network::p2p;
 using namespace neo::io;
+using neo::network::IPEndPoint;
 
 // Mock Connection class for testing
 class MockConnection : public Connection
@@ -82,9 +83,9 @@ TEST_F(UT_connection_management, BasicConnectionManagement)
 
     // Verify initial state
     EXPECT_TRUE(mockConnection->IsConnected());
-    EXPECT_EQ(mockConnection->GetRemoteEndPoint().GetAddress(), "192.168.1.100");
+    EXPECT_EQ(mockConnection->GetRemoteEndPoint().GetAddress().ToString(), "192.168.1.100");
     EXPECT_EQ(mockConnection->GetRemoteEndPoint().GetPort(), 10333);
-    EXPECT_EQ(mockConnection->GetLocalEndPoint().GetAddress(), "127.0.0.1");
+    EXPECT_EQ(mockConnection->GetLocalEndPoint().GetAddress().ToString(), "127.0.0.1");
     EXPECT_EQ(mockConnection->GetLocalEndPoint().GetPort(), 20333);
 
     // Test connection ID
@@ -143,7 +144,7 @@ TEST_F(UT_connection_management, IPEndPointHandling)
     IPEndPoint ipv4Local("192.168.1.1", 20333);
     auto ipv4Connection = std::make_shared<MockConnection>(ipv4Remote, ipv4Local);
 
-    EXPECT_EQ(ipv4Connection->GetRemoteEndPoint().GetAddress(), "203.0.113.1");
+    EXPECT_EQ(ipv4Connection->GetRemoteEndPoint().GetAddress().ToString(), "203.0.113.1");
     EXPECT_EQ(ipv4Connection->GetRemoteEndPoint().GetPort(), 10333);
 
     // Test loopback endpoints
@@ -151,8 +152,8 @@ TEST_F(UT_connection_management, IPEndPointHandling)
     IPEndPoint loopbackLocal("127.0.0.1", 20333);
     auto loopbackConnection = std::make_shared<MockConnection>(loopbackRemote, loopbackLocal);
 
-    EXPECT_EQ(loopbackConnection->GetRemoteEndPoint().GetAddress(), "127.0.0.1");
-    EXPECT_EQ(loopbackConnection->GetLocalEndPoint().GetAddress(), "127.0.0.1");
+    EXPECT_EQ(loopbackConnection->GetRemoteEndPoint().GetAddress().ToString(), "127.0.0.1");
+    EXPECT_EQ(loopbackConnection->GetLocalEndPoint().GetAddress().ToString(), "127.0.0.1");
 }
 
 TEST_F(UT_connection_management, ErrorHandling)
@@ -166,7 +167,7 @@ TEST_F(UT_connection_management, ErrorHandling)
     // Connection should handle invalid endpoints gracefully
     EXPECT_NO_THROW({
         auto connection = std::make_shared<MockConnection>(invalidRemote, validLocal);
-        EXPECT_EQ(connection->GetRemoteEndPoint().GetAddress(), "");
+        EXPECT_EQ(connection->GetRemoteEndPoint().GetAddress().ToString(), "");
         EXPECT_EQ(connection->GetRemoteEndPoint().GetPort(), 0);
     });
 
@@ -176,6 +177,6 @@ TEST_F(UT_connection_management, ErrorHandling)
     EXPECT_FALSE(connection->IsConnected());
 
     // Should maintain endpoint information even when disconnected
-    EXPECT_EQ(connection->GetRemoteEndPoint().GetAddress(), "192.168.1.100");
-    EXPECT_EQ(connection->GetLocalEndPoint().GetAddress(), "127.0.0.1");
+    EXPECT_EQ(connection->GetRemoteEndPoint().GetAddress().ToString(), "192.168.1.100");
+    EXPECT_EQ(connection->GetLocalEndPoint().GetAddress().ToString(), "127.0.0.1");
 }

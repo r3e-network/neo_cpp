@@ -6,7 +6,7 @@
 #include <neo/ledger/transaction.h>
 #include <neo/node/node.h>
 #include <neo/persistence/memory_store.h>
-#include <neo/persistence/store_provider.h>
+// #include <neo/persistence/store_provider.h> // File not found
 #include <sstream>
 
 using namespace neo::node;

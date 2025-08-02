@@ -158,6 +158,8 @@ IPEndPoint::IPEndPoint() : port_(0) {}
 
 IPEndPoint::IPEndPoint(const IPAddress& address, uint16_t port) : address_(address), port_(port) {}
 
+IPEndPoint::IPEndPoint(const std::string& address, uint16_t port) : address_(address), port_(port) {}
+
 const IPAddress& IPEndPoint::GetAddress() const
 {
     return address_;

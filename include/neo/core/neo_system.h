@@ -63,6 +63,7 @@ class ECPoint;
 namespace ledger
 {
 class Blockchain;
+class Block;
 }
 
 namespace plugins
@@ -107,6 +108,9 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
     // Threading
     std::vector<std::thread> worker_threads_;
     std::atomic<bool> shutdown_requested_{false};
+    
+    // Performance optimization flags
+    std::atomic<bool> fastSyncMode_{true};  // Skip validation during initial sync
 
   public:
     /**
@@ -153,6 +157,12 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
      * @return A store cache for read-only operations
      */
     std::unique_ptr<persistence::StoreCache> store_view() const;
+
+    /**
+     * @brief Initializes the plugin system after construction is complete.
+     * This must be called after the NeoSystem is fully constructed and shared_ptr is available.
+     */
+    void load_plugins();
 
     // Service management
     /**
@@ -244,6 +254,32 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
     {
         return mem_pool_.get();
     }
+
+    /**
+     * @brief Gets the current block height.
+     * @return The current block height, or 0 if blockchain is not initialized
+     */
+    uint32_t GetCurrentBlockHeight() const;
+
+    /**
+     * @brief Processes a new block received from the network.
+     * @param block The block to process
+     * @return true if the block was successfully processed, false otherwise
+     */
+    bool ProcessBlock(const std::shared_ptr<ledger::Block>& block);
+
+    /**
+     * @brief Processes multiple blocks in a batch for high-performance synchronization
+     * @param blocks The blocks to process
+     * @return Number of blocks successfully processed
+     */
+    size_t ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::Block>>& blocks);
+    
+    /**
+     * @brief Enables/disables fast sync mode (skips validation for initial sync)
+     * @param enabled True to enable fast sync, false for full validation
+     */
+    void SetFastSyncMode(bool enabled) { fastSyncMode_ = enabled; }
 
     // Transaction operations
     /**

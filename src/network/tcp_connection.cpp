@@ -100,7 +100,7 @@ void TcpConnection::Close()
         }
         catch (const std::exception& e)
         {
-            logging::Logger::Instance().Warning("Network", std::string("Error closing socket: ") + e.what());
+            neo::logging::Logger::Instance().Warning("Network", std::string("Error closing socket: ") + e.what());
         }
     }
 
@@ -113,7 +113,7 @@ void TcpConnection::Close()
         }
         catch (const std::exception& e)
         {
-            logging::Logger::Instance().Warning("Network",
+            neo::logging::Logger::Instance().Warning("Network",
                                                 std::string("Error in connection closed callback: ") + e.what());
         }
     }
@@ -140,7 +140,7 @@ void TcpConnection::Send(const Message& message)
     }
     catch (const std::exception& e)
     {
-        logging::Logger::Instance().Warning("Network", std::string("Error sending message: ") + e.what());
+        neo::logging::Logger::Instance().Warning("Network", std::string("Error sending message: ") + e.what());
         Close();
     }
 }
@@ -263,7 +263,7 @@ void TcpConnection::HandleReadHeader(const std::error_code& error, size_t bytesT
                 }
                 catch (const std::exception& e)
                 {
-                    logging::Logger::Instance().Warning("Network",
+                    neo::logging::Logger::Instance().Warning("Network",
                                                         std::string("Error in message received callback: ") + e.what());
                 }
             }
@@ -279,7 +279,7 @@ void TcpConnection::HandleReadHeader(const std::error_code& error, size_t bytesT
     }
     catch (const std::exception& e)
     {
-        logging::Logger::Instance().Warning("Network", std::string("Error parsing message header: ") + e.what());
+        neo::logging::Logger::Instance().Warning("Network", std::string("Error parsing message header: ") + e.what());
         Close();
     }
 }
@@ -289,7 +289,7 @@ void TcpConnection::ReadPayload(p2p::MessageCommand command, uint32_t payloadLen
 {
     if (payloadLength > Message::PayloadMaxSize)
     {
-        logging::Logger::Instance().Warning("Network",
+        neo::logging::Logger::Instance().Warning("Network",
                                             "Payload too large: " + std::to_string(payloadLength) + " bytes");
         Close();
         return;
@@ -319,7 +319,7 @@ void TcpConnection::HandleReadPayload(const std::error_code& error, size_t bytes
         // Validate checksum
         if (!ValidateChecksum(payload, checksum))
         {
-            logging::Logger::Instance().Warning("Network", "Invalid checksum");
+            neo::logging::Logger::Instance().Warning("Network", "Invalid checksum");
             Close();
             return;
         }
@@ -336,7 +336,7 @@ void TcpConnection::HandleReadPayload(const std::error_code& error, size_t bytes
             }
             catch (const std::exception& e)
             {
-                logging::Logger::Instance().Warning("Network",
+                neo::logging::Logger::Instance().Warning("Network",
                                                     std::string("Error in message received callback: ") + e.what());
             }
         }
@@ -346,7 +346,7 @@ void TcpConnection::HandleReadPayload(const std::error_code& error, size_t bytes
     }
     catch (const std::exception& e)
     {
-        logging::Logger::Instance().Warning("Network", std::string("Error handling payload: ") + e.what());
+        neo::logging::Logger::Instance().Warning("Network", std::string("Error handling payload: ") + e.what());
         Close();
     }
 }
@@ -394,7 +394,7 @@ void TcpConnection::HandleError(const std::error_code& error)
         return;
     }
 
-    logging::Logger::Instance().Warning("Network", "Socket error: " + error.message() + " (" +
+    neo::logging::Logger::Instance().Warning("Network", "Socket error: " + error.message() + " (" +
                                                        std::to_string(error.value()) + ")");
     Close();
 }

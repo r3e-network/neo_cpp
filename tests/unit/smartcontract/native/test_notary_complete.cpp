@@ -23,7 +23,7 @@ class UT_Notary_Complete : public testing::Test
     void SetUp() override
     {
         store = std::make_shared<MemoryStore>();
-        snapshot = std::make_shared<StoreCache>(store);
+        snapshot = std::make_shared<StoreCache>(*store);
         engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0);
     }
 
@@ -47,7 +47,7 @@ TEST_F(UT_Notary_Complete, LockDepositUntil)
     // Execute method
     try
     {
-        auto result = contract->OnLockDepositUntil(*engine, args);
+        auto result = contract->Call(*engine, "lockDepositUntil", args);
 
         // Verify result
         EXPECT_TRUE(result != nullptr);
@@ -67,7 +67,7 @@ TEST_F(UT_Notary_Complete, LockDepositUntil_InvalidArgs)
 
     // Test with wrong number of arguments
     std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnLockDepositUntil(*engine, emptyArgs), std::exception);
+    EXPECT_THROW(contract->Call(*engine, "lockDepositUntil", emptyArgs), std::exception);
 
     // TODO: Add more invalid argument tests
 }
@@ -95,7 +95,7 @@ TEST_F(UT_Notary_Complete, Withdraw)
     // Execute method
     try
     {
-        auto result = contract->OnWithdraw(*engine, args);
+        auto result = contract->Call(*engine, "withdraw", args);
 
         // Verify result
         EXPECT_TRUE(result != nullptr);
@@ -115,7 +115,7 @@ TEST_F(UT_Notary_Complete, Withdraw_InvalidArgs)
 
     // Test with wrong number of arguments
     std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnWithdraw(*engine, emptyArgs), std::exception);
+    EXPECT_THROW(contract->Call(*engine, "withdraw", emptyArgs), std::exception);
 
     // TODO: Add more invalid argument tests
 }
@@ -143,7 +143,8 @@ TEST_F(UT_Notary_Complete, BalanceOf)
     // Execute method
     try
     {
-        auto result = contract->OnBalanceOf(*engine, args);
+        // OnBalanceOf is protected, use Call method instead
+        auto result = contract->Call(*engine, "balanceOf", args);
 
         // Verify result
         EXPECT_TRUE(result != nullptr);
@@ -163,7 +164,8 @@ TEST_F(UT_Notary_Complete, BalanceOf_InvalidArgs)
 
     // Test with wrong number of arguments
     std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnBalanceOf(*engine, emptyArgs), std::exception);
+    // OnBalanceOf is protected, test with Call method
+    EXPECT_THROW(contract->Call(*engine, "balanceOf", emptyArgs), std::exception);
 
     // TODO: Add more invalid argument tests
 }
@@ -191,7 +193,8 @@ TEST_F(UT_Notary_Complete, ExpirationOf)
     // Execute method
     try
     {
-        auto result = contract->OnExpirationOf(*engine, args);
+        // OnExpirationOf is protected, use Call method instead
+        auto result = contract->Call(*engine, "expirationOf", args);
 
         // Verify result
         EXPECT_TRUE(result != nullptr);
@@ -211,7 +214,8 @@ TEST_F(UT_Notary_Complete, ExpirationOf_InvalidArgs)
 
     // Test with wrong number of arguments
     std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnExpirationOf(*engine, emptyArgs), std::exception);
+    // OnExpirationOf is protected, test with Call method
+    EXPECT_THROW(contract->Call(*engine, "expirationOf", emptyArgs), std::exception);
 
     // TODO: Add more invalid argument tests
 }

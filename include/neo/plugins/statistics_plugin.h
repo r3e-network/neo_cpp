@@ -92,7 +92,7 @@ class StatisticsPlugin : public PluginBase
 /**
  * @brief Represents a statistics plugin factory.
  */
-class StatisticsPluginFactory : public PluginFactoryBase<StatisticsPlugin>
-{
-};
+// class StatisticsPluginFactory : public PluginFactoryBase<StatisticsPlugin>
+// {
+// };
 }  // namespace neo::plugins

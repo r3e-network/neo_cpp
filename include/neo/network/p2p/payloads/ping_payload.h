@@ -70,7 +70,7 @@ class PingPayload : public IPayload
      * @brief Gets the size of the payload in bytes.
      * @return The size of the payload.
      */
-    uint32_t GetSize() const;
+    size_t GetSize() const;
 
     /**
      * @brief Creates a new PingPayload with the specified height.
@@ -103,13 +103,13 @@ class PingPayload : public IPayload
      * @brief Serializes the PingPayload to a JSON writer.
      * @param writer The JSON writer.
      */
-    void SerializeJson(io::JsonWriter& writer) const override;
+    void SerializeJson(io::JsonWriter& writer) const;
 
     /**
      * @brief Deserializes the PingPayload from a JSON reader.
      * @param reader The JSON reader.
      */
-    void DeserializeJson(const io::JsonReader& reader) override;
+    void DeserializeJson(const io::JsonReader& reader);
 
   private:
     uint32_t lastBlockIndex_;

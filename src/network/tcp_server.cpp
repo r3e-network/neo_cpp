@@ -24,11 +24,11 @@ void TcpServer::Start()
 {
     if (running_)
     {
-        logging::Logger::Instance().Info("Network", "TcpServer already running");
+        neo::logging::Logger::Instance().Info("Network", "TcpServer already running");
         return;
     }
 
-    logging::Logger::Instance().Info("Network", "Starting TcpServer on " + endpoint_.ToString());
+    neo::logging::Logger::Instance().Info("Network", "Starting TcpServer on " + endpoint_.ToString());
 
     try
     {
@@ -71,7 +71,7 @@ void TcpServer::Start()
 
         // Start the io_context in a thread pool
         unsigned int thread_count = std::max(1u, std::thread::hardware_concurrency());
-        logging::Logger::Instance().Info("Network", "Starting " + std::to_string(thread_count) + " IO threads");
+        neo::logging::Logger::Instance().Info("Network", "Starting " + std::to_string(thread_count) + " IO threads");
 
         for (unsigned int i = 0; i < thread_count; ++i)
         {
@@ -80,26 +80,26 @@ void TcpServer::Start()
                 {
                     try
                     {
-                        logging::Logger::Instance().Debug("Network", "IO thread " + std::to_string(i) + " started");
+                        neo::logging::Logger::Instance().Debug("Network", "IO thread " + std::to_string(i) + " started");
                         ioContext_->run();
-                        logging::Logger::Instance().Debug("Network", "IO thread " + std::to_string(i) + " stopped");
+                        neo::logging::Logger::Instance().Debug("Network", "IO thread " + std::to_string(i) + " stopped");
                     }
                     catch (const std::exception& e)
                     {
                         // Log the error
-                        logging::Logger::Instance().Error("Network", std::string("Error in IO thread ") +
+                        neo::logging::Logger::Instance().Error("Network", std::string("Error in IO thread ") +
                                                                          std::to_string(i) + ": " + e.what());
                     }
                 });
         }
 
         running_ = true;
-        logging::Logger::Instance().Info("Network", "TcpServer started successfully");
+        neo::logging::Logger::Instance().Info("Network", "TcpServer started successfully");
     }
     catch (const std::exception& e)
     {
         // Log the error
-        logging::Logger::Instance().Error("Network", std::string("Error starting server: ") + e.what());
+        neo::logging::Logger::Instance().Error("Network", std::string("Error starting server: ") + e.what());
 
         // Clean up
         Stop();
@@ -113,11 +113,11 @@ void TcpServer::Stop()
 {
     if (!running_)
     {
-        logging::Logger::Instance().Debug("Network", "TcpServer already stopped");
+        neo::logging::Logger::Instance().Debug("Network", "TcpServer already stopped");
         return;
     }
 
-    logging::Logger::Instance().Info("Network", "Stopping TcpServer");
+    neo::logging::Logger::Instance().Info("Network", "Stopping TcpServer");
     running_ = false;
 
     // Close the acceptor
@@ -126,11 +126,11 @@ void TcpServer::Stop()
         try
         {
             acceptor_->close();
-            logging::Logger::Instance().Debug("Network", "Acceptor closed");
+            neo::logging::Logger::Instance().Debug("Network", "Acceptor closed");
         }
         catch (const std::exception& e)
         {
-            logging::Logger::Instance().Warning("Network", std::string("Error closing acceptor: ") + e.what());
+            neo::logging::Logger::Instance().Warning("Network", std::string("Error closing acceptor: ") + e.what());
         }
         acceptor_.reset();
     }
@@ -146,20 +146,20 @@ void TcpServer::Stop()
             }
             catch (const std::exception& e)
             {
-                logging::Logger::Instance().Warning("Network", std::string("Error closing connection to ") + endpoint +
+                neo::logging::Logger::Instance().Warning("Network", std::string("Error closing connection to ") + endpoint +
                                                                    ": " + e.what());
             }
         }
         size_t connectionCount = connections_.size();
         connections_.clear();
-        logging::Logger::Instance().Info("Network", "Closed " + std::to_string(connectionCount) + " connection(s)");
+        neo::logging::Logger::Instance().Info("Network", "Closed " + std::to_string(connectionCount) + " connection(s)");
     }
 
     // Reset the work guard to allow the io_context to finish
     if (workGuard_)
     {
         workGuard_.reset();
-        logging::Logger::Instance().Debug("Network", "Work guard reset");
+        neo::logging::Logger::Instance().Debug("Network", "Work guard reset");
     }
 
     // Stop the IO context
@@ -168,11 +168,11 @@ void TcpServer::Stop()
         try
         {
             ioContext_->stop();
-            logging::Logger::Instance().Debug("Network", "IO context stopped");
+            neo::logging::Logger::Instance().Debug("Network", "IO context stopped");
         }
         catch (const std::exception& e)
         {
-            logging::Logger::Instance().Warning("Network", std::string("Error stopping IO context: ") + e.what());
+            neo::logging::Logger::Instance().Warning("Network", std::string("Error stopping IO context: ") + e.what());
         }
     }
 
@@ -187,14 +187,14 @@ void TcpServer::Stop()
             }
             catch (const std::exception& e)
             {
-                logging::Logger::Instance().Warning("Network", std::string("Error joining IO thread: ") + e.what());
+                neo::logging::Logger::Instance().Warning("Network", std::string("Error joining IO thread: ") + e.what());
             }
         }
     }
     ioThreads_.clear();
-    logging::Logger::Instance().Debug("Network", "All IO threads joined");
+    neo::logging::Logger::Instance().Debug("Network", "All IO threads joined");
 
-    logging::Logger::Instance().Info("Network", "TcpServer stopped successfully");
+    neo::logging::Logger::Instance().Info("Network", "TcpServer stopped successfully");
 }
 
 const IPEndPoint& TcpServer::GetEndpoint() const
@@ -230,7 +230,7 @@ void TcpServer::HandleAccept(std::shared_ptr<TcpConnection> connection, const st
 
     if (error)
     {
-        logging::Logger::Instance().Warning("Network", std::string("Error accepting connection: ") + error.message());
+        neo::logging::Logger::Instance().Warning("Network", std::string("Error accepting connection: ") + error.message());
         return;
     }
 
@@ -240,11 +240,11 @@ void TcpServer::HandleAccept(std::shared_ptr<TcpConnection> connection, const st
     {
         remoteEndpoint = connection->GetRemoteEndpoint();
         std::string remoteEndpointStr = remoteEndpoint.ToString();
-        logging::Logger::Instance().Info("Network", "Accepted connection from " + remoteEndpointStr);
+        neo::logging::Logger::Instance().Info("Network", "Accepted connection from " + remoteEndpointStr);
     }
     catch (const std::exception& e)
     {
-        logging::Logger::Instance().Warning("Network", std::string("Error getting remote endpoint: ") + e.what());
+        neo::logging::Logger::Instance().Warning("Network", std::string("Error getting remote endpoint: ") + e.what());
         connection->Close();
         return;
     }
@@ -254,7 +254,7 @@ void TcpServer::HandleAccept(std::shared_ptr<TcpConnection> connection, const st
         std::lock_guard<std::mutex> lock(connectionsMutex_);
         if (connections_.size() >= maxConnections_)
         {
-            logging::Logger::Instance().Warning("Network", "Connection limit reached, rejecting connection from " +
+            neo::logging::Logger::Instance().Warning("Network", "Connection limit reached, rejecting connection from " +
                                                                remoteEndpoint.ToString());
             connection->Close();
             return;
@@ -281,7 +281,7 @@ void TcpServer::HandleAccept(std::shared_ptr<TcpConnection> connection, const st
         }
         catch (const std::exception& e)
         {
-            logging::Logger::Instance().Warning("Network",
+            neo::logging::Logger::Instance().Warning("Network",
                                                 std::string("Error in connection accepted callback: ") + e.what());
         }
     }
@@ -294,7 +294,7 @@ void TcpServer::RemoveConnection(const std::string& endpoint)
     if (it != connections_.end())
     {
         connections_.erase(it);
-        logging::Logger::Instance().Debug("Network", "Removed connection to " + endpoint);
+        neo::logging::Logger::Instance().Debug("Network", "Removed connection to " + endpoint);
     }
 }
 

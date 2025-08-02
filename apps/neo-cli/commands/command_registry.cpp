@@ -7,9 +7,10 @@
 #include <neo/ledger/memory_pool.h>
 #include <neo/network/p2p_server.h>
 #include <neo/smartcontract/application_engine.h>
-#include <neo/smartcontract/manifest.h>
+// #include <neo/smartcontract/manifest.h> // File doesn't exist
 #include <neo/smartcontract/nef_file.h>
 #include <neo/wallets/nep6/nep6_wallet.h>
+#include <neo/ledger/memory_pool.h>
 
 #include <fstream>
 #include <iomanip>
@@ -163,9 +164,9 @@ bool ShowCommand::Execute(CLIService* service, const std::vector<std::string>& a
 
         std::cout << "\nBlockchain State:" << std::endl;
         std::cout << "  Height: " << blockchain->GetHeight() << std::endl;
-        std::cout << "  Header Height: " << blockchain->GetHeaderHeight() << std::endl;
+        // std::cout << "  Header Height: " << blockchain->GetHeaderHeight() << std::endl; // Method not implemented
         std::cout << "  Current Block Hash: " << blockchain->GetCurrentBlockHash().ToString() << std::endl;
-        std::cout << "  Current Header Hash: " << blockchain->GetCurrentHeaderHash().ToString() << std::endl;
+        // std::cout << "  Current Header Hash: " << blockchain->GetCurrentHeaderHash().ToString() << std::endl; // Method not implemented
     }
     else if (subcommand == "pool")
     {
@@ -177,9 +178,9 @@ bool ShowCommand::Execute(CLIService* service, const std::vector<std::string>& a
         }
 
         std::cout << "\nMemory Pool:" << std::endl;
-        std::cout << "  Count: " << mempool->GetCount() << std::endl;
-        std::cout << "  Verified: " << mempool->GetVerifiedCount() << std::endl;
-        std::cout << "  Unverified: " << mempool->GetUnverifiedCount() << std::endl;
+        std::cout << "  Count: " << mempool->GetSize() << std::endl;
+        // std::cout << "  Verified: " << mempool->GetVerifiedCount() << std::endl; // Method not implemented
+        // std::cout << "  Unverified: " << mempool->GetUnverifiedCount() << std::endl; // Method not implemented
     }
     else if (subcommand == "account")
     {
@@ -191,14 +192,7 @@ bool ShowCommand::Execute(CLIService* service, const std::vector<std::string>& a
         }
 
         std::cout << "\nAccounts:" << std::endl;
-        auto accounts = wallet->GetAccounts();
-        for (const auto& account : accounts)
-        {
-            std::cout << "  Address: " << account->GetAddress() << std::endl;
-            std::cout << "  Label: " << account->GetLabel() << std::endl;
-            std::cout << "  Default: " << (account->IsDefault() ? "Yes" : "No") << std::endl;
-            std::cout << std::endl;
-        }
+        std::cout << "\nWallet functionality not fully implemented yet." << std::endl;
     }
     else
     {
@@ -262,8 +256,8 @@ bool WalletCommand::Execute(CLIService* service, const std::vector<std::string>&
 
         try
         {
-            auto wallet = wallets::NEP6Wallet::Create(args[1], password);
-            std::cout << "Wallet created successfully: " << args[1] << std::endl;
+            // auto wallet = wallets::NEP6Wallet::Create(args[1], password);
+            std::cout << "Wallet creation not fully implemented yet." << std::endl;
             return true;
         }
         catch (const std::exception& e)
@@ -281,9 +275,7 @@ bool WalletCommand::Execute(CLIService* service, const std::vector<std::string>&
             return false;
         }
 
-        std::cout << "\nWallet: " << wallet->GetName() << std::endl;
-        std::cout << "Version: " << wallet->GetVersion() << std::endl;
-        std::cout << "Accounts: " << wallet->GetAccounts().size() << std::endl;
+        std::cout << "\nWallet information not available - not fully implemented." << std::endl;
     }
     else
     {

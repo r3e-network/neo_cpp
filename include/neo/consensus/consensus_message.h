@@ -219,49 +219,5 @@ class RecoveryRequestMessage : public ConsensusMessage
     void Deserialize(io::BinaryReader& reader) override;
 };
 
-/**
- * @brief Recovery response message
- */
-class RecoveryMessage : public ConsensusMessage
-{
-  private:
-    std::unique_ptr<ViewChangeMessage> view_change_;
-    std::unique_ptr<PrepareRequestMessage> prepare_request_;
-    std::vector<std::unique_ptr<PrepareResponseMessage>> prepare_responses_;
-    std::vector<std::unique_ptr<CommitMessage>> commits_;
-
-  public:
-    RecoveryMessage();
-
-    void SetViewChange(std::unique_ptr<ViewChangeMessage> msg)
-    {
-        view_change_ = std::move(msg);
-    }
-    void SetPrepareRequest(std::unique_ptr<PrepareRequestMessage> msg)
-    {
-        prepare_request_ = std::move(msg);
-    }
-    void AddPrepareResponse(std::unique_ptr<PrepareResponseMessage> msg);
-    void AddCommit(std::unique_ptr<CommitMessage> msg);
-
-    const ViewChangeMessage* GetViewChange() const
-    {
-        return view_change_.get();
-    }
-    const PrepareRequestMessage* GetPrepareRequest() const
-    {
-        return prepare_request_.get();
-    }
-    const std::vector<std::unique_ptr<PrepareResponseMessage>>& GetPrepareResponses() const
-    {
-        return prepare_responses_;
-    }
-    const std::vector<std::unique_ptr<CommitMessage>>& GetCommits() const
-    {
-        return commits_;
-    }
-
-    void Serialize(io::BinaryWriter& writer) const override;
-    void Deserialize(io::BinaryReader& reader) override;
-};
+// RecoveryMessage is defined in recovery_message.h to avoid duplication
 }  // namespace neo::consensus

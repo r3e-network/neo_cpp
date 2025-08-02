@@ -20,6 +20,12 @@
 
 namespace neo::rpc
 {
+// Forward declarations for helper functions
+class RpcSessionManager;
+std::shared_ptr<RpcSessionManager> GetRpcSessionManager();
+nlohmann::json ConvertStackItemToJson(std::shared_ptr<vm::StackItem> item);
+void LogSessionTermination(const std::string& sessionId);
+
 // Helper function to convert Neo3Transaction to JSON
 static nlohmann::json TransactionToJson(std::shared_ptr<network::p2p::payloads::Neo3Transaction> tx, bool verbose)
 {
@@ -1262,4 +1268,127 @@ nlohmann::json RPCMethods::ContractToJson(std::shared_ptr<smartcontract::Contrac
 
     return json;
 }
+
+// RPC Session management implementation
+class RpcSessionManager 
+{
+public:
+    class RpcSession 
+    {
+    public:
+        class RpcIterator 
+        {
+        public:
+            bool HasNext() const { return has_next_; }
+            std::shared_ptr<vm::StackItem> Next() 
+            { 
+                if (!has_next_) return nullptr;
+                has_next_ = false; // Simple implementation - mark as exhausted after first call
+                return vm::StackItem::Null();
+            }
+        private:
+            bool has_next_ = true;
+        };
+
+        std::shared_ptr<RpcIterator> GetIterator(const std::string& id) 
+        {
+            auto it = iterators_.find(id);
+            if (it != iterators_.end()) {
+                return it->second;
+            }
+            return nullptr;
+        }
+
+        void UpdateLastActivity() 
+        {
+            last_activity_ = std::chrono::steady_clock::now();
+        }
+
+    private:
+        std::map<std::string, std::shared_ptr<RpcIterator>> iterators_;
+        std::chrono::steady_clock::time_point last_activity_;
+    };
+
+    std::shared_ptr<RpcSession> GetSession(const std::string& id) 
+    {
+        auto it = sessions_.find(id);
+        if (it != sessions_.end()) {
+            return it->second;
+        }
+        return nullptr;
+    }
+
+    bool TerminateSession(const std::string& id) 
+    {
+        auto it = sessions_.find(id);
+        if (it != sessions_.end()) {
+            sessions_.erase(it);
+            return true;
+        }
+        return false;
+    }
+
+private:
+    std::map<std::string, std::shared_ptr<RpcSession>> sessions_;
+};
+
+// Global RPC session manager instance
+static std::shared_ptr<RpcSessionManager> g_rpc_session_manager = std::make_shared<RpcSessionManager>();
+
+std::shared_ptr<RpcSessionManager> GetRpcSessionManager() 
+{
+    return g_rpc_session_manager;
+}
+
+nlohmann::json ConvertStackItemToJson(std::shared_ptr<vm::StackItem> item) 
+{
+    if (!item) {
+        return nullptr;
+    }
+
+    switch (item->GetType()) {
+        case vm::StackItemType::Null:
+            return nullptr;
+        case vm::StackItemType::Boolean:
+            return nlohmann::json{{"type", "Boolean"}, {"value", item->GetBoolean()}};
+        case vm::StackItemType::Integer:
+            return nlohmann::json{{"type", "Integer"}, {"value", item->GetInteger()}};
+        case vm::StackItemType::ByteString:
+            return nlohmann::json{{"type", "ByteString"}, {"value", cryptography::Base64::Encode(item->GetByteArray().AsSpan())}};
+        case vm::StackItemType::Buffer:
+            return nlohmann::json{{"type", "Buffer"}, {"value", cryptography::Base64::Encode(item->GetByteArray().AsSpan())}};
+        case vm::StackItemType::Array:
+        case vm::StackItemType::Struct:
+        {
+            nlohmann::json array = nlohmann::json::array();
+            auto items = item->GetArray();
+            for (const auto& arrayItem : items) {
+                array.push_back(ConvertStackItemToJson(arrayItem));
+            }
+            return nlohmann::json{{"type", item->GetType() == vm::StackItemType::Array ? "Array" : "Struct"}, {"value", array}};
+        }
+        case vm::StackItemType::Map:
+        {
+            nlohmann::json map = nlohmann::json::object();
+            auto mapItems = item->GetMap();
+            for (const auto& [key, value] : mapItems) {
+                auto keyJson = ConvertStackItemToJson(key);
+                auto valueJson = ConvertStackItemToJson(value);
+                // Use string representation of key for JSON object
+                std::string keyStr = keyJson.is_string() ? keyJson.get<std::string>() : keyJson.dump();
+                map[keyStr] = valueJson;
+            }
+            return nlohmann::json{{"type", "Map"}, {"value", map}};
+        }
+        default:
+            return nlohmann::json{{"type", "Unknown"}, {"value", nullptr}};
+    }
+}
+
+void LogSessionTermination(const std::string& sessionId) 
+{
+    // Simple logging implementation - in production this would use proper logging framework
+    std::cout << "RPC Session terminated: " << sessionId << std::endl;
+}
+
 }  // namespace neo::rpc

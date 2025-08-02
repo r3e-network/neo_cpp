@@ -1,0 +1,24 @@
+[Unit]
+Description=Neo Node Health Check
+Documentation=https://github.com/neo-project/neo-cpp
+
+[Service]
+Type=oneshot
+User=neo
+Group=neo
+
+# Health check script
+ExecStart=/opt/neo-cpp/bin/neo-cli rpc getblockcount
+
+# Alert on failure
+ExecStartPost=-/usr/bin/systemctl is-active --quiet neo-node.service || /usr/bin/logger -p err "Neo node is not running"
+
+# Restart node if health check fails
+ExecStartPost=-/usr/bin/systemctl is-active --quiet neo-node.service || /usr/bin/systemctl restart neo-node.service
+
+# Resource limits
+CPUQuota=10%
+MemoryLimit=100M
+
+[Install]
+WantedBy=multi-user.target

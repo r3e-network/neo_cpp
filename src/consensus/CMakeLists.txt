@@ -5,6 +5,7 @@ add_library(neo_consensus OBJECT
     dbft_consensus.cpp
     consensus_state.cpp
     consensus_message.cpp
+    # recovery_message.cpp  # Disabled due to API incompatibilities
 )
 
 # Set include directories
@@ -20,4 +21,5 @@ target_link_libraries(neo_consensus PUBLIC
     neo_io
     neo_persistence
     neo_network
+    neo_ledger
 )

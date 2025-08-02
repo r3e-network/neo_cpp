@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.15)
 add_executable(neo-cli
     main.cpp
     cli_service.cpp
-    cli_service_production.cpp
+    # cli_service_production.cpp  # Commented out due to compilation errors
     commands/command_registry.cpp
     plugins/plugin_manager.cpp
     services/console_service_neo.cpp
@@ -20,17 +20,8 @@ target_include_directories(neo-cli PRIVATE
 
 # Link libraries
 target_link_libraries(neo-cli PRIVATE
-    neo_core
-    neo_persistence
-    neo_ledger
-    neo_network
-    neo_rpc
-    neo_consensus
-    neo_wallets
-    neo_smartcontract
-    neo_vm
-    neo_cryptography
-    neo_console_service
+    neo_cpp
+    neo_plugins
     ${ROCKSDB_LIBRARIES}
     ${Boost_LIBRARIES}
     ${OPENSSL_LIBRARIES}

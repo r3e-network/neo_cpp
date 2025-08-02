@@ -41,7 +41,7 @@ void PingPayload::SetLastBlockIndex(uint32_t lastBlockIndex)
     lastBlockIndex_ = lastBlockIndex;
 }
 
-uint32_t PingPayload::GetSize() const
+size_t PingPayload::GetSize() const
 {
     // Size calculation matching C# implementation:
     return sizeof(uint32_t) +  // LastBlockIndex

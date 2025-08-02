@@ -40,8 +40,13 @@ class CircuitBreaker
 
     using OnStateChangeCallback = std::function<void(State, State)>;
 
-    explicit CircuitBreaker(const std::string& name, const Config& config = Config{})
+    explicit CircuitBreaker(const std::string& name, const Config& config)
         : name_(name), config_(config), state_(State::CLOSED)
+    {
+    }
+    
+    explicit CircuitBreaker(const std::string& name)
+        : name_(name), config_(Config{}), state_(State::CLOSED)
     {
     }
 
@@ -137,7 +142,10 @@ class CircuitBreaker
 
         State oldState = state_;
         state_ = State::CLOSED;
-        metrics_ = Metrics{};
+        metrics_.successCount.store(0);
+        metrics_.failureCount.store(0);
+        metrics_.totalResponseTime.store(0);
+        metrics_.maxResponseTime.store(0);
         consecutiveSuccesses_ = 0;
         lastFailureTime_ = std::chrono::steady_clock::time_point{};
         lastStateChange_ = std::chrono::system_clock::now();
@@ -289,7 +297,10 @@ class CircuitBreaker
         switch (newState)
         {
             case State::CLOSED:
-                metrics_ = Metrics{};
+                metrics_.successCount.store(0);
+        metrics_.failureCount.store(0);
+        metrics_.totalResponseTime.store(0);
+        metrics_.maxResponseTime.store(0);
                 consecutiveSuccesses_ = 0;
                 break;
 
@@ -327,13 +338,13 @@ class CircuitBreaker
         auto now = std::chrono::steady_clock::now();
         if (now - lastMetricsReset_ > config_.windowSize)
         {
-            // Preserve min/max values while resetting counters
-            auto prevMin = metrics_.minResponseTime;
-            auto prevMax = metrics_.maxResponseTime;
-
-            metrics_ = Metrics{};
-            metrics_.minResponseTime = prevMin;
-            metrics_.maxResponseTime = prevMax;
+            // Reset counters while preserving max response time
+            auto prevMax = metrics_.maxResponseTime.load();
+            
+            metrics_.successCount.store(0);
+            metrics_.failureCount.store(0);
+            metrics_.totalResponseTime.store(0);
+            metrics_.maxResponseTime.store(prevMax);
             lastMetricsReset_ = now;
         }
     }

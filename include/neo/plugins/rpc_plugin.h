@@ -2,7 +2,9 @@
 
 #include <functional>
 #include <memory>
-#include <neo/node/rpc_server.h>
+#include <neo/rpc/rpc_server.h>
+#include <neo/rpc/rpc_request.h>
+#include <neo/rpc/rpc_response.h>
 #include <neo/plugins/plugin_base.h>
 #include <string>
 #include <unordered_map>
@@ -61,7 +63,7 @@ class RPCPlugin : public PluginBase
      * @param request The request.
      * @return The response.
      */
-    node::RPCResponse OnRequest(const node::RPCRequest& request);
+    rpc::RpcResponse OnRequest(const rpc::RpcRequest& request);
 };
 
 /**

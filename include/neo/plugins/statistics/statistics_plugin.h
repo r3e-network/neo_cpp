@@ -5,7 +5,7 @@
 #include <memory>
 #include <mutex>
 #include <neo/io/json.h>
-#include <neo/node/node.h>
+#include <neo/node/neo_system.h>
 #include <neo/plugins/plugin.h>
 #include <neo/rpc/rpc_server.h>
 #include <string>
@@ -31,6 +31,12 @@ class StatisticsPlugin : public Plugin
     ~StatisticsPlugin() override;
 
     /**
+     * @brief Gets the name of the plugin.
+     * @return The name of the plugin.
+     */
+    std::string GetName() const override;
+
+    /**
      * @brief Gets the description of the plugin.
      * @return The description of the plugin.
      */
@@ -50,12 +56,11 @@ class StatisticsPlugin : public Plugin
 
     /**
      * @brief Initializes the plugin.
-     * @param node The node.
-     * @param rpcServer The RPC server.
+     * @param neoSystem The Neo system.
      * @param settings The settings.
      * @return True if the plugin was initialized, false otherwise.
      */
-    bool Initialize(std::shared_ptr<node::Node> node, std::shared_ptr<rpc::RPCServer> rpcServer,
+    bool Initialize(std::shared_ptr<node::NeoSystem> neoSystem,
                     const std::unordered_map<std::string, std::string>& settings) override;
 
     /**
@@ -77,8 +82,7 @@ class StatisticsPlugin : public Plugin
     bool IsRunning() const override;
 
   private:
-    std::shared_ptr<node::Node> node_;
-    std::shared_ptr<rpc::RPCServer> rpcServer_;
+    std::shared_ptr<node::NeoSystem> neoSystem_;
     std::atomic<bool> running_;
     std::thread statisticsThread_;
     std::mutex mutex_;

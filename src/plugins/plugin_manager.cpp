@@ -1,4 +1,5 @@
 #include <iostream>
+#include <neo/plugins/plugin_manager.h>
 #include <neo/plugins/plugin.h>
 #include <neo/rpc/rpc_server.h>
 

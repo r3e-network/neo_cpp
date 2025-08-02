@@ -23,7 +23,7 @@ class UT_StdLib_Complete : public testing::Test
     void SetUp() override
     {
         store = std::make_shared<MemoryStore>();
-        snapshot = std::make_shared<StoreCache>(store);
+        snapshot = std::make_shared<StoreCache>(*store);
         engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0);
     }
 
@@ -47,7 +47,8 @@ TEST_F(UT_StdLib_Complete, Serialize)
     // Execute method
     try
     {
-        auto result = contract->OnSerialize(*engine, args);
+        // OnSerialize is private, use Call method instead
+        auto result = contract->Call(*engine, "serialize", args);
 
         // Verify result
         EXPECT_TRUE(result != nullptr);
@@ -67,7 +68,8 @@ TEST_F(UT_StdLib_Complete, Serialize_InvalidArgs)
 
     // Test with wrong number of arguments
     std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnSerialize(*engine, emptyArgs), std::exception);
+    // OnSerialize is private, test with Call method
+    EXPECT_THROW(contract->Call(*engine, "serialize", emptyArgs), std::exception);
 
     // TODO: Add more invalid argument tests
 }
@@ -95,7 +97,8 @@ TEST_F(UT_StdLib_Complete, Deserialize)
     // Execute method
     try
     {
-        auto result = contract->OnDeserialize(*engine, args);
+        // OnDeserialize is private, use Call method instead
+        auto result = contract->Call(*engine, "deserialize", args);
 
         // Verify result
         EXPECT_TRUE(result != nullptr);
@@ -115,7 +118,8 @@ TEST_F(UT_StdLib_Complete, Deserialize_InvalidArgs)
 
     // Test with wrong number of arguments
     std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnDeserialize(*engine, emptyArgs), std::exception);
+    // OnDeserialize is private, test with Call method
+    EXPECT_THROW(contract->Call(*engine, "deserialize", emptyArgs), std::exception);
 
     // TODO: Add more invalid argument tests
 }
@@ -143,7 +147,8 @@ TEST_F(UT_StdLib_Complete, JsonSerialize)
     // Execute method
     try
     {
-        auto result = contract->OnJsonSerialize(*engine, args);
+        // OnJsonSerialize is private, use Call method instead
+        auto result = contract->Call(*engine, "jsonSerialize", args);
 
         // Verify result
         EXPECT_TRUE(result != nullptr);
@@ -163,7 +168,8 @@ TEST_F(UT_StdLib_Complete, JsonSerialize_InvalidArgs)
 
     // Test with wrong number of arguments
     std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnJsonSerialize(*engine, emptyArgs), std::exception);
+    // OnJsonSerialize is private, test with Call method
+    EXPECT_THROW(contract->Call(*engine, "jsonSerialize", emptyArgs), std::exception);
 
     // TODO: Add more invalid argument tests
 }
@@ -191,7 +197,8 @@ TEST_F(UT_StdLib_Complete, JsonDeserialize)
     // Execute method
     try
     {
-        auto result = contract->OnJsonDeserialize(*engine, args);
+        // OnJsonDeserialize is private, use Call method instead
+        auto result = contract->Call(*engine, "jsonDeserialize", args);
 
         // Verify result
         EXPECT_TRUE(result != nullptr);
@@ -211,7 +218,8 @@ TEST_F(UT_StdLib_Complete, JsonDeserialize_InvalidArgs)
 
     // Test with wrong number of arguments
     std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnJsonDeserialize(*engine, emptyArgs), std::exception);
+    // OnJsonDeserialize is private, test with Call method
+    EXPECT_THROW(contract->Call(*engine, "jsonDeserialize", emptyArgs), std::exception);
 
     // TODO: Add more invalid argument tests
 }

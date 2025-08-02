@@ -13,8 +13,8 @@ WalletAccount::WalletAccount(const cryptography::ecc::KeyPair& keyPair)
     // Calculate script hash
     scriptHash_ = cryptography::Hash::Hash160(publicKey_.ToArray().AsSpan());
 
-    // Create contract
-    contract_ = smartcontract::Contract::CreateSignatureContract(publicKey_);
+    // TODO: Create contract when smartcontract dependency is resolved
+    // contract_ = smartcontract::Contract::CreateSignatureContract(publicKey_);
 }
 
 WalletAccount::WalletAccount(const io::UInt160& scriptHash) : scriptHash_(scriptHash), locked_(false) {}
@@ -109,20 +109,21 @@ nlohmann::json WalletAccount::ToJson() const
     if (!privateKey_.empty())
         json["private_key"] = io::ByteVector(io::ByteSpan(privateKey_.data(), privateKey_.size())).ToHexString();
 
-    if (!contract_.GetScript().IsEmpty())
-    {
-        nlohmann::json contractJson;
-        contractJson["script"] = contract_.GetScript().ToHexString();
+    // TODO: Implement contract serialization when smartcontract dependency is resolved
+    // if (!contract_.GetScript().IsEmpty())
+    // {
+    //     nlohmann::json contractJson;
+    //     contractJson["script"] = contract_.GetScript().ToHexString();
 
-        nlohmann::json parameterListJson = nlohmann::json::array();
-        for (const auto& parameter : contract_.GetParameterList())
-        {
-            parameterListJson.push_back(static_cast<uint8_t>(parameter));
-        }
-        contractJson["parameters"] = parameterListJson;
+    //     nlohmann::json parameterListJson = nlohmann::json::array();
+    //     for (const auto& parameter : contract_.GetParameterList())
+    //     {
+    //         parameterListJson.push_back(static_cast<uint8_t>(parameter));
+    //     }
+    //     contractJson["parameters"] = parameterListJson;
 
-        json["contract"] = contractJson;
-    }
+    //     json["contract"] = contractJson;
+    // }
 
     if (!label_.empty())
         json["label"] = label_;
@@ -158,16 +159,16 @@ void WalletAccount::FromJson(const nlohmann::json& json)
         if (contractJson.contains("script"))
             script = io::ByteVector::Parse(contractJson["script"].get<std::string>());
 
-        std::vector<smartcontract::ContractParameterType> parameterList;
-        if (contractJson.contains("parameters") && contractJson["parameters"].is_array())
-        {
-            for (const auto& parameter : contractJson["parameters"])
-            {
-                parameterList.push_back(static_cast<smartcontract::ContractParameterType>(parameter.get<uint8_t>()));
-            }
-        }
-
-        contract_ = smartcontract::Contract(script, parameterList);
+        // TODO: Implement contract deserialization when smartcontract dependency is resolved
+        // std::vector<smartcontract::ContractParameterType> parameterList;
+        // if (contractJson.contains("parameters") && contractJson["parameters"].is_array())
+        // {
+        //     for (const auto& parameter : contractJson["parameters"])
+        //     {
+        //         parameterList.push_back(static_cast<smartcontract::ContractParameterType>(parameter.get<uint8_t>()));
+        //     }
+        // }
+        // contract_ = smartcontract::Contract(script, parameterList);
     }
 
     if (json.contains("label"))

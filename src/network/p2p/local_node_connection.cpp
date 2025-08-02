@@ -322,20 +322,24 @@ void LocalNode::HandleConnect(const std::error_code& error, boost::asio::ip::tcp
 {
     if (!error)
     {
+        LOG_INFO("Connected to " + endpoint.ToString());
+        
         // Create a TCP connection
         auto connection = TcpConnection::Create(std::move(socket));
 
         // Create a remote node
         auto remoteNode = std::make_unique<RemoteNode>(this, connection);
 
-        // Add the remote node to the connected nodes
-        AddConnectedNode(std::move(remoteNode));
+        // Send version message BEFORE moving the remoteNode
+        LOG_INFO("Sending Version message to newly connected peer");
+        bool versionSent = remoteNode->SendVersion();
+        LOG_INFO("Version message send result: " + std::string(versionSent ? "success" : "failed"));
 
         // Start receiving messages
         connection->StartReceiving();
 
-        // Send version message
-        remoteNode->SendVersion();
+        // Add the remote node to the connected nodes (moves remoteNode)
+        AddConnectedNode(std::move(remoteNode));
     }
     else
     {
@@ -346,15 +350,26 @@ void LocalNode::HandleConnect(const std::error_code& error, boost::asio::ip::tcp
 
 void LocalNode::AddConnectedNode(std::unique_ptr<RemoteNode> remoteNode)
 {
-    std::lock_guard<std::mutex> lock(connectedNodesMutex_);
+    try 
+    {
+        std::lock_guard<std::mutex> lock(connectedNodesMutex_);
 
-    uint32_t id = remoteNode->GetConnection()->GetId();
-    auto node = remoteNode.get();
+        uint32_t id = remoteNode->GetConnection()->GetId();
+        auto node = remoteNode.get();
 
-    connectedNodes_[id] = std::move(remoteNode);
+        LOG_DEBUG("Adding connected node with ID: " + std::to_string(id));
 
-    // Notify that a remote node has connected
-    OnRemoteNodeConnected(node);
+        connectedNodes_[id] = std::move(remoteNode);
+
+        LOG_DEBUG("About to call OnRemoteNodeConnected");
+        // Notify that a remote node has connected
+        OnRemoteNodeConnected(node);
+        LOG_DEBUG("OnRemoteNodeConnected completed");
+    }
+    catch (const std::exception& e)
+    {
+        LOG_ERROR("AddConnectedNode failed: " + std::string(e.what()));
+    }
 }
 
 void LocalNode::RemoveConnectedNode(uint32_t id)

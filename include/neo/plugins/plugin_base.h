@@ -111,7 +111,7 @@ class PluginBase : public Plugin
      * @brief Gets the RPC server.
      * @return The RPC server.
      */
-    std::shared_ptr<rpc::RPCServer> GetRPCServer() const;
+    std::shared_ptr<rpc::RpcServer> GetRPCServer() const;
 
   private:
     std::string name_;
@@ -119,7 +119,7 @@ class PluginBase : public Plugin
     std::string version_;
     std::string author_;
     std::shared_ptr<node::NeoSystem> neoSystem_;
-    std::shared_ptr<rpc::RPCServer> rpcServer_;
+    std::shared_ptr<rpc::RpcServer> rpcServer_;
     std::atomic<bool> running_;
 };
 
@@ -137,7 +137,7 @@ class PluginFactoryBase : public PluginFactory
      */
     std::shared_ptr<Plugin> CreatePlugin() override
     {
-        return std::make_shared<T>();
+        return std::shared_ptr<Plugin>(new T());
     }
 };
 }  // namespace neo::plugins

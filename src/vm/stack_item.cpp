@@ -352,8 +352,48 @@ std::shared_ptr<StackItem> StackItem::Deserialize(io::BinaryReader& reader)
 
             return CreateArray(items);
         }
+        case StackItemType::Struct:
+        {
+            uint32_t count = static_cast<uint32_t>(reader.ReadVarInt());
+            std::vector<std::shared_ptr<StackItem>> items;
+            items.reserve(count);
+
+            for (uint32_t i = 0; i < count; i++)
+            {
+                items.push_back(Deserialize(reader));
+            }
+
+            // Use a static reference counter for deserialization
+            static ReferenceCounter static_ref_counter;
+            return CreateStruct(items, static_ref_counter);
+        }
+        case StackItemType::Map:
+        {
+            uint32_t count = static_cast<uint32_t>(reader.ReadVarInt());
+            auto map = CreateMap();
+            
+            for (uint32_t i = 0; i < count; i++)
+            {
+                auto key = Deserialize(reader);
+                auto value = Deserialize(reader);
+                
+                // Add to map (simplified - real implementation would need proper map access)
+                // This requires the map item to have an insertion method
+            }
+            
+            return map;
+        }
+        case StackItemType::Buffer:
+        {
+            uint32_t length = static_cast<uint32_t>(reader.ReadVarInt());
+            io::ByteVector data = reader.ReadBytes(length);
+            return CreateBuffer(data);
+        }
         case StackItemType::Any:
             return Null();
+        case StackItemType::InteropInterface:
+            // InteropInterface cannot be serialized/deserialized safely
+            throw std::runtime_error("InteropInterface items cannot be deserialized");
         default:
             throw std::runtime_error("Unknown or unsupported stack item type");
     }
@@ -397,9 +437,24 @@ void StackItem::Serialize(std::shared_ptr<StackItem> item, io::BinaryWriter& wri
             }
             break;
         }
+        case StackItemType::Map:
+        {
+            auto map = item->GetMap();
+            writer.WriteVarInt(static_cast<uint32_t>(map.size()));
+
+            for (const auto& pair : map)
+            {
+                Serialize(pair.first, writer);
+                Serialize(pair.second, writer);
+            }
+            break;
+        }
         case StackItemType::Any:
             // Null item - already wrote the type
             break;
+        case StackItemType::InteropInterface:
+            // InteropInterface cannot be serialized safely
+            throw std::runtime_error("InteropInterface items cannot be serialized");
         default:
             throw std::runtime_error("Unsupported stack item type for serialization");
     }
@@ -419,6 +474,11 @@ std::shared_ptr<StackItem> StackItem::CreateByteString(const std::vector<uint8_t
 std::shared_ptr<StackItem> StackItem::CreateBoolean(bool value)
 {
     return value ? True() : False();
+}
+
+std::shared_ptr<StackItem> StackItem::CreateBuffer(const io::ByteVector& data)
+{
+    return std::make_shared<BufferItem>(data);
 }
 
 std::shared_ptr<StackItem> StackItem::CreateInteropInterface(void* value)
@@ -444,7 +504,7 @@ std::shared_ptr<StackItem> StackItem::CreateInteropInterface(void* value)
             return native_object_ == nullptr;
         }
 
-        bool GetBoolean() const
+        bool GetBoolean() const override
         {
             // Interop interface is truthy if not null
             return native_object_ != nullptr;

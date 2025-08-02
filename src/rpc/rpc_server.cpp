@@ -365,4 +365,17 @@ io::JsonValue RpcServer::GetApplicationLog(const io::JsonValue& params)
     return methods.GetApplicationLog(params);
 }
 
+io::JsonValue RpcServer::GetStatistics() const
+{
+    io::JsonValue stats;
+    stats.AddMember("totalRequests", static_cast<int64_t>(total_requests_.load()));
+    stats.AddMember("failedRequests", static_cast<int64_t>(failed_requests_.load()));
+    
+    auto now = std::chrono::steady_clock::now();
+    auto uptime = std::chrono::duration_cast<std::chrono::seconds>(now - start_time_).count();
+    stats.AddMember("uptimeSeconds", static_cast<int64_t>(uptime));
+    
+    return stats;
+}
+
 }  // namespace neo::rpc

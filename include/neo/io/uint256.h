@@ -149,6 +149,26 @@ class UInt256 : public ISerializable
     }
 
     /**
+     * @brief Checks if this UInt256 is less than or equal to another UInt256.
+     * @param other The other UInt256.
+     * @return True if this UInt256 is less than or equal to the other UInt256, false otherwise.
+     */
+    bool operator<=(const UInt256& other) const
+    {
+        return !(*this > other);
+    }
+
+    /**
+     * @brief Checks if this UInt256 is greater than or equal to another UInt256.
+     * @param other The other UInt256.
+     * @return True if this UInt256 is greater than or equal to the other UInt256, false otherwise.
+     */
+    bool operator>=(const UInt256& other) const
+    {
+        return !(*this < other);
+    }
+
+    /**
      * @brief Converts this UInt256 to a string.
      * @return The string representation of this UInt256.
      */
@@ -220,6 +240,17 @@ class UInt256 : public ISerializable
      * @return The UInt256 value.
      */
     static UInt256 FromLittleEndianString(const std::string& hex_string);
+
+    /**
+     * @brief Creates a UInt256 from a ByteSpan.
+     * @param data The ByteSpan containing the data.
+     * @return The UInt256 created from the data.
+     * @throws std::invalid_argument if the ByteSpan size is not equal to UInt256::Size.
+     */
+    static UInt256 FromBytes(const ByteSpan& data)
+    {
+        return UInt256(data);
+    }
 
     /**
      * @brief Gets the raw data.

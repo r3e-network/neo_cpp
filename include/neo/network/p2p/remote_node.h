@@ -5,7 +5,7 @@
 #include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/network/ip_endpoint.h>
-#include <neo/network/message.h>
+#include <neo/network/p2p/message.h>
 #include <neo/network/p2p/connection.h>
 #include <neo/network/p2p/node_capability.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
@@ -147,7 +147,7 @@ class RemoteNode
      * @param addresses The addresses to send.
      * @return True if the message was sent successfully, false otherwise.
      */
-    bool SendAddr(const std::vector<NetworkAddressWithTime>& addresses);
+    bool SendAddr(const std::vector<payloads::NetworkAddressWithTime>& addresses);
 
     /**
      * @brief Sends an inv message to the remote node.
@@ -232,5 +232,7 @@ class RemoteNode
     void ProcessGetAddrMessage(const Message& message);
     void ProcessRejectMessage(const Message& message);
     void ProcessNotFoundMessage(const Message& message);
+    void ProcessTransactionMessage(const Message& message);
+    void ProcessBlockMessage(const Message& message);
 };
 }  // namespace neo::network::p2p

@@ -8,7 +8,7 @@
 #include <mutex>
 #include <neo/io/uint256.h>
 #include <neo/network/inventory_type.h>
-#include <neo/network/message.h>
+#include <neo/network/p2p/message.h>
 #include <neo/network/peer_discovery_service.h>
 #include <neo/network/tcp_client.h>
 #include <neo/network/tcp_server.h>
@@ -123,7 +123,7 @@ class P2PPeer
      * @brief Sends a message to the peer.
      * @param message The message.
      */
-    void Send(const Message& message);
+    void Send(const p2p::Message& message);
 
   private:
     std::shared_ptr<TcpConnection> connection_;
@@ -231,7 +231,7 @@ class P2PServer : public std::enable_shared_from_this<P2PServer>
      * @brief Broadcasts a message to all connected peers.
      * @param message The message.
      */
-    void Broadcast(const Message& message);
+    void Broadcast(const p2p::Message& message);
 
     /**
      * @brief Sets the inventory received callback.
@@ -254,13 +254,13 @@ class P2PServer : public std::enable_shared_from_this<P2PServer>
     boost::asio::io_context& ioContext_;
 
     void HandleConnectionAccepted(std::shared_ptr<TcpConnection> connection);
-    void HandleMessageReceived(std::shared_ptr<P2PPeer> peer, const Message& message);
-    void HandleVersionMessage(std::shared_ptr<P2PPeer> peer, const Message& message);
-    void HandleVerackMessage(std::shared_ptr<P2PPeer> peer, const Message& message);
-    void HandleInventoryMessage(std::shared_ptr<P2PPeer> peer, const Message& message);
-    void HandleGetDataMessage(std::shared_ptr<P2PPeer> peer, const Message& message);
-    void HandlePingMessage(std::shared_ptr<P2PPeer> peer, const Message& message);
-    void HandlePongMessage(std::shared_ptr<P2PPeer> peer, const Message& message);
+    void HandleMessageReceived(std::shared_ptr<P2PPeer> peer, const p2p::Message& message);
+    void HandleVersionMessage(std::shared_ptr<P2PPeer> peer, const p2p::Message& message);
+    void HandleVerackMessage(std::shared_ptr<P2PPeer> peer, const p2p::Message& message);
+    void HandleInventoryMessage(std::shared_ptr<P2PPeer> peer, const p2p::Message& message);
+    void HandleGetDataMessage(std::shared_ptr<P2PPeer> peer, const p2p::Message& message);
+    void HandlePingMessage(std::shared_ptr<P2PPeer> peer, const p2p::Message& message);
+    void HandlePongMessage(std::shared_ptr<P2PPeer> peer, const p2p::Message& message);
     /**
      * @brief Gets the peer discovery service.
      * @return The peer discovery service.
@@ -268,8 +268,8 @@ class P2PServer : public std::enable_shared_from_this<P2PServer>
     std::shared_ptr<PeerDiscoveryService> GetPeerDiscoveryService() const;
 
   private:
-    void HandleGetAddrMessage(std::shared_ptr<P2PPeer> peer, const Message& message);
-    void HandleAddrMessage(std::shared_ptr<P2PPeer> peer, const Message& message);
+    void HandleGetAddrMessage(std::shared_ptr<P2PPeer> peer, const p2p::Message& message);
+    void HandleAddrMessage(std::shared_ptr<P2PPeer> peer, const p2p::Message& message);
     void RequestAddresses(std::shared_ptr<P2PPeer> peer);
     void SendVersionMessage(std::shared_ptr<P2PPeer> peer);
 };

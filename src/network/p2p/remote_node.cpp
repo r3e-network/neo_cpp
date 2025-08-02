@@ -4,7 +4,6 @@
 #include <neo/core/logging.h>
 #include <neo/io/byte_vector.h>
 #include <neo/network/ip_endpoint.h>
-#include <neo/network/message.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p/network_address.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
@@ -23,6 +22,7 @@
 #include <neo/network/p2p/payloads/verack_payload.h>
 #include <neo/network/p2p/payloads/version_payload.h>
 #include <neo/network/p2p/remote_node.h>
+#include <neo/network/p2p/message.h>
 #include <string>
 #include <vector>
 
@@ -111,8 +111,11 @@ bool RemoteNode::SendVersion()
     // Create a version payload
     auto payload = localNode_->CreateVersionPayload();
 
-    // Send the version message
-    return Send(Message::Create(MessageCommand::Version, payload));
+    // Send the version message - use explicit p2p namespace
+    LOG_INFO("About to call neo::network::p2p::Message::Create for Version command");
+    auto message = neo::network::p2p::Message::Create(MessageCommand::Version, payload);
+    LOG_INFO("neo::network::p2p::Message::Create returned message with command: " + std::to_string(static_cast<int>(message.GetCommand())));
+    return Send(message);
 }
 
 bool RemoteNode::SendVerack()
@@ -161,7 +164,7 @@ bool RemoteNode::SendGetAddr()
     return Send(Message::Create(MessageCommand::GetAddr));
 }
 
-bool RemoteNode::SendAddr(const std::vector<NetworkAddressWithTime>& addresses)
+bool RemoteNode::SendAddr(const std::vector<payloads::NetworkAddressWithTime>& addresses)
 {
     if (!IsConnected())
         return false;
@@ -263,6 +266,8 @@ bool RemoteNode::SendHeaders(const std::vector<std::shared_ptr<ledger::BlockHead
 
 void RemoteNode::OnMessageReceived(const Message& message)
 {
+    LOG_DEBUG("RemoteNode::OnMessageReceived - Command: " + std::to_string(static_cast<int>(message.GetCommand())));
+    
     // Process the message based on its command
     switch (message.GetCommand())
     {
@@ -324,6 +329,14 @@ void RemoteNode::OnMessageReceived(const Message& message)
             // NotFound message indicates requested objects were not found
             ProcessNotFoundMessage(message);
             break;
+        case MessageCommand::Transaction:
+            // Transaction message contains transaction data
+            ProcessTransactionMessage(message);
+            break;
+        case MessageCommand::Block:
+            // Block message contains block data
+            ProcessBlockMessage(message);
+            break;
         default:
             // Log unhandled message types for debugging
             LOG_DEBUG("RemoteNode received unhandled message type: {}", static_cast<int>(message.GetCommand()));
@@ -342,14 +355,24 @@ void RemoteNode::OnDisconnected()
 
 void RemoteNode::ProcessVersionMessage(const Message& message)
 {
+    LOG_DEBUG("ProcessVersionMessage called");
+    
     // Only process version message if we haven't handshaked yet
     if (handshaked_)
+    {
+        LOG_DEBUG("Already handshaked, ignoring version message");
         return;
+    }
 
     // Get the version payload
     auto payload = std::dynamic_pointer_cast<payloads::VersionPayload>(message.GetPayload());
     if (!payload)
+    {
+        LOG_WARNING("Failed to get VersionPayload from message");
         return;
+    }
+
+    LOG_INFO("Received Version message from peer");
 
     // Store the version information
     version_ = payload->GetVersion();
@@ -357,11 +380,13 @@ void RemoteNode::ProcessVersionMessage(const Message& message)
     capabilities_ = payload->GetCapabilities();
 
     // Send verack message
+    LOG_DEBUG("Sending VerAck message");
     SendVerack();
 
     // If we haven't sent our version yet, send it
     if (!handshaked_)
     {
+        LOG_DEBUG("Sending Version message in response");
         SendVersion();
     }
 
@@ -374,12 +399,21 @@ void RemoteNode::ProcessVersionMessage(const Message& message)
 
 void RemoteNode::ProcessVerackMessage(const Message& /* message */)
 {
+    LOG_DEBUG("ProcessVerackMessage called");
+    
     // Only process verack message if we haven't handshaked yet
     if (handshaked_)
+    {
+        LOG_DEBUG("Already handshaked, ignoring verack message");
         return;
+    }
+
+    LOG_INFO("Received VerAck message from peer");
 
     // Mark as handshaked
     handshaked_ = true;
+
+    LOG_INFO("P2P handshake completed successfully");
 
     // Notify the local node that we've handshaked
     if (localNode_)
@@ -651,7 +685,7 @@ void RemoteNode::ProcessGetAddrMessage(const Message& message)
     if (localNode_)
     {
         auto& peerList = localNode_->GetPeerList();
-        std::vector<NetworkAddressWithTime> addresses;
+        std::vector<payloads::NetworkAddressWithTime> addresses;
 
         // Collect up to maxCount addresses from known connected peers
         constexpr size_t maxAddressCount = payloads::AddrPayload::MaxCountToSend;
@@ -672,7 +706,14 @@ void RemoteNode::ProcessGetAddrMessage(const Message& message)
                 std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch())
                     .count());
 
-            addresses.emplace_back(timestamp, endpoint.GetAddress(), capabilities);
+            // Convert capabilities to services bitmask
+            uint64_t services = 0;
+            for (const auto& cap : capabilities)
+            {
+                services |= static_cast<uint64_t>(cap.GetType());
+            }
+            
+            addresses.emplace_back(timestamp, services, endpoint.GetAddress().ToString(), endpoint.GetPort());
             addressCount++;
         }
 
@@ -725,6 +766,61 @@ void RemoteNode::ProcessNotFoundMessage(const Message& message)
     {
         // Handle missing items - for example, request from another peer
         // or mark these items as unavailable from this peer
+    }
+}
+
+void RemoteNode::ProcessTransactionMessage(const Message& message)
+{
+    // Only process transaction message if we've handshaked
+    if (!handshaked_)
+        return;
+
+    // Get the transaction payload
+    auto payload = message.GetPayload();
+    if (!payload)
+        return;
+
+    // Cast to transaction - in full implementation, this would be the actual transaction object
+    // For now, we'll handle this as a generic payload and forward to the local node
+    LOG_DEBUG("RemoteNode received transaction message");
+
+    // Notify the local node about the new transaction
+    if (localNode_)
+    {
+        // Forward transaction to local node for processing
+        // In full implementation, this would involve:
+        // 1. Deserializing the transaction
+        // 2. Validating the transaction
+        // 3. Adding to memory pool if valid
+        // 4. Relaying to other peers if needed
+        localNode_->OnTransactionReceived(payload);
+    }
+}
+
+void RemoteNode::ProcessBlockMessage(const Message& message)
+{
+    // Only process block message if we've handshaked
+    if (!handshaked_)
+        return;
+
+    // Get the block payload
+    auto payload = message.GetPayload();
+    if (!payload)
+        return;
+
+    // Cast to block - in full implementation, this would be the actual block object
+    LOG_DEBUG("RemoteNode received block message");
+
+    // Notify the local node about the new block
+    if (localNode_)
+    {
+        // Forward block to local node for processing
+        // In full implementation, this would involve:
+        // 1. Deserializing the block
+        // 2. Validating the block
+        // 3. Adding to blockchain if valid
+        // 4. Relaying to other peers if needed
+        localNode_->OnBlockReceived(payload);
     }
 }
 

@@ -9,7 +9,7 @@
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint256.h>
 #include <neo/network/ip_endpoint.h>
-#include <neo/network/message.h>
+#include <neo/network/p2p/message.h>
 #include <neo/network/p2p/channels_config.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/p2p/payloads/filter_add_payload.h>
@@ -379,6 +379,18 @@ class LocalNode
     void OnRemoteNodeHandshaked(RemoteNode* remoteNode);
 
     /**
+     * @brief Called when a transaction is received from a remote node.
+     * @param payload The transaction payload.
+     */
+    void OnTransactionReceived(std::shared_ptr<IPayload> payload);
+
+    /**
+     * @brief Called when a block is received from a remote node.
+     * @param payload The block payload.
+     */
+    void OnBlockReceived(std::shared_ptr<IPayload> payload);
+
+    /**
      * @brief Sets the peer list file path.
      * @param path The path to the peer list file.
      */
@@ -478,7 +490,7 @@ class LocalNode
     std::unique_ptr<boost::asio::ip::tcp::acceptor> acceptor_;
     std::thread ioThread_;
 
-    std::unordered_map<uint32_t, std::unique_ptr<RemoteNode>> connectedNodes_;
+    std::unordered_map<std::string, std::unique_ptr<RemoteNode>> connectedNodes_;
     mutable std::mutex connectedNodesMutex_;
     size_t maxConnections_;
     std::atomic<bool> running_;
@@ -510,6 +522,6 @@ class LocalNode
     void HandleAccept(const std::error_code& error, boost::asio::ip::tcp::socket socket);
     void HandleConnect(const std::error_code& error, boost::asio::ip::tcp::socket socket, const IPEndPoint& endpoint);
     void AddConnectedNode(std::unique_ptr<RemoteNode> remoteNode);
-    void RemoveConnectedNode(uint32_t id);
+    void RemoveConnectedNode(const std::string& key);
 };
 }  // namespace neo::network::p2p

@@ -24,7 +24,8 @@ class RateLimiter
         bool enabled = true;
     };
 
-    explicit RateLimiter(const Config& config = Config{}) : config_(config), tokens_(config.burstSize) {}
+    explicit RateLimiter(const Config& config) : config_(config), tokens_(config_.burstSize) {}
+    explicit RateLimiter() : config_(Config{}), tokens_(config_.burstSize) {}
 
     /**
      * @brief Check if a request is allowed
@@ -162,7 +163,7 @@ class RateLimiter
 
         if (tokensToAdd > 0)
         {
-            tokens_ = std::min(tokens_ + tokensToAdd, config_.burstSize);
+            tokens_ = std::min(tokens_ + static_cast<size_t>(tokensToAdd), config_.burstSize);
             lastRefill_ = now;
         }
     }

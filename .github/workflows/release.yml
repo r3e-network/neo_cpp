@@ -1,0 +1,207 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., v1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+      version: ${{ steps.get_version.outputs.version }}
+    steps:
+    - name: Get version
+      id: get_version
+      run: |
+        if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          VERSION="${{ github.event.inputs.version }}"
+        else
+          VERSION=${GITHUB_REF#refs/tags/}
+        fi
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.get_version.outputs.version }}
+        release_name: Neo C++ ${{ steps.get_version.outputs.version }}
+        draft: true
+        prerelease: false
+        body: |
+          ## Neo C++ ${{ steps.get_version.outputs.version }}
+          
+          ### Changes
+          - TODO: Add release notes
+          
+          ### Downloads
+          See assets below for platform-specific binaries.
+
+  build-release:
+    name: Build Release Binaries
+    needs: create-release
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-20.04
+            artifact_name: neo-cpp-linux-amd64
+            asset_name: neo-cpp-${{ needs.create-release.outputs.version }}-linux-amd64.tar.gz
+          - os: ubuntu-22.04
+            artifact_name: neo-cpp-linux-ubuntu22-amd64
+            asset_name: neo-cpp-${{ needs.create-release.outputs.version }}-ubuntu22-amd64.tar.gz
+          - os: macos-12
+            artifact_name: neo-cpp-darwin-amd64
+            asset_name: neo-cpp-${{ needs.create-release.outputs.version }}-darwin-amd64.tar.gz
+          - os: macos-13
+            artifact_name: neo-cpp-darwin-arm64
+            asset_name: neo-cpp-${{ needs.create-release.outputs.version }}-darwin-arm64.tar.gz
+          - os: windows-2022
+            artifact_name: neo-cpp-windows-amd64
+            asset_name: neo-cpp-${{ needs.create-release.outputs.version }}-windows-amd64.zip
+
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Install dependencies (Ubuntu)
+      if: startsWith(matrix.os, 'ubuntu')
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          cmake \
+          ninja-build \
+          libboost-all-dev \
+          libssl-dev \
+          librocksdb-dev
+
+    - name: Install dependencies (macOS)
+      if: startsWith(matrix.os, 'macos')
+      run: |
+        brew install cmake ninja boost openssl rocksdb
+
+    - name: Install dependencies (Windows)
+      if: startsWith(matrix.os, 'windows')
+      run: |
+        choco install cmake ninja
+        vcpkg install boost-all:x64-windows openssl:x64-windows rocksdb:x64-windows
+
+    - name: Configure CMake
+      run: |
+        cmake -B build \
+          -G Ninja \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DNEO_BUILD_TESTS=OFF \
+          -DNEO_BUILD_EXAMPLES=OFF \
+          -DNEO_ENABLE_LTO=ON \
+          -DNEO_ENABLE_NATIVE_ARCH=OFF
+
+    - name: Build
+      run: cmake --build build --config Release
+
+    - name: Package (Unix)
+      if: runner.os != 'Windows'
+      run: |
+        mkdir -p release/neo-cpp/bin
+        mkdir -p release/neo-cpp/lib
+        mkdir -p release/neo-cpp/include
+        
+        cp build/apps/cli/neo-cli release/neo-cpp/bin/
+        cp build/apps/node/neo-node release/neo-cpp/bin/ || true
+        cp -r include/* release/neo-cpp/include/
+        find build -name "*.so" -o -name "*.dylib" | xargs -I {} cp {} release/neo-cpp/lib/ || true
+        
+        cd release
+        tar czf ${{ matrix.asset_name }} neo-cpp
+
+    - name: Package (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        New-Item -ItemType Directory -Force -Path release\neo-cpp\bin
+        New-Item -ItemType Directory -Force -Path release\neo-cpp\lib
+        New-Item -ItemType Directory -Force -Path release\neo-cpp\include
+        
+        Copy-Item build\apps\cli\neo-cli.exe release\neo-cpp\bin\
+        Copy-Item build\apps\node\neo-node.exe release\neo-cpp\bin\ -ErrorAction SilentlyContinue
+        Copy-Item -Recurse include\* release\neo-cpp\include\
+        Get-ChildItem -Path build -Filter "*.dll" -Recurse | Copy-Item -Destination release\neo-cpp\lib\
+        
+        Compress-Archive -Path release\neo-cpp -DestinationPath release\${{ matrix.asset_name }}
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.create-release.outputs.upload_url }}
+        asset_path: ./release/${{ matrix.asset_name }}
+        asset_name: ${{ matrix.asset_name }}
+        asset_content_type: application/gzip
+
+  build-docker:
+    name: Build and Push Docker Images
+    needs: create-release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          ${{ secrets.DOCKER_USERNAME }}/neo-cpp:${{ needs.create-release.outputs.version }}
+          ${{ secrets.DOCKER_USERNAME }}/neo-cpp:latest
+          ghcr.io/${{ github.repository }}:${{ needs.create-release.outputs.version }}
+          ghcr.io/${{ github.repository }}:latest
+
+  publish-release:
+    name: Publish Release
+    needs: [create-release, build-release, build-docker]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Publish release
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          github.rest.repos.updateRelease({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            release_id: ${{ needs.create-release.outputs.release_id }},
+            draft: false
+          })

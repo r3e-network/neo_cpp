@@ -39,7 +39,7 @@ bool RpcServerPlugin::OnInitialize(const std::unordered_map<std::string, std::st
 
     // Create RPC server
     rpcServer_ =
-        std::make_shared<rpc::RPCServer>(GetNeoSystem(), port_, enableCors_, enableAuth_, username_, password_);
+        std::make_shared<rpc::RpcServer>(GetNeoSystem(), port_, enableCors_, enableAuth_, username_, password_);
 
     // Register methods
     RegisterMethod("ping", [](const nlohmann::json& params) { return "pong"; });

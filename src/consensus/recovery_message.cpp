@@ -1,11 +1,15 @@
 #include <neo/consensus/recovery_message.h>
+#include <neo/consensus/consensus_message.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <sstream>
 
 namespace neo::consensus
 {
-RecoveryMessage::RecoveryMessage(uint8_t viewNumber) : ConsensusMessage(MessageType::RecoveryMessage, viewNumber) {}
+RecoveryMessage::RecoveryMessage(uint8_t viewNumber) : ConsensusMessage(ConsensusMessageType::RecoveryMessage) 
+{
+    SetViewNumber(viewNumber);
+}
 
 const std::vector<std::shared_ptr<ChangeViewMessage>>& RecoveryMessage::GetChangeViewMessages() const
 {

@@ -92,7 +92,7 @@ void InvPayload::SetInventories(const std::vector<InventoryVector>& inventories)
     }
 }
 
-uint32_t InvPayload::GetSize() const
+size_t InvPayload::GetSize() const
 {
     // Type (1 byte) + Hashes size
     size_t hashesSize = 1;  // VarInt for count
@@ -104,7 +104,7 @@ uint32_t InvPayload::GetSize() const
     // Each hash is 32 bytes
     hashesSize += hashes_.size() * 32;
 
-    return static_cast<uint32_t>(sizeof(uint8_t) + hashesSize);
+    return sizeof(uint8_t) + hashesSize;
 }
 
 InvPayload InvPayload::Create(InventoryType type, const std::vector<io::UInt256>& hashes)

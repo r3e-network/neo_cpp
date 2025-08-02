@@ -48,7 +48,7 @@ class RpcServerPlugin : public PluginBase
     bool OnStop() override;
 
   private:
-    std::shared_ptr<rpc::RPCServer> rpcServer_;
+    std::shared_ptr<rpc::RpcServer> rpcServer_;
     uint16_t port_;
     bool enableCors_;
     bool enableAuth_;

@@ -97,7 +97,7 @@ class MainService
   private:
     std::shared_ptr<node::NeoSystem> neoSystem_;
     std::shared_ptr<wallets::Wallet> currentWallet_;
-    std::shared_ptr<rpc::RPCServer> rpcServer_;
+    std::shared_ptr<rpc::RpcServer> rpcServer_;
     std::unordered_map<std::string, CommandHandler> commands_;
     std::unordered_map<std::string, std::unordered_map<std::string, CommandHandler>> commandsByCategory_;
     std::unordered_map<std::string, TypeConverter> typeConverters_;
@@ -129,5 +129,8 @@ class MainService
     void RunConsole();
     void InitializeCommands();
     void InitializeTypeConverters();
+    void InitializeBlockchainCommands();
+    void InitializeNodeCommands();
+    void InitializeWalletCommands();
 };
 }  // namespace neo::cli

@@ -32,7 +32,7 @@ void GetBlocksPayload::SetCount(int16_t count)
     count_ = count;
 }
 
-int GetBlocksPayload::GetSize() const
+size_t GetBlocksPayload::GetSize() const
 {
     return sizeof(int16_t) + io::UInt256::Size;
 }

@@ -23,7 +23,7 @@ class UT_RoleManagement_Complete : public testing::Test
     void SetUp() override
     {
         store = std::make_shared<MemoryStore>();
-        snapshot = std::make_shared<StoreCache>(store);
+        snapshot = std::make_shared<StoreCache>(*store);
         engine = std::make_shared<ApplicationEngine>(TriggerType::Application, nullptr, snapshot, nullptr, 0);
     }
 
@@ -47,11 +47,13 @@ TEST_F(UT_RoleManagement_Complete, DesignateAsRole)
     // Execute method
     try
     {
-        auto result = contract->OnDesignateAsRole(*engine, args);
-
-        // Verify result
-        EXPECT_TRUE(result != nullptr);
-        // TODO: Add specific assertions for DesignateAsRole result
+        // Use public method instead of private OnDesignateAsRole
+        std::vector<neo::cryptography::ecc::ECPoint> nodes; // Empty nodes for test
+        EXPECT_NO_THROW(contract->DesignateAsRole(*engine, Role::StateValidator, nodes));
+        
+        // Verify that designation worked by checking GetDesignatedByRole
+        auto designatedNodes = contract->GetDesignatedByRole(snapshot, Role::StateValidator, 0);
+        EXPECT_TRUE(designatedNodes.empty()); // Should match the empty nodes we designated
     }
     catch (const std::exception& e)
     {
@@ -67,7 +69,8 @@ TEST_F(UT_RoleManagement_Complete, DesignateAsRole_InvalidArgs)
 
     // Test with wrong number of arguments
     std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnDesignateAsRole(*engine, emptyArgs), std::exception);
+    std::vector<neo::cryptography::ecc::ECPoint> emptyNodes;
+    EXPECT_THROW(contract->DesignateAsRole(*engine, Role::StateValidator, emptyNodes), std::exception);
 
     // TODO: Add more invalid argument tests
 }
@@ -95,11 +98,16 @@ TEST_F(UT_RoleManagement_Complete, GetDesignatedByRole)
     // Execute method
     try
     {
-        auto result = contract->OnGetDesignatedByRole(*engine, args);
+        // Use public method instead of private OnGetDesignatedByRole
+        auto result = contract->GetDesignatedByRole(snapshot, Role::StateValidator, 0);
 
-        // Verify result
-        EXPECT_TRUE(result != nullptr);
-        // TODO: Add specific assertions for GetDesignatedByRole result
+        // Verify result (returns vector of ECPoints)
+        EXPECT_TRUE(result.empty()); // Should be empty for new contract
+        EXPECT_EQ(result.size(), 0); // Explicit size check
+        
+        // Test with different roles to ensure they're independent
+        auto oracleResult = contract->GetDesignatedByRole(snapshot, Role::Oracle, 0);
+        EXPECT_TRUE(oracleResult.empty()); // Should also be empty
     }
     catch (const std::exception& e)
     {
@@ -115,7 +123,9 @@ TEST_F(UT_RoleManagement_Complete, GetDesignatedByRole_InvalidArgs)
 
     // Test with wrong number of arguments
     std::vector<std::shared_ptr<StackItem>> emptyArgs;
-    EXPECT_THROW(contract->OnGetDesignatedByRole(*engine, emptyArgs), std::exception);
+    // Test with invalid parameters - GetDesignatedByRole should handle invalid role gracefully
+    auto result = contract->GetDesignatedByRole(snapshot, static_cast<Role>(999), 0);
+    EXPECT_TRUE(result.empty());
 
     // TODO: Add more invalid argument tests
 }

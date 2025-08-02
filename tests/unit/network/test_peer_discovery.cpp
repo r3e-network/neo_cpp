@@ -8,6 +8,7 @@
 #include <neo/network/p2p/message.h>
 #include <neo/network/p2p/message_command.h>
 #include <neo/network/p2p/network_address.h>
+#include <neo/network/p2p/payloads/network_address_with_time.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/p2p/node_capability.h>
 #include <sstream>
@@ -33,7 +34,7 @@ class UT_peer_discovery : public testing::Test
         // Cleanup
     }
 
-    std::vector<NetworkAddressWithTime> testAddresses_;
+    std::vector<payloads::NetworkAddressWithTime> testAddresses_;
 };
 
 TEST_F(UT_peer_discovery, DISABLED_AddrPayload_Construction)
@@ -82,10 +83,10 @@ TEST_F(UT_peer_discovery, AddrPayload_Serialization)
     for (size_t i = 0; i < originalAddresses.size(); ++i)
     {
         EXPECT_EQ(originalAddresses[i].GetTimestamp(), deserializedAddresses[i].GetTimestamp());
-        EXPECT_EQ(originalAddresses[i].GetAddress().GetEndpoint().GetAddress(),
-                  deserializedAddresses[i].GetAddress().GetEndpoint().GetAddress());
-        EXPECT_EQ(originalAddresses[i].GetAddress().GetEndpoint().GetPort(),
-                  deserializedAddresses[i].GetAddress().GetEndpoint().GetPort());
+        EXPECT_EQ(originalAddresses[i].GetAddress(),
+                  deserializedAddresses[i].GetAddress());
+        EXPECT_EQ(originalAddresses[i].GetPort(),
+                  deserializedAddresses[i].GetPort());
     }
 }
 
@@ -118,14 +119,14 @@ TEST_F(UT_peer_discovery, MaxAddressLimit)
     // Test: AddrPayload respects maximum address count
 
     // Create more addresses than the maximum allowed
-    std::vector<NetworkAddressWithTime> manyAddresses;
+    std::vector<payloads::NetworkAddressWithTime> manyAddresses;
     auto now = static_cast<uint32_t>(
         std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count());
 
     for (int i = 0; i < AddrPayload::MaxCountToSend + 50; ++i)
     {
         std::string ip = "192.168.1." + std::to_string((i % 254) + 1);
-        manyAddresses.emplace_back(now - i, NetworkAddress(IPEndPoint(ip, 10333), NodeCapabilityType::FullNode));
+        manyAddresses.emplace_back(now - i, 1, ip, 10333);  // timestamp, services, address, port
     }
 
     // Create payload with excessive addresses
@@ -166,16 +167,15 @@ TEST_F(UT_peer_discovery, DuplicateAddresses)
 {
     // Test: Handling of duplicate addresses in discovery
 
-    std::vector<NetworkAddressWithTime> duplicateAddresses;
+    std::vector<payloads::NetworkAddressWithTime> duplicateAddresses;
     auto now = static_cast<uint32_t>(
         std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count());
 
     // Add same address multiple times with different timestamps
-    NetworkAddress sameAddress(IPEndPoint("192.168.1.100", 10333), NodeCapabilityType::FullNode);
-
-    duplicateAddresses.emplace_back(now, sameAddress);
-    duplicateAddresses.emplace_back(now - 1800, sameAddress);  // 30 minutes ago
-    duplicateAddresses.emplace_back(now - 3600, sameAddress);  // 1 hour ago
+    // Using same address for duplicates
+    duplicateAddresses.emplace_back(now, 1, "192.168.1.100", 10333);
+    duplicateAddresses.emplace_back(now - 1800, 1, "192.168.1.100", 10333);  // 30 minutes ago
+    duplicateAddresses.emplace_back(now - 3600, 1, "192.168.1.100", 10333);  // 1 hour ago
 
     AddrPayload payload(duplicateAddresses);
 
@@ -197,14 +197,14 @@ TEST_F(UT_peer_discovery, InvalidAddresses)
 {
     // Test: Handling of invalid network addresses
 
-    std::vector<NetworkAddressWithTime> invalidAddresses;
+    std::vector<payloads::NetworkAddressWithTime> invalidAddresses;
     auto now = static_cast<uint32_t>(
         std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count());
 
     // Add addresses with invalid IPs
-    invalidAddresses.emplace_back(now, NetworkAddress(IPEndPoint("0.0.0.0", 10333), NodeCapabilityType::FullNode));
+    invalidAddresses.emplace_back(now, 1, "0.0.0.0", 10333);
 
-    invalidAddresses.emplace_back(now, NetworkAddress(IPEndPoint("255.255.255.255", 0), NodeCapabilityType::FullNode));
+    invalidAddresses.emplace_back(now, 1, "255.255.255.255", 0);
 
     AddrPayload payload(invalidAddresses);
 
@@ -220,14 +220,14 @@ TEST_F(UT_peer_discovery, FutureTimestamps)
 {
     // Test: Handling of addresses with future timestamps
 
-    std::vector<NetworkAddressWithTime> futureAddresses;
+    std::vector<payloads::NetworkAddressWithTime> futureAddresses;
     auto futureTime = static_cast<uint32_t>(std::chrono::duration_cast<std::chrono::seconds>(
                                                 std::chrono::system_clock::now().time_since_epoch())
                                                 .count()) +
                       86400;  // 1 day in future
 
     futureAddresses.emplace_back(futureTime,
-                                 NetworkAddress(IPEndPoint("192.168.1.200", 10333), NodeCapabilityType::FullNode));
+                                 1, "192.168.1.200", 10333);
 
     AddrPayload payload(futureAddresses);
 

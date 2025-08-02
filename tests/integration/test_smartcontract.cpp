@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <neo/persistence/memory_store.h>
-#include <neo/persistence/store_provider.h>
+// #include <neo/persistence/store_provider.h>  // File not found
 #include <neo/smartcontract/application_engine.h>
 
 using namespace neo::smartcontract;
@@ -8,13 +8,13 @@ using namespace neo::persistence;
 
 TEST(SmartContractIntegrationTest, TestApplicationEngineInitialization)
 {
-    // Create store provider
+    // Create store and snapshot
     auto store = std::make_shared<MemoryStore>();
-    auto storeProvider = std::make_shared<StoreProvider>(store);
-    auto snapshot = storeProvider->GetSnapshot();
+    auto snapshot = store->GetSnapshot();
 
-    // Create application engine
-    auto engine = std::make_unique<ApplicationEngine>(TriggerType::Application, nullptr, snapshot);
+    // Create application engine with DataCache
+    auto dataCache = std::make_shared<persistence::DataCache>();
+    auto engine = std::make_unique<ApplicationEngine>(TriggerType::Application, nullptr, dataCache);
 
     // Check initial state
     EXPECT_EQ(engine->GetTrigger(), TriggerType::Application);

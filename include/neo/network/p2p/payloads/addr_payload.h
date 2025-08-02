@@ -6,7 +6,7 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/network/p2p/ipayload.h>
-#include <neo/network/p2p/network_address.h>
+#include <neo/network/p2p/payloads/network_address_with_time.h>
 #include <vector>
 
 namespace neo::network::p2p::payloads
@@ -51,7 +51,7 @@ class AddrPayload : public IPayload
      * @brief Gets the size of the payload.
      * @return The size of the payload.
      */
-    int GetSize() const;
+    size_t GetSize() const;
 
     /**
      * @brief Serializes the AddrPayload to a binary writer.
@@ -69,13 +69,13 @@ class AddrPayload : public IPayload
      * @brief Serializes the AddrPayload to a JSON writer.
      * @param writer The JSON writer.
      */
-    void SerializeJson(io::JsonWriter& writer) const override;
+    void SerializeJson(io::JsonWriter& writer) const;
 
     /**
      * @brief Deserializes the AddrPayload from a JSON reader.
      * @param reader The JSON reader.
      */
-    void DeserializeJson(const io::JsonReader& reader) override;
+    void DeserializeJson(const io::JsonReader& reader);
 
   private:
     std::vector<NetworkAddressWithTime> addressList_;

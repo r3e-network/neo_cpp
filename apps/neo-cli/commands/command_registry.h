@@ -9,6 +9,7 @@
 namespace neo::cli
 {
 
+// Forward declaration
 class CLIService;
 
 /**

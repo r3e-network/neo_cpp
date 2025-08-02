@@ -9,9 +9,11 @@ set(PERSISTENCE_SOURCES
     store_factory_complete.cpp
 )
 
-# Add RocksDB store only if RocksDB is found
+# Add RocksDB store
+find_package(RocksDB REQUIRED)
 if(RocksDB_FOUND)
     list(APPEND PERSISTENCE_SOURCES rocksdb_store.cpp)
+    message(STATUS "RocksDB found - enabling RocksDB storage backend")
 endif()
 
 add_library(neo_persistence OBJECT ${PERSISTENCE_SOURCES})
@@ -24,13 +26,14 @@ target_include_directories(neo_persistence
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-# Link dependencies conditionally
+# Link dependencies
 if(RocksDB_FOUND)
     target_link_libraries(neo_persistence
         PUBLIC
             RocksDB::rocksdb
     )
     target_compile_definitions(neo_persistence PUBLIC NEO_HAS_ROCKSDB)
+    message(STATUS "RocksDB integration enabled")
 else()
-    message(WARNING "RocksDB not found - persistence module will use memory store only")
+    message(FATAL_ERROR "RocksDB is required but not found")
 endif()

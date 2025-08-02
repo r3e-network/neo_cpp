@@ -2,11 +2,11 @@
 add_library(neo_network OBJECT
     stubs.cpp  # Temporary stubs for linking
     ip_endpoint.cpp
-    message.cpp
+    p2p/message_simple.cpp
+    # p2p/message.cpp # Disabled - namespace collision causing wrong ToArray method
     tcp_server.cpp
     # p2p_server.cpp # Temporarily disabled due to type conflicts
     upnp.cpp
-    # p2p/message.cpp # Temporarily disabled - needs major refactoring
     p2p/node_capability.cpp
     p2p/network_address.cpp
     p2p/inventory_vector.cpp
@@ -49,6 +49,7 @@ add_library(neo_network OBJECT
     p2p/payloads/header.cpp
     p2p/payloads/network_address_with_time.cpp
     p2p/protocol_handler.cpp
+    p2p/block_sync_manager.cpp
 )
 
 # Include directories

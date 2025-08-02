@@ -89,7 +89,7 @@ std::shared_ptr<node::NeoSystem> PluginBase::GetNeoSystem() const
     return neoSystem_;
 }
 
-std::shared_ptr<rpc::RPCServer> PluginBase::GetRPCServer() const
+std::shared_ptr<rpc::RpcServer> PluginBase::GetRPCServer() const
 {
     return rpcServer_;
 }

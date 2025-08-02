@@ -7,7 +7,7 @@
 #include <string>
 
 // Check if spdlog is available
-#ifdef HAS_SPDLOG
+#ifdef NEO_HAS_SPDLOG
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <spdlog/async.h>
@@ -58,7 +58,7 @@ struct LogConfig
 class Logger
 {
   private:
-#ifdef HAS_SPDLOG
+#ifdef NEO_HAS_SPDLOG
     std::shared_ptr<spdlog::logger> logger_;
 #else
     LogLevel level_;
@@ -138,7 +138,7 @@ class Logger
 };
 
 // Implementation
-#ifdef HAS_SPDLOG
+#ifdef NEO_HAS_SPDLOG
 template <typename... Args>
 void Logger::Trace(const std::string& fmt, Args&&... args)
 {
@@ -281,5 +281,24 @@ class StructuredLog
     }
 
     void Log();
+};
+
+/**
+ * @brief Factory for creating named loggers
+ */
+class LoggerFactory
+{
+public:
+    /**
+     * @brief Get a logger by name
+     * @param name Logger name
+     * @return Shared pointer to logger
+     */
+    static std::shared_ptr<Logger> GetLogger(const std::string& name)
+    {
+        // For simplicity, return the global instance for now
+        // In a full implementation, this would maintain separate named loggers
+        return Logger::GetInstance();
+    }
 };
 }  // namespace neo::core

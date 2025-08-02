@@ -1,6 +1,7 @@
 # Create the CLI executable
 add_executable(neo_cli_app
     main.cpp
+    main_service.cpp
 )
 
 # Set target properties

@@ -21,7 +21,7 @@ class CommandHandler
      * @param neoSystem The Neo system.
      * @param rpcServer The RPC server.
      */
-    CommandHandler(std::shared_ptr<node::NeoSystem> neoSystem, std::shared_ptr<rpc::RPCServer> rpcServer);
+    CommandHandler(std::shared_ptr<node::NeoSystem> neoSystem, std::shared_ptr<rpc::RpcServer> rpcServer);
 
     /**
      * @brief Sets the wallet.
@@ -177,7 +177,7 @@ class CommandHandler
 
   private:
     std::shared_ptr<node::NeoSystem> neoSystem_;
-    std::shared_ptr<rpc::RPCServer> rpcServer_;
+    std::shared_ptr<rpc::RpcServer> rpcServer_;
     std::shared_ptr<wallets::Wallet> wallet_;
     std::unordered_map<std::string, std::string> commandHelp_;
 

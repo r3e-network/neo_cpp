@@ -6,12 +6,15 @@
 #include <neo/persistence/istore.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
+#include <string>
+
+#ifdef NEO_HAS_ROCKSDB
 #include <rocksdb/db.h>
 #include <rocksdb/filter_policy.h>
 #include <rocksdb/options.h>
 #include <rocksdb/table.h>
 #include <rocksdb/write_batch.h>
-#include <string>
+#endif
 
 namespace neo::persistence
 {
@@ -56,6 +59,7 @@ struct RocksDbConfig
     size_t optimize_for_point_lookup_cache_size{0};
 };
 
+#ifdef NEO_HAS_ROCKSDB
 /**
  * @brief RocksDB-based persistent storage implementation
  *
@@ -74,6 +78,12 @@ class RocksDbStore : public IStore
 
     // Column families for different data types
     std::vector<rocksdb::ColumnFamilyHandle*> cf_handles_;
+    
+    // Batch operations
+    std::unique_ptr<rocksdb::WriteBatch> current_batch_;
+    std::mutex batch_mutex_;
+    size_t batch_size_{0};
+    static constexpr size_t MAX_BATCH_SIZE = 1000;
     rocksdb::ColumnFamilyHandle* default_cf_{nullptr};
     rocksdb::ColumnFamilyHandle* blocks_cf_{nullptr};
     rocksdb::ColumnFamilyHandle* transactions_cf_{nullptr};
@@ -218,4 +228,11 @@ class RocksDbStore : public IStore
      */
     rocksdb::WriteOptions GetWriteOptions(bool sync = false) const;
 };
+
+// Alias for compatibility
+using RocksDBStore = RocksDbStore;
+using LevelDBStore = RocksDbStore;  // Temporary alias until LevelDB is implemented
+
+#endif // NEO_HAS_ROCKSDB
+
 }  // namespace neo::persistence
