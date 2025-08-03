@@ -36,11 +36,11 @@ void CLIService::SetupShutdownHandlers()
         {
             if (p2p_server_)
             {
-                // p2p_server_->StopAcceptingConnections(); // Method not implemented
+                p2p_server_->Stop();
             }
             if (rpc_server_)
             {
-                // rpc_server_->StopAcceptingRequests(); // Method not implemented
+                rpc_server_->Stop();
             }
         },
         10, std::chrono::seconds(5));

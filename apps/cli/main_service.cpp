@@ -63,8 +63,7 @@ void MainService::Start(const CommandLineOptions& options)
         }
         else
         {
-            // settings = Settings::Default(); // Method not implemented
-            settings = Settings{};
+            settings = Settings::GetDefault();
         }
 
         // Override settings from command line
@@ -562,13 +561,11 @@ void MainService::InitializeWalletCommands()
             io::UInt160 assetId;
             if (asset == "neo" || asset == "NEO")
             {
-                // assetId = smartcontract::native::NeoToken::SCRIPT_HASH; // Member not implemented
-                assetId = io::UInt160{};
+                assetId = smartcontract::native::NeoToken::GetContractId();
             }
             else if (asset == "gas" || asset == "GAS")
             {
-                // assetId = smartcontract::native::GasToken::SCRIPT_HASH; // Member not implemented
-                assetId = io::UInt160{};
+                assetId = smartcontract::native::GasToken::GetContractId();
             }
             else
             {

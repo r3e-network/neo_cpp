@@ -168,15 +168,25 @@ Validator::ValidationResult Validator::ValidateAddress(const std::string& addres
 // Neo-specific validation
 Validator::ValidationResult Validator::ValidateUInt160(const io::UInt160& value, const std::string& name)
 {
-    // UInt160 is always valid by construction, but we can check if it's meaningful
-    // For now, just return valid
+    // UInt160 is always valid by construction
+    // Check if it's not all zeros (which might indicate uninitialized value)
+    static const io::UInt160 zero_hash;
+    if (value == zero_hash)
+    {
+        return ValidationResult(false, name + " cannot be zero hash");
+    }
     return ValidationResult(true);
 }
 
 Validator::ValidationResult Validator::ValidateUInt256(const io::UInt256& value, const std::string& name)
 {
-    // UInt256 is always valid by construction, but we can check if it's meaningful
-    // For now, just return valid
+    // UInt256 is always valid by construction
+    // Check if it's not all zeros (which might indicate uninitialized value)
+    static const io::UInt256 zero_hash;
+    if (value == zero_hash)
+    {
+        return ValidationResult(false, name + " cannot be zero hash");
+    }
     return ValidationResult(true);
 }
 

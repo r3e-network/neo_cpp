@@ -32,6 +32,9 @@ public:
         ValidationResult(bool valid = true) 
             : is_valid(valid), error_code(NeoException::ErrorCode::UNKNOWN_ERROR) {}
             
+        ValidationResult(bool valid, const std::string& message)
+            : is_valid(valid), error_message(message), error_code(NeoException::ErrorCode::INVALID_ARGUMENT) {}
+            
         ValidationResult(bool valid, const std::string& message, NeoException::ErrorCode code)
             : is_valid(valid), error_message(message), error_code(code) {}
             

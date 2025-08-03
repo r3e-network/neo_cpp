@@ -195,7 +195,7 @@ void CLIService::DisplayStatus()
 
     std::cout << "\nNode Status:" << std::endl;
     std::cout << "  Height: " << blockchain->GetHeight() << std::endl;
-    // std::cout << "  Header Height: " << blockchain->GetHeaderHeight() << std::endl; // Method not implemented
+    std::cout << "  Block Height: " << blockchain->GetHeight() << std::endl;
     std::cout << "  Connected Peers: " << (p2p ? p2p->GetConnectedPeersCount() : 0) << std::endl;
     std::cout << "  Memory Pool: " << (mempool ? mempool->GetSize() : 0) << " transactions" << std::endl;
 

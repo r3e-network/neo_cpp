@@ -164,9 +164,8 @@ bool ShowCommand::Execute(CLIService* service, const std::vector<std::string>& a
 
         std::cout << "\nBlockchain State:" << std::endl;
         std::cout << "  Height: " << blockchain->GetHeight() << std::endl;
-        // std::cout << "  Header Height: " << blockchain->GetHeaderHeight() << std::endl; // Method not implemented
+        std::cout << "  Block Height: " << blockchain->GetHeight() << std::endl;
         std::cout << "  Current Block Hash: " << blockchain->GetCurrentBlockHash().ToString() << std::endl;
-        // std::cout << "  Current Header Hash: " << blockchain->GetCurrentHeaderHash().ToString() << std::endl; // Method not implemented
     }
     else if (subcommand == "pool")
     {
@@ -179,8 +178,7 @@ bool ShowCommand::Execute(CLIService* service, const std::vector<std::string>& a
 
         std::cout << "\nMemory Pool:" << std::endl;
         std::cout << "  Count: " << mempool->GetSize() << std::endl;
-        // std::cout << "  Verified: " << mempool->GetVerifiedCount() << std::endl; // Method not implemented
-        // std::cout << "  Unverified: " << mempool->GetUnverifiedCount() << std::endl; // Method not implemented
+        std::cout << "  Total Transactions: " << mempool->GetSize() << std::endl;
     }
     else if (subcommand == "account")
     {

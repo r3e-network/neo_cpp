@@ -16,6 +16,7 @@ add_library(neo_core OBJECT
     memory_pool.cpp        # Memory pool allocators
     performance_config.cpp # Performance optimization settings
     string_intern.cpp      # String interning for efficiency
+    ../settings.cpp        # Settings implementation
     ../protocol_settings.cpp
     ../protocol_settings_json.cpp
     ../hardfork.cpp
