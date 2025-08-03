@@ -13,6 +13,7 @@ add_library(neo_cryptography OBJECT
     base64.cpp
     base64url.cpp
     base58.cpp
+    ed25519.cpp
     lz4.cpp
     keccak256.cpp
     keccak256_simple.cpp
