@@ -1,12 +1,14 @@
 #pragma once
 
-// Network payload includes disabled since network module is disabled
-// #include <neo/network/p2p/payloads/block.h>
-// #include <neo/network/p2p/payloads/header.h>
-// #include <neo/network/p2p/payloads/header_cache.h>
+// Network payload includes
+#include <neo/network/p2p/payloads/block.h>
+#include <neo/network/p2p/payloads/header.h>
+#include <neo/network/p2p/payloads/header_cache.h>
 #include <neo/ledger/block.h>
 #include <neo/ledger/block_header.h>
+#include <neo/ledger/header.h>
 #include <neo/ledger/transaction.h>
+#include <neo/ledger/event_system.h>
 // #include <neo/network/p2p/payloads/extensible_payload.h> // Disabled since network module is disabled
 #include <atomic>
 #include <condition_variable>
@@ -40,9 +42,8 @@ namespace neo::ledger
 // Forward declarations
 class MemoryPool;
 
-// Type aliases - using ledger types since network module is disabled
-using Header = BlockHeader;  // Use BlockHeader from ledger instead of network payload
 // Note: Block class is defined in this namespace as neo::ledger::Block
+// Note: Header type alias is defined in header.h as alias for BlockHeader
 
 /**
  * @brief Represents an unverified block list for a specific height.
@@ -274,7 +275,8 @@ class Blockchain
     // Network module disabled - IInventory methods commented out
     // void ReverifyInventories(const std::vector<std::shared_ptr<network::p2p::payloads::IInventory>>& inventories);
 
-    // Event registration methods
+    // Event registration methods (deprecated - use static event system for C# compatibility)
+    // Use BlockchainEvents::SubscribeCommitting(), BlockchainEvents::SubscribeCommitted(), etc.
     void RegisterCommittingHandler(CommittingHandler handler);
     void RegisterCommittedHandler(CommittedHandler handler);
     void RegisterBlockPersistenceHandler(BlockPersistenceHandler handler);
@@ -286,8 +288,7 @@ class Blockchain
      * @brief Gets the header cache.
      * @return The header cache.
      */
-    // HeaderCache disabled since network module is disabled
-    // std::shared_ptr<HeaderCache> GetHeaderCache() const { return header_cache_; }
+    std::shared_ptr<network::p2p::payloads::HeaderCache> GetHeaderCache() const { return header_cache_; }
 
     /**
      * @brief Gets the Neo system.
@@ -308,7 +309,7 @@ class Blockchain
     std::vector<ApplicationExecuted> ExecuteBlockScripts(std::shared_ptr<Block> block,
                                                          std::shared_ptr<persistence::DataCache> snapshot);
 
-    // Event firing methods
+    // Event firing methods (updated to use static event system for C# compatibility)
     void FireCommittingEvent(std::shared_ptr<Block> block, std::shared_ptr<persistence::DataCache> snapshot,
                              const std::vector<ApplicationExecuted>& app_executed);
     void FireCommittedEvent(std::shared_ptr<Block> block);
@@ -328,7 +329,7 @@ class Blockchain
 
     // Member variables
     std::shared_ptr<NeoSystem> system_;
-    // std::shared_ptr<HeaderCache> header_cache_;  // Disabled since network module is disabled
+    std::shared_ptr<network::p2p::payloads::HeaderCache> header_cache_;
     std::shared_ptr<persistence::DataCache> data_cache_;
 
     // Block caches

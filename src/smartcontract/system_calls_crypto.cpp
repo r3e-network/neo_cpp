@@ -232,7 +232,7 @@ void RegisterCryptoSystemCallsImpl(ApplicationEngine& engine)
                         writer.Write(block->GetVersion());
                         writer.Write(block->GetPreviousHash());
                         writer.Write(block->GetMerkleRoot());
-                        writer.Write(static_cast<uint64_t>(block->GetTimestamp().time_since_epoch().count()));
+                        writer.Write(static_cast<uint64_t>(block->GetTimestamp()));
                         writer.Write(block->GetNonce());
                         writer.Write(block->GetIndex());
                         writer.Write(block->GetPrimaryIndex());

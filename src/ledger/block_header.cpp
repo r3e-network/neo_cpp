@@ -14,8 +14,7 @@ BlockHeader::BlockHeader() : version_(0), timestamp_(0), nonce_(0), index_(0), p
 
 BlockHeader::BlockHeader(const Block& block)
     : version_(block.GetVersion()), prevHash_(block.GetPreviousHash()), merkleRoot_(block.GetMerkleRoot()),
-      timestamp_(static_cast<uint64_t>(
-          std::chrono::duration_cast<std::chrono::seconds>(block.GetTimestamp().time_since_epoch()).count())),
+      timestamp_(block.GetTimestamp()),
       nonce_(0),  // Block doesn't have nonce
       index_(block.GetIndex()), primaryIndex_(static_cast<uint8_t>(block.GetPrimaryIndex())),
       nextConsensus_(block.GetNextConsensus()), witness_()  // Block doesn't have witness

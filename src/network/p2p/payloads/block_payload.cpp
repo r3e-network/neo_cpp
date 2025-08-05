@@ -53,7 +53,7 @@ void BlockPayload::SerializeJson(io::JsonWriter& writer) const
         writer.WriteProperty("version", block_->GetVersion());
         writer.WriteProperty("previousHash", block_->GetPreviousHash().ToString());
         writer.WriteProperty("merkleRoot", block_->GetMerkleRoot().ToString());
-        writer.WriteProperty("timestamp", static_cast<uint64_t>(block_->GetTimestamp().time_since_epoch().count()));
+        writer.WriteProperty("timestamp", static_cast<uint64_t>(block_->GetTimestamp()));
         writer.WriteProperty("nonce", block_->GetNonce());
         writer.WriteProperty("index", block_->GetIndex());
         writer.WriteProperty("primaryIndex", block_->GetPrimaryIndex());
@@ -83,16 +83,13 @@ void BlockPayload::DeserializeJson(const io::JsonReader& reader)
     io::UInt256 merkleRoot = io::UInt256::Parse(merkleRootStr);
     io::UInt160 nextConsensus = io::UInt160::Parse(nextConsensusStr);
     
-    // Create timestamp from microseconds
-    auto blockTimestamp = std::chrono::system_clock::time_point{std::chrono::microseconds(timestamp)};
-
     // Set block properties (assuming Block has appropriate setters or constructor)
     // Note: This assumes Block class has methods to set these properties
     // In a real implementation, you'd need to check the actual Block API
     block_->SetVersion(version);
     block_->SetPreviousHash(previousHash);
     block_->SetMerkleRoot(merkleRoot);
-    block_->SetTimestamp(blockTimestamp);
+    block_->SetTimestamp(timestamp);
     block_->SetNonce(nonce);
     block_->SetIndex(index);
     block_->SetPrimaryIndex(primaryIndex);

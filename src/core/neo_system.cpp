@@ -30,6 +30,10 @@
 #include "neo/smartcontract/contract.h"
 #include "neo/smartcontract/native/ledger_contract.h"
 #include "neo/smartcontract/native/native_contract.h"
+#include "neo/smartcontract/native/native_contract_manager.h"
+#include "neo/smartcontract/native/neo_token.h"
+#include "neo/smartcontract/native/gas_token.h"
+#include "neo/smartcontract/native/role_management.h"
 #include "neo/vm/opcode.h"
 #include <neo/plugins/plugin.h>
 #include <neo/plugins/plugin_manager.h>
@@ -113,6 +117,8 @@ class RelayCache
     }
 };
 
+// Factory method moved to NeoSystemFactory class to handle proper initialization
+
 NeoSystem::NeoSystem(std::unique_ptr<ProtocolSettings> settings, const std::string& storage_provider_name,
                      const std::string& storage_path)
     : NeoSystem(std::move(settings), persistence::StoreFactory::get_store_provider(storage_provider_name), storage_path)
@@ -167,7 +173,8 @@ NeoSystem::~NeoSystem()
 
 void NeoSystem::initialize_components()
 {
-    // Blockchain initialization moved to factory to avoid shared_from_this() in constructor
+    // Initialize blockchain - use a lambda to capture shared_from_this after construction
+    // This is called after the NeoSystem object is fully constructed
     // blockchain_ = std::make_unique<ledger::Blockchain>(shared_from_this());
 
     // LocalNode is singleton - we'll initialize it but not store in unique_ptr
@@ -431,9 +438,8 @@ bool NeoSystem::ProcessBlock(const std::shared_ptr<ledger::Block>& block)
 
     try
     {
-        LOG_INFO("Processing block {} with {} transactions", 
-                 block->GetIndex(), 
-                 block->GetTransactions().size());
+        LOG_INFO("Processing block " + std::to_string(block->GetIndex()) + 
+                 " with " + std::to_string(block->GetTransactions().size()) + " transactions");
 
         // Verify block is valid
         // For now, we'll process blocks without requiring full blockchain initialization
@@ -470,7 +476,7 @@ bool NeoSystem::ProcessBlock(const std::shared_ptr<ledger::Block>& block)
         auto existingBlock = snapshot->TryGet(blockKey);
         if (existingBlock != nullptr)
         {
-            LOG_WARNING("Block {} already exists in storage", block->GetHash().ToString());
+            LOG_WARNING("Block " + block->GetHash().ToString() + " already exists in storage");
             // Still update the height if this block's index is higher
             auto currentHeight = GetCurrentBlockHeight();
             if (block->GetIndex() > currentHeight)
@@ -486,8 +492,8 @@ bool NeoSystem::ProcessBlock(const std::shared_ptr<ledger::Block>& block)
                 snapshot->Update(heightKey, *heightItem);
                 snapshot->Commit();
             }
-            // Block already processed, consider this success
-            return true;
+            // Block already processed, return false to indicate duplicate
+            return false;
         }
         
         // Serialize block data
@@ -539,28 +545,35 @@ bool NeoSystem::ProcessBlock(const std::shared_ptr<ledger::Block>& block)
         io::ByteVector heightData(sizeof(uint32_t));
         *reinterpret_cast<uint32_t*>(heightData.Data()) = block->GetIndex();
         auto heightItem = std::make_shared<persistence::StorageItem>(heightData);
-        snapshot->Add(heightKey, *heightItem);
+        
+        // Use Update if key exists, otherwise Add
+        if (snapshot->Contains(heightKey))
+        {
+            snapshot->Update(heightKey, *heightItem);
+        }
+        else
+        {
+            snapshot->Add(heightKey, *heightItem);
+        }
 
         // Commit changes
         snapshot->Commit();
 
-        LOG_INFO("Successfully processed block {} at height {}", 
-                 block->GetHash().ToString(), 
-                 block->GetIndex());
+        LOG_INFO("Successfully processed block " + block->GetHash().ToString() + 
+                 " at height " + std::to_string(block->GetIndex()));
 
         return true;
     }
     catch (const std::exception& e)
     {
-        LOG_ERROR("Failed to process block {}: {}", 
-                  block->GetIndex(), 
-                  e.what());
+        LOG_ERROR("Failed to process block " + std::to_string(block->GetIndex()) + 
+                  ": " + std::string(e.what()));
         return false;
     }
     catch (...)
     {
-        LOG_ERROR("Failed to process block {}: Unknown exception", 
-                  block->GetIndex());
+        LOG_ERROR("Failed to process block " + std::to_string(block->GetIndex()) + 
+                  ": Unknown exception");
         return false;
     }
 }
@@ -572,7 +585,7 @@ size_t NeoSystem::ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::B
         return 0;
     }
 
-    LOG_INFO("Processing batch of {} blocks", blocks.size());
+    LOG_INFO("Processing batch of " + std::to_string(blocks.size()) + " blocks");
     auto start_time = std::chrono::high_resolution_clock::now();
     
     size_t processed = 0;
@@ -621,6 +634,15 @@ size_t NeoSystem::ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::B
                     block->GetHash()
                 );
                 
+                // Check if block already exists to avoid duplicate key error
+                if (snapshot->Contains(blockKey))
+                {
+                    LOG_WARNING("Block {} at height {} already exists in storage", 
+                                block->GetHash().ToString(), block->GetIndex());
+                    // Don't count as processed since it was already there
+                    continue;
+                }
+                
                 // Serialize block data using pre-allocated buffer
                 blockDataBuffer.clear();
                 io::BinaryWriter writer(blockDataBuffer);
@@ -635,11 +657,16 @@ size_t NeoSystem::ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::B
                     static_cast<uint8_t>(0x09), // Block by height prefix
                     io::ByteVector(reinterpret_cast<const uint8_t*>(&blockIndex), sizeof(uint32_t))
                 );
-                auto blockHash = block->GetHash();
-                auto hashItem = std::make_shared<persistence::StorageItem>(
-                    io::ByteVector(blockHash.Data(), blockHash.size())
-                );
-                snapshot->Add(heightKey, *hashItem);
+                
+                // Skip if height key already exists
+                if (!snapshot->Contains(heightKey))
+                {
+                    auto blockHash = block->GetHash();
+                    auto hashItem = std::make_shared<persistence::StorageItem>(
+                        io::ByteVector(blockHash.Data(), blockHash.size())
+                    );
+                    snapshot->Add(heightKey, *hashItem);
+                }
 
                 // Process all transactions in the block
                 for (const auto& tx : block->GetTransactions())
@@ -649,18 +676,24 @@ size_t NeoSystem::ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::B
                         static_cast<uint8_t>(0x01), // Transaction prefix
                         tx.GetHash()
                     );
-                    txDataBuffer.clear();
-                    io::BinaryWriter txWriter(txDataBuffer);
-                    tx.Serialize(txWriter);
-                    auto txItem = std::make_shared<persistence::StorageItem>(txDataBuffer);
-                    snapshot->Add(txKey, *txItem);
+                    
+                    // Skip if transaction already exists
+                    if (!snapshot->Contains(txKey))
+                    {
+                        txDataBuffer.clear();
+                        io::BinaryWriter txWriter(txDataBuffer);
+                        tx.Serialize(txWriter);
+                        auto txItem = std::make_shared<persistence::StorageItem>(txDataBuffer);
+                        snapshot->Add(txKey, *txItem);
+                    }
                 }
 
                 processed++;
             }
             catch (const std::exception& e)
             {
-                LOG_ERROR("Failed to process block {} in batch: {}", block->GetIndex(), e.what());
+                LOG_ERROR("Failed to process block " + std::to_string(block->GetIndex()) + 
+                          " in batch: " + std::string(e.what()));
                 // Continue processing other blocks
             }
         }
@@ -684,7 +717,16 @@ size_t NeoSystem::ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::B
             io::ByteVector heightData(sizeof(uint32_t));
             *reinterpret_cast<uint32_t*>(heightData.Data()) = maxHeight;
             auto heightItem = std::make_shared<persistence::StorageItem>(heightData);
-            snapshot->Add(heightKey, *heightItem);
+            
+            // Use Update if key exists, otherwise Add
+            if (snapshot->Contains(heightKey))
+            {
+                snapshot->Update(heightKey, *heightItem);
+            }
+            else
+            {
+                snapshot->Add(heightKey, *heightItem);
+            }
         }
 
         // Single commit for entire batch - massive performance improvement
@@ -694,14 +736,15 @@ size_t NeoSystem::ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::B
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
         double blocks_per_second = (processed * 1000.0) / duration.count();
         
-        LOG_INFO("Processed {} blocks in {}ms ({:.2f} blocks/sec)", 
-                 processed, duration.count(), blocks_per_second);
+        LOG_INFO("Processed " + std::to_string(processed) + " blocks in " + 
+                 std::to_string(duration.count()) + "ms (" + 
+                 std::to_string(blocks_per_second) + " blocks/sec)");
         
         return processed;
     }
     catch (const std::exception& e)
     {
-        LOG_ERROR("Batch processing failed: {}", e.what());
+        LOG_ERROR("Batch processing failed: " + std::string(e.what()));
         return processed;
     }
 }
@@ -765,7 +808,7 @@ ledger::Block* NeoSystem::create_genesis_block(const ProtocolSettings& settings)
     // Genesis block timestamp: July 15, 2016 15:08:21 UTC
     auto genesis_time = std::chrono::system_clock::from_time_t(1468594101);
     auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(genesis_time.time_since_epoch()).count();
-    block->SetTimestamp(genesis_time);
+    block->SetTimestamp(timestamp);
 
     // Note: Block class doesn't have nonce property
     block->SetIndex(0);
@@ -853,6 +896,78 @@ void NeoSystem::ensure_stopped(const std::string& component_name, std::function<
 void NeoSystem::handle_unhandled_exception(const std::exception& exception)
 {
     LOG_ERROR("Unhandled exception: {}", exception.what());
+}
+
+std::shared_ptr<smartcontract::native::LedgerContract> NeoSystem::GetLedgerContract() const
+{
+    return smartcontract::native::LedgerContract::GetInstance();
+}
+
+std::shared_ptr<smartcontract::native::NeoToken> NeoSystem::GetNeoToken() const
+{
+    return smartcontract::native::NeoToken::GetInstance();
+}
+
+std::shared_ptr<smartcontract::native::GasToken> NeoSystem::GetGasToken() const
+{
+    return smartcontract::native::GasToken::GetInstance();
+}
+
+ledger::Blockchain* NeoSystem::GetBlockchain() const
+{
+    return blockchain_.get();
+}
+
+std::shared_ptr<smartcontract::native::RoleManagement> NeoSystem::GetRoleManagement() const
+{
+    return smartcontract::native::RoleManagement::GetInstance();
+}
+
+std::shared_ptr<ledger::Block> NeoSystem::GetGenesisBlock() const
+{
+    // genesis_block_ is a raw pointer, need to create a shared_ptr that doesn't own it
+    return std::shared_ptr<ledger::Block>(genesis_block_, [](ledger::Block*) {});
+}
+
+smartcontract::native::NativeContract* NeoSystem::GetNativeContract(const io::UInt160& hash) const
+{
+    // Use NativeContractManager to find by hash
+    auto contract = smartcontract::native::NativeContractManager::GetInstance().GetContract(hash);
+    return contract.get();
+}
+
+uint32_t NeoSystem::GetMaxTraceableBlocks() const
+{
+    // Return the protocol setting for max traceable blocks
+    return settings_->GetMaxTraceableBlocks();
+}
+
+std::shared_ptr<persistence::DataCache> NeoSystem::GetSnapshot() const
+{
+    // Create a new snapshot from the current store
+    return std::make_shared<persistence::StoreCache>(*store_);
+}
+
+ContainsTransactionType NeoSystem::ContainsTransaction(const io::UInt256& hash) const
+{
+    return contains_transaction(hash);
+}
+
+bool NeoSystem::ContainsConflictHash(const io::UInt256& hash, const std::vector<io::UInt160>& signers) const
+{
+    return contains_conflict_hash(hash, signers);
+}
+
+std::shared_ptr<ledger::MemoryPool> NeoSystem::GetMemoryPool() const
+{
+    // mem_pool_ is a unique_ptr, need to create a shared_ptr that doesn't own it
+    return std::shared_ptr<ledger::MemoryPool>(mem_pool_.get(), [](ledger::MemoryPool*) {});
+}
+
+std::shared_ptr<ProtocolSettings> NeoSystem::GetSettings() const
+{
+    // settings_ is a unique_ptr, need to create a shared_ptr that doesn't own it
+    return std::shared_ptr<ProtocolSettings>(settings_.get(), [](ProtocolSettings*) {});
 }
 
 }  // namespace neo

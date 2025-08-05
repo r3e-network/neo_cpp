@@ -2,8 +2,8 @@
 #include <chrono>
 #include <filesystem>
 #include <fstream>
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 #include <memory>
 #include <signal.h>
 #include <thread>
@@ -14,26 +14,26 @@
 #include <neo/core/neo_system_factory.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/memory_pool.h>
-#include <neo/persistence/rocksdb_store.h>
 #include <neo/persistence/memory_store.h>
+#include <neo/persistence/rocksdb_store.h>
 #include <neo/persistence/store_factory.h>
-#include <neo/rpc/rpc_server.h>
 #include <neo/protocol_settings.h>
+#include <neo/rpc/rpc_server.h>
 
 // P2P components
-#include <neo/network/p2p/local_node.h>
-#include <neo/network/p2p/channels_config.h>
-#include <neo/network/p2p/block_sync_manager.h>
 #include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/block_sync_manager.h>
+#include <neo/network/p2p/channels_config.h>
+#include <neo/network/p2p/local_node.h>
 
 // Network resolution
-#include <netdb.h>
 #include <arpa/inet.h>
+#include <netdb.h>
 
 // Native contracts
-#include <neo/smartcontract/native/neo_token.h>
-#include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/contract_management.h>
+#include <neo/smartcontract/native/gas_token.h>
+#include <neo/smartcontract/native/neo_token.h>
 
 // JSON configuration
 #include <nlohmann/json.hpp>
@@ -58,7 +58,7 @@ void signal_handler(int signal)
 
 class ProductionNeoNode
 {
-private:
+  private:
     // Core components
     std::shared_ptr<NeoSystem> neoSystem_;
     std::shared_ptr<IStore> store_;
@@ -66,7 +66,7 @@ private:
     std::shared_ptr<MemoryPool> mempool_;
     std::shared_ptr<RpcServer> rpcServer_;
     std::unique_ptr<network::p2p::BlockSyncManager> blockSyncManager_;
-    
+
     // Configuration
     json config_;
     std::unique_ptr<ProtocolSettings> protocolSettings_;
@@ -74,13 +74,13 @@ private:
     std::string network_;
     uint32_t maxPoolSize_ = 50000;  // Store this before moving protocolSettings_
     std::unique_ptr<network::p2p::ChannelsConfig> p2pConfig_;
-    
+
     // Statistics
     std::atomic<uint32_t> processedTransactions_{0};
     std::atomic<uint32_t> currentHeight_{0};
     std::atomic<uint32_t> connectedPeers_{0};
 
-public:
+  public:
     ProductionNeoNode(const std::string& configPath = "config.json")
     {
         LOG_INFO("Initializing Neo C++ Production Node");
@@ -101,7 +101,7 @@ public:
             LOG_INFO("P2P Network initialization completed");
             InitializeRpcServer();
             LOG_INFO("RPC Server initialization completed");
-            
+
             LOG_INFO("Neo Production Node initialization complete!");
         }
         catch (const std::exception& e)
@@ -140,19 +140,35 @@ public:
                         LOG_INFO("Continuing without block synchronization");
                     }
                 }
-                
+
                 if (localNode.Start(*p2pConfig_))
                 {
                     LOG_INFO("P2P network started successfully");
-                    
+
                     // Set up callbacks for block synchronization
                     localNode.SetHeadersMessageReceivedCallback(
-                        [this](network::p2p::RemoteNode* node, const network::p2p::payloads::HeadersPayload& payload) {
+                        [this](network::p2p::RemoteNode* node, const network::p2p::payloads::HeadersPayload& payload)
+                        {
                             LOG_INFO("Received " + std::to_string(payload.GetHeaders().size()) + " headers from peer");
+                            if (blockSyncManager_)
+                            {
+                                blockSyncManager_->OnHeadersReceived(node, payload.GetHeaders());
+                            }
                         });
-                    
+
+                    localNode.SetBlockMessageReceivedCallback(
+                        [this](network::p2p::RemoteNode* node, std::shared_ptr<ledger::Block> block)
+                        {
+                            LOG_INFO("Received block " + std::to_string(block->GetIndex()) + " from peer");
+                            if (blockSyncManager_)
+                            {
+                                blockSyncManager_->OnBlockReceived(node, block);
+                            }
+                        });
+
                     localNode.SetRemoteNodeHandshakedCallback(
-                        [this](network::p2p::RemoteNode* node) {
+                        [this](network::p2p::RemoteNode* node)
+                        {
                             connectedPeers_++;
                             LOG_INFO("Peer connected. Total peers: " + std::to_string(connectedPeers_.load()));
                             // Also notify the block sync manager
@@ -161,10 +177,12 @@ public:
                                 blockSyncManager_->OnPeerConnected(node);
                             }
                         });
-                    
+
                     localNode.SetRemoteNodeDisconnectedCallback(
-                        [this](network::p2p::RemoteNode* node) {
-                            if (connectedPeers_ > 0) connectedPeers_--;
+                        [this](network::p2p::RemoteNode* node)
+                        {
+                            if (connectedPeers_ > 0)
+                                connectedPeers_--;
                             LOG_INFO("Peer disconnected. Total peers: " + std::to_string(connectedPeers_.load()));
                             // Also notify the block sync manager
                             if (blockSyncManager_)
@@ -172,7 +190,7 @@ public:
                                 blockSyncManager_->OnPeerDisconnected(node);
                             }
                         });
-                    
+
                     // Start block sync manager
                     if (blockSyncManager_)
                     {
@@ -193,7 +211,7 @@ public:
                     LOG_ERROR("Failed to start P2P network");
                 }
             }
-            
+
             // Start RPC server
             if (rpcServer_)
             {
@@ -243,7 +261,7 @@ public:
                 LOG_ERROR("Error stopping block sync manager: " + std::string(e.what()));
             }
         }
-        
+
         // Stop P2P network
         if (p2pConfig_)
         {
@@ -270,7 +288,7 @@ public:
         LOG_INFO("Neo Production Node shutdown complete");
     }
 
-private:
+  private:
     void LoadConfiguration(const std::string& configPath)
     {
         try
@@ -281,7 +299,7 @@ private:
                 std::ifstream file(configPath);
                 json fullConfig;
                 file >> fullConfig;
-                
+
                 // Check if config has ApplicationConfiguration wrapper
                 if (fullConfig.contains("ApplicationConfiguration"))
                 {
@@ -290,30 +308,20 @@ private:
                     config_ = json{
                         {"Network", appConfig.value("Network", "mainnet")},
                         {"DataPath", "./neo-data"},
-                        {"RPC", {
-                            {"Port", appConfig["RPC"].value("Port", 10334)},
-                            {"BindAddress", "127.0.0.1"},
-                            {"MaxConcurrentConnections", appConfig["RPC"].value("MaxConcurrentConnections", 40)},
-                            {"EnableCors", appConfig["RPC"].value("EnableCorsAllowOrigin", false)}
-                        }},
-                        {"P2P", {
-                            {"Port", appConfig["P2P"].value("Port", 10332)},
-                            {"MaxConnections", appConfig["P2P"].value("MaxConnections", 100)},
-                            {"MinDesiredConnections", appConfig["P2P"].value("MinDesiredConnections", 10)},
-                            {"SeedList", appConfig["P2P"].value("SeedList", json::array())}
-                        }},
-                        {"Consensus", {
-                            {"Enabled", false}
-                        }},
-                        {"Logging", {
-                            {"Level", appConfig["Logging"].value("Level", "info")},
-                            {"Path", "./logs"}
-                        }},
-                        {"Storage", {
-                            {"Engine", appConfig["Storage"].value("Engine", "rocksdb")},
-                            {"Path", "./neo-data/chain"}
-                        }}
-                    };
+                        {"RPC",
+                         {{"Port", appConfig["RPC"].value("Port", 10334)},
+                          {"BindAddress", "127.0.0.1"},
+                          {"MaxConcurrentConnections", appConfig["RPC"].value("MaxConcurrentConnections", 40)},
+                          {"EnableCors", appConfig["RPC"].value("EnableCorsAllowOrigin", false)}}},
+                        {"P2P",
+                         {{"Port", appConfig["P2P"].value("Port", 10332)},
+                          {"MaxConnections", appConfig["P2P"].value("MaxConnections", 100)},
+                          {"MinDesiredConnections", appConfig["P2P"].value("MinDesiredConnections", 10)},
+                          {"SeedList", appConfig["P2P"].value("SeedList", json::array())}}},
+                        {"Consensus", {{"Enabled", false}}},
+                        {"Logging", {{"Level", appConfig["Logging"].value("Level", "info")}, {"Path", "./logs"}}},
+                        {"Storage",
+                         {{"Engine", appConfig["Storage"].value("Engine", "rocksdb")}, {"Path", "./neo-data/chain"}}}};
                     LOG_INFO("Configuration loaded from " + configPath + " (ApplicationConfiguration format)");
                 }
                 else
@@ -349,29 +357,12 @@ private:
         return json{
             {"Network", "mainnet"},
             {"DataPath", "./neo-data"},
-            {"RPC", {
-                {"Port", 10332},
-                {"BindAddress", "127.0.0.1"},
-                {"MaxConcurrentConnections", 40},
-                {"EnableCors", true}
-            }},
-            {"P2P", {
-                {"Port", 10333},
-                {"MaxConnections", 10},
-                {"MinDesiredConnections", 4}
-            }},
-            {"Consensus", {
-                {"Enabled", false}
-            }},
-            {"Logging", {
-                {"Level", "info"},
-                {"Path", "./logs"}
-            }},
-            {"Storage", {
-                {"Engine", "rocksdb"},
-                {"Path", "./neo-data/chain"}
-            }}
-        };
+            {"RPC",
+             {{"Port", 10332}, {"BindAddress", "127.0.0.1"}, {"MaxConcurrentConnections", 40}, {"EnableCors", true}}},
+            {"P2P", {{"Port", 10333}, {"MaxConnections", 10}, {"MinDesiredConnections", 4}}},
+            {"Consensus", {{"Enabled", false}}},
+            {"Logging", {{"Level", "info"}, {"Path", "./logs"}}},
+            {"Storage", {{"Engine", "rocksdb"}, {"Path", "./neo-data/chain"}}}};
     }
 
     void InitializeLogging()
@@ -381,14 +372,14 @@ private:
 
         std::filesystem::create_directories(logPath);
         Logger::Initialize("neo-production");
-        
+
         LOG_INFO("Logging initialized - Level: " + logLevel);
     }
 
     void InitializeProtocolSettings()
     {
         protocolSettings_ = std::make_unique<ProtocolSettings>();
-        
+
         // Set up protocol settings for the network
         if (network_ == "mainnet")
         {
@@ -422,7 +413,7 @@ private:
         try
         {
             auto storageEngine = config_["Storage"]["Engine"].get<std::string>();
-            
+
             if (storageEngine == "rocksdb")
             {
                 auto dbPath = dataPath_ + "/chain";
@@ -454,10 +445,10 @@ private:
             // Get the storage provider
             auto storageEngine = config_["Storage"]["Engine"].get<std::string>();
             auto storeProvider = persistence::StoreFactory::get_store_provider(storageEngine);
-            
+
             // Create ProtocolSettings copy since we need to move it
             auto settings = std::make_unique<ProtocolSettings>();
-            
+
             // Copy settings from our protocolSettings_
             if (network_ == "mainnet")
             {
@@ -481,14 +472,10 @@ private:
                 settings->SetMaxTransactionsPerBlock(512);
                 settings->SetMemoryPoolMaxTransactions(50000);
             }
-            
+
             // Use factory to create NeoSystem with proper shared_ptr management
-            neoSystem_ = NeoSystemFactory::Create(
-                std::move(settings),
-                storeProvider,
-                dataPath_ + "/chain"
-            );
-            
+            neoSystem_ = NeoSystemFactory::Create(std::move(settings), storeProvider, dataPath_ + "/chain");
+
             LOG_INFO("NeoSystem initialized successfully");
         }
         catch (const std::exception& e)
@@ -561,7 +548,7 @@ private:
             LOG_ERROR("Failed to resolve hostname: " + hostname);
             return "";
         }
-        
+
         char* ip_address = inet_ntoa(*((struct in_addr*)host_entry->h_addr_list[0]));
         return std::string(ip_address);
     }
@@ -571,28 +558,28 @@ private:
         try
         {
             auto& localNode = network::p2p::LocalNode::GetInstance();
-            
+
             // Set user agent
             localNode.SetUserAgent("Neo C++ Node/3.6.0");
-            
+
             // Set capabilities
             std::vector<network::p2p::NodeCapability> capabilities;
             capabilities.push_back(network::p2p::NodeCapability(network::p2p::NodeCapabilityType::FullNode));
             capabilities.push_back(network::p2p::NodeCapability(network::p2p::NodeCapabilityType::TcpServer));
             localNode.SetCapabilities(capabilities);
-            
+
             // Create channels config
             auto channelsConfig = std::make_unique<network::p2p::ChannelsConfig>();
-            
+
             // Configure P2P settings
             auto p2pPort = config_["P2P"]["Port"].get<uint16_t>();
             network::IPEndPoint tcpEndpoint("0.0.0.0", p2pPort);
             channelsConfig->SetTcp(tcpEndpoint);
-            
+
             // Set connection limits
             channelsConfig->SetMaxConnections(config_["P2P"]["MaxConnections"].get<uint32_t>());
             channelsConfig->SetMinDesiredConnections(config_["P2P"]["MinDesiredConnections"].get<uint32_t>());
-            
+
             // Load seed nodes
             std::vector<network::IPEndPoint> seedList;
             if (config_["P2P"].contains("SeedList"))
@@ -608,7 +595,7 @@ private:
                     {
                         std::string host = seedStr.substr(0, colonPos);
                         uint16_t port = std::stoi(seedStr.substr(colonPos + 1));
-                        
+
                         // Resolve hostname to IP if needed
                         std::string ipAddress = host;
                         // Check if it's not already an IP address
@@ -624,7 +611,7 @@ private:
                                 continue;
                             }
                         }
-                        
+
                         seedList.push_back(network::IPEndPoint(ipAddress, port));
                         LOG_INFO("Added seed node: " + host + " (" + ipAddress + ":" + std::to_string(port) + ")");
                     }
@@ -635,12 +622,12 @@ private:
                 LOG_WARNING("No SeedList found in P2P config");
             }
             channelsConfig->SetSeedList(seedList);
-            
+
             // Store the config for later use
             p2pConfig_ = std::move(channelsConfig);
-            
-            LOG_INFO("P2P network configured on port " + std::to_string(p2pPort) + 
-                     " with " + std::to_string(seedList.size()) + " seed nodes");
+
+            LOG_INFO("P2P network configured on port " + std::to_string(p2pPort) + " with " +
+                     std::to_string(seedList.size()) + " seed nodes");
         }
         catch (const std::exception& e)
         {
@@ -654,7 +641,7 @@ private:
         auto rpcPort = config_["RPC"]["Port"].get<uint16_t>();
         auto bindAddress = config_["RPC"]["BindAddress"].get<std::string>();
         auto maxConnections = config_["RPC"]["MaxConcurrentConnections"].get<uint32_t>();
-        
+
         try
         {
             RpcConfig rpcConfig;
@@ -662,7 +649,7 @@ private:
             rpcConfig.bind_address = bindAddress;
             rpcConfig.max_concurrent_requests = maxConnections;
             rpcConfig.enable_cors = config_["RPC"]["EnableCors"].get<bool>();
-            
+
             rpcServer_ = std::make_shared<RpcServer>(rpcConfig);
             LOG_INFO("RPC server configured on " + bindAddress + ":" + std::to_string(rpcPort));
         }
@@ -682,19 +669,22 @@ private:
         std::cout << "║                  Version 3.6.0                          ║\n";
         std::cout << "╠══════════════════════════════════════════════════════════╣\n";
         std::cout << "║ Network: " << std::left << std::setw(47) << network_ << "║\n";
-        std::cout << "║ Storage: " << std::left << std::setw(47) << config_["Storage"]["Engine"].get<std::string>() << "║\n";
+        std::cout << "║ Storage: " << std::left << std::setw(47) << config_["Storage"]["Engine"].get<std::string>()
+                  << "║\n";
         std::cout << "║ Block Height: " << std::left << std::setw(42) << currentHeight_.load() << "║\n";
-        std::cout << "║ RPC Server: " << std::left << std::setw(44) 
-                  << (config_["RPC"]["BindAddress"].get<std::string>() + ":" + 
-                      std::to_string(config_["RPC"]["Port"].get<uint16_t>())) << "║\n";
+        std::cout << "║ RPC Server: " << std::left << std::setw(44)
+                  << (config_["RPC"]["BindAddress"].get<std::string>() + ":" +
+                      std::to_string(config_["RPC"]["Port"].get<uint16_t>()))
+                  << "║\n";
         if (p2pConfig_)
         {
-            std::cout << "║ P2P Server: " << std::left << std::setw(44) 
-                      << ("Port: " + std::to_string(config_["P2P"]["Port"].get<uint16_t>()) + 
-                          ", Peers: " + std::to_string(connectedPeers_.load())) << "║\n";
+            std::cout << "║ P2P Server: " << std::left << std::setw(44)
+                      << ("Port: " + std::to_string(config_["P2P"]["Port"].get<uint16_t>()) +
+                          ", Peers: " + std::to_string(connectedPeers_.load()))
+                      << "║\n";
         }
-        std::cout << "║ Memory Pool: " << std::left << std::setw(43) 
-                  << ("Capacity: " + std::to_string(maxPoolSize_)) << "║\n";
+        std::cout << "║ Memory Pool: " << std::left << std::setw(43) << ("Capacity: " + std::to_string(maxPoolSize_))
+                  << "║\n";
         std::cout << "╠══════════════════════════════════════════════════════════╣\n";
         std::cout << "║ Native Contracts:                                        ║\n";
         std::cout << "║  • NeoToken (NEO)    • GasToken (GAS)                  ║\n";
@@ -720,11 +710,11 @@ private:
     {
         auto lastStats = std::chrono::steady_clock::now();
         auto lastHeightCheck = std::chrono::steady_clock::now();
-        
+
         while (!g_shutdown)
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
-            
+
             // Update blockchain height every 5 seconds
             auto now = std::chrono::steady_clock::now();
             if (std::chrono::duration_cast<std::chrono::seconds>(now - lastHeightCheck).count() >= 5)
@@ -735,7 +725,7 @@ private:
                 }
                 lastHeightCheck = now;
             }
-            
+
             // Display statistics every 30 seconds
             if (std::chrono::duration_cast<std::chrono::seconds>(now - lastStats).count() >= 30)
             {
@@ -756,7 +746,7 @@ private:
         LOG_INFO("Native Contracts: " + std::to_string(GetNativeContractCount()));
         LOG_INFO("Storage entries: " + std::to_string(GetStorageEntryCount()));
         LOG_INFO("P2P Status: " + std::string(p2pConfig_ ? "Active" : "Disabled"));
-        
+
         // Block sync status
         if (blockSyncManager_)
         {
@@ -777,19 +767,19 @@ private:
         {
             LOG_INFO("Block sync: Not initialized");
         }
-        
+
         LOG_INFO("Status: " + std::string(neoSystem_ ? "Running (Full mode)" : "Running in safe mode"));
         LOG_INFO("=======================");
     }
-    
-private:
+
+  private:
     size_t GetNativeContractCount()
     {
         // Neo system loads native contracts automatically
         // Standard count for Neo3: 11 native contracts
         return neoSystem_ ? 11 : 2;
     }
-    
+
     size_t GetStorageEntryCount()
     {
         // Would need proper implementation based on storage API
@@ -802,16 +792,16 @@ int main(int argc, char* argv[])
     // Setup signal handlers
     signal(SIGINT, signal_handler);
     signal(SIGTERM, signal_handler);
-    
+
     std::cout << "Neo C++ Production Node v3.6.0\n";
     std::cout << "==============================\n\n";
-    
+
     try
     {
         // Parse command line arguments
         std::string configPath = "config.json";
         std::string network = "";
-        
+
         for (int i = 1; i < argc; i++)
         {
             std::string arg = argv[i];
@@ -833,11 +823,11 @@ int main(int argc, char* argv[])
                 }
             }
         }
-        
+
         // Create and start the node
         ProductionNeoNode node(configPath);
         node.Start();
-        
+
         std::cout << "\nNode stopped successfully.\n";
         return 0;
     }

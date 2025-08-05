@@ -84,7 +84,7 @@ bool HandleGetTime(vm::ExecutionEngine& engine)
     if (appEngine.GetPersistingBlock())
     {
         time =
-            static_cast<uint64_t>(appEngine.GetPersistingBlock()->GetTimestamp().time_since_epoch().count() / 1000000);
+            static_cast<uint64_t>(appEngine.GetPersistingBlock()->GetTimestamp() / 1000000);
     }
     else if (appEngine.GetTransaction())
     {
@@ -254,7 +254,7 @@ bool HandleGetScriptContainer(vm::ExecutionEngine& engine)
             // Add block timestamp
             blockMap->Set(vm::StackItem::Create("timestamp"),
                           vm::StackItem::Create(
-                              static_cast<int64_t>(block->GetTimestamp().time_since_epoch().count() / 1000000)));
+                              static_cast<int64_t>(block->GetTimestamp() / 1000000)));
 
             // Add block next consensus
             auto nextConsensus = block->GetNextConsensus();

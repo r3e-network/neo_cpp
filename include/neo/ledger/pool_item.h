@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <memory>
+#include <neo/io/uint256.h>
 #include <neo/ledger/transaction.h>
 
 namespace neo::ledger
@@ -12,6 +13,11 @@ namespace neo::ledger
 class PoolItem
 {
   public:
+    /**
+     * @brief Default constructor.
+     */
+    PoolItem() = default;
+    
     /**
      * @brief Constructor.
      * @param transaction The transaction.
@@ -36,10 +42,41 @@ class PoolItem
     std::chrono::system_clock::time_point GetTimestamp() const;
 
     /**
+     * @brief Gets the transaction hash.
+     * @return The transaction hash.
+     */
+    io::UInt256 GetHash() const;
+
+    /**
      * @brief Gets the network fee per byte.
      * @return The network fee per byte.
      */
     uint64_t GetFeePerByte() const;
+
+    /**
+     * @brief Gets the network fee.
+     * @return The network fee.
+     */
+    int64_t GetNetworkFee() const;
+
+    /**
+     * @brief Gets the system fee.
+     * @return The system fee.
+     */
+    int64_t GetSystemFee() const;
+
+    /**
+     * @brief Gets the transaction size.
+     * @return The size in bytes.
+     */
+    int GetSize() const;
+
+    /**
+     * @brief Check if this item conflicts with another transaction.
+     * @param other The other pool item.
+     * @return true if there's a conflict.
+     */
+    bool ConflictsWith(const PoolItem& other) const;
 
     /**
      * @brief Checks if this item has higher priority than another.
@@ -73,6 +110,7 @@ class PoolItem
     std::shared_ptr<Transaction> transaction_;
     std::chrono::system_clock::time_point timestamp_;
     uint64_t fee_per_byte_;
+    io::UInt256 hash_;  // Cached hash
 
     /**
      * @brief Calculates the fee per byte for the transaction.
@@ -80,4 +118,28 @@ class PoolItem
      */
     uint64_t CalculateFeePerByte() const;
 };
+
+/**
+ * @brief Event arguments for transaction removed from pool
+ * This matches the C# Neo TransactionRemovedEventArgs
+ */
+struct TransactionRemovedEventArgs
+{
+    std::shared_ptr<Transaction> transaction;
+    
+    enum class Reason
+    {
+        Expired,
+        LowPriority,
+        Replaced,
+        InvalidTransaction,
+        InsufficientFunds,
+        PolicyViolation,
+        Included
+    } reason;
+
+    TransactionRemovedEventArgs(std::shared_ptr<Transaction> tx, Reason r)
+        : transaction(tx), reason(r) {}
+};
+
 }  // namespace neo::ledger

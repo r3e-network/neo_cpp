@@ -8,7 +8,9 @@ add_library(neo_ledger OBJECT
     block.cpp
     block_header.cpp
     header_cache.cpp
-    memory_pool.cpp
+    memory_pool_enhanced.cpp
+    event_system.cpp
+    pool_item.cpp
     transaction_attribute.cpp
     transaction_output.cpp
     coin_reference.cpp

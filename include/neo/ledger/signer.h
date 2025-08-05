@@ -26,6 +26,45 @@ enum class WitnessScope : uint8_t
     Global = 0x80
 };
 
+// Bitwise operators for WitnessScope
+inline WitnessScope operator&(WitnessScope lhs, WitnessScope rhs)
+{
+    return static_cast<WitnessScope>(static_cast<uint8_t>(lhs) & static_cast<uint8_t>(rhs));
+}
+
+inline WitnessScope operator|(WitnessScope lhs, WitnessScope rhs)
+{
+    return static_cast<WitnessScope>(static_cast<uint8_t>(lhs) | static_cast<uint8_t>(rhs));
+}
+
+inline WitnessScope operator^(WitnessScope lhs, WitnessScope rhs)
+{
+    return static_cast<WitnessScope>(static_cast<uint8_t>(lhs) ^ static_cast<uint8_t>(rhs));
+}
+
+inline WitnessScope operator~(WitnessScope scope)
+{
+    return static_cast<WitnessScope>(~static_cast<uint8_t>(scope));
+}
+
+inline WitnessScope& operator&=(WitnessScope& lhs, WitnessScope rhs)
+{
+    lhs = lhs & rhs;
+    return lhs;
+}
+
+inline WitnessScope& operator|=(WitnessScope& lhs, WitnessScope rhs)
+{
+    lhs = lhs | rhs;
+    return lhs;
+}
+
+inline WitnessScope& operator^=(WitnessScope& lhs, WitnessScope rhs)
+{
+    lhs = lhs ^ rhs;
+    return lhs;
+}
+
 /**
  * @brief Represents a transaction signer.
  */

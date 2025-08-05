@@ -10,6 +10,7 @@ PoolItem::PoolItem(std::shared_ptr<Transaction> transaction)
         throw std::invalid_argument("Transaction cannot be null");
     }
 
+    hash_ = transaction_->GetHash();
     fee_per_byte_ = CalculateFeePerByte();
 }
 
@@ -56,6 +57,66 @@ bool PoolItem::operator!=(const PoolItem& other) const
     return !(*this == other);
 }
 
+io::UInt256 PoolItem::GetHash() const
+{
+    return hash_;
+}
+
+int64_t PoolItem::GetNetworkFee() const
+{
+    return transaction_->GetNetworkFee();
+}
+
+int64_t PoolItem::GetSystemFee() const
+{
+    return transaction_->GetSystemFee();
+}
+
+int PoolItem::GetSize() const
+{
+    return transaction_->GetSize();
+}
+
+bool PoolItem::ConflictsWith(const PoolItem& other) const
+{
+    // Check if transactions have same signers with conflicting scopes
+    const auto& our_signers = transaction_->GetSigners();
+    const auto& other_signers = other.transaction_->GetSigners();
+    
+    // Check for account conflicts (same sender with overlapping scopes)
+    for (const auto& our_signer : our_signers)
+    {
+        for (const auto& other_signer : other_signers)
+        {
+            if (our_signer.GetAccount() == other_signer.GetAccount())
+            {
+                // Same account - check if witness scopes conflict
+                auto our_scope = our_signer.GetScopes();
+                auto other_scope = other_signer.GetScopes();
+                
+                // If both have Global scope, they conflict
+                if ((our_scope & ledger::WitnessScope::Global) != ledger::WitnessScope::None &&
+                    (other_scope & ledger::WitnessScope::Global) != ledger::WitnessScope::None)
+                {
+                    return true;
+                }
+                
+                // Check for overlapping contract-specific scopes
+                if ((our_scope & ledger::WitnessScope::CustomContracts) != ledger::WitnessScope::None &&
+                    (other_scope & ledger::WitnessScope::CustomContracts) != ledger::WitnessScope::None)
+                {
+                    // Would need to check AllowedContracts lists for overlap
+                    // Simplified: assume conflict if both have CustomContracts
+                    return true;
+                }
+            }
+        }
+    }
+    
+    // No conflicts detected
+    return false;
+}
+
 uint64_t PoolItem::CalculateFeePerByte() const
 {
     auto size = transaction_->GetSize();
@@ -64,7 +125,7 @@ uint64_t PoolItem::CalculateFeePerByte() const
         return 0;
     }
 
-    auto fee_per_byte = io::Fixed8(transaction_->GetNetworkFee()) / io::Fixed8(static_cast<int64_t>(size));
-    return static_cast<uint64_t>(fee_per_byte.Value());
+    // Use integer division to avoid Fixed8 dependency issues
+    return static_cast<uint64_t>(transaction_->GetNetworkFee() / size);
 }
 }  // namespace neo::ledger

@@ -637,7 +637,8 @@ std::shared_ptr<ledger::Block> DbftConsensus::CreateBlock()
 
         // Set basic block properties
         block->SetIndex(state_->GetBlockIndex());
-        block->SetTimestamp(state_->GetTimestamp());
+        auto timestamp_ms = std::chrono::duration_cast<std::chrono::milliseconds>(state_->GetTimestamp().time_since_epoch()).count();
+        block->SetTimestamp(static_cast<uint64_t>(timestamp_ms));
         block->SetNonce(state_->GetNonce());
 
         // Set previous block hash
@@ -738,14 +739,14 @@ bool DbftConsensus::VerifyBlock(const std::shared_ptr<ledger::Block>& block)
 
         // Verify timestamp is reasonable
         auto current_time = std::chrono::system_clock::now();
-        auto block_time = block->GetTimestamp();
+        auto block_time_ms = block->GetTimestamp();
+        auto block_time = std::chrono::system_clock::time_point{std::chrono::milliseconds(block_time_ms)};
         auto time_diff = std::chrono::duration_cast<std::chrono::seconds>(current_time - block_time);
 
         // Block timestamp should not be too far in the future or past
         if (time_diff.count() < -60 || time_diff.count() > 3600)
         {  // 1 minute future, 1 hour past
-            LOG_WARNING("Block timestamp {} is outside acceptable range",
-                        std::chrono::duration_cast<std::chrono::milliseconds>(block_time.time_since_epoch()).count());
+            LOG_WARNING("Block timestamp {} is outside acceptable range", block_time_ms);
             return false;
         }
 

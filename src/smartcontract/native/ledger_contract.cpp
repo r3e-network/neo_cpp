@@ -179,7 +179,7 @@ std::shared_ptr<vm::StackItem> LedgerContract::BlockToStackItem(std::shared_ptr<
     items.push_back(vm::StackItem::Create(static_cast<int64_t>(block->GetVersion())));
     items.push_back(vm::StackItem::Create(block->GetPreviousHash()));
     items.push_back(vm::StackItem::Create(block->GetMerkleRoot()));
-    items.push_back(vm::StackItem::Create(static_cast<int64_t>(block->GetTimestamp().time_since_epoch().count())));
+    items.push_back(vm::StackItem::Create(static_cast<int64_t>(block->GetTimestamp())));
     items.push_back(vm::StackItem::Create(static_cast<int64_t>(block->GetIndex())));
     items.push_back(vm::StackItem::Create(block->GetNextConsensus()));
     items.push_back(vm::StackItem::Create(static_cast<int64_t>(1)));  // Block has single witness

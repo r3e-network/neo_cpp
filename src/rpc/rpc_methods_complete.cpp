@@ -382,7 +382,7 @@ nlohmann::json RPCMethods::BlockToJson(std::shared_ptr<ledger::Block> block, boo
         result["version"] = block->GetVersion();
         result["previousblockhash"] = block->GetPreviousHash().ToString();
         result["merkleroot"] = block->GetMerkleRoot().ToString();
-        result["time"] = block->GetTimestamp().time_since_epoch().count();
+        result["time"] = block->GetTimestamp();
         result["index"] = block->GetIndex();
         result["primary"] = block->GetPrimaryIndex();
         result["nextconsensus"] = block->GetNextConsensus().ToString();

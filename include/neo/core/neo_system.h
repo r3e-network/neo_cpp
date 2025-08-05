@@ -64,12 +64,27 @@ namespace ledger
 {
 class Blockchain;
 class Block;
-}
+}  // namespace ledger
 
 namespace plugins
 {
 class Plugin;
 }
+
+namespace smartcontract::native
+{
+class LedgerContract;
+class NeoToken;
+class GasToken;
+class RoleManagement;
+class NativeContract;
+}  // namespace smartcontract::native
+
+namespace io
+{
+class UInt160;
+class UInt256;
+}  // namespace io
 }  // namespace neo
 
 namespace neo
@@ -83,6 +98,9 @@ namespace neo
  */
 class NeoSystem : public std::enable_shared_from_this<NeoSystem>
 {
+    // Friend class for factory initialization
+    friend class NeoSystemInit;
+
   public:
     /**
      * @brief Event handler type for service addition events.
@@ -108,7 +126,7 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
     // Threading
     std::vector<std::thread> worker_threads_;
     std::atomic<bool> shutdown_requested_{false};
-    
+
     // Performance optimization flags
     std::atomic<bool> fastSyncMode_{true};  // Skip validation during initial sync
 
@@ -274,12 +292,15 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
      * @return Number of blocks successfully processed
      */
     size_t ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::Block>>& blocks);
-    
+
     /**
      * @brief Enables/disables fast sync mode (skips validation for initial sync)
      * @param enabled True to enable fast sync, false for full validation
      */
-    void SetFastSyncMode(bool enabled) { fastSyncMode_ = enabled; }
+    void SetFastSyncMode(bool enabled)
+    {
+        fastSyncMode_ = enabled;
+    }
 
     // Transaction operations
     /**
@@ -316,6 +337,89 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
      * @brief Initializes the global plugin system.
      */
     static void initialize_plugins();
+
+    // Native contract access methods
+    /**
+     * @brief Gets the ledger contract instance.
+     * @return Shared pointer to the ledger contract
+     */
+    std::shared_ptr<smartcontract::native::LedgerContract> GetLedgerContract() const;
+
+    /**
+     * @brief Gets the NEO token contract instance.
+     * @return Shared pointer to the NEO token contract
+     */
+    std::shared_ptr<smartcontract::native::NeoToken> GetNeoToken() const;
+
+    /**
+     * @brief Gets the GAS token contract instance.
+     * @return Shared pointer to the GAS token contract
+     */
+    std::shared_ptr<smartcontract::native::GasToken> GetGasToken() const;
+
+    /**
+     * @brief Gets the blockchain instance.
+     * @return Pointer to the blockchain
+     */
+    ledger::Blockchain* GetBlockchain() const;
+
+    /**
+     * @brief Gets the role management contract instance.
+     * @return Shared pointer to the role management contract
+     */
+    std::shared_ptr<smartcontract::native::RoleManagement> GetRoleManagement() const;
+
+    /**
+     * @brief Gets the genesis block.
+     * @return Shared pointer to the genesis block
+     */
+    std::shared_ptr<ledger::Block> GetGenesisBlock() const;
+
+    /**
+     * @brief Gets a native contract by script hash.
+     * @param hash The script hash of the contract
+     * @return Pointer to the native contract or nullptr if not found
+     */
+    smartcontract::native::NativeContract* GetNativeContract(const io::UInt160& hash) const;
+
+    /**
+     * @brief Gets the maximum number of traceable blocks.
+     * @return Maximum traceable blocks
+     */
+    uint32_t GetMaxTraceableBlocks() const;
+
+    /**
+     * @brief Gets a snapshot of the current state.
+     * @return Shared pointer to the data cache snapshot
+     */
+    std::shared_ptr<persistence::DataCache> GetSnapshot() const;
+
+    /**
+     * @brief Gets the memory pool.
+     * @return Shared pointer to the memory pool
+     */
+    std::shared_ptr<ledger::MemoryPool> GetMemoryPool() const;
+
+    /**
+     * @brief Gets the protocol settings.
+     * @return Shared pointer to the protocol settings
+     */
+    std::shared_ptr<ProtocolSettings> GetSettings() const;
+
+    /**
+     * @brief Checks if the system contains a transaction.
+     * @param hash The transaction hash
+     * @return The transaction containment status
+     */
+    ContainsTransactionType ContainsTransaction(const io::UInt256& hash) const;
+
+    /**
+     * @brief Checks if the system contains a conflict hash.
+     * @param hash The transaction hash
+     * @param signers The transaction signers
+     * @return True if conflict exists, false otherwise
+     */
+    bool ContainsConflictHash(const io::UInt256& hash, const std::vector<io::UInt160>& signers) const;
 
   private:
     /**
