@@ -68,13 +68,13 @@ class MemoryStream : public std::iostream
     /**
      * @brief Constructs an empty memory stream.
      */
-    MemoryStream() : std::iostream(&streamBuf_), streamBuf_(data_) {}
+    MemoryStream() : std::iostream(&streamBuf_), streamBuf_(data_), position_(0) {}
 
     /**
      * @brief Constructs a memory stream from a byte vector.
      * @param data The initial data.
      */
-    explicit MemoryStream(const ByteVector& data) : std::iostream(&streamBuf_), streamBuf_(data_)
+    explicit MemoryStream(const ByteVector& data) : std::iostream(&streamBuf_), streamBuf_(data_), position_(0)
     {
         data_.assign(data.Data(), data.Data() + data.Size());
         streamBuf_.Reset();
@@ -85,7 +85,7 @@ class MemoryStream : public std::iostream
      * @param data The initial data.
      * @param size The size of the data.
      */
-    MemoryStream(const uint8_t* data, size_t size) : std::iostream(&streamBuf_), streamBuf_(data_)
+    MemoryStream(const uint8_t* data, size_t size) : std::iostream(&streamBuf_), streamBuf_(data_), position_(0)
     {
         data_.assign(data, data + size);
         streamBuf_.Reset();

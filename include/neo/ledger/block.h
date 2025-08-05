@@ -4,6 +4,7 @@
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+#include <neo/ledger/block_header.h>
 #include <neo/ledger/transaction.h>
 #include <neo/ledger/witness.h>
 #include <vector>
@@ -16,15 +17,7 @@ namespace neo::ledger
 class Block : public io::ISerializable
 {
   private:
-    uint32_t version_{0};
-    io::UInt256 previous_hash_;
-    io::UInt256 merkle_root_;
-    std::chrono::system_clock::time_point timestamp_;
-    uint64_t nonce_{0};
-    uint32_t index_{0};
-    uint32_t primary_index_{0};
-    io::UInt160 next_consensus_;
-    Witness witness_;
+    BlockHeader header_;
     std::vector<Transaction> transactions_;
     mutable io::UInt256 hash_;  // Cached hash
     mutable bool hash_calculated_{false};
@@ -41,115 +34,148 @@ class Block : public io::ISerializable
     virtual ~Block() = default;
 
     /**
-     * @brief Get block version
+     * @brief Get the header of the block
+     */
+    const BlockHeader& GetHeader() const
+    {
+        return header_;
+    }
+
+    /**
+     * @brief Get the header of the block (non-const)
+     */
+    BlockHeader& GetHeader()
+    {
+        hash_calculated_ = false;
+        return header_;
+    }
+
+    /**
+     * @brief Set the header of the block
+     */
+    void SetHeader(const BlockHeader& header)
+    {
+        header_ = header;
+        hash_calculated_ = false;
+    }
+
+    /**
+     * @brief Get block version (delegates to header)
      */
     uint32_t GetVersion() const
     {
-        return version_;
+        return header_.GetVersion();
     }
 
     /**
-     * @brief Set block version
+     * @brief Set block version (delegates to header)
      */
     void SetVersion(uint32_t version)
     {
-        version_ = version;
+        header_.SetVersion(version);
+        hash_calculated_ = false;
     }
 
     /**
-     * @brief Get previous block hash
+     * @brief Get previous block hash (delegates to header)
      */
     const io::UInt256& GetPreviousHash() const
     {
-        return previous_hash_;
+        return header_.GetPrevHash();
     }
 
     /**
-     * @brief Set previous block hash
+     * @brief Set previous block hash (delegates to header)
      */
     void SetPreviousHash(const io::UInt256& hash)
     {
-        previous_hash_ = hash;
+        header_.SetPrevHash(hash);
+        hash_calculated_ = false;
     }
 
     /**
-     * @brief Get merkle root
+     * @brief Get merkle root (delegates to header)
      */
     const io::UInt256& GetMerkleRoot() const
     {
-        return merkle_root_;
+        return header_.GetMerkleRoot();
     }
 
     /**
-     * @brief Set merkle root
+     * @brief Set merkle root (delegates to header)
      */
     void SetMerkleRoot(const io::UInt256& root)
     {
-        merkle_root_ = root;
+        header_.SetMerkleRoot(root);
+        hash_calculated_ = false;
     }
 
     /**
-     * @brief Get block timestamp
+     * @brief Get block timestamp (delegates to header)
      */
-    std::chrono::system_clock::time_point GetTimestamp() const
+    uint64_t GetTimestamp() const
     {
-        return timestamp_;
+        return header_.GetTimestamp();
     }
 
     /**
-     * @brief Set block timestamp
+     * @brief Set block timestamp (delegates to header)
      */
-    void SetTimestamp(std::chrono::system_clock::time_point timestamp)
+    void SetTimestamp(uint64_t timestamp)
     {
-        timestamp_ = timestamp;
+        header_.SetTimestamp(timestamp);
+        hash_calculated_ = false;
     }
 
     /**
-     * @brief Get block index
+     * @brief Get block index (delegates to header)
      */
     uint32_t GetIndex() const
     {
-        return index_;
+        return header_.GetIndex();
     }
 
     /**
-     * @brief Set block index
+     * @brief Set block index (delegates to header)
      */
     void SetIndex(uint32_t index)
     {
-        index_ = index;
+        header_.SetIndex(index);
+        hash_calculated_ = false;
     }
 
     /**
-     * @brief Get primary index
+     * @brief Get primary index (delegates to header)
      */
     uint32_t GetPrimaryIndex() const
     {
-        return primary_index_;
+        return static_cast<uint32_t>(header_.GetPrimaryIndex());
     }
 
     /**
-     * @brief Set primary index
+     * @brief Set primary index (delegates to header)
      */
     void SetPrimaryIndex(uint32_t index)
     {
-        primary_index_ = index;
+        header_.SetPrimaryIndex(static_cast<uint8_t>(index));
+        hash_calculated_ = false;
     }
 
     /**
-     * @brief Get next consensus address
+     * @brief Get next consensus address (delegates to header)
      */
     const io::UInt160& GetNextConsensus() const
     {
-        return next_consensus_;
+        return header_.GetNextConsensus();
     }
 
     /**
-     * @brief Set next consensus address
+     * @brief Set next consensus address (delegates to header)
      */
     void SetNextConsensus(const io::UInt160& address)
     {
-        next_consensus_ = address;
+        header_.SetNextConsensus(address);
+        hash_calculated_ = false;
     }
 
     /**
@@ -169,36 +195,37 @@ class Block : public io::ISerializable
     }
 
     /**
-     * @brief Get nonce
+     * @brief Get nonce (delegates to header)
      */
     uint64_t GetNonce() const
     {
-        return nonce_;
+        return header_.GetNonce();
     }
 
     /**
-     * @brief Set nonce
+     * @brief Set nonce (delegates to header)
      */
     void SetNonce(uint64_t nonce)
     {
-        nonce_ = nonce;
+        header_.SetNonce(nonce);
         hash_calculated_ = false;
     }
 
     /**
-     * @brief Get witness
+     * @brief Get witness (delegates to header)
      */
     const Witness& GetWitness() const
     {
-        return witness_;
+        return header_.GetWitness();
     }
 
     /**
-     * @brief Set witness
+     * @brief Set witness (delegates to header)
      */
     void SetWitness(const Witness& witness)
     {
-        witness_ = witness;
+        header_.SetWitness(witness);
+        hash_calculated_ = false;
     }
 
     /**

@@ -44,7 +44,7 @@ endif()
 
 # Examples temporarily disabled due to missing dependencies
 # if(NEO_BUILD_EXAMPLES)
-#     add_subdirectory(examples)
+    add_subdirectory(examples)
 # endif()
 
 # Tools subdirectory

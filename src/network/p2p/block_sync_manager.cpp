@@ -38,7 +38,7 @@ void BlockSyncManager::Start()
     
     running_ = true;
     processingRunning_ = true;
-    syncState_ = SyncState::SyncingHeaders;
+    syncState_ = SyncState::Idle;
     
     // Start processing threads for parallel block processing
     processingThreads_.reserve(PROCESSING_THREADS);
@@ -219,12 +219,19 @@ void BlockSyncManager::OnBlockInventory(RemoteNode* node, const std::vector<io::
     
     LOG_DEBUG("Received inventory with " + std::to_string(hashes.size()) + " block hashes");
     
-    // TODO: Implement blockchain->ContainsBlock() check when blockchain interface is complete
-    // For now, assume all blocks are needed
     std::lock_guard<std::mutex> lock(blockMutex_);
+    
+    auto blockchain = system_->GetBlockchain();
+    if (!blockchain)
+    {
+        LOG_ERROR("Blockchain not available");
+        return;
+    }
+    
     for (const auto& hash : hashes)
     {
-        if (!IsBlockRequested(hash))
+        // Check if we already have this block
+        if (!blockchain->ContainsBlock(hash) && !IsBlockRequested(hash))
         {
             blockDownloadQueue_.push(hash);
         }
@@ -252,9 +259,11 @@ void BlockSyncManager::OnPeerConnected(RemoteNode* node)
     // Update target height
     uint32_t peerHeight = node->GetLastBlockIndex();
     uint32_t currentTarget = targetHeight_.load();
+    LOG_INFO("Peer height: " + std::to_string(peerHeight) + ", current target: " + std::to_string(currentTarget));
     if (peerHeight > currentTarget)
     {
         targetHeight_ = peerHeight;
+        LOG_INFO("Updated target height to: " + std::to_string(peerHeight));
     }
     
     // Start syncing if we're behind
@@ -388,9 +397,13 @@ void BlockSyncManager::RequestHeaders()
     }
     
     // Create get headers request
-    // TODO: Implement blockchain->GetBlockHash() when blockchain interface is complete
-    // For now, use zero hash to request from genesis
-    io::UInt256 startHash; // Zero hash
+    auto blockchain = system_->GetBlockchain();
+    io::UInt256 startHash;
+    if (blockchain && localHeight > 0)
+    {
+        startHash = blockchain->GetBlockHash(localHeight);
+    }
+    // Otherwise use zero hash to request from genesis
     
     // Request headers
     auto payload = std::make_shared<payloads::GetBlocksPayload>();
@@ -504,8 +517,12 @@ void BlockSyncManager::ProcessPendingHeaders()
         return;
     }
     
-    // TODO: Implement blockchain->OnNewHeaders() when blockchain interface is complete
-    LOG_DEBUG("Processing " + std::to_string(headers.size()) + " headers (blockchain integration pending)");
+    auto blockchain = system_->GetBlockchain();
+    if (blockchain)
+    {
+        blockchain->OnNewHeaders(headers);
+    }
+    LOG_DEBUG("Processing " + std::to_string(headers.size()) + " headers");
     
     // Update header height
     if (!headers.empty())
@@ -519,8 +536,11 @@ void BlockSyncManager::ProcessPendingHeaders()
         for (const auto& header : headers)
         {
             io::UInt256 hash = header->GetHash();
-            // TODO: Add blockchain->ContainsBlock() check when available
-            blockDownloadQueue_.push(hash);
+            // Only add blocks we don't already have
+            if (blockchain && !blockchain->ContainsBlock(hash))
+            {
+                blockDownloadQueue_.push(hash);
+            }
         }
     }
     

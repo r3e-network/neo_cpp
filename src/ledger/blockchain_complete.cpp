@@ -164,8 +164,7 @@ std::shared_ptr<Header> Blockchain::GetBlockHeader(const io::UInt256& hash) cons
     header->SetVersion(block->GetVersion());
     header->SetPrevHash(block->GetPreviousHash());
     header->SetMerkleRoot(block->GetMerkleRoot());
-    header->SetTimestamp(
-        std::chrono::duration_cast<std::chrono::milliseconds>(block->GetTimestamp().time_since_epoch()).count());
+    header->SetTimestamp(block->GetTimestamp());
     header->SetIndex(block->GetIndex());
     header->SetPrimaryIndex(block->GetPrimaryIndex());
     header->SetNextConsensus(block->GetNextConsensus());
@@ -604,7 +603,7 @@ void Blockchain::InitializeGenesisBlock()
     auto genesis = std::make_shared<Block>();
     genesis->SetVersion(0);
     genesis->SetPreviousHash(io::UInt256::Zero());
-    genesis->SetTimestamp(std::chrono::system_clock::from_time_t(1468595301));  // Neo genesis time
+    genesis->SetTimestamp(1468595301000);  // Neo genesis time (milliseconds since epoch)
     genesis->SetIndex(0);
     genesis->SetPrimaryIndex(0);
     genesis->SetNextConsensus(io::UInt160::Parse("0x0000000000000000000000000000000000000000"));

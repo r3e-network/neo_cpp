@@ -20,6 +20,10 @@ target_link_libraries(neo_example_consensus PRIVATE neo_consensus)
 add_executable(neo_example_ledger ledger/ledger_example.cpp)
 target_link_libraries(neo_example_ledger PRIVATE neo_ledger)
 
+add_executable(neo_example_event_system event_system_usage.cpp)
+target_link_libraries(neo_example_event_system PRIVATE neo_ledger neo_core)
+target_include_directories(neo_example_event_system PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
 # Install
 install(TARGETS
     neo_example_vm
@@ -27,5 +31,6 @@ install(TARGETS
     neo_example_network
     neo_example_consensus
     neo_example_ledger
+    neo_example_event_system
     RUNTIME DESTINATION bin/examples
 )

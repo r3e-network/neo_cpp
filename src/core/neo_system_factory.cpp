@@ -3,12 +3,10 @@
 #include <neo/persistence/store_factory.h>
 #include <neo/protocol_settings.h>
 #include <neo/core/logging.h>
+#include <neo/ledger/blockchain.h>
 
 namespace neo
 {
-
-// Forward declaration
-namespace ledger { class Blockchain; }
 
 // Private implementation class to handle two-phase initialization
 class NeoSystemInit
@@ -22,10 +20,17 @@ public:
             // The NeoSystem is now fully constructed and in a shared_ptr
             // We can safely initialize components that need shared_from_this()
             
+            // Initialize blockchain
+            neo_system->blockchain_ = std::make_unique<ledger::Blockchain>(neo_system);
+            if (neo_system->blockchain_)
+            {
+                neo_system->blockchain_->Initialize();
+            }
+            
             // Load plugins
             neo_system->load_plugins();
             
-            LOG_INFO("NeoSystem fully initialized with shared_ptr");
+            LOG_INFO("NeoSystem fully initialized with shared_ptr and blockchain");
         }
         catch (const std::exception& e)
         {

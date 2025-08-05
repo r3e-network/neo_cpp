@@ -68,6 +68,32 @@ class Neo3Transaction : public IInventory, public IVerifiable, public io::ISeria
     Neo3Transaction();
 
     /**
+     * @brief Copy constructor.
+     * @param other The transaction to copy from.
+     */
+    Neo3Transaction(const Neo3Transaction& other);
+
+    /**
+     * @brief Move constructor.
+     * @param other The transaction to move from.
+     */
+    Neo3Transaction(Neo3Transaction&& other) noexcept;
+
+    /**
+     * @brief Copy assignment operator.
+     * @param other The transaction to copy from.
+     * @return Reference to this transaction.
+     */
+    Neo3Transaction& operator=(const Neo3Transaction& other);
+
+    /**
+     * @brief Move assignment operator.
+     * @param other The transaction to move from.
+     * @return Reference to this transaction.
+     */
+    Neo3Transaction& operator=(Neo3Transaction&& other) noexcept;
+
+    /**
      * @brief Destructor.
      */
     ~Neo3Transaction() override;

@@ -8,10 +8,13 @@
 // Include transaction type
 #include <neo/ledger/transaction.h>
 
+// Forward declarations
+namespace neo { class NeoSystem; }
+
 namespace neo::ledger
 {
-
 // Forward declarations
+class Block;
 struct TransactionRemovedEventArgs;
 
 /**
@@ -79,12 +82,10 @@ class BlockchainEvents
 {
   public:
     // Forward declarations
-    class Block;
     class ApplicationExecuted;
     class DataCache;
-    class NeoSystem;
 
-    // Event handler types
+    // Event handler types  
     using CommittingHandler = std::function<void(std::shared_ptr<NeoSystem>, std::shared_ptr<Block>,
                                                  std::shared_ptr<DataCache>, const std::vector<ApplicationExecuted>&)>;
     using CommittedHandler = std::function<void(std::shared_ptr<NeoSystem>, std::shared_ptr<Block>)>;

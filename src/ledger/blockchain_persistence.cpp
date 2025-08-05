@@ -37,26 +37,26 @@ void Blockchain::ProcessBlock(std::shared_ptr<Block> block)
 
             // Check for next block
             uint32_t next_index = current_block->GetIndex() + 1;
-            auto header_height = header_cache_->GetLast() ? header_cache_->GetLast()->GetIndex() : current_height;
-
-            if (next_index > header_height)
+            
+            // Since header_cache is disabled, we can only process blocks we have in cache
+            // Look for next block directly in block cache
+            std::shared_ptr<Block> next_block = nullptr;
+            for (const auto& [hash, cached_block] : block_cache_)
+            {
+                if (cached_block->GetIndex() == next_index && 
+                    cached_block->GetPrevHash() == current_block->GetHash())
+                {
+                    next_block = cached_block;
+                    break;
+                }
+            }
+            
+            if (!next_block)
             {
                 break;
             }
 
-            auto next_header = header_cache_->Get(next_index);
-            if (!next_header)
-            {
-                break;
-            }
-
-            auto cache_it = block_cache_.find(next_header->GetHash());
-            if (cache_it == block_cache_.end())
-            {
-                break;
-            }
-
-            current_block = cache_it->second;
+            current_block = next_block;
             current_height = next_index - 1;
         }
 
@@ -118,49 +118,43 @@ void Blockchain::PersistBlock(std::shared_ptr<Block> block)
             app_executed.notifications = engine->GetNotifications();
 
             all_application_executed.push_back(app_executed);
+        }
 
-            // Get transaction states from the engine
-            auto transaction_states = engine->GetTransactionStates();
+        // Process each transaction in the block
+        auto cloned_snapshot = snapshot->CloneCache();
 
-            // Process each transaction in the block
-            auto cloned_snapshot = snapshot->CloneCache();
+        for (const auto& tx : block->GetTransactions())
+        {
+            // Execute transaction script
+            auto tx_engine = smartcontract::ApplicationEngine::Create(
+                smartcontract::TriggerType::Application, tx, cloned_snapshot, block,
+                system_->GetSettings(), tx->GetSystemFee());
 
-            for (const auto& tx_state : transaction_states)
+            tx_engine->LoadScript(tx->GetScript());
+            auto tx_vm_state = tx_engine->Execute();
+
+            ApplicationExecuted tx_app_executed;
+            tx_app_executed.transaction = tx;
+            tx_app_executed.engine = tx_engine;
+            tx_app_executed.vm_state = tx_vm_state;
+            tx_app_executed.gas_consumed = tx_engine->GetGasConsumed();
+            tx_app_executed.logs = tx_engine->GetLogs();
+            tx_app_executed.notifications = tx_engine->GetNotifications();
+
+            if (tx_vm_state == smartcontract::VMState::HALT)
             {
-                if (!tx_state.transaction)
-                    continue;
-
-                // Execute transaction script
-                auto tx_engine = smartcontract::ApplicationEngine::Create(
-                    smartcontract::TriggerType::Application, tx_state.transaction, cloned_snapshot, block,
-                    system_->GetSettings(), tx_state.transaction->GetSystemFee());
-
-                tx_engine->LoadScript(tx_state.transaction->GetScript());
-                auto tx_vm_state = tx_engine->Execute();
-
-                ApplicationExecuted tx_app_executed;
-                tx_app_executed.transaction = tx_state.transaction;
-                tx_app_executed.engine = tx_engine;
-                tx_app_executed.vm_state = tx_vm_state;
-                tx_app_executed.gas_consumed = tx_engine->GetGasConsumed();
-                tx_app_executed.logs = tx_engine->GetLogs();
-                tx_app_executed.notifications = tx_engine->GetNotifications();
-
-                if (tx_vm_state == smartcontract::VMState::HALT)
-                {
-                    cloned_snapshot->Commit();
-                    tx_app_executed.exception_message = "";
-                }
-                else
-                {
-                    cloned_snapshot = snapshot->CloneCache();
-                    tx_app_executed.exception_message = tx_engine->GetFaultException()
-                                                            ? tx_engine->GetFaultException()->what()
-                                                            : "Transaction execution failed";
-                }
-
-                all_application_executed.push_back(tx_app_executed);
+                cloned_snapshot->Commit();
+                tx_app_executed.exception_message = "";
             }
+            else
+            {
+                cloned_snapshot = snapshot->CloneCache();
+                tx_app_executed.exception_message = tx_engine->GetFaultException()
+                                                        ? tx_engine->GetFaultException()->what()
+                                                        : "Transaction execution failed";
+            }
+
+            all_application_executed.push_back(tx_app_executed);
         }
 
         // Execute PostPersist script
@@ -209,8 +203,7 @@ void Blockchain::PersistBlock(std::shared_ptr<Block> block)
             block_cache_.erase(block->GetPrevHash());
         }
 
-        // Remove header from cache after persistence
-        header_cache_->TryRemoveFirst();
+        // Header cache disabled - no need to remove headers
 
         // Fire events
         FireCommittedEvent(block);
@@ -238,11 +231,7 @@ bool Blockchain::VerifyBlock(std::shared_ptr<Block> block, std::shared_ptr<persi
             return false;
         }
 
-        // Verify with header cache if available
-        if (header_cache_)
-        {
-            return block->Verify(system_->GetSettings(), snapshot, header_cache_);
-        }
+        // Header cache disabled - verification done above
 
         return true;
     }
@@ -458,21 +447,6 @@ void Blockchain::FireTransactionEvent(std::shared_ptr<Transaction> transaction, 
     }
 }
 
-void Blockchain::FireInventoryEvent(std::shared_ptr<IInventory> inventory, VerifyResult result)
-{
-    std::lock_guard<std::mutex> lock(event_mutex_);
-
-    for (const auto& handler : inventory_handlers_)
-    {
-        try
-        {
-            handler(inventory, result);
-        }
-        catch (const std::exception& e)
-        {
-            std::cerr << "Error in inventory handler: " << e.what() << std::endl;
-        }
-    }
-}
+// FireInventoryEvent removed - network module is disabled
 
 }  // namespace neo::ledger

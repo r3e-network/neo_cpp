@@ -32,8 +32,11 @@ RemoteNode::RemoteNode(LocalNode* localNode, std::shared_ptr<Connection> connect
     : localNode_(localNode), connection_(connection), handshaked_(false), version_(0), lastBlockIndex_(0)
 {
     // Set up callbacks
-    connection_->SetMessageReceivedCallback(std::bind(&RemoteNode::OnMessageReceived, this, std::placeholders::_1));
-    connection_->SetDisconnectedCallback(std::bind(&RemoteNode::OnDisconnected, this));
+    if (connection_)
+    {
+        connection_->SetMessageReceivedCallback(std::bind(&RemoteNode::OnMessageReceived, this, std::placeholders::_1));
+        connection_->SetDisconnectedCallback(std::bind(&RemoteNode::OnDisconnected, this));
+    }
 }
 
 RemoteNode::~RemoteNode()
@@ -182,7 +185,9 @@ bool RemoteNode::SendInv(InventoryType type, const std::vector<io::UInt256>& has
         return false;
 
     // Create an inv payload
-    auto payload = std::make_shared<payloads::InvPayload>(type, hashes);
+    auto payload = std::make_shared<payloads::InvPayload>();
+    payload->SetType(static_cast<payloads::InventoryType>(type));
+    payload->SetHashes(hashes);
 
     // Send the inv message
     return Send(Message::Create(MessageCommand::Inv, payload));
@@ -194,7 +199,14 @@ bool RemoteNode::SendGetData(InventoryType type, const std::vector<io::UInt256>&
         return false;
 
     // Create a getdata payload
-    auto payload = std::make_shared<payloads::GetDataPayload>(type, hashes);
+    auto payload = std::make_shared<payloads::GetDataPayload>();
+    // Note: GetDataPayload uses inventory vectors, not simple type/hashes
+    std::vector<InventoryVector> inventories;
+    for (const auto& hash : hashes)
+    {
+        inventories.emplace_back(static_cast<InventoryType>(type), hash);
+    }
+    payload->SetInventories(inventories);
 
     // Send the getdata message
     return Send(Message::Create(MessageCommand::GetData, payload));
@@ -808,19 +820,28 @@ void RemoteNode::ProcessBlockMessage(const Message& message)
     if (!payload)
         return;
 
-    // Cast to block - in full implementation, this would be the actual block object
-    LOG_DEBUG("RemoteNode received block message");
-
-    // Notify the local node about the new block
-    if (localNode_)
+    // Deserialize the block from the payload
+    try
     {
-        // Forward block to local node for processing
-        // In full implementation, this would involve:
-        // 1. Deserializing the block
-        // 2. Validating the block
-        // 3. Adding to blockchain if valid
-        // 4. Relaying to other peers if needed
-        localNode_->OnBlockReceived(payload);
+        auto blockPayload = std::dynamic_pointer_cast<ledger::Block>(payload);
+        if (!blockPayload)
+        {
+            LOG_ERROR("Failed to cast payload to Block");
+            return;
+        }
+
+        LOG_DEBUG("RemoteNode received block " + std::to_string(blockPayload->GetIndex()) + 
+                  " with hash " + blockPayload->GetHash().ToString());
+
+        // Notify the local node about the new block
+        if (localNode_)
+        {
+            localNode_->OnBlockReceived(this, blockPayload);
+        }
+    }
+    catch (const std::exception& e)
+    {
+        LOG_ERROR("Failed to process block message: " + std::string(e.what()));
     }
 }
 

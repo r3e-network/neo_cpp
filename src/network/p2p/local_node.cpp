@@ -8,6 +8,7 @@
 #include <neo/core/logging.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint256.h>
+#include <neo/ledger/block.h>
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p/message.h>
@@ -243,16 +244,27 @@ void LocalNode::OnTransactionReceived(std::shared_ptr<IPayload> payload)
     }
 }
 
-void LocalNode::OnBlockReceived(std::shared_ptr<IPayload> payload)
+void LocalNode::OnBlockReceived(RemoteNode* remoteNode, std::shared_ptr<ledger::Block> block)
 {
     // Log the block receipt
-    LOG_DEBUG("LocalNode received block from remote peer");
+    LOG_DEBUG("LocalNode received block " + std::to_string(block->GetIndex()) + " from remote peer");
     
-    // TODO: Implement block handling
-    // This will be handled by BlockSyncManager when integrated
-    
-    // For now, we'll just acknowledge receipt
-    // This ensures the message handler doesn't break the protocol flow
+    // Forward to the registered callback if available
+    if (blockMessageReceivedCallback_ && block)
+    {
+        try
+        {
+            blockMessageReceivedCallback_(remoteNode, block);
+        }
+        catch (const std::exception& e)
+        {
+            LOG_ERROR("Error in block received callback: " + std::string(e.what()));
+        }
+    }
+    else if (!blockMessageReceivedCallback_)
+    {
+        LOG_WARNING("No block received callback registered - block will be ignored");
+    }
 }
 
 bool LocalNode::Start(uint16_t port, size_t maxConnections)
@@ -444,7 +456,7 @@ void LocalNode::Broadcast(const Message& message, bool enableCompression)
     }
 }
 
-void LocalNode::BroadcastInv(InventoryType type, const std::vector<io::UInt256>& hashes)
+void LocalNode::BroadcastInv(network::p2p::InventoryType type, const std::vector<io::UInt256>& hashes)
 {
     if (hashes.empty())
     {
@@ -452,7 +464,7 @@ void LocalNode::BroadcastInv(InventoryType type, const std::vector<io::UInt256>&
     }
 
     auto payload = std::make_shared<payloads::InvPayload>();
-    payload->SetType(type);
+    payload->SetType(static_cast<payloads::InventoryType>(type));
     payload->SetHashes(hashes);
 
     Message message(MessageCommand::Inv, payload);
@@ -858,6 +870,11 @@ void LocalNode::SetRemoteNodeDisconnectedCallback(std::function<void(RemoteNode*
 void LocalNode::SetRemoteNodeHandshakedCallback(std::function<void(RemoteNode*)> callback)
 {
     remoteNodeHandshakedCallback_ = callback;
+}
+
+void LocalNode::SetBlockMessageReceivedCallback(std::function<void(RemoteNode*, std::shared_ptr<ledger::Block>)> callback)
+{
+    blockMessageReceivedCallback_ = callback;
 }
 
 // Additional message handlers that were referenced but not implemented

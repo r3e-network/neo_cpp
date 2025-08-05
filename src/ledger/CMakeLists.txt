@@ -1,10 +1,10 @@
 # Neo Ledger Module
 
-# Create ledger library with minimal working files
+# Create ledger library with complete implementations
 add_library(neo_ledger OBJECT
     stubs.cpp  # Temporary stubs for linking
     ledger_dummy.cpp
-    blockchain_stubs.cpp  # Minimal blockchain stubs
+    blockchain_complete.cpp  # Complete blockchain implementation
     block.cpp
     block_header.cpp
     header_cache.cpp

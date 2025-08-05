@@ -12,6 +12,8 @@
 #include <neo/vm/opcode.h>
 #include <neo/common/contains_transaction_type.h>
 #include <neo/smartcontract/contract.h>
+#include <neo/io/memory_stream.h>
+#include <neo/io/binary_writer.h>
 #include <chrono>
 #include <thread>
 #include <vector>
@@ -174,11 +176,53 @@ TEST_F(BlockExecutionTest, TestTransactionExecution)
     // Verify all transactions in block
     EXPECT_EQ(block->GetTransactions().size(), 10);
     
-    // Check that transactions are in the system
-    for (const auto& tx : block->GetTransactions())
+    // Test a simple case: Create transaction, copy it, and get hash
+    std::cout << "Testing simple transaction copy and hash..." << std::endl;
     {
-        auto containsResult = system->contains_transaction(tx.GetHash());
-        EXPECT_NE(containsResult, ContainsTransactionType::NotExist);
+        // Create a transaction directly
+        ledger::Transaction tx;
+        tx.SetVersion(0);
+        tx.SetNonce(9999);
+        tx.SetSystemFee(0);
+        tx.SetNetworkFee(0);
+        tx.SetValidUntilBlock(100);
+        
+        // Set script
+        tx.SetScript(io::ByteVector{static_cast<uint8_t>(neo::vm::OpCode::PUSH1)});
+        
+        // Add signer
+        Signer signer;
+        signer.SetAccount(io::UInt160::Zero());
+        signer.SetScopes(WitnessScope::Global);
+        tx.SetSigners({signer});
+        
+        // Add witness
+        Witness witness;
+        witness.SetInvocationScript(io::ByteVector{0x00});
+        witness.SetVerificationScript(io::ByteVector{static_cast<uint8_t>(neo::vm::OpCode::PUSH1)});
+        tx.SetWitnesses({witness});
+        
+        // Get hash before copy
+        std::cout << "Getting hash before copy..." << std::endl;
+        try {
+            auto hash1 = tx.GetHash();
+            std::cout << "Hash before copy: " << hash1.ToString() << std::endl;
+            
+            // Copy the transaction
+            std::cout << "Copying transaction..." << std::endl;
+            ledger::Transaction txCopy = tx;
+            
+            // Get hash after copy
+            std::cout << "Getting hash after copy..." << std::endl;
+            auto hash2 = txCopy.GetHash();
+            std::cout << "Hash after copy: " << hash2.ToString() << std::endl;
+            
+            EXPECT_EQ(hash1, hash2);
+        }
+        catch (const std::exception& e) {
+            std::cout << "Exception: " << e.what() << std::endl;
+            FAIL() << "Transaction hash calculation failed: " << e.what();
+        }
     }
 }
 

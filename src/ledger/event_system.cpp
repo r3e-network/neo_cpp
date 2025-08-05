@@ -2,6 +2,8 @@
 #include <neo/ledger/event_system.h>
 #include <neo/ledger/pool_item.h>
 #include <neo/ledger/transaction.h>
+#include <neo/ledger/block.h>
+#include <neo/core/neo_system.h>
 
 namespace neo::ledger
 {

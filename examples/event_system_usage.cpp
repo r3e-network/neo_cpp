@@ -11,8 +11,11 @@
 #include <neo/ledger/event_system.h>
 #include <neo/ledger/memory_pool.h>
 #include <neo/ledger/transaction.h>
+#include <neo/ledger/block.h>
+#include <neo/core/neo_system.h>
 
 using namespace neo::ledger;
+using namespace neo;
 
 // Example event handlers
 void OnTransactionAdded(std::shared_ptr<Transaction> transaction)
@@ -26,7 +29,7 @@ void OnTransactionRemoved(const TransactionRemovedEventArgs& args)
               << " Reason: " << static_cast<int>(args.reason) << std::endl;
 }
 
-void OnBlockCommitted(std::shared_ptr<neo::NeoSystem> system, std::shared_ptr<Block> block)
+void OnBlockCommitted(std::shared_ptr<NeoSystem> system, std::shared_ptr<Block> block)
 {
     std::cout << "Block committed: " << block->GetHash().ToString() << std::endl;
 }
@@ -66,9 +69,7 @@ int main()
         // Fire events through static system (this is what MemoryPool does internally)
         MemoryPoolEvents::FireTransactionAdded(mock_transaction);
 
-        TransactionRemovedEventArgs remove_args;
-        remove_args.transaction = mock_transaction;
-        remove_args.reason = TransactionRemovedEventArgs::Reason::LowPriority;
+        TransactionRemovedEventArgs remove_args(mock_transaction, TransactionRemovedEventArgs::Reason::LowPriority);
         MemoryPoolEvents::FireTransactionRemoved(remove_args);
 
     }  // RAII subscription automatically unsubscribes here

@@ -286,48 +286,10 @@ VerifyResult Blockchain::OnNewBlock(std::shared_ptr<Block> block)
 
 void Blockchain::OnNewHeaders(const std::vector<std::shared_ptr<Header>>& headers)
 {
-    // Header cache disabled - method temporarily disabled
+    // Header cache disabled - method is no-op
+    // In a full implementation, this would update the header cache
+    // to allow for fast header synchronization
     return;
-    if (header_cache_->IsFull())
-    {
-        return;
-    }
-
-    std::unique_lock<std::shared_mutex> lock(blockchain_mutex_);
-
-    auto snapshot = data_cache_->CreateSnapshot();
-    uint32_t header_height = header_cache_->GetLast() ? header_cache_->GetLast()->GetIndex()
-                                                      : system_->GetLedgerContract()->GetCurrentIndex(snapshot);
-
-    for (const auto& header : headers)
-    {
-        if (!header->TryGetHash())
-        {
-            continue;
-        }
-
-        if (header->GetIndex() > header_height + 1)
-        {
-            break;
-        }
-
-        if (header->GetIndex() < header_height + 1)
-        {
-            continue;
-        }
-
-        if (!header->Verify(system_->GetSettings(), snapshot, header_cache_))
-        {
-            break;
-        }
-
-        if (!header_cache_->Add(header))
-        {
-            break;
-        }
-
-        ++header_height;
-    }
 }
 
 VerifyResult Blockchain::OnNewTransaction(std::shared_ptr<Transaction> transaction)

@@ -8,6 +8,7 @@
 #include <mutex>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint256.h>
+#include <neo/ledger/block.h>
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/message.h>
 #include <neo/network/p2p/channels_config.h>
@@ -263,6 +264,12 @@ class LocalNode
     void SetRemoteNodeHandshakedCallback(std::function<void(RemoteNode*)> callback);
 
     /**
+     * @brief Sets the block message received callback.
+     * @param callback The callback.
+     */
+    void SetBlockMessageReceivedCallback(std::function<void(RemoteNode*, std::shared_ptr<ledger::Block>)> callback);
+
+    /**
      * @brief Called when a version message is received.
      * @param remoteNode The remote node.
      * @param payload The version payload.
@@ -386,9 +393,10 @@ class LocalNode
 
     /**
      * @brief Called when a block is received from a remote node.
-     * @param payload The block payload.
+     * @param remoteNode The remote node that sent the block.
+     * @param block The block received.
      */
-    void OnBlockReceived(std::shared_ptr<IPayload> payload);
+    void OnBlockReceived(RemoteNode* remoteNode, std::shared_ptr<ledger::Block> block);
 
     /**
      * @brief Sets the peer list file path.
@@ -517,6 +525,7 @@ class LocalNode
     std::function<void(RemoteNode*)> remoteNodeConnectedCallback_;
     std::function<void(RemoteNode*)> remoteNodeDisconnectedCallback_;
     std::function<void(RemoteNode*)> remoteNodeHandshakedCallback_;
+    std::function<void(RemoteNode*, std::shared_ptr<ledger::Block>)> blockMessageReceivedCallback_;
 
     void StartAccept();
     void HandleAccept(const std::error_code& error, boost::asio::ip::tcp::socket socket);
