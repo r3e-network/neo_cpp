@@ -1,9 +1,10 @@
+#include <neo/console_service/console_service_base.h>
+#include <neo/core/safe_conversions.h>
+
 #include <algorithm>
 #include <chrono>
 #include <csignal>
 #include <iostream>
-#include <neo/console_service/console_service_base.h>
-#include <neo/core/safe_conversions.h>
 #include <sstream>
 #include <thread>
 
@@ -18,25 +19,13 @@ ConsoleServiceBase::ConsoleServiceBase() : show_prompt_(true), running_(false)
     RegisterDefaultHandlers();
 }
 
-std::string ConsoleServiceBase::GetDepends() const
-{
-    return "";
-}
+std::string ConsoleServiceBase::GetDepends() const { return ""; }
 
-std::string ConsoleServiceBase::GetPrompt() const
-{
-    return "service";
-}
+std::string ConsoleServiceBase::GetPrompt() const { return "service"; }
 
-bool ConsoleServiceBase::GetShowPrompt() const
-{
-    return show_prompt_;
-}
+bool ConsoleServiceBase::GetShowPrompt() const { return show_prompt_; }
 
-void ConsoleServiceBase::SetShowPrompt(bool show_prompt)
-{
-    show_prompt_ = show_prompt;
-}
+void ConsoleServiceBase::SetShowPrompt(bool show_prompt) { show_prompt_ = show_prompt; }
 
 bool ConsoleServiceBase::OnStart(const std::vector<std::string>& args)
 {
@@ -131,16 +120,14 @@ void ConsoleServiceBase::RegisterCommand(std::shared_ptr<void> instance, const s
 
 bool ConsoleServiceBase::OnCommand(const std::string& command_line)
 {
-    if (command_line.empty())
-        return true;
+    if (command_line.empty()) return true;
 
     auto command_args = CommandToken::Parse(command_line);
 
     // Simple command processing - in a full implementation this would be more sophisticated
     auto args = CommandToken::ToArguments(command_args);
 
-    if (args.empty())
-        return true;
+    if (args.empty()) return true;
 
     std::string command = args[0];
     std::transform(command.begin(), command.end(), command.begin(), ::tolower);
@@ -216,20 +203,11 @@ void ConsoleServiceBase::OnHelpCommand(const std::string& key)
     }
 }
 
-void ConsoleServiceBase::OnClear()
-{
-    ConsoleHelper::Clear();
-}
+void ConsoleServiceBase::OnClear() { ConsoleHelper::Clear(); }
 
-void ConsoleServiceBase::OnVersion()
-{
-    std::cout << "Neo C++ Node v1.0.0" << std::endl;
-}
+void ConsoleServiceBase::OnVersion() { std::cout << "Neo C++ Node v1.0.0" << std::endl; }
 
-void ConsoleServiceBase::OnExit()
-{
-    running_ = false;
-}
+void ConsoleServiceBase::OnExit() { running_ = false; }
 
 void ConsoleServiceBase::RunConsole()
 {
@@ -238,8 +216,7 @@ void ConsoleServiceBase::RunConsole()
     while (running_)
     {
         std::string command = ReadTask();
-        if (command.empty() && !running_)
-            break;
+        if (command.empty() && !running_) break;
 
         if (!command.empty())
         {

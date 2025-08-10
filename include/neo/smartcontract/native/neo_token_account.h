@@ -15,7 +15,7 @@ namespace neo::smartcontract::native
  */
 class NeoTokenAccount
 {
-  public:
+   public:
     /**
      * @brief Gets the balance of an account.
      * @param token The NEO token.

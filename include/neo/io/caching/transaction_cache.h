@@ -1,9 +1,10 @@
 #pragma once
 
-#include <functional>
 #include <neo/io/caching/lru_cache.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/transaction.h>
+
+#include <functional>
 
 namespace neo::io::caching
 {
@@ -12,7 +13,7 @@ namespace neo::io::caching
  */
 class TransactionCache
 {
-  public:
+   public:
     /**
      * @brief Constructs a TransactionCache with the specified capacity.
      * @param capacity The maximum number of items the cache can hold.
@@ -25,8 +26,7 @@ class TransactionCache
      */
     void Add(std::shared_ptr<ledger::Transaction> transaction)
     {
-        if (!transaction)
-            return;
+        if (!transaction) return;
 
         // Add to cache
         cache_.Add(transaction->GetHash(), transaction);
@@ -37,10 +37,7 @@ class TransactionCache
      * @param hash The hash of the transaction.
      * @return The transaction if found, std::nullopt otherwise.
      */
-    std::optional<std::shared_ptr<ledger::Transaction>> Get(const UInt256& hash)
-    {
-        return cache_.Get(hash);
-    }
+    std::optional<std::shared_ptr<ledger::Transaction>> Get(const UInt256& hash) { return cache_.Get(hash); }
 
     /**
      * @brief Tries to get a transaction by hash.
@@ -58,38 +55,26 @@ class TransactionCache
      * @param hash The hash of the transaction.
      * @return True if the transaction was removed, false otherwise.
      */
-    bool Remove(const UInt256& hash)
-    {
-        return cache_.Remove(hash);
-    }
+    bool Remove(const UInt256& hash) { return cache_.Remove(hash); }
 
     /**
      * @brief Clears the cache.
      */
-    void Clear()
-    {
-        cache_.Clear();
-    }
+    void Clear() { cache_.Clear(); }
 
     /**
      * @brief Gets the number of items in the cache.
      * @return The number of items in the cache.
      */
-    size_t Size() const
-    {
-        return cache_.Size();
-    }
+    size_t Size() const { return cache_.Size(); }
 
     /**
      * @brief Gets the capacity of the cache.
      * @return The capacity of the cache.
      */
-    size_t Capacity() const
-    {
-        return cache_.Capacity();
-    }
+    size_t Capacity() const { return cache_.Capacity(); }
 
-  private:
+   private:
     LRUCache<UInt256, std::shared_ptr<ledger::Transaction>> cache_;
 };
 }  // namespace neo::io::caching

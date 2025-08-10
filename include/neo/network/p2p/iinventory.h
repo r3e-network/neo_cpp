@@ -22,7 +22,7 @@ namespace neo::network::p2p
  */
 class IInventory
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor
      */

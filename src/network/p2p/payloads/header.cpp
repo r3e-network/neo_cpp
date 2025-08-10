@@ -5,6 +5,7 @@
 #include <neo/io/json_writer.h>
 #include <neo/io/memory_stream.h>
 #include <neo/network/p2p/payloads/header.h>
+
 #include <stdexcept>
 #include <vector>
 
@@ -221,20 +222,11 @@ void Header::DeserializeJson(const io::JsonReader& reader)
     }
 }
 
-bool Header::operator==(const Header& other) const
-{
-    return GetHash() == other.GetHash();
-}
+bool Header::operator==(const Header& other) const { return GetHash() == other.GetHash(); }
 
-bool Header::operator!=(const Header& other) const
-{
-    return !(*this == other);
-}
+bool Header::operator!=(const Header& other) const { return !(*this == other); }
 
-void Header::InvalidateHash()
-{
-    hash_calculated_ = false;
-}
+void Header::InvalidateHash() { hash_calculated_ = false; }
 
 void Header::CalculateHash() const
 {

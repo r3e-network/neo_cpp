@@ -5,6 +5,7 @@
 #include <neo/io/json_writer.h>
 #include <neo/ledger/block.h>
 #include <neo/ledger/block_header.h>
+
 #include <nlohmann/json.hpp>
 #include <sstream>
 
@@ -13,115 +14,65 @@ namespace neo::ledger
 BlockHeader::BlockHeader() : version_(0), timestamp_(0), nonce_(0), index_(0), primaryIndex_(0) {}
 
 BlockHeader::BlockHeader(const Block& block)
-    : version_(block.GetVersion()), prevHash_(block.GetPreviousHash()), merkleRoot_(block.GetMerkleRoot()),
+    : version_(block.GetVersion()),
+      prevHash_(block.GetPreviousHash()),
+      merkleRoot_(block.GetMerkleRoot()),
       timestamp_(block.GetTimestamp()),
       nonce_(0),  // Block doesn't have nonce
-      index_(block.GetIndex()), primaryIndex_(static_cast<uint8_t>(block.GetPrimaryIndex())),
-      nextConsensus_(block.GetNextConsensus()), witness_()  // Block doesn't have witness
+      index_(block.GetIndex()),
+      primaryIndex_(static_cast<uint8_t>(block.GetPrimaryIndex())),
+      nextConsensus_(block.GetNextConsensus()),
+      witness_()  // Block doesn't have witness
 {
 }
 
-uint32_t BlockHeader::GetVersion() const
-{
-    return version_;
-}
+uint32_t BlockHeader::GetVersion() const { return version_; }
 
-void BlockHeader::SetVersion(uint32_t version)
-{
-    version_ = version;
-}
+void BlockHeader::SetVersion(uint32_t version) { version_ = version; }
 
-const io::UInt256& BlockHeader::GetPrevHash() const
-{
-    return prevHash_;
-}
+const io::UInt256& BlockHeader::GetPrevHash() const { return prevHash_; }
 
-void BlockHeader::SetPrevHash(const io::UInt256& prevHash)
-{
-    prevHash_ = prevHash;
-}
+void BlockHeader::SetPrevHash(const io::UInt256& prevHash) { prevHash_ = prevHash; }
 
-const io::UInt256& BlockHeader::GetMerkleRoot() const
-{
-    return merkleRoot_;
-}
+const io::UInt256& BlockHeader::GetMerkleRoot() const { return merkleRoot_; }
 
-void BlockHeader::SetMerkleRoot(const io::UInt256& merkleRoot)
-{
-    merkleRoot_ = merkleRoot;
-}
+void BlockHeader::SetMerkleRoot(const io::UInt256& merkleRoot) { merkleRoot_ = merkleRoot; }
 
-uint64_t BlockHeader::GetTimestamp() const
-{
-    return timestamp_;
-}
+uint64_t BlockHeader::GetTimestamp() const { return timestamp_; }
 
-void BlockHeader::SetTimestamp(uint64_t timestamp)
-{
-    timestamp_ = timestamp;
-}
+void BlockHeader::SetTimestamp(uint64_t timestamp) { timestamp_ = timestamp; }
 
-uint64_t BlockHeader::GetNonce() const
-{
-    return nonce_;
-}
+uint64_t BlockHeader::GetNonce() const { return nonce_; }
 
-void BlockHeader::SetNonce(uint64_t nonce)
-{
-    nonce_ = nonce;
-}
+void BlockHeader::SetNonce(uint64_t nonce) { nonce_ = nonce; }
 
-uint32_t BlockHeader::GetIndex() const
-{
-    return index_;
-}
+uint32_t BlockHeader::GetIndex() const { return index_; }
 
-void BlockHeader::SetIndex(uint32_t index)
-{
-    index_ = index;
-}
+void BlockHeader::SetIndex(uint32_t index) { index_ = index; }
 
-uint8_t BlockHeader::GetPrimaryIndex() const
-{
-    return primaryIndex_;
-}
+uint8_t BlockHeader::GetPrimaryIndex() const { return primaryIndex_; }
 
-void BlockHeader::SetPrimaryIndex(uint8_t primaryIndex)
-{
-    primaryIndex_ = primaryIndex;
-}
+void BlockHeader::SetPrimaryIndex(uint8_t primaryIndex) { primaryIndex_ = primaryIndex; }
 
-const io::UInt160& BlockHeader::GetNextConsensus() const
-{
-    return nextConsensus_;
-}
+const io::UInt160& BlockHeader::GetNextConsensus() const { return nextConsensus_; }
 
-void BlockHeader::SetNextConsensus(const io::UInt160& nextConsensus)
-{
-    nextConsensus_ = nextConsensus;
-}
+void BlockHeader::SetNextConsensus(const io::UInt160& nextConsensus) { nextConsensus_ = nextConsensus; }
 
-const Witness& BlockHeader::GetWitness() const
-{
-    return witness_;
-}
+const Witness& BlockHeader::GetWitness() const { return witness_; }
 
-void BlockHeader::SetWitness(const Witness& witness)
-{
-    witness_ = witness;
-}
+void BlockHeader::SetWitness(const Witness& witness) { witness_ = witness; }
 
 io::UInt256 BlockHeader::GetHash() const
 {
     std::ostringstream stream;
     io::BinaryWriter writer(stream);
 
-    // Serialize the block header without the witness - exactly like C# SerializeUnsigned
+    // Serialize the unsigned header data (Neo N3): version, prevHash, merkleRoot, timestamp, index,
+    // primaryIndex, nextConsensus. Nonce is not part of N3 header hash.
     writer.Write(version_);
     writer.Write(prevHash_);
     writer.Write(merkleRoot_);
     writer.Write(timestamp_);
-    writer.Write(nonce_);
     writer.Write(index_);
     writer.Write(primaryIndex_);
     writer.Write(nextConsensus_);
@@ -137,7 +88,6 @@ int BlockHeader::GetSize() const
            32 +                       // PrevHash (UInt256.Length)
            32 +                       // MerkleRoot (UInt256.Length)
            sizeof(uint64_t) +         // Timestamp
-           sizeof(uint64_t) +         // Nonce
            sizeof(uint32_t) +         // Index
            sizeof(uint8_t) +          // PrimaryIndex
            20 +                       // NextConsensus (UInt160.Length)
@@ -147,19 +97,16 @@ int BlockHeader::GetSize() const
 bool BlockHeader::Verify() const
 {
     // Verify the block header
-    if (version_ != 0)
-        return false;
+    if (version_ != 0) return false;
 
     // Genesis block has no previous hash
     if (index_ == 0)
     {
-        if (prevHash_ != io::UInt256::Zero())
-            return false;
+        if (prevHash_ != io::UInt256::Zero()) return false;
     }
     else
     {
-        if (prevHash_ == io::UInt256::Zero())
-            return false;
+        if (prevHash_ == io::UInt256::Zero()) return false;
     }
 
     // Verify the witness
@@ -172,16 +119,14 @@ bool BlockHeader::VerifyWitness() const
     // Block headers should be signed by consensus nodes
     try
     {
-        if (witness_.GetVerificationScript().Size() == 0)
-            return false;
+        if (witness_.GetVerificationScript().Size() == 0) return false;
 
         // For blocks, the witness should be a multi-signature contract
         // signed by the consensus nodes (validators)
         auto verificationScript = witness_.GetVerificationScript();
 
         // Check if it's a multi-signature contract
-        if (!IsMultiSignatureContract(verificationScript))
-            return false;
+        if (!IsMultiSignatureContract(verificationScript)) return false;
 
         // Verify the multi-signature
         return VerifyMultiSignatureWitness(witness_);
@@ -259,10 +204,7 @@ bool BlockHeader::operator==(const BlockHeader& other) const
            witness_ == other.witness_;
 }
 
-bool BlockHeader::operator!=(const BlockHeader& other) const
-{
-    return !(*this == other);
-}
+bool BlockHeader::operator!=(const BlockHeader& other) const { return !(*this == other); }
 
 bool BlockHeader::IsMultiSignatureContract(const io::ByteVector& script) const
 {
@@ -287,8 +229,7 @@ bool BlockHeader::IsMultiSignatureContract(const io::ByteVector& script) const
     int m = mByte - 0x50;
 
     // Validate m <= n
-    if (m > n || m < 1 || n < 1 || n > 16)
-        return false;
+    if (m > n || m < 1 || n < 1 || n > 16) return false;
 
     return true;
 }
@@ -309,8 +250,7 @@ bool BlockHeader::VerifyMultiSignatureWitness(const Witness& witness) const
         size_t offset = 1;
         for (int i = 0; i < n; i++)
         {
-            if (offset >= verificationScript.Size() || verificationScript[offset] != 0x21)
-                return false;
+            if (offset >= verificationScript.Size() || verificationScript[offset] != 0x21) return false;
 
             auto pubkeyBytes = io::ByteSpan(verificationScript.Data() + offset + 1, 33);
             publicKeys.push_back(cryptography::ecc::ECPoint::FromBytes(pubkeyBytes, "secp256r1"));
@@ -349,8 +289,7 @@ bool BlockHeader::VerifyMultiSignatureWitness(const Witness& witness) const
 
         for (const auto& signature : signatures)
         {
-            if (validSignatures >= m)
-                break;
+            if (validSignatures >= m) break;
 
             // Find a public key that validates this signature
             bool signatureValid = false;
@@ -365,12 +304,10 @@ bool BlockHeader::VerifyMultiSignatureWitness(const Witness& witness) const
                 }
             }
 
-            if (!signatureValid)
-                return false;
+            if (!signatureValid) return false;
 
             // Check if we can still reach m signatures with remaining public keys
-            if (m - validSignatures > n - pubKeyIndex)
-                return false;
+            if (m - validSignatures > n - pubKeyIndex) return false;
         }
 
         return validSignatures >= m;

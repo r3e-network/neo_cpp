@@ -8,6 +8,7 @@
 #include <neo/io/json_writer.h>
 #include <neo/io/uint256.h>
 #include <neo/network/p2p/ipayload.h>
+
 #include <vector>
 
 namespace neo::network::p2p::payloads
@@ -17,7 +18,7 @@ namespace neo::network::p2p::payloads
  */
 class GetBlocksPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs a GetBlocksPayload.
      */
@@ -91,7 +92,7 @@ class GetBlocksPayload : public IPayload
      */
     void DeserializeJson(const io::JsonReader& reader);
 
-  private:
+   private:
     io::UInt256 hashStart_;
     int16_t count_;
 };

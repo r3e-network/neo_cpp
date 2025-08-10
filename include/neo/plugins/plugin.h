@@ -1,9 +1,10 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/node/neo_system.h>
 #include <neo/rpc/rpc_server.h>
+
+#include <functional>
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -15,7 +16,7 @@ namespace neo::plugins
  */
 class Plugin
 {
-  public:
+   public:
     /**
      * @brief Destructor.
      */
@@ -78,7 +79,7 @@ class Plugin
  */
 class PluginFactory
 {
-  public:
+   public:
     /**
      * @brief Destructor.
      */

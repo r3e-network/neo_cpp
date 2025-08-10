@@ -2,6 +2,7 @@
 
 #include <neo/cli/main_service.h>
 #include <neo/io/uint256.h>
+
 #include <string>
 #include <vector>
 
@@ -12,7 +13,7 @@ namespace neo::cli
  */
 class BlockchainCommands
 {
-  public:
+   public:
     /**
      * @brief Constructs a BlockchainCommands.
      * @param service The main service.
@@ -45,7 +46,7 @@ class BlockchainCommands
      */
     bool HandleShowTransaction(const std::vector<std::string>& args);
 
-  private:
+   private:
     MainService& service_;
 };
 }  // namespace neo::cli

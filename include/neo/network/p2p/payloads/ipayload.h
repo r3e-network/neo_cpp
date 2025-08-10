@@ -1,9 +1,10 @@
 #pragma once
 
-#include <cstddef>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/uint256.h>
+
+#include <cstddef>
 
 namespace neo::network::p2p::payloads
 {
@@ -13,7 +14,7 @@ namespace neo::network::p2p::payloads
  */
 class IPayload
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */

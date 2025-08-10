@@ -1,7 +1,8 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/json_serializable.h>
+
+#include <cstdint>
 
 namespace neo::wallets::nep6
 {
@@ -10,7 +11,7 @@ namespace neo::wallets::nep6
  */
 class ScryptParameters : public io::JsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs a ScryptParameters with default values.
      */
@@ -78,7 +79,7 @@ class ScryptParameters : public io::JsonSerializable
      */
     void FromJson(const nlohmann::json& json) override;
 
-  private:
+   private:
     uint32_t n_;
     uint32_t r_;
     uint32_t p_;

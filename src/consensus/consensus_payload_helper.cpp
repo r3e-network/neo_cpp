@@ -4,9 +4,9 @@
 
 namespace neo::consensus
 {
-std::shared_ptr<network::p2p::payloads::ExtensiblePayload>
-ConsensusPayloadHelper::CreatePayload(std::shared_ptr<ConsensusMessage> message, const io::UInt160& sender,
-                                      uint32_t validBlockStart, uint32_t validBlockEnd)
+std::shared_ptr<network::p2p::payloads::ExtensiblePayload> ConsensusPayloadHelper::CreatePayload(
+    std::shared_ptr<ConsensusMessage> message, const io::UInt160& sender, uint32_t validBlockStart,
+    uint32_t validBlockEnd)
 {
     // Serialize the consensus message
     io::MemoryStream stream;
@@ -22,11 +22,10 @@ ConsensusPayloadHelper::CreatePayload(std::shared_ptr<ConsensusMessage> message,
     return payload;
 }
 
-std::shared_ptr<ConsensusMessage>
-ConsensusPayloadHelper::GetMessage(const network::p2p::payloads::ExtensiblePayload& payload)
+std::shared_ptr<ConsensusMessage> ConsensusPayloadHelper::GetMessage(
+    const network::p2p::payloads::ExtensiblePayload& payload)
 {
-    if (!IsConsensusPayload(payload))
-        return nullptr;
+    if (!IsConsensusPayload(payload)) return nullptr;
 
     return ConsensusMessage::DeserializeFrom(payload.GetData());
 }

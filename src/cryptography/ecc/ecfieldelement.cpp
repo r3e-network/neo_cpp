@@ -1,4 +1,5 @@
 #include <neo/cryptography/ecc/ecfieldelement.h>
+
 #include <stdexcept>
 
 namespace neo::cryptography::ecc
@@ -12,10 +13,7 @@ ECFieldElement::ECFieldElement(const io::ByteVector& bytes)
     value_ = extensions::BigIntegerExtensions::BigInteger();
 }
 
-ECFieldElement ECFieldElement::Zero()
-{
-    return ECFieldElement(extensions::BigIntegerExtensions::BigInteger());
-}
+ECFieldElement ECFieldElement::Zero() { return ECFieldElement(extensions::BigIntegerExtensions::BigInteger()); }
 
 ECFieldElement ECFieldElement::One()
 {
@@ -76,10 +74,7 @@ ECFieldElement ECFieldElement::Negate() const
     return ECFieldElement(value_);
 }
 
-ECFieldElement ECFieldElement::Square() const
-{
-    return ECFieldElement(value_);
-}
+ECFieldElement ECFieldElement::Square() const { return ECFieldElement(value_); }
 
 ECFieldElement ECFieldElement::ModularInverse() const
 {
@@ -90,35 +85,23 @@ ECFieldElement ECFieldElement::ModularInverse() const
     return ECFieldElement(value_);
 }
 
-ECFieldElement ECFieldElement::Sqrt() const
-{
-    return ECFieldElement(value_);
-}
+ECFieldElement ECFieldElement::Sqrt() const { return ECFieldElement(value_); }
 
 bool ECFieldElement::IsZero() const
 {
     return value_.words.empty() || (value_.words.size() == 1 && value_.words[0] == 0);
 }
 
-bool ECFieldElement::IsOne() const
-{
-    return value_.words.size() == 1 && value_.words[0] == 1 && !value_.isNegative;
-}
+bool ECFieldElement::IsOne() const { return value_.words.size() == 1 && value_.words[0] == 1 && !value_.isNegative; }
 
 bool ECFieldElement::operator==(const ECFieldElement& other) const
 {
     return value_.words == other.value_.words && value_.isNegative == other.value_.isNegative;
 }
 
-bool ECFieldElement::operator!=(const ECFieldElement& other) const
-{
-    return !(*this == other);
-}
+bool ECFieldElement::operator!=(const ECFieldElement& other) const { return !(*this == other); }
 
-const extensions::BigIntegerExtensions::BigInteger& ECFieldElement::GetValue() const
-{
-    return value_;
-}
+const extensions::BigIntegerExtensions::BigInteger& ECFieldElement::GetValue() const { return value_; }
 
 io::ByteVector ECFieldElement::ToByteArray() const
 {

@@ -1,9 +1,10 @@
 #pragma once
 
-#include <memory>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint160.h>
+
+#include <memory>
 
 namespace neo::cryptography::ecc
 {
@@ -12,7 +13,7 @@ namespace neo::cryptography::ecc
  */
 class KeyPair
 {
-  public:
+   public:
     /**
      * @brief Constructor with private key
      */
@@ -36,10 +37,7 @@ class KeyPair
     /**
      * @brief Get the private key (alias for C# compatibility)
      */
-    const io::ByteVector& PrivateKey() const
-    {
-        return GetPrivateKey();
-    }
+    const io::ByteVector& PrivateKey() const { return GetPrivateKey(); }
 
     /**
      * @brief Get the public key
@@ -49,10 +47,7 @@ class KeyPair
     /**
      * @brief Get the public key (alias for C# compatibility)
      */
-    const ECPoint& PublicKey() const
-    {
-        return GetPublicKey();
-    }
+    const ECPoint& PublicKey() const { return GetPublicKey(); }
 
     /**
      * @brief Get the script hash for this key pair
@@ -87,7 +82,7 @@ class KeyPair
     KeyPair(KeyPair&&) noexcept = default;
     KeyPair& operator=(KeyPair&&) noexcept = default;
 
-  private:
+   private:
     io::ByteVector privateKey_;
     mutable std::unique_ptr<ECPoint> publicKey_;
 

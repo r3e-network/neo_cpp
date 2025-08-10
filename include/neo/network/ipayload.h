@@ -10,7 +10,7 @@ namespace neo::network
  */
 class IPayload : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Destructor.
      */

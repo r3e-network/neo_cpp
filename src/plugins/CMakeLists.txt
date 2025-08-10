@@ -27,7 +27,7 @@ target_include_directories(neo_plugins
 target_link_libraries(neo_plugins
     PUBLIC
         neo_io
-        neo_node
+        neo_node_core
         neo_rpc
         neo_consensus
         neo_wallets

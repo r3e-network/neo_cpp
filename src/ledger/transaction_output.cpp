@@ -14,35 +14,17 @@ TransactionOutput::TransactionOutput(const io::UInt256& assetId, const core::Fix
 {
 }
 
-const io::UInt256& TransactionOutput::GetAssetId() const
-{
-    return assetId_;
-}
+const io::UInt256& TransactionOutput::GetAssetId() const { return assetId_; }
 
-void TransactionOutput::SetAssetId(const io::UInt256& assetId)
-{
-    assetId_ = assetId;
-}
+void TransactionOutput::SetAssetId(const io::UInt256& assetId) { assetId_ = assetId; }
 
-const core::Fixed8& TransactionOutput::GetValue() const
-{
-    return value_;
-}
+const core::Fixed8& TransactionOutput::GetValue() const { return value_; }
 
-void TransactionOutput::SetValue(const core::Fixed8& value)
-{
-    value_ = value;
-}
+void TransactionOutput::SetValue(const core::Fixed8& value) { value_ = value; }
 
-const io::UInt160& TransactionOutput::GetScriptHash() const
-{
-    return scriptHash_;
-}
+const io::UInt160& TransactionOutput::GetScriptHash() const { return scriptHash_; }
 
-void TransactionOutput::SetScriptHash(const io::UInt160& scriptHash)
-{
-    scriptHash_ = scriptHash;
-}
+void TransactionOutput::SetScriptHash(const io::UInt160& scriptHash) { scriptHash_ = scriptHash; }
 
 void TransactionOutput::Serialize(io::BinaryWriter& writer) const
 {
@@ -155,8 +137,5 @@ bool TransactionOutput::operator==(const TransactionOutput& other) const
     return assetId_ == other.assetId_ && value_ == other.value_ && scriptHash_ == other.scriptHash_;
 }
 
-bool TransactionOutput::operator!=(const TransactionOutput& other) const
-{
-    return !(*this == other);
-}
+bool TransactionOutput::operator!=(const TransactionOutput& other) const { return !(*this == other); }
 }  // namespace neo::ledger

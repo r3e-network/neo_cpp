@@ -11,7 +11,7 @@ namespace neo::network::p2p::payloads
  */
 class VerAckPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs a VerAckPayload.
      */

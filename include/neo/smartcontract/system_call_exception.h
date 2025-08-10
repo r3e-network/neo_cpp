@@ -13,7 +13,7 @@ namespace neo::smartcontract
  */
 class SystemCallException : public std::runtime_error
 {
-  public:
+   public:
     /**
      * @brief Constructs a SystemCallException.
      * @param systemCall The name of the system call that failed.
@@ -28,21 +28,15 @@ class SystemCallException : public std::runtime_error
      * @brief Gets the name of the system call that failed.
      * @return The name of the system call.
      */
-    const std::string& GetSystemCall() const
-    {
-        return systemCall_;
-    }
+    const std::string& GetSystemCall() const { return systemCall_; }
 
     /**
      * @brief Gets the error message.
      * @return The error message.
      */
-    const std::string& GetMessage() const
-    {
-        return message_;
-    }
+    const std::string& GetMessage() const { return message_; }
 
-  private:
+   private:
     std::string systemCall_;
     std::string message_;
 
@@ -63,7 +57,7 @@ class SystemCallException : public std::runtime_error
  */
 class InvalidArgumentException : public SystemCallException
 {
-  public:
+   public:
     /**
      * @brief Constructs an InvalidArgumentException.
      * @param systemCall The name of the system call that failed.
@@ -80,7 +74,7 @@ class InvalidArgumentException : public SystemCallException
  */
 class MissingFlagsException : public SystemCallException
 {
-  public:
+   public:
     /**
      * @brief Constructs a MissingFlagsException.
      * @param systemCall The name of the system call that failed.
@@ -97,7 +91,7 @@ class MissingFlagsException : public SystemCallException
  */
 class InsufficientGasException : public SystemCallException
 {
-  public:
+   public:
     /**
      * @brief Constructs an InsufficientGasException.
      * @param systemCall The name of the system call that failed.
@@ -107,7 +101,8 @@ class InsufficientGasException : public SystemCallException
     InsufficientGasException(const std::string& systemCall, int64_t requiredGas, int64_t availableGas)
         : SystemCallException(systemCall, "Insufficient gas: required " + std::to_string(requiredGas) + ", available " +
                                               std::to_string(availableGas)),
-          requiredGas_(requiredGas), availableGas_(availableGas)
+          requiredGas_(requiredGas),
+          availableGas_(availableGas)
     {
     }
 
@@ -115,21 +110,15 @@ class InsufficientGasException : public SystemCallException
      * @brief Gets the amount of gas required.
      * @return The amount of gas required.
      */
-    int64_t GetRequiredGas() const
-    {
-        return requiredGas_;
-    }
+    int64_t GetRequiredGas() const { return requiredGas_; }
 
     /**
      * @brief Gets the amount of gas available.
      * @return The amount of gas available.
      */
-    int64_t GetAvailableGas() const
-    {
-        return availableGas_;
-    }
+    int64_t GetAvailableGas() const { return availableGas_; }
 
-  private:
+   private:
     int64_t requiredGas_;
     int64_t availableGas_;
 };
@@ -139,7 +128,7 @@ class InsufficientGasException : public SystemCallException
  */
 class ContractNotFoundException : public SystemCallException
 {
-  public:
+   public:
     /**
      * @brief Constructs a ContractNotFoundException.
      * @param systemCall The name of the system call that failed.
@@ -156,7 +145,7 @@ class ContractNotFoundException : public SystemCallException
  */
 class MethodNotFoundException : public SystemCallException
 {
-  public:
+   public:
     /**
      * @brief Constructs a MethodNotFoundException.
      * @param systemCall The name of the system call that failed.

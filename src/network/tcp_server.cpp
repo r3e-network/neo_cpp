@@ -1,7 +1,8 @@
-#include <boost/bind.hpp>
-#include <chrono>
 #include <neo/logging/logger.h>
 #include <neo/network/tcp_server.h>
+
+#include <boost/bind.hpp>
+#include <chrono>
 #include <sstream>
 #include <stdexcept>
 #include <thread>
@@ -15,10 +16,7 @@ TcpServer::TcpServer(const IPEndPoint& endpoint, uint32_t maxConnections)
     ioContext_ = std::make_unique<boost::asio::io_context>();
 }
 
-TcpServer::~TcpServer()
-{
-    Stop();
-}
+TcpServer::~TcpServer() { Stop(); }
 
 void TcpServer::Start()
 {
@@ -80,15 +78,17 @@ void TcpServer::Start()
                 {
                     try
                     {
-                        neo::logging::Logger::Instance().Debug("Network", "IO thread " + std::to_string(i) + " started");
+                        neo::logging::Logger::Instance().Debug("Network",
+                                                               "IO thread " + std::to_string(i) + " started");
                         ioContext_->run();
-                        neo::logging::Logger::Instance().Debug("Network", "IO thread " + std::to_string(i) + " stopped");
+                        neo::logging::Logger::Instance().Debug("Network",
+                                                               "IO thread " + std::to_string(i) + " stopped");
                     }
                     catch (const std::exception& e)
                     {
                         // Log the error
-                        neo::logging::Logger::Instance().Error("Network", std::string("Error in IO thread ") +
-                                                                         std::to_string(i) + ": " + e.what());
+                        neo::logging::Logger::Instance().Error(
+                            "Network", std::string("Error in IO thread ") + std::to_string(i) + ": " + e.what());
                     }
                 });
         }
@@ -146,13 +146,14 @@ void TcpServer::Stop()
             }
             catch (const std::exception& e)
             {
-                neo::logging::Logger::Instance().Warning("Network", std::string("Error closing connection to ") + endpoint +
-                                                                   ": " + e.what());
+                neo::logging::Logger::Instance().Warning(
+                    "Network", std::string("Error closing connection to ") + endpoint + ": " + e.what());
             }
         }
         size_t connectionCount = connections_.size();
         connections_.clear();
-        neo::logging::Logger::Instance().Info("Network", "Closed " + std::to_string(connectionCount) + " connection(s)");
+        neo::logging::Logger::Instance().Info("Network",
+                                              "Closed " + std::to_string(connectionCount) + " connection(s)");
     }
 
     // Reset the work guard to allow the io_context to finish
@@ -187,7 +188,8 @@ void TcpServer::Stop()
             }
             catch (const std::exception& e)
             {
-                neo::logging::Logger::Instance().Warning("Network", std::string("Error joining IO thread: ") + e.what());
+                neo::logging::Logger::Instance().Warning("Network",
+                                                         std::string("Error joining IO thread: ") + e.what());
             }
         }
     }
@@ -197,10 +199,7 @@ void TcpServer::Stop()
     neo::logging::Logger::Instance().Info("Network", "TcpServer stopped successfully");
 }
 
-const IPEndPoint& TcpServer::GetEndpoint() const
-{
-    return endpoint_;
-}
+const IPEndPoint& TcpServer::GetEndpoint() const { return endpoint_; }
 
 uint32_t TcpServer::GetConnectionCount() const
 {
@@ -215,8 +214,7 @@ void TcpServer::SetConnectionAcceptedCallback(std::function<void(std::shared_ptr
 
 void TcpServer::AcceptConnection()
 {
-    if (!running_)
-        return;
+    if (!running_) return;
 
     auto connection = std::make_shared<TcpConnection>(*ioContext_);
     acceptor_->async_accept(connection->GetSocket(), [this, connection](const boost::system::error_code& error)
@@ -230,7 +228,8 @@ void TcpServer::HandleAccept(std::shared_ptr<TcpConnection> connection, const st
 
     if (error)
     {
-        neo::logging::Logger::Instance().Warning("Network", std::string("Error accepting connection: ") + error.message());
+        neo::logging::Logger::Instance().Warning("Network",
+                                                 std::string("Error accepting connection: ") + error.message());
         return;
     }
 
@@ -254,8 +253,8 @@ void TcpServer::HandleAccept(std::shared_ptr<TcpConnection> connection, const st
         std::lock_guard<std::mutex> lock(connectionsMutex_);
         if (connections_.size() >= maxConnections_)
         {
-            neo::logging::Logger::Instance().Warning("Network", "Connection limit reached, rejecting connection from " +
-                                                               remoteEndpoint.ToString());
+            neo::logging::Logger::Instance().Warning(
+                "Network", "Connection limit reached, rejecting connection from " + remoteEndpoint.ToString());
             connection->Close();
             return;
         }
@@ -282,7 +281,7 @@ void TcpServer::HandleAccept(std::shared_ptr<TcpConnection> connection, const st
         catch (const std::exception& e)
         {
             neo::logging::Logger::Instance().Warning("Network",
-                                                std::string("Error in connection accepted callback: ") + e.what());
+                                                     std::string("Error in connection accepted callback: ") + e.what());
         }
     }
 }

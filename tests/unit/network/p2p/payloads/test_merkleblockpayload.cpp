@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <memory>
-#include <neo/blockchain/header.h>
+#include <neo/network/p2p/payloads/header.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_vector.h>
@@ -11,8 +11,7 @@
 #include <neo/network/p2p/payloads/merkle_block_payload.h>
 #include <vector>
 
-using namespace neo::network::payloads;
-using namespace neo::blockchain;
+using namespace neo::network::p2p::payloads;
 using namespace neo::io;
 
 /**

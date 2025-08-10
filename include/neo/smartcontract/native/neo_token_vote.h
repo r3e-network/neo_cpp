@@ -9,7 +9,7 @@ namespace neo::smartcontract::native
  */
 class NeoTokenVote
 {
-  public:
+   public:
     /**
      * @brief Votes for a candidate.
      * @param token The NEO token.

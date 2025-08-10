@@ -19,7 +19,7 @@ namespace neo::network
 template <typename Connection>
 class ConnectionPool
 {
-  public:
+   public:
     struct Config
     {
         size_t minConnections = 5;
@@ -57,10 +57,7 @@ class ConnectionPool
         maintenanceThread_ = std::thread(&ConnectionPool::MaintenanceLoop, this);
     }
 
-    ~ConnectionPool()
-    {
-        Shutdown();
-    }
+    ~ConnectionPool() { Shutdown(); }
 
     /**
      * @brief Acquire a connection from the pool
@@ -128,8 +125,7 @@ class ConnectionPool
      */
     void Release(std::shared_ptr<Connection> conn)
     {
-        if (!conn)
-            return;
+        if (!conn) return;
 
         std::lock_guard<std::mutex> lock(mutex_);
 
@@ -190,7 +186,7 @@ class ConnectionPool
         active_.clear();
     }
 
-  private:
+   private:
     void MaintenanceLoop()
     {
         while (running_)
@@ -261,7 +257,7 @@ class ConnectionPool
  */
 class TimeoutManager
 {
-  public:
+   public:
     using TimeoutCallback = std::function<void()>;
 
     /**
@@ -298,8 +294,7 @@ class TimeoutManager
      */
     void Start()
     {
-        if (running_.exchange(true))
-            return;
+        if (running_.exchange(true)) return;
 
         workerThread_ = std::thread(&TimeoutManager::WorkerLoop, this);
     }
@@ -309,8 +304,7 @@ class TimeoutManager
      */
     void Stop()
     {
-        if (!running_.exchange(false))
-            return;
+        if (!running_.exchange(false)) return;
 
         cv_.notify_all();
 
@@ -320,12 +314,9 @@ class TimeoutManager
         }
     }
 
-    ~TimeoutManager()
-    {
-        Stop();
-    }
+    ~TimeoutManager() { Stop(); }
 
-  private:
+   private:
     struct TimeoutEntry
     {
         std::chrono::steady_clock::time_point deadline;
@@ -399,7 +390,7 @@ class TimeoutManager
  */
 class ConnectionLimits
 {
-  public:
+   public:
     struct Config
     {
         size_t maxConnectionsPerIP = 5;
@@ -504,7 +495,7 @@ class ConnectionLimits
         return totalConnections_;
     }
 
-  private:
+   private:
     void CleanOldRecords(const std::chrono::steady_clock::time_point& now)
     {
         auto cutoff = now - config_.connectionRateWindow;

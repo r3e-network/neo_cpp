@@ -1,6 +1,7 @@
 #include <neo/consensus/recovery_request.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+
 #include <sstream>
 
 namespace neo::consensus
@@ -10,10 +11,7 @@ RecoveryRequest::RecoveryRequest(uint8_t viewNumber, uint64_t timestamp)
 {
 }
 
-uint64_t RecoveryRequest::GetTimestamp() const
-{
-    return timestamp_;
-}
+uint64_t RecoveryRequest::GetTimestamp() const { return timestamp_; }
 
 void RecoveryRequest::Serialize(io::BinaryWriter& writer) const
 {

@@ -1,7 +1,8 @@
-#include <cstring>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/network/ip_endpoint.h>
+
+#include <cstring>
 #include <regex>
 #include <sstream>
 #include <stdexcept>
@@ -11,6 +12,7 @@
 #include <ws2tcpip.h>
 #else
 #include <arpa/inet.h>
+#include <netdb.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #endif
@@ -18,15 +20,16 @@
 namespace neo::network
 {
 // IPAddress implementation
-IPAddress::IPAddress() : length_(0)
-{
-    std::memset(address_, 0, sizeof(address_));
-}
+IPAddress::IPAddress() : length_(0) { std::memset(address_, 0, sizeof(address_)); }
 
 IPAddress::IPAddress(const std::string& address)
 {
+    // Be permissive for hostnames in configuration: attempt parse/resolve; if it fails, use Any()
     if (!TryParse(address, *this))
-        throw std::invalid_argument("Invalid IP address");
+    {
+        // Fallback: unspecified address (will be resolved later by connection layer)
+        *this = Any();
+    }
 }
 
 IPAddress::IPAddress(uint32_t address) : length_(4)
@@ -40,8 +43,7 @@ IPAddress::IPAddress(uint32_t address) : length_(4)
 
 IPAddress::IPAddress(const uint8_t* address, size_t length) : length_(length)
 {
-    if (length > 16)
-        throw std::invalid_argument("Invalid IP address length");
+    if (length > 16) throw std::invalid_argument("Invalid IP address length");
 
     std::memset(address_, 0, sizeof(address_));
     std::memcpy(address_, address, length);
@@ -73,28 +75,18 @@ std::string IPAddress::ToString() const
     }
 }
 
-const uint8_t* IPAddress::GetAddressBytes() const
-{
-    return address_;
-}
+const uint8_t* IPAddress::GetAddressBytes() const { return address_; }
 
-size_t IPAddress::GetAddressLength() const
-{
-    return length_;
-}
+size_t IPAddress::GetAddressLength() const { return length_; }
 
 bool IPAddress::operator==(const IPAddress& other) const
 {
-    if (length_ != other.length_)
-        return false;
+    if (length_ != other.length_) return false;
 
     return std::memcmp(address_, other.address_, length_) == 0;
 }
 
-bool IPAddress::operator!=(const IPAddress& other) const
-{
-    return !(*this == other);
-}
+bool IPAddress::operator!=(const IPAddress& other) const { return !(*this == other); }
 
 IPAddress IPAddress::Loopback()
 {
@@ -121,8 +113,7 @@ IPAddress IPAddress::Any()
 IPAddress IPAddress::Parse(const std::string& address)
 {
     IPAddress result;
-    if (!TryParse(address, result))
-        throw std::invalid_argument("Invalid IP address");
+    if (!TryParse(address, result)) throw std::invalid_argument("Invalid IP address");
     return result;
 }
 
@@ -150,6 +141,42 @@ bool IPAddress::TryParse(const std::string& address, IPAddress& result)
         return true;
     }
 
+    // Try DNS resolution for hostnames
+    addrinfo hints{};
+    hints.ai_family = AF_UNSPEC;      // Allow IPv4 or IPv6
+    hints.ai_socktype = SOCK_STREAM;  // Any
+    hints.ai_flags = AI_ADDRCONFIG;   // Only configured families
+
+    addrinfo* res = nullptr;
+    int rc = getaddrinfo(address.c_str(), nullptr, &hints, &res);
+    if (rc == 0 && res != nullptr)
+    {
+        for (addrinfo* p = res; p != nullptr; p = p->ai_next)
+        {
+            if (p->ai_family == AF_INET)
+            {
+                auto* a4 = reinterpret_cast<sockaddr_in*>(p->ai_addr);
+                result.length_ = 4;
+                uint32_t addr = ntohl(a4->sin_addr.s_addr);
+                result.address_[0] = static_cast<uint8_t>((addr >> 24) & 0xFF);
+                result.address_[1] = static_cast<uint8_t>((addr >> 16) & 0xFF);
+                result.address_[2] = static_cast<uint8_t>((addr >> 8) & 0xFF);
+                result.address_[3] = static_cast<uint8_t>(addr & 0xFF);
+                freeaddrinfo(res);
+                return true;
+            }
+            else if (p->ai_family == AF_INET6)
+            {
+                auto* a6 = reinterpret_cast<sockaddr_in6*>(p->ai_addr);
+                result.length_ = 16;
+                std::memcpy(result.address_, a6->sin6_addr.s6_addr, 16);
+                freeaddrinfo(res);
+                return true;
+            }
+        }
+        freeaddrinfo(res);
+    }
+
     return false;
 }
 
@@ -160,15 +187,9 @@ IPEndPoint::IPEndPoint(const IPAddress& address, uint16_t port) : address_(addre
 
 IPEndPoint::IPEndPoint(const std::string& address, uint16_t port) : address_(address), port_(port) {}
 
-const IPAddress& IPEndPoint::GetAddress() const
-{
-    return address_;
-}
+const IPAddress& IPEndPoint::GetAddress() const { return address_; }
 
-uint16_t IPEndPoint::GetPort() const
-{
-    return port_;
-}
+uint16_t IPEndPoint::GetPort() const { return port_; }
 
 std::string IPEndPoint::ToString() const
 {
@@ -206,16 +227,12 @@ bool IPEndPoint::operator==(const IPEndPoint& other) const
     return address_ == other.address_ && port_ == other.port_;
 }
 
-bool IPEndPoint::operator!=(const IPEndPoint& other) const
-{
-    return !(*this == other);
-}
+bool IPEndPoint::operator!=(const IPEndPoint& other) const { return !(*this == other); }
 
 IPEndPoint IPEndPoint::Parse(const std::string& endpoint)
 {
     IPEndPoint result;
-    if (!TryParse(endpoint, result))
-        throw std::invalid_argument("Invalid IP endpoint");
+    if (!TryParse(endpoint, result)) throw std::invalid_argument("Invalid IP endpoint");
     return result;
 }
 
@@ -227,8 +244,7 @@ bool IPEndPoint::TryParse(const std::string& endpoint, IPEndPoint& result)
     if (std::regex_match(endpoint, ipv4_match, ipv4_regex))
     {
         IPAddress address;
-        if (!IPAddress::TryParse(ipv4_match[1].str(), address))
-            return false;
+        if (!IPAddress::TryParse(ipv4_match[1].str(), address)) return false;
 
         uint16_t port;
         try
@@ -250,13 +266,38 @@ bool IPEndPoint::TryParse(const std::string& endpoint, IPEndPoint& result)
     if (std::regex_match(endpoint, ipv6_match, ipv6_regex))
     {
         IPAddress address;
-        if (!IPAddress::TryParse(ipv6_match[1].str(), address))
-            return false;
+        if (!IPAddress::TryParse(ipv6_match[1].str(), address)) return false;
 
         uint16_t port;
         try
         {
             port = static_cast<uint16_t>(std::stoi(ipv6_match[2].str()));
+        }
+        catch (const std::exception&)
+        {
+            return false;
+        }
+
+        result = IPEndPoint(address, port);
+        return true;
+    }
+
+    // Hostname endpoint: host:port (letters/digits/dot/dash)
+    std::regex host_regex("^([A-Za-z0-9.-]+):([0-9]+)$");
+    std::smatch host_match;
+    if (std::regex_match(endpoint, host_match, host_regex))
+    {
+        IPAddress address;
+        // Try to parse/resolve; if it fails, keep unspecified to avoid throwing during config load
+        if (!IPAddress::TryParse(host_match[1].str(), address))
+        {
+            address = IPAddress::Any();
+        }
+
+        uint16_t port;
+        try
+        {
+            port = static_cast<uint16_t>(std::stoi(host_match[2].str()));
         }
         catch (const std::exception&)
         {

@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
+
+#include <memory>
 #include <optional>
 #include <string>
 #include <utility>
@@ -27,7 +28,7 @@ enum class SeekDirection
 template <typename TKey, typename TValue>
 class IReadOnlyStore
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */
@@ -65,7 +66,7 @@ class IReadOnlyStore
 template <typename TKey, typename TValue>
 class IWriteStore
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */
@@ -89,10 +90,7 @@ class IWriteStore
      * @param key The key.
      * @param value The value.
      */
-    virtual void PutSync(const TKey& key, const TValue& value)
-    {
-        Put(key, value);
-    }
+    virtual void PutSync(const TKey& key, const TValue& value) { Put(key, value); }
 };
 
 /**
@@ -100,7 +98,7 @@ class IWriteStore
  */
 class IStore : public IReadOnlyStore<io::ByteVector, io::ByteVector>, public IWriteStore<io::ByteVector, io::ByteVector>
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */
@@ -112,7 +110,7 @@ class IStore : public IReadOnlyStore<io::ByteVector, io::ByteVector>, public IWr
  */
 class IStoreSnapshot : public IStore
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */
@@ -133,10 +131,7 @@ class IStoreSnapshot : public IStore
      * @brief Checks if the snapshot is read-only.
      * @return True if read-only, false otherwise.
      */
-    virtual bool IsReadOnly() const
-    {
-        return false;
-    }
+    virtual bool IsReadOnly() const { return false; }
 };
 
 /**
@@ -144,7 +139,7 @@ class IStoreSnapshot : public IStore
  */
 class IStoreProvider
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */

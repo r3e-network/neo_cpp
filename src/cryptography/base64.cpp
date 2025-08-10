@@ -2,6 +2,7 @@
 #include <openssl/bio.h>
 #include <openssl/buffer.h>
 #include <openssl/evp.h>
+
 #include <stdexcept>
 
 namespace neo::cryptography
@@ -40,8 +41,7 @@ io::ByteVector Base64::Decode(const std::string& data)
     int decodedSize = BIO_read(bmem, result.Data(), static_cast<int>(result.Size()));
     BIO_free_all(bmem);
 
-    if (decodedSize < 0)
-        throw std::runtime_error("Failed to decode base64");
+    if (decodedSize < 0) throw std::runtime_error("Failed to decode base64");
 
     result.Resize(decodedSize);
     return result;

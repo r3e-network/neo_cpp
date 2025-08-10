@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/ijson_serializable.h>
@@ -9,6 +8,8 @@
 #include <neo/io/json_writer.h>
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/node_capability.h>
+
+#include <cstdint>
 #include <vector>
 
 namespace neo::network::p2p
@@ -18,7 +19,7 @@ namespace neo::network::p2p
  */
 class NetworkAddressWithTime : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty NetworkAddressWithTime.
      */
@@ -105,7 +106,7 @@ class NetworkAddressWithTime : public io::ISerializable, public io::IJsonSeriali
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
+   private:
     uint32_t timestamp_;
     IPAddress address_;
     std::vector<NodeCapability> capabilities_;

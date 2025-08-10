@@ -1,8 +1,9 @@
+#include <neo/hardfork.h>
+#include <neo/protocol_settings.h>
+
 #include <algorithm>
 #include <filesystem>
 #include <fstream>
-#include <neo/hardfork.h>
-#include <neo/protocol_settings.h>
 #include <nlohmann/json.hpp>
 #include <stdexcept>
 
@@ -24,24 +25,34 @@ constexpr uint64_t INITIAL_GAS_DISTRIBUTION = 5200000000000000ull;
 }  // namespace defaults
 
 ProtocolSettings::ProtocolSettings()
-    : network_(defaults::NETWORK), addressVersion_(defaults::ADDRESS_VERSION), standbyCommittee_(), validatorsCount_(0),
-      seedList_(), millisecondsPerBlock_(defaults::MILLISECONDS_PER_BLOCK),
+    : network_(defaults::NETWORK),
+      addressVersion_(defaults::ADDRESS_VERSION),
+      standbyCommittee_(),
+      validatorsCount_(0),
+      seedList_(),
+      millisecondsPerBlock_(defaults::MILLISECONDS_PER_BLOCK),
       maxValidUntilBlockIncrement_(defaults::MAX_VALID_UNTIL_BLOCK_INCREMENT),
       maxTransactionsPerBlock_(defaults::MAX_TRANSACTIONS_PER_BLOCK),
       memoryPoolMaxTransactions_(defaults::MEMORY_POOL_MAX_TRANSACTIONS),
-      maxTraceableBlocks_(defaults::MAX_TRACEABLE_BLOCKS), initialGasDistribution_(defaults::INITIAL_GAS_DISTRIBUTION),
+      maxTraceableBlocks_(defaults::MAX_TRACEABLE_BLOCKS),
+      initialGasDistribution_(defaults::INITIAL_GAS_DISTRIBUTION),
       hardforks_(EnsureOmittedHardforks({}))
 {
 }
 
 ProtocolSettings::ProtocolSettings(const ProtocolSettings& other)
-    : network_(other.network_), addressVersion_(other.addressVersion_), standbyCommittee_(other.standbyCommittee_),
-      validatorsCount_(other.validatorsCount_), seedList_(other.seedList_),
+    : network_(other.network_),
+      addressVersion_(other.addressVersion_),
+      standbyCommittee_(other.standbyCommittee_),
+      validatorsCount_(other.validatorsCount_),
+      seedList_(other.seedList_),
       millisecondsPerBlock_(other.millisecondsPerBlock_),
       maxValidUntilBlockIncrement_(other.maxValidUntilBlockIncrement_),
       maxTransactionsPerBlock_(other.maxTransactionsPerBlock_),
-      memoryPoolMaxTransactions_(other.memoryPoolMaxTransactions_), maxTraceableBlocks_(other.maxTraceableBlocks_),
-      initialGasDistribution_(other.initialGasDistribution_), hardforks_(other.hardforks_)
+      memoryPoolMaxTransactions_(other.memoryPoolMaxTransactions_),
+      maxTraceableBlocks_(other.maxTraceableBlocks_),
+      initialGasDistribution_(other.initialGasDistribution_),
+      hardforks_(other.hardforks_)
 {
 }
 
@@ -66,80 +77,32 @@ ProtocolSettings& ProtocolSettings::operator=(const ProtocolSettings& other)
 }
 
 // Getters
-uint32_t ProtocolSettings::GetNetwork() const
-{
-    return network_;
-}
-uint8_t ProtocolSettings::GetAddressVersion() const
-{
-    return addressVersion_;
-}
+uint32_t ProtocolSettings::GetNetwork() const { return network_; }
+uint8_t ProtocolSettings::GetAddressVersion() const { return addressVersion_; }
 const std::vector<neo::cryptography::ecc::ECPoint>& ProtocolSettings::GetStandbyCommittee() const
 {
     return standbyCommittee_;
 }
-int ProtocolSettings::GetCommitteeMembersCount() const
-{
-    return static_cast<int>(standbyCommittee_.size());
-}
-int ProtocolSettings::GetValidatorsCount() const
-{
-    return validatorsCount_;
-}
-const std::vector<std::string>& ProtocolSettings::GetSeedList() const
-{
-    return seedList_;
-}
-uint32_t ProtocolSettings::GetMillisecondsPerBlock() const
-{
-    return millisecondsPerBlock_;
-}
-uint32_t ProtocolSettings::GetMaxValidUntilBlockIncrement() const
-{
-    return maxValidUntilBlockIncrement_;
-}
-uint32_t ProtocolSettings::GetMaxTransactionsPerBlock() const
-{
-    return maxTransactionsPerBlock_;
-}
-int ProtocolSettings::GetMemoryPoolMaxTransactions() const
-{
-    return memoryPoolMaxTransactions_;
-}
-uint32_t ProtocolSettings::GetMaxTraceableBlocks() const
-{
-    return maxTraceableBlocks_;
-}
-uint64_t ProtocolSettings::GetInitialGasDistribution() const
-{
-    return initialGasDistribution_;
-}
-const std::unordered_map<Hardfork, uint32_t>& ProtocolSettings::GetHardforks() const
-{
-    return hardforks_;
-}
+int ProtocolSettings::GetCommitteeMembersCount() const { return static_cast<int>(standbyCommittee_.size()); }
+int ProtocolSettings::GetValidatorsCount() const { return validatorsCount_; }
+const std::vector<std::string>& ProtocolSettings::GetSeedList() const { return seedList_; }
+uint32_t ProtocolSettings::GetMillisecondsPerBlock() const { return millisecondsPerBlock_; }
+uint32_t ProtocolSettings::GetMaxValidUntilBlockIncrement() const { return maxValidUntilBlockIncrement_; }
+uint32_t ProtocolSettings::GetMaxTransactionsPerBlock() const { return maxTransactionsPerBlock_; }
+int ProtocolSettings::GetMemoryPoolMaxTransactions() const { return memoryPoolMaxTransactions_; }
+uint32_t ProtocolSettings::GetMaxTraceableBlocks() const { return maxTraceableBlocks_; }
+uint64_t ProtocolSettings::GetInitialGasDistribution() const { return initialGasDistribution_; }
+const std::unordered_map<Hardfork, uint32_t>& ProtocolSettings::GetHardforks() const { return hardforks_; }
 
 // Setters
-void ProtocolSettings::SetNetwork(uint32_t network)
-{
-    network_ = network;
-}
-void ProtocolSettings::SetAddressVersion(uint8_t addressVersion)
-{
-    addressVersion_ = addressVersion;
-}
+void ProtocolSettings::SetNetwork(uint32_t network) { network_ = network; }
+void ProtocolSettings::SetAddressVersion(uint8_t addressVersion) { addressVersion_ = addressVersion; }
 void ProtocolSettings::SetStandbyCommittee(const std::vector<neo::cryptography::ecc::ECPoint>& committee)
 {
     standbyCommittee_ = committee;
 }
-void ProtocolSettings::SetValidatorsCount(int validatorsCount)
-{
-    validatorsCount_ = validatorsCount;
-}
-void ProtocolSettings::SetSeedList(const std::vector<std::string>& seedList)
-{
-    seedList_ = seedList;
-}
+void ProtocolSettings::SetValidatorsCount(int validatorsCount) { validatorsCount_ = validatorsCount; }
+void ProtocolSettings::SetSeedList(const std::vector<std::string>& seedList) { seedList_ = seedList; }
 void ProtocolSettings::SetMillisecondsPerBlock(uint32_t millisecondsPerBlock)
 {
     millisecondsPerBlock_ = millisecondsPerBlock;
@@ -156,18 +119,12 @@ void ProtocolSettings::SetMemoryPoolMaxTransactions(int memoryPoolMaxTransaction
 {
     memoryPoolMaxTransactions_ = memoryPoolMaxTransactions;
 }
-void ProtocolSettings::SetMaxTraceableBlocks(uint32_t maxTraceableBlocks)
-{
-    maxTraceableBlocks_ = maxTraceableBlocks;
-}
+void ProtocolSettings::SetMaxTraceableBlocks(uint32_t maxTraceableBlocks) { maxTraceableBlocks_ = maxTraceableBlocks; }
 void ProtocolSettings::SetInitialGasDistribution(uint64_t initialGasDistribution)
 {
     initialGasDistribution_ = initialGasDistribution;
 }
-void ProtocolSettings::SetHardforks(const std::unordered_map<Hardfork, uint32_t>& hardforks)
-{
-    hardforks_ = hardforks;
-}
+void ProtocolSettings::SetHardforks(const std::unordered_map<Hardfork, uint32_t>& hardforks) { hardforks_ = hardforks; }
 
 std::vector<neo::cryptography::ecc::ECPoint> ProtocolSettings::GetStandbyValidators() const
 {
@@ -193,8 +150,8 @@ bool ProtocolSettings::IsHardforkEnabled(Hardfork hardfork, uint32_t blockHeight
     return false;
 }
 
-std::unordered_map<Hardfork, uint32_t>
-ProtocolSettings::EnsureOmittedHardforks(const std::unordered_map<Hardfork, uint32_t>& hardforks)
+std::unordered_map<Hardfork, uint32_t> ProtocolSettings::EnsureOmittedHardforks(
+    const std::unordered_map<Hardfork, uint32_t>& hardforks)
 {
     std::unordered_map<Hardfork, uint32_t> result = hardforks;
 
@@ -252,10 +209,7 @@ void ProtocolSettings::CheckHardforkConfiguration(const ProtocolSettings& settin
     }
 }
 
-void ProtocolSettings::ValidateHardforkConfiguration() const
-{
-    CheckHardforkConfiguration(*this);
-}
+void ProtocolSettings::ValidateHardforkConfiguration() const { CheckHardforkConfiguration(*this); }
 
 const ProtocolSettings& ProtocolSettings::GetDefault()
 {

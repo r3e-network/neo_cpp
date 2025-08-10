@@ -1,4 +1,5 @@
 #include <neo/network/p2p/payloads/inv_payload.h>
+
 #include <stdexcept>
 
 namespace neo::network::p2p::payloads
@@ -31,25 +32,13 @@ InvPayload::InvPayload(const std::vector<InventoryVector>& inventories)
     }
 }
 
-InventoryType InvPayload::GetType() const
-{
-    return type_;
-}
+InventoryType InvPayload::GetType() const { return type_; }
 
-void InvPayload::SetType(InventoryType type)
-{
-    type_ = type;
-}
+void InvPayload::SetType(InventoryType type) { type_ = type; }
 
-std::vector<io::UInt256> InvPayload::GetHashes() const
-{
-    return hashes_;
-}
+std::vector<io::UInt256> InvPayload::GetHashes() const { return hashes_; }
 
-void InvPayload::SetHashes(const std::vector<io::UInt256>& hashes)
-{
-    hashes_ = hashes;
-}
+void InvPayload::SetHashes(const std::vector<io::UInt256>& hashes) { hashes_ = hashes; }
 
 const std::vector<InventoryVector>& InvPayload::GetInventories() const
 {

@@ -10,45 +10,21 @@ RpcRequest::RpcRequest(const std::string& jsonrpc, const std::string& method, co
 {
 }
 
-const std::string& RpcRequest::GetJsonRpc() const
-{
-    return jsonrpc_;
-}
+const std::string& RpcRequest::GetJsonRpc() const { return jsonrpc_; }
 
-void RpcRequest::SetJsonRpc(const std::string& jsonrpc)
-{
-    jsonrpc_ = jsonrpc;
-}
+void RpcRequest::SetJsonRpc(const std::string& jsonrpc) { jsonrpc_ = jsonrpc; }
 
-const std::string& RpcRequest::GetMethod() const
-{
-    return method_;
-}
+const std::string& RpcRequest::GetMethod() const { return method_; }
 
-void RpcRequest::SetMethod(const std::string& method)
-{
-    method_ = method;
-}
+void RpcRequest::SetMethod(const std::string& method) { method_ = method; }
 
-const nlohmann::json& RpcRequest::GetParams() const
-{
-    return params_;
-}
+const nlohmann::json& RpcRequest::GetParams() const { return params_; }
 
-void RpcRequest::SetParams(const nlohmann::json& params)
-{
-    params_ = params;
-}
+void RpcRequest::SetParams(const nlohmann::json& params) { params_ = params; }
 
-const nlohmann::json& RpcRequest::GetId() const
-{
-    return id_;
-}
+const nlohmann::json& RpcRequest::GetId() const { return id_; }
 
-void RpcRequest::SetId(const nlohmann::json& id)
-{
-    id_ = id;
-}
+void RpcRequest::SetId(const nlohmann::json& id) { id_ = id; }
 
 nlohmann::json RpcRequest::ToJson() const
 {
@@ -64,17 +40,13 @@ RpcRequest RpcRequest::FromJson(const nlohmann::json& json)
 {
     RpcRequest request;
 
-    if (json.contains("jsonrpc") && json["jsonrpc"].is_string())
-        request.SetJsonRpc(json["jsonrpc"].get<std::string>());
+    if (json.contains("jsonrpc") && json["jsonrpc"].is_string()) request.SetJsonRpc(json["jsonrpc"].get<std::string>());
 
-    if (json.contains("method") && json["method"].is_string())
-        request.SetMethod(json["method"].get<std::string>());
+    if (json.contains("method") && json["method"].is_string()) request.SetMethod(json["method"].get<std::string>());
 
-    if (json.contains("params"))
-        request.SetParams(json["params"]);
+    if (json.contains("params")) request.SetParams(json["params"]);
 
-    if (json.contains("id"))
-        request.SetId(json["id"]);
+    if (json.contains("id")) request.SetId(json["id"]);
 
     return request;
 }

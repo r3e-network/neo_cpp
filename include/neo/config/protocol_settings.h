@@ -48,9 +48,6 @@ struct ProtocolSettings
     /**
      * @brief Get network magic number
      */
-    uint32_t GetNetwork() const
-    {
-        return Network;
-    }
+    uint32_t GetNetwork() const { return Network; }
 };
 }  // namespace neo::config

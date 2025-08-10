@@ -1,12 +1,13 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
+
+#include <cstdint>
 #include <string>
 
 namespace neo::network::p2p
@@ -16,7 +17,7 @@ namespace neo::network::p2p
  */
 class NetworkAddressWithTime : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty NetworkAddressWithTime.
      */
@@ -123,7 +124,7 @@ class NetworkAddressWithTime : public io::ISerializable, public io::IJsonSeriali
      */
     bool operator!=(const NetworkAddressWithTime& other) const;
 
-  private:
+   private:
     uint32_t timestamp_;
     uint64_t services_;
     std::string address_;

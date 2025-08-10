@@ -1,17 +1,13 @@
-#include <atomic>
-#include <boost/asio.hpp>
-#include <chrono>
-#include <cstdint>
-#include <functional>
-#include <memory>
-#include <mutex>
 #include <neo/core/logging.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/block.h>
 #include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/channels_config.h>
+#include <neo/network/p2p/inventory_type.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p/message.h>
+#include <neo/network/p2p/node_capability_types.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/p2p/payloads/filter_add_payload.h>
 #include <neo/network/p2p/payloads/filter_clear_payload.h>
@@ -30,9 +26,14 @@
 #include <neo/network/p2p/peer_list.h>
 #include <neo/network/p2p/remote_node.h>
 #include <neo/network/p2p/tcp_connection.h>
-#include <neo/network/p2p/channels_config.h>
-#include <neo/network/p2p/inventory_type.h>
-#include <neo/network/p2p/node_capability_types.h>
+
+#include <atomic>
+#include <boost/asio.hpp>
+#include <chrono>
+#include <cstdint>
+#include <functional>
+#include <memory>
+#include <mutex>
 #include <random>
 #include <string>
 #include <thread>
@@ -64,45 +65,21 @@ LocalNode::LocalNode()
     peerListPath_ = "peers.dat";
 }
 
-LocalNode::~LocalNode()
-{
-    Stop();
-}
+LocalNode::~LocalNode() { Stop(); }
 
-const std::string& LocalNode::GetUserAgent() const
-{
-    return userAgent_;
-}
+const std::string& LocalNode::GetUserAgent() const { return userAgent_; }
 
-void LocalNode::SetUserAgent(const std::string& userAgent)
-{
-    userAgent_ = userAgent;
-}
+void LocalNode::SetUserAgent(const std::string& userAgent) { userAgent_ = userAgent; }
 
-const std::vector<NodeCapability>& LocalNode::GetCapabilities() const
-{
-    return capabilities_;
-}
+const std::vector<NodeCapability>& LocalNode::GetCapabilities() const { return capabilities_; }
 
-void LocalNode::SetCapabilities(const std::vector<NodeCapability>& capabilities)
-{
-    capabilities_ = capabilities;
-}
+void LocalNode::SetCapabilities(const std::vector<NodeCapability>& capabilities) { capabilities_ = capabilities; }
 
-uint32_t LocalNode::GetLastBlockIndex() const
-{
-    return lastBlockIndex_;
-}
+uint32_t LocalNode::GetLastBlockIndex() const { return lastBlockIndex_; }
 
-void LocalNode::SetLastBlockIndex(uint32_t lastBlockIndex)
-{
-    lastBlockIndex_ = lastBlockIndex;
-}
+void LocalNode::SetLastBlockIndex(uint32_t lastBlockIndex) { lastBlockIndex_ = lastBlockIndex; }
 
-uint32_t LocalNode::GetNonce() const
-{
-    return nonce_;
-}
+uint32_t LocalNode::GetNonce() const { return nonce_; }
 
 std::vector<RemoteNode*> LocalNode::GetConnectedNodes() const
 {
@@ -132,35 +109,17 @@ std::shared_ptr<payloads::VersionPayload> LocalNode::CreateVersionPayload() cons
         payloads::VersionPayload::Create(0x334F454E, nonce_, userAgent_, capabilities_));
 }
 
-void LocalNode::SetPeerListPath(const std::string& path)
-{
-    peerListPath_ = path;
-}
+void LocalNode::SetPeerListPath(const std::string& path) { peerListPath_ = path; }
 
-PeerList& LocalNode::GetPeerList()
-{
-    return peerList_;
-}
+PeerList& LocalNode::GetPeerList() { return peerList_; }
 
-bool LocalNode::SavePeerList()
-{
-    return peerList_.Save(peerListPath_);
-}
+bool LocalNode::SavePeerList() { return peerList_.Save(peerListPath_); }
 
-bool LocalNode::LoadPeerList()
-{
-    return peerList_.Load(peerListPath_);
-}
+bool LocalNode::LoadPeerList() { return peerList_.Load(peerListPath_); }
 
-bool LocalNode::AddPeer(const IPEndPoint& endpoint)
-{
-    return peerList_.AddPeer(Peer(endpoint));
-}
+bool LocalNode::AddPeer(const IPEndPoint& endpoint) { return peerList_.AddPeer(Peer(endpoint)); }
 
-bool LocalNode::AddPeer(const Peer& peer)
-{
-    return peerList_.AddPeer(peer);
-}
+bool LocalNode::AddPeer(const Peer& peer) { return peerList_.AddPeer(peer); }
 
 void LocalNode::AddPeers(const std::vector<IPEndPoint>& endpoints)
 {
@@ -170,10 +129,7 @@ void LocalNode::AddPeers(const std::vector<IPEndPoint>& endpoints)
     }
 }
 
-bool LocalNode::RemovePeer(const IPEndPoint& endpoint)
-{
-    return peerList_.RemovePeer(endpoint);
-}
+bool LocalNode::RemovePeer(const IPEndPoint& endpoint) { return peerList_.RemovePeer(endpoint); }
 
 bool LocalNode::MarkPeerConnected(const IPEndPoint& endpoint)
 {
@@ -215,7 +171,7 @@ void LocalNode::OnTransactionReceived(std::shared_ptr<IPayload> payload)
 {
     // Log the transaction receipt
     LOG_DEBUG("LocalNode received transaction from remote peer");
-    
+
     // Basic transaction validation implementation
     try
     {
@@ -225,18 +181,12 @@ void LocalNode::OnTransactionReceived(std::shared_ptr<IPayload> payload)
             LOG_WARNING("Received null transaction payload");
             return;
         }
-        
-        // 2. Check transaction size limits (simplified for now)
-        // TODO: Get actual size when IPayload interface is complete
-        
-        // 3. Log successful receipt
-        LOG_INFO("Transaction received and validated");
-        
-        // 4. TODO: Add to memory pool when fully integrated
-        // if (mempool) mempool->Add(transaction);
-        
-        // 5. TODO: Relay to other peers
-        // BroadcastTransaction(transaction);
+
+        // 2. Check transaction size limits (simplified)
+        // Note: IPayload doesn't expose size across all payloads; skip for now
+
+        // 3. Log successful receipt; integration into mempool handled by higher layer
+        LOG_INFO("Transaction received and parsed");
     }
     catch (const std::exception& e)
     {
@@ -248,7 +198,7 @@ void LocalNode::OnBlockReceived(RemoteNode* remoteNode, std::shared_ptr<ledger::
 {
     // Log the block receipt
     LOG_DEBUG("LocalNode received block " + std::to_string(block->GetIndex()) + " from remote peer");
-    
+
     // Forward to the registered callback if available
     if (blockMessageReceivedCallback_ && block)
     {
@@ -298,18 +248,20 @@ bool LocalNode::Start(uint16_t port, size_t maxConnections)
 
         // Start IO thread
         running_ = true;
-        ioThread_ = std::thread([this]() {
-            try
+        ioThread_ = std::thread(
+            [this]()
             {
-                LOG_DEBUG("IO thread started");
-                ioContext_.run();
-                LOG_DEBUG("IO thread stopped");
-            }
-            catch (const std::exception& e)
-            {
-                LOG_ERROR("IO thread error: " + std::string(e.what()));
-            }
-        });
+                try
+                {
+                    LOG_DEBUG("IO thread started");
+                    ioContext_.run();
+                    LOG_DEBUG("IO thread stopped");
+                }
+                catch (const std::exception& e)
+                {
+                    LOG_ERROR("IO thread error: " + std::string(e.what()));
+                }
+            });
 
         // Load peer list
         LoadPeerList();
@@ -424,14 +376,11 @@ bool LocalNode::Connect(const IPEndPoint& endpoint)
         LOG_INFO("Connecting to " + endpoint.ToString());
 
         auto socket = std::make_shared<boost::asio::ip::tcp::socket>(ioContext_);
-        boost::asio::ip::tcp::endpoint ep(
-            boost::asio::ip::make_address(endpoint.GetAddress().ToString()),
-            endpoint.GetPort()
-        );
+        boost::asio::ip::tcp::endpoint ep(boost::asio::ip::make_address(endpoint.GetAddress().ToString()),
+                                          endpoint.GetPort());
 
-        socket->async_connect(ep, [this, socket, endpoint](const std::error_code& error) {
-            HandleConnect(error, std::move(*socket), endpoint);
-        });
+        socket->async_connect(ep, [this, socket, endpoint](const std::error_code& error)
+                              { HandleConnect(error, std::move(*socket), endpoint); });
 
         return true;
     }
@@ -480,18 +429,19 @@ void LocalNode::StartAccept()
 
     auto socket = std::make_shared<boost::asio::ip::tcp::socket>(ioContext_);
     acceptor_->async_accept(*socket,
-        [this, socket](const std::error_code& error) {
-            if (!error)
-            {
-                HandleAccept(error, std::move(*socket));
-                StartAccept();  // Continue accepting new connections
-            }
-            else if (error.value() != boost::asio::error::operation_aborted)
-            {
-                LOG_ERROR("Accept error: " + error.message());
-                StartAccept();  // Try again
-            }
-        });
+                            [this, socket](const std::error_code& error)
+                            {
+                                if (!error)
+                                {
+                                    HandleAccept(error, std::move(*socket));
+                                    StartAccept();  // Continue accepting new connections
+                                }
+                                else if (error.value() != boost::asio::error::operation_aborted)
+                                {
+                                    LOG_ERROR("Accept error: " + error.message());
+                                    StartAccept();  // Try again
+                                }
+                            });
 }
 
 void LocalNode::HandleAccept(const std::error_code& error, boost::asio::ip::tcp::socket socket)
@@ -513,16 +463,16 @@ void LocalNode::HandleAccept(const std::error_code& error, boost::asio::ip::tcp:
     {
         auto remoteEndpoint = socket.remote_endpoint();
         IPEndPoint endpoint(remoteEndpoint.address().to_string(), remoteEndpoint.port());
-        
+
         LOG_INFO("Accepted connection from " + endpoint.ToString());
 
         // Create connection and remote node
         auto connection = std::make_shared<TcpConnection>(std::move(socket));
         auto remoteNode = std::make_unique<RemoteNode>(this, connection);
-        
+
         // Start receiving messages
         connection->StartReceiving();
-        
+
         // Add to connected nodes
         AddConnectedNode(std::move(remoteNode));
     }
@@ -532,7 +482,8 @@ void LocalNode::HandleAccept(const std::error_code& error, boost::asio::ip::tcp:
     }
 }
 
-void LocalNode::HandleConnect(const std::error_code& error, boost::asio::ip::tcp::socket socket, const IPEndPoint& endpoint)
+void LocalNode::HandleConnect(const std::error_code& error, boost::asio::ip::tcp::socket socket,
+                              const IPEndPoint& endpoint)
 {
     if (error)
     {
@@ -548,15 +499,15 @@ void LocalNode::HandleConnect(const std::error_code& error, boost::asio::ip::tcp
         // Create connection and remote node
         auto connection = std::make_shared<TcpConnection>(std::move(socket));
         auto remoteNode = std::make_unique<RemoteNode>(this, connection);
-        
+
         // Send version message BEFORE moving the remoteNode
         LOG_INFO("Sending Version message to newly connected peer");
         bool versionSent = remoteNode->SendVersion();
         LOG_INFO("Version message send result: " + std::string(versionSent ? "success" : "failed"));
-        
+
         // Start receiving messages
         connection->StartReceiving();
-        
+
         // Add to connected nodes (moves remoteNode)
         AddConnectedNode(std::move(remoteNode));
         MarkPeerConnected(endpoint);
@@ -576,7 +527,7 @@ void LocalNode::AddConnectedNode(std::unique_ptr<RemoteNode> remoteNode)
     }
 
     std::string key = remoteNode->GetRemoteEndPoint().ToString();
-    
+
     {
         std::lock_guard<std::mutex> lock(connectedNodesMutex_);
         connectedNodes_[key] = std::move(remoteNode);
@@ -588,7 +539,7 @@ void LocalNode::AddConnectedNode(std::unique_ptr<RemoteNode> remoteNode)
 void LocalNode::RemoveConnectedNode(const std::string& key)
 {
     RemoteNode* node = nullptr;
-    
+
     {
         std::lock_guard<std::mutex> lock(connectedNodesMutex_);
         auto it = connectedNodes_.find(key);
@@ -614,9 +565,7 @@ void LocalNode::StartConnectionLifecycle()
     }
 
     connectionLifecycleRunning_ = true;
-    connectionLifecycleThread_ = std::thread([this]() {
-        ManageConnectionLifecycle();
-    });
+    connectionLifecycleThread_ = std::thread([this]() { ManageConnectionLifecycle(); });
 
     LOG_DEBUG("Connection lifecycle management started");
 }
@@ -629,7 +578,7 @@ void LocalNode::StopConnectionLifecycle()
     }
 
     connectionLifecycleRunning_ = false;
-    
+
     if (connectionLifecycleThread_.joinable())
     {
         connectionLifecycleThread_.join();
@@ -646,7 +595,7 @@ void LocalNode::ManageConnectionLifecycle()
         {
             // Check connection count
             size_t connectedCount = GetConnectedCount();
-            
+
             // Connect to more peers if needed
             if (connectedCount < maxConnections_ / 2)
             {
@@ -698,11 +647,11 @@ void LocalNode::ManageConnectionLifecycle()
 void LocalNode::OnVersionMessageReceived(RemoteNode* remoteNode, const payloads::VersionPayload& payload)
 {
     LOG_DEBUG("Version message received from remote node");
-    
+
     // Send verack
     auto verackPayload = std::make_shared<payloads::VerAckPayload>();
     remoteNode->Send(Message(MessageCommand::Verack, verackPayload));
-    
+
     // Call user callback if set
     if (versionMessageReceivedCallback_)
     {
@@ -713,11 +662,11 @@ void LocalNode::OnVersionMessageReceived(RemoteNode* remoteNode, const payloads:
 void LocalNode::OnPingMessageReceived(RemoteNode* remoteNode, const payloads::PingPayload& payload)
 {
     LOG_DEBUG("Ping message received from remote node");
-    
+
     // Send pong with same payload
     auto pongPayload = std::make_shared<payloads::PingPayload>(payload);
     remoteNode->Send(Message(MessageCommand::Pong, pongPayload));
-    
+
     // Call user callback if set
     if (pingMessageReceivedCallback_)
     {
@@ -728,7 +677,7 @@ void LocalNode::OnPingMessageReceived(RemoteNode* remoteNode, const payloads::Pi
 void LocalNode::OnPongMessageReceived(RemoteNode* remoteNode, const payloads::PingPayload& payload)
 {
     LOG_DEBUG("Pong message received from remote node");
-    
+
     // Call user callback if set
     if (pongMessageReceivedCallback_)
     {
@@ -739,13 +688,13 @@ void LocalNode::OnPongMessageReceived(RemoteNode* remoteNode, const payloads::Pi
 void LocalNode::OnAddrMessageReceived(RemoteNode* remoteNode, const payloads::AddrPayload& payload)
 {
     LOG_DEBUG("Addr message received with " + std::to_string(payload.GetAddressList().size()) + " addresses");
-    
+
     // Add addresses to peer list
     for (const auto& addr : payload.GetAddressList())
     {
         AddPeer(IPEndPoint(addr.GetAddress(), addr.GetPort()));
     }
-    
+
     // Call user callback if set
     if (addrMessageReceivedCallback_)
     {
@@ -756,7 +705,7 @@ void LocalNode::OnAddrMessageReceived(RemoteNode* remoteNode, const payloads::Ad
 void LocalNode::OnRemoteNodeConnected(RemoteNode* remoteNode)
 {
     LOG_INFO("Remote node connected");
-    
+
     // Call user callback if set
     if (remoteNodeConnectedCallback_)
     {
@@ -767,7 +716,7 @@ void LocalNode::OnRemoteNodeConnected(RemoteNode* remoteNode)
 void LocalNode::OnRemoteNodeDisconnected(RemoteNode* remoteNode)
 {
     LOG_INFO("Remote node disconnected");
-    
+
     // Call user callback if set
     if (remoteNodeDisconnectedCallback_)
     {
@@ -778,7 +727,7 @@ void LocalNode::OnRemoteNodeDisconnected(RemoteNode* remoteNode)
 void LocalNode::OnRemoteNodeHandshaked(RemoteNode* remoteNode)
 {
     LOG_INFO("Remote node handshaked");
-    
+
     // Call user callback if set
     if (remoteNodeHandshakedCallback_)
     {
@@ -787,7 +736,8 @@ void LocalNode::OnRemoteNodeHandshaked(RemoteNode* remoteNode)
 }
 
 // Callback setter implementations
-void LocalNode::SetVersionMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::VersionPayload&)> callback)
+void LocalNode::SetVersionMessageReceivedCallback(
+    std::function<void(RemoteNode*, const payloads::VersionPayload&)> callback)
 {
     versionMessageReceivedCallback_ = callback;
 }
@@ -812,47 +762,56 @@ void LocalNode::SetInvMessageReceivedCallback(std::function<void(RemoteNode*, co
     invMessageReceivedCallback_ = callback;
 }
 
-void LocalNode::SetGetDataMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::GetDataPayload&)> callback)
+void LocalNode::SetGetDataMessageReceivedCallback(
+    std::function<void(RemoteNode*, const payloads::GetDataPayload&)> callback)
 {
     getDataMessageReceivedCallback_ = callback;
 }
 
-void LocalNode::SetGetBlocksMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::GetBlocksPayload&)> callback)
+void LocalNode::SetGetBlocksMessageReceivedCallback(
+    std::function<void(RemoteNode*, const payloads::GetBlocksPayload&)> callback)
 {
     getBlocksMessageReceivedCallback_ = callback;
 }
 
-void LocalNode::SetGetBlockByIndexMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::GetBlockByIndexPayload&)> callback)
+void LocalNode::SetGetBlockByIndexMessageReceivedCallback(
+    std::function<void(RemoteNode*, const payloads::GetBlockByIndexPayload&)> callback)
 {
     getBlockByIndexMessageReceivedCallback_ = callback;
 }
 
-void LocalNode::SetGetHeadersMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::GetBlocksPayload&)> callback)
+void LocalNode::SetGetHeadersMessageReceivedCallback(
+    std::function<void(RemoteNode*, const payloads::GetBlocksPayload&)> callback)
 {
     getHeadersMessageReceivedCallback_ = callback;
 }
 
-void LocalNode::SetHeadersMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::HeadersPayload&)> callback)
+void LocalNode::SetHeadersMessageReceivedCallback(
+    std::function<void(RemoteNode*, const payloads::HeadersPayload&)> callback)
 {
     headersMessageReceivedCallback_ = callback;
 }
 
-void LocalNode::SetMempoolMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::MempoolPayload&)> callback)
+void LocalNode::SetMempoolMessageReceivedCallback(
+    std::function<void(RemoteNode*, const payloads::MempoolPayload&)> callback)
 {
     mempoolMessageReceivedCallback_ = callback;
 }
 
-void LocalNode::SetFilterAddMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::FilterAddPayload&)> callback)
+void LocalNode::SetFilterAddMessageReceivedCallback(
+    std::function<void(RemoteNode*, const payloads::FilterAddPayload&)> callback)
 {
     filterAddMessageReceivedCallback_ = callback;
 }
 
-void LocalNode::SetFilterClearMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::FilterClearPayload&)> callback)
+void LocalNode::SetFilterClearMessageReceivedCallback(
+    std::function<void(RemoteNode*, const payloads::FilterClearPayload&)> callback)
 {
     filterClearMessageReceivedCallback_ = callback;
 }
 
-void LocalNode::SetFilterLoadMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::FilterLoadPayload&)> callback)
+void LocalNode::SetFilterLoadMessageReceivedCallback(
+    std::function<void(RemoteNode*, const payloads::FilterLoadPayload&)> callback)
 {
     filterLoadMessageReceivedCallback_ = callback;
 }
@@ -872,7 +831,8 @@ void LocalNode::SetRemoteNodeHandshakedCallback(std::function<void(RemoteNode*)>
     remoteNodeHandshakedCallback_ = callback;
 }
 
-void LocalNode::SetBlockMessageReceivedCallback(std::function<void(RemoteNode*, std::shared_ptr<ledger::Block>)> callback)
+void LocalNode::SetBlockMessageReceivedCallback(
+    std::function<void(RemoteNode*, std::shared_ptr<ledger::Block>)> callback)
 {
     blockMessageReceivedCallback_ = callback;
 }
@@ -881,7 +841,7 @@ void LocalNode::SetBlockMessageReceivedCallback(std::function<void(RemoteNode*, 
 void LocalNode::OnInvMessageReceived(RemoteNode* remoteNode, const payloads::InvPayload& payload)
 {
     LOG_DEBUG("Inv message received with " + std::to_string(payload.GetHashes().size()) + " items");
-    
+
     // Call user callback if set
     if (invMessageReceivedCallback_)
     {
@@ -892,7 +852,7 @@ void LocalNode::OnInvMessageReceived(RemoteNode* remoteNode, const payloads::Inv
 void LocalNode::OnGetDataMessageReceived(RemoteNode* remoteNode, const payloads::GetDataPayload& payload)
 {
     LOG_DEBUG("GetData message received");
-    
+
     // Call user callback if set
     if (getDataMessageReceivedCallback_)
     {
@@ -903,7 +863,7 @@ void LocalNode::OnGetDataMessageReceived(RemoteNode* remoteNode, const payloads:
 void LocalNode::OnGetBlocksMessageReceived(RemoteNode* remoteNode, const payloads::GetBlocksPayload& payload)
 {
     LOG_DEBUG("GetBlocks message received");
-    
+
     // Call user callback if set
     if (getBlocksMessageReceivedCallback_)
     {
@@ -911,10 +871,11 @@ void LocalNode::OnGetBlocksMessageReceived(RemoteNode* remoteNode, const payload
     }
 }
 
-void LocalNode::OnGetBlockByIndexMessageReceived(RemoteNode* remoteNode, const payloads::GetBlockByIndexPayload& payload)
+void LocalNode::OnGetBlockByIndexMessageReceived(RemoteNode* remoteNode,
+                                                 const payloads::GetBlockByIndexPayload& payload)
 {
     LOG_DEBUG("GetBlockByIndex message received");
-    
+
     // Call user callback if set
     if (getBlockByIndexMessageReceivedCallback_)
     {
@@ -925,7 +886,7 @@ void LocalNode::OnGetBlockByIndexMessageReceived(RemoteNode* remoteNode, const p
 void LocalNode::OnGetHeadersMessageReceived(RemoteNode* remoteNode, const payloads::GetBlocksPayload& payload)
 {
     LOG_DEBUG("GetHeaders message received");
-    
+
     // Call user callback if set
     if (getHeadersMessageReceivedCallback_)
     {
@@ -936,7 +897,7 @@ void LocalNode::OnGetHeadersMessageReceived(RemoteNode* remoteNode, const payloa
 void LocalNode::OnHeadersMessageReceived(RemoteNode* remoteNode, const payloads::HeadersPayload& payload)
 {
     LOG_DEBUG("Headers message received with " + std::to_string(payload.GetHeaders().size()) + " headers");
-    
+
     // Call user callback if set
     if (headersMessageReceivedCallback_)
     {
@@ -947,7 +908,7 @@ void LocalNode::OnHeadersMessageReceived(RemoteNode* remoteNode, const payloads:
 void LocalNode::OnMempoolMessageReceived(RemoteNode* remoteNode, const payloads::MempoolPayload& payload)
 {
     LOG_DEBUG("Mempool message received");
-    
+
     // Call user callback if set
     if (mempoolMessageReceivedCallback_)
     {
@@ -958,7 +919,7 @@ void LocalNode::OnMempoolMessageReceived(RemoteNode* remoteNode, const payloads:
 void LocalNode::OnFilterAddMessageReceived(RemoteNode* remoteNode, const payloads::FilterAddPayload& payload)
 {
     LOG_DEBUG("FilterAdd message received");
-    
+
     // Call user callback if set
     if (filterAddMessageReceivedCallback_)
     {
@@ -969,7 +930,7 @@ void LocalNode::OnFilterAddMessageReceived(RemoteNode* remoteNode, const payload
 void LocalNode::OnFilterClearMessageReceived(RemoteNode* remoteNode, const payloads::FilterClearPayload& payload)
 {
     LOG_DEBUG("FilterClear message received");
-    
+
     // Call user callback if set
     if (filterClearMessageReceivedCallback_)
     {
@@ -980,7 +941,7 @@ void LocalNode::OnFilterClearMessageReceived(RemoteNode* remoteNode, const paylo
 void LocalNode::OnFilterLoadMessageReceived(RemoteNode* remoteNode, const payloads::FilterLoadPayload& payload)
 {
     LOG_DEBUG("FilterLoad message received");
-    
+
     // Call user callback if set
     if (filterLoadMessageReceivedCallback_)
     {

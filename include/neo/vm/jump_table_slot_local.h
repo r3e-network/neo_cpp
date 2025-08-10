@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableSlotLocal
 {
-  public:
+   public:
     // Local variable operations
     static void INITSLOT(ExecutionEngine& engine, const Instruction& instruction);
     static void LDLOC0(ExecutionEngine& engine, const Instruction& instruction);

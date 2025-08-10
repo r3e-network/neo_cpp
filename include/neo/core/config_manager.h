@@ -1,6 +1,5 @@
 #pragma once
 
-#include "safe_conversions.h"
 #include <cstdlib>
 #include <fstream>
 #include <memory>
@@ -9,6 +8,8 @@
 #include <regex>
 #include <string>
 #include <unordered_map>
+
+#include "safe_conversions.h"
 
 namespace neo::core
 {
@@ -25,7 +26,7 @@ namespace neo::core
  */
 class ConfigManager
 {
-  public:
+   public:
     /**
      * @brief Load configuration from file with environment variable substitution
      * @param configPath Path to configuration file
@@ -201,35 +202,26 @@ class ConfigManager
     {
         if (network == "mainnet")
         {
-            if (service == "p2p")
-                return 10333;
-            if (service == "rpc")
-                return 10332;
-            if (service == "ws")
-                return 10334;
+            if (service == "p2p") return 10333;
+            if (service == "rpc") return 10332;
+            if (service == "ws") return 10334;
         }
         else if (network == "testnet")
         {
-            if (service == "p2p")
-                return 20333;
-            if (service == "rpc")
-                return 20332;
-            if (service == "ws")
-                return 20334;
+            if (service == "p2p") return 20333;
+            if (service == "rpc") return 20332;
+            if (service == "ws") return 20334;
         }
         else if (network == "privnet")
         {
-            if (service == "p2p")
-                return 30333;
-            if (service == "rpc")
-                return 30332;
-            if (service == "ws")
-                return 30334;
+            if (service == "p2p") return 30333;
+            if (service == "rpc") return 30332;
+            if (service == "ws") return 30334;
         }
         return 0;
     }
 
-  private:
+   private:
     ConfigManager() = default;
 
     /**
@@ -375,7 +367,7 @@ class ConfigManager
  */
 class Config
 {
-  public:
+   public:
     static std::string GetString(const std::string& path, const std::string& defaultValue = "")
     {
         return ConfigManager::GetInstance().GetString(path, defaultValue);

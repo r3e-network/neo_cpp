@@ -20,7 +20,7 @@ namespace neo::persistence
  */
 class StoreFactory
 {
-  public:
+   public:
     /**
      * @brief Gets a store provider by name.
      * @param provider_name The name of the provider ("memory", "rocksdb", etc.)
@@ -34,8 +34,8 @@ class StoreFactory
      * @param config Configuration parameters for the provider
      * @return Shared pointer to the store provider, or nullptr if not found
      */
-    static std::shared_ptr<IStoreProvider> get_store_provider(const std::string& provider_name, 
-                                                              const std::unordered_map<std::string, std::string>& config);
+    static std::shared_ptr<IStoreProvider> get_store_provider(
+        const std::string& provider_name, const std::unordered_map<std::string, std::string>& config);
 
     /**
      * @brief Gets the default store provider.
@@ -64,7 +64,7 @@ class StoreFactory
      */
     static std::unique_ptr<IStore> create_store(const std::string& provider_name, const std::string& path);
 
-  private:
+   private:
     static std::unordered_map<std::string, std::shared_ptr<IStoreProvider>> providers_;
     static std::mutex providers_mutex_;
     static bool initialized_;

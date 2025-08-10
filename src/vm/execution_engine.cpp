@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <cstring>
 #include <neo/cryptography/hash.h>
 #include <neo/vm/compound_items.h>
 #include <neo/vm/exceptions.h>
@@ -7,6 +5,9 @@
 #include <neo/vm/jump_table.h>
 #include <neo/vm/primitive_items.h>
 #include <neo/vm/special_items.h>
+
+#include <algorithm>
+#include <cstring>
 #include <stdexcept>
 
 namespace neo::vm
@@ -35,36 +36,25 @@ ExecutionEngine::ExecutionEngine(const JumpTable& jumpTable, const ExecutionEngi
 {
 }
 
-ExecutionEngine::~ExecutionEngine()
-{
-    invocationStack_.clear();
-}
+ExecutionEngine::~ExecutionEngine() { invocationStack_.clear(); }
 
-const ExecutionEngineLimits& ExecutionEngine::GetLimits() const
-{
-    return limits_;
-}
+const ExecutionEngineLimits& ExecutionEngine::GetLimits() const { return limits_; }
 
 ExecutionContext& ExecutionEngine::GetCurrentContext()
 {
-    if (invocationStack_.empty())
-        throw std::runtime_error("Invocation stack is empty");
+    if (invocationStack_.empty()) throw std::runtime_error("Invocation stack is empty");
 
     return *invocationStack_.back();
 }
 
 const ExecutionContext& ExecutionEngine::GetCurrentContext() const
 {
-    if (invocationStack_.empty())
-        throw std::runtime_error("Invocation stack is empty");
+    if (invocationStack_.empty()) throw std::runtime_error("Invocation stack is empty");
 
     return *invocationStack_.back();
 }
 
-std::shared_ptr<ExecutionContext> ExecutionEngine::GetEntryContext() const
-{
-    return entryContext_;
-}
+std::shared_ptr<ExecutionContext> ExecutionEngine::GetEntryContext() const { return entryContext_; }
 
 const std::vector<std::shared_ptr<ExecutionContext>>& ExecutionEngine::GetInvocationStack() const
 {
@@ -140,50 +130,23 @@ std::shared_ptr<StackItem> ExecutionEngine::Pop()
     return item;
 }
 
-std::shared_ptr<StackItem> ExecutionEngine::Peek(int32_t index) const
-{
-    return GetCurrentContext().Peek(index);
-}
+std::shared_ptr<StackItem> ExecutionEngine::Peek(int32_t index) const { return GetCurrentContext().Peek(index); }
 
-void ExecutionEngine::SetJumping(bool jumping)
-{
-    jumping_ = jumping;
-}
+void ExecutionEngine::SetJumping(bool jumping) { jumping_ = jumping; }
 
-bool ExecutionEngine::IsJumping() const
-{
-    return jumping_;
-}
+bool ExecutionEngine::IsJumping() const { return jumping_; }
 
-ReferenceCounter* ExecutionEngine::GetReferenceCounter()
-{
-    return &referenceCounter_;
-}
+ReferenceCounter* ExecutionEngine::GetReferenceCounter() { return &referenceCounter_; }
 
-bool ExecutionEngine::HasUncaughtException() const
-{
-    return uncaughtException_ != nullptr;
-}
+bool ExecutionEngine::HasUncaughtException() const { return uncaughtException_ != nullptr; }
 
-std::shared_ptr<StackItem> ExecutionEngine::GetUncaughtException() const
-{
-    return uncaughtException_;
-}
+std::shared_ptr<StackItem> ExecutionEngine::GetUncaughtException() const { return uncaughtException_; }
 
-void ExecutionEngine::ClearUncaughtException()
-{
-    uncaughtException_ = nullptr;
-}
+void ExecutionEngine::ClearUncaughtException() { uncaughtException_ = nullptr; }
 
-void ExecutionEngine::SetUncaughtException(std::shared_ptr<StackItem> exception)
-{
-    uncaughtException_ = exception;
-}
+void ExecutionEngine::SetUncaughtException(std::shared_ptr<StackItem> exception) { uncaughtException_ = exception; }
 
-VMState ExecutionEngine::GetState() const
-{
-    return state_;
-}
+VMState ExecutionEngine::GetState() const { return state_; }
 
 void ExecutionEngine::SetState(VMState state)
 {
@@ -194,10 +157,7 @@ void ExecutionEngine::SetState(VMState state)
     }
 }
 
-const std::vector<std::shared_ptr<StackItem>>& ExecutionEngine::GetResultStack() const
-{
-    return resultStack_;
-}
+const std::vector<std::shared_ptr<StackItem>>& ExecutionEngine::GetResultStack() const { return resultStack_; }
 
 std::shared_ptr<ExecutionContext> ExecutionEngine::CreateContext(const Script& script, int32_t rvcount,
                                                                  int32_t initialPosition)
@@ -212,8 +172,7 @@ std::shared_ptr<ExecutionContext> ExecutionEngine::LoadScript(const Script& scri
 {
     auto context = CreateContext(script, -1, initialPosition);
 
-    if (configureContext)
-        configureContext(*context);
+    if (configureContext) configureContext(*context);
 
     LoadContext(context);
     return context;
@@ -226,8 +185,7 @@ void ExecutionEngine::LoadContext(std::shared_ptr<ExecutionContext> context)
 
     invocationStack_.push_back(context);
 
-    if (entryContext_ == nullptr)
-        entryContext_ = context;
+    if (entryContext_ == nullptr) entryContext_ = context;
 }
 
 void ExecutionEngine::UnloadContext(ExecutionContext& context)
@@ -281,8 +239,7 @@ void ExecutionEngine::UnloadContext(ExecutionContext& context)
 
 VMState ExecutionEngine::Execute(int64_t gasLimit)
 {
-    if (invocationStack_.empty())
-        return VMState::None;
+    if (invocationStack_.empty()) return VMState::None;
 
     // Check if the invocation stack is too large
     if (invocationStack_.size() > limits_.MaxInvocationStackSize)
@@ -291,16 +248,14 @@ VMState ExecutionEngine::Execute(int64_t gasLimit)
         return state_;
     }
 
-    if (state_ == VMState::Break)
-        SetState(VMState::None);
+    if (state_ == VMState::Break) SetState(VMState::None);
 
     while (state_ != VMState::Halt && state_ != VMState::Fault)
     {
         ExecuteNext();
 
         // Check gas limit if specified
-        if (gasLimit >= 0 && gasLimit-- <= 0)
-            break;
+        if (gasLimit >= 0 && gasLimit-- <= 0) break;
     }
 
     return state_;
@@ -352,8 +307,7 @@ void ExecutionEngine::ExecuteNext()
         // Post-execute instruction hook (for debugging)
         PostExecuteInstruction(instruction);
 
-        if (!jumping_)
-            context.MoveNext();
+        if (!jumping_) context.MoveNext();
 
         jumping_ = false;
     }
@@ -399,8 +353,7 @@ void ExecutionEngine::RegisterSystemCall(const std::string& name, std::function<
 const SystemCall& ExecutionEngine::GetSystemCall(uint32_t hash) const
 {
     auto it = systemCalls_.find(hash);
-    if (it == systemCalls_.end())
-        throw std::runtime_error("System call not found");
+    if (it == systemCalls_.end()) throw std::runtime_error("System call not found");
 
     return it->second;
 }
@@ -461,10 +414,7 @@ void ExecutionEngine::OnFault(std::exception_ptr ex)
     }
 }
 
-void ExecutionEngine::OnFault()
-{
-    OnFault(std::current_exception());
-}
+void ExecutionEngine::OnFault() { OnFault(std::current_exception()); }
 
 bool ExecutionEngine::ExecuteRet()
 {

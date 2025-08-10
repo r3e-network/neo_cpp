@@ -11,7 +11,7 @@ namespace neo::cli
  */
 class ConsoleCommandAttribute
 {
-  public:
+   public:
     /**
      * @brief The command name.
      */
@@ -59,7 +59,7 @@ class ConsoleCommandAttribute
 /**
  * @brief Macro for defining console commands.
  */
-#define CONSOLE_COMMAND(name, category, description)                                                                   \
-    static ConsoleCommandAttribute name##_command(#name, category, description);                                       \
+#define CONSOLE_COMMAND(name, category, description)                             \
+    static ConsoleCommandAttribute name##_command(#name, category, description); \
     void name
 }  // namespace neo::cli

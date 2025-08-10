@@ -1,6 +1,3 @@
-#include <algorithm>
-#include <chrono>
-#include <mutex>
 #include <neo/core/protocol_constants.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/ecpoint.h>
@@ -17,6 +14,10 @@
 #include <neo/smartcontract/transaction_verifier.h>
 #include <neo/smartcontract/trigger_type.h>
 #include <neo/vm/vm_state.h>
+
+#include <algorithm>
+#include <chrono>
+#include <mutex>
 #include <sstream>
 #include <unordered_map>
 
@@ -72,13 +73,13 @@ void CleanExpiredEntries()
 }  // namespace
 class VerificationCache
 {
-  private:
+   private:
     mutable std::shared_mutex cache_mutex_;
     std::unordered_map<std::string, std::pair<bool, std::chrono::steady_clock::time_point>> cache_;
     static constexpr size_t MAX_CACHE_SIZE = 10000;
     static constexpr std::chrono::minutes CACHE_TTL{30};
 
-  public:
+   public:
     template <typename T>
     T* Get(const std::string& key)
     {
@@ -140,28 +141,22 @@ class VerificationCache
 // Production-ready metrics implementation
 class VerificationCounter
 {
-  private:
+   private:
     std::atomic<uint64_t> count_{0};
 
-  public:
-    void Increment()
-    {
-        count_.fetch_add(1, std::memory_order_relaxed);
-    }
-    uint64_t GetCount() const
-    {
-        return count_.load(std::memory_order_relaxed);
-    }
+   public:
+    void Increment() { count_.fetch_add(1, std::memory_order_relaxed); }
+    uint64_t GetCount() const { return count_.load(std::memory_order_relaxed); }
 };
 
 class VerificationHistogram
 {
-  private:
+   private:
     mutable std::shared_mutex histogram_mutex_;
     std::vector<double> observations_;
     static constexpr size_t MAX_OBSERVATIONS = 1000;
 
-  public:
+   public:
     void Observe(double value)
     {
         std::unique_lock lock(histogram_mutex_);
@@ -178,8 +173,7 @@ class VerificationHistogram
     double GetAverage() const
     {
         std::shared_lock lock(histogram_mutex_);
-        if (observations_.empty())
-            return 0.0;
+        if (observations_.empty()) return 0.0;
 
         double sum = 0.0;
         for (double obs : observations_)
@@ -780,8 +774,8 @@ VerificationOutput TransactionVerifier::VerifyWitness(const ledger::Transaction&
 VerificationOutput TransactionVerifier::VerifyNetworkFee(const ledger::Transaction& transaction,
                                                          const VerificationContext& context)
 {
-    neo::logging::Logger::GetDefault().Debug("TransactionVerifier", "Verifying network fee for transaction " +
-                                                                        transaction.GetHash().ToString());
+    neo::logging::Logger::GetDefault().Debug(
+        "TransactionVerifier", "Verifying network fee for transaction " + transaction.GetHash().ToString());
 
     try
     {
@@ -810,8 +804,8 @@ VerificationOutput TransactionVerifier::VerifyNetworkFee(const ledger::Transacti
 VerificationOutput TransactionVerifier::VerifySystemFee(const ledger::Transaction& transaction,
                                                         const VerificationContext& context)
 {
-    neo::logging::Logger::GetDefault().Debug("TransactionVerifier", "Verifying system fee for transaction " +
-                                                                        transaction.GetHash().ToString());
+    neo::logging::Logger::GetDefault().Debug(
+        "TransactionVerifier", "Verifying system fee for transaction " + transaction.GetHash().ToString());
 
     try
     {

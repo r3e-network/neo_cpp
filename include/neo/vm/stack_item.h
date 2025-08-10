@@ -1,14 +1,15 @@
 #pragma once
 
-#include <array>
-#include <cstddef>
-#include <map>
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/vm/internal/byte_vector.h>
 #include <neo/vm/stack_item_types.h>
+
+#include <array>
+#include <cstddef>
+#include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -66,13 +67,13 @@ class NullItem;
  */
 class StackItem : public std::enable_shared_from_this<StackItem>
 {
-  private:
+   private:
     // Tarjan algorithm fields
     int dfn_ = -1;
     int low_link_ = -1;
     bool on_stack_ = false;
 
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */
@@ -94,46 +95,31 @@ class StackItem : public std::enable_shared_from_this<StackItem>
      * @brief Checks if this stack item is a boolean.
      * @return True if this is a boolean stack item.
      */
-    virtual bool IsBoolean() const
-    {
-        return GetType() == StackItemType::Boolean;
-    }
+    virtual bool IsBoolean() const { return GetType() == StackItemType::Boolean; }
 
     /**
      * @brief Checks if this stack item is an integer.
      * @return True if this is an integer stack item.
      */
-    virtual bool IsInteger() const
-    {
-        return GetType() == StackItemType::Integer;
-    }
+    virtual bool IsInteger() const { return GetType() == StackItemType::Integer; }
 
     /**
      * @brief Checks if this stack item is a byte string.
      * @return True if this is a byte string stack item.
      */
-    virtual bool IsByteString() const
-    {
-        return GetType() == StackItemType::ByteString;
-    }
+    virtual bool IsByteString() const { return GetType() == StackItemType::ByteString; }
 
     /**
      * @brief Checks if this stack item is a map.
      * @return True if this is a map stack item.
      */
-    virtual bool IsMap() const
-    {
-        return GetType() == StackItemType::Map;
-    }
+    virtual bool IsMap() const { return GetType() == StackItemType::Map; }
 
     /**
      * @brief Checks if this stack item is an interop interface.
      * @return True if this is an interop interface stack item.
      */
-    virtual bool IsInteropInterface() const
-    {
-        return GetType() == StackItemType::InteropInterface;
-    }
+    virtual bool IsInteropInterface() const { return GetType() == StackItemType::InteropInterface; }
 
     /**
      * @brief Gets the integer value of the stack item.

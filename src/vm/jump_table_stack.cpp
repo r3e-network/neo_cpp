@@ -20,20 +20,22 @@ void JumpTable::DEPTH(ExecutionEngine& engine, const Instruction&)
 void JumpTable::DROP(ExecutionEngine& engine, const Instruction&)
 {
     // Check stack size before popping
-    if (engine.GetCurrentContext().GetStackSize() < 1) {
+    if (engine.GetCurrentContext().GetStackSize() < 1)
+    {
         throw std::runtime_error("Stack underflow");
     }
-    
+
     engine.Pop();
 }
 
 void JumpTable::NIP(ExecutionEngine& engine, const Instruction&)
 {
     // Check stack size before popping
-    if (engine.GetCurrentContext().GetStackSize() < 2) {
+    if (engine.GetCurrentContext().GetStackSize() < 2)
+    {
         throw std::runtime_error("Stack underflow");
     }
-    
+
     auto x = engine.Pop();
     engine.Pop();
     engine.Push(x);
@@ -42,19 +44,18 @@ void JumpTable::NIP(ExecutionEngine& engine, const Instruction&)
 void JumpTable::XDROP(ExecutionEngine& engine, const Instruction&)
 {
     // Check stack size before first pop
-    if (engine.GetCurrentContext().GetStackSize() < 1) {
+    if (engine.GetCurrentContext().GetStackSize() < 1)
+    {
         throw std::runtime_error("Stack underflow");
     }
-    
+
     auto n = engine.Pop()->GetInteger();
-    if (n < 0)
-        throw InvalidOperationException("Negative index for XDROP");
+    if (n < 0) throw InvalidOperationException("Negative index for XDROP");
 
     auto& context = engine.GetCurrentContext();
     auto& stack = context.GetEvaluationStack();
 
-    if (n >= static_cast<int64_t>(stack.size()))
-        throw InvalidOperationException("Index out of range for XDROP");
+    if (n >= static_cast<int64_t>(stack.size())) throw InvalidOperationException("Index out of range for XDROP");
 
     std::vector<std::shared_ptr<StackItem>> items;
     for (int64_t i = 0; i < n; i++)
@@ -79,10 +80,11 @@ void JumpTable::CLEAR(ExecutionEngine& engine, const Instruction&)
 void JumpTable::DUP(ExecutionEngine& engine, const Instruction&)
 {
     // Check stack size before peeking
-    if (engine.GetCurrentContext().GetStackSize() < 1) {
+    if (engine.GetCurrentContext().GetStackSize() < 1)
+    {
         throw std::runtime_error("Stack underflow");
     }
-    
+
     auto x = engine.Peek(0);
     engine.Push(x);
 }
@@ -90,10 +92,11 @@ void JumpTable::DUP(ExecutionEngine& engine, const Instruction&)
 void JumpTable::OVER(ExecutionEngine& engine, const Instruction&)
 {
     // Check stack size before peeking
-    if (engine.GetCurrentContext().GetStackSize() < 2) {
+    if (engine.GetCurrentContext().GetStackSize() < 2)
+    {
         throw std::runtime_error("Stack underflow");
     }
-    
+
     auto x = engine.Peek(1);
     engine.Push(x);
 }
@@ -101,16 +104,17 @@ void JumpTable::OVER(ExecutionEngine& engine, const Instruction&)
 void JumpTable::PICK(ExecutionEngine& engine, const Instruction&)
 {
     // Check stack size before first pop
-    if (engine.GetCurrentContext().GetStackSize() < 1) {
+    if (engine.GetCurrentContext().GetStackSize() < 1)
+    {
         throw std::runtime_error("Stack underflow");
     }
-    
+
     auto n = engine.Pop()->GetInteger();
-    if (n < 0)
-        throw InvalidOperationException("Negative index for PICK");
+    if (n < 0) throw InvalidOperationException("Negative index for PICK");
 
     // Check if we have enough items for the peek
-    if (engine.GetCurrentContext().GetStackSize() < static_cast<int32_t>(n + 1)) {
+    if (engine.GetCurrentContext().GetStackSize() < static_cast<int32_t>(n + 1))
+    {
         throw std::runtime_error("Stack underflow");
     }
 
@@ -121,10 +125,11 @@ void JumpTable::PICK(ExecutionEngine& engine, const Instruction&)
 void JumpTable::TUCK(ExecutionEngine& engine, const Instruction&)
 {
     // Check stack size before popping
-    if (engine.GetCurrentContext().GetStackSize() < 2) {
+    if (engine.GetCurrentContext().GetStackSize() < 2)
+    {
         throw std::runtime_error("Stack underflow");
     }
-    
+
     auto x1 = engine.Pop();
     auto x2 = engine.Pop();
     engine.Push(x1);
@@ -135,10 +140,11 @@ void JumpTable::TUCK(ExecutionEngine& engine, const Instruction&)
 void JumpTable::SWAP(ExecutionEngine& engine, const Instruction&)
 {
     // Check stack size before popping
-    if (engine.GetCurrentContext().GetStackSize() < 2) {
+    if (engine.GetCurrentContext().GetStackSize() < 2)
+    {
         throw std::runtime_error("Stack underflow");
     }
-    
+
     auto x1 = engine.Pop();
     auto x2 = engine.Pop();
     engine.Push(x1);
@@ -148,10 +154,11 @@ void JumpTable::SWAP(ExecutionEngine& engine, const Instruction&)
 void JumpTable::ROT(ExecutionEngine& engine, const Instruction&)
 {
     // Check stack size before popping
-    if (engine.GetCurrentContext().GetStackSize() < 3) {
+    if (engine.GetCurrentContext().GetStackSize() < 3)
+    {
         throw std::runtime_error("Stack underflow");
     }
-    
+
     auto x1 = engine.Pop();
     auto x2 = engine.Pop();
     auto x3 = engine.Pop();
@@ -163,17 +170,14 @@ void JumpTable::ROT(ExecutionEngine& engine, const Instruction&)
 void JumpTable::ROLL(ExecutionEngine& engine, const Instruction&)
 {
     auto n = engine.Pop()->GetInteger();
-    if (n < 0)
-        throw InvalidOperationException("Negative index for ROLL");
+    if (n < 0) throw InvalidOperationException("Negative index for ROLL");
 
-    if (n == 0)
-        return;
+    if (n == 0) return;
 
     auto& context = engine.GetCurrentContext();
     auto& stack = context.GetEvaluationStack();
 
-    if (n >= static_cast<int64_t>(stack.size()))
-        throw InvalidOperationException("Index out of range for ROLL");
+    if (n >= static_cast<int64_t>(stack.size())) throw InvalidOperationException("Index out of range for ROLL");
 
     std::vector<std::shared_ptr<StackItem>> items;
     for (int64_t i = 0; i < n; i++)
@@ -194,10 +198,11 @@ void JumpTable::ROLL(ExecutionEngine& engine, const Instruction&)
 void JumpTable::REVERSE3(ExecutionEngine& engine, const Instruction&)
 {
     // Check stack size before popping
-    if (engine.GetCurrentContext().GetStackSize() < 3) {
+    if (engine.GetCurrentContext().GetStackSize() < 3)
+    {
         throw std::runtime_error("Stack underflow");
     }
-    
+
     auto x1 = engine.Pop();
     auto x2 = engine.Pop();
     auto x3 = engine.Pop();
@@ -209,10 +214,11 @@ void JumpTable::REVERSE3(ExecutionEngine& engine, const Instruction&)
 void JumpTable::REVERSE4(ExecutionEngine& engine, const Instruction&)
 {
     // Check stack size before popping
-    if (engine.GetCurrentContext().GetStackSize() < 4) {
+    if (engine.GetCurrentContext().GetStackSize() < 4)
+    {
         throw std::runtime_error("Stack underflow");
     }
-    
+
     auto x1 = engine.Pop();
     auto x2 = engine.Pop();
     auto x3 = engine.Pop();
@@ -226,17 +232,14 @@ void JumpTable::REVERSE4(ExecutionEngine& engine, const Instruction&)
 void JumpTable::REVERSEN(ExecutionEngine& engine, const Instruction&)
 {
     auto n = engine.Pop()->GetInteger();
-    if (n < 0)
-        throw InvalidOperationException("Negative count for REVERSEN");
+    if (n < 0) throw InvalidOperationException("Negative count for REVERSEN");
 
-    if (n <= 1)
-        return;
+    if (n <= 1) return;
 
     auto& context = engine.GetCurrentContext();
     auto& stack = context.GetEvaluationStack();
 
-    if (n > static_cast<int64_t>(stack.size()))
-        throw InvalidOperationException("Count out of range for REVERSEN");
+    if (n > static_cast<int64_t>(stack.size())) throw InvalidOperationException("Count out of range for REVERSEN");
 
     std::vector<std::shared_ptr<StackItem>> items;
     for (int64_t i = 0; i < n; i++)

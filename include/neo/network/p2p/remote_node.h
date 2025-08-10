@@ -1,12 +1,9 @@
 #pragma once
 
-#include <cstdint>
-#include <functional>
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/network/ip_endpoint.h>
-#include <neo/network/p2p/message.h>
 #include <neo/network/p2p/connection.h>
+#include <neo/network/p2p/message.h>
 #include <neo/network/p2p/node_capability.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/p2p/payloads/get_block_by_index_payload.h>
@@ -19,6 +16,10 @@
 #include <neo/network/p2p/payloads/ping_payload.h>
 #include <neo/network/p2p/payloads/verack_payload.h>
 #include <neo/network/p2p/payloads/version_payload.h>
+
+#include <cstdint>
+#include <functional>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -31,7 +32,7 @@ class LocalNode;
  */
 class RemoteNode
 {
-  public:
+   public:
     /**
      * @brief Constructs a RemoteNode.
      * @param localNode The local node.
@@ -84,13 +85,13 @@ class RemoteNode
      * @brief Gets the last block index of the remote node.
      * @return The last block index.
      */
-    uint32_t GetLastBlockIndex() const;
+    virtual uint32_t GetLastBlockIndex() const;
 
     /**
      * @brief Gets whether the remote node is connected.
      * @return True if the remote node is connected, false otherwise.
      */
-    bool IsConnected() const;
+    virtual bool IsConnected() const;
 
     /**
      * @brief Gets whether the remote node is handshaked.
@@ -109,7 +110,7 @@ class RemoteNode
      * @param enableCompression Whether to enable compression.
      * @return True if the message was sent successfully, false otherwise.
      */
-    bool Send(const Message& message, bool enableCompression = true);
+    virtual bool Send(const Message& message, bool enableCompression = true);
 
     /**
      * @brief Sends a version message to the remote node.
@@ -202,7 +203,7 @@ class RemoteNode
      */
     bool SendMempool();
 
-  private:
+   private:
     LocalNode* localNode_;
     std::shared_ptr<Connection> connection_;
     bool handshaked_;

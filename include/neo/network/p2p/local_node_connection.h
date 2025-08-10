@@ -1,8 +1,9 @@
 #pragma once
 
-#include "neo/network/p2p/remote_node.h"
 #include <memory>
 #include <string>
+
+#include "neo/network/p2p/remote_node.h"
 
 namespace neo::network::p2p
 {
@@ -12,7 +13,7 @@ namespace neo::network::p2p
  */
 class LocalNodeConnection
 {
-  public:
+   public:
     LocalNodeConnection() = default;
     virtual ~LocalNodeConnection() = default;
 

@@ -1,9 +1,10 @@
 #pragma once
 
-#include <functional>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/caching/lru_cache.h>
+
+#include <functional>
 
 namespace neo::io::caching
 {
@@ -41,13 +42,11 @@ struct ByteVectorEqual
      */
     bool operator()(const ByteVector& lhs, const ByteVector& rhs) const
     {
-        if (lhs.Size() != rhs.Size())
-            return false;
+        if (lhs.Size() != rhs.Size()) return false;
 
         for (size_t i = 0; i < lhs.Size(); ++i)
         {
-            if (lhs[i] != rhs[i])
-                return false;
+            if (lhs[i] != rhs[i]) return false;
         }
 
         return true;
@@ -59,7 +58,7 @@ struct ByteVectorEqual
  */
 class ECPointCache
 {
-  public:
+   public:
     /**
      * @brief Constructs an ECPointCache with the specified capacity.
      * @param capacity The maximum number of items the cache can hold.
@@ -77,8 +76,7 @@ class ECPointCache
     {
         // Try to get from cache
         auto ecpoint = cache_.Get(bytes);
-        if (ecpoint)
-            return ecpoint.value();
+        if (ecpoint) return ecpoint.value();
 
         // Create new ECPoint
         auto newECPoint = cryptography::ecc::ECPoint::DecodePoint(bytes.AsSpan(), curve);
@@ -105,8 +103,7 @@ class ECPointCache
      */
     void Add(std::shared_ptr<cryptography::ecc::ECPoint> ecpoint)
     {
-        if (!ecpoint)
-            return;
+        if (!ecpoint) return;
 
         // Encode ECPoint
         auto bytes = ecpoint->EncodePoint(true);
@@ -118,30 +115,21 @@ class ECPointCache
     /**
      * @brief Clears the cache.
      */
-    void Clear()
-    {
-        cache_.Clear();
-    }
+    void Clear() { cache_.Clear(); }
 
     /**
      * @brief Gets the number of items in the cache.
      * @return The number of items in the cache.
      */
-    size_t Size() const
-    {
-        return cache_.Size();
-    }
+    size_t Size() const { return cache_.Size(); }
 
     /**
      * @brief Gets the capacity of the cache.
      * @return The capacity of the cache.
      */
-    size_t Capacity() const
-    {
-        return cache_.Capacity();
-    }
+    size_t Capacity() const { return cache_.Capacity(); }
 
-  private:
+   private:
     LRUCache<ByteVector, std::shared_ptr<cryptography::ecc::ECPoint>, ByteVectorHash> cache_;
 };
 }  // namespace neo::io::caching

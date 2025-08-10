@@ -1,10 +1,5 @@
 #pragma once
 
-#include <atomic>
-#include <cstdint>
-#include <functional>
-#include <memory>
-#include <mutex>
 #include <neo/io/uint256.h>
 #include <neo/ledger/block.h>
 #include <neo/ledger/blockchain.h>
@@ -15,6 +10,12 @@
 #include <neo/network/p2p/payloads/headers_payload.h>
 #include <neo/network/p2p/payloads/inv_payload.h>
 #include <neo/network/p2p/remote_node.h>
+
+#include <atomic>
+#include <cstdint>
+#include <functional>
+#include <memory>
+#include <mutex>
 #include <thread>
 #include <unordered_map>
 #include <unordered_set>
@@ -53,7 +54,7 @@ enum class SynchronizationState
  */
 class NetworkSynchronizer
 {
-  public:
+   public:
     /**
      * @brief Constructs a NetworkSynchronizer.
      * @param localNode The local node.
@@ -140,7 +141,7 @@ class NetworkSynchronizer
      */
     void OnHeadersMessageReceived(RemoteNode* remoteNode, const payloads::HeadersPayload& payload);
 
-  private:
+   private:
     LocalNode& localNode_;
     std::shared_ptr<ledger::Blockchain> blockchain_;
     std::atomic<SynchronizationState> state_;

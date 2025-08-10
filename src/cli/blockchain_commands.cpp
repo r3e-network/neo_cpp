@@ -1,10 +1,11 @@
-#include <iostream>
 #include <neo/cli/blockchain_commands.h>
 #include <neo/cli/console_helper.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/block.h>
 #include <neo/ledger/block_header.h>
 #include <neo/ledger/transaction.h>
+
+#include <iostream>
 
 namespace neo::cli
 {

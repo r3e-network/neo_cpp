@@ -1,8 +1,9 @@
-#include <filesystem>
-#include <fstream>
 #include <neo/cryptography/ecc/ec_point.h>
 #include <neo/hardfork.h>
 #include <neo/protocol_settings.h>
+
+#include <filesystem>
+#include <fstream>
 #include <nlohmann/json.hpp>
 #include <stdexcept>
 

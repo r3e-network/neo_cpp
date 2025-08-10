@@ -9,11 +9,11 @@ set(NODE_SOURCES
     # neo_node_processing.cpp # Disabled - has LevelDB dependencies
 )
 
-# Create node library
-add_library(neo_node OBJECT ${NODE_SOURCES})
+# Create node core object library
+add_library(neo_node_core OBJECT ${NODE_SOURCES})
 
 # Link dependencies
-target_link_libraries(neo_node
+target_link_libraries(neo_node_core
     PUBLIC
         neo_core
         neo_ledger
@@ -22,7 +22,7 @@ target_link_libraries(neo_node
 )
 
 # Set target properties
-set_target_properties(neo_node PROPERTIES
+set_target_properties(neo_node_core PROPERTIES
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED ON
     CXX_EXTENSIONS OFF
@@ -30,7 +30,7 @@ set_target_properties(neo_node PROPERTIES
 )
 
 # Include directories
-target_include_directories(neo_node
+target_include_directories(neo_node_core
     PUBLIC
         ${CMAKE_SOURCE_DIR}/include
 )

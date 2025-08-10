@@ -1,7 +1,8 @@
+#include <neo/extensions/datetime_extensions.h>
+
 #include <cstdio>
 #include <ctime>
 #include <iomanip>
-#include <neo/extensions/datetime_extensions.h>
 #include <sstream>
 #include <stdexcept>
 
@@ -19,8 +20,7 @@ std::string DateTimeExtensions::ToISO8601String(uint64_t timestamp)
     auto time_t_val = std::chrono::system_clock::to_time_t(timePoint);
 
     struct tm* utc_tm = gmtime(&time_t_val);
-    if (!utc_tm)
-        throw std::runtime_error("Failed to convert timestamp to UTC time");
+    if (!utc_tm) throw std::runtime_error("Failed to convert timestamp to UTC time");
 
     char buffer[32];
     snprintf(buffer, sizeof(buffer), "%04d-%02d-%02dT%02d:%02d:%02dZ", utc_tm->tm_year + 1900, utc_tm->tm_mon + 1,
@@ -35,8 +35,7 @@ std::string DateTimeExtensions::ToReadableString(uint64_t timestamp)
     auto time_t_val = std::chrono::system_clock::to_time_t(timePoint);
 
     struct tm* utc_tm = gmtime(&time_t_val);
-    if (!utc_tm)
-        throw std::runtime_error("Failed to convert timestamp to UTC time");
+    if (!utc_tm) throw std::runtime_error("Failed to convert timestamp to UTC time");
 
     char buffer[32];
     snprintf(buffer, sizeof(buffer), "%04d-%02d-%02d %02d:%02d:%02d UTC", utc_tm->tm_year + 1900, utc_tm->tm_mon + 1,
@@ -91,8 +90,7 @@ uint64_t DateTimeExtensions::GetStartOfDay(uint64_t timestamp)
     auto time_t_val = std::chrono::system_clock::to_time_t(timePoint);
 
     struct tm* utc_tm = gmtime(&time_t_val);
-    if (!utc_tm)
-        throw std::runtime_error("Failed to convert timestamp to UTC time");
+    if (!utc_tm) throw std::runtime_error("Failed to convert timestamp to UTC time");
 
     struct tm start_tm = *utc_tm;
 
@@ -111,8 +109,7 @@ uint64_t DateTimeExtensions::GetEndOfDay(uint64_t timestamp)
     auto time_t_val = std::chrono::system_clock::to_time_t(timePoint);
 
     struct tm* utc_tm = gmtime(&time_t_val);
-    if (!utc_tm)
-        throw std::runtime_error("Failed to convert timestamp to UTC time");
+    if (!utc_tm) throw std::runtime_error("Failed to convert timestamp to UTC time");
 
     struct tm end_tm = *utc_tm;
 

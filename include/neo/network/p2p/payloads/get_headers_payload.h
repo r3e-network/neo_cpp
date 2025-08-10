@@ -11,7 +11,7 @@ namespace neo::network::p2p::payloads
  */
 class GetHeadersPayload : public GetBlocksPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs a GetHeadersPayload.
      */

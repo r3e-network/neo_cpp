@@ -5,6 +5,7 @@
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/name_service.h>
 #include <neo/smartcontract/native/neo_token.h>
+
 #include <regex>
 #include <sstream>
 
@@ -85,8 +86,7 @@ int64_t NameService::GetPrice(std::shared_ptr<persistence::StoreView> snapshot) 
 {
     auto key = GetStorageKey(PREFIX_PRICE, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return DEFAULT_PRICE;
+    if (value.IsEmpty()) return DEFAULT_PRICE;
 
     return *reinterpret_cast<const int64_t*>(value.Data());
 }
@@ -109,14 +109,12 @@ bool NameService::CheckCommittee(ApplicationEngine& engine) const
 std::tuple<io::UInt160, uint64_t> NameService::GetName(std::shared_ptr<persistence::DataCache> snapshot,
                                                        const std::string& name) const
 {
-    if (!ValidateName(name))
-        throw std::runtime_error("Invalid name");
+    if (!ValidateName(name)) throw std::runtime_error("Invalid name");
 
     auto key =
         CreateStorageKey(PREFIX_NAME, io::ByteVector(reinterpret_cast<const uint8_t*>(name.data()), name.size()));
     auto value = GetStorageValue(snapshot, key.GetKey());
-    if (value.IsEmpty())
-        throw std::runtime_error("Name not found");
+    if (value.IsEmpty()) throw std::runtime_error("Name not found");
 
     std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
     io::BinaryReader reader(stream);
@@ -128,8 +126,7 @@ std::tuple<io::UInt160, uint64_t> NameService::GetName(std::shared_ptr<persisten
 bool NameService::ValidateName(const std::string& name) const
 {
     // Check if name is valid
-    if (name.empty() || name.length() > MAX_NAME_LENGTH)
-        return false;
+    if (name.empty() || name.length() > MAX_NAME_LENGTH) return false;
 
     // Check if name matches the pattern
     std::regex pattern("^[a-z0-9][a-z0-9-]{2,62}$");
@@ -138,8 +135,7 @@ bool NameService::ValidateName(const std::string& name) const
 
 bool NameService::IsAvailable(std::shared_ptr<persistence::DataCache> snapshot, const std::string& name) const
 {
-    if (!ValidateName(name))
-        return false;
+    if (!ValidateName(name)) return false;
 
     try
     {
@@ -156,14 +152,12 @@ bool NameService::IsAvailable(std::shared_ptr<persistence::DataCache> snapshot, 
 bool NameService::ValidateRecordType(const std::string& type) const
 {
     // Check if type is empty
-    if (type.empty())
-        return false;
+    if (type.empty()) return false;
 
     // Check if type contains only valid characters
     // Valid characters are: A-Z, a-z, 0-9, -, _
     static const std::regex typeRegex("^[A-Za-z0-9-_]+$");
-    if (!std::regex_match(type, typeRegex))
-        return false;
+    if (!std::regex_match(type, typeRegex)) return false;
 
     return true;
 }
@@ -177,18 +171,15 @@ std::shared_ptr<vm::StackItem> NameService::OnGetPrice(ApplicationEngine& engine
 std::shared_ptr<vm::StackItem> NameService::OnSetPrice(ApplicationEngine& engine,
                                                        const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     // Check if caller is committee
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Not authorized");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Not authorized");
 
     auto priceItem = args[0];
     auto price = priceItem->GetInteger();
 
-    if (price <= 0)
-        throw std::runtime_error("Invalid price");
+    if (price <= 0) throw std::runtime_error("Invalid price");
 
     // Set price
     auto key = GetStorageKey(PREFIX_PRICE, io::ByteVector{});
@@ -201,8 +192,7 @@ std::shared_ptr<vm::StackItem> NameService::OnSetPrice(ApplicationEngine& engine
 std::shared_ptr<vm::StackItem> NameService::OnIsAvailable(ApplicationEngine& engine,
                                                           const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto nameItem = args[0];
     auto name = nameItem->GetString();

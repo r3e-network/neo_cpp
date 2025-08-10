@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableControlJump
 {
-  public:
+   public:
     // Jump operations
     static void JMP(ExecutionEngine& engine, const Instruction& instruction);
     static void JMP_L(ExecutionEngine& engine, const Instruction& instruction);

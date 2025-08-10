@@ -1,5 +1,6 @@
-#include <iostream>
 #include <neo/plugins/test_plugin.h>
+
+#include <iostream>
 
 namespace neo::plugins
 {
@@ -23,15 +24,9 @@ bool TestPlugin::OnStop()
     return true;
 }
 
-void TestPlugin::LogMessage(const std::string& message)
-{
-    std::cout << "TestPlugin: " << message << std::endl;
-}
+void TestPlugin::LogMessage(const std::string& message) { std::cout << "TestPlugin: " << message << std::endl; }
 
-bool TestPlugin::TestOnMessage(const std::string& message)
-{
-    return OnMessage(message);
-}
+bool TestPlugin::TestOnMessage(const std::string& message) { return OnMessage(message); }
 
 bool TestPlugin::OnMessage(const std::string& message)
 {

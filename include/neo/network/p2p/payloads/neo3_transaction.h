@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
 #include <neo/common/safe_math.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
@@ -13,6 +11,9 @@
 #include <neo/ledger/witness.h>
 #include <neo/network/p2p/payloads/iinventory.h>
 #include <neo/network/p2p/payloads/iverifiable.h>
+
+#include <cstdint>
+#include <memory>
 #include <vector>
 
 namespace neo::network::p2p::payloads
@@ -24,7 +25,7 @@ namespace neo::network::p2p::payloads
  */
 class Neo3Transaction : public IInventory, public IVerifiable, public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /// <summary>
     /// The maximum size of a transaction.
     /// </summary>
@@ -44,7 +45,7 @@ class Neo3Transaction : public IInventory, public IVerifiable, public io::ISeria
                                       sizeof(int64_t) +   // NetworkFee
                                       sizeof(uint32_t);   // ValidUntilBlock
 
-  private:
+   private:
     uint8_t version_;
     uint32_t nonce_;
     int64_t systemFee_;   // In the unit of datoshi, 1 datoshi = 1e-8 GAS
@@ -61,7 +62,7 @@ class Neo3Transaction : public IInventory, public IVerifiable, public io::ISeria
     mutable int size_;
     mutable bool sizeCalculated_;
 
-  public:
+   public:
     /**
      * @brief Constructs an empty Neo3Transaction.
      */
@@ -266,8 +267,7 @@ class Neo3Transaction : public IInventory, public IVerifiable, public io::ISeria
         for (const auto& attr : attributes_)
         {
             auto typed_attr = std::dynamic_pointer_cast<T>(std::make_shared<ledger::TransactionAttribute>(attr));
-            if (typed_attr)
-                return typed_attr;
+            if (typed_attr) return typed_attr;
         }
         return nullptr;
     }
@@ -312,18 +312,13 @@ class Neo3Transaction : public IInventory, public IVerifiable, public io::ISeria
      * @brief Gets the transaction type (Neo 2.x compatibility).
      * @return The transaction type.
      */
-    Type GetType() const
-    {
-        return Type::InvocationTransaction;
-    }  // Neo 3 transactions are all invocation-like
+    Type GetType() const { return Type::InvocationTransaction; }  // Neo 3 transactions are all invocation-like
 
     /**
      * @brief Sets the transaction type (Neo 2.x compatibility - no-op in Neo 3).
      * @param type The transaction type.
      */
-    void SetType(Type type)
-    { /* No-op in Neo 3 */
-    }
+    void SetType(Type type) { /* No-op in Neo 3 */ }
 
     // Neo 2.x compatibility - store legacy data for tests
     mutable std::vector<ledger::TransactionAttribute> legacy_attributes_;
@@ -334,57 +329,39 @@ class Neo3Transaction : public IInventory, public IVerifiable, public io::ISeria
      * @brief Gets attributes (Neo 2.x compatibility).
      * @return The attributes as TransactionAttribute objects.
      */
-    const std::vector<ledger::TransactionAttribute>& GetLegacyAttributes() const
-    {
-        return legacy_attributes_;
-    }
+    const std::vector<ledger::TransactionAttribute>& GetLegacyAttributes() const { return legacy_attributes_; }
 
     /**
      * @brief Sets attributes (Neo 2.x compatibility).
      * @param attributes The attributes.
      */
-    void SetAttributes(const std::vector<ledger::TransactionAttribute>& attributes)
-    {
-        legacy_attributes_ = attributes;
-    }
+    void SetAttributes(const std::vector<ledger::TransactionAttribute>& attributes) { legacy_attributes_ = attributes; }
 
     /**
      * @brief Gets inputs (Neo 2.x compatibility - empty in Neo 3).
      * @return Empty vector.
      */
-    const std::vector<int>& GetInputs() const
-    {
-        return legacy_inputs_;
-    }
+    const std::vector<int>& GetInputs() const { return legacy_inputs_; }
 
     /**
      * @brief Sets inputs (Neo 2.x compatibility - no-op in Neo 3).
      * @param inputs The inputs.
      */
-    void SetInputs(const std::vector<int>& inputs)
-    {
-        legacy_inputs_ = inputs;
-    }
+    void SetInputs(const std::vector<int>& inputs) { legacy_inputs_ = inputs; }
 
     /**
      * @brief Gets outputs (Neo 2.x compatibility - empty in Neo 3).
      * @return Empty vector.
      */
-    const std::vector<int>& GetOutputs() const
-    {
-        return legacy_outputs_;
-    }
+    const std::vector<int>& GetOutputs() const { return legacy_outputs_; }
 
     /**
      * @brief Sets outputs (Neo 2.x compatibility - no-op in Neo 3).
      * @param outputs The outputs.
      */
-    void SetOutputs(const std::vector<int>& outputs)
-    {
-        legacy_outputs_ = outputs;
-    }
+    void SetOutputs(const std::vector<int>& outputs) { legacy_outputs_ = outputs; }
 
-  private:
+   private:
     void InvalidateCache() const;
     void CalculateHash() const;
     void CalculateSize() const;

@@ -85,7 +85,7 @@ public:
         }
         
         block->SetMerkleRoot(io::UInt256::Zero());
-        block->SetTimestamp(std::chrono::system_clock::from_time_t(1468595301 + index));
+        block->SetTimestamp(static_cast<uint64_t>(1468595301 + index));
         block->SetIndex(index);
         block->SetPrimaryIndex(0);
         block->SetNextConsensus(io::UInt160::Zero());

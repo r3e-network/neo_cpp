@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <neo/vm/stack_item.h>
+
+#include <memory>
 #include <stack>
 #include <vector>
 
@@ -12,11 +13,11 @@ namespace neo::vm
  */
 class EvaluationStack
 {
-  private:
+   private:
     std::stack<std::shared_ptr<StackItem>> stack_;
     size_t max_size_;
 
-  public:
+   public:
     /**
      * @brief Constructor with maximum size
      * @param max_size Maximum stack size (default 2048)
@@ -49,28 +50,19 @@ class EvaluationStack
      * @brief Get stack size
      * @return Number of items on stack
      */
-    size_t Size() const
-    {
-        return stack_.size();
-    }
+    size_t Size() const { return stack_.size(); }
 
     /**
      * @brief Check if stack is empty
      * @return True if empty
      */
-    bool IsEmpty() const
-    {
-        return stack_.empty();
-    }
+    bool IsEmpty() const { return stack_.empty(); }
 
     /**
      * @brief Check if stack is full
      * @return True if at maximum capacity
      */
-    bool IsFull() const
-    {
-        return stack_.size() >= max_size_;
-    }
+    bool IsFull() const { return stack_.size() >= max_size_; }
 
     /**
      * @brief Clear all items from stack
@@ -114,19 +106,13 @@ class EvaluationStack
      * @brief Get maximum stack size
      * @return Maximum stack size
      */
-    size_t GetMaxSize() const
-    {
-        return max_size_;
-    }
+    size_t GetMaxSize() const { return max_size_; }
 
     /**
      * @brief Set maximum stack size
      * @param max_size New maximum size
      */
-    void SetMaxSize(size_t max_size)
-    {
-        max_size_ = max_size;
-    }
+    void SetMaxSize(size_t max_size) { max_size_ = max_size; }
 
     /**
      * @brief Convert stack to vector (for debugging)

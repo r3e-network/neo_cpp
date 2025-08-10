@@ -3,6 +3,7 @@
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/serializable.h>
 #include <neo/io/uint160.h>
+
 #include <string>
 #include <vector>
 
@@ -15,7 +16,7 @@ namespace neo::smartcontract::manifest
  */
 class ContractPermissionDescriptor : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs a ContractPermissionDescriptor.
      */
@@ -95,7 +96,7 @@ class ContractPermissionDescriptor : public io::ISerializable
      */
     void Deserialize(io::BinaryReader& reader) override;
 
-  private:
+   private:
     io::UInt160 hash_;
     cryptography::ecc::ECPoint group_;
     bool isWildcard_;
@@ -110,7 +111,7 @@ class ContractPermissionDescriptor : public io::ISerializable
  */
 class ContractPermission : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs a ContractPermission.
      */
@@ -170,7 +171,7 @@ class ContractPermission : public io::ISerializable
      */
     void Deserialize(io::BinaryReader& reader) override;
 
-  private:
+   private:
     ContractPermissionDescriptor contract_;
     std::vector<std::string> methods_;
     bool isMethodsWildcard_;

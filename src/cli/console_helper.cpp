@@ -1,5 +1,6 @@
-#include <iostream>
 #include <neo/cli/console_helper.h>
+
+#include <iostream>
 #include <string>
 
 #ifdef _WIN32

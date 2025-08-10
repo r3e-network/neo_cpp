@@ -3,61 +3,32 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/smartcontract/method_token.h>
+
 #include <stdexcept>
 
 namespace neo::smartcontract
 {
 MethodToken::MethodToken() : parametersCount_(0), hasReturnValue_(false), callFlags_(CallFlags::None) {}
 
-const io::UInt160& MethodToken::GetHash() const
-{
-    return hash_;
-}
+const io::UInt160& MethodToken::GetHash() const { return hash_; }
 
-void MethodToken::SetHash(const io::UInt160& hash)
-{
-    hash_ = hash;
-}
+void MethodToken::SetHash(const io::UInt160& hash) { hash_ = hash; }
 
-const std::string& MethodToken::GetMethod() const
-{
-    return method_;
-}
+const std::string& MethodToken::GetMethod() const { return method_; }
 
-void MethodToken::SetMethod(const std::string& method)
-{
-    method_ = method;
-}
+void MethodToken::SetMethod(const std::string& method) { method_ = method; }
 
-uint16_t MethodToken::GetParametersCount() const
-{
-    return parametersCount_;
-}
+uint16_t MethodToken::GetParametersCount() const { return parametersCount_; }
 
-void MethodToken::SetParametersCount(uint16_t parametersCount)
-{
-    parametersCount_ = parametersCount;
-}
+void MethodToken::SetParametersCount(uint16_t parametersCount) { parametersCount_ = parametersCount; }
 
-bool MethodToken::GetHasReturnValue() const
-{
-    return hasReturnValue_;
-}
+bool MethodToken::GetHasReturnValue() const { return hasReturnValue_; }
 
-void MethodToken::SetHasReturnValue(bool hasReturnValue)
-{
-    hasReturnValue_ = hasReturnValue;
-}
+void MethodToken::SetHasReturnValue(bool hasReturnValue) { hasReturnValue_ = hasReturnValue; }
 
-CallFlags MethodToken::GetCallFlags() const
-{
-    return callFlags_;
-}
+CallFlags MethodToken::GetCallFlags() const { return callFlags_; }
 
-void MethodToken::SetCallFlags(CallFlags callFlags)
-{
-    callFlags_ = callFlags;
-}
+void MethodToken::SetCallFlags(CallFlags callFlags) { callFlags_ = callFlags; }
 
 void MethodToken::Serialize(io::BinaryWriter& writer) const
 {

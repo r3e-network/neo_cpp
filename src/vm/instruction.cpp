@@ -1,7 +1,8 @@
-#include <cstring>
-#include <iostream>
 #include <neo/vm/exceptions.h>
 #include <neo/vm/instruction.h>
+
+#include <cstring>
+#include <iostream>
 
 namespace neo::vm
 {
@@ -16,8 +17,7 @@ const Instruction Instruction::RET(OpCode::RET);
 void Instruction::InitializeOperandSizeTables()
 {
     static bool initialized = false;
-    if (initialized)
-        return;
+    if (initialized) return;
 
     // Initialize with default values
     OperandSizePrefixTable.fill(0);
@@ -88,10 +88,7 @@ void Instruction::InitializeOperandSizeTables()
     initialized = true;
 }
 
-Instruction::Instruction(vm::OpCode opcode) : opcode(opcode), Operand()
-{
-    InitializeOperandSizeTables();
-}
+Instruction::Instruction(vm::OpCode opcode) : opcode(opcode), Operand() { InitializeOperandSizeTables(); }
 
 Instruction::Instruction(vm::OpCode opcode, const internal::ByteVector& operand) : opcode(opcode), Operand(operand)
 {
@@ -120,21 +117,17 @@ Instruction::Instruction(const internal::ByteSpan& script, int ip)
             operandSize = OperandSizeTable[static_cast<uint8_t>(opcode)];
             break;
         case 1:
-            if (ip >= script.Size())
-                throw BadScriptException("Instruction out of bounds");
+            if (ip >= script.Size()) throw BadScriptException("Instruction out of bounds");
             operandSize = script[ip];
             break;
         case 2:
-            if (ip + 1 >= script.Size())
-                throw BadScriptException("Instruction out of bounds");
+            if (ip + 1 >= script.Size()) throw BadScriptException("Instruction out of bounds");
             operandSize = script[ip] | (script[ip + 1] << 8);
             break;
         case 4:
-            if (ip + 3 >= script.Size())
-                throw BadScriptException("Instruction out of bounds");
+            if (ip + 3 >= script.Size()) throw BadScriptException("Instruction out of bounds");
             operandSize = script[ip] | (script[ip + 1] << 8) | (script[ip + 2] << 16) | (script[ip + 3] << 24);
-            if (operandSize < 0)
-                throw BadScriptException("Invalid operand size");
+            if (operandSize < 0) throw BadScriptException("Invalid operand size");
             break;
     }
 
@@ -142,8 +135,7 @@ Instruction::Instruction(const internal::ByteSpan& script, int ip)
 
     if (operandSize > 0)
     {
-        if (ip + operandSize > script.Size())
-            throw BadScriptException("Instruction out of bounds");
+        if (ip + operandSize > script.Size()) throw BadScriptException("Instruction out of bounds");
 
         // Create a new ByteVector with the operand data
         internal::ByteVector operand(script.Slice(ip, operandSize));
@@ -159,24 +151,21 @@ int Instruction::Size() const
 
 int16_t Instruction::TokenI16() const
 {
-    if (Operand.Size() < 2)
-        throw std::runtime_error("Operand too small for TokenI16");
+    if (Operand.Size() < 2) throw std::runtime_error("Operand too small for TokenI16");
 
     return static_cast<int16_t>(Operand[0] | (Operand[1] << 8));
 }
 
 int32_t Instruction::TokenI32() const
 {
-    if (Operand.Size() < 4)
-        throw std::runtime_error("Operand too small for TokenI32");
+    if (Operand.Size() < 4) throw std::runtime_error("Operand too small for TokenI32");
 
     return static_cast<int32_t>(Operand[0] | (Operand[1] << 8) | (Operand[2] << 16) | (Operand[3] << 24));
 }
 
 int64_t Instruction::TokenI64() const
 {
-    if (Operand.Size() < 8)
-        throw std::runtime_error("Operand too small for TokenI64");
+    if (Operand.Size() < 8) throw std::runtime_error("Operand too small for TokenI64");
 
     return static_cast<int64_t>(static_cast<uint64_t>(Operand[0]) | (static_cast<uint64_t>(Operand[1]) << 8) |
                                 (static_cast<uint64_t>(Operand[2]) << 16) | (static_cast<uint64_t>(Operand[3]) << 24) |
@@ -186,56 +175,49 @@ int64_t Instruction::TokenI64() const
 
 uint8_t Instruction::TokenU8() const
 {
-    if (Operand.IsEmpty())
-        throw std::runtime_error("Operand too small for TokenU8");
+    if (Operand.IsEmpty()) throw std::runtime_error("Operand too small for TokenU8");
 
     return Operand[0];
 }
 
 uint8_t Instruction::TokenU8_1() const
 {
-    if (Operand.Size() < 2)
-        throw std::runtime_error("Operand too small for TokenU8_1");
+    if (Operand.Size() < 2) throw std::runtime_error("Operand too small for TokenU8_1");
 
     return Operand[1];
 }
 
 int8_t Instruction::TokenI8() const
 {
-    if (Operand.IsEmpty())
-        throw std::runtime_error("Operand too small for TokenI8");
+    if (Operand.IsEmpty()) throw std::runtime_error("Operand too small for TokenI8");
 
     return static_cast<int8_t>(Operand[0]);
 }
 
 int8_t Instruction::TokenI8_1() const
 {
-    if (Operand.Size() < 2)
-        throw std::runtime_error("Operand too small for TokenI8_1");
+    if (Operand.Size() < 2) throw std::runtime_error("Operand too small for TokenI8_1");
 
     return static_cast<int8_t>(Operand[1]);
 }
 
 uint16_t Instruction::TokenU16() const
 {
-    if (Operand.Size() < 2)
-        throw std::runtime_error("Operand too small for TokenU16");
+    if (Operand.Size() < 2) throw std::runtime_error("Operand too small for TokenU16");
 
     return static_cast<uint16_t>(Operand[0] | (Operand[1] << 8));
 }
 
 uint32_t Instruction::TokenU32() const
 {
-    if (Operand.Size() < 4)
-        throw std::runtime_error("Operand too small for TokenU32");
+    if (Operand.Size() < 4) throw std::runtime_error("Operand too small for TokenU32");
 
     return static_cast<uint32_t>(Operand[0] | (Operand[1] << 8) | (Operand[2] << 16) | (Operand[3] << 24));
 }
 
 int32_t Instruction::TokenI32_1() const
 {
-    if (Operand.Size() < 8)
-        throw std::runtime_error("Operand too small for TokenI32_1");
+    if (Operand.Size() < 8) throw std::runtime_error("Operand too small for TokenI32_1");
 
     return static_cast<int32_t>(Operand[4] | (Operand[5] << 8) | (Operand[6] << 16) | (Operand[7] << 24));
 }
@@ -257,8 +239,5 @@ int64_t Instruction::GetOperand() const
     }
 }
 
-internal::ByteVector Instruction::GetData() const
-{
-    return Operand;
-}
+internal::ByteVector Instruction::GetData() const { return Operand; }
 }  // namespace neo::vm

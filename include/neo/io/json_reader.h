@@ -1,11 +1,12 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/io/fixed8.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
+#include <cstdint>
+#include <memory>
 #include <nlohmann/json.hpp>
 #include <optional>
 #include <string>
@@ -20,7 +21,7 @@ class IJsonSerializable;
  */
 class JsonReader
 {
-  public:
+   public:
     /**
      * @brief Constructs a JsonReader that reads from the specified JSON value.
      * @param json The JSON value to read from.
@@ -176,8 +177,7 @@ class JsonReader
         static_assert(std::is_base_of<IJsonSerializable, T>::value, "T must derive from IJsonSerializable");
         static_assert(std::is_default_constructible<T>::value, "T must be default constructible");
 
-        if (!json_.contains(key) || !json_[key].is_object())
-            return std::nullopt;
+        if (!json_.contains(key) || !json_[key].is_object()) return std::nullopt;
 
         T obj;
         JsonReader reader(json_[key]);
@@ -197,8 +197,7 @@ class JsonReader
         static_assert(std::is_base_of<IJsonSerializable, T>::value, "T must derive from IJsonSerializable");
         static_assert(std::is_default_constructible<T>::value, "T must be default constructible");
 
-        if (!json_.contains(key) || !json_[key].is_array())
-            return {};
+        if (!json_.contains(key) || !json_[key].is_array()) return {};
 
         std::vector<T> result;
         for (const auto& item : json_[key])
@@ -216,20 +215,14 @@ class JsonReader
      * @brief Gets the underlying JSON value.
      * @return The underlying JSON value.
      */
-    const nlohmann::json& GetJson() const
-    {
-        return json_;
-    }
+    const nlohmann::json& GetJson() const { return json_; }
 
     /**
      * @brief Checks if the JSON contains the specified key.
      * @param key The key to check.
      * @return True if the JSON contains the key, false otherwise.
      */
-    bool HasKey(const std::string& key) const
-    {
-        return json_.contains(key);
-    }
+    bool HasKey(const std::string& key) const { return json_.contains(key); }
 
     /**
      * @brief Reads the start of an object from the JSON.
@@ -241,7 +234,7 @@ class JsonReader
      */
     void ReadEndObject() const {}
 
-  private:
+   private:
     const nlohmann::json& json_;
 };
 }  // namespace neo::io

@@ -1,6 +1,7 @@
-#include <algorithm>
 #include <neo/cryptography/base64.h>
 #include <neo/cryptography/base64url.h>
+
+#include <algorithm>
 
 namespace neo::cryptography
 {

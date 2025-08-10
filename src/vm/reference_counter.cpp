@@ -3,26 +3,18 @@
 
 namespace neo::vm
 {
-void ReferenceCounter::AddReference()
-{
-    references_count_++;
-}
+void ReferenceCounter::AddReference() { references_count_++; }
 
-void ReferenceCounter::RemoveReference()
-{
-    references_count_--;
-}
+void ReferenceCounter::RemoveReference() { references_count_--; }
 
 void ReferenceCounter::AddReference(std::shared_ptr<StackItem> child, std::shared_ptr<StackItem> parent)
 {
-    if (!child || !parent)
-        return;
+    if (!child || !parent) return;
 
     references_count_++;
 
     // Only track CompoundType and Buffer items
-    if (!NeedTrack(child))
-        return;
+    if (!NeedTrack(child)) return;
 
     // Clear the cached components
     cached_components_.clear();
@@ -45,44 +37,36 @@ void ReferenceCounter::AddReference(std::shared_ptr<StackItem> child, std::share
 
 void ReferenceCounter::RemoveReference(std::shared_ptr<StackItem> child, std::shared_ptr<StackItem> parent)
 {
-    if (!child || !parent)
-        return;
+    if (!child || !parent) return;
 
     references_count_--;
 
     // Only track CompoundType and Buffer items
-    if (!NeedTrack(child))
-        return;
+    if (!NeedTrack(child)) return;
 
     // Clear the cached components
     cached_components_.clear();
 
     auto parentIt = references_.find(parent);
-    if (parentIt == references_.end())
-        return;
+    if (parentIt == references_.end()) return;
 
     auto& parentReferences = parentIt->second;
     auto childIt = parentReferences.find(child);
-    if (childIt == parentReferences.end())
-        return;
+    if (childIt == parentReferences.end()) return;
 
-    if (--childIt->second.Count == 0)
-        parentReferences.erase(childIt);
+    if (--childIt->second.Count == 0) parentReferences.erase(childIt);
 
-    if (parentReferences.empty())
-        references_.erase(parentIt);
+    if (parentReferences.empty()) references_.erase(parentIt);
 
     // If the item has no stack references, add it to the zero_referred set
-    if (GetStackReferences(child) == 0)
-        zero_referred_.insert(child);
+    if (GetStackReferences(child) == 0) zero_referred_.insert(child);
 }
 
 bool ReferenceCounter::NeedTrack(std::shared_ptr<StackItem> item)
 {
     // Track all items if TrackAllItems is true
     constexpr bool TrackAllItems = false;
-    if (TrackAllItems)
-        return true;
+    if (TrackAllItems) return true;
 
     // Track the item if it is a CompoundType or Buffer
     if (item->GetType() == StackItemType::Array || item->GetType() == StackItemType::Struct ||
@@ -98,8 +82,7 @@ void ReferenceCounter::AddStackReference(std::shared_ptr<StackItem> item, size_t
     references_count_ += count;
 
     // If the item doesn't need to be tracked, return early
-    if (!NeedTrack(item))
-        return;
+    if (!NeedTrack(item)) return;
 
     // Add the item to the set of tracked items and to the cached components if needed
     if (tracked_items_.insert(item).second && !cached_components_.empty())
@@ -122,8 +105,7 @@ void ReferenceCounter::RemoveStackReference(std::shared_ptr<StackItem> item)
     references_count_--;
 
     // If the item doesn't need to be tracked, return early
-    if (!NeedTrack(item))
-        return;
+    if (!NeedTrack(item)) return;
 
     // Decrement the item's stack references and add it to the zero_referred set if it has no references
     auto it = stack_references_.find(item);
@@ -140,8 +122,7 @@ void ReferenceCounter::AddZeroReferred(std::shared_ptr<StackItem> item)
     zero_referred_.insert(item);
 
     // If the item doesn't need to be tracked, return early
-    if (!NeedTrack(item))
-        return;
+    if (!NeedTrack(item)) return;
 
     // Add the item to the cached components and the set of tracked items
     if (!cached_components_.empty())
@@ -203,8 +184,7 @@ size_t ReferenceCounter::CheckZeroReferred()
                     }
                 }
 
-                if (on_stack)
-                    break;
+                if (on_stack) break;
             }
 
             // If any item in the component is on stack, mark all items in the component as on stack
@@ -250,8 +230,7 @@ size_t ReferenceCounter::GetReferenceCount(std::shared_ptr<StackItem> item) cons
     for (const auto& [parent, children] : references_)
     {
         auto it = children.find(item);
-        if (it != children.end())
-            count += it->second.Count;
+        if (it != children.end()) count += it->second.Count;
     }
     return count;
 }
@@ -265,14 +244,12 @@ size_t ReferenceCounter::GetStackReferences(std::shared_ptr<StackItem> item) con
 bool ReferenceCounter::IsReferenced(std::shared_ptr<StackItem> item) const
 {
     // Check if the item has stack references
-    if (GetStackReferences(item) > 0)
-        return true;
+    if (GetStackReferences(item) > 0) return true;
 
     // Check if the item has object references
     for (const auto& [parent, children] : references_)
     {
-        if (children.find(item) != children.end())
-            return true;
+        if (children.find(item) != children.end()) return true;
     }
 
     return false;
@@ -377,11 +354,9 @@ void ReferenceCounter::StrongConnect(std::shared_ptr<StackItem> v,
 bool ReferenceCounter::HasCircularReference(std::shared_ptr<StackItem> root,
                                             std::unordered_set<std::shared_ptr<StackItem>>& visited) const
 {
-    if (!root)
-        return false;
+    if (!root) return false;
 
-    if (visited.find(root) != visited.end())
-        return true;
+    if (visited.find(root) != visited.end()) return true;
 
     visited.insert(root);
 
@@ -390,8 +365,7 @@ bool ReferenceCounter::HasCircularReference(std::shared_ptr<StackItem> root,
     {
         for (const auto& [child, entry] : it->second)
         {
-            if (HasCircularReference(child, visited))
-                return true;
+            if (HasCircularReference(child, visited)) return true;
         }
     }
 

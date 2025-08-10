@@ -1,5 +1,6 @@
 #include <neo/ledger/transaction.h>
 #include <neo/ledger/transaction_verification_context.h>
+
 #include <sstream>
 
 namespace neo::ledger
@@ -67,10 +68,7 @@ bool TransactionVerificationContext::IsConflicted(std::shared_ptr<Transaction> t
     return HasOutputConflict(transaction) || HasAccountConflict(transaction);
 }
 
-void TransactionVerificationContext::Reset()
-{
-    Clear();
-}
+void TransactionVerificationContext::Reset() { Clear(); }
 
 void TransactionVerificationContext::Clear()
 {
@@ -78,10 +76,7 @@ void TransactionVerificationContext::Clear()
     transaction_hashes_.clear();
 }
 
-size_t TransactionVerificationContext::GetTransactionCount() const
-{
-    return transaction_hashes_.size();
-}
+size_t TransactionVerificationContext::GetTransactionCount() const { return transaction_hashes_.size(); }
 
 bool TransactionVerificationContext::HasOutputConflict(std::shared_ptr<Transaction> transaction) const
 {

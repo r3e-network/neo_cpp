@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <chrono>
 #include <neo/consensus/consensus_service.h>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/hash.h>
@@ -9,6 +7,9 @@
 #include <neo/network/p2p/message_command.h>
 #include <neo/smartcontract/native/native_contract_manager.h>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <algorithm>
+#include <chrono>
 #include <sstream>
 
 namespace neo::consensus
@@ -17,8 +18,7 @@ void ConsensusService::OnMessage(std::shared_ptr<ConsensusMessage> message, cons
 {
     // Check if sender is validator
     auto it = std::find(validators_.begin(), validators_.end(), sender);
-    if (it == validators_.end())
-        return;
+    if (it == validators_.end()) return;
 
     // Get validator index
     uint16_t validatorIndex = static_cast<uint16_t>(std::distance(validators_.begin(), it));
@@ -27,8 +27,7 @@ void ConsensusService::OnMessage(std::shared_ptr<ConsensusMessage> message, cons
     message->SetValidatorIndex(validatorIndex);
 
     // Verify signature
-    if (!message->VerifySignature(sender))
-        return;
+    if (!message->VerifySignature(sender)) return;
 
     // Handle message based on type
     switch (message->GetType())
@@ -60,8 +59,7 @@ void ConsensusService::OnChangeViewMessage(std::shared_ptr<ChangeViewMessage> me
     std::lock_guard<std::mutex> lock(mutex_);
 
     // Check if message is for current block
-    if (message->GetViewNumber() < viewNumber_)
-        return;
+    if (message->GetViewNumber() < viewNumber_) return;
 
     // Check if message is already received
     if (message->GetViewNumber() == viewNumber_ &&
@@ -92,16 +90,13 @@ void ConsensusService::OnPrepareRequestMessage(std::shared_ptr<PrepareRequest> m
     std::lock_guard<std::mutex> lock(mutex_);
 
     // Check if message is for current block
-    if (message->GetViewNumber() < viewNumber_)
-        return;
+    if (message->GetViewNumber() < viewNumber_) return;
 
     // Check if message is from primary
-    if (message->GetValidatorIndex() != GetPrimaryIndex(message->GetViewNumber()))
-        return;
+    if (message->GetValidatorIndex() != GetPrimaryIndex(message->GetViewNumber())) return;
 
     // Check if message is already received
-    if (message->GetViewNumber() == viewNumber_ && prepareRequest_)
-        return;
+    if (message->GetViewNumber() == viewNumber_ && prepareRequest_) return;
 
     // Store message
     if (message->GetViewNumber() == viewNumber_)
@@ -124,8 +119,7 @@ void ConsensusService::OnPrepareResponseMessage(std::shared_ptr<PrepareResponse>
     std::lock_guard<std::mutex> lock(mutex_);
 
     // Check if message is for current block
-    if (message->GetViewNumber() < viewNumber_)
-        return;
+    if (message->GetViewNumber() < viewNumber_) return;
 
     // Check if message is already received
     if (message->GetViewNumber() == viewNumber_ &&
@@ -155,12 +149,10 @@ void ConsensusService::OnCommitMessage(std::shared_ptr<CommitMessage> message, c
     std::lock_guard<std::mutex> lock(mutex_);
 
     // Check if message is for current block
-    if (message->GetViewNumber() < viewNumber_)
-        return;
+    if (message->GetViewNumber() < viewNumber_) return;
 
     // Check if message is already received
-    if (commitMessages_.find(message->GetValidatorIndex()) != commitMessages_.end())
-        return;
+    if (commitMessages_.find(message->GetValidatorIndex()) != commitMessages_.end()) return;
 
     // Store message
     commitMessages_[message->GetValidatorIndex()] = message;
@@ -188,8 +180,7 @@ void ConsensusService::OnRecoveryMessage(std::shared_ptr<RecoveryMessage> messag
     std::lock_guard<std::mutex> lock(mutex_);
 
     // Check if message is for current block
-    if (message->GetViewNumber() < viewNumber_)
-        return;
+    if (message->GetViewNumber() < viewNumber_) return;
 
     // Store message
     recoveryMessages_[message->GetValidatorIndex()] = message;
@@ -242,8 +233,7 @@ bool ConsensusService::HasReceivedEnoughChangeViewMessages(uint8_t viewNumber) c
     uint16_t count = 0;
     for (const auto& [index, message] : messages)
     {
-        if (message->GetNewViewNumber() >= viewNumber)
-            count++;
+        if (message->GetNewViewNumber() >= viewNumber) count++;
     }
 
     // Calculate fault tolerance (f)
@@ -256,15 +246,13 @@ bool ConsensusService::HasReceivedEnoughChangeViewMessages(uint8_t viewNumber) c
 bool ConsensusService::HasReceivedEnoughPrepareResponses() const
 {
     // Check if prepare request is received
-    if (!prepareRequest_)
-        return false;
+    if (!prepareRequest_) return false;
 
     // Count prepare responses
     uint16_t count = 0;
     for (const auto& [index, message] : prepareResponses_)
     {
-        if (message->GetPreparationHash() == prepareRequest_->GetSignature())
-            count++;
+        if (message->GetPreparationHash() == prepareRequest_->GetSignature()) count++;
     }
 
     // Calculate fault tolerance (f)
@@ -277,8 +265,7 @@ bool ConsensusService::HasReceivedEnoughPrepareResponses() const
 bool ConsensusService::HasReceivedEnoughCommits() const
 {
     // Check if prepare request is received
-    if (!prepareRequest_)
-        return false;
+    if (!prepareRequest_) return false;
 
     // Count commit messages with valid signatures
     uint16_t count = 0;

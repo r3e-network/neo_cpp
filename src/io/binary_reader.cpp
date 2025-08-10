@@ -1,6 +1,7 @@
-#include <cstring>
 #include <neo/io/binary_reader.h>
 #include <neo/io/iserializable.h>
+
+#include <cstring>
 #include <sstream>
 #include <stdexcept>
 
@@ -12,33 +13,44 @@ BinaryReader::BinaryReader(std::istream& stream)
 }
 
 BinaryReader::BinaryReader(const ByteSpan& data)
-    : stream_(nullptr), data_(data.Data()), size_(data.Size()), position_(0), owns_stream_(false),
+    : stream_(nullptr),
+      data_(data.Data()),
+      size_(data.Size()),
+      position_(0),
+      owns_stream_(false),
+      using_data_mode_(true)
+{
+}
+
+BinaryReader::BinaryReader(const ByteVector& data)
+    : stream_(nullptr),
+      data_(data.Data()),
+      size_(data.Size()),
+      position_(0),
+      owns_stream_(false),
       using_data_mode_(true)
 {
 }
 
 BinaryReader::BinaryReader(const std::vector<uint8_t>& data)
-    : stream_(nullptr), data_(data.data()), size_(data.size()), position_(0), owns_stream_(false),
+    : stream_(nullptr),
+      data_(data.data()),
+      size_(data.size()),
+      position_(0),
+      owns_stream_(false),
       using_data_mode_(true)
 {
 }
 
-bool BinaryReader::ReadBool()
-{
-    return ReadUInt8() != 0;
-}
+bool BinaryReader::ReadBool() { return ReadUInt8() != 0; }
 
-bool BinaryReader::ReadBoolean()
-{
-    return ReadBool();
-}
+bool BinaryReader::ReadBoolean() { return ReadBool(); }
 
 uint8_t BinaryReader::ReadUInt8()
 {
     if (using_data_mode_)
     {
-        if (position_ >= size_)
-            throw std::out_of_range("Unexpected end of data");
+        if (position_ >= size_) throw std::out_of_range("Unexpected end of data");
         if (size_ == 0)
         {
             throw std::out_of_range("Unexpected end of data");
@@ -49,8 +61,7 @@ uint8_t BinaryReader::ReadUInt8()
     {
         uint8_t value;
         stream_->read(reinterpret_cast<char*>(&value), sizeof(value));
-        if (stream_->gcount() != sizeof(value))
-            throw std::runtime_error("Failed to read UInt8");
+        if (stream_->gcount() != sizeof(value)) throw std::runtime_error("Failed to read UInt8");
         return value;
     }
 }
@@ -65,8 +76,7 @@ uint8_t BinaryReader::PeekUInt8()
 {
     if (using_data_mode_)
     {
-        if (position_ >= size_)
-            throw std::out_of_range("Unexpected end of data");
+        if (position_ >= size_) throw std::out_of_range("Unexpected end of data");
         return data_[position_];
     }
     else
@@ -74,8 +84,7 @@ uint8_t BinaryReader::PeekUInt8()
         uint8_t value;
         std::streampos pos = stream_->tellg();
         stream_->read(reinterpret_cast<char*>(&value), sizeof(value));
-        if (stream_->gcount() != sizeof(value))
-            throw std::runtime_error("Failed to peek UInt8");
+        if (stream_->gcount() != sizeof(value)) throw std::runtime_error("Failed to peek UInt8");
         stream_->seekg(pos);
         return value;
     }
@@ -132,31 +141,20 @@ int64_t BinaryReader::ReadInt64()
 
 ByteVector BinaryReader::ReadBytes(size_t count)
 {
-    if (count > DEFAULT_MAX_ARRAY_SIZE)
-        throw std::out_of_range("Byte array size exceeds maximum allowed size");
+    if (count > DEFAULT_MAX_ARRAY_SIZE) throw std::out_of_range("Byte array size exceeds maximum allowed size");
 
     EnsureAvailable(count);
 
     ByteVector value(count);
-    if (count > 0)
-        ReadRawBytes(value.Data(), count);
+    if (count > 0) ReadRawBytes(value.Data(), count);
     return value;
 }
 
-UInt160 BinaryReader::ReadUInt160()
-{
-    return UInt160(ReadBytes(UInt160::Size).AsSpan());
-}
+UInt160 BinaryReader::ReadUInt160() { return UInt160(ReadBytes(UInt160::Size).AsSpan()); }
 
-UInt256 BinaryReader::ReadUInt256()
-{
-    return UInt256(ReadBytes(UInt256::Size).AsSpan());
-}
+UInt256 BinaryReader::ReadUInt256() { return UInt256(ReadBytes(UInt256::Size).AsSpan()); }
 
-Fixed8 BinaryReader::ReadFixed8()
-{
-    return Fixed8(ReadInt64());
-}
+Fixed8 BinaryReader::ReadFixed8() { return Fixed8(ReadInt64()); }
 
 int64_t BinaryReader::ReadVarInt()
 {
@@ -182,8 +180,7 @@ int64_t BinaryReader::ReadVarInt()
 int64_t BinaryReader::ReadVarInt(int64_t max)
 {
     int64_t value = ReadVarInt();
-    if (value > max)
-        throw std::out_of_range("Value exceeds maximum allowed");
+    if (value > max) throw std::out_of_range("Value exceeds maximum allowed");
     return value;
 }
 
@@ -207,15 +204,13 @@ ByteVector BinaryReader::ReadVarBytes()
 ByteVector BinaryReader::ReadVarBytes(size_t maxSize)
 {
     int64_t count = ReadVarInt();
-    if (count < 0)
-        throw std::out_of_range("Byte array size cannot be negative");
+    if (count < 0) throw std::out_of_range("Byte array size cannot be negative");
 
     int64_t maxSizeInt64 = (maxSize > static_cast<size_t>(std::numeric_limits<int64_t>::max()))
                                ? std::numeric_limits<int64_t>::max()
                                : static_cast<int64_t>(maxSize);
 
-    if (count > maxSizeInt64)
-        throw std::out_of_range("Byte array size exceeds maximum allowed");
+    if (count > maxSizeInt64) throw std::out_of_range("Byte array size exceeds maximum allowed");
     return ReadBytes(static_cast<size_t>(count));
 }
 
@@ -225,10 +220,7 @@ std::string BinaryReader::ReadString()
     return std::string(reinterpret_cast<const char*>(bytes.Data()), bytes.Size());
 }
 
-std::string BinaryReader::ReadVarString()
-{
-    return ReadString();
-}
+std::string BinaryReader::ReadVarString() { return ReadString(); }
 
 std::string BinaryReader::ReadVarString(size_t maxLength)
 {
@@ -245,22 +237,18 @@ std::string BinaryReader::ReadFixedString(size_t length)
     ByteVector bytes = ReadBytes(length);
     // Find the null terminator if there is one
     size_t nullTerminator = 0;
-    while (nullTerminator < length && bytes[nullTerminator] != 0)
-        nullTerminator++;
+    while (nullTerminator < length && bytes[nullTerminator] != 0) nullTerminator++;
 
     return std::string(reinterpret_cast<const char*>(bytes.Data()), nullTerminator);
 }
 
 void BinaryReader::ReadBytes(uint8_t* data, size_t size)
 {
-    if (!data && size > 0)
-        throw std::invalid_argument("data pointer cannot be null");
+    if (!data && size > 0) throw std::invalid_argument("data pointer cannot be null");
 
-    if (size > DEFAULT_MAX_ARRAY_SIZE)
-        throw std::out_of_range("Read size exceeds maximum allowed size");
+    if (size > DEFAULT_MAX_ARRAY_SIZE) throw std::out_of_range("Read size exceeds maximum allowed size");
 
-    if (size > 0)
-        ReadRawBytes(data, size);
+    if (size > 0) ReadRawBytes(data, size);
 }
 
 size_t BinaryReader::GetPosition() const
@@ -405,8 +393,7 @@ void BinaryReader::EnsureAvailable(size_t size) const
 
 void BinaryReader::ReadRawBytes(uint8_t* data, size_t size)
 {
-    if (!data)
-        throw std::invalid_argument("data pointer cannot be null");
+    if (!data) throw std::invalid_argument("data pointer cannot be null");
 
     EnsureAvailable(size);
 
@@ -421,8 +408,7 @@ void BinaryReader::ReadRawBytes(uint8_t* data, size_t size)
     else
     {
         stream_->read(reinterpret_cast<char*>(data), size);
-        if (static_cast<size_t>(stream_->gcount()) != size)
-            throw std::runtime_error("Unexpected end of stream");
+        if (static_cast<size_t>(stream_->gcount()) != size) throw std::runtime_error("Unexpected end of stream");
     }
 }
 }  // namespace neo::io

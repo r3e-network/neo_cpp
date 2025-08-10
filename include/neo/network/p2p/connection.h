@@ -1,16 +1,17 @@
 #pragma once
 
-#include <cstdint>
-#include <functional>
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/message.h>
+
+#include <cstdint>
+#include <functional>
+#include <memory>
 #include <string>
 
 namespace neo::network::p2p
 {
-// Forward declaration  
+// Forward declaration
 class Message;
 
 /**
@@ -18,7 +19,7 @@ class Message;
  */
 class Connection
 {
-  public:
+   public:
     /**
      * @brief Constructs a Connection.
      */
@@ -132,7 +133,7 @@ class Connection
      */
     void UpdatePingTime(uint32_t pingTime);
 
-  protected:
+   protected:
     /**
      * @brief Called when a message is received.
      * @param message The message.
@@ -186,7 +187,7 @@ class Connection
      */
     void UpdateMessagesReceived();
 
-  private:
+   private:
     uint32_t id_;
     uint64_t lastMessageReceived_;
     uint64_t lastMessageSent_;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <neo/json/jtoken.h>
+
 #include <vector>
 
 namespace neo::json
@@ -10,7 +11,7 @@ namespace neo::json
  */
 class JArray : public JToken
 {
-  public:
+   public:
     using Items = std::vector<std::shared_ptr<JToken>>;
 
     /**
@@ -141,7 +142,7 @@ class JArray : public JToken
      */
     Items::const_iterator cend() const;
 
-  protected:
+   protected:
     /**
      * @brief Writes this token to JSON output.
      * @param output The output string.
@@ -150,7 +151,7 @@ class JArray : public JToken
      */
     void WriteJson(std::string& output, bool indented = false, int indent_level = 0) const override;
 
-  private:
+   private:
     Items items_;
 };
 }  // namespace neo::json

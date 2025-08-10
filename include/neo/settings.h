@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <neo/protocol_settings.h>
+
+#include <memory>
 #include <string>
 #include <unordered_map>
 
@@ -83,7 +84,7 @@ struct PluginSettings
  */
 class Settings
 {
-  public:
+   public:
     /**
      * @brief Default constructor with default settings
      */
@@ -199,7 +200,7 @@ class Settings
      */
     std::string ToString() const;
 
-  private:
+   private:
     /**
      * @brief Loads protocol settings from JSON
      * @param json JSON object containing protocol settings

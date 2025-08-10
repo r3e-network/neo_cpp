@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/persistence/storage_item.h>
@@ -6,6 +5,8 @@
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/name_service.h>
+
+#include <algorithm>
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -13,8 +14,7 @@ namespace neo::smartcontract::native
 std::shared_ptr<vm::StackItem> NameService::OnRegister(ApplicationEngine& engine,
                                                        const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto nameItem = args[0];
     auto ownerItem = args[1];
@@ -22,23 +22,20 @@ std::shared_ptr<vm::StackItem> NameService::OnRegister(ApplicationEngine& engine
     auto name = nameItem->GetString();
     auto ownerBytes = ownerItem->GetByteArray();
 
-    if (ownerBytes.Size() != 20)
-        throw std::runtime_error("Invalid owner");
+    if (ownerBytes.Size() != 20) throw std::runtime_error("Invalid owner");
 
     io::UInt160 owner;
     std::memcpy(owner.Data(), ownerBytes.Data(), 20);
 
     // Check if name is available
-    if (!IsAvailable(engine.GetSnapshot(), name))
-        throw std::runtime_error("Name is not available");
+    if (!IsAvailable(engine.GetSnapshot(), name)) throw std::runtime_error("Name is not available");
 
     // Check if the caller has enough GAS
     auto price = GetPrice(engine.GetSnapshot());
     auto gasToken = GasToken::GetInstance();
     auto caller = engine.GetCurrentScriptHash();
     auto gasBalance = gasToken->GetBalance(engine.GetSnapshot(), caller);
-    if (gasBalance < price)
-        throw std::runtime_error("Insufficient GAS");
+    if (gasBalance < price) throw std::runtime_error("Insufficient GAS");
 
     // Transfer GAS to the name service contract
     if (!gasToken->Transfer(engine.GetSnapshot(), caller, GetScriptHash(), price))
@@ -69,15 +66,13 @@ std::shared_ptr<vm::StackItem> NameService::OnRegister(ApplicationEngine& engine
 std::shared_ptr<vm::StackItem> NameService::OnRenew(ApplicationEngine& engine,
                                                     const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto nameItem = args[0];
     auto name = nameItem->GetString();
 
     // Check if name is valid
-    if (!ValidateName(name))
-        throw std::runtime_error("Invalid name");
+    if (!ValidateName(name)) throw std::runtime_error("Invalid name");
 
     // Get name
     auto [owner, expiration] = GetName(engine.GetSnapshot(), name);
@@ -87,8 +82,7 @@ std::shared_ptr<vm::StackItem> NameService::OnRenew(ApplicationEngine& engine,
     auto gasToken = GasToken::GetInstance();
     auto caller = engine.GetCurrentScriptHash();
     auto gasBalance = gasToken->GetBalance(engine.GetSnapshot(), caller);
-    if (gasBalance < price)
-        throw std::runtime_error("Insufficient GAS");
+    if (gasBalance < price) throw std::runtime_error("Insufficient GAS");
 
     // Transfer GAS to the name service contract
     if (!gasToken->Transfer(engine.GetSnapshot(), caller, GetScriptHash(), price))
@@ -120,8 +114,7 @@ std::shared_ptr<vm::StackItem> NameService::OnRenew(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> NameService::OnTransfer(ApplicationEngine& engine,
                                                        const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto nameItem = args[0];
     auto toItem = args[1];
@@ -130,11 +123,9 @@ std::shared_ptr<vm::StackItem> NameService::OnTransfer(ApplicationEngine& engine
     auto toBytes = toItem->GetByteArray();
 
     // Check if name is valid
-    if (!ValidateName(name))
-        throw std::runtime_error("Invalid name");
+    if (!ValidateName(name)) throw std::runtime_error("Invalid name");
 
-    if (toBytes.Size() != 20)
-        throw std::runtime_error("Invalid to");
+    if (toBytes.Size() != 20) throw std::runtime_error("Invalid to");
 
     io::UInt160 to;
     std::memcpy(to.Data(), toBytes.Data(), 20);
@@ -143,17 +134,14 @@ std::shared_ptr<vm::StackItem> NameService::OnTransfer(ApplicationEngine& engine
     auto [owner, expiration] = GetName(engine.GetSnapshot(), name);
 
     // Check if name is expired
-    if (expiration <= engine.GetSnapshot()->GetCurrentBlockIndex())
-        throw std::runtime_error("Name expired");
+    if (expiration <= engine.GetSnapshot()->GetCurrentBlockIndex()) throw std::runtime_error("Name expired");
 
     // Check if the caller is the owner
     auto caller = engine.GetCurrentScriptHash();
-    if (caller != owner)
-        throw std::runtime_error("Not the owner");
+    if (caller != owner) throw std::runtime_error("Not the owner");
 
     // Check if the owner is different from the new owner
-    if (owner == to)
-        throw std::runtime_error("Owner is already the new owner");
+    if (owner == to) throw std::runtime_error("Owner is already the new owner");
 
     // Transfer name
     std::ostringstream stream;
@@ -179,23 +167,20 @@ std::shared_ptr<vm::StackItem> NameService::OnTransfer(ApplicationEngine& engine
 std::shared_ptr<vm::StackItem> NameService::OnDelete(ApplicationEngine& engine,
                                                      const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto nameItem = args[0];
     auto name = nameItem->GetString();
 
     // Check if name is valid
-    if (!ValidateName(name))
-        throw std::runtime_error("Invalid name");
+    if (!ValidateName(name)) throw std::runtime_error("Invalid name");
 
     // Get name
     auto [owner, expiration] = GetName(engine.GetSnapshot(), name);
 
     // Check if the caller is the owner
     auto caller = engine.GetCurrentScriptHash();
-    if (caller != owner)
-        throw std::runtime_error("Not the owner");
+    if (caller != owner) throw std::runtime_error("Not the owner");
 
     // Delete name
     auto key = GetStorageKey(PREFIX_NAME, name);
@@ -213,8 +198,7 @@ std::shared_ptr<vm::StackItem> NameService::OnDelete(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> NameService::OnResolve(ApplicationEngine& engine,
                                                       const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto nameItem = args[0];
     auto name = nameItem->GetString();
@@ -225,8 +209,7 @@ std::shared_ptr<vm::StackItem> NameService::OnResolve(ApplicationEngine& engine,
         auto [owner, expiration] = GetName(engine.GetSnapshot(), name);
 
         // Check if name is expired
-        if (expiration <= engine.GetSnapshot()->GetCurrentBlockIndex())
-            return vm::StackItem::Create(nullptr);
+        if (expiration <= engine.GetSnapshot()->GetCurrentBlockIndex()) return vm::StackItem::Create(nullptr);
 
         return vm::StackItem::Create(io::ByteVector(owner.Data(), 20));
     }
@@ -239,8 +222,7 @@ std::shared_ptr<vm::StackItem> NameService::OnResolve(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> NameService::OnGetOwner(ApplicationEngine& engine,
                                                        const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto nameItem = args[0];
     auto name = nameItem->GetString();
@@ -251,8 +233,7 @@ std::shared_ptr<vm::StackItem> NameService::OnGetOwner(ApplicationEngine& engine
         auto [owner, expiration] = GetName(engine.GetSnapshot(), name);
 
         // Check if name is expired
-        if (expiration <= engine.GetSnapshot()->GetCurrentBlockIndex())
-            return vm::StackItem::Create(nullptr);
+        if (expiration <= engine.GetSnapshot()->GetCurrentBlockIndex()) return vm::StackItem::Create(nullptr);
 
         return vm::StackItem::Create(io::ByteVector(owner.Data(), 20));
     }
@@ -265,15 +246,13 @@ std::shared_ptr<vm::StackItem> NameService::OnGetOwner(ApplicationEngine& engine
 std::shared_ptr<vm::StackItem> NameService::OnGetExpiration(ApplicationEngine& engine,
                                                             const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto nameItem = args[0];
     auto name = nameItem->GetString();
 
     // Check if name is valid
-    if (!ValidateName(name))
-        return vm::StackItem::Create(nullptr);
+    if (!ValidateName(name)) return vm::StackItem::Create(nullptr);
 
     try
     {

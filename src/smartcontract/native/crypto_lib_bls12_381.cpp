@@ -3,6 +3,7 @@
 #include <neo/io/binary_writer.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/crypto_lib.h>
+
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -11,16 +12,13 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Serialize(ApplicationEngine&
                                                               const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     // Implement BLS12-381 serialization using the helper function
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto pointItem = args[0];
-    if (!pointItem->IsInterop())
-        throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
+    if (!pointItem->IsInterop()) throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
 
     auto pointInterop = pointItem->GetInterface();
-    if (!pointInterop)
-        throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
+    if (!pointInterop) throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
 
     // Cast to BLS12381Point and serialize
     auto point = static_cast<const BLS12381Point*>(pointInterop);
@@ -33,8 +31,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Deserialize(ApplicationEngin
                                                                 const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     // Implement BLS12-381 deserialization using the helper function
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetByteArray();
@@ -51,8 +48,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Equal(ApplicationEngine& eng
                                                           const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     // Implement BLS12-381 equality comparison using the helper function
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto aItem = args[0];
     auto bItem = args[1];
@@ -62,8 +58,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Equal(ApplicationEngine& eng
 
     auto aInterop = aItem->GetInterface();
     auto bInterop = bItem->GetInterface();
-    if (!aInterop || !bInterop)
-        throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
+    if (!aInterop || !bInterop) throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
 
     // Cast to BLS12381Point and compare
     auto pointA = static_cast<const BLS12381Point*>(aInterop);
@@ -77,8 +72,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Add(ApplicationEngine& engin
                                                         const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     // Implement BLS12-381 addition using the helper function
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto aItem = args[0];
     auto bItem = args[1];
@@ -88,8 +82,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Add(ApplicationEngine& engin
 
     auto aInterop = aItem->GetInterface();
     auto bInterop = bItem->GetInterface();
-    if (!aInterop || !bInterop)
-        throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
+    if (!aInterop || !bInterop) throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
 
     // Cast to BLS12381Point and add
     auto pointA = static_cast<const BLS12381Point*>(aInterop);
@@ -105,19 +98,16 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Add(ApplicationEngine& engin
 std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Mul(ApplicationEngine& engine,
                                                         const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 3)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 3) throw std::runtime_error("Invalid arguments");
 
     auto x = args[0];
     auto mulItem = args[1];
     auto negItem = args[2];
 
-    if (!x->IsInterop())
-        throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
+    if (!x->IsInterop()) throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
 
     auto xInterop = x->GetInterface();
-    if (!xInterop)
-        throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
+    if (!xInterop) throw std::runtime_error("Bls12381 operation fault, type:format, error:type mismatch");
 
     auto mul = mulItem->GetByteArray();
     if (mul.Size() != 32)
@@ -198,8 +188,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Pairing(ApplicationEngine& e
                                                             const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     // Implement BLS12-381 pairing operation
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments - pairing requires 2 points");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments - pairing requires 2 points");
 
     auto pointAItem = args[0];
     auto pointBItem = args[1];
@@ -385,8 +374,7 @@ bool CryptoLib::Equal(const BLS12381Point& a, const BLS12381Point& b)
     // Implement BLS12-381 equality comparison matching C# implementation
     try
     {
-        if (a.GetType() != b.GetType())
-            return false;
+        if (a.GetType() != b.GetType()) return false;
 
         switch (a.GetType())
         {
@@ -415,8 +403,7 @@ BLS12381Point CryptoLib::Add(const BLS12381Point& a, const BLS12381Point& b)
     // Implement BLS12-381 addition matching C# implementation
     try
     {
-        if (a.GetType() != b.GetType())
-            throw std::invalid_argument("Cannot add BLS12-381 points of different types");
+        if (a.GetType() != b.GetType()) throw std::invalid_argument("Cannot add BLS12-381 points of different types");
 
         switch (a.GetType())
         {

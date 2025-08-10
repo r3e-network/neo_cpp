@@ -1,7 +1,8 @@
-#include <algorithm>
-#include <cstring>
 #include <neo/cryptography/base58.h>
 #include <neo/cryptography/hash.h>
+
+#include <algorithm>
+#include <cstring>
 #include <stdexcept>
 
 namespace neo::cryptography

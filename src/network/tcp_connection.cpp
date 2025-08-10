@@ -5,6 +5,7 @@
 #include <neo/network/p2p/message_flags.h>
 #include <neo/network/payload_factory.h>
 #include <neo/network/tcp_connection.h>
+
 #include <sstream>
 #include <stdexcept>
 
@@ -14,20 +15,13 @@ TcpConnection::TcpConnection(boost::asio::io_context& ioContext) : socket_(ioCon
 {
 }
 
-TcpConnection::~TcpConnection()
-{
-    Stop();
-}
+TcpConnection::~TcpConnection() { Stop(); }
 
-boost::asio::ip::tcp::socket& TcpConnection::GetSocket()
-{
-    return socket_;
-}
+boost::asio::ip::tcp::socket& TcpConnection::GetSocket() { return socket_; }
 
 IPEndPoint TcpConnection::GetRemoteEndpoint() const
 {
-    if (!socket_.is_open())
-        throw std::runtime_error("Socket is not open");
+    if (!socket_.is_open()) throw std::runtime_error("Socket is not open");
 
     boost::asio::ip::tcp::endpoint endpoint = socket_.remote_endpoint();
 
@@ -65,8 +59,7 @@ std::string TcpConnection::GetRemoteEndpointString() const
 
 void TcpConnection::Start()
 {
-    if (running_)
-        return;
+    if (running_) return;
 
     running_ = true;
 
@@ -83,8 +76,7 @@ void TcpConnection::Start()
 
 void TcpConnection::Stop()
 {
-    if (!running_)
-        return;
+    if (!running_) return;
 
     running_ = false;
     Close();
@@ -114,15 +106,14 @@ void TcpConnection::Close()
         catch (const std::exception& e)
         {
             neo::logging::Logger::Instance().Warning("Network",
-                                                std::string("Error in connection closed callback: ") + e.what());
+                                                     std::string("Error in connection closed callback: ") + e.what());
         }
     }
 }
 
 void TcpConnection::Send(const Message& message)
 {
-    if (!running_ || !socket_.is_open())
-        return;
+    if (!running_ || !socket_.is_open()) return;
 
     try
     {
@@ -157,8 +148,7 @@ void TcpConnection::SetConnectionClosedCallback(std::function<void()> callback)
 
 void TcpConnection::ReadMessage()
 {
-    if (!running_ || !socket_.is_open())
-        return;
+    if (!running_ || !socket_.is_open()) return;
 
     // Read the header (24 bytes)
     socket_.async_read_some(
@@ -263,8 +253,8 @@ void TcpConnection::HandleReadHeader(const std::error_code& error, size_t bytesT
                 }
                 catch (const std::exception& e)
                 {
-                    neo::logging::Logger::Instance().Warning("Network",
-                                                        std::string("Error in message received callback: ") + e.what());
+                    neo::logging::Logger::Instance().Warning(
+                        "Network", std::string("Error in message received callback: ") + e.what());
                 }
             }
 
@@ -290,7 +280,7 @@ void TcpConnection::ReadPayload(p2p::MessageCommand command, uint32_t payloadLen
     if (payloadLength > Message::PayloadMaxSize)
     {
         neo::logging::Logger::Instance().Warning("Network",
-                                            "Payload too large: " + std::to_string(payloadLength) + " bytes");
+                                                 "Payload too large: " + std::to_string(payloadLength) + " bytes");
         Close();
         return;
     }
@@ -336,8 +326,8 @@ void TcpConnection::HandleReadPayload(const std::error_code& error, size_t bytes
             }
             catch (const std::exception& e)
             {
-                neo::logging::Logger::Instance().Warning("Network",
-                                                    std::string("Error in message received callback: ") + e.what());
+                neo::logging::Logger::Instance().Warning(
+                    "Network", std::string("Error in message received callback: ") + e.what());
             }
         }
 
@@ -394,8 +384,8 @@ void TcpConnection::HandleError(const std::error_code& error)
         return;
     }
 
-    neo::logging::Logger::Instance().Warning("Network", "Socket error: " + error.message() + " (" +
-                                                       std::to_string(error.value()) + ")");
+    neo::logging::Logger::Instance().Warning(
+        "Network", "Socket error: " + error.message() + " (" + std::to_string(error.value()) + ")");
     Close();
 }
 

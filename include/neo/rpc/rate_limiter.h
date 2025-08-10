@@ -15,7 +15,7 @@ namespace neo::rpc
  */
 class RateLimiter
 {
-  public:
+   public:
     struct Config
     {
         size_t requestsPerSecond = 10;
@@ -35,8 +35,7 @@ class RateLimiter
      */
     bool IsAllowed(const std::string& clientId, const std::string& method = "")
     {
-        if (!config_.enabled)
-            return true;
+        if (!config_.enabled) return true;
 
         std::lock_guard<std::mutex> lock(mutex_);
 
@@ -134,7 +133,7 @@ class RateLimiter
         tokens_ = std::min(tokens_, config.burstSize);
     }
 
-  private:
+   private:
     struct ClientState
     {
         std::deque<std::chrono::steady_clock::time_point> requests;
@@ -180,7 +179,7 @@ class RateLimiter
  */
 class MethodRateLimiter
 {
-  public:
+   public:
     struct MethodConfig
     {
         size_t requestsPerSecond = 10;
@@ -269,7 +268,7 @@ class MethodRateLimiter
         defaultLimiter_->ResetClient(clientId);
     }
 
-  private:
+   private:
     std::unordered_map<std::string, std::unique_ptr<RateLimiter>> methodLimiters_;
     std::unique_ptr<RateLimiter> defaultLimiter_ =
         std::make_unique<RateLimiter>(RateLimiter::Config{10, 300, 20, true});

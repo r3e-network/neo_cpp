@@ -1,11 +1,12 @@
-#include <cstdint>
-#include <cstring>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_vector.h>
 #include <neo/vm/opcode.h>
 #include <neo/vm/script.h>
 #include <neo/vm/script_builder.h>
+
+#include <cstdint>
+#include <cstring>
 #include <sstream>
 #include <stdexcept>
 
@@ -85,10 +86,7 @@ ScriptBuilder& ScriptBuilder::EmitPush(int64_t value)
     }
 }
 
-ScriptBuilder& ScriptBuilder::EmitPush(bool value)
-{
-    return Emit(value ? OpCode::PUSHT : OpCode::PUSHF);
-}
+ScriptBuilder& ScriptBuilder::EmitPush(bool value) { return Emit(value ? OpCode::PUSHT : OpCode::PUSHF); }
 
 ScriptBuilder& ScriptBuilder::EmitPush(const io::ByteSpan& data)
 {
@@ -118,10 +116,7 @@ ScriptBuilder& ScriptBuilder::EmitPush(const std::string& data)
     return EmitPush(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
 }
 
-ScriptBuilder& ScriptBuilder::EmitPush(const char* data)
-{
-    return EmitPush(std::string(data));
-}
+ScriptBuilder& ScriptBuilder::EmitPush(const char* data) { return EmitPush(std::string(data)); }
 
 ScriptBuilder& ScriptBuilder::EmitRaw(const io::ByteSpan& script)
 {

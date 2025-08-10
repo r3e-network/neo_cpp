@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -8,6 +7,8 @@
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
+#include <cstdint>
 #include <optional>
 #include <shared_mutex>
 #include <span>
@@ -28,7 +29,7 @@ class DataCache;
  */
 class StorageKey : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief The length of the prefix (contract ID + prefix byte).
      */
@@ -75,10 +76,7 @@ class StorageKey : public io::ISerializable
      * @brief Gets the contract ID.
      * @return The contract ID.
      */
-    int32_t GetId() const
-    {
-        return id_;
-    }
+    int32_t GetId() const { return id_; }
 
     /**
      * @brief Gets the key.
@@ -281,7 +279,7 @@ class StorageKey : public io::ISerializable
      */
     int CompareTo(const StorageKey& other) const;
 
-  private:
+   private:
     mutable int32_t id_ = 0;
     io::ByteVector key_;
     mutable std::optional<io::UInt160> scriptHash_;  // For Neo 2.x compatibility

@@ -1,13 +1,14 @@
 #pragma once
 
-#include <atomic>
-#include <condition_variable>
-#include <memory>
-#include <mutex>
 #include <neo/io/uint256.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/mempool.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
+
+#include <atomic>
+#include <condition_variable>
+#include <memory>
+#include <mutex>
 #include <thread>
 #include <unordered_map>
 #include <vector>
@@ -22,7 +23,7 @@ using Neo3Transaction = payloads::Neo3Transaction;
  */
 class TransactionRouter
 {
-  public:
+   public:
     /**
      * @brief Constructs a TransactionRouter.
      * @param blockchain The blockchain.
@@ -71,7 +72,7 @@ class TransactionRouter
      */
     bool RemoveTransaction(const io::UInt256& hash);
 
-  private:
+   private:
     std::shared_ptr<ledger::Blockchain> blockchain_;
     std::shared_ptr<ledger::MemoryPool> memPool_;
     std::unordered_map<io::UInt256, std::shared_ptr<Neo3Transaction>> transactions_;

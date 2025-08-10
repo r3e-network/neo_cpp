@@ -1,12 +1,13 @@
 #pragma once
 
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/tcp_connection.h>
+
 #include <atomic>
 #include <boost/asio.hpp>
 #include <functional>
 #include <memory>
 #include <mutex>
-#include <neo/network/ip_endpoint.h>
-#include <neo/network/tcp_connection.h>
 #include <string>
 #include <thread>
 #include <unordered_map>
@@ -19,7 +20,7 @@ namespace neo::network
  */
 class TcpClient
 {
-  public:
+   public:
     /**
      * @brief Constructs a TcpClient.
      */
@@ -57,7 +58,7 @@ class TcpClient
      */
     void Stop();
 
-  private:
+   private:
     std::unique_ptr<boost::asio::io_context> ioContext_;
     boost::asio::io_context* ioContextPtr_;  // Points to internal or external io_context
     std::vector<std::thread> ioThreads_;

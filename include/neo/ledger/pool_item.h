@@ -1,9 +1,10 @@
 #pragma once
 
-#include <chrono>
-#include <memory>
 #include <neo/io/uint256.h>
 #include <neo/ledger/transaction.h>
+
+#include <chrono>
+#include <memory>
 
 namespace neo::ledger
 {
@@ -12,12 +13,12 @@ namespace neo::ledger
  */
 class PoolItem
 {
-  public:
+   public:
     /**
      * @brief Default constructor.
      */
     PoolItem() = default;
-    
+
     /**
      * @brief Constructor.
      * @param transaction The transaction.
@@ -106,7 +107,7 @@ class PoolItem
      */
     bool operator!=(const PoolItem& other) const;
 
-  private:
+   private:
     std::shared_ptr<Transaction> transaction_;
     std::chrono::system_clock::time_point timestamp_;
     uint64_t fee_per_byte_;
@@ -126,7 +127,7 @@ class PoolItem
 struct TransactionRemovedEventArgs
 {
     std::shared_ptr<Transaction> transaction;
-    
+
     enum class Reason
     {
         Expired,
@@ -138,8 +139,7 @@ struct TransactionRemovedEventArgs
         Included
     } reason;
 
-    TransactionRemovedEventArgs(std::shared_ptr<Transaction> tx, Reason r)
-        : transaction(tx), reason(r) {}
+    TransactionRemovedEventArgs(std::shared_ptr<Transaction> tx, Reason r) : transaction(tx), reason(r) {}
 };
 
 }  // namespace neo::ledger

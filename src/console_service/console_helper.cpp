@@ -1,5 +1,6 @@
-#include <iostream>
 #include <neo/console_service/console_helper.h>
+
+#include <iostream>
 #include <sstream>
 #ifdef _WIN32
 #include <conio.h>  // For Windows _getch()
@@ -40,10 +41,7 @@ void ConsoleColorSet::Apply() const
 }
 
 // ConsoleHelper implementation
-bool ConsoleHelper::IsReadingPassword()
-{
-    return reading_password_;
-}
+bool ConsoleHelper::IsReadingPassword() { return reading_password_; }
 
 void ConsoleHelper::Info(const std::vector<std::string>& values)
 {
@@ -61,20 +59,11 @@ void ConsoleHelper::Info(const std::vector<std::string>& values)
     std::cout << std::endl;
 }
 
-void ConsoleHelper::Info(const std::string& tag, const std::string& message)
-{
-    Info({tag, message});
-}
+void ConsoleHelper::Info(const std::string& tag, const std::string& message) { Info({tag, message}); }
 
-void ConsoleHelper::Warning(const std::string& msg)
-{
-    Log("Warning", warning_color_, msg);
-}
+void ConsoleHelper::Warning(const std::string& msg) { Log("Warning", warning_color_, msg); }
 
-void ConsoleHelper::Error(const std::string& msg)
-{
-    Log("Error", error_color_, msg);
-}
+void ConsoleHelper::Error(const std::string& msg) { Log("Error", error_color_, msg); }
 
 void ConsoleHelper::Log(const std::string& tag, const ConsoleColorSet& color_set, const std::string& msg)
 {
@@ -97,8 +86,7 @@ std::string ConsoleHelper::ReadUserInput(const std::string& prompt, bool passwor
         std::cout << prompt << ": ";
     }
 
-    if (password)
-        reading_password_ = true;
+    if (password) reading_password_ = true;
 
     ConsoleColor prev_color = GetCurrentForegroundColor();
     SetForegroundColor(ConsoleColor::Yellow);
@@ -161,17 +149,13 @@ std::string ConsoleHelper::ReadUserInput(const std::string& prompt, bool passwor
 #endif
 
     SetForegroundColor(prev_color);
-    if (password)
-        reading_password_ = false;
+    if (password) reading_password_ = false;
     std::cout << std::endl;
 
     return input;
 }
 
-std::string ConsoleHelper::ReadSecureString(const std::string& prompt)
-{
-    return ReadUserInput(prompt, true);
-}
+std::string ConsoleHelper::ReadSecureString(const std::string& prompt) { return ReadUserInput(prompt, true); }
 
 void ConsoleHelper::SetForegroundColor(ConsoleColor color)
 {
@@ -183,8 +167,7 @@ void ConsoleHelper::SetForegroundColor(ConsoleColor color)
 #else
     // ANSI color codes for Unix/Linux
     int ansi_color = 30 + static_cast<int>(color) % 8;
-    if (static_cast<int>(color) >= 8)
-        ansi_color += 60;  // Bright colors
+    if (static_cast<int>(color) >= 8) ansi_color += 60;  // Bright colors
     std::cout << "\033[" << ansi_color << "m";
 #endif
 }
@@ -199,8 +182,7 @@ void ConsoleHelper::SetBackgroundColor(ConsoleColor color)
 #else
     // ANSI color codes for Unix/Linux
     int ansi_color = 40 + static_cast<int>(color) % 8;
-    if (static_cast<int>(color) >= 8)
-        ansi_color += 60;  // Bright colors
+    if (static_cast<int>(color) >= 8) ansi_color += 60;  // Bright colors
     std::cout << "\033[" << ansi_color << "m";
 #endif
 }

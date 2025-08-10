@@ -13,7 +13,7 @@ namespace neo::vm::internal
  */
 class ByteSpan
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty ByteSpan.
      */
@@ -39,28 +39,19 @@ class ByteSpan
      * @brief Gets the size of the ByteSpan.
      * @return The size of the ByteSpan.
      */
-    size_t Size() const noexcept
-    {
-        return size_;
-    }
+    size_t Size() const noexcept { return size_; }
 
     /**
      * @brief Checks if the ByteSpan is empty.
      * @return True if the ByteSpan is empty, false otherwise.
      */
-    bool IsEmpty() const noexcept
-    {
-        return size_ == 0;
-    }
+    bool IsEmpty() const noexcept { return size_ == 0; }
 
     /**
      * @brief Gets a pointer to the data.
      * @return Pointer to the data.
      */
-    const uint8_t* Data() const noexcept
-    {
-        return data_;
-    }
+    const uint8_t* Data() const noexcept { return data_; }
 
     /**
      * @brief Gets the byte at the specified index.
@@ -69,8 +60,7 @@ class ByteSpan
      */
     uint8_t operator[](size_t index) const
     {
-        if (index >= size_)
-            throw std::out_of_range("Index out of range");
+        if (index >= size_) throw std::out_of_range("Index out of range");
         return data_[index];
     }
 
@@ -81,8 +71,7 @@ class ByteSpan
      */
     bool operator==(const ByteSpan& other) const noexcept
     {
-        if (size_ != other.size_)
-            return false;
+        if (size_ != other.size_) return false;
         return std::memcmp(data_, other.data_, size_) == 0;
     }
 
@@ -91,10 +80,7 @@ class ByteSpan
      * @param other The other ByteSpan.
      * @return True if the ByteSpans are not equal, false otherwise.
      */
-    bool operator!=(const ByteSpan& other) const noexcept
-    {
-        return !(*this == other);
-    }
+    bool operator!=(const ByteSpan& other) const noexcept { return !(*this == other); }
 
     /**
      * @brief Creates a new ByteSpan that is a slice of this ByteSpan.
@@ -104,8 +90,7 @@ class ByteSpan
      */
     ByteSpan Slice(size_t start, size_t length) const
     {
-        if (start + length > size_)
-            throw std::out_of_range("Slice out of range");
+        if (start + length > size_) throw std::out_of_range("Slice out of range");
         return ByteSpan(data_ + start, length);
     }
 
@@ -128,7 +113,7 @@ class ByteSpan
         return result;
     }
 
-  private:
+   private:
     const uint8_t* data_;
     size_t size_;
 };

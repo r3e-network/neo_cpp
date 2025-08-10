@@ -1,8 +1,9 @@
-#include <iostream>
 #include <neo/consensus/consensus_service.h>
 #include <neo/cryptography/ecc/key_pair.h>
 #include <neo/plugins/dbft_plugin.h>
 #include <neo/wallets/wallet.h>
+
+#include <iostream>
 
 namespace neo::plugins
 {
@@ -55,18 +56,14 @@ bool DBFTPlugin::OnStart()
     return true;
 }
 
-bool DBFTPlugin::OnStop()
-{
-    return StopConsensus();
-}
+bool DBFTPlugin::OnStop() { return StopConsensus(); }
 
 bool DBFTPlugin::StartConsensus(std::shared_ptr<wallets::Wallet> wallet)
 {
     std::lock_guard<std::mutex> lock(mutex_);
 
     // Check if consensus is already running
-    if (consensusService_)
-        return true;
+    if (consensusService_) return true;
 
     try
     {
@@ -108,8 +105,7 @@ bool DBFTPlugin::StopConsensus()
     std::lock_guard<std::mutex> lock(mutex_);
 
     // Check if consensus is running
-    if (!consensusService_)
-        return true;
+    if (!consensusService_) return true;
 
     try
     {

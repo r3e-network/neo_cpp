@@ -1,9 +1,10 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/uint256.h>
 #include <neo/network/inventory_type.h>
 #include <neo/network/ipayload.h>
+
+#include <cstdint>
 #include <vector>
 
 namespace neo::network::payloads
@@ -13,7 +14,7 @@ namespace neo::network::payloads
  */
 class InventoryPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty InventoryPayload.
      */
@@ -62,7 +63,7 @@ class InventoryPayload : public IPayload
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
+   private:
     InventoryType type_;
     std::vector<io::UInt256> hashes_;
 };

@@ -1,8 +1,9 @@
 #pragma once
 
+#include <neo/vm/stack_item.h>
+
 #include <cstdint>
 #include <memory>
-#include <neo/vm/stack_item.h>
 
 namespace neo::vm
 {
@@ -32,7 +33,7 @@ enum class ExceptionHandlingState
  */
 class ExceptionHandlingContext
 {
-  public:
+   public:
     /**
      * @brief Constructs a new ExceptionHandlingContext.
      * @param catchPointer The catch pointer.
@@ -88,7 +89,7 @@ class ExceptionHandlingContext
      */
     bool HasFinally() const;
 
-  private:
+   private:
     int32_t catchPointer_;
     int32_t finallyPointer_;
     int32_t endPointer_;

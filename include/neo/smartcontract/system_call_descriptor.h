@@ -1,8 +1,9 @@
 #pragma once
 
-#include <functional>
 #include <neo/smartcontract/call_flags.h>
 #include <neo/vm/execution_engine.h>
+
+#include <functional>
 #include <string>
 
 namespace neo::smartcontract

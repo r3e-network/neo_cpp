@@ -1,6 +1,7 @@
 #pragma once
 
 #include <neo/vm/execution_engine.h>
+
 #include <unordered_set>
 
 namespace neo::vm
@@ -10,7 +11,7 @@ namespace neo::vm
  */
 class Debugger
 {
-  public:
+   public:
     /**
      * @brief Initializes a new instance of the Debugger class.
      * @param engine The execution engine to debug.
@@ -58,7 +59,7 @@ class Debugger
      */
     void ClearBreakPoints();
 
-  private:
+   private:
     ExecutionEngine& engine_;
     std::unordered_set<int> breakpoints_;
     int initialContextCount_ = 0;

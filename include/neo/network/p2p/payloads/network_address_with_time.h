@@ -1,9 +1,10 @@
 #pragma once
 
-#include <array>
-#include <cstdint>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
+
+#include <array>
+#include <cstdint>
 #include <string>
 
 namespace neo::network::p2p::payloads
@@ -15,7 +16,7 @@ namespace neo::network::p2p::payloads
  */
 class NetworkAddressWithTime : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /// <summary>
     /// The size of the network address with time in bytes.
     /// </summary>
@@ -24,13 +25,13 @@ class NetworkAddressWithTime : public io::ISerializable, public io::IJsonSeriali
                                 16 +                // Address (IPv6)
                                 sizeof(uint16_t);   // Port
 
-  private:
+   private:
     uint32_t timestamp_;
     uint64_t services_;
     std::array<uint8_t, 16> address_;  // IPv6 address (IPv4 mapped if needed)
     uint16_t port_;
 
-  public:
+   public:
     /**
      * @brief Constructs an empty NetworkAddressWithTime.
      */
@@ -173,7 +174,7 @@ class NetworkAddressWithTime : public io::ISerializable, public io::IJsonSeriali
     static NetworkAddressWithTime FromIPv6(uint32_t timestamp, uint64_t services, const std::string& ipv6,
                                            uint16_t port);
 
-  private:
+   private:
     void ParseIPAddress(const std::string& address);
     std::string FormatIPAddress() const;
 };

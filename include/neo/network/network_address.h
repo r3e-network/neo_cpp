@@ -1,8 +1,9 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
+
+#include <cstdint>
 #include <string>
 
 namespace neo::network
@@ -12,7 +13,7 @@ namespace neo::network
  */
 class NetworkAddress : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty NetworkAddress.
      */
@@ -75,7 +76,7 @@ class NetworkAddress : public io::ISerializable, public io::IJsonSerializable
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
+   private:
     uint32_t timestamp_;
     uint64_t services_;
     std::string address_;

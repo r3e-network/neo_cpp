@@ -1,9 +1,10 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/hardfork.h>
+
+#include <cstdint>
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -19,7 +20,7 @@ namespace neo
  */
 class ProtocolSettings
 {
-  public:
+   public:
     // Protocol constants
     static constexpr uint32_t MAX_TRANSACTION_SIZE = 2097152;  // 2MB
     static constexpr uint16_t MAX_TRANSACTION_ATTRIBUTES = 16;
@@ -239,10 +240,10 @@ class ProtocolSettings
      * @param hardforks The hardfork map to process.
      * @return Processed hardfork map with all entries.
      */
-    static std::unordered_map<Hardfork, uint32_t>
-    EnsureOmittedHardforks(const std::unordered_map<Hardfork, uint32_t>& hardforks);
+    static std::unordered_map<Hardfork, uint32_t> EnsureOmittedHardforks(
+        const std::unordered_map<Hardfork, uint32_t>& hardforks);
 
-  private:
+   private:
     uint32_t network_;
     uint8_t addressVersion_;
     std::vector<neo::cryptography::ecc::ECPoint> standbyCommittee_;

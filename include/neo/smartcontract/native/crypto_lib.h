@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <neo/smartcontract/native/native_contract.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::smartcontract::native
@@ -15,7 +16,7 @@ class CryptoLib : public NativeContract
     friend class NativeContractTest;
     friend class CryptoLibTest;
 
-  public:
+   public:
     /**
      * @brief The contract ID (matches Neo C# implementation).
      */
@@ -31,13 +32,13 @@ class CryptoLib : public NativeContract
      */
     CryptoLib();
 
-  protected:
+   protected:
     /**
      * @brief Initializes the contract.
      */
     void Initialize() override;
 
-  private:
+   private:
     /**
      * @brief Handles the sha256 method.
      * @param engine The engine.
@@ -150,8 +151,8 @@ class CryptoLib : public NativeContract
     bool VerifySecp256k1Signature(const io::ByteVector& message, const io::ByteVector& signature,
                                   const cryptography::ecc::ECPoint& publicKey);
     bool IsValidSecp256k1PublicKey(const cryptography::ecc::ECPoint& publicKey);
-    std::pair<std::optional<io::ByteVector>, std::optional<io::ByteVector>>
-    ParseSecp256k1Signature(const io::ByteVector& signature);
+    std::pair<std::optional<io::ByteVector>, std::optional<io::ByteVector>> ParseSecp256k1Signature(
+        const io::ByteVector& signature);
     bool VerifySecp256k1ECDSA(const io::UInt256& messageHash, const io::ByteVector& r, const io::ByteVector& s,
                               const cryptography::ecc::ECPoint& publicKey);
     bool IsZero(const io::ByteVector& value);

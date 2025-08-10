@@ -1,9 +1,10 @@
 #pragma once
 
-#include <memory>
-#include <string>
 #include <neo/core/neo_system.h>
 #include <neo/persistence/istore.h>
+
+#include <memory>
+#include <string>
 
 namespace neo
 {
@@ -14,7 +15,7 @@ class ProtocolSettings;
  */
 class NeoSystemFactory
 {
-public:
+   public:
     /**
      * @brief Creates a NeoSystem instance with the specified settings and storage provider
      * @param settings The protocol settings for this Neo system
@@ -22,10 +23,9 @@ public:
      * @param storage_path The path for persistent storage
      * @return Shared pointer to the created NeoSystem
      */
-    static std::shared_ptr<NeoSystem> Create(
-        std::unique_ptr<ProtocolSettings> settings,
-        std::shared_ptr<persistence::IStoreProvider> storage_provider,
-        const std::string& storage_path = "");
+    static std::shared_ptr<NeoSystem> Create(std::unique_ptr<ProtocolSettings> settings,
+                                             std::shared_ptr<persistence::IStoreProvider> storage_provider,
+                                             const std::string& storage_path = "");
 
     /**
      * @brief Creates a NeoSystem instance with the specified settings and storage provider name
@@ -34,14 +34,13 @@ public:
      * @param storage_path The path for persistent storage (ignored for memory provider)
      * @return Shared pointer to the created NeoSystem
      */
-    static std::shared_ptr<NeoSystem> Create(
-        std::unique_ptr<ProtocolSettings> settings,
-        const std::string& storage_provider_name = "memory",
-        const std::string& storage_path = "");
+    static std::shared_ptr<NeoSystem> Create(std::unique_ptr<ProtocolSettings> settings,
+                                             const std::string& storage_provider_name = "memory",
+                                             const std::string& storage_path = "");
 
-private:
+   private:
     // Factory class should not be instantiated
     NeoSystemFactory() = delete;
 };
 
-} // namespace neo
+}  // namespace neo

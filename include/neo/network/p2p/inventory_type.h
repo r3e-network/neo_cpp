@@ -9,24 +9,13 @@ namespace neo::network::p2p
  */
 enum class InventoryType : uint8_t
 {
-    /**
-     * @brief Transaction inventory type.
-     */
+    // Primary names (match C# Neo.Network.P2P)
     Transaction = 0x01,
-
-    /**
-     * @brief Block inventory type.
-     */
     Block = 0x02,
-
-    /**
-     * @brief Consensus data inventory type.
-     */
     Consensus = 0xe0,
+    Extensible = 0xf0,
 
-    /**
-     * @brief Extensible payload inventory type.
-     */
-    Extensible = 0xf0
+    // Backward-compatible aliases used elsewhere in this C++ port
+    TX = Transaction
 };
 }  // namespace neo::network::p2p

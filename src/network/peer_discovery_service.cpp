@@ -1,8 +1,3 @@
-#include <algorithm>
-#include <boost/asio/connect.hpp>
-#include <boost/asio/ip/tcp.hpp>
-#include <chrono>
-#include <fstream>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/logging/logger.h>
@@ -14,6 +9,12 @@
 #include <neo/network/payloads/addr_payload.h>
 #include <neo/network/payloads/get_addr_payload.h>
 #include <neo/network/peer_discovery_service.h>
+
+#include <algorithm>
+#include <boost/asio/connect.hpp>
+#include <boost/asio/ip/tcp.hpp>
+#include <chrono>
+#include <fstream>
 #include <random>
 #include <sstream>
 
@@ -40,8 +41,7 @@ PeerDiscoveryService::PeerDiscoveryService(boost::asio::io_context& ioContext, s
 
 void PeerDiscoveryService::Start()
 {
-    if (running_)
-        return;
+    if (running_) return;
 
     running_ = true;
     LoadKnownPeers();
@@ -52,8 +52,7 @@ void PeerDiscoveryService::Start()
 
 void PeerDiscoveryService::Stop()
 {
-    if (!running_)
-        return;
+    if (!running_) return;
 
     running_ = false;
     boost::system::error_code ec;
@@ -70,8 +69,7 @@ void PeerDiscoveryService::Stop()
 
 void PeerDiscoveryService::AddSeedNodes(const std::vector<NetworkAddress>& seedNodes)
 {
-    if (seedNodes.empty())
-        return;
+    if (seedNodes.empty()) return;
 
     std::lock_guard<std::mutex> lock(mutex_);
 
@@ -142,8 +140,7 @@ void PeerDiscoveryService::AddKnownPeer(const NetworkAddress& address)
 
 void PeerDiscoveryService::AddKnownPeers(const std::vector<NetworkAddress>& addresses)
 {
-    if (addresses.empty())
-        return;
+    if (addresses.empty()) return;
 
     size_t added = 0;
     for (const auto& addr : addresses)
@@ -233,8 +230,7 @@ void PeerDiscoveryService::DiscoverPeers()
             try
             {
                 auto peer = peers[i];
-                if (!peer || !peer->IsConnected())
-                    continue;
+                if (!peer || !peer->IsConnected()) continue;
 
                 // Create and send getaddr message
                 auto getAddrPayload = std::make_shared<GetAddrPayload>();
@@ -321,15 +317,13 @@ void PeerDiscoveryService::AttemptConnections()
             for (const auto& [endpoint, info] : knownPeers_)
             {
                 // Skip if already connected
-                if (connectedPeers_.find(endpoint) != connectedPeers_.end())
-                    continue;
+                if (connectedPeers_.find(endpoint) != connectedPeers_.end()) continue;
 
                 // Skip if we recently tried and failed
                 if (info.failedAttempts > 0)
                 {
                     auto backoff = RECONNECT_DELAY * (1 << std::min<size_t>(info.failedAttempts, 8));
-                    if (now - info.lastAttempt < backoff)
-                        continue;
+                    if (now - info.lastAttempt < backoff) continue;
                 }
 
                 candidates.emplace_back(endpoint, info.address);
@@ -479,8 +473,7 @@ void PeerDiscoveryService::HandleGetAddrMessage(const std::shared_ptr<P2PPeer>& 
 
         for (const auto& [endpoint, peerInfo] : knownPeers_)
         {
-            if (count >= MAX_ADDRS_TO_SEND)
-                break;
+            if (count >= MAX_ADDRS_TO_SEND) break;
             if (!peerInfo.connected)  // Don't include already connected peers (they're already included above)
             {
                 addresses.push_back(peerInfo.address);
@@ -626,8 +619,7 @@ void PeerDiscoveryService::CleanupOldPeers()
 
 void PeerDiscoveryService::ScheduleNextDiscovery()
 {
-    if (!running_)
-        return;
+    if (!running_) return;
 
     discoveryTimer_.expires_after(DISCOVERY_INTERVAL);
     discoveryTimer_.async_wait(

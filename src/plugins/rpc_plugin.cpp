@@ -1,5 +1,6 @@
-#include <iostream>
 #include <neo/plugins/rpc_plugin.h>
+
+#include <iostream>
 
 namespace neo::plugins
 {
@@ -13,8 +14,7 @@ bool RPCPlugin::OnInitialize(const std::unordered_map<std::string, std::string>&
     RegisterMethod("echo",
                    [](const std::vector<std::string>& params)
                    {
-                       if (params.empty())
-                           return nlohmann::json("echo");
+                       if (params.empty()) return nlohmann::json("echo");
 
                        return nlohmann::json(params[0]);
                    });

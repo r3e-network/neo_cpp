@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/binary_reader.h>
 #include <neo/network/message_command.h>
 #include <neo/network/p2p/ipayload.h>
 #include <neo/network/payload_type.h>
+
+#include <memory>
 
 namespace neo::network::p2p
 {
@@ -13,7 +14,7 @@ namespace neo::network::p2p
  */
 class PayloadFactory
 {
-  public:
+   public:
     /**
      * @brief Creates an empty payload based on the message command.
      * @param command The message command.

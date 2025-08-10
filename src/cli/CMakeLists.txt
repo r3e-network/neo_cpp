@@ -27,7 +27,7 @@ target_include_directories(neo_cli
 # Link dependencies
 target_link_libraries(neo_cli
     PUBLIC
-        neo_node
+        neo_node_core
         neo_rpc
         neo_wallets
         neo_smartcontract

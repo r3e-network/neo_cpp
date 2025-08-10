@@ -1,4 +1,5 @@
 #include <neo/network/p2p/ip_endpoint.h>
+
 #include <regex>
 #include <stdexcept>
 
@@ -8,25 +9,13 @@ IPEndPoint::IPEndPoint() : port_(0) {}
 
 IPEndPoint::IPEndPoint(const std::string& address, uint16_t port) : address_(address), port_(port) {}
 
-const std::string& IPEndPoint::GetAddress() const
-{
-    return address_;
-}
+const std::string& IPEndPoint::GetAddress() const { return address_; }
 
-void IPEndPoint::SetAddress(const std::string& address)
-{
-    address_ = address;
-}
+void IPEndPoint::SetAddress(const std::string& address) { address_ = address; }
 
-uint16_t IPEndPoint::GetPort() const
-{
-    return port_;
-}
+uint16_t IPEndPoint::GetPort() const { return port_; }
 
-void IPEndPoint::SetPort(uint16_t port)
-{
-    port_ = port;
-}
+void IPEndPoint::SetPort(uint16_t port) { port_ = port; }
 
 void IPEndPoint::Serialize(io::BinaryWriter& writer) const
 {
@@ -57,21 +46,14 @@ bool IPEndPoint::operator==(const IPEndPoint& other) const
     return address_ == other.address_ && port_ == other.port_;
 }
 
-bool IPEndPoint::operator!=(const IPEndPoint& other) const
-{
-    return !(*this == other);
-}
+bool IPEndPoint::operator!=(const IPEndPoint& other) const { return !(*this == other); }
 
-std::string IPEndPoint::ToString() const
-{
-    return address_ + ":" + std::to_string(port_);
-}
+std::string IPEndPoint::ToString() const { return address_ + ":" + std::to_string(port_); }
 
 IPEndPoint IPEndPoint::Parse(const std::string& str)
 {
     IPEndPoint result;
-    if (!TryParse(str, result))
-        throw std::invalid_argument("Invalid IP endpoint format");
+    if (!TryParse(str, result)) throw std::invalid_argument("Invalid IP endpoint format");
     return result;
 }
 

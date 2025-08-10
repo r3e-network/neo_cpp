@@ -1,13 +1,14 @@
 #pragma once
 
+#include <neo/cli/command_handler.h>
+#include <neo/node/neo_system.h>
+#include <neo/rpc/rpc_server.h>
+
 #include <atomic>
 #include <condition_variable>
 #include <functional>
 #include <memory>
 #include <mutex>
-#include <neo/cli/command_handler.h>
-#include <neo/node/neo_system.h>
-#include <neo/rpc/rpc_server.h>
 #include <string>
 #include <thread>
 #include <unordered_map>
@@ -19,7 +20,7 @@ namespace neo::cli
  */
 class CLI
 {
-  public:
+   public:
     /**
      * @brief Constructs a CLI.
      * @param neoSystem The Neo system.
@@ -100,7 +101,7 @@ class CLI
      */
     const std::unordered_map<std::string, std::string>& GetCommandHelp() const;
 
-  private:
+   private:
     std::shared_ptr<node::NeoSystem> neoSystem_;
     std::shared_ptr<rpc::RpcServer> rpcServer_;
     std::shared_ptr<CommandHandler> commandHandler_;

@@ -1,8 +1,9 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
+
+#include <cstdint>
 #include <string>
 
 namespace neo::cryptography
@@ -16,7 +17,7 @@ namespace neo::cryptography
  */
 class MurmurHash3
 {
-  public:
+   public:
     /**
      * @brief Compute MurmurHash3 32-bit hash
      * @param data Input data to hash

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <map>
-#include <memory>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
@@ -10,6 +8,9 @@
 #include <neo/network/p2p/payloads/iverifiable.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/smartcontract/contract.h>
+
+#include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -20,10 +21,10 @@ namespace neo::smartcontract
  */
 class ContractParametersContext
 {
-  private:
+   private:
     class ContextItem
     {
-      public:
+       public:
         io::ByteVector script;
         std::vector<ContractParameter> parameters;
         std::map<cryptography::ecc::ECPoint, io::ByteVector> signatures;
@@ -47,7 +48,7 @@ class ContractParametersContext
         void ToJson(io::JsonWriter& writer) const;
     };
 
-  public:
+   public:
     /**
      * @brief The IVerifiable to add witnesses.
      */
@@ -161,7 +162,7 @@ class ContractParametersContext
      */
     void ToJson(io::JsonWriter& writer) const;
 
-  private:
+   private:
     std::map<io::UInt160, std::unique_ptr<ContextItem>> contextItems;
     mutable std::vector<io::UInt160> scriptHashes;
 

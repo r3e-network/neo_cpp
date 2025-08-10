@@ -2,6 +2,7 @@
 #include <neo/cryptography/mpttrie/node.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+
 #include <sstream>
 #include <stdexcept>
 
@@ -10,8 +11,13 @@ namespace neo::cryptography::mpttrie
 Node::Node() : type_(NodeType::Empty), hash_dirty_(true), reference_(0) {}
 
 Node::Node(const Node& other)
-    : type_(other.type_), hash_(other.hash_), hash_dirty_(other.hash_dirty_), reference_(other.reference_),
-      key_(other.key_), value_(other.value_), stored_hash_(other.stored_hash_)
+    : type_(other.type_),
+      hash_(other.hash_),
+      hash_dirty_(other.hash_dirty_),
+      reference_(other.reference_),
+      key_(other.key_),
+      value_(other.value_),
+      stored_hash_(other.stored_hash_)
 {
     // Deep copy children
     if (!other.children_.empty())
@@ -34,9 +40,15 @@ Node::Node(const Node& other)
 }
 
 Node::Node(Node&& other) noexcept
-    : type_(other.type_), hash_(std::move(other.hash_)), hash_dirty_(other.hash_dirty_), reference_(other.reference_),
-      children_(std::move(other.children_)), key_(std::move(other.key_)), next_(std::move(other.next_)),
-      value_(std::move(other.value_)), stored_hash_(std::move(other.stored_hash_))
+    : type_(other.type_),
+      hash_(std::move(other.hash_)),
+      hash_dirty_(other.hash_dirty_),
+      reference_(other.reference_),
+      children_(std::move(other.children_)),
+      key_(std::move(other.key_)),
+      next_(std::move(other.next_)),
+      value_(std::move(other.value_)),
+      stored_hash_(std::move(other.stored_hash_))
 {
     other.type_ = NodeType::Empty;
     other.hash_dirty_ = true;
@@ -73,10 +85,7 @@ Node& Node::operator=(Node&& other) noexcept
     return *this;
 }
 
-NodeType Node::GetType() const
-{
-    return type_;
-}
+NodeType Node::GetType() const { return type_; }
 
 io::UInt256 Node::GetHash() const
 {
@@ -88,25 +97,13 @@ io::UInt256 Node::GetHash() const
     return hash_;
 }
 
-bool Node::IsEmpty() const
-{
-    return type_ == NodeType::Empty;
-}
+bool Node::IsEmpty() const { return type_ == NodeType::Empty; }
 
-int Node::GetReference() const
-{
-    return reference_;
-}
+int Node::GetReference() const { return reference_; }
 
-void Node::SetReference(int reference)
-{
-    reference_ = reference;
-}
+void Node::SetReference(int reference) { reference_ = reference; }
 
-void Node::SetDirty()
-{
-    hash_dirty_ = true;
-}
+void Node::SetDirty() { hash_dirty_ = true; }
 
 size_t Node::GetSize() const
 {
@@ -145,10 +142,7 @@ size_t Node::GetSizeAsChild() const
     }
 }
 
-std::unique_ptr<Node> Node::Clone() const
-{
-    return std::make_unique<Node>(*this);
-}
+std::unique_ptr<Node> Node::Clone() const { return std::make_unique<Node>(*this); }
 
 std::unique_ptr<Node> Node::CloneAsChild() const
 {
@@ -329,21 +323,12 @@ std::unique_ptr<Node> Node::NewHash(const io::UInt256& hash)
 }
 
 // Branch node accessors
-std::vector<std::unique_ptr<Node>>& Node::GetChildren()
-{
-    return children_;
-}
+std::vector<std::unique_ptr<Node>>& Node::GetChildren() { return children_; }
 
-const std::vector<std::unique_ptr<Node>>& Node::GetChildren() const
-{
-    return children_;
-}
+const std::vector<std::unique_ptr<Node>>& Node::GetChildren() const { return children_; }
 
 // Extension node accessors
-std::span<const uint8_t> Node::GetKey() const
-{
-    return std::span<const uint8_t>(key_.Data(), key_.Size());
-}
+std::span<const uint8_t> Node::GetKey() const { return std::span<const uint8_t>(key_.Data(), key_.Size()); }
 
 void Node::SetKey(std::span<const uint8_t> key)
 {
@@ -353,27 +338,19 @@ void Node::SetKey(std::span<const uint8_t> key)
 
 Node& Node::GetNext()
 {
-    if (!next_)
-        throw std::runtime_error("Next node is null");
+    if (!next_) throw std::runtime_error("Next node is null");
     return *next_;
 }
 
 const Node& Node::GetNext() const
 {
-    if (!next_)
-        throw std::runtime_error("Next node is null");
+    if (!next_) throw std::runtime_error("Next node is null");
     return *next_;
 }
 
-std::unique_ptr<Node>& Node::GetNextPtr()
-{
-    return next_;
-}
+std::unique_ptr<Node>& Node::GetNextPtr() { return next_; }
 
-const std::unique_ptr<Node>& Node::GetNextPtr() const
-{
-    return next_;
-}
+const std::unique_ptr<Node>& Node::GetNextPtr() const { return next_; }
 
 void Node::SetNext(std::unique_ptr<Node> next)
 {
@@ -382,10 +359,7 @@ void Node::SetNext(std::unique_ptr<Node> next)
 }
 
 // Leaf node accessors
-std::span<const uint8_t> Node::GetValue() const
-{
-    return std::span<const uint8_t>(value_.Data(), value_.Size());
-}
+std::span<const uint8_t> Node::GetValue() const { return std::span<const uint8_t>(value_.Data(), value_.Size()); }
 
 void Node::SetValue(std::span<const uint8_t> value)
 {
@@ -394,10 +368,7 @@ void Node::SetValue(std::span<const uint8_t> value)
 }
 
 // Hash node accessors
-const io::UInt256& Node::GetStoredHash() const
-{
-    return stored_hash_;
-}
+const io::UInt256& Node::GetStoredHash() const { return stored_hash_; }
 
 io::UInt256 Node::CalculateHash() const
 {
@@ -544,15 +515,9 @@ void Node::DeserializeExtension(io::BinaryReader& reader)
     next_->Deserialize(reader);
 }
 
-void Node::SerializeLeaf(io::BinaryWriter& writer) const
-{
-    writer.WriteVarBytes(value_.AsSpan());
-}
+void Node::SerializeLeaf(io::BinaryWriter& writer) const { writer.WriteVarBytes(value_.AsSpan()); }
 
-void Node::DeserializeLeaf(io::BinaryReader& reader)
-{
-    value_ = reader.ReadVarBytes();
-}
+void Node::DeserializeLeaf(io::BinaryReader& reader) { value_ = reader.ReadVarBytes(); }
 
 size_t Node::GetBranchSize() const
 {
@@ -564,18 +529,9 @@ size_t Node::GetBranchSize() const
     return size;
 }
 
-size_t Node::GetExtensionSize() const
-{
-    return key_.GetVarSize() + next_->GetSizeAsChild();
-}
+size_t Node::GetExtensionSize() const { return key_.GetVarSize() + next_->GetSizeAsChild(); }
 
-size_t Node::GetLeafSize() const
-{
-    return value_.GetVarSize();
-}
+size_t Node::GetLeafSize() const { return value_.GetVarSize(); }
 
-size_t Node::GetHashSize() const
-{
-    return io::UInt256::Size;
-}
+size_t Node::GetHashSize() const { return io::UInt256::Size; }
 }  // namespace neo::cryptography::mpttrie

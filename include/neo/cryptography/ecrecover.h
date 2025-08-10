@@ -2,6 +2,7 @@
 
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/byte_span.h>
+
 #include <optional>
 
 namespace neo::cryptography

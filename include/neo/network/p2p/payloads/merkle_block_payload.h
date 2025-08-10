@@ -1,8 +1,5 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
-#include <neo/blockchain/header.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_vector.h>
@@ -12,6 +9,10 @@
 #include <neo/io/json_writer.h>
 #include <neo/io/uint256.h>
 #include <neo/network/ipayload.h>
+#include <neo/network/p2p/payloads/header.h>
+
+#include <cstdint>
+#include <memory>
 #include <vector>
 
 namespace neo::network::payloads
@@ -21,7 +22,7 @@ namespace neo::network::payloads
  */
 class MerkleBlockPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty MerkleBlockPayload.
      */
@@ -34,20 +35,20 @@ class MerkleBlockPayload : public IPayload
      * @param hashes The transaction hashes that match the filter.
      * @param flags The flags bits, which indicate matches in the merkle tree.
      */
-    MerkleBlockPayload(std::shared_ptr<blockchain::Header> header, uint32_t transactionCount,
+    MerkleBlockPayload(std::shared_ptr<neo::network::p2p::payloads::Header> header, uint32_t transactionCount,
                        const std::vector<io::UInt256>& hashes, const io::ByteVector& flags);
 
     /**
      * @brief Gets the block header.
      * @return The block header.
      */
-    std::shared_ptr<blockchain::Header> GetHeader() const;
+    std::shared_ptr<neo::network::p2p::payloads::Header> GetHeader() const;
 
     /**
      * @brief Sets the block header.
      * @param header The block header.
      */
-    void SetHeader(std::shared_ptr<blockchain::Header> header);
+    void SetHeader(std::shared_ptr<neo::network::p2p::payloads::Header> header);
 
     /**
      * @brief Gets the transaction count.
@@ -109,8 +110,8 @@ class MerkleBlockPayload : public IPayload
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
-    std::shared_ptr<blockchain::Header> header_;
+   private:
+    std::shared_ptr<neo::network::p2p::payloads::Header> header_;
     uint32_t transactionCount_;
     std::vector<io::UInt256> hashes_;
     io::ByteVector flags_;

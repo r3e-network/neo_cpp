@@ -1,8 +1,5 @@
 #include <algorithm>
 // #include <codecvt> // Removed - using manual UTF-8 parsing instead
-#include <cwctype>
-#include <iomanip>
-#include <locale>
 #include <neo/cryptography/base58.h>
 #include <neo/cryptography/base64.h>
 #include <neo/cryptography/base64url.h>
@@ -11,6 +8,10 @@
 #include <neo/smartcontract/binary_serializer.h>
 #include <neo/smartcontract/json_serializer.h>
 #include <neo/smartcontract/native/std_lib.h>
+
+#include <cwctype>
+#include <iomanip>
+#include <locale>
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -62,8 +63,7 @@ void StdLib::Initialize()
 std::shared_ptr<vm::StackItem> StdLib::OnSerialize(ApplicationEngine& engine,
                                                    const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto item = args[0];
 
@@ -83,8 +83,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnSerialize(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> StdLib::OnDeserialize(ApplicationEngine& engine,
                                                      const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetByteArray();
@@ -104,8 +103,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnDeserialize(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> StdLib::OnJsonSerialize(ApplicationEngine& engine,
                                                        const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto item = args[0];
 
@@ -124,8 +122,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnJsonSerialize(ApplicationEngine& engine
 std::shared_ptr<vm::StackItem> StdLib::OnJsonDeserialize(ApplicationEngine& engine,
                                                          const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetByteArray();
@@ -148,8 +145,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnItoa(ApplicationEngine& engine,
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto valueItem = args[0];
     auto value = valueItem->GetInteger();
@@ -162,8 +158,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnItoa(ApplicationEngine& engine,
         base = static_cast<int>(baseItem->GetInteger());
 
         // Check if the base is valid
-        if (base != 10 && base != 16)
-            throw std::runtime_error("Invalid base");
+        if (base != 10 && base != 16) throw std::runtime_error("Invalid base");
     }
 
     // Convert to string
@@ -187,8 +182,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnAtoi(ApplicationEngine& engine,
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto valueItem = args[0];
     auto value = valueItem->GetString();
@@ -201,8 +195,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnAtoi(ApplicationEngine& engine,
         base = static_cast<int>(baseItem->GetInteger());
 
         // Check if the base is valid
-        if (base != 10 && base != 16)
-            throw std::runtime_error("Invalid base");
+        if (base != 10 && base != 16) throw std::runtime_error("Invalid base");
     }
 
     // Convert to integer
@@ -231,8 +224,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnBase64Encode(ApplicationEngine& engine,
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetByteArray();
@@ -248,8 +240,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnBase64Decode(ApplicationEngine& engine,
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetString();
@@ -265,8 +256,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnBase58Encode(ApplicationEngine& engine,
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetByteArray();
@@ -282,8 +272,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnBase58Decode(ApplicationEngine& engine,
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetString();
@@ -299,8 +288,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnBase58CheckEncode(ApplicationEngine& en
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetByteArray();
@@ -316,8 +304,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnBase58CheckDecode(ApplicationEngine& en
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetString();
@@ -333,8 +320,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnMemoryCompare(ApplicationEngine& engine
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto data1Item = args[0];
     auto data2Item = args[1];
@@ -360,8 +346,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnMemoryCopy(ApplicationEngine& engine,
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.size() < 3)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 3) throw std::runtime_error("Invalid arguments");
 
     auto sourceItem = args[0];
     auto destItem = args[1];
@@ -385,8 +370,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnMemorySearch(ApplicationEngine& engine,
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto sourceItem = args[0];
     auto valueItem = args[1];
@@ -395,8 +379,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnMemorySearch(ApplicationEngine& engine,
     auto value = valueItem->GetByteArray();
 
     // Search memory
-    if (value.Size() > source.Size())
-        return vm::StackItem::Create(static_cast<int64_t>(-1));
+    if (value.Size() > source.Size()) return vm::StackItem::Create(static_cast<int64_t>(-1));
 
     for (size_t i = 0; i <= source.Size() - value.Size(); i++)
     {
@@ -412,8 +395,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnStringCompare(ApplicationEngine& engine
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto string1Item = args[0];
     auto string2Item = args[1];
@@ -432,8 +414,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnBase64UrlEncode(ApplicationEngine& engi
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
 
@@ -460,8 +441,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnBase64UrlDecode(ApplicationEngine& engi
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetString();
@@ -477,8 +457,7 @@ std::shared_ptr<vm::StackItem> StdLib::OnStrLen(ApplicationEngine& engine,
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto stringItem = args[0];
     auto str = stringItem->GetString();

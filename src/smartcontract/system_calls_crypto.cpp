@@ -12,6 +12,7 @@
 #include <neo/smartcontract/system_calls.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/vm_constants.h>
+
 #include <sstream>
 
 namespace neo::smartcontract
@@ -612,12 +613,10 @@ void RegisterCryptoSystemCallsImpl(ApplicationEngine& engine)
                 result.reserve(leadingZeros + digits.size());
 
                 // Add leading '1's for leading zeros
-                for (size_t i = 0; i < leadingZeros; i++)
-                    result += '1';
+                for (size_t i = 0; i < leadingZeros; i++) result += '1';
 
                 // Add base58 digits in reverse order
-                for (auto it = digits.rbegin(); it != digits.rend(); ++it)
-                    result += alphabet[*it];
+                for (auto it = digits.rbegin(); it != digits.rend(); ++it) result += alphabet[*it];
 
                 context.Push(vm::StackItem::Create(result));
             }
@@ -710,11 +709,9 @@ void RegisterCryptoSystemCallsImpl(ApplicationEngine& engine)
                 std::vector<uint8_t> finalResult;
                 finalResult.reserve(leadingOnes + result.size());
 
-                for (size_t i = 0; i < leadingOnes; i++)
-                    finalResult.push_back(0);
+                for (size_t i = 0; i < leadingOnes; i++) finalResult.push_back(0);
 
-                for (auto it = result.rbegin(); it != result.rend(); ++it)
-                    finalResult.push_back(*it);
+                for (auto it = result.rbegin(); it != result.rend(); ++it) finalResult.push_back(*it);
 
                 io::ByteVector resultBytes(finalResult);
                 context.Push(vm::StackItem::Create(resultBytes));
@@ -766,10 +763,8 @@ bool ValidateBLS12381G1Point(const io::ByteVector& point_bytes)
 
         for (size_t i = 0; i < point_bytes.Size(); ++i)
         {
-            if (point_bytes.Data()[i] != 0x00)
-                all_zero = false;
-            if (point_bytes.Data()[i] != 0xFF)
-                all_ff = false;
+            if (point_bytes.Data()[i] != 0x00) all_zero = false;
+            if (point_bytes.Data()[i] != 0xFF) all_ff = false;
         }
 
         // Reject all-zero and all-FF points as they're typically invalid
@@ -818,10 +813,8 @@ bool ValidateBLS12381G2Point(const io::ByteVector& point_bytes)
 
         for (size_t i = 0; i < point_bytes.Size(); ++i)
         {
-            if (point_bytes.Data()[i] != 0x00)
-                all_zero = false;
-            if (point_bytes.Data()[i] != 0xFF)
-                all_ff = false;
+            if (point_bytes.Data()[i] != 0x00) all_zero = false;
+            if (point_bytes.Data()[i] != 0xFF) all_ff = false;
         }
 
         if (all_zero || all_ff)
@@ -940,8 +933,7 @@ io::ByteVector HashToG1BLS12381(const io::ByteVector& message)
         // Return a zero point on error (will fail validation)
         io::ByteVector result;
         result.Reserve(48);
-        for (int i = 0; i < 48; ++i)
-            result.Push(0);
+        for (int i = 0; i < 48; ++i) result.Push(0);
         return result;  // G1 compressed size is 48 bytes
     }
 }
@@ -1621,8 +1613,5 @@ k_(2,2) * x'^2) static const uint64_t K_1_0[6] = {0x11560bf17baa99bcULL, 0x89f55
 */
 
 // This function will be called from the RegisterSystemCalls method in application_engine_system_calls.cpp
-void RegisterCryptoSystemCalls(ApplicationEngine& engine)
-{
-    RegisterCryptoSystemCallsImpl(engine);
-}
+void RegisterCryptoSystemCalls(ApplicationEngine& engine) { RegisterCryptoSystemCallsImpl(engine); }
 }  // namespace neo::smartcontract

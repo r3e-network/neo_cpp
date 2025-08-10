@@ -4,6 +4,7 @@
 #include <neo/json/jobject.h>
 #include <neo/json/jstring.h>
 #include <neo/json/jtoken.h>
+
 #include <nlohmann/json.hpp>
 #include <sstream>
 
@@ -69,25 +70,13 @@ std::string JToken::ToString(bool indented) const
     return output;
 }
 
-JToken::operator bool() const
-{
-    return AsBoolean();
-}
+JToken::operator bool() const { return AsBoolean(); }
 
-JToken::operator std::string() const
-{
-    return AsString();
-}
+JToken::operator std::string() const { return AsString(); }
 
-JToken::operator int() const
-{
-    return GetInt32();
-}
+JToken::operator int() const { return GetInt32(); }
 
-JToken::operator double() const
-{
-    return AsNumber();
-}
+JToken::operator double() const { return AsNumber(); }
 
 void JToken::AddIndentation(std::string& output, int indent_level)
 {

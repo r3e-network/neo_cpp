@@ -1,11 +1,12 @@
 #pragma once
 
-#include <array>
-#include <cstdint>
-#include <memory>
 #include <neo/vm/internal/byte_span.h>
 #include <neo/vm/internal/byte_vector.h>
 #include <neo/vm/opcode.h>
+
+#include <array>
+#include <cstdint>
+#include <memory>
 #include <stdexcept>
 
 namespace neo::vm
@@ -15,7 +16,7 @@ namespace neo::vm
  */
 class Instruction
 {
-  public:
+   public:
     /**
      * @brief Static instance of the RET instruction.
      */
@@ -130,7 +131,7 @@ class Instruction
      */
     internal::ByteVector GetData() const;
 
-  private:
+   private:
     static std::array<int, 256> OperandSizePrefixTable;
     static std::array<int, 256> OperandSizeTable;
 

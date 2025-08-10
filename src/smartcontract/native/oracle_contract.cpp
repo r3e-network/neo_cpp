@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <iostream>
 #include <neo/cryptography/crypto.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -13,6 +11,9 @@
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/oracle_contract.h>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <algorithm>
+#include <iostream>
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -47,8 +48,7 @@ int64_t OracleContract::GetPrice(std::shared_ptr<persistence::StoreView> snapsho
 {
     auto key = GetStorageKey(PREFIX_PRICE, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.Size() == 0)
-        return DEFAULT_PRICE;
+    if (value.Size() == 0) return DEFAULT_PRICE;
 
     return *reinterpret_cast<const int64_t*>(value.Data());
 }
@@ -57,8 +57,7 @@ std::vector<io::UInt160> OracleContract::GetOracles(std::shared_ptr<persistence:
 {
     auto key = GetStorageKey(PREFIX_ORACLE, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.Size() == 0)
-        return {};
+    if (value.Size() == 0) return {};
 
     std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
     io::BinaryReader reader(stream);
@@ -74,8 +73,7 @@ std::vector<io::UInt160> OracleContract::GetOracles(std::shared_ptr<persistence:
 
 void OracleContract::SetPrice(std::shared_ptr<persistence::StoreView> snapshot, int64_t price)
 {
-    if (price <= 0)
-        throw std::runtime_error("Price must be positive");
+    if (price <= 0) throw std::runtime_error("Price must be positive");
 
     auto key = GetStorageKey(PREFIX_PRICE, io::ByteVector{});
     io::ByteVector value(io::ByteSpan(reinterpret_cast<const uint8_t*>(&price), sizeof(int64_t)));
@@ -121,8 +119,7 @@ bool OracleContract::InitializeContract(ApplicationEngine& engine, uint32_t hard
 bool OracleContract::OnPersist(ApplicationEngine& engine)
 {
     auto block = engine.GetPersistingBlock();
-    if (!block)
-        return true;
+    if (!block) return true;
 
     for (const auto& tx : block->GetTransactions())
     {
@@ -131,8 +128,7 @@ bool OracleContract::OnPersist(ApplicationEngine& engine)
             std::find_if(tx.GetAttributes().begin(), tx.GetAttributes().end(),
                          [](const std::shared_ptr<ledger::TransactionAttribute>& a)
                          { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::OracleResponse; });
-        if (attr_it == tx.GetAttributes().end())
-            continue;
+        if (attr_it == tx.GetAttributes().end()) continue;
 
         // Process oracle response
         // Oracle response processing requires transaction execution engine
@@ -141,18 +137,14 @@ bool OracleContract::OnPersist(ApplicationEngine& engine)
     return true;
 }
 
-bool OracleContract::PostPersist(ApplicationEngine& engine)
-{
-    return true;
-}
+bool OracleContract::PostPersist(ApplicationEngine& engine) { return true; }
 
 OracleRequest OracleContract::GetRequest(std::shared_ptr<persistence::StoreView> snapshot, uint64_t id) const
 {
     auto key = GetStorageKey(PREFIX_REQUEST,
                              io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t))));
     auto value = GetStorageValue(snapshot, key);
-    if (value.Size() == 0)
-        throw std::runtime_error("Request not found");
+    if (value.Size() == 0) throw std::runtime_error("Request not found");
 
     // Basic OracleRequest deserialization - full implementation would parse all fields
     // Default request returned until full deserialization is implemented
@@ -165,8 +157,7 @@ IdList OracleContract::GetIdList(std::shared_ptr<persistence::StoreView> snapsho
 {
     auto key = GetStorageKey(PREFIX_ID_LIST, urlHash);
     auto value = GetStorageValue(snapshot, key);
-    if (value.Size() == 0)
-        return IdList();
+    if (value.Size() == 0) return IdList();
 
     // Basic IdList deserialization - returns empty list until full implementation
     // Full implementation would deserialize the actual ID list from storage
@@ -178,8 +169,8 @@ io::UInt256 OracleContract::GetUrlHash(const std::string& url)
     return cryptography::Crypto::Hash256(io::ByteVector(reinterpret_cast<const uint8_t*>(url.data()), url.size()));
 }
 
-std::vector<std::pair<uint64_t, OracleRequest>>
-OracleContract::GetRequests(std::shared_ptr<persistence::StoreView> snapshot) const
+std::vector<std::pair<uint64_t, OracleRequest>> OracleContract::GetRequests(
+    std::shared_ptr<persistence::StoreView> snapshot) const
 {
     std::vector<std::pair<uint64_t, OracleRequest>> requests;
 
@@ -221,8 +212,8 @@ OracleContract::GetRequests(std::shared_ptr<persistence::StoreView> snapshot) co
     return requests;
 }
 
-std::vector<std::pair<uint64_t, OracleRequest>>
-OracleContract::GetRequestsByUrl(std::shared_ptr<persistence::StoreView> snapshot, const std::string& url) const
+std::vector<std::pair<uint64_t, OracleRequest>> OracleContract::GetRequestsByUrl(
+    std::shared_ptr<persistence::StoreView> snapshot, const std::string& url) const
 {
     std::vector<std::pair<uint64_t, OracleRequest>> requests;
     auto urlHash = GetUrlHash(url);
@@ -250,8 +241,7 @@ std::tuple<uint8_t, std::string> OracleContract::GetResponse(std::shared_ptr<per
     auto key = GetStorageKey(PREFIX_RESPONSE,
                              io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t))));
     auto value = GetStorageValue(snapshot, key);
-    if (value.Size() == 0)
-        throw std::runtime_error("Response not found");
+    if (value.Size() == 0) throw std::runtime_error("Response not found");
 
     std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
     io::BinaryReader reader(stream);
@@ -266,14 +256,10 @@ uint64_t OracleContract::CreateRequest(std::shared_ptr<persistence::StoreView> s
                                        const std::string& callbackMethod, int64_t gasForResponse,
                                        const io::ByteVector& userData, const io::UInt256& originalTxid)
 {
-    if (url.length() > MAX_URL_LENGTH)
-        throw std::runtime_error("URL too long");
-    if (filter.length() > MAX_FILTER_LENGTH)
-        throw std::runtime_error("Filter too long");
-    if (callbackMethod.length() > MAX_CALLBACK_LENGTH)
-        throw std::runtime_error("Callback method too long");
-    if (userData.Size() > MAX_USER_DATA_LENGTH)
-        throw std::runtime_error("User data too long");
+    if (url.length() > MAX_URL_LENGTH) throw std::runtime_error("URL too long");
+    if (filter.length() > MAX_FILTER_LENGTH) throw std::runtime_error("Filter too long");
+    if (callbackMethod.length() > MAX_CALLBACK_LENGTH) throw std::runtime_error("Callback method too long");
+    if (userData.Size() > MAX_USER_DATA_LENGTH) throw std::runtime_error("User data too long");
 
     uint64_t id = GetNextRequestId(snapshot);
 
@@ -373,8 +359,7 @@ IdList OracleContract::GetIdList(std::shared_ptr<persistence::StoreView> snapsho
 {
     auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
     auto value = GetStorageValue(snapshot, key);
-    if (value.Size() == 0)
-        return IdList();
+    if (value.Size() == 0) return IdList();
 
     // Basic IdList deserialization - returns empty list until full implementation
     // Full implementation would deserialize the actual ID list from storage
@@ -399,8 +384,7 @@ bool OracleContract::CheckOracleNode(ApplicationEngine& engine) const
 io::UInt256 OracleContract::GetOriginalTxid(ApplicationEngine& engine) const
 {
     auto tx = dynamic_cast<const ledger::Transaction*>(engine.GetScriptContainer());
-    if (tx)
-        return tx->GetHash();
+    if (tx) return tx->GetHash();
     return io::UInt256::Zero();
 }
 
@@ -415,15 +399,12 @@ std::shared_ptr<vm::StackItem> OracleContract::OnGetPrice(ApplicationEngine& eng
 std::shared_ptr<vm::StackItem> OracleContract::OnSetPrice(ApplicationEngine& engine,
                                                           const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Only committee can set price");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Only committee can set price");
 
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto price = args[0]->GetInteger();
-    if (price <= 0)
-        throw std::runtime_error("Price must be positive");
+    if (price <= 0) throw std::runtime_error("Price must be positive");
 
     SetPrice(engine.GetSnapshot(), price);
     return vm::StackItem::Create(true);
@@ -446,11 +427,9 @@ std::shared_ptr<vm::StackItem> OracleContract::OnGetOracles(ApplicationEngine& e
 std::shared_ptr<vm::StackItem> OracleContract::OnSetOracles(ApplicationEngine& engine,
                                                             const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Only committee can set oracles");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Only committee can set oracles");
 
-    if (args.empty() || !args[0]->IsArray())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty() || !args[0]->IsArray()) throw std::runtime_error("Invalid arguments");
 
     auto oracleArray = args[0]->GetArray();
     std::vector<io::UInt160> oracles;
@@ -458,8 +437,7 @@ std::shared_ptr<vm::StackItem> OracleContract::OnSetOracles(ApplicationEngine& e
     for (const auto& item : oracleArray)
     {
         auto bytes = item->GetByteArray();
-        if (bytes.Size() != 20)
-            throw std::runtime_error("Invalid oracle address");
+        if (bytes.Size() != 20) throw std::runtime_error("Invalid oracle address");
 
         io::UInt160 oracle;
         std::memcpy(oracle.Data(), bytes.Data(), 20);
@@ -473,8 +451,7 @@ std::shared_ptr<vm::StackItem> OracleContract::OnSetOracles(ApplicationEngine& e
 std::shared_ptr<vm::StackItem> OracleContract::OnRequest(ApplicationEngine& engine,
                                                          const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 6)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 6) throw std::runtime_error("Invalid arguments");
 
     auto url = args[0]->GetString();
     auto filter = args[1]->GetString();
@@ -483,15 +460,13 @@ std::shared_ptr<vm::StackItem> OracleContract::OnRequest(ApplicationEngine& engi
     auto gasForResponse = args[4]->GetInteger();
     auto userData = args[5]->GetByteArray();
 
-    if (callbackBytes.Size() != 20)
-        throw std::runtime_error("Invalid callback contract");
+    if (callbackBytes.Size() != 20) throw std::runtime_error("Invalid callback contract");
 
     io::UInt160 callback;
     std::memcpy(callback.Data(), callbackBytes.Data(), 20);
 
     auto price = GetPrice(engine.GetSnapshot());
-    if (gasForResponse < price)
-        throw std::runtime_error("Insufficient gas for response");
+    if (gasForResponse < price) throw std::runtime_error("Insufficient gas for response");
 
     auto originalTxid = GetOriginalTxid(engine);
     auto id = CreateRequest(engine.GetSnapshot(), url, filter, callback, callbackMethod, gasForResponse, userData,
@@ -509,8 +484,7 @@ std::shared_ptr<vm::StackItem> OracleContract::OnRequest(ApplicationEngine& engi
 std::shared_ptr<vm::StackItem> OracleContract::OnFinish(ApplicationEngine& engine,
                                                         const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (!CheckOracleNode(engine))
-        throw std::runtime_error("Only oracle nodes can finish requests");
+    if (!CheckOracleNode(engine)) throw std::runtime_error("Only oracle nodes can finish requests");
 
     // This method is called by oracle nodes to process responses
     // The actual response processing is handled in OnPersist
@@ -522,16 +496,14 @@ std::shared_ptr<vm::StackItem> OracleContract::OnVerify(ApplicationEngine& engin
 {
     // Verify oracle transactions
     auto tx = dynamic_cast<const ledger::Transaction*>(engine.GetScriptContainer());
-    if (!tx)
-        return vm::StackItem::Create(false);
+    if (!tx) return vm::StackItem::Create(false);
 
     // Check if transaction has OracleResponse attribute
     auto attr_it = std::find_if(tx->GetAttributes().begin(), tx->GetAttributes().end(),
                                 [](const std::shared_ptr<ledger::TransactionAttribute>& a)
                                 { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::OracleResponse; });
 
-    if (attr_it == tx->GetAttributes().end())
-        return vm::StackItem::Create(false);
+    if (attr_it == tx->GetAttributes().end()) return vm::StackItem::Create(false);
 
     // Verify oracle node signature
     return vm::StackItem::Create(CheckOracleNode(engine));

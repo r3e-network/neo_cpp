@@ -1,10 +1,11 @@
+#include <neo/cryptography/merkletree.h>
+#include <neo/network/p2p/payloads/header.h>
+#include <neo/network/p2p/payloads/merkle_block_payload.h>
+
 #include <algorithm>
 #include <cmath>
 #include <cstddef>
 #include <limits>
-#include <neo/cryptography/merkletree.h>
-#include <neo/ledger/block.h>
-#include <neo/network/p2p/payloads/merkle_block_payload.h>
 #include <stdexcept>
 #include <vector>
 
@@ -12,51 +13,28 @@ namespace neo::network::payloads
 {
 MerkleBlockPayload::MerkleBlockPayload() : transactionCount_(0) {}
 
-MerkleBlockPayload::MerkleBlockPayload(std::shared_ptr<blockchain::Header> header, uint32_t transactionCount,
-                                       const std::vector<io::UInt256>& hashes, const io::ByteVector& flags)
+MerkleBlockPayload::MerkleBlockPayload(std::shared_ptr<neo::network::p2p::payloads::Header> header,
+                                       uint32_t transactionCount, const std::vector<io::UInt256>& hashes,
+                                       const io::ByteVector& flags)
     : header_(header), transactionCount_(transactionCount), hashes_(hashes), flags_(flags)
 {
 }
 
-std::shared_ptr<blockchain::Header> MerkleBlockPayload::GetHeader() const
-{
-    return header_;
-}
+std::shared_ptr<neo::network::p2p::payloads::Header> MerkleBlockPayload::GetHeader() const { return header_; }
 
-void MerkleBlockPayload::SetHeader(std::shared_ptr<blockchain::Header> header)
-{
-    header_ = header;
-}
+void MerkleBlockPayload::SetHeader(std::shared_ptr<neo::network::p2p::payloads::Header> header) { header_ = header; }
 
-uint32_t MerkleBlockPayload::GetTransactionCount() const
-{
-    return transactionCount_;
-}
+uint32_t MerkleBlockPayload::GetTransactionCount() const { return transactionCount_; }
 
-void MerkleBlockPayload::SetTransactionCount(uint32_t count)
-{
-    transactionCount_ = count;
-}
+void MerkleBlockPayload::SetTransactionCount(uint32_t count) { transactionCount_ = count; }
 
-const std::vector<io::UInt256>& MerkleBlockPayload::GetHashes() const
-{
-    return hashes_;
-}
+const std::vector<io::UInt256>& MerkleBlockPayload::GetHashes() const { return hashes_; }
 
-void MerkleBlockPayload::SetHashes(const std::vector<io::UInt256>& hashes)
-{
-    hashes_ = hashes;
-}
+void MerkleBlockPayload::SetHashes(const std::vector<io::UInt256>& hashes) { hashes_ = hashes; }
 
-const io::ByteVector& MerkleBlockPayload::GetFlags() const
-{
-    return flags_;
-}
+const io::ByteVector& MerkleBlockPayload::GetFlags() const { return flags_; }
 
-void MerkleBlockPayload::SetFlags(const io::ByteVector& flags)
-{
-    flags_ = flags;
-}
+void MerkleBlockPayload::SetFlags(const io::ByteVector& flags) { flags_ = flags; }
 
 void MerkleBlockPayload::Serialize(io::BinaryWriter& writer) const
 {
@@ -67,7 +45,7 @@ void MerkleBlockPayload::Serialize(io::BinaryWriter& writer) const
     else
     {
         // Serialize an empty header if header_ is null
-        blockchain::Header emptyHeader;
+        neo::network::p2p::payloads::Header emptyHeader;
         emptyHeader.Serialize(writer);
     }
 
@@ -82,7 +60,7 @@ void MerkleBlockPayload::Serialize(io::BinaryWriter& writer) const
 
 void MerkleBlockPayload::Deserialize(io::BinaryReader& reader)
 {
-    header_ = std::make_shared<blockchain::Header>();
+    header_ = std::make_shared<neo::network::p2p::payloads::Header>();
     header_->Deserialize(reader);
 
     transactionCount_ = static_cast<uint32_t>(reader.ReadVarInt());
@@ -133,7 +111,7 @@ void MerkleBlockPayload::DeserializeJson(const io::JsonReader& reader)
 {
     auto headerJson = reader.ReadObject("header");
     io::JsonReader headerReader(headerJson);
-    header_ = std::make_shared<blockchain::Header>();
+    header_ = std::make_shared<neo::network::p2p::payloads::Header>();
     header_->DeserializeJson(headerReader);
 
     transactionCount_ = reader.ReadUInt32("transactionCount");

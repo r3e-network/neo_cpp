@@ -1,5 +1,6 @@
-#include <iostream>
 #include <neo/wallets/wallet_manager.h>
+
+#include <iostream>
 
 namespace neo::wallets
 {
@@ -11,10 +12,7 @@ WalletManager& WalletManager::GetInstance()
 
 WalletManager::WalletManager() = default;
 
-const std::vector<std::shared_ptr<Wallet>>& WalletManager::GetWallets() const
-{
-    return wallets_;
-}
+const std::vector<std::shared_ptr<Wallet>>& WalletManager::GetWallets() const { return wallets_; }
 
 std::shared_ptr<Wallet> WalletManager::GetCurrentWallet() const
 {
@@ -34,8 +32,7 @@ std::shared_ptr<Wallet> WalletManager::GetWallet(const std::string& path) const
 
     for (const auto& wallet : wallets_)
     {
-        if (wallet->GetPath() == path)
-            return wallet;
+        if (wallet->GetPath() == path) return wallet;
     }
 
     return nullptr;
@@ -47,8 +44,7 @@ std::shared_ptr<Wallet> WalletManager::GetWalletByName(const std::string& name) 
 
     for (const auto& wallet : wallets_)
     {
-        if (wallet->GetName() == name)
-            return wallet;
+        if (wallet->GetName() == name) return wallet;
     }
 
     return nullptr;
@@ -61,8 +57,7 @@ std::shared_ptr<Wallet> WalletManager::CreateWallet(const std::string& path)
     // Check if wallet already exists
     for (const auto& wallet : wallets_)
     {
-        if (wallet->GetPath() == path)
-            return wallet;
+        if (wallet->GetPath() == path) return wallet;
     }
 
     // Create new wallet
@@ -82,8 +77,7 @@ std::shared_ptr<Wallet> WalletManager::CreateWallet(const std::string& path)
     wallets_.push_back(wallet);
 
     // Set as current wallet if none is set
-    if (!currentWallet_)
-        currentWallet_ = wallet;
+    if (!currentWallet_) currentWallet_ = wallet;
 
     return wallet;
 }
@@ -95,8 +89,7 @@ std::shared_ptr<Wallet> WalletManager::OpenWallet(const std::string& path)
     // Check if wallet is already open
     for (const auto& wallet : wallets_)
     {
-        if (wallet->GetPath() == path)
-            return wallet;
+        if (wallet->GetPath() == path) return wallet;
     }
 
     // Create wallet
@@ -113,8 +106,7 @@ std::shared_ptr<Wallet> WalletManager::OpenWallet(const std::string& path)
     wallets_.push_back(wallet);
 
     // Set as current wallet if none is set
-    if (!currentWallet_)
-        currentWallet_ = wallet;
+    if (!currentWallet_) currentWallet_ = wallet;
 
     return wallet;
 }
@@ -128,8 +120,7 @@ bool WalletManager::CloseWallet(const std::string& path)
         if ((*it)->GetPath() == path)
         {
             // Check if it's the current wallet
-            if (currentWallet_ == *it)
-                currentWallet_ = nullptr;
+            if (currentWallet_ == *it) currentWallet_ = nullptr;
 
             wallets_.erase(it);
             return true;
@@ -148,8 +139,7 @@ bool WalletManager::CloseWallet(std::shared_ptr<Wallet> wallet)
         if (*it == wallet)
         {
             // Check if it's the current wallet
-            if (currentWallet_ == *it)
-                currentWallet_ = nullptr;
+            if (currentWallet_ == *it) currentWallet_ = nullptr;
 
             wallets_.erase(it);
             return true;

@@ -3,6 +3,7 @@
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/neo_token_account.h>
 #include <neo/vm/stack_item.h>
+
 #include <sstream>
 #include <stdexcept>
 
@@ -44,15 +45,13 @@ NeoToken::AccountState NeoTokenAccount::GetAccountState(const NeoToken& token,
 std::shared_ptr<vm::StackItem> NeoTokenAccount::OnBalanceOf(const NeoToken& token, ApplicationEngine& engine,
                                                             const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 1)
-        throw std::runtime_error("Invalid number of arguments");
+    if (args.size() < 1) throw std::runtime_error("Invalid number of arguments");
 
     auto accountItem = args[0];
 
     io::UInt160 account;
     auto accountBytes = accountItem->GetByteArray();
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     std::memcpy(account.Data(), accountBytes.Data(), 20);
 
@@ -61,19 +60,16 @@ std::shared_ptr<vm::StackItem> NeoTokenAccount::OnBalanceOf(const NeoToken& toke
     return vm::StackItem::Create(balance.Value());
 }
 
-std::shared_ptr<vm::StackItem>
-NeoTokenAccount::OnGetAccountState(const NeoToken& token, ApplicationEngine& engine,
-                                   const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> NeoTokenAccount::OnGetAccountState(
+    const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 1)
-        throw std::runtime_error("Invalid number of arguments");
+    if (args.size() < 1) throw std::runtime_error("Invalid number of arguments");
 
     auto accountItem = args[0];
 
     io::UInt160 account;
     auto accountBytes = accountItem->GetByteArray();
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     std::memcpy(account.Data(), accountBytes.Data(), 20);
 

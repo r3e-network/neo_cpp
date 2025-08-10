@@ -1,6 +1,7 @@
-#include <filesystem>
 #include <neo/wallets/nep6/nep6_wallet.h>
 #include <neo/wallets/nep6/nep6_wallet_factory.h>
+
+#include <filesystem>
 
 namespace neo::wallets::nep6
 {
@@ -19,8 +20,7 @@ bool NEP6WalletFactory::CanHandle(const std::string& path) const
 std::shared_ptr<Wallet> NEP6WalletFactory::CreateWallet(const std::string& path, const std::string& password,
                                                         const std::string& name) const
 {
-    if (std::filesystem::exists(path))
-        throw std::invalid_argument("The wallet file already exists.");
+    if (std::filesystem::exists(path)) throw std::invalid_argument("The wallet file already exists.");
 
     auto wallet = std::make_shared<NEP6Wallet>(path, password, name);
     wallet->Save();

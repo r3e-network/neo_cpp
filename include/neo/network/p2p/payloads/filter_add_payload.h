@@ -1,12 +1,13 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/network/p2p/ipayload.h>
+
+#include <cstdint>
 
 namespace neo::network::p2p::payloads
 {
@@ -17,7 +18,7 @@ namespace neo::network::p2p::payloads
  */
 class FilterAddPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty FilterAddPayload.
      */
@@ -65,7 +66,7 @@ class FilterAddPayload : public IPayload
      */
     void DeserializeJson(const io::JsonReader& reader);
 
-  private:
+   private:
     io::ByteVector data_;
 };
 }  // namespace neo::network::p2p::payloads

@@ -13,7 +13,7 @@ namespace neo::extensions
  */
 class StringExtensions
 {
-  public:
+   public:
     /**
      * @brief Converts a byte span to a strict UTF8 string.
      * @param bytes The byte span to convert.
@@ -159,7 +159,7 @@ class StringExtensions
      */
     static std::string Join(const std::vector<std::string>& values, const std::string& delimiter);
 
-  private:
+   private:
     /**
      * @brief Checks if a character is a valid hex digit.
      * @param c The character to check.

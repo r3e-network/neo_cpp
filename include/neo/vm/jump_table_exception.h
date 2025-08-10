@@ -1,9 +1,10 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/vm/instruction.h>
 #include <neo/vm/opcode.h>
+
+#include <functional>
+#include <memory>
 #include <string>
 
 // Forward declarations
@@ -20,7 +21,7 @@ namespace neo::vm
  */
 class JumpTableException
 {
-  public:
+   public:
     /**
      * @brief Executes a throw operation.
      * @param engine The execution engine.

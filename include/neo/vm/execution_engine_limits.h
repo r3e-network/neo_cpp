@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class ExecutionEngineLimits
 {
-  public:
+   public:
     /**
      * @brief The default strategy.
      */

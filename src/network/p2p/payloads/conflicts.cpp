@@ -6,15 +6,9 @@ Conflicts::Conflicts() {}
 
 Conflicts::Conflicts(const io::UInt256& hash) : hash_(hash) {}
 
-const io::UInt256& Conflicts::GetHash() const
-{
-    return hash_;
-}
+const io::UInt256& Conflicts::GetHash() const { return hash_; }
 
-void Conflicts::SetHash(const io::UInt256& hash)
-{
-    hash_ = hash;
-}
+void Conflicts::SetHash(const io::UInt256& hash) { hash_ = hash; }
 
 ledger::TransactionAttribute::Usage Conflicts::GetType() const
 {
@@ -92,13 +86,7 @@ int64_t Conflicts::CalculateNetworkFee(/* DataCache& snapshot, const Transaction
     return 5000000;  // 0.05 GAS in datoshi (Neo N3 default fee for conflicts)
 }
 
-bool Conflicts::operator==(const Conflicts& other) const
-{
-    return hash_ == other.hash_;
-}
+bool Conflicts::operator==(const Conflicts& other) const { return hash_ == other.hash_; }
 
-bool Conflicts::operator!=(const Conflicts& other) const
-{
-    return !(*this == other);
-}
+bool Conflicts::operator!=(const Conflicts& other) const { return !(*this == other); }
 }  // namespace neo::network::p2p::payloads

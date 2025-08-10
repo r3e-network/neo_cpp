@@ -7,7 +7,6 @@
 #include <neo/smartcontract/native/neo_token_transfer.h>
 #include <neo/smartcontract/native/neo_token_vote.h>
 // #include <neo/smartcontract/native/gas_token.h> // Temporarily disabled
-#include <algorithm>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -15,6 +14,8 @@
 #include <neo/persistence/storage_key.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/vm/stack_item.h>
+
+#include <algorithm>
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -164,15 +165,9 @@ io::Fixed8 NeoToken::GetTotalSupply(std::shared_ptr<persistence::DataCache> snap
     return NeoTokenTransfer::GetTotalSupply(*this, snapshot);
 }
 
-std::string NeoToken::Symbol() const
-{
-    return SYMBOL;
-}
+std::string NeoToken::Symbol() const { return SYMBOL; }
 
-uint8_t NeoToken::Decimals() const
-{
-    return DECIMALS;
-}
+uint8_t NeoToken::Decimals() const { return DECIMALS; }
 
 io::Fixed8 NeoToken::GetBalance(std::shared_ptr<persistence::DataCache> snapshot, const io::UInt160& account) const
 {
@@ -195,8 +190,8 @@ std::vector<cryptography::ecc::ECPoint> NeoToken::GetCommittee(std::shared_ptr<p
     return NeoTokenCommittee::GetCommittee(*this, snapshot);
 }
 
-std::vector<cryptography::ecc::ECPoint>
-NeoToken::GetNextBlockValidators(std::shared_ptr<persistence::DataCache> snapshot, int32_t validatorsCount) const
+std::vector<cryptography::ecc::ECPoint> NeoToken::GetNextBlockValidators(
+    std::shared_ptr<persistence::DataCache> snapshot, int32_t validatorsCount) const
 {
     return NeoTokenCommittee::GetNextBlockValidators(*this, snapshot, validatorsCount);
 }
@@ -254,9 +249,8 @@ std::shared_ptr<vm::StackItem> NeoToken::OnGetCommittee(neo::smartcontract::Appl
     return NeoTokenCommittee::OnGetCommittee(*this, engine, args);
 }
 
-std::shared_ptr<vm::StackItem>
-NeoToken::OnGetNextBlockValidators(neo::smartcontract::ApplicationEngine& engine,
-                                   const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> NeoToken::OnGetNextBlockValidators(
+    neo::smartcontract::ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     return NeoTokenCommittee::OnGetNextBlockValidators(*this, engine, args);
 }
@@ -355,8 +349,8 @@ int64_t NeoToken::CalculateNeoHolderReward(std::shared_ptr<persistence::DataCach
     return NeoTokenGas::CalculateNeoHolderReward(*this, snapshot, value, start, end);
 }
 
-std::vector<cryptography::ecc::ECPoint>
-NeoToken::ComputeCommitteeMembers(std::shared_ptr<persistence::DataCache> snapshot, int32_t committeeSize) const
+std::vector<cryptography::ecc::ECPoint> NeoToken::ComputeCommitteeMembers(
+    std::shared_ptr<persistence::DataCache> snapshot, int32_t committeeSize) const
 {
     return NeoTokenCommittee::ComputeCommitteeMembers(*this, snapshot, committeeSize);
 }
@@ -366,8 +360,8 @@ bool NeoToken::ShouldRefreshCommittee(uint32_t blockIndex, int32_t committeeSize
     return NeoTokenCommittee::ShouldRefreshCommittee(*this, blockIndex, committeeSize);
 }
 
-std::vector<NeoToken::CommitteeMember>
-NeoToken::GetCommitteeFromCache(std::shared_ptr<persistence::DataCache> snapshot) const
+std::vector<NeoToken::CommitteeMember> NeoToken::GetCommitteeFromCache(
+    std::shared_ptr<persistence::DataCache> snapshot) const
 {
     return NeoTokenCommittee::GetCommitteeFromCache(*this, snapshot);
 }
@@ -411,8 +405,8 @@ NeoToken::CandidateState NeoToken::GetCandidateState(std::shared_ptr<persistence
     return NeoTokenCandidate::GetCandidateState(*this, snapshot, pubKey);
 }
 
-std::vector<std::pair<cryptography::ecc::ECPoint, NeoToken::CandidateState>>
-NeoToken::GetCandidates(std::shared_ptr<persistence::DataCache> snapshot) const
+std::vector<std::pair<cryptography::ecc::ECPoint, NeoToken::CandidateState>> NeoToken::GetCandidates(
+    std::shared_ptr<persistence::DataCache> snapshot) const
 {
     return NeoTokenCandidate::GetCandidates(*this, snapshot);
 }

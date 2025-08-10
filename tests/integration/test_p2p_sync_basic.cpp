@@ -44,7 +44,7 @@ TEST_F(P2PSyncBasicTest, TestBlockProcessing)
     block->SetVersion(0);
     block->SetPreviousHash(io::UInt256::Zero());
     block->SetMerkleRoot(io::UInt256::Zero());
-    block->SetTimestamp(std::chrono::system_clock::now());
+    block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block->SetIndex(0);
     block->SetPrimaryIndex(0);
     block->SetNextConsensus(io::UInt160::Zero());
@@ -66,7 +66,7 @@ TEST_F(P2PSyncBasicTest, TestBlockHeight)
     block->SetVersion(0);
     block->SetPreviousHash(io::UInt256::Zero());
     block->SetMerkleRoot(io::UInt256::Zero());
-    block->SetTimestamp(std::chrono::system_clock::now());
+    block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block->SetIndex(0);
     block->SetPrimaryIndex(0);
     block->SetNextConsensus(io::UInt160::Zero());
@@ -95,7 +95,7 @@ TEST_F(P2PSyncBasicTest, TestMultipleBlocks)
     genesis->SetVersion(0);
     genesis->SetPreviousHash(io::UInt256::Zero());
     genesis->SetMerkleRoot(io::UInt256::Zero());
-    genesis->SetTimestamp(std::chrono::system_clock::from_time_t(1468595301));
+    genesis->SetTimestamp(static_cast<uint64_t>(1468595301));
     genesis->SetIndex(0);
     genesis->SetPrimaryIndex(0);
     genesis->SetNextConsensus(io::UInt160::Zero());
@@ -124,7 +124,7 @@ TEST_F(P2PSyncBasicTest, TestFastSyncMode)
     block->SetVersion(0);
     block->SetPreviousHash(io::UInt256::Zero());
     block->SetMerkleRoot(io::UInt256::Zero());
-    block->SetTimestamp(std::chrono::system_clock::now());
+    block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block->SetIndex(0);
     block->SetPrimaryIndex(0);
     block->SetNextConsensus(io::UInt160::Zero());
@@ -146,7 +146,7 @@ TEST_F(P2PSyncBasicTest, TestBlockValidation)
     block1->SetVersion(0);
     block1->SetPreviousHash(io::UInt256::Zero());
     block1->SetMerkleRoot(io::UInt256::Zero());
-    block1->SetTimestamp(std::chrono::system_clock::now());
+    block1->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block1->SetIndex(0);
     block1->SetPrimaryIndex(0);
     block1->SetNextConsensus(io::UInt160::Zero());
@@ -160,7 +160,7 @@ TEST_F(P2PSyncBasicTest, TestBlockValidation)
     block2->SetVersion(0);
     block2->SetPreviousHash(block1->GetHash());
     block2->SetMerkleRoot(io::UInt256::Zero());
-    block2->SetTimestamp(std::chrono::system_clock::now());
+    block2->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block2->SetIndex(1);
     block2->SetPrimaryIndex(0);
     block2->SetNextConsensus(io::UInt160::Zero());
@@ -180,7 +180,7 @@ TEST_F(P2PSyncBasicTest, TestSimpleEndToEnd)
     block->SetVersion(0);
     block->SetPreviousHash(io::UInt256::Zero());
     block->SetMerkleRoot(io::UInt256::Zero());
-    block->SetTimestamp(std::chrono::system_clock::now());
+    block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block->SetIndex(0);
     block->SetPrimaryIndex(0);
     block->SetNextConsensus(io::UInt160::Zero());
@@ -208,7 +208,7 @@ TEST_F(P2PSyncBasicTest, TestPerformanceMode)
         block->SetVersion(0);
         block->SetPreviousHash(i == 0 ? io::UInt256::Zero() : blocks[i-1]->GetHash());
         block->SetMerkleRoot(io::UInt256::Zero());
-        block->SetTimestamp(std::chrono::system_clock::now() + std::chrono::seconds(i));
+        block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>((std::chrono::system_clock::now() + std::chrono::seconds(i)).time_since_epoch()).count()));
         block->SetIndex(i);
         block->SetPrimaryIndex(0);
         block->SetNextConsensus(io::UInt160::Zero());

@@ -1,7 +1,8 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/network/ip_endpoint.h>
+
+#include <cstdint>
 #include <vector>
 
 namespace neo::network::p2p
@@ -11,7 +12,7 @@ namespace neo::network::p2p
  */
 class ChannelsConfig
 {
-  public:
+   public:
     /**
      * @brief Constructs a ChannelsConfig.
      */
@@ -113,7 +114,7 @@ class ChannelsConfig
      */
     void SetSeedList(const std::vector<IPEndPoint>& seedList);
 
-  private:
+   private:
     IPEndPoint tcp_;
     IPEndPoint webSocket_;
     uint32_t minDesiredConnections_;

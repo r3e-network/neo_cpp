@@ -12,35 +12,17 @@ NeoAccountState::NeoAccountState(int64_t balance) : AccountState(balance), balan
 
 NeoAccountState::~NeoAccountState() = default;
 
-uint32_t NeoAccountState::GetBalanceHeight() const
-{
-    return balanceHeight_;
-}
+uint32_t NeoAccountState::GetBalanceHeight() const { return balanceHeight_; }
 
-void NeoAccountState::SetBalanceHeight(uint32_t height)
-{
-    balanceHeight_ = height;
-}
+void NeoAccountState::SetBalanceHeight(uint32_t height) { balanceHeight_ = height; }
 
-const cryptography::ecc::ECPoint& NeoAccountState::GetVoteTo() const
-{
-    return voteTo_;
-}
+const cryptography::ecc::ECPoint& NeoAccountState::GetVoteTo() const { return voteTo_; }
 
-void NeoAccountState::SetVoteTo(const cryptography::ecc::ECPoint& voteTo)
-{
-    voteTo_ = voteTo;
-}
+void NeoAccountState::SetVoteTo(const cryptography::ecc::ECPoint& voteTo) { voteTo_ = voteTo; }
 
-int64_t NeoAccountState::GetLastGasPerVote() const
-{
-    return lastGasPerVote_;
-}
+int64_t NeoAccountState::GetLastGasPerVote() const { return lastGasPerVote_; }
 
-void NeoAccountState::SetLastGasPerVote(int64_t lastGasPerVote)
-{
-    lastGasPerVote_ = lastGasPerVote;
-}
+void NeoAccountState::SetLastGasPerVote(int64_t lastGasPerVote) { lastGasPerVote_ = lastGasPerVote; }
 
 void NeoAccountState::Deserialize(io::BinaryReader& reader)
 {
@@ -91,12 +73,10 @@ std::shared_ptr<vm::StackItem> NeoAccountState::ToStackItem() const
 
 void NeoAccountState::FromStackItem(const std::shared_ptr<vm::StackItem>& item)
 {
-    if (!item->IsStruct())
-        throw std::runtime_error("Invalid stack item type");
+    if (!item->IsStruct()) throw std::runtime_error("Invalid stack item type");
 
     auto structItem = std::dynamic_pointer_cast<vm::Struct>(item);
-    if (structItem->Count() < 4)
-        throw std::runtime_error("Invalid stack item count");
+    if (structItem->Count() < 4) throw std::runtime_error("Invalid stack item count");
 
     SetBalance(structItem->Get(0)->GetInteger());
     balanceHeight_ = static_cast<uint32_t>(structItem->Get(1)->GetInteger());

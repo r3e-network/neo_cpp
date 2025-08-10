@@ -14,7 +14,7 @@ namespace neo::cryptography::ecc
  */
 class Witness : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty Witness.
      */
@@ -95,7 +95,7 @@ class Witness : public io::ISerializable, public io::IJsonSerializable
      */
     bool operator!=(const Witness& other) const;
 
-  private:
+   private:
     io::ByteVector invocationScript_;
     io::ByteVector verificationScript_;
 };

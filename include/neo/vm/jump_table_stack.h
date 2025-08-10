@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableStack
 {
-  public:
+   public:
     // Stack operations
     static void DEPTH(ExecutionEngine& engine, const Instruction& instruction);
     static void DROP(ExecutionEngine& engine, const Instruction& instruction);

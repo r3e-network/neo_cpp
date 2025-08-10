@@ -22,7 +22,7 @@ enum class LogLevel
  */
 class Logger
 {
-  public:
+   public:
     /**
      * @brief Logs a message with the specified level.
      * @param level The log level.
@@ -43,7 +43,7 @@ class Logger
      */
     static void SetMinLevel(LogLevel level);
 
-  private:
+   private:
     static LogLevel minLevel_;
 };
 }  // namespace neo::common
@@ -54,10 +54,10 @@ class Logger
 #define NEO_WARNING neo::common::LogLevel::WARNING
 #define NEO_ERROR neo::common::LogLevel::ERROR_LEVEL
 
-#define NEO_LOG(level, message)                                                                                        \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        std::ostringstream oss;                                                                                        \
-        oss << message;                                                                                                \
-        neo::common::Logger::Log(level, oss.str());                                                                    \
+#define NEO_LOG(level, message)                     \
+    do                                              \
+    {                                               \
+        std::ostringstream oss;                     \
+        oss << message;                             \
+        neo::common::Logger::Log(level, oss.str()); \
     } while (0)

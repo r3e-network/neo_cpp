@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <chrono>
 #include <neo/consensus/consensus_service.h>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/hash.h>
@@ -9,6 +7,9 @@
 #include <neo/network/p2p/message_command.h>
 #include <neo/smartcontract/native/native_contract_manager.h>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <algorithm>
+#include <chrono>
 #include <sstream>
 
 namespace neo::consensus
@@ -16,16 +17,14 @@ namespace neo::consensus
 std::shared_ptr<ledger::Block> ConsensusService::CreateBlock()
 {
     // Check if prepare request is received
-    if (!prepareRequest_)
-        throw std::runtime_error("Prepare request not received");
+    if (!prepareRequest_) throw std::runtime_error("Prepare request not received");
 
     // Validate transactions
     std::vector<std::shared_ptr<ledger::Transaction>> validTransactions;
     for (const auto& tx : transactions_)
     {
         // Skip invalid transactions
-        if (!node_->GetBlockchain()->VerifyTransaction(tx))
-            continue;
+        if (!node_->GetBlockchain()->VerifyTransaction(tx)) continue;
 
         // Add valid transaction
         validTransactions.push_back(tx);
@@ -39,8 +38,7 @@ std::shared_ptr<ledger::Block> ConsensusService::CreateBlock()
                   int64_t feeA = a->GetSystemFee() + a->GetNetworkFee();
                   int64_t feeB = b->GetSystemFee() + b->GetNetworkFee();
 
-                  if (feeA != feeB)
-                      return feeA > feeB;
+                  if (feeA != feeB) return feeA > feeB;
 
                   // Sort by hash (ascending)
                   return a->GetHash() < b->GetHash();
@@ -74,12 +72,10 @@ void ConsensusService::ProcessBlock(std::shared_ptr<ledger::Block> block)
     try
     {
         // Verify block
-        if (!node_->GetBlockchain()->VerifyBlock(block))
-            throw std::runtime_error("Block verification failed");
+        if (!node_->GetBlockchain()->VerifyBlock(block)) throw std::runtime_error("Block verification failed");
 
         // Add block to blockchain
-        if (!node_->GetBlockchain()->AddBlock(block))
-            throw std::runtime_error("Failed to add block to blockchain");
+        if (!node_->GetBlockchain()->AddBlock(block)) throw std::runtime_error("Failed to add block to blockchain");
 
         // Remove transactions from memory pool
         for (const auto& tx : block->GetTransactions())
@@ -257,8 +253,7 @@ uint64_t ConsensusService::GetTimeout(uint8_t viewNumber) const
     uint64_t baseTimeout = 15000;
 
     // Use exponential backoff for higher view numbers
-    if (viewNumber == 0)
-        return baseTimeout;
+    if (viewNumber == 0) return baseTimeout;
 
     // Calculate timeout with exponential backoff (capped at 5 minutes)
     uint64_t timeout = baseTimeout * (1 << std::min(viewNumber, static_cast<uint8_t>(8)));

@@ -1,9 +1,10 @@
 #pragma once
 
-#include <memory>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint160.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::wallets
@@ -13,7 +14,7 @@ namespace neo::wallets
  */
 class KeyPair
 {
-  public:
+   public:
     /**
      * @brief Constructor with private key
      */
@@ -114,7 +115,7 @@ class KeyPair
      */
     bool operator!=(const KeyPair& other) const;
 
-  private:
+   private:
     io::ByteVector privateKey_;
     mutable std::unique_ptr<cryptography::ecc::ECPoint> publicKey_;
     mutable std::unique_ptr<io::UInt160> scriptHash_;

@@ -1,12 +1,13 @@
 #pragma once
 
-#include <chrono>
-#include <memory>
-#include <mutex>
 #include <neo/core/logging.h>
 #include <neo/io/uint256.h>
 #include <neo/network/p2p/network_address.h>
 #include <neo/network/p2p/remote_node.h>
+
+#include <chrono>
+#include <memory>
+#include <mutex>
 #include <random>
 #include <unordered_map>
 #include <unordered_set>
@@ -47,7 +48,7 @@ enum class PeerQuality
  */
 class PeerManager
 {
-  public:
+   public:
     struct Config
     {
         size_t max_peers{50};
@@ -62,7 +63,7 @@ class PeerManager
         std::vector<NetworkAddress> seed_nodes;
     };
 
-  private:
+   private:
     Config config_;
     std::shared_ptr<core::Logger> logger_;
     mutable std::mutex mutex_;
@@ -85,7 +86,7 @@ class PeerManager
     // Random generator for peer selection
     std::mt19937 rng_{std::random_device{}()};
 
-  public:
+   public:
     explicit PeerManager(const Config& config);
 
     /**
@@ -201,7 +202,7 @@ class PeerManager
      */
     bool LoadPeerAddresses(const std::string& filepath);
 
-  private:
+   private:
     /**
      * @brief Check if we can accept more peers from this IP
      */
@@ -238,14 +239,14 @@ class PeerManager
  */
 class PeerDiscovery
 {
-  private:
+   private:
     std::shared_ptr<PeerManager> peer_manager_;
     std::shared_ptr<core::Logger> logger_;
     std::thread discovery_thread_;
     std::atomic<bool> running_{false};
     std::chrono::seconds discovery_interval_{300};  // 5 minutes
 
-  public:
+   public:
     PeerDiscovery(std::shared_ptr<PeerManager> peer_manager);
     ~PeerDiscovery();
 
@@ -269,7 +270,7 @@ class PeerDiscovery
      */
     void ProcessReceivedAddresses(const std::vector<NetworkAddress>& addresses);
 
-  private:
+   private:
     /**
      * @brief Discovery thread main loop
      */

@@ -1,3 +1,6 @@
+#include <neo/logging/logger.h>
+#include <neo/network/upnp.h>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/asio.hpp>
 #include <boost/beast/core.hpp>
@@ -6,8 +9,6 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <chrono>
-#include <neo/logging/logger.h>
-#include <neo/network/upnp.h>
 #include <sstream>
 #include <stdexcept>
 #include <thread>
@@ -18,15 +19,9 @@ namespace neo::network
 std::chrono::seconds UPnP::timeOut_ = std::chrono::seconds(3);
 std::string UPnP::serviceUrl_;
 
-std::chrono::seconds UPnP::GetTimeOut()
-{
-    return timeOut_;
-}
+std::chrono::seconds UPnP::GetTimeOut() { return timeOut_; }
 
-void UPnP::SetTimeOut(std::chrono::seconds timeout)
-{
-    timeOut_ = timeout;
-}
+void UPnP::SetTimeOut(std::chrono::seconds timeout) { timeOut_ = timeout; }
 
 bool UPnP::Discover()
 {
@@ -43,11 +38,12 @@ bool UPnP::Discover()
         socket.set_option(option);
 
         // Create the discovery message
-        std::string req = "M-SEARCH * HTTP/1.1\r\n"
-                          "HOST: 239.255.255.250:1900\r\n"
-                          "ST:upnp:rootdevice\r\n"
-                          "MAN:\"ssdp:discover\"\r\n"
-                          "MX:3\r\n\r\n";
+        std::string req =
+            "M-SEARCH * HTTP/1.1\r\n"
+            "HOST: 239.255.255.250:1900\r\n"
+            "ST:upnp:rootdevice\r\n"
+            "MAN:\"ssdp:discover\"\r\n"
+            "MX:3\r\n\r\n";
 
         // Send the discovery message
         boost::asio::ip::udp::endpoint broadcast_endpoint(boost::asio::ip::address_v4::broadcast(), 1900);
@@ -101,7 +97,7 @@ bool UPnP::Discover()
             {
                 // Ignore errors and continue
                 neo::logging::Logger::Instance().Warning("Network",
-                                                    std::string("Error receiving UPnP response: ") + e.what());
+                                                         std::string("Error receiving UPnP response: ") + e.what());
             }
         }
 
@@ -224,8 +220,7 @@ std::string UPnP::GetServiceUrl(const std::string& resp)
 
 std::string UPnP::CombineUrls(const std::string& baseUrl, const std::string& relativeUrl)
 {
-    if (relativeUrl.empty())
-        return "";
+    if (relativeUrl.empty()) return "";
 
     if (relativeUrl[0] == '/')
     {
@@ -257,8 +252,7 @@ std::string UPnP::CombineUrls(const std::string& baseUrl, const std::string& rel
 
 void UPnP::ForwardPort(uint16_t port, const std::string& protocol, const std::string& description)
 {
-    if (serviceUrl_.empty())
-        throw std::runtime_error("No UPnP service available or Discover() has not been called");
+    if (serviceUrl_.empty()) throw std::runtime_error("No UPnP service available or Discover() has not been called");
 
     // Get the local IP address
     boost::asio::io_context io_context;
@@ -271,65 +265,66 @@ void UPnP::ForwardPort(uint16_t port, const std::string& protocol, const std::st
     boost::asio::ip::address local_address = socket.local_endpoint().address();
 
     // Create the SOAP request
-    std::string soap = "<u:AddPortMapping xmlns:u=\"urn:schemas-upnp-org:service:WANIPConnection:1\">"
-                       "<NewRemoteHost></NewRemoteHost>"
-                       "<NewExternalPort>" +
-                       std::to_string(port) +
-                       "</NewExternalPort>"
-                       "<NewProtocol>" +
-                       protocol +
-                       "</NewProtocol>"
-                       "<NewInternalPort>" +
-                       std::to_string(port) +
-                       "</NewInternalPort>"
-                       "<NewInternalClient>" +
-                       local_address.to_string() +
-                       "</NewInternalClient>"
-                       "<NewEnabled>1</NewEnabled>"
-                       "<NewPortMappingDescription>" +
-                       description +
-                       "</NewPortMappingDescription>"
-                       "<NewLeaseDuration>0</NewLeaseDuration>"
-                       "</u:AddPortMapping>";
+    std::string soap =
+        "<u:AddPortMapping xmlns:u=\"urn:schemas-upnp-org:service:WANIPConnection:1\">"
+        "<NewRemoteHost></NewRemoteHost>"
+        "<NewExternalPort>" +
+        std::to_string(port) +
+        "</NewExternalPort>"
+        "<NewProtocol>" +
+        protocol +
+        "</NewProtocol>"
+        "<NewInternalPort>" +
+        std::to_string(port) +
+        "</NewInternalPort>"
+        "<NewInternalClient>" +
+        local_address.to_string() +
+        "</NewInternalClient>"
+        "<NewEnabled>1</NewEnabled>"
+        "<NewPortMappingDescription>" +
+        description +
+        "</NewPortMappingDescription>"
+        "<NewLeaseDuration>0</NewLeaseDuration>"
+        "</u:AddPortMapping>";
 
     // Send the SOAP request
     SOAPRequest(serviceUrl_, soap, "AddPortMapping");
 
-    neo::logging::Logger::Instance().Info("Network",
-                                     "UPnP port forwarding created for " + protocol + " port " + std::to_string(port));
+    neo::logging::Logger::Instance().Info(
+        "Network", "UPnP port forwarding created for " + protocol + " port " + std::to_string(port));
 }
 
 void UPnP::DeleteForwardingRule(uint16_t port, const std::string& protocol)
 {
-    if (serviceUrl_.empty())
-        throw std::runtime_error("No UPnP service available or Discover() has not been called");
+    if (serviceUrl_.empty()) throw std::runtime_error("No UPnP service available or Discover() has not been called");
 
     // Create the SOAP request
-    std::string soap = "<u:DeletePortMapping xmlns:u=\"urn:schemas-upnp-org:service:WANIPConnection:1\">"
-                       "<NewRemoteHost></NewRemoteHost>"
-                       "<NewExternalPort>" +
-                       std::to_string(port) +
-                       "</NewExternalPort>"
-                       "<NewProtocol>" +
-                       protocol +
-                       "</NewProtocol>"
-                       "</u:DeletePortMapping>";
+    std::string soap =
+        "<u:DeletePortMapping xmlns:u=\"urn:schemas-upnp-org:service:WANIPConnection:1\">"
+        "<NewRemoteHost></NewRemoteHost>"
+        "<NewExternalPort>" +
+        std::to_string(port) +
+        "</NewExternalPort>"
+        "<NewProtocol>" +
+        protocol +
+        "</NewProtocol>"
+        "</u:DeletePortMapping>";
 
     // Send the SOAP request
     SOAPRequest(serviceUrl_, soap, "DeletePortMapping");
 
-    neo::logging::Logger::Instance().Info("Network",
-                                     "UPnP port forwarding deleted for " + protocol + " port " + std::to_string(port));
+    neo::logging::Logger::Instance().Info(
+        "Network", "UPnP port forwarding deleted for " + protocol + " port " + std::to_string(port));
 }
 
 IPAddress UPnP::GetExternalIP()
 {
-    if (serviceUrl_.empty())
-        throw std::runtime_error("No UPnP service available or Discover() has not been called");
+    if (serviceUrl_.empty()) throw std::runtime_error("No UPnP service available or Discover() has not been called");
 
     // Create the SOAP request
-    std::string soap = "<u:GetExternalIPAddress xmlns:u=\"urn:schemas-upnp-org:service:WANIPConnection:1\">"
-                       "</u:GetExternalIPAddress>";
+    std::string soap =
+        "<u:GetExternalIPAddress xmlns:u=\"urn:schemas-upnp-org:service:WANIPConnection:1\">"
+        "</u:GetExternalIPAddress>";
 
     // Send the SOAP request
     std::string response = SOAPRequest(serviceUrl_, soap, "GetExternalIPAddress");
@@ -341,8 +336,7 @@ IPAddress UPnP::GetExternalIP()
 
     // Extract the IP address
     std::string ip = pt.get<std::string>("s:Envelope.s:Body.u:GetExternalIPAddressResponse.NewExternalIPAddress", "");
-    if (ip.empty())
-        throw std::runtime_error("Failed to get external IP address");
+    if (ip.empty()) throw std::runtime_error("Failed to get external IP address");
 
     return IPAddress(ip);
 }
@@ -352,13 +346,14 @@ std::string UPnP::SOAPRequest(const std::string& url, const std::string& soap, c
     try
     {
         // Create the SOAP envelope
-        std::string req = "<?xml version=\"1.0\"?>"
-                          "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
-                          "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"
-                          "<s:Body>" +
-                          soap +
-                          "</s:Body>"
-                          "</s:Envelope>";
+        std::string req =
+            "<?xml version=\"1.0\"?>"
+            "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
+            "s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"
+            "<s:Body>" +
+            soap +
+            "</s:Body>"
+            "</s:Envelope>";
 
         // Parse the URL
         std::string host;

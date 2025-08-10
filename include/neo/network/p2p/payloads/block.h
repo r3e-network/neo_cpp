@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
 #include <neo/ledger/transaction.h>
 #include <neo/network/p2p/payloads/header.h>
+
+#include <memory>
 #include <vector>
 
 namespace neo::network::p2p::payloads
@@ -15,7 +16,7 @@ namespace neo::network::p2p::payloads
  */
 class Block : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty Block.
      */
@@ -39,26 +40,17 @@ class Block : public io::ISerializable, public io::IJsonSerializable
     /**
      * @brief Gets the header of the block.
      */
-    std::shared_ptr<Header> GetHeader() const
-    {
-        return header_;
-    }
+    std::shared_ptr<Header> GetHeader() const { return header_; }
 
     /**
      * @brief Sets the header of the block.
      */
-    void SetHeader(std::shared_ptr<Header> header)
-    {
-        header_ = header;
-    }
+    void SetHeader(std::shared_ptr<Header> header) { header_ = header; }
 
     /**
      * @brief Gets the transactions of the block.
      */
-    const std::vector<std::shared_ptr<ledger::Transaction>>& GetTransactions() const
-    {
-        return transactions_;
-    }
+    const std::vector<std::shared_ptr<ledger::Transaction>>& GetTransactions() const { return transactions_; }
 
     /**
      * @brief Sets the transactions of the block.
@@ -73,82 +65,52 @@ class Block : public io::ISerializable, public io::IJsonSerializable
     /**
      * @brief Gets the hash of the block.
      */
-    io::UInt256 GetHash() const
-    {
-        return header_ ? header_->GetHash() : io::UInt256();
-    }
+    io::UInt256 GetHash() const { return header_ ? header_->GetHash() : io::UInt256(); }
 
     /**
      * @brief Gets the version of the block.
      */
-    uint32_t GetVersion() const
-    {
-        return header_ ? header_->GetVersion() : 0;
-    }
+    uint32_t GetVersion() const { return header_ ? header_->GetVersion() : 0; }
 
     /**
      * @brief Gets the hash of the previous block.
      */
-    io::UInt256 GetPrevHash() const
-    {
-        return header_ ? header_->GetPrevHash() : io::UInt256();
-    }
+    io::UInt256 GetPrevHash() const { return header_ ? header_->GetPrevHash() : io::UInt256(); }
 
     /**
      * @brief Gets the merkle root of the transactions.
      */
-    io::UInt256 GetMerkleRoot() const
-    {
-        return header_ ? header_->GetMerkleRoot() : io::UInt256();
-    }
+    io::UInt256 GetMerkleRoot() const { return header_ ? header_->GetMerkleRoot() : io::UInt256(); }
 
     /**
      * @brief Gets the timestamp of the block.
      */
-    uint64_t GetTimestamp() const
-    {
-        return header_ ? header_->GetTimestamp() : 0;
-    }
+    uint64_t GetTimestamp() const { return header_ ? header_->GetTimestamp() : 0; }
 
     /**
      * @brief Gets the nonce of the block.
      */
-    uint64_t GetNonce() const
-    {
-        return header_ ? header_->GetNonce() : 0;
-    }
+    uint64_t GetNonce() const { return header_ ? header_->GetNonce() : 0; }
 
     /**
      * @brief Gets the index of the block.
      */
-    uint32_t GetIndex() const
-    {
-        return header_ ? header_->GetIndex() : 0;
-    }
+    uint32_t GetIndex() const { return header_ ? header_->GetIndex() : 0; }
 
     /**
      * @brief Gets the primary index of the consensus node.
      */
-    uint8_t GetPrimaryIndex() const
-    {
-        return header_ ? header_->GetPrimaryIndex() : 0;
-    }
+    uint8_t GetPrimaryIndex() const { return header_ ? header_->GetPrimaryIndex() : 0; }
 
     /**
      * @brief Gets the next consensus address.
      */
-    io::UInt160 GetNextConsensus() const
-    {
-        return header_ ? header_->GetNextConsensus() : io::UInt160();
-    }
+    io::UInt160 GetNextConsensus() const { return header_ ? header_->GetNextConsensus() : io::UInt160(); }
 
     /**
      * @brief Gets the witness of the block.
      */
-    ledger::Witness GetWitness() const
-    {
-        return header_ ? header_->GetWitness() : ledger::Witness();
-    }
+    ledger::Witness GetWitness() const { return header_ ? header_->GetWitness() : ledger::Witness(); }
 
     /**
      * @brief Gets the witnesses of the block (as a vector for RPC compatibility).
@@ -202,7 +164,7 @@ class Block : public io::ISerializable, public io::IJsonSerializable
     bool operator==(const Block& other) const;
     bool operator!=(const Block& other) const;
 
-  private:
+   private:
     // Block data (matching C# structure exactly)
     std::shared_ptr<Header> header_;
     std::vector<std::shared_ptr<ledger::Transaction>> transactions_;

@@ -1,7 +1,8 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_vector.h>
+
+#include <cstdint>
 #include <string>
 
 // Forward declarations
@@ -18,7 +19,7 @@ namespace neo::cryptography::ecc
  */
 class Secp256r1
 {
-  public:
+   public:
     static constexpr size_t PRIVATE_KEY_SIZE = 32;
     static constexpr size_t PUBLIC_KEY_SIZE = 33;  // Compressed
     static constexpr size_t SIGNATURE_SIZE = 64;
@@ -98,7 +99,8 @@ class Secp256r1
     /**
      * @brief Decrypt private key from NEP2 format with custom scrypt parameters
      */
-    static io::ByteVector DecryptPrivateKey(const std::string& nep2, const std::string& passphrase, int scryptN, int scryptR, int scryptP);
+    static io::ByteVector DecryptPrivateKey(const std::string& nep2, const std::string& passphrase, int scryptN,
+                                            int scryptR, int scryptP);
 
     /**
      * @brief Convert private key to NEP2 format (encrypted)

@@ -6,10 +6,7 @@ HeadersPayload::HeadersPayload() = default;
 
 HeadersPayload::HeadersPayload(const std::vector<std::shared_ptr<ledger::BlockHeader>>& headers) : headers_(headers) {}
 
-const std::vector<std::shared_ptr<ledger::BlockHeader>>& HeadersPayload::GetHeaders() const
-{
-    return headers_;
-}
+const std::vector<std::shared_ptr<ledger::BlockHeader>>& HeadersPayload::GetHeaders() const { return headers_; }
 
 void HeadersPayload::SetHeaders(const std::vector<std::shared_ptr<ledger::BlockHeader>>& headers)
 {

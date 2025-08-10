@@ -1,10 +1,11 @@
-#include <algorithm>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/smartcontract/nef_file.h>
+
+#include <algorithm>
 #include <sstream>
 #include <stdexcept>
 
@@ -12,55 +13,25 @@ namespace neo::smartcontract
 {
 NefFile::NefFile() : compiler_(""), source_(""), checkSum_(0) {}
 
-const std::string& NefFile::GetCompiler() const
-{
-    return compiler_;
-}
+const std::string& NefFile::GetCompiler() const { return compiler_; }
 
-void NefFile::SetCompiler(const std::string& compiler)
-{
-    compiler_ = compiler;
-}
+void NefFile::SetCompiler(const std::string& compiler) { compiler_ = compiler; }
 
-const std::string& NefFile::GetSource() const
-{
-    return source_;
-}
+const std::string& NefFile::GetSource() const { return source_; }
 
-void NefFile::SetSource(const std::string& source)
-{
-    source_ = source;
-}
+void NefFile::SetSource(const std::string& source) { source_ = source; }
 
-const std::vector<MethodToken>& NefFile::GetTokens() const
-{
-    return tokens_;
-}
+const std::vector<MethodToken>& NefFile::GetTokens() const { return tokens_; }
 
-void NefFile::SetTokens(const std::vector<MethodToken>& tokens)
-{
-    tokens_ = tokens;
-}
+void NefFile::SetTokens(const std::vector<MethodToken>& tokens) { tokens_ = tokens; }
 
-const io::ByteVector& NefFile::GetScript() const
-{
-    return script_;
-}
+const io::ByteVector& NefFile::GetScript() const { return script_; }
 
-void NefFile::SetScript(const io::ByteVector& script)
-{
-    script_ = script;
-}
+void NefFile::SetScript(const io::ByteVector& script) { script_ = script; }
 
-uint32_t NefFile::GetCheckSum() const
-{
-    return checkSum_;
-}
+uint32_t NefFile::GetCheckSum() const { return checkSum_; }
 
-void NefFile::SetCheckSum(uint32_t checkSum)
-{
-    checkSum_ = checkSum;
-}
+void NefFile::SetCheckSum(uint32_t checkSum) { checkSum_ = checkSum; }
 
 uint32_t NefFile::ComputeChecksum() const
 {
@@ -134,8 +105,7 @@ void NefFile::Deserialize(io::BinaryReader& reader)
 {
     // Read the header
     uint32_t magic = reader.ReadUInt32();
-    if (magic != Magic)
-        throw std::runtime_error("Invalid NEF file: wrong magic");
+    if (magic != Magic) throw std::runtime_error("Invalid NEF file: wrong magic");
 
     compiler_ = reader.ReadFixedString(64);
 
@@ -144,13 +114,11 @@ void NefFile::Deserialize(io::BinaryReader& reader)
 
     // Read reserved byte (must be 0)
     uint8_t reserved = reader.ReadUInt8();
-    if (reserved != 0)
-        throw std::runtime_error("Invalid NEF file: reserved byte must be 0");
+    if (reserved != 0) throw std::runtime_error("Invalid NEF file: reserved byte must be 0");
 
     // Read the tokens
     int64_t tokenCount = reader.ReadVarInt();
-    if (tokenCount < 0 || tokenCount > 128)
-        throw std::runtime_error("Invalid NEF file: too many tokens");
+    if (tokenCount < 0 || tokenCount > 128) throw std::runtime_error("Invalid NEF file: too many tokens");
 
     tokens_.clear();
     tokens_.reserve(static_cast<size_t>(tokenCount));
@@ -163,21 +131,18 @@ void NefFile::Deserialize(io::BinaryReader& reader)
 
     // Read reserved bytes (must be 0)
     uint16_t reserved2 = reader.ReadUInt16();
-    if (reserved2 != 0)
-        throw std::runtime_error("Invalid NEF file: reserved bytes must be 0");
+    if (reserved2 != 0) throw std::runtime_error("Invalid NEF file: reserved bytes must be 0");
 
     // Read the script
     script_ = reader.ReadVarBytes();
-    if (script_.IsEmpty())
-        throw std::runtime_error("Invalid NEF file: script cannot be empty");
+    if (script_.IsEmpty()) throw std::runtime_error("Invalid NEF file: script cannot be empty");
 
     // Read the checksum
     checkSum_ = reader.ReadUInt32();
 
     // Verify the checksum
     uint32_t computedChecksum = ComputeChecksum();
-    if (checkSum_ != computedChecksum)
-        throw std::runtime_error("Invalid NEF file: checksum verification failed");
+    if (checkSum_ != computedChecksum) throw std::runtime_error("Invalid NEF file: checksum verification failed");
 }
 
 void NefFile::SerializeJson(io::JsonWriter& writer) const

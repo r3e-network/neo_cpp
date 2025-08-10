@@ -1,4 +1,3 @@
-#include <iostream>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -10,6 +9,8 @@
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/vm/script_builder.h>
+
+#include <iostream>
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -64,8 +65,7 @@ std::shared_ptr<ContractState> ContractManagement::GetContract(std::shared_ptr<p
 {
     auto key = GetStorageKey(PREFIX_CONTRACT, hash);
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return nullptr;
+    if (value.IsEmpty()) return nullptr;
 
     std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
     io::BinaryReader reader(stream);
@@ -89,14 +89,14 @@ std::shared_ptr<ContractState> ContractManagement::GetContract(const persistence
         // Create storage key for contract lookup
         auto key = contractMgmt->GetStorageKey(PREFIX_CONTRACT, hash);
         persistence::StorageKey storageKey(contractMgmt->GetId(), key);
-        
+
         // Query the DataCache directly (need to cast away const for GetAndChange)
         auto storageItem = const_cast<persistence::DataCache&>(snapshot).GetAndChange(storageKey);
         if (!storageItem || storageItem->GetValue().IsEmpty())
         {
             return nullptr;
         }
-        
+
         // Deserialize the contract from storage
         auto& value = storageItem->GetValue();
         std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
@@ -119,8 +119,7 @@ std::shared_ptr<ContractState> ContractManagement::CreateContract(std::shared_pt
     // Check if contract already exists
     auto key = GetStorageKey(PREFIX_CONTRACT, hash);
     auto value = GetStorageValue(snapshot, key);
-    if (!value.IsEmpty())
-        throw std::runtime_error("Contract already exists");
+    if (!value.IsEmpty()) throw std::runtime_error("Contract already exists");
 
     // Create contract
     auto contract = std::make_shared<ContractState>();
@@ -148,8 +147,7 @@ std::shared_ptr<ContractState> ContractManagement::UpdateContract(std::shared_pt
 {
     // Get contract
     auto contract = GetContract(snapshot, hash);
-    if (!contract)
-        throw std::runtime_error("Contract not found");
+    if (!contract) throw std::runtime_error("Contract not found");
 
     // Update contract
     contract->SetScript(script);
@@ -176,8 +174,7 @@ void ContractManagement::DestroyContract(std::shared_ptr<persistence::StoreView>
     // Check if contract exists
     auto key = GetStorageKey(PREFIX_CONTRACT, hash);
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        throw std::runtime_error("Contract not found");
+    if (value.IsEmpty()) throw std::runtime_error("Contract not found");
 
     // Delete contract
     DeleteStorageValue(snapshot, key);
@@ -204,16 +201,14 @@ int64_t ContractManagement::GetMinimumDeploymentFee(std::shared_ptr<persistence:
 {
     auto key = GetStorageKey(PREFIX_MINIMUM_DEPLOYMENT_FEE, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return 10 * 100000000;  // 10 GAS
+    if (value.IsEmpty()) return 10 * 100000000;  // 10 GAS
 
     return *reinterpret_cast<const int64_t*>(value.Data());
 }
 
 void ContractManagement::SetMinimumDeploymentFee(std::shared_ptr<persistence::StoreView> snapshot, int64_t fee) const
 {
-    if (fee < 0)
-        throw std::runtime_error("Fee cannot be negative");
+    if (fee < 0) throw std::runtime_error("Fee cannot be negative");
 
     auto key = GetStorageKey(PREFIX_MINIMUM_DEPLOYMENT_FEE, io::ByteVector{});
     io::ByteVector value(io::ByteSpan(reinterpret_cast<const uint8_t*>(&fee), sizeof(int64_t)));
@@ -253,8 +248,7 @@ bool ContractManagement::OnDeploy(ApplicationEngine& engine, std::shared_ptr<Con
         {
             // Call the deploy method
             std::vector<std::shared_ptr<vm::StackItem>> args;
-            if (data)
-                args.push_back(data);
+            if (data) args.push_back(data);
 
             engine.CallContract(contract->GetScriptHash(), "deploy", args, CallFlags::All);
             break;
@@ -285,8 +279,7 @@ bool ContractManagement::OnPersist(ApplicationEngine& engine)
 std::shared_ptr<vm::StackItem> ContractManagement::OnDeploy(ApplicationEngine& engine,
                                                             const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto scriptItem = args[0];
     auto manifestItem = args[1];
@@ -309,8 +302,7 @@ std::shared_ptr<vm::StackItem> ContractManagement::OnDeploy(ApplicationEngine& e
 
     // Get data if provided
     std::shared_ptr<vm::StackItem> data = vm::StackItem::Null();
-    if (args.size() >= 3)
-        data = args[2];
+    if (args.size() >= 3) data = args[2];
 
     // Call OnDeploy
     OnDeploy(engine, contract, data, false);
@@ -321,8 +313,7 @@ std::shared_ptr<vm::StackItem> ContractManagement::OnDeploy(ApplicationEngine& e
 std::shared_ptr<vm::StackItem> ContractManagement::OnUpdate(ApplicationEngine& engine,
                                                             const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto scriptItem = args[0];
     auto manifestItem = args[1];
@@ -339,8 +330,7 @@ std::shared_ptr<vm::StackItem> ContractManagement::OnUpdate(ApplicationEngine& e
 
     // Get data if provided
     std::shared_ptr<vm::StackItem> data = vm::StackItem::Null();
-    if (args.size() >= 3)
-        data = args[2];
+    if (args.size() >= 3) data = args[2];
 
     // Call OnDeploy
     OnDeploy(engine, contract, data, true);
@@ -362,25 +352,22 @@ std::shared_ptr<vm::StackItem> ContractManagement::OnDestroy(ApplicationEngine& 
     return vm::StackItem::Create(true);
 }
 
-std::shared_ptr<vm::StackItem>
-ContractManagement::OnGetContract(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> ContractManagement::OnGetContract(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto hashItem = args[0];
     auto hashBytes = hashItem->GetByteArray();
 
-    if (hashBytes.Size() != 20)
-        throw std::runtime_error("Invalid hash");
+    if (hashBytes.Size() != 20) throw std::runtime_error("Invalid hash");
 
     io::UInt160 hash;
     std::memcpy(hash.Data(), hashBytes.Data(), 20);
 
     // Get contract
     auto contract = GetContract(engine.GetSnapshot(), hash);
-    if (!contract)
-        return vm::StackItem::Create(nullptr);
+    if (!contract) return vm::StackItem::Create(nullptr);
 
     // Create result
     auto result = vm::StackItem::Create(std::vector<std::shared_ptr<vm::StackItem>>{
@@ -392,25 +379,21 @@ ContractManagement::OnGetContract(ApplicationEngine& engine, const std::vector<s
     return result;
 }
 
-std::shared_ptr<vm::StackItem>
-ContractManagement::OnGetMinimumDeploymentFee(ApplicationEngine& engine,
-                                              const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> ContractManagement::OnGetMinimumDeploymentFee(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     return vm::StackItem::Create(GetMinimumDeploymentFee(engine.GetSnapshot()));
 }
 
-std::shared_ptr<vm::StackItem>
-ContractManagement::OnSetMinimumDeploymentFee(ApplicationEngine& engine,
-                                              const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> ContractManagement::OnSetMinimumDeploymentFee(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto feeItem = args[0];
     int64_t fee = feeItem->GetInteger();
 
-    if (fee < 0)
-        throw std::runtime_error("Fee cannot be negative");
+    if (fee < 0) throw std::runtime_error("Fee cannot be negative");
 
     // Check if caller is committee using proper committee address verification
     // Implement complete committee authorization check
@@ -471,8 +454,7 @@ bool ContractManagement::HasMethod(std::shared_ptr<persistence::StoreView> snaps
                                    const std::string& method, int parameterCount) const
 {
     auto contract = GetContract(snapshot, hash);
-    if (!contract)
-        return false;
+    if (!contract) return false;
 
     auto manifest = manifest::ContractManifest::Parse(contract->GetManifest());
     auto abi = manifest.GetAbi();
@@ -480,15 +462,14 @@ bool ContractManagement::HasMethod(std::shared_ptr<persistence::StoreView> snaps
     // Check if the method exists in the ABI
     for (const auto& m : abi.GetMethods())
     {
-        if (m.GetName() == method && (parameterCount < 0 || m.GetParameters().size() == parameterCount))
-            return true;
+        if (m.GetName() == method && (parameterCount < 0 || m.GetParameters().size() == parameterCount)) return true;
     }
 
     return false;
 }
 
-std::vector<std::shared_ptr<ContractState>>
-ContractManagement::ListContracts(std::shared_ptr<persistence::StoreView> snapshot) const
+std::vector<std::shared_ptr<ContractState>> ContractManagement::ListContracts(
+    std::shared_ptr<persistence::StoreView> snapshot) const
 {
     std::vector<std::shared_ptr<ContractState>> contracts;
 
@@ -519,8 +500,7 @@ ContractManagement::ListContracts(std::shared_ptr<persistence::StoreView> snapsh
 std::shared_ptr<vm::StackItem> ContractManagement::OnHasMethod(ApplicationEngine& engine,
                                                                const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 3)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 3) throw std::runtime_error("Invalid arguments");
 
     auto hashItem = args[0];
     auto methodItem = args[1];
@@ -530,8 +510,7 @@ std::shared_ptr<vm::StackItem> ContractManagement::OnHasMethod(ApplicationEngine
     auto method = methodItem->GetString();
     auto parameterCount = static_cast<int>(parameterCountItem->GetInteger());
 
-    if (hashBytes.Size() != 20)
-        throw std::runtime_error("Invalid hash");
+    if (hashBytes.Size() != 20) throw std::runtime_error("Invalid hash");
 
     io::UInt160 hash;
     std::memcpy(hash.Data(), hashBytes.Data(), 20);
@@ -539,8 +518,8 @@ std::shared_ptr<vm::StackItem> ContractManagement::OnHasMethod(ApplicationEngine
     return vm::StackItem::Create(HasMethod(engine.GetSnapshot(), hash, method, parameterCount));
 }
 
-std::shared_ptr<vm::StackItem>
-ContractManagement::OnListContracts(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> ContractManagement::OnListContracts(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     auto contracts = ListContracts(engine.GetSnapshot());
 
@@ -557,8 +536,8 @@ ContractManagement::OnListContracts(ApplicationEngine& engine, const std::vector
     return vm::StackItem::Create(result);
 }
 
-std::vector<cryptography::ecc::ECPoint>
-ContractManagement::GetCommitteeFromNeoContract(const std::shared_ptr<persistence::DataCache>& snapshot)
+std::vector<cryptography::ecc::ECPoint> ContractManagement::GetCommitteeFromNeoContract(
+    const std::shared_ptr<persistence::DataCache>& snapshot)
 {
     // Implementation to get committee from NEO token contract
     std::vector<cryptography::ecc::ECPoint> committee;
@@ -693,12 +672,10 @@ io::UInt160 ContractManagement::GetScriptHashFromPublicKey(const cryptography::e
     return cryptography::Hash::Hash160(script.AsSpan());
 }
 
-std::shared_ptr<vm::StackItem>
-ContractManagement::OnGetContractById(ApplicationEngine& engine,
-                                      const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> ContractManagement::OnGetContractById(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto idItem = args[0];
     auto id = static_cast<int32_t>(idItem->GetInteger());
@@ -722,9 +699,8 @@ ContractManagement::OnGetContractById(ApplicationEngine& engine,
     return vm::StackItem::Null();
 }
 
-std::shared_ptr<vm::StackItem>
-ContractManagement::OnGetContractHashes(ApplicationEngine& engine,
-                                        const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> ContractManagement::OnGetContractHashes(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     // Get all contract hashes
     auto contracts = ListContracts(engine.GetSnapshot());

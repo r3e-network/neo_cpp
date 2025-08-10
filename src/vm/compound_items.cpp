@@ -1,7 +1,8 @@
-#include <algorithm>
 #include <neo/vm/compound_items.h>
 #include <neo/vm/exceptions.h>
 #include <neo/vm/reference_counter.h>
+
+#include <algorithm>
 #include <set>
 #include <stdexcept>
 
@@ -36,30 +37,15 @@ void ArrayItem::InitializeReferences()
     }
 }
 
-StackItemType ArrayItem::GetType() const
-{
-    return StackItemType::Array;
-}
+StackItemType ArrayItem::GetType() const { return StackItemType::Array; }
 
-bool ArrayItem::GetBoolean() const
-{
-    return true;
-}
+bool ArrayItem::GetBoolean() const { return true; }
 
-int64_t ArrayItem::GetInteger() const
-{
-    return 0;
-}
+int64_t ArrayItem::GetInteger() const { return 0; }
 
-std::vector<std::shared_ptr<StackItem>> ArrayItem::GetArray() const
-{
-    return value_;
-}
+std::vector<std::shared_ptr<StackItem>> ArrayItem::GetArray() const { return value_; }
 
-std::vector<std::shared_ptr<StackItem>> ArrayItem::GetStruct() const
-{
-    return value_;
-}
+std::vector<std::shared_ptr<StackItem>> ArrayItem::GetStruct() const { return value_; }
 
 void ArrayItem::Add(std::shared_ptr<StackItem> item)
 {
@@ -72,16 +58,14 @@ void ArrayItem::Add(std::shared_ptr<StackItem> item)
 
 std::shared_ptr<StackItem> ArrayItem::Get(size_t index) const
 {
-    if (index >= value_.size())
-        throw std::out_of_range("Index out of range");
+    if (index >= value_.size()) throw std::out_of_range("Index out of range");
 
     return value_[index];
 }
 
 void ArrayItem::Set(size_t index, std::shared_ptr<StackItem> item)
 {
-    if (index >= value_.size())
-        throw std::out_of_range("Index out of range");
+    if (index >= value_.size()) throw std::out_of_range("Index out of range");
 
     if (refCounter_)
     {
@@ -94,8 +78,7 @@ void ArrayItem::Set(size_t index, std::shared_ptr<StackItem> item)
 
 void ArrayItem::Remove(size_t index)
 {
-    if (index >= value_.size())
-        throw std::out_of_range("Index out of range");
+    if (index >= value_.size()) throw std::out_of_range("Index out of range");
 
     if (refCounter_)
     {
@@ -105,10 +88,7 @@ void ArrayItem::Remove(size_t index)
     value_.erase(value_.begin() + index);
 }
 
-size_t ArrayItem::Size() const
-{
-    return value_.size();
-}
+size_t ArrayItem::Size() const { return value_.size(); }
 
 void ArrayItem::Clear()
 {
@@ -126,10 +106,7 @@ void ArrayItem::Clear()
     value_.clear();
 }
 
-bool ArrayItem::Equals(const StackItem& other) const
-{
-    return this == &other;
-}
+bool ArrayItem::Equals(const StackItem& other) const { return this == &other; }
 
 std::shared_ptr<StackItem> ArrayItem::DeepCopy(ReferenceCounter* refCounter, bool asImmutable) const
 {
@@ -152,15 +129,9 @@ StructItem::StructItem(const std::vector<std::shared_ptr<StackItem>>& value, Ref
 {
 }
 
-StackItemType StructItem::GetType() const
-{
-    return StackItemType::Struct;
-}
+StackItemType StructItem::GetType() const { return StackItemType::Struct; }
 
-bool StructItem::GetBoolean() const
-{
-    return !value_.empty();
-}
+bool StructItem::GetBoolean() const { return !value_.empty(); }
 
 std::shared_ptr<StructItem> StructItem::Clone() const
 {
@@ -200,15 +171,12 @@ std::shared_ptr<StackItem> StructItem::DeepCopy(ReferenceCounter* refCounter, bo
 
 bool StructItem::Equals(const StackItem& other) const
 {
-    if (this == &other)
-        return true;
+    if (this == &other) return true;
 
-    if (other.GetType() != StackItemType::Struct)
-        return false;
+    if (other.GetType() != StackItemType::Struct) return false;
 
     auto otherArray = other.GetArray();
-    if (value_.size() != otherArray.size())
-        return false;
+    if (value_.size() != otherArray.size()) return false;
 
     // Use a static thread_local set to track visited pairs to prevent infinite recursion
     static thread_local std::set<std::pair<const StackItem*, const StackItem*>> visitedPairs;
@@ -226,8 +194,7 @@ bool StructItem::Equals(const StackItem& other) const
     bool result = true;
     for (size_t i = 0; i < value_.size() && result; i++)
     {
-        if (!value_[i]->Equals(*otherArray[i]))
-            result = false;
+        if (!value_[i]->Equals(*otherArray[i])) result = false;
     }
 
     // Remove this pair from the visited set
@@ -271,15 +238,9 @@ void MapItem::InitializeReferences()
     }
 }
 
-StackItemType MapItem::GetType() const
-{
-    return StackItemType::Map;
-}
+StackItemType MapItem::GetType() const { return StackItemType::Map; }
 
-bool MapItem::GetBoolean() const
-{
-    return true;
-}
+bool MapItem::GetBoolean() const { return true; }
 
 std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>> MapItem::GetMap() const
 {
@@ -288,17 +249,13 @@ std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>> MapItem::GetMap
     throw std::runtime_error("GetMap() is not supported for MapItem - use GetSize() and Get() methods instead");
 }
 
-size_t MapItem::GetSize() const
-{
-    return value_.size();
-}
+size_t MapItem::GetSize() const { return value_.size(); }
 
 std::optional<std::shared_ptr<StackItem>> MapItem::Get(const std::shared_ptr<StackItem>& key) const
 {
     for (const auto& [k, v] : value_)
     {
-        if (k->Equals(*key))
-            return v;
+        if (k->Equals(*key)) return v;
     }
 
     return std::nullopt;
@@ -351,10 +308,7 @@ void MapItem::Remove(const std::shared_ptr<StackItem>& key)
     }
 }
 
-size_t MapItem::Size() const
-{
-    return value_.size();
-}
+size_t MapItem::Size() const { return value_.size(); }
 
 void MapItem::Clear()
 {
@@ -373,10 +327,7 @@ void MapItem::Clear()
     value_.clear();
 }
 
-bool MapItem::Equals(const StackItem& other) const
-{
-    return this == &other;
-}
+bool MapItem::Equals(const StackItem& other) const { return this == &other; }
 
 std::shared_ptr<StackItem> MapItem::DeepCopy(ReferenceCounter* refCounter, bool asImmutable) const
 {

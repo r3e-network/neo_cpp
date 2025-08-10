@@ -160,7 +160,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:10332/health || exit 1
 
 # Default command
-CMD ["neo_node_app", "/opt/neo/config/production_config.json"]
+CMD ["neo_node", "/opt/neo/config/production_config.json"]
 EOF
 fi
 

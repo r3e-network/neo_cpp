@@ -10,7 +10,7 @@ namespace neo::io
  */
 class JsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */
@@ -43,9 +43,6 @@ class JsonSerializable
      * @brief Deserializes the object from a JSON string.
      * @param json The JSON string representation of the object.
      */
-    void FromJsonString(const std::string& json)
-    {
-        FromJson(nlohmann::json::parse(json));
-    }
+    void FromJsonString(const std::string& json) { FromJson(nlohmann::json::parse(json)); }
 };
 }  // namespace neo::io

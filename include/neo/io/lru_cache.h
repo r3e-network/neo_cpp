@@ -16,7 +16,7 @@ namespace neo::io
 template <typename TKey, typename TValue>
 class LRUCache
 {
-  public:
+   public:
     /**
      * @brief Constructs an LRUCache with the specified capacity.
      * @param capacity The maximum number of items the cache can hold.
@@ -24,8 +24,7 @@ class LRUCache
      */
     explicit LRUCache(size_t capacity) : capacity_(capacity)
     {
-        if (capacity == 0)
-            throw std::invalid_argument("Capacity must be greater than zero");
+        if (capacity == 0) throw std::invalid_argument("Capacity must be greater than zero");
     }
 
     /**
@@ -38,8 +37,7 @@ class LRUCache
         std::lock_guard<std::mutex> lock(mutex_);
 
         auto it = cache_.find(key);
-        if (it == cache_.end())
-            return std::nullopt;
+        if (it == cache_.end()) return std::nullopt;
 
         // Move the key to the front of the list
         keys_.erase(it->second.first);
@@ -59,8 +57,7 @@ class LRUCache
         std::lock_guard<std::mutex> lock(mutex_);
 
         // If capacity is zero, don't store anything
-        if (capacity_ == 0)
-            return;
+        if (capacity_ == 0) return;
 
         auto it = cache_.find(key);
         if (it != cache_.end())
@@ -96,8 +93,7 @@ class LRUCache
         std::lock_guard<std::mutex> lock(mutex_);
 
         auto it = cache_.find(key);
-        if (it == cache_.end())
-            return false;
+        if (it == cache_.end()) return false;
 
         keys_.erase(it->second.first);
         cache_.erase(it);
@@ -130,10 +126,7 @@ class LRUCache
      * @brief Gets the capacity of the cache.
      * @return The capacity of the cache.
      */
-    size_t Capacity() const
-    {
-        return capacity_;
-    }
+    size_t Capacity() const { return capacity_; }
 
     // Alias methods for compatibility
     /**
@@ -141,29 +134,20 @@ class LRUCache
      * @param key The key to look up.
      * @return The value if found, std::nullopt otherwise.
      */
-    std::optional<TValue> Get(const TKey& key)
-    {
-        return TryGet(key);
-    }
+    std::optional<TValue> Get(const TKey& key) { return TryGet(key); }
 
     /**
      * @brief Alias for Add.
      * @param key The key.
      * @param value The value.
      */
-    void Put(const TKey& key, const TValue& value)
-    {
-        Add(key, value);
-    }
+    void Put(const TKey& key, const TValue& value) { Add(key, value); }
 
     /**
      * @brief Alias for Count.
      * @return The number of items in the cache.
      */
-    size_t Size() const
-    {
-        return Count();
-    }
+    size_t Size() const { return Count(); }
 
     /**
      * @brief Checks if a key exists in the cache.
@@ -176,7 +160,7 @@ class LRUCache
         return cache_.find(key) != cache_.end();
     }
 
-  private:
+   private:
     size_t capacity_;
     std::list<TKey> keys_;
     std::unordered_map<TKey, std::pair<typename std::list<TKey>::iterator, TValue>> cache_;

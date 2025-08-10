@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/ijson_serializable.h>
@@ -8,6 +7,8 @@
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/witness.h>
+
+#include <cstdint>
 
 namespace neo::ledger
 {
@@ -18,7 +19,7 @@ class Block;
  */
 class BlockHeader : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty BlockHeader.
      */
@@ -200,7 +201,7 @@ class BlockHeader : public io::ISerializable, public io::IJsonSerializable
      */
     bool operator!=(const BlockHeader& other) const;
 
-  private:
+   private:
     uint32_t version_;
     io::UInt256 prevHash_;
     io::UInt256 merkleRoot_;

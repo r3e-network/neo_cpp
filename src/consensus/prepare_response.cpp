@@ -1,6 +1,7 @@
 #include <neo/consensus/prepare_response.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+
 #include <sstream>
 
 namespace neo::consensus
@@ -10,10 +11,7 @@ PrepareResponse::PrepareResponse(uint8_t viewNumber, const io::UInt256& preparat
 {
 }
 
-const io::UInt256& PrepareResponse::GetPreparationHash() const
-{
-    return preparationHash_;
-}
+const io::UInt256& PrepareResponse::GetPreparationHash() const { return preparationHash_; }
 
 void PrepareResponse::Serialize(io::BinaryWriter& writer) const
 {

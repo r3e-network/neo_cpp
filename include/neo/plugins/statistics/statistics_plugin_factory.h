@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <neo/plugins/plugin.h>
+
+#include <memory>
 
 namespace neo::plugins::statistics
 {
@@ -10,7 +11,7 @@ namespace neo::plugins::statistics
  */
 class StatisticsPluginFactory : public PluginFactory
 {
-  public:
+   public:
     /**
      * @brief Creates a plugin.
      * @return The plugin.

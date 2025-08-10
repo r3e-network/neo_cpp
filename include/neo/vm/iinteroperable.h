@@ -13,7 +13,7 @@ class IReferenceCounter;
  */
 class IInteroperable
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */

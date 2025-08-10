@@ -1,6 +1,7 @@
 #include <iostream>
 #include <neo/network/p2p/ip_endpoint.h>
 #include <neo/network/p2p/message.h>
+#include <neo/network/p2p/payloads/version_payload.h>
 
 using namespace neo::network::p2p;
 
@@ -12,12 +13,14 @@ int main()
     // Print the endpoint
     std::cout << "Endpoint: " << endpoint.ToString() << std::endl;
 
-    // Create a message
-    Message message(MessageCommand::Version, std::vector<uint8_t>{1, 2, 3, 4});
+    // Create a version payload and wrap in a message
+    auto payload = std::make_shared<payloads::VersionPayload>();
+    Message message(MessageCommand::Version, payload);
 
     // Print the message
     std::cout << "Message command: " << static_cast<int>(message.GetCommand()) << std::endl;
-    std::cout << "Message payload size: " << message.GetPayload().size() << std::endl;
+    // Print payload type
+    std::cout << "Message has payload" << std::endl;
 
     return 0;
 }

@@ -1,11 +1,12 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/iserializable.h>
 #include <neo/vm/stack_item.h>
+
+#include <memory>
 #include <sstream>
 
 namespace neo::persistence
@@ -15,7 +16,7 @@ namespace neo::persistence
  */
 class StorageItem : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty StorageItem.
      */
@@ -88,8 +89,7 @@ class StorageItem : public io::ISerializable
         if (!interoperable_obj_)
         {
             // Deserialize from value_ if no cached object
-            if (value_.empty())
-                return nullptr;
+            if (value_.empty()) return nullptr;
 
             auto obj = std::make_shared<T>();
 
@@ -202,7 +202,7 @@ class StorageItem : public io::ISerializable
      */
     bool IsConstant() const;
 
-  private:
+   private:
     io::ByteVector value_;
     mutable std::shared_ptr<void> interoperable_obj_;
 };

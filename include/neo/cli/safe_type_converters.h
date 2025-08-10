@@ -16,7 +16,7 @@ namespace neo::cli
  */
 class SafeTypeConverters
 {
-  public:
+   public:
     /**
      * @brief Type converter function that returns std::any for type safety
      */
@@ -78,17 +78,14 @@ class SafeTypeConverters
      * @param typeName The type name
      * @return true if exists
      */
-    bool HasConverter(const std::string& typeName) const
-    {
-        return converters_.find(typeName) != converters_.end();
-    }
+    bool HasConverter(const std::string& typeName) const { return converters_.find(typeName) != converters_.end(); }
 
     /**
      * @brief Initialize default converters
      */
     void InitializeDefaultConverters();
 
-  private:
+   private:
     std::unordered_map<std::string, SafeTypeConverter> converters_;
 
     SafeTypeConverters() = default;

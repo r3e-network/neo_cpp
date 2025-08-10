@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <neo/smartcontract/native/native_contract.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::smartcontract::native
@@ -11,7 +12,7 @@ namespace neo::smartcontract::native
  */
 class PolicyContract : public NativeContract
 {
-  public:
+   public:
     /**
      * @brief The contract ID.
      */
@@ -216,13 +217,13 @@ class PolicyContract : public NativeContract
      */
     bool PostPersist(ApplicationEngine& engine);
 
-  protected:
+   protected:
     /**
      * @brief Initializes the contract.
      */
     void Initialize() override;
 
-  private:
+   private:
     /**
      * @brief Handles the getFeePerByte method.
      * @param engine The engine.
@@ -346,9 +347,8 @@ class PolicyContract : public NativeContract
      * @param args The arguments.
      * @return The result.
      */
-    std::shared_ptr<vm::StackItem>
-    OnGetMaxValidUntilBlockIncrement(ApplicationEngine& engine,
-                                     const std::vector<std::shared_ptr<vm::StackItem>>& args);
+    std::shared_ptr<vm::StackItem> OnGetMaxValidUntilBlockIncrement(
+        ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
 
     /**
      * @brief Handles the setMaxValidUntilBlockIncrement method.
@@ -356,9 +356,8 @@ class PolicyContract : public NativeContract
      * @param args The arguments.
      * @return The result.
      */
-    std::shared_ptr<vm::StackItem>
-    OnSetMaxValidUntilBlockIncrement(ApplicationEngine& engine,
-                                     const std::vector<std::shared_ptr<vm::StackItem>>& args);
+    std::shared_ptr<vm::StackItem> OnSetMaxValidUntilBlockIncrement(
+        ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
 
     /**
      * @brief Handles the getMaxTraceableBlocks method.

@@ -1,4 +1,5 @@
 #include <neo/console_service/command_token.h>
+
 #include <sstream>
 #include <stdexcept>
 
@@ -7,25 +8,13 @@ namespace neo::console_service
 // CommandToken implementation
 CommandToken::CommandToken(CommandTokenType type, int offset) : type_(type), offset_(offset) {}
 
-CommandTokenType CommandToken::GetType() const
-{
-    return type_;
-}
+CommandTokenType CommandToken::GetType() const { return type_; }
 
-int CommandToken::GetOffset() const
-{
-    return offset_;
-}
+int CommandToken::GetOffset() const { return offset_; }
 
-const std::string& CommandToken::GetValue() const
-{
-    return value_;
-}
+const std::string& CommandToken::GetValue() const { return value_; }
 
-void CommandToken::SetValue(const std::string& value)
-{
-    value_ = value;
-}
+void CommandToken::SetValue(const std::string& value) { value_ = value; }
 
 std::vector<std::shared_ptr<CommandToken>> CommandToken::Parse(const std::string& command_line)
 {
@@ -215,10 +204,7 @@ std::shared_ptr<CommandSpaceToken> CommandSpaceToken::Parse(const std::string& c
     return token;
 }
 
-void CommandSpaceToken::Trim(std::vector<std::shared_ptr<CommandToken>>& args)
-{
-    CommandToken::Trim(args);
-}
+void CommandSpaceToken::Trim(std::vector<std::shared_ptr<CommandToken>>& args) { CommandToken::Trim(args); }
 
 // CommandQuoteToken implementation
 CommandQuoteToken::CommandQuoteToken(int offset, char quote_char)
@@ -235,10 +221,7 @@ std::shared_ptr<CommandQuoteToken> CommandQuoteToken::Parse(const std::string& c
     return token;
 }
 
-char CommandQuoteToken::GetQuoteChar() const
-{
-    return quote_char_;
-}
+char CommandQuoteToken::GetQuoteChar() const { return quote_char_; }
 
 // CommandStringToken implementation
 CommandStringToken::CommandStringToken(int offset, const std::string& value)

@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableCompound
 {
-  public:
+   public:
     // Compound type operations
     static void PACK(ExecutionEngine& engine, const Instruction& instruction);
     static void UNPACK(ExecutionEngine& engine, const Instruction& instruction);

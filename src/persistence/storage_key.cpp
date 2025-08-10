@@ -9,13 +9,14 @@
 // Redistribution and use in source and binary forms with or without
 // modifications are permitted.
 
-#include <algorithm>
-#include <bit>
-#include <mutex>
 #include <neo/io/memory_stream.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/smartcontract/native/contract_management.h>
+
+#include <algorithm>
+#include <bit>
+#include <mutex>
 
 using namespace neo::io;
 
@@ -46,12 +47,12 @@ constexpr T byteswap(T value) noexcept
 // Thread-safe contract ID cache
 class ContractIdCache
 {
-  private:
+   private:
     mutable std::shared_mutex mutex_;
     std::unordered_map<UInt160, int32_t> cache_;
     static constexpr size_t MAX_CACHE_SIZE = 1000;
 
-  public:
+   public:
     static ContractIdCache& GetInstance()
     {
         static ContractIdCache instance;
@@ -101,8 +102,7 @@ StorageKey::StorageKey(int32_t contractId, const io::ByteVector& key) : id_(cont
 
 StorageKey::StorageKey(const io::ByteVector& data)
 {
-    if (data.Size() < sizeof(int32_t))
-        throw std::invalid_argument("Invalid storage key data");
+    if (data.Size() < sizeof(int32_t)) throw std::invalid_argument("Invalid storage key data");
 
     // Read contract ID (little-endian)
     std::memcpy(&id_, data.Data(), sizeof(int32_t));
@@ -335,10 +335,7 @@ int32_t StorageKey::GetContractId() const
     return id_;
 }
 
-const io::ByteVector& StorageKey::GetKey() const
-{
-    return key_;
-}
+const io::ByteVector& StorageKey::GetKey() const { return key_; }
 
 io::ByteVector StorageKey::ToArray() const
 {
@@ -375,24 +372,19 @@ bool StorageKey::operator==(const StorageKey& other) const
     return id_ == other.id_ && key_ == other.key_;
 }
 
-bool StorageKey::operator!=(const StorageKey& other) const
-{
-    return !(*this == other);
-}
+bool StorageKey::operator!=(const StorageKey& other) const { return !(*this == other); }
 
 bool StorageKey::operator<(const StorageKey& other) const
 {
     // If both have script hashes, compare them first
     if (scriptHash_.has_value() && other.scriptHash_.has_value())
     {
-        if (scriptHash_.value() != other.scriptHash_.value())
-            return scriptHash_.value() < other.scriptHash_.value();
+        if (scriptHash_.value() != other.scriptHash_.value()) return scriptHash_.value() < other.scriptHash_.value();
         return key_ < other.key_;
     }
 
     // Otherwise compare contract IDs
-    if (id_ != other.id_)
-        return id_ < other.id_;
+    if (id_ != other.id_) return id_ < other.id_;
     return key_ < other.key_;
 }
 
@@ -415,8 +407,7 @@ io::ByteVector StorageKey::Build() const
 
 void StorageKey::FillHeader(std::span<uint8_t> data, int32_t id, uint8_t prefix)
 {
-    if (data.size() < PREFIX_LENGTH)
-        throw std::invalid_argument("Buffer too small for header");
+    if (data.size() < PREFIX_LENGTH) throw std::invalid_argument("Buffer too small for header");
 
     // Write contract ID (little-endian)
     data[0] = static_cast<uint8_t>(id & 0xFF);
@@ -476,19 +467,13 @@ StorageKey StorageKey::Create(int32_t id, uint8_t prefix, const io::UInt256& has
     return StorageKey(id, ByteVector(data.Data() + sizeof(int32_t), data.Size() - sizeof(int32_t)));
 }
 
-bool StorageKey::Equals(const StorageKey& other) const
-{
-    return *this == other;
-}
+bool StorageKey::Equals(const StorageKey& other) const { return *this == other; }
 
 int StorageKey::CompareTo(const StorageKey& other) const
 {
-    if (*this < other)
-        return -1;
-    if (other < *this)
-        return 1;
+    if (*this < other) return -1;
+    if (other < *this) return 1;
     return 0;
 }
-
 
 }  // namespace neo::persistence

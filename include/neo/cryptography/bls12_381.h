@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::cryptography::bls12_381
@@ -12,7 +13,7 @@ namespace neo::cryptography::bls12_381
  */
 class G1Point
 {
-  public:
+   public:
     /**
      * @brief Constructs a G1Point at infinity.
      */
@@ -113,7 +114,7 @@ class G1Point
      */
     static constexpr size_t UncompressedSize = 96;
 
-  private:
+   private:
     class Impl;
     std::unique_ptr<Impl> impl_;
 
@@ -125,7 +126,7 @@ class G1Point
  */
 class G2Point
 {
-  public:
+   public:
     /**
      * @brief Constructs a G2Point at infinity.
      */
@@ -226,7 +227,7 @@ class G2Point
      */
     static constexpr size_t UncompressedSize = 192;
 
-  private:
+   private:
     class Impl;
     std::unique_ptr<Impl> impl_;
 
@@ -238,7 +239,7 @@ class G2Point
  */
 class GTPoint
 {
-  public:
+   public:
     /**
      * @brief Constructs a GTPoint at identity.
      */
@@ -325,7 +326,7 @@ class GTPoint
      */
     static constexpr size_t Size = 576;
 
-  private:
+   private:
     class Impl;
     std::unique_ptr<Impl> impl_;
 

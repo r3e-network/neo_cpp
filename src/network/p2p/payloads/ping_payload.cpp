@@ -1,5 +1,6 @@
-#include <chrono>
 #include <neo/network/p2p/payloads/ping_payload.h>
+
+#include <chrono>
 #include <random>
 
 namespace neo::network::p2p::payloads
@@ -11,35 +12,17 @@ PingPayload::PingPayload(uint32_t lastBlockIndex, uint32_t timestamp, uint32_t n
 {
 }
 
-uint32_t PingPayload::GetTimestamp() const
-{
-    return timestamp_;
-}
+uint32_t PingPayload::GetTimestamp() const { return timestamp_; }
 
-void PingPayload::SetTimestamp(uint32_t timestamp)
-{
-    timestamp_ = timestamp;
-}
+void PingPayload::SetTimestamp(uint32_t timestamp) { timestamp_ = timestamp; }
 
-uint32_t PingPayload::GetNonce() const
-{
-    return nonce_;
-}
+uint32_t PingPayload::GetNonce() const { return nonce_; }
 
-void PingPayload::SetNonce(uint32_t nonce)
-{
-    nonce_ = nonce;
-}
+void PingPayload::SetNonce(uint32_t nonce) { nonce_ = nonce; }
 
-uint32_t PingPayload::GetLastBlockIndex() const
-{
-    return lastBlockIndex_;
-}
+uint32_t PingPayload::GetLastBlockIndex() const { return lastBlockIndex_; }
 
-void PingPayload::SetLastBlockIndex(uint32_t lastBlockIndex)
-{
-    lastBlockIndex_ = lastBlockIndex;
-}
+void PingPayload::SetLastBlockIndex(uint32_t lastBlockIndex) { lastBlockIndex_ = lastBlockIndex; }
 
 size_t PingPayload::GetSize() const
 {

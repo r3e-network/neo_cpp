@@ -35,7 +35,7 @@ enum class TransactionAttributeType : uint8_t
  */
 class TransactionAttributeBase
 {
-  public:
+   public:
     virtual ~TransactionAttributeBase() = default;
 
     /**

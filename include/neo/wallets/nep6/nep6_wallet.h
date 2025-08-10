@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
-#include <mutex>
 #include <neo/cryptography/key_pair.h>
 #include <neo/wallets/nep6/scrypt_parameters.h>
 #include <neo/wallets/wallet.h>
+
+#include <memory>
+#include <mutex>
 #include <string>
 
 namespace neo::wallets::nep6
@@ -14,7 +15,7 @@ namespace neo::wallets::nep6
  */
 class NEP6Account : public WalletAccount
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty NEP6Account.
      */
@@ -117,7 +118,7 @@ class NEP6Account : public WalletAccount
      */
     void FromJson(const nlohmann::json& json) override;
 
-  private:
+   private:
     std::string nep2Key_;
     nlohmann::json extra_;
     bool deployed_;
@@ -129,7 +130,7 @@ class NEP6Account : public WalletAccount
  */
 class NEP6Wallet : public Wallet
 {
-  public:
+   public:
     /**
      * @brief Constructs a NEP6Wallet with the specified path and password.
      * @param path The path.
@@ -231,7 +232,7 @@ class NEP6Wallet : public Wallet
      */
     void FromJson(const nlohmann::json& json) override;
 
-  private:
+   private:
     std::string password_;
     ScryptParameters scrypt_;
     nlohmann::json extra_;

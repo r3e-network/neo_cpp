@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/consensus/consensus_message.h>
 #include <neo/cryptography/witness.h>
 #include <neo/io/uint160.h>
 #include <neo/network/p2p/payloads/extensible_payload.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::consensus
@@ -17,7 +18,7 @@ namespace neo::consensus
  */
 class ConsensusPayloadHelper
 {
-  public:
+   public:
     /**
      * @brief The category name for consensus messages.
      */
@@ -31,9 +32,9 @@ class ConsensusPayloadHelper
      * @param validBlockEnd The ending block for validity.
      * @return The created ExtensiblePayload.
      */
-    static std::shared_ptr<network::p2p::payloads::ExtensiblePayload>
-    CreatePayload(std::shared_ptr<ConsensusMessage> message, const io::UInt160& sender, uint32_t validBlockStart,
-                  uint32_t validBlockEnd);
+    static std::shared_ptr<network::p2p::payloads::ExtensiblePayload> CreatePayload(
+        std::shared_ptr<ConsensusMessage> message, const io::UInt160& sender, uint32_t validBlockStart,
+        uint32_t validBlockEnd);
 
     /**
      * @brief Extracts a consensus message from an ExtensiblePayload.

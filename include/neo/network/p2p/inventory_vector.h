@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/ijson_serializable.h>
@@ -10,6 +9,8 @@
 #include <neo/io/uint256.h>
 #include <neo/network/p2p/inventory_type.h>
 
+#include <cstdint>
+
 namespace neo::network::p2p
 {
 /**
@@ -17,7 +18,7 @@ namespace neo::network::p2p
  */
 class InventoryVector : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty InventoryVector.
      */
@@ -92,7 +93,7 @@ class InventoryVector : public io::ISerializable, public io::IJsonSerializable
      */
     bool operator!=(const InventoryVector& other) const;
 
-  private:
+   private:
     InventoryType type_;
     io::UInt256 hash_;
 };

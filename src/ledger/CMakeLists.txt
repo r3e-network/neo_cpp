@@ -16,6 +16,7 @@ add_library(neo_ledger OBJECT
     coin_reference.cpp
     witness.cpp
     signer.cpp
+    witness_rule.cpp
 )
 
 # Set include directories

@@ -1,6 +1,7 @@
+#include <neo/cryptography/hash.h>
+
 #include <array>
 #include <cstring>
-#include <neo/cryptography/hash.h>
 
 namespace neo::cryptography
 {
@@ -24,10 +25,7 @@ constexpr std::array<uint64_t, KECCAK_ROUNDS> RC = {
 constexpr std::array<int, 25> rho_offsets = {0,  1,  62, 28, 27, 36, 44, 6,  55, 20, 3,  10, 43,
                                              25, 39, 41, 45, 15, 21, 8,  18, 2,  61, 56, 14};
 
-inline uint64_t rotl64(uint64_t n, int c)
-{
-    return (n << c) | (n >> (64 - c));
-}
+inline uint64_t rotl64(uint64_t n, int c) { return (n << c) | (n >> (64 - c)); }
 
 void keccakf(uint64_t state[25])
 {

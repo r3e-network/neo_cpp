@@ -1,12 +1,13 @@
 #pragma once
 
-#include <memory>
-#include <mutex>
 #include <neo/cryptography/ecc/keypair.h>
 #include <neo/io/json_serializable.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/wallets/wallet_account.h>
+
+#include <memory>
+#include <mutex>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -18,7 +19,7 @@ namespace neo::wallets
  */
 class Wallet : public io::JsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty Wallet.
      */
@@ -190,7 +191,7 @@ class Wallet : public io::JsonSerializable
      */
     void FromJson(const nlohmann::json& json) override;
 
-  private:
+   private:
     std::string path_;
     std::string name_;
     int32_t version_;

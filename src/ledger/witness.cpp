@@ -14,30 +14,18 @@ Witness::Witness(const io::ByteVector& invocationScript, const io::ByteVector& v
 {
 }
 
-const io::ByteVector& Witness::GetInvocationScript() const
-{
-    return invocationScript_;
-}
+const io::ByteVector& Witness::GetInvocationScript() const { return invocationScript_; }
 
-void Witness::SetInvocationScript(const io::ByteVector& invocationScript)
-{
-    invocationScript_ = invocationScript;
-}
+void Witness::SetInvocationScript(const io::ByteVector& invocationScript) { invocationScript_ = invocationScript; }
 
-const io::ByteVector& Witness::GetVerificationScript() const
-{
-    return verificationScript_;
-}
+const io::ByteVector& Witness::GetVerificationScript() const { return verificationScript_; }
 
 void Witness::SetVerificationScript(const io::ByteVector& verificationScript)
 {
     verificationScript_ = verificationScript;
 }
 
-io::UInt160 Witness::GetScriptHash() const
-{
-    return cryptography::Hash::Hash160(verificationScript_.AsSpan());
-}
+io::UInt160 Witness::GetScriptHash() const { return cryptography::Hash::Hash160(verificationScript_.AsSpan()); }
 
 int Witness::GetSize() const
 {
@@ -80,8 +68,5 @@ bool Witness::operator==(const Witness& other) const
     return invocationScript_ == other.invocationScript_ && verificationScript_ == other.verificationScript_;
 }
 
-bool Witness::operator!=(const Witness& other) const
-{
-    return !(*this == other);
-}
+bool Witness::operator!=(const Witness& other) const { return !(*this == other); }
 }  // namespace neo::ledger

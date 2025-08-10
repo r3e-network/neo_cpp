@@ -1,7 +1,5 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/core/logging.h>
 #include <neo/ledger/memory_pool.h>
 #include <neo/network/p2p/message.h>
@@ -18,6 +16,9 @@
 #include <neo/network/p2p/payloads/transaction_payload.h>
 #include <neo/network/p2p/payloads/version_payload.h>
 #include <neo/persistence/data_cache.h>
+
+#include <functional>
+#include <memory>
 #include <queue>
 #include <unordered_set>
 
@@ -30,7 +31,7 @@ namespace neo::network::p2p
  */
 class ProtocolHandler
 {
-  public:
+   public:
     using SendMessageCallback = std::function<void(const io::UInt256& peer_id, const Message& message)>;
     using BroadcastCallback = std::function<void(const Message& message, const std::vector<io::UInt256>& exclude)>;
     using DisconnectCallback = std::function<void(const io::UInt256& peer_id, const std::string& reason)>;
@@ -48,7 +49,7 @@ class ProtocolHandler
         std::chrono::seconds ping_timeout{60};
     };
 
-  private:
+   private:
     Config config_;
     std::shared_ptr<core::Logger> logger_;
     std::shared_ptr<persistence::DataCache> blockchain_;
@@ -75,25 +76,16 @@ class ProtocolHandler
     std::unordered_map<io::UInt256, PeerState> peer_states_;
     mutable std::mutex mutex_;
 
-  public:
+   public:
     ProtocolHandler(const Config& config, std::shared_ptr<persistence::DataCache> blockchain,
                     std::shared_ptr<ledger::MemoryPool> mempool);
 
     /**
      * @brief Set callbacks
      */
-    void SetSendCallback(SendMessageCallback callback)
-    {
-        send_callback_ = callback;
-    }
-    void SetBroadcastCallback(BroadcastCallback callback)
-    {
-        broadcast_callback_ = callback;
-    }
-    void SetDisconnectCallback(DisconnectCallback callback)
-    {
-        disconnect_callback_ = callback;
-    }
+    void SetSendCallback(SendMessageCallback callback) { send_callback_ = callback; }
+    void SetBroadcastCallback(BroadcastCallback callback) { broadcast_callback_ = callback; }
+    void SetDisconnectCallback(DisconnectCallback callback) { disconnect_callback_ = callback; }
 
     /**
      * @brief Handle new peer connection
@@ -145,7 +137,7 @@ class ProtocolHandler
      */
     size_t GetHandshakedPeerCount() const;
 
-  private:
+   private:
     // Message handlers
     void HandleVersion(const io::UInt256& peer_id, const payloads::VersionPayload& payload);
     void HandleVerack(const io::UInt256& peer_id);

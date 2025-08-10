@@ -1,10 +1,11 @@
 #pragma once
 
-#include <atomic>
-#include <memory>
 #include <neo/node/neo_system.h>
 #include <neo/plugins/plugin.h>
 #include <neo/rpc/rpc_server.h>
+
+#include <atomic>
+#include <memory>
 #include <string>
 
 namespace neo::plugins
@@ -14,7 +15,7 @@ namespace neo::plugins
  */
 class PluginBase : public Plugin
 {
-  public:
+   public:
     /**
      * @brief Constructs a PluginBase.
      * @param name The name.
@@ -81,7 +82,7 @@ class PluginBase : public Plugin
      */
     bool IsRunning() const override;
 
-  protected:
+   protected:
     /**
      * @brief Initializes the plugin.
      * @param settings The settings.
@@ -113,7 +114,7 @@ class PluginBase : public Plugin
      */
     std::shared_ptr<rpc::RpcServer> GetRPCServer() const;
 
-  private:
+   private:
     std::string name_;
     std::string description_;
     std::string version_;
@@ -130,14 +131,11 @@ class PluginBase : public Plugin
 template <typename T>
 class PluginFactoryBase : public PluginFactory
 {
-  public:
+   public:
     /**
      * @brief Creates a plugin.
      * @return The plugin.
      */
-    std::shared_ptr<Plugin> CreatePlugin() override
-    {
-        return std::shared_ptr<Plugin>(new T());
-    }
+    std::shared_ptr<Plugin> CreatePlugin() override { return std::shared_ptr<Plugin>(new T()); }
 };
 }  // namespace neo::plugins

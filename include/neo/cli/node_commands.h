@@ -1,6 +1,7 @@
 #pragma once
 
 #include <neo/cli/main_service.h>
+
 #include <string>
 #include <vector>
 
@@ -11,7 +12,7 @@ namespace neo::cli
  */
 class NodeCommands
 {
-  public:
+   public:
     /**
      * @brief Constructs a NodeCommands.
      * @param service The main service.
@@ -44,7 +45,7 @@ class NodeCommands
      */
     bool HandleShowPeers(const std::vector<std::string>& args);
 
-  private:
+   private:
     MainService& service_;
 };
 }  // namespace neo::cli

@@ -12,7 +12,7 @@ class StackItem;
  */
 class IReferenceCounter
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */

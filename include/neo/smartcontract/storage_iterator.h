@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
+
+#include <memory>
 #include <utility>
 #include <vector>
 
@@ -19,7 +20,7 @@ namespace neo::smartcontract
  */
 class StorageIterator
 {
-  public:
+   public:
     /**
      * @brief Constructs a StorageIterator.
      * @param snapshot The data cache snapshot.
@@ -47,7 +48,7 @@ class StorageIterator
      */
     std::pair<io::ByteVector, io::ByteVector> GetCurrent() const;
 
-  private:
+   private:
     std::shared_ptr<persistence::DataCache> snapshot_;
     persistence::StorageKey prefix_;
     std::vector<std::pair<persistence::StorageKey, persistence::StorageItem>> entries_;

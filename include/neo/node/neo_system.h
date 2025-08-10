@@ -1,7 +1,5 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/mempool.h>
 #include <neo/network/p2p_server.h>
@@ -9,6 +7,9 @@
 #include <neo/protocol_settings.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/native_contract.h>
+
+#include <functional>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -22,7 +23,7 @@ namespace neo::node
  */
 class NeoSystem
 {
-  public:
+   public:
     /**
      * @brief Constructs a NeoSystem with the given settings.
      * @param protocolSettings The protocol settings
@@ -76,19 +77,13 @@ class NeoSystem
      * @brief Gets the memory pool instance (alias for GetMemoryPool).
      * @return The memory pool
      */
-    std::shared_ptr<ledger::MemoryPool> GetMemPool() const
-    {
-        return GetMemoryPool();
-    }
+    std::shared_ptr<ledger::MemoryPool> GetMemPool() const { return GetMemoryPool(); }
 
     /**
      * @brief Gets the local P2P node instance.
      * @return The local P2P node
      */
-    std::shared_ptr<network::P2PServer> GetLocalNode() const
-    {
-        return GetP2PServer();
-    }
+    std::shared_ptr<network::P2PServer> GetLocalNode() const { return GetP2PServer(); }
 
     /**
      * @brief Gets the P2P server instance
@@ -106,10 +101,7 @@ class NeoSystem
      * @brief Gets a snapshot of the data cache (alias for GetDataCache).
      * @return The data cache snapshot
      */
-    std::shared_ptr<persistence::DataCache> GetSnapshot() const
-    {
-        return GetDataCache();
-    }
+    std::shared_ptr<persistence::DataCache> GetSnapshot() const { return GetDataCache(); }
 
     /**
      * @brief Creates an application engine for smart contract execution
@@ -119,10 +111,9 @@ class NeoSystem
      * @param gas The gas limit
      * @return The application engine
      */
-    std::unique_ptr<smartcontract::ApplicationEngine>
-    CreateApplicationEngine(smartcontract::TriggerType trigger, const io::ISerializable* container,
-                            const ledger::Block* persistingBlock = nullptr,
-                            int64_t gas = smartcontract::ApplicationEngine::TestModeGas);
+    std::unique_ptr<smartcontract::ApplicationEngine> CreateApplicationEngine(
+        smartcontract::TriggerType trigger, const io::ISerializable* container,
+        const ledger::Block* persistingBlock = nullptr, int64_t gas = smartcontract::ApplicationEngine::TestModeGas);
 
     /**
      * @brief Registers a native contract
@@ -153,10 +144,7 @@ class NeoSystem
      * @brief Gets the current block index (alias for GetCurrentBlockHeight).
      * @return The current block index
      */
-    uint32_t GetCurrentBlockIndex() const
-    {
-        return GetCurrentBlockHeight();
-    }
+    uint32_t GetCurrentBlockIndex() const { return GetCurrentBlockHeight(); }
 
     /**
      * @brief Gets the current block hash
@@ -197,7 +185,7 @@ class NeoSystem
      */
     std::string GetSystemStats() const;
 
-  private:
+   private:
     // Core components
     std::shared_ptr<ProtocolSettings> protocolSettings_;
     std::shared_ptr<persistence::DataCache> dataCache_;

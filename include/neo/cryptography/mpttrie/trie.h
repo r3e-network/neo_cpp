@@ -1,13 +1,14 @@
 #pragma once
 
-#include <cstddef>
-#include <cstdint>
-#include <memory>
 #include <neo/cryptography/mpttrie/cache.h>
 #include <neo/cryptography/mpttrie/node.h>
 #include <neo/io/byte_span.h>
 #include <neo/io/uint256.h>
 #include <neo/persistence/istore.h>
+
+#include <cstddef>
+#include <cstdint>
+#include <memory>
 #include <vector>
 
 namespace neo::cryptography::mpttrie
@@ -28,7 +29,7 @@ namespace neo::cryptography::mpttrie
  */
 class Trie
 {
-  public:
+   public:
     /**
      * @brief Constructs a Trie with the given store and root.
      * @param store The store snapshot for persistence.
@@ -91,7 +92,7 @@ class Trie
      */
     std::vector<io::ByteVector> GetProof(io::ByteSpan key) const;
 
-  private:
+   private:
     std::shared_ptr<persistence::IStoreSnapshot> store_;
     std::unique_ptr<Cache> cache_;
     std::unique_ptr<Node> root_;

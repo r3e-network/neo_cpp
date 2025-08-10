@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableConstants
 {
-  public:
+   public:
     /**
      * @brief Pushes a 1-byte signed integer onto the stack.
      * @param engine The execution engine.

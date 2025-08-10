@@ -1,10 +1,11 @@
 #pragma once
 
+#include <neo/core/logging.h>
+
 #include <atomic>
 #include <chrono>
 #include <memory>
 #include <mutex>
-#include <neo/core/logging.h>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -27,13 +28,13 @@ enum class MetricType
  */
 class Metric
 {
-  protected:
+   protected:
     std::string name_;
     std::string description_;
     std::unordered_map<std::string, std::string> labels_;
     MetricType type_;
 
-  public:
+   public:
     Metric(const std::string& name, const std::string& description, MetricType type)
         : name_(name), description_(description), type_(type)
     {
@@ -41,23 +42,11 @@ class Metric
 
     virtual ~Metric() = default;
 
-    const std::string& GetName() const
-    {
-        return name_;
-    }
-    const std::string& GetDescription() const
-    {
-        return description_;
-    }
-    MetricType GetType() const
-    {
-        return type_;
-    }
+    const std::string& GetName() const { return name_; }
+    const std::string& GetDescription() const { return description_; }
+    MetricType GetType() const { return type_; }
 
-    void SetLabel(const std::string& key, const std::string& value)
-    {
-        labels_[key] = value;
-    }
+    void SetLabel(const std::string& key, const std::string& value) { labels_[key] = value; }
 
     virtual std::string ToPrometheus() const = 0;
 };
@@ -67,21 +56,15 @@ class Metric
  */
 class Counter : public Metric
 {
-  private:
+   private:
     std::atomic<uint64_t> value_{0};
 
-  public:
+   public:
     Counter(const std::string& name, const std::string& description) : Metric(name, description, MetricType::Counter) {}
 
-    void Increment(uint64_t delta = 1)
-    {
-        value_.fetch_add(delta, std::memory_order_relaxed);
-    }
+    void Increment(uint64_t delta = 1) { value_.fetch_add(delta, std::memory_order_relaxed); }
 
-    uint64_t Get() const
-    {
-        return value_.load(std::memory_order_relaxed);
-    }
+    uint64_t Get() const { return value_.load(std::memory_order_relaxed); }
 
     std::string ToPrometheus() const override;
 };
@@ -91,16 +74,13 @@ class Counter : public Metric
  */
 class Gauge : public Metric
 {
-  private:
+   private:
     std::atomic<double> value_{0.0};
 
-  public:
+   public:
     Gauge(const std::string& name, const std::string& description) : Metric(name, description, MetricType::Gauge) {}
 
-    void Set(double value)
-    {
-        value_.store(value, std::memory_order_relaxed);
-    }
+    void Set(double value) { value_.store(value, std::memory_order_relaxed); }
 
     void Increment(double delta = 1.0)
     {
@@ -113,15 +93,9 @@ class Gauge : public Metric
         } while (!value_.compare_exchange_weak(current, desired));
     }
 
-    void Decrement(double delta = 1.0)
-    {
-        Increment(-delta);
-    }
+    void Decrement(double delta = 1.0) { Increment(-delta); }
 
-    double Get() const
-    {
-        return value_.load(std::memory_order_relaxed);
-    }
+    double Get() const { return value_.load(std::memory_order_relaxed); }
 
     std::string ToPrometheus() const override;
 };
@@ -131,14 +105,14 @@ class Gauge : public Metric
  */
 class Histogram : public Metric
 {
-  private:
+   private:
     mutable std::mutex mutex_;
     std::vector<double> buckets_;
     std::vector<uint64_t> bucket_counts_;
     uint64_t count_{0};
     double sum_{0.0};
 
-  public:
+   public:
     Histogram(const std::string& name, const std::string& description,
               const std::vector<double>& buckets = {0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10})
         : Metric(name, description, MetricType::Histogram), buckets_(buckets), bucket_counts_(buckets.size() + 1, 0)
@@ -154,20 +128,17 @@ class Histogram : public Metric
  */
 class Timer
 {
-  private:
+   private:
     std::shared_ptr<Histogram> histogram_;
     std::chrono::steady_clock::time_point start_;
 
-  public:
+   public:
     explicit Timer(std::shared_ptr<Histogram> histogram)
         : histogram_(histogram), start_(std::chrono::steady_clock::now())
     {
     }
 
-    ~Timer()
-    {
-        Stop();
-    }
+    ~Timer() { Stop(); }
 
     void Stop()
     {
@@ -186,7 +157,7 @@ class Timer
  */
 class MetricsRegistry
 {
-  private:
+   private:
     mutable std::mutex mutex_;
     std::unordered_map<std::string, std::shared_ptr<Metric>> metrics_;
     static std::shared_ptr<MetricsRegistry> instance_;
@@ -194,7 +165,7 @@ class MetricsRegistry
 
     MetricsRegistry() = default;
 
-  public:
+   public:
     static std::shared_ptr<MetricsRegistry> GetInstance();
 
     template <typename T>
@@ -257,7 +228,7 @@ struct HealthCheckResult
  */
 class IHealthCheck
 {
-  public:
+   public:
     virtual ~IHealthCheck() = default;
     virtual HealthCheckResult Check() = 0;
     virtual std::string GetName() const = 0;
@@ -268,7 +239,7 @@ class IHealthCheck
  */
 class HealthCheckRegistry
 {
-  private:
+   private:
     mutable std::mutex mutex_;
     std::unordered_map<std::string, std::shared_ptr<IHealthCheck>> checks_;
     static std::shared_ptr<HealthCheckRegistry> instance_;
@@ -276,7 +247,7 @@ class HealthCheckRegistry
 
     HealthCheckRegistry() = default;
 
-  public:
+   public:
     static std::shared_ptr<HealthCheckRegistry> GetInstance();
 
     void Register(const std::string& name, std::shared_ptr<IHealthCheck> check);
@@ -299,13 +270,13 @@ class HealthCheckRegistry
 };
 
 // Convenience macros for metrics
-#define METRICS_COUNTER(name, description)                                                                             \
+#define METRICS_COUNTER(name, description) \
     neo::monitoring::MetricsRegistry::GetInstance()->Register<neo::monitoring::Counter>(name, description)
 
-#define METRICS_GAUGE(name, description)                                                                               \
+#define METRICS_GAUGE(name, description) \
     neo::monitoring::MetricsRegistry::GetInstance()->Register<neo::monitoring::Gauge>(name, description)
 
-#define METRICS_HISTOGRAM(name, description)                                                                           \
+#define METRICS_HISTOGRAM(name, description) \
     neo::monitoring::MetricsRegistry::GetInstance()->Register<neo::monitoring::Histogram>(name, description)
 
 #define METRICS_TIMER(histogram) neo::monitoring::Timer timer(histogram)

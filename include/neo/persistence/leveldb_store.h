@@ -4,12 +4,13 @@
 #include <leveldb/db.h>
 #include <leveldb/filter_policy.h>
 #include <leveldb/write_batch.h>
-#include <memory>
-#include <mutex>
 #include <neo/core/logging.h>
 #include <neo/persistence/istore.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
+
+#include <memory>
+#include <mutex>
 #include <string>
 
 namespace neo::persistence
@@ -36,7 +37,7 @@ struct LevelDbConfig
  */
 class LevelDbStore : public IStore
 {
-  private:
+   private:
     LevelDbConfig config_;
     std::unique_ptr<leveldb::DB> db_;
     std::unique_ptr<leveldb::Cache> cache_;
@@ -49,7 +50,7 @@ class LevelDbStore : public IStore
     mutable std::atomic<uint64_t> write_count_{0};
     mutable std::atomic<uint64_t> delete_count_{0};
 
-  public:
+   public:
     /**
      * @brief Construct a new LevelDB store
      * @param config Configuration options
@@ -72,10 +73,7 @@ class LevelDbStore : public IStore
     /**
      * @brief Check if database is open
      */
-    bool IsOpen() const
-    {
-        return db_ != nullptr;
-    }
+    bool IsOpen() const { return db_ != nullptr; }
 
     // StorageKey/StorageItem specific methods
     void Put(const StorageKey& key, const StorageItem& value);
@@ -84,25 +82,25 @@ class LevelDbStore : public IStore
     void Delete(const StorageKey& key);
     std::vector<std::pair<StorageKey, StorageItem>> Find(const io::ByteSpan& keyPrefix) const;
     void Clear();
-    
+
     // IStore interface implementation
     void Put(const io::ByteVector& key, const io::ByteVector& value) override;
     std::optional<io::ByteVector> TryGet(const io::ByteVector& key) const override;
     bool Contains(const io::ByteVector& key) const override;
     void Delete(const io::ByteVector& key) override;
-    std::vector<std::pair<io::ByteVector, io::ByteVector>> Find(const io::ByteVector* prefix = nullptr,
-                                                              SeekDirection direction = SeekDirection::Forward) const override;
+    std::vector<std::pair<io::ByteVector, io::ByteVector>> Find(
+        const io::ByteVector* prefix = nullptr, SeekDirection direction = SeekDirection::Forward) const override;
 
     /**
      * @brief Batch write operations for efficiency
      */
     class WriteBatch
     {
-      private:
+       private:
         leveldb::WriteBatch batch_;
         LevelDbStore* store_;
 
-      public:
+       public:
         explicit WriteBatch(LevelDbStore* store) : store_(store) {}
 
         void Put(const StorageKey& key, const StorageItem& value);
@@ -133,7 +131,7 @@ class LevelDbStore : public IStore
      */
     bool Backup(const std::string& backup_path);
 
-  private:
+   private:
     /**
      * @brief Convert StorageKey to LevelDB key
      */

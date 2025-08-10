@@ -1,9 +1,10 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/vm/stack_item.h>
+
+#include <cstdint>
 #include <vector>
 
 namespace neo::smartcontract::native
@@ -13,7 +14,7 @@ namespace neo::smartcontract::native
  */
 class IdList
 {
-  public:
+   public:
     /**
      * @brief Constructs an IdList.
      */
@@ -75,7 +76,7 @@ class IdList
      */
     void Deserialize(io::BinaryReader& reader);
 
-  private:
+   private:
     std::vector<uint64_t> ids_;
 };
 }  // namespace neo::smartcontract::native

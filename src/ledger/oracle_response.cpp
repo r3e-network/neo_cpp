@@ -11,35 +11,17 @@ OracleResponse::OracleResponse(uint64_t id, OracleResponseCode code, const io::B
 {
 }
 
-uint64_t OracleResponse::GetId() const
-{
-    return id_;
-}
+uint64_t OracleResponse::GetId() const { return id_; }
 
-void OracleResponse::SetId(uint64_t id)
-{
-    id_ = id;
-}
+void OracleResponse::SetId(uint64_t id) { id_ = id; }
 
-OracleResponseCode OracleResponse::GetCode() const
-{
-    return code_;
-}
+OracleResponseCode OracleResponse::GetCode() const { return code_; }
 
-void OracleResponse::SetCode(OracleResponseCode code)
-{
-    code_ = code;
-}
+void OracleResponse::SetCode(OracleResponseCode code) { code_ = code; }
 
-const io::ByteVector& OracleResponse::GetResult() const
-{
-    return result_;
-}
+const io::ByteVector& OracleResponse::GetResult() const { return result_; }
 
-void OracleResponse::SetResult(const io::ByteVector& result)
-{
-    result_ = result;
-}
+void OracleResponse::SetResult(const io::ByteVector& result) { result_ = result; }
 
 void OracleResponse::Serialize(io::BinaryWriter& writer) const
 {
@@ -76,8 +58,5 @@ bool OracleResponse::operator==(const OracleResponse& other) const
            result_ == other.result_;
 }
 
-bool OracleResponse::operator!=(const OracleResponse& other) const
-{
-    return !(*this == other);
-}
+bool OracleResponse::operator!=(const OracleResponse& other) const { return !(*this == other); }
 }  // namespace neo::ledger

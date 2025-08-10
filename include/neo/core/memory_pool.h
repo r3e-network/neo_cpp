@@ -15,7 +15,7 @@ namespace neo::core
 template <typename T>
 class MemoryPool
 {
-  public:
+   public:
     /**
      * @brief Constructs a memory pool with initial capacity
      * @param initial_size Initial number of objects to pre-allocate
@@ -41,18 +41,18 @@ class MemoryPool
     std::unique_ptr<T> acquire(Args&&... args)
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        
+
         if (!pool_.empty())
         {
             auto obj = std::move(pool_.back());
             pool_.pop_back();
-            
+
             // Reset the object with new values
             *obj = T(std::forward<Args>(args)...);
             reused_count_++;
             return obj;
         }
-        
+
         // Pool is empty, create new object
         allocated_count_++;
         return std::make_unique<T>(std::forward<Args>(args)...);
@@ -64,11 +64,10 @@ class MemoryPool
      */
     void release(std::unique_ptr<T> obj)
     {
-        if (!obj)
-            return;
-            
+        if (!obj) return;
+
         std::lock_guard<std::mutex> lock(mutex_);
-        
+
         // Only keep objects if we haven't reached max size
         if (pool_.size() < max_size_)
         {
@@ -106,7 +105,7 @@ class MemoryPool
         pool_.clear();
     }
 
-  private:
+   private:
     mutable std::mutex mutex_;
     std::vector<std::unique_ptr<T>> pool_;
     size_t max_size_;
@@ -119,7 +118,7 @@ class MemoryPool
  */
 class MemoryPoolManager
 {
-  public:
+   public:
     static MemoryPoolManager& instance()
     {
         static MemoryPoolManager instance;
@@ -128,13 +127,13 @@ class MemoryPoolManager
 
     // Specialized pools for frequently allocated objects
     MemoryPool<std::vector<uint8_t>>& byte_vector_pool() { return byte_vector_pool_; }
-    
+
     /**
      * @brief Reports memory pool statistics
      */
     void report_statistics() const;
 
-  private:
+   private:
     MemoryPoolManager() = default;
     ~MemoryPoolManager() = default;
     MemoryPoolManager(const MemoryPoolManager&) = delete;
@@ -151,11 +150,8 @@ class MemoryPoolManager
 template <typename T>
 class PooledObject
 {
-  public:
-    explicit PooledObject(std::unique_ptr<T> obj, MemoryPool<T>* pool)
-        : obj_(std::move(obj)), pool_(pool)
-    {
-    }
+   public:
+    explicit PooledObject(std::unique_ptr<T> obj, MemoryPool<T>* pool) : obj_(std::move(obj)), pool_(pool) {}
 
     ~PooledObject()
     {
@@ -166,8 +162,7 @@ class PooledObject
     }
 
     // Move-only semantics
-    PooledObject(PooledObject&& other) noexcept
-        : obj_(std::move(other.obj_)), pool_(other.pool_)
+    PooledObject(PooledObject&& other) noexcept : obj_(std::move(other.obj_)), pool_(other.pool_)
     {
         other.pool_ = nullptr;
     }
@@ -198,7 +193,7 @@ class PooledObject
     T* get() { return obj_.get(); }
     const T* get() const { return obj_.get(); }
 
-  private:
+   private:
     std::unique_ptr<T> obj_;
     MemoryPool<T>* pool_;
 };

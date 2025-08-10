@@ -14,7 +14,7 @@ namespace neo::json
 template <typename TKey, typename TValue>
 class OrderedDictionary
 {
-  private:
+   private:
     struct Item
     {
         TKey key;
@@ -27,7 +27,7 @@ class OrderedDictionary
     std::vector<Item> items_;
     std::unordered_map<TKey, size_t> key_to_index_;
 
-  public:
+   public:
     using iterator = typename std::vector<Item>::iterator;
     using const_iterator = typename std::vector<Item>::const_iterator;
 
@@ -60,19 +60,13 @@ class OrderedDictionary
      * @brief Gets the number of elements.
      * @return The number of elements.
      */
-    size_t size() const
-    {
-        return items_.size();
-    }
+    size_t size() const { return items_.size(); }
 
     /**
      * @brief Checks if the dictionary is empty.
      * @return True if empty, false otherwise.
      */
-    bool empty() const
-    {
-        return items_.empty();
-    }
+    bool empty() const { return items_.empty(); }
 
     /**
      * @brief Clears all elements.
@@ -132,10 +126,7 @@ class OrderedDictionary
      * @param key The key to check.
      * @return True if the key exists, false otherwise.
      */
-    bool contains(const TKey& key) const
-    {
-        return key_to_index_.find(key) != key_to_index_.end();
-    }
+    bool contains(const TKey& key) const { return key_to_index_.find(key) != key_to_index_.end(); }
 
     /**
      * @brief Gets a value by key.
@@ -146,8 +137,7 @@ class OrderedDictionary
     TValue& at(const TKey& key)
     {
         auto it = key_to_index_.find(key);
-        if (it == key_to_index_.end())
-            throw std::out_of_range("Key not found");
+        if (it == key_to_index_.end()) throw std::out_of_range("Key not found");
         return items_[it->second].value;
     }
 
@@ -160,8 +150,7 @@ class OrderedDictionary
     const TValue& at(const TKey& key) const
     {
         auto it = key_to_index_.find(key);
-        if (it == key_to_index_.end())
-            throw std::out_of_range("Key not found");
+        if (it == key_to_index_.end()) throw std::out_of_range("Key not found");
         return items_[it->second].value;
     }
 
@@ -173,8 +162,7 @@ class OrderedDictionary
      */
     TValue& at(size_t index)
     {
-        if (index >= items_.size())
-            throw std::out_of_range("Index out of range");
+        if (index >= items_.size()) throw std::out_of_range("Index out of range");
         return items_[index].value;
     }
 
@@ -186,8 +174,7 @@ class OrderedDictionary
      */
     const TValue& at(size_t index) const
     {
-        if (index >= items_.size())
-            throw std::out_of_range("Index out of range");
+        if (index >= items_.size()) throw std::out_of_range("Index out of range");
         return items_[index].value;
     }
 
@@ -218,20 +205,14 @@ class OrderedDictionary
      * @param index The index.
      * @return Reference to the value.
      */
-    TValue& operator[](size_t index)
-    {
-        return items_[index].value;
-    }
+    TValue& operator[](size_t index) { return items_[index].value; }
 
     /**
      * @brief Operator[] for index access (const version).
      * @param index The index.
      * @return Const reference to the value.
      */
-    const TValue& operator[](size_t index) const
-    {
-        return items_[index].value;
-    }
+    const TValue& operator[](size_t index) const { return items_[index].value; }
 
     /**
      * @brief Removes an element by key.
@@ -241,8 +222,7 @@ class OrderedDictionary
     bool erase(const TKey& key)
     {
         auto it = key_to_index_.find(key);
-        if (it == key_to_index_.end())
-            return false;
+        if (it == key_to_index_.end()) return false;
 
         size_t index = it->second;
 
@@ -255,8 +235,7 @@ class OrderedDictionary
         // Update indices in key map
         for (auto& pair : key_to_index_)
         {
-            if (pair.second > index)
-                pair.second--;
+            if (pair.second > index) pair.second--;
         }
 
         return true;
@@ -266,55 +245,37 @@ class OrderedDictionary
      * @brief Gets an iterator to the beginning.
      * @return Iterator to the beginning.
      */
-    iterator begin()
-    {
-        return items_.begin();
-    }
+    iterator begin() { return items_.begin(); }
 
     /**
      * @brief Gets an iterator to the end.
      * @return Iterator to the end.
      */
-    iterator end()
-    {
-        return items_.end();
-    }
+    iterator end() { return items_.end(); }
 
     /**
      * @brief Gets a const iterator to the beginning.
      * @return Const iterator to the beginning.
      */
-    const_iterator begin() const
-    {
-        return items_.begin();
-    }
+    const_iterator begin() const { return items_.begin(); }
 
     /**
      * @brief Gets a const iterator to the end.
      * @return Const iterator to the end.
      */
-    const_iterator end() const
-    {
-        return items_.end();
-    }
+    const_iterator end() const { return items_.end(); }
 
     /**
      * @brief Gets a const iterator to the beginning.
      * @return Const iterator to the beginning.
      */
-    const_iterator cbegin() const
-    {
-        return items_.cbegin();
-    }
+    const_iterator cbegin() const { return items_.cbegin(); }
 
     /**
      * @brief Gets a const iterator to the end.
      * @return Const iterator to the end.
      */
-    const_iterator cend() const
-    {
-        return items_.cend();
-    }
+    const_iterator cend() const { return items_.cend(); }
 
     /**
      * @brief Gets the key at the specified index.
@@ -323,8 +284,7 @@ class OrderedDictionary
      */
     const TKey& key_at(size_t index) const
     {
-        if (index >= items_.size())
-            throw std::out_of_range("Index out of range");
+        if (index >= items_.size()) throw std::out_of_range("Index out of range");
         return items_[index].key;
     }
 
@@ -335,8 +295,7 @@ class OrderedDictionary
      */
     const TValue& value_at(size_t index) const
     {
-        if (index >= items_.size())
-            throw std::out_of_range("Index out of range");
+        if (index >= items_.size()) throw std::out_of_range("Index out of range");
         return items_[index].value;
     }
 };

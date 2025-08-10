@@ -1,7 +1,8 @@
-#include <algorithm>
-#include <chrono>
 #include <neo/ledger/event_system.h>
 #include <neo/ledger/memory_pool.h>
+
+#include <algorithm>
+#include <chrono>
 #include <numeric>
 
 namespace neo::ledger
@@ -180,8 +181,7 @@ void MemoryPool::ReverifyTransactions(size_t max_count)
 {
     std::unique_lock<std::shared_mutex> lock(mutex_);
 
-    if (unverified_transactions_.empty())
-        return;
+    if (unverified_transactions_.empty()) return;
 
     size_t processed = 0;
     auto it = unverified_transactions_.begin();

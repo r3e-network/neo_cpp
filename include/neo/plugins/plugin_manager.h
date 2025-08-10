@@ -1,9 +1,10 @@
 #pragma once
 
-#include <memory>
 #include <neo/node/neo_system.h>
 #include <neo/plugins/plugin.h>
 #include <neo/rpc/rpc_server.h>
+
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -15,7 +16,7 @@ namespace neo::plugins
  */
 class PluginManager
 {
-  public:
+   public:
     /**
      * @brief Gets the instance.
      * @return The instance.
@@ -68,7 +69,7 @@ class PluginManager
      */
     bool StopPlugins();
 
-  private:
+   private:
     PluginManager();
     std::vector<std::shared_ptr<PluginFactory>> factories_;
     std::vector<std::shared_ptr<Plugin>> plugins_;

@@ -2,6 +2,7 @@
 
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
+
 #include <string>
 
 namespace neo::cryptography
@@ -11,7 +12,7 @@ namespace neo::cryptography
  */
 class Base64Url
 {
-  public:
+   public:
     /**
      * @brief Encodes a byte array to a Base64Url string.
      * @param data The data to encode.

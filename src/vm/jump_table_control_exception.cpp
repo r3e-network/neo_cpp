@@ -68,8 +68,7 @@ void JumpTableControlException::LEAVE(ExecutionEngine& engine, const Instruction
     auto& context = engine.GetCurrentContext();
 
     // Ensure we're in a try block
-    if (context.GetTryCount() == 0)
-        throw InvalidOperationException("The corresponding TRY block cannot be found");
+    if (context.GetTryCount() == 0) throw InvalidOperationException("The corresponding TRY block cannot be found");
 
     // Get the offset from the instruction
     int8_t offset = instruction.TokenI8();
@@ -119,8 +118,7 @@ void JumpTableControlException::LEAVE_L(ExecutionEngine& engine, const Instructi
     auto& context = engine.GetCurrentContext();
 
     // Ensure we're in a try block
-    if (context.GetTryCount() == 0)
-        throw InvalidOperationException("The corresponding TRY block cannot be found");
+    if (context.GetTryCount() == 0) throw InvalidOperationException("The corresponding TRY block cannot be found");
 
     // Get the offset from the instruction
     int32_t offset = instruction.TokenI32();
@@ -171,8 +169,7 @@ void JumpTableControlException::ABORT(ExecutionEngine& engine, const Instruction
 
 void JumpTableControlException::ASSERT(ExecutionEngine& engine, const Instruction& /* instruction */)
 {
-    if (!engine.Pop()->GetBoolean())
-        throw InvalidOperationException("ASSERT: Assertion failed");
+    if (!engine.Pop()->GetBoolean()) throw InvalidOperationException("ASSERT: Assertion failed");
 }
 
 void JumpTableControlException::THROW(ExecutionEngine& engine, const Instruction& /* instruction */)
@@ -210,8 +207,7 @@ void JumpTableControlException::ENDTRY_L(ExecutionEngine& engine, const Instruct
 void JumpTableControlException::ENDFINALLY(ExecutionEngine& engine, const Instruction& /* instruction */)
 {
     auto& context = engine.GetCurrentContext();
-    if (context.GetTryCount() == 0)
-        throw InvalidOperationException("The corresponding TRY block cannot be found");
+    if (context.GetTryCount() == 0) throw InvalidOperationException("The corresponding TRY block cannot be found");
 
     // Get the current try context
     auto& tryContext = context.GetCurrentTry();

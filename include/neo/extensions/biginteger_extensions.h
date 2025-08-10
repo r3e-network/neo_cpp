@@ -38,7 +38,7 @@ namespace neo::extensions
  */
 class BigIntegerExtensions
 {
-  public:
+   public:
     /**
      * @brief BigInteger representation using vector of 64-bit words
      */
@@ -87,7 +87,7 @@ class BigIntegerExtensions
         BigInteger Abs() const;
         BigInteger Negate() const;
 
-      private:
+       private:
         void Normalize();
     };
 

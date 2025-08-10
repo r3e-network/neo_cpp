@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <neo/wallets/wallet.h>
+
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -12,7 +13,7 @@ namespace neo::wallets
  */
 class WalletFactory
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */
@@ -49,7 +50,7 @@ class WalletFactory
  */
 class WalletFactoryManager
 {
-  public:
+   public:
     /**
      * @brief Gets the singleton instance of the WalletFactoryManager.
      * @return The singleton instance.
@@ -87,7 +88,7 @@ class WalletFactoryManager
      */
     std::shared_ptr<Wallet> OpenWallet(const std::string& path, const std::string& password) const;
 
-  private:
+   private:
     WalletFactoryManager();
     std::vector<std::shared_ptr<WalletFactory>> factories_;
 };

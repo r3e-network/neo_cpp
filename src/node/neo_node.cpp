@@ -1,7 +1,8 @@
+#include <neo/node/neo_node.h>
+
 #include <chrono>
 #include <exception>
 #include <iostream>
-#include <neo/node/neo_node.h>
 
 namespace neo::node
 {
@@ -234,23 +235,11 @@ void NeoNode::Stop()
     }
 }
 
-bool NeoNode::IsRunning() const
-{
-    return running_;
-}
+bool NeoNode::IsRunning() const { return running_; }
 
-uint32_t NeoNode::GetBlockHeight() const
-{
-    return blockchain_ ? blockchain_->GetHeight() : 0;
-}
+uint32_t NeoNode::GetBlockHeight() const { return blockchain_ ? blockchain_->GetHeight() : 0; }
 
-size_t NeoNode::GetConnectedPeersCount() const
-{
-    return p2pServer_ ? p2pServer_->GetConnectedPeersCount() : 0;
-}
+size_t NeoNode::GetConnectedPeersCount() const { return p2pServer_ ? p2pServer_->GetConnectedPeersCount() : 0; }
 
-size_t NeoNode::GetMemoryPoolCount() const
-{
-    return memoryPool_ ? memoryPool_->GetTransactionCount() : 0;
-}
+size_t NeoNode::GetMemoryPoolCount() const { return memoryPool_ ? memoryPool_->GetTransactionCount() : 0; }
 }  // namespace neo::node

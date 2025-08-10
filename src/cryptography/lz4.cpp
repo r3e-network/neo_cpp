@@ -1,6 +1,7 @@
+#include <neo/cryptography/lz4.h>
+
 #include <algorithm>
 #include <cstring>
-#include <neo/cryptography/lz4.h>
 #include <stdexcept>
 
 namespace neo::cryptography

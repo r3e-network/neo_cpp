@@ -11,10 +11,7 @@ NeoSystem::NeoSystem(std::shared_ptr<ProtocolSettings> protocolSettings, const s
     LOG_WARNING("Using lightweight implementation of NeoSystem");
 }
 
-NeoSystem::~NeoSystem()
-{
-    Stop();
-}
+NeoSystem::~NeoSystem() { Stop(); }
 
 bool NeoSystem::Start()
 {
@@ -29,15 +26,9 @@ void NeoSystem::Stop()
     running_ = false;
 }
 
-bool NeoSystem::IsRunning() const
-{
-    return running_;
-}
+bool NeoSystem::IsRunning() const { return running_; }
 
-std::shared_ptr<ProtocolSettings> NeoSystem::GetProtocolSettings() const
-{
-    return protocolSettings_;
-}
+std::shared_ptr<ProtocolSettings> NeoSystem::GetProtocolSettings() const { return protocolSettings_; }
 
 std::shared_ptr<ledger::Blockchain> NeoSystem::GetBlockchain() const
 {

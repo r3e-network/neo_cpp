@@ -19,11 +19,11 @@ namespace neo::core
  */
 class Fixed8
 {
-  private:
+   private:
     int64_t value_;  // Value stored as int64_t with 8 decimal places (e.g., 1.0 = 100000000)
     static constexpr int64_t SCALE_FACTOR = 100000000;  // 10^8
 
-  public:
+   public:
     // Constants
     static constexpr int64_t Decimals = SCALE_FACTOR;
     /**
@@ -60,37 +60,25 @@ class Fixed8
      * @brief Gets the raw int64_t value.
      * @return The raw value.
      */
-    int64_t GetRawValue() const
-    {
-        return value_;
-    }
+    int64_t GetRawValue() const { return value_; }
 
     /**
      * @brief Converts to int64_t.
      * @return The int64_t value.
      */
-    int64_t ToInt64() const
-    {
-        return value_ / SCALE_FACTOR;
-    }
+    int64_t ToInt64() const { return value_ / SCALE_FACTOR; }
 
     /**
      * @brief Converts to double.
      * @return The double value.
      */
-    double ToDouble() const
-    {
-        return static_cast<double>(value_) / SCALE_FACTOR;
-    }
+    double ToDouble() const { return static_cast<double>(value_) / SCALE_FACTOR; }
 
     /**
      * @brief Gets the underlying value (compatibility method).
      * @return The raw value
      */
-    int64_t Value() const
-    {
-        return value_;
-    }
+    int64_t Value() const { return value_; }
 
     /**
      * @brief Converts the Fixed8 to a string representation.
@@ -102,10 +90,7 @@ class Fixed8
      * @brief Gets a Fixed8 representing zero.
      * @return Fixed8 with value 0
      */
-    static Fixed8 Zero()
-    {
-        return Fixed8();
-    }
+    static Fixed8 Zero() { return Fixed8(); }
 
     /**
      * @brief Gets a Fixed8 representing one.
@@ -145,10 +130,7 @@ class Fixed8
      * @param value The double value
      * @return Fixed8 representation
      */
-    static Fixed8 FromDouble(double value)
-    {
-        return Fixed8(value);
-    }
+    static Fixed8 FromDouble(double value) { return Fixed8(value); }
 
     /**
      * @brief Creates a Fixed8 from a decimal value.
@@ -181,60 +163,42 @@ class Fixed8
      * @param other The other Fixed8.
      * @return True if equal.
      */
-    bool operator==(const Fixed8& other) const
-    {
-        return value_ == other.value_;
-    }
+    bool operator==(const Fixed8& other) const { return value_ == other.value_; }
 
     /**
      * @brief Inequality operator.
      * @param other The other Fixed8.
      * @return True if not equal.
      */
-    bool operator!=(const Fixed8& other) const
-    {
-        return value_ != other.value_;
-    }
+    bool operator!=(const Fixed8& other) const { return value_ != other.value_; }
 
     /**
      * @brief Less than operator.
      * @param other The other Fixed8.
      * @return True if less than.
      */
-    bool operator<(const Fixed8& other) const
-    {
-        return value_ < other.value_;
-    }
+    bool operator<(const Fixed8& other) const { return value_ < other.value_; }
 
     /**
      * @brief Greater than operator.
      * @param other The other Fixed8.
      * @return True if greater than.
      */
-    bool operator>(const Fixed8& other) const
-    {
-        return value_ > other.value_;
-    }
+    bool operator>(const Fixed8& other) const { return value_ > other.value_; }
 
     /**
      * @brief Less than or equal operator.
      * @param other The other Fixed8.
      * @return True if less than or equal.
      */
-    bool operator<=(const Fixed8& other) const
-    {
-        return value_ <= other.value_;
-    }
+    bool operator<=(const Fixed8& other) const { return value_ <= other.value_; }
 
     /**
      * @brief Greater than or equal operator.
      * @param other The other Fixed8.
      * @return True if greater than or equal.
      */
-    bool operator>=(const Fixed8& other) const
-    {
-        return value_ >= other.value_;
-    }
+    bool operator>=(const Fixed8& other) const { return value_ >= other.value_; }
 
     /**
      * @brief Addition operator.

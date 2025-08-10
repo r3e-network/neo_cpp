@@ -1,13 +1,14 @@
 #pragma once
 
+#include <neo/io/byte_vector.h>
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/connection.h>
+
 #include <atomic>
 #include <boost/asio.hpp>
 #include <cstdint>
 #include <memory>
 #include <mutex>
-#include <neo/io/byte_vector.h>
-#include <neo/network/ip_endpoint.h>
-#include <neo/network/p2p/connection.h>
 #include <thread>
 
 namespace neo::network::p2p
@@ -20,7 +21,7 @@ class Message;
  */
 class TcpConnection : public Connection, public std::enable_shared_from_this<TcpConnection>
 {
-  public:
+   public:
     /**
      * @brief Creates a TcpConnection.
      * @param socket The socket.
@@ -69,7 +70,7 @@ class TcpConnection : public Connection, public std::enable_shared_from_this<Tcp
      */
     void StartReceiving();
 
-  private:
+   private:
     boost::asio::ip::tcp::socket socket_;
     std::atomic<bool> connected_;
     std::mutex sendMutex_;

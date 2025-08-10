@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <iostream>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -12,6 +10,9 @@
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/oracle_contract.h>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <algorithm>
+#include <iostream>
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -21,8 +22,7 @@ OracleRequest OracleContract::GetRequest(std::shared_ptr<persistence::StoreView>
     auto key = GetStorageKey(PREFIX_REQUEST,
                              io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t))));
     auto value = GetStorageValue(snapshot, key);
-    if (value.Size() == 0)
-        throw std::runtime_error("Request not found");
+    if (value.Size() == 0) throw std::runtime_error("Request not found");
 
     std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
     io::BinaryReader reader(stream);
@@ -33,8 +33,8 @@ OracleRequest OracleContract::GetRequest(std::shared_ptr<persistence::StoreView>
     return request;
 }
 
-std::vector<std::pair<uint64_t, OracleRequest>>
-OracleContract::GetRequests(std::shared_ptr<persistence::StoreView> snapshot) const
+std::vector<std::pair<uint64_t, OracleRequest>> OracleContract::GetRequests(
+    std::shared_ptr<persistence::StoreView> snapshot) const
 {
     auto prefix = CreateStorageKey(PREFIX_REQUEST);
     auto results = snapshot->Find(&prefix);
@@ -64,8 +64,8 @@ OracleContract::GetRequests(std::shared_ptr<persistence::StoreView> snapshot) co
     return requests;
 }
 
-std::vector<std::pair<uint64_t, OracleRequest>>
-OracleContract::GetRequestsByUrl(std::shared_ptr<persistence::StoreView> snapshot, const std::string& url) const
+std::vector<std::pair<uint64_t, OracleRequest>> OracleContract::GetRequestsByUrl(
+    std::shared_ptr<persistence::StoreView> snapshot, const std::string& url) const
 {
     auto urlHash = GetUrlHash(url);
     auto idList = GetIdList(snapshot, urlHash);
@@ -93,8 +93,7 @@ std::tuple<uint8_t, std::string> OracleContract::GetResponse(std::shared_ptr<per
     auto key = GetStorageKey(PREFIX_RESPONSE,
                              io::ByteVector(io::ByteSpan(reinterpret_cast<const uint8_t*>(&id), sizeof(uint64_t))));
     auto value = GetStorageValue(snapshot, key);
-    if (value.Size() == 0)
-        throw std::runtime_error("Response not found");
+    if (value.Size() == 0) throw std::runtime_error("Response not found");
 
     std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
     io::BinaryReader reader(stream);
@@ -186,8 +185,7 @@ IdList OracleContract::GetIdList(std::shared_ptr<persistence::StoreView> snapsho
 {
     auto key = GetStorageKey(PREFIX_ID_LIST, io::ByteVector(urlHash.AsSpan()));
     auto value = GetStorageValue(snapshot, key);
-    if (value.Size() == 0)
-        return IdList();
+    if (value.Size() == 0) return IdList();
 
     std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
     io::BinaryReader reader(stream);
@@ -209,20 +207,16 @@ uint64_t OracleContract::CreateRequest(std::shared_ptr<persistence::StoreView> s
                                        const io::ByteVector& userData, const io::UInt256& originalTxid)
 {
     // Validate inputs
-    if (url.empty() || url.length() > MAX_URL_LENGTH)
-        throw std::runtime_error("Invalid URL");
+    if (url.empty() || url.length() > MAX_URL_LENGTH) throw std::runtime_error("Invalid URL");
 
-    if (filter.length() > MAX_FILTER_LENGTH)
-        throw std::runtime_error("Filter too long");
+    if (filter.length() > MAX_FILTER_LENGTH) throw std::runtime_error("Filter too long");
 
     if (callbackMethod.empty() || callbackMethod.length() > MAX_CALLBACK_LENGTH)
         throw std::runtime_error("Invalid callback method");
 
-    if (userData.Size() > MAX_USER_DATA_LENGTH)
-        throw std::runtime_error("User data too large");
+    if (userData.Size() > MAX_USER_DATA_LENGTH) throw std::runtime_error("User data too large");
 
-    if (gasForResponse < 0)
-        throw std::runtime_error("Gas for response must be non-negative");
+    if (gasForResponse < 0) throw std::runtime_error("Gas for response must be non-negative");
 
     // Create request
     uint64_t id = GetNextRequestId(snapshot);
@@ -247,8 +241,7 @@ uint64_t OracleContract::CreateRequest(std::shared_ptr<persistence::StoreView> s
     auto idList = GetIdList(snapshot, urlHash);
 
     // Check if there are too many pending requests for this URL
-    if (idList.GetCount() >= 256)
-        throw std::runtime_error("Too many pending requests for this URL");
+    if (idList.GetCount() >= 256) throw std::runtime_error("Too many pending requests for this URL");
 
     // Add the ID to the list
     idList.Add(id);

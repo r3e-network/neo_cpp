@@ -1,6 +1,7 @@
+#include <neo/node/neo_node.h>
+
 #include <chrono>
 #include <exception>
-#include <neo/node/neo_node.h>
 #include <thread>
 
 namespace neo::node
@@ -48,8 +49,7 @@ void NeoNode::MainLoop()
 
 void NeoNode::ProcessBlockchain()
 {
-    if (!blockchain_)
-        return;
+    if (!blockchain_) return;
 
     // Process pending blocks
     blockchain_->ProcessPendingBlocks();
@@ -63,8 +63,7 @@ void NeoNode::ProcessBlockchain()
 
 void NeoNode::ProcessMemoryPool()
 {
-    if (!memoryPool_)
-        return;
+    if (!memoryPool_) return;
 
     // Remove expired transactions
     memoryPool_->RemoveExpiredTransactions();

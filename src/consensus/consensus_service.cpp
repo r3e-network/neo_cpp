@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <chrono>
 #include <neo/consensus/consensus_service.h>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/hash.h>
@@ -9,27 +7,30 @@
 #include <neo/network/p2p/message_command.h>
 #include <neo/smartcontract/native/native_contract_manager.h>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <algorithm>
+#include <chrono>
 #include <sstream>
 
 namespace neo::consensus
 {
 ConsensusService::ConsensusService(std::shared_ptr<node::NeoSystem> neoSystem,
                                    const cryptography::ecc::KeyPair& keyPair)
-    : neoSystem_(neoSystem), keyPair_(keyPair), lastChangeViewTime_(0), lastPrepareRequestTime_(0), lastBlockTime_(0),
+    : neoSystem_(neoSystem),
+      keyPair_(keyPair),
+      lastChangeViewTime_(0),
+      lastPrepareRequestTime_(0),
+      lastBlockTime_(0),
       running_(false)
 {
     InitializeValidators();
 }
 
-ConsensusService::~ConsensusService()
-{
-    Stop();
-}
+ConsensusService::~ConsensusService() { Stop(); }
 
 void ConsensusService::Start()
 {
-    if (running_)
-        return;
+    if (running_) return;
 
     running_ = true;
     consensusThread_ = std::thread(&ConsensusService::RunConsensus, this);
@@ -97,58 +98,35 @@ void ConsensusService::Start()
 
 void ConsensusService::Stop()
 {
-    if (!running_)
-        return;
+    if (!running_) return;
 
     running_ = false;
     condition_.notify_all();
 
-    if (consensusThread_.joinable())
-        consensusThread_.join();
+    if (consensusThread_.joinable()) consensusThread_.join();
 
     // Unregister message handler
     node_->UnregisterMessageHandler(network::p2p::MessageCommand::Consensus);
 }
 
-bool ConsensusService::IsRunning() const
-{
-    return running_;
-}
+bool ConsensusService::IsRunning() const { return running_; }
 
 const std::vector<cryptography::ecc::ECPoint>& ConsensusService::GetValidators() const
 {
     return context_ ? context_->GetValidators() : std::vector<cryptography::ecc::ECPoint>();
 }
 
-uint16_t ConsensusService::GetValidatorIndex() const
-{
-    return context_ ? context_->GetValidatorIndex() : 0xFFFF;
-}
+uint16_t ConsensusService::GetValidatorIndex() const { return context_ ? context_->GetValidatorIndex() : 0xFFFF; }
 
-uint16_t ConsensusService::GetPrimaryIndex() const
-{
-    return context_ ? context_->GetPrimaryIndex() : 0;
-}
+uint16_t ConsensusService::GetPrimaryIndex() const { return context_ ? context_->GetPrimaryIndex() : 0; }
 
-uint8_t ConsensusService::GetViewNumber() const
-{
-    return context_ ? context_->GetViewNumber() : 0;
-}
+uint8_t ConsensusService::GetViewNumber() const { return context_ ? context_->GetViewNumber() : 0; }
 
-uint32_t ConsensusService::GetBlockIndex() const
-{
-    return context_ ? context_->GetBlockIndex() : 0;
-}
+uint32_t ConsensusService::GetBlockIndex() const { return context_ ? context_->GetBlockIndex() : 0; }
 
-const cryptography::ecc::KeyPair& ConsensusService::GetKeyPair() const
-{
-    return keyPair_;
-}
+const cryptography::ecc::KeyPair& ConsensusService::GetKeyPair() const { return keyPair_; }
 
-std::shared_ptr<node::NeoSystem> ConsensusService::GetNeoSystem() const
-{
-    return neoSystem_;
-}
+std::shared_ptr<node::NeoSystem> ConsensusService::GetNeoSystem() const { return neoSystem_; }
 
 void ConsensusService::Initialize()
 {
@@ -252,15 +230,9 @@ void ConsensusService::RunConsensus()
     }
 }
 
-bool ConsensusService::IsPrimary() const
-{
-    return context_ ? context_->IsPrimary() : false;
-}
+bool ConsensusService::IsPrimary() const { return context_ ? context_->IsPrimary() : false; }
 
-bool ConsensusService::IsBackup() const
-{
-    return context_ ? context_->IsBackup() : false;
-}
+bool ConsensusService::IsBackup() const { return context_ ? context_->IsBackup() : false; }
 
 uint16_t ConsensusService::GetPrimaryIndex(uint8_t viewNumber) const
 {
@@ -271,19 +243,16 @@ void ConsensusService::OnPrepareRequestReceived(const PrepareRequest& request)
 {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (!context_ || request.GetValidatorIndex() != GetPrimaryIndex())
-        return;
+    if (!context_ || request.GetValidatorIndex() != GetPrimaryIndex()) return;
 
     // Verify prepare request
-    if (request.GetTimestamp() <= lastBlockTime_)
-        return;
+    if (request.GetTimestamp() <= lastBlockTime_) return;
 
     // Process the prepare request
     context_->SetPrepareRequest(std::make_shared<PrepareRequest>(request));
 
     // Send prepare response if we agree
-    if (context_->IsPrepareResponseSent())
-        return;
+    if (context_->IsPrepareResponseSent()) return;
 
     auto response = std::make_shared<PrepareResponse>();
     response->SetBlockHash(request.GetBlockHash());
@@ -297,8 +266,7 @@ void ConsensusService::OnPrepareResponseReceived(const PrepareResponse& response
 {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (!context_)
-        return;
+    if (!context_) return;
 
     // Add prepare response to context
     context_->AddPrepareResponse(response);
@@ -322,8 +290,7 @@ void ConsensusService::OnChangeViewReceived(const ChangeViewMessage& message)
 {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (!context_)
-        return;
+    if (!context_) return;
 
     // Add change view to context
     context_->AddChangeView(message);
@@ -343,8 +310,7 @@ void ConsensusService::OnCommitReceived(const CommitMessage& commit)
 {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (!context_)
-        return;
+    if (!context_) return;
 
     // Add commit to context
     context_->AddCommit(commit);
@@ -364,27 +330,22 @@ void ConsensusService::OnCommitReceived(const CommitMessage& commit)
 
 bool ConsensusService::ValidateBlock(std::shared_ptr<ledger::Block> block)
 {
-    if (!block)
-        return false;
+    if (!block) return false;
 
     // Verify block timestamp
-    if (block->GetTimestamp() <= lastBlockTime_)
-        return false;
+    if (block->GetTimestamp() <= lastBlockTime_) return false;
 
     // Verify block index
-    if (block->GetIndex() != GetBlockIndex())
-        return false;
+    if (block->GetIndex() != GetBlockIndex()) return false;
 
     // Verify merkle root
     auto merkleRoot = block->ComputeMerkleRoot();
-    if (merkleRoot != block->GetMerkleRoot())
-        return false;
+    if (merkleRoot != block->GetMerkleRoot()) return false;
 
     // Verify transactions
     for (const auto& tx : block->GetTransactions())
     {
-        if (!neoSystem_->GetBlockchain().VerifyTransaction(tx))
-            return false;
+        if (!neoSystem_->GetBlockchain().VerifyTransaction(tx)) return false;
     }
 
     return true;

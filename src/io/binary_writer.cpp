@@ -1,8 +1,9 @@
+#include <neo/io/binary_writer.h>
+#include <neo/io/iserializable.h>
+
 #include <algorithm>
 #include <cstddef>
 #include <cstring>
-#include <neo/io/binary_writer.h>
-#include <neo/io/iserializable.h>
 #include <stdexcept>
 #include <vector>
 
@@ -12,20 +13,11 @@ BinaryWriter::BinaryWriter(std::ostream& stream) : stream_(&stream), buffer_(nul
 
 BinaryWriter::BinaryWriter(ByteVector& buffer) : stream_(nullptr), buffer_(&buffer), owns_stream_(false) {}
 
-void BinaryWriter::Write(bool value)
-{
-    Write(static_cast<uint8_t>(value ? 1 : 0));
-}
+void BinaryWriter::Write(bool value) { Write(static_cast<uint8_t>(value ? 1 : 0)); }
 
-void BinaryWriter::WriteBoolean(bool value)
-{
-    Write(value);
-}
+void BinaryWriter::WriteBoolean(bool value) { Write(value); }
 
-void BinaryWriter::WriteBool(bool value)
-{
-    Write(value);
-}
+void BinaryWriter::WriteBool(bool value) { Write(value); }
 
 void BinaryWriter::Write(uint8_t value)
 {
@@ -39,95 +31,43 @@ void BinaryWriter::Write(uint8_t value)
     }
 }
 
-void BinaryWriter::WriteByte(uint8_t value)
-{
-    Write(value);
-}
+void BinaryWriter::WriteByte(uint8_t value) { Write(value); }
 
-void BinaryWriter::Write(uint16_t value)
-{
-    WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
-}
+void BinaryWriter::Write(uint16_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
 
-void BinaryWriter::WriteUInt16(uint16_t value)
-{
-    Write(value);
-}
+void BinaryWriter::WriteUInt16(uint16_t value) { Write(value); }
 
-void BinaryWriter::Write(uint32_t value)
-{
-    WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
-}
+void BinaryWriter::Write(uint32_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
 
-void BinaryWriter::Write(uint64_t value)
-{
-    WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
-}
+void BinaryWriter::Write(uint64_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
 
-void BinaryWriter::WriteUInt64(uint64_t value)
-{
-    Write(value);
-}
+void BinaryWriter::WriteUInt64(uint64_t value) { Write(value); }
 
-void BinaryWriter::Write(int8_t value)
-{
-    WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
-}
+void BinaryWriter::Write(int8_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
 
-void BinaryWriter::Write(int16_t value)
-{
-    WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
-}
+void BinaryWriter::Write(int16_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
 
-void BinaryWriter::Write(int32_t value)
-{
-    WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
-}
+void BinaryWriter::Write(int32_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
 
-void BinaryWriter::Write(int64_t value)
-{
-    WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value));
-}
+void BinaryWriter::Write(int64_t value) { WriteRawBytes(reinterpret_cast<const uint8_t*>(&value), sizeof(value)); }
 
-void BinaryWriter::WriteInt64(int64_t value)
-{
-    Write(value);
-}
+void BinaryWriter::WriteInt64(int64_t value) { Write(value); }
 
-void BinaryWriter::Write(const ByteSpan& value)
-{
-    WriteRawBytes(value.Data(), value.Size());
-}
+void BinaryWriter::Write(const ByteSpan& value) { WriteRawBytes(value.Data(), value.Size()); }
 
-void BinaryWriter::Write(const std::string& value)
-{
-    WriteString(value);
-}
+void BinaryWriter::Write(const std::string& value) { WriteString(value); }
 
-void BinaryWriter::Write(const UInt160& value)
-{
-    Write(value.AsSpan());
-}
+void BinaryWriter::Write(const UInt160& value) { Write(value.AsSpan()); }
 
-void BinaryWriter::Write(const UInt256& value)
-{
-    Write(value.AsSpan());
-}
+void BinaryWriter::Write(const UInt256& value) { Write(value.AsSpan()); }
 
-void BinaryWriter::Write(const Fixed8& value)
-{
-    Write(value.ToString());
-}
+void BinaryWriter::Write(const Fixed8& value) { Write(value.ToString()); }
 
-void BinaryWriter::Write(const ISerializable& value)
-{
-    value.Serialize(*this);
-}
+void BinaryWriter::Write(const ISerializable& value) { value.Serialize(*this); }
 
 void BinaryWriter::WriteVarInt(int64_t value)
 {
-    if (value < 0)
-        throw std::invalid_argument("Value must be non-negative");
+    if (value < 0) throw std::invalid_argument("Value must be non-negative");
 
     if (value < 0xFD)
     {
@@ -167,10 +107,7 @@ void BinaryWriter::WriteString(const std::string& value)
     WriteVarBytes(ByteSpan(reinterpret_cast<const uint8_t*>(value.data()), value.size()));
 }
 
-void BinaryWriter::WriteVarString(const std::string& value)
-{
-    WriteString(value);
-}
+void BinaryWriter::WriteVarString(const std::string& value) { WriteString(value); }
 
 void BinaryWriter::WriteFixedString(const std::string& value, size_t length)
 {
@@ -185,15 +122,9 @@ void BinaryWriter::WriteFixedString(const std::string& value, size_t length)
     Write(ByteSpan(buffer.data(), length));
 }
 
-void BinaryWriter::WriteBytes(const uint8_t* data, size_t size)
-{
-    WriteRawBytes(data, size);
-}
+void BinaryWriter::WriteBytes(const uint8_t* data, size_t size) { WriteRawBytes(data, size); }
 
-void BinaryWriter::WriteBytes(const ByteVector& data)
-{
-    WriteBytes(data.Data(), data.Size());
-}
+void BinaryWriter::WriteBytes(const ByteVector& data) { WriteBytes(data.Data(), data.Size()); }
 
 void BinaryWriter::WriteRawBytes(const uint8_t* data, size_t size)
 {

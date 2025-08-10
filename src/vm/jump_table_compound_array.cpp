@@ -301,8 +301,7 @@ void JumpTableCompoundArray::HASKEY(ExecutionEngine& engine, const Instruction& 
 void JumpTableCompoundArray::KEYS(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto map = engine.Pop();
-    if (map->GetType() != StackItemType::Map)
-        throw InvalidOperationException("Item is not a map");
+    if (map->GetType() != StackItemType::Map) throw InvalidOperationException("Item is not a map");
 
     auto mapData = map->GetMap();
     std::vector<std::shared_ptr<StackItem>> keys;
@@ -377,8 +376,7 @@ void JumpTableCompoundArray::PICKITEM(ExecutionEngine& engine, const Instruction
                 }
             }
 
-            if (!found)
-                throw InvalidOperationException("Key not found in map");
+            if (!found) throw InvalidOperationException("Key not found in map");
 
             break;
         }
@@ -581,8 +579,7 @@ void JumpTableCompoundArray::POPITEM(ExecutionEngine& engine, const Instruction&
         throw InvalidOperationException("Item is not an array or struct");
 
     auto array = container->GetArray();
-    if (array.empty())
-        throw InvalidOperationException("Array is empty");
+    if (array.empty()) throw InvalidOperationException("Array is empty");
 
     auto lastItem = array.back();
 

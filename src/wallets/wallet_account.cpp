@@ -19,83 +19,40 @@ WalletAccount::WalletAccount(const cryptography::ecc::KeyPair& keyPair)
 
 WalletAccount::WalletAccount(const io::UInt160& scriptHash) : scriptHash_(scriptHash), locked_(false) {}
 
-const io::UInt160& WalletAccount::GetScriptHash() const
-{
-    return scriptHash_;
-}
+const io::UInt160& WalletAccount::GetScriptHash() const { return scriptHash_; }
 
-void WalletAccount::SetScriptHash(const io::UInt160& scriptHash)
-{
-    scriptHash_ = scriptHash;
-}
+void WalletAccount::SetScriptHash(const io::UInt160& scriptHash) { scriptHash_ = scriptHash; }
 
-const cryptography::ecc::ECPoint& WalletAccount::GetPublicKey() const
-{
-    return publicKey_;
-}
+const cryptography::ecc::ECPoint& WalletAccount::GetPublicKey() const { return publicKey_; }
 
-void WalletAccount::SetPublicKey(const cryptography::ecc::ECPoint& publicKey)
-{
-    publicKey_ = publicKey;
-}
+void WalletAccount::SetPublicKey(const cryptography::ecc::ECPoint& publicKey) { publicKey_ = publicKey; }
 
-const std::vector<uint8_t>& WalletAccount::GetPrivateKey() const
-{
-    return privateKey_;
-}
+const std::vector<uint8_t>& WalletAccount::GetPrivateKey() const { return privateKey_; }
 
-void WalletAccount::SetPrivateKey(const std::vector<uint8_t>& privateKey)
-{
-    privateKey_ = privateKey;
-}
+void WalletAccount::SetPrivateKey(const std::vector<uint8_t>& privateKey) { privateKey_ = privateKey; }
 
-const smartcontract::Contract& WalletAccount::GetContract() const
-{
-    return contract_;
-}
+const smartcontract::Contract& WalletAccount::GetContract() const { return contract_; }
 
-void WalletAccount::SetContract(const smartcontract::Contract& contract)
-{
-    contract_ = contract;
-}
+void WalletAccount::SetContract(const smartcontract::Contract& contract) { contract_ = contract; }
 
-const std::string& WalletAccount::GetLabel() const
-{
-    return label_;
-}
+const std::string& WalletAccount::GetLabel() const { return label_; }
 
-void WalletAccount::SetLabel(const std::string& label)
-{
-    label_ = label;
-}
+void WalletAccount::SetLabel(const std::string& label) { label_ = label; }
 
-bool WalletAccount::IsLocked() const
-{
-    return locked_;
-}
+bool WalletAccount::IsLocked() const { return locked_; }
 
-void WalletAccount::SetLocked(bool locked)
-{
-    locked_ = locked;
-}
+void WalletAccount::SetLocked(bool locked) { locked_ = locked; }
 
 std::string WalletAccount::GetWIF() const
 {
-    if (privateKey_.empty())
-        return "";
+    if (privateKey_.empty()) return "";
 
     return cryptography::ecc::Secp256r1::ToWIF(privateKey_);
 }
 
-std::string WalletAccount::GetAddress() const
-{
-    return scriptHash_.ToAddress();
-}
+std::string WalletAccount::GetAddress() const { return scriptHash_.ToAddress(); }
 
-bool WalletAccount::HasPrivateKey() const
-{
-    return !privateKey_.empty();
-}
+bool WalletAccount::HasPrivateKey() const { return !privateKey_.empty(); }
 
 nlohmann::json WalletAccount::ToJson() const
 {
@@ -103,8 +60,7 @@ nlohmann::json WalletAccount::ToJson() const
     json["address"] = GetAddress();
     json["script_hash"] = scriptHash_.ToString();
 
-    if (!publicKey_.IsInfinity())
-        json["public_key"] = publicKey_.ToString();
+    if (!publicKey_.IsInfinity()) json["public_key"] = publicKey_.ToString();
 
     if (!privateKey_.empty())
         json["private_key"] = io::ByteVector(io::ByteSpan(privateKey_.data(), privateKey_.size())).ToHexString();
@@ -125,8 +81,7 @@ nlohmann::json WalletAccount::ToJson() const
     //     json["contract"] = contractJson;
     // }
 
-    if (!label_.empty())
-        json["label"] = label_;
+    if (!label_.empty()) json["label"] = label_;
 
     json["locked"] = locked_;
 
@@ -156,8 +111,7 @@ void WalletAccount::FromJson(const nlohmann::json& json)
         auto contractJson = json["contract"];
 
         io::ByteVector script;
-        if (contractJson.contains("script"))
-            script = io::ByteVector::Parse(contractJson["script"].get<std::string>());
+        if (contractJson.contains("script")) script = io::ByteVector::Parse(contractJson["script"].get<std::string>());
 
         // TODO: Implement contract deserialization when smartcontract dependency is resolved
         // std::vector<smartcontract::ContractParameterType> parameterList;
@@ -171,10 +125,8 @@ void WalletAccount::FromJson(const nlohmann::json& json)
         // contract_ = smartcontract::Contract(script, parameterList);
     }
 
-    if (json.contains("label"))
-        label_ = json["label"].get<std::string>();
+    if (json.contains("label")) label_ = json["label"].get<std::string>();
 
-    if (json.contains("locked"))
-        locked_ = json["locked"].get<bool>();
+    if (json.contains("locked")) locked_ = json["locked"].get<bool>();
 }
 }  // namespace neo::wallets

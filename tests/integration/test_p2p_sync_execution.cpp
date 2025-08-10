@@ -109,7 +109,7 @@ TEST_F(P2PSyncExecutionTest, TestBlockSyncManager)
     block->SetVersion(0);
     block->SetPreviousHash(io::UInt256::Zero());
     block->SetMerkleRoot(io::UInt256::Zero());
-    block->SetTimestamp(std::chrono::system_clock::now());
+    block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block->SetIndex(1);
     block->SetPrimaryIndex(0);
     block->SetNextConsensus(io::UInt160::Zero());
@@ -132,7 +132,7 @@ TEST_F(P2PSyncExecutionTest, TestBlockProcessing)
     genesis->SetVersion(0);
     genesis->SetPreviousHash(io::UInt256::Zero());
     genesis->SetMerkleRoot(io::UInt256::Zero());
-    genesis->SetTimestamp(std::chrono::system_clock::from_time_t(1468595301)); // Neo genesis time
+    genesis->SetTimestamp(static_cast<uint64_t>(1468595301)); // Neo genesis time
     genesis->SetIndex(0);
     genesis->SetPrimaryIndex(0);
     genesis->SetNextConsensus(io::UInt160::Zero());
@@ -198,7 +198,7 @@ TEST_F(P2PSyncExecutionTest, TestEndToEndFlow)
     block->SetVersion(0);
     block->SetPreviousHash(io::UInt256::Zero());
     block->SetMerkleRoot(io::UInt256::Zero());
-    block->SetTimestamp(std::chrono::system_clock::now());
+    block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block->SetIndex(0);
     block->SetPrimaryIndex(0);
     block->SetNextConsensus(io::UInt160::Zero());
@@ -284,7 +284,7 @@ TEST_F(P2PSyncExecutionTest, TestBlockValidation)
     validBlock->SetVersion(0);
     validBlock->SetPreviousHash(io::UInt256::Zero());
     validBlock->SetMerkleRoot(io::UInt256::Zero());
-    validBlock->SetTimestamp(std::chrono::system_clock::now());
+    validBlock->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     validBlock->SetIndex(0);
     validBlock->SetPrimaryIndex(0);
     validBlock->SetNextConsensus(io::UInt160::Zero());
@@ -297,7 +297,7 @@ TEST_F(P2PSyncExecutionTest, TestBlockValidation)
     invalidBlock->SetVersion(0);
     invalidBlock->SetPreviousHash(io::UInt256::Parse("0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"));
     invalidBlock->SetMerkleRoot(io::UInt256::Zero());
-    invalidBlock->SetTimestamp(std::chrono::system_clock::now());
+    invalidBlock->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     invalidBlock->SetIndex(1);
     invalidBlock->SetPrimaryIndex(0);
     invalidBlock->SetNextConsensus(io::UInt160::Zero());
@@ -357,7 +357,7 @@ TEST_F(P2PSyncExecutionTest, TestConcurrentBlockProcessing)
     genesis->SetVersion(0);
     genesis->SetPreviousHash(io::UInt256::Zero());
     genesis->SetMerkleRoot(io::UInt256::Zero());
-    genesis->SetTimestamp(std::chrono::system_clock::from_time_t(1468595301));
+            genesis->SetTimestamp(static_cast<uint64_t>(1468595301));
     genesis->SetIndex(0);
     genesis->SetPrimaryIndex(0);
     genesis->SetNextConsensus(io::UInt160::Zero());
@@ -372,7 +372,7 @@ TEST_F(P2PSyncExecutionTest, TestConcurrentBlockProcessing)
             block->SetVersion(0);
             block->SetPreviousHash(prevHash);
             block->SetMerkleRoot(io::UInt256::Zero());
-            block->SetTimestamp(std::chrono::system_clock::now() + std::chrono::seconds(i));
+            block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>((std::chrono::system_clock::now() + std::chrono::seconds(i)).time_since_epoch()).count()));
             block->SetIndex(i);
             block->SetPrimaryIndex(0);
             block->SetNextConsensus(io::UInt160::Zero());

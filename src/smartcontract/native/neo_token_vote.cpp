@@ -5,6 +5,7 @@
 #include <neo/smartcontract/native/neo_token_candidate.h>
 #include <neo/smartcontract/native/neo_token_vote.h>
 #include <neo/vm/stack_item.h>
+
 #include <sstream>
 #include <stdexcept>
 
@@ -17,8 +18,7 @@ bool NeoTokenVote::Vote(const NeoToken& token, std::shared_ptr<persistence::Data
     auto state = NeoTokenAccount::GetAccountState(token, snapshot, account);
 
     // Check if the account has NEO
-    if (state.balance <= 0)
-        return false;
+    if (state.balance <= 0) return false;
 
     // Check if the account is already voting
     if (!state.voteTo.IsInfinity())
@@ -54,8 +54,7 @@ bool NeoTokenVote::Vote(const NeoToken& token, std::shared_ptr<persistence::Data
     {
         // Check if the candidate is registered
         auto candidateState = NeoTokenCandidate::GetCandidateState(token, snapshot, pubKeys[0]);
-        if (!candidateState.registered)
-            return false;
+        if (!candidateState.registered) return false;
 
         // Add votes to the new candidate
         candidateState.votes += state.balance;
@@ -111,22 +110,19 @@ bool NeoTokenVote::Vote(const NeoToken& token, std::shared_ptr<persistence::Data
 std::shared_ptr<vm::StackItem> NeoTokenVote::OnVote(const NeoToken& token, ApplicationEngine& engine,
                                                     const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid number of arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid number of arguments");
 
     auto accountItem = args[0];
     auto pubKeysItem = args[1];
 
     io::UInt160 account;
     auto accountBytes = accountItem->GetByteArray();
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     std::memcpy(account.Data(), accountBytes.Data(), 20);
 
     // Check witness
-    if (!engine.CheckWitness(account))
-        throw std::runtime_error("No authorization");
+    if (!engine.CheckWitness(account)) throw std::runtime_error("No authorization");
 
     std::vector<cryptography::ecc::ECPoint> pubKeys;
     auto pubKeysArray = pubKeysItem->GetArray();
@@ -153,21 +149,18 @@ std::shared_ptr<vm::StackItem> NeoTokenVote::OnVote(const NeoToken& token, Appli
 std::shared_ptr<vm::StackItem> NeoTokenVote::OnUnVote(const NeoToken& token, ApplicationEngine& engine,
                                                       const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 1)
-        throw std::runtime_error("Invalid number of arguments");
+    if (args.size() < 1) throw std::runtime_error("Invalid number of arguments");
 
     auto accountItem = args[0];
 
     io::UInt160 account;
     auto accountBytes = accountItem->GetByteArray();
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     std::memcpy(account.Data(), accountBytes.Data(), 20);
 
     // Check witness
-    if (!engine.CheckWitness(account))
-        throw std::runtime_error("No authorization");
+    if (!engine.CheckWitness(account)) throw std::runtime_error("No authorization");
 
     // UnVote is equivalent to voting with empty public keys
     std::vector<cryptography::ecc::ECPoint> emptyPubKeys;

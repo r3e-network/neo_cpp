@@ -1,12 +1,13 @@
 #pragma once
 
-#include <memory>
-#include <mutex>
 #include <neo/io/fixed8.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/transaction.h>
 #include <neo/persistence/data_cache.h>
+
+#include <memory>
+#include <mutex>
 #include <unordered_map>
 #include <vector>
 
@@ -17,7 +18,7 @@ namespace neo::ledger
  */
 class TransactionStorage
 {
-  public:
+   public:
     /**
      * @brief Constructs a TransactionStorage.
      * @param dataCache The data cache.
@@ -68,7 +69,7 @@ class TransactionStorage
      */
     io::Fixed8 GetBalance(const io::UInt160& scriptHash, const io::UInt256& assetId) const;
 
-  private:
+   private:
     std::shared_ptr<persistence::DataCache> dataCache_;
     mutable std::mutex mutex_;
     mutable std::unordered_map<io::UInt256, std::shared_ptr<Transaction>> transactions_;

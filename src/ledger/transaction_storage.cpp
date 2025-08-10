@@ -3,6 +3,7 @@
 #include <neo/ledger/transaction_storage.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
+
 #include <sstream>
 
 namespace neo::ledger
@@ -20,15 +21,13 @@ std::shared_ptr<Transaction> TransactionStorage::GetTransaction(const io::UInt25
 
     // Check if the transaction is in memory
     auto it = transactions_.find(hash);
-    if (it != transactions_.end())
-        return it->second;
+    if (it != transactions_.end()) return it->second;
 
     // Check if the transaction is in storage
     io::ByteVector prefixVector{TransactionPrefix};
     persistence::StorageKey key(io::UInt160(), io::ByteVector::Concat(prefixVector.AsSpan(), hash.AsSpan()));
     auto item = dataCache_->TryGet(key);
-    if (!item)
-        return nullptr;
+    if (!item) return nullptr;
 
     // Deserialize the transaction
     std::istringstream stream(
@@ -123,8 +122,7 @@ bool TransactionStorage::ContainsTransaction(const io::UInt256& hash) const
     std::lock_guard<std::mutex> lock(mutex_);
 
     // Check if the transaction is in memory
-    if (transactions_.find(hash) != transactions_.end())
-        return true;
+    if (transactions_.find(hash) != transactions_.end()) return true;
 
     // Check if the transaction is in storage
     io::ByteVector prefixVector{TransactionPrefix};
@@ -138,8 +136,7 @@ std::vector<TransactionOutput> TransactionStorage::GetUnspentOutputs(const io::U
 
     // Check if the unspent outputs are in memory
     auto it = unspentOutputs_.find(hash);
-    if (it != unspentOutputs_.end())
-        return it->second;
+    if (it != unspentOutputs_.end()) return it->second;
 
     // Get the unspent outputs from storage
     std::vector<TransactionOutput> outputs;
@@ -168,8 +165,7 @@ std::vector<TransactionOutput> TransactionStorage::GetUnspentOutputs(const io::U
 
     // Check if the address outputs are in memory
     auto it = addressOutputs_.find(scriptHash);
-    if (it != addressOutputs_.end())
-        return it->second;
+    if (it != addressOutputs_.end()) return it->second;
 
     // Get the address outputs from storage
     std::vector<TransactionOutput> outputs;

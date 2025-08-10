@@ -6,25 +6,13 @@ FilterAddPayload::FilterAddPayload() = default;
 
 FilterAddPayload::FilterAddPayload(const io::ByteVector& data) : data_(data) {}
 
-const io::ByteVector& FilterAddPayload::GetData() const
-{
-    return data_;
-}
+const io::ByteVector& FilterAddPayload::GetData() const { return data_; }
 
-void FilterAddPayload::SetData(const io::ByteVector& data)
-{
-    data_ = data;
-}
+void FilterAddPayload::SetData(const io::ByteVector& data) { data_ = data; }
 
-void FilterAddPayload::Serialize(io::BinaryWriter& writer) const
-{
-    writer.WriteVarBytes(data_.AsSpan());
-}
+void FilterAddPayload::Serialize(io::BinaryWriter& writer) const { writer.WriteVarBytes(data_.AsSpan()); }
 
-void FilterAddPayload::Deserialize(io::BinaryReader& reader)
-{
-    data_ = reader.ReadVarBytes(520);
-}
+void FilterAddPayload::Deserialize(io::BinaryReader& reader) { data_ = reader.ReadVarBytes(520); }
 
 void FilterAddPayload::SerializeJson(io::JsonWriter& writer) const
 {

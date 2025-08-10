@@ -1,6 +1,7 @@
 #pragma once
 
 #include <neo/cli/main_service.h>
+
 #include <string>
 #include <vector>
 
@@ -11,7 +12,7 @@ namespace neo::cli
  */
 class WalletCommands
 {
-  public:
+   public:
     /**
      * @brief Constructs a WalletCommands.
      * @param service The main service.
@@ -58,7 +59,7 @@ class WalletCommands
      */
     bool HandleTransfer(const std::vector<std::string>& args);
 
-  private:
+   private:
     MainService& service_;
 };
 }  // namespace neo::cli

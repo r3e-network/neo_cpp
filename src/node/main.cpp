@@ -10,13 +10,14 @@
  * @date December 2024
  */
 
+#include <neo/node/neo_node.h>
+
 #include <atomic>
 #include <chrono>
 #include <csignal>
 #include <exception>
 #include <iostream>
 #include <memory>
-#include <neo/node/neo_node.h>
 #include <string>
 #include <thread>
 

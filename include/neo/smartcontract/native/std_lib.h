@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <neo/smartcontract/native/native_contract.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::smartcontract::native
@@ -15,7 +16,7 @@ class StdLib : public NativeContract
     friend class NativeContractTest;
     friend class StdLibTest;
 
-  public:
+   public:
     /**
      * @brief The contract ID (matches Neo C# implementation).
      */
@@ -31,13 +32,13 @@ class StdLib : public NativeContract
      */
     StdLib();
 
-  protected:
+   protected:
     /**
      * @brief Initializes the contract.
      */
     void Initialize() override;
 
-  private:
+   private:
     /**
      * @brief Handles the serialize method.
      * @param engine The engine.

@@ -1,8 +1,9 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint256.h>
+
+#include <cstdint>
 #include <vector>
 
 namespace neo::cryptography
@@ -12,7 +13,7 @@ namespace neo::cryptography
  */
 class ECDSA
 {
-  public:
+   public:
     /**
      * @brief Verifies an ECDSA signature.
      * @param message The message that was signed.

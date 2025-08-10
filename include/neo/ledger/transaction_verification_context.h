@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/transaction.h>
 #include <neo/ledger/verify_result.h>
+
+#include <memory>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -34,7 +35,7 @@ namespace neo::ledger
  */
 class TransactionVerificationContext
 {
-  public:
+   public:
     /**
      * @brief Default constructor
      */
@@ -81,7 +82,7 @@ class TransactionVerificationContext
      */
     size_t GetTransactionCount() const;
 
-  private:
+   private:
     // Track account conflicts (account -> transaction hash)
     std::unordered_map<io::UInt160, io::UInt256> account_conflicts_;
 

@@ -1,4 +1,3 @@
-#include <chrono>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>
@@ -6,6 +5,8 @@
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/node_capability.h>
 #include <neo/network/p2p/peer.h>
+
+#include <chrono>
 
 namespace neo::network::p2p
 {
@@ -15,86 +16,55 @@ Peer::Peer()
 }
 
 Peer::Peer(const IPEndPoint& endpoint)
-    : endpoint_(endpoint), version_(0), lastConnectionTime_(0), lastSeenTime_(0), connectionAttempts_(0),
-      connected_(false), bad_(false)
+    : endpoint_(endpoint),
+      version_(0),
+      lastConnectionTime_(0),
+      lastSeenTime_(0),
+      connectionAttempts_(0),
+      connected_(false),
+      bad_(false)
 {
 }
 
 Peer::Peer(const IPEndPoint& endpoint, uint32_t version, const std::vector<NodeCapability>& capabilities)
-    : endpoint_(endpoint), version_(version), capabilities_(capabilities), lastConnectionTime_(0), lastSeenTime_(0),
-      connectionAttempts_(0), connected_(false), bad_(false)
+    : endpoint_(endpoint),
+      version_(version),
+      capabilities_(capabilities),
+      lastConnectionTime_(0),
+      lastSeenTime_(0),
+      connectionAttempts_(0),
+      connected_(false),
+      bad_(false)
 {
 }
 
-const IPEndPoint& Peer::GetEndPoint() const
-{
-    return endpoint_;
-}
+const IPEndPoint& Peer::GetEndPoint() const { return endpoint_; }
 
-void Peer::SetEndPoint(const IPEndPoint& endpoint)
-{
-    endpoint_ = endpoint;
-}
+void Peer::SetEndPoint(const IPEndPoint& endpoint) { endpoint_ = endpoint; }
 
-uint32_t Peer::GetVersion() const
-{
-    return version_;
-}
+uint32_t Peer::GetVersion() const { return version_; }
 
-void Peer::SetVersion(uint32_t version)
-{
-    version_ = version;
-}
+void Peer::SetVersion(uint32_t version) { version_ = version; }
 
-const std::vector<NodeCapability>& Peer::GetCapabilities() const
-{
-    return capabilities_;
-}
+const std::vector<NodeCapability>& Peer::GetCapabilities() const { return capabilities_; }
 
-void Peer::SetCapabilities(const std::vector<NodeCapability>& capabilities)
-{
-    capabilities_ = capabilities;
-}
+void Peer::SetCapabilities(const std::vector<NodeCapability>& capabilities) { capabilities_ = capabilities; }
 
-uint64_t Peer::GetLastConnectionTime() const
-{
-    return lastConnectionTime_;
-}
+uint64_t Peer::GetLastConnectionTime() const { return lastConnectionTime_; }
 
-void Peer::SetLastConnectionTime(uint64_t lastConnectionTime)
-{
-    lastConnectionTime_ = lastConnectionTime;
-}
+void Peer::SetLastConnectionTime(uint64_t lastConnectionTime) { lastConnectionTime_ = lastConnectionTime; }
 
-uint64_t Peer::GetLastSeenTime() const
-{
-    return lastSeenTime_;
-}
+uint64_t Peer::GetLastSeenTime() const { return lastSeenTime_; }
 
-void Peer::SetLastSeenTime(uint64_t lastSeenTime)
-{
-    lastSeenTime_ = lastSeenTime;
-}
+void Peer::SetLastSeenTime(uint64_t lastSeenTime) { lastSeenTime_ = lastSeenTime; }
 
-uint32_t Peer::GetConnectionAttempts() const
-{
-    return connectionAttempts_;
-}
+uint32_t Peer::GetConnectionAttempts() const { return connectionAttempts_; }
 
-void Peer::SetConnectionAttempts(uint32_t connectionAttempts)
-{
-    connectionAttempts_ = connectionAttempts;
-}
+void Peer::SetConnectionAttempts(uint32_t connectionAttempts) { connectionAttempts_ = connectionAttempts; }
 
-void Peer::IncrementConnectionAttempts()
-{
-    connectionAttempts_++;
-}
+void Peer::IncrementConnectionAttempts() { connectionAttempts_++; }
 
-bool Peer::IsConnected() const
-{
-    return connected_;
-}
+bool Peer::IsConnected() const { return connected_; }
 
 void Peer::SetConnected(bool connected)
 {
@@ -112,15 +82,9 @@ void Peer::SetConnected(bool connected)
     }
 }
 
-bool Peer::IsBad() const
-{
-    return bad_;
-}
+bool Peer::IsBad() const { return bad_; }
 
-void Peer::SetBad(bool bad)
-{
-    bad_ = bad;
-}
+void Peer::SetBad(bool bad) { bad_ = bad; }
 
 void Peer::Serialize(io::BinaryWriter& writer) const
 {
@@ -328,13 +292,7 @@ void Peer::DeserializeJson(const io::JsonReader& reader)
     connected_ = false;
 }
 
-bool Peer::operator==(const Peer& other) const
-{
-    return endpoint_ == other.endpoint_;
-}
+bool Peer::operator==(const Peer& other) const { return endpoint_ == other.endpoint_; }
 
-bool Peer::operator!=(const Peer& other) const
-{
-    return !(*this == other);
-}
+bool Peer::operator!=(const Peer& other) const { return !(*this == other); }
 }  // namespace neo::network::p2p

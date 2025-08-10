@@ -7,14 +7,15 @@
 #include <neo/network/p2p_server.h>
 
 using namespace neo::network::p2p::payloads;
-#include <boost/asio/io_context.hpp>
-#include <chrono>
-#include <memory>
 #include <neo/io/binary_writer.h>
 #include <neo/logging/logger.h>
 #include <neo/network/network_address.h>
 #include <neo/network/peer_discovery_service.h>
 #include <neo/network/upnp.h>
+
+#include <boost/asio/io_context.hpp>
+#include <chrono>
+#include <memory>
 #include <random>
 #include <sstream>
 
@@ -27,75 +28,33 @@ P2PPeer::P2PPeer(std::shared_ptr<TcpConnection> connection)
     UpdateLastSeen();
 }
 
-std::shared_ptr<TcpConnection> P2PPeer::GetConnection() const
-{
-    return connection_;
-}
+std::shared_ptr<TcpConnection> P2PPeer::GetConnection() const { return connection_; }
 
-uint32_t P2PPeer::GetVersion() const
-{
-    return version_;
-}
+uint32_t P2PPeer::GetVersion() const { return version_; }
 
-void P2PPeer::SetVersion(uint32_t version)
-{
-    version_ = version;
-}
+void P2PPeer::SetVersion(uint32_t version) { version_ = version; }
 
-uint64_t P2PPeer::GetServices() const
-{
-    return services_;
-}
+uint64_t P2PPeer::GetServices() const { return services_; }
 
-void P2PPeer::SetServices(uint64_t services)
-{
-    services_ = services;
-}
+void P2PPeer::SetServices(uint64_t services) { services_ = services; }
 
-const std::string& P2PPeer::GetUserAgent() const
-{
-    return userAgent_;
-}
+const std::string& P2PPeer::GetUserAgent() const { return userAgent_; }
 
-void P2PPeer::SetUserAgent(const std::string& userAgent)
-{
-    userAgent_ = userAgent;
-}
+void P2PPeer::SetUserAgent(const std::string& userAgent) { userAgent_ = userAgent; }
 
-uint32_t P2PPeer::GetStartHeight() const
-{
-    return startHeight_;
-}
+uint32_t P2PPeer::GetStartHeight() const { return startHeight_; }
 
-void P2PPeer::SetStartHeight(uint32_t startHeight)
-{
-    startHeight_ = startHeight;
-}
+void P2PPeer::SetStartHeight(uint32_t startHeight) { startHeight_ = startHeight; }
 
-bool P2PPeer::GetRelay() const
-{
-    return relay_;
-}
+bool P2PPeer::GetRelay() const { return relay_; }
 
-void P2PPeer::SetRelay(bool relay)
-{
-    relay_ = relay;
-}
+void P2PPeer::SetRelay(bool relay) { relay_ = relay; }
 
-std::chrono::system_clock::time_point P2PPeer::GetLastSeen() const
-{
-    return lastSeen_;
-}
+std::chrono::system_clock::time_point P2PPeer::GetLastSeen() const { return lastSeen_; }
 
-void P2PPeer::UpdateLastSeen()
-{
-    lastSeen_ = std::chrono::system_clock::now();
-}
+void P2PPeer::UpdateLastSeen() { lastSeen_ = std::chrono::system_clock::now(); }
 
-bool P2PPeer::IsConnected() const
-{
-    return connection_ != nullptr;
-}
+bool P2PPeer::IsConnected() const { return connection_ != nullptr; }
 
 void P2PPeer::Disconnect()
 {
@@ -133,10 +92,7 @@ P2PServer::P2PServer(boost::asio::io_context& ioContext, const IPEndPoint& endpo
     peerDiscovery_ = std::make_shared<PeerDiscoveryService>(ioContext_, shared_from_this());
 }
 
-std::shared_ptr<PeerDiscoveryService> P2PServer::GetPeerDiscovery() const
-{
-    return peerDiscovery_;
-}
+std::shared_ptr<PeerDiscoveryService> P2PServer::GetPeerDiscovery() const { return peerDiscovery_; }
 
 void P2PServer::Start()
 {
@@ -366,10 +322,7 @@ void P2PServer::HandleConnectionAccepted(std::shared_ptr<TcpConnection> connecti
     }
 }
 
-std::shared_ptr<PeerDiscoveryService> P2PServer::GetPeerDiscoveryService() const
-{
-    return peerDiscovery_;
-}
+std::shared_ptr<PeerDiscoveryService> P2PServer::GetPeerDiscoveryService() const { return peerDiscovery_; }
 
 void P2PServer::HandleGetAddrMessage(std::shared_ptr<P2PPeer> peer, const Message& message)
 {
@@ -557,8 +510,7 @@ void P2PServer::HandleMessageReceived(std::shared_ptr<P2PPeer> peer, const Messa
                 }
             }
 
-            if (eligiblePeers.empty())
-                return;  // No peers to send
+            if (eligiblePeers.empty()) return;  // No peers to send
 
             // Group by address and take first from each group (remove duplicates)
             std::map<std::string, std::shared_ptr<P2PPeer>> uniquePeers;
@@ -600,8 +552,7 @@ void P2PServer::HandleMessageReceived(std::shared_ptr<P2PPeer> peer, const Messa
                 addresses.push_back(addr);
             }
 
-            if (addresses.empty())
-                return;  // No valid addresses to send
+            if (addresses.empty()) return;  // No valid addresses to send
 
             addrPayload->SetAddresses(addresses);
 
@@ -661,16 +612,14 @@ void P2PServer::HandleGetDataMessage(std::shared_ptr<P2PPeer> peer, const Messag
     try
     {
         auto payload = std::dynamic_pointer_cast<payloads::InvPayload>(message.GetPayload());
-        if (!payload)
-            return;
+        if (!payload) return;
 
         std::vector<io::UInt256> notFound;
 
         for (const auto& hash : payload->GetHashes())
         {
             // Check if we've already sent this hash to avoid spam
-            if (sentHashes_.find(hash) != sentHashes_.end())
-                continue;
+            if (sentHashes_.find(hash) != sentHashes_.end()) continue;
 
             sentHashes_.insert(hash);
 
@@ -915,25 +864,13 @@ void P2PServer::RequestAddresses(std::shared_ptr<P2PPeer> peer)
 // Missing P2PServer method implementations
 P2PServer::~P2PServer() = default;
 
-const IPEndPoint& P2PServer::GetEndpoint() const
-{
-    return endpoint_;
-}
+const IPEndPoint& P2PServer::GetEndpoint() const { return endpoint_; }
 
-const std::string& P2PServer::GetUserAgent() const
-{
-    return userAgent_;
-}
+const std::string& P2PServer::GetUserAgent() const { return userAgent_; }
 
-uint32_t P2PServer::GetStartHeight() const
-{
-    return startHeight_.load();
-}
+uint32_t P2PServer::GetStartHeight() const { return startHeight_.load(); }
 
-void P2PServer::SetStartHeight(uint32_t startHeight)
-{
-    startHeight_.store(startHeight);
-}
+void P2PServer::SetStartHeight(uint32_t startHeight) { startHeight_.store(startHeight); }
 
 std::vector<std::shared_ptr<P2PPeer>> P2PServer::GetConnectedPeers() const
 {
@@ -952,10 +889,7 @@ std::vector<std::shared_ptr<P2PPeer>> P2PServer::GetConnectedPeers() const
     return peers;
 }
 
-uint16_t P2PServer::GetPort() const
-{
-    return endpoint_.GetPort();
-}
+uint16_t P2PServer::GetPort() const { return endpoint_.GetPort(); }
 
 uint32_t P2PServer::GetNonce() const
 {

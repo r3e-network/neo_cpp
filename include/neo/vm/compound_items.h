@@ -1,6 +1,7 @@
 #pragma once
 
 #include <neo/vm/stack_item.h>
+
 #include <optional>
 
 namespace neo::vm
@@ -10,7 +11,7 @@ namespace neo::vm
  */
 class ArrayItem : public StackItem
 {
-  public:
+   public:
     /**
      * @brief Constructs an ArrayItem.
      * @param value The value.
@@ -22,10 +23,7 @@ class ArrayItem : public StackItem
      * @brief Conversion operator to std::shared_ptr<StackItem>.
      * @return A shared pointer to the base StackItem.
      */
-    operator std::shared_ptr<StackItem>() const
-    {
-        return std::const_pointer_cast<StackItem>(shared_from_this());
-    }
+    operator std::shared_ptr<StackItem>() const { return std::const_pointer_cast<StackItem>(shared_from_this()); }
 
     /**
      * @brief Destructor.
@@ -121,7 +119,7 @@ class ArrayItem : public StackItem
     std::shared_ptr<StackItem> DeepCopy(ReferenceCounter* refCounter = nullptr,
                                         bool asImmutable = false) const override;
 
-  protected:
+   protected:
     std::vector<std::shared_ptr<StackItem>> value_;
     ReferenceCounter* refCounter_ = nullptr;
 };
@@ -131,7 +129,7 @@ class ArrayItem : public StackItem
  */
 class StructItem : public ArrayItem
 {
-  public:
+   public:
     /**
      * @brief Constructs a StructItem.
      * @param value The value.
@@ -143,10 +141,7 @@ class StructItem : public ArrayItem
      * @brief Conversion operator to std::shared_ptr<StackItem>.
      * @return A shared pointer to the base StackItem.
      */
-    operator std::shared_ptr<StackItem>() const
-    {
-        return std::const_pointer_cast<StackItem>(shared_from_this());
-    }
+    operator std::shared_ptr<StackItem>() const { return std::const_pointer_cast<StackItem>(shared_from_this()); }
 
     /**
      * @brief Conversion operator to std::shared_ptr<ArrayItem>.
@@ -173,10 +168,7 @@ class StructItem : public ArrayItem
      * @brief Gets the count of items in the struct.
      * @return The count of items.
      */
-    size_t Count() const
-    {
-        return Size();
-    }
+    size_t Count() const { return Size(); }
 
     /**
      * @brief Clones the struct.
@@ -219,7 +211,7 @@ struct StackItemPtrComparator
  */
 class MapItem : public StackItem
 {
-  public:
+   public:
     /**
      * @brief Constructs a MapItem.
      * @param value The value.
@@ -233,10 +225,7 @@ class MapItem : public StackItem
      * @brief Conversion operator to std::shared_ptr<StackItem>.
      * @return A shared pointer to the base StackItem.
      */
-    operator std::shared_ptr<StackItem>() const
-    {
-        return std::const_pointer_cast<StackItem>(shared_from_this());
-    }
+    operator std::shared_ptr<StackItem>() const { return std::const_pointer_cast<StackItem>(shared_from_this()); }
 
     /**
      * @brief Destructor.
@@ -320,7 +309,7 @@ class MapItem : public StackItem
     std::shared_ptr<StackItem> DeepCopy(ReferenceCounter* refCounter = nullptr,
                                         bool asImmutable = false) const override;
 
-  private:
+   private:
     std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>, StackItemPtrComparator> value_;
     ReferenceCounter* refCounter_ = nullptr;
 };

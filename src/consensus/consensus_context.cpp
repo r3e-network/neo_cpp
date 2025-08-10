@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <chrono>
 #include <neo/consensus/change_view_message.h>
 #include <neo/consensus/commit_message.h>
 #include <neo/consensus/consensus_context.h>
@@ -11,6 +9,9 @@
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/vm/script_builder.h>
+
+#include <algorithm>
+#include <chrono>
 #include <random>
 
 namespace neo::consensus
@@ -118,8 +119,7 @@ void ConsensusContext::Reset(uint8_t viewNumber)
 
 uint8_t ConsensusContext::GetPrimaryIndex(uint8_t viewNumber) const
 {
-    if (Validators.empty())
-        return 0;
+    if (Validators.empty()) return 0;
 
     return static_cast<uint8_t>((Block->GetIndex() - viewNumber) % Validators.size());
 }
@@ -129,36 +129,25 @@ bool ConsensusContext::RequestSentOrReceived() const
     return PreparationPayloads[Block->GetPrimaryIndex()] != nullptr;
 }
 
-bool ConsensusContext::ResponseSent() const
-{
-    return !WatchOnly() && PreparationPayloads[MyIndex] != nullptr;
-}
+bool ConsensusContext::ResponseSent() const { return !WatchOnly() && PreparationPayloads[MyIndex] != nullptr; }
 
-bool ConsensusContext::CommitSent() const
-{
-    return !WatchOnly() && CommitPayloads[MyIndex] != nullptr;
-}
+bool ConsensusContext::CommitSent() const { return !WatchOnly() && CommitPayloads[MyIndex] != nullptr; }
 
-bool ConsensusContext::BlockSent() const
-{
-    return Block->GetTransactions() != nullptr;
-}
+bool ConsensusContext::BlockSent() const { return Block->GetTransactions() != nullptr; }
 
 bool ConsensusContext::ViewChanging() const
 {
-    if (WatchOnly() || !ChangeViewPayloads[MyIndex])
-        return false;
+    if (WatchOnly() || !ChangeViewPayloads[MyIndex]) return false;
 
     auto msg = ConsensusPayloadHelper::GetMessage(*ChangeViewPayloads[MyIndex]);
-    if (!msg)
-        return false;
+    if (!msg) return false;
 
     auto changeView = std::dynamic_pointer_cast<ChangeViewMessage>(msg);
     return changeView && changeView->GetNewViewNumber() > ViewNumber;
 }
 
-std::shared_ptr<network::p2p::payloads::ExtensiblePayload>
-ConsensusContext::MakeSignedPayload(std::shared_ptr<ConsensusMessage> message)
+std::shared_ptr<network::p2p::payloads::ExtensiblePayload> ConsensusContext::MakeSignedPayload(
+    std::shared_ptr<ConsensusMessage> message)
 {
     message->SetBlockIndex(Block->GetIndex());
     message->SetValidatorIndex(static_cast<uint8_t>(MyIndex));
@@ -263,8 +252,7 @@ std::shared_ptr<network::p2p::payloads::ExtensiblePayload> ConsensusContext::Mak
 
 std::shared_ptr<network::p2p::payloads::ExtensiblePayload> ConsensusContext::MakeCommit()
 {
-    if (CommitPayloads[MyIndex])
-        return CommitPayloads[MyIndex];
+    if (CommitPayloads[MyIndex]) return CommitPayloads[MyIndex];
 
     auto block = EnsureHeader();
     auto commit = std::make_shared<CommitMessage>();
@@ -382,13 +370,11 @@ void ConsensusContext::EnsureMaxBlockLimitation(const std::vector<std::shared_pt
     {
         // Check size limit
         blockSize += tx->GetSize();
-        if (blockSize > settings_->GetMaxBlockSize())
-            break;
+        if (blockSize > settings_->GetMaxBlockSize()) break;
 
         // Check system fee limit
         blockSystemFee += tx->GetSystemFee();
-        if (blockSystemFee > settings_->GetMaxBlockSystemFee())
-            break;
+        if (blockSystemFee > settings_->GetMaxBlockSystemFee()) break;
 
         TransactionHashes.push_back(tx->GetHash());
         Transactions[tx->GetHash()] = tx;
@@ -404,8 +390,7 @@ size_t ConsensusContext::GetExpectedBlockSizeWithoutTransactions(size_t txCount)
 
 std::shared_ptr<ledger::Block> ConsensusContext::EnsureHeader()
 {
-    if (TransactionHashes.empty())
-        return Block;
+    if (TransactionHashes.empty()) return Block;
 
     // Calculate merkle root - Complete implementation
     try

@@ -14,12 +14,12 @@ namespace neo::ledger
  */
 class Witness : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty Witness.
      */
     Witness();
-    
+
     /**
      * @brief Virtual destructor.
      */
@@ -106,7 +106,7 @@ class Witness : public io::ISerializable, public io::IJsonSerializable
      */
     bool operator!=(const Witness& other) const;
 
-  private:
+   private:
     io::ByteVector invocationScript_;
     io::ByteVector verificationScript_;
 };

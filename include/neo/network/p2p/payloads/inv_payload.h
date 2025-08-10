@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>
@@ -9,6 +8,8 @@
 #include <neo/network/p2p/inventory_type.h>
 #include <neo/network/p2p/inventory_vector.h>
 #include <neo/network/p2p/ipayload.h>
+
+#include <cstdint>
 #include <vector>
 
 namespace neo::network::p2p::payloads
@@ -18,7 +19,7 @@ namespace neo::network::p2p::payloads
  */
 class InvPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Indicates the maximum number of inventories sent each time.
      */
@@ -124,7 +125,7 @@ class InvPayload : public IPayload
      */
     void DeserializeJson(const io::JsonReader& reader);
 
-  private:
+   private:
     InventoryType type_;
     std::vector<io::UInt256> hashes_;
 };

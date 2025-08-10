@@ -1,9 +1,10 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_vector.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
+
+#include <cstdint>
 
 namespace neo::ledger
 {
@@ -12,7 +13,7 @@ namespace neo::ledger
  */
 class TransactionAttribute : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Enum for transaction attribute usage (Neo N3 TransactionAttributeType).
      */
@@ -88,10 +89,7 @@ class TransactionAttribute : public io::ISerializable, public io::IJsonSerializa
      * @brief Gets the type (alias for GetUsage for RPC compatibility).
      * @return The usage/type.
      */
-    Usage GetType() const
-    {
-        return GetUsage();
-    }
+    Usage GetType() const { return GetUsage(); }
 
     /**
      * @brief Sets the usage.
@@ -149,7 +147,7 @@ class TransactionAttribute : public io::ISerializable, public io::IJsonSerializa
      */
     bool operator!=(const TransactionAttribute& other) const;
 
-  private:
+   private:
     Usage usage_;
     io::ByteVector data_;
 };

@@ -9,7 +9,7 @@ namespace neo::json
  */
 class JNumber : public JToken
 {
-  public:
+   public:
     /**
      * @brief Constructor.
      * @param value The numeric value.
@@ -71,7 +71,7 @@ class JNumber : public JToken
      */
     double GetValue() const;
 
-  protected:
+   protected:
     /**
      * @brief Writes this token to JSON output.
      * @param output The output string.
@@ -80,7 +80,7 @@ class JNumber : public JToken
      */
     void WriteJson(std::string& output, bool indented = false, int indent_level = 0) const override;
 
-  private:
+   private:
     double value_;
 };
 }  // namespace neo::json

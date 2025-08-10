@@ -12,7 +12,7 @@ namespace neo::core
  */
 class NetworkConfig
 {
-  public:
+   public:
     struct NetworkSettings
     {
         uint32_t magic;
@@ -47,10 +47,7 @@ class NetworkConfig
      * @param network Network name
      * @return Magic number
      */
-    static uint32_t GetNetworkMagic(const std::string& network)
-    {
-        return GetNetworkSettings(network).magic;
-    }
+    static uint32_t GetNetworkMagic(const std::string& network) { return GetNetworkSettings(network).magic; }
 
     /**
      * @brief Get default port for service on network
@@ -104,7 +101,7 @@ class NetworkConfig
         return networks;
     }
 
-  private:
+   private:
     static const std::unordered_map<std::string, NetworkSettings> network_settings_;
 };
 

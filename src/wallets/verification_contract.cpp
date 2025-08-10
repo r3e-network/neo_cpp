@@ -24,8 +24,7 @@ VerificationContract::VerificationContract(const smartcontract::Contract& contra
     {
         // Extract the public keys and M value from the multi-signature contract
         auto script = contract.GetScript();
-        if (script.Size() < 10)
-            return;
+        if (script.Size() < 10) return;
 
         // Parse m value
         uint8_t mByte = script[0];
@@ -240,50 +239,29 @@ VerificationContract::VerificationContract(const std::vector<cryptography::ecc::
     contract_.SetParameterList(parameterList);
 }
 
-const smartcontract::Contract& VerificationContract::GetContract() const
-{
-    return contract_;
-}
+const smartcontract::Contract& VerificationContract::GetContract() const { return contract_; }
 
-void VerificationContract::SetContract(const smartcontract::Contract& contract)
-{
-    contract_ = contract;
-}
+void VerificationContract::SetContract(const smartcontract::Contract& contract) { contract_ = contract; }
 
-io::UInt160 VerificationContract::GetScriptHash() const
-{
-    return contract_.GetScriptHash();
-}
+io::UInt160 VerificationContract::GetScriptHash() const { return contract_.GetScriptHash(); }
 
-const std::vector<cryptography::ecc::ECPoint>& VerificationContract::GetPublicKeys() const
-{
-    return publicKeys_;
-}
+const std::vector<cryptography::ecc::ECPoint>& VerificationContract::GetPublicKeys() const { return publicKeys_; }
 
 void VerificationContract::SetPublicKeys(const std::vector<cryptography::ecc::ECPoint>& publicKeys)
 {
     publicKeys_ = publicKeys;
 }
 
-const std::vector<std::string>& VerificationContract::GetParameterNames() const
-{
-    return parameterNames_;
-}
+const std::vector<std::string>& VerificationContract::GetParameterNames() const { return parameterNames_; }
 
 void VerificationContract::SetParameterNames(const std::vector<std::string>& parameterNames)
 {
     parameterNames_ = parameterNames;
 }
 
-int VerificationContract::GetM() const
-{
-    return m_;
-}
+int VerificationContract::GetM() const { return m_; }
 
-void VerificationContract::SetM(int m)
-{
-    m_ = m;
-}
+void VerificationContract::SetM(int m) { m_ = m; }
 
 bool VerificationContract::IsSignatureContract() const
 {

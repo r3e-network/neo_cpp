@@ -1,9 +1,10 @@
-#include <chrono>
 #include <neo/core/logging.h>
 #include <neo/core/neo_system.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/persistence/store_factory.h>
 #include <neo/smartcontract/native/native_contract_manager.h>
+
+#include <chrono>
 
 namespace neo::ledger
 {
@@ -21,10 +22,7 @@ Blockchain::Blockchain(std::shared_ptr<NeoSystem> system)
 }
 
 // Destructor
-Blockchain::~Blockchain()
-{
-    Stop();
-}
+Blockchain::~Blockchain() { Stop(); }
 
 // Initialize blockchain
 void Blockchain::Initialize()
@@ -91,13 +89,11 @@ std::shared_ptr<Block> Blockchain::GetBlock(const io::UInt256& hash) const
     }
 
     // Load from storage
-    if (!data_cache_)
-        return nullptr;
+    if (!data_cache_) return nullptr;
 
     persistence::StorageKey key(0, io::ByteVector(hash.AsSpan()));
     auto item = data_cache_->TryGet(key);
-    if (!item)
-        return nullptr;
+    if (!item) return nullptr;
 
     // Deserialize block
     try
@@ -122,16 +118,14 @@ std::shared_ptr<Block> Blockchain::GetBlock(const io::UInt256& hash) const
 std::shared_ptr<Block> Blockchain::GetBlock(uint32_t index) const
 {
     auto hash = GetBlockHash(index);
-    if (hash == io::UInt256::Zero())
-        return nullptr;
+    if (hash == io::UInt256::Zero()) return nullptr;
     return GetBlock(hash);
 }
 
 // Get block hash by index
 io::UInt256 Blockchain::GetBlockHash(uint32_t index) const
 {
-    if (!data_cache_)
-        return io::UInt256::Zero();
+    if (!data_cache_) return io::UInt256::Zero();
 
     // Create key for block hash lookup
     io::ByteVector keyData;
@@ -156,8 +150,7 @@ io::UInt256 Blockchain::GetBlockHash(uint32_t index) const
 std::shared_ptr<Header> Blockchain::GetBlockHeader(const io::UInt256& hash) const
 {
     auto block = GetBlock(hash);
-    if (!block)
-        return nullptr;
+    if (!block) return nullptr;
 
     // Create header from block
     auto header = std::make_shared<BlockHeader>();
@@ -177,16 +170,14 @@ std::shared_ptr<Header> Blockchain::GetBlockHeader(const io::UInt256& hash) cons
 std::shared_ptr<Header> Blockchain::GetBlockHeader(uint32_t index) const
 {
     auto hash = GetBlockHash(index);
-    if (hash == io::UInt256::Zero())
-        return nullptr;
+    if (hash == io::UInt256::Zero()) return nullptr;
     return GetBlockHeader(hash);
 }
 
 // Get transaction by hash
 std::shared_ptr<Transaction> Blockchain::GetTransaction(const io::UInt256& hash) const
 {
-    if (!data_cache_)
-        return nullptr;
+    if (!data_cache_) return nullptr;
 
     // Create key for transaction lookup
     io::ByteVector keyData;
@@ -195,8 +186,7 @@ std::shared_ptr<Transaction> Blockchain::GetTransaction(const io::UInt256& hash)
 
     persistence::StorageKey key(0, keyData);
     auto item = data_cache_->TryGet(key);
-    if (!item)
-        return nullptr;
+    if (!item) return nullptr;
 
     // The item contains the block index where the transaction is stored
     // Transaction retrieval requires loading the containing block from storage
@@ -207,8 +197,7 @@ std::shared_ptr<Transaction> Blockchain::GetTransaction(const io::UInt256& hash)
 // Get transaction height
 int32_t Blockchain::GetTransactionHeight(const io::UInt256& hash) const
 {
-    if (!data_cache_)
-        return -1;
+    if (!data_cache_) return -1;
 
     // Create key for transaction height lookup
     io::ByteVector keyData;
@@ -217,8 +206,7 @@ int32_t Blockchain::GetTransactionHeight(const io::UInt256& hash) const
 
     persistence::StorageKey key(0, keyData);
     auto item = data_cache_->TryGet(key);
-    if (!item || item->GetValue().Size() < 4)
-        return -1;
+    if (!item || item->GetValue().Size() < 4) return -1;
 
     return *reinterpret_cast<const int32_t*>(item->GetValue().Data());
 }
@@ -241,8 +229,7 @@ bool Blockchain::ContainsBlock(const io::UInt256& hash) const
     }
 
     // Check storage
-    if (!data_cache_)
-        return false;
+    if (!data_cache_) return false;
 
     persistence::StorageKey key(0, io::ByteVector(hash.AsSpan()));
     return data_cache_->TryGet(key) != nullptr;
@@ -251,8 +238,7 @@ bool Blockchain::ContainsBlock(const io::UInt256& hash) const
 // Check if transaction exists
 bool Blockchain::ContainsTransaction(const io::UInt256& hash) const
 {
-    if (!data_cache_)
-        return false;
+    if (!data_cache_) return false;
 
     io::ByteVector keyData;
     keyData.Push(0x02);  // Transaction prefix
@@ -265,8 +251,7 @@ bool Blockchain::ContainsTransaction(const io::UInt256& hash) const
 // Process new block
 VerifyResult Blockchain::OnNewBlock(std::shared_ptr<Block> block)
 {
-    if (!block)
-        return VerifyResult::Invalid;
+    if (!block) return VerifyResult::Invalid;
 
     LOG_INFO("Processing new block: {} at height {}", block->GetHash().ToString(), block->GetIndex());
 
@@ -293,8 +278,7 @@ void Blockchain::OnNewHeaders(const std::vector<std::shared_ptr<Header>>& header
 // Process new transaction
 VerifyResult Blockchain::OnNewTransaction(std::shared_ptr<Transaction> transaction)
 {
-    if (!transaction)
-        return VerifyResult::Invalid;
+    if (!transaction) return VerifyResult::Invalid;
 
     // Forward to memory pool if available
     if (system_ && system_->GetMemPool())
@@ -335,40 +319,29 @@ bool Blockchain::ImportBlocks(const ImportData& import_data)
 // Fill memory pool
 void Blockchain::FillMemoryPool(const std::vector<std::shared_ptr<Transaction>>& transactions)
 {
-    if (!system_ || !system_->GetMemPool())
-        return;
+    if (!system_ || !system_->GetMemPool()) return;
 
     // Neo N3 transaction processing for memory pool
     LOG_DEBUG("FillMemoryPool called with Neo N3 transactions");
 }
 
 // Register event handlers
-void Blockchain::RegisterCommittingHandler(CommittingHandler handler)
-{
-    committing_handlers_.push_back(handler);
-}
+void Blockchain::RegisterCommittingHandler(CommittingHandler handler) { committing_handlers_.push_back(handler); }
 
-void Blockchain::RegisterCommittedHandler(CommittedHandler handler)
-{
-    committed_handlers_.push_back(handler);
-}
+void Blockchain::RegisterCommittedHandler(CommittedHandler handler) { committed_handlers_.push_back(handler); }
 
 void Blockchain::RegisterBlockPersistenceHandler(BlockPersistenceHandler handler)
 {
     block_persistence_handlers_.push_back(handler);
 }
 
-void Blockchain::RegisterTransactionHandler(TransactionHandler handler)
-{
-    transaction_handlers_.push_back(handler);
-}
+void Blockchain::RegisterTransactionHandler(TransactionHandler handler) { transaction_handlers_.push_back(handler); }
 
 // Private methods
 
 void Blockchain::ProcessBlock(std::shared_ptr<Block> block)
 {
-    if (!block)
-        return;
+    if (!block) return;
 
     // Verify block
     auto snapshot = data_cache_->CreateSnapshot();
@@ -443,8 +416,7 @@ void Blockchain::PersistBlock(std::shared_ptr<Block> block)
 bool Blockchain::VerifyBlock(std::shared_ptr<Block> block, std::shared_ptr<persistence::DataCache> snapshot)
 {
     // Basic verification
-    if (!block)
-        return false;
+    if (!block) return false;
 
     // Check if block already exists
     if (ContainsBlock(block->GetHash()))
@@ -590,10 +562,7 @@ void Blockchain::FireTransactionEvent(std::shared_ptr<Transaction> transaction, 
     }
 }
 
-bool Blockchain::IsGenesisBlockInitialized() const
-{
-    return GetBlockHash(0) != io::UInt256::Zero();
-}
+bool Blockchain::IsGenesisBlockInitialized() const { return GetBlockHash(0) != io::UInt256::Zero(); }
 
 void Blockchain::InitializeGenesisBlock()
 {
@@ -650,8 +619,8 @@ void Blockchain::IdleProcessingFunction()
     // Idle processing for maintenance tasks
 }
 
-std::unordered_set<io::UInt160>
-Blockchain::UpdateExtensibleWitnessWhiteList(std::shared_ptr<persistence::DataCache> snapshot)
+std::unordered_set<io::UInt160> Blockchain::UpdateExtensibleWitnessWhiteList(
+    std::shared_ptr<persistence::DataCache> snapshot)
 {
     // Would query RoleManagement native contract for whitelist
     return std::unordered_set<io::UInt160>();

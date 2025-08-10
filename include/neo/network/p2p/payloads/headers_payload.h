@@ -1,12 +1,13 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/ledger/block_header.h>
 #include <neo/network/p2p/ipayload.h>
+
+#include <memory>
 #include <vector>
 
 namespace neo::network::p2p::payloads
@@ -18,7 +19,7 @@ namespace neo::network::p2p::payloads
  */
 class HeadersPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Indicates the maximum number of headers sent each time.
      */
@@ -84,7 +85,7 @@ class HeadersPayload : public IPayload
      */
     void DeserializeJson(const io::JsonReader& reader);
 
-  private:
+   private:
     std::vector<std::shared_ptr<ledger::BlockHeader>> headers_;
 };
 }  // namespace neo::network::p2p::payloads

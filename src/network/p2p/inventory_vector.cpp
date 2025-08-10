@@ -6,25 +6,13 @@ InventoryVector::InventoryVector() : type_(InventoryType::Transaction) {}
 
 InventoryVector::InventoryVector(InventoryType type, const io::UInt256& hash) : type_(type), hash_(hash) {}
 
-InventoryType InventoryVector::GetType() const
-{
-    return type_;
-}
+InventoryType InventoryVector::GetType() const { return type_; }
 
-void InventoryVector::SetType(InventoryType type)
-{
-    type_ = type;
-}
+void InventoryVector::SetType(InventoryType type) { type_ = type; }
 
-const io::UInt256& InventoryVector::GetHash() const
-{
-    return hash_;
-}
+const io::UInt256& InventoryVector::GetHash() const { return hash_; }
 
-void InventoryVector::SetHash(const io::UInt256& hash)
-{
-    hash_ = hash;
-}
+void InventoryVector::SetHash(const io::UInt256& hash) { hash_ = hash; }
 
 void InventoryVector::Serialize(io::BinaryWriter& writer) const
 {
@@ -55,8 +43,5 @@ bool InventoryVector::operator==(const InventoryVector& other) const
     return type_ == other.type_ && hash_ == other.hash_;
 }
 
-bool InventoryVector::operator!=(const InventoryVector& other) const
-{
-    return !(*this == other);
-}
+bool InventoryVector::operator!=(const InventoryVector& other) const { return !(*this == other); }
 }  // namespace neo::network::p2p

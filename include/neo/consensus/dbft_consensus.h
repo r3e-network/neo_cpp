@@ -8,15 +8,16 @@
 #include <neo/ledger/witness.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
 // Using Neo N3 transactions for consensus
+#include <neo/consensus/consensus_message.h>
+#include <neo/consensus/consensus_state.h>
+#include <neo/core/logging.h>
+#include <neo/cryptography/ecc/ecpoint.h>
+
 #include <atomic>
 #include <chrono>
 #include <functional>
 #include <map>
 #include <memory>
-#include <neo/consensus/consensus_message.h>
-#include <neo/consensus/consensus_state.h>
-#include <neo/core/logging.h>
-#include <neo/cryptography/ecc/ecpoint.h>
 #include <optional>
 #include <thread>
 #include <vector>
@@ -46,12 +47,12 @@ struct ConsensusConfig
  */
 class DbftConsensus
 {
-  public:
+   public:
     using TransactionVerifier = std::function<bool(const network::p2p::payloads::Neo3Transaction&)>;
     using BlockPersister = std::function<bool(const std::shared_ptr<ledger::Block>&)>;
     using MessageBroadcaster = std::function<void(const ConsensusMessage&)>;
 
-  private:
+   private:
     ConsensusConfig config_;
     std::shared_ptr<ConsensusState> state_;
     std::shared_ptr<core::Logger> logger_;
@@ -82,7 +83,7 @@ class DbftConsensus
     std::shared_ptr<ledger::MemoryPool> mempool_;
     std::shared_ptr<ledger::Blockchain> blockchain_;
 
-  public:
+   public:
     /**
      * @brief Construct a new dBFT consensus instance
      * @param config Consensus configuration
@@ -130,30 +131,21 @@ class DbftConsensus
      * @brief Set transaction verifier callback
      * @param verifier Callback to verify transactions
      */
-    void SetTransactionVerifier(TransactionVerifier verifier)
-    {
-        tx_verifier_ = verifier;
-    }
+    void SetTransactionVerifier(TransactionVerifier verifier) { tx_verifier_ = verifier; }
 
     /**
      * @brief Set block persister callback
      * @param persister Callback to persist blocks
      */
-    void SetBlockPersister(BlockPersister persister)
-    {
-        block_persister_ = persister;
-    }
+    void SetBlockPersister(BlockPersister persister) { block_persister_ = persister; }
 
     /**
      * @brief Set message broadcaster callback
      * @param broadcaster Callback to broadcast messages
      */
-    void SetMessageBroadcaster(MessageBroadcaster broadcaster)
-    {
-        message_broadcaster_ = broadcaster;
-    }
+    void SetMessageBroadcaster(MessageBroadcaster broadcaster) { message_broadcaster_ = broadcaster; }
 
-  private:
+   private:
     /**
      * @brief Main consensus loop
      */

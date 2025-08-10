@@ -15,6 +15,7 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/ledger/neo2_transaction.h>
+
 #include <sstream>
 
 namespace neo::ledger
@@ -318,9 +319,6 @@ bool Neo2Transaction::operator==(const Neo2Transaction& other) const
            inputs_ == other.inputs_ && outputs_ == other.outputs_ && witnesses_ == other.witnesses_;
 }
 
-bool Neo2Transaction::operator!=(const Neo2Transaction& other) const
-{
-    return !(*this == other);
-}
+bool Neo2Transaction::operator!=(const Neo2Transaction& other) const { return !(*this == other); }
 
 }  // namespace neo::ledger

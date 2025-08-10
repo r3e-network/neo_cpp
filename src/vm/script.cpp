@@ -1,9 +1,10 @@
-#include <iostream>
 #include <neo/io/binary_reader.h>
 #include <neo/io/memory_stream.h>
 #include <neo/vm/exceptions.h>
 #include <neo/vm/opcode.h>
 #include <neo/vm/script.h>
+
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 #include <unordered_map>
@@ -17,25 +18,17 @@ Script::Script(const internal::ByteVector& script) : script_(script) {}
 
 Script::Script(const internal::ByteSpan& script) : script_(script) {}
 
-const internal::ByteVector& Script::GetScript() const
-{
-    return script_;
-}
+const internal::ByteVector& Script::GetScript() const { return script_; }
 
-size_t Script::GetLength() const
-{
-    return script_.Size();
-}
+size_t Script::GetLength() const { return script_.Size(); }
 
 std::shared_ptr<Instruction> Script::GetInstruction(int32_t position) const
 {
-    if (position < 0 || position >= static_cast<int32_t>(script_.Size()))
-        return nullptr;
+    if (position < 0 || position >= static_cast<int32_t>(script_.Size())) return nullptr;
 
     // Check if the instruction is already cached
     auto it = instructions_.find(position);
-    if (it != instructions_.end())
-        return it->second;
+    if (it != instructions_.end()) return it->second;
 
     try
     {
@@ -53,29 +46,19 @@ std::shared_ptr<Instruction> Script::GetInstruction(int32_t position) const
 std::shared_ptr<Instruction> Script::GetNextInstruction(int32_t& position) const
 {
     auto instruction = GetInstruction(position);
-    if (!instruction)
-        return nullptr;
+    if (!instruction) return nullptr;
 
     position += instruction->Size();
     return instruction;
 }
 
-int32_t Script::GetJumpDestination(int32_t position, int32_t offset) const
-{
-    return position + offset;
-}
+int32_t Script::GetJumpDestination(int32_t position, int32_t offset) const { return position + offset; }
 
 // Serialization methods removed to eliminate dependencies on the IO module
 
-bool Script::operator==(const Script& other) const
-{
-    return script_ == other.script_;
-}
+bool Script::operator==(const Script& other) const { return script_ == other.script_; }
 
-bool Script::operator!=(const Script& other) const
-{
-    return !(*this == other);
-}
+bool Script::operator!=(const Script& other) const { return !(*this == other); }
 
 int32_t Script::GetOperandSize(OpCode opcode)
 {
@@ -486,8 +469,7 @@ std::string Script::GetOpCodeName(OpCode opcode)
             return "CONVERT";
         default:
             // Special case for test that expects 0xFF to return "CONVERT"
-            if (static_cast<uint8_t>(opcode) == 0xFF)
-                return "CONVERT";
+            if (static_cast<uint8_t>(opcode) == 0xFF) return "CONVERT";
             return "UNKNOWN";
     }
 }

@@ -61,10 +61,7 @@ enum class Hardfork
  * @brief Get the total number of defined hardforks
  * @return The count of hardforks
  */
-constexpr int GetHardforkCount()
-{
-    return static_cast<int>(Hardfork::HF_Echidna) + 1;
-}
+constexpr int GetHardforkCount() { return static_cast<int>(Hardfork::HF_Echidna) + 1; }
 
 /**
  * @brief Convert hardfork enum to string representation

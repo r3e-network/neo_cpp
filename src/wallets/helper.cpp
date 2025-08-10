@@ -1,12 +1,13 @@
-#include <algorithm>
-#include <cstring>
-#include <functional>
-#include <iomanip>
 #include <neo/cryptography/base58.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/hash.h>
 #include <neo/vm/opcode.h>
 #include <neo/wallets/helper.h>
+
+#include <algorithm>
+#include <cstring>
+#include <functional>
+#include <iomanip>
 #include <random>
 #include <sstream>
 #include <stdexcept>
@@ -266,10 +267,7 @@ std::string Helper::Base58Encode(const uint8_t* data, size_t data_size)
     return cryptography::Base58::Encode(byteVector);
 }
 
-std::vector<uint8_t> Helper::Base58Decode(const std::string& encoded)
-{
-    return cryptography::Base58::Decode(encoded);
-}
+std::vector<uint8_t> Helper::Base58Decode(const std::string& encoded) { return cryptography::Base58::Decode(encoded); }
 
 std::string Helper::Base58CheckEncode(const uint8_t* data, size_t data_size)
 {
@@ -315,10 +313,7 @@ bool Helper::ValidateChecksum(const uint8_t* data, size_t data_size)
 }
 
 // Convenience overloads for span-like usage
-io::UInt160 Helper::ToScriptHash(io::ByteSpan script)
-{
-    return ToScriptHash(script.Data(), script.Size());
-}
+io::UInt160 Helper::ToScriptHash(io::ByteSpan script) { return ToScriptHash(script.Data(), script.Size()); }
 
 std::vector<uint8_t> Helper::Sign(io::ByteSpan message, io::ByteSpan private_key)
 {
@@ -346,18 +341,9 @@ std::vector<uint8_t> Helper::CalculateChecksum(io::ByteSpan data)
     return CalculateChecksum(data.Data(), data.Size());
 }
 
-std::string Helper::Base58Encode(io::ByteSpan data)
-{
-    return Base58Encode(data.Data(), data.Size());
-}
+std::string Helper::Base58Encode(io::ByteSpan data) { return Base58Encode(data.Data(), data.Size()); }
 
-std::string Helper::Base58CheckEncode(io::ByteSpan data)
-{
-    return Base58CheckEncode(data.Data(), data.Size());
-}
+std::string Helper::Base58CheckEncode(io::ByteSpan data) { return Base58CheckEncode(data.Data(), data.Size()); }
 
-bool Helper::ValidateChecksum(io::ByteSpan data)
-{
-    return ValidateChecksum(data.Data(), data.Size());
-}
+bool Helper::ValidateChecksum(io::ByteSpan data) { return ValidateChecksum(data.Data(), data.Size()); }
 }  // namespace neo::wallets

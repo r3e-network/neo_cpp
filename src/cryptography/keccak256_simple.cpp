@@ -1,6 +1,7 @@
+#include <neo/cryptography/hash.h>
+
 #include <array>
 #include <cstring>
-#include <neo/cryptography/hash.h>
 
 namespace neo::cryptography
 {
@@ -29,14 +30,12 @@ void keccakf(uint64_t st[25])
     for (int r = 0; r < 24; r++)
     {
         // Theta
-        for (int i = 0; i < 5; i++)
-            bc[i] = st[i] ^ st[i + 5] ^ st[i + 10] ^ st[i + 15] ^ st[i + 20];
+        for (int i = 0; i < 5; i++) bc[i] = st[i] ^ st[i + 5] ^ st[i + 10] ^ st[i + 15] ^ st[i + 20];
 
         for (int i = 0; i < 5; i++)
         {
             t = bc[(i + 4) % 5] ^ ((bc[(i + 1) % 5] << 1) | (bc[(i + 1) % 5] >> 63));
-            for (int j = 0; j < 25; j += 5)
-                st[j + i] ^= t;
+            for (int j = 0; j < 25; j += 5) st[j + i] ^= t;
         }
 
         // Rho Pi
@@ -52,10 +51,8 @@ void keccakf(uint64_t st[25])
         // Chi
         for (int j = 0; j < 25; j += 5)
         {
-            for (int i = 0; i < 5; i++)
-                bc[i] = st[j + i];
-            for (int i = 0; i < 5; i++)
-                st[j + i] ^= (~bc[(i + 1) % 5]) & bc[(i + 2) % 5];
+            for (int i = 0; i < 5; i++) bc[i] = st[j + i];
+            for (int i = 0; i < 5; i++) st[j + i] ^= (~bc[(i + 1) % 5]) & bc[(i + 2) % 5];
         }
 
         // Iota
@@ -76,8 +73,7 @@ void keccak(const uint8_t* in, size_t inlen, uint8_t* md, int mdlen)
 
     for (; inlen >= rsiz; inlen -= rsiz, in += rsiz)
     {
-        for (size_t i = 0; i < rsizw; i++)
-            st[i] ^= ((uint64_t*)in)[i];
+        for (size_t i = 0; i < rsizw; i++) st[i] ^= ((uint64_t*)in)[i];
         keccakf(st);
     }
 
@@ -86,8 +82,7 @@ void keccak(const uint8_t* in, size_t inlen, uint8_t* md, int mdlen)
     memset(buffer + inlen, 0, rsiz - inlen);
     buffer[rsiz - 1] |= 0x80;
 
-    for (size_t i = 0; i < rsizw; i++)
-        st[i] ^= ((uint64_t*)buffer)[i];
+    for (size_t i = 0; i < rsizw; i++) st[i] ^= ((uint64_t*)buffer)[i];
 
     keccakf(st);
 

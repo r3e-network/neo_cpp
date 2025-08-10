@@ -1,12 +1,13 @@
-#include <filesystem>
-#include <fstream>
-#include <iostream>
 #include <neo/cryptography/merkle_tree.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/plugins/state_service_plugin.h>
+
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 
 namespace neo::plugins
 {
@@ -58,8 +59,7 @@ std::shared_ptr<StateRoot> StateServicePlugin::GetStateRoot(uint32_t index) cons
     std::lock_guard<std::mutex> lock(mutex_);
 
     auto it = stateRoots_.find(index);
-    if (it != stateRoots_.end())
-        return it->second;
+    if (it != stateRoots_.end()) return it->second;
 
     return nullptr;
 }
@@ -69,8 +69,7 @@ std::shared_ptr<StateRoot> StateServicePlugin::GetStateRoot(const io::UInt256& h
     std::lock_guard<std::mutex> lock(mutex_);
 
     auto it = stateRootsByHash_.find(hash);
-    if (it != stateRootsByHash_.end())
-        return it->second;
+    if (it != stateRootsByHash_.end()) return it->second;
 
     return nullptr;
 }
@@ -137,14 +136,12 @@ void StateServicePlugin::LoadStateRoots()
     stateRootsByHash_.clear();
 
     // Check if state directory exists
-    if (!std::filesystem::exists(statePath_))
-        return;
+    if (!std::filesystem::exists(statePath_)) return;
 
     // Load state root files
     for (const auto& entry : std::filesystem::directory_iterator(statePath_))
     {
-        if (entry.path().extension() != ".json")
-            continue;
+        if (entry.path().extension() != ".json") continue;
 
         try
         {
@@ -198,8 +195,7 @@ io::UInt256 StateServicePlugin::CalculateStateRoot(
     }
 
     // Calculate merkle root
-    if (hashes.empty())
-        return io::UInt256();
+    if (hashes.empty()) return io::UInt256();
 
     return cryptography::MerkleTree::ComputeRoot(hashes);
 }

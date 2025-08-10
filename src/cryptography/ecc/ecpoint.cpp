@@ -1,5 +1,3 @@
-#include <boost/multiprecision/cpp_int.hpp>
-#include <cstring>
 #include <neo/core/logging.h>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/hash.h>
@@ -7,6 +5,9 @@
 #include <neo/io/binary_writer.h>
 #include <openssl/ec.h>
 #include <openssl/obj_mac.h>
+
+#include <boost/multiprecision/cpp_int.hpp>
+#include <cstring>
 #include <stdexcept>
 
 // Suppress OpenSSL deprecation warnings
@@ -21,30 +22,15 @@ ECPoint::ECPoint() : isInfinity_(true) {}
 
 ECPoint::ECPoint(const std::string& curveName) : curveName_(curveName), isInfinity_(true) {}
 
-const std::string& ECPoint::GetCurveName() const
-{
-    return curveName_;
-}
+const std::string& ECPoint::GetCurveName() const { return curveName_; }
 
-void ECPoint::SetCurveName(const std::string& curveName)
-{
-    curveName_ = curveName;
-}
+void ECPoint::SetCurveName(const std::string& curveName) { curveName_ = curveName; }
 
-bool ECPoint::IsInfinity() const
-{
-    return isInfinity_;
-}
+bool ECPoint::IsInfinity() const { return isInfinity_; }
 
-void ECPoint::SetInfinity(bool isInfinity)
-{
-    isInfinity_ = isInfinity;
-}
+void ECPoint::SetInfinity(bool isInfinity) { isInfinity_ = isInfinity; }
 
-const io::UInt256& ECPoint::GetX() const
-{
-    return x_;
-}
+const io::UInt256& ECPoint::GetX() const { return x_; }
 
 void ECPoint::SetX(const io::UInt256& x)
 {
@@ -52,10 +38,7 @@ void ECPoint::SetX(const io::UInt256& x)
     isInfinity_ = false;
 }
 
-const io::UInt256& ECPoint::GetY() const
-{
-    return y_;
-}
+const io::UInt256& ECPoint::GetY() const { return y_; }
 
 void ECPoint::SetY(const io::UInt256& y)
 {
@@ -65,8 +48,7 @@ void ECPoint::SetY(const io::UInt256& y)
 
 io::ByteVector ECPoint::ToBytes(bool compressed) const
 {
-    if (isInfinity_)
-        return io::ByteVector{0x00};
+    if (isInfinity_) return io::ByteVector{0x00};
 
     if (compressed)
     {
@@ -171,15 +153,11 @@ io::ByteVector ECPoint::ToArray() const
     return ToBytes(true);  // Always return compressed format to match C# behavior
 }
 
-std::string ECPoint::ToHex(bool compressed) const
-{
-    return ToBytes(compressed).ToHexString();
-}
+std::string ECPoint::ToHex(bool compressed) const { return ToBytes(compressed).ToHexString(); }
 
 ECPoint ECPoint::FromBytes(const io::ByteSpan& data, const std::string& curveName)
 {
-    if (data.Size() == 0)
-        throw std::invalid_argument("Invalid ECPoint data");
+    if (data.Size() == 0) throw std::invalid_argument("Invalid ECPoint data");
 
     ECPoint point(curveName);
 
@@ -227,10 +205,8 @@ ECPoint ECPoint::FromBytes(const io::ByteSpan& data, const std::string& curveNam
 
             if (!x_bn || !y_bn)
             {
-                if (x_bn)
-                    BN_free(x_bn);
-                if (y_bn)
-                    BN_free(y_bn);
+                if (x_bn) BN_free(x_bn);
+                if (y_bn) BN_free(y_bn);
                 EC_POINT_free(ecPoint);
                 EC_GROUP_free(group);
                 throw std::runtime_error("Failed to create BIGNUMs");
@@ -298,17 +274,12 @@ ECPoint ECPoint::Infinity(const std::string& curveName)
 
 bool ECPoint::operator==(const ECPoint& other) const
 {
-    if (isInfinity_ && other.isInfinity_)
-        return true;
-    if (isInfinity_ || other.isInfinity_)
-        return false;
+    if (isInfinity_ && other.isInfinity_) return true;
+    if (isInfinity_ || other.isInfinity_) return false;
     return x_ == other.x_ && y_ == other.y_;
 }
 
-bool ECPoint::operator!=(const ECPoint& other) const
-{
-    return !(*this == other);
-}
+bool ECPoint::operator!=(const ECPoint& other) const { return !(*this == other); }
 
 bool ECPoint::operator<(const ECPoint& other) const
 {
@@ -316,39 +287,25 @@ bool ECPoint::operator<(const ECPoint& other) const
     auto thisBytes = ToBytes(true);
     auto otherBytes = other.ToBytes(true);
 
-    if (thisBytes.Size() != otherBytes.Size())
-        return thisBytes.Size() < otherBytes.Size();
+    if (thisBytes.Size() != otherBytes.Size()) return thisBytes.Size() < otherBytes.Size();
 
     return std::memcmp(thisBytes.Data(), otherBytes.Data(), thisBytes.Size()) < 0;
 }
 
-bool ECPoint::operator>(const ECPoint& other) const
-{
-    return other < *this;
-}
+bool ECPoint::operator>(const ECPoint& other) const { return other < *this; }
 
-bool ECPoint::operator<=(const ECPoint& other) const
-{
-    return !(other < *this);
-}
+bool ECPoint::operator<=(const ECPoint& other) const { return !(other < *this); }
 
-bool ECPoint::operator>=(const ECPoint& other) const
-{
-    return !(*this < other);
-}
-
+bool ECPoint::operator>=(const ECPoint& other) const { return !(*this < other); }
 
 ECPoint ECPoint::Add(const ECPoint& other) const
 {
     // Handle point at infinity cases
-    if (IsInfinity())
-        return other;
-    if (other.IsInfinity())
-        return *this;
+    if (IsInfinity()) return other;
+    if (other.IsInfinity()) return *this;
 
     // Check if curves match
-    if (curveName_ != other.curveName_)
-        throw std::runtime_error("Cannot add points from different curves");
+    if (curveName_ != other.curveName_) throw std::runtime_error("Cannot add points from different curves");
 
     ECPoint result(curveName_);
 
@@ -416,16 +373,11 @@ ECPoint ECPoint::Add(const ECPoint& other) const
         LOG_WARNING("ECPoint operation failed: {}", e.what());
     }
 
-    if (group)
-        EC_GROUP_free(group);
-    if (point1)
-        EC_POINT_free(point1);
-    if (point2)
-        EC_POINT_free(point2);
-    if (resultPoint)
-        EC_POINT_free(resultPoint);
-    if (ctx)
-        BN_CTX_free(ctx);
+    if (group) EC_GROUP_free(group);
+    if (point1) EC_POINT_free(point1);
+    if (point2) EC_POINT_free(point2);
+    if (resultPoint) EC_POINT_free(resultPoint);
+    if (ctx) BN_CTX_free(ctx);
 
     return result;
 }
@@ -433,8 +385,7 @@ ECPoint ECPoint::Add(const ECPoint& other) const
 ECPoint ECPoint::Multiply(const io::UInt256& scalar) const
 {
     // Handle point at infinity
-    if (IsInfinity())
-        return *this;
+    if (IsInfinity()) return *this;
 
     ECPoint result(curveName_);
 
@@ -497,14 +448,10 @@ ECPoint ECPoint::Multiply(const io::UInt256& scalar) const
         LOG_WARNING("ECPoint operation failed: {}", e.what());
     }
 
-    if (group)
-        EC_GROUP_free(group);
-    if (point)
-        EC_POINT_free(point);
-    if (resultPoint)
-        EC_POINT_free(resultPoint);
-    if (ctx)
-        BN_CTX_free(ctx);
+    if (group) EC_GROUP_free(group);
+    if (point) EC_POINT_free(point);
+    if (resultPoint) EC_POINT_free(resultPoint);
+    if (ctx) BN_CTX_free(ctx);
 
     return result;
 }
@@ -512,8 +459,7 @@ ECPoint ECPoint::Multiply(const io::UInt256& scalar) const
 ECPoint ECPoint::Negate() const
 {
     // Handle point at infinity
-    if (IsInfinity())
-        return *this;
+    if (IsInfinity()) return *this;
 
     ECPoint result(curveName_);
     result.x_ = x_;
@@ -571,12 +517,9 @@ ECPoint ECPoint::Negate() const
         LOG_WARNING("ECPoint operation failed: {}", e.what());
     }
 
-    if (group)
-        EC_GROUP_free(group);
-    if (point)
-        EC_POINT_free(point);
-    if (ctx)
-        BN_CTX_free(ctx);
+    if (group) EC_GROUP_free(group);
+    if (point) EC_POINT_free(point);
+    if (ctx) BN_CTX_free(ctx);
 
     return result;
 }

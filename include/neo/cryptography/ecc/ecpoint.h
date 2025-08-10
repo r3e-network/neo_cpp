@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint256.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::cryptography::ecc
@@ -14,7 +15,7 @@ namespace neo::cryptography::ecc
  */
 class ECPoint : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief The maximum size of an ECPoint in bytes (compressed format).
      */
@@ -117,10 +118,7 @@ class ECPoint : public io::ISerializable
      * @param data The byte array.
      * @return The ECPoint.
      */
-    static ECPoint FromBytes(const io::ByteSpan& data)
-    {
-        return FromBytes(data, "secp256r1");
-    }
+    static ECPoint FromBytes(const io::ByteSpan& data) { return FromBytes(data, "secp256r1"); }
 
     /**
      * @brief Creates an ECPoint from a hex string.
@@ -135,20 +133,14 @@ class ECPoint : public io::ISerializable
      * @param hex The hex string.
      * @return The ECPoint.
      */
-    static ECPoint FromHex(const std::string& hex)
-    {
-        return FromHex(hex, "secp256r1");
-    }
+    static ECPoint FromHex(const std::string& hex) { return FromHex(hex, "secp256r1"); }
 
     /**
      * @brief Converts this point to a string (hex representation).
      * @param compressed True to use compressed format, false otherwise.
      * @return The hex string representation.
      */
-    std::string ToString(bool compressed = true) const
-    {
-        return ToHex(compressed);
-    }
+    std::string ToString(bool compressed = true) const { return ToHex(compressed); }
 
     /**
      * @brief Parses an ECPoint from a hex string.
@@ -210,7 +202,6 @@ class ECPoint : public io::ISerializable
      */
     bool operator>=(const ECPoint& other) const;
 
-
     /**
      * @brief Adds another ECPoint to this ECPoint.
      * @param other The other ECPoint.
@@ -236,29 +227,20 @@ class ECPoint : public io::ISerializable
      * @param other The other ECPoint.
      * @return The result of the addition.
      */
-    ECPoint operator+(const ECPoint& other) const
-    {
-        return Add(other);
-    }
+    ECPoint operator+(const ECPoint& other) const { return Add(other); }
 
     /**
      * @brief Operator overload for ECPoint scalar multiplication.
      * @param scalar The scalar value.
      * @return The result of the multiplication.
      */
-    ECPoint operator*(const io::UInt256& scalar) const
-    {
-        return Multiply(scalar);
-    }
+    ECPoint operator*(const io::UInt256& scalar) const { return Multiply(scalar); }
 
     /**
      * @brief Operator overload for ECPoint negation.
      * @return The negated ECPoint.
      */
-    ECPoint operator-() const
-    {
-        return Negate();
-    }
+    ECPoint operator-() const { return Negate(); }
 
     // ISerializable implementation
     /**
@@ -273,7 +255,7 @@ class ECPoint : public io::ISerializable
      */
     void Deserialize(io::BinaryReader& reader) override;
 
-  private:
+   private:
     std::string curveName_;
     bool isInfinity_;
     io::UInt256 x_;

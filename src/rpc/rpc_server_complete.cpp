@@ -3,6 +3,7 @@
 #include <neo/network/p2p/local_node.h>
 #include <neo/rpc/rpc_methods.h>
 #include <neo/rpc/rpc_server.h>
+
 #include <nlohmann/json.hpp>
 #include <sstream>
 #include <thread>
@@ -16,22 +17,22 @@ namespace neo::rpc
 using json = nlohmann::json;
 
 RpcServer::RpcServer(const RpcConfig& config)
-    : config_(config), logger_(std::make_shared<logging::Logger>("RpcServer")), running_(false), total_requests_(0),
-      failed_requests_(0), start_time_(std::chrono::steady_clock::now())
+    : config_(config),
+      logger_(std::make_shared<logging::Logger>("RpcServer")),
+      running_(false),
+      total_requests_(0),
+      failed_requests_(0),
+      start_time_(std::chrono::steady_clock::now())
 {
     LOG_INFO("Initializing RPC server on {}:{}", config_.bind_address, config_.port);
     InitializeHandlers();
 }
 
-RpcServer::~RpcServer()
-{
-    Stop();
-}
+RpcServer::~RpcServer() { Stop(); }
 
 void RpcServer::Start()
 {
-    if (running_.exchange(true))
-        return;
+    if (running_.exchange(true)) return;
 
     LOG_INFO("Starting RPC server on {}:{}", config_.bind_address, config_.port);
 
@@ -73,8 +74,7 @@ void RpcServer::Start()
 
 void RpcServer::Stop()
 {
-    if (!running_.exchange(false))
-        return;
+    if (!running_.exchange(false)) return;
 
     LOG_INFO("Stopping RPC server");
 

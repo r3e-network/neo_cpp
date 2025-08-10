@@ -1,11 +1,12 @@
 #pragma once
 
-#include <functional>
-#include <memory>
-#include <neo/rpc/rpc_server.h>
+#include <neo/plugins/plugin_base.h>
 #include <neo/rpc/rpc_request.h>
 #include <neo/rpc/rpc_response.h>
-#include <neo/plugins/plugin_base.h>
+#include <neo/rpc/rpc_server.h>
+
+#include <functional>
+#include <memory>
 #include <string>
 #include <unordered_map>
 
@@ -16,7 +17,7 @@ namespace neo::plugins
  */
 class RPCPlugin : public PluginBase
 {
-  public:
+   public:
     /**
      * @brief Constructs an RPCPlugin.
      */
@@ -27,7 +28,7 @@ class RPCPlugin : public PluginBase
      */
     virtual ~RPCPlugin() = default;
 
-  protected:
+   protected:
     /**
      * @brief Initializes the plugin.
      * @param settings The settings.
@@ -54,7 +55,7 @@ class RPCPlugin : public PluginBase
      */
     void RegisterMethod(const std::string& name, std::function<nlohmann::json(const std::vector<std::string>&)> method);
 
-  private:
+   private:
     std::unordered_map<std::string, std::function<nlohmann::json(const std::vector<std::string>&)>> methods_;
     std::vector<int32_t> callbackIds_;
 

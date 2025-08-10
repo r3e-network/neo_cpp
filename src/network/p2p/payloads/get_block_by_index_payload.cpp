@@ -9,30 +9,15 @@ GetBlockByIndexPayload::GetBlockByIndexPayload(uint32_t indexStart, uint16_t cou
 {
 }
 
-uint32_t GetBlockByIndexPayload::GetIndexStart() const
-{
-    return indexStart_;
-}
+uint32_t GetBlockByIndexPayload::GetIndexStart() const { return indexStart_; }
 
-void GetBlockByIndexPayload::SetIndexStart(uint32_t indexStart)
-{
-    indexStart_ = indexStart;
-}
+void GetBlockByIndexPayload::SetIndexStart(uint32_t indexStart) { indexStart_ = indexStart; }
 
-uint16_t GetBlockByIndexPayload::GetCount() const
-{
-    return count_;
-}
+uint16_t GetBlockByIndexPayload::GetCount() const { return count_; }
 
-void GetBlockByIndexPayload::SetCount(uint16_t count)
-{
-    count_ = count;
-}
+void GetBlockByIndexPayload::SetCount(uint16_t count) { count_ = count; }
 
-size_t GetBlockByIndexPayload::GetSize() const
-{
-    return sizeof(uint32_t) + sizeof(uint16_t);
-}
+size_t GetBlockByIndexPayload::GetSize() const { return sizeof(uint32_t) + sizeof(uint16_t); }
 
 GetBlockByIndexPayload GetBlockByIndexPayload::Create(uint32_t indexStart, uint16_t count)
 {

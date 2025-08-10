@@ -1,5 +1,7 @@
 #include <iostream>
 #include <neo/ledger/block.h>
+#include <neo/io/uint160.h>
+#include <neo/io/uint256.h>
 #include <neo/ledger/transaction.h>
 
 using namespace neo::ledger;
@@ -9,12 +11,13 @@ int main()
     // Create a block
     Block block;
     block.SetVersion(0);
-    block.SetPrevHash(std::vector<uint8_t>(32, 0));
-    block.SetMerkleRoot(std::vector<uint8_t>(32, 0));
+    neo::io::UInt256 zero256(std::vector<uint8_t>(32, 0));
+    block.SetPreviousHash(zero256);
+    block.SetMerkleRoot(zero256);
     block.SetTimestamp(0);
     block.SetIndex(0);
-    block.SetConsensusData(0);
-    block.SetNextConsensus(std::vector<uint8_t>(20, 0));
+    neo::io::UInt160 zero160(std::vector<uint8_t>(20, 0));
+    block.SetNextConsensus(zero160);
 
     // Print the block
     std::cout << "Block version: " << block.GetVersion() << std::endl;

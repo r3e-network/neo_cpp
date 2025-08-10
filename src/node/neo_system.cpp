@@ -1,4 +1,3 @@
-#include <chrono>
 #include <neo/logging/logger.h>
 #include <neo/node/neo_system.h>
 #include <neo/persistence/leveldb_store.h>
@@ -7,13 +6,18 @@
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/policy_contract.h>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <chrono>
 #include <stdexcept>
 
 namespace neo::node
 {
 NeoSystem::NeoSystem(std::shared_ptr<ProtocolSettings> protocolSettings, const std::string& storageEngine,
                      const std::string& storePath)
-    : protocolSettings_(protocolSettings), running_(false), storageEngine_(storageEngine), storePath_(storePath),
+    : protocolSettings_(protocolSettings),
+      running_(false),
+      storageEngine_(storageEngine),
+      storePath_(storePath),
       nextCallbackId_(1)
 {
     if (!protocolSettings_)
@@ -22,10 +26,7 @@ NeoSystem::NeoSystem(std::shared_ptr<ProtocolSettings> protocolSettings, const s
     }
 }
 
-NeoSystem::~NeoSystem()
-{
-    Stop();
-}
+NeoSystem::~NeoSystem() { Stop(); }
 
 bool NeoSystem::Start()
 {
@@ -103,39 +104,21 @@ void NeoSystem::Stop()
     blockPersistCallbacks_.clear();
 }
 
-bool NeoSystem::IsRunning() const
-{
-    return running_;
-}
+bool NeoSystem::IsRunning() const { return running_; }
 
-std::shared_ptr<ProtocolSettings> NeoSystem::GetProtocolSettings() const
-{
-    return protocolSettings_;
-}
+std::shared_ptr<ProtocolSettings> NeoSystem::GetProtocolSettings() const { return protocolSettings_; }
 
-std::shared_ptr<ledger::Blockchain> NeoSystem::GetBlockchain() const
-{
-    return blockchain_;
-}
+std::shared_ptr<ledger::Blockchain> NeoSystem::GetBlockchain() const { return blockchain_; }
 
-std::shared_ptr<ledger::MemoryPool> NeoSystem::GetMemoryPool() const
-{
-    return memoryPool_;
-}
+std::shared_ptr<ledger::MemoryPool> NeoSystem::GetMemoryPool() const { return memoryPool_; }
 
-std::shared_ptr<network::P2PServer> NeoSystem::GetP2PServer() const
-{
-    return p2pServer_;
-}
+std::shared_ptr<network::P2PServer> NeoSystem::GetP2PServer() const { return p2pServer_; }
 
-std::shared_ptr<persistence::DataCache> NeoSystem::GetDataCache() const
-{
-    return dataCache_;
-}
+std::shared_ptr<persistence::DataCache> NeoSystem::GetDataCache() const { return dataCache_; }
 
-std::unique_ptr<smartcontract::ApplicationEngine>
-NeoSystem::CreateApplicationEngine(smartcontract::TriggerType trigger, const io::ISerializable* container,
-                                   const ledger::Block* persistingBlock, int64_t gas)
+std::unique_ptr<smartcontract::ApplicationEngine> NeoSystem::CreateApplicationEngine(
+    smartcontract::TriggerType trigger, const io::ISerializable* container, const ledger::Block* persistingBlock,
+    int64_t gas)
 {
     return std::make_unique<smartcontract::ApplicationEngine>(trigger, container, dataCache_, persistingBlock, gas);
 }
@@ -162,10 +145,7 @@ std::vector<std::shared_ptr<smartcontract::native::NativeContract>> NeoSystem::G
     return nativeContracts_;
 }
 
-uint32_t NeoSystem::GetCurrentBlockHeight() const
-{
-    return blockchain_ ? blockchain_->GetHeight() : 0;
-}
+uint32_t NeoSystem::GetCurrentBlockHeight() const { return blockchain_ ? blockchain_->GetHeight() : 0; }
 
 io::UInt256 NeoSystem::GetCurrentBlockHash() const
 {

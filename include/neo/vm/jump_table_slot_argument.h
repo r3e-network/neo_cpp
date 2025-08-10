@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableSlotArgument
 {
-  public:
+   public:
     // Argument operations
     static void LDARG0(ExecutionEngine& engine, const Instruction& instruction);
     static void LDARG1(ExecutionEngine& engine, const Instruction& instruction);

@@ -1,12 +1,13 @@
 #pragma once
 
-#include <memory>
-#include <mutex>
 #include <neo/io/uint256.h>
 #include <neo/ledger/block.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/plugins/plugin_base.h>
+
+#include <memory>
+#include <mutex>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -44,7 +45,7 @@ struct StateRoot
  */
 class StateServicePlugin : public PluginBase
 {
-  public:
+   public:
     /**
      * @brief Constructs a StateServicePlugin.
      */
@@ -64,7 +65,7 @@ class StateServicePlugin : public PluginBase
      */
     std::shared_ptr<StateRoot> GetStateRoot(const io::UInt256& hash) const;
 
-  protected:
+   protected:
     /**
      * @brief Initializes the plugin.
      * @param settings The settings.
@@ -84,7 +85,7 @@ class StateServicePlugin : public PluginBase
      */
     bool OnStop() override;
 
-  private:
+   private:
     std::string statePath_;
     std::unordered_map<uint32_t, std::shared_ptr<StateRoot>> stateRoots_;
     std::unordered_map<io::UInt256, std::shared_ptr<StateRoot>> stateRootsByHash_;
@@ -93,9 +94,8 @@ class StateServicePlugin : public PluginBase
     void OnBlockPersisted(std::shared_ptr<ledger::Block> block);
     void SaveStateRoots();
     void LoadStateRoots();
-    io::UInt256
-    CalculateStateRoot(uint32_t index,
-                       const std::vector<std::pair<persistence::StorageKey, persistence::StorageItem>>& changes);
+    io::UInt256 CalculateStateRoot(
+        uint32_t index, const std::vector<std::pair<persistence::StorageKey, persistence::StorageItem>>& changes);
 };
 
 /**

@@ -1,9 +1,10 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint256.h>
+
+#include <cstdint>
 
 namespace neo::ledger
 {
@@ -13,11 +14,11 @@ namespace neo::ledger
  */
 class CoinReference : public io::ISerializable, public io::IJsonSerializable
 {
-  private:
+   private:
     io::UInt256 prevHash_;
     uint16_t prevIndex_;
 
-  public:
+   public:
     /**
      * @brief Constructs an empty CoinReference.
      */

@@ -1,10 +1,11 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
+#include <cstdint>
 #include <string>
 
 // Forward declarations
@@ -20,7 +21,7 @@ namespace neo::cryptography
  */
 class Crypto
 {
-  public:
+   public:
     /**
      * @brief Generates random bytes.
      * @param length The number of bytes to generate.

@@ -1,11 +1,12 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/ledger/transaction_attribute.h>
+
+#include <cstdint>
 
 namespace neo::network::p2p::payloads
 {
@@ -14,10 +15,10 @@ namespace neo::network::p2p::payloads
  */
 class NotValidBefore : public ledger::TransactionAttribute
 {
-  private:
+   private:
     uint32_t height_;
 
-  public:
+   public:
     /**
      * @brief Constructs an empty NotValidBefore attribute.
      */

@@ -1,4 +1,3 @@
-#include <iostream>
 #include <neo/console_service/service_proxy.h>
 #include <neo/io/uint160.h>
 #include <neo/logging/logger.h>
@@ -12,6 +11,8 @@
 #include <neo/vm/stack_item.h>
 #include <neo/wallets/wallet.h>
 #include <neo/wallets/wallet_manager.h>
+
+#include <iostream>
 #include <sstream>
 
 namespace neo::console_service
@@ -25,8 +26,7 @@ std::shared_ptr<ServiceProxy> ServiceProxy::Create(std::shared_ptr<neo::node::Ne
 
 uint32_t ServiceProxy::GetBlockchainHeight() const
 {
-    if (!neoSystem_)
-        return 0;
+    if (!neoSystem_) return 0;
 
     try
     {
@@ -48,15 +48,11 @@ uint32_t ServiceProxy::GetBlockchainHeight() const
     }
 }
 
-bool ServiceProxy::IsNodeRunning() const
-{
-    return neoSystem_ != nullptr;
-}
+bool ServiceProxy::IsNodeRunning() const { return neoSystem_ != nullptr; }
 
 size_t ServiceProxy::GetPeerCount() const
 {
-    if (!neoSystem_)
-        return 0;
+    if (!neoSystem_) return 0;
 
     try
     {
@@ -102,8 +98,7 @@ size_t ServiceProxy::GetPeerCount() const
 
 std::string ServiceProxy::GetSystemStatus() const
 {
-    if (!neoSystem_)
-        return "System not initialized";
+    if (!neoSystem_) return "System not initialized";
 
     std::stringstream status;
     status << "Neo Node Status:\n";
@@ -116,8 +111,7 @@ std::string ServiceProxy::GetSystemStatus() const
 
 bool neo::console_service::ServiceProxy::StartNode()
 {
-    if (!neoSystem_)
-        return false;
+    if (!neoSystem_) return false;
 
     try
     {
@@ -163,8 +157,7 @@ bool neo::console_service::ServiceProxy::StartNode()
 
 bool neo::console_service::ServiceProxy::StopNode()
 {
-    if (!neoSystem_)
-        return false;
+    if (!neoSystem_) return false;
 
     try
     {
@@ -217,8 +210,7 @@ bool neo::console_service::ServiceProxy::StopNode()
 std::string neo::console_service::ServiceProxy::ExecuteCommand(const std::string& command,
                                                                const std::vector<std::string>& args)
 {
-    if (!neoSystem_)
-        return "System not available";
+    if (!neoSystem_) return "System not available";
 
     try
     {
@@ -335,10 +327,7 @@ std::string neo::console_service::ServiceProxy::ExecuteCommand(const std::string
     }
 }
 
-std::shared_ptr<neo::node::NeoSystem> neo::console_service::ServiceProxy::GetNeoSystem() const
-{
-    return neoSystem_;
-}
+std::shared_ptr<neo::node::NeoSystem> neo::console_service::ServiceProxy::GetNeoSystem() const { return neoSystem_; }
 
 void neo::console_service::ServiceProxy::SetEventCallback(std::function<void(const std::string&)> callback)
 {

@@ -1,4 +1,3 @@
-#include <chrono>
 #include <neo/network/message.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
@@ -15,6 +14,8 @@
 #include <neo/network/p2p/payloads/ping_payload.h>
 #include <neo/network/p2p/payloads/version_payload.h>
 #include <neo/network/p2p/remote_node.h>
+
+#include <chrono>
 
 namespace neo::network::p2p
 {
@@ -33,8 +34,7 @@ void LocalNode::Broadcast(const Message& message, bool enableCompression)
 
 void LocalNode::BroadcastInv(InventoryType type, const std::vector<io::UInt256>& hashes)
 {
-    if (hashes.empty())
-        return;
+    if (hashes.empty()) return;
 
     // Create an inv payload
     auto payload = std::make_shared<payloads::InvPayload>(type, hashes);

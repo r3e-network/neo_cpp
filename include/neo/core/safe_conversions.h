@@ -17,7 +17,7 @@ namespace neo::core
  */
 class SafeConversions
 {
-  public:
+   public:
     /**
      * @brief Safely convert string to int32_t
      * @param str Input string
@@ -376,10 +376,8 @@ class SafeConversions
     static bool IsValidNeoAddress(const std::string& address)
     {
         // Validate NEO address format and checksum
-        if (address.length() != 34)
-            return false;
-        if (address[0] != 'N')
-            return false;
+        if (address.length() != 34) return false;
+        if (address[0] != 'N') return false;
 
         // Validate base58 characters
         const std::string base58_chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";

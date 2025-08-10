@@ -175,10 +175,7 @@ void ProtocolHandler::RequestTransactions(const io::UInt256& peer_id, const std:
     LOG_DEBUG("RequestTransactions stub: peer={} count={}", peer_id.ToString(), hashes.size());
 }
 
-void ProtocolHandler::BroadcastBlock(const ledger::Block& block)
-{
-    LOG_DEBUG("BroadcastBlock stub");
-}
+void ProtocolHandler::BroadcastBlock(const ledger::Block& block) { LOG_DEBUG("BroadcastBlock stub"); }
 
 void ProtocolHandler::BroadcastTransaction(const ledger::Transaction& transaction)
 {
@@ -241,15 +238,9 @@ void ProtocolHandler::HandleVersion(const io::UInt256& peer_id, const payloads::
     LOG_INFO("Version handshake from peer {} completed", peer_id.ToString());
 }
 
-void ProtocolHandler::HandleVerack(const io::UInt256& peer_id)
-{
-    LOG_DEBUG("HandleVerack stub");
-}
+void ProtocolHandler::HandleVerack(const io::UInt256& peer_id) { LOG_DEBUG("HandleVerack stub"); }
 
-void ProtocolHandler::HandleGetAddr(const io::UInt256& peer_id)
-{
-    LOG_DEBUG("HandleGetAddr stub");
-}
+void ProtocolHandler::HandleGetAddr(const io::UInt256& peer_id) { LOG_DEBUG("HandleGetAddr stub"); }
 
 void ProtocolHandler::HandleAddr(const io::UInt256& peer_id, const payloads::AddrPayload& payload)
 {
@@ -325,10 +316,7 @@ void ProtocolHandler::HandleTransaction(const io::UInt256& peer_id, const payloa
     LOG_DEBUG("HandleTransaction stub");
 }
 
-void ProtocolHandler::HandleMempool(const io::UInt256& peer_id)
-{
-    LOG_DEBUG("HandleMempool stub");
-}
+void ProtocolHandler::HandleMempool(const io::UInt256& peer_id) { LOG_DEBUG("HandleMempool stub"); }
 
 void ProtocolHandler::HandleNotFound(const io::UInt256& peer_id, const payloads::InvPayload& payload)
 {

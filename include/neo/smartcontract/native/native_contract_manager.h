@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/uint160.h>
 #include <neo/smartcontract/native/native_contract.h>
+
+#include <memory>
 #include <unordered_map>
 #include <vector>
 
@@ -13,7 +14,7 @@ namespace neo::smartcontract::native
  */
 class NativeContractManager
 {
-  public:
+   public:
     /**
      * @brief Gets the instance.
      * @return The instance.
@@ -58,7 +59,7 @@ class NativeContractManager
      */
     void Initialize();
 
-  private:
+   private:
     NativeContractManager();
     std::vector<std::shared_ptr<NativeContract>> contracts_;
     std::unordered_map<std::string, std::shared_ptr<NativeContract>> contractsByName_;

@@ -1,11 +1,12 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
+
+#include <functional>
+#include <memory>
 #include <optional>
 #include <unordered_map>
 #include <vector>
@@ -17,7 +18,7 @@ namespace neo::persistence
  */
 class StorageIterator
 {
-  public:
+   public:
     virtual ~StorageIterator() = default;
 
     /**
@@ -52,7 +53,7 @@ namespace neo::persistence
  */
 class StoreView
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty StoreView.
      */
@@ -83,8 +84,8 @@ class StoreView
      * @param factory Optional factory function to create new item.
      * @return Pointer to the storage item.
      */
-    virtual std::shared_ptr<StorageItem>
-    GetAndChange(const StorageKey& key, std::function<std::shared_ptr<StorageItem>()> factory = nullptr) = 0;
+    virtual std::shared_ptr<StorageItem> GetAndChange(
+        const StorageKey& key, std::function<std::shared_ptr<StorageItem>()> factory = nullptr) = 0;
 
     /**
      * @brief Adds or updates a storage item.

@@ -46,10 +46,7 @@ inline CallFlags operator^(CallFlags lhs, CallFlags rhs)
 /**
  * @brief Bitwise NOT operator for CallFlags.
  */
-inline CallFlags operator~(CallFlags flags)
-{
-    return static_cast<CallFlags>(~static_cast<uint8_t>(flags));
-}
+inline CallFlags operator~(CallFlags flags) { return static_cast<CallFlags>(~static_cast<uint8_t>(flags)); }
 
 /**
  * @brief Checks if a CallFlags value has a specific flag set.

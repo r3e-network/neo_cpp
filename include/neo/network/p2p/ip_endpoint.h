@@ -1,12 +1,13 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
+
+#include <cstdint>
 #include <string>
 
 namespace neo::network::p2p
@@ -16,7 +17,7 @@ namespace neo::network::p2p
  */
 class IPEndPoint : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty IPEndPoint.
      */
@@ -112,7 +113,7 @@ class IPEndPoint : public io::ISerializable, public io::IJsonSerializable
      */
     static bool TryParse(const std::string& str, IPEndPoint& result);
 
-  private:
+   private:
     std::string address_;
     uint16_t port_;
 };

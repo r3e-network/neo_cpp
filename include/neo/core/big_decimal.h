@@ -29,14 +29,14 @@ namespace neo
  */
 class BigDecimal
 {
-  public:
+   public:
     using BigInteger = boost::multiprecision::cpp_int;
 
-  private:
+   private:
     BigInteger value_;
     uint8_t decimals_;
 
-  public:
+   public:
     /**
      * @brief Default constructor - creates a BigDecimal with value 0 and 0 decimals.
      */
@@ -79,19 +79,13 @@ class BigDecimal
      * @brief Gets the BigInteger value of the number.
      * @return The BigInteger value
      */
-    const BigInteger& value() const
-    {
-        return value_;
-    }
+    const BigInteger& value() const { return value_; }
 
     /**
      * @brief Gets the number of decimal places for this number.
      * @return The number of decimal places
      */
-    uint8_t decimals() const
-    {
-        return decimals_;
-    }
+    uint8_t decimals() const { return decimals_; }
 
     /**
      * @brief Gets the sign of the number.
@@ -160,7 +154,7 @@ class BigDecimal
     // Hash support
     std::size_t hash() const;
 
-  private:
+   private:
     /**
      * @brief Normalizes two BigDecimals to have the same number of decimal places.
      * @param left The first BigDecimal
@@ -185,10 +179,7 @@ namespace std
 template <>
 struct hash<neo::BigDecimal>
 {
-    std::size_t operator()(const neo::BigDecimal& bd) const
-    {
-        return bd.hash();
-    }
+    std::size_t operator()(const neo::BigDecimal& bd) const { return bd.hash(); }
 };
 }  // namespace std
 

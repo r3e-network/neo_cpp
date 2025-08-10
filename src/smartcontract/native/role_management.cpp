@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <iostream>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
@@ -13,6 +11,9 @@
 #include <neo/smartcontract/native/role_management.h>
 #include <neo/vm/opcode.h>
 #include <neo/vm/script_builder.h>
+
+#include <algorithm>
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 
@@ -180,8 +181,8 @@ bool RoleManagement::CheckCommittee(ApplicationEngine& engine) const
     return currentScriptHash == committeeAddress;
 }
 
-std::vector<cryptography::ecc::ECPoint>
-RoleManagement::GetDesignatedByRole(std::shared_ptr<persistence::StoreView> snapshot, Role role, uint32_t index) const
+std::vector<cryptography::ecc::ECPoint> RoleManagement::GetDesignatedByRole(
+    std::shared_ptr<persistence::StoreView> snapshot, Role role, uint32_t index) const
 {
     // Validate role
     if (role != Role::StateValidator && role != Role::Oracle && role != Role::NeoFSAlphabetNode &&
@@ -304,12 +305,10 @@ RoleManagement::GetDesignatedByRole(std::shared_ptr<persistence::StoreView> snap
     return result;
 }
 
-std::shared_ptr<vm::StackItem>
-RoleManagement::OnGetDesignatedByRole(ApplicationEngine& engine,
-                                      const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> RoleManagement::OnGetDesignatedByRole(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto roleItem = args[0];
     auto indexItem = args[1];
@@ -331,21 +330,18 @@ void RoleManagement::DesignateAsRole(ApplicationEngine& engine, Role role,
                                      const std::vector<cryptography::ecc::ECPoint>& nodes)
 {
     // Validate inputs
-    if (nodes.empty() || nodes.size() > 32)
-        throw std::invalid_argument("Invalid number of nodes");
+    if (nodes.empty() || nodes.size() > 32) throw std::invalid_argument("Invalid number of nodes");
 
     if (role != Role::StateValidator && role != Role::Oracle && role != Role::NeoFSAlphabetNode &&
         role != Role::P2PNotary)
         throw std::invalid_argument("Invalid role");
 
     // Check if caller is committee
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Not authorized");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Not authorized");
 
     // Check if persisting block is available
     auto persistingBlock = engine.GetPersistingBlock();
-    if (!persistingBlock)
-        throw std::runtime_error("No persisting block");
+    if (!persistingBlock) throw std::runtime_error("No persisting block");
 
     // Calculate next block index
     uint32_t index = persistingBlock->GetIndex() + 1;
@@ -576,19 +572,17 @@ void RoleManagement::DesignateAsRole(ApplicationEngine& engine, Role role,
     engine.Notify(GetScriptHash(), "Designation", notificationArgs);
 }
 
-std::shared_ptr<vm::StackItem>
-RoleManagement::OnDesignateAsRole(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> RoleManagement::OnDesignateAsRole(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto roleItem = args[0];
     auto nodesItem = args[1];
 
     auto role = static_cast<Role>(roleItem->GetInteger());
 
-    if (nodesItem->GetType() != vm::StackItemType::Array)
-        throw std::runtime_error("Invalid nodes");
+    if (nodesItem->GetType() != vm::StackItemType::Array) throw std::runtime_error("Invalid nodes");
 
     auto nodesArray = nodesItem->GetArray();
     std::vector<cryptography::ecc::ECPoint> nodes;

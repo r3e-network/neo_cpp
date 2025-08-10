@@ -1,9 +1,10 @@
 #pragma once
 
-#include <cstdint>
-#include <functional>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
+
+#include <cstdint>
+#include <functional>
 #include <vector>
 
 namespace neo::extensions
@@ -34,7 +35,7 @@ namespace neo::extensions
  */
 class ByteArrayEqualityComparer
 {
-  public:
+   public:
     /**
      * @brief Check if two byte spans are equal
      * @param left First byte span
@@ -85,15 +86,9 @@ class ByteArrayEqualityComparer
      */
     struct Equal
     {
-        bool operator()(const io::ByteVector& left, const io::ByteVector& right) const
-        {
-            return Equals(left, right);
-        }
+        bool operator()(const io::ByteVector& left, const io::ByteVector& right) const { return Equals(left, right); }
 
-        bool operator()(const io::ByteSpan& left, const io::ByteSpan& right) const
-        {
-            return Equals(left, right);
-        }
+        bool operator()(const io::ByteSpan& left, const io::ByteSpan& right) const { return Equals(left, right); }
 
         bool operator()(const std::vector<uint8_t>& left, const std::vector<uint8_t>& right) const
         {
@@ -106,20 +101,11 @@ class ByteArrayEqualityComparer
      */
     struct Hash
     {
-        size_t operator()(const io::ByteVector& data) const
-        {
-            return GetHashCode(data);
-        }
+        size_t operator()(const io::ByteVector& data) const { return GetHashCode(data); }
 
-        size_t operator()(const io::ByteSpan& data) const
-        {
-            return GetHashCode(data);
-        }
+        size_t operator()(const io::ByteSpan& data) const { return GetHashCode(data); }
 
-        size_t operator()(const std::vector<uint8_t>& data) const
-        {
-            return GetHashCode(data);
-        }
+        size_t operator()(const std::vector<uint8_t>& data) const { return GetHashCode(data); }
     };
 
     /**
@@ -127,15 +113,9 @@ class ByteArrayEqualityComparer
      */
     struct HashEqual
     {
-        size_t operator()(const io::ByteVector& data) const
-        {
-            return GetHashCode(data);
-        }
+        size_t operator()(const io::ByteVector& data) const { return GetHashCode(data); }
 
-        bool operator()(const io::ByteVector& left, const io::ByteVector& right) const
-        {
-            return Equals(left, right);
-        }
+        bool operator()(const io::ByteVector& left, const io::ByteVector& right) const { return Equals(left, right); }
     };
 };
 }  // namespace neo::extensions

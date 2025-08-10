@@ -12,7 +12,7 @@ namespace neo::network::p2p::payloads
  */
 class NotFoundPayload : public InvPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty NotFoundPayload.
      */

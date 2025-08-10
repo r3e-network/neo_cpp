@@ -1,10 +1,11 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
 #include <neo/vm/instruction.h>
 #include <neo/vm/internal/byte_span.h>
 #include <neo/vm/internal/byte_vector.h>
+
+#include <cstdint>
+#include <memory>
 #include <optional>
 #include <string>
 #include <unordered_map>
@@ -18,7 +19,7 @@ namespace neo::vm
  */
 class Script
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty Script.
      */
@@ -105,7 +106,7 @@ class Script
      */
     static std::string GetOpCodeName(OpCode opcode);
 
-  private:
+   private:
     internal::ByteVector script_;
     mutable std::unordered_map<int32_t, std::shared_ptr<Instruction>> instructions_;
 };

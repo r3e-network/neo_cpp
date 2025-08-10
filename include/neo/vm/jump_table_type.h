@@ -1,9 +1,10 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/vm/instruction.h>
 #include <neo/vm/opcode.h>
+
+#include <functional>
+#include <memory>
 
 // Forward declarations
 namespace neo::vm
@@ -19,7 +20,7 @@ namespace neo::vm
  */
 class JumpTableType
 {
-  public:
+   public:
     /**
      * @brief Checks if the top item on the stack is null.
      * @param engine The execution engine.

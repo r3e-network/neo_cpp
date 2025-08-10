@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <iostream>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -8,13 +6,16 @@
 #include <neo/smartcontract/native/neo_token_committee.h>
 #include <neo/vm/script_builder.h>
 #include <neo/vm/stack_item.h>
+
+#include <algorithm>
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 
 namespace neo::smartcontract::native
 {
-std::vector<cryptography::ecc::ECPoint>
-NeoTokenCommittee::GetCommittee(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot)
+std::vector<cryptography::ecc::ECPoint> NeoTokenCommittee::GetCommittee(
+    const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot)
 {
     auto committee = GetCommitteeFromCache(token, snapshot);
     std::vector<cryptography::ecc::ECPoint> result;
@@ -28,8 +29,8 @@ NeoTokenCommittee::GetCommittee(const NeoToken& token, std::shared_ptr<persisten
     return result;
 }
 
-std::vector<cryptography::ecc::ECPoint>
-NeoTokenCommittee::GetValidators(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot)
+std::vector<cryptography::ecc::ECPoint> NeoTokenCommittee::GetValidators(
+    const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot)
 {
     // Implement validator selection based on voting
     try
@@ -41,8 +42,7 @@ NeoTokenCommittee::GetValidators(const NeoToken& token, std::shared_ptr<persiste
         int validatorsCount = 7;  // Default NEO validator count
 
         // If we have fewer committee members than needed validators, return all committee
-        if (committee.size() <= static_cast<size_t>(validatorsCount))
-            return committee;
+        if (committee.size() <= static_cast<size_t>(validatorsCount)) return committee;
 
         // Sort committee members by vote count (descending order)
         // This requires getting vote counts for each committee member
@@ -78,9 +78,8 @@ NeoTokenCommittee::GetValidators(const NeoToken& token, std::shared_ptr<persiste
     }
 }
 
-std::vector<cryptography::ecc::ECPoint>
-NeoTokenCommittee::GetNextBlockValidators(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot,
-                                          int32_t validatorsCount)
+std::vector<cryptography::ecc::ECPoint> NeoTokenCommittee::GetNextBlockValidators(
+    const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot, int32_t validatorsCount)
 {
     auto validators = GetValidators(token, snapshot);
     if (validators.size() > static_cast<size_t>(validatorsCount))
@@ -90,9 +89,8 @@ NeoTokenCommittee::GetNextBlockValidators(const NeoToken& token, std::shared_ptr
     return validators;
 }
 
-std::vector<cryptography::ecc::ECPoint>
-NeoTokenCommittee::ComputeCommitteeMembers(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot,
-                                           int32_t committeeSize)
+std::vector<cryptography::ecc::ECPoint> NeoTokenCommittee::ComputeCommitteeMembers(
+    const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot, int32_t committeeSize)
 {
     // Implement committee computation based on voting
     try
@@ -149,13 +147,12 @@ bool NeoTokenCommittee::ShouldRefreshCommittee(const NeoToken& token, uint32_t b
     return blockIndex % COMMITTEE_REFRESH_INTERVAL == 0;
 }
 
-std::vector<NeoToken::CommitteeMember>
-NeoTokenCommittee::GetCommitteeFromCache(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot)
+std::vector<NeoToken::CommitteeMember> NeoTokenCommittee::GetCommitteeFromCache(
+    const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot)
 {
     persistence::StorageKey key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Committee));
     auto item = snapshot->TryGet(key);
-    if (!item)
-        return std::vector<NeoToken::CommitteeMember>();
+    if (!item) return std::vector<NeoToken::CommitteeMember>();
 
     std::istringstream stream(
         std::string(reinterpret_cast<const char*>(item->GetValue().Data()), item->GetValue().Size()));
@@ -179,8 +176,7 @@ io::UInt160 NeoTokenCommittee::GetCommitteeAddress(const NeoToken& token,
                                                    std::shared_ptr<persistence::DataCache> snapshot)
 {
     auto committee = GetCommittee(token, snapshot);
-    if (committee.empty())
-        return io::UInt160();
+    if (committee.empty()) return io::UInt160();
 
     // Implement proper multi-signature script creation
     try
@@ -222,9 +218,9 @@ io::UInt160 NeoTokenCommittee::GetCommitteeAddress(const NeoToken& token,
     }
 }
 
-std::shared_ptr<vm::StackItem>
-NeoTokenCommittee::OnGetValidators(const NeoToken& token, neo::smartcontract::ApplicationEngine& engine,
-                                   const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> NeoTokenCommittee::OnGetValidators(
+    const NeoToken& token, neo::smartcontract::ApplicationEngine& engine,
+    const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     auto validators = GetValidators(token, engine.GetSnapshot());
 
@@ -238,9 +234,9 @@ NeoTokenCommittee::OnGetValidators(const NeoToken& token, neo::smartcontract::Ap
     return vm::StackItem::Create(validatorsArray);
 }
 
-std::shared_ptr<vm::StackItem>
-NeoTokenCommittee::OnGetCommittee(const NeoToken& token, neo::smartcontract::ApplicationEngine& engine,
-                                  const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> NeoTokenCommittee::OnGetCommittee(
+    const NeoToken& token, neo::smartcontract::ApplicationEngine& engine,
+    const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     auto committee = GetCommittee(token, engine.GetSnapshot());
 
@@ -254,16 +250,15 @@ NeoTokenCommittee::OnGetCommittee(const NeoToken& token, neo::smartcontract::App
     return vm::StackItem::Create(committeeArray);
 }
 
-std::shared_ptr<vm::StackItem>
-NeoTokenCommittee::OnGetNextBlockValidators(const NeoToken& token, neo::smartcontract::ApplicationEngine& engine,
-                                            const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> NeoTokenCommittee::OnGetNextBlockValidators(
+    const NeoToken& token, neo::smartcontract::ApplicationEngine& engine,
+    const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     int32_t validatorsCount = 7;  // Default to 7 validators
     if (args.size() > 0)
     {
         validatorsCount = static_cast<int32_t>(args[0]->GetInteger());
-        if (validatorsCount <= 0)
-            throw std::runtime_error("Invalid validators count");
+        if (validatorsCount <= 0) throw std::runtime_error("Invalid validators count");
     }
 
     auto validators = GetNextBlockValidators(token, engine.GetSnapshot(), validatorsCount);

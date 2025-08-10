@@ -1,4 +1,5 @@
 #include <neo/network/p2p/payloads/addr_payload.h>
+
 #include <stdexcept>
 
 namespace neo::network::p2p::payloads
@@ -7,15 +8,9 @@ AddrPayload::AddrPayload() = default;
 
 AddrPayload::AddrPayload(const std::vector<NetworkAddressWithTime>& addresses) : addressList_(addresses) {}
 
-const std::vector<NetworkAddressWithTime>& AddrPayload::GetAddressList() const
-{
-    return addressList_;
-}
+const std::vector<NetworkAddressWithTime>& AddrPayload::GetAddressList() const { return addressList_; }
 
-void AddrPayload::SetAddressList(const std::vector<NetworkAddressWithTime>& addresses)
-{
-    addressList_ = addresses;
-}
+void AddrPayload::SetAddressList(const std::vector<NetworkAddressWithTime>& addresses) { addressList_ = addresses; }
 
 size_t AddrPayload::GetSize() const
 {

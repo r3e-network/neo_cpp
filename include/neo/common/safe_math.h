@@ -11,7 +11,7 @@ namespace neo::common
  */
 class SafeMath
 {
-  public:
+   public:
     /**
      * @brief Safe addition with overflow check
      * @tparam T Numeric type

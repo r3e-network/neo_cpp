@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <neo/vm/stack_item.h>
+
+#include <memory>
 #include <vector>
 
 namespace neo::vm
@@ -11,10 +12,10 @@ namespace neo::vm
  */
 class Slot
 {
-  private:
+   private:
     std::vector<std::shared_ptr<StackItem>> items_;
 
-  public:
+   public:
     /**
      * @brief Constructor with capacity
      * @param capacity Number of slots
@@ -49,20 +50,14 @@ class Slot
      * @brief Get slot count
      * @return Number of slots
      */
-    size_t Count() const
-    {
-        return items_.size();
-    }
+    size_t Count() const { return items_.size(); }
 
     /**
      * @brief Check if index is valid
      * @param index Index to check
      * @return True if index is valid
      */
-    bool IsValidIndex(size_t index) const
-    {
-        return index < items_.size();
-    }
+    bool IsValidIndex(size_t index) const { return index < items_.size(); }
 
     /**
      * @brief Clear all slots
@@ -79,27 +74,12 @@ class Slot
      * @brief Get all items (for debugging)
      * @return Vector of all items
      */
-    const std::vector<std::shared_ptr<StackItem>>& GetItems() const
-    {
-        return items_;
-    }
+    const std::vector<std::shared_ptr<StackItem>>& GetItems() const { return items_; }
 
     // Iterator support
-    auto begin()
-    {
-        return items_.begin();
-    }
-    auto end()
-    {
-        return items_.end();
-    }
-    auto begin() const
-    {
-        return items_.begin();
-    }
-    auto end() const
-    {
-        return items_.end();
-    }
+    auto begin() { return items_.begin(); }
+    auto end() { return items_.end(); }
+    auto begin() const { return items_.begin(); }
+    auto end() const { return items_.end(); }
 };
 }  // namespace neo::vm

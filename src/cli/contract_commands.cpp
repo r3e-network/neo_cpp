@@ -1,10 +1,11 @@
-#include <filesystem>
-#include <fstream>
-#include <iostream>
 #include <neo/cli/command_handler.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json.h>
+
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 
 namespace neo::cli
 {

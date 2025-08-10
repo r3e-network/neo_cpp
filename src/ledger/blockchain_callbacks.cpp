@@ -1,5 +1,6 @@
-#include <iostream>
 #include <neo/ledger/blockchain_callbacks.h>
+
+#include <iostream>
 
 namespace neo::ledger
 {

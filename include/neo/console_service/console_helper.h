@@ -34,7 +34,7 @@ enum class ConsoleColor
  */
 class ConsoleColorSet
 {
-  public:
+   public:
     /**
      * @brief Default constructor using current console colors.
      */
@@ -58,7 +58,7 @@ class ConsoleColorSet
      */
     void Apply() const;
 
-  private:
+   private:
     ConsoleColor foreground_;
     ConsoleColor background_;
 };
@@ -68,7 +68,7 @@ class ConsoleColorSet
  */
 class ConsoleHelper
 {
-  public:
+   public:
     /**
      * @brief Gets whether currently reading a password.
      * @return True if reading password, false otherwise.
@@ -153,7 +153,7 @@ class ConsoleHelper
      */
     static ConsoleColor GetCurrentBackgroundColor();
 
-  private:
+   private:
     static bool reading_password_;
     static ConsoleColorSet info_color_;
     static ConsoleColorSet warning_color_;

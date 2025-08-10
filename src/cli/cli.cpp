@@ -1,8 +1,9 @@
+#include <neo/cli/cli.h>
+#include <neo/cli/command_handler.h>
+
 #include <algorithm>
 #include <cctype>
 #include <iostream>
-#include <neo/cli/cli.h>
-#include <neo/cli/command_handler.h>
 #include <sstream>
 
 namespace neo::cli
@@ -14,15 +15,11 @@ CLI::CLI(std::shared_ptr<node::NeoSystem> neoSystem, std::shared_ptr<rpc::RpcSer
     InitializeCommands();
 }
 
-CLI::~CLI()
-{
-    Stop();
-}
+CLI::~CLI() { Stop(); }
 
 void CLI::Start()
 {
-    if (running_)
-        return;
+    if (running_) return;
 
     running_ = true;
     cliThread_ = std::thread(&CLI::RunCLI, this);
@@ -30,40 +27,23 @@ void CLI::Start()
 
 void CLI::Stop()
 {
-    if (!running_)
-        return;
+    if (!running_) return;
 
     running_ = false;
     condition_.notify_all();
 
-    if (cliThread_.joinable())
-        cliThread_.join();
+    if (cliThread_.joinable()) cliThread_.join();
 }
 
-bool CLI::IsRunning() const
-{
-    return running_;
-}
+bool CLI::IsRunning() const { return running_; }
 
-std::shared_ptr<node::NeoSystem> CLI::GetNeoSystem() const
-{
-    return neoSystem_;
-}
+std::shared_ptr<node::NeoSystem> CLI::GetNeoSystem() const { return neoSystem_; }
 
-std::shared_ptr<rpc::RpcServer> CLI::GetRPCServer() const
-{
-    return rpcServer_;
-}
+std::shared_ptr<rpc::RpcServer> CLI::GetRPCServer() const { return rpcServer_; }
 
-std::shared_ptr<wallets::Wallet> CLI::GetWallet() const
-{
-    return commandHandler_->GetWallet();
-}
+std::shared_ptr<wallets::Wallet> CLI::GetWallet() const { return commandHandler_->GetWallet(); }
 
-void CLI::SetWallet(std::shared_ptr<wallets::Wallet> wallet)
-{
-    commandHandler_->SetWallet(wallet);
-}
+void CLI::SetWallet(std::shared_ptr<wallets::Wallet> wallet) { commandHandler_->SetWallet(wallet); }
 
 void CLI::RegisterCommand(const std::string& command, std::function<bool(const std::vector<std::string>&)> handler,
                           const std::string& help)
@@ -84,8 +64,7 @@ bool CLI::ExecuteCommand(const std::string& command)
 {
     auto [cmd, args] = ParseCommand(command);
 
-    if (cmd.empty())
-        return true;
+    if (cmd.empty()) return true;
 
     std::lock_guard<std::mutex> lock(mutex_);
     auto it = commands_.find(cmd);
@@ -117,8 +96,7 @@ void CLI::RunCLI()
         std::string command;
         std::getline(std::cin, command);
 
-        if (!running_)
-            break;
+        if (!running_) break;
 
         ExecuteCommand(command);
     }
@@ -134,8 +112,7 @@ void CLI::InitializeCommands()
         [this](const std::vector<std::string>& args)
         {
             bool result = commandHandler_->HandleExit(args);
-            if (result)
-                running_ = false;
+            if (result) running_ = false;
             return result;
         },
         "Exit the CLI");
@@ -221,11 +198,9 @@ std::pair<std::string, std::vector<std::string>> CLI::ParseCommand(const std::st
         }
     }
 
-    if (!token.empty())
-        tokens.push_back(token);
+    if (!token.empty()) tokens.push_back(token);
 
-    if (tokens.empty())
-        return {"", {}};
+    if (tokens.empty()) return {"", {}};
 
     std::string cmd = tokens[0];
     std::vector<std::string> args(tokens.begin() + 1, tokens.end());
@@ -244,8 +219,5 @@ std::pair<std::string, std::vector<std::string>> CLI::ParseCommand(const std::st
     return {cmd, args};
 }
 
-const std::unordered_map<std::string, std::string>& CLI::GetCommandHelp() const
-{
-    return commandHelp_;
-}
+const std::unordered_map<std::string, std::string>& CLI::GetCommandHelp() const { return commandHelp_; }
 }  // namespace neo::cli

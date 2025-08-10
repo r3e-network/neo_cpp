@@ -1,12 +1,13 @@
 #pragma once
 
+#include <neo/ledger/block.h>
+#include <neo/ledger/transaction.h>
+#include <neo/plugins/plugin_base.h>
+
 #include <atomic>
 #include <chrono>
 #include <memory>
 #include <mutex>
-#include <neo/ledger/block.h>
-#include <neo/ledger/transaction.h>
-#include <neo/plugins/plugin_base.h>
 #include <string>
 #include <thread>
 #include <unordered_map>
@@ -18,7 +19,7 @@ namespace neo::plugins
  */
 class StatisticsPlugin : public PluginBase
 {
-  public:
+   public:
     /**
      * @brief Constructs a StatisticsPlugin.
      */
@@ -29,7 +30,7 @@ class StatisticsPlugin : public PluginBase
      */
     virtual ~StatisticsPlugin();
 
-  protected:
+   protected:
     /**
      * @brief Initializes the plugin.
      * @param settings The settings.
@@ -49,7 +50,7 @@ class StatisticsPlugin : public PluginBase
      */
     bool OnStop() override;
 
-  private:
+   private:
     std::atomic<uint64_t> blockCount_;
     std::atomic<uint64_t> transactionCount_;
     std::atomic<uint64_t> peerCount_;

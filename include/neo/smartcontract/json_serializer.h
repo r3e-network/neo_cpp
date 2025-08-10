@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/vm/stack_item.h>
+
+#include <memory>
 #include <nlohmann/json.hpp>
 
 namespace neo::smartcontract
@@ -14,7 +15,7 @@ namespace neo::smartcontract
  */
 class JsonSerializer
 {
-  public:
+   public:
     /**
      * @brief Serializes a StackItem to a JSON object.
      * @param item The StackItem to serialize.
@@ -50,7 +51,7 @@ class JsonSerializer
     static std::shared_ptr<vm::StackItem> Deserialize(const io::ByteSpan& data, int64_t maxSize = 2048,
                                                       int64_t maxItems = 2048);
 
-  private:
+   private:
     /**
      * @brief Serializes a StackItem to a JSON object (internal implementation).
      * @param item The StackItem to serialize.

@@ -1,5 +1,6 @@
-#include <exception>
 #include <neo/node/neo_node.h>
+
+#include <exception>
 
 namespace neo::node
 {

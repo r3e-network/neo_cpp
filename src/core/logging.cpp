@@ -1,6 +1,7 @@
+#include <neo/core/logging.h>
+
 #include <filesystem>
 #include <iostream>
-#include <neo/core/logging.h>
 
 namespace neo::core
 {

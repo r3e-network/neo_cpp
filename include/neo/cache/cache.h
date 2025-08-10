@@ -18,7 +18,7 @@ namespace neo::cache
 template <typename Key, typename Value>
 class Cache
 {
-  public:
+   public:
     using KeyType = Key;
     using ValueType = Value;
     using TimePoint = std::chrono::steady_clock::time_point;
@@ -73,10 +73,7 @@ class Cache
      * @param key The key
      * @param value The value
      */
-    void Put(const Key& key, const Value& value)
-    {
-        Put(key, value, defaultTtl_);
-    }
+    void Put(const Key& key, const Value& value) { Put(key, value, defaultTtl_); }
 
     /**
      * @brief Put value in cache with custom TTL.
@@ -138,10 +135,7 @@ class Cache
      * @param key The key to check
      * @return true if key exists and not expired
      */
-    bool Contains(const Key& key)
-    {
-        return Get(key) != nullptr;
-    }
+    bool Contains(const Key& key) { return Get(key) != nullptr; }
 
     /**
      * @brief Clean up expired entries.
@@ -170,7 +164,7 @@ class Cache
         return removed;
     }
 
-  private:
+   private:
     mutable std::mutex mutex_;
     std::unordered_map<Key, CacheEntry> cache_;
     size_t maxSize_;
@@ -195,7 +189,7 @@ using HashCache = Cache<std::string, Value>;  // Using string representation of 
 template <typename Key, typename Value>
 class LRUCache
 {
-  public:
+   public:
     explicit LRUCache(size_t capacity) : capacity_(capacity) {}
 
     std::shared_ptr<Value> Get(const Key& key)
@@ -267,7 +261,7 @@ class LRUCache
         return cache_.size();
     }
 
-  private:
+   private:
     mutable std::mutex mutex_;
     size_t capacity_;
     std::list<Key> order_;

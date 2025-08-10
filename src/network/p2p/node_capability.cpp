@@ -7,30 +7,18 @@ NodeCapability::NodeCapability() : type_(NodeCapabilityType::TcpServer) {}
 
 NodeCapability::NodeCapability(NodeCapabilityType type) : type_(type) {}
 
-NodeCapabilityType NodeCapability::GetType() const
-{
-    return type_;
-}
+NodeCapabilityType NodeCapability::GetType() const { return type_; }
 
-void NodeCapability::SetType(NodeCapabilityType type)
-{
-    type_ = type;
-}
+void NodeCapability::SetType(NodeCapabilityType type) { type_ = type; }
 
-void NodeCapability::Serialize(io::BinaryWriter& writer) const
-{
-    writer.Write(static_cast<uint8_t>(type_));
-}
+void NodeCapability::Serialize(io::BinaryWriter& writer) const { writer.Write(static_cast<uint8_t>(type_)); }
 
 void NodeCapability::Deserialize(io::BinaryReader& reader)
 {
     type_ = static_cast<NodeCapabilityType>(reader.ReadUInt8());
 }
 
-void NodeCapability::SerializeJson(io::JsonWriter& writer) const
-{
-    writer.Write("type", static_cast<uint8_t>(type_));
-}
+void NodeCapability::SerializeJson(io::JsonWriter& writer) const { writer.Write("type", static_cast<uint8_t>(type_)); }
 
 void NodeCapability::DeserializeJson(const io::JsonReader& reader)
 {
@@ -42,15 +30,9 @@ UnknownCapability::UnknownCapability() : NodeCapability(NodeCapabilityType::Unkn
 
 UnknownCapability::UnknownCapability(uint8_t type) : NodeCapability(NodeCapabilityType::Unknown), rawType_(type) {}
 
-uint8_t UnknownCapability::GetRawType() const
-{
-    return rawType_;
-}
+uint8_t UnknownCapability::GetRawType() const { return rawType_; }
 
-void UnknownCapability::SetRawType(uint8_t rawType)
-{
-    rawType_ = rawType;
-}
+void UnknownCapability::SetRawType(uint8_t rawType) { rawType_ = rawType; }
 
 void UnknownCapability::Serialize(io::BinaryWriter& writer) const
 {
@@ -58,35 +40,20 @@ void UnknownCapability::Serialize(io::BinaryWriter& writer) const
     writer.Write(rawType_);
 }
 
-void UnknownCapability::Deserialize(io::BinaryReader& reader)
-{
-    rawType_ = reader.ReadUInt8();
-}
+void UnknownCapability::Deserialize(io::BinaryReader& reader) { rawType_ = reader.ReadUInt8(); }
 
-void UnknownCapability::SerializeJson(io::JsonWriter& writer) const
-{
-    writer.Write("type", rawType_);
-}
+void UnknownCapability::SerializeJson(io::JsonWriter& writer) const { writer.Write("type", rawType_); }
 
-void UnknownCapability::DeserializeJson(const io::JsonReader& reader)
-{
-    rawType_ = reader.ReadUInt8("type");
-}
+void UnknownCapability::DeserializeJson(const io::JsonReader& reader) { rawType_ = reader.ReadUInt8("type"); }
 
 // ServerCapability implementation
 ServerCapability::ServerCapability() : NodeCapability(NodeCapabilityType::TcpServer), port_(0) {}
 
 ServerCapability::ServerCapability(NodeCapabilityType type, uint16_t port) : NodeCapability(type), port_(port) {}
 
-uint16_t ServerCapability::GetPort() const
-{
-    return port_;
-}
+uint16_t ServerCapability::GetPort() const { return port_; }
 
-void ServerCapability::SetPort(uint16_t port)
-{
-    port_ = port;
-}
+void ServerCapability::SetPort(uint16_t port) { port_ = port; }
 
 void ServerCapability::Serialize(io::BinaryWriter& writer) const
 {
@@ -120,15 +87,9 @@ FullNodeCapability::FullNodeCapability(uint32_t startHeight)
 {
 }
 
-uint32_t FullNodeCapability::GetStartHeight() const
-{
-    return startHeight_;
-}
+uint32_t FullNodeCapability::GetStartHeight() const { return startHeight_; }
 
-void FullNodeCapability::SetStartHeight(uint32_t startHeight)
-{
-    startHeight_ = startHeight;
-}
+void FullNodeCapability::SetStartHeight(uint32_t startHeight) { startHeight_ = startHeight; }
 
 void FullNodeCapability::Serialize(io::BinaryWriter& writer) const
 {

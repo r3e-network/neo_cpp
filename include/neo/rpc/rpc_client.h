@@ -1,12 +1,13 @@
 #pragma once
 
+#include <neo/json/json.h>
+#include <neo/rpc/rpc_request.h>
+#include <neo/rpc/rpc_response.h>
+
 #include <functional>
 #include <future>
 #include <map>
 #include <memory>
-#include <neo/json/json.h>
-#include <neo/rpc/rpc_request.h>
-#include <neo/rpc/rpc_response.h>
 #include <nlohmann/json.hpp>
 #include <string>
 
@@ -17,7 +18,7 @@ namespace neo::rpc
  */
 class IHttpClient
 {
-  public:
+   public:
     virtual ~IHttpClient() = default;
 
     /**
@@ -46,7 +47,7 @@ class IHttpClient
  */
 class SimpleHttpClient : public IHttpClient
 {
-  public:
+   public:
     /**
      * @brief Constructor.
      */
@@ -70,7 +71,7 @@ class SimpleHttpClient : public IHttpClient
     std::future<std::string> PostAsync(const std::string& url, const std::string& content,
                                        const std::map<std::string, std::string>& headers = {}) override;
 
-  private:
+   private:
     std::string auth_header_;
 };
 
@@ -79,7 +80,7 @@ class SimpleHttpClient : public IHttpClient
  */
 class RpcClient
 {
-  public:
+   public:
     /**
      * @brief Constructor.
      * @param base_url The base URL of the Neo node.
@@ -253,7 +254,7 @@ class RpcClient
      */
     std::future<nlohmann::json> GetVersionAsync();
 
-  private:
+   private:
     std::string base_url_;
     std::unique_ptr<IHttpClient> http_client_;
     uint64_t next_id_;

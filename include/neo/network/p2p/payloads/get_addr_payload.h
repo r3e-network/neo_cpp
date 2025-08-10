@@ -13,7 +13,7 @@ namespace neo::network::p2p::payloads
  */
 class GetAddrPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs a GetAddrPayload.
      */

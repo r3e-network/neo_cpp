@@ -4,6 +4,7 @@
 #include <neo/vm/execution_context.h>
 #include <neo/vm/primitive_items.h>
 #include <neo/vm/special_items.h>
+
 #include <stdexcept>
 
 namespace neo::vm
@@ -16,15 +17,9 @@ ExecutionContext::ExecutionContext(const Script& script, int32_t rvcount)
         throw std::invalid_argument("rvcount out of range");
 }
 
-const Script& ExecutionContext::GetScript() const
-{
-    return script_;
-}
+const Script& ExecutionContext::GetScript() const { return script_; }
 
-int32_t ExecutionContext::GetInstructionPointer() const
-{
-    return instructionPointer_;
-}
+int32_t ExecutionContext::GetInstructionPointer() const { return instructionPointer_; }
 
 void ExecutionContext::SetInstructionPointer(int32_t instructionPointer)
 {
@@ -36,16 +31,14 @@ void ExecutionContext::SetInstructionPointer(int32_t instructionPointer)
 
 OpCode ExecutionContext::GetNextInstructionOpCode() const
 {
-    if (instructionPointer_ >= static_cast<int32_t>(script_.GetLength()))
-        return OpCode::RET;
+    if (instructionPointer_ >= static_cast<int32_t>(script_.GetLength())) return OpCode::RET;
 
     return static_cast<OpCode>(script_.GetScript()[instructionPointer_]);
 }
 
 std::shared_ptr<Instruction> ExecutionContext::GetCurrentInstruction() const
 {
-    if (instructionPointer_ >= static_cast<int32_t>(script_.GetLength()))
-        return nullptr;
+    if (instructionPointer_ >= static_cast<int32_t>(script_.GetLength())) return nullptr;
 
     return script_.GetInstruction(instructionPointer_);
 }
@@ -53,8 +46,7 @@ std::shared_ptr<Instruction> ExecutionContext::GetCurrentInstruction() const
 std::shared_ptr<Instruction> ExecutionContext::GetNextInstructionObject() const
 {
     auto current = GetCurrentInstruction();
-    if (!current)
-        return nullptr;
+    if (!current) return nullptr;
 
     return script_.GetInstruction(instructionPointer_ + current->Size());
 }
@@ -62,49 +54,26 @@ std::shared_ptr<Instruction> ExecutionContext::GetNextInstructionObject() const
 void ExecutionContext::MoveNext()
 {
     auto instruction = GetCurrentInstruction();
-    if (instruction)
-        instructionPointer_ += instruction->Size();
+    if (instruction) instructionPointer_ += instruction->Size();
 }
 
-int32_t ExecutionContext::GetRVCount() const
-{
-    return rvcount_;
-}
+int32_t ExecutionContext::GetRVCount() const { return rvcount_; }
 
-int32_t ExecutionContext::GetCurrentPosition() const
-{
-    return instructionPointer_;
-}
+int32_t ExecutionContext::GetCurrentPosition() const { return instructionPointer_; }
 
-const std::vector<std::shared_ptr<StackItem>>& ExecutionContext::GetStaticFields() const
-{
-    return staticFields_;
-}
+const std::vector<std::shared_ptr<StackItem>>& ExecutionContext::GetStaticFields() const { return staticFields_; }
 
-const std::vector<std::shared_ptr<StackItem>>& ExecutionContext::GetLocalVariables() const
-{
-    return localVariables_;
-}
+const std::vector<std::shared_ptr<StackItem>>& ExecutionContext::GetLocalVariables() const { return localVariables_; }
 
-const std::vector<std::shared_ptr<StackItem>>& ExecutionContext::GetArguments() const
-{
-    return arguments_;
-}
+const std::vector<std::shared_ptr<StackItem>>& ExecutionContext::GetArguments() const { return arguments_; }
 
-const std::vector<std::shared_ptr<StackItem>>& ExecutionContext::GetEvaluationStack() const
-{
-    return evaluationStack_;
-}
+const std::vector<std::shared_ptr<StackItem>>& ExecutionContext::GetEvaluationStack() const { return evaluationStack_; }
 
-int32_t ExecutionContext::GetTryCount() const
-{
-    return static_cast<int32_t>(tryStack_.size());
-}
+int32_t ExecutionContext::GetTryCount() const { return static_cast<int32_t>(tryStack_.size()); }
 
 void ExecutionContext::InitializeStaticFields(int32_t count)
 {
-    if (count < 0)
-        throw std::invalid_argument("Count cannot be negative");
+    if (count < 0) throw std::invalid_argument("Count cannot be negative");
 
     staticFields_.resize(count);
     // Initialize all fields to null
@@ -132,8 +101,7 @@ void ExecutionContext::SetStaticField(int32_t index, std::shared_ptr<StackItem> 
 
 void ExecutionContext::InitializeLocalVariables(int32_t count)
 {
-    if (count < 0)
-        throw std::invalid_argument("Count cannot be negative");
+    if (count < 0) throw std::invalid_argument("Count cannot be negative");
 
     localVariables_.resize(count);
 }
@@ -156,8 +124,7 @@ void ExecutionContext::InitializeLocalVariables(int32_t localCount, int32_t argu
 
 void ExecutionContext::InitializeArguments(int32_t count)
 {
-    if (count < 0)
-        throw std::invalid_argument("Count cannot be negative");
+    if (count < 0) throw std::invalid_argument("Count cannot be negative");
 
     arguments_.resize(count);
 }
@@ -270,8 +237,7 @@ void ExecutionContext::Push(std::shared_ptr<StackItem> item)
 
 std::shared_ptr<StackItem> ExecutionContext::Pop()
 {
-    if (evaluationStack_.empty())
-        throw std::runtime_error("Stack is empty");
+    if (evaluationStack_.empty()) throw std::runtime_error("Stack is empty");
 
     auto item = evaluationStack_.back();
     evaluationStack_.pop_back();
@@ -286,15 +252,9 @@ std::shared_ptr<StackItem> ExecutionContext::Peek(int32_t index) const
     return evaluationStack_[evaluationStack_.size() - 1 - index];
 }
 
-void ExecutionContext::ClearStack()
-{
-    evaluationStack_.clear();
-}
+void ExecutionContext::ClearStack() { evaluationStack_.clear(); }
 
-int32_t ExecutionContext::GetStackSize() const
-{
-    return static_cast<int32_t>(evaluationStack_.size());
-}
+int32_t ExecutionContext::GetStackSize() const { return static_cast<int32_t>(evaluationStack_.size()); }
 
 void ExecutionContext::EnterTry(int32_t catchOffset, int32_t finallyOffset, int32_t endOffset)
 {
@@ -304,60 +264,51 @@ void ExecutionContext::EnterTry(int32_t catchOffset, int32_t finallyOffset, int3
 
 void ExecutionContext::ExitTry()
 {
-    if (tryStack_.empty())
-        throw std::runtime_error("Not in a try block");
+    if (tryStack_.empty()) throw std::runtime_error("Not in a try block");
 
     tryStack_.pop_back();
 }
 
 std::optional<int32_t> ExecutionContext::GetCatchOffset() const
 {
-    if (tryStack_.empty())
-        return std::nullopt;
+    if (tryStack_.empty()) return std::nullopt;
 
     int32_t catchOffset = tryStack_.back().GetCatchPointer();
-    if (catchOffset < 0)
-        return std::nullopt;
+    if (catchOffset < 0) return std::nullopt;
 
     return catchOffset;
 }
 
 std::optional<int32_t> ExecutionContext::GetFinallyOffset() const
 {
-    if (tryStack_.empty())
-        return std::nullopt;
+    if (tryStack_.empty()) return std::nullopt;
 
     int32_t finallyOffset = tryStack_.back().GetFinallyPointer();
-    if (finallyOffset < 0)
-        return std::nullopt;
+    if (finallyOffset < 0) return std::nullopt;
 
     return finallyOffset;
 }
 
 std::optional<int32_t> ExecutionContext::GetEndOffset() const
 {
-    if (tryStack_.empty())
-        return std::nullopt;
+    if (tryStack_.empty()) return std::nullopt;
 
     int32_t endOffset = tryStack_.back().GetEndPointer();
-    if (endOffset < 0)
-        return std::nullopt;
+    if (endOffset < 0) return std::nullopt;
 
     return endOffset;
 }
 
 ExceptionHandlingContext& ExecutionContext::GetCurrentTry()
 {
-    if (tryStack_.empty())
-        throw InvalidOperationException("No try context available");
+    if (tryStack_.empty()) throw InvalidOperationException("No try context available");
 
     return tryStack_.back();
 }
 
 const ExceptionHandlingContext& ExecutionContext::GetCurrentTry() const
 {
-    if (tryStack_.empty())
-        throw InvalidOperationException("No try context available");
+    if (tryStack_.empty()) throw InvalidOperationException("No try context available");
 
     return tryStack_.back();
 }
@@ -369,8 +320,7 @@ void ExecutionContext::SetTryState(int32_t catchPosition, int32_t finallyPositio
 
 void ExecutionContext::ClearTryState()
 {
-    if (!tryStack_.empty())
-        tryStack_.pop_back();
+    if (!tryStack_.empty()) tryStack_.pop_back();
 }
 
 std::shared_ptr<ExecutionContext> ExecutionContext::Clone(int32_t initialPosition) const
@@ -404,8 +354,5 @@ std::shared_ptr<ExecutionContext> ExecutionContext::Clone(int32_t initialPositio
     return clone;
 }
 
-const std::vector<int32_t>& ExecutionContext::GetCallTable() const
-{
-    return callTable_;
-}
+const std::vector<int32_t>& ExecutionContext::GetCallTable() const { return callTable_; }
 }  // namespace neo::vm

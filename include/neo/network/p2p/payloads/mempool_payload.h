@@ -15,7 +15,7 @@ namespace neo::network::p2p::payloads
  */
 class MempoolPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs a MempoolPayload.
      */

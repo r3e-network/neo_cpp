@@ -20,7 +20,7 @@ namespace neo::core
  */
 class CircuitBreaker
 {
-  public:
+   public:
     enum class State
     {
         CLOSED,
@@ -44,11 +44,8 @@ class CircuitBreaker
         : name_(name), config_(config), state_(State::CLOSED)
     {
     }
-    
-    explicit CircuitBreaker(const std::string& name)
-        : name_(name), config_(Config{}), state_(State::CLOSED)
-    {
-    }
+
+    explicit CircuitBreaker(const std::string& name) : name_(name), config_(Config{}), state_(State::CLOSED) {}
 
     /**
      * @brief Execute a function through the circuit breaker
@@ -175,7 +172,7 @@ class CircuitBreaker
         TransitionTo(State::OPEN);
     }
 
-  private:
+   private:
     bool AllowRequest()
     {
         std::lock_guard<std::mutex> lock(mutex_);
@@ -286,8 +283,7 @@ class CircuitBreaker
 
     void TransitionTo(State newState)
     {
-        if (state_ == newState)
-            return;
+        if (state_ == newState) return;
 
         State oldState = state_;
         state_ = newState;
@@ -298,9 +294,9 @@ class CircuitBreaker
         {
             case State::CLOSED:
                 metrics_.successCount.store(0);
-        metrics_.failureCount.store(0);
-        metrics_.totalResponseTime.store(0);
-        metrics_.maxResponseTime.store(0);
+                metrics_.failureCount.store(0);
+                metrics_.totalResponseTime.store(0);
+                metrics_.maxResponseTime.store(0);
                 consecutiveSuccesses_ = 0;
                 break;
 
@@ -340,7 +336,7 @@ class CircuitBreaker
         {
             // Reset counters while preserving max response time
             auto prevMax = metrics_.maxResponseTime.load();
-            
+
             metrics_.successCount.store(0);
             metrics_.failureCount.store(0);
             metrics_.totalResponseTime.store(0);
@@ -376,7 +372,7 @@ class CircuitBreaker
  */
 class CircuitBreakerManager
 {
-  public:
+   public:
     static CircuitBreakerManager& GetInstance()
     {
         static CircuitBreakerManager instance;
@@ -433,7 +429,7 @@ class CircuitBreakerManager
         return names;
     }
 
-  private:
+   private:
     CircuitBreakerManager() = default;
 
     std::unordered_map<std::string, std::unique_ptr<CircuitBreaker>> breakers_;

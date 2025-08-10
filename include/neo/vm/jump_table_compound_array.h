@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableCompoundArray
 {
-  public:
+   public:
     // Array operations
     static void PACK(ExecutionEngine& engine, const Instruction& instruction);
     static void UNPACK(ExecutionEngine& engine, const Instruction& instruction);

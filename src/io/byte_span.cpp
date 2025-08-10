@@ -1,5 +1,6 @@
-#include <iomanip>
 #include <neo/io/byte_span.h>
+
+#include <iomanip>
 #include <sstream>
 
 namespace neo::io
@@ -33,12 +34,10 @@ std::string ByteSpan::ToBase64String() const
         triple |= (data_[i] << 16);
 
         // Second byte (if exists)
-        if (i + 1 < size_)
-            triple |= (data_[i + 1] << 8);
+        if (i + 1 < size_) triple |= (data_[i + 1] << 8);
 
         // Third byte (if exists)
-        if (i + 2 < size_)
-            triple |= data_[i + 2];
+        if (i + 2 < size_) triple |= data_[i + 2];
 
         // Extract 6-bit chunks and encode
         result += alphabet[(triple >> 18) & 0x3F];

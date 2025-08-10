@@ -1,8 +1,9 @@
+#include <neo/extensions/biginteger_extensions.h>
+
 #include <algorithm>
 #include <cmath>
 #include <iomanip>
 #include <limits>
-#include <neo/extensions/biginteger_extensions.h>
 #include <sstream>
 #include <stdexcept>
 #include <vector>
@@ -35,10 +36,7 @@ BigIntegerExtensions::BigInteger::BigInteger(uint64_t value) : isNegative(false)
     }
 }
 
-BigIntegerExtensions::BigInteger::BigInteger(const std::string& value)
-{
-    *this = FromString(value);
-}
+BigIntegerExtensions::BigInteger::BigInteger(const std::string& value) { *this = FromString(value); }
 
 // Normalize - remove leading zeros
 void BigIntegerExtensions::BigInteger::Normalize()
@@ -80,35 +78,17 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::BigInteger::operator%(con
     return Modulo(*this, other);
 }
 
-bool BigIntegerExtensions::BigInteger::operator==(const BigInteger& other) const
-{
-    return Compare(*this, other) == 0;
-}
+bool BigIntegerExtensions::BigInteger::operator==(const BigInteger& other) const { return Compare(*this, other) == 0; }
 
-bool BigIntegerExtensions::BigInteger::operator!=(const BigInteger& other) const
-{
-    return Compare(*this, other) != 0;
-}
+bool BigIntegerExtensions::BigInteger::operator!=(const BigInteger& other) const { return Compare(*this, other) != 0; }
 
-bool BigIntegerExtensions::BigInteger::operator<(const BigInteger& other) const
-{
-    return Compare(*this, other) < 0;
-}
+bool BigIntegerExtensions::BigInteger::operator<(const BigInteger& other) const { return Compare(*this, other) < 0; }
 
-bool BigIntegerExtensions::BigInteger::operator>(const BigInteger& other) const
-{
-    return Compare(*this, other) > 0;
-}
+bool BigIntegerExtensions::BigInteger::operator>(const BigInteger& other) const { return Compare(*this, other) > 0; }
 
-bool BigIntegerExtensions::BigInteger::operator<=(const BigInteger& other) const
-{
-    return Compare(*this, other) <= 0;
-}
+bool BigIntegerExtensions::BigInteger::operator<=(const BigInteger& other) const { return Compare(*this, other) <= 0; }
 
-bool BigIntegerExtensions::BigInteger::operator>=(const BigInteger& other) const
-{
-    return Compare(*this, other) >= 0;
-}
+bool BigIntegerExtensions::BigInteger::operator>=(const BigInteger& other) const { return Compare(*this, other) >= 0; }
 
 BigIntegerExtensions::BigInteger& BigIntegerExtensions::BigInteger::operator+=(const BigInteger& other)
 {
@@ -141,15 +121,9 @@ BigIntegerExtensions::BigInteger& BigIntegerExtensions::BigInteger::operator%=(c
 }
 
 // Conversion methods
-std::string BigIntegerExtensions::BigInteger::ToString() const
-{
-    return BigIntegerExtensions::ToString(*this);
-}
+std::string BigIntegerExtensions::BigInteger::ToString() const { return BigIntegerExtensions::ToString(*this); }
 
-std::string BigIntegerExtensions::BigInteger::ToHexString() const
-{
-    return BigIntegerExtensions::ToHexString(*this);
-}
+std::string BigIntegerExtensions::BigInteger::ToHexString() const { return BigIntegerExtensions::ToHexString(*this); }
 
 std::vector<uint8_t> BigIntegerExtensions::BigInteger::ToByteArray() const
 {
@@ -158,8 +132,7 @@ std::vector<uint8_t> BigIntegerExtensions::BigInteger::ToByteArray() const
 
 int64_t BigIntegerExtensions::BigInteger::ToInt64() const
 {
-    if (words.empty())
-        return 0;
+    if (words.empty()) return 0;
 
     uint64_t value = words[0];
     if (value > static_cast<uint64_t>(std::numeric_limits<int64_t>::max()))
@@ -170,37 +143,25 @@ int64_t BigIntegerExtensions::BigInteger::ToInt64() const
 
 uint64_t BigIntegerExtensions::BigInteger::ToUInt64() const
 {
-    if (isNegative)
-        throw std::overflow_error("Cannot convert negative BigInteger to uint64_t");
+    if (isNegative) throw std::overflow_error("Cannot convert negative BigInteger to uint64_t");
 
-    if (words.empty())
-        return 0;
+    if (words.empty()) return 0;
 
     return words[0];
 }
 
 // Utility methods
-bool BigIntegerExtensions::BigInteger::IsZero() const
-{
-    return words.empty();
-}
+bool BigIntegerExtensions::BigInteger::IsZero() const { return words.empty(); }
 
-bool BigIntegerExtensions::BigInteger::IsOne() const
-{
-    return !isNegative && words.size() == 1 && words[0] == 1;
-}
+bool BigIntegerExtensions::BigInteger::IsOne() const { return !isNegative && words.size() == 1 && words[0] == 1; }
 
 bool BigIntegerExtensions::BigInteger::IsEven() const
 {
-    if (words.empty())
-        return true;
+    if (words.empty()) return true;
     return (words[0] & 1) == 0;
 }
 
-bool BigIntegerExtensions::BigInteger::IsOdd() const
-{
-    return !IsEven();
-}
+bool BigIntegerExtensions::BigInteger::IsOdd() const { return !IsEven(); }
 
 BigIntegerExtensions::BigInteger BigIntegerExtensions::BigInteger::Abs() const
 {
@@ -222,8 +183,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::BigInteger::Negate() cons
 // Static methods
 BigIntegerExtensions::BigInteger BigIntegerExtensions::FromString(const std::string& value)
 {
-    if (value.empty())
-        throw std::invalid_argument("Empty string");
+    if (value.empty()) throw std::invalid_argument("Empty string");
 
     BigInteger result;
     size_t start = 0;
@@ -243,8 +203,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::FromString(const std::str
     for (size_t i = start; i < value.length(); ++i)
     {
         char c = value[i];
-        if (c < '0' || c > '9')
-            throw std::invalid_argument("Invalid digit in string");
+        if (c < '0' || c > '9') throw std::invalid_argument("Invalid digit in string");
     }
 
     // Complete arbitrary precision BigInteger parsing implementation
@@ -344,26 +303,18 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::FromString(const std::str
     }
 }
 
-BigIntegerExtensions::BigInteger BigIntegerExtensions::FromInt64(int64_t value)
-{
-    return BigInteger(value);
-}
+BigIntegerExtensions::BigInteger BigIntegerExtensions::FromInt64(int64_t value) { return BigInteger(value); }
 
-BigIntegerExtensions::BigInteger BigIntegerExtensions::FromUInt64(uint64_t value)
-{
-    return BigInteger(value);
-}
+BigIntegerExtensions::BigInteger BigIntegerExtensions::FromUInt64(uint64_t value) { return BigInteger(value); }
 
 std::string BigIntegerExtensions::ToString(const BigInteger& value)
 {
-    if (value.IsZero())
-        return "0";
+    if (value.IsZero()) return "0";
 
     if (value.words.size() == 1)
     {
         std::string result = std::to_string(value.words[0]);
-        if (value.isNegative)
-            result = "-" + result;
+        if (value.isNegative) result = "-" + result;
         return result;
     }
 
@@ -387,19 +338,16 @@ std::string BigIntegerExtensions::ToString(const BigInteger& value)
         absValue = quotient;
     }
 
-    if (result.empty())
-        result = "0";
+    if (result.empty()) result = "0";
 
-    if (value.isNegative)
-        result = "-" + result;
+    if (value.isNegative) result = "-" + result;
 
     return result;
 }
 
 std::string BigIntegerExtensions::ToHexString(const BigInteger& value, bool prefix)
 {
-    if (value.IsZero())
-        return prefix ? "0x0" : "0";
+    if (value.IsZero()) return prefix ? "0x0" : "0";
 
     if (value.words.size() == 1)
     {
@@ -407,10 +355,8 @@ std::string BigIntegerExtensions::ToHexString(const BigInteger& value, bool pref
         ss << std::hex << value.words[0];
         std::string result = ss.str();
 
-        if (value.isNegative)
-            result = "-" + result;
-        if (prefix)
-            result = "0x" + result;
+        if (value.isNegative) result = "-" + result;
+        if (prefix) result = "0x" + result;
 
         return result;
     }
@@ -448,18 +394,15 @@ std::string BigIntegerExtensions::ToHexString(const BigInteger& value, bool pref
         result = result.substr(firstNonZero);
     }
 
-    if (value.isNegative)
-        result = "-" + result;
-    if (prefix)
-        result = "0x" + result;
+    if (value.isNegative) result = "-" + result;
+    if (prefix) result = "0x" + result;
 
     return result;
 }
 
 std::vector<uint8_t> BigIntegerExtensions::ToByteArray(const BigInteger& value)
 {
-    if (value.IsZero())
-        return {0};
+    if (value.IsZero()) return {0};
 
     std::vector<uint8_t> result;
     for (uint64_t word : value.words)
@@ -483,10 +426,8 @@ std::vector<uint8_t> BigIntegerExtensions::ToByteArray(const BigInteger& value)
 BigIntegerExtensions::BigInteger BigIntegerExtensions::Add(const BigInteger& left, const BigInteger& right)
 {
     // Handle simple cases
-    if (left.IsZero())
-        return right;
-    if (right.IsZero())
-        return left;
+    if (left.IsZero()) return right;
+    if (right.IsZero()) return left;
 
     // Handle sign combinations
     if (left.isNegative != right.isNegative)
@@ -525,16 +466,14 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Add(const BigInteger& lef
         {
             uint64_t prev_sum = sum;
             sum += left.words[i];
-            if (sum < prev_sum)
-                carry++;  // Overflow occurred
+            if (sum < prev_sum) carry++;  // Overflow occurred
         }
 
         if (i < right.words.size())
         {
             uint64_t prev_sum = sum;
             sum += right.words[i];
-            if (sum < prev_sum)
-                carry++;  // Overflow occurred
+            if (sum < prev_sum) carry++;  // Overflow occurred
         }
 
         result.words.push_back(sum);
@@ -553,8 +492,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Add(const BigInteger& lef
 BigIntegerExtensions::BigInteger BigIntegerExtensions::Subtract(const BigInteger& left, const BigInteger& right)
 {
     // Handle simple cases
-    if (right.IsZero())
-        return left;
+    if (right.IsZero()) return left;
     if (left.IsZero())
     {
         // Return negative of right
@@ -581,8 +519,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Subtract(const BigInteger
             {
                 leftVal |= static_cast<int64_t>(left.words[1]) << 32;
             }
-            if (left.isNegative)
-                leftVal = -leftVal;
+            if (left.isNegative) leftVal = -leftVal;
         }
 
         // Extract right value
@@ -593,8 +530,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Subtract(const BigInteger
             {
                 rightVal |= static_cast<int64_t>(right.words[1]) << 32;
             }
-            if (right.isNegative)
-                rightVal = -rightVal;
+            if (right.isNegative) rightVal = -rightVal;
         }
 
         return BigInteger(leftVal - rightVal);
@@ -651,8 +587,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Subtract(const BigInteger
 
 BigIntegerExtensions::BigInteger BigIntegerExtensions::Multiply(const BigInteger& left, const BigInteger& right)
 {
-    if (left.IsZero() || right.IsZero())
-        return BigInteger(static_cast<int64_t>(0));
+    if (left.IsZero() || right.IsZero()) return BigInteger(static_cast<int64_t>(0));
 
     // Enhanced implementation for single and double-word values
     if (left.words.size() <= 2 && right.words.size() <= 2)
@@ -669,8 +604,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Multiply(const BigInteger
             {
                 leftVal |= static_cast<int64_t>(left.words[1]) << 32;
             }
-            if (left.isNegative)
-                leftVal = -leftVal;
+            if (left.isNegative) leftVal = -leftVal;
         }
 
         // Extract right value
@@ -681,8 +615,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Multiply(const BigInteger
             {
                 rightVal |= static_cast<int64_t>(right.words[1]) << 32;
             }
-            if (right.isNegative)
-                rightVal = -rightVal;
+            if (right.isNegative) rightVal = -rightVal;
         }
 
         // Check for potential overflow
@@ -725,8 +658,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Multiply(const BigInteger
 
             // Add to result with carry
             low += result[i + j] + carry;
-            if (low < result[i + j] || low < carry)
-                high++;  // Handle overflow
+            if (low < result[i + j] || low < carry) high++;  // Handle overflow
 
             result[i + j] = low;
             carry = high;
@@ -754,11 +686,9 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Multiply(const BigInteger
 
 BigIntegerExtensions::BigInteger BigIntegerExtensions::Divide(const BigInteger& dividend, const BigInteger& divisor)
 {
-    if (divisor.IsZero())
-        throw std::runtime_error("Division by zero");
+    if (divisor.IsZero()) throw std::runtime_error("Division by zero");
 
-    if (dividend.IsZero())
-        return BigInteger(static_cast<int64_t>(0));
+    if (dividend.IsZero()) return BigInteger(static_cast<int64_t>(0));
 
     // Enhanced implementation for single and double-word values
     if (dividend.words.size() <= 2 && divisor.words.size() <= 2)
@@ -775,8 +705,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Divide(const BigInteger& 
             {
                 dividendVal |= static_cast<int64_t>(dividend.words[1]) << 32;
             }
-            if (dividend.isNegative)
-                dividendVal = -dividendVal;
+            if (dividend.isNegative) dividendVal = -dividendVal;
         }
 
         // Extract divisor value
@@ -787,8 +716,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Divide(const BigInteger& 
             {
                 divisorVal |= static_cast<int64_t>(divisor.words[1]) << 32;
             }
-            if (divisor.isNegative)
-                divisorVal = -divisorVal;
+            if (divisor.isNegative) divisorVal = -divisorVal;
         }
 
         if (divisorVal == 0)
@@ -849,8 +777,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Divide(const BigInteger& 
         }
 
         int shift = dividendBits - divisorBits;
-        if (shift < 0)
-            shift = 0;
+        if (shift < 0) shift = 0;
 
         // Shift divisor left
         BigInteger shiftedDivisor = LeftShift(divisorAbs, shift);
@@ -891,8 +818,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Divide(const BigInteger& 
 
 BigIntegerExtensions::BigInteger BigIntegerExtensions::Modulo(const BigInteger& dividend, const BigInteger& divisor)
 {
-    if (divisor.IsZero())
-        throw std::runtime_error("Modulo by zero");
+    if (divisor.IsZero()) throw std::runtime_error("Modulo by zero");
 
     // Enhanced implementation for single and double-word values
     if (dividend.words.size() <= 2 && divisor.words.size() <= 2)
@@ -909,8 +835,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Modulo(const BigInteger& 
             {
                 dividendVal |= static_cast<int64_t>(dividend.words[1]) << 32;
             }
-            if (dividend.isNegative)
-                dividendVal = -dividendVal;
+            if (dividend.isNegative) dividendVal = -dividendVal;
         }
 
         // Extract divisor value
@@ -921,8 +846,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Modulo(const BigInteger& 
             {
                 divisorVal |= static_cast<int64_t>(divisor.words[1]) << 32;
             }
-            if (divisor.isNegative)
-                divisorVal = -divisorVal;
+            if (divisor.isNegative) divisorVal = -divisorVal;
         }
 
         if (divisorVal == 0)
@@ -950,18 +874,13 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Modulo(const BigInteger& 
 int BigIntegerExtensions::Compare(const BigInteger& left, const BigInteger& right)
 {
     // Handle zero cases
-    if (left.IsZero() && right.IsZero())
-        return 0;
-    if (left.IsZero())
-        return right.isNegative ? 1 : -1;
-    if (right.IsZero())
-        return left.isNegative ? -1 : 1;
+    if (left.IsZero() && right.IsZero()) return 0;
+    if (left.IsZero()) return right.isNegative ? 1 : -1;
+    if (right.IsZero()) return left.isNegative ? -1 : 1;
 
     // Handle signs
-    if (left.isNegative && !right.isNegative)
-        return -1;
-    if (!left.isNegative && right.isNegative)
-        return 1;
+    if (left.isNegative && !right.isNegative) return -1;
+    if (!left.isNegative && right.isNegative) return 1;
 
     // Same signs - compare magnitude
     if (left.words.size() != right.words.size())
@@ -984,36 +903,20 @@ int BigIntegerExtensions::Compare(const BigInteger& left, const BigInteger& righ
 }
 
 // Additional utility methods with basic implementations
-BigIntegerExtensions::BigInteger BigIntegerExtensions::Abs(const BigInteger& value)
-{
-    return value.Abs();
-}
+BigIntegerExtensions::BigInteger BigIntegerExtensions::Abs(const BigInteger& value) { return value.Abs(); }
 
-BigIntegerExtensions::BigInteger BigIntegerExtensions::Negate(const BigInteger& value)
-{
-    return value.Negate();
-}
+BigIntegerExtensions::BigInteger BigIntegerExtensions::Negate(const BigInteger& value) { return value.Negate(); }
 
-bool BigIntegerExtensions::IsZero(const BigInteger& value)
-{
-    return value.IsZero();
-}
+bool BigIntegerExtensions::IsZero(const BigInteger& value) { return value.IsZero(); }
 
-bool BigIntegerExtensions::IsOne(const BigInteger& value)
-{
-    return value.IsOne();
-}
+bool BigIntegerExtensions::IsOne(const BigInteger& value) { return value.IsOne(); }
 
-bool BigIntegerExtensions::IsEven(const BigInteger& value)
-{
-    return value.IsEven();
-}
+bool BigIntegerExtensions::IsEven(const BigInteger& value) { return value.IsEven(); }
 
 // Complex operations with proper implementations
 BigIntegerExtensions::BigInteger BigIntegerExtensions::FromHexString(const std::string& hex)
 {
-    if (hex.empty())
-        return BigInteger(static_cast<int64_t>(0));
+    if (hex.empty()) return BigInteger(static_cast<int64_t>(0));
 
     std::string hexStr = hex;
     bool negative = false;
@@ -1142,8 +1045,7 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::FromHexString(const std::
 
 BigIntegerExtensions::BigInteger BigIntegerExtensions::FromByteArray(const std::vector<uint8_t>& bytes, bool isNegative)
 {
-    if (bytes.empty())
-        return BigInteger(static_cast<int64_t>(0));
+    if (bytes.empty()) return BigInteger(static_cast<int64_t>(0));
 
     // Simple implementation for small byte arrays
     if (bytes.size() <= 8)
@@ -1212,12 +1114,9 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::FromByteArray(const std::
 BigIntegerExtensions::BigInteger BigIntegerExtensions::Power(const BigInteger& baseValue, uint32_t exponent)
 {
     // Handle special cases
-    if (exponent == 0)
-        return BigInteger(static_cast<int64_t>(1));
-    if (exponent == 1)
-        return baseValue;
-    if (baseValue.IsZero())
-        return BigInteger(static_cast<int64_t>(0));
+    if (exponent == 0) return BigInteger(static_cast<int64_t>(1));
+    if (exponent == 1) return baseValue;
+    if (baseValue.IsZero()) return BigInteger(static_cast<int64_t>(0));
 
     // Simple implementation for single-word values with small exponents
     if (baseValue.words.size() <= 1 && exponent <= 20)
@@ -1258,8 +1157,9 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::Power(const BigInteger& b
     return result;
 }
 
-BigIntegerExtensions::BigInteger
-BigIntegerExtensions::ModularPower(const BigInteger& baseValue, const BigInteger& exponent, const BigInteger& modulus)
+BigIntegerExtensions::BigInteger BigIntegerExtensions::ModularPower(const BigInteger& baseValue,
+                                                                    const BigInteger& exponent,
+                                                                    const BigInteger& modulus)
 {
     // Handle special cases
     if (modulus.IsZero())
@@ -1287,10 +1187,8 @@ BigIntegerExtensions::ModularPower(const BigInteger& baseValue, const BigInteger
         uint64_t exp = exponent.isNegative ? -static_cast<int64_t>(exponent.words[0]) : exponent.words[0];
         uint64_t mod = modulus.isNegative ? -static_cast<int64_t>(modulus.words[0]) : modulus.words[0];
 
-        if (static_cast<int64_t>(base) < 0)
-            base = static_cast<uint64_t>(-static_cast<int64_t>(base));
-        if (static_cast<int64_t>(mod) < 0)
-            mod = static_cast<uint64_t>(-static_cast<int64_t>(mod));
+        if (static_cast<int64_t>(base) < 0) base = static_cast<uint64_t>(-static_cast<int64_t>(base));
+        if (static_cast<int64_t>(mod) < 0) mod = static_cast<uint64_t>(-static_cast<int64_t>(mod));
 
         if (exponent.isNegative)
         {
@@ -1348,10 +1246,8 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::GreatestCommonDivisor(con
                                                                              const BigInteger& right)
 {
     // Handle zero cases
-    if (left.IsZero())
-        return right;
-    if (right.IsZero())
-        return left;
+    if (left.IsZero()) return right;
+    if (right.IsZero()) return left;
 
     // Simple implementation for single-word values using Euclidean algorithm
     if (left.words.size() <= 1 && right.words.size() <= 1)
@@ -1360,10 +1256,8 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::GreatestCommonDivisor(con
         uint64_t b = right.isNegative ? -static_cast<int64_t>(right.words[0]) : right.words[0];
 
         // Make positive for GCD calculation
-        if (static_cast<int64_t>(a) < 0)
-            a = -a;
-        if (static_cast<int64_t>(b) < 0)
-            b = -b;
+        if (static_cast<int64_t>(a) < 0) a = -a;
+        if (static_cast<int64_t>(b) < 0) b = -b;
 
         // Euclidean algorithm
         while (b != 0)
@@ -1381,10 +1275,8 @@ BigIntegerExtensions::BigInteger BigIntegerExtensions::GreatestCommonDivisor(con
     BigInteger b = right;
 
     // Make both positive for GCD calculation
-    if (a.isNegative)
-        a.isNegative = false;
-    if (b.isNegative)
-        b.isNegative = false;
+    if (a.isNegative) a.isNegative = false;
+    if (b.isNegative) b.isNegative = false;
 
     // Euclidean algorithm
     while (!b.IsZero())

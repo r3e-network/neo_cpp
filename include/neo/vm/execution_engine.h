@@ -1,8 +1,5 @@
 #pragma once
 
-#include <functional>
-#include <map>
-#include <memory>
 #include <neo/vm/execution_context.h>
 #include <neo/vm/execution_engine_limits.h>
 #include <neo/vm/internal/byte_vector.h>
@@ -11,6 +8,10 @@
 #include <neo/vm/script.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/vm_state.h>
+
+#include <functional>
+#include <map>
+#include <memory>
 #include <optional>
 #include <string>
 #include <unordered_map>
@@ -26,7 +27,7 @@ class ExecutionContext;
  */
 class SystemCall
 {
-  public:
+   public:
     /**
      * @brief Default constructor.
      */
@@ -51,7 +52,7 @@ class SystemCall
      */
     const std::function<bool(ExecutionEngine&)>& GetHandler() const;
 
-  private:
+   private:
     std::string name_;
     std::function<bool(ExecutionEngine&)> handler_;
 };
@@ -61,7 +62,7 @@ class SystemCall
  */
 class ExecutionEngine
 {
-  public:
+   public:
     /**
      * @brief Constructs an ExecutionEngine with default settings.
      */
@@ -203,8 +204,7 @@ class ExecutionEngine
     {
         auto item = Pop();
         auto typed = std::dynamic_pointer_cast<T>(item);
-        if (!typed)
-            throw std::runtime_error("Invalid cast");
+        if (!typed) throw std::runtime_error("Invalid cast");
         return typed;
     }
 
@@ -311,7 +311,7 @@ class ExecutionEngine
      */
     void UnloadContext(ExecutionContext& context);
 
-  protected:
+   protected:
     /**
      * @brief Creates a new context with the specified script without loading.
      * @param script The script.
@@ -349,7 +349,7 @@ class ExecutionEngine
      */
     virtual void OnStateChanged();
 
-  private:
+   private:
     std::vector<std::shared_ptr<ExecutionContext>> invocationStack_;
     VMState state_;
     std::vector<std::shared_ptr<StackItem>> resultStack_;

@@ -1,6 +1,7 @@
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/smartcontract/native/oracle_request.h>
+
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -10,80 +11,43 @@ OracleRequest::OracleRequest() : gasForResponse_(0) {}
 OracleRequest::OracleRequest(const io::UInt256& originalTxid, int64_t gasForResponse, const std::string& url,
                              const std::string& filter, const io::UInt160& callbackContract,
                              const std::string& callbackMethod, const io::ByteVector& userData)
-    : originalTxid_(originalTxid), gasForResponse_(gasForResponse), url_(url), filter_(filter),
-      callbackContract_(callbackContract), callbackMethod_(callbackMethod), userData_(userData)
+    : originalTxid_(originalTxid),
+      gasForResponse_(gasForResponse),
+      url_(url),
+      filter_(filter),
+      callbackContract_(callbackContract),
+      callbackMethod_(callbackMethod),
+      userData_(userData)
 {
 }
 
-const io::UInt256& OracleRequest::GetOriginalTxid() const
-{
-    return originalTxid_;
-}
+const io::UInt256& OracleRequest::GetOriginalTxid() const { return originalTxid_; }
 
-void OracleRequest::SetOriginalTxid(const io::UInt256& originalTxid)
-{
-    originalTxid_ = originalTxid;
-}
+void OracleRequest::SetOriginalTxid(const io::UInt256& originalTxid) { originalTxid_ = originalTxid; }
 
-int64_t OracleRequest::GetGasForResponse() const
-{
-    return gasForResponse_;
-}
+int64_t OracleRequest::GetGasForResponse() const { return gasForResponse_; }
 
-void OracleRequest::SetGasForResponse(int64_t gasForResponse)
-{
-    gasForResponse_ = gasForResponse;
-}
+void OracleRequest::SetGasForResponse(int64_t gasForResponse) { gasForResponse_ = gasForResponse; }
 
-const std::string& OracleRequest::GetUrl() const
-{
-    return url_;
-}
+const std::string& OracleRequest::GetUrl() const { return url_; }
 
-void OracleRequest::SetUrl(const std::string& url)
-{
-    url_ = url;
-}
+void OracleRequest::SetUrl(const std::string& url) { url_ = url; }
 
-const std::string& OracleRequest::GetFilter() const
-{
-    return filter_;
-}
+const std::string& OracleRequest::GetFilter() const { return filter_; }
 
-void OracleRequest::SetFilter(const std::string& filter)
-{
-    filter_ = filter;
-}
+void OracleRequest::SetFilter(const std::string& filter) { filter_ = filter; }
 
-const io::UInt160& OracleRequest::GetCallbackContract() const
-{
-    return callbackContract_;
-}
+const io::UInt160& OracleRequest::GetCallbackContract() const { return callbackContract_; }
 
-void OracleRequest::SetCallbackContract(const io::UInt160& callbackContract)
-{
-    callbackContract_ = callbackContract;
-}
+void OracleRequest::SetCallbackContract(const io::UInt160& callbackContract) { callbackContract_ = callbackContract; }
 
-const std::string& OracleRequest::GetCallbackMethod() const
-{
-    return callbackMethod_;
-}
+const std::string& OracleRequest::GetCallbackMethod() const { return callbackMethod_; }
 
-void OracleRequest::SetCallbackMethod(const std::string& callbackMethod)
-{
-    callbackMethod_ = callbackMethod;
-}
+void OracleRequest::SetCallbackMethod(const std::string& callbackMethod) { callbackMethod_ = callbackMethod; }
 
-const io::ByteVector& OracleRequest::GetUserData() const
-{
-    return userData_;
-}
+const io::ByteVector& OracleRequest::GetUserData() const { return userData_; }
 
-void OracleRequest::SetUserData(const io::ByteVector& userData)
-{
-    userData_ = userData;
-}
+void OracleRequest::SetUserData(const io::ByteVector& userData) { userData_ = userData; }
 
 std::shared_ptr<vm::StackItem> OracleRequest::ToStackItem() const
 {
@@ -100,16 +64,13 @@ std::shared_ptr<vm::StackItem> OracleRequest::ToStackItem() const
 
 void OracleRequest::FromStackItem(const std::shared_ptr<vm::StackItem>& item)
 {
-    if (!item->IsArray())
-        throw std::runtime_error("Expected array");
+    if (!item->IsArray()) throw std::runtime_error("Expected array");
 
     auto array = item->GetArray();
-    if (array.size() < 7)
-        throw std::runtime_error("Invalid array size");
+    if (array.size() < 7) throw std::runtime_error("Invalid array size");
 
     auto originalTxidBytes = array[0]->GetByteArray();
-    if (originalTxidBytes.Size() != io::UInt256::Size)
-        throw std::runtime_error("Invalid originalTxid size");
+    if (originalTxidBytes.Size() != io::UInt256::Size) throw std::runtime_error("Invalid originalTxid size");
     std::memcpy(originalTxid_.Data(), originalTxidBytes.Data(), io::UInt256::Size);
 
     gasForResponse_ = array[1]->GetInteger();
@@ -117,8 +78,7 @@ void OracleRequest::FromStackItem(const std::shared_ptr<vm::StackItem>& item)
     filter_ = array[3]->IsNull() ? "" : array[3]->GetString();
 
     auto callbackContractBytes = array[4]->GetByteArray();
-    if (callbackContractBytes.Size() != io::UInt160::Size)
-        throw std::runtime_error("Invalid callbackContract size");
+    if (callbackContractBytes.Size() != io::UInt160::Size) throw std::runtime_error("Invalid callbackContract size");
     std::memcpy(callbackContract_.Data(), callbackContractBytes.Data(), io::UInt160::Size);
 
     callbackMethod_ = array[5]->GetString();

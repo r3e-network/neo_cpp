@@ -1,6 +1,7 @@
-#include <iostream>
 #include <neo/cli/console_helper.h>
 #include <neo/cli/node_commands.h>
+
+#include <iostream>
 
 namespace neo::cli
 {

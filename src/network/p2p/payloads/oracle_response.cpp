@@ -3,6 +3,7 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/network/p2p/payloads/oracle_response.h>
+
 #include <stdexcept>
 
 namespace neo::network::p2p::payloads
@@ -14,35 +15,17 @@ OracleResponse::OracleResponse(uint64_t id, OracleResponseCode code, const io::B
 {
 }
 
-uint64_t OracleResponse::GetId() const
-{
-    return id_;
-}
+uint64_t OracleResponse::GetId() const { return id_; }
 
-void OracleResponse::SetId(uint64_t id)
-{
-    id_ = id;
-}
+void OracleResponse::SetId(uint64_t id) { id_ = id; }
 
-OracleResponseCode OracleResponse::GetCode() const
-{
-    return code_;
-}
+OracleResponseCode OracleResponse::GetCode() const { return code_; }
 
-void OracleResponse::SetCode(OracleResponseCode code)
-{
-    code_ = code;
-}
+void OracleResponse::SetCode(OracleResponseCode code) { code_ = code; }
 
-const io::ByteVector& OracleResponse::GetResult() const
-{
-    return result_;
-}
+const io::ByteVector& OracleResponse::GetResult() const { return result_; }
 
-void OracleResponse::SetResult(const io::ByteVector& result)
-{
-    result_ = result;
-}
+void OracleResponse::SetResult(const io::ByteVector& result) { result_ = result; }
 
 void OracleResponse::Serialize(io::BinaryWriter& writer) const
 {

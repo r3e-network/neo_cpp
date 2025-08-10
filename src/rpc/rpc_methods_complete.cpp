@@ -371,8 +371,7 @@ nlohmann::json RPCMethods::InvokeContractVerify(std::shared_ptr<node::NeoSystem>
 // Private helper methods
 nlohmann::json RPCMethods::BlockToJson(std::shared_ptr<ledger::Block> block, bool verbose)
 {
-    if (!block)
-        return nullptr;
+    if (!block) return nullptr;
 
     if (verbose)
     {
@@ -410,8 +409,7 @@ nlohmann::json RPCMethods::BlockToJson(std::shared_ptr<ledger::Block> block, boo
 
 nlohmann::json RPCMethods::TransactionToJson(std::shared_ptr<ledger::Transaction> tx, bool verbose)
 {
-    if (!tx)
-        return nullptr;
+    if (!tx) return nullptr;
 
     if (verbose)
     {
@@ -435,8 +433,7 @@ nlohmann::json RPCMethods::TransactionToJson(std::shared_ptr<ledger::Transaction
 
 nlohmann::json RPCMethods::ContractToJson(std::shared_ptr<smartcontract::ContractState> contract)
 {
-    if (!contract)
-        return nullptr;
+    if (!contract) return nullptr;
 
     json result;
     result["id"] = contract->GetId();

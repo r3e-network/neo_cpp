@@ -1,9 +1,10 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
+#include <cstdint>
 #include <random>
 #include <string>
 #include <vector>
@@ -37,7 +38,7 @@ namespace neo::extensions
  */
 class RandomExtensions
 {
-  public:
+   public:
     /**
      * @brief Generate cryptographically secure random bytes
      * @param length Number of bytes to generate
@@ -58,10 +59,7 @@ class RandomExtensions
      * @param max Maximum value (inclusive)
      * @return Random integer in range
      */
-    static int32_t NextInt(int32_t max)
-    {
-        return NextInt(0, max);
-    }
+    static int32_t NextInt(int32_t max) { return NextInt(0, max); }
 
     /**
      * @brief Generate random integer (full range)
@@ -85,19 +83,13 @@ class RandomExtensions
      * @param max Maximum value (inclusive)
      * @return Random unsigned integer in range
      */
-    static uint32_t NextUInt(uint32_t max)
-    {
-        return NextUInt(0, max);
-    }
+    static uint32_t NextUInt(uint32_t max) { return NextUInt(0, max); }
 
     /**
      * @brief Generate random unsigned integer (full range)
      * @return Random 32-bit unsigned integer
      */
-    static uint32_t NextUInt()
-    {
-        return NextUInt(0, std::numeric_limits<uint32_t>::max());
-    }
+    static uint32_t NextUInt() { return NextUInt(0, std::numeric_limits<uint32_t>::max()); }
 
     /**
      * @brief Generate random 64-bit integer in range [min, max]
@@ -128,10 +120,7 @@ class RandomExtensions
      * @brief Generate random 64-bit unsigned integer (full range)
      * @return Random 64-bit unsigned integer
      */
-    static uint64_t NextULong()
-    {
-        return NextULong(0, std::numeric_limits<uint64_t>::max());
-    }
+    static uint64_t NextULong() { return NextULong(0, std::numeric_limits<uint64_t>::max()); }
 
     /**
      * @brief Generate random float in range [0.0, 1.0)
@@ -165,20 +154,14 @@ class RandomExtensions
      * @brief Generate random boolean
      * @return Random boolean value
      */
-    static bool NextBool()
-    {
-        return NextInt(0, 1) == 1;
-    }
+    static bool NextBool() { return NextInt(0, 1) == 1; }
 
     /**
      * @brief Generate random boolean with specified probability
      * @param probability Probability of returning true (0.0 to 1.0)
      * @return Random boolean based on probability
      */
-    static bool NextBool(double probability)
-    {
-        return NextDouble() < probability;
-    }
+    static bool NextBool(double probability) { return NextDouble() < probability; }
 
     /**
      * @brief Generate random UInt160 hash
@@ -227,8 +210,7 @@ class RandomExtensions
     template <typename T>
     static const T& SelectRandom(const std::vector<T>& vec)
     {
-        if (vec.empty())
-            throw std::invalid_argument("Cannot select from empty vector");
+        if (vec.empty()) throw std::invalid_argument("Cannot select from empty vector");
 
         auto index = NextUInt(0, static_cast<uint32_t>(vec.size() - 1));
         return vec[index];
@@ -244,8 +226,7 @@ class RandomExtensions
     template <typename T>
     static std::vector<T> SelectRandomMultiple(const std::vector<T>& vec, size_t count)
     {
-        if (count > vec.size())
-            throw std::invalid_argument("Cannot select more elements than available");
+        if (count > vec.size()) throw std::invalid_argument("Cannot select more elements than available");
 
         std::vector<T> result = vec;
         Shuffle(result);
@@ -257,10 +238,7 @@ class RandomExtensions
      * @brief Generate random nonce for blockchain operations
      * @return Random 32-bit nonce
      */
-    static uint32_t GenerateNonce()
-    {
-        return NextUInt();
-    }
+    static uint32_t GenerateNonce() { return NextUInt(); }
 
     /**
      * @brief Generate random timestamp within reasonable bounds
@@ -270,7 +248,7 @@ class RandomExtensions
      */
     static uint64_t GenerateRandomTimestamp(uint64_t baseTime = 0, uint64_t maxVariation = 3600);
 
-  private:
+   private:
     /**
      * @brief Get secure random number generator
      * @return Reference to thread-local secure RNG

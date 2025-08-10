@@ -3,8 +3,6 @@
 #include <neo/ledger/transaction_attribute.h>
 // #include <neo/ledger/coin_reference.h> - deprecated in Neo N3
 // #include <neo/ledger/transaction_output.h> - deprecated in Neo N3
-#include <algorithm>
-#include <memory>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -12,6 +10,9 @@
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/witness.h>
+
+#include <algorithm>
+#include <memory>
 #include <sstream>
 #include <stdexcept>
 #include <vector>
@@ -20,135 +21,65 @@ namespace neo::ledger
 {
 // Transaction basic implementation
 Transaction::Transaction()
-    : type_(Type::ContractTransaction), version_(0), nonce_(0), systemFee_(0), networkFee_(0), validUntilBlock_(0),
+    : type_(Type::ContractTransaction),
+      version_(0),
+      nonce_(0),
+      systemFee_(0),
+      networkFee_(0),
+      validUntilBlock_(0),
       timestamp_(0)
 {
 }
 
-Transaction::Type Transaction::GetType() const
-{
-    return type_;
-}
+Transaction::Type Transaction::GetType() const { return type_; }
 
-void Transaction::SetType(Type type)
-{
-    type_ = type;
-}
+void Transaction::SetType(Type type) { type_ = type; }
 
-uint8_t Transaction::GetVersion() const
-{
-    return version_;
-}
+uint8_t Transaction::GetVersion() const { return version_; }
 
-void Transaction::SetVersion(uint8_t version)
-{
-    version_ = version;
-}
+void Transaction::SetVersion(uint8_t version) { version_ = version; }
 
-const std::vector<TransactionAttribute>& Transaction::GetAttributes() const
-{
-    return attributes_;
-}
+const std::vector<TransactionAttribute>& Transaction::GetAttributes() const { return attributes_; }
 
-void Transaction::SetAttributes(const std::vector<TransactionAttribute>& attributes)
-{
-    attributes_ = attributes;
-}
+void Transaction::SetAttributes(const std::vector<TransactionAttribute>& attributes) { attributes_ = attributes; }
 
-const std::vector<CoinReference>& Transaction::GetInputs() const
-{
-    return inputs_;
-}
+const std::vector<CoinReference>& Transaction::GetInputs() const { return inputs_; }
 
-void Transaction::SetInputs(const std::vector<CoinReference>& inputs)
-{
-    inputs_ = inputs;
-}
+void Transaction::SetInputs(const std::vector<CoinReference>& inputs) { inputs_ = inputs; }
 
-const std::vector<TransactionOutput>& Transaction::GetOutputs() const
-{
-    return outputs_;
-}
+const std::vector<TransactionOutput>& Transaction::GetOutputs() const { return outputs_; }
 
-void Transaction::SetOutputs(const std::vector<TransactionOutput>& outputs)
-{
-    outputs_ = outputs;
-}
+void Transaction::SetOutputs(const std::vector<TransactionOutput>& outputs) { outputs_ = outputs; }
 
-const std::vector<Witness>& Transaction::GetWitnesses() const
-{
-    return witnesses_;
-}
+const std::vector<Witness>& Transaction::GetWitnesses() const { return witnesses_; }
 
-void Transaction::SetWitnesses(const std::vector<Witness>& witnesses)
-{
-    witnesses_ = witnesses;
-}
+void Transaction::SetWitnesses(const std::vector<Witness>& witnesses) { witnesses_ = witnesses; }
 
-uint32_t Transaction::GetNonce() const
-{
-    return nonce_;
-}
+uint32_t Transaction::GetNonce() const { return nonce_; }
 
-void Transaction::SetNonce(uint32_t nonce)
-{
-    nonce_ = nonce;
-}
+void Transaction::SetNonce(uint32_t nonce) { nonce_ = nonce; }
 
-int64_t Transaction::GetNetworkFee() const
-{
-    return networkFee_;
-}
+int64_t Transaction::GetNetworkFee() const { return networkFee_; }
 
-void Transaction::SetNetworkFee(int64_t networkFee)
-{
-    networkFee_ = networkFee;
-}
+void Transaction::SetNetworkFee(int64_t networkFee) { networkFee_ = networkFee; }
 
-int64_t Transaction::GetSystemFee() const
-{
-    return systemFee_;
-}
+int64_t Transaction::GetSystemFee() const { return systemFee_; }
 
-void Transaction::SetSystemFee(int64_t systemFee)
-{
-    systemFee_ = systemFee;
-}
+void Transaction::SetSystemFee(int64_t systemFee) { systemFee_ = systemFee; }
 
-uint32_t Transaction::GetValidUntilBlock() const
-{
-    return validUntilBlock_;
-}
+uint32_t Transaction::GetValidUntilBlock() const { return validUntilBlock_; }
 
-void Transaction::SetValidUntilBlock(uint32_t validUntilBlock)
-{
-    validUntilBlock_ = validUntilBlock;
-}
+void Transaction::SetValidUntilBlock(uint32_t validUntilBlock) { validUntilBlock_ = validUntilBlock; }
 
-uint64_t Transaction::GetTimestamp() const
-{
-    return timestamp_;
-}
+uint64_t Transaction::GetTimestamp() const { return timestamp_; }
 
-const io::ByteVector& Transaction::GetScript() const
-{
-    return script_;
-}
+const io::ByteVector& Transaction::GetScript() const { return script_; }
 
-void Transaction::SetScript(const io::ByteVector& script)
-{
-    script_ = script;
-}
+void Transaction::SetScript(const io::ByteVector& script) { script_ = script; }
 
-const std::vector<Signer>& Transaction::GetSigners() const
-{
-    return signers_;
-}
+const std::vector<Signer>& Transaction::GetSigners() const { return signers_; }
 
-void Transaction::SetSigners(const std::vector<Signer>& signers)
-{
-    signers_ = signers;
-}
+void Transaction::SetSigners(const std::vector<Signer>& signers) { signers_ = signers; }
 
 io::UInt160 Transaction::GetSender() const
 {
@@ -253,10 +184,7 @@ bool Transaction::operator==(const Transaction& other) const
            inputs_ == other.inputs_ && outputs_ == other.outputs_ && witnesses_ == other.witnesses_;
 }
 
-bool Transaction::operator!=(const Transaction& other) const
-{
-    return !(*this == other);
-}
+bool Transaction::operator!=(const Transaction& other) const { return !(*this == other); }
 
 void Transaction::SerializeExclusiveData(io::BinaryWriter& writer) const
 {

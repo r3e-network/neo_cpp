@@ -1,16 +1,17 @@
-#include <algorithm>
-#include <chrono>
-#include <iostream>
 #include <neo/core/neo_system.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/memory_pool.h>
+#include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/neo_token.h>
-#include <neo/smartcontract/native/contract_management.h>
+
+#include <algorithm>
+#include <chrono>
+#include <iostream>
 #include <stdexcept>
 
 namespace neo::ledger
@@ -28,7 +29,9 @@ Blockchain::Blockchain(std::shared_ptr<NeoSystem> system)
     : system_(system)
       // , header_cache_(std::make_shared<HeaderCache>())  // Disabled since network module is disabled
       ,
-      data_cache_(system->GetStoreView()), extensible_whitelist_cached_(false), running_(false)
+      data_cache_(system->GetStoreView()),
+      extensible_whitelist_cached_(false),
+      running_(false)
 {
     if (!system_)
     {
@@ -36,10 +39,7 @@ Blockchain::Blockchain(std::shared_ptr<NeoSystem> system)
     }
 }
 
-Blockchain::~Blockchain()
-{
-    Stop();
-}
+Blockchain::~Blockchain() { Stop(); }
 
 void Blockchain::Initialize()
 {

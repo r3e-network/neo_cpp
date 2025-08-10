@@ -1,18 +1,17 @@
+#include <neo/extensions/byte_array_equality_comparer.h>
+
 #include <algorithm>
 #include <cstring>
-#include <neo/extensions/byte_array_equality_comparer.h>
 
 namespace neo::extensions
 {
 bool ByteArrayEqualityComparer::Equals(const io::ByteSpan& left, const io::ByteSpan& right)
 {
     // Fast size comparison first
-    if (left.Size() != right.Size())
-        return false;
+    if (left.Size() != right.Size()) return false;
 
     // Handle empty arrays
-    if (left.Size() == 0)
-        return true;
+    if (left.Size() == 0) return true;
 
     // Use memcmp for fast byte-by-byte comparison
     return std::memcmp(left.Data(), right.Data(), left.Size()) == 0;
@@ -31,8 +30,7 @@ bool ByteArrayEqualityComparer::Equals(const std::vector<uint8_t>& left, const s
 
 size_t ByteArrayEqualityComparer::GetHashCode(const io::ByteSpan& data)
 {
-    if (data.Size() == 0)
-        return 0;
+    if (data.Size() == 0) return 0;
 
     // Use FNV-1a hash algorithm for consistent hashing
     constexpr size_t fnvOffsetBasis = 14695981039346656037ULL;
@@ -48,15 +46,11 @@ size_t ByteArrayEqualityComparer::GetHashCode(const io::ByteSpan& data)
     return hash;
 }
 
-size_t ByteArrayEqualityComparer::GetHashCode(const io::ByteVector& data)
-{
-    return GetHashCode(data.AsSpan());
-}
+size_t ByteArrayEqualityComparer::GetHashCode(const io::ByteVector& data) { return GetHashCode(data.AsSpan()); }
 
 size_t ByteArrayEqualityComparer::GetHashCode(const std::vector<uint8_t>& data)
 {
-    if (data.empty())
-        return 0;
+    if (data.empty()) return 0;
 
     // Use FNV-1a hash algorithm
     constexpr size_t fnvOffsetBasis = 14695981039346656037ULL;

@@ -44,8 +44,8 @@ std::shared_ptr<IStoreProvider> StoreFactory::get_store_provider(const std::stri
     return std::make_shared<MemoryStoreProvider>();
 }
 
-std::shared_ptr<IStoreProvider> StoreFactory::get_store_provider(const std::string& engine, 
-                                                                const std::unordered_map<std::string, std::string>& config)
+std::shared_ptr<IStoreProvider> StoreFactory::get_store_provider(
+    const std::string& engine, const std::unordered_map<std::string, std::string>& config)
 {
     LOG_INFO("Creating store provider for engine: {} with config", engine);
 
@@ -58,40 +58,51 @@ std::shared_ptr<IStoreProvider> StoreFactory::get_store_provider(const std::stri
     {
         // Configure RocksDB based on provided configuration
         RocksDbConfig rocksdb_config;
-        
+
         auto it = config.find("db_path");
-        if (it != config.end()) {
+        if (it != config.end())
+        {
             rocksdb_config.db_path = it->second;
         }
-        
+
         it = config.find("write_buffer_size");
-        if (it != config.end()) {
-            try {
+        if (it != config.end())
+        {
+            try
+            {
                 rocksdb_config.write_buffer_size = std::stoull(it->second);
-            } catch (...) {
+            }
+            catch (...)
+            {
                 LOG_WARNING("Invalid write_buffer_size value: {}", it->second);
             }
         }
-        
+
         it = config.find("block_cache_size");
-        if (it != config.end()) {
-            try {
+        if (it != config.end())
+        {
+            try
+            {
                 rocksdb_config.block_cache_size = std::stoull(it->second);
-            } catch (...) {
+            }
+            catch (...)
+            {
                 LOG_WARNING("Invalid block_cache_size value: {}", it->second);
             }
         }
-        
+
         it = config.find("compression_enabled");
-        if (it != config.end()) {
+        if (it != config.end())
+        {
             rocksdb_config.compression_enabled = (it->second == "true" || it->second == "1");
         }
-        
+
         it = config.find("use_bloom_filter");
-        if (it != config.end()) {
+        if (it != config.end())
+        {
             rocksdb_config.use_bloom_filter = (it->second == "true" || it->second == "1");
         }
-        
+
         LOG_INFO("Using RocksDB storage provider with custom config");
         return CreateRocksDbStoreProvider(rocksdb_config);
     }

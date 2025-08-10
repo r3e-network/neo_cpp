@@ -55,8 +55,7 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                     std::string result = "[";
                     for (size_t i = 0; i < array.size(); i++)
                     {
-                        if (i > 0)
-                            result += ",";
+                        if (i > 0) result += ",";
                         result += stackItemToJson(array[i]);
                     }
                     result += "]";
@@ -69,8 +68,7 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                     bool first = true;
                     for (const auto& pair : map)
                     {
-                        if (!first)
-                            result += ",";
+                        if (!first) result += ",";
                         first = false;
                         result += "\"" + pair.first->GetString() + "\":" + stackItemToJson(pair.second);
                     }
@@ -110,11 +108,9 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
             parseJson = [&parseJson](const std::string& json, size_t& pos) -> std::shared_ptr<vm::StackItem>
             {
                 // Skip whitespace
-                while (pos < json.size() && std::isspace(json[pos]))
-                    pos++;
+                while (pos < json.size() && std::isspace(json[pos])) pos++;
 
-                if (pos >= json.size())
-                    throw std::runtime_error("Unexpected end of JSON");
+                if (pos >= json.size()) throw std::runtime_error("Unexpected end of JSON");
 
                 // Parse based on the first character
                 char c = json[pos];
@@ -158,8 +154,7 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                         if (json[pos] == '\\')
                         {
                             pos++;
-                            if (pos >= json.size())
-                                throw std::runtime_error("Unexpected end of JSON");
+                            if (pos >= json.size()) throw std::runtime_error("Unexpected end of JSON");
 
                             switch (json[pos])
                             {
@@ -199,8 +194,7 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                         pos++;
                     }
 
-                    if (pos >= json.size())
-                        throw std::runtime_error("Unexpected end of JSON");
+                    if (pos >= json.size()) throw std::runtime_error("Unexpected end of JSON");
 
                     pos++;  // Skip closing quote
                     return vm::StackItem::Create(str);
@@ -212,8 +206,7 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                     auto array = vm::StackItem::CreateArray();
 
                     // Skip whitespace
-                    while (pos < json.size() && std::isspace(json[pos]))
-                        pos++;
+                    while (pos < json.size() && std::isspace(json[pos])) pos++;
 
                     if (pos < json.size() && json[pos] == ']')
                     {
@@ -227,11 +220,9 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                         array->Add(item);
 
                         // Skip whitespace
-                        while (pos < json.size() && std::isspace(json[pos]))
-                            pos++;
+                        while (pos < json.size() && std::isspace(json[pos])) pos++;
 
-                        if (pos >= json.size())
-                            throw std::runtime_error("Unexpected end of JSON");
+                        if (pos >= json.size()) throw std::runtime_error("Unexpected end of JSON");
 
                         if (json[pos] == ']')
                         {
@@ -239,8 +230,7 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                             break;
                         }
 
-                        if (json[pos] != ',')
-                            throw std::runtime_error("Invalid JSON: expected ',' or ']'");
+                        if (json[pos] != ',') throw std::runtime_error("Invalid JSON: expected ',' or ']'");
 
                         pos++;  // Skip comma
                     }
@@ -254,8 +244,7 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                     auto map = vm::StackItem::CreateMap();
 
                     // Skip whitespace
-                    while (pos < json.size() && std::isspace(json[pos]))
-                        pos++;
+                    while (pos < json.size() && std::isspace(json[pos])) pos++;
 
                     if (pos < json.size() && json[pos] == '}')
                     {
@@ -272,8 +261,7 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                         auto key = parseJson(json, pos);
 
                         // Skip whitespace
-                        while (pos < json.size() && std::isspace(json[pos]))
-                            pos++;
+                        while (pos < json.size() && std::isspace(json[pos])) pos++;
 
                         if (pos >= json.size() || json[pos] != ':')
                             throw std::runtime_error("Invalid JSON: expected ':'");
@@ -289,11 +277,9 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                         }
 
                         // Skip whitespace
-                        while (pos < json.size() && std::isspace(json[pos]))
-                            pos++;
+                        while (pos < json.size() && std::isspace(json[pos])) pos++;
 
-                        if (pos >= json.size())
-                            throw std::runtime_error("Unexpected end of JSON");
+                        if (pos >= json.size()) throw std::runtime_error("Unexpected end of JSON");
 
                         if (json[pos] == '}')
                         {
@@ -301,8 +287,7 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                             break;
                         }
 
-                        if (json[pos] != ',')
-                            throw std::runtime_error("Invalid JSON: expected ',' or '}'");
+                        if (json[pos] != ',') throw std::runtime_error("Invalid JSON: expected ',' or '}'");
 
                         pos++;  // Skip comma
                     }
@@ -313,27 +298,22 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                 {
                     // Parse number
                     size_t start = pos;
-                    if (c == '-')
-                        pos++;
+                    if (c == '-') pos++;
 
-                    while (pos < json.size() && json[pos] >= '0' && json[pos] <= '9')
-                        pos++;
+                    while (pos < json.size() && json[pos] >= '0' && json[pos] <= '9') pos++;
 
                     if (pos < json.size() && json[pos] == '.')
                     {
                         pos++;
-                        while (pos < json.size() && json[pos] >= '0' && json[pos] <= '9')
-                            pos++;
+                        while (pos < json.size() && json[pos] >= '0' && json[pos] <= '9') pos++;
                     }
 
                     if (pos < json.size() && (json[pos] == 'e' || json[pos] == 'E'))
                     {
                         pos++;
-                        if (pos < json.size() && (json[pos] == '+' || json[pos] == '-'))
-                            pos++;
+                        if (pos < json.size() && (json[pos] == '+' || json[pos] == '-')) pos++;
 
-                        while (pos < json.size() && json[pos] >= '0' && json[pos] <= '9')
-                            pos++;
+                        while (pos < json.size() && json[pos] >= '0' && json[pos] <= '9') pos++;
                     }
 
                     std::string numStr = json.substr(start, pos - start);
@@ -359,11 +339,9 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
                 auto result = parseJson(json, pos);
 
                 // Skip trailing whitespace
-                while (pos < json.size() && std::isspace(json[pos]))
-                    pos++;
+                while (pos < json.size() && std::isspace(json[pos])) pos++;
 
-                if (pos < json.size())
-                    throw std::runtime_error("Invalid JSON: unexpected trailing characters");
+                if (pos < json.size()) throw std::runtime_error("Invalid JSON: unexpected trailing characters");
 
                 context.Push(result);
             }
@@ -380,8 +358,5 @@ void RegisterJsonSystemCallsImpl(ApplicationEngine& engine)
 }  // namespace
 
 // This function will be called from the RegisterSystemCalls method in application_engine_system_calls.cpp
-void RegisterJsonSystemCalls(ApplicationEngine& engine)
-{
-    RegisterJsonSystemCallsImpl(engine);
-}
+void RegisterJsonSystemCalls(ApplicationEngine& engine) { RegisterJsonSystemCallsImpl(engine); }
 }  // namespace neo::smartcontract

@@ -14,20 +14,11 @@ PoolItem::PoolItem(std::shared_ptr<Transaction> transaction)
     fee_per_byte_ = CalculateFeePerByte();
 }
 
-std::shared_ptr<Transaction> PoolItem::GetTransaction() const
-{
-    return transaction_;
-}
+std::shared_ptr<Transaction> PoolItem::GetTransaction() const { return transaction_; }
 
-std::chrono::system_clock::time_point PoolItem::GetTimestamp() const
-{
-    return timestamp_;
-}
+std::chrono::system_clock::time_point PoolItem::GetTimestamp() const { return timestamp_; }
 
-uint64_t PoolItem::GetFeePerByte() const
-{
-    return fee_per_byte_;
-}
+uint64_t PoolItem::GetFeePerByte() const { return fee_per_byte_; }
 
 bool PoolItem::HasHigherPriorityThan(const PoolItem& other) const
 {
@@ -52,37 +43,22 @@ bool PoolItem::operator==(const PoolItem& other) const
     return transaction_->GetHash() == other.transaction_->GetHash();
 }
 
-bool PoolItem::operator!=(const PoolItem& other) const
-{
-    return !(*this == other);
-}
+bool PoolItem::operator!=(const PoolItem& other) const { return !(*this == other); }
 
-io::UInt256 PoolItem::GetHash() const
-{
-    return hash_;
-}
+io::UInt256 PoolItem::GetHash() const { return hash_; }
 
-int64_t PoolItem::GetNetworkFee() const
-{
-    return transaction_->GetNetworkFee();
-}
+int64_t PoolItem::GetNetworkFee() const { return transaction_->GetNetworkFee(); }
 
-int64_t PoolItem::GetSystemFee() const
-{
-    return transaction_->GetSystemFee();
-}
+int64_t PoolItem::GetSystemFee() const { return transaction_->GetSystemFee(); }
 
-int PoolItem::GetSize() const
-{
-    return transaction_->GetSize();
-}
+int PoolItem::GetSize() const { return transaction_->GetSize(); }
 
 bool PoolItem::ConflictsWith(const PoolItem& other) const
 {
     // Check if transactions have same signers with conflicting scopes
     const auto& our_signers = transaction_->GetSigners();
     const auto& other_signers = other.transaction_->GetSigners();
-    
+
     // Check for account conflicts (same sender with overlapping scopes)
     for (const auto& our_signer : our_signers)
     {
@@ -93,14 +69,14 @@ bool PoolItem::ConflictsWith(const PoolItem& other) const
                 // Same account - check if witness scopes conflict
                 auto our_scope = our_signer.GetScopes();
                 auto other_scope = other_signer.GetScopes();
-                
+
                 // If both have Global scope, they conflict
                 if ((our_scope & ledger::WitnessScope::Global) != ledger::WitnessScope::None &&
                     (other_scope & ledger::WitnessScope::Global) != ledger::WitnessScope::None)
                 {
                     return true;
                 }
-                
+
                 // Check for overlapping contract-specific scopes
                 if ((our_scope & ledger::WitnessScope::CustomContracts) != ledger::WitnessScope::None &&
                     (other_scope & ledger::WitnessScope::CustomContracts) != ledger::WitnessScope::None)
@@ -112,7 +88,7 @@ bool PoolItem::ConflictsWith(const PoolItem& other) const
             }
         }
     }
-    
+
     // No conflicts detected
     return false;
 }

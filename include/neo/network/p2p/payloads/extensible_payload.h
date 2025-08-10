@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/ijson_serializable.h>
@@ -10,6 +9,8 @@
 #include <neo/io/uint256.h>
 #include <neo/ledger/witness.h>
 #include <neo/network/p2p/payloads/ipayload.h>
+
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -21,7 +22,7 @@ namespace neo::network::p2p::payloads
  */
 class ExtensiblePayload : public IPayload, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Default constructor.
      */
@@ -43,109 +44,73 @@ class ExtensiblePayload : public IPayload, public io::IJsonSerializable
      * @brief Gets the category string.
      * @return The category.
      */
-    const std::string& GetCategory() const
-    {
-        return category_;
-    }
+    const std::string& GetCategory() const { return category_; }
 
     /**
      * @brief Sets the category string.
      * @param category The category to set.
      */
-    void SetCategory(const std::string& category)
-    {
-        category_ = category;
-    }
+    void SetCategory(const std::string& category) { category_ = category; }
 
     /**
      * @brief Gets the valid block start.
      * @return The valid block start.
      */
-    uint32_t GetValidBlockStart() const
-    {
-        return valid_block_start_;
-    }
+    uint32_t GetValidBlockStart() const { return valid_block_start_; }
 
     /**
      * @brief Sets the valid block start.
      * @param start The valid block start.
      */
-    void SetValidBlockStart(uint32_t start)
-    {
-        valid_block_start_ = start;
-    }
+    void SetValidBlockStart(uint32_t start) { valid_block_start_ = start; }
 
     /**
      * @brief Gets the valid block end.
      * @return The valid block end.
      */
-    uint32_t GetValidBlockEnd() const
-    {
-        return valid_block_end_;
-    }
+    uint32_t GetValidBlockEnd() const { return valid_block_end_; }
 
     /**
      * @brief Sets the valid block end.
      * @param end The valid block end.
      */
-    void SetValidBlockEnd(uint32_t end)
-    {
-        valid_block_end_ = end;
-    }
+    void SetValidBlockEnd(uint32_t end) { valid_block_end_ = end; }
 
     /**
      * @brief Gets the sender's script hash.
      * @return The sender.
      */
-    const io::UInt160& GetSender() const
-    {
-        return sender_;
-    }
+    const io::UInt160& GetSender() const { return sender_; }
 
     /**
      * @brief Sets the sender's script hash.
      * @param sender The sender to set.
      */
-    void SetSender(const io::UInt160& sender)
-    {
-        sender_ = sender;
-    }
+    void SetSender(const io::UInt160& sender) { sender_ = sender; }
 
     /**
      * @brief Gets the payload data.
      * @return The data.
      */
-    const io::ByteVector& GetData() const
-    {
-        return data_;
-    }
+    const io::ByteVector& GetData() const { return data_; }
 
     /**
      * @brief Sets the payload data.
      * @param data The data to set.
      */
-    void SetData(const io::ByteVector& data)
-    {
-        data_ = data;
-    }
+    void SetData(const io::ByteVector& data) { data_ = data; }
 
     /**
      * @brief Gets the witness.
      * @return The witness.
      */
-    const ledger::Witness& GetWitness() const
-    {
-        return witness_;
-    }
+    const ledger::Witness& GetWitness() const { return witness_; }
 
     /**
      * @brief Sets the witness.
      * @param witness The witness to set.
      */
-    void SetWitness(const ledger::Witness& witness)
-    {
-        witness_ = witness;
-    }
+    void SetWitness(const ledger::Witness& witness) { witness_ = witness; }
 
     // IPayload implementation
     void Serialize(io::BinaryWriter& writer) const override;
@@ -192,7 +157,7 @@ class ExtensiblePayload : public IPayload, public io::IJsonSerializable
                                                      uint32_t valid_block_end, const io::UInt160& sender,
                                                      const io::ByteVector& data);
 
-  private:
+   private:
     std::string category_;
     uint32_t valid_block_start_ = 0;
     uint32_t valid_block_end_ = 0;

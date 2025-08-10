@@ -15,10 +15,7 @@ io::UInt256 Block::GetHash() const
     return hash_;
 }
 
-io::UInt256 Block::CalculateHash() const
-{
-    return header_.GetHash();
-}
+io::UInt256 Block::CalculateHash() const { return header_.GetHash(); }
 
 uint32_t Block::GetSize() const
 {

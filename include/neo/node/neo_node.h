@@ -31,7 +31,7 @@ namespace neo::node
  */
 class NeoNode
 {
-  private:
+   private:
     // Core configuration
     std::shared_ptr<ProtocolSettings> protocolSettings_;
     std::string configPath_;
@@ -69,7 +69,7 @@ class NeoNode
     // Logging
     std::shared_ptr<logging::Logger> logger_;
 
-  public:
+   public:
     /**
      * @brief Constructor
      * @param configPath Path to configuration file
@@ -123,7 +123,7 @@ class NeoNode
      */
     size_t GetMemoryPoolCount() const;
 
-  private:
+   private:
     // Initialization methods (implemented in neo_node_initialization.cpp)
     void InitializeLogging();
     bool LoadProtocolSettings();

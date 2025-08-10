@@ -10,7 +10,7 @@ namespace neo::extensions
  */
 class IntegerExtensions
 {
-  public:
+   public:
     /**
      * @brief Gets the size of variable-length of the data.
      * @param value The length of the data.
@@ -148,7 +148,7 @@ class IntegerExtensions
      */
     static bool IsLittleEndian();
 
-  private:
+   private:
     /**
      * @brief Template function to convert integer to little-endian bytes.
      * @tparam T The integer type.

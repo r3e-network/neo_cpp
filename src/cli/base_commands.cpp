@@ -1,7 +1,8 @@
-#include <algorithm>
-#include <iostream>
 #include <neo/cli/base_commands.h>
 #include <neo/cli/console_helper.h>
+
+#include <algorithm>
+#include <iostream>
 
 namespace neo::cli
 {

@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <neo/plugins/plugin_base.h>
+
+#include <memory>
 #include <string>
 #include <unordered_map>
 
@@ -12,7 +13,7 @@ namespace neo::plugins
  */
 class TestPlugin : public PluginBase
 {
-  public:
+   public:
     /**
      * @brief Constructs a TestPlugin.
      */
@@ -31,7 +32,7 @@ class TestPlugin : public PluginBase
      */
     bool TestOnMessage(const std::string& message);
 
-  protected:
+   protected:
     /**
      * @brief Initializes the plugin.
      * @param settings The settings.

@@ -32,7 +32,7 @@ namespace smartcontract
  */
 class InteropParameterDescriptor
 {
-  public:
+   public:
     /**
      * @brief The type information of the parameter.
      */
@@ -80,7 +80,7 @@ class InteropParameterDescriptor
         return descriptor;
     }
 
-  private:
+   private:
     /**
      * @brief Creates a converter function for the specified type.
      */

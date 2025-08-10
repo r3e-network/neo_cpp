@@ -52,7 +52,7 @@ protected:
         block->SetVersion(0);
         block->SetPreviousHash(prevHash);
         block->SetMerkleRoot(io::UInt256::Zero());
-        block->SetTimestamp(std::chrono::system_clock::now());
+        block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
         block->SetIndex(index);
         block->SetPrimaryIndex(0);
         block->SetNextConsensus(io::UInt160::Zero());

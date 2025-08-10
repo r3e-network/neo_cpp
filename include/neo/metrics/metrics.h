@@ -14,7 +14,7 @@ namespace neo::metrics
  */
 class Metrics
 {
-  public:
+   public:
     static Metrics& GetInstance()
     {
         static Metrics instance;
@@ -22,94 +22,34 @@ class Metrics
     }
 
     // Transaction metrics
-    void IncrementTransactionsProcessed()
-    {
-        transactionsProcessed_++;
-    }
-    void IncrementTransactionsVerified()
-    {
-        transactionsVerified_++;
-    }
-    void IncrementTransactionsFailed()
-    {
-        transactionsFailed_++;
-    }
+    void IncrementTransactionsProcessed() { transactionsProcessed_++; }
+    void IncrementTransactionsVerified() { transactionsVerified_++; }
+    void IncrementTransactionsFailed() { transactionsFailed_++; }
 
     // Block metrics
-    void IncrementBlocksProcessed()
-    {
-        blocksProcessed_++;
-    }
-    void IncrementBlocksVerified()
-    {
-        blocksVerified_++;
-    }
-    void IncrementBlocksFailed()
-    {
-        blocksFailed_++;
-    }
+    void IncrementBlocksProcessed() { blocksProcessed_++; }
+    void IncrementBlocksVerified() { blocksVerified_++; }
+    void IncrementBlocksFailed() { blocksFailed_++; }
 
     // Network metrics
-    void IncrementPeersConnected()
-    {
-        peersConnected_++;
-    }
-    void IncrementPeersDisconnected()
-    {
-        peersDisconnected_++;
-    }
-    void IncrementMessagesReceived()
-    {
-        messagesReceived_++;
-    }
-    void IncrementMessagesSent()
-    {
-        messagesSent_++;
-    }
+    void IncrementPeersConnected() { peersConnected_++; }
+    void IncrementPeersDisconnected() { peersDisconnected_++; }
+    void IncrementMessagesReceived() { messagesReceived_++; }
+    void IncrementMessagesSent() { messagesSent_++; }
 
     // Getters
-    uint64_t GetTransactionsProcessed() const
-    {
-        return transactionsProcessed_;
-    }
-    uint64_t GetTransactionsVerified() const
-    {
-        return transactionsVerified_;
-    }
-    uint64_t GetTransactionsFailed() const
-    {
-        return transactionsFailed_;
-    }
-    uint64_t GetBlocksProcessed() const
-    {
-        return blocksProcessed_;
-    }
-    uint64_t GetBlocksVerified() const
-    {
-        return blocksVerified_;
-    }
-    uint64_t GetBlocksFailed() const
-    {
-        return blocksFailed_;
-    }
-    uint64_t GetPeersConnected() const
-    {
-        return peersConnected_;
-    }
-    uint64_t GetPeersDisconnected() const
-    {
-        return peersDisconnected_;
-    }
-    uint64_t GetMessagesReceived() const
-    {
-        return messagesReceived_;
-    }
-    uint64_t GetMessagesSent() const
-    {
-        return messagesSent_;
-    }
+    uint64_t GetTransactionsProcessed() const { return transactionsProcessed_; }
+    uint64_t GetTransactionsVerified() const { return transactionsVerified_; }
+    uint64_t GetTransactionsFailed() const { return transactionsFailed_; }
+    uint64_t GetBlocksProcessed() const { return blocksProcessed_; }
+    uint64_t GetBlocksVerified() const { return blocksVerified_; }
+    uint64_t GetBlocksFailed() const { return blocksFailed_; }
+    uint64_t GetPeersConnected() const { return peersConnected_; }
+    uint64_t GetPeersDisconnected() const { return peersDisconnected_; }
+    uint64_t GetMessagesReceived() const { return messagesReceived_; }
+    uint64_t GetMessagesSent() const { return messagesSent_; }
 
-  private:
+   private:
     std::atomic<uint64_t> transactionsProcessed_{0};
     std::atomic<uint64_t> transactionsVerified_{0};
     std::atomic<uint64_t> transactionsFailed_{0};
@@ -127,25 +67,16 @@ class Metrics
  */
 class Counter
 {
-  public:
+   public:
     Counter() : value_(0) {}
 
-    void Increment(int64_t delta = 1)
-    {
-        value_.fetch_add(delta, std::memory_order_relaxed);
-    }
+    void Increment(int64_t delta = 1) { value_.fetch_add(delta, std::memory_order_relaxed); }
 
-    int64_t Get() const
-    {
-        return value_.load(std::memory_order_relaxed);
-    }
+    int64_t Get() const { return value_.load(std::memory_order_relaxed); }
 
-    void Put(int64_t value)
-    {
-        value_.store(value, std::memory_order_relaxed);
-    }
+    void Put(int64_t value) { value_.store(value, std::memory_order_relaxed); }
 
-  private:
+   private:
     std::atomic<int64_t> value_;
 };
 
@@ -154,7 +85,7 @@ class Counter
  */
 class Histogram
 {
-  public:
+   public:
     Histogram() = default;
 
     void Observe(double value)
@@ -163,12 +94,9 @@ class Histogram
         observations_.push_back({value, std::chrono::steady_clock::now()});
     }
 
-    size_t Count() const
-    {
-        return observations_.size();
-    }
+    size_t Count() const { return observations_.size(); }
 
-  private:
+   private:
     struct Observation
     {
         double value;

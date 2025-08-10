@@ -1,7 +1,8 @@
-#include <iomanip>
 #include <neo/extensions/base64.h>
 #include <neo/extensions/integer_extensions.h>
 #include <neo/io/byte_vector.h>
+
+#include <iomanip>
 #include <sstream>
 #include <stdexcept>
 
@@ -9,17 +10,14 @@ namespace neo::io
 {
 ByteVector ByteVector::Parse(const std::string& hex)
 {
-    if (hex.empty())
-        return ByteVector();
+    if (hex.empty()) return ByteVector();
 
     // Remove '0x' prefix if present
     std::string hexStr = hex;
-    if (hexStr.size() >= 2 && hexStr[0] == '0' && (hexStr[1] == 'x' || hexStr[1] == 'X'))
-        hexStr = hexStr.substr(2);
+    if (hexStr.size() >= 2 && hexStr[0] == '0' && (hexStr[1] == 'x' || hexStr[1] == 'X')) hexStr = hexStr.substr(2);
 
     // Ensure even length
-    if (hexStr.length() % 2 != 0)
-        throw std::invalid_argument("Invalid hex string length");
+    if (hexStr.length() % 2 != 0) throw std::invalid_argument("Invalid hex string length");
 
     // Validate hex characters
     for (char c : hexStr)
@@ -90,8 +88,7 @@ std::string ByteVector::ToHexString(const ByteSpan& span)
 
 ByteVector ByteVector::FromHexString(const std::string& hex)
 {
-    if (hex.size() % 2 != 0)
-        throw std::invalid_argument("Hex string must have an even number of characters");
+    if (hex.size() % 2 != 0) throw std::invalid_argument("Hex string must have an even number of characters");
 
     ByteVector result(hex.size() / 2);
 
@@ -131,13 +128,7 @@ size_t ByteVector::GetVarSize() const
     return extensions::IntegerExtensions::GetVarSize(static_cast<uint64_t>(data_.size())) + data_.size();
 }
 
-std::string ByteVector::ToBase64String() const
-{
-    return extensions::Base64::Encode(AsSpan());
-}
+std::string ByteVector::ToBase64String() const { return extensions::Base64::Encode(AsSpan()); }
 
-ByteVector ByteVector::FromBase64String(const std::string& base64)
-{
-    return extensions::Base64::Decode(base64);
-}
+ByteVector ByteVector::FromBase64String(const std::string& base64) { return extensions::Base64::Decode(base64); }
 }  // namespace neo::io

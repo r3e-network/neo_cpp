@@ -6,6 +6,7 @@
 #include <neo/smartcontract/native/neo_token_gas.h>
 #include <neo/smartcontract/native/neo_token_transfer.h>
 #include <neo/vm/stack_item.h>
+
 #include <sstream>
 #include <stdexcept>
 
@@ -15,8 +16,7 @@ io::Fixed8 NeoTokenTransfer::GetTotalSupply(const NeoToken& token, std::shared_p
 {
     persistence::StorageKey key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::TotalSupply));
     auto item = snapshot->TryGet(key);
-    if (!item)
-        return io::Fixed8(static_cast<int64_t>(0));
+    if (!item) return io::Fixed8(static_cast<int64_t>(0));
 
     std::istringstream stream(
         std::string(reinterpret_cast<const char*>(item->GetValue().Data()), item->GetValue().Size()));
@@ -29,8 +29,7 @@ bool NeoTokenTransfer::Transfer(const NeoToken& token, ApplicationEngine& engine
                                 const io::UInt160& to, const io::Fixed8& amount)
 {
     // Check if the amount is valid
-    if (amount.Value() <= 0)
-        return false;
+    if (amount.Value() <= 0) return false;
 
     // Check if the from account is the null account (for minting)
     if (from != io::UInt160())
@@ -39,8 +38,7 @@ bool NeoTokenTransfer::Transfer(const NeoToken& token, ApplicationEngine& engine
         auto fromState = NeoTokenAccount::GetAccountState(token, snapshot, from);
 
         // Check if the from account has enough balance
-        if (fromState.balance < amount.Value())
-            return false;
+        if (fromState.balance < amount.Value()) return false;
 
         // Update the from account state
         fromState.balance -= amount.Value();
@@ -147,8 +145,7 @@ std::shared_ptr<vm::StackItem> NeoTokenTransfer::OnTotalSupply(const NeoToken& t
 std::shared_ptr<vm::StackItem> NeoTokenTransfer::OnTransfer(const NeoToken& token, ApplicationEngine& engine,
                                                             const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() != 3)
-        throw std::runtime_error("The argument count is incorrect");
+    if (args.size() != 3) throw std::runtime_error("The argument count is incorrect");
 
     auto fromItem = args[0];
     auto toItem = args[1];
@@ -158,8 +155,7 @@ std::shared_ptr<vm::StackItem> NeoTokenTransfer::OnTransfer(const NeoToken& toke
     if (!fromItem->IsNull())
     {
         auto fromBytes = fromItem->GetByteArray();
-        if (fromBytes.Size() != 20)
-            throw std::runtime_error("The argument 'from' is invalid");
+        if (fromBytes.Size() != 20) throw std::runtime_error("The argument 'from' is invalid");
 
         std::memcpy(from.Data(), fromBytes.Data(), 20);
     }
@@ -168,8 +164,7 @@ std::shared_ptr<vm::StackItem> NeoTokenTransfer::OnTransfer(const NeoToken& toke
     if (!toItem->IsNull())
     {
         auto toBytes = toItem->GetByteArray();
-        if (toBytes.Size() != 20)
-            throw std::runtime_error("The argument 'to' is invalid");
+        if (toBytes.Size() != 20) throw std::runtime_error("The argument 'to' is invalid");
 
         std::memcpy(to.Data(), toBytes.Data(), 20);
     }
@@ -177,12 +172,10 @@ std::shared_ptr<vm::StackItem> NeoTokenTransfer::OnTransfer(const NeoToken& toke
     io::Fixed8 amount(amountItem->GetInteger());
 
     // Check if the amount is valid
-    if (amount.Value() <= 0)
-        throw std::runtime_error("The amount must be a positive number");
+    if (amount.Value() <= 0) throw std::runtime_error("The amount must be a positive number");
 
     // Check witness
-    if (from != io::UInt160() && !engine.CheckWitness(from))
-        throw std::runtime_error("No authorization");
+    if (from != io::UInt160() && !engine.CheckWitness(from)) throw std::runtime_error("No authorization");
 
     // Distribute GAS before transfer
     if (from != io::UInt160())

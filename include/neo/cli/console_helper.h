@@ -10,7 +10,7 @@ namespace neo::cli
  */
 class ConsoleHelper
 {
-  public:
+   public:
     /**
      * @brief Print an informational message
      * @param message The message to print
@@ -65,7 +65,7 @@ class ConsoleHelper
      */
     static void ResetColor();
 
-  private:
+   private:
     // Console color codes
     static constexpr int COLOR_DEFAULT = 0;
     static constexpr int COLOR_RED = 1;

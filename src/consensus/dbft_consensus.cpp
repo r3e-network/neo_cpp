@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <map>
 #include <neo/common/safe_math.h>
 #include <neo/consensus/consensus_message.h>
 #include <neo/consensus/dbft_consensus.h>
@@ -9,6 +7,9 @@
 #include <neo/ledger/block.h>
 #include <neo/vm/opcode.h>
 #include <neo/vm/script_builder.h>
+
+#include <algorithm>
+#include <map>
 #include <random>
 
 namespace neo::consensus
@@ -16,8 +17,13 @@ namespace neo::consensus
 DbftConsensus::DbftConsensus(const ConsensusConfig& config, const io::UInt160& node_id,
                              const std::vector<io::UInt160>& validators, std::shared_ptr<ledger::MemoryPool> mempool,
                              std::shared_ptr<ledger::Blockchain> blockchain)
-    : config_(config), node_id_(node_id), validators_(validators), mempool_(mempool), blockchain_(blockchain),
-      state_(std::make_shared<ConsensusState>()), logger_(core::Logger::GetInstance())
+    : config_(config),
+      node_id_(node_id),
+      validators_(validators),
+      mempool_(mempool),
+      blockchain_(blockchain),
+      state_(std::make_shared<ConsensusState>()),
+      logger_(core::Logger::GetInstance())
 {
     // Validate inputs
     if (validators_.empty())
@@ -55,10 +61,7 @@ DbftConsensus::DbftConsensus(const ConsensusConfig& config, const io::UInt160& n
     LOG_INFO("dBFT consensus initialized with {} validators, node index: {}", validators_.size(), validator_index_);
 }
 
-DbftConsensus::~DbftConsensus()
-{
-    Stop();
-}
+DbftConsensus::~DbftConsensus() { Stop(); }
 
 void DbftConsensus::Start()
 {
@@ -162,10 +165,7 @@ bool DbftConsensus::AddTransaction(const network::p2p::payloads::Neo3Transaction
     return mempool_->TryAdd(tx);
 }
 
-const ConsensusState& DbftConsensus::GetState() const
-{
-    return *state_;
-}
+const ConsensusState& DbftConsensus::GetState() const { return *state_; }
 
 void DbftConsensus::ConsensusLoop()
 {
@@ -267,10 +267,7 @@ void DbftConsensus::StartNewRound()
     }
 }
 
-bool DbftConsensus::IsPrimary() const
-{
-    return validator_index_ == GetPrimaryIndex(state_->GetViewNumber());
-}
+bool DbftConsensus::IsPrimary() const { return validator_index_ == GetPrimaryIndex(state_->GetViewNumber()); }
 
 uint32_t DbftConsensus::GetPrimaryIndex(uint32_t view_number) const
 {
@@ -603,30 +600,15 @@ void DbftConsensus::ProcessViewChange(const ViewChangeMessage& message)
     }
 }
 
-bool DbftConsensus::HasEnoughPrepareResponses() const
-{
-    return state_->GetPrepareResponseCount() >= 2 * GetF() + 1;
-}
+bool DbftConsensus::HasEnoughPrepareResponses() const { return state_->GetPrepareResponseCount() >= 2 * GetF() + 1; }
 
-bool DbftConsensus::HasEnoughCommits() const
-{
-    return state_->GetCommitCount() >= 2 * GetF() + 1;
-}
+bool DbftConsensus::HasEnoughCommits() const { return state_->GetCommitCount() >= 2 * GetF() + 1; }
 
-bool DbftConsensus::HasEnoughViewChanges() const
-{
-    return state_->GetViewChangeCount() >= GetF() + 1;
-}
+bool DbftConsensus::HasEnoughViewChanges() const { return state_->GetViewChangeCount() >= GetF() + 1; }
 
-uint32_t DbftConsensus::GetF() const
-{
-    return (validators_.size() - 1) / 3;
-}
+uint32_t DbftConsensus::GetF() const { return (validators_.size() - 1) / 3; }
 
-uint32_t DbftConsensus::GetM() const
-{
-    return 2 * GetF() + 1;
-}
+uint32_t DbftConsensus::GetM() const { return 2 * GetF() + 1; }
 
 std::shared_ptr<ledger::Block> DbftConsensus::CreateBlock()
 {
@@ -637,7 +619,8 @@ std::shared_ptr<ledger::Block> DbftConsensus::CreateBlock()
 
         // Set basic block properties
         block->SetIndex(state_->GetBlockIndex());
-        auto timestamp_ms = std::chrono::duration_cast<std::chrono::milliseconds>(state_->GetTimestamp().time_since_epoch()).count();
+        auto timestamp_ms =
+            std::chrono::duration_cast<std::chrono::milliseconds>(state_->GetTimestamp().time_since_epoch()).count();
         block->SetTimestamp(static_cast<uint64_t>(timestamp_ms));
         block->SetNonce(state_->GetNonce());
 
@@ -989,10 +972,7 @@ std::optional<cryptography::ecc::ECPoint> DbftConsensus::GetValidatorPublicKey(c
     }
 }
 
-std::shared_ptr<ledger::MemoryPool> DbftConsensus::GetMemoryPool()
-{
-    return mempool_;
-}
+std::shared_ptr<ledger::MemoryPool> DbftConsensus::GetMemoryPool() { return mempool_; }
 
 std::shared_ptr<ledger::Block> DbftConsensus::GetPreviousBlock()
 {

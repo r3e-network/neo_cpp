@@ -9,7 +9,7 @@ namespace neo::smartcontract::native
  */
 class NeoTokenPersistence
 {
-  public:
+   public:
     /**
      * @brief Initializes the contract when it's first deployed.
      * @param token The NEO token.

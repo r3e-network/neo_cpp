@@ -5,6 +5,7 @@
 #include <neo/vm/primitive_items.h>
 #include <neo/vm/special_items.h>
 #include <neo/vm/stack_item.h>
+
 #include <stdexcept>
 
 namespace neo::vm
@@ -37,8 +38,7 @@ void JumpTableConstants::PUSHINT128(ExecutionEngine& engine, const Instruction& 
 {
     // Implement 128-bit integer support
     auto data = instruction.GetData();
-    if (data.Size() != 16)
-        throw std::runtime_error("PUSHINT128 requires exactly 16 bytes");
+    if (data.Size() != 16) throw std::runtime_error("PUSHINT128 requires exactly 16 bytes");
 
     // Complete 128-bit BigInteger support implementation
     try
@@ -64,8 +64,7 @@ void JumpTableConstants::PUSHINT256(ExecutionEngine& engine, const Instruction& 
 {
     // Implement 256-bit integer support
     auto data = instruction.GetData();
-    if (data.Size() != 32)
-        throw std::runtime_error("PUSHINT256 requires exactly 32 bytes");
+    if (data.Size() != 32) throw std::runtime_error("PUSHINT256 requires exactly 32 bytes");
 
     // Complete 256-bit BigInteger support implementation
     try

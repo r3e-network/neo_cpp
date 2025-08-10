@@ -114,17 +114,13 @@ void JumpTable::CALL_L(ExecutionEngine& engine, const Instruction& instruction)
 void JumpTable::CALLA(ExecutionEngine& engine, const Instruction& /* instruction */)
 {
     auto item = engine.Pop();
-    if (item->GetType() != StackItemType::Pointer)
-        throw InvalidOperationException("Item is not a pointer");
+    if (item->GetType() != StackItemType::Pointer) throw InvalidOperationException("Item is not a pointer");
 
     auto pointerItem = std::dynamic_pointer_cast<PointerItem>(item);
     engine.ExecuteCall(pointerItem->GetPosition());
 }
 
-void JumpTable::RET(ExecutionEngine& engine, const Instruction& /* instruction */)
-{
-    engine.ExecuteRet();
-}
+void JumpTable::RET(ExecutionEngine& engine, const Instruction& /* instruction */) { engine.ExecuteRet(); }
 
 void JumpTable::SYSCALL(ExecutionEngine& engine, const Instruction& instruction)
 {
@@ -144,122 +140,106 @@ void JumpTableControlJump::JMP_L(ExecutionEngine& engine, const Instruction& ins
 
 void JumpTableControlJump::JMPIF(ExecutionEngine& engine, const Instruction& instruction)
 {
-    if (engine.Pop()->GetBoolean())
-        ExecuteJumpOffset(engine, instruction.TokenI8());
+    if (engine.Pop()->GetBoolean()) ExecuteJumpOffset(engine, instruction.TokenI8());
 }
 
 void JumpTableControlJump::JMPIF_L(ExecutionEngine& engine, const Instruction& instruction)
 {
-    if (engine.Pop()->GetBoolean())
-        ExecuteJumpOffset(engine, instruction.TokenI32());
+    if (engine.Pop()->GetBoolean()) ExecuteJumpOffset(engine, instruction.TokenI32());
 }
 
 void JumpTableControlJump::JMPIFNOT(ExecutionEngine& engine, const Instruction& instruction)
 {
-    if (!engine.Pop()->GetBoolean())
-        ExecuteJumpOffset(engine, instruction.TokenI8());
+    if (!engine.Pop()->GetBoolean()) ExecuteJumpOffset(engine, instruction.TokenI8());
 }
 
 void JumpTableControlJump::JMPIFNOT_L(ExecutionEngine& engine, const Instruction& instruction)
 {
-    if (!engine.Pop()->GetBoolean())
-        ExecuteJumpOffset(engine, instruction.TokenI32());
+    if (!engine.Pop()->GetBoolean()) ExecuteJumpOffset(engine, instruction.TokenI32());
 }
 
 void JumpTableControlJump::JMPEQ(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 == x2)
-        ExecuteJumpOffset(engine, instruction.TokenI8());
+    if (x1 == x2) ExecuteJumpOffset(engine, instruction.TokenI8());
 }
 
 void JumpTableControlJump::JMPEQ_L(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 == x2)
-        ExecuteJumpOffset(engine, instruction.TokenI32());
+    if (x1 == x2) ExecuteJumpOffset(engine, instruction.TokenI32());
 }
 
 void JumpTableControlJump::JMPNE(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 != x2)
-        ExecuteJumpOffset(engine, instruction.TokenI8());
+    if (x1 != x2) ExecuteJumpOffset(engine, instruction.TokenI8());
 }
 
 void JumpTableControlJump::JMPNE_L(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 != x2)
-        ExecuteJumpOffset(engine, instruction.TokenI32());
+    if (x1 != x2) ExecuteJumpOffset(engine, instruction.TokenI32());
 }
 
 void JumpTableControlJump::JMPGT(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 > x2)
-        ExecuteJumpOffset(engine, instruction.TokenI8());
+    if (x1 > x2) ExecuteJumpOffset(engine, instruction.TokenI8());
 }
 
 void JumpTableControlJump::JMPGT_L(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 > x2)
-        ExecuteJumpOffset(engine, instruction.TokenI32());
+    if (x1 > x2) ExecuteJumpOffset(engine, instruction.TokenI32());
 }
 
 void JumpTableControlJump::JMPGE(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 >= x2)
-        ExecuteJumpOffset(engine, instruction.TokenI8());
+    if (x1 >= x2) ExecuteJumpOffset(engine, instruction.TokenI8());
 }
 
 void JumpTableControlJump::JMPGE_L(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 >= x2)
-        ExecuteJumpOffset(engine, instruction.TokenI32());
+    if (x1 >= x2) ExecuteJumpOffset(engine, instruction.TokenI32());
 }
 
 void JumpTableControlJump::JMPLT(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 < x2)
-        ExecuteJumpOffset(engine, instruction.TokenI8());
+    if (x1 < x2) ExecuteJumpOffset(engine, instruction.TokenI8());
 }
 
 void JumpTableControlJump::JMPLT_L(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 < x2)
-        ExecuteJumpOffset(engine, instruction.TokenI32());
+    if (x1 < x2) ExecuteJumpOffset(engine, instruction.TokenI32());
 }
 
 void JumpTableControlJump::JMPLE(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 <= x2)
-        ExecuteJumpOffset(engine, instruction.TokenI8());
+    if (x1 <= x2) ExecuteJumpOffset(engine, instruction.TokenI8());
 }
 
 void JumpTableControlJump::JMPLE_L(ExecutionEngine& engine, const Instruction& instruction)
 {
     auto x2 = engine.Pop()->GetInteger();
     auto x1 = engine.Pop()->GetInteger();
-    if (x1 <= x2)
-        ExecuteJumpOffset(engine, instruction.TokenI32());
+    if (x1 <= x2) ExecuteJumpOffset(engine, instruction.TokenI32());
 }
 
 void JumpTableControlJump::CALL(ExecutionEngine& engine, const Instruction& instruction)
@@ -281,17 +261,13 @@ void JumpTableControlJump::CALL_L(ExecutionEngine& engine, const Instruction& in
 void JumpTableControlJump::CALLA(ExecutionEngine& engine, const Instruction& /* instruction */)
 {
     auto item = engine.Pop();
-    if (item->GetType() != StackItemType::Pointer)
-        throw InvalidOperationException("Item is not a pointer");
+    if (item->GetType() != StackItemType::Pointer) throw InvalidOperationException("Item is not a pointer");
 
     auto pointerItem = std::dynamic_pointer_cast<PointerItem>(item);
     engine.ExecuteCall(pointerItem->GetPosition());
 }
 
-void JumpTableControlJump::RET(ExecutionEngine& engine, const Instruction& /* instruction */)
-{
-    engine.ExecuteRet();
-}
+void JumpTableControlJump::RET(ExecutionEngine& engine, const Instruction& /* instruction */) { engine.ExecuteRet(); }
 
 void JumpTableControlJump::SYSCALL(ExecutionEngine& engine, const Instruction& instruction)
 {

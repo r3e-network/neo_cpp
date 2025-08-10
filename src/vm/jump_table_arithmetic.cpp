@@ -1,4 +1,3 @@
-#include <cmath>
 #include <neo/vm/compound_items.h>
 #include <neo/vm/exceptions.h>
 #include <neo/vm/execution_engine.h>
@@ -9,6 +8,8 @@
 #include <neo/vm/primitive_items.h>
 #include <neo/vm/special_items.h>
 #include <neo/vm/stack_item.h>
+
+#include <cmath>
 
 namespace neo::vm
 {

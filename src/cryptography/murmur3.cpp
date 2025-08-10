@@ -1,5 +1,6 @@
-#include <cstring>
 #include <neo/cryptography/murmur3.h>
+
+#include <cstring>
 
 namespace neo::cryptography
 {
@@ -59,10 +60,7 @@ uint32_t MurmurHash3::Hash32(const uint8_t* data, size_t len, uint32_t seed)
     return hash;
 }
 
-uint32_t MurmurHash3::Hash32(const io::ByteSpan& data, uint32_t seed)
-{
-    return Hash32(data.Data(), data.Size(), seed);
-}
+uint32_t MurmurHash3::Hash32(const io::ByteSpan& data, uint32_t seed) { return Hash32(data.Data(), data.Size(), seed); }
 
 uint32_t MurmurHash3::Hash32(const io::ByteVector& data, uint32_t seed)
 {

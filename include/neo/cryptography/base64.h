@@ -2,6 +2,7 @@
 
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
+
 #include <string>
 
 namespace neo::cryptography
@@ -11,7 +12,7 @@ namespace neo::cryptography
  */
 class Base64
 {
-  public:
+   public:
     /**
      * @brief Encodes data to Base64.
      * @param data The data to encode.

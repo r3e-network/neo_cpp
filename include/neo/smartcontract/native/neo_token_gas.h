@@ -9,7 +9,7 @@ namespace neo::smartcontract::native
  */
 class NeoTokenGas
 {
-  public:
+   public:
     /**
      * @brief Gets the gas per block.
      * @param token The NEO token.

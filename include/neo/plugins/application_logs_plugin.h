@@ -1,12 +1,13 @@
 #pragma once
 
-#include <memory>
-#include <mutex>
 #include <neo/io/uint256.h>
 #include <neo/ledger/block.h>
 #include <neo/plugins/plugin_base.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/vm/vm_state.h>
+
+#include <memory>
+#include <mutex>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -59,7 +60,7 @@ struct ApplicationLog
  */
 class ApplicationLogsPlugin : public PluginBase
 {
-  public:
+   public:
     /**
      * @brief Constructs an ApplicationLogsPlugin.
      */
@@ -72,7 +73,7 @@ class ApplicationLogsPlugin : public PluginBase
      */
     std::shared_ptr<ApplicationLog> GetApplicationLog(const io::UInt256& txHash) const;
 
-  protected:
+   protected:
     /**
      * @brief Initializes the plugin.
      * @param settings The settings.
@@ -92,7 +93,7 @@ class ApplicationLogsPlugin : public PluginBase
      */
     bool OnStop() override;
 
-  private:
+   private:
     std::string logPath_;
     std::unordered_map<io::UInt256, std::shared_ptr<ApplicationLog>> logs_;
     mutable std::mutex mutex_;

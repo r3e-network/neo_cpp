@@ -140,15 +140,9 @@ void CommitMessage::Deserialize(io::BinaryReader& reader)
 // RecoveryRequestMessage implementation
 RecoveryRequestMessage::RecoveryRequestMessage() : ConsensusMessage(ConsensusMessageType::RecoveryRequest) {}
 
-void RecoveryRequestMessage::Serialize(io::BinaryWriter& writer) const
-{
-    ConsensusMessage::Serialize(writer);
-}
+void RecoveryRequestMessage::Serialize(io::BinaryWriter& writer) const { ConsensusMessage::Serialize(writer); }
 
-void RecoveryRequestMessage::Deserialize(io::BinaryReader& reader)
-{
-    ConsensusMessage::Deserialize(reader);
-}
+void RecoveryRequestMessage::Deserialize(io::BinaryReader& reader) { ConsensusMessage::Deserialize(reader); }
 
 // RecoveryMessage implementation is in recovery_message.cpp
 }  // namespace neo::consensus

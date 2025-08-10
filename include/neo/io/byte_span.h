@@ -13,7 +13,7 @@ namespace neo::io
  */
 class ByteSpan
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty ByteSpan.
      */
@@ -39,74 +39,50 @@ class ByteSpan
      * @brief Gets the size of the ByteSpan.
      * @return The size of the ByteSpan.
      */
-    size_t Size() const noexcept
-    {
-        return size_;
-    }
+    size_t Size() const noexcept { return size_; }
 
     /**
      * @brief Gets the size of the ByteSpan (STL compatibility).
      * @return The size of the ByteSpan.
      */
-    size_t size() const noexcept
-    {
-        return size_;
-    }
+    size_t size() const noexcept { return size_; }
 
     /**
      * @brief Checks if the ByteSpan is empty.
      * @return True if the ByteSpan is empty, false otherwise.
      */
-    bool IsEmpty() const noexcept
-    {
-        return size_ == 0;
-    }
+    bool IsEmpty() const noexcept { return size_ == 0; }
 
     /**
      * @brief Checks if the ByteSpan is empty (STL compatibility).
      * @return True if the ByteSpan is empty, false otherwise.
      */
-    bool empty() const noexcept
-    {
-        return size_ == 0;
-    }
+    bool empty() const noexcept { return size_ == 0; }
 
     /**
      * @brief Gets a pointer to the data.
      * @return Pointer to the data.
      */
-    const uint8_t* Data() const noexcept
-    {
-        return data_;
-    }
+    const uint8_t* Data() const noexcept { return data_; }
 
     /**
      * @brief Gets the byte at the specified index.
      * @param index The index.
      * @return The byte at the specified index.
      */
-    uint8_t operator[](size_t index) const
-    {
-        return data_[index];
-    }
+    uint8_t operator[](size_t index) const { return data_[index]; }
 
     /**
      * @brief Gets an iterator to the beginning of the ByteSpan.
      * @return Iterator to the beginning.
      */
-    const uint8_t* begin() const noexcept
-    {
-        return data_;
-    }
+    const uint8_t* begin() const noexcept { return data_; }
 
     /**
      * @brief Gets an iterator to the end of the ByteSpan.
      * @return Iterator to the end.
      */
-    const uint8_t* end() const noexcept
-    {
-        return data_ + size_;
-    }
+    const uint8_t* end() const noexcept { return data_ + size_; }
 
     /**
      * @brief Gets a subspan of this ByteSpan.
@@ -116,11 +92,9 @@ class ByteSpan
      */
     ByteSpan subspan(size_t offset, size_t count) const
     {
-        if (offset > size_)
-            throw std::out_of_range("Offset out of range");
+        if (offset > size_) throw std::out_of_range("Offset out of range");
 
-        if (offset + count > size_)
-            throw std::out_of_range("Count out of range");
+        if (offset + count > size_) throw std::out_of_range("Count out of range");
 
         return ByteSpan(data_ + offset, count);
     }
@@ -132,8 +106,7 @@ class ByteSpan
      */
     ByteSpan subspan(size_t offset) const
     {
-        if (offset > size_)
-            throw std::out_of_range("Offset out of range");
+        if (offset > size_) throw std::out_of_range("Offset out of range");
 
         return ByteSpan(data_ + offset, size_ - offset);
     }
@@ -146,8 +119,7 @@ class ByteSpan
      */
     ByteSpan Slice(size_t start, size_t length) const
     {
-        if (start + length > size_)
-            throw std::out_of_range("Slice out of range");
+        if (start + length > size_) throw std::out_of_range("Slice out of range");
         return ByteSpan(data_ + start, length);
     }
 
@@ -170,8 +142,7 @@ class ByteSpan
      */
     bool operator==(const ByteSpan& other) const
     {
-        if (size_ != other.size_)
-            return false;
+        if (size_ != other.size_) return false;
         return std::memcmp(data_, other.data_, size_) == 0;
     }
 
@@ -180,12 +151,9 @@ class ByteSpan
      * @param other The other ByteSpan.
      * @return True if the ByteSpans are not equal, false otherwise.
      */
-    bool operator!=(const ByteSpan& other) const
-    {
-        return !(*this == other);
-    }
+    bool operator!=(const ByteSpan& other) const { return !(*this == other); }
 
-  private:
+   private:
     const uint8_t* data_;
     size_t size_;
 };

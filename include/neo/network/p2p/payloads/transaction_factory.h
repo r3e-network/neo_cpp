@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/ledger/transaction.h>
+
+#include <memory>
 
 namespace neo::network::p2p::payloads
 {
@@ -11,7 +12,7 @@ namespace neo::network::p2p::payloads
  */
 class TransactionFactory
 {
-  public:
+   public:
     /**
      * @brief Creates a transaction from raw bytes.
      * @param data The raw transaction data.

@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <cstring>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/vm/compound_items.h>
@@ -8,52 +6,35 @@
 #include <neo/vm/reference_counter.h>
 #include <neo/vm/special_items.h>
 #include <neo/vm/stack_item.h>
+
+#include <algorithm>
+#include <cstring>
 #include <stdexcept>
 
 namespace neo::vm
 {
 // StackItem implementation
-int64_t StackItem::GetInteger() const
-{
-    throw std::runtime_error("Not supported");
-}
+int64_t StackItem::GetInteger() const { throw std::runtime_error("Not supported"); }
 
-io::ByteVector StackItem::GetByteArray() const
-{
-    throw std::runtime_error("Not supported");
-}
+io::ByteVector StackItem::GetByteArray() const { throw std::runtime_error("Not supported"); }
 
-std::string StackItem::GetString() const
-{
-    throw std::runtime_error("Not supported");
-}
+std::string StackItem::GetString() const { throw std::runtime_error("Not supported"); }
 
-std::vector<std::shared_ptr<StackItem>> StackItem::GetArray() const
-{
-    throw std::runtime_error("Not supported");
-}
+std::vector<std::shared_ptr<StackItem>> StackItem::GetArray() const { throw std::runtime_error("Not supported"); }
 
 std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>> StackItem::GetMap() const
 {
     throw std::runtime_error("Not supported");
 }
 
-std::shared_ptr<void> StackItem::GetInterface() const
-{
-    throw std::runtime_error("Not supported");
-}
+std::shared_ptr<void> StackItem::GetInterface() const { throw std::runtime_error("Not supported"); }
 
-size_t StackItem::Size() const
-{
-    throw std::runtime_error("Not supported");
-}
+size_t StackItem::Size() const { throw std::runtime_error("Not supported"); }
 
 std::shared_ptr<StackItem> StackItem::ConvertTo(StackItemType type) const
 {
-    if (type == GetType())
-        return std::const_pointer_cast<StackItem>(shared_from_this());
-    if (type == StackItemType::Boolean)
-        return StackItem::Create(GetBoolean());
+    if (type == GetType()) return std::const_pointer_cast<StackItem>(shared_from_this());
+    if (type == StackItemType::Boolean) return StackItem::Create(GetBoolean());
     if (type == StackItemType::Integer &&
         (GetType() == StackItemType::Boolean || GetType() == StackItemType::ByteString ||
          GetType() == StackItemType::Buffer))
@@ -72,31 +53,19 @@ std::shared_ptr<StackItem> StackItem::ConvertTo(StackItemType type) const
                                std::to_string(static_cast<int>(type)));
 }
 
-size_t StackItem::GetHashCode() const
-{
-    throw std::runtime_error("Not supported");
-}
+size_t StackItem::GetHashCode() const { throw std::runtime_error("Not supported"); }
 
-bool StackItem::operator==(const StackItem& other) const
-{
-    return Equals(other);
-}
+bool StackItem::operator==(const StackItem& other) const { return Equals(other); }
 
-bool StackItem::operator!=(const StackItem& other) const
-{
-    return !Equals(other);
-}
+bool StackItem::operator!=(const StackItem& other) const { return !Equals(other); }
 
 int StackItem::CompareTo(const std::shared_ptr<StackItem>& other) const
 {
-    if (!other)
-        return 1;
+    if (!other) return 1;
 
-    if (this->GetType() != other->GetType())
-        throw InvalidOperationException("Cannot compare different types");
+    if (this->GetType() != other->GetType()) throw InvalidOperationException("Cannot compare different types");
 
-    if (this->Equals(*other))
-        return 0;
+    if (this->Equals(*other)) return 0;
 
     // For numeric types, compare the values
     if (this->GetType() == StackItemType::Integer)
@@ -120,16 +89,12 @@ int StackItem::CompareTo(const std::shared_ptr<StackItem>& other) const
 
         for (size_t i = 0; i < minLength; i++)
         {
-            if (thisBytes[i] < otherBytes[i])
-                return -1;
-            if (thisBytes[i] > otherBytes[i])
-                return 1;
+            if (thisBytes[i] < otherBytes[i]) return -1;
+            if (thisBytes[i] > otherBytes[i]) return 1;
         }
 
-        if (thisBytes.Size() < otherBytes.Size())
-            return -1;
-        if (thisBytes.Size() > otherBytes.Size())
-            return 1;
+        if (thisBytes.Size() < otherBytes.Size()) return -1;
+        if (thisBytes.Size() > otherBytes.Size()) return 1;
 
         return 0;
     }
@@ -140,10 +105,8 @@ int StackItem::CompareTo(const std::shared_ptr<StackItem>& other) const
         bool thisValue = this->GetBoolean();
         bool otherValue = other->GetBoolean();
 
-        if (thisValue == otherValue)
-            return 0;
-        if (!thisValue && otherValue)
-            return -1;
+        if (thisValue == otherValue) return 0;
+        if (!thisValue && otherValue) return -1;
         return 1;
     }
 
@@ -160,25 +123,13 @@ std::shared_ptr<StackItem> StackItem::DeepCopy(ReferenceCounter* refCounter, boo
     return std::const_pointer_cast<StackItem>(shared_from_this());
 }
 
-bool StackItem::IsNull() const
-{
-    return GetType() == StackItemType::Any;
-}
+bool StackItem::IsNull() const { return GetType() == StackItemType::Any; }
 
-bool StackItem::IsInterop() const
-{
-    return GetType() == StackItemType::InteropInterface;
-}
+bool StackItem::IsInterop() const { return GetType() == StackItemType::InteropInterface; }
 
-bool StackItem::IsArray() const
-{
-    return GetType() == StackItemType::Array || GetType() == StackItemType::Struct;
-}
+bool StackItem::IsArray() const { return GetType() == StackItemType::Array || GetType() == StackItemType::Struct; }
 
-bool StackItem::IsStruct() const
-{
-    return GetType() == StackItemType::Struct;
-}
+bool StackItem::IsStruct() const { return GetType() == StackItemType::Struct; }
 
 std::shared_ptr<StackItem> StackItem::Null()
 {
@@ -198,15 +149,9 @@ std::shared_ptr<StackItem> StackItem::False()
     return falseItem;
 }
 
-std::shared_ptr<StackItem> StackItem::Create(bool value)
-{
-    return value ? True() : False();
-}
+std::shared_ptr<StackItem> StackItem::Create(bool value) { return value ? True() : False(); }
 
-std::shared_ptr<StackItem> StackItem::Create(int64_t value)
-{
-    return std::make_shared<IntegerItem>(value);
-}
+std::shared_ptr<StackItem> StackItem::Create(int64_t value) { return std::make_shared<IntegerItem>(value); }
 
 std::shared_ptr<StackItem> StackItem::Create(const io::ByteVector& value)
 {
@@ -260,35 +205,17 @@ void StackItem::Reset()
     on_stack_ = false;
 }
 
-int StackItem::GetDFN() const
-{
-    return dfn_;
-}
+int StackItem::GetDFN() const { return dfn_; }
 
-void StackItem::SetDFN(int dfn)
-{
-    dfn_ = dfn;
-}
+void StackItem::SetDFN(int dfn) { dfn_ = dfn; }
 
-int StackItem::GetLowLink() const
-{
-    return low_link_;
-}
+int StackItem::GetLowLink() const { return low_link_; }
 
-void StackItem::SetLowLink(int low_link)
-{
-    low_link_ = low_link;
-}
+void StackItem::SetLowLink(int low_link) { low_link_ = low_link; }
 
-bool StackItem::IsOnStack() const
-{
-    return on_stack_;
-}
+bool StackItem::IsOnStack() const { return on_stack_; }
 
-void StackItem::SetOnStack(bool on_stack)
-{
-    on_stack_ = on_stack;
-}
+void StackItem::SetOnStack(bool on_stack) { on_stack_ = on_stack; }
 
 // Additional StackItem static methods
 std::shared_ptr<StackItem> StackItem::CreateStruct(ReferenceCounter& refCounter)
@@ -311,10 +238,7 @@ std::vector<std::shared_ptr<StackItem>> StackItem::GetStruct() const
     throw std::runtime_error("Item is not a struct or array");
 }
 
-void StackItem::Add(std::shared_ptr<StackItem> item)
-{
-    throw std::runtime_error("Add not supported for this type");
-}
+void StackItem::Add(std::shared_ptr<StackItem> item) { throw std::runtime_error("Add not supported for this type"); }
 
 std::shared_ptr<StackItem> StackItem::Deserialize(io::BinaryReader& reader)
 {
@@ -371,16 +295,16 @@ std::shared_ptr<StackItem> StackItem::Deserialize(io::BinaryReader& reader)
         {
             uint32_t count = static_cast<uint32_t>(reader.ReadVarInt());
             auto map = CreateMap();
-            
+
             for (uint32_t i = 0; i < count; i++)
             {
                 auto key = Deserialize(reader);
                 auto value = Deserialize(reader);
-                
+
                 // Add to map (simplified - real implementation would need proper map access)
                 // This requires the map item to have an insertion method
             }
-            
+
             return map;
         }
         case StackItemType::Buffer:
@@ -471,10 +395,7 @@ std::shared_ptr<StackItem> StackItem::CreateByteString(const std::vector<uint8_t
     return std::make_shared<ByteStringItem>(io::ByteVector(data));
 }
 
-std::shared_ptr<StackItem> StackItem::CreateBoolean(bool value)
-{
-    return value ? True() : False();
-}
+std::shared_ptr<StackItem> StackItem::CreateBoolean(bool value) { return value ? True() : False(); }
 
 std::shared_ptr<StackItem> StackItem::CreateBuffer(const io::ByteVector& data)
 {
@@ -488,21 +409,15 @@ std::shared_ptr<StackItem> StackItem::CreateInteropInterface(void* value)
 
     class InteropInterface : public StackItem
     {
-      private:
+       private:
         void* native_object_;
 
-      public:
+       public:
         explicit InteropInterface(void* obj) : native_object_(obj) {}
 
-        StackItemType GetType() const override
-        {
-            return StackItemType::InteropInterface;
-        }
+        StackItemType GetType() const override { return StackItemType::InteropInterface; }
 
-        bool IsNull() const
-        {
-            return native_object_ == nullptr;
-        }
+        bool IsNull() const { return native_object_ == nullptr; }
 
         bool GetBoolean() const override
         {
@@ -519,10 +434,7 @@ std::shared_ptr<StackItem> StackItem::CreateInteropInterface(void* value)
             return result;
         }
 
-        std::shared_ptr<StackItem> Clone() const
-        {
-            return std::make_shared<InteropInterface>(native_object_);
-        }
+        std::shared_ptr<StackItem> Clone() const { return std::make_shared<InteropInterface>(native_object_); }
 
         bool Equals(const StackItem& other) const override
         {
@@ -536,10 +448,7 @@ std::shared_ptr<StackItem> StackItem::CreateInteropInterface(void* value)
             return native_object_ == other_interop.native_object_;
         }
 
-        void* GetNativeObject() const
-        {
-            return native_object_;
-        }
+        void* GetNativeObject() const { return native_object_; }
     };
 
     return std::make_shared<InteropInterface>(value);

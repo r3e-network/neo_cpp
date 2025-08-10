@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
@@ -9,6 +8,8 @@
 #include <neo/smartcontract/native/native_contract.h>
 #include <neo/smartcontract/native/oracle_request.h>
 #include <neo/vm/stack_item.h>
+
+#include <memory>
 #include <string>
 #include <tuple>
 #include <vector>
@@ -20,7 +21,7 @@ namespace neo::smartcontract::native
  */
 class OracleContract : public NativeContract
 {
-  public:
+   public:
     /**
      * @brief The contract ID.
      */
@@ -210,13 +211,13 @@ class OracleContract : public NativeContract
                            const std::string& filter, const io::UInt160& callback, const std::string& callbackMethod,
                            int64_t gasForResponse, const io::ByteVector& userData, const io::UInt256& originalTxid);
 
-  protected:
+   protected:
     /**
      * @brief Initializes the contract.
      */
     void Initialize() override;
 
-  private:
+   private:
     /**
      * @brief Handles the getPrice method.
      * @param engine The engine.

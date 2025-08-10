@@ -3,6 +3,7 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/ledger/transaction_attribute.h>
+
 #include <stdexcept>
 
 namespace neo::ledger
@@ -11,25 +12,13 @@ TransactionAttribute::TransactionAttribute() : usage_(Usage::ContractHash) {}
 
 TransactionAttribute::TransactionAttribute(Usage usage, const io::ByteVector& data) : usage_(usage), data_(data) {}
 
-TransactionAttribute::Usage TransactionAttribute::GetUsage() const
-{
-    return usage_;
-}
+TransactionAttribute::Usage TransactionAttribute::GetUsage() const { return usage_; }
 
-void TransactionAttribute::SetUsage(Usage usage)
-{
-    usage_ = usage;
-}
+void TransactionAttribute::SetUsage(Usage usage) { usage_ = usage; }
 
-const io::ByteVector& TransactionAttribute::GetData() const
-{
-    return data_;
-}
+const io::ByteVector& TransactionAttribute::GetData() const { return data_; }
 
-void TransactionAttribute::SetData(const io::ByteVector& data)
-{
-    data_ = data;
-}
+void TransactionAttribute::SetData(const io::ByteVector& data) { data_ = data; }
 
 void TransactionAttribute::Serialize(io::BinaryWriter& writer) const
 {
@@ -184,8 +173,5 @@ bool TransactionAttribute::operator==(const TransactionAttribute& other) const
     return usage_ == other.usage_ && data_ == other.data_;
 }
 
-bool TransactionAttribute::operator!=(const TransactionAttribute& other) const
-{
-    return !(*this == other);
-}
+bool TransactionAttribute::operator!=(const TransactionAttribute& other) const { return !(*this == other); }
 }  // namespace neo::ledger

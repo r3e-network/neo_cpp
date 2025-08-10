@@ -1,5 +1,6 @@
-#include <algorithm>
 #include <neo/persistence/memory_store.h>
+
+#include <algorithm>
 
 namespace neo::persistence
 {
@@ -17,8 +18,7 @@ std::optional<io::ByteVector> MemoryStore::TryGet(const io::ByteVector& key) con
     std::lock_guard<std::mutex> lock(mutex_);
 
     auto it = store_.find(key);
-    if (it == store_.end())
-        return std::nullopt;
+    if (it == store_.end()) return std::nullopt;
 
     return it->second;
 }
@@ -72,10 +72,7 @@ void MemoryStore::Delete(const io::ByteVector& key)
     store_.erase(key);
 }
 
-std::unique_ptr<IStoreSnapshot> MemoryStore::GetSnapshot()
-{
-    return std::make_unique<MemorySnapshot>(*this);
-}
+std::unique_ptr<IStoreSnapshot> MemoryStore::GetSnapshot() { return std::make_unique<MemorySnapshot>(*this); }
 
 std::vector<std::pair<io::ByteVector, io::ByteVector>> MemoryStore::Seek(const io::ByteVector& prefix,
                                                                          SeekDirection direction) const
@@ -105,18 +102,15 @@ MemorySnapshot::MemorySnapshot(MemoryStore& store) : store_(store)
 std::optional<io::ByteVector> MemorySnapshot::TryGet(const io::ByteVector& key) const
 {
     // Check if the key is in the deletions
-    if (deletions_.find(key) != deletions_.end())
-        return std::nullopt;
+    if (deletions_.find(key) != deletions_.end()) return std::nullopt;
 
     // Check if the key is in the changes
     auto it = changes_.find(key);
-    if (it != changes_.end())
-        return it->second;
+    if (it != changes_.end()) return it->second;
 
     // Check if the key is in the snapshot
     auto it2 = snapshot_.find(key);
-    if (it2 == snapshot_.end())
-        return std::nullopt;
+    if (it2 == snapshot_.end()) return std::nullopt;
 
     return it2->second;
 }
@@ -124,12 +118,10 @@ std::optional<io::ByteVector> MemorySnapshot::TryGet(const io::ByteVector& key) 
 bool MemorySnapshot::Contains(const io::ByteVector& key) const
 {
     // Check if the key is in the deletions
-    if (deletions_.find(key) != deletions_.end())
-        return false;
+    if (deletions_.find(key) != deletions_.end()) return false;
 
     // Check if the key is in the changes
-    if (changes_.find(key) != changes_.end())
-        return true;
+    if (changes_.find(key) != changes_.end()) return true;
 
     // Check if the key is in the snapshot
     return snapshot_.find(key) != snapshot_.end();
@@ -144,12 +136,10 @@ std::vector<std::pair<io::ByteVector, io::ByteVector>> MemorySnapshot::Find(cons
     for (const auto& [key, value] : snapshot_)
     {
         // Skip if the key is in the deletions
-        if (deletions_.find(key) != deletions_.end())
-            continue;
+        if (deletions_.find(key) != deletions_.end()) continue;
 
         // Skip if the key is in the changes (we'll add it later)
-        if (changes_.find(key) != changes_.end())
-            continue;
+        if (changes_.find(key) != changes_.end()) continue;
 
         if (prefix == nullptr ||
             (key.Size() >= prefix->Size() && std::equal(prefix->Data(), prefix->Data() + prefix->Size(), key.Data())))
@@ -222,22 +212,23 @@ void MemorySnapshot::Commit()
     snapshot_ = store_.store_;
 }
 
-IStore& MemorySnapshot::GetStore()
-{
-    return store_;
-}
+IStore& MemorySnapshot::GetStore() { return store_; }
 
 // MemoryStoreProvider implementation
 MemoryStoreProvider::MemoryStoreProvider() = default;
 
-std::string MemoryStoreProvider::GetName() const
-{
-    return "MemoryStore";
-}
+std::string MemoryStoreProvider::GetName() const { return "MemoryStore"; }
 
 std::unique_ptr<IStore> MemoryStoreProvider::GetStore(const std::string& path)
 {
     std::lock_guard<std::mutex> lock(mutex_);
+
+    // For in-memory testing, when no path is provided OR path indicates memory engine,
+    // return a fresh, isolated store to avoid cross-test contamination
+    if (path.empty() || path == "memory" || path == ":memory:")
+    {
+        return std::make_unique<MemoryStore>();
+    }
 
     auto it = stores_.find(path);
     if (it == stores_.end())

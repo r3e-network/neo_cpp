@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <neo/cache/cache.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
@@ -9,6 +8,8 @@
 #include <neo/metrics/metrics.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/smartcontract/application_engine.h>
+
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -116,8 +117,11 @@ struct VerificationContext
     VerificationContext(std::shared_ptr<persistence::DataCache> snapshot,
                         const ledger::Block* persistingBlock = nullptr, int64_t maxGas = ApplicationEngine::TestModeGas,
                         bool skipSignatureVerification = false, bool skipWitnessVerification = false)
-        : snapshot(snapshot), persistingBlock(persistingBlock), maxGas(maxGas),
-          skipSignatureVerification(skipSignatureVerification), skipWitnessVerification(skipWitnessVerification)
+        : snapshot(snapshot),
+          persistingBlock(persistingBlock),
+          maxGas(maxGas),
+          skipSignatureVerification(skipSignatureVerification),
+          skipWitnessVerification(skipWitnessVerification)
     {
     }
 };
@@ -168,7 +172,7 @@ struct VerificationOutput
  */
 class TransactionVerifier
 {
-  public:
+   public:
     /**
      * @brief Gets the singleton instance of the transaction verifier.
      * @return The singleton instance of the transaction verifier.
@@ -231,7 +235,7 @@ class TransactionVerifier
      */
     int64_t CalculateSystemFee(const ledger::Transaction& transaction, const VerificationContext& context);
 
-  private:
+   private:
     TransactionVerifier();
     ~TransactionVerifier() = default;
     TransactionVerifier(const TransactionVerifier&) = delete;
@@ -321,8 +325,5 @@ class TransactionVerifier
  * @brief Gets the singleton instance of the transaction verifier.
  * @return The singleton instance of the transaction verifier.
  */
-inline TransactionVerifier& Verifier()
-{
-    return TransactionVerifier::Instance();
-}
+inline TransactionVerifier& Verifier() { return TransactionVerifier::Instance(); }
 }  // namespace neo::smartcontract

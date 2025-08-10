@@ -1,7 +1,8 @@
-#include <algorithm>
-#include <cstring>
 #include <neo/cryptography/bls12_381.h>
 #include <neo/cryptography/hash.h>
+
+#include <algorithm>
+#include <cstring>
 #include <stdexcept>
 
 namespace neo::cryptography::bls12_381
@@ -32,7 +33,7 @@ const uint8_t G2_GENERATOR_X0[48] = {0x5c, 0xb3, 0x87, 0x90, 0xfd, 0x53, 0x0c, 0
 // Simple field element operations
 class FieldOps
 {
-  public:
+   public:
     // Add two field elements modulo p
     static void Add(const uint8_t* a, const uint8_t* b, uint8_t* result)
     {
@@ -82,10 +83,8 @@ class FieldOps
     {
         for (int i = 47; i >= 0; --i)
         {
-            if (a[i] > b[i])
-                return 1;
-            if (a[i] < b[i])
-                return -1;
+            if (a[i] > b[i]) return 1;
+            if (a[i] < b[i]) return -1;
         }
         return 0;
     }
@@ -95,8 +94,7 @@ class FieldOps
     {
         for (size_t i = 0; i < 48; ++i)
         {
-            if (a[i] != 0)
-                return false;
+            if (a[i] != 0) return false;
         }
         return true;
     }
@@ -105,7 +103,7 @@ class FieldOps
 // G1Point implementation
 class G1Point::Impl
 {
-  public:
+   public:
     uint8_t x[48];
     uint8_t y[48];
     bool is_infinity;
@@ -195,7 +193,7 @@ class G1Point::Impl
 // G2Point implementation
 class G2Point::Impl
 {
-  public:
+   public:
     uint8_t x0[48];  // x = x0 + x1 * u
     uint8_t x1[48];
     uint8_t y0[48];  // y = y0 + y1 * u
@@ -294,7 +292,7 @@ class G2Point::Impl
 // GTPoint implementation
 class GTPoint::Impl
 {
-  public:
+   public:
     uint8_t data[576];
     bool is_identity;
 
@@ -365,22 +363,14 @@ G1Point G1Point::Generator()
     return G1Point(std::move(impl));
 }
 
-io::ByteVector G1Point::ToBytes(bool compressed) const
-{
-    return impl_->ToBytes(compressed);
-}
+io::ByteVector G1Point::ToBytes(bool compressed) const { return impl_->ToBytes(compressed); }
 
-std::string G1Point::ToHex(bool compressed) const
-{
-    return ToBytes(compressed).ToHexString();
-}
+std::string G1Point::ToHex(bool compressed) const { return ToBytes(compressed).ToHexString(); }
 
 G1Point G1Point::Add(const G1Point& other) const
 {
-    if (impl_->is_infinity)
-        return other;
-    if (other.impl_->is_infinity)
-        return *this;
+    if (impl_->is_infinity) return other;
+    if (other.impl_->is_infinity) return *this;
 
     auto result = std::make_unique<Impl>();
     result->is_infinity = false;
@@ -394,8 +384,7 @@ G1Point G1Point::Add(const G1Point& other) const
 
 G1Point G1Point::Multiply(const io::ByteSpan& scalar) const
 {
-    if (impl_->is_infinity || scalar.Size() == 0)
-        return G1Point();
+    if (impl_->is_infinity || scalar.Size() == 0) return G1Point();
 
     auto result = std::make_unique<Impl>();
     G1Point accumulator = *this;
@@ -428,22 +417,14 @@ G1Point G1Point::Multiply(const io::ByteSpan& scalar) const
 
 bool G1Point::operator==(const G1Point& other) const
 {
-    if (impl_->is_infinity && other.impl_->is_infinity)
-        return true;
-    if (impl_->is_infinity != other.impl_->is_infinity)
-        return false;
+    if (impl_->is_infinity && other.impl_->is_infinity) return true;
+    if (impl_->is_infinity != other.impl_->is_infinity) return false;
     return std::memcmp(impl_->x, other.impl_->x, 48) == 0 && std::memcmp(impl_->y, other.impl_->y, 48) == 0;
 }
 
-bool G1Point::operator!=(const G1Point& other) const
-{
-    return !(*this == other);
-}
+bool G1Point::operator!=(const G1Point& other) const { return !(*this == other); }
 
-bool G1Point::IsInfinity() const
-{
-    return impl_->is_infinity;
-}
+bool G1Point::IsInfinity() const { return impl_->is_infinity; }
 
 // G2Point methods
 G2Point::G2Point() : impl_(std::make_unique<Impl>()) {}
@@ -480,22 +461,14 @@ G2Point G2Point::Generator()
     return G2Point(std::move(impl));
 }
 
-io::ByteVector G2Point::ToBytes(bool compressed) const
-{
-    return impl_->ToBytes(compressed);
-}
+io::ByteVector G2Point::ToBytes(bool compressed) const { return impl_->ToBytes(compressed); }
 
-std::string G2Point::ToHex(bool compressed) const
-{
-    return ToBytes(compressed).ToHexString();
-}
+std::string G2Point::ToHex(bool compressed) const { return ToBytes(compressed).ToHexString(); }
 
 G2Point G2Point::Add(const G2Point& other) const
 {
-    if (impl_->is_infinity)
-        return other;
-    if (other.impl_->is_infinity)
-        return *this;
+    if (impl_->is_infinity) return other;
+    if (other.impl_->is_infinity) return *this;
 
     auto result = std::make_unique<Impl>();
     result->is_infinity = false;
@@ -511,8 +484,7 @@ G2Point G2Point::Add(const G2Point& other) const
 
 G2Point G2Point::Multiply(const io::ByteSpan& scalar) const
 {
-    if (impl_->is_infinity || scalar.Size() == 0)
-        return G2Point();
+    if (impl_->is_infinity || scalar.Size() == 0) return G2Point();
 
     auto result = std::make_unique<Impl>();
     G2Point accumulator = *this;
@@ -547,23 +519,15 @@ G2Point G2Point::Multiply(const io::ByteSpan& scalar) const
 
 bool G2Point::operator==(const G2Point& other) const
 {
-    if (impl_->is_infinity && other.impl_->is_infinity)
-        return true;
-    if (impl_->is_infinity != other.impl_->is_infinity)
-        return false;
+    if (impl_->is_infinity && other.impl_->is_infinity) return true;
+    if (impl_->is_infinity != other.impl_->is_infinity) return false;
     return std::memcmp(impl_->x0, other.impl_->x0, 48) == 0 && std::memcmp(impl_->x1, other.impl_->x1, 48) == 0 &&
            std::memcmp(impl_->y0, other.impl_->y0, 48) == 0 && std::memcmp(impl_->y1, other.impl_->y1, 48) == 0;
 }
 
-bool G2Point::operator!=(const G2Point& other) const
-{
-    return !(*this == other);
-}
+bool G2Point::operator!=(const G2Point& other) const { return !(*this == other); }
 
-bool G2Point::IsInfinity() const
-{
-    return impl_->is_infinity;
-}
+bool G2Point::IsInfinity() const { return impl_->is_infinity; }
 
 // GTPoint methods
 GTPoint::GTPoint() : impl_(std::make_unique<Impl>()) {}
@@ -587,15 +551,9 @@ GTPoint GTPoint::FromHex(const std::string& hex)
     return GTPoint(data.AsSpan());
 }
 
-io::ByteVector GTPoint::ToBytes() const
-{
-    return io::ByteVector(io::ByteSpan(impl_->data, 576));
-}
+io::ByteVector GTPoint::ToBytes() const { return io::ByteVector(io::ByteSpan(impl_->data, 576)); }
 
-std::string GTPoint::ToHex() const
-{
-    return ToBytes().ToHexString();
-}
+std::string GTPoint::ToHex() const { return ToBytes().ToHexString(); }
 
 GTPoint GTPoint::Multiply(const GTPoint& other) const
 {
@@ -613,8 +571,7 @@ GTPoint GTPoint::Multiply(const GTPoint& other) const
 
 GTPoint GTPoint::Pow(const io::ByteSpan& scalar) const
 {
-    if (scalar.Size() == 0)
-        return *this;
+    if (scalar.Size() == 0) return *this;
 
     auto result = std::make_unique<Impl>();
     *result = *impl_;
@@ -631,20 +588,11 @@ GTPoint GTPoint::Pow(const io::ByteSpan& scalar) const
     return GTPoint(std::move(result));
 }
 
-bool GTPoint::operator==(const GTPoint& other) const
-{
-    return std::memcmp(impl_->data, other.impl_->data, 576) == 0;
-}
+bool GTPoint::operator==(const GTPoint& other) const { return std::memcmp(impl_->data, other.impl_->data, 576) == 0; }
 
-bool GTPoint::operator!=(const GTPoint& other) const
-{
-    return !(*this == other);
-}
+bool GTPoint::operator!=(const GTPoint& other) const { return !(*this == other); }
 
-bool GTPoint::IsIdentity() const
-{
-    return impl_->is_identity;
-}
+bool GTPoint::IsIdentity() const { return impl_->is_identity; }
 
 // Pairing and signature functions
 GTPoint Pairing(const G1Point& p, const G2Point& q)
@@ -733,10 +681,7 @@ G1Point Sign(const io::ByteSpan& privateKey, const io::ByteSpan& message)
     return msgPoint.Multiply(privateKey);
 }
 
-G2Point GeneratePublicKey(const io::ByteSpan& privateKey)
-{
-    return G2Point::Generator().Multiply(privateKey);
-}
+G2Point GeneratePublicKey(const io::ByteSpan& privateKey) { return G2Point::Generator().Multiply(privateKey); }
 
 G1Point AggregateSignatures(const std::vector<G1Point>& signatures)
 {
@@ -822,15 +767,11 @@ bool DeserializeG2Point(const io::ByteSpan& data, G2Point& out)
     }
 }
 
-G2Point GetG2Generator()
-{
-    return G2Point::Generator();
-}
+G2Point GetG2Generator() { return G2Point::Generator(); }
 
 G2Point NegateG2(const G2Point& point)
 {
-    if (point.IsInfinity())
-        return point;
+    if (point.IsInfinity()) return point;
 
     // Get bytes, modify, and reconstruct
     auto bytes = point.ToBytes(false);  // Get uncompressed format
@@ -844,15 +785,9 @@ G2Point NegateG2(const G2Point& point)
     return G2Point(bytes.AsSpan());
 }
 
-GTPoint MultiplyGT(const GTPoint& a, const GTPoint& b)
-{
-    return a.Multiply(b);
-}
+GTPoint MultiplyGT(const GTPoint& a, const GTPoint& b) { return a.Multiply(b); }
 
-bool IsIdentityGT(const GTPoint& point)
-{
-    return point.IsIdentity();
-}
+bool IsIdentityGT(const GTPoint& point) { return point.IsIdentity(); }
 
 // Additional helper methods needed by the pairing implementation
 namespace
@@ -919,15 +854,11 @@ GTPoint ComputeSecantLine(const G1Point& p1, const G1Point& p2, const G2Point& t
 }  // namespace
 
 // Extension methods for G1Point
-G1Point G1PointDouble(const G1Point& point)
-{
-    return point.Add(point);
-}
+G1Point G1PointDouble(const G1Point& point) { return point.Add(point); }
 
 G1Point G1PointNegate(const G1Point& point)
 {
-    if (point.IsInfinity())
-        return point;
+    if (point.IsInfinity()) return point;
 
     // Get bytes and negate y-coordinate
     auto bytes = point.ToBytes(false);
@@ -940,8 +871,5 @@ G1Point G1PointNegate(const G1Point& point)
 }
 
 // Identity element for GT
-GTPoint GTPointIdentity()
-{
-    return GTPoint();
-}
+GTPoint GTPointIdentity() { return GTPoint(); }
 }  // namespace neo::cryptography::bls12_381

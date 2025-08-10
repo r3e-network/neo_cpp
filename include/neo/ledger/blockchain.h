@@ -1,20 +1,15 @@
 #pragma once
 
 // Network payload includes
+#include <neo/ledger/block.h>
+#include <neo/ledger/block_header.h>
+#include <neo/ledger/event_system.h>
+#include <neo/ledger/header.h>
+#include <neo/ledger/transaction.h>
 #include <neo/network/p2p/payloads/block.h>
 #include <neo/network/p2p/payloads/header.h>
 #include <neo/network/p2p/payloads/header_cache.h>
-#include <neo/ledger/block.h>
-#include <neo/ledger/block_header.h>
-#include <neo/ledger/header.h>
-#include <neo/ledger/transaction.h>
-#include <neo/ledger/event_system.h>
 // #include <neo/network/p2p/payloads/extensible_payload.h> // Disabled since network module is disabled
-#include <atomic>
-#include <condition_variable>
-#include <functional>
-#include <memory>
-#include <mutex>
 #include <neo/config/protocol_settings.h>
 #include <neo/io/fixed8.h>
 #include <neo/io/uint160.h>
@@ -23,6 +18,12 @@
 #include <neo/persistence/data_cache.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/vm_types.h>
+
+#include <atomic>
+#include <condition_variable>
+#include <functional>
+#include <memory>
+#include <mutex>
 #include <optional>
 #include <queue>
 #include <shared_mutex>
@@ -92,7 +93,7 @@ struct ImportData
  */
 class Blockchain
 {
-  public:
+   public:
     // Event callback types
     using CommittingHandler =
         std::function<void(std::shared_ptr<NeoSystem>, std::shared_ptr<Block>, std::shared_ptr<persistence::DataCache>,
@@ -145,10 +146,7 @@ class Blockchain
      * @brief Gets the current block index (alias for GetHeight).
      * @return The current block index.
      */
-    uint32_t GetCurrentBlockIndex() const
-    {
-        return GetHeight();
-    }
+    uint32_t GetCurrentBlockIndex() const { return GetHeight(); }
 
     /**
      * @brief Gets the current block hash.
@@ -294,12 +292,9 @@ class Blockchain
      * @brief Gets the Neo system.
      * @return The Neo system.
      */
-    std::shared_ptr<NeoSystem> GetSystem() const
-    {
-        return system_;
-    }
+    std::shared_ptr<NeoSystem> GetSystem() const { return system_; }
 
-  private:
+   private:
     // Core processing methods
     void ProcessBlock(std::shared_ptr<Block> block);
     void PersistBlock(std::shared_ptr<Block> block);

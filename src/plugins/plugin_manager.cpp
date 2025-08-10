@@ -1,7 +1,8 @@
-#include <iostream>
-#include <neo/plugins/plugin_manager.h>
 #include <neo/plugins/plugin.h>
+#include <neo/plugins/plugin_manager.h>
 #include <neo/rpc/rpc_server.h>
+
+#include <iostream>
 
 namespace neo::plugins
 {
@@ -13,27 +14,17 @@ PluginManager& PluginManager::GetInstance()
 
 PluginManager::PluginManager() = default;
 
-void PluginManager::RegisterPluginFactory(std::shared_ptr<PluginFactory> factory)
-{
-    factories_.push_back(factory);
-}
+void PluginManager::RegisterPluginFactory(std::shared_ptr<PluginFactory> factory) { factories_.push_back(factory); }
 
-const std::vector<std::shared_ptr<PluginFactory>>& PluginManager::GetPluginFactories() const
-{
-    return factories_;
-}
+const std::vector<std::shared_ptr<PluginFactory>>& PluginManager::GetPluginFactories() const { return factories_; }
 
-const std::vector<std::shared_ptr<Plugin>>& PluginManager::GetPlugins() const
-{
-    return plugins_;
-}
+const std::vector<std::shared_ptr<Plugin>>& PluginManager::GetPlugins() const { return plugins_; }
 
 std::shared_ptr<Plugin> PluginManager::GetPlugin(const std::string& name) const
 {
     for (const auto& plugin : plugins_)
     {
-        if (plugin->GetName() == name)
-            return plugin;
+        if (plugin->GetName() == name) return plugin;
     }
 
     return nullptr;

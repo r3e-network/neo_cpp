@@ -1,26 +1,24 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/uint256.h>
+#include <neo/network/p2p/inventory_type.h>
+
+#include <cstdint>
 
 namespace neo::network::p2p::payloads
 {
 /**
  * @brief Inventory types for the Neo network protocol.
  */
-enum class InventoryType : uint8_t
-{
-    TX = 0x2b,         // Transaction
-    Block = 0x2c,      // Block
-    Extensible = 0x2e  // Extensible payload
-};
+// Use the canonical InventoryType from neo::network::p2p
+using InventoryType = neo::network::p2p::InventoryType;
 
 /**
  * @brief Interface for inventory items in the P2P network.
  */
 class IInventory
 {
-  public:
+   public:
     virtual ~IInventory() = default;
 
     /**

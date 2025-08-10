@@ -14,10 +14,10 @@ namespace neo::network::p2p::payloads
  */
 class Conflicts : public ledger::TransactionAttribute
 {
-  private:
+   private:
     io::UInt256 hash_;
 
-  public:
+   public:
     /**
      * @brief Constructs an empty Conflicts attribute.
      */

@@ -1,8 +1,9 @@
 #pragma once
 
+#include <neo/io/byte_vector.h>
+
 #include <cstdint>
 #include <iostream>
-#include <neo/io/byte_vector.h>
 #include <sstream>
 #include <streambuf>
 #include <vector>
@@ -14,7 +15,7 @@ namespace neo::io
  */
 class MemoryStreamBuf : public std::streambuf
 {
-  public:
+   public:
     MemoryStreamBuf(std::vector<uint8_t>& buffer) : buffer_(buffer)
     {
         // Set up the buffer for both reading and writing
@@ -32,7 +33,7 @@ class MemoryStreamBuf : public std::streambuf
         setg(begin, begin, end);
     }
 
-  protected:
+   protected:
     int_type overflow(int_type ch) override
     {
         if (ch != EOF)
@@ -55,7 +56,7 @@ class MemoryStreamBuf : public std::streambuf
         return n;
     }
 
-  private:
+   private:
     std::vector<uint8_t>& buffer_;
 };
 
@@ -64,7 +65,7 @@ class MemoryStreamBuf : public std::streambuf
  */
 class MemoryStream : public std::iostream
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty memory stream.
      */
@@ -100,10 +101,7 @@ class MemoryStream : public std::iostream
      * @brief Gets the current position in the stream.
      * @return The current position.
      */
-    size_t GetPosition() const
-    {
-        return position_;
-    }
+    size_t GetPosition() const { return position_; }
 
     /**
      * @brief Sets the current position in the stream.
@@ -115,19 +113,13 @@ class MemoryStream : public std::iostream
      * @brief Seeks to a specific position in the stream.
      * @param position The position to seek to.
      */
-    void Seek(size_t position)
-    {
-        SetPosition(position);
-    }
+    void Seek(size_t position) { SetPosition(position); }
 
     /**
      * @brief Gets the length of the stream.
      * @return The length of the stream.
      */
-    size_t GetLength() const
-    {
-        return data_.size();
-    }
+    size_t GetLength() const { return data_.size(); }
 
     /**
      * @brief Reads data from the stream.
@@ -148,10 +140,7 @@ class MemoryStream : public std::iostream
      * @brief Gets the underlying data.
      * @return The data.
      */
-    const std::vector<uint8_t>& GetData() const
-    {
-        return data_;
-    }
+    const std::vector<uint8_t>& GetData() const { return data_; }
 
     /**
      * @brief Gets the underlying data as a ByteVector.
@@ -159,7 +148,7 @@ class MemoryStream : public std::iostream
      */
     ByteVector ToByteVector() const;
 
-  private:
+   private:
     std::vector<uint8_t> data_;
     size_t position_;
     MemoryStreamBuf streamBuf_;

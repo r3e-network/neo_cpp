@@ -1,6 +1,3 @@
-#include <algorithm>
-#include <cstring>
-#include <functional>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/hardfork.h>
@@ -18,6 +15,10 @@
 #include <neo/smartcontract/native/policy_contract.h>
 #include <neo/wallets/helper.h>
 
+#include <algorithm>
+#include <cstring>
+#include <functional>
+
 namespace neo::smartcontract::native
 {
 Notary::Notary() : NativeContract("Notary", ID) {}
@@ -28,10 +29,7 @@ std::shared_ptr<Notary> Notary::GetInstance()
     return instance;
 }
 
-uint32_t Notary::GetActiveInHardfork() const
-{
-    return static_cast<uint32_t>(Hardfork::HF_Echidna);
-}
+uint32_t Notary::GetActiveInHardfork() const { return static_cast<uint32_t>(Hardfork::HF_Echidna); }
 
 void Notary::Initialize()
 {
@@ -71,8 +69,7 @@ bool Notary::OnPersist(ApplicationEngine& engine)
     std::vector<cryptography::ecc::ECPoint> notaries;
 
     auto block = engine.GetPersistingBlock();
-    if (!block)
-        return true;
+    if (!block) return true;
 
     for (const auto& tx : block->GetTransactions())
     {
@@ -81,14 +78,12 @@ bool Notary::OnPersist(ApplicationEngine& engine)
             std::find_if(tx.GetAttributes().begin(), tx.GetAttributes().end(),
                          [](const std::shared_ptr<ledger::TransactionAttribute>& a)
                          { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::NotaryAssisted; });
-        if (attr_it == tx.GetAttributes().end())
-            continue;
+        if (attr_it == tx.GetAttributes().end()) continue;
 
         auto attr = &(*attr_it);
         if (attr)
         {
-            if (notaries.empty())
-                notaries = GetNotaryNodes(engine.GetSnapshot());
+            if (notaries.empty()) notaries = GetNotaryNodes(engine.GetSnapshot());
 
             // Extract nKeys from NotaryAssisted attribute data
             // auto notaryAssistedAttr = tx.GetAttribute<ledger::NotaryAssisted>();
@@ -107,16 +102,14 @@ bool Notary::OnPersist(ApplicationEngine& engine)
                     if (deposit)
                     {
                         deposit->Amount -= tx.GetSystemFee() + tx.GetNetworkFee();
-                        if (deposit->Amount == 0)
-                            RemoveDepositFor(engine.GetSnapshot(), payer.GetAccount());
+                        if (deposit->Amount == 0) RemoveDepositFor(engine.GetSnapshot(), payer.GetAccount());
                     }
                 }
             }
         }
     }
 
-    if (nFees == 0 || notaries.empty())
-        return true;
+    if (nFees == 0 || notaries.empty()) return true;
 
     auto singleReward = CalculateNotaryReward(engine.GetSnapshot(), nFees, notaries.size());
     for (const auto& notary : notaries)
@@ -130,17 +123,13 @@ bool Notary::OnPersist(ApplicationEngine& engine)
     return true;
 }
 
-bool Notary::PostPersist(ApplicationEngine& engine)
-{
-    return true;
-}
+bool Notary::PostPersist(ApplicationEngine& engine) { return true; }
 
 uint32_t Notary::GetMaxNotValidBeforeDelta(std::shared_ptr<persistence::StoreView> snapshot) const
 {
     auto key = GetStorageKey(PREFIX_MAX_NOT_VALID_BEFORE_DELTA, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.empty())
-        return DEFAULT_MAX_NOT_VALID_BEFORE_DELTA;
+    if (value.empty()) return DEFAULT_MAX_NOT_VALID_BEFORE_DELTA;
 
     return *reinterpret_cast<const uint32_t*>(value.Data());
 }
@@ -149,13 +138,11 @@ bool Notary::SetMaxNotValidBeforeDelta(ApplicationEngine& engine, uint32_t value
 {
     auto neoToken = NeoToken::GetInstance();
     auto committeeAddress = neoToken->GetCommitteeAddress(engine.GetSnapshot());
-    if (!engine.CheckWitness(committeeAddress))
-        return false;
+    if (!engine.CheckWitness(committeeAddress)) return false;
 
     auto policyContract = PolicyContract::GetInstance();
     auto maxVUBIncrement = policyContract->GetMaxValidUntilBlockIncrement(engine.GetSnapshot());
-    if (value > maxVUBIncrement / 2 || value < 7)
-        return false;
+    if (value > maxVUBIncrement / 2 || value < 7) return false;
 
     auto key = GetStorageKey(PREFIX_MAX_NOT_VALID_BEFORE_DELTA, io::ByteVector{});
     io::ByteVector valueBytes(io::ByteSpan(reinterpret_cast<const uint8_t*>(&value), sizeof(uint32_t)));
@@ -167,8 +154,7 @@ bool Notary::SetMaxNotValidBeforeDelta(ApplicationEngine& engine, uint32_t value
 uint32_t Notary::ExpirationOf(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account) const
 {
     auto deposit = GetDepositFor(snapshot, account);
-    if (!deposit)
-        return 0;
+    if (!deposit) return 0;
 
     return deposit->Till;
 }
@@ -176,25 +162,21 @@ uint32_t Notary::ExpirationOf(std::shared_ptr<persistence::StoreView> snapshot, 
 int64_t Notary::BalanceOf(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account) const
 {
     auto deposit = GetDepositFor(snapshot, account);
-    if (!deposit)
-        return 0;
+    if (!deposit) return 0;
 
     return deposit->Amount;
 }
 
 bool Notary::LockDepositUntil(ApplicationEngine& engine, const io::UInt160& account, uint32_t till)
 {
-    if (!engine.CheckWitness(account))
-        return false;
+    if (!engine.CheckWitness(account)) return false;
 
     auto ledgerContract = LedgerContract::GetInstance();
     auto currentIndex = ledgerContract->GetCurrentIndex(engine.GetSnapshot());
-    if (till < currentIndex + 2)
-        return false;
+    if (till < currentIndex + 2) return false;
 
     auto deposit = GetDepositFor(engine.GetSnapshot(), account);
-    if (!deposit || till < deposit->Till)
-        return false;
+    if (!deposit || till < deposit->Till) return false;
 
     deposit->Till = till;
     PutDepositFor(engine, account, deposit);
@@ -204,18 +186,15 @@ bool Notary::LockDepositUntil(ApplicationEngine& engine, const io::UInt160& acco
 
 bool Notary::Withdraw(ApplicationEngine& engine, const io::UInt160& from, const io::UInt160& to)
 {
-    if (!engine.CheckWitness(from))
-        return false;
+    if (!engine.CheckWitness(from)) return false;
 
     auto receive = to.IsZero() ? from : to;
     auto deposit = GetDepositFor(engine.GetSnapshot(), from);
-    if (!deposit)
-        return false;
+    if (!deposit) return false;
 
     auto ledgerContract = LedgerContract::GetInstance();
     auto currentIndex = ledgerContract->GetCurrentIndex(engine.GetSnapshot());
-    if (currentIndex < deposit->Till)
-        return false;
+    if (currentIndex < deposit->Till) return false;
 
     RemoveDepositFor(engine.GetSnapshot(), from);
 
@@ -228,31 +207,26 @@ bool Notary::Withdraw(ApplicationEngine& engine, const io::UInt160& from, const 
 
 bool Notary::Verify(ApplicationEngine& engine, const io::ByteVector& signature)
 {
-    if (signature.Size() != 64)
-        return false;
+    if (signature.Size() != 64) return false;
 
     auto tx = dynamic_cast<const ledger::Transaction*>(engine.GetScriptContainer());
-    if (!tx)
-        return false;
+    if (!tx) return false;
 
     // Find NotaryAssisted attribute
     auto attr_it = std::find_if(tx->GetAttributes().begin(), tx->GetAttributes().end(),
                                 [](const std::shared_ptr<ledger::TransactionAttribute>& a)
                                 { return a && a->GetUsage() == ledger::TransactionAttribute::Usage::NotaryAssisted; });
-    if (attr_it == tx->GetAttributes().end())
-        return false;
+    if (attr_it == tx->GetAttributes().end()) return false;
 
     for (const auto& signer : tx->GetSigners())
     {
         if (signer.GetAccount() == GetScriptHash())
         {
-            if (tx->GetSigners().size() < 2)
-                return false;
+            if (tx->GetSigners().size() < 2) return false;
 
             auto payer = tx->GetSigners()[1];
             auto deposit = GetDepositFor(engine.GetSnapshot(), payer.GetAccount());
-            if (!deposit)
-                return false;
+            if (!deposit) return false;
 
             auto policyContract = PolicyContract::GetInstance();
             auto feePerKey = policyContract->GetAttributeFee(
@@ -261,8 +235,7 @@ bool Notary::Verify(ApplicationEngine& engine, const io::ByteVector& signature)
             // auto notaryAssistedAttr = tx.GetAttribute<ledger::NotaryAssisted>();
             auto nKeys = 1;  // Default to 1 since we can't get the attribute
             auto requiredFee = (static_cast<int64_t>(nKeys) + 1) * feePerKey;
-            if (deposit->Amount < tx->GetSystemFee() + tx->GetNetworkFee() + requiredFee)
-                return false;
+            if (deposit->Amount < tx->GetSystemFee() + tx->GetNetworkFee() + requiredFee) return false;
 
             auto notaries = GetNotaryNodes(engine.GetSnapshot());
             for (const auto& notary : notaries)
@@ -289,8 +262,7 @@ bool Notary::Verify(ApplicationEngine& engine, const io::ByteVector& signature)
                     std::string hashData = stream.str();
                     auto message = io::ByteSpan(reinterpret_cast<const uint8_t*>(hashData.data()), hashData.size());
                     auto signatureData = signature.AsSpan().subspan(33, 31);
-                    if (cryptography::Crypto::VerifySignature(message, signatureData, pubKey))
-                        return true;
+                    if (cryptography::Crypto::VerifySignature(message, signatureData, pubKey)) return true;
                 }
             }
         }
@@ -310,8 +282,7 @@ void Notary::OnNEP17Payment(ApplicationEngine& engine, const io::UInt160& from, 
 
     auto to = from;
     auto additionalParams = data->GetArray();
-    if (!additionalParams[0]->IsNull())
-        to = io::UInt160::FromBytes(additionalParams[0]->GetByteArray().AsSpan());
+    if (!additionalParams[0]->IsNull()) to = io::UInt160::FromBytes(additionalParams[0]->GetByteArray().AsSpan());
 
     auto till = static_cast<uint32_t>(additionalParams[1]->GetInteger());
     auto tx = dynamic_cast<const ledger::Transaction*>(engine.GetScriptContainer());
@@ -319,8 +290,7 @@ void Notary::OnNEP17Payment(ApplicationEngine& engine, const io::UInt160& from, 
 
     auto ledgerContract = LedgerContract::GetInstance();
     auto currentHeight = ledgerContract->GetCurrentIndex(engine.GetSnapshot());
-    if (till < currentHeight + 2)
-        throw std::out_of_range("`till` shouldn't be less than the chain's height + 1");
+    if (till < currentHeight + 2) throw std::out_of_range("`till` shouldn't be less than the chain's height + 1");
 
     auto key = GetStorageKey(PREFIX_DEPOSIT, to);
     persistence::StorageKey storageKey(key);
@@ -338,12 +308,10 @@ void Notary::OnNEP17Payment(ApplicationEngine& engine, const io::UInt160& from, 
         auto policyContract = PolicyContract::GetInstance();
         // Check TransactionAttributeType
         auto feePerKey = 1000;  // Default fee per key
-        if (amount < 2 * feePerKey)
-            throw std::out_of_range("first deposit can not be less than 2 * feePerKey");
+        if (amount < 2 * feePerKey) throw std::out_of_range("first deposit can not be less than 2 * feePerKey");
 
         deposit = std::make_shared<Deposit>(0, 0);
-        if (!allowedChangeTill)
-            till = currentHeight + DEFAULT_DEPOSIT_DELTA_TILL;
+        if (!allowedChangeTill) till = currentHeight + DEFAULT_DEPOSIT_DELTA_TILL;
     }
     else if (!allowedChangeTill)
     {
@@ -377,8 +345,7 @@ std::shared_ptr<Notary::Deposit> Notary::GetDepositFor(std::shared_ptr<persisten
 {
     auto key = GetStorageKey(PREFIX_DEPOSIT, account);
     auto value = GetStorageValue(snapshot, key);
-    if (value.Size() == 0)
-        return nullptr;
+    if (value.Size() == 0) return nullptr;
 
     // Deserialize deposit from bytes manually
     std::string data(reinterpret_cast<const char*>(value.Data()), value.Size());
@@ -435,18 +402,17 @@ std::shared_ptr<vm::StackItem> Notary::Deposit::ToStackItem(vm::IReferenceCounte
 }
 
 // Adapter method implementations
-std::shared_ptr<vm::StackItem>
-Notary::OnGetMaxNotValidBeforeDelta(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> Notary::OnGetMaxNotValidBeforeDelta(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     auto result = GetMaxNotValidBeforeDelta(engine.GetSnapshot());
     return vm::StackItem::Create(static_cast<int64_t>(result));
 }
 
-std::shared_ptr<vm::StackItem>
-Notary::OnSetMaxNotValidBeforeDelta(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> Notary::OnSetMaxNotValidBeforeDelta(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto value = static_cast<uint32_t>(args[0]->GetInteger());
     auto result = SetMaxNotValidBeforeDelta(engine, value);
@@ -456,12 +422,10 @@ Notary::OnSetMaxNotValidBeforeDelta(ApplicationEngine& engine, const std::vector
 std::shared_ptr<vm::StackItem> Notary::OnExpirationOf(ApplicationEngine& engine,
                                                       const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto accountBytes = args[0]->GetByteArray();
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     io::UInt160 account;
     memcpy(account.Data(), accountBytes.Data(), 20);
@@ -473,12 +437,10 @@ std::shared_ptr<vm::StackItem> Notary::OnExpirationOf(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> Notary::OnBalanceOf(ApplicationEngine& engine,
                                                    const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto accountBytes = args[0]->GetByteArray();
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     io::UInt160 account;
     std::memcpy(account.Data(), accountBytes.Data(), 20);
@@ -490,12 +452,10 @@ std::shared_ptr<vm::StackItem> Notary::OnBalanceOf(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> Notary::OnLockDepositUntil(ApplicationEngine& engine,
                                                           const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto accountBytes = args[0]->GetByteArray();
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     io::UInt160 account;
     std::memcpy(account.Data(), accountBytes.Data(), 20);
@@ -508,14 +468,12 @@ std::shared_ptr<vm::StackItem> Notary::OnLockDepositUntil(ApplicationEngine& eng
 std::shared_ptr<vm::StackItem> Notary::OnWithdraw(ApplicationEngine& engine,
                                                   const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid arguments");
 
     auto fromBytes = args[0]->GetByteArray();
     auto toBytes = args[1]->GetByteArray();
 
-    if (fromBytes.Size() != 20 || toBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (fromBytes.Size() != 20 || toBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     io::UInt160 from, to;
     std::memcpy(from.Data(), fromBytes.Data(), 20);
@@ -528,8 +486,7 @@ std::shared_ptr<vm::StackItem> Notary::OnWithdraw(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> Notary::OnVerify(ApplicationEngine& engine,
                                                 const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto signature = args[0]->GetByteArray();
     auto result = Verify(engine, signature);
@@ -539,12 +496,10 @@ std::shared_ptr<vm::StackItem> Notary::OnVerify(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> Notary::OnNEP17PaymentAdapter(ApplicationEngine& engine,
                                                              const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 3)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 3) throw std::runtime_error("Invalid arguments");
 
     auto fromBytes = args[0]->GetByteArray();
-    if (fromBytes.Size() != 20)
-        throw std::runtime_error("Invalid from account");
+    if (fromBytes.Size() != 20) throw std::runtime_error("Invalid from account");
 
     io::UInt160 from;
     std::memcpy(from.Data(), fromBytes.Data(), 20);

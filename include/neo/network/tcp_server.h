@@ -1,12 +1,13 @@
 #pragma once
 
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/tcp_connection.h>
+
 #include <atomic>
 #include <boost/asio.hpp>
 #include <functional>
 #include <memory>
 #include <mutex>
-#include <neo/network/ip_endpoint.h>
-#include <neo/network/tcp_connection.h>
 #include <string>
 #include <thread>
 #include <unordered_map>
@@ -19,7 +20,7 @@ namespace neo::network
  */
 class TcpServer
 {
-  public:
+   public:
     /**
      * @brief Constructs a TcpServer.
      * @param endpoint The endpoint to listen on.
@@ -60,7 +61,7 @@ class TcpServer
      */
     void SetConnectionAcceptedCallback(std::function<void(std::shared_ptr<TcpConnection>)> callback);
 
-  private:
+   private:
     IPEndPoint endpoint_;
     std::unique_ptr<boost::asio::io_context> ioContext_;
     std::unique_ptr<boost::asio::basic_socket_acceptor<boost::asio::ip::tcp>> acceptor_;

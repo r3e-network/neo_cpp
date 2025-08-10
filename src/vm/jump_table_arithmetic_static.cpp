@@ -1,8 +1,9 @@
-#include <cmath>
 #include <neo/vm/exceptions.h>
 #include <neo/vm/execution_engine.h>
 #include <neo/vm/jump_table_arithmetic.h>
 #include <neo/vm/stack_item.h>
+
+#include <cmath>
 
 namespace neo::vm
 {

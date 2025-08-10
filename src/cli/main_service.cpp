@@ -1,7 +1,3 @@
-#include <algorithm>
-#include <cctype>
-#include <chrono>
-#include <iostream>
 #include <neo/cli/main_service.h>
 #include <neo/cli/type_converters.h>
 #include <neo/cryptography/ecc/ec_point.h>
@@ -13,6 +9,11 @@
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/policy_contract.h>
+
+#include <algorithm>
+#include <cctype>
+#include <chrono>
+#include <iostream>
 #include <sstream>
 #include <thread>
 
@@ -84,10 +85,7 @@ void MainService::InitializeCommands()
     InitializeWalletCommands();
 }
 
-MainService::~MainService()
-{
-    Stop();
-}
+MainService::~MainService() { Stop(); }
 
 void MainService::Run(const std::vector<std::string>& args)
 {
@@ -108,17 +106,16 @@ void MainService::Run(const std::vector<std::string>& args)
 
 void MainService::Start(const CommandLineOptions& options)
 {
-    if (neoSystem_)
-        return;
+    if (neoSystem_) return;
 
     // Create Neo system with default settings
     // TODO: Load settings from config file
     std::string dbEngine = options.DbEngine.empty() ? "memory" : options.DbEngine;
     std::string dbPath = options.DbPath.empty() ? "./data" : options.DbPath;
-    
+
     // Create protocol settings (using defaults)
     ProtocolSettings protocolSettings;
-    
+
     neoSystem_ = std::make_shared<node::NeoSystem>(protocolSettings, dbEngine, dbPath);
 
     // Native contracts are initialized internally by NeoSystem
@@ -126,9 +123,9 @@ void MainService::Start(const CommandLineOptions& options)
     // Start RPC server if enabled (using default config)
     // TODO: Load RPC config from settings
     rpc::RpcConfig rpcConfig;
-    rpcConfig.port = 10332; // Default RPC port
+    rpcConfig.port = 10332;  // Default RPC port
     rpcConfig.max_concurrent_requests = 40;
-    
+
     rpcServer_ = std::make_shared<rpc::RpcServer>(rpcConfig);
     rpcServer_->Start();
 
@@ -146,14 +143,12 @@ void MainService::Start(const CommandLineOptions& options)
 
 void MainService::Stop()
 {
-    if (!running_)
-        return;
+    if (!running_) return;
 
     running_ = false;
 
     // Stop console thread
-    if (consoleThread_.joinable())
-        consoleThread_.join();
+    if (consoleThread_.joinable()) consoleThread_.join();
 
     // Close wallet
     currentWallet_.reset();
@@ -188,20 +183,13 @@ void MainService::RegisterTypeConverter(const std::string& typeName, const TypeC
     typeConverters_[typeName] = converter;
 }
 
-std::shared_ptr<node::NeoSystem> MainService::GetNeoSystem() const
-{
-    return neoSystem_;
-}
+std::shared_ptr<node::NeoSystem> MainService::GetNeoSystem() const { return neoSystem_; }
 
-std::shared_ptr<wallets::Wallet> MainService::GetCurrentWallet() const
-{
-    return currentWallet_;
-}
+std::shared_ptr<wallets::Wallet> MainService::GetCurrentWallet() const { return currentWallet_; }
 
 void MainService::OnCommand(const std::string& command)
 {
-    if (command.empty())
-        return;
+    if (command.empty()) return;
 
     // Parse command and arguments
     std::istringstream iss(command);
@@ -243,28 +231,23 @@ void MainService::OnStartWithCommandLine(const std::vector<std::string>& args)
     {
         if (args[i] == "-c" || args[i] == "--config")
         {
-            if (i + 1 < args.size())
-                options.Config = args[++i];
+            if (i + 1 < args.size()) options.Config = args[++i];
         }
         else if (args[i] == "-w" || args[i] == "--wallet")
         {
-            if (i + 1 < args.size())
-                options.Wallet = args[++i];
+            if (i + 1 < args.size()) options.Wallet = args[++i];
         }
         else if (args[i] == "-p" || args[i] == "--password")
         {
-            if (i + 1 < args.size())
-                options.Password = args[++i];
+            if (i + 1 < args.size()) options.Password = args[++i];
         }
         else if (args[i] == "--db-engine")
         {
-            if (i + 1 < args.size())
-                options.DbEngine = args[++i];
+            if (i + 1 < args.size()) options.DbEngine = args[++i];
         }
         else if (args[i] == "--db-path")
         {
-            if (i + 1 < args.size())
-                options.DbPath = args[++i];
+            if (i + 1 < args.size()) options.DbPath = args[++i];
         }
         else if (args[i] == "--noverify")
         {
@@ -279,8 +262,7 @@ void MainService::OnStartWithCommandLine(const std::vector<std::string>& args)
         }
         else if (args[i] == "--verbose")
         {
-            if (i + 1 < args.size())
-                options.Verbose = std::stoi(args[++i]);
+            if (i + 1 < args.size()) options.Verbose = std::stoi(args[++i]);
         }
     }
 
@@ -344,10 +326,7 @@ void MainService::OnHelp(const std::string& category)
     }
 }
 
-void MainService::OnExit()
-{
-    running_ = false;
-}
+void MainService::OnExit() { running_ = false; }
 
 void MainService::OnClear()
 {
@@ -358,10 +337,7 @@ void MainService::OnClear()
 #endif
 }
 
-void MainService::OnVersion()
-{
-    ConsoleHelper::Info("Neo C++ CLI v1.0.0");
-}
+void MainService::OnVersion() { ConsoleHelper::Info("Neo C++ CLI v1.0.0"); }
 
 void MainService::RunConsole()
 {
@@ -374,8 +350,7 @@ void MainService::RunConsole()
     while (running_)
     {
         std::string command = ConsoleHelper::ReadLine("neo> ");
-        if (command.empty())
-            continue;
+        if (command.empty()) continue;
 
         OnCommand(command);
     }

@@ -1,17 +1,22 @@
-#include <algorithm>
-#include <chrono>
-#include <iostream>
 #include <neo/cryptography/hash.h>
 #include <neo/network/p2p/message.h>
 #include <neo/network/p2p/message_command.h>
 #include <neo/network/p2p/network_synchronizer.h>
 #include <neo/network/p2p/payloads/get_data_payload.h>
 
+#include <algorithm>
+#include <chrono>
+#include <iostream>
+
 namespace neo::network::p2p
 {
 NetworkSynchronizer::NetworkSynchronizer(LocalNode& localNode, std::shared_ptr<ledger::Blockchain> blockchain)
-    : localNode_(localNode), blockchain_(blockchain), state_(SynchronizationState::NotSynchronizing),
-      currentBlockIndex_(0), targetBlockIndex_(0), running_(false)
+    : localNode_(localNode),
+      blockchain_(blockchain),
+      state_(SynchronizationState::NotSynchronizing),
+      currentBlockIndex_(0),
+      targetBlockIndex_(0),
+      running_(false)
 {
     // Register callbacks
     localNode_.SetInvMessageReceivedCallback([this](RemoteNode* remoteNode, const payloads::InvPayload& payload)
@@ -21,15 +26,11 @@ NetworkSynchronizer::NetworkSynchronizer(LocalNode& localNode, std::shared_ptr<l
                                                  { OnHeadersMessageReceived(remoteNode, payload); });
 }
 
-NetworkSynchronizer::~NetworkSynchronizer()
-{
-    Stop();
-}
+NetworkSynchronizer::~NetworkSynchronizer() { Stop(); }
 
 void NetworkSynchronizer::Start()
 {
-    if (running_)
-        return;
+    if (running_) return;
 
     running_ = true;
     syncThread_ = std::thread(&NetworkSynchronizer::RunSync, this);
@@ -50,31 +51,20 @@ void NetworkSynchronizer::Start()
 
 void NetworkSynchronizer::Stop()
 {
-    if (!running_)
-        return;
+    if (!running_) return;
 
     running_ = false;
 
-    if (syncThread_.joinable())
-        syncThread_.join();
+    if (syncThread_.joinable()) syncThread_.join();
 
     SetState(SynchronizationState::NotSynchronizing);
 }
 
-SynchronizationState NetworkSynchronizer::GetState() const
-{
-    return state_;
-}
+SynchronizationState NetworkSynchronizer::GetState() const { return state_; }
 
-uint32_t NetworkSynchronizer::GetCurrentBlockIndex() const
-{
-    return currentBlockIndex_;
-}
+uint32_t NetworkSynchronizer::GetCurrentBlockIndex() const { return currentBlockIndex_; }
 
-uint32_t NetworkSynchronizer::GetTargetBlockIndex() const
-{
-    return targetBlockIndex_;
-}
+uint32_t NetworkSynchronizer::GetTargetBlockIndex() const { return targetBlockIndex_; }
 
 void NetworkSynchronizer::SetBlockReceivedCallback(std::function<void(const std::shared_ptr<ledger::Block>&)> callback)
 {
@@ -103,8 +93,7 @@ void NetworkSynchronizer::OnInvMessageReceived(RemoteNode* remoteNode, const pay
         for (const auto& hash : payload.GetHashes())
         {
             // Skip known hashes
-            if (knownHashes_.find(hash) != knownHashes_.end())
-                continue;
+            if (knownHashes_.find(hash) != knownHashes_.end()) continue;
 
             // Add to known hashes
             knownHashes_.insert(hash);
@@ -135,8 +124,7 @@ void NetworkSynchronizer::OnBlockMessageReceived(RemoteNode* remoteNode, const s
     ProcessPendingBlocks();
 
     // Notify block received
-    if (blockReceivedCallback_)
-        blockReceivedCallback_(block);
+    if (blockReceivedCallback_) blockReceivedCallback_(block);
 }
 
 void NetworkSynchronizer::OnTransactionMessageReceived(RemoteNode* remoteNode,
@@ -152,8 +140,7 @@ void NetworkSynchronizer::OnTransactionMessageReceived(RemoteNode* remoteNode,
     ProcessPendingTransactions();
 
     // Notify transaction received
-    if (transactionReceivedCallback_)
-        transactionReceivedCallback_(transaction);
+    if (transactionReceivedCallback_) transactionReceivedCallback_(transaction);
 }
 
 void NetworkSynchronizer::OnHeadersMessageReceived(RemoteNode* remoteNode, const payloads::HeadersPayload& payload)
@@ -284,8 +271,7 @@ void NetworkSynchronizer::RequestHeaders()
     // Get connected nodes
     auto connectedNodes = localNode_.GetConnectedNodes();
 
-    if (connectedNodes.empty())
-        return;
+    if (connectedNodes.empty()) return;
 
     // Get a random node
     auto randomNode = connectedNodes[rand() % connectedNodes.size()];
@@ -304,8 +290,7 @@ void NetworkSynchronizer::RequestBlocks()
     // Get connected nodes
     auto connectedNodes = localNode_.GetConnectedNodes();
 
-    if (connectedNodes.empty())
-        return;
+    if (connectedNodes.empty()) return;
 
     // Get a random node
     auto randomNode = connectedNodes[rand() % connectedNodes.size()];
@@ -324,7 +309,6 @@ void NetworkSynchronizer::SetState(SynchronizationState state)
     state_ = state;
 
     // Notify state changed
-    if (stateChangedCallback_)
-        stateChangedCallback_(state);
+    if (stateChangedCallback_) stateChangedCallback_(state);
 }
 }  // namespace neo::network::p2p

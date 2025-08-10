@@ -1,12 +1,13 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/uint256.h>
 #include <neo/ledger/block.h>
 #include <neo/ledger/transaction.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/smartcontract/native/hash_index_state.h>
 #include <neo/smartcontract/native/native_contract.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::smartcontract::native
@@ -20,7 +21,7 @@ class LedgerContract : public NativeContract
     friend class NativeContractTest;
     friend class LedgerContractTest;
 
-  public:
+   public:
     /**
      * @brief The contract ID.
      */
@@ -62,7 +63,7 @@ class LedgerContract : public NativeContract
      */
     static std::shared_ptr<LedgerContract> GetInstance();
 
-  public:
+   public:
     /**
      * @brief Checks if the contract is initialized.
      * @param snapshot The snapshot.
@@ -150,13 +151,13 @@ class LedgerContract : public NativeContract
      */
     bool PostPersist(ApplicationEngine& engine);
 
-  protected:
+   protected:
     /**
      * @brief Initializes the contract.
      */
     void Initialize() override;
 
-  private:
+   private:
     /**
      * @brief The current block storage key.
      */

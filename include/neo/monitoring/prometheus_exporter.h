@@ -1,9 +1,10 @@
 #pragma once
 
+#include <httplib.h>
+
 #include <atomic>
 #include <chrono>
 #include <functional>
-#include <httplib.h>
 #include <mutex>
 #include <sstream>
 #include <string>
@@ -29,7 +30,7 @@ enum class MetricType
  */
 class Metric
 {
-  public:
+   public:
     Metric(const std::string& name, const std::string& help, MetricType type) : name_(name), help_(help), type_(type) {}
 
     virtual ~Metric() = default;
@@ -40,20 +41,11 @@ class Metric
      */
     virtual std::string Serialize() const = 0;
 
-    const std::string& GetName() const
-    {
-        return name_;
-    }
-    const std::string& GetHelp() const
-    {
-        return help_;
-    }
-    MetricType GetType() const
-    {
-        return type_;
-    }
+    const std::string& GetName() const { return name_; }
+    const std::string& GetHelp() const { return help_; }
+    MetricType GetType() const { return type_; }
 
-  protected:
+   protected:
     std::string TypeString() const
     {
         switch (type_)
@@ -80,18 +72,12 @@ class Metric
  */
 class Counter : public Metric
 {
-  public:
+   public:
     Counter(const std::string& name, const std::string& help) : Metric(name, help, MetricType::COUNTER), value_(0) {}
 
-    void Increment(double value = 1.0)
-    {
-        value_ += value;
-    }
+    void Increment(double value = 1.0) { value_ += value; }
 
-    double Get() const
-    {
-        return value_.load();
-    }
+    double Get() const { return value_.load(); }
 
     std::string Serialize() const override
     {
@@ -102,7 +88,7 @@ class Counter : public Metric
         return ss.str();
     }
 
-  private:
+   private:
     std::atomic<double> value_;
 };
 
@@ -111,28 +97,16 @@ class Counter : public Metric
  */
 class Gauge : public Metric
 {
-  public:
+   public:
     Gauge(const std::string& name, const std::string& help) : Metric(name, help, MetricType::GAUGE), value_(0) {}
 
-    void Set(double value)
-    {
-        value_ = value;
-    }
+    void Set(double value) { value_ = value; }
 
-    void Increment(double value = 1.0)
-    {
-        value_ += value;
-    }
+    void Increment(double value = 1.0) { value_ += value; }
 
-    void Decrement(double value = 1.0)
-    {
-        value_ -= value;
-    }
+    void Decrement(double value = 1.0) { value_ -= value; }
 
-    double Get() const
-    {
-        return value_.load();
-    }
+    double Get() const { return value_.load(); }
 
     std::string Serialize() const override
     {
@@ -143,7 +117,7 @@ class Gauge : public Metric
         return ss.str();
     }
 
-  private:
+   private:
     std::atomic<double> value_;
 };
 
@@ -152,7 +126,7 @@ class Gauge : public Metric
  */
 class Histogram : public Metric
 {
-  public:
+   public:
     Histogram(const std::string& name, const std::string& help,
               const std::vector<double>& buckets = {0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10})
         : Metric(name, help, MetricType::HISTOGRAM), buckets_(buckets)
@@ -210,7 +184,7 @@ class Histogram : public Metric
         return ss.str();
     }
 
-  private:
+   private:
     std::vector<double> buckets_;
     std::vector<uint64_t> bucketCounts_;
     double sum_ = 0;
@@ -224,7 +198,7 @@ class Histogram : public Metric
 template <typename MetricT>
 class LabeledMetric
 {
-  public:
+   public:
     LabeledMetric(const std::string& name, const std::string& help, const std::vector<std::string>& labelNames)
         : name_(name), help_(help), labelNames_(labelNames)
     {
@@ -256,8 +230,7 @@ class LabeledMetric
     {
         std::lock_guard<std::mutex> lock(mutex_);
 
-        if (metrics_.empty())
-            return "";
+        if (metrics_.empty()) return "";
 
         std::stringstream ss;
 
@@ -291,14 +264,13 @@ class LabeledMetric
         return ss.str();
     }
 
-  private:
+   private:
     std::string CreateKey(const std::vector<std::string>& labelValues) const
     {
         std::stringstream ss;
         for (size_t i = 0; i < labelValues.size(); ++i)
         {
-            if (i > 0)
-                ss << ",";
+            if (i > 0) ss << ",";
             ss << labelNames_[i] << "=" << labelValues[i];
         }
         return ss.str();
@@ -309,8 +281,7 @@ class LabeledMetric
         std::stringstream ss;
         for (size_t i = 0; i < labelNames_.size(); ++i)
         {
-            if (i > 0)
-                ss << ",";
+            if (i > 0) ss << ",";
             ss << labelNames_[i] << "=\"" << labelValues[i] << "\"";
         }
         return ss.str();
@@ -334,7 +305,7 @@ class LabeledMetric
  */
 class PrometheusExporter
 {
-  public:
+   public:
     static PrometheusExporter& GetInstance()
     {
         static PrometheusExporter instance;
@@ -357,8 +328,7 @@ class PrometheusExporter
      */
     void StartServer(uint16_t port = 9090)
     {
-        if (server_)
-            return;
+        if (server_) return;
 
         server_ = std::make_unique<httplib::Server>();
 
@@ -409,12 +379,9 @@ class PrometheusExporter
         return ss.str();
     }
 
-    ~PrometheusExporter()
-    {
-        StopServer();
-    }
+    ~PrometheusExporter() { StopServer(); }
 
-  private:
+   private:
     PrometheusExporter() = default;
 
     void AddProcessMetrics(std::stringstream& ss) const
@@ -452,13 +419,13 @@ class PrometheusExporter
 
 #define PROMETHEUS_HISTOGRAM(name, help, ...) std::make_shared<neo::monitoring::Histogram>(name, help, ##__VA_ARGS__)
 
-#define PROMETHEUS_LABELED_COUNTER(name, help, labels)                                                                 \
+#define PROMETHEUS_LABELED_COUNTER(name, help, labels) \
     std::make_shared<neo::monitoring::LabeledMetric<neo::monitoring::Counter>>(name, help, labels)
 
-#define PROMETHEUS_LABELED_GAUGE(name, help, labels)                                                                   \
+#define PROMETHEUS_LABELED_GAUGE(name, help, labels) \
     std::make_shared<neo::monitoring::LabeledMetric<neo::monitoring::Gauge>>(name, help, labels)
 
-#define PROMETHEUS_LABELED_HISTOGRAM(name, help, labels, ...)                                                          \
+#define PROMETHEUS_LABELED_HISTOGRAM(name, help, labels, ...) \
     std::make_shared<neo::monitoring::LabeledMetric<neo::monitoring::Histogram>>(name, help, labels, ##__VA_ARGS__)
 
 }  // namespace neo::monitoring

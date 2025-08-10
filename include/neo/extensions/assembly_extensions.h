@@ -40,7 +40,7 @@ namespace neo::extensions
  */
 class AssemblyExtensions
 {
-  public:
+   public:
     /**
      * @brief Type information structure
      */
@@ -227,7 +227,7 @@ class AssemblyExtensions
      */
     static size_t GetRegisteredTypeCount();
 
-  private:
+   private:
     /**
      * @brief Get the type registry (singleton pattern)
      * @return Reference to type registry map
@@ -268,15 +268,12 @@ class AssemblyExtensions
 template <typename T>
 class TypeRegistrar
 {
-  public:
+   public:
     /**
      * @brief Constructor automatically registers the type
      * @param name Optional type name
      */
-    explicit TypeRegistrar(const std::string& name = "")
-    {
-        AssemblyExtensions::RegisterType<T>(name);
-    }
+    explicit TypeRegistrar(const std::string& name = "") { AssemblyExtensions::RegisterType<T>(name); }
 };
 
 /**

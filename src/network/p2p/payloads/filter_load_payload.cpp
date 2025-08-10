@@ -9,45 +9,21 @@ FilterLoadPayload::FilterLoadPayload(const io::ByteVector& filter, uint8_t k, ui
 {
 }
 
-const io::ByteVector& FilterLoadPayload::GetFilter() const
-{
-    return filter_;
-}
+const io::ByteVector& FilterLoadPayload::GetFilter() const { return filter_; }
 
-void FilterLoadPayload::SetFilter(const io::ByteVector& filter)
-{
-    filter_ = filter;
-}
+void FilterLoadPayload::SetFilter(const io::ByteVector& filter) { filter_ = filter; }
 
-uint8_t FilterLoadPayload::GetK() const
-{
-    return k_;
-}
+uint8_t FilterLoadPayload::GetK() const { return k_; }
 
-void FilterLoadPayload::SetK(uint8_t k)
-{
-    k_ = k;
-}
+void FilterLoadPayload::SetK(uint8_t k) { k_ = k; }
 
-uint32_t FilterLoadPayload::GetTweak() const
-{
-    return tweak_;
-}
+uint32_t FilterLoadPayload::GetTweak() const { return tweak_; }
 
-void FilterLoadPayload::SetTweak(uint32_t tweak)
-{
-    tweak_ = tweak;
-}
+void FilterLoadPayload::SetTweak(uint32_t tweak) { tweak_ = tweak; }
 
-uint8_t FilterLoadPayload::GetFlags() const
-{
-    return flags_;
-}
+uint8_t FilterLoadPayload::GetFlags() const { return flags_; }
 
-void FilterLoadPayload::SetFlags(uint8_t flags)
-{
-    flags_ = flags;
-}
+void FilterLoadPayload::SetFlags(uint8_t flags) { flags_ = flags; }
 
 void FilterLoadPayload::Serialize(io::BinaryWriter& writer) const
 {

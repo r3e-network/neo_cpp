@@ -1,11 +1,12 @@
 #pragma once
 
-#include <memory>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/fixed8.h>
 #include <neo/io/uint160.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/smartcontract/native/native_contract.h>
+
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -27,7 +28,7 @@ class NeoToken : public NativeContract
     friend class NativeContractTest;
     friend class NeoTokenTest;
 
-  public:
+   public:
     /**
      * @brief Type alias for method handler function.
      */
@@ -210,13 +211,13 @@ class NeoToken : public NativeContract
      */
     io::ByteVector GetStoragePrefix() const override;
 
-  protected:
+   protected:
     /**
      * @brief Initializes the contract.
      */
     void Initialize() override;
 
-  public:
+   public:
     /**
      * @brief Account state structure.
      */
@@ -317,8 +318,8 @@ class NeoToken : public NativeContract
      * @param snapshot The snapshot.
      * @return The candidates.
      */
-    std::vector<std::pair<cryptography::ecc::ECPoint, CandidateState>>
-    GetCandidates(std::shared_ptr<persistence::DataCache> snapshot) const;
+    std::vector<std::pair<cryptography::ecc::ECPoint, CandidateState>> GetCandidates(
+        std::shared_ptr<persistence::DataCache> snapshot) const;
 
     /**
      * @brief Gets the candidate vote.
@@ -389,7 +390,7 @@ class NeoToken : public NativeContract
     static constexpr uint8_t PREFIX_BALANCE = 1;
     static constexpr uint8_t PREFIX_VOTER = 34;
 
-  private:
+   private:
     /**
      * @brief Handles the totalSupply method.
      * @param engine The engine.

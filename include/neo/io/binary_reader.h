@@ -1,13 +1,14 @@
 #pragma once
 
-#include <cstdint>
-#include <istream>
-#include <limits>
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/io/fixed8.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
+#include <cstdint>
+#include <istream>
+#include <limits>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -20,7 +21,7 @@ class ISerializable;
  */
 class BinaryReader
 {
-  public:
+   public:
     static constexpr size_t DEFAULT_MAX_ARRAY_SIZE = 16 * 1024 * 1024;  // 16MB
     static constexpr size_t DEFAULT_MAX_STRING_SIZE = 1 * 1024 * 1024;  // 1MB
     /**
@@ -34,6 +35,12 @@ class BinaryReader
      * @param data The ByteSpan to read from.
      */
     explicit BinaryReader(const ByteSpan& data);
+
+    /**
+     * @brief Constructs a BinaryReader that reads from the specified ByteVector.
+     * @param data The ByteVector to read from.
+     */
+    explicit BinaryReader(const ByteVector& data);
 
     /**
      * @brief Constructs a BinaryReader that reads from the specified vector.
@@ -219,8 +226,7 @@ class BinaryReader
         static_assert(std::is_default_constructible<T>::value, "T must be default constructible");
 
         int64_t count = ReadVarInt();
-        if (count < 0 || count > std::numeric_limits<size_t>::max())
-            throw std::out_of_range("Invalid vector size");
+        if (count < 0 || count > std::numeric_limits<size_t>::max()) throw std::out_of_range("Invalid vector size");
 
         std::vector<T> result;
         result.reserve(static_cast<size_t>(count));
@@ -329,7 +335,7 @@ class BinaryReader
      */
     void EnsureAvailable(size_t size) const;
 
-  private:
+   private:
     std::istream* stream_;
     const uint8_t* data_;
     size_t size_;

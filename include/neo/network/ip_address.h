@@ -10,7 +10,7 @@ namespace neo::network
  */
 class IPAddress
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty IPAddress.
      */
@@ -94,7 +94,7 @@ class IPAddress
      */
     static bool TryParse(const std::string& address, IPAddress& result);
 
-  private:
+   private:
     uint8_t address_[16];
     size_t length_;
 };

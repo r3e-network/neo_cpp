@@ -1,14 +1,15 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
+
+#include <cstdint>
 
 namespace neo::cryptography
 {
 class LZ4
 {
-  public:
+   public:
     // Compress data using LZ4 algorithm
     static io::ByteVector Compress(const io::ByteSpan& data);
 

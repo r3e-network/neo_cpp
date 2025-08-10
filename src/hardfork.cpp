@@ -1,4 +1,5 @@
 #include <neo/hardfork.h>
+
 #include <stdexcept>
 #include <string>
 

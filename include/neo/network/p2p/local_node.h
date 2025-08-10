@@ -1,17 +1,11 @@
 #pragma once
 
-#include <atomic>
-#include <boost/asio.hpp>
-#include <cstdint>
-#include <functional>
-#include <memory>
-#include <mutex>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/block.h>
 #include <neo/network/ip_endpoint.h>
-#include <neo/network/p2p/message.h>
 #include <neo/network/p2p/channels_config.h>
+#include <neo/network/p2p/message.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/p2p/payloads/filter_add_payload.h>
 #include <neo/network/p2p/payloads/filter_clear_payload.h>
@@ -30,6 +24,13 @@
 #include <neo/network/p2p/peer_list.h>
 #include <neo/network/p2p/remote_node.h>
 #include <neo/network/p2p/tcp_connection.h>
+
+#include <atomic>
+#include <boost/asio.hpp>
+#include <cstdint>
+#include <functional>
+#include <memory>
+#include <mutex>
 #include <string>
 #include <thread>
 #include <unordered_map>
@@ -42,7 +43,7 @@ namespace neo::network::p2p
  */
 class LocalNode
 {
-  public:
+   public:
     /**
      * @brief Gets the singleton instance of the LocalNode.
      * @return The singleton instance.
@@ -195,8 +196,8 @@ class LocalNode
      * @brief Sets the getblocks message received callback.
      * @param callback The callback.
      */
-    void
-    SetGetBlocksMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::GetBlocksPayload&)> callback);
+    void SetGetBlocksMessageReceivedCallback(
+        std::function<void(RemoteNode*, const payloads::GetBlocksPayload&)> callback);
 
     /**
      * @brief Sets the getblockbyindex message received callback.
@@ -209,8 +210,8 @@ class LocalNode
      * @brief Sets the getheaders message received callback.
      * @param callback The callback.
      */
-    void
-    SetGetHeadersMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::GetBlocksPayload&)> callback);
+    void SetGetHeadersMessageReceivedCallback(
+        std::function<void(RemoteNode*, const payloads::GetBlocksPayload&)> callback);
 
     /**
      * @brief Sets the headers message received callback.
@@ -228,8 +229,8 @@ class LocalNode
      * @brief Sets the filteradd message received callback.
      * @param callback The callback.
      */
-    void
-    SetFilterAddMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::FilterAddPayload&)> callback);
+    void SetFilterAddMessageReceivedCallback(
+        std::function<void(RemoteNode*, const payloads::FilterAddPayload&)> callback);
 
     /**
      * @brief Sets the filterclear message received callback.
@@ -242,8 +243,8 @@ class LocalNode
      * @brief Sets the filterload message received callback.
      * @param callback The callback.
      */
-    void
-    SetFilterLoadMessageReceivedCallback(std::function<void(RemoteNode*, const payloads::FilterLoadPayload&)> callback);
+    void SetFilterLoadMessageReceivedCallback(
+        std::function<void(RemoteNode*, const payloads::FilterLoadPayload&)> callback);
 
     /**
      * @brief Sets the remote node connected callback.
@@ -485,7 +486,7 @@ class LocalNode
      */
     void ManageConnectionLifecycle();
 
-  private:
+   private:
     LocalNode();
 
     std::string userAgent_;

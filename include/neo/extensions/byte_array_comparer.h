@@ -1,9 +1,10 @@
 #pragma once
 
-#include <algorithm>
-#include <cstdint>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
+
+#include <algorithm>
+#include <cstdint>
 #include <vector>
 
 namespace neo::extensions
@@ -34,7 +35,7 @@ namespace neo::extensions
  */
 class ByteArrayComparer
 {
-  public:
+   public:
     /**
      * @brief Compare two byte spans lexicographically
      * @param left First byte span
@@ -161,10 +162,7 @@ class ByteArrayComparer
      */
     struct Equal
     {
-        bool operator()(const io::ByteVector& left, const io::ByteVector& right) const
-        {
-            return Equals(left, right);
-        }
+        bool operator()(const io::ByteVector& left, const io::ByteVector& right) const { return Equals(left, right); }
     };
 
     /**
@@ -172,10 +170,7 @@ class ByteArrayComparer
      */
     struct Hash
     {
-        size_t operator()(const io::ByteVector& data) const
-        {
-            return GetHashCode(data);
-        }
+        size_t operator()(const io::ByteVector& data) const { return GetHashCode(data); }
     };
 };
 }  // namespace neo::extensions

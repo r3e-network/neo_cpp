@@ -2,6 +2,7 @@
 
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
+
 #include <string>
 
 namespace neo::extensions
@@ -11,7 +12,7 @@ namespace neo::extensions
  */
 class Base64
 {
-  public:
+   public:
     /**
      * @brief Encodes a byte span to a base64 string.
      * @param data The data to encode.
@@ -26,7 +27,7 @@ class Base64
      */
     static io::ByteVector Decode(const std::string& base64);
 
-  private:
+   private:
     static const std::string base64_chars;
     static bool IsBase64(unsigned char c);
 };

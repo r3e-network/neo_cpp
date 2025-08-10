@@ -1,10 +1,11 @@
 #pragma once
 
+#include <neo/ledger/block.h>
+#include <neo/ledger/transaction.h>
+
 #include <functional>
 #include <memory>
 #include <mutex>
-#include <neo/ledger/block.h>
-#include <neo/ledger/transaction.h>
 #include <unordered_map>
 
 namespace neo::ledger
@@ -14,7 +15,7 @@ namespace neo::ledger
  */
 class BlockchainCallbacks
 {
-  public:
+   public:
     /**
      * @brief Callback for block persistence.
      */
@@ -68,7 +69,7 @@ class BlockchainCallbacks
      */
     void NotifyTransactionExecution(std::shared_ptr<Transaction> transaction);
 
-  private:
+   private:
     mutable std::mutex mutex_;
     std::unordered_map<int32_t, BlockPersistenceCallback> blockPersistenceCallbacks_;
     std::unordered_map<int32_t, TransactionExecutionCallback> transactionExecutionCallbacks_;

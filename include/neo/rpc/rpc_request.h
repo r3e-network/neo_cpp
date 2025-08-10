@@ -10,7 +10,7 @@ namespace neo::rpc
  */
 class RpcRequest
 {
-  public:
+   public:
     /**
      * @brief Constructs an RpcRequest.
      */
@@ -87,7 +87,7 @@ class RpcRequest
      */
     static RpcRequest FromJson(const nlohmann::json& json);
 
-  private:
+   private:
     std::string jsonrpc_;
     std::string method_;
     nlohmann::json params_;

@@ -9,7 +9,10 @@
 #include <neo/ledger/transaction.h>
 
 // Forward declarations
-namespace neo { class NeoSystem; }
+namespace neo
+{
+class NeoSystem;
+}
 
 namespace neo::ledger
 {
@@ -23,7 +26,7 @@ struct TransactionRemovedEventArgs;
  */
 class MemoryPoolEvents
 {
-  public:
+   public:
     // Event handler types
     using TransactionAddedHandler = std::function<void(std::shared_ptr<Transaction>)>;
     using TransactionRemovedHandler = std::function<void(const TransactionRemovedEventArgs&)>;
@@ -69,7 +72,7 @@ class MemoryPoolEvents
      */
     static void ClearAllSubscriptions();
 
-  private:
+   private:
     static std::vector<TransactionAddedHandler> transaction_added_handlers_;
     static std::vector<TransactionRemovedHandler> transaction_removed_handlers_;
     static std::mutex handlers_mutex_;
@@ -80,12 +83,12 @@ class MemoryPoolEvents
  */
 class BlockchainEvents
 {
-  public:
+   public:
     // Forward declarations
     class ApplicationExecuted;
     class DataCache;
 
-    // Event handler types  
+    // Event handler types
     using CommittingHandler = std::function<void(std::shared_ptr<NeoSystem>, std::shared_ptr<Block>,
                                                  std::shared_ptr<DataCache>, const std::vector<ApplicationExecuted>&)>;
     using CommittedHandler = std::function<void(std::shared_ptr<NeoSystem>, std::shared_ptr<Block>)>;
@@ -127,7 +130,7 @@ class BlockchainEvents
      */
     static void ClearAllSubscriptions();
 
-  private:
+   private:
     static std::vector<CommittingHandler> committing_handlers_;
     static std::vector<CommittedHandler> committed_handlers_;
     static std::vector<BlockPersistedHandler> block_persisted_handlers_;
@@ -141,7 +144,7 @@ class BlockchainEvents
 template <typename EventClass, typename Handler>
 class EventSubscription
 {
-  public:
+   public:
     EventSubscription(Handler handler) : handler_(handler), subscribed_(false) {}
 
     ~EventSubscription()
@@ -160,12 +163,9 @@ class EventSubscription
 
     void Subscribe();
     void Unsubscribe();
-    bool IsSubscribed() const
-    {
-        return subscribed_;
-    }
+    bool IsSubscribed() const { return subscribed_; }
 
-  private:
+   private:
     Handler handler_;
     bool subscribed_;
 };

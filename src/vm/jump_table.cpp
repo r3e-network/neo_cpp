@@ -14,6 +14,7 @@
 #include <neo/vm/jump_table_type.h>
 #include <neo/vm/script.h>
 #include <neo/vm/stack_item.h>
+
 #include <stdexcept>
 
 namespace neo::vm
@@ -333,8 +334,7 @@ void JumpTable::ExecuteTry(ExecutionEngine& engine, int32_t catchOffset, int32_t
 void JumpTable::ExecuteEndTry(ExecutionEngine& engine, int32_t endOffset)
 {
     auto& context = engine.GetCurrentContext();
-    if (context.GetTryCount() == 0)
-        throw InvalidOperationException("The corresponding TRY block cannot be found");
+    if (context.GetTryCount() == 0) throw InvalidOperationException("The corresponding TRY block cannot be found");
 
     auto catchOffset = context.GetCatchOffset();
     auto finallyOffset = context.GetFinallyOffset();

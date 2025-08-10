@@ -3,6 +3,7 @@
 #include <neo/core/safe_conversions.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/json.h>
+
 #include <regex>
 #include <stdexcept>
 #include <string>
@@ -16,7 +17,7 @@ namespace neo::rpc
  */
 class RpcValidation
 {
-  public:
+   public:
     /**
      * @brief Validate a hex string
      * @param hex The hex string to validate
@@ -25,8 +26,7 @@ class RpcValidation
      */
     static bool IsValidHexString(const std::string& hex, size_t expectedLength = 0)
     {
-        if (hex.empty())
-            return false;
+        if (hex.empty()) return false;
 
         // Check if starts with 0x
         size_t start = 0;
@@ -37,8 +37,7 @@ class RpcValidation
 
         // Must have even number of hex digits
         size_t hexLength = hex.length() - start;
-        if (hexLength % 2 != 0)
-            return false;
+        if (hexLength % 2 != 0) return false;
 
         // Check expected length
         if (expectedLength > 0 && hexLength / 2 != expectedLength)

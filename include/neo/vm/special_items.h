@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class InteropInterfaceItem : public StackItem
 {
-  public:
+   public:
     /**
      * @brief Constructs an InteropInterfaceItem.
      * @param value The value.
@@ -20,10 +20,7 @@ class InteropInterfaceItem : public StackItem
      * @brief Conversion operator to std::shared_ptr<StackItem>.
      * @return A shared pointer to the base StackItem.
      */
-    operator std::shared_ptr<StackItem>() const
-    {
-        return std::const_pointer_cast<StackItem>(shared_from_this());
-    }
+    operator std::shared_ptr<StackItem>() const { return std::const_pointer_cast<StackItem>(shared_from_this()); }
 
     /**
      * @brief Gets the type of the stack item.
@@ -62,7 +59,7 @@ class InteropInterfaceItem : public StackItem
      */
     bool Equals(const StackItem& other) const override;
 
-  private:
+   private:
     std::shared_ptr<void> value_;
 };
 
@@ -71,7 +68,7 @@ class InteropInterfaceItem : public StackItem
  */
 class PointerItem : public StackItem
 {
-  public:
+   public:
     /**
      * @brief Constructs a PointerItem.
      * @param position The position.
@@ -83,10 +80,7 @@ class PointerItem : public StackItem
      * @brief Conversion operator to std::shared_ptr<StackItem>.
      * @return A shared pointer to the base StackItem.
      */
-    operator std::shared_ptr<StackItem>() const
-    {
-        return std::const_pointer_cast<StackItem>(shared_from_this());
-    }
+    operator std::shared_ptr<StackItem>() const { return std::const_pointer_cast<StackItem>(shared_from_this()); }
 
     /**
      * @brief Gets the type of the stack item.
@@ -119,7 +113,7 @@ class PointerItem : public StackItem
      */
     bool Equals(const StackItem& other) const override;
 
-  private:
+   private:
     int32_t position_;
     std::shared_ptr<StackItem> value_;
 };
@@ -129,7 +123,7 @@ class PointerItem : public StackItem
  */
 class NullItem : public StackItem
 {
-  public:
+   public:
     /**
      * @brief Constructs a NullItem.
      */
@@ -139,10 +133,7 @@ class NullItem : public StackItem
      * @brief Conversion operator to std::shared_ptr<StackItem>.
      * @return A shared pointer to the base StackItem.
      */
-    operator std::shared_ptr<StackItem>() const
-    {
-        return std::const_pointer_cast<StackItem>(shared_from_this());
-    }
+    operator std::shared_ptr<StackItem>() const { return std::const_pointer_cast<StackItem>(shared_from_this()); }
 
     /**
      * @brief Gets the type of the stack item.

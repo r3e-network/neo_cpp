@@ -1,17 +1,18 @@
 #pragma once
 
-#include <atomic>
-#include <boost/asio/io_context.hpp>
-#include <chrono>
-#include <functional>
-#include <memory>
-#include <mutex>
 #include <neo/io/uint256.h>
 #include <neo/network/inventory_type.h>
 #include <neo/network/p2p/message.h>
 #include <neo/network/peer_discovery_service.h>
 #include <neo/network/tcp_client.h>
 #include <neo/network/tcp_server.h>
+
+#include <atomic>
+#include <boost/asio/io_context.hpp>
+#include <chrono>
+#include <functional>
+#include <memory>
+#include <mutex>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -24,7 +25,7 @@ namespace neo::network
  */
 class P2PPeer
 {
-  public:
+   public:
     /**
      * @brief Constructs a P2PPeer.
      * @param connection The TCP connection.
@@ -125,7 +126,7 @@ class P2PPeer
      */
     void Send(const p2p::Message& message);
 
-  private:
+   private:
     std::shared_ptr<TcpConnection> connection_;
     uint32_t version_;
     uint64_t services_;
@@ -140,7 +141,7 @@ class P2PPeer
  */
 class P2PServer : public std::enable_shared_from_this<P2PServer>
 {
-  public:
+   public:
     /**
      * @brief Constructs a P2PServer.
      * @param ioContext The IO context.
@@ -240,7 +241,7 @@ class P2PServer : public std::enable_shared_from_this<P2PServer>
     void SetInventoryReceivedCallback(
         std::function<void(std::shared_ptr<P2PPeer>, InventoryType, const std::vector<io::UInt256>&)> callback);
 
-  private:
+   private:
     IPEndPoint endpoint_;
     std::string userAgent_;
     std::atomic<uint32_t> startHeight_;
@@ -267,7 +268,7 @@ class P2PServer : public std::enable_shared_from_this<P2PServer>
      */
     std::shared_ptr<PeerDiscoveryService> GetPeerDiscoveryService() const;
 
-  private:
+   private:
     void HandleGetAddrMessage(std::shared_ptr<P2PPeer> peer, const p2p::Message& message);
     void HandleAddrMessage(std::shared_ptr<P2PPeer> peer, const p2p::Message& message);
     void RequestAddresses(std::shared_ptr<P2PPeer> peer);

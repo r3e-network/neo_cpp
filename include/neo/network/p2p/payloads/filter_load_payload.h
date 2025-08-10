@@ -1,12 +1,13 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/network/p2p/ipayload.h>
+
+#include <cstdint>
 
 namespace neo::network::p2p::payloads
 {
@@ -17,7 +18,7 @@ namespace neo::network::p2p::payloads
  */
 class FilterLoadPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Maximum filter size in bytes
      */
@@ -109,7 +110,7 @@ class FilterLoadPayload : public IPayload
      */
     void DeserializeJson(const io::JsonReader& reader);
 
-  private:
+   private:
     io::ByteVector filter_;
     uint8_t k_;
     uint32_t tweak_;

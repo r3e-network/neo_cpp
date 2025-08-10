@@ -1,9 +1,10 @@
+#include <neo/extensions/byte_extensions.h>
+#include <neo/extensions/string_extensions.h>
+
 #include <algorithm>
 #include <cctype>
 #include <codecvt>
 #include <locale>
-#include <neo/extensions/byte_extensions.h>
-#include <neo/extensions/string_extensions.h>
 #include <sstream>
 #include <stdexcept>
 
@@ -83,10 +84,8 @@ std::string StringExtensions::ToStrictUtf8String(const std::vector<uint8_t>& val
 
 std::string StringExtensions::ToStrictUtf8String(const std::vector<uint8_t>& value, size_t start, size_t count)
 {
-    if (start > value.size())
-        throw std::out_of_range("Start index out of range");
-    if (start + count > value.size())
-        throw std::out_of_range("Count extends beyond array bounds");
+    if (start > value.size()) throw std::out_of_range("Start index out of range");
+    if (start + count > value.size()) throw std::out_of_range("Count extends beyond array bounds");
 
     return ToStrictUtf8String(std::span<const uint8_t>(value.data() + start, count));
 }
@@ -104,22 +103,18 @@ size_t StringExtensions::GetStrictUtf8ByteCount(const std::string& value)
 
 bool StringExtensions::IsHex(const std::string& value)
 {
-    if (value.empty())
-        return true;
+    if (value.empty()) return true;
 
-    if (value.length() % 2 != 0)
-        return false;
+    if (value.length() % 2 != 0) return false;
 
     return std::all_of(value.begin(), value.end(), [](char c) { return IsHexDigit(c); });
 }
 
 std::vector<uint8_t> StringExtensions::HexToBytes(const std::string& value)
 {
-    if (value.empty())
-        return {};
+    if (value.empty()) return {};
 
-    if (value.length() % 2 != 0)
-        throw std::invalid_argument("Hex string must have even length");
+    if (value.length() % 2 != 0) throw std::invalid_argument("Hex string must have even length");
 
     std::vector<uint8_t> result;
     result.reserve(value.length() / 2);
@@ -194,15 +189,13 @@ std::string StringExtensions::ToUpper(const std::string& value)
 
 bool StringExtensions::StartsWith(const std::string& value, const std::string& prefix)
 {
-    if (prefix.length() > value.length())
-        return false;
+    if (prefix.length() > value.length()) return false;
     return value.compare(0, prefix.length(), prefix) == 0;
 }
 
 bool StringExtensions::EndsWith(const std::string& value, const std::string& suffix)
 {
-    if (suffix.length() > value.length())
-        return false;
+    if (suffix.length() > value.length()) return false;
     return value.compare(value.length() - suffix.length(), suffix.length(), suffix) == 0;
 }
 
@@ -235,14 +228,12 @@ std::vector<std::string> StringExtensions::Split(const std::string& value, char 
 
 std::string StringExtensions::Join(const std::vector<std::string>& values, const std::string& delimiter)
 {
-    if (values.empty())
-        return "";
+    if (values.empty()) return "";
 
     std::ostringstream oss;
     for (size_t i = 0; i < values.size(); ++i)
     {
-        if (i > 0)
-            oss << delimiter;
+        if (i > 0) oss << delimiter;
         oss << values[i];
     }
 
@@ -256,18 +247,12 @@ bool StringExtensions::IsHexDigit(char c)
 
 uint8_t StringExtensions::HexCharToValue(char c)
 {
-    if (c >= '0' && c <= '9')
-        return c - '0';
-    if (c >= 'a' && c <= 'f')
-        return c - 'a' + 10;
-    if (c >= 'A' && c <= 'F')
-        return c - 'A' + 10;
+    if (c >= '0' && c <= '9') return c - '0';
+    if (c >= 'a' && c <= 'f') return c - 'a' + 10;
+    if (c >= 'A' && c <= 'F') return c - 'A' + 10;
 
     throw std::invalid_argument("Invalid hex character");
 }
 
-bool StringExtensions::IsWhitespace(char c)
-{
-    return std::isspace(static_cast<unsigned char>(c));
-}
+bool StringExtensions::IsWhitespace(char c) { return std::isspace(static_cast<unsigned char>(c)); }
 }  // namespace neo::extensions

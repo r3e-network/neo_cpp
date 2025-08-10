@@ -16,6 +16,7 @@
 #include <neo/vm/stack_item.h>
 #include <neo/vm/stack_item_types.h>
 #include <neo/vm/vm_state.h>
+
 #include <sstream>
 
 namespace neo::rpc
@@ -29,8 +30,7 @@ void LogSessionTermination(const std::string& sessionId);
 // Helper function to convert Neo3Transaction to JSON
 static nlohmann::json TransactionToJson(std::shared_ptr<network::p2p::payloads::Neo3Transaction> tx, bool verbose)
 {
-    if (!tx)
-        return nullptr;
+    if (!tx) return nullptr;
 
     if (!verbose)
     {
@@ -52,8 +52,7 @@ static nlohmann::json TransactionToJson(std::shared_ptr<network::p2p::payloads::
 // Helper function to convert Block to JSON
 static nlohmann::json BlockToJson(std::shared_ptr<ledger::Block> block, bool verbose)
 {
-    if (!block)
-        return nullptr;
+    if (!block) return nullptr;
 
     nlohmann::json json;
     io::JsonWriter writer(json);
@@ -84,8 +83,7 @@ static nlohmann::json BlockToJson(std::shared_ptr<ledger::Block> block, bool ver
 // Helper function to convert Contract to JSON
 static nlohmann::json ContractToJson(std::shared_ptr<smartcontract::ContractState> contract)
 {
-    if (!contract)
-        return nullptr;
+    if (!contract) return nullptr;
 
     nlohmann::json json;
     io::JsonWriter writer(json);
@@ -108,8 +106,7 @@ nlohmann::json RPCMethods::GetBlockCount(std::shared_ptr<node::NeoSystem> neoSys
 
 nlohmann::json RPCMethods::GetBlock(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty())
-        throw std::runtime_error("Invalid params");
+    if (params.empty()) throw std::runtime_error("Invalid params");
 
     std::shared_ptr<ledger::Block> block;
 
@@ -133,8 +130,7 @@ nlohmann::json RPCMethods::GetBlock(std::shared_ptr<node::NeoSystem> neoSystem, 
         throw std::runtime_error("Invalid params");
     }
 
-    if (!block)
-        throw std::runtime_error("Unknown block");
+    if (!block) throw std::runtime_error("Unknown block");
 
     // Check if verbose
     bool verbose = params.size() >= 2 && params[1].is_boolean() && params[1].get<bool>();
@@ -145,22 +141,19 @@ nlohmann::json RPCMethods::GetBlock(std::shared_ptr<node::NeoSystem> neoSystem, 
 
 nlohmann::json RPCMethods::GetBlockHash(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_number())
-        throw std::runtime_error("Invalid params");
+    if (params.empty() || !params[0].is_number()) throw std::runtime_error("Invalid params");
 
     uint32_t index = params[0].get<uint32_t>();
     auto hash = neoSystem->GetBlockchain().GetBlockHash(index);
 
-    if (hash.IsZero())
-        throw std::runtime_error("Unknown block");
+    if (hash.IsZero()) throw std::runtime_error("Unknown block");
 
     return hash.ToString();
 }
 
 nlohmann::json RPCMethods::GetBlockHeader(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty())
-        throw std::runtime_error("Invalid params");
+    if (params.empty()) throw std::runtime_error("Invalid params");
 
     std::shared_ptr<ledger::Block> block;
 
@@ -184,8 +177,7 @@ nlohmann::json RPCMethods::GetBlockHeader(std::shared_ptr<node::NeoSystem> neoSy
         throw std::runtime_error("Invalid params");
     }
 
-    if (!block)
-        throw std::runtime_error("Unknown block");
+    if (!block) throw std::runtime_error("Unknown block");
 
     // Check if verbose
     bool verbose = params.size() >= 2 && params[1].is_boolean() && params[1].get<bool>();
@@ -194,8 +186,7 @@ nlohmann::json RPCMethods::GetBlockHeader(std::shared_ptr<node::NeoSystem> neoSy
     auto json = BlockToJson(block, verbose);
 
     // Remove transactions
-    if (json.contains("tx"))
-        json.erase("tx");
+    if (json.contains("tx")) json.erase("tx");
 
     return json;
 }
@@ -215,8 +206,7 @@ nlohmann::json RPCMethods::GetRawMemPool(std::shared_ptr<node::NeoSystem> neoSys
 
 nlohmann::json RPCMethods::GetRawTransaction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string())
-        throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
 
     io::UInt256 hash;
     hash.FromString(params[0].get<std::string>());
@@ -225,11 +215,9 @@ nlohmann::json RPCMethods::GetRawTransaction(std::shared_ptr<node::NeoSystem> ne
     auto tx = neoSystem->GetMemPool().GetTransaction(hash);
 
     // If not found in memory pool, try to get from blockchain
-    if (!tx)
-        tx = neoSystem->GetBlockchain().GetTransaction(hash);
+    if (!tx) tx = neoSystem->GetBlockchain().GetTransaction(hash);
 
-    if (!tx)
-        throw std::runtime_error("Transaction not found");
+    if (!tx) throw std::runtime_error("Transaction not found");
 
     // Check if verbose
     bool verbose = params.size() >= 2 && params[1].is_boolean() && params[1].get<bool>();
@@ -241,24 +229,21 @@ nlohmann::json RPCMethods::GetRawTransaction(std::shared_ptr<node::NeoSystem> ne
 nlohmann::json RPCMethods::GetTransactionHeight(std::shared_ptr<node::NeoSystem> neoSystem,
                                                 const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string())
-        throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
 
     io::UInt256 hash;
     hash.FromString(params[0].get<std::string>());
 
     auto height = neoSystem->GetBlockchain().GetTransactionHeight(hash);
 
-    if (height < 0)
-        throw std::runtime_error("Transaction not found");
+    if (height < 0) throw std::runtime_error("Transaction not found");
 
     return height;
 }
 
 nlohmann::json RPCMethods::SendRawTransaction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string())
-        throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
 
     auto data = cryptography::Base64::Decode(params[0].get<std::string>());
 
@@ -390,8 +375,7 @@ nlohmann::json RPCMethods::InvokeFunction(std::shared_ptr<node::NeoSystem> neoSy
 
 nlohmann::json RPCMethods::InvokeScript(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string())
-        throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
 
     // Get script
     auto scriptBase64 = params[0].get<std::string>();
@@ -452,8 +436,7 @@ nlohmann::json RPCMethods::InvokeScript(std::shared_ptr<node::NeoSystem> neoSyst
 
 nlohmann::json RPCMethods::GetContractState(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string())
-        throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
 
     // Get contract hash
     io::UInt160 scriptHash;
@@ -462,8 +445,7 @@ nlohmann::json RPCMethods::GetContractState(std::shared_ptr<node::NeoSystem> neo
     // Get contract state
     auto contract = neoSystem->GetBlockchain().GetContract(scriptHash);
 
-    if (!contract)
-        throw std::runtime_error("Contract not found");
+    if (!contract) throw std::runtime_error("Contract not found");
 
     // Convert contract to JSON
     return ContractToJson(contract);
@@ -471,8 +453,7 @@ nlohmann::json RPCMethods::GetContractState(std::shared_ptr<node::NeoSystem> neo
 
 nlohmann::json RPCMethods::GetUnclaimedGas(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string())
-        throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
 
     // Get account
     io::UInt160 account;
@@ -610,8 +591,7 @@ nlohmann::json RPCMethods::GetStorage(std::shared_ptr<node::NeoSystem> neoSystem
 
     // Get contract state to find contract ID
     auto contract = neoSystem->GetBlockchain().GetContract(scriptHash);
-    if (!contract)
-        throw std::runtime_error("Contract not found");
+    if (!contract) throw std::runtime_error("Contract not found");
 
     // Create storage key
     auto storageKey = persistence::StorageKey::Create(contract->GetId(), keyBytes.AsSpan());
@@ -620,8 +600,7 @@ nlohmann::json RPCMethods::GetStorage(std::shared_ptr<node::NeoSystem> neoSystem
     auto snapshot = neoSystem->GetSnapshot();
     auto item = snapshot->TryGet(storageKey);
 
-    if (!item)
-        return nullptr;
+    if (!item) return nullptr;
 
     return cryptography::Base64::Encode(item->GetValue().AsSpan());
 }
@@ -649,8 +628,7 @@ nlohmann::json RPCMethods::FindStorage(std::shared_ptr<node::NeoSystem> neoSyste
 
     // Get contract state to find contract ID
     auto contract = neoSystem->GetBlockchain().GetContract(scriptHash);
-    if (!contract)
-        throw std::runtime_error("Contract not found");
+    if (!contract) throw std::runtime_error("Contract not found");
 
     // Create search prefix
     auto searchKey = persistence::StorageKey::Create(contract->GetId(), prefixBytes.AsSpan());
@@ -735,8 +713,7 @@ nlohmann::json RPCMethods::GetNativeContracts(std::shared_ptr<node::NeoSystem> n
 
 nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string())
-        throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
 
     auto blockBase64 = params[0].get<std::string>();
     auto blockData = cryptography::Base64::Decode(blockBase64);
@@ -750,16 +727,14 @@ nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<node::NeoSystem> neoSyste
     // Submit block to blockchain
     auto result = neoSystem->GetBlockchain().AddBlock(block);
 
-    if (!result)
-        throw std::runtime_error("Block rejected");
+    if (!result) throw std::runtime_error("Block rejected");
 
     return block->GetHash().ToString();
 }
 
 nlohmann::json RPCMethods::ValidateAddress(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string())
-        throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
 
     auto address = params[0].get<std::string>();
 
@@ -805,8 +780,7 @@ nlohmann::json RPCMethods::TraverseIterator(std::shared_ptr<node::NeoSystem> neo
     if (params.size() >= 3 && params[2].is_number())
     {
         count = params[2].get<int>();
-        if (count <= 0 || count > 1000)
-            throw std::runtime_error("Invalid count parameter");
+        if (count <= 0 || count > 1000) throw std::runtime_error("Invalid count parameter");
     }
 
     // Complete iterator session management implementation
@@ -873,8 +847,7 @@ nlohmann::json RPCMethods::TraverseIterator(std::shared_ptr<node::NeoSystem> neo
 
 nlohmann::json RPCMethods::TerminateSession(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    if (params.empty() || !params[0].is_string())
-        throw std::runtime_error("Invalid parameter");
+    if (params.empty() || !params[0].is_string()) throw std::runtime_error("Invalid parameter");
 
     auto sessionId = params[0].get<std::string>();
 
@@ -1270,83 +1243,83 @@ nlohmann::json RPCMethods::ContractToJson(std::shared_ptr<smartcontract::Contrac
 }
 
 // RPC Session management implementation
-class RpcSessionManager 
+class RpcSessionManager
 {
-public:
-    class RpcSession 
+   public:
+    class RpcSession
     {
-    public:
-        class RpcIterator 
+       public:
+        class RpcIterator
         {
-        public:
+           public:
             bool HasNext() const { return has_next_; }
-            std::shared_ptr<vm::StackItem> Next() 
-            { 
+            std::shared_ptr<vm::StackItem> Next()
+            {
                 if (!has_next_) return nullptr;
-                has_next_ = false; // Simple implementation - mark as exhausted after first call
+                has_next_ = false;  // Simple implementation - mark as exhausted after first call
                 return vm::StackItem::Null();
             }
-        private:
+
+           private:
             bool has_next_ = true;
         };
 
-        std::shared_ptr<RpcIterator> GetIterator(const std::string& id) 
+        std::shared_ptr<RpcIterator> GetIterator(const std::string& id)
         {
             auto it = iterators_.find(id);
-            if (it != iterators_.end()) {
+            if (it != iterators_.end())
+            {
                 return it->second;
             }
             return nullptr;
         }
 
-        void UpdateLastActivity() 
-        {
-            last_activity_ = std::chrono::steady_clock::now();
-        }
+        void UpdateLastActivity() { last_activity_ = std::chrono::steady_clock::now(); }
 
-    private:
+       private:
         std::map<std::string, std::shared_ptr<RpcIterator>> iterators_;
         std::chrono::steady_clock::time_point last_activity_;
     };
 
-    std::shared_ptr<RpcSession> GetSession(const std::string& id) 
+    std::shared_ptr<RpcSession> GetSession(const std::string& id)
     {
         auto it = sessions_.find(id);
-        if (it != sessions_.end()) {
+        if (it != sessions_.end())
+        {
             return it->second;
         }
         return nullptr;
     }
 
-    bool TerminateSession(const std::string& id) 
+    bool TerminateSession(const std::string& id)
     {
         auto it = sessions_.find(id);
-        if (it != sessions_.end()) {
+        if (it != sessions_.end())
+        {
             sessions_.erase(it);
             return true;
         }
         return false;
     }
 
-private:
+   private:
     std::map<std::string, std::shared_ptr<RpcSession>> sessions_;
 };
 
 // Global RPC session manager instance
 static std::shared_ptr<RpcSessionManager> g_rpc_session_manager = std::make_shared<RpcSessionManager>();
 
-std::shared_ptr<RpcSessionManager> GetRpcSessionManager() 
-{
-    return g_rpc_session_manager;
-}
+std::shared_ptr<RpcSessionManager> GetRpcSessionManager() { return g_rpc_session_manager; }
 
-nlohmann::json ConvertStackItemToJson(std::shared_ptr<vm::StackItem> item) 
+nlohmann::json ConvertStackItemToJson(std::shared_ptr<vm::StackItem> item)
 {
-    if (!item) {
+    if (!item)
+    {
         return nullptr;
     }
 
-    switch (item->GetType()) {
+    switch (item->GetType())
+    {
         case vm::StackItemType::Null:
             return nullptr;
         case vm::StackItemType::Boolean:
@@ -1354,24 +1327,29 @@ nlohmann::json ConvertStackItemToJson(std::shared_ptr<vm::StackItem> item)
         case vm::StackItemType::Integer:
             return nlohmann::json{{"type", "Integer"}, {"value", item->GetInteger()}};
         case vm::StackItemType::ByteString:
-            return nlohmann::json{{"type", "ByteString"}, {"value", cryptography::Base64::Encode(item->GetByteArray().AsSpan())}};
+            return nlohmann::json{{"type", "ByteString"},
+                                  {"value", cryptography::Base64::Encode(item->GetByteArray().AsSpan())}};
         case vm::StackItemType::Buffer:
-            return nlohmann::json{{"type", "Buffer"}, {"value", cryptography::Base64::Encode(item->GetByteArray().AsSpan())}};
+            return nlohmann::json{{"type", "Buffer"},
+                                  {"value", cryptography::Base64::Encode(item->GetByteArray().AsSpan())}};
         case vm::StackItemType::Array:
         case vm::StackItemType::Struct:
         {
             nlohmann::json array = nlohmann::json::array();
             auto items = item->GetArray();
-            for (const auto& arrayItem : items) {
+            for (const auto& arrayItem : items)
+            {
                 array.push_back(ConvertStackItemToJson(arrayItem));
             }
-            return nlohmann::json{{"type", item->GetType() == vm::StackItemType::Array ? "Array" : "Struct"}, {"value", array}};
+            return nlohmann::json{{"type", item->GetType() == vm::StackItemType::Array ? "Array" : "Struct"},
+                                  {"value", array}};
         }
         case vm::StackItemType::Map:
         {
             nlohmann::json map = nlohmann::json::object();
             auto mapItems = item->GetMap();
-            for (const auto& [key, value] : mapItems) {
+            for (const auto& [key, value] : mapItems)
+            {
                 auto keyJson = ConvertStackItemToJson(key);
                 auto valueJson = ConvertStackItemToJson(value);
                 // Use string representation of key for JSON object
@@ -1385,7 +1363,7 @@ nlohmann::json ConvertStackItemToJson(std::shared_ptr<vm::StackItem> item)
     }
 }
 
-void LogSessionTermination(const std::string& sessionId) 
+void LogSessionTermination(const std::string& sessionId)
 {
     // Simple logging implementation - in production this would use proper logging framework
     std::cout << "RPC Session terminated: " << sessionId << std::endl;

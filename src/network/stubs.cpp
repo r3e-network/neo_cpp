@@ -136,10 +136,7 @@ TaskManager::TaskManager(std::shared_ptr<ledger::Blockchain>, std::shared_ptr<le
     LOG_INFO("TaskManager stub constructor");
 }
 
-TaskManager::~TaskManager()
-{
-    LOG_INFO("TaskManager stub destructor");
-}
+TaskManager::~TaskManager() { LOG_INFO("TaskManager stub destructor"); }
 
 // Message implementations moved to message_simple.cpp - stubs removed to avoid conflicts
 }  // namespace neo::network::p2p
@@ -171,20 +168,11 @@ TcpConnection::TcpConnection(boost::asio::io_context& context) : socket_(context
 
 TcpConnection::~TcpConnection() = default;
 
-void TcpConnection::Start()
-{
-    LOG_INFO("TcpConnection::Start() stub");
-}
+void TcpConnection::Start() { LOG_INFO("TcpConnection::Start() stub"); }
 
-void TcpConnection::Close()
-{
-    LOG_INFO("TcpConnection::Close() stub");
-}
+void TcpConnection::Close() { LOG_INFO("TcpConnection::Close() stub"); }
 
-boost::asio::ip::tcp::socket& TcpConnection::GetSocket()
-{
-    return socket_;
-}
+boost::asio::ip::tcp::socket& TcpConnection::GetSocket() { return socket_; }
 
 void TcpConnection::SetConnectionClosedCallback(std::function<void()> callback)
 {

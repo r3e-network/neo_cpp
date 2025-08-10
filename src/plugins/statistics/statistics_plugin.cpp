@@ -1,38 +1,29 @@
-#include <iostream>
 #include <neo/plugins/statistics/statistics_plugin.h>
+
+#include <iostream>
 
 namespace neo::plugins::statistics
 {
 StatisticsPlugin::StatisticsPlugin()
-    : running_(false), blockCount_(0), transactionCount_(0), peerCount_(0), memoryPoolSize_(0),
-      interval_(10), enableRPC_(true)
+    : running_(false),
+      blockCount_(0),
+      transactionCount_(0),
+      peerCount_(0),
+      memoryPoolSize_(0),
+      interval_(10),
+      enableRPC_(true)
 {
 }
 
-StatisticsPlugin::~StatisticsPlugin()
-{
-    Stop();
-}
+StatisticsPlugin::~StatisticsPlugin() { Stop(); }
 
-std::string StatisticsPlugin::GetName() const
-{
-    return "Statistics";
-}
+std::string StatisticsPlugin::GetName() const { return "Statistics"; }
 
-std::string StatisticsPlugin::GetDescription() const
-{
-    return "Collects and displays node statistics";
-}
+std::string StatisticsPlugin::GetDescription() const { return "Collects and displays node statistics"; }
 
-std::string StatisticsPlugin::GetVersion() const
-{
-    return "1.0.0";
-}
+std::string StatisticsPlugin::GetVersion() const { return "1.0.0"; }
 
-std::string StatisticsPlugin::GetAuthor() const
-{
-    return "Neo C++ Team";
-}
+std::string StatisticsPlugin::GetAuthor() const { return "Neo C++ Team"; }
 
 bool StatisticsPlugin::Initialize(std::shared_ptr<node::NeoSystem> neoSystem,
                                   const std::unordered_map<std::string, std::string>& settings)
@@ -71,8 +62,7 @@ bool StatisticsPlugin::Initialize(std::shared_ptr<node::NeoSystem> neoSystem,
 
 bool StatisticsPlugin::Start()
 {
-    if (running_)
-        return true;
+    if (running_) return true;
 
     running_ = true;
     statisticsThread_ = std::thread(&StatisticsPlugin::CollectStatistics, this);
@@ -84,13 +74,11 @@ bool StatisticsPlugin::Start()
 
 bool StatisticsPlugin::Stop()
 {
-    if (!running_)
-        return true;
+    if (!running_) return true;
 
     running_ = false;
 
-    if (statisticsThread_.joinable())
-        statisticsThread_.join();
+    if (statisticsThread_.joinable()) statisticsThread_.join();
 
     // RPC cleanup would be handled by the RPC system
     // if (enableRPC_)
@@ -103,10 +91,7 @@ bool StatisticsPlugin::Stop()
     return true;
 }
 
-bool StatisticsPlugin::IsRunning() const
-{
-    return running_;
-}
+bool StatisticsPlugin::IsRunning() const { return running_; }
 
 void StatisticsPlugin::CollectStatistics()
 {
@@ -119,13 +104,13 @@ void StatisticsPlugin::CollectStatistics()
             {
                 // Block count would come from blockchain
                 blockCount_ = 0;  // Would need GetCurrentBlockHeight() method
-                
+
                 // Transaction count would come from database
                 transactionCount_ = 0;
-                
+
                 // Peer count would come from network
                 peerCount_ = 0;
-                
+
                 // Memory pool size would come from mempool
                 memoryPoolSize_ = 0;
             }

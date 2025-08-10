@@ -22,8 +22,7 @@ void JumpTableExtension::ASSERTMSG(ExecutionEngine& engine, const Instruction& /
     auto message = engine.Pop()->GetString();
     auto condition = engine.Pop()->GetBoolean();
 
-    if (!condition)
-        throw InvalidOperationException("ASSERT: " + message);
+    if (!condition) throw InvalidOperationException("ASSERT: " + message);
 }
 
 void JumpTableExtension::PUSHT(ExecutionEngine& engine, const Instruction& /* instruction */)
@@ -42,8 +41,7 @@ void JumpTableExtension::CALLT(ExecutionEngine& engine, const Instruction& instr
     auto& context = engine.GetCurrentContext();
     auto table = context.GetCallTable();
 
-    if (index >= table.size())
-        throw InvalidOperationException("Call table index out of range");
+    if (index >= table.size()) throw InvalidOperationException("Call table index out of range");
 
     auto position = table[index];
     JumpTable::ExecuteCall(engine, position);

@@ -1,9 +1,10 @@
 #pragma once
 
-#include <memory>
-#include <mutex>
 #include <neo/io/uint256.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
+
+#include <memory>
+#include <mutex>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -30,7 +31,7 @@ enum class ConsensusPhase
  */
 class ConsensusState
 {
-  private:
+   private:
     mutable std::mutex mutex_;
 
     // Basic state
@@ -52,7 +53,7 @@ class ConsensusState
     // Transaction pool
     std::unordered_map<io::UInt256, network::p2p::payloads::Neo3Transaction> transaction_pool_;
 
-  public:
+   public:
     /**
      * @brief Get current view number
      */

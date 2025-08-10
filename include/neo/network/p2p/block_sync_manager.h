@@ -1,5 +1,10 @@
 #pragma once
 
+#include <neo/io/uint256.h>
+#include <neo/ledger/block.h>
+#include <neo/ledger/block_header.h>
+#include <neo/network/p2p/remote_node.h>
+
 #include <atomic>
 #include <chrono>
 #include <condition_variable>
@@ -12,11 +17,6 @@
 #include <unordered_set>
 #include <vector>
 
-#include <neo/io/uint256.h>
-#include <neo/ledger/block.h>
-#include <neo/ledger/block_header.h>
-#include <neo/network/p2p/remote_node.h>
-
 namespace neo
 {
 class NeoSystem;
@@ -28,7 +28,7 @@ class LocalNode;
 
 /**
  * @brief Manages block synchronization from network peers
- * 
+ *
  * This class handles:
  * - Initial block download (IBD) from peers
  * - Header synchronization
@@ -38,7 +38,7 @@ class LocalNode;
  */
 class BlockSyncManager
 {
-public:
+   public:
     enum class SyncState
     {
         Idle,
@@ -141,23 +141,23 @@ public:
      */
     SyncStats GetStats() const;
 
-private:
+   private:
     // Core components
     std::shared_ptr<NeoSystem> system_;
     LocalNode& localNode_;
-    
+
     // Sync state
     std::atomic<SyncState> syncState_{SyncState::Idle};
     std::atomic<uint32_t> currentHeight_{0};
     std::atomic<uint32_t> targetHeight_{0};
     std::atomic<uint32_t> headerHeight_{0};
-    
+
     // Thread management
     std::thread syncThread_;
     std::atomic<bool> running_{false};
     std::condition_variable syncCv_;
     mutable std::mutex syncMutex_;
-    
+
     // Parallel processing
     static constexpr size_t PROCESSING_THREADS = 8;
     std::vector<std::thread> processingThreads_;
@@ -165,42 +165,43 @@ private:
     mutable std::mutex batchMutex_;
     std::condition_variable batchCv_;
     std::atomic<bool> processingRunning_{false};
-    
+
     // Block management
     std::unordered_map<io::UInt256, std::shared_ptr<ledger::Block>> orphanBlocks_;
     std::unordered_set<io::UInt256> requestedBlocks_;
+    std::unordered_map<io::UInt256, std::chrono::steady_clock::time_point> requestTimestamps_;
     std::queue<io::UInt256> blockDownloadQueue_;
     mutable std::mutex blockMutex_;
-    
+
     // Block collection for batching
     std::vector<std::shared_ptr<ledger::Block>> pendingBlocks_;
     mutable std::mutex pendingBlocksMutex_;
     static constexpr size_t BATCH_COLLECTION_SIZE = 500;
-    
+
     // Header management
     std::vector<std::shared_ptr<ledger::BlockHeader>> pendingHeaders_;
     mutable std::mutex headerMutex_;
-    
+
     // Peer tracking
     struct PeerInfo
     {
         uint32_t lastBlockIndex;
         std::chrono::steady_clock::time_point lastUpdate;
-        uint32_t downloadSpeed; // blocks per second
+        uint32_t downloadSpeed;  // blocks per second
         bool syncing;
     };
     std::unordered_map<RemoteNode*, PeerInfo> peers_;
     mutable std::mutex peerMutex_;
-    
+
     // Configuration
     uint32_t maxConcurrentDownloads_{2000};  // Production: download 2000 blocks concurrently
     uint32_t maxOrphanBlocks_{100};
     std::chrono::seconds requestTimeout_{30};
-    
+
     // Statistics
     std::chrono::steady_clock::time_point syncStartTime_;
     std::atomic<uint32_t> downloadedBlocks_{0};
-    
+
     // Private methods
     void SyncLoop();
     void RequestHeaders();
@@ -215,10 +216,10 @@ private:
     void UpdatePeerInfo(RemoteNode* node, uint32_t lastBlockIndex);
     uint32_t GetLocalHeight() const;
     void UpdateSyncState();
-    
+
     // Parallel processing methods
     void ProcessingThreadWorker();
     void EnqueueBlockBatch(std::vector<std::shared_ptr<ledger::Block>>&& batch);
 };
 
-} // namespace neo::network::p2p
+}  // namespace neo::network::p2p

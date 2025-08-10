@@ -1,11 +1,12 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/persistence/istore.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/persistence/store_view.h>
+
+#include <functional>
+#include <memory>
 #include <optional>
 #include <unordered_map>
 
@@ -27,7 +28,7 @@ enum class TrackState
  */
 class DataCache : public StoreView
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */
@@ -55,8 +56,8 @@ class DataCache : public StoreView
      * @param factory Optional factory function to create the item if it doesn't exist.
      * @return Pointer to the storage item, or nullptr if not found and no factory provided.
      */
-    virtual std::shared_ptr<StorageItem>
-    GetAndChange(const StorageKey& key, std::function<std::shared_ptr<StorageItem>()> factory = nullptr) override = 0;
+    virtual std::shared_ptr<StorageItem> GetAndChange(
+        const StorageKey& key, std::function<std::shared_ptr<StorageItem>()> factory = nullptr) override = 0;
 
     /**
      * @brief Creates a snapshot of the cache.
@@ -82,7 +83,7 @@ class DataCache : public StoreView
  */
 class StoreCache : public DataCache
 {
-  public:
+   public:
     /**
      * @brief Constructs a StoreCache.
      * @param store The store to cache.
@@ -236,7 +237,7 @@ class StoreCache : public DataCache
      */
     bool IsReadOnly() const override;
 
-  private:
+   private:
     IStore& store_;
     std::shared_ptr<IStoreSnapshot> snapshot_;
     std::unordered_map<StorageKey, std::pair<StorageItem, TrackState>> items_;

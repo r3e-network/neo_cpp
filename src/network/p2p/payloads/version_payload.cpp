@@ -1,80 +1,42 @@
-#include <algorithm>
-#include <chrono>
-#include <functional>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/network/p2p/payloads/version_payload.h>
 
+#include <algorithm>
+#include <chrono>
+#include <functional>
+
 namespace neo::network::p2p::payloads
 {
 VersionPayload::VersionPayload() : network_(0), version_(0), timestamp_(0), nonce_(0), allowCompression_(true) {}
 
-uint32_t VersionPayload::GetNetwork() const
-{
-    return network_;
-}
+uint32_t VersionPayload::GetNetwork() const { return network_; }
 
-void VersionPayload::SetNetwork(uint32_t network)
-{
-    network_ = network;
-}
+void VersionPayload::SetNetwork(uint32_t network) { network_ = network; }
 
-uint32_t VersionPayload::GetVersion() const
-{
-    return version_;
-}
+uint32_t VersionPayload::GetVersion() const { return version_; }
 
-void VersionPayload::SetVersion(uint32_t version)
-{
-    version_ = version;
-}
+void VersionPayload::SetVersion(uint32_t version) { version_ = version; }
 
-uint32_t VersionPayload::GetTimestamp() const
-{
-    return timestamp_;
-}
+uint32_t VersionPayload::GetTimestamp() const { return timestamp_; }
 
-void VersionPayload::SetTimestamp(uint32_t timestamp)
-{
-    timestamp_ = timestamp;
-}
+void VersionPayload::SetTimestamp(uint32_t timestamp) { timestamp_ = timestamp; }
 
-uint32_t VersionPayload::GetNonce() const
-{
-    return nonce_;
-}
+uint32_t VersionPayload::GetNonce() const { return nonce_; }
 
-void VersionPayload::SetNonce(uint32_t nonce)
-{
-    nonce_ = nonce;
-}
+void VersionPayload::SetNonce(uint32_t nonce) { nonce_ = nonce; }
 
-const std::string& VersionPayload::GetUserAgent() const
-{
-    return userAgent_;
-}
+const std::string& VersionPayload::GetUserAgent() const { return userAgent_; }
 
-void VersionPayload::SetUserAgent(const std::string& userAgent)
-{
-    userAgent_ = userAgent;
-}
+void VersionPayload::SetUserAgent(const std::string& userAgent) { userAgent_ = userAgent; }
 
-bool VersionPayload::GetAllowCompression() const
-{
-    return allowCompression_;
-}
+bool VersionPayload::GetAllowCompression() const { return allowCompression_; }
 
-void VersionPayload::SetAllowCompression(bool allowCompression)
-{
-    allowCompression_ = allowCompression;
-}
+void VersionPayload::SetAllowCompression(bool allowCompression) { allowCompression_ = allowCompression; }
 
-const std::vector<NodeCapability>& VersionPayload::GetCapabilities() const
-{
-    return capabilities_;
-}
+const std::vector<NodeCapability>& VersionPayload::GetCapabilities() const { return capabilities_; }
 
 uint32_t VersionPayload::GetStartHeight() const
 {
@@ -93,10 +55,7 @@ uint32_t VersionPayload::GetStartHeight() const
     return 0;  // Return 0 if no FullNode capability found
 }
 
-void VersionPayload::SetCapabilities(const std::vector<NodeCapability>& capabilities)
-{
-    capabilities_ = capabilities;
-}
+void VersionPayload::SetCapabilities(const std::vector<NodeCapability>& capabilities) { capabilities_ = capabilities; }
 
 size_t VersionPayload::GetSize() const
 {

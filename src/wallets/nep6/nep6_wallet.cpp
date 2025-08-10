@@ -1,11 +1,12 @@
-#include <filesystem>
-#include <fstream>
-#include <iostream>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/hash.h>
 #include <neo/cryptography/scrypt.h>
 #include <neo/io/json.h>
 #include <neo/wallets/nep6/nep6_wallet.h>
+
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 
 namespace neo::wallets::nep6
 {
@@ -28,40 +29,19 @@ NEP6Account::NEP6Account(const io::UInt160& scriptHash, const std::string& nep2K
 {
 }
 
-const std::string& NEP6Account::GetNEP2Key() const
-{
-    return nep2Key_;
-}
+const std::string& NEP6Account::GetNEP2Key() const { return nep2Key_; }
 
-void NEP6Account::SetNEP2Key(const std::string& nep2Key)
-{
-    nep2Key_ = nep2Key;
-}
+void NEP6Account::SetNEP2Key(const std::string& nep2Key) { nep2Key_ = nep2Key; }
 
-const nlohmann::json& NEP6Account::GetExtra() const
-{
-    return extra_;
-}
+const nlohmann::json& NEP6Account::GetExtra() const { return extra_; }
 
-void NEP6Account::SetExtra(const nlohmann::json& extra)
-{
-    extra_ = extra;
-}
+void NEP6Account::SetExtra(const nlohmann::json& extra) { extra_ = extra; }
 
-bool NEP6Account::IsDeployed() const
-{
-    return deployed_;
-}
+bool NEP6Account::IsDeployed() const { return deployed_; }
 
-void NEP6Account::SetDeployed(bool deployed)
-{
-    deployed_ = deployed;
-}
+void NEP6Account::SetDeployed(bool deployed) { deployed_ = deployed; }
 
-const std::vector<std::string>& NEP6Account::GetParameterNames() const
-{
-    return parameterNames_;
-}
+const std::vector<std::string>& NEP6Account::GetParameterNames() const { return parameterNames_; }
 
 void NEP6Account::SetParameterNames(const std::vector<std::string>& parameterNames)
 {
@@ -70,8 +50,7 @@ void NEP6Account::SetParameterNames(const std::vector<std::string>& parameterNam
 
 bool NEP6Account::DecryptPrivateKey(const std::string& password, const ScryptParameters& scrypt)
 {
-    if (nep2Key_.empty())
-        return false;
+    if (nep2Key_.empty()) return false;
 
     try
     {
@@ -94,8 +73,7 @@ bool NEP6Account::DecryptPrivateKey(const std::string& password, const ScryptPar
 
 bool NEP6Account::VerifyPassword(const std::string& password, const ScryptParameters& scrypt) const
 {
-    if (nep2Key_.empty())
-        return false;
+    if (nep2Key_.empty()) return false;
 
     try
     {
@@ -113,11 +91,9 @@ nlohmann::json NEP6Account::ToJson() const
     nlohmann::json json;
     json["address"] = GetAddress();
 
-    if (!nep2Key_.empty())
-        json["key"] = nep2Key_;
+    if (!nep2Key_.empty()) json["key"] = nep2Key_;
 
-    if (!GetLabel().empty())
-        json["label"] = GetLabel();
+    if (!GetLabel().empty()) json["label"] = GetLabel();
 
     json["isDefault"] = false;  // Will be set by the wallet
     json["lock"] = IsLocked();
@@ -141,8 +117,7 @@ nlohmann::json NEP6Account::ToJson() const
         json["contract"] = contractJson;
     }
 
-    if (!extra_.is_null())
-        json["extra"] = extra_;
+    if (!extra_.is_null()) json["extra"] = extra_;
 
     return json;
 }
@@ -155,22 +130,18 @@ void NEP6Account::FromJson(const nlohmann::json& json)
         SetScriptHash(io::UInt160::FromAddress(address));
     }
 
-    if (json.contains("key"))
-        nep2Key_ = json["key"].get<std::string>();
+    if (json.contains("key")) nep2Key_ = json["key"].get<std::string>();
 
-    if (json.contains("label"))
-        SetLabel(json["label"].get<std::string>());
+    if (json.contains("label")) SetLabel(json["label"].get<std::string>());
 
-    if (json.contains("lock"))
-        SetLocked(json["lock"].get<bool>());
+    if (json.contains("lock")) SetLocked(json["lock"].get<bool>());
 
     if (json.contains("contract") && !json["contract"].is_null())
     {
         auto contractJson = json["contract"];
 
         io::ByteVector script;
-        if (contractJson.contains("script"))
-            script = io::ByteVector::Parse(contractJson["script"].get<std::string>());
+        if (contractJson.contains("script")) script = io::ByteVector::Parse(contractJson["script"].get<std::string>());
 
         std::vector<smartcontract::ContractParameterType> parameterList;
         parameterNames_.clear();
@@ -191,12 +162,10 @@ void NEP6Account::FromJson(const nlohmann::json& json)
 
         SetContract(smartcontract::Contract(script, parameterList));
 
-        if (contractJson.contains("deployed"))
-            deployed_ = contractJson["deployed"].get<bool>();
+        if (contractJson.contains("deployed")) deployed_ = contractJson["deployed"].get<bool>();
     }
 
-    if (json.contains("extra") && !json["extra"].is_null())
-        extra_ = json["extra"];
+    if (json.contains("extra") && !json["extra"].is_null()) extra_ = json["extra"];
 }
 
 // NEP6Wallet implementation
@@ -216,25 +185,15 @@ NEP6Wallet::NEP6Wallet(const std::string& path, const std::string& password, con
     SetVersion(1);
 }
 
-const ScryptParameters& NEP6Wallet::GetScrypt() const
-{
-    return scrypt_;
-}
+const ScryptParameters& NEP6Wallet::GetScrypt() const { return scrypt_; }
 
-void NEP6Wallet::SetScrypt(const ScryptParameters& scrypt)
-{
-    scrypt_ = scrypt;
-}
+void NEP6Wallet::SetScrypt(const ScryptParameters& scrypt) { scrypt_ = scrypt; }
 
-const std::string& NEP6Wallet::GetPassword() const
-{
-    return password_;
-}
+const std::string& NEP6Wallet::GetPassword() const { return password_; }
 
 bool NEP6Wallet::ChangePassword(const std::string& oldPassword, const std::string& newPassword)
 {
-    if (!VerifyPassword(oldPassword))
-        return false;
+    if (!VerifyPassword(oldPassword)) return false;
 
     // Change password for all accounts
     for (const auto& account : GetAccounts())
@@ -243,8 +202,7 @@ bool NEP6Wallet::ChangePassword(const std::string& oldPassword, const std::strin
         if (nep6Account && !nep6Account->GetNEP2Key().empty())
         {
             // Decrypt private key
-            if (!nep6Account->DecryptPrivateKey(oldPassword, scrypt_))
-                return false;
+            if (!nep6Account->DecryptPrivateKey(oldPassword, scrypt_)) return false;
 
             // Re-encrypt with new password
             auto privateKey = nep6Account->GetPrivateKey();
@@ -260,8 +218,7 @@ bool NEP6Wallet::ChangePassword(const std::string& oldPassword, const std::strin
 
 bool NEP6Wallet::VerifyPassword(const std::string& password) const
 {
-    if (password_ != password)
-        return false;
+    if (password_ != password) return false;
 
     // Verify password for all accounts
     for (const auto& account : GetAccounts())
@@ -269,8 +226,7 @@ bool NEP6Wallet::VerifyPassword(const std::string& password) const
         auto nep6Account = std::dynamic_pointer_cast<NEP6Account>(account);
         if (nep6Account && !nep6Account->GetNEP2Key().empty())
         {
-            if (!nep6Account->VerifyPassword(password, scrypt_))
-                return false;
+            if (!nep6Account->VerifyPassword(password, scrypt_)) return false;
         }
     }
 
@@ -364,22 +320,18 @@ nlohmann::json NEP6Wallet::ToJson() const
 
     json["accounts"] = accountsJson;
 
-    if (!extra_.is_null())
-        json["extra"] = extra_;
+    if (!extra_.is_null()) json["extra"] = extra_;
 
     return json;
 }
 
 void NEP6Wallet::FromJson(const nlohmann::json& json)
 {
-    if (json.contains("name"))
-        SetName(json["name"].get<std::string>());
+    if (json.contains("name")) SetName(json["name"].get<std::string>());
 
-    if (json.contains("version"))
-        SetVersion(json["version"].get<int32_t>());
+    if (json.contains("version")) SetVersion(json["version"].get<int32_t>());
 
-    if (json.contains("scrypt"))
-        scrypt_.FromJson(json["scrypt"]);
+    if (json.contains("scrypt")) scrypt_.FromJson(json["scrypt"]);
 
     if (json.contains("accounts") && json["accounts"].is_array())
     {
@@ -392,15 +344,12 @@ void NEP6Wallet::FromJson(const nlohmann::json& json)
 
             AddAccount(account);
 
-            if (accountJson.contains("isDefault") && accountJson["isDefault"].get<bool>())
-                defaultAccount = account;
+            if (accountJson.contains("isDefault") && accountJson["isDefault"].get<bool>()) defaultAccount = account;
         }
 
-        if (defaultAccount)
-            SetDefaultAccount(defaultAccount);
+        if (defaultAccount) SetDefaultAccount(defaultAccount);
     }
 
-    if (json.contains("extra") && !json["extra"].is_null())
-        extra_ = json["extra"];
+    if (json.contains("extra") && !json["extra"].is_null()) extra_ = json["extra"];
 }
 }  // namespace neo::wallets::nep6

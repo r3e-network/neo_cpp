@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
-#include <mutex>
 #include <neo/io/uint256.h>
 #include <neo/ledger/block.h>
 #include <neo/persistence/data_cache.h>
+
+#include <memory>
+#include <mutex>
 #include <optional>
 #include <unordered_map>
 
@@ -15,7 +16,7 @@ namespace neo::ledger
  */
 class BlockStorage
 {
-  public:
+   public:
     /**
      * @brief Constructs a BlockStorage.
      * @param dataCache The data cache.
@@ -87,7 +88,7 @@ class BlockStorage
      */
     std::optional<io::UInt256> GetNextBlockHash(const io::UInt256& hash) const;
 
-  private:
+   private:
     std::shared_ptr<persistence::DataCache> dataCache_;
     mutable std::mutex mutex_;
     mutable std::unordered_map<io::UInt256, std::shared_ptr<Block>> blocks_;

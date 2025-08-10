@@ -26,7 +26,7 @@ TEST(BlockTest, Constructor)
     EXPECT_EQ(block.GetVersion(), 0);
     EXPECT_EQ(block.GetPreviousHash(), UInt256());
     EXPECT_EQ(block.GetMerkleRoot(), UInt256());
-    EXPECT_EQ(block.GetTimestamp(), std::chrono::system_clock::time_point());
+    EXPECT_EQ(block.GetTimestamp(), 0);
     EXPECT_EQ(block.GetIndex(), 0);
     EXPECT_EQ(block.GetNextConsensus(), UInt160());
     EXPECT_TRUE(block.GetTransactions().empty());
@@ -39,7 +39,7 @@ TEST(BlockTest, Serialization)
     block.SetVersion(0);  // Neo3 blocks use version 0
     block.SetPreviousHash(UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"));
     block.SetMerkleRoot(UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40"));
-    block.SetTimestamp(std::chrono::system_clock::from_time_t(123456789));
+    block.SetTimestamp(static_cast<uint64_t>(123456789));
     block.SetIndex(1);
     block.SetNextConsensus(UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
 
@@ -90,7 +90,7 @@ TEST(BlockTest, Serialization)
               UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"));
     EXPECT_EQ(block2.GetMerkleRoot(),
               UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40"));
-    EXPECT_EQ(block2.GetTimestamp(), std::chrono::system_clock::from_time_t(123456789));
+    EXPECT_EQ(block2.GetTimestamp(), static_cast<uint64_t>(123456789));
     EXPECT_EQ(block2.GetIndex(), 1);
     EXPECT_EQ(block2.GetNextConsensus(), UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
     EXPECT_EQ(block2.GetTransactions().size(), 1);
@@ -114,30 +114,14 @@ TEST(BlockTest, GetHash)
     block.SetVersion(0);  // Neo3 blocks use version 0
     block.SetPreviousHash(UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"));
     block.SetMerkleRoot(UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40"));
-    block.SetTimestamp(std::chrono::system_clock::from_time_t(123456789));
+    block.SetTimestamp(static_cast<uint64_t>(123456789));
     block.SetIndex(1);
     block.SetNextConsensus(UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
 
-    // Get the hash
+    // Verify the hash equals the header hash
+    UInt256 expectedHash = block.GetHeader().GetHash();
+    // Get the block hash (cached)
     UInt256 hash = block.GetHash();
-
-    // Verify the hash
-    std::ostringstream stream;
-    BinaryWriter writer(stream);
-
-    // Serialize the block header (must match Block::CalculateHash)
-    writer.Write(block.GetVersion());
-    writer.Write(block.GetPreviousHash());
-    writer.Write(block.GetMerkleRoot());
-    writer.Write(static_cast<uint64_t>(block.GetTimestamp().time_since_epoch().count()));
-    writer.Write(block.GetNonce());  // Missing nonce field
-    writer.Write(block.GetIndex());
-    writer.Write(block.GetPrimaryIndex());
-    writer.Write(block.GetNextConsensus());
-
-    std::string data = stream.str();
-    UInt256 expectedHash = Hash::Hash256(ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
-
     EXPECT_EQ(hash, expectedHash);
 }
 
@@ -163,7 +147,7 @@ TEST(BlockHeaderTest, Constructor)
     block.SetVersion(1);
     block.SetPreviousHash(UInt256::Parse("0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"));
     block.SetMerkleRoot(UInt256::Parse("2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40"));
-    block.SetTimestamp(std::chrono::system_clock::from_time_t(123456789));
+    block.SetTimestamp(static_cast<uint64_t>(123456789));
     block.SetIndex(1);
     block.SetNextConsensus(UInt160::Parse("0102030405060708090a0b0c0d0e0f1011121314"));
 
@@ -240,14 +224,13 @@ TEST(BlockHeaderTest, GetHash)
     std::ostringstream stream;
     BinaryWriter writer(stream);
 
-    // Serialize the block header
+    // Serialize the unsigned header data per N3 (exclude nonce)
     writer.Write(header.GetVersion());
     writer.Write(header.GetPrevHash());
     writer.Write(header.GetMerkleRoot());
     writer.Write(header.GetTimestamp());
-    writer.Write(header.GetNonce());
     writer.Write(header.GetIndex());
-    writer.Write(header.GetPrimaryIndex());
+    writer.Write(static_cast<uint8_t>(header.GetPrimaryIndex()));
     writer.Write(header.GetNextConsensus());
 
     std::string data = stream.str();

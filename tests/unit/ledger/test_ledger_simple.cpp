@@ -60,7 +60,7 @@ TEST_F(LedgerSimpleTest, BlockTimestamp)
     Block block;
     
     // Set timestamp
-    auto now = std::chrono::system_clock::now();
+    uint64_t now = static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count());
     block.SetTimestamp(now);
     
     // Verify timestamp
@@ -114,7 +114,7 @@ TEST_F(LedgerSimpleTest, BlockHashCalculation)
     Block block;
     block.SetVersion(0);
     block.SetPreviousHash(UInt256::Zero());
-    block.SetTimestamp(std::chrono::system_clock::from_time_t(1000000));
+    block.SetTimestamp(static_cast<uint64_t>(1000000));
     block.SetIndex(1);
     block.SetNextConsensus(UInt160::Zero());
     

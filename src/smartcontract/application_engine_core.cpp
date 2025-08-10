@@ -18,6 +18,7 @@
 #include <neo/smartcontract/system_call_exception.h>
 #include <neo/smartcontract/transaction_verifier.h>
 #include <neo/vm/script.h>
+
 #include <sstream>
 
 namespace neo::smartcontract
@@ -25,54 +26,44 @@ namespace neo::smartcontract
 ApplicationEngine::ApplicationEngine(TriggerType trigger, const io::ISerializable* container,
                                      std::shared_ptr<persistence::DataCache> snapshot,
                                      const ledger::Block* persistingBlock, int64_t gas)
-    : trigger_(trigger), container_(container), snapshot_(snapshot), persistingBlock_(persistingBlock), gasConsumed_(0),
-      gasLeft_(gas), flags_(CallFlags::All)
+    : trigger_(trigger),
+      container_(container),
+      snapshot_(snapshot),
+      persistingBlock_(persistingBlock),
+      gasConsumed_(0),
+      gasLeft_(gas),
+      flags_(CallFlags::All)
 {
     RegisterSystemCalls();
 }
 
 // Note: GetTrigger(), GetGasConsumed(), GetGasLeft() are already inline in header
 
-const io::ISerializable* ApplicationEngine::GetContainer() const
-{
-    return container_;
-}
+const io::ISerializable* ApplicationEngine::GetContainer() const { return container_; }
 
-const io::ISerializable* ApplicationEngine::GetScriptContainer() const
-{
-    return container_;
-}
+const io::ISerializable* ApplicationEngine::GetScriptContainer() const { return container_; }
 
-std::shared_ptr<persistence::DataCache> ApplicationEngine::GetSnapshot() const
-{
-    return snapshot_;
-}
+std::shared_ptr<persistence::DataCache> ApplicationEngine::GetSnapshot() const { return snapshot_; }
 
-const ledger::Block* ApplicationEngine::GetPersistingBlock() const
-{
-    return persistingBlock_;
-}
+const ledger::Block* ApplicationEngine::GetPersistingBlock() const { return persistingBlock_; }
 
 io::UInt160 ApplicationEngine::GetCurrentScriptHash() const
 {
-    if (scriptHashes_.empty())
-        return io::UInt160();
+    if (scriptHashes_.empty()) return io::UInt160();
 
     return scriptHashes_.back();
 }
 
 io::UInt160 ApplicationEngine::GetCallingScriptHash() const
 {
-    if (scriptHashes_.size() < 2)
-        return io::UInt160();
+    if (scriptHashes_.size() < 2) return io::UInt160();
 
     return scriptHashes_[scriptHashes_.size() - 2];
 }
 
 io::UInt160 ApplicationEngine::GetEntryScriptHash() const
 {
-    if (scriptHashes_.empty())
-        return io::UInt160();
+    if (scriptHashes_.empty()) return io::UInt160();
 
     return scriptHashes_.front();
 }
@@ -165,13 +156,11 @@ bool ApplicationEngine::HasFlag(CallFlags flag) const
 
 void ApplicationEngine::AddGas(int64_t gas)
 {
-    if (gas < 0)
-        throw std::invalid_argument("Gas cannot be negative");
+    if (gas < 0) throw std::invalid_argument("Gas cannot be negative");
 
     if (gasLeft_ >= 0)
     {
-        if (gasLeft_ < gas)
-            throw std::runtime_error("Insufficient gas");
+        if (gasLeft_ < gas) throw std::runtime_error("Insufficient gas");
 
         gasLeft_ -= gas;
     }
@@ -182,14 +171,12 @@ void ApplicationEngine::AddGas(int64_t gas)
 bool ApplicationEngine::CheckWitness(const io::UInt160& hash) const
 {
     // Check if the hash is the current script hash
-    if (GetCurrentScriptHash() == hash)
-        return true;
+    if (GetCurrentScriptHash() == hash) return true;
 
     // Check if the hash is in the calling chain
     for (const auto& scriptHash : scriptHashes_)
     {
-        if (scriptHash == hash)
-            return true;
+        if (scriptHash == hash) return true;
     }
 
     // Check if the hash is in the transaction signers
@@ -198,8 +185,7 @@ bool ApplicationEngine::CheckWitness(const io::UInt160& hash) const
     {
         for (const auto& signer : tx->GetSigners())
         {
-            if (signer == hash)
-                return true;
+            if (signer == hash) return true;
         }
     }
 
@@ -236,21 +222,18 @@ bool ApplicationEngine::CheckWitness(const io::UInt256& hash) const
 ContractState ApplicationEngine::CreateContract(const io::ByteVector& script, const std::string& manifest,
                                                 uint32_t offset)
 {
-    if (!HasFlag(CallFlags::WriteStates))
-        throw MissingFlagsException("CreateContract", "WriteStates");
+    if (!HasFlag(CallFlags::WriteStates)) throw MissingFlagsException("CreateContract", "WriteStates");
 
     // Calculate script hash
     io::UInt160 scriptHash = cryptography::Hash::Hash160(script.AsSpan());
 
     // Check if contract already exists using ContractManagement native contract
     auto contractManagement = native::ContractManagement::GetInstance();
-    if (!contractManagement)
-        throw SystemCallException("CreateContract", "ContractManagement not initialized");
+    if (!contractManagement) throw SystemCallException("CreateContract", "ContractManagement not initialized");
 
     // Check if contract with this hash already exists
     auto existingContract = contractManagement->GetContract(*snapshot_, scriptHash);
-    if (existingContract)
-        throw SystemCallException("CreateContract", "Contract already exists");
+    if (existingContract) throw SystemCallException("CreateContract", "Contract already exists");
 
     // Get next available ID from ContractManagement
     persistence::StorageKey idKey(
@@ -305,17 +288,14 @@ std::shared_ptr<vm::StackItem> ApplicationEngine::CallContract(const io::UInt160
                                                                const std::vector<std::shared_ptr<vm::StackItem>>& args,
                                                                CallFlags flags)
 {
-    if (!HasFlag(CallFlags::AllowCall))
-        throw std::runtime_error("Cannot call contract without AllowCall flag");
+    if (!HasFlag(CallFlags::AllowCall)) throw std::runtime_error("Cannot call contract without AllowCall flag");
 
     // Get contract from ContractManagement
     auto contractManagement = native::ContractManagement::GetInstance();
-    if (!contractManagement)
-        throw std::runtime_error("ContractManagement not initialized");
+    if (!contractManagement) throw std::runtime_error("ContractManagement not initialized");
 
     auto contract = contractManagement->GetContract(*snapshot_, scriptHash);
-    if (!contract)
-        throw std::runtime_error("Contract not found");
+    if (!contract) throw std::runtime_error("Contract not found");
 
     // Get the deserialized contract state
     ContractState contractState = *contract;
@@ -333,8 +313,7 @@ std::shared_ptr<vm::StackItem> ApplicationEngine::CallContract(const io::UInt160
             bool result = methodIt->second(*this);
             flags_ = oldFlags;
 
-            if (!result)
-                throw std::runtime_error("Native method execution failed");
+            if (!result) throw std::runtime_error("Native method execution failed");
 
             // Return the top item from the evaluation stack
             return Pop();
@@ -353,8 +332,7 @@ std::shared_ptr<vm::StackItem> ApplicationEngine::CallContract(const io::UInt160
     auto state = Execute();
     flags_ = oldFlags;
 
-    if (state != vm::VMState::Halt)
-        throw std::runtime_error("Contract execution failed");
+    if (state != vm::VMState::Halt) throw std::runtime_error("Contract execution failed");
 
     // Return the top item from the evaluation stack
     return Pop();
@@ -363,8 +341,7 @@ std::shared_ptr<vm::StackItem> ApplicationEngine::CallContract(const io::UInt160
 void ApplicationEngine::Notify(const io::UInt160& scriptHash, const std::string& eventName,
                                const std::vector<std::shared_ptr<vm::StackItem>>& state)
 {
-    if (!HasFlag(CallFlags::AllowNotify))
-        throw std::runtime_error("Cannot notify without AllowNotify flag");
+    if (!HasFlag(CallFlags::AllowNotify)) throw std::runtime_error("Cannot notify without AllowNotify flag");
 
     notifications_.emplace_back(scriptHash, eventName, state);
 }
@@ -377,25 +354,13 @@ const ledger::Transaction* ApplicationEngine::GetTransaction() const
     return nullptr;
 }
 
-int64_t ApplicationEngine::GetGasPrice() const
-{
-    return gasPrice_;
-}
+int64_t ApplicationEngine::GetGasPrice() const { return gasPrice_; }
 
-uint32_t ApplicationEngine::GetPlatformVersion() const
-{
-    return platformVersion_;
-}
+uint32_t ApplicationEngine::GetPlatformVersion() const { return platformVersion_; }
 
-uint64_t ApplicationEngine::GetRandom() const
-{
-    return random_;
-}
+uint64_t ApplicationEngine::GetRandom() const { return random_; }
 
-int64_t ApplicationEngine::GetNetworkFeePerByte() const
-{
-    return networkFeePerByte_;
-}
+int64_t ApplicationEngine::GetNetworkFeePerByte() const { return networkFeePerByte_; }
 
 vm::ExecutionEngineLimits ApplicationEngine::GetLimits() const
 {
@@ -422,10 +387,7 @@ std::unique_ptr<ApplicationEngine> ApplicationEngine::Run(const io::ByteVector& 
     return engine;
 }
 
-const ProtocolSettings* ApplicationEngine::GetProtocolSettings() const
-{
-    return &protocolSettings_;
-}
+const ProtocolSettings* ApplicationEngine::GetProtocolSettings() const { return &protocolSettings_; }
 
 bool ApplicationEngine::IsHardforkEnabled(int hardfork) const
 {
@@ -448,48 +410,40 @@ native::NativeContract* ApplicationEngine::GetNativeContract(const io::UInt160& 
 
     // NEO Token
     auto neoToken = native::NeoToken::GetInstance();
-    if (neoToken && neoToken->GetScriptHash() == hash)
-        return neoToken.get();
+    if (neoToken && neoToken->GetScriptHash() == hash) return neoToken.get();
 
     // Contract Management
     auto contractManagement = native::ContractManagement::GetInstance();
-    if (contractManagement && contractManagement->GetScriptHash() == hash)
-        return contractManagement.get();
+    if (contractManagement && contractManagement->GetScriptHash() == hash) return contractManagement.get();
 
     // Policy Contract
     auto policyContract = native::PolicyContract::GetInstance();
-    if (policyContract && policyContract->GetScriptHash() == hash)
-        return policyContract.get();
+    if (policyContract && policyContract->GetScriptHash() == hash) return policyContract.get();
 
     // Ledger Contract
     auto ledgerContract = native::LedgerContract::GetInstance();
-    if (ledgerContract && ledgerContract->GetScriptHash() == hash)
-        return ledgerContract.get();
+    if (ledgerContract && ledgerContract->GetScriptHash() == hash) return ledgerContract.get();
 
     // Complete native contract singleton pattern implementation
 
     // GAS Token
     auto gasToken = native::GasToken::GetInstance();
-    if (gasToken && gasToken->GetScriptHash() == hash)
-        return gasToken.get();
+    if (gasToken && gasToken->GetScriptHash() == hash) return gasToken.get();
 
     // StdLib and CryptoLib don't have GetInstance() method
     // They are utility contracts handled differently
 
     // NameService Contract
     auto nameService = native::NameService::GetInstance();
-    if (nameService && nameService->GetScriptHash() == hash)
-        return nameService.get();
+    if (nameService && nameService->GetScriptHash() == hash) return nameService.get();
 
     // RoleManagement Contract
     auto roleManagement = native::RoleManagement::GetInstance();
-    if (roleManagement && roleManagement->GetScriptHash() == hash)
-        return roleManagement.get();
+    if (roleManagement && roleManagement->GetScriptHash() == hash) return roleManagement.get();
 
     // Oracle Contract (if available)
     auto oracleContract = native::OracleContract::GetInstance();
-    if (oracleContract && oracleContract->GetScriptHash() == hash)
-        return oracleContract.get();
+    if (oracleContract && oracleContract->GetScriptHash() == hash) return oracleContract.get();
 
     // Native contract not found
     return nullptr;

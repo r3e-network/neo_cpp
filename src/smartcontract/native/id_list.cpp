@@ -1,40 +1,30 @@
-#include <algorithm>
 #include <neo/smartcontract/native/id_list.h>
+
+#include <algorithm>
 
 namespace neo::smartcontract::native
 {
 IdList::IdList() {}
 
-size_t IdList::GetCount() const
-{
-    return ids_.size();
-}
+size_t IdList::GetCount() const { return ids_.size(); }
 
 void IdList::Add(uint64_t id)
 {
-    if (!Contains(id))
-        ids_.push_back(id);
+    if (!Contains(id)) ids_.push_back(id);
 }
 
 bool IdList::Remove(uint64_t id)
 {
     auto it = std::find(ids_.begin(), ids_.end(), id);
-    if (it == ids_.end())
-        return false;
+    if (it == ids_.end()) return false;
 
     ids_.erase(it);
     return true;
 }
 
-bool IdList::Contains(uint64_t id) const
-{
-    return std::find(ids_.begin(), ids_.end(), id) != ids_.end();
-}
+bool IdList::Contains(uint64_t id) const { return std::find(ids_.begin(), ids_.end(), id) != ids_.end(); }
 
-const std::vector<uint64_t>& IdList::GetIds() const
-{
-    return ids_;
-}
+const std::vector<uint64_t>& IdList::GetIds() const { return ids_; }
 
 std::shared_ptr<vm::StackItem> IdList::ToStackItem() const
 {
@@ -48,8 +38,7 @@ std::shared_ptr<vm::StackItem> IdList::ToStackItem() const
 
 void IdList::FromStackItem(const std::shared_ptr<vm::StackItem>& item)
 {
-    if (!item->IsArray())
-        throw std::runtime_error("Expected array");
+    if (!item->IsArray()) throw std::runtime_error("Expected array");
 
     auto array = item->GetArray();
     ids_.clear();

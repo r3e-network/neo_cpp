@@ -3,6 +3,7 @@
 #include <neo/persistence/storage_key.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/native_contract.h>
+
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -16,20 +17,11 @@ NativeContract::NativeContract(const std::string& name, uint32_t id) : name_(nam
     scriptHash_ = cryptography::Hash::Hash160(io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
 }
 
-const std::string& NativeContract::GetName() const
-{
-    return name_;
-}
+const std::string& NativeContract::GetName() const { return name_; }
 
-uint32_t NativeContract::GetId() const
-{
-    return id_;
-}
+uint32_t NativeContract::GetId() const { return id_; }
 
-const io::UInt160& NativeContract::GetScriptHash() const
-{
-    return scriptHash_;
-}
+const io::UInt160& NativeContract::GetScriptHash() const { return scriptHash_; }
 
 const std::unordered_map<
     std::string, std::pair<CallFlags, std::function<std::shared_ptr<vm::StackItem>(
@@ -44,11 +36,9 @@ std::shared_ptr<vm::StackItem> NativeContract::Invoke(ApplicationEngine& engine,
                                                       CallFlags callFlags)
 {
     auto it = methods_.find(method);
-    if (it == methods_.end())
-        throw std::runtime_error("Method not found: " + method);
+    if (it == methods_.end()) throw std::runtime_error("Method not found: " + method);
 
-    if (!CheckCallFlags(method, callFlags))
-        throw std::runtime_error("Call flags not allowed: " + method);
+    if (!CheckCallFlags(method, callFlags)) throw std::runtime_error("Call flags not allowed: " + method);
 
     return it->second.second(engine, args);
 }
@@ -64,17 +54,13 @@ std::shared_ptr<vm::StackItem> NativeContract::Call(ApplicationEngine& engine, c
 bool NativeContract::CheckCallFlags(const std::string& method, CallFlags callFlags) const
 {
     auto it = methods_.find(method);
-    if (it == methods_.end())
-        return false;
+    if (it == methods_.end()) return false;
 
     return (static_cast<uint8_t>(it->second.first) & static_cast<uint8_t>(callFlags)) ==
            static_cast<uint8_t>(callFlags);
 }
 
-io::ByteVector NativeContract::GetStoragePrefix() const
-{
-    return io::ByteVector{static_cast<uint8_t>(id_)};
-}
+io::ByteVector NativeContract::GetStoragePrefix() const { return io::ByteVector{static_cast<uint8_t>(id_)}; }
 
 io::ByteVector NativeContract::GetStorageKey(uint8_t prefix, const io::ByteVector& key) const
 {
@@ -117,8 +103,7 @@ io::ByteVector NativeContract::GetStorageValue(std::shared_ptr<persistence::Stor
     // Use Neo N3 storage key format with contract ID
     auto storageKey = CreateStorageKey(key[0], io::ByteVector(key.AsSpan().subspan(1)));
     auto item = snapshot->TryGet(storageKey);
-    if (!item)
-        return io::ByteVector();
+    if (!item) return io::ByteVector();
 
     return item->GetValue();
 }

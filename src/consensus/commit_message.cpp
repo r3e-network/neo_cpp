@@ -1,6 +1,7 @@
 #include <neo/consensus/commit_message.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+
 #include <sstream>
 
 namespace neo::consensus
@@ -10,15 +11,9 @@ CommitMessage::CommitMessage(uint8_t viewNumber, const io::UInt256& commitHash, 
 {
 }
 
-const io::UInt256& CommitMessage::GetCommitHash() const
-{
-    return commitHash_;
-}
+const io::UInt256& CommitMessage::GetCommitHash() const { return commitHash_; }
 
-const io::ByteVector& CommitMessage::GetCommitSignature() const
-{
-    return commitSignature_;
-}
+const io::ByteVector& CommitMessage::GetCommitSignature() const { return commitSignature_; }
 
 std::vector<uint8_t> CommitMessage::GetSignature() const
 {

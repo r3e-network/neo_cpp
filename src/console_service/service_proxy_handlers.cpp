@@ -9,13 +9,14 @@
 // Redistribution and use in source and binary forms with or without
 // modifications are permitted.
 
-#include <iomanip>
 #include <neo/consensus/consensus_service.h>
 #include <neo/console_service/service_proxy.h>
 #include <neo/ledger/transaction.h>
 #include <neo/plugins/plugin_manager.h>
 #include <neo/smartcontract/contract_state.h>
 #include <neo/wallets/wallet.h>
+
+#include <iomanip>
 #include <sstream>
 
 namespace neo::console_service

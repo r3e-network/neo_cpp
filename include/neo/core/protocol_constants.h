@@ -13,7 +13,7 @@ namespace neo::core
  */
 class ProtocolConstants
 {
-  public:
+   public:
     // Network and protocol limits
     static constexpr uint32_t MaxTransactionSize = 2000000;      // 2MB max transaction size
     static constexpr uint32_t MaxTransactionAttributes = 1024;   // Max attributes per transaction
@@ -96,7 +96,7 @@ class ProtocolConstants
     static constexpr uint32_t MaxItemSize = 1024 * 1024;      // Max size of a single stack item
     static constexpr uint32_t MaxCloneDepth = 255;            // Max clone depth for reference types
 
-  private:
+   private:
     // Private constructor to prevent instantiation
     ProtocolConstants() = delete;
 };

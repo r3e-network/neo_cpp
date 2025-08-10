@@ -9,15 +9,16 @@
 // Redistribution and use in source and binary forms with or without
 // modifications are permitted.
 
-#include <algorithm>
-#include <cstring>
-#include <memory>
 #include <neo/cryptography/base58.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/wallets/helper.h>
 #include <neo/wallets/key_pair.h>
 #include <openssl/rand.h>
+
+#include <algorithm>
+#include <cstring>
+#include <memory>
 #include <stdexcept>
 
 namespace neo::wallets
@@ -35,10 +36,7 @@ KeyPair::KeyPair(const io::ByteVector& privateKey) : privateKey_(privateKey)
     }
 }
 
-KeyPair::~KeyPair()
-{
-    Clear();
-}
+KeyPair::~KeyPair() { Clear(); }
 
 KeyPair::KeyPair(const KeyPair& other) : privateKey_(other.privateKey_)
 {
@@ -46,7 +44,8 @@ KeyPair::KeyPair(const KeyPair& other) : privateKey_(other.privateKey_)
 }
 
 KeyPair::KeyPair(KeyPair&& other) noexcept
-    : privateKey_(std::move(other.privateKey_)), publicKey_(std::move(other.publicKey_)),
+    : privateKey_(std::move(other.privateKey_)),
+      publicKey_(std::move(other.publicKey_)),
       scriptHash_(std::move(other.scriptHash_))
 {
     other.Clear();
@@ -76,10 +75,7 @@ KeyPair& KeyPair::operator=(KeyPair&& other) noexcept
     return *this;
 }
 
-const io::ByteVector& KeyPair::GetPrivateKey() const
-{
-    return privateKey_;
-}
+const io::ByteVector& KeyPair::GetPrivateKey() const { return privateKey_; }
 
 const cryptography::ecc::ECPoint& KeyPair::GetPublicKey() const
 {
@@ -161,25 +157,13 @@ KeyPair KeyPair::FromHex(const std::string& hex)
     return KeyPair(private_key);
 }
 
-std::string KeyPair::ToHex() const
-{
-    return Helper::ToHexString(privateKey_.AsSpan());
-}
+std::string KeyPair::ToHex() const { return Helper::ToHexString(privateKey_.AsSpan()); }
 
-bool KeyPair::IsValid() const
-{
-    return cryptography::ecc::Secp256r1::IsValidPrivateKey(privateKey_);
-}
+bool KeyPair::IsValid() const { return cryptography::ecc::Secp256r1::IsValidPrivateKey(privateKey_); }
 
-bool KeyPair::operator==(const KeyPair& other) const
-{
-    return privateKey_ == other.privateKey_;
-}
+bool KeyPair::operator==(const KeyPair& other) const { return privateKey_ == other.privateKey_; }
 
-bool KeyPair::operator!=(const KeyPair& other) const
-{
-    return !(*this == other);
-}
+bool KeyPair::operator!=(const KeyPair& other) const { return !(*this == other); }
 
 bool KeyPair::ValidatePrivateKey(const io::ByteVector& private_key)
 {

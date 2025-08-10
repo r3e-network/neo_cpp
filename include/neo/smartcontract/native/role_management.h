@@ -1,13 +1,14 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/smartcontract/native/native_contract.h>
+
+#include <cstdint>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -44,7 +45,7 @@ enum class Role : uint8_t
  */
 class NodeList
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty NodeList.
      */
@@ -85,7 +86,7 @@ class NodeList
      */
     void Deserialize(io::BinaryReader& reader);
 
-  private:
+   private:
     std::vector<cryptography::ecc::ECPoint> nodes_;
 };
 
@@ -98,7 +99,7 @@ class RoleManagement : public NativeContract
     friend class NativeContractTest;
     friend class RoleManagementTest;
 
-  public:
+   public:
     /**
      * @brief The contract ID.
      */
@@ -197,13 +198,13 @@ class RoleManagement : public NativeContract
      */
     bool PostPersist(ApplicationEngine& engine);
 
-  protected:
+   protected:
     /**
      * @brief Initializes the contract.
      */
     void Initialize() override;
 
-  private:
+   private:
     /**
      * @brief Handles the getDesignatedByRole method.
      * @param engine The engine.

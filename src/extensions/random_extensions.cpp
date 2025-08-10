@@ -1,8 +1,9 @@
+#include <neo/extensions/datetime_extensions.h>
+#include <neo/extensions/random_extensions.h>
+
 #include <algorithm>
 #include <chrono>
 #include <limits>
-#include <neo/extensions/datetime_extensions.h>
-#include <neo/extensions/random_extensions.h>
 #include <random>
 #include <thread>
 
@@ -10,8 +11,9 @@
 #include <wincrypt.h>
 #include <windows.h>
 #else
-#include <fstream>
 #include <unistd.h>
+
+#include <fstream>
 #endif
 
 namespace neo::extensions
@@ -60,8 +62,7 @@ io::ByteVector RandomExtensions::GenerateRandomBytes(size_t length)
 
 int32_t RandomExtensions::NextInt(int32_t min, int32_t max)
 {
-    if (min > max)
-        std::swap(min, max);
+    if (min > max) std::swap(min, max);
 
     auto& rng = GetSecureRNG();
     std::uniform_int_distribution<int32_t> dist(min, max);
@@ -70,8 +71,7 @@ int32_t RandomExtensions::NextInt(int32_t min, int32_t max)
 
 uint32_t RandomExtensions::NextUInt(uint32_t min, uint32_t max)
 {
-    if (min > max)
-        std::swap(min, max);
+    if (min > max) std::swap(min, max);
 
     auto& rng = GetSecureRNG();
     std::uniform_int_distribution<uint32_t> dist(min, max);
@@ -80,8 +80,7 @@ uint32_t RandomExtensions::NextUInt(uint32_t min, uint32_t max)
 
 int64_t RandomExtensions::NextLong(int64_t min, int64_t max)
 {
-    if (min > max)
-        std::swap(min, max);
+    if (min > max) std::swap(min, max);
 
     auto& rng = GetSecureRNG();
     std::uniform_int_distribution<int64_t> dist(min, max);
@@ -90,8 +89,7 @@ int64_t RandomExtensions::NextLong(int64_t min, int64_t max)
 
 uint64_t RandomExtensions::NextULong(uint64_t min, uint64_t max)
 {
-    if (min > max)
-        std::swap(min, max);
+    if (min > max) std::swap(min, max);
 
     auto& rng = GetSecureRNG();
     std::uniform_int_distribution<uint64_t> dist(min, max);
@@ -107,8 +105,7 @@ float RandomExtensions::NextFloat()
 
 float RandomExtensions::NextFloat(float min, float max)
 {
-    if (min > max)
-        std::swap(min, max);
+    if (min > max) std::swap(min, max);
 
     auto& rng = GetSecureRNG();
     std::uniform_real_distribution<float> dist(min, max);
@@ -124,8 +121,7 @@ double RandomExtensions::NextDouble()
 
 double RandomExtensions::NextDouble(double min, double max)
 {
-    if (min > max)
-        std::swap(min, max);
+    if (min > max) std::swap(min, max);
 
     auto& rng = GetSecureRNG();
     std::uniform_real_distribution<double> dist(min, max);

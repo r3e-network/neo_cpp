@@ -1,6 +1,7 @@
+#include <neo/extensions/assembly_extensions.h>
+
 #include <cstring>
 #include <mutex>
-#include <neo/extensions/assembly_extensions.h>
 #include <typeinfo>
 
 #ifdef __GNUC__
@@ -119,8 +120,7 @@ bool AssemblyExtensions::HasMethod(const std::string& typeName, const std::strin
     {
         for (const auto& method : it->second)
         {
-            if (method.name == methodName)
-                return true;
+            if (method.name == methodName) return true;
         }
     }
     return false;

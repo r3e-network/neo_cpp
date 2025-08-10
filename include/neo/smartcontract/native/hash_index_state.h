@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/uint256.h>
 #include <neo/vm/stack_item.h>
+
+#include <memory>
 
 namespace neo::smartcontract::native
 {
@@ -13,7 +14,7 @@ namespace neo::smartcontract::native
  */
 class HashIndexState
 {
-  public:
+   public:
     /**
      * @brief Constructs a HashIndexState.
      */
@@ -74,7 +75,7 @@ class HashIndexState
      */
     void FromStackItem(const std::shared_ptr<vm::StackItem>& item);
 
-  private:
+   private:
     io::UInt256 hash_;
     uint32_t index_;
 };

@@ -38,17 +38,17 @@ namespace neo::extensions
  */
 class SecureStringExtensions
 {
-  public:
+   public:
     /**
      * @brief RAII class for secure string handling
      */
     class SecureString
     {
-      private:
+       private:
         std::unique_ptr<char[]> data_;
         size_t length_;
 
-      public:
+       public:
         /**
          * @brief Construct from regular string
          * @param str String to secure
@@ -91,28 +91,19 @@ class SecureStringExtensions
          * @brief Get pointer to data (use with caution)
          * @return Pointer to secure data
          */
-        const char* data() const
-        {
-            return data_.get();
-        }
+        const char* data() const { return data_.get(); }
 
         /**
          * @brief Get length of string
          * @return String length
          */
-        size_t length() const
-        {
-            return length_;
-        }
+        size_t length() const { return length_; }
 
         /**
          * @brief Check if empty
          * @return True if empty
          */
-        bool empty() const
-        {
-            return length_ == 0;
-        }
+        bool empty() const { return length_ == 0; }
 
         /**
          * @brief Create regular string (use with caution)
@@ -206,9 +197,8 @@ class SecureStringExtensions
      * @param charset Character set to use (default: alphanumeric)
      * @return SecureString with random data
      */
-    static SecureString
-    GenerateSecureRandom(size_t length,
-                         const std::string& charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
+    static SecureString GenerateSecureRandom(
+        size_t length, const std::string& charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
 
     /**
      * @brief Validate password strength
@@ -256,7 +246,7 @@ class SecureStringExtensions
      */
     static SecureString SecureHash(const SecureString& input, const SecureString& salt = SecureString(""));
 
-  private:
+   private:
     /**
      * @brief Platform-specific secure memory clearing
      * @param data Pointer to memory

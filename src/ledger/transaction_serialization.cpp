@@ -1,6 +1,3 @@
-#include <algorithm>
-#include <limits>
-#include <memory>
 #include <neo/config/protocol_settings.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -15,6 +12,10 @@
 #include <neo/ledger/transaction_attribute.h>
 #include <neo/ledger/transaction_output.h>
 #include <neo/ledger/witness.h>
+
+#include <algorithm>
+#include <limits>
+#include <memory>
 #include <sstream>
 #include <stdexcept>
 #include <vector>

@@ -1,10 +1,11 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/node/neo_system.h>
 #include <neo/rpc/rpc_server.h>
 #include <neo/wallets/wallet.h>
+
+#include <functional>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -15,7 +16,7 @@ namespace neo::cli
  */
 class CommandHandler
 {
-  public:
+   public:
     /**
      * @brief Constructs a CommandHandler.
      * @param neoSystem The Neo system.
@@ -175,7 +176,7 @@ class CommandHandler
      */
     bool HandleImportNEP2(const std::vector<std::string>& args);
 
-  private:
+   private:
     std::shared_ptr<node::NeoSystem> neoSystem_;
     std::shared_ptr<rpc::RpcServer> rpcServer_;
     std::shared_ptr<wallets::Wallet> wallet_;

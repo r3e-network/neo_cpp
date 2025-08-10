@@ -1,13 +1,14 @@
 #pragma once
 
+#include <neo/core/logging.h>
+#include <neo/io/json.h>
+#include <neo/network/p2p/local_node.h>
+#include <neo/persistence/data_cache.h>
+
 #include <atomic>
 #include <chrono>
 #include <functional>
 #include <memory>
-#include <neo/io/json.h>
-#include <neo/logging/logger.h>
-#include <neo/network/p2p/local_node.h>
-#include <neo/persistence/data_cache.h>
 #include <string>
 #include <thread>
 #include <unordered_map>
@@ -42,9 +43,9 @@ using RpcMethodHandler = std::function<io::JsonValue(const io::JsonValue& params
  */
 class RpcServer
 {
-  private:
+   private:
     RpcConfig config_;
-    std::shared_ptr<logging::Logger> logger_;
+    std::shared_ptr<core::Logger> logger_;
     std::atomic<bool> running_{false};
     std::thread server_thread_;
 
@@ -60,7 +61,7 @@ class RpcServer
     std::atomic<uint64_t> failed_requests_{0};
     std::chrono::steady_clock::time_point start_time_;
 
-  public:
+   public:
     /**
      * @brief Construct RPC server
      * @param config Server configuration
@@ -82,25 +83,19 @@ class RpcServer
     /**
      * @brief Set blockchain data cache
      */
-    void SetBlockchain(std::shared_ptr<persistence::DataCache> blockchain)
-    {
-        blockchain_ = blockchain;
-    }
+    void SetBlockchain(std::shared_ptr<persistence::DataCache> blockchain) { blockchain_ = blockchain; }
 
     /**
      * @brief Set local node for P2P information
      */
-    void SetLocalNode(std::shared_ptr<network::p2p::LocalNode> node)
-    {
-        local_node_ = node;
-    }
+    void SetLocalNode(std::shared_ptr<network::p2p::LocalNode> node) { local_node_ = node; }
 
     /**
      * @brief Get server statistics
      */
     io::JsonValue GetStatistics() const;
 
-  private:
+   private:
     /**
      * @brief Initialize all RPC method handlers
      */

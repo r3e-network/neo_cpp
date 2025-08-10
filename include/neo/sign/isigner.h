@@ -1,12 +1,13 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/witness.h>
 #include <neo/ledger/block.h>
 #include <neo/network/p2p/payloads/extensible_payload.h>
 #include <neo/persistence/data_cache.h>
+
+#include <cstdint>
+#include <memory>
 
 namespace neo::sign
 {
@@ -18,7 +19,7 @@ namespace neo::sign
  */
 class ISigner
 {
-  public:
+   public:
     virtual ~ISigner() = default;
 
     /**
@@ -45,8 +46,8 @@ class ISigner
      * @param network The network magic.
      * @return The witness containing the signature.
      */
-    virtual cryptography::Witness
-    SignExtensiblePayload(std::shared_ptr<network::p2p::payloads::ExtensiblePayload> payload,
-                          std::shared_ptr<persistence::DataCache> snapshot, uint32_t network) const = 0;
+    virtual cryptography::Witness SignExtensiblePayload(
+        std::shared_ptr<network::p2p::payloads::ExtensiblePayload> payload,
+        std::shared_ptr<persistence::DataCache> snapshot, uint32_t network) const = 0;
 };
 }  // namespace neo::sign

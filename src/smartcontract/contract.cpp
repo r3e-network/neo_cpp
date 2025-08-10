@@ -4,6 +4,7 @@
 #include <neo/io/binary_writer.h>
 #include <neo/smartcontract/contract.h>
 #include <neo/vm/script.h>
+
 #include <sstream>
 
 namespace neo::smartcontract
@@ -13,40 +14,19 @@ ContractParameter::ContractParameter() : type_(ContractParameterType::Void) {}
 
 ContractParameter::ContractParameter(ContractParameterType type) : type_(type) {}
 
-ContractParameterType ContractParameter::GetType() const
-{
-    return type_;
-}
+ContractParameterType ContractParameter::GetType() const { return type_; }
 
-void ContractParameter::SetType(ContractParameterType type)
-{
-    type_ = type;
-}
+void ContractParameter::SetType(ContractParameterType type) { type_ = type; }
 
-const std::optional<io::ByteVector>& ContractParameter::GetValue() const
-{
-    return value_;
-}
+const std::optional<io::ByteVector>& ContractParameter::GetValue() const { return value_; }
 
-void ContractParameter::SetValue(const io::ByteVector& value)
-{
-    value_ = value;
-}
+void ContractParameter::SetValue(const io::ByteVector& value) { value_ = value; }
 
-const std::vector<ContractParameter>& ContractParameter::GetArray() const
-{
-    return array_;
-}
+const std::vector<ContractParameter>& ContractParameter::GetArray() const { return array_; }
 
-void ContractParameter::SetArray(const std::vector<ContractParameter>& value)
-{
-    array_ = value;
-}
+void ContractParameter::SetArray(const std::vector<ContractParameter>& value) { array_ = value; }
 
-const std::vector<std::pair<ContractParameter, ContractParameter>>& ContractParameter::GetMap() const
-{
-    return map_;
-}
+const std::vector<std::pair<ContractParameter, ContractParameter>>& ContractParameter::GetMap() const { return map_; }
 
 void ContractParameter::SetMap(const std::vector<std::pair<ContractParameter, ContractParameter>>& value)
 {
@@ -116,18 +96,15 @@ ContractParameter ContractParameter::CreateArray(const std::vector<ContractParam
     return parameter;
 }
 
-ContractParameter
-ContractParameter::CreateMap(const std::vector<std::pair<ContractParameter, ContractParameter>>& value)
+ContractParameter ContractParameter::CreateMap(
+    const std::vector<std::pair<ContractParameter, ContractParameter>>& value)
 {
     ContractParameter parameter(ContractParameterType::Map);
     parameter.SetMap(value);
     return parameter;
 }
 
-ContractParameter ContractParameter::CreateVoid()
-{
-    return ContractParameter(ContractParameterType::Void);
-}
+ContractParameter ContractParameter::CreateVoid() { return ContractParameter(ContractParameterType::Void); }
 
 // Contract implementation
 Contract::Contract() = default;
@@ -137,30 +114,18 @@ Contract::Contract(const io::ByteVector& script, const std::vector<ContractParam
 {
 }
 
-const io::ByteVector& Contract::GetScript() const
-{
-    return script_;
-}
+const io::ByteVector& Contract::GetScript() const { return script_; }
 
-void Contract::SetScript(const io::ByteVector& script)
-{
-    script_ = script;
-}
+void Contract::SetScript(const io::ByteVector& script) { script_ = script; }
 
-const std::vector<ContractParameterType>& Contract::GetParameterList() const
-{
-    return parameterList_;
-}
+const std::vector<ContractParameterType>& Contract::GetParameterList() const { return parameterList_; }
 
 void Contract::SetParameterList(const std::vector<ContractParameterType>& parameterList)
 {
     parameterList_ = parameterList;
 }
 
-io::UInt160 Contract::GetScriptHash() const
-{
-    return cryptography::Hash::Hash160(script_.AsSpan());
-}
+io::UInt160 Contract::GetScriptHash() const { return cryptography::Hash::Hash160(script_.AsSpan()); }
 
 void Contract::Serialize(io::BinaryWriter& writer) const
 {
@@ -176,8 +141,7 @@ void Contract::Deserialize(io::BinaryReader& reader)
 {
     script_ = reader.ReadVarBytes();
     int64_t count = reader.ReadVarInt();
-    if (count < 0 || count > std::numeric_limits<size_t>::max())
-        throw std::out_of_range("Invalid parameter count");
+    if (count < 0 || count > std::numeric_limits<size_t>::max()) throw std::out_of_range("Invalid parameter count");
 
     parameterList_.clear();
     parameterList_.reserve(static_cast<size_t>(count));
@@ -216,8 +180,7 @@ Contract Contract::CreateMultiSigContract(int m, const std::vector<cryptography:
 {
     using namespace vm;
 
-    if (m <= 0 || m > pubKeys.size() || pubKeys.size() > 1024)
-        throw std::invalid_argument("Invalid parameters");
+    if (m <= 0 || m > pubKeys.size() || pubKeys.size() > 1024) throw std::invalid_argument("Invalid parameters");
 
     // Create the verification script
     std::vector<uint8_t> script;

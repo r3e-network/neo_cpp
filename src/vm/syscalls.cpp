@@ -1,9 +1,10 @@
-#include <functional>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/interop_service.h>
 #include <neo/vm/execution_engine.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/syscalls.h>
+
+#include <functional>
 #include <unordered_map>
 
 namespace neo::vm
@@ -11,14 +12,11 @@ namespace neo::vm
 
 class SyscallHandler
 {
-  private:
+   private:
     std::unordered_map<uint32_t, std::function<void(ExecutionEngine&)>> handlers_;
 
-  public:
-    SyscallHandler()
-    {
-        RegisterBuiltinSyscalls();
-    }
+   public:
+    SyscallHandler() { RegisterBuiltinSyscalls(); }
 
     void RegisterSyscall(uint32_t id, std::function<void(ExecutionEngine&)> handler)
     {
@@ -44,7 +42,7 @@ class SyscallHandler
         return false;
     }
 
-  private:
+   private:
     void RegisterBuiltinSyscalls()
     {
         // System.Runtime syscalls
@@ -270,10 +268,7 @@ class SyscallHandler
                         });
     }
 
-    uint32_t CalculateHash(const std::string& name)
-    {
-        return smartcontract::calculate_interop_hash(name);
-    }
+    uint32_t CalculateHash(const std::string& name) { return smartcontract::calculate_interop_hash(name); }
 };
 
 static SyscallHandler& GetSyscallHandler()
@@ -287,9 +282,6 @@ void RegisterSyscall(uint32_t id, std::function<void(ExecutionEngine&)> handler)
     GetSyscallHandler().RegisterSyscall(id, std::move(handler));
 }
 
-bool HandleSyscall(ExecutionEngine& engine, uint32_t id)
-{
-    return GetSyscallHandler().HandleSyscall(engine, id);
-}
+bool HandleSyscall(ExecutionEngine& engine, uint32_t id) { return GetSyscallHandler().HandleSyscall(engine, id); }
 
 }  // namespace neo::vm

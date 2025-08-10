@@ -1,7 +1,8 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_span.h>
+
+#include <cstdint>
 
 namespace neo::cryptography
 {
@@ -13,7 +14,7 @@ namespace neo::cryptography
  */
 class Murmur32
 {
-  public:
+   public:
     /**
      * @brief Computes Murmur32 hash of the given data.
      * @param data The data to hash.
@@ -31,7 +32,7 @@ class Murmur32
      */
     static uint32_t Hash(const uint8_t* data, size_t len, uint32_t seed = 0);
 
-  private:
+   private:
     static constexpr uint32_t c1 = 0xcc9e2d51;
     static constexpr uint32_t c2 = 0x1b873593;
     static constexpr uint32_t r1 = 15;

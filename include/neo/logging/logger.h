@@ -25,7 +25,7 @@ namespace neo::logging
  */
 class Logger
 {
-  public:
+   public:
     /**
      * @brief Log levels
      */
@@ -161,7 +161,7 @@ class Logger
     // Helper method for minimal logging
     void LogMinimal(Level level, const std::string& message);
 
-  private:
+   private:
 #if defined(NEO_MINIMAL_LOGGING) || !defined(NEO_HAS_SPDLOG)
     Level current_level_ = Level::Info;
     std::string name_;

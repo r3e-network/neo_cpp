@@ -19,7 +19,7 @@ using TypeConverter = std::function<void*(const std::vector<std::string>&, bool)
  */
 class TypeConverters
 {
-  public:
+   public:
     /**
      * @brief Gets the instance.
      * @return The instance.
@@ -58,7 +58,7 @@ class TypeConverters
      */
     void InitializeDefaultConverters();
 
-  private:
+   private:
     std::unordered_map<std::string, TypeConverter> converters_;
 
     TypeConverters();

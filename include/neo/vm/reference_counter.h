@@ -24,7 +24,7 @@ class CompoundType;
  */
 class ReferenceCounter
 {
-  public:
+   public:
     /**
      * @brief Constructs a new ReferenceCounter.
      */
@@ -97,10 +97,7 @@ class ReferenceCounter
      * @brief Gets the total number of references.
      * @return The total number of references.
      */
-    size_t Count() const
-    {
-        return references_count_;
-    }
+    size_t Count() const { return references_count_; }
 
     /**
      * @brief Checks if an item is referenced.
@@ -116,7 +113,7 @@ class ReferenceCounter
      */
     bool HasCircularReference(std::shared_ptr<StackItem> root) const;
 
-  private:
+   private:
     struct ReferenceEntry
     {
         std::shared_ptr<StackItem> Item;

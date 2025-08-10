@@ -1,4 +1,3 @@
-#include <iostream>
 #include <neo/extensions/biginteger_extensions.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -14,6 +13,8 @@
 #include <neo/smartcontract/native/oracle_contract.h>
 #include <neo/smartcontract/native/policy_contract.h>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <iostream>
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -155,8 +156,7 @@ int64_t PolicyContract::GetFeePerByte(std::shared_ptr<persistence::StoreView> sn
 {
     auto key = GetStorageKey(PREFIX_FEE_PER_BYTE, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return DEFAULT_FEE_PER_BYTE;
+    if (value.IsEmpty()) return DEFAULT_FEE_PER_BYTE;
 
     return extensions::BigIntegerExtensions::FromByteArray(value).ToInt64();
 }
@@ -165,8 +165,7 @@ uint32_t PolicyContract::GetExecFeeFactor(std::shared_ptr<persistence::StoreView
 {
     auto key = GetStorageKey(PREFIX_EXEC_FEE_FACTOR, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return DEFAULT_EXEC_FEE_FACTOR;
+    if (value.IsEmpty()) return DEFAULT_EXEC_FEE_FACTOR;
 
     return static_cast<uint32_t>(extensions::BigIntegerExtensions::FromByteArray(value).ToUInt64());
 }
@@ -175,8 +174,7 @@ uint32_t PolicyContract::GetStoragePrice(std::shared_ptr<persistence::StoreView>
 {
     auto key = GetStorageKey(PREFIX_STORAGE_PRICE, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return DEFAULT_STORAGE_PRICE;
+    if (value.IsEmpty()) return DEFAULT_STORAGE_PRICE;
 
     return static_cast<uint32_t>(extensions::BigIntegerExtensions::FromByteArray(value).ToUInt64());
 }
@@ -218,8 +216,7 @@ uint32_t PolicyContract::GetMaxValidUntilBlockIncrement(std::shared_ptr<persiste
 {
     auto key = GetStorageKey(PREFIX_MAX_VALID_UNTIL_BLOCK_INCREMENT, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return 5760;  // Default value
+    if (value.IsEmpty()) return 5760;  // Default value
 
     return static_cast<uint32_t>(extensions::BigIntegerExtensions::FromByteArray(value).ToUInt64());
 }
@@ -228,8 +225,7 @@ uint32_t PolicyContract::GetMaxTraceableBlocks(std::shared_ptr<persistence::Stor
 {
     auto key = GetStorageKey(PREFIX_MAX_TRACEABLE_BLOCKS, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return 2102400;  // Default value
+    if (value.IsEmpty()) return 2102400;  // Default value
 
     return static_cast<uint32_t>(extensions::BigIntegerExtensions::FromByteArray(value).ToUInt64());
 }
@@ -243,8 +239,7 @@ std::shared_ptr<vm::StackItem> PolicyContract::OnGetFeePerByte(ApplicationEngine
 std::shared_ptr<vm::StackItem> PolicyContract::OnSetFeePerByte(ApplicationEngine& engine,
                                                                const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::invalid_argument("Invalid arguments");
+    if (args.empty()) throw std::invalid_argument("Invalid arguments");
 
     auto valueItem = args[0];
     auto value = valueItem->GetInteger();
@@ -253,8 +248,7 @@ std::shared_ptr<vm::StackItem> PolicyContract::OnSetFeePerByte(ApplicationEngine
         throw std::out_of_range("Value out of range");
 
     // Check committee witness
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Invalid committee signature");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Invalid committee signature");
 
     // Set fee per byte
     auto key = GetStorageKey(PREFIX_FEE_PER_BYTE, io::ByteVector{});
@@ -263,27 +257,24 @@ std::shared_ptr<vm::StackItem> PolicyContract::OnSetFeePerByte(ApplicationEngine
     return vm::StackItem::Null();
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnGetExecFeeFactor(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnGetExecFeeFactor(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     return vm::StackItem::Create(static_cast<int64_t>(GetExecFeeFactor(engine.GetSnapshot())));
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnSetExecFeeFactor(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnSetExecFeeFactor(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::invalid_argument("Invalid arguments");
+    if (args.empty()) throw std::invalid_argument("Invalid arguments");
 
     auto valueItem = args[0];
     auto value = valueItem->GetInteger();
 
-    if (value == 0 || value > MAX_EXEC_FEE_FACTOR)
-        throw std::out_of_range("Value out of range");
+    if (value == 0 || value > MAX_EXEC_FEE_FACTOR) throw std::out_of_range("Value out of range");
 
     // Check committee witness
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Invalid committee signature");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Invalid committee signature");
 
     // Set execution fee factor
     auto key = GetStorageKey(PREFIX_EXEC_FEE_FACTOR, io::ByteVector{});
@@ -292,27 +283,24 @@ PolicyContract::OnSetExecFeeFactor(ApplicationEngine& engine, const std::vector<
     return vm::StackItem::Null();
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnGetStoragePrice(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnGetStoragePrice(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     return vm::StackItem::Create(static_cast<int64_t>(GetStoragePrice(engine.GetSnapshot())));
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnSetStoragePrice(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnSetStoragePrice(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::invalid_argument("Invalid arguments");
+    if (args.empty()) throw std::invalid_argument("Invalid arguments");
 
     auto valueItem = args[0];
     auto value = valueItem->GetInteger();
 
-    if (value == 0 || value > MAX_STORAGE_PRICE)
-        throw std::out_of_range("Value out of range");
+    if (value == 0 || value > MAX_STORAGE_PRICE) throw std::out_of_range("Value out of range");
 
     // Check committee witness
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Invalid committee signature");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Invalid committee signature");
 
     // Set storage price
     auto key = GetStorageKey(PREFIX_STORAGE_PRICE, io::ByteVector{});
@@ -324,14 +312,12 @@ PolicyContract::OnSetStoragePrice(ApplicationEngine& engine, const std::vector<s
 std::shared_ptr<vm::StackItem> PolicyContract::OnIsBlocked(ApplicationEngine& engine,
                                                            const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto accountItem = args[0];
     auto accountBytes = accountItem->GetByteArray();
 
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     io::UInt160 account;
     std::memcpy(account.Data(), accountBytes.Data(), 20);
@@ -342,18 +328,15 @@ std::shared_ptr<vm::StackItem> PolicyContract::OnIsBlocked(ApplicationEngine& en
 std::shared_ptr<vm::StackItem> PolicyContract::OnBlockAccount(ApplicationEngine& engine,
                                                               const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::invalid_argument("Invalid arguments");
+    if (args.empty()) throw std::invalid_argument("Invalid arguments");
 
     // Check committee witness
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Invalid committee signature");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Invalid committee signature");
 
     auto accountItem = args[0];
     auto accountBytes = accountItem->GetByteArray();
 
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     io::UInt160 account;
     std::memcpy(account.Data(), accountBytes.Data(), 20);
@@ -367,8 +350,7 @@ std::shared_ptr<vm::StackItem> PolicyContract::OnBlockAccount(ApplicationEngine&
 
     // Check if account is already blocked
     auto key = GetStorageKey(PREFIX_BLOCKED_ACCOUNT, account);
-    if (!GetStorageValue(engine.GetSnapshot(), key).IsEmpty())
-        return vm::StackItem::Create(false);
+    if (!GetStorageValue(engine.GetSnapshot(), key).IsEmpty()) return vm::StackItem::Create(false);
 
     // Block account
     PutStorageValue(engine.GetSnapshot(), key, io::ByteVector{});
@@ -379,26 +361,22 @@ std::shared_ptr<vm::StackItem> PolicyContract::OnBlockAccount(ApplicationEngine&
 std::shared_ptr<vm::StackItem> PolicyContract::OnUnblockAccount(ApplicationEngine& engine,
                                                                 const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::invalid_argument("Invalid arguments");
+    if (args.empty()) throw std::invalid_argument("Invalid arguments");
 
     // Check committee witness
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Invalid committee signature");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Invalid committee signature");
 
     auto accountItem = args[0];
     auto accountBytes = accountItem->GetByteArray();
 
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     io::UInt160 account;
     std::memcpy(account.Data(), accountBytes.Data(), 20);
 
     // Check if account is blocked
     auto key = GetStorageKey(PREFIX_BLOCKED_ACCOUNT, account);
-    if (GetStorageValue(engine.GetSnapshot(), key).IsEmpty())
-        return vm::StackItem::Create(false);
+    if (GetStorageValue(engine.GetSnapshot(), key).IsEmpty()) return vm::StackItem::Create(false);
 
     // Unblock account
     DeleteStorageValue(engine.GetSnapshot(), key);
@@ -406,11 +384,10 @@ std::shared_ptr<vm::StackItem> PolicyContract::OnUnblockAccount(ApplicationEngin
     return vm::StackItem::Create(true);
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnGetAttributeFee(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnGetAttributeFee(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto attributeTypeItem = args[0];
     auto attributeType = static_cast<uint8_t>(attributeTypeItem->GetInteger());
@@ -418,11 +395,10 @@ PolicyContract::OnGetAttributeFee(ApplicationEngine& engine, const std::vector<s
     return vm::StackItem::Create(static_cast<int64_t>(GetAttributeFee(engine.GetSnapshot(), attributeType)));
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnSetAttributeFee(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnSetAttributeFee(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 2)
-        throw std::invalid_argument("Invalid arguments");
+    if (args.size() < 2) throw std::invalid_argument("Invalid arguments");
 
     auto attributeTypeItem = args[0];
     auto valueItem = args[1];
@@ -435,12 +411,10 @@ PolicyContract::OnSetAttributeFee(ApplicationEngine& engine, const std::vector<s
     if (attributeType > 0x20 && attributeType != 0x20)  // 0x20 is NotaryAssisted
         throw std::runtime_error("Unsupported attribute type");
 
-    if (value > MAX_ATTRIBUTE_FEE)
-        throw std::out_of_range("Value out of range");
+    if (value > MAX_ATTRIBUTE_FEE) throw std::out_of_range("Value out of range");
 
     // Check committee witness
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Invalid committee signature");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Invalid committee signature");
 
     // Set attribute fee
     auto key = GetStorageKey(PREFIX_ATTRIBUTE_FEE, io::ByteVector{&attributeType, 1});
@@ -457,19 +431,16 @@ PolicyContract::OnSetAttributeFee(ApplicationEngine& engine, const std::vector<s
     return vm::StackItem::Null();
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnGetMillisecondsPerBlock(ApplicationEngine& engine,
-                                          const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnGetMillisecondsPerBlock(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     return vm::StackItem::Create(static_cast<int64_t>(GetMillisecondsPerBlock(engine.GetSnapshot())));
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnSetMillisecondsPerBlock(ApplicationEngine& engine,
-                                          const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnSetMillisecondsPerBlock(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::invalid_argument("Invalid arguments");
+    if (args.empty()) throw std::invalid_argument("Invalid arguments");
 
     auto valueItem = args[0];
     auto value = valueItem->GetInteger();
@@ -479,8 +450,7 @@ PolicyContract::OnSetMillisecondsPerBlock(ApplicationEngine& engine,
                                 std::to_string(MAX_MILLISECONDS_PER_BLOCK) + ", got " + std::to_string(value));
 
     // Check committee witness
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("invalid committee signature");
+    if (!CheckCommittee(engine)) throw std::runtime_error("invalid committee signature");
 
     // Get old value for event
     auto oldValue = GetMillisecondsPerBlock(engine.GetSnapshot());
@@ -497,25 +467,21 @@ PolicyContract::OnSetMillisecondsPerBlock(ApplicationEngine& engine,
     return vm::StackItem::Null();
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnGetMaxValidUntilBlockIncrement(ApplicationEngine& engine,
-                                                 const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnGetMaxValidUntilBlockIncrement(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     return vm::StackItem::Create(static_cast<int64_t>(GetMaxValidUntilBlockIncrement(engine.GetSnapshot())));
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnSetMaxValidUntilBlockIncrement(ApplicationEngine& engine,
-                                                 const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnSetMaxValidUntilBlockIncrement(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::invalid_argument("Invalid arguments");
+    if (args.empty()) throw std::invalid_argument("Invalid arguments");
 
     auto valueItem = args[0];
     auto value = valueItem->GetInteger();
 
-    if (value == 0 || value > MAX_MAX_VALID_UNTIL_BLOCK_INCREMENT)
-        throw std::out_of_range("Value out of range");
+    if (value == 0 || value > MAX_MAX_VALID_UNTIL_BLOCK_INCREMENT) throw std::out_of_range("Value out of range");
 
     // Check if value is less than max traceable blocks
     auto mtb = GetMaxTraceableBlocks(engine.GetSnapshot());
@@ -524,8 +490,7 @@ PolicyContract::OnSetMaxValidUntilBlockIncrement(ApplicationEngine& engine,
                                  std::to_string(value) + " vs " + std::to_string(mtb) + ")");
 
     // Check committee witness
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Invalid committee signature");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Invalid committee signature");
 
     // Set max valid until block increment
     auto key = GetStorageKey(PREFIX_MAX_VALID_UNTIL_BLOCK_INCREMENT, io::ByteVector{});
@@ -534,19 +499,16 @@ PolicyContract::OnSetMaxValidUntilBlockIncrement(ApplicationEngine& engine,
     return vm::StackItem::Null();
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnGetMaxTraceableBlocks(ApplicationEngine& engine,
-                                        const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnGetMaxTraceableBlocks(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     return vm::StackItem::Create(static_cast<int64_t>(GetMaxTraceableBlocks(engine.GetSnapshot())));
 }
 
-std::shared_ptr<vm::StackItem>
-PolicyContract::OnSetMaxTraceableBlocks(ApplicationEngine& engine,
-                                        const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> PolicyContract::OnSetMaxTraceableBlocks(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::invalid_argument("Invalid arguments");
+    if (args.empty()) throw std::invalid_argument("Invalid arguments");
 
     auto valueItem = args[0];
     auto value = valueItem->GetInteger();
@@ -566,8 +528,7 @@ PolicyContract::OnSetMaxTraceableBlocks(ApplicationEngine& engine,
                                  std::to_string(value) + " vs " + std::to_string(mVUBIncrement) + ")");
 
     // Check committee witness
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Invalid committee signature");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Invalid committee signature");
 
     // Set max traceable blocks
     auto key = GetStorageKey(PREFIX_MAX_TRACEABLE_BLOCKS, io::ByteVector{});
@@ -599,42 +560,33 @@ bool PolicyContract::IsNativeContract(const io::UInt160& scriptHash) const
     // Check against all known native contract hashes
     // Core token contracts
     auto neoToken = NeoToken::GetInstance();
-    if (neoToken && neoToken->GetScriptHash() == scriptHash)
-        return true;
+    if (neoToken && neoToken->GetScriptHash() == scriptHash) return true;
 
     auto gasToken = GasToken::GetInstance();
-    if (gasToken && gasToken->GetScriptHash() == scriptHash)
-        return true;
+    if (gasToken && gasToken->GetScriptHash() == scriptHash) return true;
 
     // System contracts
     auto contractManagement = ContractManagement::GetInstance();
-    if (contractManagement && contractManagement->GetScriptHash() == scriptHash)
-        return true;
+    if (contractManagement && contractManagement->GetScriptHash() == scriptHash) return true;
 
     auto policyContract = PolicyContract::GetInstance();
-    if (policyContract && policyContract->GetScriptHash() == scriptHash)
-        return true;
+    if (policyContract && policyContract->GetScriptHash() == scriptHash) return true;
 
     auto ledgerContract = LedgerContract::GetInstance();
-    if (ledgerContract && ledgerContract->GetScriptHash() == scriptHash)
-        return true;
+    if (ledgerContract && ledgerContract->GetScriptHash() == scriptHash) return true;
 
     auto roleManagement = RoleManagement::GetInstance();
-    if (roleManagement && roleManagement->GetScriptHash() == scriptHash)
-        return true;
+    if (roleManagement && roleManagement->GetScriptHash() == scriptHash) return true;
 
     // Service contracts
     auto oracleContract = OracleContract::GetInstance();
-    if (oracleContract && oracleContract->GetScriptHash() == scriptHash)
-        return true;
+    if (oracleContract && oracleContract->GetScriptHash() == scriptHash) return true;
 
     auto notary = Notary::GetInstance();
-    if (notary && notary->GetScriptHash() == scriptHash)
-        return true;
+    if (notary && notary->GetScriptHash() == scriptHash) return true;
 
     auto nameService = NameService::GetInstance();
-    if (nameService && nameService->GetScriptHash() == scriptHash)
-        return true;
+    if (nameService && nameService->GetScriptHash() == scriptHash) return true;
 
     return false;
 }

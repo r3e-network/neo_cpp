@@ -1,21 +1,21 @@
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/local_node.h>
+#include <neo/network/p2p/remote_node.h>
+#include <neo/network/p2p/tcp_connection.h>
+
 #include <algorithm>
 #include <boost/asio.hpp>
 #include <chrono>
 #include <functional>
 #include <iostream>
 #include <memory>
-#include <neo/network/ip_endpoint.h>
-#include <neo/network/p2p/local_node.h>
-#include <neo/network/p2p/remote_node.h>
-#include <neo/network/p2p/tcp_connection.h>
 #include <thread>
 
 namespace neo::network::p2p
 {
 bool LocalNode::Start(uint16_t port, size_t maxConnections)
 {
-    if (running_)
-        return false;
+    if (running_) return false;
 
     maxConnections_ = maxConnections;
 
@@ -63,8 +63,7 @@ bool LocalNode::Start(uint16_t port, size_t maxConnections)
 
 bool LocalNode::Start(const ChannelsConfig& config)
 {
-    if (running_)
-        return false;
+    if (running_) return false;
 
     maxConnections_ = config.GetMaxConnections();
 
@@ -115,8 +114,7 @@ bool LocalNode::Start(const ChannelsConfig& config)
 
 void LocalNode::Stop()
 {
-    if (!running_)
-        return;
+    if (!running_) return;
 
     running_ = false;
 
@@ -152,8 +150,7 @@ void LocalNode::Stop()
 
 bool LocalNode::Connect(const IPEndPoint& endpoint)
 {
-    if (!running_)
-        return false;
+    if (!running_) return false;
 
     try
     {
@@ -209,8 +206,7 @@ bool LocalNode::Connect(const IPEndPoint& endpoint)
 
 void LocalNode::StartConnectionLifecycle()
 {
-    if (connectionLifecycleRunning_)
-        return;
+    if (connectionLifecycleRunning_) return;
 
     connectionLifecycleRunning_ = true;
 
@@ -219,8 +215,7 @@ void LocalNode::StartConnectionLifecycle()
 
 void LocalNode::StopConnectionLifecycle()
 {
-    if (!connectionLifecycleRunning_)
-        return;
+    if (!connectionLifecycleRunning_) return;
 
     connectionLifecycleRunning_ = false;
 
@@ -247,8 +242,7 @@ void LocalNode::ManageConnectionLifecycle()
             // Connect to peers
             for (const auto& peer : unconnectedPeers)
             {
-                if (GetConnectedCount() >= maxConnections_)
-                    break;
+                if (GetConnectedCount() >= maxConnections_) break;
 
                 Connect(peer.GetEndPoint());
             }
@@ -261,8 +255,7 @@ void LocalNode::ManageConnectionLifecycle()
 
 void LocalNode::StartAccept()
 {
-    if (!acceptor_)
-        return;
+    if (!acceptor_) return;
 
     acceptor_->async_accept(std::bind(&LocalNode::HandleAccept, this, std::placeholders::_1, std::placeholders::_2));
 }
@@ -323,7 +316,7 @@ void LocalNode::HandleConnect(const std::error_code& error, boost::asio::ip::tcp
     if (!error)
     {
         LOG_INFO("Connected to " + endpoint.ToString());
-        
+
         // Create a TCP connection
         auto connection = TcpConnection::Create(std::move(socket));
 
@@ -350,7 +343,7 @@ void LocalNode::HandleConnect(const std::error_code& error, boost::asio::ip::tcp
 
 void LocalNode::AddConnectedNode(std::unique_ptr<RemoteNode> remoteNode)
 {
-    try 
+    try
     {
         std::lock_guard<std::mutex> lock(connectedNodesMutex_);
 
@@ -381,8 +374,7 @@ void LocalNode::RemoveConnectedNode(uint32_t id)
 void LocalNode::RelayTransaction(std::shared_ptr<ledger::Transaction> transaction)
 {
     // Implement transaction relay matching C# LocalNode.RelayDirectly
-    if (!transaction)
-        return;
+    if (!transaction) return;
 
     try
     {
@@ -412,8 +404,7 @@ void LocalNode::RelayTransaction(std::shared_ptr<ledger::Transaction> transactio
 void LocalNode::RelayBlock(std::shared_ptr<ledger::Block> block)
 {
     // Implement block relay matching C# LocalNode.RelayDirectly
-    if (!block)
-        return;
+    if (!block) return;
 
     try
     {
@@ -455,8 +446,7 @@ void LocalNode::DiscoverPeers()
             {
                 // Parse seed node address
                 size_t colonPos = seedNode.find(':');
-                if (colonPos == std::string::npos)
-                    continue;
+                if (colonPos == std::string::npos) continue;
 
                 std::string host = seedNode.substr(0, colonPos);
                 std::string portStr = seedNode.substr(colonPos + 1);

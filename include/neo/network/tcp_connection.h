@@ -1,12 +1,13 @@
 #pragma once
 
+#include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/message.h>
+#include <neo/network/thread_safe_queue.h>
+
 #include <atomic>
 #include <boost/asio.hpp>
 #include <functional>
 #include <memory>
-#include <neo/network/ip_endpoint.h>
-#include <neo/network/p2p/message.h>
-#include <neo/network/thread_safe_queue.h>
 #include <string>
 
 namespace neo::network
@@ -16,7 +17,7 @@ namespace neo::network
  */
 class TcpConnection : public std::enable_shared_from_this<TcpConnection>
 {
-  public:
+   public:
     /**
      * @brief Constructs a TcpConnection.
      * @param ioContext The IO context.
@@ -79,7 +80,7 @@ class TcpConnection : public std::enable_shared_from_this<TcpConnection>
      */
     void SetConnectionClosedCallback(std::function<void()> callback);
 
-  private:
+   private:
     boost::asio::ip::tcp::socket socket_;
     std::atomic<bool> running_;
     std::function<void(const p2p::Message&)> messageReceivedCallback_;

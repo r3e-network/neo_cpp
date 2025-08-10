@@ -1,11 +1,12 @@
 #pragma once
 
+#include <neo/io/uint256.h>
+#include <neo/ledger/event_system.h>
+#include <neo/ledger/pool_item.h>
+#include <neo/network/p2p/payloads/neo3_transaction.h>
+
 #include <functional>
 #include <mutex>
-#include <neo/io/uint256.h>
-#include <neo/ledger/pool_item.h>
-#include <neo/ledger/event_system.h>
-#include <neo/network/p2p/payloads/neo3_transaction.h>
 #include <set>
 #include <shared_mutex>
 #include <unordered_map>
@@ -19,24 +20,24 @@ namespace neo::ledger
  */
 class MemoryPool
 {
-  private:
+   private:
     mutable std::shared_mutex mutex_;
-    
+
     // Main transaction pools (matches C# Neo architecture)
-    std::unordered_map<io::UInt256, PoolItem> unsorted_transactions_;  // Dictionary<UInt256, PoolItem>
-    std::set<PoolItem> sorted_transactions_;                           // SortedSet<PoolItem>
-    std::unordered_map<io::UInt256, PoolItem> unverified_transactions_; // Dictionary<UInt256, PoolItem>
-    
+    std::unordered_map<io::UInt256, PoolItem> unsorted_transactions_;    // Dictionary<UInt256, PoolItem>
+    std::set<PoolItem> sorted_transactions_;                             // SortedSet<PoolItem>
+    std::unordered_map<io::UInt256, PoolItem> unverified_transactions_;  // Dictionary<UInt256, PoolItem>
+
     size_t max_capacity_;
     size_t max_unverified_capacity_;
 
     // Transaction verification function
     std::function<bool(const network::p2p::payloads::Neo3Transaction&)> verifier_;
-    
+
     // Note: Event handlers moved to static event system for C# compatibility
     // Events are now fired through MemoryPoolEvents static class
 
-  public:
+   public:
     /**
      * @brief Constructor
      * @param max_capacity Maximum number of verified transactions to hold
@@ -82,7 +83,7 @@ class MemoryPool
      * @return Vector of transactions sorted by priority
      */
     std::vector<network::p2p::payloads::Neo3Transaction> GetSortedTransactions() const;
-    
+
     /**
      * @brief Get all unverified transactions
      * @return Vector of unverified transactions
@@ -101,7 +102,7 @@ class MemoryPool
      * @return Number of verified transactions in pool
      */
     size_t GetSize() const;
-    
+
     /**
      * @brief Get current unverified pool size
      * @return Number of unverified transactions in pool
@@ -134,25 +135,25 @@ class MemoryPool
     };
 
     Stats GetStatistics() const;
-    
+
     /**
      * @brief Subscribe to transaction events (C# compatibility)
      * Note: Use MemoryPoolEvents::SubscribeTransactionAdded() and MemoryPoolEvents::SubscribeTransactionRemoved()
      * for static event subscription matching C# Neo's event pattern.
      */
-    
+
     /**
      * @brief Reverify unverified transactions
      * @param max_count Maximum number of transactions to reverify
      */
     void ReverifyTransactions(size_t max_count = 10);
 
-  private:
+   private:
     /**
      * @brief Remove lowest priority transaction if pool is full
      */
     void EvictLowestPriority();
-    
+
     /**
      * @brief Remove lowest priority unverified transaction if pool is full
      */
@@ -164,25 +165,25 @@ class MemoryPool
      * @return Priority value (higher is better)
      */
     double CalculatePriority(const network::p2p::payloads::Neo3Transaction& tx) const;
-    
+
     /**
      * @brief Move transaction from unverified to verified pool
      * @param item The pool item to move
      */
     void MoveToVerified(const PoolItem& item);
-    
+
     /**
      * @brief Fire transaction added event through static event system
      * @param transaction The added transaction
      */
     void FireTransactionAddedEvent(std::shared_ptr<network::p2p::payloads::Neo3Transaction> transaction);
-    
+
     /**
      * @brief Fire transaction removed event through static event system
      * @param transaction The removed transaction
      * @param reason The removal reason
      */
-    void FireTransactionRemovedEvent(std::shared_ptr<network::p2p::payloads::Neo3Transaction> transaction, 
+    void FireTransactionRemovedEvent(std::shared_ptr<network::p2p::payloads::Neo3Transaction> transaction,
                                      TransactionRemovedEventArgs::Reason reason);
 };
 }  // namespace neo::ledger

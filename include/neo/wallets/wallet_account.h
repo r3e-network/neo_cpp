@@ -4,6 +4,7 @@
 #include <neo/io/json_serializable.h>
 #include <neo/io/uint160.h>
 #include <neo/smartcontract/contract.h>
+
 #include <string>
 #include <vector>
 
@@ -14,7 +15,7 @@ namespace neo::wallets
  */
 class WalletAccount : public io::JsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty WalletAccount.
      */
@@ -134,7 +135,7 @@ class WalletAccount : public io::JsonSerializable
      */
     void FromJson(const nlohmann::json& json) override;
 
-  private:
+   private:
     io::UInt160 scriptHash_;
     cryptography::ecc::ECPoint publicKey_;
     std::vector<uint8_t> privateKey_;

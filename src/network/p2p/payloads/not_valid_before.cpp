@@ -6,15 +6,9 @@ NotValidBefore::NotValidBefore() : height_(0) {}
 
 NotValidBefore::NotValidBefore(uint32_t height) : height_(height) {}
 
-uint32_t NotValidBefore::GetHeight() const
-{
-    return height_;
-}
+uint32_t NotValidBefore::GetHeight() const { return height_; }
 
-void NotValidBefore::SetHeight(uint32_t height)
-{
-    height_ = height;
-}
+void NotValidBefore::SetHeight(uint32_t height) { height_ = height; }
 
 ledger::TransactionAttribute::Usage NotValidBefore::GetType() const
 {
@@ -90,13 +84,7 @@ int64_t NotValidBefore::CalculateNetworkFee(/* DataCache& snapshot, const Transa
     return 0;
 }
 
-bool NotValidBefore::operator==(const NotValidBefore& other) const
-{
-    return height_ == other.height_;
-}
+bool NotValidBefore::operator==(const NotValidBefore& other) const { return height_ == other.height_; }
 
-bool NotValidBefore::operator!=(const NotValidBefore& other) const
-{
-    return !(*this == other);
-}
+bool NotValidBefore::operator!=(const NotValidBefore& other) const { return !(*this == other); }
 }  // namespace neo::network::p2p::payloads

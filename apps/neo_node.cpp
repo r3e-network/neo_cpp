@@ -48,28 +48,37 @@ class NeoNode
     NeoNode()
     {
         // Initialize logging
+        std::cout << "About to initialize logger..." << std::endl;
         Logger::Initialize("neo-node");
-        LOG_INFO("Initializing Neo C++ Node...");
+        std::cout << "Logger initialized successfully" << std::endl;
+        
+        // Simple test without LOG_INFO macro
+        std::cout << "Initializing Neo C++ Node..." << std::endl;
 
         // Initialize storage layer
+        std::cout << "Creating MemoryStore..." << std::endl;
         store_ = std::make_shared<MemoryStore>();
+        std::cout << "Creating StoreCache..." << std::endl;
         blockchain_ = std::make_shared<StoreCache>(*store_);
-        LOG_INFO("Storage layer initialized");
+        std::cout << "Storage layer initialized" << std::endl;
 
         // Initialize memory pool (temporarily disabled due to transaction dependencies)
         // mempool_ = std::make_shared<MemoryPool>(10000); // 10k tx capacity
-        LOG_INFO("Memory pool temporarily disabled");
+        std::cout << "Memory pool temporarily disabled" << std::endl;
 
         // Initialize native contracts
+        std::cout << "About to initialize native contracts..." << std::endl;
         InitializeNativeContracts();
 
         // Initialize RPC server
+        std::cout << "About to initialize RPC server..." << std::endl;
         InitializeRpcServer();
 
         // Initialize consensus service
+        std::cout << "About to initialize consensus..." << std::endl;
         InitializeConsensus();
 
-        LOG_INFO("Neo C++ Node initialization complete!");
+        std::cout << "Neo C++ Node initialization complete!" << std::endl;
     }
 
     ~NeoNode()
@@ -79,15 +88,15 @@ class NeoNode
 
     void Start()
     {
-        LOG_INFO("Starting Neo C++ Node...");
+        std::cout << "Starting Neo C++ Node..." << std::endl;
 
         // Start RPC server
         rpc_server_->Start();
-        LOG_INFO("RPC server started on port 10332");
+        std::cout << "RPC server started on port 10332" << std::endl;
 
         // Initialize consensus service
         // Initialize consensus service
-        LOG_INFO("Consensus service ready for initialization");
+        std::cout << "Consensus service ready for initialization" << std::endl;
 
         // Display node information
         DisplayNodeInfo();
@@ -98,33 +107,33 @@ class NeoNode
 
     void Shutdown()
     {
-        LOG_INFO("Shutting down Neo C++ Node...");
+        std::cout << "Shutting down Neo C++ Node..." << std::endl;
 
         if (rpc_server_)
         {
             rpc_server_->Stop();
-            LOG_INFO("RPC server stopped");
+            std::cout << "RPC server stopped" << std::endl;
         }
 
-        LOG_INFO("Neo C++ Node shutdown complete");
+        std::cout << "Neo C++ Node shutdown complete" << std::endl;
     }
 
   private:
     void InitializeNativeContracts()
     {
-        LOG_INFO("Initializing native contracts...");
+        std::cout << "Initializing native contracts..." << std::endl;
 
         // Create native contract instances
         neo_token_ = NeoToken::GetInstance();
         // gas_token_ = GasToken::GetInstance(); // Temporarily disabled
         contract_mgmt_ = ContractManagement::GetInstance();
 
-        LOG_INFO("Native contracts initialized: NEO, ContractManagement");
+        std::cout << "Native contracts initialized: NEO, ContractManagement" << std::endl;
     }
 
     void InitializeRpcServer()
     {
-        LOG_INFO("Initializing RPC server...");
+        std::cout << "Initializing RPC server..." << std::endl;
 
         RpcConfig rpc_config;
         rpc_config.bind_address = "127.0.0.1";
@@ -135,12 +144,12 @@ class NeoNode
         rpc_server_ = std::make_shared<RpcServer>(rpc_config);
         // rpc_server_->SetBlockchain(blockchain_);
 
-        LOG_INFO("RPC server initialized on {}:{}", rpc_config.bind_address, rpc_config.port);
+        std::cout << "RPC server initialized on " << rpc_config.bind_address << ":" << rpc_config.port << std::endl;
     }
 
     void InitializeConsensus()
     {
-        LOG_INFO("Initializing consensus service...");
+        std::cout << "Initializing consensus service..." << std::endl;
 
         // Complete dBFT consensus initialization
         try
@@ -180,19 +189,19 @@ class NeoNode
                         {
                             throw std::runtime_error("Failed to load keypair from wallet");
                         }
-                        LOG_INFO("Successfully loaded consensus keypair from wallet");
+                        std::cout << "Successfully loaded consensus keypair from wallet" << std::endl;
                     }
                     catch (const std::exception& e)
                     {
                         LOG_ERROR("Failed to load wallet keypair: {}", e.what());
-                        LOG_INFO("Falling back to auto-generated keypair");
+                        std::cout << "Falling back to auto-generated keypair" << std::endl;
                         consensus_keypair = cryptography::ecc::KeyPair::Generate();
                     }
                 }
                 else
                 {
                     // Generate secure keypair for testing/development
-                    LOG_INFO("Generating secure consensus keypair for development");
+                    std::cout << "Generating secure consensus keypair for development" << std::endl;
                     consensus_keypair = cryptography::ecc::KeyPair::Generate();
                 }
 
@@ -207,7 +216,7 @@ class NeoNode
                 {
                     // For now, we'll run as an observer node without active consensus participation
                     // This allows the node to run and sync without requiring full consensus implementation
-                    LOG_INFO("Running as observer node - consensus participation disabled");
+                    std::cout << "Running as observer node - consensus participation disabled" << std::endl;
                     
                     // When consensus is fully implemented, uncomment the following:
                     // consensus_ = std::make_shared<consensus::ConsensusService>(
@@ -229,8 +238,8 @@ class NeoNode
                     // Start consensus service
                     // consensus_->Start();
 
-                    LOG_INFO("Consensus service started successfully");
-                    LOG_INFO("Node participating in consensus as validator");
+                    std::cout << "Consensus service started successfully" << std::endl;
+                    std::cout << "Node participating in consensus as validator" << std::endl;
                 }
                 catch (const std::exception& e)
                 {
@@ -240,8 +249,8 @@ class NeoNode
             }
             else
             {
-                LOG_INFO("Consensus participation disabled - running as observer node");
-                LOG_INFO("Node will validate blocks but not participate in consensus");
+                std::cout << "Consensus participation disabled - running as observer node" << std::endl;
+                std::cout << "Node will validate blocks but not participate in consensus" << std::endl;
             }
         }
         catch (const std::exception& e)
@@ -250,7 +259,7 @@ class NeoNode
             throw;
         }
 
-        LOG_INFO("Consensus service initialization completed");
+        std::cout << "Consensus service initialization completed" << std::endl;
     }
 
     void DisplayNodeInfo()
@@ -307,16 +316,22 @@ class NeoNode
     {
         auto rpc_stats = rpc_server_->GetStatistics();
 
-        LOG_INFO("=== NODE STATISTICS ===");
-        LOG_INFO("RPC Requests: {} total, {} failed", rpc_stats["totalRequests"].GetInt64(),
-                 rpc_stats["failedRequests"].GetInt64());
-        LOG_INFO("Memory Pool: disabled");
-        LOG_INFO("Blockchain Height: 0");
-        LOG_INFO("========================");
+        std::cout << "=== NODE STATISTICS ===" << std::endl;
+        std::cout << "RPC Requests: " << rpc_stats["totalRequests"].GetInt64() << " total, " 
+                  << rpc_stats["failedRequests"].GetInt64() << " failed" << std::endl;
+        std::cout << "Memory Pool: disabled" << std::endl;
+        std::cout << "Blockchain Height: 0" << std::endl;
+        std::cout << "========================" << std::endl;
     }
 };
 
-int main(int /* argc */, char* /* argv */[])
+static void PrintUsage()
+{
+    std::cout << "Neo C++ Node\n"
+              << "Usage: neo_node [--help] [--config <path>]" << std::endl;
+}
+
+int main(int argc, char* argv[])
 {
     // Setup signal handlers for graceful shutdown
     signal(SIGINT, signal_handler);
@@ -324,6 +339,23 @@ int main(int /* argc */, char* /* argv */[])
 
     try
     {
+        // Basic CLI handling
+        std::string configPath;
+        for (int i = 1; i < argc; ++i)
+        {
+            std::string arg(argv[i]);
+            if (arg == "--help" || arg == "-h")
+            {
+                PrintUsage();
+                return 0;
+            }
+            if (arg == "--config" && i + 1 < argc)
+            {
+                configPath = std::string(argv[++i]);
+                continue;
+            }
+        }
+
         std::cout << "Starting Neo C++ Blockchain Node...\n";
 
         // Create and start the node

@@ -8,6 +8,7 @@
 #include <neo/smartcontract/native/neo_token_persistence.h>
 #include <neo/smartcontract/native/neo_token_transfer.h>
 #include <neo/vm/stack_item.h>
+
 #include <sstream>
 #include <stdexcept>
 #include <vector>
@@ -20,8 +21,7 @@ bool NeoTokenPersistence::InitializeContract(const NeoToken& token, ApplicationE
     {
         // Create a cached committee from standby validators
         auto settings = engine.GetProtocolSettings();
-        if (!settings)
-            return false;
+        if (!settings) return false;
 
         auto standbyCommittee = settings->GetStandbyCommittee();
         // Use manual size check instead of empty() method
@@ -58,8 +58,7 @@ bool NeoTokenPersistence::InitializeContract(const NeoToken& token, ApplicationE
             }
         }
 
-        if (committeeCount == 0)
-            return false;
+        if (committeeCount == 0) return false;
 
         std::ostringstream stream;
         io::BinaryWriter writer(stream);
@@ -130,8 +129,7 @@ bool NeoTokenPersistence::OnPersist(const NeoToken& token, ApplicationEngine& en
 {
     // Get the persisting block
     auto block = engine.GetPersistingBlock();
-    if (!block)
-        return false;
+    if (!block) return false;
 
     // Initialize contract if needed
     auto key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::Committee));
@@ -185,8 +183,7 @@ bool NeoTokenPersistence::PostPersist(const NeoToken& token, ApplicationEngine& 
 {
     // Get the persisting block
     auto block = engine.GetPersistingBlock();
-    if (!block)
-        return false;
+    if (!block) return false;
 
     // Distribute GAS for committee
     int committeeSize = 7;    // Default to 7 committee members

@@ -1,4 +1,3 @@
-#include <iostream>
 #include <neo/cryptography/ecc/ec_point.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
@@ -11,6 +10,8 @@
 #include <neo/smartcontract/native/neo_token_committee.h>
 #include <neo/vm/script_builder.h>
 #include <neo/vm/stack_item.h>
+
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 
@@ -20,15 +21,13 @@ bool NeoTokenCandidate::RegisterCandidate(const NeoToken& token, std::shared_ptr
                                           const cryptography::ecc::ECPoint& pubKey)
 {
     // Check if the public key is valid
-    if (pubKey.IsInfinity())
-        return false;
+    if (pubKey.IsInfinity()) return false;
 
     // Get the candidate state
     auto state = GetCandidateState(token, snapshot, pubKey);
 
     // Check if the candidate is already registered
-    if (state.registered)
-        return false;
+    if (state.registered) return false;
 
     // Register the candidate
     state.registered = true;
@@ -52,15 +51,13 @@ bool NeoTokenCandidate::UnregisterCandidate(const NeoToken& token, std::shared_p
                                             const cryptography::ecc::ECPoint& pubKey)
 {
     // Check if the public key is valid
-    if (pubKey.IsInfinity())
-        return false;
+    if (pubKey.IsInfinity()) return false;
 
     // Get the candidate state
     auto state = GetCandidateState(token, snapshot, pubKey);
 
     // Check if the candidate is registered
-    if (!state.registered)
-        return false;
+    if (!state.registered) return false;
 
     // Unregister the candidate
     state.registered = false;
@@ -105,8 +102,8 @@ NeoToken::CandidateState NeoTokenCandidate::GetCandidateState(const NeoToken& to
     return state;
 }
 
-std::vector<std::pair<cryptography::ecc::ECPoint, NeoToken::CandidateState>>
-NeoTokenCandidate::GetCandidates(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot)
+std::vector<std::pair<cryptography::ecc::ECPoint, NeoToken::CandidateState>> NeoTokenCandidate::GetCandidates(
+    const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot)
 {
     std::vector<std::pair<cryptography::ecc::ECPoint, NeoToken::CandidateState>> candidates;
 
@@ -141,8 +138,7 @@ NeoTokenCandidate::GetCandidates(const NeoToken& token, std::shared_ptr<persiste
         state.Deserialize(reader);
 
         // Only add registered candidates
-        if (state.registered)
-            candidates.push_back(std::make_pair(pubKey, state));
+        if (state.registered) candidates.push_back(std::make_pair(pubKey, state));
 
         iterator->Next();
     }
@@ -170,12 +166,10 @@ void NeoTokenCandidate::CheckCandidate(const NeoToken& token, std::shared_ptr<pe
     }
 }
 
-std::shared_ptr<vm::StackItem>
-NeoTokenCandidate::OnRegisterCandidate(const NeoToken& token, ApplicationEngine& engine,
-                                       const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> NeoTokenCandidate::OnRegisterCandidate(
+    const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 1)
-        throw std::runtime_error("Invalid number of arguments");
+    if (args.size() < 1) throw std::runtime_error("Invalid number of arguments");
 
     auto pubKeyItem = args[0];
 
@@ -219,12 +213,10 @@ NeoTokenCandidate::OnRegisterCandidate(const NeoToken& token, ApplicationEngine&
     return vm::StackItem::Create(result);
 }
 
-std::shared_ptr<vm::StackItem>
-NeoTokenCandidate::OnUnregisterCandidate(const NeoToken& token, ApplicationEngine& engine,
-                                         const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> NeoTokenCandidate::OnUnregisterCandidate(
+    const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 1)
-        throw std::runtime_error("Invalid number of arguments");
+    if (args.size() < 1) throw std::runtime_error("Invalid number of arguments");
 
     auto pubKeyItem = args[0];
 
@@ -268,9 +260,8 @@ NeoTokenCandidate::OnUnregisterCandidate(const NeoToken& token, ApplicationEngin
     return vm::StackItem::Create(result);
 }
 
-std::shared_ptr<vm::StackItem>
-NeoTokenCandidate::OnGetCandidates(const NeoToken& token, ApplicationEngine& engine,
-                                   const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> NeoTokenCandidate::OnGetCandidates(
+    const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     auto candidates = GetCandidates(token, engine.GetSnapshot());
 
@@ -288,12 +279,10 @@ NeoTokenCandidate::OnGetCandidates(const NeoToken& token, ApplicationEngine& eng
     return vm::StackItem::Create(candidatesArray);
 }
 
-std::shared_ptr<vm::StackItem>
-NeoTokenCandidate::OnGetCandidateVote(const NeoToken& token, ApplicationEngine& engine,
-                                      const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> NeoTokenCandidate::OnGetCandidateVote(
+    const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 1)
-        throw std::runtime_error("Invalid number of arguments");
+    if (args.size() < 1) throw std::runtime_error("Invalid number of arguments");
 
     auto pubKeyItem = args[0];
 
@@ -326,19 +315,16 @@ int64_t NeoTokenCandidate::GetRegisterPrice(const NeoToken& token, std::shared_p
     }
 }
 
-std::shared_ptr<vm::StackItem>
-NeoTokenCandidate::OnGetRegisterPrice(const NeoToken& token, ApplicationEngine& engine,
-                                      const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> NeoTokenCandidate::OnGetRegisterPrice(
+    const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     return vm::StackItem::Create(GetRegisterPrice(token, engine.GetSnapshot()));
 }
 
-std::shared_ptr<vm::StackItem>
-NeoTokenCandidate::OnSetRegisterPrice(const NeoToken& token, ApplicationEngine& engine,
-                                      const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> NeoTokenCandidate::OnSetRegisterPrice(
+    const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 1)
-        throw std::runtime_error("Invalid number of arguments");
+    if (args.size() < 1) throw std::runtime_error("Invalid number of arguments");
 
     auto priceItem = args[0];
     int64_t price = priceItem->GetInteger();

@@ -1,12 +1,13 @@
-#include <algorithm>
-#include <chrono>
-#include <iostream>
 #include <neo/config/protocol_settings.h>
 #include <neo/ledger/memory_pool.h>
 #include <neo/ledger/neo_system.h>
 #include <neo/ledger/transaction_verification_context.h>
 #include <neo/ledger/verify_result.h>
 #include <neo/smartcontract/application_engine.h>
+
+#include <algorithm>
+#include <chrono>
+#include <iostream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -15,9 +16,10 @@ namespace neo::ledger
 {
 // PoolItem implementation - matches C# PoolItem exactly
 PoolItem::PoolItem(std::shared_ptr<Neo3Transaction> transaction)
-    : tx(transaction), timestamp(std::chrono::duration_cast<std::chrono::milliseconds>(
-                                     std::chrono::system_clock::now().time_since_epoch())
-                                     .count()),
+    : tx(transaction),
+      timestamp(
+          std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch())
+              .count()),
       fee_per_byte(0)
 {
     if (tx)
@@ -32,17 +34,13 @@ PoolItem::PoolItem(std::shared_ptr<Neo3Transaction> transaction)
 bool PoolItem::operator<(const PoolItem& other) const
 {
     // Higher fee per byte = higher priority (reverse order for std::set)
-    if (fee_per_byte != other.fee_per_byte)
-        return fee_per_byte > other.fee_per_byte;
+    if (fee_per_byte != other.fee_per_byte) return fee_per_byte > other.fee_per_byte;
 
     // If same fee per byte, older transaction has priority
     return timestamp < other.timestamp;
 }
 
-bool PoolItem::operator>(const PoolItem& other) const
-{
-    return other < *this;
-}
+bool PoolItem::operator>(const PoolItem& other) const { return other < *this; }
 
 bool PoolItem::operator==(const PoolItem& other) const
 {
@@ -51,34 +49,31 @@ bool PoolItem::operator==(const PoolItem& other) const
 
 int PoolItem::CompareTo(const PoolItem& other) const
 {
-    if (*this < other)
-        return -1;
-    if (*this > other)
-        return 1;
+    if (*this < other) return -1;
+    if (*this > other) return 1;
     return 0;
 }
 
 int PoolItem::CompareTo(std::shared_ptr<Neo3Transaction> transaction) const
 {
-    if (!tx || !transaction)
-        return 0;
+    if (!tx || !transaction) return 0;
 
     auto other_fee = transaction->GetNetworkFee();
     auto other_size = transaction->GetSize();
     auto other_fee_per_byte = other_size > 0 ? other_fee / other_size : 0;
 
-    if (fee_per_byte > other_fee_per_byte)
-        return -1;
-    if (fee_per_byte < other_fee_per_byte)
-        return 1;
+    if (fee_per_byte > other_fee_per_byte) return -1;
+    if (fee_per_byte < other_fee_per_byte) return 1;
     return 0;
 }
 
 // MemoryPool implementation - matches C# MemoryPool.cs exactly
 MemoryPool::MemoryPool(std::shared_ptr<NeoSystem> system)
-    : system_(system), capacity_(256)  // Default capacity like C# version
+    : system_(system),
+      capacity_(256)  // Default capacity like C# version
       ,
-      max_milliseconds_to_reverify_tx_(100.0), max_milliseconds_to_reverify_tx_per_idle_(10.0),
+      max_milliseconds_to_reverify_tx_(100.0),
+      max_milliseconds_to_reverify_tx_per_idle_(10.0),
       verification_context_(std::make_unique<TransactionVerificationContext>())
 {
     if (!system_)
@@ -158,8 +153,7 @@ std::vector<std::shared_ptr<Neo3Transaction>> MemoryPool::GetSortedVerifiedTrans
     int added = 0;
     for (const auto& item : sorted_transactions_)
     {
-        if (count > 0 && added >= count)
-            break;
+        if (count > 0 && added >= count) break;
         result.push_back(item->tx);
         ++added;
     }
@@ -190,14 +184,12 @@ void MemoryPool::GetVerifiedAndUnverifiedTransactions(
 
 bool MemoryPool::CanTransactionFitInPool(std::shared_ptr<Neo3Transaction> tx) const
 {
-    if (!tx)
-        return false;
+    if (!tx) return false;
 
     std::shared_lock<std::shared_mutex> lock(tx_rw_lock_);
 
     // If pool is not full, transaction can fit
-    if (GetCount() < capacity_)
-        return true;
+    if (GetCount() < capacity_) return true;
 
     // If pool is full, check if this transaction has higher priority than the lowest
     if (!sorted_transactions_.empty())
@@ -277,8 +269,7 @@ VerifyResult MemoryPool::TryAdd(std::shared_ptr<Neo3Transaction> tx, std::shared
 void MemoryPool::UpdatePoolForBlockPersisted(std::shared_ptr<network::p2p::payloads::Block> block,
                                              std::shared_ptr<persistence::DataCache> snapshot)
 {
-    if (!block)
-        return;
+    if (!block) return;
 
     std::unique_lock<std::shared_mutex> lock(tx_rw_lock_);
 
@@ -316,8 +307,7 @@ void MemoryPool::UpdatePoolForBlockPersisted(std::shared_ptr<network::p2p::paylo
 void MemoryPool::ReVerifyTopUnverifiedTransactionsIfNeeded(int count, double milliseconds_timeout,
                                                            std::shared_ptr<persistence::DataCache> snapshot)
 {
-    if (!snapshot || unverified_transactions_.empty())
-        return;
+    if (!snapshot || unverified_transactions_.empty()) return;
 
     auto start_time = std::chrono::high_resolution_clock::now();
     int reverified = 0;
@@ -330,8 +320,7 @@ void MemoryPool::ReVerifyTopUnverifiedTransactionsIfNeeded(int count, double mil
         auto current_time = std::chrono::high_resolution_clock::now();
         auto elapsed = std::chrono::duration<double, std::milli>(current_time - start_time).count();
 
-        if (elapsed > milliseconds_timeout)
-            break;
+        if (elapsed > milliseconds_timeout) break;
 
         auto item = *it;
         auto hash = item->tx->GetHash();
@@ -428,10 +417,7 @@ void MemoryPool::InvalidateAllTransactions()
     conflicts_.clear();
 }
 
-void MemoryPool::InvalidateVerifiedTransactions()
-{
-    InvalidateAllTransactions();
-}
+void MemoryPool::InvalidateVerifiedTransactions() { InvalidateAllTransactions(); }
 
 // Event registration
 void MemoryPool::RegisterTransactionAddedHandler(TransactionAddedHandler handler)
@@ -447,17 +433,15 @@ void MemoryPool::RegisterTransactionRemovedHandler(TransactionRemovedHandler han
 // Private methods
 std::shared_ptr<PoolItem> MemoryPool::GetLowestFeeTransaction() const
 {
-    if (sorted_transactions_.empty())
-        return nullptr;
+    if (sorted_transactions_.empty()) return nullptr;
     return *sorted_transactions_.rbegin();  // Last item has lowest priority
 }
 
-std::shared_ptr<PoolItem>
-MemoryPool::GetLowestFeeTransaction(std::unordered_map<io::UInt256, std::shared_ptr<PoolItem>>*& unsorted_pool,
-                                    std::set<std::shared_ptr<PoolItem>>*& sorted_pool) const
+std::shared_ptr<PoolItem> MemoryPool::GetLowestFeeTransaction(
+    std::unordered_map<io::UInt256, std::shared_ptr<PoolItem>>*& unsorted_pool,
+    std::set<std::shared_ptr<PoolItem>>*& sorted_pool) const
 {
-    if (sorted_pool->empty())
-        return nullptr;
+    if (sorted_pool->empty()) return nullptr;
     return *sorted_pool->rbegin();
 }
 
@@ -551,8 +535,7 @@ bool MemoryPool::TryRemoveUnverified(const io::UInt256& hash, std::shared_ptr<Po
 
 void MemoryPool::RemoveConflictsOfVerified(std::shared_ptr<PoolItem> item)
 {
-    if (!item || !item->tx)
-        return;
+    if (!item || !item->tx) return;
 
     auto hash = item->tx->GetHash();
     std::shared_ptr<PoolItem> removed_item;

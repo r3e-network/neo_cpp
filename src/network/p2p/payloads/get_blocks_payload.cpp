@@ -1,4 +1,5 @@
 #include <neo/network/p2p/payloads/get_blocks_payload.h>
+
 #include <stdexcept>
 
 namespace neo::network::p2p::payloads
@@ -12,30 +13,15 @@ GetBlocksPayload::GetBlocksPayload(const io::UInt256& hashStart)
 {
 }
 
-const io::UInt256& GetBlocksPayload::GetHashStart() const
-{
-    return hashStart_;
-}
+const io::UInt256& GetBlocksPayload::GetHashStart() const { return hashStart_; }
 
-void GetBlocksPayload::SetHashStart(const io::UInt256& hashStart)
-{
-    hashStart_ = hashStart;
-}
+void GetBlocksPayload::SetHashStart(const io::UInt256& hashStart) { hashStart_ = hashStart; }
 
-int16_t GetBlocksPayload::GetCount() const
-{
-    return count_;
-}
+int16_t GetBlocksPayload::GetCount() const { return count_; }
 
-void GetBlocksPayload::SetCount(int16_t count)
-{
-    count_ = count;
-}
+void GetBlocksPayload::SetCount(int16_t count) { count_ = count; }
 
-size_t GetBlocksPayload::GetSize() const
-{
-    return sizeof(int16_t) + io::UInt256::Size;
-}
+size_t GetBlocksPayload::GetSize() const { return sizeof(int16_t) + io::UInt256::Size; }
 
 GetBlocksPayload GetBlocksPayload::Create(const io::UInt256& hashStart, int16_t count)
 {
@@ -57,8 +43,7 @@ void GetBlocksPayload::Deserialize(io::BinaryReader& reader)
     count_ = reader.ReadInt16();
 
     // Validate count
-    if (count_ < -1 || count_ == 0)
-        throw std::runtime_error("Invalid count");
+    if (count_ < -1 || count_ == 0) throw std::runtime_error("Invalid count");
 }
 
 void GetBlocksPayload::SerializeJson(io::JsonWriter& writer) const
@@ -79,7 +64,6 @@ void GetBlocksPayload::DeserializeJson(const io::JsonReader& reader)
     count_ = reader.ReadInt16("count");
 
     // Validate count (same validation as binary deserialization)
-    if (count_ < -1 || count_ == 0)
-        throw std::runtime_error("Invalid count");
+    if (count_ < -1 || count_ == 0) throw std::runtime_error("Invalid count");
 }
 }  // namespace neo::network::p2p::payloads

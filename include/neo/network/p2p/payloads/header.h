@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
 #include <neo/config/protocol_settings.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
@@ -9,6 +7,9 @@
 #include <neo/io/uint256.h>
 #include <neo/ledger/witness.h>
 #include <neo/persistence/data_cache.h>
+
+#include <cstdint>
+#include <memory>
 
 namespace neo::network::p2p::payloads
 {
@@ -21,7 +22,7 @@ class HeaderCache;
  */
 class Header : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty Header.
      */
@@ -45,10 +46,7 @@ class Header : public io::ISerializable, public io::IJsonSerializable
     /**
      * @brief Gets the version of the block.
      */
-    uint32_t GetVersion() const
-    {
-        return version_;
-    }
+    uint32_t GetVersion() const { return version_; }
 
     /**
      * @brief Sets the version of the block.
@@ -58,10 +56,7 @@ class Header : public io::ISerializable, public io::IJsonSerializable
     /**
      * @brief Gets the hash of the previous block.
      */
-    const io::UInt256& GetPrevHash() const
-    {
-        return prev_hash_;
-    }
+    const io::UInt256& GetPrevHash() const { return prev_hash_; }
 
     /**
      * @brief Sets the hash of the previous block.
@@ -71,10 +66,7 @@ class Header : public io::ISerializable, public io::IJsonSerializable
     /**
      * @brief Gets the merkle root of the transactions.
      */
-    const io::UInt256& GetMerkleRoot() const
-    {
-        return merkle_root_;
-    }
+    const io::UInt256& GetMerkleRoot() const { return merkle_root_; }
 
     /**
      * @brief Sets the merkle root of the transactions.
@@ -84,10 +76,7 @@ class Header : public io::ISerializable, public io::IJsonSerializable
     /**
      * @brief Gets the timestamp of the block.
      */
-    uint64_t GetTimestamp() const
-    {
-        return timestamp_;
-    }
+    uint64_t GetTimestamp() const { return timestamp_; }
 
     /**
      * @brief Sets the timestamp of the block.
@@ -97,10 +86,7 @@ class Header : public io::ISerializable, public io::IJsonSerializable
     /**
      * @brief Gets the nonce of the block.
      */
-    uint64_t GetNonce() const
-    {
-        return nonce_;
-    }
+    uint64_t GetNonce() const { return nonce_; }
 
     /**
      * @brief Sets the nonce of the block.
@@ -110,10 +96,7 @@ class Header : public io::ISerializable, public io::IJsonSerializable
     /**
      * @brief Gets the index of the block.
      */
-    uint32_t GetIndex() const
-    {
-        return index_;
-    }
+    uint32_t GetIndex() const { return index_; }
 
     /**
      * @brief Sets the index of the block.
@@ -123,10 +106,7 @@ class Header : public io::ISerializable, public io::IJsonSerializable
     /**
      * @brief Gets the primary index of the consensus node.
      */
-    uint8_t GetPrimaryIndex() const
-    {
-        return primary_index_;
-    }
+    uint8_t GetPrimaryIndex() const { return primary_index_; }
 
     /**
      * @brief Sets the primary index of the consensus node.
@@ -136,10 +116,7 @@ class Header : public io::ISerializable, public io::IJsonSerializable
     /**
      * @brief Gets the next consensus address.
      */
-    const io::UInt160& GetNextConsensus() const
-    {
-        return next_consensus_;
-    }
+    const io::UInt160& GetNextConsensus() const { return next_consensus_; }
 
     /**
      * @brief Sets the next consensus address.
@@ -149,10 +126,7 @@ class Header : public io::ISerializable, public io::IJsonSerializable
     /**
      * @brief Gets the witness of the block.
      */
-    const ledger::Witness& GetWitness() const
-    {
-        return witness_;
-    }
+    const ledger::Witness& GetWitness() const { return witness_; }
 
     /**
      * @brief Sets the witness of the block.
@@ -208,7 +182,7 @@ class Header : public io::ISerializable, public io::IJsonSerializable
     bool operator==(const Header& other) const;
     bool operator!=(const Header& other) const;
 
-  private:
+   private:
     /**
      * @brief Calculates and caches the hash.
      */

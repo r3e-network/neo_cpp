@@ -1,12 +1,13 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
 #include <neo/consensus/change_view_message.h>
 #include <neo/consensus/commit_message.h>
 #include <neo/consensus/consensus_message.h>
 #include <neo/consensus/prepare_request.h>
 #include <neo/consensus/prepare_response.h>
+
+#include <cstdint>
+#include <memory>
 #include <vector>
 
 namespace neo::consensus
@@ -16,7 +17,7 @@ namespace neo::consensus
  */
 class RecoveryMessage : public ConsensusMessage
 {
-  public:
+   public:
     /**
      * @brief Constructs a RecoveryMessage.
      * @param viewNumber The view number.
@@ -89,7 +90,7 @@ class RecoveryMessage : public ConsensusMessage
      */
     io::ByteVector GetData() const;
 
-  private:
+   private:
     std::vector<std::shared_ptr<ChangeViewMessage>> changeViewMessages_;
     std::shared_ptr<PrepareRequest> prepareRequest_;
     std::vector<std::shared_ptr<PrepareResponse>> prepareResponses_;

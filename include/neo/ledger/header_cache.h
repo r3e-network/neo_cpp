@@ -1,10 +1,11 @@
 #pragma once
 
+#include <neo/io/uint256.h>
+#include <neo/ledger/header.h>
+
 #include <deque>
 #include <memory>
 #include <mutex>
-#include <neo/io/uint256.h>
-#include <neo/ledger/header.h>
 #include <shared_mutex>
 #include <unordered_map>
 
@@ -15,7 +16,7 @@ namespace neo::ledger
  */
 class HeaderCache
 {
-  public:
+   public:
     /**
      * @brief Constructs a header cache.
      * @param max_size Maximum number of headers to cache.
@@ -97,7 +98,7 @@ class HeaderCache
      */
     void Clear();
 
-  private:
+   private:
     mutable std::shared_mutex mutex_;
     std::deque<std::shared_ptr<Header>> headers_;
     std::unordered_map<io::UInt256, std::shared_ptr<Header>> hash_index_;

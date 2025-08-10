@@ -1,4 +1,3 @@
-#include <memory>
 #include <neo/core/logging.h>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/ecrecover.h>
@@ -7,6 +6,8 @@
 #include <openssl/ec.h>
 #include <openssl/ecdsa.h>
 #include <openssl/evp.h>
+
+#include <memory>
 #include <stdexcept>
 #include <vector>
 
@@ -18,8 +19,7 @@ struct BNDeleter
 {
     void operator()(BIGNUM* bn) const
     {
-        if (bn)
-            BN_free(bn);
+        if (bn) BN_free(bn);
     }
 };
 using BNPtr = std::unique_ptr<BIGNUM, BNDeleter>;
@@ -29,8 +29,7 @@ struct ECPointDeleter
 {
     void operator()(EC_POINT* point) const
     {
-        if (point)
-            EC_POINT_free(point);
+        if (point) EC_POINT_free(point);
     }
 };
 using ECPointPtr = std::unique_ptr<EC_POINT, ECPointDeleter>;
@@ -40,8 +39,7 @@ struct ECKeyDeleter
 {
     void operator()(EC_KEY* key) const
     {
-        if (key)
-            EC_KEY_free(key);
+        if (key) EC_KEY_free(key);
     }
 };
 using ECKeyPtr = std::unique_ptr<EC_KEY, ECKeyDeleter>;

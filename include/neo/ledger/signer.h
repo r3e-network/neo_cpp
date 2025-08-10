@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -9,6 +8,9 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/io/uint160.h>
+#include <neo/ledger/witness_rule.h>
+
+#include <cstdint>
 #include <vector>
 
 namespace neo::ledger
@@ -42,10 +44,7 @@ inline WitnessScope operator^(WitnessScope lhs, WitnessScope rhs)
     return static_cast<WitnessScope>(static_cast<uint8_t>(lhs) ^ static_cast<uint8_t>(rhs));
 }
 
-inline WitnessScope operator~(WitnessScope scope)
-{
-    return static_cast<WitnessScope>(~static_cast<uint8_t>(scope));
-}
+inline WitnessScope operator~(WitnessScope scope) { return static_cast<WitnessScope>(~static_cast<uint8_t>(scope)); }
 
 inline WitnessScope& operator&=(WitnessScope& lhs, WitnessScope rhs)
 {
@@ -70,12 +69,12 @@ inline WitnessScope& operator^=(WitnessScope& lhs, WitnessScope rhs)
  */
 class Signer : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty Signer.
      */
     Signer();
-    
+
     /**
      * @brief Virtual destructor.
      */
@@ -137,6 +136,18 @@ class Signer : public io::ISerializable, public io::IJsonSerializable
     void SetAllowedGroups(const std::vector<cryptography::ecc::ECPoint>& allowedGroups);
 
     /**
+     * @brief Gets the witness rules.
+     * @return The witness rules.
+     */
+    const std::vector<WitnessRule>& GetRules() const;
+
+    /**
+     * @brief Sets the witness rules.
+     * @param rules The witness rules.
+     */
+    void SetRules(const std::vector<WitnessRule>& rules);
+
+    /**
      * @brief Serializes the Signer to a binary writer.
      * @param writer The binary writer.
      */
@@ -174,10 +185,11 @@ class Signer : public io::ISerializable, public io::IJsonSerializable
      */
     bool operator!=(const Signer& other) const;
 
-  private:
+   private:
     io::UInt160 account_;
     WitnessScope scopes_;
     std::vector<io::UInt160> allowedContracts_;
     std::vector<cryptography::ecc::ECPoint> allowedGroups_;
+    std::vector<WitnessRule> rules_;
 };
 }  // namespace neo::ledger

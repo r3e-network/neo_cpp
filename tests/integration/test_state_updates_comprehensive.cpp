@@ -45,7 +45,7 @@ protected:
         block->SetVersion(0);
         block->SetPreviousHash(io::UInt256::Zero());
         block->SetMerkleRoot(io::UInt256::Zero());
-        block->SetTimestamp(std::chrono::system_clock::now());
+        block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
         block->SetIndex(0);
         block->SetPrimaryIndex(0);
         block->SetNextConsensus(io::UInt160::Zero());
@@ -126,7 +126,7 @@ TEST_F(StateUpdatesTest, TestBlockHeightStateUpdates)
     block1->SetVersion(0);
     block1->SetPreviousHash(genesis->GetHash());
     block1->SetMerkleRoot(io::UInt256::Zero());
-    block1->SetTimestamp(std::chrono::system_clock::now());
+    block1->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block1->SetIndex(1);
     block1->SetPrimaryIndex(0);
     block1->SetNextConsensus(io::UInt160::Zero());
@@ -155,7 +155,7 @@ TEST_F(StateUpdatesTest, TestTransactionStateUpdates)
     block->SetVersion(0);
     block->SetPreviousHash(genesis->GetHash());
     block->SetMerkleRoot(io::UInt256::Zero());
-    block->SetTimestamp(std::chrono::system_clock::now());
+    block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block->SetIndex(1);
     block->SetPrimaryIndex(0);
     block->SetNextConsensus(io::UInt160::Zero());

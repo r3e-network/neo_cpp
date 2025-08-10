@@ -1,8 +1,9 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
+#include <cstdint>
 #include <string>
 
 namespace neo::wallets
@@ -12,7 +13,7 @@ namespace neo::wallets
  */
 class TransferOutput
 {
-  public:
+   public:
     /**
      * @brief Default constructor.
      */
@@ -133,7 +134,7 @@ class TransferOutput
      */
     std::string ToString() const;
 
-  private:
+   private:
     io::UInt160 asset_id_;
     io::UInt160 script_hash_;
     int64_t amount_;

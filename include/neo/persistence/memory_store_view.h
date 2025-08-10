@@ -1,10 +1,11 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/persistence/store_view.h>
+
+#include <functional>
+#include <memory>
 #include <optional>
 #include <unordered_map>
 
@@ -15,10 +16,10 @@ namespace neo::persistence
  */
 class MemoryStoreView : public StoreView
 {
-  private:
+   private:
     std::unordered_map<StorageKey, StorageItem> storage_;
 
-  public:
+   public:
     /**
      * @brief Default constructor
      */
@@ -50,18 +51,12 @@ class MemoryStoreView : public StoreView
      * @brief Get number of items
      * @return Number of items in storage
      */
-    size_t Size() const
-    {
-        return storage_.size();
-    }
+    size_t Size() const { return storage_.size(); }
 
     /**
      * @brief Check if storage is empty
      * @return True if empty
      */
-    bool IsEmpty() const
-    {
-        return storage_.empty();
-    }
+    bool IsEmpty() const { return storage_.empty(); }
 };
 }  // namespace neo::persistence

@@ -5,6 +5,7 @@
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
 #include <optional>
 #include <string>
 #include <vector>
@@ -35,7 +36,7 @@ enum class ContractParameterType : uint8_t
  */
 class ContractParameter
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty ContractParameter.
      */
@@ -171,7 +172,7 @@ class ContractParameter
      */
     static ContractParameter CreateVoid();
 
-  private:
+   private:
     ContractParameterType type_;
     std::optional<io::ByteVector> value_;
     std::vector<ContractParameter> array_;
@@ -183,7 +184,7 @@ class ContractParameter
  */
 class Contract : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty Contract.
      */
@@ -253,7 +254,7 @@ class Contract : public io::ISerializable
      */
     static Contract CreateMultiSigContract(int m, const std::vector<cryptography::ecc::ECPoint>& pubKeys);
 
-  private:
+   private:
     io::ByteVector script_;
     std::vector<ContractParameterType> parameterList_;
 };
@@ -263,7 +264,7 @@ class Contract : public io::ISerializable
  */
 class ContractState : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty ContractState.
      */
@@ -341,7 +342,7 @@ class ContractState : public io::ISerializable
      */
     void Deserialize(io::BinaryReader& reader) override;
 
-  private:
+   private:
     int32_t id_;
     uint16_t updateCounter_;
     io::UInt160 scriptHash_;

@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableArithmeticNumeric
 {
-  public:
+   public:
     // Arithmetic operations
     static void ADD(ExecutionEngine& engine, const Instruction& instruction);
     static void SUB(ExecutionEngine& engine, const Instruction& instruction);

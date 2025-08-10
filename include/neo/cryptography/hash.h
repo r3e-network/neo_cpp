@@ -3,6 +3,7 @@
 #include <neo/io/byte_span.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
 #include <optional>
 #include <vector>
 
@@ -13,7 +14,7 @@ namespace neo::cryptography
  */
 class Hash
 {
-  public:
+   public:
     /**
      * @brief Computes SHA256 hash.
      * @param data The data to hash.

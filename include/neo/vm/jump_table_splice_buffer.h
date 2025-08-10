@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableSpliceBuffer
 {
-  public:
+   public:
     // Buffer operations
     static void NEWBUFFER(ExecutionEngine& engine, const Instruction& instruction);
     static void MEMCPY(ExecutionEngine& engine, const Instruction& instruction);

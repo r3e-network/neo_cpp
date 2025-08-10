@@ -1,12 +1,13 @@
+#include <neo/core/logging.h>
+#include <neo/io/byte_vector.h>
+#include <neo/network/p2p/message.h>
+#include <neo/network/p2p/tcp_connection.h>
+
 #include <atomic>
 #include <boost/asio.hpp>
 #include <cstdint>
 #include <memory>
 #include <mutex>
-#include <neo/core/logging.h>
-#include <neo/io/byte_vector.h>
-#include <neo/network/p2p/message.h>
-#include <neo/network/p2p/tcp_connection.h>
 #include <thread>
 
 namespace neo::network::p2p
@@ -21,10 +22,7 @@ TcpConnection::TcpConnection(boost::asio::ip::tcp::socket socket)
 {
 }
 
-TcpConnection::~TcpConnection()
-{
-    Disconnect();
-}
+TcpConnection::~TcpConnection() { Disconnect(); }
 
 IPEndPoint TcpConnection::GetRemoteEndPoint() const
 {
@@ -54,8 +52,7 @@ IPEndPoint TcpConnection::GetLocalEndPoint() const
 
 bool TcpConnection::Send(const Message& message, bool enableCompression)
 {
-    if (!connected_)
-        return false;
+    if (!connected_) return false;
 
     try
     {
@@ -65,10 +62,11 @@ bool TcpConnection::Send(const Message& message, bool enableCompression)
         LOG_INFO("TcpConnection::Send - Calling ToArray on message");
         io::ByteVector data = message.ToArray(enableCompression);
         LOG_INFO("TcpConnection::Send - ToArray returned " + std::to_string(data.Size()) + " bytes");
-        
+
         // Log outgoing message bytes for debugging
         std::string hexBytes;
-        for (size_t i = 0; i < std::min(data.Size(), size_t(32)); ++i) {
+        for (size_t i = 0; i < std::min(data.Size(), size_t(32)); ++i)
+        {
             char hex[4];
             snprintf(hex, sizeof(hex), "%02x ", data.Data()[i]);
             hexBytes += hex;
@@ -149,10 +147,11 @@ void TcpConnection::HandleReceive(const std::error_code& error, std::size_t byte
     {
         // Update the bytes received
         UpdateBytesReceived(bytesTransferred);
-        
+
         // Log raw received bytes for debugging
         std::string hexBytes;
-        for (size_t i = 0; i < std::min(bytesTransferred, size_t(32)); ++i) {
+        for (size_t i = 0; i < std::min(bytesTransferred, size_t(32)); ++i)
+        {
             char hex[4];
             snprintf(hex, sizeof(hex), "%02x ", receiveBuffer_.Data()[i]);
             hexBytes += hex;
@@ -165,7 +164,8 @@ void TcpConnection::HandleReceive(const std::error_code& error, std::size_t byte
 
         if (bytesRead > 0)
         {
-            LOG_INFO("Successfully deserialized message, command: " + std::to_string(static_cast<int>(message.GetCommand())));
+            LOG_INFO("Successfully deserialized message, command: " +
+                     std::to_string(static_cast<int>(message.GetCommand())));
             // Process the message
             OnMessageReceived(message);
 

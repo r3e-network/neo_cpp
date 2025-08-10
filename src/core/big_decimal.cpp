@@ -10,6 +10,7 @@
 // modifications are permitted.
 
 #include "neo/core/big_decimal.h"
+
 #include <algorithm>
 #include <cmath>
 #include <regex>
@@ -61,10 +62,8 @@ BigDecimal::BigDecimal(double value, uint8_t decimals)
 
 int BigDecimal::sign() const
 {
-    if (value_ > 0)
-        return 1;
-    if (value_ < 0)
-        return -1;
+    if (value_ > 0) return 1;
+    if (value_ < 0) return -1;
     return 0;
 }
 
@@ -366,27 +365,19 @@ BigDecimal& BigDecimal::operator%=(const BigDecimal& other)
     return *this;
 }
 
-BigDecimal BigDecimal::operator-() const
-{
-    return BigDecimal(-value_, decimals_);
-}
+BigDecimal BigDecimal::operator-() const { return BigDecimal(-value_, decimals_); }
 
 // Comparison operators
 std::strong_ordering BigDecimal::operator<=>(const BigDecimal& other) const
 {
     auto [left_val, right_val] = normalize(*this, other);
 
-    if (left_val < right_val)
-        return std::strong_ordering::less;
-    if (left_val > right_val)
-        return std::strong_ordering::greater;
+    if (left_val < right_val) return std::strong_ordering::less;
+    if (left_val > right_val) return std::strong_ordering::greater;
     return std::strong_ordering::equal;
 }
 
-bool BigDecimal::operator==(const BigDecimal& other) const
-{
-    return (*this <=> other) == std::strong_ordering::equal;
-}
+bool BigDecimal::operator==(const BigDecimal& other) const { return (*this <=> other) == std::strong_ordering::equal; }
 
 std::size_t BigDecimal::hash() const
 {

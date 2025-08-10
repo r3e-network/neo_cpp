@@ -1,10 +1,11 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/vm/stack_item.h>
+
+#include <cstdint>
+#include <memory>
 
 namespace neo::smartcontract::native
 {
@@ -14,7 +15,7 @@ namespace neo::smartcontract::native
  */
 class AccountState
 {
-  public:
+   public:
     /**
      * @brief Constructs an AccountState.
      */
@@ -67,7 +68,7 @@ class AccountState
      */
     virtual void FromStackItem(const std::shared_ptr<vm::StackItem>& item);
 
-  private:
+   private:
     int64_t balance_;
 };
 }  // namespace neo::smartcontract::native

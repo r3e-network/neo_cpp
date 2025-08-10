@@ -1,5 +1,6 @@
-#include <algorithm>
 #include <neo/ledger/memory_pool.h>
+
+#include <algorithm>
 #include <numeric>
 
 namespace neo::ledger

@@ -1,12 +1,13 @@
 #pragma once
 
+#include <signal.h>
+
 #include <atomic>
 #include <chrono>
 #include <condition_variable>
 #include <functional>
 #include <iostream>
 #include <mutex>
-#include <signal.h>
 #include <string>
 #include <thread>
 #include <vector>
@@ -19,7 +20,7 @@ namespace neo::core
  */
 class ShutdownManager
 {
-  public:
+   public:
     using ShutdownHandler = std::function<void()>;
 
     struct HandlerInfo
@@ -84,10 +85,7 @@ class ShutdownManager
      * @brief Check if shutdown has been requested
      * @return true if shutdown requested
      */
-    bool IsShutdownRequested() const
-    {
-        return shutdownRequested_.load();
-    }
+    bool IsShutdownRequested() const { return shutdownRequested_.load(); }
 
     /**
      * @brief Wait for shutdown request
@@ -141,12 +139,9 @@ class ShutdownManager
      * @brief Set maximum shutdown time
      * @param timeout Maximum time for shutdown
      */
-    void SetMaxShutdownTime(std::chrono::milliseconds timeout)
-    {
-        maxShutdownTime_ = timeout;
-    }
+    void SetMaxShutdownTime(std::chrono::milliseconds timeout) { maxShutdownTime_ = timeout; }
 
-  private:
+   private:
     ShutdownManager() = default;
 
     void ExecuteShutdown()
@@ -180,8 +175,7 @@ class ShutdownManager
             auto deadline = std::chrono::steady_clock::now() + info.timeout;
             while (handlerThread.joinable() && std::chrono::steady_clock::now() < deadline)
             {
-                if (completed)
-                    break;
+                if (completed) break;
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
 
@@ -233,7 +227,7 @@ class ShutdownManager
  */
 class ShutdownHandlerGuard
 {
-  public:
+   public:
     ShutdownHandlerGuard(const std::string& name, ShutdownManager::ShutdownHandler handler, int priority = 100,
                          std::chrono::milliseconds timeout = std::chrono::milliseconds(30000))
     {
@@ -244,8 +238,8 @@ class ShutdownHandlerGuard
 /**
  * @brief Macro for easy shutdown handler registration
  */
-#define REGISTER_SHUTDOWN_HANDLER(name, priority, timeout, code)                                                       \
-    static neo::core::ShutdownHandlerGuard _shutdown_##name(                                                           \
+#define REGISTER_SHUTDOWN_HANDLER(name, priority, timeout, code) \
+    static neo::core::ShutdownHandlerGuard _shutdown_##name(     \
         #name, []() { code }, priority, std::chrono::milliseconds(timeout))
 
 }  // namespace neo::core

@@ -10,7 +10,7 @@ namespace neo::vm
  */
 class VMException : public std::runtime_error
 {
-  public:
+   public:
     /**
      * @brief Constructs a new VMException.
      * @param message The error message.
@@ -23,7 +23,7 @@ class VMException : public std::runtime_error
  */
 class BadScriptException : public VMException
 {
-  public:
+   public:
     /**
      * @brief Constructs a new BadScriptException with the specified message.
      * @param message The error message.
@@ -36,7 +36,7 @@ class BadScriptException : public VMException
  */
 class InvalidOperationException : public VMException
 {
-  public:
+   public:
     /**
      * @brief Constructs a new InvalidOperationException with the specified message.
      * @param message The error message.
@@ -49,7 +49,7 @@ class InvalidOperationException : public VMException
  */
 class StackOverflowException : public VMException
 {
-  public:
+   public:
     /**
      * @brief Constructs a new StackOverflowException with the specified message.
      * @param message The error message.
@@ -62,7 +62,7 @@ class StackOverflowException : public VMException
  */
 class StackUnderflowException : public VMException
 {
-  public:
+   public:
     /**
      * @brief Constructs a new StackUnderflowException with the specified message.
      * @param message The error message.
@@ -75,7 +75,7 @@ class StackUnderflowException : public VMException
  */
 class InvalidCastException : public VMException
 {
-  public:
+   public:
     /**
      * @brief Constructs a new InvalidCastException with the specified message.
      * @param message The error message.
@@ -88,7 +88,7 @@ class InvalidCastException : public VMException
  */
 class NotSupportedException : public VMException
 {
-  public:
+   public:
     /**
      * @brief Constructs a new NotSupportedException.
      * @param message The error message.
@@ -101,7 +101,7 @@ class NotSupportedException : public VMException
  */
 class ArgumentException : public VMException
 {
-  public:
+   public:
     /**
      * @brief Constructs a new ArgumentException.
      * @param message The error message.
@@ -114,7 +114,7 @@ class ArgumentException : public VMException
  */
 class ArgumentOutOfRangeException : public ArgumentException
 {
-  public:
+   public:
     /**
      * @brief Constructs a new ArgumentOutOfRangeException.
      * @param message The error message.
@@ -127,7 +127,7 @@ class ArgumentOutOfRangeException : public ArgumentException
  */
 class ArgumentNullException : public ArgumentException
 {
-  public:
+   public:
     /**
      * @brief Constructs a new ArgumentNullException.
      * @param message The error message.
@@ -140,7 +140,7 @@ class ArgumentNullException : public ArgumentException
  */
 class CatchableException : public VMException
 {
-  public:
+   public:
     /**
      * @brief Constructs a new CatchableException.
      * @param message The error message.
@@ -153,7 +153,7 @@ class CatchableException : public VMException
  */
 class DivideByZeroException : public VMException
 {
-  public:
+   public:
     /**
      * @brief Constructs a new DivideByZeroException.
      * @param message The error message.

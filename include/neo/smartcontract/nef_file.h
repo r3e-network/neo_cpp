@@ -1,11 +1,12 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_vector.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
 #include <neo/smartcontract/method_token.h>
+
+#include <cstdint>
 #include <string>
 #include <vector>
 
@@ -16,7 +17,7 @@ namespace neo::smartcontract
  */
 class NefFile : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief NEO Executable Format 3 (NEF3)
      */
@@ -117,7 +118,7 @@ class NefFile : public io::ISerializable, public io::IJsonSerializable
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
+   private:
     std::string compiler_;
     std::string source_;
     std::vector<MethodToken> tokens_;

@@ -3,16 +3,14 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/network/p2p/payloads/network_address_with_time.h>
+
 #include <regex>
 #include <sstream>
 #include <stdexcept>
 
 namespace neo::network::p2p::payloads
 {
-NetworkAddressWithTime::NetworkAddressWithTime() : timestamp_(0), services_(0), port_(0)
-{
-    address_.fill(0);
-}
+NetworkAddressWithTime::NetworkAddressWithTime() : timestamp_(0), services_(0), port_(0) { address_.fill(0); }
 
 NetworkAddressWithTime::NetworkAddressWithTime(uint32_t timestamp, uint64_t services, const std::string& address,
                                                uint16_t port)
@@ -22,55 +20,25 @@ NetworkAddressWithTime::NetworkAddressWithTime(uint32_t timestamp, uint64_t serv
     ParseIPAddress(address);
 }
 
-uint32_t NetworkAddressWithTime::GetTimestamp() const
-{
-    return timestamp_;
-}
+uint32_t NetworkAddressWithTime::GetTimestamp() const { return timestamp_; }
 
-void NetworkAddressWithTime::SetTimestamp(uint32_t timestamp)
-{
-    timestamp_ = timestamp;
-}
+void NetworkAddressWithTime::SetTimestamp(uint32_t timestamp) { timestamp_ = timestamp; }
 
-uint64_t NetworkAddressWithTime::GetServices() const
-{
-    return services_;
-}
+uint64_t NetworkAddressWithTime::GetServices() const { return services_; }
 
-void NetworkAddressWithTime::SetServices(uint64_t services)
-{
-    services_ = services;
-}
+void NetworkAddressWithTime::SetServices(uint64_t services) { services_ = services; }
 
-std::string NetworkAddressWithTime::GetAddress() const
-{
-    return FormatIPAddress();
-}
+std::string NetworkAddressWithTime::GetAddress() const { return FormatIPAddress(); }
 
-void NetworkAddressWithTime::SetAddress(const std::string& address)
-{
-    ParseIPAddress(address);
-}
+void NetworkAddressWithTime::SetAddress(const std::string& address) { ParseIPAddress(address); }
 
-const std::array<uint8_t, 16>& NetworkAddressWithTime::GetAddressBytes() const
-{
-    return address_;
-}
+const std::array<uint8_t, 16>& NetworkAddressWithTime::GetAddressBytes() const { return address_; }
 
-void NetworkAddressWithTime::SetAddressBytes(const std::array<uint8_t, 16>& address)
-{
-    address_ = address;
-}
+void NetworkAddressWithTime::SetAddressBytes(const std::array<uint8_t, 16>& address) { address_ = address; }
 
-uint16_t NetworkAddressWithTime::GetPort() const
-{
-    return port_;
-}
+uint16_t NetworkAddressWithTime::GetPort() const { return port_; }
 
-void NetworkAddressWithTime::SetPort(uint16_t port)
-{
-    port_ = port;
-}
+void NetworkAddressWithTime::SetPort(uint16_t port) { port_ = port; }
 
 std::string NetworkAddressWithTime::GetEndpoint() const
 {
@@ -91,21 +59,14 @@ bool NetworkAddressWithTime::IsIPv4() const
     // IPv4-mapped IPv6 addresses have the form ::ffff:x.x.x.x
     for (int i = 0; i < 10; i++)
     {
-        if (address_[i] != 0)
-            return false;
+        if (address_[i] != 0) return false;
     }
     return address_[10] == 0xff && address_[11] == 0xff;
 }
 
-bool NetworkAddressWithTime::IsIPv6() const
-{
-    return !IsIPv4();
-}
+bool NetworkAddressWithTime::IsIPv6() const { return !IsIPv4(); }
 
-int NetworkAddressWithTime::GetSize() const
-{
-    return Size;
-}
+int NetworkAddressWithTime::GetSize() const { return Size; }
 
 void NetworkAddressWithTime::Serialize(io::BinaryWriter& writer) const
 {
@@ -165,10 +126,7 @@ bool NetworkAddressWithTime::operator==(const NetworkAddressWithTime& other) con
            port_ == other.port_;
 }
 
-bool NetworkAddressWithTime::operator!=(const NetworkAddressWithTime& other) const
-{
-    return !(*this == other);
-}
+bool NetworkAddressWithTime::operator!=(const NetworkAddressWithTime& other) const { return !(*this == other); }
 
 NetworkAddressWithTime NetworkAddressWithTime::FromIPv4(uint32_t timestamp, uint64_t services, const std::string& ipv4,
                                                         uint16_t port)
@@ -323,8 +281,7 @@ std::string NetworkAddressWithTime::FormatIPAddress() const
         std::stringstream ss;
         for (int i = 0; i < 16; i += 2)
         {
-            if (i > 0)
-                ss << ":";
+            if (i > 0) ss << ":";
             uint16_t segment = (static_cast<uint16_t>(address_[i]) << 8) | address_[i + 1];
             ss << std::hex << segment;
         }

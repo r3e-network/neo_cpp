@@ -7,25 +7,13 @@ namespace neo::smartcontract::manifest
 // ContractParameterDefinition implementation
 ContractParameterDefinition::ContractParameterDefinition() : type_(ContractParameterType::Void) {}
 
-const std::string& ContractParameterDefinition::GetName() const
-{
-    return name_;
-}
+const std::string& ContractParameterDefinition::GetName() const { return name_; }
 
-void ContractParameterDefinition::SetName(const std::string& name)
-{
-    name_ = name;
-}
+void ContractParameterDefinition::SetName(const std::string& name) { name_ = name; }
 
-ContractParameterType ContractParameterDefinition::GetType() const
-{
-    return type_;
-}
+ContractParameterType ContractParameterDefinition::GetType() const { return type_; }
 
-void ContractParameterDefinition::SetType(ContractParameterType type)
-{
-    type_ = type;
-}
+void ContractParameterDefinition::SetType(ContractParameterType type) { type_ = type; }
 
 void ContractParameterDefinition::Serialize(io::BinaryWriter& writer) const
 {
@@ -45,55 +33,28 @@ ContractMethodDescriptor::ContractMethodDescriptor()
 {
 }
 
-const std::string& ContractMethodDescriptor::GetName() const
-{
-    return name_;
-}
+const std::string& ContractMethodDescriptor::GetName() const { return name_; }
 
-void ContractMethodDescriptor::SetName(const std::string& name)
-{
-    name_ = name;
-}
+void ContractMethodDescriptor::SetName(const std::string& name) { name_ = name; }
 
-const std::vector<ContractParameterDefinition>& ContractMethodDescriptor::GetParameters() const
-{
-    return parameters_;
-}
+const std::vector<ContractParameterDefinition>& ContractMethodDescriptor::GetParameters() const { return parameters_; }
 
 void ContractMethodDescriptor::SetParameters(const std::vector<ContractParameterDefinition>& parameters)
 {
     parameters_ = parameters;
 }
 
-ContractParameterType ContractMethodDescriptor::GetReturnType() const
-{
-    return returnType_;
-}
+ContractParameterType ContractMethodDescriptor::GetReturnType() const { return returnType_; }
 
-void ContractMethodDescriptor::SetReturnType(ContractParameterType returnType)
-{
-    returnType_ = returnType;
-}
+void ContractMethodDescriptor::SetReturnType(ContractParameterType returnType) { returnType_ = returnType; }
 
-uint32_t ContractMethodDescriptor::GetOffset() const
-{
-    return offset_;
-}
+uint32_t ContractMethodDescriptor::GetOffset() const { return offset_; }
 
-void ContractMethodDescriptor::SetOffset(uint32_t offset)
-{
-    offset_ = offset;
-}
+void ContractMethodDescriptor::SetOffset(uint32_t offset) { offset_ = offset; }
 
-bool ContractMethodDescriptor::IsSafe() const
-{
-    return safe_;
-}
+bool ContractMethodDescriptor::IsSafe() const { return safe_; }
 
-void ContractMethodDescriptor::SetSafe(bool safe)
-{
-    safe_ = safe;
-}
+void ContractMethodDescriptor::SetSafe(bool safe) { safe_ = safe; }
 
 void ContractMethodDescriptor::Serialize(io::BinaryWriter& writer) const
 {
@@ -125,20 +86,11 @@ void ContractMethodDescriptor::Deserialize(io::BinaryReader& reader)
 // ContractEventDescriptor implementation
 ContractEventDescriptor::ContractEventDescriptor() {}
 
-const std::string& ContractEventDescriptor::GetName() const
-{
-    return name_;
-}
+const std::string& ContractEventDescriptor::GetName() const { return name_; }
 
-void ContractEventDescriptor::SetName(const std::string& name)
-{
-    name_ = name;
-}
+void ContractEventDescriptor::SetName(const std::string& name) { name_ = name; }
 
-const std::vector<ContractParameterDefinition>& ContractEventDescriptor::GetParameters() const
-{
-    return parameters_;
-}
+const std::vector<ContractParameterDefinition>& ContractEventDescriptor::GetParameters() const { return parameters_; }
 
 void ContractEventDescriptor::SetParameters(const std::vector<ContractParameterDefinition>& parameters)
 {
@@ -169,25 +121,13 @@ void ContractEventDescriptor::Deserialize(io::BinaryReader& reader)
 // ContractAbi implementation
 ContractAbi::ContractAbi() {}
 
-const std::vector<ContractMethodDescriptor>& ContractAbi::GetMethods() const
-{
-    return methods_;
-}
+const std::vector<ContractMethodDescriptor>& ContractAbi::GetMethods() const { return methods_; }
 
-void ContractAbi::SetMethods(const std::vector<ContractMethodDescriptor>& methods)
-{
-    methods_ = methods;
-}
+void ContractAbi::SetMethods(const std::vector<ContractMethodDescriptor>& methods) { methods_ = methods; }
 
-const std::vector<ContractEventDescriptor>& ContractAbi::GetEvents() const
-{
-    return events_;
-}
+const std::vector<ContractEventDescriptor>& ContractAbi::GetEvents() const { return events_; }
 
-void ContractAbi::SetEvents(const std::vector<ContractEventDescriptor>& events)
-{
-    events_ = events;
-}
+void ContractAbi::SetEvents(const std::vector<ContractEventDescriptor>& events) { events_ = events; }
 
 void ContractAbi::Serialize(io::BinaryWriter& writer) const
 {

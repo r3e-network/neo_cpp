@@ -1,9 +1,10 @@
-#include <filesystem>
-#include <fstream>
-#include <iostream>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/io/json.h>
 #include <neo/wallets/wallet.h>
+
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 
 namespace neo::wallets
 {
@@ -18,10 +19,7 @@ Wallet::Wallet(const std::string& path) : path_(path), version_(1)
     name_ = fsPath.stem().string();
 }
 
-const std::string& Wallet::GetPath() const
-{
-    return path_;
-}
+const std::string& Wallet::GetPath() const { return path_; }
 
 void Wallet::SetPath(const std::string& path)
 {
@@ -32,40 +30,23 @@ void Wallet::SetPath(const std::string& path)
     name_ = fsPath.stem().string();
 }
 
-const std::string& Wallet::GetName() const
-{
-    return name_;
-}
+const std::string& Wallet::GetName() const { return name_; }
 
-void Wallet::SetName(const std::string& name)
-{
-    name_ = name;
-}
+void Wallet::SetName(const std::string& name) { name_ = name; }
 
-int32_t Wallet::GetVersion() const
-{
-    return version_;
-}
+int32_t Wallet::GetVersion() const { return version_; }
 
-void Wallet::SetVersion(int32_t version)
-{
-    version_ = version;
-}
+void Wallet::SetVersion(int32_t version) { version_ = version; }
 
-const std::vector<std::shared_ptr<WalletAccount>>& Wallet::GetAccounts() const
-{
-    return accounts_;
-}
+const std::vector<std::shared_ptr<WalletAccount>>& Wallet::GetAccounts() const { return accounts_; }
 
 std::shared_ptr<WalletAccount> Wallet::GetDefaultAccount() const
 {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (defaultAccount_)
-        return defaultAccount_;
+    if (defaultAccount_) return defaultAccount_;
 
-    if (!accounts_.empty())
-        return accounts_[0];
+    if (!accounts_.empty()) return accounts_[0];
 
     return nullptr;
 }
@@ -82,8 +63,7 @@ std::shared_ptr<WalletAccount> Wallet::GetAccount(const io::UInt160& scriptHash)
 
     for (const auto& account : accounts_)
     {
-        if (account->GetScriptHash() == scriptHash)
-            return account;
+        if (account->GetScriptHash() == scriptHash) return account;
     }
 
     return nullptr;
@@ -121,8 +101,7 @@ std::shared_ptr<WalletAccount> Wallet::CreateAccount(const cryptography::ecc::Ke
     auto account = std::make_shared<WalletAccount>(keyPair);
     accounts_.push_back(account);
 
-    if (!defaultAccount_)
-        defaultAccount_ = account;
+    if (!defaultAccount_) defaultAccount_ = account;
 
     return account;
 }
@@ -140,8 +119,7 @@ std::shared_ptr<WalletAccount> Wallet::CreateAccount(const io::UInt160& scriptHa
     auto account = std::make_shared<WalletAccount>(scriptHash);
     accounts_.push_back(account);
 
-    if (!defaultAccount_)
-        defaultAccount_ = account;
+    if (!defaultAccount_) defaultAccount_ = account;
 
     return account;
 }
@@ -153,14 +131,12 @@ void Wallet::AddAccount(std::shared_ptr<WalletAccount> account)
     // Check if account already exists
     for (const auto& existingAccount : accounts_)
     {
-        if (existingAccount->GetScriptHash() == account->GetScriptHash())
-            return;
+        if (existingAccount->GetScriptHash() == account->GetScriptHash()) return;
     }
 
     accounts_.push_back(account);
 
-    if (!defaultAccount_)
-        defaultAccount_ = account;
+    if (!defaultAccount_) defaultAccount_ = account;
 }
 
 bool Wallet::RemoveAccount(const io::UInt160& scriptHash)
@@ -172,8 +148,7 @@ bool Wallet::RemoveAccount(const io::UInt160& scriptHash)
         if ((*it)->GetScriptHash() == scriptHash)
         {
             // Check if it's the default account
-            if (defaultAccount_ == *it)
-                defaultAccount_ = nullptr;
+            if (defaultAccount_ == *it) defaultAccount_ = nullptr;
 
             accounts_.erase(it);
             return true;
@@ -196,10 +171,7 @@ bool Wallet::RemoveAccount(const std::string& address)
     }
 }
 
-bool Wallet::Save()
-{
-    return SaveAs(path_);
-}
+bool Wallet::Save() { return SaveAs(path_); }
 
 bool Wallet::SaveAs(const std::string& path)
 {
@@ -211,8 +183,7 @@ bool Wallet::SaveAs(const std::string& path)
 
         // Open file
         std::ofstream file(path);
-        if (!file.is_open())
-            return false;
+        if (!file.is_open()) return false;
 
         // Serialize wallet
         nlohmann::json json = ToJson();
@@ -232,10 +203,7 @@ bool Wallet::SaveAs(const std::string& path)
     }
 }
 
-bool Wallet::Load()
-{
-    return LoadFrom(path_);
-}
+bool Wallet::Load() { return LoadFrom(path_); }
 
 bool Wallet::LoadFrom(const std::string& path)
 {
@@ -243,8 +211,7 @@ bool Wallet::LoadFrom(const std::string& path)
     {
         // Open file
         std::ifstream file(path);
-        if (!file.is_open())
-            return false;
+        if (!file.is_open()) return false;
 
         // Parse JSON
         nlohmann::json json;
@@ -280,8 +247,7 @@ nlohmann::json Wallet::ToJson() const
     }
     json["accounts"] = accountsJson;
 
-    if (defaultAccount_)
-        json["default_account"] = defaultAccount_->GetAddress();
+    if (defaultAccount_) json["default_account"] = defaultAccount_->GetAddress();
 
     return json;
 }
@@ -290,11 +256,9 @@ void Wallet::FromJson(const nlohmann::json& json)
 {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (json.contains("name"))
-        name_ = json["name"].get<std::string>();
+    if (json.contains("name")) name_ = json["name"].get<std::string>();
 
-    if (json.contains("version"))
-        version_ = json["version"].get<int32_t>();
+    if (json.contains("version")) version_ = json["version"].get<int32_t>();
 
     accounts_.clear();
     defaultAccount_ = nullptr;

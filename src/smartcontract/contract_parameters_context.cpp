@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <neo/cryptography/base64.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/io/binary_reader.h>
@@ -10,6 +9,8 @@
 #include <neo/vm/opcode.h>
 #include <neo/vm/script.h>
 #include <neo/vm/script_builder.h>
+
+#include <algorithm>
 #include <sstream>
 
 namespace neo::smartcontract
@@ -17,30 +18,18 @@ namespace neo::smartcontract
 // Helper function to parse ContractParameterType from string
 ContractParameterType ParseContractParameterType(const std::string& typeStr)
 {
-    if (typeStr == "Boolean")
-        return ContractParameterType::Boolean;
-    if (typeStr == "Integer")
-        return ContractParameterType::Integer;
-    if (typeStr == "Hash160")
-        return ContractParameterType::Hash160;
-    if (typeStr == "Hash256")
-        return ContractParameterType::Hash256;
-    if (typeStr == "ByteArray")
-        return ContractParameterType::ByteArray;
-    if (typeStr == "PublicKey")
-        return ContractParameterType::PublicKey;
-    if (typeStr == "String")
-        return ContractParameterType::String;
-    if (typeStr == "Array")
-        return ContractParameterType::Array;
-    if (typeStr == "Map")
-        return ContractParameterType::Map;
-    if (typeStr == "InteropInterface")
-        return ContractParameterType::InteropInterface;
-    if (typeStr == "Void")
-        return ContractParameterType::Void;
-    if (typeStr == "Signature")
-        return ContractParameterType::Signature;
+    if (typeStr == "Boolean") return ContractParameterType::Boolean;
+    if (typeStr == "Integer") return ContractParameterType::Integer;
+    if (typeStr == "Hash160") return ContractParameterType::Hash160;
+    if (typeStr == "Hash256") return ContractParameterType::Hash256;
+    if (typeStr == "ByteArray") return ContractParameterType::ByteArray;
+    if (typeStr == "PublicKey") return ContractParameterType::PublicKey;
+    if (typeStr == "String") return ContractParameterType::String;
+    if (typeStr == "Array") return ContractParameterType::Array;
+    if (typeStr == "Map") return ContractParameterType::Map;
+    if (typeStr == "InteropInterface") return ContractParameterType::InteropInterface;
+    if (typeStr == "Void") return ContractParameterType::Void;
+    if (typeStr == "Signature") return ContractParameterType::Signature;
 
     throw std::runtime_error("Unknown contract parameter type: " + typeStr);
 }
@@ -144,18 +133,15 @@ ContractParametersContext::ContractParametersContext(const persistence::DataCach
 
 bool ContractParametersContext::IsCompleted() const
 {
-    if (contextItems.empty())
-        return false;
+    if (contextItems.empty()) return false;
 
     for (const auto& [hash, item] : contextItems)
     {
-        if (!item)
-            return false;
+        if (!item) return false;
 
         for (const auto& param : item->parameters)
         {
-            if (!param.GetValue().has_value())
-                return false;
+            if (!param.GetValue().has_value()) return false;
         }
     }
 
@@ -178,13 +164,11 @@ bool ContractParametersContext::Add(const Contract& contract, int index, const i
     if (it == contextItems.end())
     {
         auto item = CreateItem(contract);
-        if (!item)
-            return false;
+        if (!item) return false;
         it = contextItems.find(scriptHash);
     }
 
-    if (index < 0 || index >= static_cast<int>(it->second->parameters.size()))
-        return false;
+    if (index < 0 || index >= static_cast<int>(it->second->parameters.size())) return false;
 
     it->second->parameters[index].SetValue(parameter);
     return true;
@@ -197,13 +181,11 @@ bool ContractParametersContext::Add(const Contract& contract, const std::vector<
     if (it == contextItems.end())
     {
         auto item = CreateItem(contract);
-        if (!item)
-            return false;
+        if (!item) return false;
         it = contextItems.find(scriptHash);
     }
 
-    if (parameters.size() != it->second->parameters.size())
-        return false;
+    if (parameters.size() != it->second->parameters.size()) return false;
 
     for (size_t i = 0; i < parameters.size(); i++)
     {
@@ -221,20 +203,17 @@ bool ContractParametersContext::AddSignature(const Contract& contract, const cry
     // Check if this is a multi-sig contract
     int m, n;
     std::vector<cryptography::ecc::ECPoint> publicKeys;
-    if (!IsMultiSigContract(contract.GetScript(), m, n, publicKeys))
-        return false;
+    if (!IsMultiSigContract(contract.GetScript(), m, n, publicKeys)) return false;
 
     // Check if the public key is in the contract
     auto it = std::find(publicKeys.begin(), publicKeys.end(), pubkey);
-    if (it == publicKeys.end())
-        return false;
+    if (it == publicKeys.end()) return false;
 
     auto itemIt = contextItems.find(scriptHash);
     if (itemIt == contextItems.end())
     {
         auto item = CreateItem(contract);
-        if (!item)
-            return false;
+        if (!item) return false;
         itemIt = contextItems.find(scriptHash);
     }
 
@@ -253,8 +232,7 @@ bool ContractParametersContext::AddSignature(const Contract& contract, const cry
 bool ContractParametersContext::AddWithScriptHash(const io::UInt160& scriptHash)
 {
     // Check if already exists
-    if (contextItems.find(scriptHash) != contextItems.end())
-        return false;
+    if (contextItems.find(scriptHash) != contextItems.end()) return false;
 
     // For now, create a basic context item without contract details
     // This is simplified to avoid complex contract management dependencies
@@ -265,11 +243,9 @@ bool ContractParametersContext::AddWithScriptHash(const io::UInt160& scriptHash)
 const ContractParameter* ContractParametersContext::GetParameter(const io::UInt160& scriptHash, int index) const
 {
     auto it = contextItems.find(scriptHash);
-    if (it == contextItems.end() || !it->second)
-        return nullptr;
+    if (it == contextItems.end() || !it->second) return nullptr;
 
-    if (index < 0 || index >= static_cast<int>(it->second->parameters.size()))
-        return nullptr;
+    if (index < 0 || index >= static_cast<int>(it->second->parameters.size())) return nullptr;
 
     return &it->second->parameters[index];
 }
@@ -277,18 +253,16 @@ const ContractParameter* ContractParametersContext::GetParameter(const io::UInt1
 const std::vector<ContractParameter>* ContractParametersContext::GetParameters(const io::UInt160& scriptHash) const
 {
     auto it = contextItems.find(scriptHash);
-    if (it == contextItems.end() || !it->second)
-        return nullptr;
+    if (it == contextItems.end() || !it->second) return nullptr;
 
     return &it->second->parameters;
 }
 
-const std::map<cryptography::ecc::ECPoint, io::ByteVector>*
-ContractParametersContext::GetSignatures(const io::UInt160& scriptHash) const
+const std::map<cryptography::ecc::ECPoint, io::ByteVector>* ContractParametersContext::GetSignatures(
+    const io::UInt160& scriptHash) const
 {
     auto it = contextItems.find(scriptHash);
-    if (it == contextItems.end() || !it->second)
-        return nullptr;
+    if (it == contextItems.end() || !it->second) return nullptr;
 
     return &it->second->signatures;
 }
@@ -300,8 +274,7 @@ std::vector<ledger::Witness> ContractParametersContext::GetWitnesses() const
     for (const auto& scriptHash : GetScriptHashes())
     {
         auto it = contextItems.find(scriptHash);
-        if (it == contextItems.end() || !it->second)
-            continue;
+        if (it == contextItems.end() || !it->second) continue;
 
         // Build invocation script
         vm::ScriptBuilder invocationBuilder;
@@ -322,8 +295,8 @@ std::vector<ledger::Witness> ContractParametersContext::GetWitnesses() const
     return witnesses;
 }
 
-std::unique_ptr<ContractParametersContext>
-ContractParametersContext::FromJson(const io::JsonReader& reader, const persistence::DataCache& snapshotCache)
+std::unique_ptr<ContractParametersContext> ContractParametersContext::FromJson(
+    const io::JsonReader& reader, const persistence::DataCache& snapshotCache)
 {
     // For now, return nullptr as this requires extensive JSON parsing implementation
     // This would need a proper IVerifiable implementation to create the context
@@ -372,8 +345,7 @@ bool ContractParametersContext::IsMultiSigContract(const io::ByteVector& script,
                                                    std::vector<cryptography::ecc::ECPoint>& publicKeys) const
 {
     // Basic multi-sig contract detection
-    if (script.Size() < 40)
-        return false;
+    if (script.Size() < 40) return false;
 
     size_t i = 0;
 
@@ -395,8 +367,7 @@ bool ContractParametersContext::IsMultiSigContract(const io::ByteVector& script,
         if (script[i] == 33)  // Public key length
         {
             i++;
-            if (i + 33 > script.Size())
-                return false;
+            if (i + 33 > script.Size()) return false;
 
             try
             {
@@ -417,18 +388,15 @@ bool ContractParametersContext::IsMultiSigContract(const io::ByteVector& script,
     }
 
     n = static_cast<int>(publicKeys.size());
-    if (n == 0 || m > n)
-        return false;
+    if (n == 0 || m > n) return false;
 
     // Check for PUSH<n> and CHECKMULTISIG at the end
-    if (i >= script.Size() - 2)
-        return false;
+    if (i >= script.Size() - 2) return false;
 
     if (script[i] >= static_cast<uint8_t>(vm::OpCode::PUSH1) && script[i] <= static_cast<uint8_t>(vm::OpCode::PUSH16))
     {
         int n2 = script[i] - static_cast<uint8_t>(vm::OpCode::PUSH1) + 1;
-        if (n2 != n)
-            return false;
+        if (n2 != n) return false;
         i++;
     }
     else
@@ -437,8 +405,7 @@ bool ContractParametersContext::IsMultiSigContract(const io::ByteVector& script,
     }
 
     // Check for CHECKMULTISIG opcode (0xAE)
-    if (i != script.Size() - 1 || script[i] != 0xAE)
-        return false;
+    if (i != script.Size() - 1 || script[i] != 0xAE) return false;
 
     return true;
 }
@@ -450,8 +417,7 @@ std::shared_ptr<ledger::Witness> ContractParametersContext::CreateMultiSigWitnes
 
     // Get context item for this contract
     auto it = contextItems.find(contract.GetScriptHash());
-    if (it == contextItems.end())
-        return nullptr;
+    if (it == contextItems.end()) return nullptr;
 
     const auto& item = it->second;
 

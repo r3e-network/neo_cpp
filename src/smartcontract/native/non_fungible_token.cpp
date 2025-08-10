@@ -1,5 +1,3 @@
-#include <cmath>
-#include <cstring>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/persistence/storage_item.h>
@@ -8,21 +6,20 @@
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/non_fungible_token.h>
 
+#include <cmath>
+#include <cstring>
+
 namespace neo::smartcontract::native
 {
 NonFungibleToken::NonFungibleToken(const char* name, uint32_t id) : NativeContract(name, id) {}
 
-uint8_t NonFungibleToken::GetDecimals() const
-{
-    return 0;
-}
+uint8_t NonFungibleToken::GetDecimals() const { return 0; }
 
 int64_t NonFungibleToken::GetTotalSupply(std::shared_ptr<persistence::StoreView> snapshot) const
 {
     auto key = GetStorageKey(PREFIX_SUPPLY, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return 0;
+    if (value.IsEmpty()) return 0;
 
     return *reinterpret_cast<const int64_t*>(value.Data());
 }
@@ -32,8 +29,7 @@ int64_t NonFungibleToken::GetBalanceOf(std::shared_ptr<persistence::StoreView> s
 {
     auto key = GetStorageKey(PREFIX_BALANCE, account);
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return 0;
+    if (value.IsEmpty()) return 0;
 
     return *reinterpret_cast<const int64_t*>(value.Data());
 }
@@ -43,22 +39,20 @@ io::UInt160 NonFungibleToken::GetOwnerOf(std::shared_ptr<persistence::StoreView>
 {
     auto key = GetStorageKey(PREFIX_OWNER, tokenId);
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return io::UInt160{};
+    if (value.IsEmpty()) return io::UInt160{};
 
     io::UInt160 owner;
     std::memcpy(owner.Data(), value.Data(), 20);  // UInt160 is always 20 bytes
     return owner;
 }
 
-std::map<std::string, std::shared_ptr<vm::StackItem>>
-NonFungibleToken::GetProperties(std::shared_ptr<persistence::StoreView> snapshot, const io::ByteVector& tokenId) const
+std::map<std::string, std::shared_ptr<vm::StackItem>> NonFungibleToken::GetProperties(
+    std::shared_ptr<persistence::StoreView> snapshot, const io::ByteVector& tokenId) const
 {
     std::map<std::string, std::shared_ptr<vm::StackItem>> properties;
     auto key = GetStorageKey(PREFIX_PROPERTIES, tokenId);
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return properties;
+    if (value.IsEmpty()) return properties;
 
     // Deserialize properties
     std::istringstream stream(std::string(reinterpret_cast<const char*>(value.Data()), value.Size()));
@@ -84,8 +78,7 @@ std::vector<io::ByteVector> NonFungibleToken::GetTokens(std::shared_ptr<persiste
     {
         auto key = iterator->Key();
         auto keyBytes = key.ToArray();
-        if (keyBytes.Size() < prefix.Size() || !std::equal(prefix.begin(), prefix.end(), keyBytes.begin()))
-            break;
+        if (keyBytes.Size() < prefix.Size() || !std::equal(prefix.begin(), prefix.end(), keyBytes.begin())) break;
 
         std::vector<uint8_t> tokenData(keyBytes.begin() + prefix.Size(), keyBytes.end());
         io::ByteVector tokenId(tokenData);
@@ -107,8 +100,7 @@ std::vector<io::ByteVector> NonFungibleToken::GetTokensOf(std::shared_ptr<persis
     {
         auto key = iterator->Key();
         auto keyBytes = key.ToArray();
-        if (keyBytes.Size() < prefix.Size() || !std::equal(prefix.begin(), prefix.end(), keyBytes.begin()))
-            break;
+        if (keyBytes.Size() < prefix.Size() || !std::equal(prefix.begin(), prefix.end(), keyBytes.begin())) break;
 
         std::vector<uint8_t> tokenData(keyBytes.begin() + prefix.Size(), keyBytes.end());
         io::ByteVector tokenId(tokenData);
@@ -124,12 +116,10 @@ bool NonFungibleToken::Transfer(std::shared_ptr<persistence::StoreView> snapshot
 {
     // Check if token exists
     auto owner = GetOwnerOf(snapshot, tokenId);
-    if (owner.IsZero())
-        return false;
+    if (owner.IsZero()) return false;
 
     // Check if from is the owner
-    if (owner != from)
-        return false;
+    if (owner != from) return false;
 
     // Update owner
     auto ownerKey = GetStorageKey(PREFIX_OWNER, tokenId);
@@ -179,8 +169,7 @@ bool NonFungibleToken::Transfer(ApplicationEngine& engine, const io::UInt160& fr
                                 const io::ByteVector& tokenId, std::shared_ptr<vm::StackItem> data, bool callOnPayment)
 {
     // Check if the caller is the owner of the token
-    if (!from.IsZero() && from != engine.GetCurrentScriptHash() && !engine.CheckWitness(from))
-        return false;
+    if (!from.IsZero() && from != engine.GetCurrentScriptHash() && !engine.CheckWitness(from)) return false;
 
     // Transfer token
     bool result = Transfer(engine.GetSnapshot(), from, to, tokenId);
@@ -200,8 +189,7 @@ bool NonFungibleToken::Mint(std::shared_ptr<persistence::StoreView> snapshot, co
 {
     // Check if token already exists
     auto existingOwner = GetOwnerOf(snapshot, tokenId);
-    if (!existingOwner.IsZero())
-        return false;
+    if (!existingOwner.IsZero()) return false;
 
     // Update owner
     auto ownerKey = GetStorageKey(PREFIX_OWNER, tokenId);
@@ -273,8 +261,7 @@ bool NonFungibleToken::Burn(std::shared_ptr<persistence::StoreView> snapshot, co
 {
     // Check if token exists
     auto owner = GetOwnerOf(snapshot, tokenId);
-    if (owner.IsZero())
-        return false;
+    if (owner.IsZero()) return false;
 
     // Update owner
     auto ownerKey = GetStorageKey(PREFIX_OWNER, tokenId);
@@ -323,12 +310,10 @@ bool NonFungibleToken::Burn(ApplicationEngine& engine, const io::ByteVector& tok
 {
     // Check if token exists
     auto owner = GetOwnerOf(engine.GetSnapshot(), tokenId);
-    if (owner.IsZero())
-        return false;
+    if (owner.IsZero()) return false;
 
     // Check if the caller is the owner of the token
-    if (!engine.CheckWitness(owner))
-        return false;
+    if (!engine.CheckWitness(owner)) return false;
 
     // Burn token
     bool result = Burn(engine.GetSnapshot(), tokenId);
@@ -360,21 +345,18 @@ bool NonFungibleToken::PostTransfer(ApplicationEngine& engine, const io::UInt160
     engine.Notify(GetScriptHash(), "Transfer", state);
 
     // Check if it's a wallet or smart contract
-    if (!callOnPayment || to.IsZero())
-        return true;
+    if (!callOnPayment || to.IsZero()) return true;
 
     // Check if the recipient is a contract
     auto contractManagement =
         dynamic_cast<ContractManagement*>(engine.GetNativeContract(ContractManagement::GetInstance()->GetScriptHash()));
-    if (!contractManagement)
-        return true;
+    if (!contractManagement) return true;
 
     // Get the contract state
     std::vector<std::shared_ptr<vm::StackItem>> getContractArgs;
     getContractArgs.push_back(vm::StackItem::Create(to));
     auto contractState = static_cast<ContractManagement*>(contractManagement)->GetContract(engine.GetSnapshot(), to);
-    if (!contractState)
-        return true;
+    if (!contractState) return true;
 
     // Call onNEP11Payment method
     std::vector<std::shared_ptr<vm::StackItem>> args;

@@ -3,6 +3,7 @@
 #include <neo/network/p2p/local_node.h>
 #include <neo/rpc/rpc_methods.h>
 #include <neo/rpc/rpc_server.h>
+
 #include <nlohmann/json.hpp>
 #include <sstream>
 #include <thread>
@@ -16,24 +17,25 @@ namespace neo::rpc
 using json = nlohmann::json;
 
 RpcServer::RpcServer(const RpcConfig& config)
-    : config_(config), logger_(std::make_shared<logging::Logger>("RpcServer")), running_(false), total_requests_(0),
-      failed_requests_(0), start_time_(std::chrono::steady_clock::now())
+    : config_(config),
+      running_(false),
+      total_requests_(0),
+      failed_requests_(0),
+      start_time_(std::chrono::steady_clock::now())
 {
-    logger_->info("Initializing RPC server on {}:{}", config_.bind_address, config_.port);
+    // Initialize logger properly
+    logger_ = core::Logger::GetInstance();
+
     InitializeHandlers();
 }
 
-RpcServer::~RpcServer()
-{
-    Stop();
-}
+RpcServer::~RpcServer() { Stop(); }
 
 void RpcServer::Start()
 {
-    if (running_.exchange(true))
-        return;
+    if (running_.exchange(true)) return;
 
-    LOG_INFO("Starting RPC server on {}:{}", settings_.bind_address, settings_.port);
+    LOG_INFO("Starting RPC server on {}:{}", config_.bind_address, config_.port);
 
 #ifdef NEO_HAS_HTTPLIB
     server_thread_ = std::thread(
@@ -64,7 +66,7 @@ void RpcServer::Start()
                             }
                         });
 
-            server.listen(settings_.bind_address.c_str(), settings_.port);
+            server.listen(config_.bind_address.c_str(), config_.port);
         });
 #else
     LOG_ERROR("HTTP server not available - RPC server cannot start");
@@ -74,8 +76,7 @@ void RpcServer::Start()
 
 void RpcServer::Stop()
 {
-    if (!running_.exchange(false))
-        return;
+    if (!running_.exchange(false)) return;
 
     LOG_INFO("Stopping RPC server");
 
@@ -370,11 +371,11 @@ io::JsonValue RpcServer::GetStatistics() const
     io::JsonValue stats;
     stats.AddMember("totalRequests", static_cast<int64_t>(total_requests_.load()));
     stats.AddMember("failedRequests", static_cast<int64_t>(failed_requests_.load()));
-    
+
     auto now = std::chrono::steady_clock::now();
     auto uptime = std::chrono::duration_cast<std::chrono::seconds>(now - start_time_).count();
     stats.AddMember("uptimeSeconds", static_cast<int64_t>(uptime));
-    
+
     return stats;
 }
 

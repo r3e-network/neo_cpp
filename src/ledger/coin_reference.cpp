@@ -13,25 +13,13 @@ CoinReference::CoinReference(const io::UInt256& prevHash, uint16_t prevIndex)
 {
 }
 
-const io::UInt256& CoinReference::GetPrevHash() const
-{
-    return prevHash_;
-}
+const io::UInt256& CoinReference::GetPrevHash() const { return prevHash_; }
 
-void CoinReference::SetPrevHash(const io::UInt256& prevHash)
-{
-    prevHash_ = prevHash;
-}
+void CoinReference::SetPrevHash(const io::UInt256& prevHash) { prevHash_ = prevHash; }
 
-uint16_t CoinReference::GetPrevIndex() const
-{
-    return prevIndex_;
-}
+uint16_t CoinReference::GetPrevIndex() const { return prevIndex_; }
 
-void CoinReference::SetPrevIndex(uint16_t prevIndex)
-{
-    prevIndex_ = prevIndex;
-}
+void CoinReference::SetPrevIndex(uint16_t prevIndex) { prevIndex_ = prevIndex; }
 
 void CoinReference::Serialize(io::BinaryWriter& writer) const
 {
@@ -108,8 +96,5 @@ bool CoinReference::operator==(const CoinReference& other) const
     return prevHash_ == other.prevHash_ && prevIndex_ == other.prevIndex_;
 }
 
-bool CoinReference::operator!=(const CoinReference& other) const
-{
-    return !(*this == other);
-}
+bool CoinReference::operator!=(const CoinReference& other) const { return !(*this == other); }
 }  // namespace neo::ledger

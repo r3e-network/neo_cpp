@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/cryptography/ecc/ec_point.h>
 #include <neo/io/byte_vector.h>
+
+#include <memory>
 #include <vector>
 
 namespace neo::cryptography::ecc
@@ -12,7 +13,7 @@ namespace neo::cryptography::ecc
  */
 class ECCurve
 {
-  public:
+   public:
     /**
      * @brief Curve parameters
      */
@@ -26,11 +27,11 @@ class ECCurve
         io::ByteVector h;  // Cofactor
     };
 
-  private:
+   private:
     CurveParams params_;
     std::shared_ptr<ECPoint> generator_;
 
-  public:
+   public:
     /**
      * @brief Get the secp256r1 curve (NIST P-256)
      * @return Secp256r1 curve instance
@@ -53,19 +54,13 @@ class ECCurve
      * @brief Get curve parameters
      * @return Curve parameters
      */
-    const CurveParams& GetParams() const
-    {
-        return params_;
-    }
+    const CurveParams& GetParams() const { return params_; }
 
     /**
      * @brief Get generator point
      * @return Generator point
      */
-    std::shared_ptr<ECPoint> GetGenerator() const
-    {
-        return generator_;
-    }
+    std::shared_ptr<ECPoint> GetGenerator() const { return generator_; }
 
     /**
      * @brief Create point from coordinates

@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class VMConstants
 {
-  public:
+   public:
     /**
      * @brief Maximum value that can be pushed using direct PUSH opcodes (PUSH0-PUSH16)
      */

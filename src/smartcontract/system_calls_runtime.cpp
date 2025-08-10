@@ -1,9 +1,10 @@
-#include <chrono>
 #include <neo/core/protocol_constants.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/system_call_constants.h>
 #include <neo/smartcontract/system_calls.h>
 #include <neo/vm/compound_items.h>
+
+#include <chrono>
 
 namespace neo::smartcontract
 {
@@ -83,8 +84,7 @@ bool HandleGetTime(vm::ExecutionEngine& engine)
     uint64_t time = 0;
     if (appEngine.GetPersistingBlock())
     {
-        time =
-            static_cast<uint64_t>(appEngine.GetPersistingBlock()->GetTimestamp() / 1000000);
+        time = static_cast<uint64_t>(appEngine.GetPersistingBlock()->GetTimestamp() / 1000000);
     }
     else if (appEngine.GetTransaction())
     {
@@ -253,8 +253,7 @@ bool HandleGetScriptContainer(vm::ExecutionEngine& engine)
 
             // Add block timestamp
             blockMap->Set(vm::StackItem::Create("timestamp"),
-                          vm::StackItem::Create(
-                              static_cast<int64_t>(block->GetTimestamp() / 1000000)));
+                          vm::StackItem::Create(static_cast<int64_t>(block->GetTimestamp() / 1000000)));
 
             // Add block next consensus
             auto nextConsensus = block->GetNextConsensus();

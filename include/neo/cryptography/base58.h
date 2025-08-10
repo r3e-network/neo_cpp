@@ -1,7 +1,8 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_vector.h>
+
+#include <cstdint>
 #include <string>
 #include <vector>
 
@@ -15,7 +16,7 @@ namespace neo::cryptography
  */
 class Base58
 {
-  public:
+   public:
     /**
      * @brief Encode bytes to Base58 string.
      * @param data The bytes to encode
@@ -43,10 +44,7 @@ class Base58
     static std::string EncodeCheck(const neo::io::ByteSpan& data);
 
     // Legacy aliases for compatibility
-    static std::string EncodeWithChecksum(const neo::io::ByteSpan& data)
-    {
-        return EncodeCheck(data);
-    }
+    static std::string EncodeWithChecksum(const neo::io::ByteSpan& data) { return EncodeCheck(data); }
 
     /**
      * @brief Decode Base58Check string to bytes (verifies checksum).
@@ -77,7 +75,7 @@ class Base58
      */
     static bool IsValidCheck(const std::string& str);
 
-  private:
+   private:
     // Base58 alphabet used by Bitcoin/Neo
     static constexpr const char* ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
@@ -92,44 +90,20 @@ class Base58
 // Convenience functions
 namespace base58
 {
-inline std::string encode(const std::vector<uint8_t>& data)
-{
-    return Base58::Encode(data);
-}
+inline std::string encode(const std::vector<uint8_t>& data) { return Base58::Encode(data); }
 
-inline std::string encode(const neo::io::ByteVector& data)
-{
-    return Base58::Encode(data);
-}
+inline std::string encode(const neo::io::ByteVector& data) { return Base58::Encode(data); }
 
-inline std::vector<uint8_t> decode(const std::string& encoded)
-{
-    return Base58::Decode(encoded);
-}
+inline std::vector<uint8_t> decode(const std::string& encoded) { return Base58::Decode(encoded); }
 
-inline std::string encode_check(const std::vector<uint8_t>& data)
-{
-    return Base58::EncodeCheck(data);
-}
+inline std::string encode_check(const std::vector<uint8_t>& data) { return Base58::EncodeCheck(data); }
 
-inline std::string encode_check(const neo::io::ByteVector& data)
-{
-    return Base58::EncodeCheck(data);
-}
+inline std::string encode_check(const neo::io::ByteVector& data) { return Base58::EncodeCheck(data); }
 
-inline std::vector<uint8_t> decode_check(const std::string& encoded)
-{
-    return Base58::DecodeCheck(encoded);
-}
+inline std::vector<uint8_t> decode_check(const std::string& encoded) { return Base58::DecodeCheck(encoded); }
 
-inline bool is_valid(const std::string& str)
-{
-    return Base58::IsValid(str);
-}
+inline bool is_valid(const std::string& str) { return Base58::IsValid(str); }
 
-inline bool is_valid_check(const std::string& str)
-{
-    return Base58::IsValidCheck(str);
-}
+inline bool is_valid_check(const std::string& str) { return Base58::IsValidCheck(str); }
 }  // namespace base58
 }  // namespace neo::cryptography

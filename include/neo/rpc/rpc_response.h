@@ -10,7 +10,7 @@ namespace neo::rpc
  */
 class RpcResponse
 {
-  public:
+   public:
     /**
      * @brief Constructs an RpcResponse.
      */
@@ -106,7 +106,7 @@ class RpcResponse
     static RpcResponse CreateErrorResponse(const nlohmann::json& id, int code, const std::string& message,
                                            const nlohmann::json& data = nullptr);
 
-  private:
+   private:
     std::string jsonrpc_;
     nlohmann::json result_;
     nlohmann::json error_;

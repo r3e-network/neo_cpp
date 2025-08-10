@@ -1,6 +1,7 @@
 #pragma once
 
 #include <neo/cli/main_service.h>
+
 #include <string>
 #include <vector>
 
@@ -11,7 +12,7 @@ namespace neo::cli
  */
 class BaseCommands
 {
-  public:
+   public:
     /**
      * @brief Constructs a BaseCommands.
      * @param service The main service.
@@ -51,7 +52,7 @@ class BaseCommands
      */
     bool HandleVersion(const std::vector<std::string>& args);
 
-  private:
+   private:
     MainService& service_;
 };
 }  // namespace neo::cli

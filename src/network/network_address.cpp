@@ -13,25 +13,13 @@ NetworkAddress::NetworkAddress(uint32_t timestamp, uint64_t services, const std:
 {
 }
 
-uint32_t NetworkAddress::GetTimestamp() const
-{
-    return timestamp_;
-}
+uint32_t NetworkAddress::GetTimestamp() const { return timestamp_; }
 
-uint64_t NetworkAddress::GetServices() const
-{
-    return services_;
-}
+uint64_t NetworkAddress::GetServices() const { return services_; }
 
-const std::string& NetworkAddress::GetAddress() const
-{
-    return address_;
-}
+const std::string& NetworkAddress::GetAddress() const { return address_; }
 
-uint16_t NetworkAddress::GetPort() const
-{
-    return port_;
-}
+uint16_t NetworkAddress::GetPort() const { return port_; }
 
 void NetworkAddress::Serialize(io::BinaryWriter& writer) const
 {

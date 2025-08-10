@@ -76,8 +76,7 @@ cd ..
 # Check if executables were built successfully
 EXECUTABLES=(
     "$BUILD_DIR/apps/simple_neo_node"
-    "$BUILD_DIR/apps/working_neo_node"
-    "$BUILD_DIR/apps/node/neo_node_app"
+    "$BUILD_DIR/apps/neo_node"
 )
 
 print_status "Checking built executables:"
@@ -110,7 +109,7 @@ echo "Starting Working Neo Node..."
 echo "This is a full-featured implementation for testing environments."
 echo "Press Ctrl+C to stop the node."
 echo ""
-exec ./build/apps/working_neo_node "$@"
+exec ./build/apps/neo_node "$@"
 EOF
 
 # Production node script
@@ -129,7 +128,7 @@ echo "Starting Production Neo Node..."
 echo "Configuration: $CONFIG_FILE"
 echo "Press Ctrl+C to stop the node."
 echo ""
-exec ./build/apps/node/neo_node_app "$CONFIG_FILE"
+exec ./build/apps/neo_node "$CONFIG_FILE"
 EOF
 
 # Make scripts executable
@@ -144,8 +143,7 @@ echo "  Production Node: ./bin/run_production_node.sh [config_file]"
 echo ""
 echo -e "${BLUE}Direct executables:${NC}"
 echo "  Simple Node:     ./build/apps/simple_neo_node"
-echo "  Working Node:    ./build/apps/working_neo_node"
-echo "  Production Node: ./build/apps/node/neo_node_app"
+echo "  Node:            ./build/apps/neo_node"
 echo ""
 echo -e "${YELLOW}Note:${NC} Production node requires a configuration file."
 echo "Example configs are available in the config/ directory."

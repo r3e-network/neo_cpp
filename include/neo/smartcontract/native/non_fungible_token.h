@@ -1,11 +1,12 @@
 #pragma once
 
-#include <map>
-#include <memory>
 #include <neo/io/uint160.h>
 #include <neo/persistence/store_view.h>
 #include <neo/smartcontract/native/native_contract.h>
 #include <neo/vm/stack_item.h>
+
+#include <map>
+#include <memory>
 #include <string>
 
 namespace neo::smartcontract::native
@@ -15,7 +16,7 @@ namespace neo::smartcontract::native
  */
 class NonFungibleToken : public NativeContract
 {
-  public:
+   public:
     /**
      * @brief The storage prefix for token owners.
      */
@@ -95,8 +96,8 @@ class NonFungibleToken : public NativeContract
      * @param tokenId The token ID.
      * @return The properties.
      */
-    virtual std::map<std::string, std::shared_ptr<vm::StackItem>>
-    GetProperties(std::shared_ptr<persistence::StoreView> snapshot, const io::ByteVector& tokenId) const;
+    virtual std::map<std::string, std::shared_ptr<vm::StackItem>> GetProperties(
+        std::shared_ptr<persistence::StoreView> snapshot, const io::ByteVector& tokenId) const;
 
     /**
      * @brief Gets all tokens.
@@ -138,7 +139,7 @@ class NonFungibleToken : public NativeContract
     virtual bool Transfer(ApplicationEngine& engine, const io::UInt160& from, const io::UInt160& to,
                           const io::ByteVector& tokenId, std::shared_ptr<vm::StackItem> data, bool callOnPayment);
 
-  protected:
+   protected:
     /**
      * @brief Mints a new token.
      * @param snapshot The snapshot.

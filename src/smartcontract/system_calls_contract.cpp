@@ -313,8 +313,5 @@ void RegisterContractSystemCallsImpl(ApplicationEngine& engine)
 }  // namespace
 
 // This function will be called from the RegisterSystemCalls method in application_engine_system_calls.cpp
-void RegisterContractSystemCalls(ApplicationEngine& engine)
-{
-    RegisterContractSystemCallsImpl(engine);
-}
+void RegisterContractSystemCalls(ApplicationEngine& engine) { RegisterContractSystemCallsImpl(engine); }
 }  // namespace neo::smartcontract

@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <iostream>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -12,6 +10,9 @@
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/oracle_contract.h>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <algorithm>
+#include <iostream>
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -53,8 +54,7 @@ bool OracleContract::PostPersist(ApplicationEngine& engine)
 {
     // Get the persisting block
     auto block = engine.GetPersistingBlock();
-    if (!block)
-        return false;
+    if (!block) return false;
 
     // Track oracle nodes and their GAS rewards
     std::vector<std::pair<io::UInt160, int64_t>> nodeRewards;

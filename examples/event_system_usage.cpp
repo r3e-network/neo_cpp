@@ -15,7 +15,8 @@
 #include <neo/core/neo_system.h>
 
 using namespace neo::ledger;
-using namespace neo;
+using neo::ledger::Block;
+using neo::NeoSystem;
 
 // Example event handlers
 void OnTransactionAdded(std::shared_ptr<Transaction> transaction)

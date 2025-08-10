@@ -13,7 +13,7 @@ class JsonReader;
  */
 class IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */

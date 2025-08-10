@@ -1,11 +1,12 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/fixed8.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
+#include <cstdint>
 #include <ostream>
 #include <string>
 #include <vector>
@@ -19,7 +20,7 @@ class ISerializable;
  */
 class BinaryWriter
 {
-  public:
+   public:
     /**
      * @brief Constructs a BinaryWriter that writes to the specified stream.
      * @param stream The stream to write to.
@@ -240,7 +241,7 @@ class BinaryWriter
      */
     void WriteBytes(const ByteVector& data);
 
-  private:
+   private:
     std::ostream* stream_;
     ByteVector* buffer_;
     bool owns_stream_;

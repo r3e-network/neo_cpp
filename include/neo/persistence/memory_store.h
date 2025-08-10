@@ -1,9 +1,10 @@
 #pragma once
 
-#include <memory>
-#include <mutex>
 #include <neo/io/byte_vector.h>
 #include <neo/persistence/istore.h>
+
+#include <memory>
+#include <mutex>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -14,7 +15,7 @@ namespace neo::persistence
  */
 class MemoryStore : public IStore
 {
-  public:
+   public:
     /**
      * @brief Constructs a MemoryStore.
      */
@@ -54,8 +55,8 @@ class MemoryStore : public IStore
      * @param direction The direction to seek.
      * @return The key-value pairs found.
      */
-    std::vector<std::pair<io::ByteVector, io::ByteVector>>
-    Find(const io::ByteVector* prefix = nullptr, SeekDirection direction = SeekDirection::Forward) const override;
+    std::vector<std::pair<io::ByteVector, io::ByteVector>> Find(
+        const io::ByteVector* prefix = nullptr, SeekDirection direction = SeekDirection::Forward) const override;
 
     /**
      * @brief Puts a value in the store.
@@ -85,7 +86,7 @@ class MemoryStore : public IStore
     std::vector<std::pair<io::ByteVector, io::ByteVector>> Seek(const io::ByteVector& prefix,
                                                                 SeekDirection direction = SeekDirection::Forward) const;
 
-  private:
+   private:
     std::unordered_map<io::ByteVector, io::ByteVector> store_;
     mutable std::mutex mutex_;
 
@@ -97,7 +98,7 @@ class MemoryStore : public IStore
  */
 class MemorySnapshot : public IStoreSnapshot
 {
-  public:
+   public:
     /**
      * @brief Constructs a MemorySnapshot.
      * @param store The store to snapshot.
@@ -124,8 +125,8 @@ class MemorySnapshot : public IStoreSnapshot
      * @param direction The direction to seek.
      * @return The key-value pairs found.
      */
-    std::vector<std::pair<io::ByteVector, io::ByteVector>>
-    Find(const io::ByteVector* prefix = nullptr, SeekDirection direction = SeekDirection::Forward) const override;
+    std::vector<std::pair<io::ByteVector, io::ByteVector>> Find(
+        const io::ByteVector* prefix = nullptr, SeekDirection direction = SeekDirection::Forward) const override;
 
     /**
      * @brief Puts a value in the store.
@@ -151,7 +152,7 @@ class MemorySnapshot : public IStoreSnapshot
      */
     IStore& GetStore() override;
 
-  private:
+   private:
     MemoryStore& store_;
     std::unordered_map<io::ByteVector, io::ByteVector> snapshot_;
     std::unordered_map<io::ByteVector, io::ByteVector> changes_;
@@ -163,7 +164,7 @@ class MemorySnapshot : public IStoreSnapshot
  */
 class MemoryStoreProvider : public IStoreProvider
 {
-  public:
+   public:
     /**
      * @brief Constructs a MemoryStoreProvider.
      */
@@ -182,7 +183,7 @@ class MemoryStoreProvider : public IStoreProvider
      */
     std::unique_ptr<IStore> GetStore(const std::string& path) override;
 
-  private:
+   private:
     std::unordered_map<std::string, std::shared_ptr<MemoryStore>> stores_;
     std::mutex mutex_;
 };

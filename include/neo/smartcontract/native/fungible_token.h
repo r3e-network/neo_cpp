@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/uint160.h>
 #include <neo/persistence/store_view.h>
 #include <neo/smartcontract/native/native_contract.h>
 #include <neo/vm/stack_item.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::smartcontract::native
@@ -14,7 +15,7 @@ namespace neo::smartcontract::native
  */
 class FungibleToken : public NativeContract
 {
-  public:
+   public:
     /**
      * @brief The storage prefix for balances.
      */
@@ -126,7 +127,7 @@ class FungibleToken : public NativeContract
      */
     virtual bool Burn(ApplicationEngine& engine, const io::UInt160& account, int64_t amount);
 
-  protected:
+   protected:
     /**
      * @brief Called after a transfer.
      * @param engine The engine.

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <neo/io/serializable.h>
+
 #include <string>
 #include <vector>
 
@@ -30,7 +31,7 @@ enum class ContractParameterType : uint8_t
  */
 class ContractParameterDefinition : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs a ContractParameterDefinition.
      */
@@ -72,7 +73,7 @@ class ContractParameterDefinition : public io::ISerializable
      */
     void Deserialize(io::BinaryReader& reader) override;
 
-  private:
+   private:
     std::string name_;
     ContractParameterType type_;
 };
@@ -82,7 +83,7 @@ class ContractParameterDefinition : public io::ISerializable
  */
 class ContractMethodDescriptor : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs a ContractMethodDescriptor.
      */
@@ -160,7 +161,7 @@ class ContractMethodDescriptor : public io::ISerializable
      */
     void Deserialize(io::BinaryReader& reader) override;
 
-  private:
+   private:
     std::string name_;
     std::vector<ContractParameterDefinition> parameters_;
     ContractParameterType returnType_;
@@ -173,7 +174,7 @@ class ContractMethodDescriptor : public io::ISerializable
  */
 class ContractEventDescriptor : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs a ContractEventDescriptor.
      */
@@ -215,7 +216,7 @@ class ContractEventDescriptor : public io::ISerializable
      */
     void Deserialize(io::BinaryReader& reader) override;
 
-  private:
+   private:
     std::string name_;
     std::vector<ContractParameterDefinition> parameters_;
 };
@@ -225,7 +226,7 @@ class ContractEventDescriptor : public io::ISerializable
  */
 class ContractAbi : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs a ContractAbi.
      */
@@ -267,7 +268,7 @@ class ContractAbi : public io::ISerializable
      */
     void Deserialize(io::BinaryReader& reader) override;
 
-  private:
+   private:
     std::vector<ContractMethodDescriptor> methods_;
     std::vector<ContractEventDescriptor> events_;
 };

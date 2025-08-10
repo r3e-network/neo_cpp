@@ -1,12 +1,13 @@
 #pragma once
 
+#include <neo/io/byte_span.h>
+#include <neo/io/byte_vector.h>
+
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
 #include <functional>
 #include <memory>
-#include <neo/io/byte_span.h>
-#include <neo/io/byte_vector.h>
 #include <string>
 #include <type_traits>
 #include <vector>
@@ -19,12 +20,11 @@ namespace neo::extensions
 template <typename Func>
 class ScopeGuard
 {
-  public:
+   public:
     explicit ScopeGuard(Func&& func) : func_(std::forward<Func>(func)), active_(true) {}
     ~ScopeGuard()
     {
-        if (active_)
-            func_();
+        if (active_) func_();
     }
 
     ScopeGuard(ScopeGuard&& other) noexcept : func_(std::move(other.func_)), active_(other.active_)
@@ -32,12 +32,9 @@ class ScopeGuard
         other.active_ = false;
     }
 
-    void Release()
-    {
-        active_ = false;
-    }
+    void Release() { active_ = false; }
 
-  private:
+   private:
     Func func_;
     bool active_;
 
@@ -74,7 +71,7 @@ class ScopeGuard
  */
 class Utility
 {
-  public:
+   public:
     /**
      * @brief Split string by delimiter
      * @param str String to split

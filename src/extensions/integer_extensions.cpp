@@ -1,24 +1,16 @@
+#include <neo/extensions/integer_extensions.h>
+
 #include <cstring>
 #include <limits>
-#include <neo/extensions/integer_extensions.h>
 #include <stdexcept>
 
 namespace neo::extensions
 {
-uint8_t IntegerExtensions::GetVarSize(int32_t value)
-{
-    return GetVarSize(static_cast<int64_t>(value));
-}
+uint8_t IntegerExtensions::GetVarSize(int32_t value) { return GetVarSize(static_cast<int64_t>(value)); }
 
-uint8_t IntegerExtensions::GetVarSize(uint16_t value)
-{
-    return GetVarSize(static_cast<int64_t>(value));
-}
+uint8_t IntegerExtensions::GetVarSize(uint16_t value) { return GetVarSize(static_cast<int64_t>(value)); }
 
-uint8_t IntegerExtensions::GetVarSize(uint32_t value)
-{
-    return GetVarSize(static_cast<int64_t>(value));
-}
+uint8_t IntegerExtensions::GetVarSize(uint32_t value) { return GetVarSize(static_cast<int64_t>(value)); }
 
 uint8_t IntegerExtensions::GetVarSize(int64_t value)
 {
@@ -44,35 +36,17 @@ uint8_t IntegerExtensions::GetVarSize(uint64_t value)
         return sizeof(uint8_t) + sizeof(uint64_t);
 }
 
-std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(int16_t value)
-{
-    return ToLittleEndianBytesImpl(value);
-}
+std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(int16_t value) { return ToLittleEndianBytesImpl(value); }
 
-std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(uint16_t value)
-{
-    return ToLittleEndianBytesImpl(value);
-}
+std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(uint16_t value) { return ToLittleEndianBytesImpl(value); }
 
-std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(int32_t value)
-{
-    return ToLittleEndianBytesImpl(value);
-}
+std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(int32_t value) { return ToLittleEndianBytesImpl(value); }
 
-std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(uint32_t value)
-{
-    return ToLittleEndianBytesImpl(value);
-}
+std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(uint32_t value) { return ToLittleEndianBytesImpl(value); }
 
-std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(int64_t value)
-{
-    return ToLittleEndianBytesImpl(value);
-}
+std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(int64_t value) { return ToLittleEndianBytesImpl(value); }
 
-std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(uint64_t value)
-{
-    return ToLittleEndianBytesImpl(value);
-}
+std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytes(uint64_t value) { return ToLittleEndianBytesImpl(value); }
 
 int16_t IntegerExtensions::FromLittleEndianBytes16(const std::vector<uint8_t>& bytes, size_t offset)
 {
@@ -134,8 +108,7 @@ std::vector<uint8_t> IntegerExtensions::ToLittleEndianBytesImpl(T value)
 template <typename T>
 T IntegerExtensions::FromLittleEndianBytesImpl(const std::vector<uint8_t>& bytes, size_t offset)
 {
-    if (offset + sizeof(T) > bytes.size())
-        throw std::out_of_range("Insufficient bytes for conversion");
+    if (offset + sizeof(T) > bytes.size()) throw std::out_of_range("Insufficient bytes for conversion");
 
     T result = 0;
 

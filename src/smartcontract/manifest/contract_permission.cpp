@@ -14,35 +14,17 @@ ContractPermissionDescriptor::ContractPermissionDescriptor(const cryptography::e
 {
 }
 
-const io::UInt160& ContractPermissionDescriptor::GetHash() const
-{
-    return hash_;
-}
+const io::UInt160& ContractPermissionDescriptor::GetHash() const { return hash_; }
 
-const cryptography::ecc::ECPoint& ContractPermissionDescriptor::GetGroup() const
-{
-    return group_;
-}
+const cryptography::ecc::ECPoint& ContractPermissionDescriptor::GetGroup() const { return group_; }
 
-bool ContractPermissionDescriptor::IsHash() const
-{
-    return !isWildcard_ && !hash_.IsZero();
-}
+bool ContractPermissionDescriptor::IsHash() const { return !isWildcard_ && !hash_.IsZero(); }
 
-bool ContractPermissionDescriptor::IsGroup() const
-{
-    return !isWildcard_ && !group_.IsInfinity();
-}
+bool ContractPermissionDescriptor::IsGroup() const { return !isWildcard_ && !group_.IsInfinity(); }
 
-bool ContractPermissionDescriptor::IsWildcard() const
-{
-    return isWildcard_;
-}
+bool ContractPermissionDescriptor::IsWildcard() const { return isWildcard_; }
 
-ContractPermissionDescriptor ContractPermissionDescriptor::CreateWildcard()
-{
-    return ContractPermissionDescriptor();
-}
+ContractPermissionDescriptor ContractPermissionDescriptor::CreateWildcard() { return ContractPermissionDescriptor(); }
 
 ContractPermissionDescriptor ContractPermissionDescriptor::Create(const io::UInt160& hash)
 {
@@ -104,20 +86,11 @@ void ContractPermissionDescriptor::Deserialize(io::BinaryReader& reader)
 // ContractPermission implementation
 ContractPermission::ContractPermission() : isMethodsWildcard_(true) {}
 
-const ContractPermissionDescriptor& ContractPermission::GetContract() const
-{
-    return contract_;
-}
+const ContractPermissionDescriptor& ContractPermission::GetContract() const { return contract_; }
 
-void ContractPermission::SetContract(const ContractPermissionDescriptor& contract)
-{
-    contract_ = contract;
-}
+void ContractPermission::SetContract(const ContractPermissionDescriptor& contract) { contract_ = contract; }
 
-const std::vector<std::string>& ContractPermission::GetMethods() const
-{
-    return methods_;
-}
+const std::vector<std::string>& ContractPermission::GetMethods() const { return methods_; }
 
 void ContractPermission::SetMethods(const std::vector<std::string>& methods)
 {
@@ -125,10 +98,7 @@ void ContractPermission::SetMethods(const std::vector<std::string>& methods)
     isMethodsWildcard_ = false;
 }
 
-bool ContractPermission::IsMethodsWildcard() const
-{
-    return isMethodsWildcard_;
-}
+bool ContractPermission::IsMethodsWildcard() const { return isMethodsWildcard_; }
 
 void ContractPermission::SetMethodsWildcard(bool isWildcard)
 {

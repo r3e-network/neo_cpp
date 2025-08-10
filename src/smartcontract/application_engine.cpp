@@ -1,4 +1,3 @@
-#include <iostream>
 #include <neo/ledger/block.h>
 #include <neo/ledger/signer.h>
 #include <neo/ledger/transaction.h>
@@ -12,10 +11,12 @@
 #include <neo/smartcontract/native/policy_contract.h>
 #include <neo/smartcontract/native/role_management.h>
 
-#define LOG_ERROR(msg, ...)                                                                                            \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        std::cerr << "ERROR: " << msg << std::endl;                                                                    \
+#include <iostream>
+
+#define LOG_ERROR(msg, ...)                         \
+    do                                              \
+    {                                               \
+        std::cerr << "ERROR: " << msg << std::endl; \
     } while (0)
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
@@ -26,6 +27,7 @@
 #include <neo/smartcontract/native/oracle_contract.h>
 #include <neo/smartcontract/native/std_lib.h>
 #include <neo/vm/script_builder.h>
+
 #include <sstream>
 
 namespace neo::smartcontract
@@ -33,9 +35,19 @@ namespace neo::smartcontract
 ApplicationEngine::ApplicationEngine(TriggerType trigger, const io::ISerializable* container,
                                      std::shared_ptr<persistence::DataCache> snapshot,
                                      const ledger::Block* persistingBlock, int64_t gas)
-    : trigger_(trigger), container_(container), snapshot_(snapshot), persisting_block_(persistingBlock),
-      gas_limit_(gas), gas_consumed_(0), state_(neo::vm::VMState::None), flags_(CallFlags::All), protocolSettings_(),
-      gasPrice_(1000000), platformVersion_(0), random_(0), networkFeePerByte_(1000)
+    : trigger_(trigger),
+      container_(container),
+      snapshot_(snapshot),
+      persisting_block_(persistingBlock),
+      gas_limit_(gas),
+      gas_consumed_(0),
+      state_(neo::vm::VMState::None),
+      flags_(CallFlags::All),
+      protocolSettings_(),
+      gasPrice_(1000000),
+      platformVersion_(0),
+      random_(0),
+      networkFeePerByte_(1000)
 {
     // Initialize basic state
 }
@@ -92,30 +104,17 @@ void ApplicationEngine::LoadScript(const std::vector<uint8_t>& script)
     scriptHashes_.push_back(hash);
 }
 
-const io::ISerializable* ApplicationEngine::GetContainer() const
-{
-    return container_;
-}
+const io::ISerializable* ApplicationEngine::GetContainer() const { return container_; }
 
-const io::ISerializable* ApplicationEngine::GetScriptContainer() const
-{
-    return container_;
-}
+const io::ISerializable* ApplicationEngine::GetScriptContainer() const { return container_; }
 
-std::shared_ptr<persistence::DataCache> ApplicationEngine::GetSnapshot() const
-{
-    return snapshot_;
-}
+std::shared_ptr<persistence::DataCache> ApplicationEngine::GetSnapshot() const { return snapshot_; }
 
-const ledger::Block* ApplicationEngine::GetPersistingBlock() const
-{
-    return persisting_block_;
-}
+const ledger::Block* ApplicationEngine::GetPersistingBlock() const { return persisting_block_; }
 
 io::UInt160 ApplicationEngine::GetCurrentScriptHash() const
 {
-    if (scriptHashes_.empty())
-        return io::UInt160();
+    if (scriptHashes_.empty()) return io::UInt160();
     return scriptHashes_.back();
 }
 
@@ -135,15 +134,13 @@ void ApplicationEngine::SetCurrentScriptHash(const io::UInt160& scriptHash)
 
 io::UInt160 ApplicationEngine::GetCallingScriptHash() const
 {
-    if (scriptHashes_.size() < 2)
-        return io::UInt160();
+    if (scriptHashes_.size() < 2) return io::UInt160();
     return scriptHashes_[scriptHashes_.size() - 2];
 }
 
 io::UInt160 ApplicationEngine::GetEntryScriptHash() const
 {
-    if (scriptHashes_.empty())
-        return io::UInt160();
+    if (scriptHashes_.empty()) return io::UInt160();
     return scriptHashes_.front();
 }
 
@@ -154,13 +151,11 @@ bool ApplicationEngine::HasFlag(CallFlags flag) const
 
 void ApplicationEngine::AddGas(int64_t gas)
 {
-    if (gas < 0)
-        throw std::invalid_argument("Gas cannot be negative");
+    if (gas < 0) throw std::invalid_argument("Gas cannot be negative");
 
     if (gas_limit_ >= 0)
     {
-        if (GetGasLeft() < gas)
-            throw std::runtime_error("Insufficient gas");
+        if (GetGasLeft() < gas) throw std::runtime_error("Insufficient gas");
     }
 
     gas_consumed_ += gas;
@@ -272,10 +267,7 @@ bool ApplicationEngine::CheckWitness(const io::UInt256& hash) const
     }
 }
 
-bool ApplicationEngine::CheckWitnessInternal(const io::UInt160& hash) const
-{
-    return CheckWitness(hash);
-}
+bool ApplicationEngine::CheckWitnessInternal(const io::UInt160& hash) const { return CheckWitness(hash); }
 
 void ApplicationEngine::Log(const std::string& message)
 {
@@ -305,25 +297,13 @@ const ledger::Transaction* ApplicationEngine::GetTransaction() const
     return dynamic_cast<const ledger::Transaction*>(container_);
 }
 
-int64_t ApplicationEngine::GetGasPrice() const
-{
-    return gasPrice_;
-}
+int64_t ApplicationEngine::GetGasPrice() const { return gasPrice_; }
 
-uint32_t ApplicationEngine::GetPlatformVersion() const
-{
-    return platformVersion_;
-}
+uint32_t ApplicationEngine::GetPlatformVersion() const { return platformVersion_; }
 
-uint64_t ApplicationEngine::GetRandom() const
-{
-    return random_;
-}
+uint64_t ApplicationEngine::GetRandom() const { return random_; }
 
-int64_t ApplicationEngine::GetNetworkFeePerByte() const
-{
-    return networkFeePerByte_;
-}
+int64_t ApplicationEngine::GetNetworkFeePerByte() const { return networkFeePerByte_; }
 
 vm::ExecutionEngineLimits ApplicationEngine::GetLimits() const
 {
@@ -340,42 +320,33 @@ native::NativeContract* ApplicationEngine::GetNativeContract(const io::UInt160& 
 
     // Core token contracts
     auto neoToken = native::NeoToken::GetInstance();
-    if (neoToken && neoToken->GetScriptHash() == hash)
-        return neoToken.get();
+    if (neoToken && neoToken->GetScriptHash() == hash) return neoToken.get();
 
     auto gasToken = native::GasToken::GetInstance();
-    if (gasToken && gasToken->GetScriptHash() == hash)
-        return gasToken.get();
+    if (gasToken && gasToken->GetScriptHash() == hash) return gasToken.get();
 
     // System contracts
     auto contractManagement = native::ContractManagement::GetInstance();
-    if (contractManagement && contractManagement->GetScriptHash() == hash)
-        return contractManagement.get();
+    if (contractManagement && contractManagement->GetScriptHash() == hash) return contractManagement.get();
 
     auto policyContract = native::PolicyContract::GetInstance();
-    if (policyContract && policyContract->GetScriptHash() == hash)
-        return policyContract.get();
+    if (policyContract && policyContract->GetScriptHash() == hash) return policyContract.get();
 
     auto ledgerContract = native::LedgerContract::GetInstance();
-    if (ledgerContract && ledgerContract->GetScriptHash() == hash)
-        return ledgerContract.get();
+    if (ledgerContract && ledgerContract->GetScriptHash() == hash) return ledgerContract.get();
 
     auto roleManagement = native::RoleManagement::GetInstance();
-    if (roleManagement && roleManagement->GetScriptHash() == hash)
-        return roleManagement.get();
+    if (roleManagement && roleManagement->GetScriptHash() == hash) return roleManagement.get();
 
     // Service contracts
     auto oracleContract = native::OracleContract::GetInstance();
-    if (oracleContract && oracleContract->GetScriptHash() == hash)
-        return oracleContract.get();
+    if (oracleContract && oracleContract->GetScriptHash() == hash) return oracleContract.get();
 
     auto notary = native::Notary::GetInstance();
-    if (notary && notary->GetScriptHash() == hash)
-        return notary.get();
+    if (notary && notary->GetScriptHash() == hash) return notary.get();
 
     auto nameService = native::NameService::GetInstance();
-    if (nameService && nameService->GetScriptHash() == hash)
-        return nameService.get();
+    if (nameService && nameService->GetScriptHash() == hash) return nameService.get();
 
     // CryptoLib and StdLib are special utility contracts
     // They don't follow the GetInstance pattern as they're stateless libraries
@@ -395,8 +366,7 @@ std::shared_ptr<vm::StackItem> ApplicationEngine::CallContract(const io::UInt160
                                                                const std::vector<std::shared_ptr<vm::StackItem>>& args,
                                                                CallFlags flags)
 {
-    if (!HasFlag(CallFlags::AllowCall))
-        throw std::runtime_error("Cannot call contract without AllowCall flag");
+    if (!HasFlag(CallFlags::AllowCall)) throw std::runtime_error("Cannot call contract without AllowCall flag");
 
     // Try to call native contract first
     auto nativeContract = GetNativeContract(scriptHash);
@@ -499,25 +469,16 @@ std::unique_ptr<ApplicationEngine> ApplicationEngine::Run(const io::ByteVector& 
     return engine;
 }
 
-std::shared_ptr<vm::StackItem> ApplicationEngine::Pop()
-{
-    return ExecutionEngine::Pop();
-}
+std::shared_ptr<vm::StackItem> ApplicationEngine::Pop() { return ExecutionEngine::Pop(); }
 
-void ApplicationEngine::Push(std::shared_ptr<vm::StackItem> item)
-{
-    ExecutionEngine::Push(item);
-}
+void ApplicationEngine::Push(std::shared_ptr<vm::StackItem> item) { ExecutionEngine::Push(item); }
 
 std::shared_ptr<vm::StackItem> ApplicationEngine::Peek() const
 {
     return vm::StackItem::CreateByteString(std::vector<uint8_t>{});
 }
 
-io::ByteVector ApplicationEngine::GetScript() const
-{
-    return io::ByteVector();
-}
+io::ByteVector ApplicationEngine::GetScript() const { return io::ByteVector(); }
 
 std::string ApplicationEngine::GetException() const
 {
@@ -553,10 +514,7 @@ void ApplicationEngine::SetInvocationCount(const io::UInt160& scriptHash, int64_
     invocationCounts_[scriptHash] = count;
 }
 
-const ProtocolSettings* ApplicationEngine::GetProtocolSettings() const
-{
-    return &protocolSettings_;
-}
+const ProtocolSettings* ApplicationEngine::GetProtocolSettings() const { return &protocolSettings_; }
 
 uint32_t ApplicationEngine::GetCurrentBlockHeight() const
 {
@@ -888,8 +846,8 @@ std::shared_ptr<ContractState> ApplicationEngine::GetContract(const io::UInt160&
     }
 }
 
-io::ByteVector
-ApplicationEngine::CreateCommitteeMultiSigScript(const std::vector<cryptography::ecc::ECPoint>& committee) const
+io::ByteVector ApplicationEngine::CreateCommitteeMultiSigScript(
+    const std::vector<cryptography::ecc::ECPoint>& committee) const
 {
     size_t m = (committee.size() / 2) + 1;
     vm::ScriptBuilder sb;

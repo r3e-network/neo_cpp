@@ -1,5 +1,3 @@
-#include <chrono>
-#include <iostream>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/neo_system.h>
 #include <neo/smartcontract/application_engine.h>
@@ -9,6 +7,9 @@
 #include <neo/smartcontract/script_builder.h>
 #include <neo/smartcontract/trigger_type.h>
 #include <neo/vm/vm_state.h>
+
+#include <chrono>
+#include <iostream>
 
 namespace neo::ledger
 {
@@ -37,20 +38,19 @@ void Blockchain::ProcessBlock(std::shared_ptr<Block> block)
 
             // Check for next block
             uint32_t next_index = current_block->GetIndex() + 1;
-            
+
             // Since header_cache is disabled, we can only process blocks we have in cache
             // Look for next block directly in block cache
             std::shared_ptr<Block> next_block = nullptr;
             for (const auto& [hash, cached_block] : block_cache_)
             {
-                if (cached_block->GetIndex() == next_index && 
-                    cached_block->GetPrevHash() == current_block->GetHash())
+                if (cached_block->GetIndex() == next_index && cached_block->GetPrevHash() == current_block->GetHash())
                 {
                     next_block = cached_block;
                     break;
                 }
             }
-            
+
             if (!next_block)
             {
                 break;
@@ -126,9 +126,9 @@ void Blockchain::PersistBlock(std::shared_ptr<Block> block)
         for (const auto& tx : block->GetTransactions())
         {
             // Execute transaction script
-            auto tx_engine = smartcontract::ApplicationEngine::Create(
-                smartcontract::TriggerType::Application, tx, cloned_snapshot, block,
-                system_->GetSettings(), tx->GetSystemFee());
+            auto tx_engine =
+                smartcontract::ApplicationEngine::Create(smartcontract::TriggerType::Application, tx, cloned_snapshot,
+                                                         block, system_->GetSettings(), tx->GetSystemFee());
 
             tx_engine->LoadScript(tx->GetScript());
             auto tx_vm_state = tx_engine->Execute();

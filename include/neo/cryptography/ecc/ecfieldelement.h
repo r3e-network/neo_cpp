@@ -2,6 +2,7 @@
 
 #include <neo/extensions/biginteger_extensions.h>
 #include <neo/io/byte_vector.h>
+
 #include <string>
 
 namespace neo::cryptography::ecc
@@ -15,12 +16,12 @@ namespace neo::cryptography::ecc
  */
 class ECFieldElement
 {
-  private:
+   private:
     extensions::BigIntegerExtensions::BigInteger value_;
 
     static const extensions::BigIntegerExtensions::BigInteger& GetFieldModulus();
 
-  public:
+   public:
     /**
      * @brief Construct field element from BigInteger
      * @param value The value (will be reduced modulo field modulus)

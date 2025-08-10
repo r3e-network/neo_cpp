@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/ledger/block.h>
 #include <neo/ledger/blockchain_callbacks.h>
 #include <neo/ledger/transaction.h>
 #include <neo/persistence/data_cache.h>
+
+#include <memory>
 
 namespace neo::ledger
 {
@@ -13,7 +14,7 @@ namespace neo::ledger
  */
 class BlockchainExecution
 {
-  public:
+   public:
     /**
      * @brief Constructs a BlockchainExecution.
      * @param callbacks The blockchain callbacks.
@@ -34,7 +35,7 @@ class BlockchainExecution
      */
     void Initialize(std::shared_ptr<persistence::DataCache> snapshot);
 
-  private:
+   private:
     std::shared_ptr<BlockchainCallbacks> callbacks_;
 };
 }  // namespace neo::ledger

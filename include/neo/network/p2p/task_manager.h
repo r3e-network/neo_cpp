@@ -1,13 +1,14 @@
 #pragma once
 
-#include <atomic>
-#include <condition_variable>
-#include <memory>
-#include <mutex>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/mempool.h>
+
+#include <atomic>
+#include <condition_variable>
+#include <memory>
+#include <mutex>
 #include <thread>
 #include <unordered_map>
 #include <vector>
@@ -19,7 +20,7 @@ namespace neo::network::p2p
  */
 class TaskManager
 {
-  public:
+   public:
     /**
      * @brief Constructs a TaskManager.
      * @param blockchain The blockchain.
@@ -88,7 +89,7 @@ class TaskManager
      */
     bool RemoveTransactionTask(const io::UInt256& hash);
 
-  private:
+   private:
     std::shared_ptr<ledger::Blockchain> blockchain_;
     std::shared_ptr<ledger::MemoryPool> memPool_;
     std::unordered_map<io::UInt256, std::chrono::system_clock::time_point> blockTasks_;

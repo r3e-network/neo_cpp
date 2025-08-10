@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class BooleanItem : public StackItem
 {
-  public:
+   public:
     /**
      * @brief Constructs a BooleanItem.
      * @param value The value.
@@ -20,10 +20,7 @@ class BooleanItem : public StackItem
      * @brief Conversion operator to std::shared_ptr<StackItem>.
      * @return A shared pointer to the base StackItem.
      */
-    operator std::shared_ptr<StackItem>() const
-    {
-        return std::const_pointer_cast<StackItem>(shared_from_this());
-    }
+    operator std::shared_ptr<StackItem>() const { return std::const_pointer_cast<StackItem>(shared_from_this()); }
 
     /**
      * @brief Gets the type of the stack item.
@@ -56,7 +53,7 @@ class BooleanItem : public StackItem
      */
     bool Equals(const StackItem& other) const override;
 
-  private:
+   private:
     bool value_;
 };
 
@@ -65,7 +62,7 @@ class BooleanItem : public StackItem
  */
 class IntegerItem : public StackItem
 {
-  public:
+   public:
     /**
      * @brief Constructs an IntegerItem.
      * @param value The value.
@@ -76,10 +73,7 @@ class IntegerItem : public StackItem
      * @brief Conversion operator to std::shared_ptr<StackItem>.
      * @return A shared pointer to the base StackItem.
      */
-    operator std::shared_ptr<StackItem>() const
-    {
-        return std::const_pointer_cast<StackItem>(shared_from_this());
-    }
+    operator std::shared_ptr<StackItem>() const { return std::const_pointer_cast<StackItem>(shared_from_this()); }
 
     /**
      * @brief Gets the type of the stack item.
@@ -112,7 +106,7 @@ class IntegerItem : public StackItem
      */
     bool Equals(const StackItem& other) const override;
 
-  private:
+   private:
     int64_t value_;
 };
 
@@ -121,7 +115,7 @@ class IntegerItem : public StackItem
  */
 class ByteStringItem : public StackItem
 {
-  public:
+   public:
     /**
      * @brief Constructs a ByteStringItem.
      * @param value The value.
@@ -138,10 +132,7 @@ class ByteStringItem : public StackItem
      * @brief Conversion operator to std::shared_ptr<StackItem>.
      * @return A shared pointer to the base StackItem.
      */
-    operator std::shared_ptr<StackItem>() const
-    {
-        return std::const_pointer_cast<StackItem>(shared_from_this());
-    }
+    operator std::shared_ptr<StackItem>() const { return std::const_pointer_cast<StackItem>(shared_from_this()); }
 
     /**
      * @brief Gets the type of the stack item.
@@ -180,7 +171,7 @@ class ByteStringItem : public StackItem
      */
     bool Equals(const StackItem& other) const override;
 
-  private:
+   private:
     io::ByteVector value_;
 };
 
@@ -189,7 +180,7 @@ class ByteStringItem : public StackItem
  */
 class BufferItem : public StackItem
 {
-  public:
+   public:
     /**
      * @brief Constructs a BufferItem.
      * @param value The value.
@@ -206,10 +197,7 @@ class BufferItem : public StackItem
      * @brief Conversion operator to std::shared_ptr<StackItem>.
      * @return A shared pointer to the base StackItem.
      */
-    operator std::shared_ptr<StackItem>() const
-    {
-        return std::const_pointer_cast<StackItem>(shared_from_this());
-    }
+    operator std::shared_ptr<StackItem>() const { return std::const_pointer_cast<StackItem>(shared_from_this()); }
 
     /**
      * @brief Gets the type of the stack item.
@@ -242,7 +230,7 @@ class BufferItem : public StackItem
      */
     bool Equals(const StackItem& other) const override;
 
-  private:
+   private:
     io::ByteVector value_;
 };
 }  // namespace neo::vm

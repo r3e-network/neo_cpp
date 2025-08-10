@@ -209,8 +209,7 @@ std::vector<std::pair<StorageKey, StorageItem>> StoreCache::Find(const StorageKe
     // Find in tracked items
     for (const auto& [key, value] : items_)
     {
-        if (value.second == TrackState::Deleted)
-            continue;
+        if (value.second == TrackState::Deleted) continue;
 
         // Check if key matches prefix
         if (!prefix || (key.GetKey().size() >= prefix->GetKey().size() &&
@@ -233,8 +232,7 @@ std::vector<std::pair<StorageKey, StorageItem>> StoreCache::Find(const StorageKe
             key.DeserializeFromArray(entry.first);
 
             // Skip if already in tracked items
-            if (items_.find(key) != items_.end())
-                continue;
+            if (items_.find(key) != items_.end()) continue;
 
             StorageItem item;
             item.DeserializeFromArray(entry.second);
@@ -251,36 +249,30 @@ std::unique_ptr<StorageIterator> StoreCache::Seek(const StorageKey& prefix) cons
     // Create a simple iterator implementation
     class StoreCacheIterator : public StorageIterator
     {
-      private:
+       private:
         std::vector<std::pair<StorageKey, StorageItem>> items_;
         size_t position_ = 0;
 
-      public:
+       public:
         StoreCacheIterator(std::vector<std::pair<StorageKey, StorageItem>> items) : items_(std::move(items)) {}
 
-        bool Valid() const override
-        {
-            return position_ < items_.size();
-        }
+        bool Valid() const override { return position_ < items_.size(); }
 
         StorageKey Key() const override
         {
-            if (!Valid())
-                throw std::out_of_range("Iterator out of range");
+            if (!Valid()) throw std::out_of_range("Iterator out of range");
             return items_[position_].first;
         }
 
         StorageItem Value() const override
         {
-            if (!Valid())
-                throw std::out_of_range("Iterator out of range");
+            if (!Valid()) throw std::out_of_range("Iterator out of range");
             return items_[position_].second;
         }
 
         void Next() override
         {
-            if (Valid())
-                position_++;
+            if (Valid()) position_++;
         }
     };
 
@@ -297,8 +289,7 @@ std::shared_ptr<StoreView> StoreCache::CreateSnapshot()
 
 void StoreCache::Commit()
 {
-    if (!snapshot_)
-        return;
+    if (!snapshot_) return;
 
     // Apply all changes to the underlying store
     for (const auto& [key, value] : items_)
@@ -482,13 +473,7 @@ bool StoreCache::TryGet(const StorageKey& key, StorageItem& item) const
     return false;
 }
 
-std::shared_ptr<IStoreSnapshot> StoreCache::GetStore() const
-{
-    return snapshot_;
-}
+std::shared_ptr<IStoreSnapshot> StoreCache::GetStore() const { return snapshot_; }
 
-bool StoreCache::IsReadOnly() const
-{
-    return false;
-}
+bool StoreCache::IsReadOnly() const { return false; }
 }  // namespace neo::persistence

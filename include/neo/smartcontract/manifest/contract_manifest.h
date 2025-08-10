@@ -3,6 +3,7 @@
 #include <neo/io/serializable.h>
 #include <neo/io/uint160.h>
 #include <neo/vm/execution_engine_limits.h>
+
 #include <string>
 #include <vector>
 
@@ -22,7 +23,7 @@ class ContractPermissionDescriptor;
  */
 class ContractManifest : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief The maximum length of a manifest.
      */
@@ -143,7 +144,7 @@ class ContractManifest : public io::ISerializable
      */
     void Deserialize(io::BinaryReader& reader) override;
 
-  private:
+   private:
     std::string name_;
     std::vector<std::string> supportedStandards_;
     ContractAbi* abi_;

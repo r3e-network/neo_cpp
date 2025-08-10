@@ -21,7 +21,7 @@ enum class CommandTokenType
  */
 class CommandToken
 {
-  public:
+   public:
     /**
      * @brief Constructor.
      * @param type The token type.
@@ -95,7 +95,7 @@ class CommandToken
      */
     static std::string ReadString(std::vector<std::shared_ptr<CommandToken>>& args, bool consume_all);
 
-  protected:
+   protected:
     CommandTokenType type_;
     int offset_;
     std::string value_;
@@ -106,7 +106,7 @@ class CommandToken
  */
 class CommandSpaceToken : public CommandToken
 {
-  public:
+   public:
     /**
      * @brief Constructor.
      * @param offset The offset.
@@ -133,7 +133,7 @@ class CommandSpaceToken : public CommandToken
  */
 class CommandQuoteToken : public CommandToken
 {
-  public:
+   public:
     /**
      * @brief Constructor.
      * @param offset The offset.
@@ -155,7 +155,7 @@ class CommandQuoteToken : public CommandToken
      */
     char GetQuoteChar() const;
 
-  private:
+   private:
     char quote_char_;
 };
 
@@ -164,7 +164,7 @@ class CommandQuoteToken : public CommandToken
  */
 class CommandStringToken : public CommandToken
 {
-  public:
+   public:
     /**
      * @brief Constructor.
      * @param offset The offset.

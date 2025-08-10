@@ -1,5 +1,6 @@
-#include <map>
 #include <neo/persistence/memory_store_view.h>
+
+#include <map>
 #include <stdexcept>
 
 namespace neo::persistence
@@ -49,15 +50,9 @@ std::shared_ptr<StorageItem> MemoryStoreView::GetAndChange(const StorageKey& key
     return item;
 }
 
-void MemoryStoreView::Add(const StorageKey& key, const StorageItem& item)
-{
-    storage_[key] = item;
-}
+void MemoryStoreView::Add(const StorageKey& key, const StorageItem& item) { storage_[key] = item; }
 
-void MemoryStoreView::Delete(const StorageKey& key)
-{
-    storage_.erase(key);
-}
+void MemoryStoreView::Delete(const StorageKey& key) { storage_.erase(key); }
 
 std::vector<std::pair<StorageKey, StorageItem>> MemoryStoreView::Find(const StorageKey* prefix) const
 {
@@ -116,12 +111,12 @@ std::unique_ptr<StorageIterator> MemoryStoreView::Seek(const StorageKey& prefix)
     // Complete StorageIterator implementation for proper blockchain storage iteration
     class MemoryStorageIterator : public StorageIterator
     {
-      private:
+       private:
         std::vector<std::pair<StorageKey, StorageItem>> items_;
         size_t current_index_;
         bool valid_;
 
-      public:
+       public:
         MemoryStorageIterator(const std::unordered_map<StorageKey, StorageItem>& storage,
                               const StorageKey& search_prefix)
             : current_index_(0), valid_(false)
@@ -163,10 +158,7 @@ std::unique_ptr<StorageIterator> MemoryStoreView::Seek(const StorageKey& prefix)
             valid_ = !items_.empty();
         }
 
-        bool Valid() const override
-        {
-            return valid_ && current_index_ < items_.size();
-        }
+        bool Valid() const override { return valid_ && current_index_ < items_.size(); }
 
         StorageKey Key() const override
         {
@@ -215,8 +207,5 @@ std::shared_ptr<StoreView> MemoryStoreView::CreateSnapshot()
     return snapshot;
 }
 
-void MemoryStoreView::Clear()
-{
-    storage_.clear();
-}
+void MemoryStoreView::Clear() { storage_.clear(); }
 }  // namespace neo::persistence

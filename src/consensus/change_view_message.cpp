@@ -1,6 +1,7 @@
 #include <neo/consensus/change_view_message.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+
 #include <sstream>
 
 namespace neo::consensus
@@ -10,15 +11,9 @@ ChangeViewMessage::ChangeViewMessage(uint8_t viewNumber, uint8_t newViewNumber, 
 {
 }
 
-uint8_t ChangeViewMessage::GetNewViewNumber() const
-{
-    return newViewNumber_;
-}
+uint8_t ChangeViewMessage::GetNewViewNumber() const { return newViewNumber_; }
 
-uint64_t ChangeViewMessage::GetTimestamp() const
-{
-    return timestamp_;
-}
+uint64_t ChangeViewMessage::GetTimestamp() const { return timestamp_; }
 
 void ChangeViewMessage::Serialize(io::BinaryWriter& writer) const
 {

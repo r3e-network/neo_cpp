@@ -1,11 +1,12 @@
-#include <algorithm>
-#include <chrono>
-#include <iostream>
 #include <neo/io/uint256.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/mempool.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
 #include <neo/network/p2p/transaction_router.h>
+
+#include <algorithm>
+#include <chrono>
+#include <iostream>
 #include <unordered_set>
 
 namespace neo::network::p2p
@@ -16,15 +17,11 @@ neo::network::p2p::TransactionRouter::TransactionRouter(std::shared_ptr<ledger::
 {
 }
 
-neo::network::p2p::TransactionRouter::~TransactionRouter()
-{
-    Stop();
-}
+neo::network::p2p::TransactionRouter::~TransactionRouter() { Stop(); }
 
 void neo::network::p2p::TransactionRouter::Start()
 {
-    if (running_)
-        return;
+    if (running_) return;
 
     running_ = true;
     routerThread_ = std::thread(&TransactionRouter::ProcessTransactions, this);
@@ -32,8 +29,7 @@ void neo::network::p2p::TransactionRouter::Start()
 
 void neo::network::p2p::TransactionRouter::Stop()
 {
-    if (!running_)
-        return;
+    if (!running_) return;
 
     running_ = false;
 
@@ -42,14 +38,10 @@ void neo::network::p2p::TransactionRouter::Stop()
         routerCondition_.notify_all();
     }
 
-    if (routerThread_.joinable())
-        routerThread_.join();
+    if (routerThread_.joinable()) routerThread_.join();
 }
 
-bool neo::network::p2p::TransactionRouter::IsRunning() const
-{
-    return running_;
-}
+bool neo::network::p2p::TransactionRouter::IsRunning() const { return running_; }
 
 bool neo::network::p2p::TransactionRouter::AddTransaction(std::shared_ptr<Neo3Transaction> transaction)
 {
@@ -62,8 +54,7 @@ bool neo::network::p2p::TransactionRouter::AddTransaction(std::shared_ptr<Neo3Tr
         std::lock_guard<std::mutex> lock(transactionsMutex_);
 
         // Check if the transaction already exists
-        if (transactions_.find(transaction->GetHash()) != transactions_.end())
-            return false;
+        if (transactions_.find(transaction->GetHash()) != transactions_.end()) return false;
 
         // Add the transaction
         transactions_[transaction->GetHash()] = transaction;
@@ -98,8 +89,7 @@ bool neo::network::p2p::TransactionRouter::RemoveTransaction(const io::UInt256& 
     std::lock_guard<std::mutex> lock(transactionsMutex_);
 
     auto it = transactions_.find(hash);
-    if (it == transactions_.end())
-        return false;
+    if (it == transactions_.end()) return false;
 
     transactions_.erase(it);
     return true;

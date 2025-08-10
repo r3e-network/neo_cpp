@@ -1,9 +1,10 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_vector.h>
 #include <neo/network/p2p/ipayload.h>
 #include <neo/network/p2p/payloads/oracle_response_code.h>
+
+#include <cstdint>
 
 namespace neo::network::p2p::payloads
 {
@@ -12,7 +13,7 @@ namespace neo::network::p2p::payloads
  */
 class OracleResponse : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Indicates the maximum size of the Result field.
      */
@@ -91,7 +92,7 @@ class OracleResponse : public IPayload
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
+   private:
     uint64_t id_;
     OracleResponseCode code_;
     io::ByteVector result_;

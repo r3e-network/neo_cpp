@@ -1,10 +1,11 @@
+#include <neo/extensions/utility.h>
+
 #include <algorithm>
 #include <cctype>
 #include <cstdarg>
 #include <cstring>
 #include <iomanip>
 #include <limits>
-#include <neo/extensions/utility.h>
 #include <sstream>
 #include <stdexcept>
 
@@ -22,8 +23,7 @@ std::vector<std::string> Utility::Split(const std::string& str, const std::strin
 
     if (str.empty() || delimiter.empty())
     {
-        if (!str.empty() || !removeEmpty)
-            result.push_back(str);
+        if (!str.empty() || !removeEmpty) result.push_back(str);
         return result;
     }
 
@@ -33,39 +33,32 @@ std::vector<std::string> Utility::Split(const std::string& str, const std::strin
     while ((pos = str.find(delimiter, start)) != std::string::npos)
     {
         std::string part = str.substr(start, pos - start);
-        if (!part.empty() || !removeEmpty)
-            result.push_back(part);
+        if (!part.empty() || !removeEmpty) result.push_back(part);
         start = pos + delimiter.length();
     }
 
     // Add the last part
     std::string lastPart = str.substr(start);
-    if (!lastPart.empty() || !removeEmpty)
-        result.push_back(lastPart);
+    if (!lastPart.empty() || !removeEmpty) result.push_back(lastPart);
 
     return result;
 }
 
 std::string Utility::Join(const std::vector<std::string>& parts, const std::string& delimiter)
 {
-    if (parts.empty())
-        return "";
+    if (parts.empty()) return "";
 
     std::ostringstream oss;
     for (size_t i = 0; i < parts.size(); ++i)
     {
-        if (i > 0)
-            oss << delimiter;
+        if (i > 0) oss << delimiter;
         oss << parts[i];
     }
 
     return oss.str();
 }
 
-std::string Utility::Trim(const std::string& str)
-{
-    return TrimRight(TrimLeft(str));
-}
+std::string Utility::Trim(const std::string& str) { return TrimRight(TrimLeft(str)); }
 
 std::string Utility::TrimLeft(const std::string& str)
 {
@@ -95,8 +88,7 @@ std::string Utility::ToUpper(const std::string& str)
 
 bool Utility::StartsWith(const std::string& str, const std::string& prefix, bool ignoreCase)
 {
-    if (prefix.length() > str.length())
-        return false;
+    if (prefix.length() > str.length()) return false;
 
     if (ignoreCase)
     {
@@ -110,8 +102,7 @@ bool Utility::StartsWith(const std::string& str, const std::string& prefix, bool
 
 bool Utility::EndsWith(const std::string& str, const std::string& suffix, bool ignoreCase)
 {
-    if (suffix.length() > str.length())
-        return false;
+    if (suffix.length() > str.length()) return false;
 
     if (ignoreCase)
     {
@@ -137,8 +128,7 @@ bool Utility::Contains(const std::string& str, const std::string& substring, boo
 
 std::string Utility::Replace(const std::string& str, const std::string& from, const std::string& to)
 {
-    if (from.empty())
-        return str;
+    if (from.empty()) return str;
 
     std::string result = str;
     size_t pos = 0;
@@ -154,8 +144,7 @@ std::string Utility::Replace(const std::string& str, const std::string& from, co
 
 void Utility::SecureZeroMemory(void* ptr, size_t size)
 {
-    if (!ptr || size == 0)
-        return;
+    if (!ptr || size == 0) return;
 
     // Use volatile to prevent compiler optimization
     volatile uint8_t* volatilePtr = static_cast<volatile uint8_t*>(ptr);
@@ -174,8 +163,7 @@ void Utility::SecureZeroMemory(void* ptr, size_t size)
 
 bool Utility::SecureCompareMemory(const void* a, const void* b, size_t size)
 {
-    if (!a || !b)
-        return false;
+    if (!a || !b) return false;
 
     const uint8_t* ptr1 = static_cast<const uint8_t*>(a);
     const uint8_t* ptr2 = static_cast<const uint8_t*>(b);
@@ -192,8 +180,7 @@ bool Utility::SecureCompareMemory(const void* a, const void* b, size_t size)
 
 uint32_t Utility::NextPowerOf2(uint32_t value)
 {
-    if (value == 0)
-        return 1;
+    if (value == 0) return 1;
 
     value--;
     value |= value >> 1;
@@ -206,15 +193,11 @@ uint32_t Utility::NextPowerOf2(uint32_t value)
     return value;
 }
 
-bool Utility::IsPowerOf2(uint32_t value)
-{
-    return value != 0 && (value & (value - 1)) == 0;
-}
+bool Utility::IsPowerOf2(uint32_t value) { return value != 0 && (value & (value - 1)) == 0; }
 
 void Utility::ReverseBytes(uint8_t* data, size_t size)
 {
-    if (!data || size <= 1)
-        return;
+    if (!data || size <= 1) return;
 
     for (size_t i = 0; i < size / 2; ++i)
     {
@@ -227,8 +210,7 @@ std::string Utility::BytesToHex(const io::ByteSpan& data, bool uppercase)
     std::ostringstream oss;
     oss << std::hex << std::setfill('0');
 
-    if (uppercase)
-        oss << std::uppercase;
+    if (uppercase) oss << std::uppercase;
 
     for (size_t i = 0; i < data.Size(); ++i)
     {
@@ -240,8 +222,7 @@ std::string Utility::BytesToHex(const io::ByteSpan& data, bool uppercase)
 
 io::ByteVector Utility::HexToBytes(const std::string& hex)
 {
-    if (hex.length() % 2 != 0)
-        throw std::invalid_argument("Hex string length must be even");
+    if (hex.length() % 2 != 0) throw std::invalid_argument("Hex string length must be even");
 
     io::ByteVector result;
     result.Reserve(hex.length() / 2);
@@ -327,8 +308,7 @@ bool Utility::TryParse<unsigned int>(const std::string& str, unsigned int& resul
     {
         size_t pos;
         unsigned long parsedValue = std::stoul(str, &pos);
-        if (pos != str.length() || parsedValue > std::numeric_limits<unsigned int>::max())
-            return false;
+        if (pos != str.length() || parsedValue > std::numeric_limits<unsigned int>::max()) return false;
         result = static_cast<unsigned int>(parsedValue);
         return true;
     }
@@ -391,8 +371,7 @@ template <>
 int Utility::Parse<int>(const std::string& str)
 {
     int result;
-    if (!TryParse(str, result))
-        throw std::invalid_argument("Cannot parse string to int: " + str);
+    if (!TryParse(str, result)) throw std::invalid_argument("Cannot parse string to int: " + str);
     return result;
 }
 
@@ -400,8 +379,7 @@ template <>
 long Utility::Parse<long>(const std::string& str)
 {
     long result;
-    if (!TryParse(str, result))
-        throw std::invalid_argument("Cannot parse string to long: " + str);
+    if (!TryParse(str, result)) throw std::invalid_argument("Cannot parse string to long: " + str);
     return result;
 }
 
@@ -409,8 +387,7 @@ template <>
 float Utility::Parse<float>(const std::string& str)
 {
     float result;
-    if (!TryParse(str, result))
-        throw std::invalid_argument("Cannot parse string to float: " + str);
+    if (!TryParse(str, result)) throw std::invalid_argument("Cannot parse string to float: " + str);
     return result;
 }
 
@@ -418,8 +395,7 @@ template <>
 double Utility::Parse<double>(const std::string& str)
 {
     double result;
-    if (!TryParse(str, result))
-        throw std::invalid_argument("Cannot parse string to double: " + str);
+    if (!TryParse(str, result)) throw std::invalid_argument("Cannot parse string to double: " + str);
     return result;
 }
 
@@ -460,8 +436,7 @@ int32_t Utility::SafeCast<int32_t, int64_t>(const int64_t& value)
 template <>
 uint32_t Utility::SafeCast<uint32_t, uint64_t>(const uint64_t& value)
 {
-    if (value > std::numeric_limits<uint32_t>::max())
-        throw std::overflow_error("Value out of range for uint32_t");
+    if (value > std::numeric_limits<uint32_t>::max()) throw std::overflow_error("Value out of range for uint32_t");
     return static_cast<uint32_t>(value);
 }
 

@@ -1,11 +1,12 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/fixed8.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
+#include <cstdint>
 #include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
@@ -19,7 +20,7 @@ class IJsonSerializable;
  */
 class JsonWriter
 {
-  public:
+   public:
     /**
      * @brief Constructs a JsonWriter that writes to a new JSON object.
      */
@@ -191,10 +192,7 @@ class JsonWriter
      * @brief Gets the underlying JSON value.
      * @return The underlying JSON value.
      */
-    const nlohmann::json& GetJson() const
-    {
-        return json_;
-    }
+    const nlohmann::json& GetJson() const { return json_; }
 
     /**
      * @brief Writes a property to the JSON.
@@ -211,10 +209,7 @@ class JsonWriter
      * @brief Writes a property name to the JSON.
      * @param name The name of the property.
      */
-    void WritePropertyName(const std::string& name)
-    {
-        currentPropertyName_ = name;
-    }
+    void WritePropertyName(const std::string& name) { currentPropertyName_ = name; }
 
     /**
      * @brief Writes the start of an array to the JSON.
@@ -237,10 +232,7 @@ class JsonWriter
     /**
      * @brief Writes the end of an array to the JSON.
      */
-    void WriteEndArray()
-    {
-        currentArray_ = nullptr;
-    }
+    void WriteEndArray() { currentArray_ = nullptr; }
 
     /**
      * @brief Writes the start of an object to the JSON.
@@ -268,10 +260,7 @@ class JsonWriter
     /**
      * @brief Writes the end of an object to the JSON.
      */
-    void WriteEndObject()
-    {
-        currentObject_ = nullptr;
-    }
+    void WriteEndObject() { currentObject_ = nullptr; }
 
     /**
      * @brief Writes an array to the JSON.
@@ -313,7 +302,7 @@ class JsonWriter
      */
     void WriteNumber(int value);
 
-  private:
+   private:
     nlohmann::json& json_;
     nlohmann::json ownedJson_;
     std::string currentPropertyName_;

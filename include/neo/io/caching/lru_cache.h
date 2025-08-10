@@ -17,7 +17,7 @@ namespace neo::io::caching
 template <typename TKey, typename TValue, typename THash = std::hash<TKey>>
 class LRUCache
 {
-  public:
+   public:
     /**
      * @brief Constructs an LRUCache with the specified capacity.
      * @param capacity The maximum number of items the cache can hold.
@@ -72,8 +72,7 @@ class LRUCache
 
         // Check if the key exists
         auto it = cache_.find(key);
-        if (it == cache_.end())
-            return false;
+        if (it == cache_.end()) return false;
 
         // Move the item to the front of the list
         items_.erase(it->second.first);
@@ -93,8 +92,7 @@ class LRUCache
     std::optional<TValue> Get(const TKey& key)
     {
         TValue value;
-        if (TryGet(key, value))
-            return value;
+        if (TryGet(key, value)) return value;
         return std::nullopt;
     }
 
@@ -109,8 +107,7 @@ class LRUCache
 
         // Check if the key exists
         auto it = cache_.find(key);
-        if (it == cache_.end())
-            return false;
+        if (it == cache_.end()) return false;
 
         // Remove the item
         items_.erase(it->second.first);
@@ -142,12 +139,9 @@ class LRUCache
      * @brief Gets the capacity of the cache.
      * @return The capacity of the cache.
      */
-    size_t Capacity() const
-    {
-        return capacity_;
-    }
+    size_t Capacity() const { return capacity_; }
 
-  private:
+   private:
     size_t capacity_;
     std::list<std::pair<TKey, TValue>> items_;
     std::unordered_map<TKey, std::pair<typename std::list<std::pair<TKey, TValue>>::iterator, TValue>, THash> cache_;

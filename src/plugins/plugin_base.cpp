@@ -8,25 +8,13 @@ PluginBase::PluginBase(const std::string& name, const std::string& description, 
 {
 }
 
-std::string PluginBase::GetName() const
-{
-    return name_;
-}
+std::string PluginBase::GetName() const { return name_; }
 
-std::string PluginBase::GetDescription() const
-{
-    return description_;
-}
+std::string PluginBase::GetDescription() const { return description_; }
 
-std::string PluginBase::GetVersion() const
-{
-    return version_;
-}
+std::string PluginBase::GetVersion() const { return version_; }
 
-std::string PluginBase::GetAuthor() const
-{
-    return author_;
-}
+std::string PluginBase::GetAuthor() const { return author_; }
 
 bool PluginBase::Initialize(std::shared_ptr<node::NeoSystem> neoSystem,
                             const std::unordered_map<std::string, std::string>& settings)
@@ -38,8 +26,7 @@ bool PluginBase::Initialize(std::shared_ptr<node::NeoSystem> neoSystem,
 
 bool PluginBase::Start()
 {
-    if (running_)
-        return true;
+    if (running_) return true;
 
     if (OnStart())
     {
@@ -52,8 +39,7 @@ bool PluginBase::Start()
 
 bool PluginBase::Stop()
 {
-    if (!running_)
-        return true;
+    if (!running_) return true;
 
     if (OnStop())
     {
@@ -64,33 +50,15 @@ bool PluginBase::Stop()
     return false;
 }
 
-bool PluginBase::IsRunning() const
-{
-    return running_;
-}
+bool PluginBase::IsRunning() const { return running_; }
 
-bool PluginBase::OnInitialize(const std::unordered_map<std::string, std::string>& settings)
-{
-    return true;
-}
+bool PluginBase::OnInitialize(const std::unordered_map<std::string, std::string>& settings) { return true; }
 
-bool PluginBase::OnStart()
-{
-    return true;
-}
+bool PluginBase::OnStart() { return true; }
 
-bool PluginBase::OnStop()
-{
-    return true;
-}
+bool PluginBase::OnStop() { return true; }
 
-std::shared_ptr<node::NeoSystem> PluginBase::GetNeoSystem() const
-{
-    return neoSystem_;
-}
+std::shared_ptr<node::NeoSystem> PluginBase::GetNeoSystem() const { return neoSystem_; }
 
-std::shared_ptr<rpc::RpcServer> PluginBase::GetRPCServer() const
-{
-    return rpcServer_;
-}
+std::shared_ptr<rpc::RpcServer> PluginBase::GetRPCServer() const { return rpcServer_; }
 }  // namespace neo::plugins

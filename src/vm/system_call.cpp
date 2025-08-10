@@ -8,13 +8,7 @@ SystemCall::SystemCall(const std::string& name, std::function<bool(ExecutionEngi
 {
 }
 
-const std::string& SystemCall::GetName() const
-{
-    return name_;
-}
+const std::string& SystemCall::GetName() const { return name_; }
 
-const std::function<bool(ExecutionEngine&)>& SystemCall::GetHandler() const
-{
-    return handler_;
-}
+const std::function<bool(ExecutionEngine&)>& SystemCall::GetHandler() const { return handler_; }
 }  // namespace neo::vm

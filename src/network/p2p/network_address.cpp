@@ -1,5 +1,6 @@
-#include <algorithm>
 #include <neo/network/p2p/network_address.h>
+
+#include <algorithm>
 
 namespace neo::network::p2p
 {
@@ -11,30 +12,15 @@ NetworkAddressWithTime::NetworkAddressWithTime(uint32_t timestamp, const IPAddre
 {
 }
 
-uint32_t NetworkAddressWithTime::GetTimestamp() const
-{
-    return timestamp_;
-}
+uint32_t NetworkAddressWithTime::GetTimestamp() const { return timestamp_; }
 
-void NetworkAddressWithTime::SetTimestamp(uint32_t timestamp)
-{
-    timestamp_ = timestamp;
-}
+void NetworkAddressWithTime::SetTimestamp(uint32_t timestamp) { timestamp_ = timestamp; }
 
-const IPAddress& NetworkAddressWithTime::GetAddress() const
-{
-    return address_;
-}
+const IPAddress& NetworkAddressWithTime::GetAddress() const { return address_; }
 
-void NetworkAddressWithTime::SetAddress(const IPAddress& address)
-{
-    address_ = address;
-}
+void NetworkAddressWithTime::SetAddress(const IPAddress& address) { address_ = address; }
 
-const std::vector<NodeCapability>& NetworkAddressWithTime::GetCapabilities() const
-{
-    return capabilities_;
-}
+const std::vector<NodeCapability>& NetworkAddressWithTime::GetCapabilities() const { return capabilities_; }
 
 void NetworkAddressWithTime::SetCapabilities(const std::vector<NodeCapability>& capabilities)
 {

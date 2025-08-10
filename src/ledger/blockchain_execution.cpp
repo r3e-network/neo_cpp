@@ -33,12 +33,10 @@ bool BlockchainExecution::ExecuteBlock(const Block& block, std::shared_ptr<persi
         auto policyContract = smartcontract::native::PolicyContract::GetInstance();
 
         // Execute OnPersist for NEO token
-        if (neoToken && !neoToken->OnPersist(*engine))
-            return false;
+        if (neoToken && !neoToken->OnPersist(*engine)) return false;
 
         // Execute OnPersist for GAS token
-        if (gasToken && !gasToken->OnPersist(*engine))
-            return false;
+        if (gasToken && !gasToken->OnPersist(*engine)) return false;
 
         // Execute transactions
         for (const auto& tx : block.GetTransactions())
@@ -51,8 +49,7 @@ bool BlockchainExecution::ExecuteBlock(const Block& block, std::shared_ptr<persi
             txEngine->LoadScript(tx.GetScript());
             auto state = txEngine->Execute();
 
-            if (state != vm::VMState::Halt)
-                return false;
+            if (state != vm::VMState::Halt) return false;
 
             // Notify transaction execution
             callbacks_->NotifyTransactionExecution(std::make_shared<Transaction>(tx));
@@ -65,12 +62,10 @@ bool BlockchainExecution::ExecuteBlock(const Block& block, std::shared_ptr<persi
             );
 
         // Execute PostPersist for NEO token
-        if (neoToken && !neoToken->PostPersist(*postEngine))
-            return false;
+        if (neoToken && !neoToken->PostPersist(*postEngine)) return false;
 
         // Execute PostPersist for GAS token
-        if (gasToken && !gasToken->PostPersist(*postEngine))
-            return false;
+        if (gasToken && !gasToken->PostPersist(*postEngine)) return false;
 
         return true;
     }
@@ -88,44 +83,35 @@ void BlockchainExecution::Initialize(std::shared_ptr<persistence::DataCache> sna
     {
         // Initialize native contracts in the correct order
         auto contractManagement = smartcontract::native::ContractManagement::GetInstance();
-        if (contractManagement)
-            contractManagement->Initialize(snapshot);
+        if (contractManagement) contractManagement->Initialize(snapshot);
 
         // Initialize NEO token
         auto neoToken = smartcontract::native::NeoToken::GetInstance();
-        if (neoToken)
-            neoToken->Initialize(snapshot);
+        if (neoToken) neoToken->Initialize(snapshot);
 
         // Initialize GAS token
         auto gasToken = smartcontract::native::GasToken::GetInstance();
-        if (gasToken)
-            gasToken->Initialize(snapshot);
+        if (gasToken) gasToken->Initialize(snapshot);
 
         // Initialize policy contract
         auto policyContract = smartcontract::native::PolicyContract::GetInstance();
-        if (policyContract)
-            policyContract->Initialize(snapshot);
+        if (policyContract) policyContract->Initialize(snapshot);
 
         // Initialize other native contracts
         auto ledgerContract = smartcontract::native::LedgerContract::GetInstance();
-        if (ledgerContract)
-            ledgerContract->Initialize(snapshot);
+        if (ledgerContract) ledgerContract->Initialize(snapshot);
 
         auto roleManagement = smartcontract::native::RoleManagement::GetInstance();
-        if (roleManagement)
-            roleManagement->Initialize(snapshot);
+        if (roleManagement) roleManagement->Initialize(snapshot);
 
         auto oracleContract = smartcontract::native::OracleContract::GetInstance();
-        if (oracleContract)
-            oracleContract->Initialize(snapshot);
+        if (oracleContract) oracleContract->Initialize(snapshot);
 
         auto stdLib = smartcontract::native::StdLib::GetInstance();
-        if (stdLib)
-            stdLib->Initialize(snapshot);
+        if (stdLib) stdLib->Initialize(snapshot);
 
         auto cryptoLib = smartcontract::native::CryptoLib::GetInstance();
-        if (cryptoLib)
-            cryptoLib->Initialize(snapshot);
+        if (cryptoLib) cryptoLib->Initialize(snapshot);
     }
     catch (const std::exception& ex)
     {

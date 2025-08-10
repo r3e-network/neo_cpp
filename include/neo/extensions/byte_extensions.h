@@ -12,7 +12,7 @@ namespace neo::extensions
  */
 class ByteExtensions
 {
-  public:
+   public:
     /**
      * @brief Computes the 32-bit hash value for the specified byte array using the xxhash3 algorithm.
      * @param value The input to compute the hash code for.
@@ -159,7 +159,7 @@ class ByteExtensions
      */
     static bool SequenceEqual(const std::vector<uint8_t>& left, const std::vector<uint8_t>& right);
 
-  private:
+   private:
     static constexpr int64_t DefaultXxHash3Seed = 40343;
     static constexpr char HexChars[] = "0123456789abcdef";
 

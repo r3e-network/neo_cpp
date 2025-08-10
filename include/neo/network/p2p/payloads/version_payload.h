@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>
@@ -8,6 +7,8 @@
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/ipayload.h>
 #include <neo/network/p2p/node_capability.h>
+
+#include <cstdint>
 #include <string>
 #include <vector>
 
@@ -18,7 +19,7 @@ namespace neo::network::p2p::payloads
  */
 class VersionPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Indicates the maximum number of capabilities contained in a VersionPayload.
      */
@@ -160,7 +161,7 @@ class VersionPayload : public IPayload
      */
     size_t GetSize() const;
 
-  private:
+   private:
     uint32_t network_;
     uint32_t version_;
     uint32_t timestamp_;

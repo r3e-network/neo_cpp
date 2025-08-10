@@ -1,9 +1,10 @@
-#include <iostream>
 #include <neo/cli/command_handler.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/wallets/nep6/nep6_wallet.h>
 #include <neo/wallets/wallet_factory.h>
+
+#include <iostream>
 
 namespace neo::cli
 {

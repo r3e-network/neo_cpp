@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/cryptography/mpttrie/node.h>
 #include <neo/io/uint256.h>
 #include <neo/persistence/istore.h>
 #include <neo/persistence/store_view.h>
+
+#include <memory>
 #include <unordered_map>
 
 namespace neo::cryptography::mpttrie
@@ -14,7 +15,7 @@ namespace neo::cryptography::mpttrie
  */
 class Cache
 {
-  public:
+   public:
     /**
      * @brief Constructor.
      * @param store The store snapshot.
@@ -51,7 +52,7 @@ class Cache
      */
     void Commit();
 
-  private:
+   private:
     enum class TrackState : uint8_t
     {
         None,

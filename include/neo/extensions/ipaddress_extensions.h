@@ -33,7 +33,7 @@ namespace neo::extensions
  */
 class IpAddressExtensions
 {
-  public:
+   public:
     /**
      * @brief Check if string is a valid IPv4 address
      * @param address String to validate
@@ -174,7 +174,7 @@ class IpAddressExtensions
      */
     static std::string CompressIPv6(const std::string& address);
 
-  private:
+   private:
     /**
      * @brief Helper to validate IPv4 octet
      * @param octet String representation of octet

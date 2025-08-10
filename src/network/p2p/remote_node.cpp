@@ -1,10 +1,8 @@
-#include <cstdint>
-#include <functional>
-#include <memory>
 #include <neo/core/logging.h>
 #include <neo/io/byte_vector.h>
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/local_node.h>
+#include <neo/network/p2p/message.h>
 #include <neo/network/p2p/network_address.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/p2p/payloads/filter_add_payload.h>
@@ -22,7 +20,10 @@
 #include <neo/network/p2p/payloads/verack_payload.h>
 #include <neo/network/p2p/payloads/version_payload.h>
 #include <neo/network/p2p/remote_node.h>
-#include <neo/network/p2p/message.h>
+
+#include <cstdint>
+#include <functional>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -39,55 +40,25 @@ RemoteNode::RemoteNode(LocalNode* localNode, std::shared_ptr<Connection> connect
     }
 }
 
-RemoteNode::~RemoteNode()
-{
-    Disconnect();
-}
+RemoteNode::~RemoteNode() { Disconnect(); }
 
-std::shared_ptr<Connection> RemoteNode::GetConnection() const
-{
-    return connection_;
-}
+std::shared_ptr<Connection> RemoteNode::GetConnection() const { return connection_; }
 
-IPEndPoint RemoteNode::GetRemoteEndPoint() const
-{
-    return connection_->GetRemoteEndPoint();
-}
+IPEndPoint RemoteNode::GetRemoteEndPoint() const { return connection_->GetRemoteEndPoint(); }
 
-IPEndPoint RemoteNode::GetLocalEndPoint() const
-{
-    return connection_->GetLocalEndPoint();
-}
+IPEndPoint RemoteNode::GetLocalEndPoint() const { return connection_->GetLocalEndPoint(); }
 
-uint32_t RemoteNode::GetVersion() const
-{
-    return version_;
-}
+uint32_t RemoteNode::GetVersion() const { return version_; }
 
-const std::string& RemoteNode::GetUserAgent() const
-{
-    return userAgent_;
-}
+const std::string& RemoteNode::GetUserAgent() const { return userAgent_; }
 
-const std::vector<NodeCapability>& RemoteNode::GetCapabilities() const
-{
-    return capabilities_;
-}
+const std::vector<NodeCapability>& RemoteNode::GetCapabilities() const { return capabilities_; }
 
-uint32_t RemoteNode::GetLastBlockIndex() const
-{
-    return lastBlockIndex_;
-}
+uint32_t RemoteNode::GetLastBlockIndex() const { return lastBlockIndex_; }
 
-bool RemoteNode::IsConnected() const
-{
-    return connection_ != nullptr;
-}
+bool RemoteNode::IsConnected() const { return connection_ != nullptr; }
 
-bool RemoteNode::IsHandshaked() const
-{
-    return handshaked_;
-}
+bool RemoteNode::IsHandshaked() const { return handshaked_; }
 
 void RemoteNode::Disconnect()
 {
@@ -100,16 +71,14 @@ void RemoteNode::Disconnect()
 
 bool RemoteNode::Send(const Message& message, bool enableCompression)
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     return connection_->Send(message, enableCompression);
 }
 
 bool RemoteNode::SendVersion()
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Create a version payload
     auto payload = localNode_->CreateVersionPayload();
@@ -117,14 +86,14 @@ bool RemoteNode::SendVersion()
     // Send the version message - use explicit p2p namespace
     LOG_INFO("About to call neo::network::p2p::Message::Create for Version command");
     auto message = neo::network::p2p::Message::Create(MessageCommand::Version, payload);
-    LOG_INFO("neo::network::p2p::Message::Create returned message with command: " + std::to_string(static_cast<int>(message.GetCommand())));
+    LOG_INFO("neo::network::p2p::Message::Create returned message with command: " +
+             std::to_string(static_cast<int>(message.GetCommand())));
     return Send(message);
 }
 
 bool RemoteNode::SendVerack()
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Send the verack message
     return Send(Message::Create(MessageCommand::Verack));
@@ -132,8 +101,7 @@ bool RemoteNode::SendVerack()
 
 bool RemoteNode::SendPing()
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Create a ping payload
     auto payload =
@@ -145,8 +113,7 @@ bool RemoteNode::SendPing()
 
 bool RemoteNode::SendPong(const payloads::PingPayload& payload)
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Create a pong payload (same as ping payload)
     auto pongPayload = std::make_shared<payloads::PingPayload>();
@@ -160,8 +127,7 @@ bool RemoteNode::SendPong(const payloads::PingPayload& payload)
 
 bool RemoteNode::SendGetAddr()
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Send the getaddr message
     return Send(Message::Create(MessageCommand::GetAddr));
@@ -169,8 +135,7 @@ bool RemoteNode::SendGetAddr()
 
 bool RemoteNode::SendAddr(const std::vector<payloads::NetworkAddressWithTime>& addresses)
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Create an addr payload
     auto payload = std::make_shared<payloads::AddrPayload>(addresses);
@@ -181,8 +146,7 @@ bool RemoteNode::SendAddr(const std::vector<payloads::NetworkAddressWithTime>& a
 
 bool RemoteNode::SendInv(InventoryType type, const std::vector<io::UInt256>& hashes)
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Create an inv payload
     auto payload = std::make_shared<payloads::InvPayload>();
@@ -195,8 +159,7 @@ bool RemoteNode::SendInv(InventoryType type, const std::vector<io::UInt256>& has
 
 bool RemoteNode::SendGetData(InventoryType type, const std::vector<io::UInt256>& hashes)
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Create a getdata payload
     auto payload = std::make_shared<payloads::GetDataPayload>();
@@ -214,8 +177,7 @@ bool RemoteNode::SendGetData(InventoryType type, const std::vector<io::UInt256>&
 
 bool RemoteNode::SendGetBlocks(const io::UInt256& hashStart, int16_t count)
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Create a getblocks payload
     auto payload = std::make_shared<payloads::GetBlocksPayload>();
@@ -228,8 +190,7 @@ bool RemoteNode::SendGetBlocks(const io::UInt256& hashStart, int16_t count)
 
 bool RemoteNode::SendGetBlockByIndex(uint32_t indexStart, uint16_t count)
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Create a getblockbyindex payload
     auto payload = std::make_shared<payloads::GetBlockByIndexPayload>(indexStart, count);
@@ -240,8 +201,7 @@ bool RemoteNode::SendGetBlockByIndex(uint32_t indexStart, uint16_t count)
 
 bool RemoteNode::SendGetHeaders(const io::UInt256& hashStart, int16_t count)
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Create a getheaders payload
     auto payload = std::make_shared<payloads::GetHeadersPayload>();
@@ -254,8 +214,7 @@ bool RemoteNode::SendGetHeaders(const io::UInt256& hashStart, int16_t count)
 
 bool RemoteNode::SendMempool()
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Create a mempool payload
     auto payload = std::make_shared<payloads::MempoolPayload>();
@@ -266,8 +225,7 @@ bool RemoteNode::SendMempool()
 
 bool RemoteNode::SendHeaders(const std::vector<std::shared_ptr<ledger::BlockHeader>>& headers)
 {
-    if (!IsConnected())
-        return false;
+    if (!IsConnected()) return false;
 
     // Create a headers payload
     auto payload = std::make_shared<payloads::HeadersPayload>(headers);
@@ -279,7 +237,7 @@ bool RemoteNode::SendHeaders(const std::vector<std::shared_ptr<ledger::BlockHead
 void RemoteNode::OnMessageReceived(const Message& message)
 {
     LOG_DEBUG("RemoteNode::OnMessageReceived - Command: " + std::to_string(static_cast<int>(message.GetCommand())));
-    
+
     // Process the message based on its command
     switch (message.GetCommand())
     {
@@ -368,7 +326,7 @@ void RemoteNode::OnDisconnected()
 void RemoteNode::ProcessVersionMessage(const Message& message)
 {
     LOG_DEBUG("ProcessVersionMessage called");
-    
+
     // Only process version message if we haven't handshaked yet
     if (handshaked_)
     {
@@ -412,7 +370,7 @@ void RemoteNode::ProcessVersionMessage(const Message& message)
 void RemoteNode::ProcessVerackMessage(const Message& /* message */)
 {
     LOG_DEBUG("ProcessVerackMessage called");
-    
+
     // Only process verack message if we haven't handshaked yet
     if (handshaked_)
     {
@@ -437,13 +395,11 @@ void RemoteNode::ProcessVerackMessage(const Message& /* message */)
 void RemoteNode::ProcessPingMessage(const Message& message)
 {
     // Only process ping message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the ping payload
     auto payload = std::dynamic_pointer_cast<payloads::PingPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Update the last block index
     lastBlockIndex_ = payload->GetLastBlockIndex();
@@ -461,13 +417,11 @@ void RemoteNode::ProcessPingMessage(const Message& message)
 void RemoteNode::ProcessPongMessage(const Message& message)
 {
     // Only process pong message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the pong payload
     auto payload = std::dynamic_pointer_cast<payloads::PingPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Update the last block index
     lastBlockIndex_ = payload->GetLastBlockIndex();
@@ -491,13 +445,11 @@ void RemoteNode::ProcessPongMessage(const Message& message)
 void RemoteNode::ProcessAddrMessage(const Message& message)
 {
     // Only process addr message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the addr payload
     auto payload = std::dynamic_pointer_cast<payloads::AddrPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Notify the local node that we've received an addr message
     if (localNode_)
@@ -509,13 +461,11 @@ void RemoteNode::ProcessAddrMessage(const Message& message)
 void RemoteNode::ProcessInvMessage(const Message& message)
 {
     // Only process inv message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the inv payload
     auto payload = std::dynamic_pointer_cast<payloads::InvPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Notify the local node that we've received an inv message
     if (localNode_)
@@ -527,13 +477,11 @@ void RemoteNode::ProcessInvMessage(const Message& message)
 void RemoteNode::ProcessGetDataMessage(const Message& message)
 {
     // Only process getdata message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the getdata payload
     auto payload = std::dynamic_pointer_cast<payloads::GetDataPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Notify the local node that we've received a getdata message
     if (localNode_)
@@ -545,13 +493,11 @@ void RemoteNode::ProcessGetDataMessage(const Message& message)
 void RemoteNode::ProcessGetBlocksMessage(const Message& message)
 {
     // Only process getblocks message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the getblocks payload
     auto payload = std::dynamic_pointer_cast<payloads::GetBlocksPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Notify the local node that we've received a getblocks message
     if (localNode_)
@@ -563,13 +509,11 @@ void RemoteNode::ProcessGetBlocksMessage(const Message& message)
 void RemoteNode::ProcessGetBlockByIndexMessage(const Message& message)
 {
     // Only process getblockbyindex message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the getblockbyindex payload
     auto payload = std::dynamic_pointer_cast<payloads::GetBlockByIndexPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Notify the local node that we've received a getblockbyindex message
     if (localNode_)
@@ -581,13 +525,11 @@ void RemoteNode::ProcessGetBlockByIndexMessage(const Message& message)
 void RemoteNode::ProcessGetHeadersMessage(const Message& message)
 {
     // Only process getheaders message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the getheaders payload
     auto payload = std::dynamic_pointer_cast<payloads::GetBlocksPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Notify the local node that we've received a getheaders message
     if (localNode_)
@@ -599,13 +541,11 @@ void RemoteNode::ProcessGetHeadersMessage(const Message& message)
 void RemoteNode::ProcessHeadersMessage(const Message& message)
 {
     // Only process headers message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the headers payload
     auto payload = std::dynamic_pointer_cast<payloads::HeadersPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Notify the local node that we've received a headers message
     if (localNode_)
@@ -617,13 +557,11 @@ void RemoteNode::ProcessHeadersMessage(const Message& message)
 void RemoteNode::ProcessMempoolMessage(const Message& message)
 {
     // Only process mempool message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the mempool payload
     auto payload = std::dynamic_pointer_cast<payloads::MempoolPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Notify the local node that we've received a mempool message
     if (localNode_)
@@ -635,13 +573,11 @@ void RemoteNode::ProcessMempoolMessage(const Message& message)
 void RemoteNode::ProcessFilterAddMessage(const Message& message)
 {
     // Only process filteradd message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the filteradd payload
     auto payload = std::dynamic_pointer_cast<payloads::FilterAddPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Notify the local node that we've received a filteradd message
     if (localNode_)
@@ -653,13 +589,11 @@ void RemoteNode::ProcessFilterAddMessage(const Message& message)
 void RemoteNode::ProcessFilterClearMessage(const Message& message)
 {
     // Only process filterclear message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the filterclear payload
     auto payload = std::dynamic_pointer_cast<payloads::FilterClearPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Notify the local node that we've received a filterclear message
     if (localNode_)
@@ -671,13 +605,11 @@ void RemoteNode::ProcessFilterClearMessage(const Message& message)
 void RemoteNode::ProcessFilterLoadMessage(const Message& message)
 {
     // Only process filterload message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the filterload payload
     auto payload = std::dynamic_pointer_cast<payloads::FilterLoadPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Notify the local node that we've received a filterload message
     if (localNode_)
@@ -689,8 +621,7 @@ void RemoteNode::ProcessFilterLoadMessage(const Message& message)
 void RemoteNode::ProcessGetAddrMessage(const Message& message)
 {
     // Only process getaddr message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // GetAddr message has no payload, just respond with addr message
     // containing known peer addresses
@@ -706,8 +637,7 @@ void RemoteNode::ProcessGetAddrMessage(const Message& message)
         size_t addressCount = 0;
         for (const auto& peer : connectedPeers)
         {
-            if (addressCount >= maxAddressCount)
-                break;
+            if (addressCount >= maxAddressCount) break;
 
             // Create NetworkAddressWithTime from peer info
             auto endpoint = peer.GetEndPoint();  // Peer has GetEndPoint method
@@ -724,7 +654,7 @@ void RemoteNode::ProcessGetAddrMessage(const Message& message)
             {
                 services |= static_cast<uint64_t>(cap.GetType());
             }
-            
+
             addresses.emplace_back(timestamp, services, endpoint.GetAddress().ToString(), endpoint.GetPort());
             addressCount++;
         }
@@ -740,13 +670,11 @@ void RemoteNode::ProcessGetAddrMessage(const Message& message)
 void RemoteNode::ProcessRejectMessage(const Message& message)
 {
     // Only process reject message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the reject payload
     auto payload = std::dynamic_pointer_cast<payloads::RejectPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Log the rejection for debugging
     LOG_WARNING("RemoteNode received reject message from peer");
@@ -762,13 +690,11 @@ void RemoteNode::ProcessRejectMessage(const Message& message)
 void RemoteNode::ProcessNotFoundMessage(const Message& message)
 {
     // Only process notfound message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the notfound payload (similar to inv payload)
     auto payload = std::dynamic_pointer_cast<payloads::InvPayload>(message.GetPayload());
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Log which items were not found
     LOG_DEBUG("RemoteNode received notfound message with {} items", payload->GetHashes().size());
@@ -784,13 +710,11 @@ void RemoteNode::ProcessNotFoundMessage(const Message& message)
 void RemoteNode::ProcessTransactionMessage(const Message& message)
 {
     // Only process transaction message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the transaction payload
     auto payload = message.GetPayload();
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Cast to transaction - in full implementation, this would be the actual transaction object
     // For now, we'll handle this as a generic payload and forward to the local node
@@ -812,13 +736,11 @@ void RemoteNode::ProcessTransactionMessage(const Message& message)
 void RemoteNode::ProcessBlockMessage(const Message& message)
 {
     // Only process block message if we've handshaked
-    if (!handshaked_)
-        return;
+    if (!handshaked_) return;
 
     // Get the block payload
     auto payload = message.GetPayload();
-    if (!payload)
-        return;
+    if (!payload) return;
 
     // Deserialize the block from the payload
     try
@@ -830,8 +752,8 @@ void RemoteNode::ProcessBlockMessage(const Message& message)
             return;
         }
 
-        LOG_DEBUG("RemoteNode received block " + std::to_string(blockPayload->GetIndex()) + 
-                  " with hash " + blockPayload->GetHash().ToString());
+        LOG_DEBUG("RemoteNode received block " + std::to_string(blockPayload->GetIndex()) + " with hash " +
+                  blockPayload->GetHash().ToString());
 
         // Notify the local node about the new block
         if (localNode_)

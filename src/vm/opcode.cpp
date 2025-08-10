@@ -1,4 +1,5 @@
 #include <neo/vm/opcode.h>
+
 #include <string>
 #include <unordered_map>
 

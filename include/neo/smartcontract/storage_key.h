@@ -1,9 +1,10 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
+
+#include <memory>
 
 namespace neo::smartcontract
 {
@@ -12,11 +13,11 @@ namespace neo::smartcontract
  */
 class StorageKey : public io::ISerializable
 {
-  private:
+   private:
     io::UInt160 script_hash_;
     io::ByteVector key_;
 
-  public:
+   public:
     /**
      * @brief Default constructor
      */
@@ -33,37 +34,25 @@ class StorageKey : public io::ISerializable
      * @brief Get script hash
      * @return Script hash
      */
-    const io::UInt160& GetScriptHash() const
-    {
-        return script_hash_;
-    }
+    const io::UInt160& GetScriptHash() const { return script_hash_; }
 
     /**
      * @brief Set script hash
      * @param script_hash Script hash
      */
-    void SetScriptHash(const io::UInt160& script_hash)
-    {
-        script_hash_ = script_hash;
-    }
+    void SetScriptHash(const io::UInt160& script_hash) { script_hash_ = script_hash; }
 
     /**
      * @brief Get key bytes
      * @return Key bytes
      */
-    const io::ByteVector& GetKey() const
-    {
-        return key_;
-    }
+    const io::ByteVector& GetKey() const { return key_; }
 
     /**
      * @brief Set key bytes
      * @param key Key bytes
      */
-    void SetKey(const io::ByteVector& key)
-    {
-        key_ = key;
-    }
+    void SetKey(const io::ByteVector& key) { key_ = key; }
 
     /**
      * @brief Get size in bytes
@@ -77,10 +66,7 @@ class StorageKey : public io::ISerializable
 
     // Comparison operators
     bool operator==(const StorageKey& other) const;
-    bool operator!=(const StorageKey& other) const
-    {
-        return !(*this == other);
-    }
+    bool operator!=(const StorageKey& other) const { return !(*this == other); }
     bool operator<(const StorageKey& other) const;
 
     /**
@@ -103,9 +89,6 @@ namespace std
 template <>
 struct hash<neo::smartcontract::StorageKey>
 {
-    size_t operator()(const neo::smartcontract::StorageKey& key) const
-    {
-        return key.GetHashCode();
-    }
+    size_t operator()(const neo::smartcontract::StorageKey& key) const { return key.GetHashCode(); }
 };
 }  // namespace std

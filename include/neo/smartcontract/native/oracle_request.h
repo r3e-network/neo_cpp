@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/vm/stack_item.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::smartcontract::native
@@ -14,7 +15,7 @@ namespace neo::smartcontract::native
  */
 class OracleRequest
 {
-  public:
+   public:
     /**
      * @brief Constructs an OracleRequest.
      */
@@ -142,7 +143,7 @@ class OracleRequest
      */
     void Deserialize(io::BinaryReader& reader);
 
-  private:
+   private:
     io::UInt256 originalTxid_;
     int64_t gasForResponse_;
     std::string url_;

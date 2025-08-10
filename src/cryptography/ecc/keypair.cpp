@@ -1,16 +1,16 @@
 #include <neo/cryptography/ecc/keypair.h>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/hash.h>
+
+#include <iostream>
 #include <stdexcept>
 #include <string>
-#include <iostream>
 
 namespace neo::cryptography::ecc
 {
 KeyPair::KeyPair(const io::ByteVector& privateKey) : privateKey_(privateKey)
 {
-    if (!Secp256r1::IsValidPrivateKey(privateKey))
-        throw std::invalid_argument("Invalid private key");
+    if (!Secp256r1::IsValidPrivateKey(privateKey)) throw std::invalid_argument("Invalid private key");
 }
 
 std::unique_ptr<KeyPair> KeyPair::Generate()
@@ -25,10 +25,7 @@ std::unique_ptr<KeyPair> KeyPair::FromWIF(const std::string& wif)
     return std::make_unique<KeyPair>(keyPair.GetPrivateKey());
 }
 
-const io::ByteVector& KeyPair::GetPrivateKey() const
-{
-    return privateKey_;
-}
+const io::ByteVector& KeyPair::GetPrivateKey() const { return privateKey_; }
 
 const ECPoint& KeyPair::GetPublicKey() const
 {
@@ -72,7 +69,8 @@ io::UInt160 KeyPair::GetScriptHash() const
     catch (const std::exception& e)
     {
         // Enhanced error recovery with proper script construction
-        std::cerr << "Primary script creation failed: " << e.what() << ". Attempting alternative construction method." << std::endl;
+        std::cerr << "Primary script creation failed: " << e.what() << ". Attempting alternative construction method."
+                  << std::endl;
 
         try
         {
@@ -110,21 +108,16 @@ io::UInt160 KeyPair::GetScriptHash() const
         }
         catch (const std::exception& innerE)
         {
-            std::cerr << "Alternative script construction also failed: " << innerE.what() << ". This indicates a serious cryptographic error." << std::endl;
+            std::cerr << "Alternative script construction also failed: " << innerE.what()
+                      << ". This indicates a serious cryptographic error." << std::endl;
             throw std::runtime_error("Failed to generate script hash: " + std::string(innerE.what()));
         }
     }
 }
 
-std::string KeyPair::ToWIF() const
-{
-    return Secp256r1::ToWIF(privateKey_);
-}
+std::string KeyPair::ToWIF() const { return Secp256r1::ToWIF(privateKey_); }
 
-io::ByteVector KeyPair::Sign(const io::ByteVector& data) const
-{
-    return Secp256r1::Sign(data, privateKey_);
-}
+io::ByteVector KeyPair::Sign(const io::ByteVector& data) const { return Secp256r1::Sign(data, privateKey_); }
 
 bool KeyPair::Verify(const io::ByteVector& data, const io::ByteVector& signature) const
 {

@@ -1,9 +1,10 @@
-#include <algorithm>
-#include <iomanip>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint256.h>
+
+#include <algorithm>
+#include <iomanip>
 #include <sstream>
 #include <stdexcept>
 
@@ -59,10 +60,7 @@ bool UInt256::TryParse(const std::string& hex, UInt256& result)
     return true;
 }
 
-UInt256 UInt256::FromString(const std::string& hex_string)
-{
-    return Parse(hex_string);
-}
+UInt256 UInt256::FromString(const std::string& hex_string) { return Parse(hex_string); }
 
 UInt256 UInt256::FromLittleEndianString(const std::string& hex_string)
 {
@@ -125,28 +123,18 @@ std::string UInt256::ToString(bool reverse) const
     return ss.str();
 }
 
-std::string UInt256::ToLittleEndianString() const
-{
-    return ToString(false);
-}
+std::string UInt256::ToLittleEndianString() const { return ToString(false); }
 
 bool UInt256::IsZero() const
 {
     for (size_t i = 0; i < Size; ++i)
     {
-        if (data_[i] != 0)
-            return false;
+        if (data_[i] != 0) return false;
     }
     return true;
 }
 
-void UInt256::Serialize(BinaryWriter& writer) const
-{
-    writer.WriteBytes(data_.data(), Size);
-}
+void UInt256::Serialize(BinaryWriter& writer) const { writer.WriteBytes(data_.data(), Size); }
 
-void UInt256::Deserialize(BinaryReader& reader)
-{
-    reader.ReadBytes(data_.data(), Size);
-}
+void UInt256::Deserialize(BinaryReader& reader) { reader.ReadBytes(data_.data(), Size); }
 }  // namespace neo::io

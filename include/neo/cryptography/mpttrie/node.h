@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/cryptography/mpttrie/node_type.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/serializable.h>
 #include <neo/io/uint256.h>
+
+#include <memory>
 #include <span>
 #include <vector>
 
@@ -15,7 +16,7 @@ namespace neo::cryptography::mpttrie
  */
 class Node : public io::ISerializable
 {
-  public:
+   public:
     static constexpr int BranchChildCount = 17;
     static constexpr int MaxKeyLength = 1024;
     static constexpr int MaxValueLength = 1024 * 1024;
@@ -236,7 +237,7 @@ class Node : public io::ISerializable
      */
     const io::UInt256& GetStoredHash() const;
 
-  private:
+   private:
     NodeType type_;
     mutable io::UInt256 hash_;
     mutable bool hash_dirty_;

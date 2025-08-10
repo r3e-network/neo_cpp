@@ -10,45 +10,21 @@ NetworkAddressWithTime::NetworkAddressWithTime(uint32_t timestamp, uint64_t serv
 {
 }
 
-uint32_t NetworkAddressWithTime::GetTimestamp() const
-{
-    return timestamp_;
-}
+uint32_t NetworkAddressWithTime::GetTimestamp() const { return timestamp_; }
 
-void NetworkAddressWithTime::SetTimestamp(uint32_t timestamp)
-{
-    timestamp_ = timestamp;
-}
+void NetworkAddressWithTime::SetTimestamp(uint32_t timestamp) { timestamp_ = timestamp; }
 
-uint64_t NetworkAddressWithTime::GetServices() const
-{
-    return services_;
-}
+uint64_t NetworkAddressWithTime::GetServices() const { return services_; }
 
-void NetworkAddressWithTime::SetServices(uint64_t services)
-{
-    services_ = services;
-}
+void NetworkAddressWithTime::SetServices(uint64_t services) { services_ = services; }
 
-const std::string& NetworkAddressWithTime::GetAddress() const
-{
-    return address_;
-}
+const std::string& NetworkAddressWithTime::GetAddress() const { return address_; }
 
-void NetworkAddressWithTime::SetAddress(const std::string& address)
-{
-    address_ = address;
-}
+void NetworkAddressWithTime::SetAddress(const std::string& address) { address_ = address; }
 
-uint16_t NetworkAddressWithTime::GetPort() const
-{
-    return port_;
-}
+uint16_t NetworkAddressWithTime::GetPort() const { return port_; }
 
-void NetworkAddressWithTime::SetPort(uint16_t port)
-{
-    port_ = port;
-}
+void NetworkAddressWithTime::SetPort(uint16_t port) { port_ = port; }
 
 void NetworkAddressWithTime::Serialize(io::BinaryWriter& writer) const
 {
@@ -97,8 +73,5 @@ bool NetworkAddressWithTime::operator==(const NetworkAddressWithTime& other) con
            port_ == other.port_;
 }
 
-bool NetworkAddressWithTime::operator!=(const NetworkAddressWithTime& other) const
-{
-    return !(*this == other);
-}
+bool NetworkAddressWithTime::operator!=(const NetworkAddressWithTime& other) const { return !(*this == other); }
 }  // namespace neo::network::p2p

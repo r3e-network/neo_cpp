@@ -1,10 +1,11 @@
 #pragma once
 
+#include <neo/vm/instruction.h>
+#include <neo/vm/opcode.h>
+
 #include <array>
 #include <functional>
 #include <memory>
-#include <neo/vm/instruction.h>
-#include <neo/vm/opcode.h>
 
 // Forward declarations
 namespace neo::vm
@@ -22,7 +23,7 @@ namespace neo::vm
  */
 class JumpTable
 {
-  public:
+   public:
     /**
      * @brief Delegate type for opcode handlers.
      */
@@ -288,7 +289,7 @@ class JumpTable
     static void STARG6(ExecutionEngine& engine, const Instruction& instruction);
     static void STARG(ExecutionEngine& engine, const Instruction& instruction);
 
-  private:
+   private:
     std::array<OpcodeHandler, 256> handlers_;
 };
 }  // namespace neo::vm

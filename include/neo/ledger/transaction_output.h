@@ -1,11 +1,12 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/core/fixed8.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
+#include <cstdint>
 
 namespace neo::ledger
 {
@@ -15,12 +16,12 @@ namespace neo::ledger
  */
 class TransactionOutput : public io::ISerializable, public io::IJsonSerializable
 {
-  private:
+   private:
     io::UInt256 assetId_;
     core::Fixed8 value_;
     io::UInt160 scriptHash_;
 
-  public:
+   public:
     /**
      * @brief Constructs an empty TransactionOutput.
      */

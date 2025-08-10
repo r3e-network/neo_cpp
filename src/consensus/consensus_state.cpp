@@ -1,5 +1,6 @@
-#include <algorithm>
 #include <neo/consensus/consensus_state.h>
+
+#include <algorithm>
 
 namespace neo::consensus
 {

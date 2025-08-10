@@ -1,9 +1,10 @@
 #pragma once
 
-#include <functional>
 #include <neo/io/caching/lru_cache.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/block.h>
+
+#include <functional>
 
 namespace neo::io::caching
 {
@@ -12,7 +13,7 @@ namespace neo::io::caching
  */
 class BlockCache
 {
-  public:
+   public:
     /**
      * @brief Constructs a BlockCache with the specified capacity.
      * @param capacity The maximum number of items the cache can hold.
@@ -25,8 +26,7 @@ class BlockCache
      */
     void Add(std::shared_ptr<ledger::Block> block)
     {
-        if (!block)
-            return;
+        if (!block) return;
 
         // Add to hash cache
         hashCache_.Add(block->GetHash(), block);
@@ -40,20 +40,14 @@ class BlockCache
      * @param hash The hash of the block.
      * @return The block if found, std::nullopt otherwise.
      */
-    std::optional<std::shared_ptr<ledger::Block>> GetByHash(const UInt256& hash)
-    {
-        return hashCache_.Get(hash);
-    }
+    std::optional<std::shared_ptr<ledger::Block>> GetByHash(const UInt256& hash) { return hashCache_.Get(hash); }
 
     /**
      * @brief Gets a block by index.
      * @param index The index of the block.
      * @return The block if found, std::nullopt otherwise.
      */
-    std::optional<std::shared_ptr<ledger::Block>> GetByIndex(uint32_t index)
-    {
-        return indexCache_.Get(index);
-    }
+    std::optional<std::shared_ptr<ledger::Block>> GetByIndex(uint32_t index) { return indexCache_.Get(index); }
 
     /**
      * @brief Tries to get a block by hash.
@@ -86,8 +80,7 @@ class BlockCache
     {
         // Get the block
         auto block = hashCache_.Get(hash);
-        if (!block)
-            return false;
+        if (!block) return false;
 
         // Remove from index cache
         indexCache_.Remove(block.value()->GetIndex());
@@ -105,8 +98,7 @@ class BlockCache
     {
         // Get the block
         auto block = indexCache_.Get(index);
-        if (!block)
-            return false;
+        if (!block) return false;
 
         // Remove from hash cache
         hashCache_.Remove(block.value()->GetHash());
@@ -128,21 +120,15 @@ class BlockCache
      * @brief Gets the number of items in the cache.
      * @return The number of items in the cache.
      */
-    size_t Size() const
-    {
-        return hashCache_.Size();
-    }
+    size_t Size() const { return hashCache_.Size(); }
 
     /**
      * @brief Gets the capacity of the cache.
      * @return The capacity of the cache.
      */
-    size_t Capacity() const
-    {
-        return hashCache_.Capacity();
-    }
+    size_t Capacity() const { return hashCache_.Capacity(); }
 
-  private:
+   private:
     LRUCache<UInt256, std::shared_ptr<ledger::Block>> hashCache_;
     LRUCache<uint32_t, std::shared_ptr<ledger::Block>> indexCache_;
 };

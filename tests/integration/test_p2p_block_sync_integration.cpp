@@ -74,10 +74,15 @@ public:
         block->SetVersion(0);
         block->SetPreviousHash(io::UInt256::Zero());
         block->SetMerkleRoot(io::UInt256::Zero());
-        block->SetTimestamp(std::chrono::system_clock::from_time_t(1468595301)); // Neo genesis time
+        block->SetTimestamp(static_cast<uint64_t>(1468595301)); // Neo genesis time
         block->SetIndex(0);
         block->SetPrimaryIndex(0);
         block->SetNextConsensus(io::UInt160::Zero());
+        // Add a minimal witness for validation
+        auto witness = std::make_shared<ledger::Witness>();
+        witness->SetInvocationScript(neo::io::ByteVector{0x00});
+        witness->SetVerificationScript(neo::io::ByteVector{0x51}); // PUSH1
+        block->SetWitness(*witness);
         return block;
     }
     
@@ -87,10 +92,15 @@ public:
         block->SetVersion(0);
         block->SetPreviousHash(prevHash);
         block->SetMerkleRoot(io::UInt256::Zero());
-        block->SetTimestamp(std::chrono::system_clock::now() + std::chrono::seconds(index));
+        block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>((std::chrono::system_clock::now() + std::chrono::seconds(index)).time_since_epoch()).count()));
         block->SetIndex(index);
         block->SetPrimaryIndex(0);
         block->SetNextConsensus(io::UInt160::Zero());
+        // Add a minimal witness for validation
+        auto witness = std::make_shared<ledger::Witness>();
+        witness->SetInvocationScript(neo::io::ByteVector{0x00});
+        witness->SetVerificationScript(neo::io::ByteVector{0x51}); // PUSH1
+        block->SetWitness(*witness);
         return block;
     }
     

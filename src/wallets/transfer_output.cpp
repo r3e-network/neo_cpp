@@ -1,4 +1,5 @@
 #include <neo/wallets/transfer_output.h>
+
 #include <sstream>
 
 namespace neo::wallets
@@ -11,45 +12,21 @@ TransferOutput::TransferOutput(const io::UInt160& asset_id, const io::UInt160& s
 {
 }
 
-const io::UInt160& TransferOutput::GetAssetId() const
-{
-    return asset_id_;
-}
+const io::UInt160& TransferOutput::GetAssetId() const { return asset_id_; }
 
-void TransferOutput::SetAssetId(const io::UInt160& asset_id)
-{
-    asset_id_ = asset_id;
-}
+void TransferOutput::SetAssetId(const io::UInt160& asset_id) { asset_id_ = asset_id; }
 
-const io::UInt160& TransferOutput::GetScriptHash() const
-{
-    return script_hash_;
-}
+const io::UInt160& TransferOutput::GetScriptHash() const { return script_hash_; }
 
-void TransferOutput::SetScriptHash(const io::UInt160& script_hash)
-{
-    script_hash_ = script_hash;
-}
+void TransferOutput::SetScriptHash(const io::UInt160& script_hash) { script_hash_ = script_hash; }
 
-int64_t TransferOutput::GetAmount() const
-{
-    return amount_;
-}
+int64_t TransferOutput::GetAmount() const { return amount_; }
 
-void TransferOutput::SetAmount(int64_t amount)
-{
-    amount_ = amount;
-}
+void TransferOutput::SetAmount(int64_t amount) { amount_ = amount; }
 
-const std::string& TransferOutput::GetData() const
-{
-    return data_;
-}
+const std::string& TransferOutput::GetData() const { return data_; }
 
-void TransferOutput::SetData(const std::string& data)
-{
-    data_ = data;
-}
+void TransferOutput::SetData(const std::string& data) { data_ = data; }
 
 bool TransferOutput::IsValid() const
 {
@@ -80,10 +57,7 @@ bool TransferOutput::operator==(const TransferOutput& other) const
            data_ == other.data_;
 }
 
-bool TransferOutput::operator!=(const TransferOutput& other) const
-{
-    return !(*this == other);
-}
+bool TransferOutput::operator!=(const TransferOutput& other) const { return !(*this == other); }
 
 std::string TransferOutput::ToString() const
 {

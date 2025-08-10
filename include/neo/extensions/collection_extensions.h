@@ -31,7 +31,7 @@ namespace neo::extensions
  */
 class CollectionExtensions
 {
-  public:
+   public:
     /**
      * @brief Filter elements by predicate
      * @tparam Container The container type

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_vector.h>
@@ -11,6 +10,8 @@
 #include <neo/io/uint160.h>
 #include <neo/network/ipayload.h>
 
+#include <cstdint>
+
 namespace neo::network::payloads
 {
 /**
@@ -18,7 +19,7 @@ namespace neo::network::payloads
  */
 class ConsensusPayload : public IPayload, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty ConsensusPayload.
      */
@@ -119,7 +120,7 @@ class ConsensusPayload : public IPayload, public io::IJsonSerializable
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
+   private:
     uint32_t version_;
     io::UInt256 prevHash_;
     uint32_t blockIndex_;

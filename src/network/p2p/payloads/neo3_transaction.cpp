@@ -1,37 +1,59 @@
-#include <algorithm>
 #include <neo/core/logging.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/memory_stream.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
+
+#include <algorithm>
 #include <set>
 #include <stdexcept>
 
 namespace neo::network::p2p::payloads
 {
 Neo3Transaction::Neo3Transaction()
-    : version_(0), nonce_(0), systemFee_(0), networkFee_(0), validUntilBlock_(0), hashCalculated_(false),
-      sizeCalculated_(false), size_(0)
+    : version_(0),
+      nonce_(0),
+      systemFee_(0),
+      networkFee_(0),
+      validUntilBlock_(0),
+      hashCalculated_(false),
+      sizeCalculated_(false),
+      size_(0)
 {
 }
 
 Neo3Transaction::Neo3Transaction(const Neo3Transaction& other)
-    : version_(other.version_), nonce_(other.nonce_), systemFee_(other.systemFee_), 
-      networkFee_(other.networkFee_), validUntilBlock_(other.validUntilBlock_),
-      signers_(other.signers_), attributes_(other.attributes_), script_(other.script_),
-      witnesses_(other.witnesses_), hash_(other.hash_), hashCalculated_(other.hashCalculated_),
-      size_(other.size_), sizeCalculated_(other.sizeCalculated_)
+    : version_(other.version_),
+      nonce_(other.nonce_),
+      systemFee_(other.systemFee_),
+      networkFee_(other.networkFee_),
+      validUntilBlock_(other.validUntilBlock_),
+      signers_(other.signers_),
+      attributes_(other.attributes_),
+      script_(other.script_),
+      witnesses_(other.witnesses_),
+      hash_(other.hash_),
+      hashCalculated_(other.hashCalculated_),
+      size_(other.size_),
+      sizeCalculated_(other.sizeCalculated_)
 {
 }
 
 Neo3Transaction::Neo3Transaction(Neo3Transaction&& other) noexcept
-    : version_(other.version_), nonce_(other.nonce_), systemFee_(other.systemFee_), 
-      networkFee_(other.networkFee_), validUntilBlock_(other.validUntilBlock_),
-      signers_(std::move(other.signers_)), attributes_(std::move(other.attributes_)), 
-      script_(std::move(other.script_)), witnesses_(std::move(other.witnesses_)), 
-      hash_(other.hash_), hashCalculated_(other.hashCalculated_),
-      size_(other.size_), sizeCalculated_(other.sizeCalculated_)
+    : version_(other.version_),
+      nonce_(other.nonce_),
+      systemFee_(other.systemFee_),
+      networkFee_(other.networkFee_),
+      validUntilBlock_(other.validUntilBlock_),
+      signers_(std::move(other.signers_)),
+      attributes_(std::move(other.attributes_)),
+      script_(std::move(other.script_)),
+      witnesses_(std::move(other.witnesses_)),
+      hash_(other.hash_),
+      hashCalculated_(other.hashCalculated_),
+      size_(other.size_),
+      sizeCalculated_(other.sizeCalculated_)
 {
     // Reset the moved-from object's cached values
     other.hashCalculated_ = false;
@@ -76,7 +98,7 @@ Neo3Transaction& Neo3Transaction::operator=(Neo3Transaction&& other) noexcept
         hashCalculated_ = other.hashCalculated_;
         size_ = other.size_;
         sizeCalculated_ = other.sizeCalculated_;
-        
+
         // Reset the moved-from object's cached values
         other.hashCalculated_ = false;
         other.sizeCalculated_ = false;
@@ -86,10 +108,7 @@ Neo3Transaction& Neo3Transaction::operator=(Neo3Transaction&& other) noexcept
 
 Neo3Transaction::~Neo3Transaction() = default;
 
-uint8_t Neo3Transaction::GetVersion() const
-{
-    return version_;
-}
+uint8_t Neo3Transaction::GetVersion() const { return version_; }
 
 void Neo3Transaction::SetVersion(uint8_t version)
 {
@@ -97,10 +116,7 @@ void Neo3Transaction::SetVersion(uint8_t version)
     InvalidateCache();
 }
 
-uint32_t Neo3Transaction::GetNonce() const
-{
-    return nonce_;
-}
+uint32_t Neo3Transaction::GetNonce() const { return nonce_; }
 
 void Neo3Transaction::SetNonce(uint32_t nonce)
 {
@@ -108,10 +124,7 @@ void Neo3Transaction::SetNonce(uint32_t nonce)
     InvalidateCache();
 }
 
-int64_t Neo3Transaction::GetSystemFee() const
-{
-    return systemFee_;
-}
+int64_t Neo3Transaction::GetSystemFee() const { return systemFee_; }
 
 void Neo3Transaction::SetSystemFee(int64_t systemFee)
 {
@@ -119,10 +132,7 @@ void Neo3Transaction::SetSystemFee(int64_t systemFee)
     InvalidateCache();
 }
 
-int64_t Neo3Transaction::GetNetworkFee() const
-{
-    return networkFee_;
-}
+int64_t Neo3Transaction::GetNetworkFee() const { return networkFee_; }
 
 void Neo3Transaction::SetNetworkFee(int64_t networkFee)
 {
@@ -130,10 +140,7 @@ void Neo3Transaction::SetNetworkFee(int64_t networkFee)
     InvalidateCache();
 }
 
-uint32_t Neo3Transaction::GetValidUntilBlock() const
-{
-    return validUntilBlock_;
-}
+uint32_t Neo3Transaction::GetValidUntilBlock() const { return validUntilBlock_; }
 
 void Neo3Transaction::SetValidUntilBlock(uint32_t validUntilBlock)
 {
@@ -141,10 +148,7 @@ void Neo3Transaction::SetValidUntilBlock(uint32_t validUntilBlock)
     InvalidateCache();
 }
 
-const std::vector<ledger::Signer>& Neo3Transaction::GetSigners() const
-{
-    return signers_;
-}
+const std::vector<ledger::Signer>& Neo3Transaction::GetSigners() const { return signers_; }
 
 void Neo3Transaction::SetSigners(const std::vector<ledger::Signer>& signers)
 {
@@ -163,10 +167,7 @@ void Neo3Transaction::SetAttributes(const std::vector<std::shared_ptr<ledger::Tr
     InvalidateCache();
 }
 
-const io::ByteVector& Neo3Transaction::GetScript() const
-{
-    return script_;
-}
+const io::ByteVector& Neo3Transaction::GetScript() const { return script_; }
 
 void Neo3Transaction::SetScript(const io::ByteVector& script)
 {
@@ -174,10 +175,7 @@ void Neo3Transaction::SetScript(const io::ByteVector& script)
     InvalidateCache();
 }
 
-const std::vector<ledger::Witness>& Neo3Transaction::GetWitnesses() const
-{
-    return witnesses_;
-}
+const std::vector<ledger::Witness>& Neo3Transaction::GetWitnesses() const { return witnesses_; }
 
 void Neo3Transaction::SetWitnesses(const std::vector<ledger::Witness>& witnesses)
 {
@@ -201,15 +199,9 @@ int64_t Neo3Transaction::GetTotalFee() const
     return common::SafeMath::Add(systemFee_, networkFee_);
 }
 
-int64_t Neo3Transaction::GetFeePerByte() const
-{
-    return GetNetworkFee() / GetSize();
-}
+int64_t Neo3Transaction::GetFeePerByte() const { return GetNetworkFee() / GetSize(); }
 
-InventoryType Neo3Transaction::GetInventoryType() const
-{
-    return InventoryType::TX;
-}
+InventoryType Neo3Transaction::GetInventoryType() const { return InventoryType::TX; }
 
 io::UInt256 Neo3Transaction::GetHash() const
 {
@@ -363,9 +355,10 @@ void Neo3Transaction::SerializeJson(io::JsonWriter& writer) const
         try
         {
             // Base64 encoding implementation
-            static const std::string base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                                    "abcdefghijklmnopqrstuvwxyz"
-                                                    "0123456789+/";
+            static const std::string base64_chars =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                "abcdefghijklmnopqrstuvwxyz"
+                "0123456789+/";
 
             std::string result;
             const uint8_t* data = script_.Data();
@@ -550,75 +543,87 @@ void Neo3Transaction::CalculateHash() const
     {
         // Use a simple vector to collect bytes
         std::vector<uint8_t> buffer;
-        
+
         // Pre-allocate some space to avoid reallocations
         buffer.reserve(256);
-        
+
         // Write version
         buffer.push_back(version_);
-        
+
         // Write nonce (4 bytes, little-endian)
         buffer.push_back(nonce_ & 0xFF);
         buffer.push_back((nonce_ >> 8) & 0xFF);
         buffer.push_back((nonce_ >> 16) & 0xFF);
         buffer.push_back((nonce_ >> 24) & 0xFF);
-        
+
         // Write systemFee (8 bytes, little-endian)
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
+        {
             buffer.push_back((systemFee_ >> (i * 8)) & 0xFF);
         }
-        
+
         // Write networkFee (8 bytes, little-endian)
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
+        {
             buffer.push_back((networkFee_ >> (i * 8)) & 0xFF);
         }
-        
+
         // Write validUntilBlock (4 bytes, little-endian)
         buffer.push_back(validUntilBlock_ & 0xFF);
         buffer.push_back((validUntilBlock_ >> 8) & 0xFF);
         buffer.push_back((validUntilBlock_ >> 16) & 0xFF);
         buffer.push_back((validUntilBlock_ >> 24) & 0xFF);
-        
+
         // Write signers count as varint
-        if (signers_.size() < 0xFD) {
+        if (signers_.size() < 0xFD)
+        {
             buffer.push_back(static_cast<uint8_t>(signers_.size()));
-        } else {
+        }
+        else
+        {
             // Handle larger counts if needed
             buffer.push_back(0xFD);
             buffer.push_back(signers_.size() & 0xFF);
             buffer.push_back((signers_.size() >> 8) & 0xFF);
         }
-        
+
         // Write each signer (account + scope = 21 bytes)
-        for (const auto& signer : signers_) {
+        for (const auto& signer : signers_)
+        {
             // Write account (20 bytes)
             auto accountData = signer.GetAccount().AsSpan();
             buffer.insert(buffer.end(), accountData.Data(), accountData.Data() + accountData.Size());
-            
+
             // Write scope (1 byte)
             buffer.push_back(static_cast<uint8_t>(signer.GetScopes()));
         }
-        
+
         // Write attributes count
-        if (attributes_.size() < 0xFD) {
+        if (attributes_.size() < 0xFD)
+        {
             buffer.push_back(static_cast<uint8_t>(attributes_.size()));
-        } else {
+        }
+        else
+        {
             buffer.push_back(0xFD);
             buffer.push_back(attributes_.size() & 0xFF);
             buffer.push_back((attributes_.size() >> 8) & 0xFF);
         }
-        
+
         // Skip attributes for now (empty)
-        
+
         // Write script length as varint
-        if (script_.size() < 0xFD) {
+        if (script_.size() < 0xFD)
+        {
             buffer.push_back(static_cast<uint8_t>(script_.size()));
-        } else {
+        }
+        else
+        {
             buffer.push_back(0xFD);
             buffer.push_back(script_.size() & 0xFF);
             buffer.push_back((script_.size() >> 8) & 0xFF);
         }
-        
+
         // Write script
         buffer.insert(buffer.end(), script_.Data(), script_.Data() + script_.Size());
 
@@ -761,19 +766,11 @@ std::vector<ledger::Signer> Neo3Transaction::DeserializeSigners(io::BinaryReader
 
 bool Neo3Transaction::operator==(const Neo3Transaction& other) const
 {
-    return version_ == other.version_ &&
-           nonce_ == other.nonce_ &&
-           systemFee_ == other.systemFee_ &&
-           networkFee_ == other.networkFee_ &&
-           validUntilBlock_ == other.validUntilBlock_ &&
-           signers_ == other.signers_ &&
-           attributes_ == other.attributes_ &&
-           script_ == other.script_ &&
+    return version_ == other.version_ && nonce_ == other.nonce_ && systemFee_ == other.systemFee_ &&
+           networkFee_ == other.networkFee_ && validUntilBlock_ == other.validUntilBlock_ &&
+           signers_ == other.signers_ && attributes_ == other.attributes_ && script_ == other.script_ &&
            witnesses_ == other.witnesses_;
 }
 
-bool Neo3Transaction::operator!=(const Neo3Transaction& other) const
-{
-    return !(*this == other);
-}
+bool Neo3Transaction::operator!=(const Neo3Transaction& other) const { return !(*this == other); }
 }  // namespace neo::network::p2p::payloads

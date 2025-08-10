@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/uint160.h>
 #include <neo/persistence/store_view.h>
@@ -8,6 +7,8 @@
 #include <neo/vm/iinteroperable.h>
 #include <neo/vm/ireference_counter.h>
 #include <neo/vm/stack_item.h>
+
+#include <memory>
 #include <string>
 
 // Forward declarations
@@ -24,7 +25,7 @@ namespace neo::smartcontract::native
  */
 class Notary : public NativeContract
 {
-  public:
+   public:
     // Forward declaration
     class Deposit;
 
@@ -150,7 +151,7 @@ class Notary : public NativeContract
      */
     bool Verify(ApplicationEngine& engine, const io::ByteVector& signature);
 
-  protected:
+   protected:
     /**
      * @brief Initializes the contract.
      */
@@ -224,13 +225,13 @@ class Notary : public NativeContract
      */
     void RemoveDepositFor(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account);
 
-  public:
+   public:
     /**
      * @brief The deposit class.
      */
     class Deposit : public vm::IInteroperable
     {
-      public:
+       public:
         /**
          * @brief The amount.
          */

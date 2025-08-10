@@ -9,7 +9,7 @@ namespace neo::smartcontract::native
  */
 class NeoTokenCandidate
 {
-  public:
+   public:
     /**
      * @brief Registers a candidate.
      * @param token The NEO token.
@@ -47,8 +47,8 @@ class NeoTokenCandidate
      * @param snapshot The snapshot.
      * @return The candidates.
      */
-    static std::vector<std::pair<cryptography::ecc::ECPoint, NeoToken::CandidateState>>
-    GetCandidates(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot);
+    static std::vector<std::pair<cryptography::ecc::ECPoint, NeoToken::CandidateState>> GetCandidates(
+        const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot);
 
     /**
      * @brief Gets the candidate vote.
@@ -87,9 +87,8 @@ class NeoTokenCandidate
      * @param args The arguments.
      * @return The result.
      */
-    static std::shared_ptr<vm::StackItem>
-    OnUnregisterCandidate(const NeoToken& token, ApplicationEngine& engine,
-                          const std::vector<std::shared_ptr<vm::StackItem>>& args);
+    static std::shared_ptr<vm::StackItem> OnUnregisterCandidate(
+        const NeoToken& token, ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args);
 
     /**
      * @brief Handles the getCandidates method.

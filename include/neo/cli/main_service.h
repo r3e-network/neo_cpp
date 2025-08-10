@@ -1,9 +1,5 @@
 #pragma once
 
-#include <atomic>
-#include <functional>
-#include <memory>
-#include <mutex>
 #include <neo/cli/command_line_options.h>
 #include <neo/cli/console_command_attribute.h>
 #include <neo/cli/console_helper.h>
@@ -11,6 +7,11 @@
 #include <neo/node/neo_system.h>
 #include <neo/rpc/rpc_server.h>
 #include <neo/wallets/wallet.h>
+
+#include <atomic>
+#include <functional>
+#include <memory>
+#include <mutex>
 #include <string>
 #include <thread>
 #include <unordered_map>
@@ -33,7 +34,7 @@ using CommandHandler = std::function<bool(const std::vector<std::string>&)>;
  */
 class MainService
 {
-  public:
+   public:
     /**
      * @brief Constructs a MainService.
      */
@@ -94,7 +95,7 @@ class MainService
      */
     void OnCommand(const std::string& command);
 
-  private:
+   private:
     std::shared_ptr<node::NeoSystem> neoSystem_;
     std::shared_ptr<wallets::Wallet> currentWallet_;
     std::shared_ptr<rpc::RpcServer> rpcServer_;

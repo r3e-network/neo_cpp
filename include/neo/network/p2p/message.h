@@ -1,12 +1,13 @@
 #pragma once
 
-#include <cstdint>
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
 #include <neo/network/p2p/message_command.h>
 #include <neo/network/p2p/message_flags.h>
+
+#include <cstdint>
+#include <memory>
 #include <string>
 
 namespace neo::network::p2p
@@ -19,7 +20,7 @@ class IPayload;
  */
 class Message : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Indicates the maximum size of the payload.
      */
@@ -124,7 +125,7 @@ class Message : public io::ISerializable, public io::IJsonSerializable
      */
     static uint32_t TryDeserialize(const io::ByteSpan& data, Message& message);
 
-  private:
+   private:
     MessageFlags flags_;
     MessageCommand command_;
     std::shared_ptr<IPayload> payload_;

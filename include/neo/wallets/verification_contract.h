@@ -5,6 +5,7 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/smartcontract/contract.h>
+
 #include <string>
 #include <vector>
 
@@ -15,7 +16,7 @@ namespace neo::wallets
  */
 class VerificationContract : public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty VerificationContract.
      */
@@ -118,7 +119,7 @@ class VerificationContract : public io::IJsonSerializable
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
+   private:
     smartcontract::Contract contract_;
     std::vector<cryptography::ecc::ECPoint> publicKeys_;
     std::vector<std::string> parameterNames_;

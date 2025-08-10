@@ -2,6 +2,7 @@
 
 #include <neo/io/uint160.h>
 #include <neo/ledger/witness.h>
+
 #include <vector>
 
 namespace neo::network::p2p::payloads
@@ -11,7 +12,7 @@ namespace neo::network::p2p::payloads
  */
 class IVerifiable
 {
-  public:
+   public:
     virtual ~IVerifiable() = default;
 
     /**

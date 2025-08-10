@@ -1,8 +1,5 @@
 #pragma once
 
-#include <cstdint>
-#include <functional>
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
@@ -19,6 +16,10 @@
 #include <neo/smartcontract/vm_types.h>
 #include <neo/vm/execution_engine.h>
 #include <neo/vm/stack_item.h>
+
+#include <cstdint>
+#include <functional>
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -39,7 +40,7 @@ class Script;
  */
 class ApplicationEngine : public vm::ExecutionEngine
 {
-  public:
+   public:
     /**
      * @brief The maximum gas that can be spent when a contract is executed in test mode.
      */
@@ -66,55 +67,37 @@ class ApplicationEngine : public vm::ExecutionEngine
      * @brief Gets the VM state.
      * @return The VM state.
      */
-    neo::vm::VMState GetState() const
-    {
-        return state_;
-    }
+    neo::vm::VMState GetState() const { return state_; }
 
     /**
      * @brief Gets the gas consumed.
      * @return The gas consumed.
      */
-    int64_t GetGasConsumed() const
-    {
-        return gas_consumed_;
-    }
+    int64_t GetGasConsumed() const { return gas_consumed_; }
 
     /**
      * @brief Gets the gas remaining.
      * @return The gas remaining.
      */
-    int64_t GetGasLeft() const
-    {
-        return gas_limit_ - gas_consumed_;
-    }
+    int64_t GetGasLeft() const { return gas_limit_ - gas_consumed_; }
 
     /**
      * @brief Gets the trigger type.
      * @return The trigger type.
      */
-    TriggerType GetTrigger() const
-    {
-        return trigger_;
-    }
+    TriggerType GetTrigger() const { return trigger_; }
 
     /**
      * @brief Gets the log entries.
      * @return The log entries.
      */
-    const std::vector<LogEntry>& GetLogs() const
-    {
-        return logs_;
-    }
+    const std::vector<LogEntry>& GetLogs() const { return logs_; }
 
     /**
      * @brief Gets the notification entries.
      * @return The notification entries.
      */
-    const std::vector<NotifyEntry>& GetNotifications() const
-    {
-        return notifications_;
-    }
+    const std::vector<NotifyEntry>& GetNotifications() const { return notifications_; }
 
     /**
      * @brief Gets the container.
@@ -187,19 +170,13 @@ class ApplicationEngine : public vm::ExecutionEngine
      * @brief Adds a log entry.
      * @param entry The log entry.
      */
-    void AddLog(const LogEntry& entry)
-    {
-        logs_.push_back(entry);
-    }
+    void AddLog(const LogEntry& entry) { logs_.push_back(entry); }
 
     /**
      * @brief Adds a notification entry.
      * @param entry The notification entry.
      */
-    void AddNotification(const NotifyEntry& entry)
-    {
-        notifications_.push_back(entry);
-    }
+    void AddNotification(const NotifyEntry& entry) { notifications_.push_back(entry); }
 
     /**
      * @brief Checks if the engine has flag.
@@ -367,10 +344,7 @@ class ApplicationEngine : public vm::ExecutionEngine
      * @brief Gets the current call flags.
      * @return The current call flags.
      */
-    CallFlags GetCallFlags() const
-    {
-        return flags_;
-    }
+    CallFlags GetCallFlags() const { return flags_; }
 
     /**
      * @brief Gets the contracts map for system call implementations.
@@ -396,10 +370,7 @@ class ApplicationEngine : public vm::ExecutionEngine
      * @brief Sets the call flags.
      * @param flags The new call flags.
      */
-    void SetCallFlags(CallFlags flags)
-    {
-        flags_ = flags;
-    }
+    void SetCallFlags(CallFlags flags) { flags_ = flags; }
 
     /**
      * @brief Pops an item from the evaluation stack.
@@ -458,12 +429,12 @@ class ApplicationEngine : public vm::ExecutionEngine
     void SetInvocationCount(const io::UInt160& scriptHash, int64_t count);
 
     // These members are made protected to allow access from system call implementations
-  protected:
+   protected:
     std::unordered_map<io::UInt160, std::unordered_map<std::string, std::function<bool(ApplicationEngine&)>>>
         contracts_;
     CallFlags flags_;
 
-  public:
+   public:
     /**
      * @brief Registers a system call.
      * @param name The name of the system call.
@@ -474,7 +445,7 @@ class ApplicationEngine : public vm::ExecutionEngine
     void RegisterSystemCall(const std::string& name, std::function<bool(vm::ExecutionEngine&)> handler,
                             int64_t gasCost = 0, CallFlags requiredFlags = CallFlags::None);
 
-  private:
+   private:
     TriggerType trigger_;
     const io::ISerializable* container_;
     std::shared_ptr<persistence::DataCache> snapshot_;

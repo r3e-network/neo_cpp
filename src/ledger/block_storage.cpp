@@ -3,6 +3,7 @@
 #include <neo/ledger/block_storage.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
+
 #include <sstream>
 
 namespace neo::ledger
@@ -21,15 +22,13 @@ std::shared_ptr<Block> BlockStorage::GetBlock(const io::UInt256& hash) const
 
     // Check if the block is in memory
     auto it = blocks_.find(hash);
-    if (it != blocks_.end())
-        return it->second;
+    if (it != blocks_.end()) return it->second;
 
     // Check if the block is in storage
     io::ByteVector prefixVector{BlockPrefix};
     persistence::StorageKey key(io::UInt160(), io::ByteVector::Concat(prefixVector.AsSpan(), hash.AsSpan()));
     auto item = dataCache_->TryGet(key);
-    if (!item)
-        return nullptr;
+    if (!item) return nullptr;
 
     // Deserialize the block
     std::istringstream stream(
@@ -50,8 +49,7 @@ std::shared_ptr<Block> BlockStorage::GetBlock(uint32_t index) const
 
     // Get the block hash
     auto hashOpt = GetBlockHash(index);
-    if (!hashOpt)
-        return nullptr;
+    if (!hashOpt) return nullptr;
 
     // Get the block
     return GetBlock(*hashOpt);
@@ -63,15 +61,13 @@ std::shared_ptr<BlockHeader> BlockStorage::GetBlockHeader(const io::UInt256& has
 
     // Check if the block header is in memory
     auto it = headers_.find(hash);
-    if (it != headers_.end())
-        return it->second;
+    if (it != headers_.end()) return it->second;
 
     // Check if the block header is in storage
     io::ByteVector prefixVector{BlockHeaderPrefix};
     persistence::StorageKey key(io::UInt160(), io::ByteVector::Concat(prefixVector.AsSpan(), hash.AsSpan()));
     auto item = dataCache_->TryGet(key);
-    if (!item)
-        return nullptr;
+    if (!item) return nullptr;
 
     // Deserialize the block header
     std::istringstream stream(
@@ -92,8 +88,7 @@ std::shared_ptr<BlockHeader> BlockStorage::GetBlockHeader(uint32_t index) const
 
     // Get the block hash
     auto hashOpt = GetBlockHash(index);
-    if (!hashOpt)
-        return nullptr;
+    if (!hashOpt) return nullptr;
 
     // Get the block header
     return GetBlockHeader(*hashOpt);
@@ -263,8 +258,7 @@ bool BlockStorage::ContainsBlock(const io::UInt256& hash) const
     std::lock_guard<std::mutex> lock(mutex_);
 
     // Check if the block is in memory
-    if (blocks_.find(hash) != blocks_.end())
-        return true;
+    if (blocks_.find(hash) != blocks_.end()) return true;
 
     // Check if the block is in storage
     io::ByteVector prefixVector{BlockPrefix};
@@ -278,16 +272,14 @@ std::optional<io::UInt256> BlockStorage::GetBlockHash(uint32_t index) const
 
     // Check if the block hash is in memory
     auto it = blockHashes_.find(index);
-    if (it != blockHashes_.end())
-        return it->second;
+    if (it != blockHashes_.end()) return it->second;
 
     // Check if the block hash is in storage
     io::ByteVector prefixVector{BlockHashPrefix};
     io::ByteVector indexVector = io::ByteVector::FromUInt32(index);
     persistence::StorageKey key(io::UInt160(), io::ByteVector::Concat(prefixVector.AsSpan(), indexVector.AsSpan()));
     auto item = dataCache_->TryGet(key);
-    if (!item)
-        return std::nullopt;
+    if (!item) return std::nullopt;
 
     // Deserialize the block hash
     std::istringstream stream(
@@ -307,15 +299,13 @@ std::optional<io::UInt256> BlockStorage::GetNextBlockHash(const io::UInt256& has
 
     // Check if the next block hash is in memory
     auto it = nextBlockHashes_.find(hash);
-    if (it != nextBlockHashes_.end())
-        return it->second;
+    if (it != nextBlockHashes_.end()) return it->second;
 
     // Check if the next block hash is in storage
     io::ByteVector prefixVector{NextBlockHashPrefix};
     persistence::StorageKey key(io::UInt160(), io::ByteVector::Concat(prefixVector.AsSpan(), hash.AsSpan()));
     auto item = dataCache_->TryGet(key);
-    if (!item)
-        return std::nullopt;
+    if (!item) return std::nullopt;
 
     // Deserialize the next block hash
     std::istringstream stream(

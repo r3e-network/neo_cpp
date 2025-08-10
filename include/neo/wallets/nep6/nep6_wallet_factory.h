@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <neo/wallets/wallet_factory.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::wallets::nep6
@@ -11,7 +12,7 @@ namespace neo::wallets::nep6
  */
 class NEP6WalletFactory : public WalletFactory
 {
-  public:
+   public:
     /**
      * @brief Gets the singleton instance of the NEP6WalletFactory.
      * @return The singleton instance.

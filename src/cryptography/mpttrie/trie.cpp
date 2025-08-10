@@ -1,23 +1,24 @@
+#include <neo/cryptography/hash.h>
+#include <neo/cryptography/mpttrie/trie.h>
+#include <neo/io/byte_span.h>
+
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
 #include <iostream>
 #include <memory>
-#include <neo/cryptography/hash.h>
-#include <neo/cryptography/mpttrie/trie.h>
-#include <neo/io/byte_span.h>
 #include <span>
 #include <vector>
 
-#define LOG_ERROR(msg, ...)                                                                                            \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        std::cerr << "ERROR: " << msg << std::endl;                                                                    \
+#define LOG_ERROR(msg, ...)                         \
+    do                                              \
+    {                                               \
+        std::cerr << "ERROR: " << msg << std::endl; \
     } while (0)
-#define LOG_DEBUG(msg, ...)                                                                                            \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        /* Debug logging disabled */                                                                                   \
+#define LOG_DEBUG(msg, ...)          \
+    do                               \
+    {                                \
+        /* Debug logging disabled */ \
     } while (0)
 
 namespace neo::cryptography::mpttrie
@@ -53,8 +54,7 @@ void Trie::SetRoot(const io::UInt256& root_hash)
 
 io::UInt256 Trie::GetRootHash() const
 {
-    if (!root_)
-        return io::UInt256::Zero();
+    if (!root_) return io::UInt256::Zero();
 
     return root_->GetHash();
 }
@@ -62,8 +62,7 @@ io::UInt256 Trie::GetRootHash() const
 io::ByteVector Trie::Get(io::ByteSpan key) const
 {
     io::ByteVector value;
-    if (TryGet(key, value))
-        return value;
+    if (TryGet(key, value)) return value;
 
     throw std::out_of_range("Key not found");
 }
@@ -161,13 +160,11 @@ bool Trie::TryGetInternal(Node& node, io::ByteSpan path, io::ByteVector& value) 
         if (node.GetType() == NodeType::HashNode)
         {
             auto hash_data = node.GetStoredHash();
-            if (hash_data.IsZero())
-                return false;
+            if (hash_data.IsZero()) return false;
 
             // Load node from cache
             cache_node = cache_->Resolve(hash_data);
-            if (!cache_node)
-                return false;
+            if (!cache_node) return false;
 
             resolved_node = cache_node.get();
         }
@@ -189,12 +186,10 @@ bool Trie::TryGetInternal(Node& node, io::ByteSpan path, io::ByteVector& value) 
                 {
                     // Follow the branch
                     uint8_t index = path[0];
-                    if (index >= 16)
-                        return false;
+                    if (index >= 16) return false;
 
                     const auto& children = resolved_node->GetChildren();
-                    if (children.size() <= index || !children[index])
-                        return false;
+                    if (children.size() <= index || !children[index]) return false;
 
                     return TryGetInternal(*children[index], path.subspan(1), value);
                 }
@@ -202,12 +197,10 @@ bool Trie::TryGetInternal(Node& node, io::ByteSpan path, io::ByteVector& value) 
             case NodeType::ExtensionNode:
             {
                 auto node_key = resolved_node->GetKey();
-                if (path.size() < node_key.size())
-                    return false;
+                if (path.size() < node_key.size()) return false;
 
                 // Check if path starts with node key
-                if (!std::equal(node_key.begin(), node_key.end(), path.begin()))
-                    return false;
+                if (!std::equal(node_key.begin(), node_key.end(), path.begin())) return false;
 
                 // Continue with remaining path
                 return TryGetInternal(resolved_node->GetNext(), path.subspan(node_key.size()), value);
@@ -325,16 +318,14 @@ void Trie::PutBranch(std::unique_ptr<Node>& node, io::ByteSpan path, std::unique
     if (path.empty())
     {
         // Set value at branch node (index 16)
-        if (children.size() <= 16)
-            children.resize(17);
+        if (children.size() <= 16) children.resize(17);
         children[16] = std::move(value_node);
     }
     else
     {
         // Follow branch
         uint8_t index = path[0];
-        if (index >= 16)
-            throw std::invalid_argument("Invalid path nibble");
+        if (index >= 16) throw std::invalid_argument("Invalid path nibble");
 
         if (children.size() <= index)
             children.resize(std::max(static_cast<size_t>(index + 1), static_cast<size_t>(17)));
@@ -449,19 +440,16 @@ void Trie::PutLeaf(std::unique_ptr<Node>& node, io::ByteSpan path, std::unique_p
 
 bool Trie::TryDeleteInternal(std::unique_ptr<Node>& node, io::ByteSpan path)
 {
-    if (!node)
-        return false;
+    if (!node) return false;
 
     // Resolve hash nodes
     if (node->GetType() == NodeType::HashNode)
     {
         auto hash_data = node->GetStoredHash();
-        if (hash_data.IsZero())
-            return false;
+        if (hash_data.IsZero()) return false;
 
         auto resolved_node = cache_->Resolve(hash_data);
-        if (!resolved_node)
-            return false;
+        if (!resolved_node) return false;
 
         node = std::move(resolved_node);
     }
@@ -515,8 +503,7 @@ bool Trie::DeleteBranch(std::unique_ptr<Node>& node, io::ByteSpan path)
     else
     {
         uint8_t index = path[0];
-        if (index >= 16 || children.size() <= index || !children[index])
-            return false;
+        if (index >= 16 || children.size() <= index || !children[index]) return false;
 
         bool deleted = TryDeleteInternal(children[index], path.subspan(1));
 
@@ -534,11 +521,9 @@ bool Trie::DeleteExtension(std::unique_ptr<Node>& node, io::ByteSpan path)
 {
     auto node_key = node->GetKey();
 
-    if (path.size() < node_key.size())
-        return false;
+    if (path.size() < node_key.size()) return false;
 
-    if (!std::equal(node_key.begin(), node_key.end(), path.begin()))
-        return false;
+    if (!std::equal(node_key.begin(), node_key.end(), path.begin())) return false;
 
     return TryDeleteInternal(node->GetNextPtr(), path.subspan(node_key.size()));
 }
@@ -600,12 +585,10 @@ bool Trie::GetProofInternal(Node& node, io::ByteSpan path, std::vector<io::ByteV
     if (node.GetType() == NodeType::HashNode)
     {
         auto hash_data = node.GetStoredHash();
-        if (hash_data.IsZero())
-            return false;
+        if (hash_data.IsZero()) return false;
 
         cache_node = cache_->Resolve(hash_data);
-        if (!cache_node)
-            return false;
+        if (!cache_node) return false;
 
         resolved_node = cache_node.get();
         proof.push_back(resolved_node->ToArrayWithoutReference());
@@ -626,12 +609,10 @@ bool Trie::GetProofInternal(Node& node, io::ByteSpan path, std::vector<io::ByteV
             else
             {
                 uint8_t index = path[0];
-                if (index >= 16)
-                    return false;
+                if (index >= 16) return false;
 
                 const auto& children = resolved_node->GetChildren();
-                if (children.size() <= index || !children[index])
-                    return false;
+                if (children.size() <= index || !children[index]) return false;
 
                 return GetProofInternal(*children[index], path.subspan(1), proof);
             }
@@ -639,11 +620,9 @@ bool Trie::GetProofInternal(Node& node, io::ByteSpan path, std::vector<io::ByteV
         case NodeType::ExtensionNode:
         {
             auto node_key = resolved_node->GetKey();
-            if (path.size() < node_key.size())
-                return false;
+            if (path.size() < node_key.size()) return false;
 
-            if (!std::equal(node_key.begin(), node_key.end(), path.begin()))
-                return false;
+            if (!std::equal(node_key.begin(), node_key.end(), path.begin())) return false;
 
             return GetProofInternal(resolved_node->GetNext(), path.subspan(node_key.size()), proof);
         }

@@ -1,9 +1,10 @@
-#include <chrono>
 #include <httplib.h>
-#include <iostream>
 #include <neo/core/safe_conversions.h>
 #include <neo/cryptography/base64.h>
 #include <neo/rpc/rpc_client.h>
+
+#include <chrono>
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 #include <thread>
@@ -310,10 +311,7 @@ std::future<json::JToken> RpcClient::InvokeFunctionAsync(const std::string& scri
                       { return InvokeFunction(script_hash, operation, params); });
 }
 
-json::JToken RpcClient::GetVersion()
-{
-    return RpcSend("getversion");
-}
+json::JToken RpcClient::GetVersion() { return RpcSend("getversion"); }
 
 std::future<json::JToken> RpcClient::GetVersionAsync()
 {

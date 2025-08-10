@@ -13,7 +13,7 @@ namespace neo::network::p2p::payloads
  */
 class HighPriority : public ledger::TransactionAttribute
 {
-  public:
+   public:
     /**
      * @brief Constructs a HighPriority attribute.
      */

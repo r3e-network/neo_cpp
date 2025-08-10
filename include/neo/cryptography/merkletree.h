@@ -1,6 +1,7 @@
 #pragma once
 
 #include <neo/io/uint256.h>
+
 #include <optional>
 #include <vector>
 
@@ -11,7 +12,7 @@ namespace neo::cryptography
  */
 class MerkleTree
 {
-  public:
+   public:
     /**
      * @brief Computes the Merkle root of the specified hashes.
      * @param hashes The hashes.
@@ -39,7 +40,7 @@ class MerkleTree
     static bool VerifyPath(const io::UInt256& leaf, const std::vector<io::UInt256>& path, size_t index,
                            const io::UInt256& root);
 
-  public:
+   public:
     /**
      * @brief Computes the Merkle root of the specified hashes.
      * @param hashes The hashes.

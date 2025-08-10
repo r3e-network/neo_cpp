@@ -1,12 +1,15 @@
-#include <iostream>
 #include <neo/plugins/rpc_server_plugin.h>
 #include <neo/rpc/rpc_server.h>
+
+#include <iostream>
 
 namespace neo::plugins
 {
 RpcServerPlugin::RpcServerPlugin()
-    : PluginBase("RpcServer", "Provides RPC server functionality", "1.0", "Neo C++ Team"), port_(10332),
-      enableCors_(false), enableAuth_(false)
+    : PluginBase("RpcServer", "Provides RPC server functionality", "1.0", "Neo C++ Team"),
+      port_(10332),
+      enableCors_(false),
+      enableAuth_(false)
 {
 }
 
@@ -47,8 +50,7 @@ bool RpcServerPlugin::OnInitialize(const std::unordered_map<std::string, std::st
     RegisterMethod("echo",
                    [](const nlohmann::json& params)
                    {
-                       if (params.empty())
-                           return nlohmann::json("echo");
+                       if (params.empty()) return nlohmann::json("echo");
 
                        return params[0];
                    });
@@ -67,8 +69,7 @@ bool RpcServerPlugin::OnInitialize(const std::unordered_map<std::string, std::st
 
 bool RpcServerPlugin::OnStart()
 {
-    if (!rpcServer_)
-        return false;
+    if (!rpcServer_) return false;
 
     rpcServer_->Start();
     return true;
@@ -76,8 +77,7 @@ bool RpcServerPlugin::OnStart()
 
 bool RpcServerPlugin::OnStop()
 {
-    if (!rpcServer_)
-        return false;
+    if (!rpcServer_) return false;
 
     rpcServer_->Stop();
     return true;
@@ -86,8 +86,7 @@ bool RpcServerPlugin::OnStop()
 void RpcServerPlugin::RegisterMethod(const std::string& method,
                                      std::function<nlohmann::json(const nlohmann::json&)> handler)
 {
-    if (!rpcServer_)
-        return;
+    if (!rpcServer_) return;
 
     rpcServer_->RegisterMethod(method, handler);
 }

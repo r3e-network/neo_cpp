@@ -32,7 +32,7 @@ namespace neo::extensions
  */
 class DateTimeExtensions
 {
-  public:
+   public:
     /**
      * @brief Get current Unix timestamp in seconds
      * @return Current Unix timestamp
@@ -152,8 +152,7 @@ class DateTimeExtensions
         auto currentTime = GetUnixTimestamp();
         auto endTime = startTime + timeoutSeconds;
 
-        if (currentTime >= endTime)
-            return 0;
+        if (currentTime >= endTime) return 0;
 
         return endTime - currentTime;
     }
@@ -200,10 +199,7 @@ class DateTimeExtensions
      * @param minutes Minutes to add
      * @return New timestamp
      */
-    static uint64_t AddMinutes(uint64_t timestamp, int64_t minutes)
-    {
-        return AddSeconds(timestamp, minutes * 60);
-    }
+    static uint64_t AddMinutes(uint64_t timestamp, int64_t minutes) { return AddSeconds(timestamp, minutes * 60); }
 
     /**
      * @brief Add hours to timestamp
@@ -211,10 +207,7 @@ class DateTimeExtensions
      * @param hours Hours to add
      * @return New timestamp
      */
-    static uint64_t AddHours(uint64_t timestamp, int64_t hours)
-    {
-        return AddSeconds(timestamp, hours * 3600);
-    }
+    static uint64_t AddHours(uint64_t timestamp, int64_t hours) { return AddSeconds(timestamp, hours * 3600); }
 
     /**
      * @brief Add days to timestamp
@@ -222,9 +215,6 @@ class DateTimeExtensions
      * @param days Days to add
      * @return New timestamp
      */
-    static uint64_t AddDays(uint64_t timestamp, int64_t days)
-    {
-        return AddSeconds(timestamp, days * 86400);
-    }
+    static uint64_t AddDays(uint64_t timestamp, int64_t days) { return AddSeconds(timestamp, days * 86400); }
 };
 }  // namespace neo::extensions

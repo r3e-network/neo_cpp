@@ -52,7 +52,7 @@ struct HealthCheckResult
         return j;
     }
 
-  private:
+   private:
     static std::string StatusToString(HealthStatus status)
     {
         switch (status)
@@ -73,7 +73,7 @@ struct HealthCheckResult
  */
 class HealthCheck
 {
-  public:
+   public:
     explicit HealthCheck(const std::string& name) : name_(name) {}
     virtual ~HealthCheck() = default;
 
@@ -83,12 +83,9 @@ class HealthCheck
      */
     virtual HealthCheckResult Check() = 0;
 
-    const std::string& GetName() const
-    {
-        return name_;
-    }
+    const std::string& GetName() const { return name_; }
 
-  protected:
+   protected:
     std::string name_;
 };
 
@@ -97,7 +94,7 @@ class HealthCheck
  */
 class BlockchainHealthCheck : public HealthCheck
 {
-  public:
+   public:
     BlockchainHealthCheck(std::function<uint32_t()> getHeight, std::function<uint32_t()> getHeaderHeight)
         : HealthCheck("blockchain"), getHeight_(getHeight), getHeaderHeight_(getHeaderHeight)
     {
@@ -148,7 +145,7 @@ class BlockchainHealthCheck : public HealthCheck
         return result;
     }
 
-  private:
+   private:
     std::function<uint32_t()> getHeight_;
     std::function<uint32_t()> getHeaderHeight_;
 };
@@ -158,7 +155,7 @@ class BlockchainHealthCheck : public HealthCheck
  */
 class P2PHealthCheck : public HealthCheck
 {
-  public:
+   public:
     P2PHealthCheck(std::function<size_t()> getPeerCount, size_t minPeers = 3)
         : HealthCheck("p2p"), getPeerCount_(getPeerCount), minPeers_(minPeers)
     {
@@ -205,7 +202,7 @@ class P2PHealthCheck : public HealthCheck
         return result;
     }
 
-  private:
+   private:
     std::function<size_t()> getPeerCount_;
     size_t minPeers_;
 };
@@ -215,7 +212,7 @@ class P2PHealthCheck : public HealthCheck
  */
 class MemoryHealthCheck : public HealthCheck
 {
-  public:
+   public:
     MemoryHealthCheck(std::function<size_t()> getMemoryUsage, size_t maxMemoryMB = 8192)
         : HealthCheck("memory"), getMemoryUsage_(getMemoryUsage), maxMemoryMB_(maxMemoryMB)
     {
@@ -265,7 +262,7 @@ class MemoryHealthCheck : public HealthCheck
         return result;
     }
 
-  private:
+   private:
     std::function<size_t()> getMemoryUsage_;
     size_t maxMemoryMB_;
 };
@@ -275,7 +272,7 @@ class MemoryHealthCheck : public HealthCheck
  */
 class HealthCheckManager
 {
-  public:
+   public:
     static HealthCheckManager& GetInstance()
     {
         static HealthCheckManager instance;
@@ -363,8 +360,7 @@ class HealthCheckManager
      */
     void StartPeriodicChecks(std::chrono::seconds interval = std::chrono::seconds(30))
     {
-        if (running_)
-            return;
+        if (running_) return;
 
         running_ = true;
         checkThread_ = std::thread(
@@ -390,12 +386,9 @@ class HealthCheckManager
         }
     }
 
-    ~HealthCheckManager()
-    {
-        StopPeriodicChecks();
-    }
+    ~HealthCheckManager() { StopPeriodicChecks(); }
 
-  private:
+   private:
     HealthCheckManager() = default;
 
     HealthStatus GetOverallStatus() const

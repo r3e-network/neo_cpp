@@ -1,11 +1,12 @@
 #pragma once
 
-#include <memory>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/smartcontract/native/account_state.h>
 #include <neo/vm/stack_item.h>
+
+#include <memory>
 
 namespace neo::smartcontract::native
 {
@@ -14,7 +15,7 @@ namespace neo::smartcontract::native
  */
 class NeoAccountState : public AccountState
 {
-  public:
+   public:
     /**
      * @brief Constructs a NeoAccountState.
      */
@@ -91,7 +92,7 @@ class NeoAccountState : public AccountState
      */
     void FromStackItem(const std::shared_ptr<vm::StackItem>& item) override;
 
-  private:
+   private:
     uint32_t balanceHeight_;
     cryptography::ecc::ECPoint voteTo_;
     int64_t lastGasPerVote_;

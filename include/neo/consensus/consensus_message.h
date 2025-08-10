@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
+
+#include <memory>
 #include <vector>
 
 namespace neo::consensus
@@ -27,44 +28,23 @@ enum class ConsensusMessageType : uint8_t
  */
 class ConsensusMessage : public io::ISerializable
 {
-  protected:
+   protected:
     ConsensusMessageType type_;
     uint32_t view_number_;
     uint32_t validator_index_;
     uint32_t block_index_;
 
-  public:
+   public:
     ConsensusMessage(ConsensusMessageType type);
 
-    ConsensusMessageType GetType() const
-    {
-        return type_;
-    }
-    uint32_t GetViewNumber() const
-    {
-        return view_number_;
-    }
-    uint32_t GetValidatorIndex() const
-    {
-        return validator_index_;
-    }
-    uint32_t GetBlockIndex() const
-    {
-        return block_index_;
-    }
+    ConsensusMessageType GetType() const { return type_; }
+    uint32_t GetViewNumber() const { return view_number_; }
+    uint32_t GetValidatorIndex() const { return validator_index_; }
+    uint32_t GetBlockIndex() const { return block_index_; }
 
-    void SetViewNumber(uint32_t view)
-    {
-        view_number_ = view;
-    }
-    void SetValidatorIndex(uint32_t index)
-    {
-        validator_index_ = index;
-    }
-    void SetBlockIndex(uint32_t index)
-    {
-        block_index_ = index;
-    }
+    void SetViewNumber(uint32_t view) { view_number_ = view; }
+    void SetValidatorIndex(uint32_t index) { validator_index_ = index; }
+    void SetBlockIndex(uint32_t index) { block_index_ = index; }
 
     // ISerializable
     void Serialize(io::BinaryWriter& writer) const override;
@@ -81,30 +61,18 @@ class ConsensusMessage : public io::ISerializable
  */
 class ViewChangeMessage : public ConsensusMessage
 {
-  private:
+   private:
     uint32_t new_view_number_;
     std::chrono::system_clock::time_point timestamp_;
 
-  public:
+   public:
     ViewChangeMessage();
 
-    uint32_t GetNewViewNumber() const
-    {
-        return new_view_number_;
-    }
-    void SetNewViewNumber(uint32_t view)
-    {
-        new_view_number_ = view;
-    }
+    uint32_t GetNewViewNumber() const { return new_view_number_; }
+    void SetNewViewNumber(uint32_t view) { new_view_number_ = view; }
 
-    std::chrono::system_clock::time_point GetTimestamp() const
-    {
-        return timestamp_;
-    }
-    void SetTimestamp(std::chrono::system_clock::time_point time)
-    {
-        timestamp_ = time;
-    }
+    std::chrono::system_clock::time_point GetTimestamp() const { return timestamp_; }
+    void SetTimestamp(std::chrono::system_clock::time_point time) { timestamp_ = time; }
 
     void Serialize(io::BinaryWriter& writer) const override;
     void Deserialize(io::BinaryReader& reader) override;
@@ -115,40 +83,22 @@ class ViewChangeMessage : public ConsensusMessage
  */
 class PrepareRequestMessage : public ConsensusMessage
 {
-  private:
+   private:
     uint64_t nonce_;
     std::chrono::system_clock::time_point timestamp_;
     std::vector<io::UInt256> transaction_hashes_;
 
-  public:
+   public:
     PrepareRequestMessage();
 
-    uint64_t GetNonce() const
-    {
-        return nonce_;
-    }
-    void SetNonce(uint64_t nonce)
-    {
-        nonce_ = nonce;
-    }
+    uint64_t GetNonce() const { return nonce_; }
+    void SetNonce(uint64_t nonce) { nonce_ = nonce; }
 
-    std::chrono::system_clock::time_point GetTimestamp() const
-    {
-        return timestamp_;
-    }
-    void SetTimestamp(std::chrono::system_clock::time_point time)
-    {
-        timestamp_ = time;
-    }
+    std::chrono::system_clock::time_point GetTimestamp() const { return timestamp_; }
+    void SetTimestamp(std::chrono::system_clock::time_point time) { timestamp_ = time; }
 
-    const std::vector<io::UInt256>& GetTransactionHashes() const
-    {
-        return transaction_hashes_;
-    }
-    void SetTransactionHashes(const std::vector<io::UInt256>& hashes)
-    {
-        transaction_hashes_ = hashes;
-    }
+    const std::vector<io::UInt256>& GetTransactionHashes() const { return transaction_hashes_; }
+    void SetTransactionHashes(const std::vector<io::UInt256>& hashes) { transaction_hashes_ = hashes; }
 
     /**
      * @brief Calculate hash of this prepare request
@@ -164,20 +114,14 @@ class PrepareRequestMessage : public ConsensusMessage
  */
 class PrepareResponseMessage : public ConsensusMessage
 {
-  private:
+   private:
     io::UInt256 prepare_request_hash_;
 
-  public:
+   public:
     PrepareResponseMessage();
 
-    const io::UInt256& GetPrepareRequestHash() const
-    {
-        return prepare_request_hash_;
-    }
-    void SetPrepareRequestHash(const io::UInt256& hash)
-    {
-        prepare_request_hash_ = hash;
-    }
+    const io::UInt256& GetPrepareRequestHash() const { return prepare_request_hash_; }
+    void SetPrepareRequestHash(const io::UInt256& hash) { prepare_request_hash_ = hash; }
 
     void Serialize(io::BinaryWriter& writer) const override;
     void Deserialize(io::BinaryReader& reader) override;
@@ -188,20 +132,14 @@ class PrepareResponseMessage : public ConsensusMessage
  */
 class CommitMessage : public ConsensusMessage
 {
-  private:
+   private:
     std::vector<uint8_t> signature_;
 
-  public:
+   public:
     CommitMessage();
 
-    const std::vector<uint8_t>& GetSignature() const
-    {
-        return signature_;
-    }
-    void SetSignature(const std::vector<uint8_t>& sig)
-    {
-        signature_ = sig;
-    }
+    const std::vector<uint8_t>& GetSignature() const { return signature_; }
+    void SetSignature(const std::vector<uint8_t>& sig) { signature_ = sig; }
 
     void Serialize(io::BinaryWriter& writer) const override;
     void Deserialize(io::BinaryReader& reader) override;
@@ -212,7 +150,7 @@ class CommitMessage : public ConsensusMessage
  */
 class RecoveryRequestMessage : public ConsensusMessage
 {
-  public:
+   public:
     RecoveryRequestMessage();
 
     void Serialize(io::BinaryWriter& writer) const override;

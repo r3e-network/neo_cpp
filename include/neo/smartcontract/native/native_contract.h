@@ -1,7 +1,5 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint160.h>
 #include <neo/persistence/data_cache.h>
@@ -9,6 +7,9 @@
 #include <neo/persistence/store_view.h>
 #include <neo/smartcontract/call_flags.h>
 #include <neo/vm/stack_item.h>
+
+#include <functional>
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -26,7 +27,7 @@ namespace neo::smartcontract::native
  */
 class NativeContract
 {
-  public:
+   public:
     /**
      * @brief Constructs a NativeContract.
      * @param name The name.
@@ -202,20 +203,19 @@ class NativeContract
      */
     virtual void Initialize() = 0;
 
-  protected:
+   protected:
     /**
      * @brief Registers a method.
      * @param name The name.
      * @param callFlags The call flags.
      * @param handler The handler.
      */
-    void
-    RegisterMethod(const std::string& name, CallFlags callFlags,
-                   std::function<std::shared_ptr<vm::StackItem>(ApplicationEngine&,
-                                                                const std::vector<std::shared_ptr<vm::StackItem>>&)>
-                       handler);
+    void RegisterMethod(const std::string& name, CallFlags callFlags,
+                        std::function<std::shared_ptr<vm::StackItem>(
+                            ApplicationEngine&, const std::vector<std::shared_ptr<vm::StackItem>>&)>
+                            handler);
 
-  private:
+   private:
     std::string name_;
     uint32_t id_;
     io::UInt160 scriptHash_;

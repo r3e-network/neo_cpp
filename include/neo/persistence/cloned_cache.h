@@ -1,7 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <neo/persistence/data_cache.h>
+
+#include <memory>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -14,7 +15,7 @@ namespace neo::persistence
 template <typename TKey, typename TValue>
 class ClonedCache
 {
-  public:
+   public:
     /**
      * @brief Constructor.
      * @param inner The inner cache to clone from.
@@ -55,7 +56,7 @@ class ClonedCache
      */
     std::shared_ptr<DataCache> GetInner() const;
 
-  private:
+   private:
     std::shared_ptr<DataCache> inner_;
     mutable std::unordered_map<TKey, TValue> cloned_items_;
     mutable std::unordered_set<TKey> deleted_items_;

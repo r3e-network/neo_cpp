@@ -1,4 +1,5 @@
 #include <neo/smartcontract/storage_iterator.h>
+
 #include <stdexcept>
 
 namespace neo::smartcontract
@@ -15,15 +16,11 @@ StorageIterator::StorageIterator(std::shared_ptr<persistence::DataCache> snapsho
     }
 }
 
-bool StorageIterator::HasNext() const
-{
-    return currentIndex_ < entries_.size();
-}
+bool StorageIterator::HasNext() const { return currentIndex_ < entries_.size(); }
 
 std::pair<io::ByteVector, io::ByteVector> StorageIterator::Next()
 {
-    if (!HasNext())
-        throw std::runtime_error("No more items in iterator");
+    if (!HasNext()) throw std::runtime_error("No more items in iterator");
 
     auto entry = entries_[currentIndex_++];
     currentPair_ = std::make_pair(entry.first.GetKey(), entry.second.GetValue());
@@ -32,8 +29,7 @@ std::pair<io::ByteVector, io::ByteVector> StorageIterator::Next()
 
 std::pair<io::ByteVector, io::ByteVector> StorageIterator::GetCurrent() const
 {
-    if (currentIndex_ == 0)
-        throw std::runtime_error("Iterator not advanced");
+    if (currentIndex_ == 0) throw std::runtime_error("Iterator not advanced");
 
     return currentPair_;
 }

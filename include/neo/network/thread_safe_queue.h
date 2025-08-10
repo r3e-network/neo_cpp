@@ -12,7 +12,7 @@ namespace neo::network
 template <typename T>
 class ThreadSafeQueue
 {
-  public:
+   public:
     /**
      * @brief Pushes an item to the queue.
      * @param item The item to push.
@@ -32,8 +32,7 @@ class ThreadSafeQueue
     bool TryPop(T& item)
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        if (queue_.empty())
-            return false;
+        if (queue_.empty()) return false;
         item = queue_.front();
         queue_.pop();
         return true;
@@ -71,7 +70,7 @@ class ThreadSafeQueue
         return queue_.size();
     }
 
-  private:
+   private:
     mutable std::mutex mutex_;
     std::queue<T> queue_;
     std::condition_variable condition_;

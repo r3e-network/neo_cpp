@@ -1,8 +1,9 @@
 #pragma once
 
+#include <neo/wallets/wallet.h>
+
 #include <memory>
 #include <mutex>
-#include <neo/wallets/wallet.h>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -14,7 +15,7 @@ namespace neo::wallets
  */
 class WalletManager
 {
-  public:
+   public:
     /**
      * @brief Gets the instance.
      * @return The instance.
@@ -86,7 +87,7 @@ class WalletManager
      */
     void CloseAllWallets();
 
-  private:
+   private:
     WalletManager();
     std::vector<std::shared_ptr<Wallet>> wallets_;
     std::shared_ptr<Wallet> currentWallet_;

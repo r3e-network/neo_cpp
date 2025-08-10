@@ -9,7 +9,7 @@ namespace neo::json
  */
 class JBoolean : public JToken
 {
-  public:
+   public:
     /**
      * @brief Constructor.
      * @param value The boolean value.
@@ -73,8 +73,8 @@ class JBoolean : public JToken
      */
     void WriteJson(std::string& output, bool indented = false, int indent_level = 0) const override;
 
-  protected:
-  private:
+   protected:
+   private:
     bool value_;
 };
 }  // namespace neo::json

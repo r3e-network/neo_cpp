@@ -104,13 +104,13 @@ void Blockchain::InitializeGenesisBlock()
 std::shared_ptr<Block> Blockchain::GetBlock(uint32_t index) const
 {
     std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
-    
+
     // Stub implementation - return nullptr for now
     // Production implementation would:
     // 1. Get block hash by index
     // 2. Load block from storage using the hash
     // 3. Deserialize and return the block
-    
+
     // For now, just return nullptr to satisfy linker
     return nullptr;
 }
@@ -118,7 +118,7 @@ std::shared_ptr<Block> Blockchain::GetBlock(uint32_t index) const
 std::shared_ptr<Block> Blockchain::GetBlock(const io::UInt256& hash) const
 {
     std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
-    
+
     // Stub implementation - return nullptr for now
     // Production implementation would load block from storage by hash
     return nullptr;

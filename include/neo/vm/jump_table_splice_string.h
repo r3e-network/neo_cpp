@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableSpliceString
 {
-  public:
+   public:
     // String operations
     static void CAT(ExecutionEngine& engine, const Instruction& instruction);
     static void SUBSTR(ExecutionEngine& engine, const Instruction& instruction);

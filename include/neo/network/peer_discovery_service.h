@@ -1,15 +1,16 @@
 #pragma once
 
+#include <neo/io/ijson_serializable.h>
+#include <neo/io/iserializable.h>
+#include <neo/logging/logger.h>
+#include <neo/network/network_address.h>
+
 #include <boost/asio/io_context.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/steady_timer.hpp>
 #include <chrono>
 #include <memory>
 #include <mutex>
-#include <neo/io/ijson_serializable.h>
-#include <neo/io/iserializable.h>
-#include <neo/logging/logger.h>
-#include <neo/network/network_address.h>
 #include <random>
 #include <string>
 #include <unordered_map>
@@ -26,7 +27,7 @@ class P2PServer;
  */
 class PeerDiscoveryService : public std::enable_shared_from_this<PeerDiscoveryService>
 {
-  public:
+   public:
     /**
      * @brief Constructs a PeerDiscoveryService.
      * @param ioContext The IO context.
@@ -107,7 +108,7 @@ class PeerDiscoveryService : public std::enable_shared_from_this<PeerDiscoverySe
     void HandleAddrMessage(const std::shared_ptr<class P2PPeer>& peer,
                            const std::shared_ptr<class AddrPayload>& payload);
 
-  private:
+   private:
     struct PeerInfo
     {
         NetworkAddress address;

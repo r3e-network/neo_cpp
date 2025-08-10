@@ -13,13 +13,13 @@ namespace neo::network::payloads
  */
 class NotaryAssisted : public TransactionAttribute
 {
-  private:
+   private:
     /**
      * @brief The number of keys.
      */
     uint8_t nKeys;
 
-  public:
+   public:
     /**
      * @brief Constructs a NotaryAssisted.
      */

@@ -1,13 +1,14 @@
 #pragma once
 
-#include <atomic>
-#include <functional>
-#include <map>
-#include <memory>
 #include <neo/console_service/command_token.h>
 #include <neo/console_service/console_command_attribute.h>
 #include <neo/console_service/console_command_method.h>
 #include <neo/console_service/console_helper.h>
+
+#include <atomic>
+#include <functional>
+#include <map>
+#include <memory>
 #include <string>
 #include <thread>
 #include <vector>
@@ -19,7 +20,7 @@ namespace neo::console_service
  */
 class ConsoleServiceBase
 {
-  public:
+   public:
     /**
      * @brief Constructor.
      */
@@ -93,7 +94,7 @@ class ConsoleServiceBase
     template <typename T>
     void RegisterCommandHandler(std::function<T(std::vector<std::shared_ptr<CommandToken>>&, bool)> handler);
 
-  protected:
+   protected:
     /**
      * @brief Processes a command.
      * @param command_line The command line to process.
@@ -136,7 +137,7 @@ class ConsoleServiceBase
     bool UninstallWindowsService();
 #endif
 
-  private:
+   private:
     static constexpr int HistorySize = 100;
 
     bool show_prompt_;

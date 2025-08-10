@@ -1,5 +1,6 @@
-#include <iostream>
 #include <neo/logging/logger.h>
+
+#include <iostream>
 #if defined(NEO_HAS_SPDLOG) && !defined(NEO_MINIMAL_LOGGING)
 #include <fmt/core.h>
 #include <fmt/format.h>
@@ -16,45 +17,21 @@ Logger& Logger::GetDefault()
     return defaultLogger;
 }
 
-Logger& Logger::Instance()
-{
-    return GetDefault();
-}
+Logger& Logger::Instance() { return GetDefault(); }
 
-void Logger::Debug(const std::string& category, const std::string& message)
-{
-    Debug("[" + category + "] " + message);
-}
+void Logger::Debug(const std::string& category, const std::string& message) { Debug("[" + category + "] " + message); }
 
-void Logger::Info(const std::string& category, const std::string& message)
-{
-    Info("[" + category + "] " + message);
-}
+void Logger::Info(const std::string& category, const std::string& message) { Info("[" + category + "] " + message); }
 
-void Logger::Warn(const std::string& category, const std::string& message)
-{
-    Warn("[" + category + "] " + message);
-}
+void Logger::Warn(const std::string& category, const std::string& message) { Warn("[" + category + "] " + message); }
 
-void Logger::Warning(const std::string& message)
-{
-    Warn(message);
-}
+void Logger::Warning(const std::string& message) { Warn(message); }
 
-void Logger::Warning(const std::string& category, const std::string& message)
-{
-    Warn(category, message);
-}
+void Logger::Warning(const std::string& category, const std::string& message) { Warn(category, message); }
 
-void Logger::Error(const std::string& category, const std::string& message)
-{
-    Error("[" + category + "] " + message);
-}
+void Logger::Error(const std::string& category, const std::string& message) { Error("[" + category + "] " + message); }
 
-std::shared_ptr<Logger> Logger::Create(const std::string& name)
-{
-    return std::make_shared<Logger>(name);
-}
+std::shared_ptr<Logger> Logger::Create(const std::string& name) { return std::make_shared<Logger>(name); }
 
 Logger::Logger(const std::string& name)
 #ifdef NEO_MINIMAL_LOGGING
@@ -99,8 +76,7 @@ void Logger::SetLevel(Level level)
 #ifdef NEO_MINIMAL_LOGGING
     current_level_ = level;
 #else
-    if (!logger_)
-        return;
+    if (!logger_) return;
 
     spdlog::level::level_enum spdlog_level;
     switch (level)
@@ -143,8 +119,7 @@ void Logger::Trace(const std::string& message)
         std::cout << "[TRACE] " << message << std::endl;
     }
 #else
-    if (logger_)
-        logger_->trace(message);
+    if (logger_) logger_->trace(message);
 #endif
 }
 
@@ -156,8 +131,7 @@ void Logger::Debug(const std::string& message)
         std::cout << "[DEBUG] " << message << std::endl;
     }
 #else
-    if (logger_)
-        logger_->debug(message);
+    if (logger_) logger_->debug(message);
 #endif
 }
 
@@ -169,8 +143,7 @@ void Logger::Info(const std::string& message)
         std::cout << "[INFO] " << message << std::endl;
     }
 #else
-    if (logger_)
-        logger_->info(message);
+    if (logger_) logger_->info(message);
 #endif
 }
 
@@ -182,8 +155,7 @@ void Logger::Warn(const std::string& message)
         std::cout << "[WARN] " << message << std::endl;
     }
 #else
-    if (logger_)
-        logger_->warn(message);
+    if (logger_) logger_->warn(message);
 #endif
 }
 
@@ -195,8 +167,7 @@ void Logger::Error(const std::string& message)
         std::cout << "[ERROR] " << message << std::endl;
     }
 #else
-    if (logger_)
-        logger_->error(message);
+    if (logger_) logger_->error(message);
 #endif
 }
 
@@ -208,8 +179,7 @@ void Logger::Critical(const std::string& message)
         std::cout << "[CRITICAL] " << message << std::endl;
     }
 #else
-    if (logger_)
-        logger_->critical(message);
+    if (logger_) logger_->critical(message);
 #endif
 }
 
@@ -227,8 +197,7 @@ void Logger::Log(Level level, const std::string& format, Args&&... args)
     // For minimal logging, just use the format string as-is
     LogMinimal(level, format);
 #else
-    if (!logger_)
-        return;
+    if (!logger_) return;
 
     // Use fmt::vformat to handle dynamic format strings
     std::string formatted = fmt::vformat(format, fmt::make_format_args(args...));

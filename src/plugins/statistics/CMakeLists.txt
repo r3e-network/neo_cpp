@@ -15,7 +15,7 @@ target_include_directories(neo_statistics_plugin
 # Link dependencies
 target_link_libraries(neo_statistics_plugin
     PUBLIC
-        neo_node
+        neo_node_core
         neo_rpc
         neo_plugins
         nlohmann_json::nlohmann_json

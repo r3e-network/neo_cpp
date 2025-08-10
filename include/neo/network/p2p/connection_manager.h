@@ -1,13 +1,14 @@
 #pragma once
 
-#include <asio.hpp>
-#include <asio/ssl.hpp>
-#include <atomic>
-#include <condition_variable>
 #include <neo/core/logging.h>
 #include <neo/network/p2p/message_handler.h>
 #include <neo/network/p2p/peer_manager.h>
 #include <neo/network/p2p/tcp_server.h>
+
+#include <asio.hpp>
+#include <asio/ssl.hpp>
+#include <atomic>
+#include <condition_variable>
 #include <queue>
 #include <thread>
 
@@ -32,7 +33,7 @@ struct ConnectionStats
  */
 class ConnectionManager
 {
-  public:
+   public:
     struct Config
     {
         std::string bind_address{"0.0.0.0"};
@@ -49,7 +50,7 @@ class ConnectionManager
         size_t receive_buffer_size{64 * 1024};
     };
 
-  private:
+   private:
     Config config_;
     std::shared_ptr<core::Logger> logger_;
     std::shared_ptr<PeerManager> peer_manager_;
@@ -73,7 +74,7 @@ class ConnectionManager
     std::condition_variable queue_cv_;
     std::thread connector_thread_;
 
-  public:
+   public:
     ConnectionManager(const Config& config, std::shared_ptr<PeerManager> peer_manager,
                       std::shared_ptr<MessageHandler> message_handler);
     ~ConnectionManager();
@@ -111,20 +112,14 @@ class ConnectionManager
     /**
      * @brief Get connection statistics
      */
-    ConnectionStats GetStatistics() const
-    {
-        return stats_;
-    }
+    ConnectionStats GetStatistics() const { return stats_; }
 
     /**
      * @brief Check if running
      */
-    bool IsRunning() const
-    {
-        return running_;
-    }
+    bool IsRunning() const { return running_; }
 
-  private:
+   private:
     /**
      * @brief Initialize SSL context
      */
@@ -206,10 +201,10 @@ class ConnectionManager
  */
 class MessageHandler
 {
-  public:
+   public:
     using MessageCallback = std::function<void(const io::UInt256& peer_id, const Message& message)>;
 
-  private:
+   private:
     std::shared_ptr<core::Logger> logger_;
     std::unordered_map<MessageType, MessageCallback> handlers_;
     std::mutex mutex_;
@@ -227,7 +222,7 @@ class MessageHandler
     std::thread processor_thread_;
     std::atomic<bool> running_{false};
 
-  public:
+   public:
     MessageHandler();
     ~MessageHandler();
 
@@ -251,7 +246,7 @@ class MessageHandler
      */
     void Stop();
 
-  private:
+   private:
     /**
      * @brief Message processor thread
      */

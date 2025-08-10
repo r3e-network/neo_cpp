@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <iostream>
 #include <neo/crypto/ecc/ecc_point.h>
 #include <neo/io/binary_writer.h>
 #include <neo/ledger/blockchain.h>
@@ -10,12 +8,15 @@
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <algorithm>
+#include <iostream>
 #include <sstream>
 
 namespace neo::ledger
 {
-std::unordered_set<io::UInt160>
-Blockchain::UpdateExtensibleWitnessWhiteList(std::shared_ptr<persistence::DataCache> snapshot)
+std::unordered_set<io::UInt160> Blockchain::UpdateExtensibleWitnessWhiteList(
+    std::shared_ptr<persistence::DataCache> snapshot)
 {
     std::unordered_set<io::UInt160> whitelist;
 

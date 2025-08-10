@@ -69,7 +69,7 @@ protected:
         block->SetVersion(0);
         block->SetPreviousHash(io::UInt256::Zero());
         block->SetMerkleRoot(io::UInt256::Zero());
-        block->SetTimestamp(std::chrono::system_clock::from_time_t(1468595301)); // Neo mainnet genesis time
+        block->SetTimestamp(static_cast<uint64_t>(1468595301)); // Neo mainnet genesis time
         block->SetIndex(0);
         block->SetPrimaryIndex(0);
         block->SetNextConsensus(io::UInt160::Zero());
@@ -131,7 +131,7 @@ protected:
         block->SetVersion(0);
         block->SetPreviousHash(prevHash);
         block->SetMerkleRoot(io::UInt256::Zero());
-        block->SetTimestamp(std::chrono::system_clock::now());
+        block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
         block->SetIndex(index);
         block->SetPrimaryIndex(index % 7); // Simulate consensus node rotation
         block->SetNextConsensus(io::UInt160::Zero());

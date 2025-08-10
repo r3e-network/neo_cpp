@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <chrono>
 #include <neo/consensus/consensus_service.h>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/hash.h>
@@ -9,6 +7,9 @@
 #include <neo/network/p2p/message_command.h>
 #include <neo/smartcontract/native/native_contract_manager.h>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <algorithm>
+#include <chrono>
 #include <sstream>
 
 namespace neo::consensus
@@ -30,8 +31,7 @@ void ConsensusService::SendChangeView()
 void ConsensusService::SendPrepareRequest()
 {
     // Check if node is primary
-    if (!IsPrimary())
-        return;
+    if (!IsPrimary()) return;
 
     // Create prepare request
     auto message = std::make_shared<PrepareRequest>(viewNumber_, GetCurrentTimestamp(), 0, io::UInt160());
@@ -62,12 +62,10 @@ void ConsensusService::SendPrepareRequest()
 void ConsensusService::SendPrepareResponse()
 {
     // Check if node is backup
-    if (!IsBackup())
-        return;
+    if (!IsBackup()) return;
 
     // Check if prepare request is received
-    if (!prepareRequest_)
-        return;
+    if (!prepareRequest_) return;
 
     // Create prepare response
     auto message = std::make_shared<PrepareResponse>(viewNumber_, prepareRequest_->GetSignature());
@@ -84,8 +82,7 @@ void ConsensusService::SendPrepareResponse()
 void ConsensusService::SendCommit()
 {
     // Check if prepare request is received
-    if (!prepareRequest_)
-        return;
+    if (!prepareRequest_) return;
 
     // Create block
     auto block = CreateBlock();
@@ -170,8 +167,7 @@ void ConsensusService::BroadcastMessage(std::shared_ptr<ConsensusMessage> messag
 void ConsensusService::SendMessage(std::shared_ptr<ConsensusMessage> message, uint16_t validatorIndex)
 {
     // Check if validator index is valid
-    if (validatorIndex >= validators_.size())
-        return;
+    if (validatorIndex >= validators_.size()) return;
 
     // Serialize message
     std::ostringstream stream;

@@ -10,7 +10,7 @@ namespace neo::console_service
  */
 class ConsoleCommandAttribute
 {
-  public:
+   public:
     std::string command;
     std::string category;
     std::string description;

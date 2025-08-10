@@ -2,6 +2,7 @@
 
 #include <neo/json/jtoken.h>
 #include <neo/json/ordered_dictionary.h>
+
 #include <string>
 
 namespace neo::json
@@ -11,7 +12,7 @@ namespace neo::json
  */
 class JObject : public JToken
 {
-  public:
+   public:
     using Properties = OrderedDictionary<std::string, std::shared_ptr<JToken>>;
 
     /**
@@ -101,7 +102,7 @@ class JObject : public JToken
      */
     size_t Count() const;
 
-  protected:
+   protected:
     /**
      * @brief Writes this token to JSON output.
      * @param output The output string.
@@ -110,7 +111,7 @@ class JObject : public JToken
      */
     void WriteJson(std::string& output, bool indented = false, int indent_level = 0) const override;
 
-  private:
+   private:
     Properties properties_;
 };
 }  // namespace neo::json

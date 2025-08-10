@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/io/iserializable.h>
+
+#include <memory>
 
 namespace neo::cryptography
 {
@@ -11,11 +12,11 @@ namespace neo::cryptography
  */
 class Witness : public io::ISerializable
 {
-  private:
+   private:
     io::ByteVector invocation_script_;
     io::ByteVector verification_script_;
 
-  public:
+   public:
     /**
      * @brief Default constructor
      */
@@ -32,34 +33,22 @@ class Witness : public io::ISerializable
     /**
      * @brief Get invocation script
      */
-    const io::ByteVector& GetInvocationScript() const
-    {
-        return invocation_script_;
-    }
+    const io::ByteVector& GetInvocationScript() const { return invocation_script_; }
 
     /**
      * @brief Set invocation script
      */
-    void SetInvocationScript(const io::ByteVector& script)
-    {
-        invocation_script_ = script;
-    }
+    void SetInvocationScript(const io::ByteVector& script) { invocation_script_ = script; }
 
     /**
      * @brief Get verification script
      */
-    const io::ByteVector& GetVerificationScript() const
-    {
-        return verification_script_;
-    }
+    const io::ByteVector& GetVerificationScript() const { return verification_script_; }
 
     /**
      * @brief Set verification script
      */
-    void SetVerificationScript(const io::ByteVector& script)
-    {
-        verification_script_ = script;
-    }
+    void SetVerificationScript(const io::ByteVector& script) { verification_script_ = script; }
 
     /**
      * @brief Get size in bytes
@@ -72,9 +61,6 @@ class Witness : public io::ISerializable
 
     // Comparison operators
     bool operator==(const Witness& other) const;
-    bool operator!=(const Witness& other) const
-    {
-        return !(*this == other);
-    }
+    bool operator!=(const Witness& other) const { return !(*this == other); }
 };
 }  // namespace neo::cryptography

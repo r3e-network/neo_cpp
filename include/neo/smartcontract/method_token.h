@@ -1,10 +1,11 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
 #include <neo/smartcontract/call_flags.h>
+
+#include <cstdint>
 #include <string>
 
 namespace neo::smartcontract
@@ -14,7 +15,7 @@ namespace neo::smartcontract
  */
 class MethodToken : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty MethodToken.
      */
@@ -104,7 +105,7 @@ class MethodToken : public io::ISerializable, public io::IJsonSerializable
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
+   private:
     io::UInt160 hash_;
     std::string method_;
     uint16_t parametersCount_;

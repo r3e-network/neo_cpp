@@ -25,8 +25,7 @@ void JumpTable::MEMCPY(ExecutionEngine& engine, const Instruction& instruction)
 void JumpTableSpliceBuffer::NEWBUFFER(ExecutionEngine& engine, const Instruction& /* instruction */)
 {
     auto size = engine.Pop()->GetInteger();
-    if (size < 0 || size > engine.GetLimits().MaxItemSize)
-        throw InvalidOperationException("Invalid buffer size");
+    if (size < 0 || size > engine.GetLimits().MaxItemSize) throw InvalidOperationException("Invalid buffer size");
 
     io::ByteVector buffer(static_cast<size_t>(size));
     std::memset(buffer.Data(), 0, static_cast<size_t>(size));
@@ -41,17 +40,13 @@ void JumpTableSpliceBuffer::MEMCPY(ExecutionEngine& engine, const Instruction& /
     auto dstIndex = engine.Pop()->GetInteger();
     auto dst = engine.Pop();
 
-    if (count < 0)
-        throw InvalidOperationException("Count cannot be negative");
+    if (count < 0) throw InvalidOperationException("Count cannot be negative");
 
-    if (srcIndex < 0)
-        throw InvalidOperationException("Source index cannot be negative");
+    if (srcIndex < 0) throw InvalidOperationException("Source index cannot be negative");
 
-    if (dstIndex < 0)
-        throw InvalidOperationException("Destination index cannot be negative");
+    if (dstIndex < 0) throw InvalidOperationException("Destination index cannot be negative");
 
-    if (dst->GetType() != StackItemType::Buffer)
-        throw InvalidOperationException("Destination is not a buffer");
+    if (dst->GetType() != StackItemType::Buffer) throw InvalidOperationException("Destination is not a buffer");
 
     auto srcBytes = src->GetByteArray();
     auto dstBytes = dst->GetByteArray();

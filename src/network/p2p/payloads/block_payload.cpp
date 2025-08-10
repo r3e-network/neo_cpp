@@ -8,25 +8,13 @@ BlockPayload::~BlockPayload() = default;
 
 BlockPayload::BlockPayload(std::shared_ptr<ledger::Block> block) : block_(block) {}
 
-std::shared_ptr<ledger::Block> BlockPayload::GetBlock() const
-{
-    return block_;
-}
+std::shared_ptr<ledger::Block> BlockPayload::GetBlock() const { return block_; }
 
-void BlockPayload::SetBlock(std::shared_ptr<ledger::Block> block)
-{
-    block_ = block;
-}
+void BlockPayload::SetBlock(std::shared_ptr<ledger::Block> block) { block_ = block; }
 
-int BlockPayload::GetSize() const
-{
-    return block_ ? static_cast<int>(block_->GetSize()) : 0;
-}
+int BlockPayload::GetSize() const { return block_ ? static_cast<int>(block_->GetSize()) : 0; }
 
-BlockPayload BlockPayload::Create(std::shared_ptr<ledger::Block> block)
-{
-    return BlockPayload(block);
-}
+BlockPayload BlockPayload::Create(std::shared_ptr<ledger::Block> block) { return BlockPayload(block); }
 
 void BlockPayload::Serialize(io::BinaryWriter& writer) const
 {
@@ -67,7 +55,7 @@ void BlockPayload::DeserializeJson(const io::JsonReader& reader)
 {
     // Create new block and populate from JSON
     block_ = std::make_shared<ledger::Block>();
-    
+
     // Read block properties from JSON using the correct API
     auto version = reader.ReadUInt32("version");
     auto previousHashStr = reader.ReadString("previousHash");
@@ -82,7 +70,7 @@ void BlockPayload::DeserializeJson(const io::JsonReader& reader)
     io::UInt256 previousHash = io::UInt256::Parse(previousHashStr);
     io::UInt256 merkleRoot = io::UInt256::Parse(merkleRootStr);
     io::UInt160 nextConsensus = io::UInt160::Parse(nextConsensusStr);
-    
+
     // Set block properties (assuming Block has appropriate setters or constructor)
     // Note: This assumes Block class has methods to set these properties
     // In a real implementation, you'd need to check the actual Block API

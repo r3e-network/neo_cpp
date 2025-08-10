@@ -1,12 +1,13 @@
 #pragma once
 
+#include <neo/vm/exception_handling_context.h>
+#include <neo/vm/script.h>
+#include <neo/vm/stack_item.h>
+
 #include <any>
 #include <cstdint>
 #include <functional>
 #include <memory>
-#include <neo/vm/exception_handling_context.h>
-#include <neo/vm/script.h>
-#include <neo/vm/stack_item.h>
 #include <optional>
 #include <tuple>
 #include <typeindex>
@@ -21,7 +22,7 @@ namespace neo::vm
  */
 class ExecutionContext
 {
-  public:
+   public:
     /**
      * @brief Constructs a new ExecutionContext.
      * @param script The script.
@@ -339,7 +340,7 @@ class ExecutionContext
      */
     const std::vector<int32_t>& GetCallTable() const;
 
-  private:
+   private:
     Script script_;
     int32_t instructionPointer_;
     int32_t rvcount_;

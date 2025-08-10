@@ -2,6 +2,7 @@
 
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
+
 #include <array>
 #include <string>
 
@@ -13,14 +14,14 @@ class Ed25519;
 
 /**
  * @brief Ed25519 signature scheme implementation.
- * 
+ *
  * This class provides Ed25519 digital signature functionality following RFC 8032.
  * Ed25519 is a high-speed, high-security signature scheme that is widely used
  * in blockchain and cryptographic applications.
  */
 class Ed25519
 {
-public:
+   public:
     static constexpr size_t PRIVATE_KEY_SIZE = 32;
     static constexpr size_t PUBLIC_KEY_SIZE = 32;
     static constexpr size_t SIGNATURE_SIZE = 64;
@@ -34,7 +35,7 @@ public:
      */
     class PrivateKey
     {
-    public:
+       public:
         /**
          * @brief Constructs a private key from raw bytes.
          * @param key_data The 32-byte private key data.
@@ -66,7 +67,7 @@ public:
          */
         io::ByteVector Sign(const io::ByteSpan& message) const;
 
-    private:
+       private:
         std::array<uint8_t, PRIVATE_KEY_SIZE> key_data_;
     };
 
@@ -75,7 +76,7 @@ public:
      */
     class PublicKey
     {
-    public:
+       public:
         /**
          * @brief Constructs a public key from raw bytes.
          * @param key_data The 32-byte public key data.
@@ -109,7 +110,7 @@ public:
          */
         static PublicKey FromHex(const std::string& hex);
 
-    private:
+       private:
         std::array<uint8_t, PUBLIC_KEY_SIZE> key_data_;
     };
 
@@ -133,9 +134,7 @@ public:
      * @param public_key The public key bytes.
      * @return True if the signature is valid, false otherwise.
      */
-    static bool Verify(const io::ByteSpan& message, 
-                      const io::ByteSpan& signature, 
-                      const io::ByteSpan& public_key);
+    static bool Verify(const io::ByteSpan& message, const io::ByteSpan& signature, const io::ByteSpan& public_key);
 };
 
-} // namespace neo::cryptography
+}  // namespace neo::cryptography

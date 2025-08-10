@@ -57,7 +57,7 @@ struct LogConfig
  */
 class Logger
 {
-  private:
+   private:
 #ifdef NEO_HAS_SPDLOG
     std::shared_ptr<spdlog::logger> logger_;
 #else
@@ -69,7 +69,7 @@ class Logger
 
     explicit Logger(const std::string& name, const LogConfig& config);
 
-  public:
+   public:
     /**
      * @brief Initialize the global logger
      * @param name Logger name
@@ -202,7 +202,15 @@ void Logger::Info(const std::string& fmt, Args&&... args)
     if (level_ <= LogLevel::Info)
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        std::cout << "[INFO] " << fmt << std::endl;
+        if constexpr (sizeof...(args) == 0)
+        {
+            std::cout << "[INFO] " << fmt << std::endl;
+        }
+        else
+        {
+            // Simple format replacement - just print as is for now
+            std::cout << "[INFO] " << fmt << std::endl;
+        }
     }
 }
 
@@ -250,12 +258,12 @@ void Logger::Critical(const std::string& fmt, Args&&... args)
  */
 class PerfLogger
 {
-  private:
+   private:
     std::string operation_;
     std::chrono::steady_clock::time_point start_;
     LogLevel level_;
 
-  public:
+   public:
     explicit PerfLogger(const std::string& operation, LogLevel level = LogLevel::Debug);
     ~PerfLogger();
 };
@@ -265,12 +273,12 @@ class PerfLogger
  */
 class StructuredLog
 {
-  private:
+   private:
     std::ostringstream stream_;
     LogLevel level_;
     std::string message_;
 
-  public:
+   public:
     StructuredLog(LogLevel level, const std::string& message);
 
     template <typename T>
@@ -288,7 +296,7 @@ class StructuredLog
  */
 class LoggerFactory
 {
-public:
+   public:
     /**
      * @brief Get a logger by name
      * @param name Logger name

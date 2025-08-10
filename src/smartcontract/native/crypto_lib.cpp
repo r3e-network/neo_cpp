@@ -1,4 +1,3 @@
-#include <iostream>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/eccurve.h>
 #include <neo/cryptography/ecc/ecpoint.h>
@@ -7,6 +6,8 @@
 #include <neo/io/binary_writer.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/crypto_lib.h>
+
+#include <iostream>
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -46,8 +47,7 @@ void CryptoLib::Initialize()
 std::shared_ptr<vm::StackItem> CryptoLib::OnSha256(ApplicationEngine& engine,
                                                    const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetByteArray();
@@ -61,8 +61,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnSha256(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> CryptoLib::OnRipemd160(ApplicationEngine& engine,
                                                       const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetByteArray();
@@ -76,8 +75,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnRipemd160(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> CryptoLib::OnHash160(ApplicationEngine& engine,
                                                     const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetByteArray();
@@ -91,8 +89,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnHash160(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> CryptoLib::OnHash256(ApplicationEngine& engine,
                                                     const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto dataItem = args[0];
     auto data = dataItem->GetByteArray();
@@ -106,8 +103,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnHash256(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> CryptoLib::OnVerifySignature(ApplicationEngine& engine,
                                                             const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 3)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 3) throw std::runtime_error("Invalid arguments");
 
     auto messageItem = args[0];
     auto pubKeyItem = args[1];
@@ -121,8 +117,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnVerifySignature(ApplicationEngine& e
     try
     {
         // Check signature length (must be 64 bytes)
-        if (signature.Size() != 64)
-            return vm::StackItem::Create(false);
+        if (signature.Size() != 64) return vm::StackItem::Create(false);
 
         // Decode the public key to ECPoint (equivalent to C# ECPoint.DecodePoint)
         auto ecPoint = neo::cryptography::ecc::ECPoint::Parse(pubKey.ToHexString());
@@ -156,8 +151,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnVerifySignature(ApplicationEngine& e
 std::shared_ptr<vm::StackItem> CryptoLib::OnVerifyWithECDsa(ApplicationEngine& engine,
                                                             const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 4)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 4) throw std::runtime_error("Invalid arguments");
 
     auto messageItem = args[0];
     auto pubKeyItem = args[1];
@@ -173,12 +167,10 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnVerifyWithECDsa(ApplicationEngine& e
     try
     {
         // Check signature length (must be 64 bytes)
-        if (signature.Size() != 64)
-            return vm::StackItem::Create(false);
+        if (signature.Size() != 64) return vm::StackItem::Create(false);
 
         // Support both secp256r1 and secp256k1 like C# version
-        if (curve != "secp256r1" && curve != "secp256k1")
-            return vm::StackItem::Create(false);
+        if (curve != "secp256r1" && curve != "secp256k1") return vm::StackItem::Create(false);
 
         // Decode the public key to ECPoint (equivalent to C# ECPoint.DecodePoint)
         auto ecPoint = neo::cryptography::ecc::ECPoint::Parse(pubKey.ToHexString());
@@ -323,8 +315,8 @@ bool CryptoLib::IsValidSecp256k1PublicKey(const cryptography::ecc::ECPoint& publ
     }
 }
 
-std::pair<std::optional<io::ByteVector>, std::optional<io::ByteVector>>
-CryptoLib::ParseSecp256k1Signature(const io::ByteVector& signature)
+std::pair<std::optional<io::ByteVector>, std::optional<io::ByteVector>> CryptoLib::ParseSecp256k1Signature(
+    const io::ByteVector& signature)
 {
     try
     {
@@ -486,8 +478,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Serialize(ApplicationEngine&
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.size() != 1)
-        throw std::runtime_error("Invalid arguments count");
+    if (args.size() != 1) throw std::runtime_error("Invalid arguments count");
 
     try
     {
@@ -533,8 +524,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Deserialize(ApplicationEngin
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.size() != 1)
-        throw std::runtime_error("Invalid arguments count");
+    if (args.size() != 1) throw std::runtime_error("Invalid arguments count");
 
     try
     {
@@ -593,8 +583,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Equal(ApplicationEngine& eng
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.size() != 2)
-        throw std::runtime_error("Invalid arguments count");
+    if (args.size() != 2) throw std::runtime_error("Invalid arguments count");
 
     try
     {
@@ -654,8 +643,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Add(ApplicationEngine& engin
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.size() != 2)
-        throw std::runtime_error("Invalid arguments count");
+    if (args.size() != 2) throw std::runtime_error("Invalid arguments count");
 
     try
     {
@@ -704,8 +692,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Mul(ApplicationEngine& engin
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.size() != 2)
-        throw std::runtime_error("Invalid arguments count");
+    if (args.size() != 2) throw std::runtime_error("Invalid arguments count");
 
     try
     {
@@ -747,8 +734,7 @@ std::shared_ptr<vm::StackItem> CryptoLib::OnBls12381Pairing(ApplicationEngine& e
 {
     (void)engine;  // Suppress unused parameter warning
 
-    if (args.size() != 2)
-        throw std::runtime_error("Invalid arguments count");
+    if (args.size() != 2) throw std::runtime_error("Invalid arguments count");
 
     try
     {
@@ -1018,16 +1004,12 @@ io::ByteVector CryptoLib::AddG1Points(const io::ByteVector& point1, const io::By
 
     for (size_t i = 0; i < 96; ++i)
     {
-        if (point1[i] != 0)
-            p1_is_identity = false;
-        if (point2[i] != 0)
-            p2_is_identity = false;
+        if (point1[i] != 0) p1_is_identity = false;
+        if (point2[i] != 0) p2_is_identity = false;
     }
 
-    if (p1_is_identity)
-        return point2;
-    if (p2_is_identity)
-        return point1;
+    if (p1_is_identity) return point2;
+    if (p2_is_identity) return point1;
 
     // Returns point1 until BLS12-381 curve addition is implemented
     // Full implementation would perform: P + Q using BLS12-381 curve arithmetic
@@ -1047,16 +1029,12 @@ io::ByteVector CryptoLib::AddG2Points(const io::ByteVector& point1, const io::By
 
     for (size_t i = 0; i < 192; ++i)
     {
-        if (point1[i] != 0)
-            p1_is_identity = false;
-        if (point2[i] != 0)
-            p2_is_identity = false;
+        if (point1[i] != 0) p1_is_identity = false;
+        if (point2[i] != 0) p2_is_identity = false;
     }
 
-    if (p1_is_identity)
-        return point2;
-    if (p2_is_identity)
-        return point1;
+    if (p1_is_identity) return point2;
+    if (p2_is_identity) return point1;
 
     // Perform actual G2 point addition using BLS12-381 curve arithmetic
     // Return point1 as safe implementation for non-identity points

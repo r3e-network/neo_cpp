@@ -34,7 +34,7 @@ namespace neo::extensions
  */
 class HashSetExtensions
 {
-  public:
+   public:
     /**
      * @brief Compute union of two unordered sets
      * @tparam T Element type
@@ -118,13 +118,11 @@ class HashSetExtensions
     template <typename T>
     static bool IsSubsetOf(const std::unordered_set<T>& left, const std::unordered_set<T>& right)
     {
-        if (left.size() > right.size())
-            return false;
+        if (left.size() > right.size()) return false;
 
         for (const auto& item : left)
         {
-            if (right.find(item) == right.end())
-                return false;
+            if (right.find(item) == right.end()) return false;
         }
         return true;
     }
@@ -157,8 +155,7 @@ class HashSetExtensions
 
         for (const auto& item : smaller)
         {
-            if (larger.find(item) != larger.end())
-                return false;
+            if (larger.find(item) != larger.end()) return false;
         }
         return true;
     }

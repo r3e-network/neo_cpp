@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/ijson_serializable.h>
@@ -9,6 +8,8 @@
 #include <neo/io/json_writer.h>
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/node_capability.h>
+
+#include <cstdint>
 #include <string>
 #include <vector>
 
@@ -19,7 +20,7 @@ namespace neo::network::p2p
  */
 class Peer : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty Peer.
      */
@@ -178,7 +179,7 @@ class Peer : public io::ISerializable, public io::IJsonSerializable
      */
     bool operator!=(const Peer& other) const;
 
-  private:
+   private:
     IPEndPoint endpoint_;
     uint32_t version_;
     std::vector<NodeCapability> capabilities_;

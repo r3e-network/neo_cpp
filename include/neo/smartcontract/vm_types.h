@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/smartcontract/trigger_type.h>
 #include <neo/vm/vm_state.h>
+
+#include <memory>
 #include <string>
 #include <vector>
 

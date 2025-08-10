@@ -8,6 +8,7 @@
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/policy_contract.h>
+
 #include <sstream>
 
 namespace neo::smartcontract::native
@@ -40,16 +41,14 @@ void LedgerContract::Initialize()
 std::shared_ptr<vm::StackItem> LedgerContract::OnGetHash(ApplicationEngine& engine,
                                                          const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto indexItem = args[0];
     auto index = indexItem->GetInteger();
 
     // Get block hash
     auto hash = GetBlockHash(engine.GetSnapshot(), index);
-    if (hash.IsZero())
-        return vm::StackItem::Create(nullptr);
+    if (hash.IsZero()) return vm::StackItem::Create(nullptr);
 
     return vm::StackItem::Create(io::ByteVector(io::ByteSpan(hash.Data(), io::UInt256::Size)));
 }
@@ -57,8 +56,7 @@ std::shared_ptr<vm::StackItem> LedgerContract::OnGetHash(ApplicationEngine& engi
 std::shared_ptr<vm::StackItem> LedgerContract::OnGetBlock(ApplicationEngine& engine,
                                                           const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto hashOrIndexItem = args[0];
     std::shared_ptr<ledger::Block> block;
@@ -69,19 +67,16 @@ std::shared_ptr<vm::StackItem> LedgerContract::OnGetBlock(ApplicationEngine& eng
         auto index = static_cast<uint32_t>(hashOrIndexItem->GetInteger());
 
         // Check if block is traceable
-        if (!IsTraceableBlock(engine, index))
-            return vm::StackItem::Create(nullptr);
+        if (!IsTraceableBlock(engine, index)) return vm::StackItem::Create(nullptr);
 
         auto hash = GetBlockHash(engine.GetSnapshot(), index);
-        if (!hash.IsZero())
-            block = GetBlock(engine.GetSnapshot(), hash);
+        if (!hash.IsZero()) block = GetBlock(engine.GetSnapshot(), hash);
     }
     else
     {
         // Get block by hash
         auto hashBytes = hashOrIndexItem->GetByteArray();
-        if (hashBytes.Size() != 32)
-            throw std::runtime_error("Invalid hash");
+        if (hashBytes.Size() != 32) throw std::runtime_error("Invalid hash");
 
         io::UInt256 hash;
         std::memcpy(hash.Data(), hashBytes.Data(), 32);
@@ -89,12 +84,10 @@ std::shared_ptr<vm::StackItem> LedgerContract::OnGetBlock(ApplicationEngine& eng
         block = GetBlock(engine.GetSnapshot(), hash);
 
         // Check if block is traceable
-        if (block && !IsTraceableBlock(engine, block->GetIndex()))
-            return vm::StackItem::Create(nullptr);
+        if (block && !IsTraceableBlock(engine, block->GetIndex())) return vm::StackItem::Create(nullptr);
     }
 
-    if (!block)
-        return vm::StackItem::Create(nullptr);
+    if (!block) return vm::StackItem::Create(nullptr);
 
     return BlockToStackItem(block);
 }
@@ -102,61 +95,52 @@ std::shared_ptr<vm::StackItem> LedgerContract::OnGetBlock(ApplicationEngine& eng
 std::shared_ptr<vm::StackItem> LedgerContract::OnGetTransaction(ApplicationEngine& engine,
                                                                 const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto hashItem = args[0];
     auto hashBytes = hashItem->GetByteArray();
 
-    if (hashBytes.Size() != 32)
-        throw std::runtime_error("Invalid hash");
+    if (hashBytes.Size() != 32) throw std::runtime_error("Invalid hash");
 
     io::UInt256 hash;
     std::memcpy(hash.Data(), hashBytes.Data(), 32);
 
     // Get transaction
     auto tx = GetTransaction(engine.GetSnapshot(), hash);
-    if (!tx)
-        return vm::StackItem::Create(nullptr);
+    if (!tx) return vm::StackItem::Create(nullptr);
 
     // Check if transaction's block is traceable
     int32_t height = GetTransactionHeight(engine.GetSnapshot(), hash);
-    if (height < 0 || !IsTraceableBlock(engine, height))
-        return vm::StackItem::Create(nullptr);
+    if (height < 0 || !IsTraceableBlock(engine, height)) return vm::StackItem::Create(nullptr);
 
     return TransactionToStackItem(tx);
 }
 
-std::shared_ptr<vm::StackItem>
-LedgerContract::OnGetTransactionHeight(ApplicationEngine& engine,
-                                       const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> LedgerContract::OnGetTransactionHeight(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto hashItem = args[0];
     auto hashBytes = hashItem->GetByteArray();
 
-    if (hashBytes.Size() != 32)
-        throw std::runtime_error("Invalid hash");
+    if (hashBytes.Size() != 32) throw std::runtime_error("Invalid hash");
 
     io::UInt256 hash;
     std::memcpy(hash.Data(), hashBytes.Data(), 32);
 
     // Get transaction height
     auto height = GetTransactionHeight(engine.GetSnapshot(), hash);
-    if (height < 0)
-        return vm::StackItem::Create(nullptr);
+    if (height < 0) return vm::StackItem::Create(nullptr);
 
     // Check if transaction's block is traceable
-    if (!IsTraceableBlock(engine, height))
-        return vm::StackItem::Create(nullptr);
+    if (!IsTraceableBlock(engine, height)) return vm::StackItem::Create(nullptr);
 
     return vm::StackItem::Create(static_cast<int64_t>(height));
 }
 
-std::shared_ptr<vm::StackItem>
-LedgerContract::OnGetCurrentIndex(ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
+std::shared_ptr<vm::StackItem> LedgerContract::OnGetCurrentIndex(
+    ApplicationEngine& engine, const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
     // Get current index
     auto index = GetCurrentIndex(engine.GetSnapshot());
@@ -205,8 +189,7 @@ std::shared_ptr<vm::StackItem> LedgerContract::TransactionToStackItem(std::share
 
 bool LedgerContract::IsInitialized(std::shared_ptr<persistence::DataCache> snapshot) const
 {
-    if (!snapshot)
-        throw std::invalid_argument("snapshot");
+    if (!snapshot) throw std::invalid_argument("snapshot");
 
     auto prefix = CreateStorageKey(PREFIX_BLOCK);
     auto results = snapshot->Find(&prefix);
@@ -231,8 +214,7 @@ bool LedgerContract::IsTraceableBlock(ApplicationEngine& engine, uint32_t index)
 bool LedgerContract::IsTraceableBlock(std::shared_ptr<persistence::DataCache> snapshot, uint32_t index,
                                       uint32_t maxTraceableBlocks) const
 {
-    if (!snapshot)
-        throw std::invalid_argument("snapshot");
+    if (!snapshot) throw std::invalid_argument("snapshot");
 
     uint32_t currentIndex = GetCurrentIndex(snapshot);
     return index <= currentIndex && index + maxTraceableBlocks > currentIndex;
@@ -240,12 +222,10 @@ bool LedgerContract::IsTraceableBlock(std::shared_ptr<persistence::DataCache> sn
 
 io::UInt256 LedgerContract::GetCurrentHash(std::shared_ptr<persistence::DataCache> snapshot) const
 {
-    if (!snapshot)
-        throw std::invalid_argument("snapshot");
+    if (!snapshot) throw std::invalid_argument("snapshot");
 
     auto item = snapshot->TryGet(currentBlockKey_);
-    if (!item)
-        return io::UInt256();
+    if (!item) return io::UInt256();
 
     std::istringstream stream(
         std::string(reinterpret_cast<const char*>(item->GetValue().Data()), item->GetValue().Size()));
@@ -259,12 +239,10 @@ io::UInt256 LedgerContract::GetCurrentHash(std::shared_ptr<persistence::DataCach
 
 uint32_t LedgerContract::GetCurrentIndex(std::shared_ptr<persistence::DataCache> snapshot) const
 {
-    if (!snapshot)
-        throw std::invalid_argument("snapshot");
+    if (!snapshot) throw std::invalid_argument("snapshot");
 
     auto item = snapshot->TryGet(currentBlockKey_);
-    if (!item)
-        return 0;
+    if (!item) return 0;
 
     std::istringstream stream(
         std::string(reinterpret_cast<const char*>(item->GetValue().Data()), item->GetValue().Size()));
@@ -278,13 +256,11 @@ uint32_t LedgerContract::GetCurrentIndex(std::shared_ptr<persistence::DataCache>
 
 io::UInt256 LedgerContract::GetBlockHash(std::shared_ptr<persistence::DataCache> snapshot, uint32_t index) const
 {
-    if (!snapshot)
-        throw std::invalid_argument("snapshot");
+    if (!snapshot) throw std::invalid_argument("snapshot");
 
     auto key = CreateStorageKey(PREFIX_BLOCK_HASH, index);
     auto item = snapshot->TryGet(key);
-    if (!item)
-        return io::UInt256();
+    if (!item) return io::UInt256();
 
     io::UInt256 hash;
     std::memcpy(hash.Data(), item->GetValue().Data(), io::UInt256::Size);
@@ -295,13 +271,11 @@ io::UInt256 LedgerContract::GetBlockHash(std::shared_ptr<persistence::DataCache>
 std::shared_ptr<ledger::Block> LedgerContract::GetBlock(std::shared_ptr<persistence::DataCache> snapshot,
                                                         const io::UInt256& hash) const
 {
-    if (!snapshot)
-        throw std::invalid_argument("snapshot");
+    if (!snapshot) throw std::invalid_argument("snapshot");
 
     auto key = CreateStorageKey(PREFIX_BLOCK, io::ByteVector(io::ByteSpan(hash.Data(), io::UInt256::Size)));
     auto item = snapshot->TryGet(key);
-    if (!item)
-        return nullptr;
+    if (!item) return nullptr;
 
     std::istringstream stream(
         std::string(reinterpret_cast<const char*>(item->GetValue().Data()), item->GetValue().Size()));
@@ -316,13 +290,11 @@ std::shared_ptr<ledger::Block> LedgerContract::GetBlock(std::shared_ptr<persiste
 std::shared_ptr<ledger::Transaction> LedgerContract::GetTransaction(std::shared_ptr<persistence::DataCache> snapshot,
                                                                     const io::UInt256& hash) const
 {
-    if (!snapshot)
-        throw std::invalid_argument("snapshot");
+    if (!snapshot) throw std::invalid_argument("snapshot");
 
     auto key = CreateStorageKey(PREFIX_TRANSACTION, io::ByteVector(io::ByteSpan(hash.Data(), io::UInt256::Size)));
     auto item = snapshot->TryGet(key);
-    if (!item)
-        return nullptr;
+    if (!item) return nullptr;
 
     std::istringstream stream(
         std::string(reinterpret_cast<const char*>(item->GetValue().Data()), item->GetValue().Size()));
@@ -337,13 +309,11 @@ std::shared_ptr<ledger::Transaction> LedgerContract::GetTransaction(std::shared_
 int32_t LedgerContract::GetTransactionHeight(std::shared_ptr<persistence::DataCache> snapshot,
                                              const io::UInt256& hash) const
 {
-    if (!snapshot)
-        throw std::invalid_argument("snapshot");
+    if (!snapshot) throw std::invalid_argument("snapshot");
 
     auto key = CreateStorageKey(PREFIX_TRANSACTION, io::ByteVector(io::ByteSpan(hash.Data(), io::UInt256::Size)));
     auto item = snapshot->TryGet(key);
-    if (!item)
-        return -1;
+    if (!item) return -1;
 
     std::istringstream stream(
         std::string(reinterpret_cast<const char*>(item->GetValue().Data()), item->GetValue().Size()));
@@ -362,8 +332,7 @@ int32_t LedgerContract::GetTransactionHeight(std::shared_ptr<persistence::DataCa
 bool LedgerContract::OnPersist(ApplicationEngine& engine)
 {
     auto block = engine.GetPersistingBlock();
-    if (!block)
-        return false;
+    if (!block) return false;
 
     // Store block hash
     auto blockHashKey = CreateStorageKey(PREFIX_BLOCK_HASH, block->GetIndex());
@@ -407,8 +376,7 @@ bool LedgerContract::OnPersist(ApplicationEngine& engine)
 bool LedgerContract::PostPersist(ApplicationEngine& engine)
 {
     auto block = engine.GetPersistingBlock();
-    if (!block)
-        return false;
+    if (!block) return false;
 
     // Update current block
     auto item = engine.GetSnapshot()->GetAndChange(

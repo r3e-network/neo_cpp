@@ -18,7 +18,7 @@ namespace core
  */
 class Plugin
 {
-  public:
+   public:
     /**
      * @brief Plugin configuration
      */
@@ -46,46 +46,31 @@ class Plugin
      * @brief Get plugin name
      * @return Plugin name
      */
-    const std::string& GetName() const
-    {
-        return config_.name;
-    }
+    const std::string& GetName() const { return config_.name; }
 
     /**
      * @brief Get plugin version
      * @return Plugin version
      */
-    const std::string& GetVersion() const
-    {
-        return config_.version;
-    }
+    const std::string& GetVersion() const { return config_.version; }
 
     /**
      * @brief Get plugin description
      * @return Plugin description
      */
-    const std::string& GetDescription() const
-    {
-        return config_.description;
-    }
+    const std::string& GetDescription() const { return config_.description; }
 
     /**
      * @brief Get plugin author
      * @return Plugin author
      */
-    const std::string& GetAuthor() const
-    {
-        return config_.author;
-    }
+    const std::string& GetAuthor() const { return config_.author; }
 
     /**
      * @brief Check if plugin is enabled
      * @return true if enabled, false otherwise
      */
-    bool IsEnabled() const
-    {
-        return config_.enabled;
-    }
+    bool IsEnabled() const { return config_.enabled; }
 
     /**
      * @brief Initialize the plugin
@@ -108,12 +93,9 @@ class Plugin
      * @brief Handle configuration changes
      * @param newConfig New configuration
      */
-    virtual void OnConfigChanged(const Config& newConfig)
-    {
-        config_ = newConfig;
-    }
+    virtual void OnConfigChanged(const Config& newConfig) { config_ = newConfig; }
 
-  protected:
+   protected:
     Config config_;
 };
 
@@ -122,7 +104,7 @@ class Plugin
  */
 class PluginManager
 {
-  public:
+   public:
     /**
      * @brief Get singleton instance
      * @return Plugin manager instance
@@ -184,7 +166,7 @@ class PluginManager
      */
     size_t LoadPluginsFromDirectory(const std::string& directory);
 
-  private:
+   private:
     PluginManager() = default;
     ~PluginManager() = default;
     PluginManager(const PluginManager&) = delete;
@@ -200,13 +182,10 @@ class PluginManager
  * Each plugin shared library should use this macro to export
  * a factory function that creates the plugin instance.
  */
-#define NEO_EXPORT_PLUGIN(PluginClass)                                                                                 \
-    extern "C"                                                                                                         \
-    {                                                                                                                  \
-        std::shared_ptr<neo::core::Plugin> CreatePlugin()                                                              \
-        {                                                                                                              \
-            return std::make_shared<PluginClass>();                                                                    \
-        }                                                                                                              \
+#define NEO_EXPORT_PLUGIN(PluginClass)                                                                \
+    extern "C"                                                                                        \
+    {                                                                                                 \
+        std::shared_ptr<neo::core::Plugin> CreatePlugin() { return std::make_shared<PluginClass>(); } \
     }
 
 }  // namespace core

@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableCompoundMap
 {
-  public:
+   public:
     // Map operations
     static void NEWMAP(ExecutionEngine& engine, const Instruction& instruction);
     static void PACKMAP(ExecutionEngine& engine, const Instruction& instruction);

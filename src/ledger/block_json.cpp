@@ -3,6 +3,7 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/ledger/block.h>
+
 #include <sstream>
 
 namespace neo::ledger

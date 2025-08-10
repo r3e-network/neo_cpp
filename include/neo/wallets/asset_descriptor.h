@@ -3,6 +3,7 @@
 #include <neo/config/protocol_settings.h>
 #include <neo/io/uint160.h>
 #include <neo/persistence/data_cache.h>
+
 #include <string>
 
 namespace neo::wallets
@@ -12,7 +13,7 @@ namespace neo::wallets
  */
 class AssetDescriptor
 {
-  public:
+   public:
     /**
      * @brief Initializes a new instance of the AssetDescriptor class.
      * @param snapshot The snapshot used to read data.
@@ -53,7 +54,7 @@ class AssetDescriptor
      */
     std::string ToString() const;
 
-  private:
+   private:
     io::UInt160 assetId_;
     std::string assetName_;
     std::string symbol_;

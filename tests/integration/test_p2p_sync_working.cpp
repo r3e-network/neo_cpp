@@ -78,7 +78,7 @@ TEST_F(P2PSyncWorkingTest, TestBlockCreation)
     block->SetVersion(0);
     block->SetPreviousHash(io::UInt256::Zero());
     block->SetMerkleRoot(io::UInt256::Zero());
-    block->SetTimestamp(std::chrono::system_clock::now());
+    block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block->SetIndex(0);
     block->SetPrimaryIndex(0);
     block->SetNextConsensus(io::UInt160::Zero());
@@ -173,7 +173,7 @@ TEST_F(P2PSyncWorkingTest, TestBlockProcessingWithoutBlockchain)
     block->SetVersion(0);
     block->SetPreviousHash(io::UInt256::Zero());
     block->SetMerkleRoot(io::UInt256::Zero());
-    block->SetTimestamp(std::chrono::system_clock::now());
+    block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
     block->SetIndex(0);
     block->SetPrimaryIndex(0);
     block->SetNextConsensus(io::UInt160::Zero());
@@ -195,7 +195,7 @@ TEST_F(P2PSyncWorkingTest, TestBatchProcessingWithoutBlockchain)
         block->SetVersion(0);
         block->SetPreviousHash(io::UInt256::Zero());
         block->SetMerkleRoot(io::UInt256::Zero());
-        block->SetTimestamp(std::chrono::system_clock::now() + std::chrono::seconds(i));
+        block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>((std::chrono::system_clock::now() + std::chrono::seconds(i)).time_since_epoch()).count()));
         block->SetIndex(i);
         block->SetPrimaryIndex(0);
         block->SetNextConsensus(io::UInt160::Zero());

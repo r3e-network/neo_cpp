@@ -11,7 +11,7 @@ namespace neo::network::p2p::payloads
  */
 class GetDataPayload : public InvPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty GetDataPayload.
      */

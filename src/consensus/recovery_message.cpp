@@ -1,12 +1,13 @@
-#include <neo/consensus/recovery_message.h>
 #include <neo/consensus/consensus_message.h>
+#include <neo/consensus/recovery_message.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+
 #include <sstream>
 
 namespace neo::consensus
 {
-RecoveryMessage::RecoveryMessage(uint8_t viewNumber) : ConsensusMessage(ConsensusMessageType::RecoveryMessage) 
+RecoveryMessage::RecoveryMessage(uint8_t viewNumber) : ConsensusMessage(ConsensusMessageType::RecoveryMessage)
 {
     SetViewNumber(viewNumber);
 }
@@ -21,10 +22,7 @@ void RecoveryMessage::AddChangeViewMessage(std::shared_ptr<ChangeViewMessage> me
     changeViewMessages_.push_back(message);
 }
 
-std::shared_ptr<PrepareRequest> RecoveryMessage::GetPrepareRequest() const
-{
-    return prepareRequest_;
-}
+std::shared_ptr<PrepareRequest> RecoveryMessage::GetPrepareRequest() const { return prepareRequest_; }
 
 void RecoveryMessage::SetPrepareRequest(std::shared_ptr<PrepareRequest> prepareRequest)
 {
@@ -46,10 +44,7 @@ const std::vector<std::shared_ptr<CommitMessage>>& RecoveryMessage::GetCommitMes
     return commitMessages_;
 }
 
-void RecoveryMessage::AddCommitMessage(std::shared_ptr<CommitMessage> message)
-{
-    commitMessages_.push_back(message);
-}
+void RecoveryMessage::AddCommitMessage(std::shared_ptr<CommitMessage> message) { commitMessages_.push_back(message); }
 
 void RecoveryMessage::Serialize(io::BinaryWriter& writer) const
 {

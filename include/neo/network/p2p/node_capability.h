@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/ijson_serializable.h>
@@ -8,6 +7,8 @@
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
 #include <neo/network/p2p/node_capability_types.h>
+
+#include <cstdint>
 #include <string>
 #include <vector>
 
@@ -18,7 +19,7 @@ namespace neo::network::p2p
  */
 class NodeCapability : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty NodeCapability.
      */
@@ -66,7 +67,7 @@ class NodeCapability : public io::ISerializable, public io::IJsonSerializable
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  protected:
+   protected:
     NodeCapabilityType type_;
 };
 
@@ -75,7 +76,7 @@ class NodeCapability : public io::ISerializable, public io::IJsonSerializable
  */
 class UnknownCapability : public NodeCapability
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty UnknownCapability.
      */
@@ -123,7 +124,7 @@ class UnknownCapability : public NodeCapability
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
+   private:
     uint8_t rawType_;
 };
 
@@ -132,7 +133,7 @@ class UnknownCapability : public NodeCapability
  */
 class ServerCapability : public NodeCapability
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty ServerCapability.
      */
@@ -181,7 +182,7 @@ class ServerCapability : public NodeCapability
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
+   private:
     uint16_t port_;
 };
 
@@ -190,7 +191,7 @@ class ServerCapability : public NodeCapability
  */
 class FullNodeCapability : public NodeCapability
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty FullNodeCapability.
      */
@@ -238,7 +239,7 @@ class FullNodeCapability : public NodeCapability
      */
     void DeserializeJson(const io::JsonReader& reader) override;
 
-  private:
+   private:
     uint32_t startHeight_;
 };
 }  // namespace neo::network::p2p

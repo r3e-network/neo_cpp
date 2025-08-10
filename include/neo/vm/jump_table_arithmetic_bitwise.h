@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableArithmeticBitwise
 {
-  public:
+   public:
     // Bitwise operations
     static void INVERT(ExecutionEngine& engine, const Instruction& instruction);
     static void AND(ExecutionEngine& engine, const Instruction& instruction);

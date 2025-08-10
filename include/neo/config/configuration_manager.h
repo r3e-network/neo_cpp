@@ -1,11 +1,12 @@
 #pragma once
 
+#include <neo/core/logging.h>
+#include <neo/io/json/jobject.h>
+
 #include <chrono>
 #include <functional>
 #include <memory>
 #include <mutex>
-#include <neo/core/logging.h>
-#include <neo/io/json/jobject.h>
 #include <string>
 #include <unordered_map>
 
@@ -16,7 +17,7 @@ namespace neo::config
  */
 class IConfigurationSource
 {
-  public:
+   public:
     virtual ~IConfigurationSource() = default;
     virtual bool Load() = 0;
     virtual std::string Get(const std::string& key) const = 0;
@@ -31,27 +32,21 @@ class IConfigurationSource
  */
 class JsonFileConfigSource : public IConfigurationSource
 {
-  private:
+   private:
     std::string filepath_;
     json::JObject config_;
     int priority_;
     mutable std::mutex mutex_;
 
-  public:
+   public:
     JsonFileConfigSource(const std::string& filepath, int priority = 0);
 
     bool Load() override;
     std::string Get(const std::string& key) const override;
     bool Contains(const std::string& key) const override;
     json::JObject GetSection(const std::string& section) const override;
-    std::string GetName() const override
-    {
-        return "JsonFile:" + filepath_;
-    }
-    int GetPriority() const override
-    {
-        return priority_;
-    }
+    std::string GetName() const override { return "JsonFile:" + filepath_; }
+    int GetPriority() const override { return priority_; }
 };
 
 /**
@@ -59,27 +54,21 @@ class JsonFileConfigSource : public IConfigurationSource
  */
 class EnvironmentConfigSource : public IConfigurationSource
 {
-  private:
+   private:
     std::string prefix_;
     mutable std::unordered_map<std::string, std::string> cache_;
     int priority_;
     mutable std::mutex mutex_;
 
-  public:
+   public:
     EnvironmentConfigSource(const std::string& prefix = "NEO_", int priority = 10);
 
     bool Load() override;
     std::string Get(const std::string& key) const override;
     bool Contains(const std::string& key) const override;
     json::JObject GetSection(const std::string& section) const override;
-    std::string GetName() const override
-    {
-        return "Environment";
-    }
-    int GetPriority() const override
-    {
-        return priority_;
-    }
+    std::string GetName() const override { return "Environment"; }
+    int GetPriority() const override { return priority_; }
 };
 
 /**
@@ -87,28 +76,19 @@ class EnvironmentConfigSource : public IConfigurationSource
  */
 class CommandLineConfigSource : public IConfigurationSource
 {
-  private:
+   private:
     std::unordered_map<std::string, std::string> args_;
     int priority_;
 
-  public:
+   public:
     CommandLineConfigSource(int argc, char* argv[], int priority = 20);
 
-    bool Load() override
-    {
-        return true;
-    }
+    bool Load() override { return true; }
     std::string Get(const std::string& key) const override;
     bool Contains(const std::string& key) const override;
     json::JObject GetSection(const std::string& section) const override;
-    std::string GetName() const override
-    {
-        return "CommandLine";
-    }
-    int GetPriority() const override
-    {
-        return priority_;
-    }
+    std::string GetName() const override { return "CommandLine"; }
+    int GetPriority() const override { return priority_; }
 };
 
 /**
@@ -125,7 +105,7 @@ using ConfigChangeCallback =
  */
 class ConfigurationManager
 {
-  private:
+   private:
     std::vector<std::shared_ptr<IConfigurationSource>> sources_;
     mutable std::mutex mutex_;
     std::shared_ptr<core::Logger> logger_;
@@ -144,7 +124,7 @@ class ConfigurationManager
 
     ConfigurationManager();
 
-  public:
+   public:
     static std::shared_ptr<ConfigurationManager> GetInstance();
 
     /**
@@ -222,12 +202,9 @@ class ConfigurationManager
      * @brief Set cache duration
      * @param duration Cache duration in seconds
      */
-    void SetCacheDuration(std::chrono::seconds duration)
-    {
-        cache_duration_ = duration;
-    }
+    void SetCacheDuration(std::chrono::seconds duration) { cache_duration_ = duration; }
 
-  private:
+   private:
     /**
      * @brief Clear cache
      */
@@ -254,7 +231,7 @@ class ConfigurationManager
  */
 class ConfigValidator
 {
-  public:
+   public:
     struct Rule
     {
         std::string key;

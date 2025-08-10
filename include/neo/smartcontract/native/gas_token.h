@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/uint160.h>
 #include <neo/smartcontract/native/fungible_token.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::smartcontract::native
@@ -16,7 +17,7 @@ class GasToken : public FungibleToken
     friend class NativeContractTest;
     friend class GasTokenTest;
 
-  public:
+   public:
     /**
      * @brief The contract ID.
      */
@@ -203,13 +204,13 @@ class GasToken : public FungibleToken
      */
     bool InitializeContract(ApplicationEngine& engine, uint32_t hardfork);
 
-  protected:
+   protected:
     /**
      * @brief Initializes the contract.
      */
     void Initialize() override;
 
-  private:
+   private:
     /**
      * @brief Handles the symbol method.
      * @param engine The engine.

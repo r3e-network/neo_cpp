@@ -42,10 +42,10 @@ if(NEO_BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
-# Examples temporarily disabled due to missing dependencies
-# if(NEO_BUILD_EXAMPLES)
+# Examples can be disabled to stabilize builds
+if(NEO_BUILD_EXAMPLES)
     add_subdirectory(examples)
-# endif()
+endif()
 
 # Tools subdirectory
 if(NEO_BUILD_TOOLS)

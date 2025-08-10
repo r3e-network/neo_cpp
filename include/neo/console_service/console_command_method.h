@@ -33,7 +33,7 @@ namespace neo::console_service
  */
 class ConsoleCommandMethod
 {
-  public:
+   public:
     using CommandFunction = std::function<std::string(const std::vector<std::string>&)>;
 
     /**
@@ -87,30 +87,21 @@ class ConsoleCommandMethod
      * @brief Check if the command has an implementation
      * @return True if command can be executed
      */
-    bool IsImplemented() const
-    {
-        return static_cast<bool>(function_);
-    }
+    bool IsImplemented() const { return static_cast<bool>(function_); }
 
     /**
      * @brief Get formatted help string
      * @return Formatted help text
      */
-    std::string GetHelp() const
-    {
-        return key + " - " + help_message + " (Category: " + help_category + ")";
-    }
+    std::string GetHelp() const { return key + " - " + help_message + " (Category: " + help_category + ")"; }
 
     /**
      * @brief Set the command function
      * @param func The command function
      */
-    void SetFunction(CommandFunction func)
-    {
-        function_ = func;
-    }
+    void SetFunction(CommandFunction func) { function_ = func; }
 
-  private:
+   private:
     CommandFunction function_;
 };
 }  // namespace neo::console_service

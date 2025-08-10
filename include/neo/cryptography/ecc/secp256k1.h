@@ -1,7 +1,8 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_vector.h>
+
+#include <cstdint>
 #include <string>
 
 // Forward declarations
@@ -18,7 +19,7 @@ namespace neo::cryptography::ecc
  */
 class Secp256k1
 {
-  public:
+   public:
     static constexpr size_t PRIVATE_KEY_SIZE = 32;
     static constexpr size_t PUBLIC_KEY_SIZE = 33;  // Compressed
     static constexpr size_t SIGNATURE_SIZE = 64;

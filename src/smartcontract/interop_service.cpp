@@ -20,7 +20,10 @@ uint32_t calculate_interop_hash(const std::string& name)
 // InteropDescriptor implementation
 InteropDescriptor::InteropDescriptor(std::string name, uint32_t hash, std::function<void(ApplicationEngine&)> handler,
                                      int64_t fixed_price, CallFlags required_call_flags)
-    : name(std::move(name)), hash(hash), handler(std::move(handler)), fixed_price(fixed_price),
+    : name(std::move(name)),
+      hash(hash),
+      handler(std::move(handler)),
+      fixed_price(fixed_price),
       required_call_flags(required_call_flags)
 {
 }
@@ -67,10 +70,7 @@ void InteropService::register_builtin_services()
 }
 
 // System.Runtime implementations
-void InteropService::runtime_platform(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Create("NEO"));
-}
+void InteropService::runtime_platform(ApplicationEngine& engine) { engine.Push(vm::StackItem::Create("NEO")); }
 
 void InteropService::runtime_get_network(ApplicationEngine& engine)
 {
@@ -92,10 +92,7 @@ void InteropService::runtime_get_time(ApplicationEngine& engine)
     engine.Push(vm::StackItem::Create(static_cast<int64_t>(0)));
 }
 
-void InteropService::runtime_get_script_container(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Null());
-}
+void InteropService::runtime_get_script_container(ApplicationEngine& engine) { engine.Push(vm::StackItem::Null()); }
 
 void InteropService::runtime_get_executing_script_hash(ApplicationEngine& engine)
 {
@@ -122,10 +119,7 @@ void InteropService::runtime_load_script(ApplicationEngine& engine)
     // Parameters consumed - script loading handled by execution engine
 }
 
-void InteropService::runtime_check_witness(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Create(false));
-}
+void InteropService::runtime_check_witness(ApplicationEngine& engine) { engine.Push(vm::StackItem::Create(false)); }
 
 void InteropService::runtime_get_invocation_counter(ApplicationEngine& engine)
 {
@@ -152,10 +146,7 @@ void InteropService::runtime_notify(ApplicationEngine& engine)
     // Parameters consumed - notification handled by engine's event system
 }
 
-void InteropService::runtime_get_notifications(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::CreateArray());
-}
+void InteropService::runtime_get_notifications(ApplicationEngine& engine) { engine.Push(vm::StackItem::CreateArray()); }
 
 void InteropService::runtime_gas_left(ApplicationEngine& engine)
 {
@@ -169,21 +160,12 @@ void InteropService::runtime_burn_gas(ApplicationEngine& engine)
     // Gas amount consumed - burning handled by engine's gas accounting
 }
 
-void InteropService::runtime_current_signers(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::CreateArray());
-}
+void InteropService::runtime_current_signers(ApplicationEngine& engine) { engine.Push(vm::StackItem::CreateArray()); }
 
 // System.Crypto implementations
-void InteropService::crypto_check_sig(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Create(false));
-}
+void InteropService::crypto_check_sig(ApplicationEngine& engine) { engine.Push(vm::StackItem::Create(false)); }
 
-void InteropService::crypto_check_multisig(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Create(false));
-}
+void InteropService::crypto_check_multisig(ApplicationEngine& engine) { engine.Push(vm::StackItem::Create(false)); }
 
 // System.Contract implementations
 void InteropService::contract_call(ApplicationEngine& engine)
@@ -237,30 +219,15 @@ void InteropService::contract_native_post_persist(ApplicationEngine& engine)
 }
 
 // System.Storage implementations
-void InteropService::storage_get_context(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Null());
-}
+void InteropService::storage_get_context(ApplicationEngine& engine) { engine.Push(vm::StackItem::Null()); }
 
-void InteropService::storage_get_readonly_context(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Null());
-}
+void InteropService::storage_get_readonly_context(ApplicationEngine& engine) { engine.Push(vm::StackItem::Null()); }
 
-void InteropService::storage_as_readonly(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Null());
-}
+void InteropService::storage_as_readonly(ApplicationEngine& engine) { engine.Push(vm::StackItem::Null()); }
 
-void InteropService::storage_get(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Null());
-}
+void InteropService::storage_get(ApplicationEngine& engine) { engine.Push(vm::StackItem::Null()); }
 
-void InteropService::storage_find(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Null());
-}
+void InteropService::storage_find(ApplicationEngine& engine) { engine.Push(vm::StackItem::Null()); }
 
 void InteropService::storage_put(ApplicationEngine& engine)
 {
@@ -282,15 +249,9 @@ void InteropService::storage_delete(ApplicationEngine& engine)
 }
 
 // System.Iterator implementations
-void InteropService::iterator_next(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Create(false));
-}
+void InteropService::iterator_next(ApplicationEngine& engine) { engine.Push(vm::StackItem::Create(false)); }
 
-void InteropService::iterator_value(ApplicationEngine& engine)
-{
-    engine.Push(vm::StackItem::Null());
-}
+void InteropService::iterator_value(ApplicationEngine& engine) { engine.Push(vm::StackItem::Null()); }
 
 // Define the interop descriptors namespace members (minimal implementation)
 namespace interop_descriptors

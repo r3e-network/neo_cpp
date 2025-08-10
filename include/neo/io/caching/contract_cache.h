@@ -1,9 +1,10 @@
 #pragma once
 
-#include <functional>
 #include <neo/io/caching/lru_cache.h>
 #include <neo/io/uint160.h>
 #include <neo/smartcontract/contract_state.h>
+
+#include <functional>
 
 namespace neo::io::caching
 {
@@ -12,7 +13,7 @@ namespace neo::io::caching
  */
 class ContractCache
 {
-  public:
+   public:
     /**
      * @brief Constructs a ContractCache with the specified capacity.
      * @param capacity The maximum number of items the cache can hold.
@@ -25,8 +26,7 @@ class ContractCache
      */
     void Add(std::shared_ptr<smartcontract::ContractState> contract)
     {
-        if (!contract)
-            return;
+        if (!contract) return;
 
         // Add to cache
         cache_.Add(contract->GetScriptHash(), contract);
@@ -58,38 +58,26 @@ class ContractCache
      * @param scriptHash The script hash of the contract.
      * @return True if the contract was removed, false otherwise.
      */
-    bool Remove(const UInt160& scriptHash)
-    {
-        return cache_.Remove(scriptHash);
-    }
+    bool Remove(const UInt160& scriptHash) { return cache_.Remove(scriptHash); }
 
     /**
      * @brief Clears the cache.
      */
-    void Clear()
-    {
-        cache_.Clear();
-    }
+    void Clear() { cache_.Clear(); }
 
     /**
      * @brief Gets the number of items in the cache.
      * @return The number of items in the cache.
      */
-    size_t Size() const
-    {
-        return cache_.Size();
-    }
+    size_t Size() const { return cache_.Size(); }
 
     /**
      * @brief Gets the capacity of the cache.
      * @return The capacity of the cache.
      */
-    size_t Capacity() const
-    {
-        return cache_.Capacity();
-    }
+    size_t Capacity() const { return cache_.Capacity(); }
 
-  private:
+   private:
     LRUCache<UInt160, std::shared_ptr<smartcontract::ContractState>> cache_;
 };
 }  // namespace neo::io::caching

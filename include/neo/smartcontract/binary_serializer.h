@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/byte_vector.h>
 #include <neo/vm/stack_item.h>
+
+#include <memory>
 
 namespace neo::smartcontract
 {
@@ -15,7 +16,7 @@ namespace neo::smartcontract
  */
 class BinarySerializer
 {
-  public:
+   public:
     /**
      * @brief Serializes a StackItem to a byte array.
      * @param item The StackItem to serialize.
@@ -36,7 +37,7 @@ class BinarySerializer
     static std::shared_ptr<vm::StackItem> Deserialize(const io::ByteSpan& data, int64_t maxSize = 2048,
                                                       int64_t maxItems = 2048);
 
-  private:
+   private:
     /**
      * @brief Serializes a StackItem to a BinaryWriter.
      * @param writer The BinaryWriter to write to.

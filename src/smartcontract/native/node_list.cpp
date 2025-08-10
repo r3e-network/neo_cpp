@@ -1,27 +1,19 @@
-#include <algorithm>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <algorithm>
 
 namespace neo::smartcontract::native
 {
-void NodeList::Add(const cryptography::ecc::ECPoint& node)
-{
-    nodes_.push_back(node);
-}
+void NodeList::Add(const cryptography::ecc::ECPoint& node) { nodes_.push_back(node); }
 
 void NodeList::AddRange(const std::vector<cryptography::ecc::ECPoint>& nodes)
 {
     nodes_.insert(nodes_.end(), nodes.begin(), nodes.end());
 }
 
-void NodeList::Sort()
-{
-    std::sort(nodes_.begin(), nodes_.end());
-}
+void NodeList::Sort() { std::sort(nodes_.begin(), nodes_.end()); }
 
-std::vector<cryptography::ecc::ECPoint> NodeList::ToArray() const
-{
-    return nodes_;
-}
+std::vector<cryptography::ecc::ECPoint> NodeList::ToArray() const { return nodes_; }
 
 void NodeList::Serialize(io::BinaryWriter& writer) const
 {

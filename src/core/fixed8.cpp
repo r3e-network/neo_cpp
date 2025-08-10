@@ -1,6 +1,7 @@
-#include <iomanip>
 #include <neo/core/big_decimal.h>
 #include <neo/core/fixed8.h>
+
+#include <iomanip>
 #include <sstream>
 
 namespace neo::core
@@ -41,8 +42,7 @@ std::string Fixed8::ToString() const
 
     // Remove trailing zeros
     size_t end = result.find_last_not_of('0');
-    if (end != std::string::npos && result[end] == '.')
-        end--;
+    if (end != std::string::npos && result[end] == '.') end--;
     result.erase(end + 1);
 
     return result;

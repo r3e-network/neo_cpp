@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableControlException
 {
-  public:
+   public:
     // Exception handling operations
     static void LEAVE(ExecutionEngine& engine, const Instruction& instruction);
     static void LEAVE_L(ExecutionEngine& engine, const Instruction& instruction);

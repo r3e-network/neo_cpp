@@ -4,22 +4,21 @@
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>
-#include <neo/network/p2p/payloads/extensible_payload.h>
 #include <neo/network/p2p/inventory_type.h>
+#include <neo/network/p2p/payloads/extensible_payload.h>
+
 #include <sstream>
 #include <stdexcept>
 
 namespace neo::network::p2p::payloads
 {
 
-
-
 io::UInt256 ExtensiblePayload::GetHash() const
 {
     if (!hash_calculated_)
     {
         // hash_cache_ = CalculateHash();
-        hash_cache_ = io::UInt256(); // Temporary placeholder
+        hash_cache_ = io::UInt256();  // Temporary placeholder
         hash_calculated_ = true;
     }
     return hash_cache_.value();
@@ -28,22 +27,22 @@ io::UInt256 ExtensiblePayload::GetHash() const
 size_t ExtensiblePayload::GetSize() const
 {
     size_t size = 0;
-    
+
     // Category string (VarString)
     size += extensions::IntegerExtensions::GetVarSize(static_cast<uint64_t>(category_.length())) + category_.length();
-    
+
     // ValidBlockStart and ValidBlockEnd (uint32_t each)
     size += sizeof(uint32_t) * 2;
-    
+
     // Sender (UInt160)
     size += io::UInt160::Size;
-    
+
     // Data (VarBytes)
     size += extensions::IntegerExtensions::GetVarSize(static_cast<uint64_t>(data_.Size())) + data_.Size();
-    
+
     // Witness count (1 byte) + witness size
     size += 1 + witness_.GetSize();
-    
+
     return size;
 }
 
@@ -77,8 +76,7 @@ void ExtensiblePayload::Deserialize(io::BinaryReader& reader)
 
     // Deserialize witness
     uint8_t witnessCount = reader.ReadUInt8();
-    if (witnessCount != 1)
-        throw std::runtime_error("Expected 1 witness, got " + std::to_string(witnessCount));
+    if (witnessCount != 1) throw std::runtime_error("Expected 1 witness, got " + std::to_string(witnessCount));
 
     witness_ = reader.ReadSerializable<ledger::Witness>();
 

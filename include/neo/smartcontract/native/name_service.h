@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/uint160.h>
 #include <neo/smartcontract/native/native_contract.h>
+
+#include <memory>
 #include <string>
 #include <tuple>
 
@@ -17,7 +18,7 @@ class NameService : public NativeContract
     friend class NativeContractTest;
     friend class NameServiceTest;
 
-  public:
+   public:
     /**
      * @brief The contract ID.
      */
@@ -156,13 +157,13 @@ class NameService : public NativeContract
      */
     bool PostPersist(ApplicationEngine& engine);
 
-  protected:
+   protected:
     /**
      * @brief Initializes the contract.
      */
     void Initialize() override;
 
-  private:
+   private:
     /**
      * @brief Handles the getPrice method.
      * @param engine The engine.

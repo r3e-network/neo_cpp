@@ -5,12 +5,13 @@
 #include <neo/ledger/memory_pool.h>
 #include <neo/persistence/data_cache.h>
 // #include <neo/network/p2p/local_node.h> // Disabled until network module is enabled
-#include <memory>
+#include <neo/common/contains_transaction_type.h>
+#include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/ledger_contract.h>
 #include <neo/smartcontract/native/neo_token.h>
-#include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/role_management.h>
-#include <neo/common/contains_transaction_type.h>
+
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -58,7 +59,7 @@ namespace neo::ledger
  */
 class NeoSystem
 {
-  public:
+   public:
     /**
      * @brief Constructs a new NeoSystem with the specified settings.
      * @param settings Protocol settings for the Neo network
@@ -105,19 +106,19 @@ class NeoSystem
      * @return Shared pointer to the ledger contract
      */
     std::shared_ptr<smartcontract::native::LedgerContract> GetLedgerContract() const;
-    
+
     /**
      * @brief Gets the NEO token contract instance.
      * @return Shared pointer to the NEO token contract
      */
     std::shared_ptr<smartcontract::native::NeoToken> GetNeoToken() const;
-    
+
     /**
      * @brief Gets the GAS token contract instance.
      * @return Shared pointer to the GAS token contract
      */
     std::shared_ptr<smartcontract::native::GasToken> GetGasToken() const;
-    
+
     /**
      * @brief Gets the role management contract instance.
      * @return Shared pointer to the role management contract
@@ -144,39 +145,39 @@ class NeoSystem
      * @brief Disposes of system resources.
      */
     void Dispose();
-    
+
     /**
      * @brief Gets the genesis block.
      * @return Shared pointer to the genesis block
      */
     std::shared_ptr<Block> GetGenesisBlock() const;
-    
+
     /**
      * @brief Gets a native contract by script hash.
      * @param hash The script hash of the contract
      * @return Pointer to the native contract or nullptr if not found
      */
     smartcontract::native::NativeContract* GetNativeContract(const io::UInt160& hash) const;
-    
+
     /**
      * @brief Gets the maximum number of traceable blocks.
      * @return Maximum traceable blocks
      */
     uint32_t GetMaxTraceableBlocks() const;
-    
+
     /**
      * @brief Gets a snapshot of the current state.
      * @return Shared pointer to the data cache snapshot
      */
     std::shared_ptr<persistence::DataCache> GetSnapshot() const;
-    
+
     /**
      * @brief Checks if the system contains a transaction.
      * @param hash The transaction hash
      * @return The transaction containment status
      */
     ContainsTransactionType ContainsTransaction(const io::UInt256& hash) const;
-    
+
     /**
      * @brief Checks if the system contains a conflict hash.
      * @param hash The transaction hash
@@ -185,7 +186,7 @@ class NeoSystem
      */
     bool ContainsConflictHash(const io::UInt256& hash, const std::vector<io::UInt160>& signers) const;
 
-  private:
+   private:
     std::shared_ptr<config::ProtocolSettings> settings_;
     std::shared_ptr<Blockchain> blockchain_;
     std::shared_ptr<MemoryPool> memory_pool_;

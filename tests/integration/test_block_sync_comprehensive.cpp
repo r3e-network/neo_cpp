@@ -25,20 +25,16 @@ using namespace neo::ledger;
 class MockRemoteNode : public RemoteNode
 {
 public:
-    MockRemoteNode(uint32_t blockHeight = 100) 
+    MockRemoteNode(uint32_t blockHeight = 100)
         : RemoteNode(nullptr, nullptr), mockBlockHeight_(blockHeight)
     {
     }
-    
-    // Override GetLastBlockIndex to return our mock value
-    uint32_t GetLastBlockIndex() const 
-    { 
-        return mockBlockHeight_; 
-    }
-    
-    bool IsConnected() const { return true; }
-    void Send(const Message& message) { /* Mock implementation */ }
-    
+
+    // Override methods to avoid dereferencing null connection in base class
+    uint32_t GetLastBlockIndex() const override { return mockBlockHeight_; }
+    bool IsConnected() const override { return true; }
+    bool Send(const Message& /*message*/, bool /*enableCompression*/ = true) override { return true; }
+
 private:
     uint32_t mockBlockHeight_;
 };
@@ -72,14 +68,16 @@ protected:
         block->SetVersion(0);
         block->SetPreviousHash(prevHash);
         block->SetMerkleRoot(io::UInt256::Zero());
-        block->SetTimestamp(std::chrono::system_clock::now());
+        block->SetTimestamp(static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
         block->SetIndex(index);
         block->SetPrimaryIndex(0);
         block->SetNextConsensus(io::UInt160::Zero());
-        
-        // Create a simple block without transactions for now
-        // This avoids potential serialization issues
-        
+        // Add minimal witness to satisfy validation
+        auto witness = std::make_shared<ledger::Witness>();
+        witness->SetInvocationScript(neo::io::ByteVector{0x00});
+        witness->SetVerificationScript(neo::io::ByteVector{0x51});
+        block->SetWitness(*witness);
+
         return block;
     }
     
@@ -340,8 +338,9 @@ TEST_F(BlockSyncTest, TestMultiplePeerSync)
         {
             connected_ = true;
         }
-        uint32_t GetLastBlockIndex() const { return height_; }
-        bool IsConnected() const { return connected_; }
+        uint32_t GetLastBlockIndex() const override { return height_; }
+        bool IsConnected() const override { return connected_; }
+        bool Send(const Message& /*message*/, bool /*enableCompression*/ = true) override { return true; }
     private:
         uint32_t height_;
         bool connected_;
@@ -417,8 +416,9 @@ TEST_F(BlockSyncTest, TestErrorRecoveryAndResilience)
             lastBlockIndex_ = 100;
             connected_ = true;
         }
-        uint32_t GetLastBlockIndex() const { return lastBlockIndex_; }
-        bool IsConnected() const { return connected_; }
+        uint32_t GetLastBlockIndex() const override { return lastBlockIndex_; }
+        bool IsConnected() const override { return connected_; }
+        bool Send(const Message& /*message*/, bool /*enableCompression*/ = true) override { return true; }
         void Disconnect() { connected_ = false; }
     private:
         uint32_t lastBlockIndex_;

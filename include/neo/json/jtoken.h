@@ -29,7 +29,7 @@ class JObject;
  */
 class JToken
 {
-  public:
+   public:
     /**
      * @brief Represents a null token.
      */
@@ -71,47 +71,32 @@ class JToken
      * @return The property with the specified name.
      * @throws std::runtime_error if not supported.
      */
-    virtual std::shared_ptr<JToken> operator[](const char* key) const
-    {
-        return operator[](std::string(key));
-    }
+    virtual std::shared_ptr<JToken> operator[](const char* key) const { return operator[](std::string(key)); }
 
     /**
      * @brief Converts the current JSON token to a boolean value.
      * @return The converted value.
      */
-    virtual bool AsBoolean() const
-    {
-        return true;
-    }
+    virtual bool AsBoolean() const { return true; }
 
     /**
      * @brief Converts the current JSON token to a floating point number.
      * @return The converted value.
      */
-    virtual double AsNumber() const
-    {
-        return std::numeric_limits<double>::quiet_NaN();
-    }
+    virtual double AsNumber() const { return std::numeric_limits<double>::quiet_NaN(); }
 
     /**
      * @brief Converts the current JSON token to a string.
      * @return The converted value.
      */
-    virtual std::string AsString() const
-    {
-        return ToString();
-    }
+    virtual std::string AsString() const { return ToString(); }
 
     /**
      * @brief Converts the current JSON token to a boolean value.
      * @return The converted value.
      * @throws std::invalid_argument if the JSON token is not a boolean.
      */
-    virtual bool GetBoolean() const
-    {
-        throw std::invalid_argument("Token is not a boolean");
-    }
+    virtual bool GetBoolean() const { throw std::invalid_argument("Token is not a boolean"); }
 
     /**
      * @brief Converts the current JSON token to a 32-bit signed integer.
@@ -122,8 +107,7 @@ class JToken
     int GetInt32() const
     {
         double d = GetNumber();
-        if (std::fmod(d, 1.0) != 0.0)
-            throw std::invalid_argument("Number is not an integer");
+        if (std::fmod(d, 1.0) != 0.0) throw std::invalid_argument("Number is not an integer");
         if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max())
             throw std::overflow_error("Number is out of range for int32");
         return static_cast<int>(d);
@@ -134,20 +118,14 @@ class JToken
      * @return The converted value.
      * @throws std::invalid_argument if the JSON token is not a number.
      */
-    virtual double GetNumber() const
-    {
-        throw std::invalid_argument("Token is not a number");
-    }
+    virtual double GetNumber() const { throw std::invalid_argument("Token is not a number"); }
 
     /**
      * @brief Converts the current JSON token to a string.
      * @return The converted value.
      * @throws std::invalid_argument if the JSON token is not a string.
      */
-    virtual std::string GetString() const
-    {
-        throw std::invalid_argument("Token is not a string");
-    }
+    virtual std::string GetString() const { throw std::invalid_argument("Token is not a string"); }
 
     /**
      * @brief Parses a JSON string into a JToken.
@@ -157,7 +135,7 @@ class JToken
      */
     static std::shared_ptr<JToken> Parse(const std::string& json, int max_nest = 64);
 
-  private:
+   private:
     /**
      * @brief Parses a nlohmann::json value into a JToken.
      * @param j The nlohmann::json value.
@@ -165,7 +143,7 @@ class JToken
      */
     static std::shared_ptr<JToken> ParseJsonValue(const nlohmann::json& j);
 
-  public:
+   public:
     /**
      * @brief Converts this token to a string representation.
      * @return The string representation.
@@ -222,7 +200,7 @@ class JToken
      */
     virtual void WriteJson(std::string& output, bool indented = false, int indent_level = 0) const = 0;
 
-  protected:
+   protected:
     /**
      * @brief Helper function to add indentation.
      * @param output The output string.

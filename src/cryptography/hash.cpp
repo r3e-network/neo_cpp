@@ -1,8 +1,9 @@
-#include <cstring>
 #include <neo/cryptography/hash.h>
 #include <openssl/evp.h>
 #include <openssl/ripemd.h>
 #include <openssl/sha.h>
+
+#include <cstring>
 
 // Suppress OpenSSL deprecation warnings for compatibility
 #ifdef _MSC_VER

@@ -1,8 +1,5 @@
 #pragma once
 
-#include <chrono>
-#include <cstdint>
-#include <memory>
 #include <neo/consensus/consensus_message.h>
 #include <neo/consensus/consensus_payload_helper.h>
 #include <neo/cryptography/ecc/ecpoint.h>
@@ -17,6 +14,10 @@
 #include <neo/persistence/data_cache.h>
 #include <neo/protocol_settings.h>
 #include <neo/sign/isigner.h>
+
+#include <chrono>
+#include <cstdint>
+#include <memory>
 #include <unordered_map>
 #include <vector>
 
@@ -30,7 +31,7 @@ namespace neo::consensus
  */
 class ConsensusContext : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs a ConsensusContext.
      * @param neoSystem The Neo system instance.
@@ -65,26 +66,11 @@ class ConsensusContext : public io::ISerializable
     std::shared_ptr<persistence::DataCache> Snapshot;
 
     // Consensus parameters
-    int F() const
-    {
-        return (Validators.size() - 1) / 3;
-    }
-    int M() const
-    {
-        return Validators.size() - F();
-    }
-    bool IsPrimary() const
-    {
-        return MyIndex == Block->GetPrimaryIndex();
-    }
-    bool IsBackup() const
-    {
-        return MyIndex >= 0 && MyIndex != Block->GetPrimaryIndex();
-    }
-    bool WatchOnly() const
-    {
-        return MyIndex < 0;
-    }
+    int F() const { return (Validators.size() - 1) / 3; }
+    int M() const { return Validators.size() - F(); }
+    bool IsPrimary() const { return MyIndex == Block->GetPrimaryIndex(); }
+    bool IsBackup() const { return MyIndex >= 0 && MyIndex != Block->GetPrimaryIndex(); }
+    bool WatchOnly() const { return MyIndex < 0; }
 
     // State queries
     bool RequestSentOrReceived() const;
@@ -111,8 +97,8 @@ class ConsensusContext : public io::ISerializable
      * @param message The consensus message.
      * @return The signed payload.
      */
-    std::shared_ptr<network::p2p::payloads::ExtensiblePayload>
-    MakeSignedPayload(std::shared_ptr<ConsensusMessage> message);
+    std::shared_ptr<network::p2p::payloads::ExtensiblePayload> MakeSignedPayload(
+        std::shared_ptr<ConsensusMessage> message);
 
     /**
      * @brief Makes a change view message.
@@ -166,7 +152,7 @@ class ConsensusContext : public io::ISerializable
     void Serialize(io::BinaryWriter& writer) const override;
     void Deserialize(io::BinaryReader& reader) override;
 
-  private:
+   private:
     std::shared_ptr<ledger::NeoSystem> neoSystem_;
     std::shared_ptr<ProtocolSettings> settings_;
     std::shared_ptr<sign::ISigner> signer_;

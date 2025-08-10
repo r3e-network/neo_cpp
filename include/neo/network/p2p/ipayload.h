@@ -10,7 +10,7 @@ namespace neo::network::p2p
  */
 class IPayload : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */

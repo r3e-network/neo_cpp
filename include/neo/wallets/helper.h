@@ -4,6 +4,7 @@
 #include <neo/io/byte_span.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
 #include <string>
 #include <vector>
 
@@ -37,7 +38,7 @@ namespace neo::wallets
  */
 class Helper
 {
-  public:
+   public:
     /**
      * @brief Converts a script hash to a Neo address.
      * @param script_hash The script hash.
@@ -246,7 +247,7 @@ class Helper
      */
     static std::vector<uint8_t> Base58CheckDecode(const std::string& encoded);
 
-  private:
+   private:
     /**
      * @brief Validates the checksum in base58check decoding.
      * @param data The data with checksum.

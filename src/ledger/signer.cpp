@@ -1,4 +1,5 @@
 #include <neo/ledger/signer.h>
+
 #include <stdexcept>
 
 namespace neo::ledger
@@ -7,45 +8,31 @@ Signer::Signer() : account_(), scopes_(WitnessScope::None) {}
 
 Signer::Signer(const io::UInt160& account, WitnessScope scopes) : account_(account), scopes_(scopes) {}
 
-const io::UInt160& Signer::GetAccount() const
-{
-    return account_;
-}
+const io::UInt160& Signer::GetAccount() const { return account_; }
 
-void Signer::SetAccount(const io::UInt160& account)
-{
-    account_ = account;
-}
+void Signer::SetAccount(const io::UInt160& account) { account_ = account; }
 
-WitnessScope Signer::GetScopes() const
-{
-    return scopes_;
-}
+WitnessScope Signer::GetScopes() const { return scopes_; }
 
-void Signer::SetScopes(WitnessScope scopes)
-{
-    scopes_ = scopes;
-}
+void Signer::SetScopes(WitnessScope scopes) { scopes_ = scopes; }
 
-const std::vector<io::UInt160>& Signer::GetAllowedContracts() const
-{
-    return allowedContracts_;
-}
+const std::vector<io::UInt160>& Signer::GetAllowedContracts() const { return allowedContracts_; }
 
 void Signer::SetAllowedContracts(const std::vector<io::UInt160>& allowedContracts)
 {
     allowedContracts_ = allowedContracts;
 }
 
-const std::vector<cryptography::ecc::ECPoint>& Signer::GetAllowedGroups() const
-{
-    return allowedGroups_;
-}
+const std::vector<cryptography::ecc::ECPoint>& Signer::GetAllowedGroups() const { return allowedGroups_; }
 
 void Signer::SetAllowedGroups(const std::vector<cryptography::ecc::ECPoint>& allowedGroups)
 {
     allowedGroups_ = allowedGroups;
 }
+
+const std::vector<WitnessRule>& Signer::GetRules() const { return rules_; }
+
+void Signer::SetRules(const std::vector<WitnessRule>& rules) { rules_ = rules; }
 
 void Signer::Serialize(io::BinaryWriter& writer) const
 {
@@ -75,6 +62,16 @@ void Signer::Serialize(io::BinaryWriter& writer) const
             writer.WriteBytes(groupBytes.Data(), groupBytes.Size());
         }
     }
+
+    // Serialize rules if WitnessRules scope is set
+    if ((static_cast<uint8_t>(scopes_) & static_cast<uint8_t>(WitnessScope::WitnessRules)) != 0)
+    {
+        writer.WriteVarInt(rules_.size());
+        for (const auto& rule : rules_)
+        {
+            rule.Serialize(writer);
+        }
+    }
 }
 
 void Signer::Deserialize(io::BinaryReader& reader)
@@ -90,8 +87,7 @@ void Signer::Deserialize(io::BinaryReader& reader)
     if ((static_cast<uint8_t>(scopes_) & static_cast<uint8_t>(WitnessScope::CustomContracts)) != 0)
     {
         int64_t contractCount = reader.ReadVarInt();
-        if (contractCount < 0 || contractCount > 16)
-            throw std::out_of_range("Invalid allowed contracts count");
+        if (contractCount < 0 || contractCount > 16) throw std::out_of_range("Invalid allowed contracts count");
 
         allowedContracts_.reserve(static_cast<size_t>(contractCount));
         for (int64_t i = 0; i < contractCount; i++)
@@ -107,8 +103,7 @@ void Signer::Deserialize(io::BinaryReader& reader)
     if ((static_cast<uint8_t>(scopes_) & static_cast<uint8_t>(WitnessScope::CustomGroups)) != 0)
     {
         int64_t groupCount = reader.ReadVarInt();
-        if (groupCount < 0 || groupCount > 16)
-            throw std::out_of_range("Invalid allowed groups count");
+        if (groupCount < 0 || groupCount > 16) throw std::out_of_range("Invalid allowed groups count");
 
         allowedGroups_.reserve(static_cast<size_t>(groupCount));
         for (int64_t i = 0; i < groupCount; i++)
@@ -117,6 +112,22 @@ void Signer::Deserialize(io::BinaryReader& reader)
             auto group =
                 cryptography::ecc::ECPoint::FromBytes(io::ByteSpan(groupBytes.Data(), groupBytes.Size()), "secp256r1");
             allowedGroups_.push_back(group);
+        }
+    }
+
+    // Deserialize rules if WitnessRules scope is set
+    rules_.clear();
+    if ((static_cast<uint8_t>(scopes_) & static_cast<uint8_t>(WitnessScope::WitnessRules)) != 0)
+    {
+        int64_t ruleCount = reader.ReadVarInt();
+        if (ruleCount < 0 || ruleCount > 16) throw std::out_of_range("Invalid rules count");
+
+        rules_.reserve(static_cast<size_t>(ruleCount));
+        for (int64_t i = 0; i < ruleCount; i++)
+        {
+            WitnessRule rule;
+            rule.Deserialize(reader);
+            rules_.push_back(rule);
         }
     }
 }
@@ -222,8 +233,5 @@ bool Signer::operator==(const Signer& other) const
            allowedGroups_ == other.allowedGroups_;
 }
 
-bool Signer::operator!=(const Signer& other) const
-{
-    return !(*this == other);
-}
+bool Signer::operator!=(const Signer& other) const { return !(*this == other); }
 }  // namespace neo::ledger

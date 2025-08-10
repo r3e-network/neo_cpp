@@ -1,7 +1,8 @@
+#include <neo/extensions/byte_extensions.h>
+
 #include <algorithm>
 #include <functional>
 #include <iomanip>
-#include <neo/extensions/byte_extensions.h>
 #include <sstream>
 #include <stdexcept>
 
@@ -29,10 +30,7 @@ inline uint32_t ReadLE32(const uint8_t* ptr)
 }
 
 // Rotate left 64-bit value
-inline uint64_t RotateLeft64(uint64_t value, int shift)
-{
-    return (value << shift) | (value >> (64 - shift));
-}
+inline uint64_t RotateLeft64(uint64_t value, int shift) { return (value << shift) | (value >> (64 - shift)); }
 }  // namespace
 
 int ByteExtensions::XxHash3_32(std::span<const uint8_t> value, int64_t seed)
@@ -230,15 +228,11 @@ std::string ByteExtensions::ToHexString(const std::vector<uint8_t>& value, bool 
     return ToHexString(std::span<const uint8_t>(value), reverse);
 }
 
-std::string ByteExtensions::ToHexString(std::span<const uint8_t> value)
-{
-    return ToHexString(value, false);
-}
+std::string ByteExtensions::ToHexString(std::span<const uint8_t> value) { return ToHexString(value, false); }
 
 std::string ByteExtensions::ToHexString(std::span<const uint8_t> value, bool reverse)
 {
-    if (value.empty())
-        return "";
+    if (value.empty()) return "";
 
     std::string result;
     result.reserve(value.size() * 2);
@@ -266,8 +260,7 @@ std::string ByteExtensions::ToHexString(std::span<const uint8_t> value, bool rev
 
 std::vector<uint8_t> ByteExtensions::FromHexString(const std::string& hex)
 {
-    if (hex.length() % 2 != 0)
-        throw std::invalid_argument("Hex string must have even length");
+    if (hex.length() % 2 != 0) throw std::invalid_argument("Hex string must have even length");
 
     std::vector<uint8_t> result;
     result.reserve(hex.length() / 2);
@@ -287,20 +280,11 @@ bool ByteExtensions::NotZero(std::span<const uint8_t> value)
     return std::any_of(value.begin(), value.end(), [](uint8_t b) { return b != 0; });
 }
 
-bool ByteExtensions::NotZero(const std::vector<uint8_t>& value)
-{
-    return NotZero(std::span<const uint8_t>(value));
-}
+bool ByteExtensions::NotZero(const std::vector<uint8_t>& value) { return NotZero(std::span<const uint8_t>(value)); }
 
-bool ByteExtensions::IsZero(std::span<const uint8_t> value)
-{
-    return !NotZero(value);
-}
+bool ByteExtensions::IsZero(std::span<const uint8_t> value) { return !NotZero(value); }
 
-bool ByteExtensions::IsZero(const std::vector<uint8_t>& value)
-{
-    return IsZero(std::span<const uint8_t>(value));
-}
+bool ByteExtensions::IsZero(const std::vector<uint8_t>& value) { return IsZero(std::span<const uint8_t>(value)); }
 
 std::vector<uint8_t> ByteExtensions::Reverse(const std::vector<uint8_t>& value)
 {
@@ -309,10 +293,7 @@ std::vector<uint8_t> ByteExtensions::Reverse(const std::vector<uint8_t>& value)
     return result;
 }
 
-void ByteExtensions::ReverseInPlace(std::vector<uint8_t>& value)
-{
-    std::reverse(value.begin(), value.end());
-}
+void ByteExtensions::ReverseInPlace(std::vector<uint8_t>& value) { std::reverse(value.begin(), value.end()); }
 
 std::vector<uint8_t> ByteExtensions::Concat(const std::vector<std::vector<uint8_t>>& arrays)
 {
@@ -344,18 +325,15 @@ std::vector<uint8_t> ByteExtensions::Concat(const std::vector<uint8_t>& first, c
 
 std::vector<uint8_t> ByteExtensions::Slice(const std::vector<uint8_t>& value, size_t start, size_t length)
 {
-    if (start > value.size())
-        throw std::out_of_range("Start index out of range");
-    if (start + length > value.size())
-        throw std::out_of_range("Length extends beyond array bounds");
+    if (start > value.size()) throw std::out_of_range("Start index out of range");
+    if (start + length > value.size()) throw std::out_of_range("Length extends beyond array bounds");
 
     return std::vector<uint8_t>(value.begin() + start, value.begin() + start + length);
 }
 
 std::vector<uint8_t> ByteExtensions::Slice(const std::vector<uint8_t>& value, size_t start)
 {
-    if (start > value.size())
-        throw std::out_of_range("Start index out of range");
+    if (start > value.size()) throw std::out_of_range("Start index out of range");
 
     return std::vector<uint8_t>(value.begin() + start, value.end());
 }
@@ -372,12 +350,9 @@ bool ByteExtensions::SequenceEqual(const std::vector<uint8_t>& left, const std::
 
 uint8_t ByteExtensions::HexCharToValue(char c)
 {
-    if (c >= '0' && c <= '9')
-        return c - '0';
-    if (c >= 'a' && c <= 'f')
-        return c - 'a' + 10;
-    if (c >= 'A' && c <= 'F')
-        return c - 'A' + 10;
+    if (c >= '0' && c <= '9') return c - '0';
+    if (c >= 'a' && c <= 'f') return c - 'a' + 10;
+    if (c >= 'A' && c <= 'F') return c - 'A' + 10;
 
     throw std::invalid_argument("Invalid hex character");
 }

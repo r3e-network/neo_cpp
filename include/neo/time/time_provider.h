@@ -25,7 +25,7 @@ namespace time
  */
 class TimeProvider
 {
-  public:
+   public:
     /**
      * @brief Gets the current UTC time as milliseconds since Unix epoch.
      * @return Current time in milliseconds
@@ -53,20 +53,14 @@ class TimeProvider
      * @param milliseconds Time in milliseconds
      * @return Time in seconds
      */
-    static uint64_t MillisecondsToSeconds(uint64_t milliseconds)
-    {
-        return milliseconds / 1000;
-    }
+    static uint64_t MillisecondsToSeconds(uint64_t milliseconds) { return milliseconds / 1000; }
 
     /**
      * @brief Converts seconds since Unix epoch to milliseconds.
      * @param seconds Time in seconds
      * @return Time in milliseconds
      */
-    static uint64_t SecondsToMilliseconds(uint64_t seconds)
-    {
-        return seconds * 1000;
-    }
+    static uint64_t SecondsToMilliseconds(uint64_t seconds) { return seconds * 1000; }
 };
 
 }  // namespace time

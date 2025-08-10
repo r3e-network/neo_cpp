@@ -1,4 +1,3 @@
-#include <cstring>
 #include <neo/vm/compound_items.h>
 #include <neo/vm/exceptions.h>
 #include <neo/vm/execution_engine.h>
@@ -8,6 +7,8 @@
 #include <neo/vm/primitive_items.h>
 #include <neo/vm/special_items.h>
 #include <neo/vm/stack_item.h>
+
+#include <cstring>
 
 namespace neo::vm
 {
@@ -39,8 +40,7 @@ void JumpTableSpliceString::CAT(ExecutionEngine& engine, const Instruction&)
     auto x1 = engine.Pop()->GetByteArray();
 
     size_t totalSize = x1.Size() + x2.Size();
-    if (totalSize > engine.GetLimits().MaxItemSize)
-        throw InvalidOperationException("Result is too large");
+    if (totalSize > engine.GetLimits().MaxItemSize) throw InvalidOperationException("Result is too large");
 
     io::ByteVector result(totalSize);
     std::memcpy(result.Data(), x1.Data(), x1.Size());
@@ -55,14 +55,11 @@ void JumpTableSpliceString::SUBSTR(ExecutionEngine& engine, const Instruction&)
     auto index = engine.Pop()->GetInteger();
     auto x = engine.Pop()->GetByteArray();
 
-    if (index < 0)
-        throw InvalidOperationException("Index cannot be negative");
+    if (index < 0) throw InvalidOperationException("Index cannot be negative");
 
-    if (length < 0)
-        throw InvalidOperationException("Length cannot be negative");
+    if (length < 0) throw InvalidOperationException("Length cannot be negative");
 
-    if (index + length > static_cast<int64_t>(x.Size()))
-        throw InvalidOperationException("Range exceeds string length");
+    if (index + length > static_cast<int64_t>(x.Size())) throw InvalidOperationException("Range exceeds string length");
 
     io::ByteVector result(static_cast<size_t>(length));
     std::memcpy(result.Data(), x.Data() + index, static_cast<size_t>(length));
@@ -75,8 +72,7 @@ void JumpTableSpliceString::LEFT(ExecutionEngine& engine, const Instruction&)
     auto count = engine.Pop()->GetInteger();
     auto x = engine.Pop()->GetByteArray();
 
-    if (count < 0)
-        throw InvalidOperationException("Count cannot be negative");
+    if (count < 0) throw InvalidOperationException("Count cannot be negative");
 
     count = std::min(count, static_cast<int64_t>(x.Size()));
 
@@ -91,8 +87,7 @@ void JumpTableSpliceString::RIGHT(ExecutionEngine& engine, const Instruction&)
     auto count = engine.Pop()->GetInteger();
     auto x = engine.Pop()->GetByteArray();
 
-    if (count < 0)
-        throw InvalidOperationException("Count cannot be negative");
+    if (count < 0) throw InvalidOperationException("Count cannot be negative");
 
     count = std::min(count, static_cast<int64_t>(x.Size()));
 

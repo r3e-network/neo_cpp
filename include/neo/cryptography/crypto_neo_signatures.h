@@ -4,6 +4,7 @@
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
 #include <vector>
 
 namespace neo::cryptography::neo_signatures

@@ -1,10 +1,11 @@
 #pragma once
 
-#include <filesystem>
-#include <memory>
 #include <neo/monitoring/metrics.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/persistence/data_cache.h>
+
+#include <filesystem>
+#include <memory>
 
 namespace neo::monitoring
 {
@@ -13,10 +14,10 @@ namespace neo::monitoring
  */
 class DatabaseHealthCheck : public IHealthCheck
 {
-  private:
+   private:
     std::shared_ptr<persistence::DataCache> db_;
 
-  public:
+   public:
     explicit DatabaseHealthCheck(std::shared_ptr<persistence::DataCache> db) : db_(db) {}
 
     HealthCheckResult Check() override
@@ -52,10 +53,7 @@ class DatabaseHealthCheck : public IHealthCheck
         return result;
     }
 
-    std::string GetName() const override
-    {
-        return "database";
-    }
+    std::string GetName() const override { return "database"; }
 };
 
 /**
@@ -63,11 +61,11 @@ class DatabaseHealthCheck : public IHealthCheck
  */
 class NetworkHealthCheck : public IHealthCheck
 {
-  private:
+   private:
     std::shared_ptr<network::p2p::LocalNode> node_;
     size_t min_peers_;
 
-  public:
+   public:
     explicit NetworkHealthCheck(std::shared_ptr<network::p2p::LocalNode> node, size_t min_peers = 3)
         : node_(node), min_peers_(min_peers)
     {
@@ -120,10 +118,7 @@ class NetworkHealthCheck : public IHealthCheck
         return result;
     }
 
-    std::string GetName() const override
-    {
-        return "network";
-    }
+    std::string GetName() const override { return "network"; }
 };
 
 /**
@@ -131,14 +126,15 @@ class NetworkHealthCheck : public IHealthCheck
  */
 class DiskSpaceHealthCheck : public IHealthCheck
 {
-  private:
+   private:
     std::string path_;
     uint64_t min_free_bytes_;
     uint64_t warning_free_bytes_;
 
-  public:
+   public:
     explicit DiskSpaceHealthCheck(const std::string& path, uint64_t min_free_gb = 10, uint64_t warning_free_gb = 50)
-        : path_(path), min_free_bytes_(min_free_gb * 1024ULL * 1024ULL * 1024ULL),
+        : path_(path),
+          min_free_bytes_(min_free_gb * 1024ULL * 1024ULL * 1024ULL),
           warning_free_bytes_(warning_free_gb * 1024ULL * 1024ULL * 1024ULL)
     {
     }
@@ -188,10 +184,7 @@ class DiskSpaceHealthCheck : public IHealthCheck
         return result;
     }
 
-    std::string GetName() const override
-    {
-        return "disk_space";
-    }
+    std::string GetName() const override { return "disk_space"; }
 };
 
 /**
@@ -199,21 +192,18 @@ class DiskSpaceHealthCheck : public IHealthCheck
  */
 class MemoryHealthCheck : public IHealthCheck
 {
-  private:
+   private:
     double max_usage_percentage_;
     double warning_usage_percentage_;
 
-  public:
+   public:
     explicit MemoryHealthCheck(double max_usage_percentage = 90.0, double warning_usage_percentage = 80.0)
         : max_usage_percentage_(max_usage_percentage), warning_usage_percentage_(warning_usage_percentage)
     {
     }
 
     HealthCheckResult Check() override;
-    std::string GetName() const override
-    {
-        return "memory";
-    }
+    std::string GetName() const override { return "memory"; }
 };
 
 /**
@@ -221,10 +211,10 @@ class MemoryHealthCheck : public IHealthCheck
  */
 class ConsensusHealthCheck : public IHealthCheck
 {
-  private:
+   private:
     std::shared_ptr<consensus::DbftConsensus> consensus_;
 
-  public:
+   public:
     explicit ConsensusHealthCheck(std::shared_ptr<consensus::DbftConsensus> consensus) : consensus_(consensus) {}
 
     HealthCheckResult Check() override
@@ -261,10 +251,7 @@ class ConsensusHealthCheck : public IHealthCheck
         return result;
     }
 
-    std::string GetName() const override
-    {
-        return "consensus";
-    }
+    std::string GetName() const override { return "consensus"; }
 };
 
 /**
@@ -272,12 +259,12 @@ class ConsensusHealthCheck : public IHealthCheck
  */
 class BlockchainSyncHealthCheck : public IHealthCheck
 {
-  private:
+   private:
     std::shared_ptr<persistence::DataCache> db_;
     std::shared_ptr<network::p2p::LocalNode> node_;
     uint32_t max_blocks_behind_;
 
-  public:
+   public:
     explicit BlockchainSyncHealthCheck(std::shared_ptr<persistence::DataCache> db,
                                        std::shared_ptr<network::p2p::LocalNode> node, uint32_t max_blocks_behind = 10)
         : db_(db), node_(node), max_blocks_behind_(max_blocks_behind)
@@ -285,9 +272,6 @@ class BlockchainSyncHealthCheck : public IHealthCheck
     }
 
     HealthCheckResult Check() override;
-    std::string GetName() const override
-    {
-        return "blockchain_sync";
-    }
+    std::string GetName() const override { return "blockchain_sync"; }
 };
 }  // namespace neo::monitoring

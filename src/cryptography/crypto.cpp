@@ -1,4 +1,3 @@
-#include <cstring>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/hash.h>
@@ -12,6 +11,8 @@
 #include <openssl/rand.h>
 #include <openssl/ripemd.h>
 #include <openssl/sha.h>
+
+#include <cstring>
 #include <random>
 #include <stdexcept>
 
@@ -36,8 +37,7 @@ io::ByteVector Crypto::GenerateRandomBytes(size_t length)
 io::UInt256 Crypto::Hash256(const uint8_t* data, size_t length)
 {
     EVP_MD_CTX* ctx = EVP_MD_CTX_new();
-    if (!ctx)
-        throw std::runtime_error("Failed to create hash context");
+    if (!ctx) throw std::runtime_error("Failed to create hash context");
 
     if (EVP_DigestInit_ex(ctx, EVP_sha256(), nullptr) != 1)
     {
@@ -63,15 +63,9 @@ io::UInt256 Crypto::Hash256(const uint8_t* data, size_t length)
     return io::UInt256(io::ByteSpan(hash, SHA256_DIGEST_LENGTH));
 }
 
-io::UInt256 Crypto::Hash256(const io::ByteSpan& data)
-{
-    return Hash256(data.Data(), data.Size());
-}
+io::UInt256 Crypto::Hash256(const io::ByteSpan& data) { return Hash256(data.Data(), data.Size()); }
 
-io::UInt256 Crypto::Hash256(const io::ByteVector& data)
-{
-    return Hash256(data.Data(), data.Size());
-}
+io::UInt256 Crypto::Hash256(const io::ByteVector& data) { return Hash256(data.Data(), data.Size()); }
 
 io::UInt160 Crypto::Hash160(const io::ByteSpan& data)
 {
@@ -87,15 +81,12 @@ io::UInt160 Crypto::Hash160(const io::ByteSpan& data)
 
 io::ByteVector Crypto::AesEncrypt(const io::ByteSpan& data, const io::ByteSpan& key, const io::ByteSpan& iv)
 {
-    if (key.Size() != 32)
-        throw std::invalid_argument("Key must be 32 bytes");
+    if (key.Size() != 32) throw std::invalid_argument("Key must be 32 bytes");
 
-    if (iv.Size() != 16)
-        throw std::invalid_argument("IV must be 16 bytes");
+    if (iv.Size() != 16) throw std::invalid_argument("IV must be 16 bytes");
 
     EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
-    if (!ctx)
-        throw std::runtime_error("Failed to create cipher context");
+    if (!ctx) throw std::runtime_error("Failed to create cipher context");
 
     if (EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, key.Data(), iv.Data()) != 1)
     {
@@ -126,15 +117,12 @@ io::ByteVector Crypto::AesEncrypt(const io::ByteSpan& data, const io::ByteSpan& 
 
 io::ByteVector Crypto::AesDecrypt(const io::ByteSpan& data, const io::ByteSpan& key, const io::ByteSpan& iv)
 {
-    if (key.Size() != 32)
-        throw std::invalid_argument("Key must be 32 bytes");
+    if (key.Size() != 32) throw std::invalid_argument("Key must be 32 bytes");
 
-    if (iv.Size() != 16)
-        throw std::invalid_argument("IV must be 16 bytes");
+    if (iv.Size() != 16) throw std::invalid_argument("IV must be 16 bytes");
 
     EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
-    if (!ctx)
-        throw std::runtime_error("Failed to create cipher context");
+    if (!ctx) throw std::runtime_error("Failed to create cipher context");
 
     if (EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, key.Data(), iv.Data()) != 1)
     {
@@ -183,8 +171,7 @@ io::ByteVector Crypto::HmacSha256(const io::ByteSpan& key, const io::ByteSpan& d
     io::ByteVector result(length);
 
     HMAC_CTX* ctx = HMAC_CTX_new();
-    if (!ctx)
-        throw std::runtime_error("Failed to create HMAC context");
+    if (!ctx) throw std::runtime_error("Failed to create HMAC context");
 
     // Handle empty key case - provide empty key buffer for OpenSSL 3.0 compatibility
     static const uint8_t emptyKey = 0;
@@ -251,8 +238,7 @@ io::ByteVector Crypto::Base64Decode(const std::string& base64)
     int decodedSize = BIO_read(bmem, result.Data(), static_cast<int>(result.Size()));
     BIO_free_all(bmem);
 
-    if (decodedSize < 0)
-        throw std::runtime_error("Failed to decode Base64");
+    if (decodedSize < 0) throw std::runtime_error("Failed to decode Base64");
 
     result.Resize(decodedSize);
     return result;
@@ -281,15 +267,13 @@ io::ByteVector Crypto::CreateSignatureRedeemScript(const ecc::ECPoint& publicKey
 
 bool Crypto::VerifySignature(const io::ByteSpan& message, const io::ByteSpan& signature, const ecc::ECPoint& publicKey)
 {
-    if (signature.Size() != 64)
-        return false;
+    if (signature.Size() != 64) return false;
 
     try
     {
         // Create EC_KEY from public key
         EC_KEY* eckey = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
-        if (!eckey)
-            return false;
+        if (!eckey) return false;
 
         // Convert public key to EC_POINT
         auto pubKeyBytes = publicKey.ToArray();
@@ -329,10 +313,8 @@ bool Crypto::VerifySignature(const io::ByteSpan& message, const io::ByteSpan& si
 
         if (!r || !s)
         {
-            if (r)
-                BN_free(r);
-            if (s)
-                BN_free(s);
+            if (r) BN_free(r);
+            if (s) BN_free(s);
             ECDSA_SIG_free(sig);
             EC_POINT_free(point);
             EC_KEY_free(eckey);
@@ -372,8 +354,7 @@ io::ByteVector Crypto::Sign(const io::ByteSpan& message, const io::ByteSpan& pri
     {
         // Create EC_KEY from private key
         EC_GROUP* group = EC_GROUP_new_by_curve_name(NID_secp256k1);
-        if (!group)
-            throw std::runtime_error("Failed to create EC_GROUP");
+        if (!group) throw std::runtime_error("Failed to create EC_GROUP");
 
         EC_KEY* eckey = EC_KEY_new();
         if (!eckey)
@@ -494,8 +475,7 @@ ecc::ECPoint Crypto::ComputePublicKey(const io::ByteSpan& privateKey)
     {
         // Create EC_GROUP for secp256k1
         EC_GROUP* group = EC_GROUP_new_by_curve_name(NID_secp256k1);
-        if (!group)
-            throw std::runtime_error("Failed to create EC_GROUP");
+        if (!group) throw std::runtime_error("Failed to create EC_GROUP");
 
         // Create BIGNUM from private key
         BIGNUM* privKeyBN = BN_bin2bn(privateKey.Data(), static_cast<int>(privateKey.Size()), nullptr);

@@ -1,5 +1,6 @@
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/wallets/asset_descriptor.h>
+
 #include <stdexcept>
 
 namespace neo::wallets
@@ -12,8 +13,7 @@ AssetDescriptor::AssetDescriptor(const persistence::DataCache& snapshot, const c
 
     // Get the contract
     auto contract = smartcontract::native::ContractManagement::GetContract(snapshot, assetId);
-    if (!contract)
-        throw std::invalid_argument("Invalid asset id");
+    if (!contract) throw std::invalid_argument("Invalid asset id");
 
     // Get the contract name from manifest
     // For now, use a simple approach since manifest is a JSON string
@@ -51,28 +51,13 @@ AssetDescriptor::AssetDescriptor(const persistence::DataCache& snapshot, const c
     }
 }
 
-const io::UInt160& AssetDescriptor::GetAssetId() const
-{
-    return assetId_;
-}
+const io::UInt160& AssetDescriptor::GetAssetId() const { return assetId_; }
 
-const std::string& AssetDescriptor::GetAssetName() const
-{
-    return assetName_;
-}
+const std::string& AssetDescriptor::GetAssetName() const { return assetName_; }
 
-const std::string& AssetDescriptor::GetSymbol() const
-{
-    return symbol_;
-}
+const std::string& AssetDescriptor::GetSymbol() const { return symbol_; }
 
-uint8_t AssetDescriptor::GetDecimals() const
-{
-    return decimals_;
-}
+uint8_t AssetDescriptor::GetDecimals() const { return decimals_; }
 
-std::string AssetDescriptor::ToString() const
-{
-    return assetName_;
-}
+std::string AssetDescriptor::ToString() const { return assetName_; }
 }  // namespace neo::wallets

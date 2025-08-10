@@ -48,7 +48,7 @@ namespace neo::console_service
  */
 class ServiceProxy
 {
-  public:
+   public:
     /**
      * @brief Constructor
      * @param system Pointer to the Neo system
@@ -123,14 +123,14 @@ class ServiceProxy
      */
     void SetEventCallback(std::function<void(const std::string&)> callback);
 
-  protected:
+   protected:
     /**
      * @brief Notify event callback if set
      * @param event Event message
      */
     void NotifyEvent(const std::string& event);
 
-  private:
+   private:
     std::shared_ptr<neo::node::NeoSystem> neoSystem_;
     std::function<void(const std::string&)> eventCallback_;
 

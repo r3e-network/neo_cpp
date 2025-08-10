@@ -1,4 +1,3 @@
-#include <iostream>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -11,6 +10,8 @@
 #include <neo/smartcontract/native/neo_token_gas.h>
 #include <neo/vm/script_builder.h>
 #include <neo/vm/stack_item.h>
+
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 
@@ -72,8 +73,7 @@ int64_t NeoTokenGas::GetGasPerBlock(const NeoToken& token, std::shared_ptr<persi
 {
     persistence::StorageKey key = token.CreateStorageKey(static_cast<uint8_t>(NeoToken::StoragePrefix::GasPerBlock));
     auto item = snapshot->TryGet(key);
-    if (!item)
-        return 5 * 100000000;  // 5 GAS
+    if (!item) return 5 * 100000000;  // 5 GAS
 
     std::istringstream stream(
         std::string(reinterpret_cast<const char*>(item->GetValue().Data()), item->GetValue().Size()));
@@ -110,13 +110,11 @@ NeoToken::GasDistribution NeoTokenGas::DistributeGas(const NeoToken& token, Appl
 {
     // Get the current block
     auto block = engine.GetPersistingBlock();
-    if (!block)
-        return NeoToken::GasDistribution{account, 0};
+    if (!block) return NeoToken::GasDistribution{account, 0};
 
     // Calculate unclaimed gas
     int64_t gas = CalculateBonus(token, engine.GetSnapshot(), state, block->GetIndex());
-    if (gas <= 0)
-        return NeoToken::GasDistribution{account, 0};
+    if (gas <= 0) return NeoToken::GasDistribution{account, 0};
 
     // Mint GAS to account
     auto gasToken = GasToken::GetInstance();
@@ -128,8 +126,7 @@ NeoToken::GasDistribution NeoTokenGas::DistributeGas(const NeoToken& token, Appl
 int64_t NeoTokenGas::CalculateBonus(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot,
                                     const NeoToken::AccountState& state, uint32_t end)
 {
-    if (state.balance <= 0 || state.balanceHeight >= end)
-        return 0;
+    if (state.balance <= 0 || state.balanceHeight >= end) return 0;
 
     // Calculate NEO holder reward
     int64_t neoHolderReward = CalculateNeoHolderReward(token, snapshot, state.balance, state.balanceHeight, end);
@@ -160,8 +157,7 @@ int64_t NeoTokenGas::CalculateBonus(const NeoToken& token, std::shared_ptr<persi
 int64_t NeoTokenGas::CalculateNeoHolderReward(const NeoToken& token, std::shared_ptr<persistence::DataCache> snapshot,
                                               int64_t value, uint32_t start, uint32_t end)
 {
-    if (start >= end)
-        return 0;
+    if (start >= end) return 0;
 
     // Get the gas per block
     int64_t gasPerBlock = GetGasPerBlock(token, snapshot);
@@ -190,8 +186,7 @@ std::shared_ptr<vm::StackItem> NeoTokenGas::OnGetGasPerBlock(const NeoToken& tok
 std::shared_ptr<vm::StackItem> NeoTokenGas::OnSetGasPerBlock(const NeoToken& token, ApplicationEngine& engine,
                                                              const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 1)
-        throw std::runtime_error("Invalid number of arguments");
+    if (args.size() < 1) throw std::runtime_error("Invalid number of arguments");
 
     auto gasPerBlockItem = args[0];
     int64_t gasPerBlock = gasPerBlockItem->GetInteger();
@@ -270,16 +265,14 @@ std::shared_ptr<vm::StackItem> NeoTokenGas::OnSetGasPerBlock(const NeoToken& tok
 std::shared_ptr<vm::StackItem> NeoTokenGas::OnGetUnclaimedGas(const NeoToken& token, ApplicationEngine& engine,
                                                               const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 2)
-        throw std::runtime_error("Invalid number of arguments");
+    if (args.size() < 2) throw std::runtime_error("Invalid number of arguments");
 
     auto accountItem = args[0];
     auto endItem = args[1];
 
     io::UInt160 account;
     auto accountBytes = accountItem->GetByteArray();
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     std::memcpy(account.Data(), accountBytes.Data(), 20);
 

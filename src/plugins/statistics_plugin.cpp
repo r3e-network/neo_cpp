@@ -1,19 +1,22 @@
-#include <iostream>
 #include <neo/plugins/statistics_plugin.h>
+
+#include <iostream>
 
 namespace neo::plugins
 {
 StatisticsPlugin::StatisticsPlugin()
-    : PluginBase("Statistics", "Collects and reports node statistics", "1.0", "Neo C++ Team"), blockCount_(0),
-      transactionCount_(0), peerCount_(0), memoryPoolSize_(0), interval_(60), blockCallbackId_(-1),
+    : PluginBase("Statistics", "Collects and reports node statistics", "1.0", "Neo C++ Team"),
+      blockCount_(0),
+      transactionCount_(0),
+      peerCount_(0),
+      memoryPoolSize_(0),
+      interval_(60),
+      blockCallbackId_(-1),
       transactionCallbackId_(-1)
 {
 }
 
-StatisticsPlugin::~StatisticsPlugin()
-{
-    OnStop();
-}
+StatisticsPlugin::~StatisticsPlugin() { OnStop(); }
 
 bool StatisticsPlugin::OnInitialize(const std::unordered_map<std::string, std::string>& settings)
 {
@@ -36,8 +39,7 @@ bool StatisticsPlugin::OnInitialize(const std::unordered_map<std::string, std::s
 bool StatisticsPlugin::OnStart()
 {
     auto node = GetNode();
-    if (!node)
-        return false;
+    if (!node) return false;
 
     // Register callbacks
     blockCallbackId_ = node->RegisterBlockPersistenceCallback(
@@ -76,8 +78,7 @@ bool StatisticsPlugin::OnStop()
         condition_.notify_all();
     }
 
-    if (statisticsThread_.joinable())
-        statisticsThread_.join();
+    if (statisticsThread_.joinable()) statisticsThread_.join();
 
     return true;
 }
@@ -112,8 +113,7 @@ void StatisticsPlugin::OnTransactionExecuted(std::shared_ptr<ledger::Transaction
 void StatisticsPlugin::CollectStatistics()
 {
     auto node = GetNode();
-    if (!node)
-        return;
+    if (!node) return;
 
     // Get peer count
     peerCount_ = node->GetP2PServer()->GetConnectedPeers().size();

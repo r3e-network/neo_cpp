@@ -2,6 +2,7 @@
 #include <neo/core/safe_conversions.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
+
 #include <sstream>
 
 namespace neo::cli

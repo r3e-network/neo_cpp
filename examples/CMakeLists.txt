@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add example executables
 add_executable(neo_example_vm vm/vm_example.cpp)
-target_link_libraries(neo_example_vm PRIVATE neo_vm)
+target_link_libraries(neo_example_vm PRIVATE neo_vm neo_smartcontract neo_core neo_io neo_cryptography neo_persistence neo_native_contracts neo_logging)
 
 add_executable(neo_example_smartcontract smartcontract/smartcontract_example.cpp)
 target_link_libraries(neo_example_smartcontract PRIVATE neo_smartcontract)
@@ -18,10 +18,10 @@ add_executable(neo_example_consensus consensus/consensus_example.cpp)
 target_link_libraries(neo_example_consensus PRIVATE neo_consensus)
 
 add_executable(neo_example_ledger ledger/ledger_example.cpp)
-target_link_libraries(neo_example_ledger PRIVATE neo_ledger)
+target_link_libraries(neo_example_ledger PRIVATE neo_ledger neo_core neo_io neo_cryptography neo_vm neo_smartcontract neo_persistence neo_native_contracts neo_logging)
 
 add_executable(neo_example_event_system event_system_usage.cpp)
-target_link_libraries(neo_example_event_system PRIVATE neo_ledger neo_core)
+target_link_libraries(neo_example_event_system PRIVATE neo_ledger neo_core neo_io neo_logging neo_extensions neo_persistence neo_smartcontract neo_native_contracts)
 target_include_directories(neo_example_event_system PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Install

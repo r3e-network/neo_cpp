@@ -3,6 +3,7 @@
 #include <neo/vm/compound_items.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/stack_item_types.h>
+
 #include <nlohmann/json.hpp>
 #include <stdexcept>
 
@@ -34,8 +35,7 @@ std::shared_ptr<vm::StackItem> JsonSerializer::Deserialize(const nlohmann::json&
 
 std::shared_ptr<vm::StackItem> JsonSerializer::Deserialize(const io::ByteSpan& data, int64_t maxSize, int64_t maxItems)
 {
-    if (static_cast<int64_t>(data.Size()) > maxSize)
-        throw std::runtime_error("Data exceeds maximum size");
+    if (static_cast<int64_t>(data.Size()) > maxSize) throw std::runtime_error("Data exceeds maximum size");
 
     std::string jsonStr(reinterpret_cast<const char*>(data.Data()), data.Size());
     auto json = nlohmann::json::parse(jsonStr);
@@ -47,8 +47,7 @@ nlohmann::json JsonSerializer::SerializeStackItem(std::shared_ptr<vm::StackItem>
     if (++itemCount > 2048)  // Default max items
         throw std::runtime_error("Maximum item count exceeded");
 
-    if (!item)
-        return nlohmann::json::value_t::null;
+    if (!item) return nlohmann::json::value_t::null;
 
     // Serialize based on stack item type
     switch (item->GetType())
@@ -119,8 +118,7 @@ nlohmann::json JsonSerializer::SerializeStackItem(std::shared_ptr<vm::StackItem>
 std::shared_ptr<vm::StackItem> JsonSerializer::DeserializeStackItem(const nlohmann::json& json, int64_t maxSize,
                                                                     int64_t maxItems, int64_t& itemCount)
 {
-    if (++itemCount > maxItems)
-        throw std::runtime_error("Maximum item count exceeded");
+    if (++itemCount > maxItems) throw std::runtime_error("Maximum item count exceeded");
 
     // Deserialize based on JSON type
     if (json.is_null())

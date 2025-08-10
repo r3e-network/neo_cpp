@@ -1,30 +1,24 @@
 #include <neo/consensus/prepare_request.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
+
 #include <sstream>
 
 namespace neo::consensus
 {
 PrepareRequest::PrepareRequest(uint8_t viewNumber, uint64_t timestamp, uint64_t nonce, const io::UInt160& nextConsensus)
-    : ConsensusMessage(MessageType::PrepareRequest, viewNumber), timestamp_(timestamp), nonce_(nonce),
+    : ConsensusMessage(MessageType::PrepareRequest, viewNumber),
+      timestamp_(timestamp),
+      nonce_(nonce),
       nextConsensus_(nextConsensus)
 {
 }
 
-uint64_t PrepareRequest::GetTimestamp() const
-{
-    return timestamp_;
-}
+uint64_t PrepareRequest::GetTimestamp() const { return timestamp_; }
 
-uint64_t PrepareRequest::GetNonce() const
-{
-    return nonce_;
-}
+uint64_t PrepareRequest::GetNonce() const { return nonce_; }
 
-const io::UInt160& PrepareRequest::GetNextConsensus() const
-{
-    return nextConsensus_;
-}
+const io::UInt160& PrepareRequest::GetNextConsensus() const { return nextConsensus_; }
 
 const std::vector<std::shared_ptr<ledger::Transaction>>& PrepareRequest::GetTransactions() const
 {
@@ -36,30 +30,21 @@ void PrepareRequest::SetTransactions(const std::vector<std::shared_ptr<ledger::T
     transactions_ = transactions;
 }
 
-const std::vector<io::UInt256>& PrepareRequest::GetTransactionHashes() const
-{
-    return transactionHashes_;
-}
+const std::vector<io::UInt256>& PrepareRequest::GetTransactionHashes() const { return transactionHashes_; }
 
 void PrepareRequest::SetTransactionHashes(const std::vector<io::UInt256>& transactionHashes)
 {
     transactionHashes_ = transactionHashes;
 }
 
-const io::ByteVector& PrepareRequest::GetInvocationScript() const
-{
-    return invocationScript_;
-}
+const io::ByteVector& PrepareRequest::GetInvocationScript() const { return invocationScript_; }
 
 void PrepareRequest::SetInvocationScript(const io::ByteVector& invocationScript)
 {
     invocationScript_ = invocationScript;
 }
 
-const io::ByteVector& PrepareRequest::GetVerificationScript() const
-{
-    return verificationScript_;
-}
+const io::ByteVector& PrepareRequest::GetVerificationScript() const { return verificationScript_; }
 
 void PrepareRequest::SetVerificationScript(const io::ByteVector& verificationScript)
 {

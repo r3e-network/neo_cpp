@@ -10,7 +10,7 @@ namespace neo::cli
  */
 class CommandLineOptions
 {
-  public:
+   public:
     /**
      * @brief The config file path.
      */

@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/byte_span.h>
 #include <neo/io/byte_vector.h>
+
+#include <memory>
 
 namespace neo::io
 {
@@ -14,7 +15,7 @@ class BinaryReader;
  */
 class ISerializable
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor.
      */

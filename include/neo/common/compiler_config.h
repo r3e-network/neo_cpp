@@ -111,15 +111,15 @@
 // Debugging macros
 #ifdef DEBUG
 #define NEO_DEBUG 1
-#define NEO_ASSERT(condition, message)                                                                                 \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        if (!(condition))                                                                                              \
-        {                                                                                                              \
-            std::cerr << "Assertion failed: " << #condition << " - " << message << " at " << __FILE__ << ":"           \
-                      << __LINE__ << std::endl;                                                                        \
-            std::abort();                                                                                              \
-        }                                                                                                              \
+#define NEO_ASSERT(condition, message)                                                                       \
+    do                                                                                                       \
+    {                                                                                                        \
+        if (!(condition))                                                                                    \
+        {                                                                                                    \
+            std::cerr << "Assertion failed: " << #condition << " - " << message << " at " << __FILE__ << ":" \
+                      << __LINE__ << std::endl;                                                              \
+            std::abort();                                                                                    \
+        }                                                                                                    \
     } while (0)
 #else
 #define NEO_DEBUG 0

@@ -13,5 +13,5 @@ using Transaction = network::p2p::payloads::Neo3Transaction;
 // Bring in Neo N3 interfaces
 using IInventory = network::p2p::payloads::IInventory;
 using IVerifiable = network::p2p::payloads::IVerifiable;
-using InventoryType = network::p2p::payloads::InventoryType;
+using InventoryType = network::p2p::InventoryType;
 }  // namespace neo::ledger

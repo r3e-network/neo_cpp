@@ -1,12 +1,13 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint160.h>
 #include <neo/persistence/data_cache.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/contract.h>
+
+#include <functional>
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -18,7 +19,7 @@ namespace neo::smartcontract
  */
 class NativeContract
 {
-  public:
+   public:
     /**
      * @brief Constructs a NativeContract.
      * @param name The name.
@@ -86,7 +87,7 @@ class NativeContract
      */
     persistence::StorageKey CreateStorageKey(uint8_t prefix, const io::ByteVector& key = io::ByteVector()) const;
 
-  protected:
+   protected:
     std::string name_;
     int32_t id_;
     io::UInt160 scriptHash_;
@@ -105,7 +106,7 @@ class NativeContract
  */
 class NativeContractManager
 {
-  public:
+   public:
     /**
      * @brief Gets the instance.
      * @return The instance.
@@ -144,7 +145,7 @@ class NativeContractManager
      */
     void Initialize(std::shared_ptr<persistence::DataCache> snapshot);
 
-  private:
+   private:
     NativeContractManager();
     std::vector<std::shared_ptr<NativeContract>> contracts_;
     std::unordered_map<io::UInt160, std::shared_ptr<NativeContract>> contractsByHash_;

@@ -1,5 +1,6 @@
-#include <iomanip>
 #include <neo/json/jstring.h>
+
+#include <iomanip>
 #include <sstream>
 
 namespace neo::json
@@ -8,54 +9,29 @@ JString::JString(const std::string& value) : value_(value) {}
 
 JString::JString(std::string&& value) : value_(std::move(value)) {}
 
-JTokenType JString::GetType() const
-{
-    return JTokenType::String;
-}
+JTokenType JString::GetType() const { return JTokenType::String; }
 
-std::string JString::AsString() const
-{
-    return value_;
-}
+std::string JString::AsString() const { return value_; }
 
-std::string JString::GetString() const
-{
-    return value_;
-}
+std::string JString::GetString() const { return value_; }
 
-std::string JString::ToString() const
-{
-    return "\"" + EscapeString(value_) + "\"";
-}
+std::string JString::ToString() const { return "\"" + EscapeString(value_) + "\""; }
 
-std::shared_ptr<JToken> JString::Clone() const
-{
-    return std::make_shared<JString>(value_);
-}
+std::shared_ptr<JToken> JString::Clone() const { return std::make_shared<JString>(value_); }
 
 bool JString::Equals(const JToken& other) const
 {
-    if (other.GetType() != JTokenType::String)
-        return false;
+    if (other.GetType() != JTokenType::String) return false;
 
     const auto& other_string = static_cast<const JString&>(other);
     return value_ == other_string.value_;
 }
 
-JString::operator std::string() const
-{
-    return value_;
-}
+JString::operator std::string() const { return value_; }
 
-const std::string& JString::GetValue() const
-{
-    return value_;
-}
+const std::string& JString::GetValue() const { return value_; }
 
-void JString::WriteJson(std::string& output, bool indented, int indent_level) const
-{
-    output += ToString();
-}
+void JString::WriteJson(std::string& output, bool indented, int indent_level) const { output += ToString(); }
 
 std::string JString::EscapeString(const std::string& str)
 {

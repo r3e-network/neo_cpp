@@ -3,6 +3,7 @@
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/network/p2p/payloads/ipayload.h>
+
 #include <string>
 
 namespace neo::network::p2p::payloads
@@ -17,7 +18,7 @@ namespace neo::network::p2p::payloads
  */
 class RejectPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty RejectPayload.
      */

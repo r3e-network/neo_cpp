@@ -1,8 +1,9 @@
 #pragma once
 
+#include <neo/network/ip_address.h>
+
 #include <chrono>
 #include <memory>
-#include <neo/network/ip_address.h>
 #include <string>
 
 namespace neo::network
@@ -12,7 +13,7 @@ namespace neo::network
  */
 class UPnP
 {
-  public:
+   public:
     /**
      * @brief Gets or sets the timeout for discovering the UPnP device.
      * @return The timeout for discovering the UPnP device.
@@ -52,7 +53,7 @@ class UPnP
      */
     static IPAddress GetExternalIP();
 
-  private:
+   private:
     /**
      * @brief The timeout for discovering the UPnP device.
      */

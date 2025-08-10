@@ -15,7 +15,7 @@ namespace neo::smartcontract::native
  */
 class NeoTokenTransfer
 {
-  public:
+   public:
     /**
      * @brief Gets the total supply.
      * @param token The NEO token.

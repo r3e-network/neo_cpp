@@ -1,8 +1,9 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/iserializable.h>
 #include <neo/network/ip_address.h>
+
+#include <cstdint>
 #include <string>
 
 namespace neo::network
@@ -13,7 +14,7 @@ namespace neo::network
  */
 class IPEndPoint : public io::ISerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty IPEndPoint.
      */
@@ -92,7 +93,7 @@ class IPEndPoint : public io::ISerializable
      */
     static bool TryParse(const std::string& endpoint, IPEndPoint& result);
 
-  private:
+   private:
     IPAddress address_;
     uint16_t port_;
 };

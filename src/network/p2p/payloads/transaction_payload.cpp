@@ -6,20 +6,11 @@ TransactionPayload::TransactionPayload() = default;
 
 TransactionPayload::TransactionPayload(std::shared_ptr<Neo3Transaction> transaction) : transaction_(transaction) {}
 
-std::shared_ptr<Neo3Transaction> TransactionPayload::GetTransaction() const
-{
-    return transaction_;
-}
+std::shared_ptr<Neo3Transaction> TransactionPayload::GetTransaction() const { return transaction_; }
 
-void TransactionPayload::SetTransaction(std::shared_ptr<Neo3Transaction> transaction)
-{
-    transaction_ = transaction;
-}
+void TransactionPayload::SetTransaction(std::shared_ptr<Neo3Transaction> transaction) { transaction_ = transaction; }
 
-int TransactionPayload::GetSize() const
-{
-    return transaction_ ? static_cast<int>(transaction_->GetSize()) : 0;
-}
+int TransactionPayload::GetSize() const { return transaction_ ? static_cast<int>(transaction_->GetSize()) : 0; }
 
 TransactionPayload TransactionPayload::Create(std::shared_ptr<Neo3Transaction> transaction)
 {

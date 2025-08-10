@@ -1,6 +1,3 @@
-#include <algorithm>
-#include <chrono>
-#include <fstream>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>
@@ -8,6 +5,10 @@
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/peer.h>
 #include <neo/network/p2p/peer_list.h>
+
+#include <algorithm>
+#include <chrono>
+#include <fstream>
 
 namespace neo::network::p2p
 {
@@ -134,7 +135,8 @@ bool PeerList::AddPeer(const Peer& peer)
 
     if (peers_.find(key) != peers_.end())
     {
-        return false;
+        // Idempotent add: treat existing peer as success
+        return true;
     }
 
     peers_[key] = peer;

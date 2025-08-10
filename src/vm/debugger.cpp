@@ -27,8 +27,7 @@ VMState Debugger::StepInto()
         engine_.SetState(VMState::Break);
     }
 
-    if (engine_.GetState() != VMState::Break)
-        return engine_.GetState();
+    if (engine_.GetState() != VMState::Break) return engine_.GetState();
 
     if (engine_.GetInvocationStack().empty())
     {
@@ -56,8 +55,7 @@ VMState Debugger::StepOver()
         engine_.SetState(VMState::Break);
     }
 
-    if (engine_.GetState() != VMState::Break)
-        return engine_.GetState();
+    if (engine_.GetState() != VMState::Break) return engine_.GetState();
 
     if (engine_.GetInvocationStack().empty())
     {
@@ -94,8 +92,7 @@ VMState Debugger::StepOut()
         engine_.SetState(VMState::Break);
     }
 
-    if (engine_.GetState() != VMState::Break)
-        return engine_.GetState();
+    if (engine_.GetState() != VMState::Break) return engine_.GetState();
 
     if (engine_.GetInvocationStack().empty())
     {
@@ -121,18 +118,9 @@ VMState Debugger::StepOut()
     return engine_.GetState();
 }
 
-void Debugger::AddBreakPoint(int position)
-{
-    breakpoints_.insert(position);
-}
+void Debugger::AddBreakPoint(int position) { breakpoints_.insert(position); }
 
-void Debugger::RemoveBreakPoint(int position)
-{
-    breakpoints_.erase(position);
-}
+void Debugger::RemoveBreakPoint(int position) { breakpoints_.erase(position); }
 
-void Debugger::ClearBreakPoints()
-{
-    breakpoints_.clear();
-}
+void Debugger::ClearBreakPoints() { breakpoints_.clear(); }
 }  // namespace neo::vm

@@ -1,11 +1,12 @@
-#include <filesystem>
-#include <fstream>
-#include <iostream>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/plugins/application_logs_plugin.h>
+
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 
 namespace neo::plugins
 {
@@ -61,8 +62,7 @@ std::shared_ptr<ApplicationLog> ApplicationLogsPlugin::GetApplicationLog(const i
     std::lock_guard<std::mutex> lock(mutex_);
 
     auto it = logs_.find(txHash);
-    if (it != logs_.end())
-        return it->second;
+    if (it != logs_.end()) return it->second;
 
     return nullptr;
 }
@@ -207,14 +207,12 @@ void ApplicationLogsPlugin::LoadLogs()
     logs_.clear();
 
     // Check if log directory exists
-    if (!std::filesystem::exists(logPath_))
-        return;
+    if (!std::filesystem::exists(logPath_)) return;
 
     // Load log files
     for (const auto& entry : std::filesystem::directory_iterator(logPath_))
     {
-        if (entry.path().extension() != ".json")
-            continue;
+        if (entry.path().extension() != ".json") continue;
 
         try
         {

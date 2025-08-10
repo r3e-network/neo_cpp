@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableSlotStatic
 {
-  public:
+   public:
     // Static field operations
     static void INITSSLOT(ExecutionEngine& engine, const Instruction& instruction);
     static void LDSFLD0(ExecutionEngine& engine, const Instruction& instruction);

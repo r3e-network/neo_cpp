@@ -1,7 +1,8 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_span.h>
+
+#include <cstdint>
 #include <string>
 #include <vector>
 #if __cplusplus >= 202002L
@@ -15,7 +16,7 @@ namespace neo::io
  */
 class ByteVector
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty ByteVector.
      */
@@ -67,119 +68,80 @@ class ByteVector
      * @brief Gets the size of the ByteVector.
      * @return The size of the ByteVector.
      */
-    size_t Size() const noexcept
-    {
-        return data_.size();
-    }
+    size_t Size() const noexcept { return data_.size(); }
 
     /**
      * @brief Gets the size of the ByteVector (STL compatibility).
      * @return The size of the ByteVector.
      */
-    size_t size() const noexcept
-    {
-        return data_.size();
-    }
+    size_t size() const noexcept { return data_.size(); }
 
     /**
      * @brief Checks if the ByteVector is empty.
      * @return True if the ByteVector is empty, false otherwise.
      */
-    bool IsEmpty() const noexcept
-    {
-        return data_.empty();
-    }
+    bool IsEmpty() const noexcept { return data_.empty(); }
 
     /**
      * @brief Checks if the ByteVector is empty (STL compatibility).
      * @return True if the ByteVector is empty, false otherwise.
      */
-    bool empty() const noexcept
-    {
-        return data_.empty();
-    }
+    bool empty() const noexcept { return data_.empty(); }
 
     /**
      * @brief Gets a pointer to the data.
      * @return Pointer to the data.
      */
-    uint8_t* Data() noexcept
-    {
-        return data_.data();
-    }
+    uint8_t* Data() noexcept { return data_.data(); }
 
     /**
      * @brief Gets a const pointer to the data.
      * @return Const pointer to the data.
      */
-    const uint8_t* Data() const noexcept
-    {
-        return data_.data();
-    }
+    const uint8_t* Data() const noexcept { return data_.data(); }
 
     /**
      * @brief Gets a reference to the byte at the specified index.
      * @param index The index.
      * @return Reference to the byte at the specified index.
      */
-    uint8_t& operator[](size_t index)
-    {
-        return data_[index];
-    }
+    uint8_t& operator[](size_t index) { return data_[index]; }
 
     /**
      * @brief Gets the byte at the specified index.
      * @param index The index.
      * @return The byte at the specified index.
      */
-    uint8_t operator[](size_t index) const
-    {
-        return data_[index];
-    }
+    uint8_t operator[](size_t index) const { return data_[index]; }
 
     /**
      * @brief Resizes the ByteVector.
      * @param size The new size.
      */
-    void Resize(size_t size)
-    {
-        data_.resize(size);
-    }
+    void Resize(size_t size) { data_.resize(size); }
 
     /**
      * @brief Reserves capacity for the ByteVector.
      * @param capacity The capacity to reserve.
      */
-    void Reserve(size_t capacity)
-    {
-        data_.reserve(capacity);
-    }
+    void Reserve(size_t capacity) { data_.reserve(capacity); }
 
     /**
      * @brief Appends data to the ByteVector.
      * @param data The data to append.
      */
-    void Append(const ByteSpan& data)
-    {
-        data_.insert(data_.end(), data.Data(), data.Data() + data.Size());
-    }
+    void Append(const ByteSpan& data) { data_.insert(data_.end(), data.Data(), data.Data() + data.Size()); }
 
     /**
      * @brief Pushes a byte to the end of the ByteVector.
      * @param value The byte to push.
      */
-    void Push(uint8_t value)
-    {
-        data_.push_back(value);
-    }
+    void Push(uint8_t value) { data_.push_back(value); }
 
     /**
      * @brief Clears the ByteVector.
      */
-    void Clear()
-    {
-        data_.clear();
-    }
+    void Clear() { data_.clear(); }
 
     /**
      * @brief Inserts data at the specified position.
@@ -188,10 +150,7 @@ class ByteVector
      * @param size Size of the data to insert.
      * @return Iterator to the first inserted element.
      */
-    auto insert(auto pos, const uint8_t* data, size_t size)
-    {
-        return data_.insert(pos, data, data + size);
-    }
+    auto insert(auto pos, const uint8_t* data, size_t size) { return data_.insert(pos, data, data + size); }
 
     /**
      * @brief Inserts data at the specified position.
@@ -209,122 +168,83 @@ class ByteVector
     /**
      * @brief Clears the ByteVector (STL compatibility).
      */
-    void clear()
-    {
-        data_.clear();
-    }
+    void clear() { data_.clear(); }
 
     /**
      * @brief Gets an iterator to the beginning of the ByteVector.
      * @return Iterator to the beginning.
      */
-    auto begin() noexcept
-    {
-        return data_.begin();
-    }
+    auto begin() noexcept { return data_.begin(); }
 
     /**
      * @brief Gets an iterator to the end of the ByteVector.
      * @return Iterator to the end.
      */
-    auto end() noexcept
-    {
-        return data_.end();
-    }
+    auto end() noexcept { return data_.end(); }
 
     /**
      * @brief Gets a const iterator to the beginning of the ByteVector.
      * @return Const iterator to the beginning.
      */
-    auto begin() const noexcept
-    {
-        return data_.begin();
-    }
+    auto begin() const noexcept { return data_.begin(); }
 
     /**
      * @brief Gets a const iterator to the end of the ByteVector.
      * @return Const iterator to the end.
      */
-    auto end() const noexcept
-    {
-        return data_.end();
-    }
+    auto end() const noexcept { return data_.end(); }
 
     /**
      * @brief Converts the ByteVector to a ByteSpan.
      * @return A ByteSpan view of the ByteVector.
      */
-    ByteSpan AsSpan() const
-    {
-        return ByteSpan(data_.data(), data_.size());
-    }
+    ByteSpan AsSpan() const { return ByteSpan(data_.data(), data_.size()); }
 
     /**
      * @brief Converts the ByteVector to a hexadecimal string.
      * @return The hexadecimal string representation of the ByteVector.
      */
-    std::string ToHexString() const
-    {
-        return AsSpan().ToHexString();
-    }
+    std::string ToHexString() const { return AsSpan().ToHexString(); }
 
     /**
      * @brief Checks if this ByteVector is equal to another ByteVector.
      * @param other The other ByteVector.
      * @return True if the ByteVectors are equal, false otherwise.
      */
-    bool operator==(const ByteVector& other) const
-    {
-        return data_ == other.data_;
-    }
+    bool operator==(const ByteVector& other) const { return data_ == other.data_; }
 
     /**
      * @brief Checks if this ByteVector is equal to a std::vector<uint8_t>.
      * @param other The other vector.
      * @return True if the vectors are equal, false otherwise.
      */
-    bool operator==(const std::vector<uint8_t>& other) const
-    {
-        return data_ == other;
-    }
+    bool operator==(const std::vector<uint8_t>& other) const { return data_ == other; }
 
     /**
      * @brief Checks if this ByteVector is not equal to another ByteVector.
      * @param other The other ByteVector.
      * @return True if the ByteVectors are not equal, false otherwise.
      */
-    bool operator!=(const ByteVector& other) const
-    {
-        return data_ != other.data_;
-    }
+    bool operator!=(const ByteVector& other) const { return data_ != other.data_; }
 
     /**
      * @brief Checks if this ByteVector is not equal to a std::vector<uint8_t>.
      * @param other The other vector.
      * @return True if the vectors are not equal, false otherwise.
      */
-    bool operator!=(const std::vector<uint8_t>& other) const
-    {
-        return data_ != other;
-    }
+    bool operator!=(const std::vector<uint8_t>& other) const { return data_ != other; }
 
     /**
      * @brief Gets the data as a const reference to std::vector.
      * @return Const reference to the underlying vector.
      */
-    const std::vector<uint8_t>& GetVector() const
-    {
-        return data_;
-    }
+    const std::vector<uint8_t>& GetVector() const { return data_; }
 
     /**
      * @brief Implicit conversion to std::vector<uint8_t>.
      * @return Copy of the underlying vector.
      */
-    operator std::vector<uint8_t>() const
-    {
-        return data_;
-    }
+    operator std::vector<uint8_t>() const { return data_; }
 
     /**
      * @brief Constructor from std::vector<uint8_t>.
@@ -391,10 +311,7 @@ class ByteVector
      * @param hex The hex string.
      * @return The ByteVector.
      */
-    static ByteVector ParseHex(const std::string& hex)
-    {
-        return FromHexString(hex);
-    }
+    static ByteVector ParseHex(const std::string& hex) { return FromHexString(hex); }
 
     /**
      * @brief Converts the ByteVector to a base64 string.
@@ -414,20 +331,14 @@ class ByteVector
      * @param other The other ByteVector.
      * @return True if this ByteVector is less than the other ByteVector, false otherwise.
      */
-    bool operator<(const ByteVector& other) const
-    {
-        return data_ < other.data_;
-    }
+    bool operator<(const ByteVector& other) const { return data_ < other.data_; }
 
     /**
      * @brief Checks if this ByteVector is greater than another ByteVector.
      * @param other The other ByteVector.
      * @return True if this ByteVector is greater than the other ByteVector, false otherwise.
      */
-    bool operator>(const ByteVector& other) const
-    {
-        return data_ > other.data_;
-    }
+    bool operator>(const ByteVector& other) const { return data_ > other.data_; }
 
     /**
      * @brief Gets the variable-length size of the vector.
@@ -435,7 +346,7 @@ class ByteVector
      */
     size_t GetVarSize() const;
 
-  private:
+   private:
     std::vector<uint8_t> data_;
 };
 
@@ -445,10 +356,7 @@ class ByteVector
  * @param rhs The ByteVector.
  * @return True if the vectors are equal, false otherwise.
  */
-inline bool operator==(const std::vector<uint8_t>& lhs, const ByteVector& rhs)
-{
-    return rhs == lhs;
-}
+inline bool operator==(const std::vector<uint8_t>& lhs, const ByteVector& rhs) { return rhs == lhs; }
 
 /**
  * @brief Checks if a std::vector<uint8_t> is not equal to a ByteVector.
@@ -456,10 +364,7 @@ inline bool operator==(const std::vector<uint8_t>& lhs, const ByteVector& rhs)
  * @param rhs The ByteVector.
  * @return True if the vectors are not equal, false otherwise.
  */
-inline bool operator!=(const std::vector<uint8_t>& lhs, const ByteVector& rhs)
-{
-    return rhs != lhs;
-}
+inline bool operator!=(const std::vector<uint8_t>& lhs, const ByteVector& rhs) { return rhs != lhs; }
 }  // namespace neo::io
 
 // Add hash function for ByteVector to be used with std::unordered_map

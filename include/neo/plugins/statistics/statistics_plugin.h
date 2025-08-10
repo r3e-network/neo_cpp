@@ -1,13 +1,14 @@
 #pragma once
 
-#include <atomic>
-#include <chrono>
-#include <memory>
-#include <mutex>
 #include <neo/io/json.h>
 #include <neo/node/neo_system.h>
 #include <neo/plugins/plugin.h>
 #include <neo/rpc/rpc_server.h>
+
+#include <atomic>
+#include <chrono>
+#include <memory>
+#include <mutex>
 #include <string>
 #include <thread>
 #include <unordered_map>
@@ -19,7 +20,7 @@ namespace neo::plugins::statistics
  */
 class StatisticsPlugin : public Plugin
 {
-  public:
+   public:
     /**
      * @brief Constructs a StatisticsPlugin.
      */
@@ -81,7 +82,7 @@ class StatisticsPlugin : public Plugin
      */
     bool IsRunning() const override;
 
-  private:
+   private:
     std::shared_ptr<node::NeoSystem> neoSystem_;
     std::atomic<bool> running_;
     std::thread statisticsThread_;

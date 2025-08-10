@@ -101,13 +101,13 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
     // Friend class for factory initialization
     friend class NeoSystemInit;
 
-  public:
+   public:
     /**
      * @brief Event handler type for service addition events.
      */
     using ServiceAddedHandler = std::function<void(const std::shared_ptr<void>&)>;
 
-  private:
+   private:
     std::unique_ptr<ProtocolSettings> settings_;
     std::unique_ptr<persistence::IStore> store_;
     std::shared_ptr<persistence::IStoreProvider> storage_provider_;
@@ -128,9 +128,11 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
     std::atomic<bool> shutdown_requested_{false};
 
     // Performance optimization flags
-    std::atomic<bool> fastSyncMode_{true};  // Skip validation during initial sync
+    std::atomic<bool> fastSyncMode_{false};  // Disabled by default; tests enable explicitly when needed
+    // Ephemeral height used only in fast sync mode to avoid store I/O
+    std::atomic<uint32_t> fastSyncEphemeralHeight_{0};
 
-  public:
+   public:
     /**
      * @brief Constructs a NeoSystem with the specified settings and storage provider.
      * @param settings The protocol settings for this Neo system
@@ -165,10 +167,7 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
      * @brief Gets the protocol settings of this Neo system.
      * @return Reference to the protocol settings
      */
-    const ProtocolSettings& settings() const
-    {
-        return *settings_;
-    }
+    const ProtocolSettings& settings() const { return *settings_; }
 
     /**
      * @brief Gets a readonly view of the store.
@@ -259,19 +258,13 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
      * @brief Gets the underlying store.
      * @return Pointer to the store
      */
-    persistence::IStore* GetStore() const
-    {
-        return store_.get();
-    }
+    persistence::IStore* GetStore() const { return store_.get(); }
 
     /**
      * @brief Gets the memory pool.
      * @return Pointer to the memory pool
      */
-    ledger::MemoryPool* GetMemPool() const
-    {
-        return mem_pool_.get();
-    }
+    ledger::MemoryPool* GetMemPool() const { return mem_pool_.get(); }
 
     /**
      * @brief Gets the current block height.
@@ -297,10 +290,7 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
      * @brief Enables/disables fast sync mode (skips validation for initial sync)
      * @param enabled True to enable fast sync, false for full validation
      */
-    void SetFastSyncMode(bool enabled)
-    {
-        fastSyncMode_ = enabled;
-    }
+    void SetFastSyncMode(bool enabled) { fastSyncMode_ = enabled; }
 
     // Transaction operations
     /**
@@ -421,7 +411,7 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
      */
     bool ContainsConflictHash(const io::UInt256& hash, const std::vector<io::UInt160>& signers) const;
 
-  private:
+   private:
     /**
      * @brief Initializes all core components.
      */

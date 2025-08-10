@@ -1,9 +1,10 @@
-#include <algorithm>
-#include <cctype>
-#include <cstring>
 #include <neo/cryptography/hash.h>
 #include <neo/extensions/secure_string_extensions.h>
 #include <neo/io/byte_vector.h>
+
+#include <algorithm>
+#include <cctype>
+#include <cstring>
 #include <random>
 #include <stdexcept>
 
@@ -79,44 +80,37 @@ SecureStringExtensions::SecureString::~SecureString()
 
 std::string SecureStringExtensions::SecureString::to_string() const
 {
-    if (!data_ || length_ == 0)
-        return "";
+    if (!data_ || length_ == 0) return "";
     return std::string(data_.get(), length_);
 }
 
 bool SecureStringExtensions::SecureString::secure_equals(const SecureString& other) const
 {
-    if (length_ != other.length_)
-        return false;
+    if (length_ != other.length_) return false;
 
-    if (length_ == 0)
-        return true;
+    if (length_ == 0) return true;
 
     return SecureStringExtensions::SecureEquals(data_.get(), other.data_.get(), length_);
 }
 
 bool SecureStringExtensions::SecureString::secure_equals(const std::string& other) const
 {
-    if (length_ != other.length())
-        return false;
+    if (length_ != other.length()) return false;
 
-    if (length_ == 0)
-        return true;
+    if (length_ == 0) return true;
 
     return SecureStringExtensions::SecureEquals(data_.get(), other.c_str(), length_);
 }
 
 char SecureStringExtensions::SecureString::at(size_t index) const
 {
-    if (index >= length_)
-        throw std::out_of_range("Index out of range");
+    if (index >= length_) throw std::out_of_range("Index out of range");
     return data_[index];
 }
 
 SecureStringExtensions::SecureString SecureStringExtensions::SecureString::substr(size_t start, size_t count) const
 {
-    if (start >= length_)
-        return SecureString("");
+    if (start >= length_) return SecureString("");
 
     size_t actualCount = std::min(count, length_ - start);
     return SecureString(data_.get() + start, actualCount);
@@ -135,8 +129,7 @@ SecureStringExtensions::SecureString SecureStringExtensions::CreateSecureString(
 
 void SecureStringExtensions::SecureClear(void* data, size_t size)
 {
-    if (!data || size == 0)
-        return;
+    if (!data || size == 0) return;
 
     PlatformSecureClear(data, size);
 }
@@ -161,19 +154,16 @@ void SecureStringExtensions::SecureClear(std::vector<char>& vec)
 
 bool SecureStringExtensions::SecureEquals(const std::string& left, const std::string& right)
 {
-    if (left.length() != right.length())
-        return false;
+    if (left.length() != right.length()) return false;
 
     return SecureEquals(left.c_str(), right.c_str(), left.length());
 }
 
 bool SecureStringExtensions::SecureEquals(const void* left, const void* right, size_t size)
 {
-    if (!left || !right)
-        return left == right;
+    if (!left || !right) return left == right;
 
-    if (size == 0)
-        return true;
+    if (size == 0) return true;
 
     // Constant-time comparison to prevent timing attacks
     const unsigned char* l = static_cast<const unsigned char*>(left);
@@ -191,8 +181,7 @@ bool SecureStringExtensions::SecureEquals(const void* left, const void* right, s
 SecureStringExtensions::SecureString SecureStringExtensions::GenerateSecureRandom(size_t length,
                                                                                   const std::string& charset)
 {
-    if (length == 0 || charset.empty())
-        return SecureString("");
+    if (length == 0 || charset.empty()) return SecureString("");
 
     // Use cryptographically secure random number generation
     auto result = std::make_unique<char[]>(length + 1);
@@ -215,8 +204,7 @@ bool SecureStringExtensions::ValidatePasswordStrength(const SecureString& passwo
                                                       bool requireUppercase, bool requireLowercase, bool requireDigits,
                                                       bool requireSpecial)
 {
-    if (password.length() < minLength)
-        return false;
+    if (password.length() < minLength) return false;
 
     bool hasUpper = false, hasLower = false, hasDigit = false, hasSpecial = false;
 
@@ -242,15 +230,12 @@ SecureStringExtensions::SecureString SecureStringExtensions::SecureConcat(const 
                                                                           const SecureString& right)
 {
     size_t totalLength = left.length() + right.length();
-    if (totalLength == 0)
-        return SecureString("");
+    if (totalLength == 0) return SecureString("");
 
     auto result = std::make_unique<char[]>(totalLength + 1);
 
-    if (left.length() > 0)
-        std::memcpy(result.get(), left.data(), left.length());
-    if (right.length() > 0)
-        std::memcpy(result.get() + left.length(), right.data(), right.length());
+    if (left.length() > 0) std::memcpy(result.get(), left.data(), left.length());
+    if (right.length() > 0) std::memcpy(result.get() + left.length(), right.data(), right.length());
     result[totalLength] = '\0';
 
     return SecureString(result.get(), totalLength);
@@ -258,15 +243,12 @@ SecureStringExtensions::SecureString SecureStringExtensions::SecureConcat(const 
 
 size_t SecureStringExtensions::SecureFind(const SecureString& haystack, const SecureString& needle)
 {
-    if (needle.length() == 0)
-        return 0;
-    if (needle.length() > haystack.length())
-        return std::string::npos;
+    if (needle.length() == 0) return 0;
+    if (needle.length() > haystack.length()) return std::string::npos;
 
     for (size_t i = 0; i <= haystack.length() - needle.length(); ++i)
     {
-        if (SecureEquals(haystack.data() + i, needle.data(), needle.length()))
-            return i;
+        if (SecureEquals(haystack.data() + i, needle.data(), needle.length())) return i;
     }
 
     return std::string::npos;

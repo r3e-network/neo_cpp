@@ -1,9 +1,10 @@
-#include <iostream>
 #include <neo/cli/command_handler.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/neo_token.h>
+
+#include <iostream>
 #include <sstream>
 
 namespace neo::cli

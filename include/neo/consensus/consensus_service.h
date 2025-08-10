@@ -1,10 +1,5 @@
 #pragma once
 
-#include <atomic>
-#include <condition_variable>
-#include <cstdint>
-#include <memory>
-#include <mutex>
 #include <neo/consensus/change_view_message.h>
 #include <neo/consensus/commit_message.h>
 #include <neo/consensus/consensus_context.h>
@@ -20,6 +15,12 @@
 #include <neo/ledger/block.h>
 #include <neo/ledger/transaction.h>
 #include <neo/node/neo_system.h>
+
+#include <atomic>
+#include <condition_variable>
+#include <cstdint>
+#include <memory>
+#include <mutex>
 #include <thread>
 #include <unordered_map>
 #include <unordered_set>
@@ -32,7 +33,7 @@ namespace neo::consensus
  */
 class ConsensusService
 {
-  public:
+   public:
     /**
      * @brief Constructs a ConsensusService.
      * @param neoSystem The Neo system.
@@ -134,7 +135,7 @@ class ConsensusService
      */
     bool ValidateBlock(std::shared_ptr<ledger::Block> block);
 
-  private:
+   private:
     std::shared_ptr<node::NeoSystem> neoSystem_;
     cryptography::ecc::KeyPair keyPair_;
     std::shared_ptr<ConsensusContext> context_;

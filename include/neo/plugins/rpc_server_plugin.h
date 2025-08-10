@@ -1,9 +1,10 @@
 #pragma once
 
-#include <functional>
-#include <memory>
 #include <neo/plugins/plugin_base.h>
 #include <neo/rpc/rpc_server.h>
+
+#include <functional>
+#include <memory>
 #include <string>
 #include <unordered_map>
 
@@ -14,7 +15,7 @@ namespace neo::plugins
  */
 class RpcServerPlugin : public PluginBase
 {
-  public:
+   public:
     /**
      * @brief Constructs an RpcServerPlugin.
      */
@@ -27,7 +28,7 @@ class RpcServerPlugin : public PluginBase
      */
     void RegisterMethod(const std::string& method, std::function<nlohmann::json(const nlohmann::json&)> handler);
 
-  protected:
+   protected:
     /**
      * @brief Initializes the plugin.
      * @param settings The settings.
@@ -47,7 +48,7 @@ class RpcServerPlugin : public PluginBase
      */
     bool OnStop() override;
 
-  private:
+   private:
     std::shared_ptr<rpc::RpcServer> rpcServer_;
     uint16_t port_;
     bool enableCors_;

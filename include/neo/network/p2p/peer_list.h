@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cstdint>
-#include <mutex>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/ijson_serializable.h>
@@ -10,6 +8,9 @@
 #include <neo/io/json_writer.h>
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/peer.h>
+
+#include <cstdint>
+#include <mutex>
 #include <unordered_map>
 #include <vector>
 
@@ -20,7 +21,7 @@ namespace neo::network::p2p
  */
 class PeerList : public io::ISerializable, public io::IJsonSerializable
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty PeerList.
      */
@@ -164,7 +165,7 @@ class PeerList : public io::ISerializable, public io::IJsonSerializable
      */
     bool Load(const std::string& path);
 
-  private:
+   private:
     std::unordered_map<std::string, Peer> peers_;
     mutable std::mutex mutex_;
 

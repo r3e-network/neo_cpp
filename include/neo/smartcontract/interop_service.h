@@ -12,10 +12,11 @@
 #ifndef NEO_SMARTCONTRACT_INTEROP_SERVICE_H
 #define NEO_SMARTCONTRACT_INTEROP_SERVICE_H
 
-#include "neo/smartcontract/interop_descriptor.h"
-#include "neo/smartcontract/interop_parameter_descriptor.h"
 #include <memory>
 #include <unordered_map>
+
+#include "neo/smartcontract/interop_descriptor.h"
+#include "neo/smartcontract/interop_parameter_descriptor.h"
 
 namespace neo
 {
@@ -32,7 +33,7 @@ class ApplicationEngine;
  */
 class InteropService
 {
-  public:
+   public:
     /**
      * @brief Gets the singleton instance of InteropService.
      */
@@ -46,10 +47,7 @@ class InteropService
     /**
      * @brief Gets all registered interop services.
      */
-    const std::unordered_map<uint32_t, InteropDescriptor>& services() const
-    {
-        return services_;
-    }
+    const std::unordered_map<uint32_t, InteropDescriptor>& services() const { return services_; }
 
     /**
      * @brief Gets an interop descriptor by hash.
@@ -109,7 +107,7 @@ class InteropService
     static void iterator_next(ApplicationEngine& engine);
     static void iterator_value(ApplicationEngine& engine);
 
-  private:
+   private:
     InteropService() = default;
 
     std::unordered_map<uint32_t, InteropDescriptor> services_;

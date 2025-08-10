@@ -35,16 +35,12 @@ NativeContractManager::NativeContractManager()
     RegisterContract(Notary::GetInstance());
 }
 
-const std::vector<std::shared_ptr<NativeContract>>& NativeContractManager::GetContracts() const
-{
-    return contracts_;
-}
+const std::vector<std::shared_ptr<NativeContract>>& NativeContractManager::GetContracts() const { return contracts_; }
 
 std::shared_ptr<NativeContract> NativeContractManager::GetContract(const std::string& name) const
 {
     auto it = contractsByName_.find(name);
-    if (it == contractsByName_.end())
-        return nullptr;
+    if (it == contractsByName_.end()) return nullptr;
 
     return it->second;
 }
@@ -52,8 +48,7 @@ std::shared_ptr<NativeContract> NativeContractManager::GetContract(const std::st
 std::shared_ptr<NativeContract> NativeContractManager::GetContract(const io::UInt160& scriptHash) const
 {
     auto it = contractsByScriptHash_.find(scriptHash);
-    if (it == contractsByScriptHash_.end())
-        return nullptr;
+    if (it == contractsByScriptHash_.end()) return nullptr;
 
     return it->second;
 }
@@ -61,8 +56,7 @@ std::shared_ptr<NativeContract> NativeContractManager::GetContract(const io::UIn
 std::shared_ptr<NativeContract> NativeContractManager::GetContract(uint32_t id) const
 {
     auto it = contractsById_.find(id);
-    if (it == contractsById_.end())
-        return nullptr;
+    if (it == contractsById_.end()) return nullptr;
 
     return it->second;
 }

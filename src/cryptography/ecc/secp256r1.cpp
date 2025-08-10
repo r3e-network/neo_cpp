@@ -9,7 +9,6 @@
 // Redistribution and use in source and binary forms with or without
 // modifications are permitted.
 
-#include <cstring>
 #include <neo/cryptography/base58.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/ecpoint.h>
@@ -27,6 +26,8 @@
 #include <openssl/evp.h>
 #include <openssl/obj_mac.h>
 #include <openssl/rand.h>
+
+#include <cstring>
 
 namespace neo::cryptography::ecc
 {
@@ -98,8 +99,7 @@ io::ByteVector Secp256r1::GeneratePrivateKey()
 
 io::ByteVector Secp256r1::ComputePublicKey(const io::ByteVector& privateKey)
 {
-    if (!IsValidPrivateKey(privateKey))
-        throw std::invalid_argument("Invalid private key");
+    if (!IsValidPrivateKey(privateKey)) throw std::invalid_argument("Invalid private key");
 
     EC_KEY* eckey = EC_KEY_new();
     if (!eckey)
@@ -167,8 +167,7 @@ io::ByteVector Secp256r1::ComputePublicKey(const io::ByteVector& privateKey)
 
 io::ByteVector Secp256r1::Sign(const io::ByteVector& data, const io::ByteVector& privateKey)
 {
-    if (!IsValidPrivateKey(privateKey))
-        throw std::invalid_argument("Invalid private key");
+    if (!IsValidPrivateKey(privateKey)) throw std::invalid_argument("Invalid private key");
 
     // Hash the data first
     auto hash = Hash::Sha256(data.AsSpan());
@@ -237,8 +236,7 @@ io::ByteVector Secp256r1::Sign(const io::ByteVector& data, const io::ByteVector&
 
 bool Secp256r1::Verify(const io::ByteVector& data, const io::ByteVector& signature, const io::ByteVector& publicKey)
 {
-    if (!IsValidPublicKey(publicKey))
-        return false;
+    if (!IsValidPublicKey(publicKey)) return false;
 
     // Hash the data first
     auto hash = Hash::Sha256(data.AsSpan());
@@ -299,13 +297,11 @@ bool Secp256r1::Verify(const io::ByteVector& data, const io::ByteVector& signatu
 
 bool Secp256r1::IsValidPrivateKey(const io::ByteVector& privateKey)
 {
-    if (privateKey.size() != PRIVATE_KEY_SIZE)
-        return false;
+    if (privateKey.size() != PRIVATE_KEY_SIZE) return false;
 
     // Check if key is in valid range [1, n-1]
     BIGNUM* key_bn = BN_bin2bn(privateKey.data(), privateKey.size(), nullptr);
-    if (!key_bn)
-        return false;
+    if (!key_bn) return false;
 
     BIGNUM* n = BN_new();
     if (!n)
@@ -332,13 +328,11 @@ bool Secp256r1::IsValidPrivateKey(const io::ByteVector& privateKey)
 
 bool Secp256r1::IsValidPublicKey(const io::ByteVector& publicKey)
 {
-    if (publicKey.size() != PUBLIC_KEY_SIZE && publicKey.size() != UNCOMPRESSED_PUBLIC_KEY_SIZE)
-        return false;
+    if (publicKey.size() != PUBLIC_KEY_SIZE && publicKey.size() != UNCOMPRESSED_PUBLIC_KEY_SIZE) return false;
 
     // Verify the point is on the curve
     EC_POINT* point = EC_POINT_new(get_ec_group());
-    if (!point)
-        return false;
+    if (!point) return false;
 
     int result = EC_POINT_oct2point(get_ec_group(), point, publicKey.data(), publicKey.size(), nullptr);
     if (result != 1)
@@ -357,8 +351,7 @@ bool Secp256r1::IsValidPublicKey(const io::ByteVector& publicKey)
 
 std::string Secp256r1::PrivateKeyToWIF(const io::ByteVector& privateKey, bool compressed)
 {
-    if (!IsValidPrivateKey(privateKey))
-        throw std::invalid_argument("Invalid private key");
+    if (!IsValidPrivateKey(privateKey)) throw std::invalid_argument("Invalid private key");
 
     // WIF format: 0x80 + private key + (0x01 if compressed) + checksum
     io::ByteVector wifData;
@@ -416,8 +409,7 @@ io::ByteVector Secp256r1::DecryptPrivateKey(const std::string& wif)
 std::string Secp256r1::EncryptPrivateKey(const io::ByteVector& privateKey, const std::string& passphrase, int N, int r,
                                          int p)
 {
-    if (!IsValidPrivateKey(privateKey))
-        throw std::invalid_argument("Invalid private key");
+    if (!IsValidPrivateKey(privateKey)) throw std::invalid_argument("Invalid private key");
 
     // NEP-2 encryption
     // 1. Compute address hash
@@ -544,7 +536,8 @@ std::string Secp256r1::ToWIF(const io::ByteVector& privateKey, bool compressed)
     return EncryptPrivateKey(privateKey);
 }
 
-std::string Secp256r1::ToNEP2(const io::ByteVector& privateKey, const std::string& passphrase, int scryptN, int scryptR, int scryptP)
+std::string Secp256r1::ToNEP2(const io::ByteVector& privateKey, const std::string& passphrase, int scryptN, int scryptR,
+                              int scryptP)
 {
     return EncryptPrivateKey(privateKey, passphrase, scryptN, scryptR, scryptP);
 }
@@ -554,7 +547,8 @@ io::ByteVector Secp256r1::FromNEP2(const std::string& nep2, const std::string& p
     return DecryptPrivateKey(nep2, passphrase);
 }
 
-io::ByteVector Secp256r1::FromNEP2(const std::string& nep2, const std::string& passphrase, int scryptN, int scryptR, int scryptP)
+io::ByteVector Secp256r1::FromNEP2(const std::string& nep2, const std::string& passphrase, int scryptN, int scryptR,
+                                   int scryptP)
 {
     return DecryptPrivateKey(nep2, passphrase, scryptN, scryptR, scryptP);
 }
@@ -564,7 +558,8 @@ io::ByteVector Secp256r1::DecryptPrivateKey(const std::string& nep2, const std::
     return DecryptPrivateKey(nep2, passphrase, 16384, 8, 8);
 }
 
-io::ByteVector Secp256r1::DecryptPrivateKey(const std::string& nep2, const std::string& passphrase, int scryptN, int scryptR, int scryptP)
+io::ByteVector Secp256r1::DecryptPrivateKey(const std::string& nep2, const std::string& passphrase, int scryptN,
+                                            int scryptR, int scryptP)
 {
     // Reverse of EncryptPrivateKey - decode NEP-2 format and decrypt
     try
@@ -575,38 +570,35 @@ io::ByteVector Secp256r1::DecryptPrivateKey(const std::string& nep2, const std::
         {
             throw std::invalid_argument("Invalid NEP-2 format");
         }
-        
+
         // Extract salt and encrypted data
         io::ByteVector salt(decoded.Data() + 3, 4);
         io::ByteVector encrypted(decoded.Data() + 7, 32);
-        
+
         // Derive key from passphrase using scrypt
         io::ByteVector derived(64);
-        int result = crypto_scrypt(
-            reinterpret_cast<const uint8_t*>(passphrase.data()), passphrase.size(),
-            salt.Data(), salt.Size(),
-            scryptN, scryptR, scryptP,
-            derived.Data(), derived.Size()
-        );
-        
+        int result = crypto_scrypt(reinterpret_cast<const uint8_t*>(passphrase.data()), passphrase.size(), salt.Data(),
+                                   salt.Size(), scryptN, scryptR, scryptP, derived.Data(), derived.Size());
+
         if (result != 0)
         {
             throw std::runtime_error("Scrypt key derivation failed");
         }
-        
+
         // Decrypt private key
         io::ByteVector privateKey(32);
         for (size_t i = 0; i < 32; i++)
         {
             privateKey[i] = encrypted[i] ^ derived[i];
         }
-        
+
         return privateKey;
     }
     catch (const std::exception&)
     {
         // Fallback: return SHA256 of passphrase for compatibility
-        auto passHash = Hash::Sha256(io::ByteSpan(reinterpret_cast<const uint8_t*>(passphrase.data()), passphrase.size()));
+        auto passHash =
+            Hash::Sha256(io::ByteSpan(reinterpret_cast<const uint8_t*>(passphrase.data()), passphrase.size()));
         return io::ByteVector(passHash.Data(), 32);
     }
 }

@@ -1,5 +1,6 @@
-#include <algorithm>
 #include <neo/extensions/ipaddress_extensions.h>
+
+#include <algorithm>
 #include <regex>
 #include <sstream>
 #include <stdexcept>
@@ -20,14 +21,12 @@ bool IpAddressExtensions::IsValidIPv4(const std::string& address)
     }
 
     // Must have exactly 4 octets
-    if (octets.size() != 4)
-        return false;
+    if (octets.size() != 4) return false;
 
     // Validate each octet
     for (const auto& oct : octets)
     {
-        if (!IsValidIPv4Octet(oct))
-            return false;
+        if (!IsValidIPv4Octet(oct)) return false;
     }
 
     return true;
@@ -119,8 +118,7 @@ bool IpAddressExtensions::IsValidIPv6(const std::string& address)
 
 std::array<uint8_t, 4> IpAddressExtensions::ParseIPv4(const std::string& address)
 {
-    if (!IsValidIPv4(address))
-        throw std::invalid_argument("Invalid IPv4 address: " + address);
+    if (!IsValidIPv4(address)) throw std::invalid_argument("Invalid IPv4 address: " + address);
 
     std::array<uint8_t, 4> result{};
     std::istringstream iss(address);
@@ -315,8 +313,7 @@ std::string IpAddressExtensions::IPv6ToString(const std::array<uint8_t, 16>& byt
         // Format groups before compression
         for (int i = 0; i < longest_start; ++i)
         {
-            if (i > 0)
-                result << ":";
+            if (i > 0) result << ":";
             result << std::hex << groups[i];
         }
 
@@ -334,8 +331,7 @@ std::string IpAddressExtensions::IPv6ToString(const std::array<uint8_t, 16>& byt
         int after_start = longest_start + longest_length;
         for (int i = after_start; i < 8; ++i)
         {
-            if (i > after_start)
-                result << ":";
+            if (i > after_start) result << ":";
             result << std::hex << groups[i];
         }
 
@@ -350,8 +346,7 @@ std::string IpAddressExtensions::IPv6ToString(const std::array<uint8_t, 16>& byt
         // No compression - format all groups
         for (int i = 0; i < 8; ++i)
         {
-            if (i > 0)
-                result << ":";
+            if (i > 0) result << ":";
             result << std::hex << groups[i];
         }
     }
@@ -361,31 +356,26 @@ std::string IpAddressExtensions::IPv6ToString(const std::array<uint8_t, 16>& byt
 
 bool IpAddressExtensions::IsPrivateIPv4(const std::string& address)
 {
-    if (!IsValidIPv4(address))
-        return false;
+    if (!IsValidIPv4(address)) return false;
 
     auto bytes = ParseIPv4(address);
 
     // Check private ranges:
     // 10.0.0.0/8 (10.0.0.0 - 10.255.255.255)
-    if (bytes[0] == 10)
-        return true;
+    if (bytes[0] == 10) return true;
 
     // 172.16.0.0/12 (172.16.0.0 - 172.31.255.255)
-    if (bytes[0] == 172 && bytes[1] >= 16 && bytes[1] <= 31)
-        return true;
+    if (bytes[0] == 172 && bytes[1] >= 16 && bytes[1] <= 31) return true;
 
     // 192.168.0.0/16 (192.168.0.0 - 192.168.255.255)
-    if (bytes[0] == 192 && bytes[1] == 168)
-        return true;
+    if (bytes[0] == 192 && bytes[1] == 168) return true;
 
     return false;
 }
 
 bool IpAddressExtensions::IsLoopbackIPv4(const std::string& address)
 {
-    if (!IsValidIPv4(address))
-        return false;
+    if (!IsValidIPv4(address)) return false;
 
     auto bytes = ParseIPv4(address);
     return bytes[0] == 127;  // 127.x.x.x
@@ -393,8 +383,7 @@ bool IpAddressExtensions::IsLoopbackIPv4(const std::string& address)
 
 bool IpAddressExtensions::IsMulticastIPv4(const std::string& address)
 {
-    if (!IsValidIPv4(address))
-        return false;
+    if (!IsValidIPv4(address)) return false;
 
     auto bytes = ParseIPv4(address);
     return bytes[0] >= 224 && bytes[0] <= 239;  // 224.0.0.0 - 239.255.255.255
@@ -402,17 +391,13 @@ bool IpAddressExtensions::IsMulticastIPv4(const std::string& address)
 
 bool IpAddressExtensions::IsLinkLocalIPv4(const std::string& address)
 {
-    if (!IsValidIPv4(address))
-        return false;
+    if (!IsValidIPv4(address)) return false;
 
     auto bytes = ParseIPv4(address);
     return bytes[0] == 169 && bytes[1] == 254;  // 169.254.x.x
 }
 
-bool IpAddressExtensions::IsLoopbackIPv6(const std::string& address)
-{
-    return address == "::1";
-}
+bool IpAddressExtensions::IsLoopbackIPv6(const std::string& address) { return address == "::1"; }
 
 bool IpAddressExtensions::IsLinkLocalIPv6(const std::string& address)
 {
@@ -467,10 +452,8 @@ std::string IpAddressExtensions::ExpandIPv6(const std::string& address)
     try
     {
         // Handle common special cases
-        if (address == "::1")
-            return "0000:0000:0000:0000:0000:0000:0000:0001";
-        if (address == "::")
-            return "0000:0000:0000:0000:0000:0000:0000:0000";
+        if (address == "::1") return "0000:0000:0000:0000:0000:0000:0000:0001";
+        if (address == "::") return "0000:0000:0000:0000:0000:0000:0000:0000";
 
         // Check if already expanded (8 groups of 4 hex digits)
         if (address.length() == 39 && std::count(address.begin(), address.end(), ':') == 7)
@@ -494,8 +477,7 @@ std::string IpAddressExtensions::ExpandIPv6(const std::string& address)
                         break;
                     }
                 }
-                if (!valid)
-                    break;
+                if (!valid) break;
                 pos += 4;
                 if (i < 7)
                 {
@@ -507,8 +489,7 @@ std::string IpAddressExtensions::ExpandIPv6(const std::string& address)
                     pos++;
                 }
             }
-            if (valid)
-                return address;
+            if (valid) return address;
         }
 
         // Handle double colon expansion
@@ -528,20 +509,17 @@ std::string IpAddressExtensions::ExpandIPv6(const std::string& address)
 
             // Build expanded address
             result = left;
-            if (!left.empty())
-                result += ":";
+            if (!left.empty()) result += ":";
 
             for (int i = 0; i < missing_groups; ++i)
             {
                 result += "0000";
-                if (i < missing_groups - 1 || !right.empty())
-                    result += ":";
+                if (i < missing_groups - 1 || !right.empty()) result += ":";
             }
 
             if (!right.empty())
             {
-                if (!result.empty() && result.back() != ':')
-                    result += ":";
+                if (!result.empty() && result.back() != ':') result += ":";
                 result += right;
             }
         }
@@ -570,8 +548,7 @@ std::string IpAddressExtensions::ExpandIPv6(const std::string& address)
         std::string expanded;
         for (size_t i = 0; i < groups.size() && i < 8; ++i)
         {
-            if (i > 0)
-                expanded += ":";
+            if (i > 0) expanded += ":";
             expanded += groups[i];
         }
 
@@ -590,10 +567,8 @@ std::string IpAddressExtensions::CompressIPv6(const std::string& address)
     try
     {
         // Handle common special cases
-        if (address == "0000:0000:0000:0000:0000:0000:0000:0001")
-            return "::1";
-        if (address == "0000:0000:0000:0000:0000:0000:0000:0000")
-            return "::";
+        if (address == "0000:0000:0000:0000:0000:0000:0000:0001") return "::1";
+        if (address == "0000:0000:0000:0000:0000:0000:0000:0000") return "::";
 
         // First, expand the address to ensure consistent format
         std::string expanded = ExpandIPv6(address);
@@ -669,8 +644,7 @@ std::string IpAddressExtensions::CompressIPv6(const std::string& address)
             std::string result;
             for (size_t i = 0; i < groups.size(); ++i)
             {
-                if (i > 0)
-                    result += ":";
+                if (i > 0) result += ":";
                 result += groups[i];
             }
             return result;
@@ -682,8 +656,7 @@ std::string IpAddressExtensions::CompressIPv6(const std::string& address)
         // Add groups before the zero sequence
         for (int i = 0; i < longest_start; ++i)
         {
-            if (i > 0)
-                result += ":";
+            if (i > 0) result += ":";
             result += groups[i];
         }
 
@@ -701,8 +674,7 @@ std::string IpAddressExtensions::CompressIPv6(const std::string& address)
         int after_start = longest_start + longest_length;
         for (int i = after_start; i < 8; ++i)
         {
-            if (i > after_start)
-                result += ":";
+            if (i > after_start) result += ":";
             result += groups[i];
         }
 
@@ -724,18 +696,15 @@ std::string IpAddressExtensions::CompressIPv6(const std::string& address)
 
 bool IpAddressExtensions::IsValidIPv4Octet(const std::string& octet)
 {
-    if (octet.empty() || octet.length() > 3)
-        return false;
+    if (octet.empty() || octet.length() > 3) return false;
 
     // Check for leading zeros (not allowed except for "0")
-    if (octet.length() > 1 && octet[0] == '0')
-        return false;
+    if (octet.length() > 1 && octet[0] == '0') return false;
 
     // Check all characters are digits
     for (char c : octet)
     {
-        if (!std::isdigit(c))
-            return false;
+        if (!std::isdigit(c)) return false;
     }
 
     // Check range 0-255
@@ -745,14 +714,12 @@ bool IpAddressExtensions::IsValidIPv4Octet(const std::string& octet)
 
 bool IpAddressExtensions::IsValidIPv6Hextet(const std::string& hextet)
 {
-    if (hextet.empty() || hextet.length() > 4)
-        return false;
+    if (hextet.empty() || hextet.length() > 4) return false;
 
     // Check all characters are hex digits
     for (char c : hextet)
     {
-        if (!std::isxdigit(c))
-            return false;
+        if (!std::isxdigit(c)) return false;
     }
 
     return true;

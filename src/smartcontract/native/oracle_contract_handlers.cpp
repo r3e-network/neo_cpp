@@ -1,7 +1,3 @@
-#include <algorithm>
-#include <cstring>
-#include <iostream>
-#include <memory>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -14,6 +10,11 @@
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/oracle_contract.h>
 #include <neo/smartcontract/native/role_management.h>
+
+#include <algorithm>
+#include <cstring>
+#include <iostream>
+#include <memory>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -29,18 +30,15 @@ std::shared_ptr<vm::StackItem> OracleContract::OnGetPrice(ApplicationEngine& eng
 std::shared_ptr<vm::StackItem> OracleContract::OnSetPrice(ApplicationEngine& engine,
                                                           const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     // Check if caller is committee
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Not authorized");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Not authorized");
 
     auto priceItem = args[0];
     auto price = priceItem->GetInteger();
 
-    if (price <= 0)
-        throw std::runtime_error("Invalid price");
+    if (price <= 0) throw std::runtime_error("Invalid price");
 
     // Set price
     SetPrice(engine.GetSnapshot(), price);
@@ -64,16 +62,13 @@ std::shared_ptr<vm::StackItem> OracleContract::OnGetOracles(ApplicationEngine& e
 std::shared_ptr<vm::StackItem> OracleContract::OnSetOracles(ApplicationEngine& engine,
                                                             const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     // Check if caller is committee
-    if (!CheckCommittee(engine))
-        throw std::runtime_error("Not authorized");
+    if (!CheckCommittee(engine)) throw std::runtime_error("Not authorized");
 
     auto oraclesItem = args[0];
-    if (oraclesItem->GetType() != vm::StackItemType::Array)
-        throw std::runtime_error("Invalid oracles");
+    if (oraclesItem->GetType() != vm::StackItemType::Array) throw std::runtime_error("Invalid oracles");
 
     auto oraclesArray = oraclesItem->GetArray();
     std::vector<io::UInt160> oracles;
@@ -81,8 +76,7 @@ std::shared_ptr<vm::StackItem> OracleContract::OnSetOracles(ApplicationEngine& e
     for (const auto& item : oraclesArray)
     {
         auto bytes = item->GetByteArray();
-        if (bytes.Size() != 20)
-            throw std::runtime_error("Invalid oracle");
+        if (bytes.Size() != 20) throw std::runtime_error("Invalid oracle");
 
         io::UInt160 oracle;
         std::memcpy(oracle.Data(), bytes.Data(), 20);
@@ -98,8 +92,7 @@ std::shared_ptr<vm::StackItem> OracleContract::OnSetOracles(ApplicationEngine& e
 std::shared_ptr<vm::StackItem> OracleContract::OnRequest(ApplicationEngine& engine,
                                                          const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 4)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 4) throw std::runtime_error("Invalid arguments");
 
     auto urlItem = args[0];
     auto filterItem = args[1];
@@ -115,31 +108,25 @@ std::shared_ptr<vm::StackItem> OracleContract::OnRequest(ApplicationEngine& engi
     auto gasForResponse = gasForResponseItem->GetInteger();
     auto userData = userDataItem->GetByteArray();
 
-    if (url.empty() || url.length() > MAX_URL_LENGTH)
-        throw std::runtime_error("Invalid URL");
+    if (url.empty() || url.length() > MAX_URL_LENGTH) throw std::runtime_error("Invalid URL");
 
-    if (filterStr.length() > MAX_FILTER_LENGTH)
-        throw std::runtime_error("Filter too long");
+    if (filterStr.length() > MAX_FILTER_LENGTH) throw std::runtime_error("Filter too long");
 
-    if (callback.Size() != 20)
-        throw std::runtime_error("Invalid callback contract");
+    if (callback.Size() != 20) throw std::runtime_error("Invalid callback contract");
 
     if (callbackMethod.empty() || callbackMethod.length() > MAX_CALLBACK_LENGTH)
         throw std::runtime_error("Invalid callback method");
 
-    if (gasForResponse < 0)
-        throw std::runtime_error("Invalid gas for response");
+    if (gasForResponse < 0) throw std::runtime_error("Invalid gas for response");
 
-    if (userData.Size() > MAX_USER_DATA_LENGTH)
-        throw std::runtime_error("User data too large");
+    if (userData.Size() > MAX_USER_DATA_LENGTH) throw std::runtime_error("User data too large");
 
     // Check if the caller has enough GAS
     auto price = GetPrice(engine.GetSnapshot());
     auto gasToken = GasToken::GetInstance();
     auto caller = engine.GetCurrentScriptHash();
     auto gasBalance = gasToken->GetBalance(engine.GetSnapshot(), caller);
-    if (gasBalance < price + gasForResponse)
-        throw std::runtime_error("Insufficient GAS");
+    if (gasBalance < price + gasForResponse) throw std::runtime_error("Insufficient GAS");
 
     // Transfer GAS to the oracle contract
     if (!gasToken->Transfer(engine.GetSnapshot(), caller, GetScriptHash(), price))
@@ -295,8 +282,7 @@ bool OracleContract::CheckOracleNode(ApplicationEngine& engine) const
     for (const auto& node : oracleNodes)
     {
         auto scriptHash = neo::cryptography::Hash::Hash160(node.ToArray().AsSpan());
-        if (scriptHash == currentScriptHash)
-            return true;
+        if (scriptHash == currentScriptHash) return true;
     }
 
     return false;
@@ -307,8 +293,7 @@ io::UInt256 OracleContract::GetOriginalTxid(ApplicationEngine& engine) const
     // Get the transaction
     auto scriptContainer = engine.GetScriptContainer();
     auto tx = dynamic_cast<const ledger::Transaction*>(scriptContainer);
-    if (!tx)
-        return io::UInt256();
+    if (!tx) return io::UInt256();
 
     // Look for Oracle response attribute in transaction
     for (const auto& attr : tx->GetAttributes())

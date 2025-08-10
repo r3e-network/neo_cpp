@@ -9,7 +9,7 @@ namespace neo::vm
  */
 class JumpTableExtension
 {
-  public:
+   public:
     // Extension operations
     static void ABORTMSG(ExecutionEngine& engine, const Instruction& instruction);
     static void ASSERTMSG(ExecutionEngine& engine, const Instruction& instruction);

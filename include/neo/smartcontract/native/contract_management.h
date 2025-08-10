@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint160.h>
 #include <neo/smartcontract/contract_state.h>
 #include <neo/smartcontract/native/native_contract.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::smartcontract::native
@@ -18,7 +19,7 @@ class ContractManagement : public NativeContract
     friend class NativeContractTest;
     friend class ContractManagementTest;
 
-  public:
+   public:
     /**
      * @brief The contract ID.
      */
@@ -174,13 +175,13 @@ class ContractManagement : public NativeContract
     bool OnDeploy(ApplicationEngine& engine, std::shared_ptr<ContractState> contract,
                   std::shared_ptr<vm::StackItem> data, bool update);
 
-  protected:
+   protected:
     /**
      * @brief Initializes the contract.
      */
     void Initialize() override;
 
-  private:
+   private:
     /**
      * @brief Gets the next available ID.
      * @param snapshot The snapshot.
@@ -290,8 +291,8 @@ class ContractManagement : public NativeContract
      * @param snapshot The blockchain snapshot
      * @return Vector of committee member public keys
      */
-    std::vector<cryptography::ecc::ECPoint>
-    GetCommitteeFromNeoContract(const std::shared_ptr<persistence::DataCache>& snapshot);
+    std::vector<cryptography::ecc::ECPoint> GetCommitteeFromNeoContract(
+        const std::shared_ptr<persistence::DataCache>& snapshot);
 
     /**
      * @brief Calculates committee multi-signature address

@@ -1,4 +1,3 @@
-#include <cstring>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc.h>
 #include <neo/cryptography/hash.h>
@@ -10,6 +9,8 @@
 #include <openssl/ecdsa.h>
 #include <openssl/evp.h>
 #include <openssl/obj_mac.h>
+
+#include <cstring>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -39,8 +40,7 @@ namespace neo_signatures
  */
 io::ByteVector CreateSingleSignatureRedeemScript(const io::ByteSpan& publicKey)
 {
-    if (publicKey.Size() != 33)
-        throw std::invalid_argument("Public key must be 33 bytes (compressed)");
+    if (publicKey.Size() != 33) throw std::invalid_argument("Public key must be 33 bytes (compressed)");
 
     io::ByteVector script;
     script.Reserve(35);  // 0x0C + 0x21 + 33 bytes + 0x41
@@ -71,13 +71,11 @@ io::ByteVector CreateMultiSignatureRedeemScript(int m, const std::vector<io::Byt
     if (m < 1 || m > static_cast<int>(publicKeys.size()))
         throw std::invalid_argument("Invalid m value for multi-signature");
 
-    if (publicKeys.size() > 16)
-        throw std::invalid_argument("Too many public keys (max 16)");
+    if (publicKeys.size() > 16) throw std::invalid_argument("Too many public keys (max 16)");
 
     for (const auto& pubKey : publicKeys)
     {
-        if (pubKey.Size() != 33)
-            throw std::invalid_argument("All public keys must be 33 bytes (compressed)");
+        if (pubKey.Size() != 33) throw std::invalid_argument("All public keys must be 33 bytes (compressed)");
     }
 
     io::ByteVector script;
@@ -119,12 +117,10 @@ io::ByteVector CreateMultiSignatureRedeemScript(int m, const std::vector<io::Byt
  */
 io::ByteVector SignMessageHash(const io::UInt256& messageHash, const io::ByteSpan& privateKey)
 {
-    if (privateKey.Size() != 32)
-        throw std::invalid_argument("Private key must be 32 bytes");
+    if (privateKey.Size() != 32) throw std::invalid_argument("Private key must be 32 bytes");
 
     EC_KEY* key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
-    if (!key)
-        throw std::runtime_error("Failed to create EC_KEY");
+    if (!key) throw std::runtime_error("Failed to create EC_KEY");
 
     BIGNUM* bn_priv = BN_bin2bn(privateKey.Data(), 32, nullptr);
     if (!bn_priv)
@@ -202,17 +198,14 @@ io::ByteVector SignMessageHash(const io::UInt256& messageHash, const io::ByteSpa
  */
 bool VerifyMessageHash(const io::UInt256& messageHash, const io::ByteSpan& signature, const io::ByteSpan& publicKey)
 {
-    if (signature.Size() != 64)
-        return false;
+    if (signature.Size() != 64) return false;
 
-    if (publicKey.Size() != 33)
-        return false;
+    if (publicKey.Size() != 33) return false;
 
     try
     {
         EC_KEY* key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
-        if (!key)
-            return false;
+        if (!key) return false;
 
         // Set public key
         const EC_GROUP* group = EC_KEY_get0_group(key);
@@ -252,10 +245,8 @@ bool VerifyMessageHash(const io::UInt256& messageHash, const io::ByteSpan& signa
 
         if (!r || !s)
         {
-            if (r)
-                BN_free(r);
-            if (s)
-                BN_free(s);
+            if (r) BN_free(r);
+            if (s) BN_free(s);
             ECDSA_SIG_free(sig);
             EC_KEY_free(key);
             return false;
@@ -288,10 +279,7 @@ bool VerifyMessageHash(const io::UInt256& messageHash, const io::ByteSpan& signa
  * @param redeemScript The redeem script bytes
  * @return The 20-byte script hash
  */
-io::UInt160 ComputeScriptHash(const io::ByteSpan& redeemScript)
-{
-    return Hash::Hash160(redeemScript);
-}
+io::UInt160 ComputeScriptHash(const io::ByteSpan& redeemScript) { return Hash::Hash160(redeemScript); }
 
 /**
  * @brief Creates a verification script for a given script hash.
@@ -325,12 +313,10 @@ io::ByteVector CreateVerificationScript(const io::UInt160& scriptHash)
  */
 io::ByteVector DerivePublicKey(const io::ByteSpan& privateKey)
 {
-    if (privateKey.Size() != 32)
-        throw std::invalid_argument("Private key must be 32 bytes");
+    if (privateKey.Size() != 32) throw std::invalid_argument("Private key must be 32 bytes");
 
     EC_KEY* key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
-    if (!key)
-        throw std::runtime_error("Failed to create EC_KEY");
+    if (!key) throw std::runtime_error("Failed to create EC_KEY");
 
     BIGNUM* bn_priv = BN_bin2bn(privateKey.Data(), 32, nullptr);
     if (!bn_priv)
@@ -399,14 +385,12 @@ io::ByteVector DerivePublicKey(const io::ByteSpan& privateKey)
  */
 bool ValidatePublicKey(const io::ByteSpan& publicKey)
 {
-    if (publicKey.Size() != 33)
-        return false;
+    if (publicKey.Size() != 33) return false;
 
     try
     {
         EC_KEY* key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
-        if (!key)
-            return false;
+        if (!key) return false;
 
         const EC_GROUP* group = EC_KEY_get0_group(key);
         EC_POINT* point = EC_POINT_new(group);

@@ -1,11 +1,12 @@
 #pragma once
 
-#include <memory>
-#include <mutex>
 #include <neo/core/logging.h>
 #include <neo/persistence/istore.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
+
+#include <memory>
+#include <mutex>
 #include <string>
 
 #ifdef NEO_HAS_ROCKSDB
@@ -68,7 +69,7 @@ struct RocksDbConfig
  */
 class RocksDbStore : public IStore
 {
-  private:
+   private:
     RocksDbConfig config_;
     std::unique_ptr<rocksdb::DB> db_;
     std::unique_ptr<rocksdb::Options> options_;
@@ -78,7 +79,7 @@ class RocksDbStore : public IStore
 
     // Column families for different data types
     std::vector<rocksdb::ColumnFamilyHandle*> cf_handles_;
-    
+
     // Batch operations
     std::unique_ptr<rocksdb::WriteBatch> current_batch_;
     std::mutex batch_mutex_;
@@ -95,7 +96,7 @@ class RocksDbStore : public IStore
     mutable std::atomic<uint64_t> write_count_{0};
     mutable std::atomic<uint64_t> delete_count_{0};
 
-  public:
+   public:
     /**
      * @brief Construct a new RocksDB store
      * @param config Configuration options
@@ -118,29 +119,26 @@ class RocksDbStore : public IStore
     /**
      * @brief Check if database is open
      */
-    bool IsOpen() const
-    {
-        return db_ != nullptr;
-    }
+    bool IsOpen() const { return db_ != nullptr; }
 
     // IStore interface implementation
     void Put(const io::ByteVector& key, const io::ByteVector& value) override;
     void Delete(const io::ByteVector& key) override;
     std::optional<io::ByteVector> TryGet(const io::ByteVector& key) const override;
     bool Contains(const io::ByteVector& key) const override;
-    std::vector<std::pair<io::ByteVector, io::ByteVector>>
-    Find(const io::ByteVector* prefix = nullptr, SeekDirection direction = SeekDirection::Forward) const override;
+    std::vector<std::pair<io::ByteVector, io::ByteVector>> Find(
+        const io::ByteVector* prefix = nullptr, SeekDirection direction = SeekDirection::Forward) const override;
 
     /**
      * @brief Batch write operations for efficiency
      */
     class WriteBatch
     {
-      private:
+       private:
         rocksdb::WriteBatch batch_;
         RocksDbStore* store_;
 
-      public:
+       public:
         explicit WriteBatch(RocksDbStore* store) : store_(store) {}
 
         void Put(const io::ByteVector& key, const io::ByteVector& value);
@@ -187,7 +185,7 @@ class RocksDbStore : public IStore
      */
     rocksdb::ColumnFamilyHandle* GetColumnFamily(const io::ByteVector& key) const;
 
-  private:
+   private:
     /**
      * @brief Initialize column families
      */
@@ -233,6 +231,6 @@ class RocksDbStore : public IStore
 using RocksDBStore = RocksDbStore;
 using LevelDBStore = RocksDbStore;  // Temporary alias until LevelDB is implemented
 
-#endif // NEO_HAS_ROCKSDB
+#endif  // NEO_HAS_ROCKSDB
 
 }  // namespace neo::persistence

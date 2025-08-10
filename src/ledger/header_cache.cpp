@@ -1,5 +1,6 @@
-#include <algorithm>
 #include <neo/ledger/header_cache.h>
+
+#include <algorithm>
 
 namespace neo::ledger
 {
@@ -112,10 +113,7 @@ size_t HeaderCache::Size() const
     return headers_.size();
 }
 
-size_t HeaderCache::MaxSize() const
-{
-    return max_size_;
-}
+size_t HeaderCache::MaxSize() const { return max_size_; }
 
 bool HeaderCache::Contains(const io::UInt256& hash) const
 {

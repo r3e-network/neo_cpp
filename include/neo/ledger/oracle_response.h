@@ -1,8 +1,9 @@
 #pragma once
 
-#include <cstdint>
 #include <neo/io/byte_vector.h>
 #include <neo/ledger/transaction_attribute.h>
+
+#include <cstdint>
 
 namespace neo::ledger
 {
@@ -28,7 +29,7 @@ enum class OracleResponseCode : uint8_t
  */
 class OracleResponse : public TransactionAttribute
 {
-  public:
+   public:
     /**
      * @brief Constructs an empty OracleResponse.
      */
@@ -110,7 +111,7 @@ class OracleResponse : public TransactionAttribute
      */
     bool operator!=(const OracleResponse& other) const;
 
-  private:
+   private:
     uint64_t id_;
     OracleResponseCode code_;
     io::ByteVector result_;

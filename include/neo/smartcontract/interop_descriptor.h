@@ -12,9 +12,10 @@
 #ifndef NEO_SMARTCONTRACT_INTEROP_DESCRIPTOR_H
 #define NEO_SMARTCONTRACT_INTEROP_DESCRIPTOR_H
 
+#include <neo/smartcontract/call_flags.h>
+
 #include <cstdint>
 #include <functional>
-#include <neo/smartcontract/call_flags.h>
 #include <string>
 #include <vector>
 
@@ -75,10 +76,7 @@ struct InteropDescriptor
     /**
      * @brief Implicit conversion to uint32_t (hash).
      */
-    operator uint32_t() const
-    {
-        return hash;
-    }
+    operator uint32_t() const { return hash; }
 };
 
 /**

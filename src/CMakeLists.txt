@@ -11,7 +11,6 @@ add_subdirectory(console_service) # Re-enabled after fixing compilation issues
 add_subdirectory(persistence)
 add_subdirectory(network) # Re-enabling to fix compilation errors
 add_subdirectory(ledger)
-add_subdirectory(blockchain)
 add_subdirectory(vm)
 add_subdirectory(smartcontract)
 add_subdirectory(wallets)
@@ -43,7 +42,6 @@ add_library(neo_cpp
     $<TARGET_OBJECTS:neo_persistence>
     $<TARGET_OBJECTS:neo_network> # Re-enabled to fix issues
     $<TARGET_OBJECTS:neo_ledger>
-    $<TARGET_OBJECTS:neo_blockchain>
     $<TARGET_OBJECTS:neo_vm>
     $<TARGET_OBJECTS:neo_smartcontract>
     $<TARGET_OBJECTS:neo_native_contracts>
@@ -53,7 +51,7 @@ add_library(neo_cpp
     $<TARGET_OBJECTS:neo_logging> # Ensure logging is included
     # $<TARGET_OBJECTS:neo_statistics_plugin> # Disabled due to compilation errors
     $<TARGET_OBJECTS:neo_consensus>
-    $<TARGET_OBJECTS:neo_node> # Add node library for neo::node::NeoSystem
+    $<TARGET_OBJECTS:neo_node_core> # Add node core objects for neo::node::NeoSystem
     $<TARGET_OBJECTS:neo_rpc> # Re-enabled with JSON API fixes
     # $<TARGET_OBJECTS:neo_cli> # Disabled due to API mismatches
 )

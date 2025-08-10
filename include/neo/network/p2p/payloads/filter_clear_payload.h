@@ -15,7 +15,7 @@ namespace neo::network::p2p::payloads
  */
 class FilterClearPayload : public IPayload
 {
-  public:
+   public:
     /**
      * @brief Constructs a FilterClearPayload.
      */

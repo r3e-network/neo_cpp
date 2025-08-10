@@ -2,6 +2,7 @@
 #include <neo/vm/compound_items.h>
 #include <neo/vm/stack_item.h>
 #include <neo/vm/stack_item_types.h>
+
 #include <sstream>
 #include <stdexcept>
 
@@ -19,8 +20,7 @@ io::ByteVector BinarySerializer::Serialize(std::shared_ptr<vm::StackItem> item, 
     std::string str = stream.str();
     io::ByteVector result(io::ByteSpan(reinterpret_cast<const uint8_t*>(str.data()), str.size()));
 
-    if (static_cast<int64_t>(result.Size()) > maxSize)
-        throw std::runtime_error("Serialized data exceeds maximum size");
+    if (static_cast<int64_t>(result.Size()) > maxSize) throw std::runtime_error("Serialized data exceeds maximum size");
 
     return result;
 }
@@ -28,8 +28,7 @@ io::ByteVector BinarySerializer::Serialize(std::shared_ptr<vm::StackItem> item, 
 std::shared_ptr<vm::StackItem> BinarySerializer::Deserialize(const io::ByteSpan& data, int64_t maxSize,
                                                              int64_t maxItems)
 {
-    if (static_cast<int64_t>(data.Size()) > maxSize)
-        throw std::runtime_error("Data exceeds maximum size");
+    if (static_cast<int64_t>(data.Size()) > maxSize) throw std::runtime_error("Data exceeds maximum size");
 
     std::istringstream stream(std::string(reinterpret_cast<const char*>(data.Data()), data.Size()));
     io::BinaryReader reader(stream);
@@ -41,8 +40,7 @@ std::shared_ptr<vm::StackItem> BinarySerializer::Deserialize(const io::ByteSpan&
 void BinarySerializer::SerializeStackItem(io::BinaryWriter& writer, std::shared_ptr<vm::StackItem> item,
                                           int64_t maxSize, int64_t maxItems, int64_t& itemCount)
 {
-    if (++itemCount > maxItems)
-        throw std::runtime_error("Maximum item count exceeded");
+    if (++itemCount > maxItems) throw std::runtime_error("Maximum item count exceeded");
 
     if (!item)
     {
@@ -115,8 +113,7 @@ void BinarySerializer::SerializeStackItem(io::BinaryWriter& writer, std::shared_
 std::shared_ptr<vm::StackItem> BinarySerializer::DeserializeStackItem(io::BinaryReader& reader, int64_t maxSize,
                                                                       int64_t maxItems, int64_t& itemCount)
 {
-    if (++itemCount > maxItems)
-        throw std::runtime_error("Maximum item count exceeded");
+    if (++itemCount > maxItems) throw std::runtime_error("Maximum item count exceeded");
 
     auto type = static_cast<vm::StackItemType>(reader.ReadByte());
 

@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/io/json.h>
 #include <neo/node/neo_system.h>
+
+#include <memory>
 #include <string>
 
 namespace neo::rpc
@@ -12,7 +13,7 @@ namespace neo::rpc
  */
 class RPCMethods
 {
-  public:
+   public:
     /**
      * @brief Gets the version.
      * @param neoSystem The Neo system.
@@ -248,7 +249,7 @@ class RPCMethods
     static nlohmann::json InvokeContractVerify(std::shared_ptr<node::NeoSystem> neoSystem,
                                                const nlohmann::json& params);
 
-  private:
+   private:
     /**
      * @brief Converts a block to JSON.
      * @param block The block.

@@ -1,12 +1,13 @@
 #pragma once
 
+#include <neo/io/byte_span.h>
+#include <neo/io/byte_vector.h>
+#include <neo/io/iserializable.h>
+
 #include <array>
 #include <cstdint>
 #include <cstring>
 #include <functional>
-#include <neo/io/byte_span.h>
-#include <neo/io/byte_vector.h>
-#include <neo/io/iserializable.h>
 #include <stdexcept>
 #include <string>
 
@@ -17,7 +18,7 @@ namespace neo::io
  */
 class UInt160 : public ISerializable
 {
-  public:
+   public:
     /**
      * @brief The size of the UInt160 in bytes.
      */
@@ -55,124 +56,85 @@ class UInt160 : public ISerializable
      * @brief Constructs a UInt160 from a raw byte array.
      * @param data The raw byte array.
      */
-    explicit UInt160(const uint8_t* data)
-    {
-        std::memcpy(data_.data(), data, Size);
-    }
+    explicit UInt160(const uint8_t* data) { std::memcpy(data_.data(), data, Size); }
 
     /**
      * @brief Gets a pointer to the data.
      * @return Pointer to the data.
      */
-    uint8_t* Data() noexcept
-    {
-        return data_.data();
-    }
+    uint8_t* Data() noexcept { return data_.data(); }
 
     /**
      * @brief Gets a const pointer to the data.
      * @return Const pointer to the data.
      */
-    const uint8_t* Data() const noexcept
-    {
-        return data_.data();
-    }
+    const uint8_t* Data() const noexcept { return data_.data(); }
 
     /**
      * @brief Converts the UInt160 to a ByteSpan.
      * @return A ByteSpan view of the UInt160.
      */
-    ByteSpan AsSpan() const
-    {
-        return ByteSpan(data_.data(), Size);
-    }
+    ByteSpan AsSpan() const { return ByteSpan(data_.data(), Size); }
 
     /**
      * @brief Converts the UInt160 to a ByteVector.
      * @return A ByteVector copy of the UInt160.
      */
-    ByteVector ToArray() const
-    {
-        return ByteVector(AsSpan());
-    }
+    ByteVector ToArray() const { return ByteVector(AsSpan()); }
 
     /**
      * @brief Converts the UInt160 to a hexadecimal string.
      * @return The hexadecimal string representation of the UInt160.
      */
-    std::string ToHexString() const
-    {
-        return AsSpan().ToHexString();
-    }
+    std::string ToHexString() const { return AsSpan().ToHexString(); }
 
     /**
      * @brief Converts the UInt160 to a string.
      * @return The string representation of the UInt160.
      */
-    std::string ToString() const
-    {
-        return ToHexString();
-    }
+    std::string ToString() const { return ToHexString(); }
 
     /**
      * @brief Checks if this UInt160 is equal to another UInt160.
      * @param other The other UInt160.
      * @return True if the UInt160s are equal, false otherwise.
      */
-    bool operator==(const UInt160& other) const
-    {
-        return data_ == other.data_;
-    }
+    bool operator==(const UInt160& other) const { return data_ == other.data_; }
 
     /**
      * @brief Checks if this UInt160 is not equal to another UInt160.
      * @param other The other UInt160.
      * @return True if the UInt160s are not equal, false otherwise.
      */
-    bool operator!=(const UInt160& other) const
-    {
-        return data_ != other.data_;
-    }
+    bool operator!=(const UInt160& other) const { return data_ != other.data_; }
 
     /**
      * @brief Checks if this UInt160 is less than another UInt160.
      * @param other The other UInt160.
      * @return True if this UInt160 is less than the other UInt160, false otherwise.
      */
-    bool operator<(const UInt160& other) const
-    {
-        return data_ < other.data_;
-    }
+    bool operator<(const UInt160& other) const { return data_ < other.data_; }
 
     /**
      * @brief Checks if this UInt160 is greater than another UInt160.
      * @param other The other UInt160.
      * @return True if this UInt160 is greater than the other UInt160, false otherwise.
      */
-    bool operator>(const UInt160& other) const
-    {
-        return data_ > other.data_;
-    }
+    bool operator>(const UInt160& other) const { return data_ > other.data_; }
 
     /**
      * @brief Checks if this UInt160 is less than or equal to another UInt160.
      * @param other The other UInt160.
      * @return True if this UInt160 is less than or equal to the other UInt160, false otherwise.
      */
-    bool operator<=(const UInt160& other) const
-    {
-        return !(*this > other);
-    }
+    bool operator<=(const UInt160& other) const { return !(*this > other); }
 
     /**
      * @brief Checks if this UInt160 is greater than or equal to another UInt160.
      * @param other The other UInt160.
      * @return True if this UInt160 is greater than or equal to the other UInt160, false otherwise.
      */
-    bool operator>=(const UInt160& other) const
-    {
-        return !(*this < other);
-    }
+    bool operator>=(const UInt160& other) const { return !(*this < other); }
 
     /**
      * @brief Parses a hexadecimal string into a UInt160.
@@ -207,10 +169,7 @@ class UInt160 : public ISerializable
      * @brief Gets a UInt160 with all bits set to zero.
      * @return A UInt160 with all bits set to zero.
      */
-    static UInt160 Zero()
-    {
-        return UInt160();
-    }
+    static UInt160 Zero() { return UInt160(); }
 
     /**
      * @brief Creates a UInt160 from a ByteSpan.
@@ -218,10 +177,7 @@ class UInt160 : public ISerializable
      * @return The UInt160 created from the data.
      * @throws std::invalid_argument if the ByteSpan size is not equal to UInt160::Size.
      */
-    static UInt160 FromBytes(const ByteSpan& data)
-    {
-        return UInt160(data);
-    }
+    static UInt160 FromBytes(const ByteSpan& data) { return UInt160(data); }
 
     /**
      * @brief Creates a UInt160 from a Neo address.
@@ -255,22 +211,16 @@ class UInt160 : public ISerializable
      * @param index The index.
      * @return Reference to the byte at the index.
      */
-    uint8_t& operator[](size_t index)
-    {
-        return data_[index];
-    }
+    uint8_t& operator[](size_t index) { return data_[index]; }
 
     /**
      * @brief Array subscript operator (const).
      * @param index The index.
      * @return Const reference to the byte at the index.
      */
-    const uint8_t& operator[](size_t index) const
-    {
-        return data_[index];
-    }
+    const uint8_t& operator[](size_t index) const { return data_[index]; }
 
-  private:
+   private:
     value_type data_;
 };
 }  // namespace neo::io

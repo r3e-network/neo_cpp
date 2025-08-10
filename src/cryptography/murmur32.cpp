@@ -1,12 +1,10 @@
-#include <cstring>
 #include <neo/cryptography/murmur32.h>
+
+#include <cstring>
 
 namespace neo::cryptography
 {
-uint32_t Murmur32::Hash(const io::ByteSpan& data, uint32_t seed)
-{
-    return Hash(data.Data(), data.Size(), seed);
-}
+uint32_t Murmur32::Hash(const io::ByteSpan& data, uint32_t seed) { return Hash(data.Data(), data.Size(), seed); }
 
 uint32_t Murmur32::Hash(const uint8_t* data, size_t len, uint32_t seed)
 {
@@ -51,10 +49,7 @@ uint32_t Murmur32::Hash(const uint8_t* data, size_t len, uint32_t seed)
     return FinalizeHash(hash, len);
 }
 
-uint32_t Murmur32::RotateLeft(uint32_t value, int shift)
-{
-    return (value << shift) | (value >> (32 - shift));
-}
+uint32_t Murmur32::RotateLeft(uint32_t value, int shift) { return (value << shift) | (value >> (32 - shift)); }
 
 uint32_t Murmur32::FinalizeHash(uint32_t hash, size_t len)
 {

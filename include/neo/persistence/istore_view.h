@@ -1,8 +1,9 @@
 #pragma once
 
-#include <memory>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>
+
+#include <memory>
 #include <vector>
 
 namespace neo::persistence
@@ -12,7 +13,7 @@ namespace neo::persistence
  */
 class IStoreView
 {
-  public:
+   public:
     /**
      * @brief Virtual destructor
      */

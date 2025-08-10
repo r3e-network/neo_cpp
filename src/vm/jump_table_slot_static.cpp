@@ -7,6 +7,7 @@
 #include <neo/vm/primitive_items.h>
 #include <neo/vm/special_items.h>
 #include <neo/vm/stack_item.h>
+
 #include <stdexcept>
 
 namespace neo::vm

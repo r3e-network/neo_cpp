@@ -1,10 +1,11 @@
 #pragma once
 
-#include <memory>
-#include <mutex>
 #include <neo/consensus/consensus_service.h>
 #include <neo/plugins/plugin_base.h>
 #include <neo/wallets/wallet.h>
+
+#include <memory>
+#include <mutex>
 #include <string>
 #include <unordered_map>
 
@@ -15,7 +16,7 @@ namespace neo::plugins
  */
 class DBFTPlugin : public PluginBase
 {
-  public:
+   public:
     /**
      * @brief Constructs a DBFTPlugin.
      */
@@ -40,7 +41,7 @@ class DBFTPlugin : public PluginBase
      */
     bool IsConsensusRunning() const;
 
-  protected:
+   protected:
     /**
      * @brief Initializes the plugin.
      * @param settings The settings.
@@ -60,7 +61,7 @@ class DBFTPlugin : public PluginBase
      */
     bool OnStop() override;
 
-  private:
+   private:
     std::shared_ptr<consensus::ConsensusService> consensusService_;
     std::string walletPath_;
     std::string walletPassword_;

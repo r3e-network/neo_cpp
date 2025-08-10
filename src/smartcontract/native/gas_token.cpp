@@ -1,4 +1,3 @@
-#include <iostream>
 #include <neo/cryptography/crypto.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -11,21 +10,17 @@
 #include <neo/smartcontract/native/notary.h>
 #include <neo/smartcontract/native/policy_contract.h>
 #include <neo/wallets/helper.h>
+
+#include <iostream>
 #include <sstream>
 
 namespace neo::smartcontract::native
 {
 GasToken::GasToken() : FungibleToken(NAME, ID) {}
 
-std::string GasToken::GetSymbol() const
-{
-    return "GAS";
-}
+std::string GasToken::GetSymbol() const { return "GAS"; }
 
-uint8_t GasToken::GetDecimals() const
-{
-    return 8;
-}
+uint8_t GasToken::GetDecimals() const { return 8; }
 
 std::shared_ptr<GasToken> GasToken::GetInstance()
 {
@@ -56,12 +51,10 @@ bool GasToken::InitializeContract(ApplicationEngine& engine, uint32_t hardfork)
     {
         // Get the BFT address from the standby validators
         auto settings = engine.GetProtocolSettings();
-        if (!settings)
-            return false;
+        if (!settings) return false;
 
         auto validators = settings->GetStandbyValidators();
-        if (validators.size() == 0)
-            return false;
+        if (validators.size() == 0) return false;
 
         // Create a multi-signature contract with the validators
         io::UInt160 account;
@@ -90,8 +83,7 @@ bool GasToken::InitializeContract(ApplicationEngine& engine, uint32_t hardfork)
 
         // Mint the initial GAS distribution
         int64_t initialGasDistribution = settings->GetInitialGasDistribution();
-        if (initialGasDistribution <= 0)
-            initialGasDistribution = 5200000 * FACTOR;  // Default: 5.2M GAS
+        if (initialGasDistribution <= 0) initialGasDistribution = 5200000 * FACTOR;  // Default: 5.2M GAS
 
         return Mint(engine, account, initialGasDistribution, false);
     }
@@ -103,8 +95,7 @@ int64_t GasToken::GetBalance(std::shared_ptr<persistence::StoreView> snapshot, c
 {
     auto key = GetStorageKey(PREFIX_BALANCE, account);
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return 0;
+    if (value.IsEmpty()) return 0;
 
     return *reinterpret_cast<const int64_t*>(value.Data());
 }
@@ -113,8 +104,7 @@ int64_t GasToken::GetTotalSupply(std::shared_ptr<persistence::StoreView> snapsho
 {
     auto key = GetStorageKey(PREFIX_TOTAL_SUPPLY, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return 0;  // GAS starts with 0 total supply, minted as needed
+    if (value.IsEmpty()) return 0;  // GAS starts with 0 total supply, minted as needed
 
     return *reinterpret_cast<const int64_t*>(value.Data());
 }
@@ -122,13 +112,11 @@ int64_t GasToken::GetTotalSupply(std::shared_ptr<persistence::StoreView> snapsho
 bool GasToken::Transfer(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& from,
                         const io::UInt160& to, int64_t amount)
 {
-    if (amount <= 0)
-        return false;
+    if (amount <= 0) return false;
 
     // Check if from account has enough balance
     int64_t fromBalance = GetBalance(snapshot, from);
-    if (fromBalance < amount)
-        return false;
+    if (fromBalance < amount) return false;
 
     // Update from account balance
     int64_t newFromBalance = fromBalance - amount;
@@ -156,8 +144,7 @@ bool GasToken::Transfer(std::shared_ptr<persistence::StoreView> snapshot, const 
 bool GasToken::Transfer(ApplicationEngine& engine, const io::UInt160& from, const io::UInt160& to, int64_t amount,
                         std::shared_ptr<vm::StackItem> data, bool callOnPayment)
 {
-    if (amount <= 0)
-        return false;
+    if (amount <= 0) return false;
 
     // Transfer GAS
     bool result = Transfer(engine.GetSnapshot(), from, to, amount);
@@ -183,8 +170,7 @@ bool GasToken::PostTransfer(ApplicationEngine& engine, const io::UInt160& from, 
     engine.Notify(GetScriptHash(), "Transfer", state);
 
     // Check if it's a wallet or smart contract
-    if (!callOnPayment || to.IsZero())
-        return true;
+    if (!callOnPayment || to.IsZero()) return true;
 
     // Check if the recipient is a contract
     // Implement ContractManagement integration for contract validation
@@ -214,8 +200,7 @@ bool GasToken::PostTransfer(ApplicationEngine& engine, const io::UInt160& from, 
 
 bool GasToken::Mint(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account, int64_t amount)
 {
-    if (amount <= 0)
-        return false;
+    if (amount <= 0) return false;
 
     // Update total supply
     int64_t totalSupply = GetTotalSupply(snapshot);
@@ -236,8 +221,7 @@ bool GasToken::Mint(std::shared_ptr<persistence::StoreView> snapshot, const io::
 
 bool GasToken::Mint(ApplicationEngine& engine, const io::UInt160& account, int64_t amount, bool callOnPayment)
 {
-    if (amount <= 0)
-        return false;
+    if (amount <= 0) return false;
 
     // Mint GAS
     bool result = Mint(engine.GetSnapshot(), account, amount);
@@ -256,13 +240,11 @@ bool GasToken::Mint(ApplicationEngine& engine, const io::UInt160& account, int64
 
 bool GasToken::Burn(std::shared_ptr<persistence::StoreView> snapshot, const io::UInt160& account, int64_t amount)
 {
-    if (amount <= 0)
-        return false;
+    if (amount <= 0) return false;
 
     // Check if account has enough balance
     int64_t balance = GetBalance(snapshot, account);
-    if (balance < amount)
-        return false;
+    if (balance < amount) return false;
 
     // Update total supply
     int64_t totalSupply = GetTotalSupply(snapshot);
@@ -289,8 +271,7 @@ bool GasToken::Burn(std::shared_ptr<persistence::StoreView> snapshot, const io::
 
 bool GasToken::Burn(ApplicationEngine& engine, const io::UInt160& account, int64_t amount)
 {
-    if (amount <= 0)
-        return false;
+    if (amount <= 0) return false;
 
     // Burn GAS
     bool result = Burn(engine.GetSnapshot(), account, amount);
@@ -311,8 +292,7 @@ int64_t GasToken::GetGasPerBlock(std::shared_ptr<persistence::StoreView> snapsho
 {
     auto key = GetStorageKey(PREFIX_GAS_PER_BLOCK, io::ByteVector{});
     auto value = GetStorageValue(snapshot, key);
-    if (value.IsEmpty())
-        return 5 * FACTOR;  // Default: 5 GAS per block
+    if (value.IsEmpty()) return 5 * FACTOR;  // Default: 5 GAS per block
 
     return *reinterpret_cast<const int64_t*>(value.Data());
 }
@@ -345,14 +325,12 @@ std::shared_ptr<vm::StackItem> GasToken::OnTotalSupply(ApplicationEngine& engine
 std::shared_ptr<vm::StackItem> GasToken::OnBalanceOf(ApplicationEngine& engine,
                                                      const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.empty())
-        throw std::runtime_error("Invalid arguments");
+    if (args.empty()) throw std::runtime_error("Invalid arguments");
 
     auto accountItem = args[0];
     auto accountBytes = accountItem->GetByteArray();
 
-    if (accountBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (accountBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     io::UInt160 account;
     std::memcpy(account.Data(), accountBytes.Data(), 20);
@@ -363,8 +341,7 @@ std::shared_ptr<vm::StackItem> GasToken::OnBalanceOf(ApplicationEngine& engine,
 std::shared_ptr<vm::StackItem> GasToken::OnTransfer(ApplicationEngine& engine,
                                                     const std::vector<std::shared_ptr<vm::StackItem>>& args)
 {
-    if (args.size() < 3)
-        throw std::runtime_error("Invalid arguments");
+    if (args.size() < 3) throw std::runtime_error("Invalid arguments");
 
     auto fromItem = args[0];
     auto toItem = args[1];
@@ -374,8 +351,7 @@ std::shared_ptr<vm::StackItem> GasToken::OnTransfer(ApplicationEngine& engine,
     auto toBytes = toItem->GetByteArray();
     auto amount = amountItem->GetInteger();
 
-    if (fromBytes.Size() != 20 || toBytes.Size() != 20)
-        throw std::runtime_error("Invalid account");
+    if (fromBytes.Size() != 20 || toBytes.Size() != 20) throw std::runtime_error("Invalid account");
 
     io::UInt160 from;
     io::UInt160 to;
@@ -383,17 +359,14 @@ std::shared_ptr<vm::StackItem> GasToken::OnTransfer(ApplicationEngine& engine,
     std::memcpy(to.Data(), toBytes.Data(), 20);
 
     // Check if from account is the current script hash
-    if (from != engine.GetCurrentScriptHash())
-        throw std::runtime_error("Invalid from account");
+    if (from != engine.GetCurrentScriptHash()) throw std::runtime_error("Invalid from account");
 
     // Check if amount is valid
-    if (amount <= 0)
-        throw std::runtime_error("Invalid amount");
+    if (amount <= 0) throw std::runtime_error("Invalid amount");
 
     // Get data if provided
     std::shared_ptr<vm::StackItem> data = vm::StackItem::Null();
-    if (args.size() >= 4)
-        data = args[3];
+    if (args.size() >= 4) data = args[3];
 
     // Check if caller is committee
     // Implement committee check matching C# NativeContract.CheckCommittee
@@ -404,8 +377,7 @@ std::shared_ptr<vm::StackItem> GasToken::OnTransfer(ApplicationEngine& engine,
         {
             // Get the NEO token contract to retrieve committee address
             auto neoContract = dynamic_cast<NeoToken*>(engine.GetNativeContract(NeoToken::GetContractId()));
-            if (!neoContract)
-                throw std::runtime_error("NEO contract not found");
+            if (!neoContract) throw std::runtime_error("NEO contract not found");
 
             // Get committee address from NEO contract
             io::UInt160 committeeAddress = neoContract->GetCommitteeAddress(engine.GetSnapshot());
@@ -447,8 +419,7 @@ bool GasToken::OnPersist(ApplicationEngine& engine)
 {
     // Get the persisting block
     auto block = engine.GetPersistingBlock();
-    if (!block)
-        return false;
+    if (!block) return false;
 
     // Process transaction fees
     int64_t totalNetworkFee = 0;
@@ -475,20 +446,17 @@ bool GasToken::PostPersist(ApplicationEngine& engine)
 {
     // Get the persisting block
     auto block = engine.GetPersistingBlock();
-    if (!block)
-        return false;
+    if (!block) return false;
 
     // Get the protocol settings
     auto settings = engine.GetProtocolSettings();
-    if (!settings)
-        return false;
+    if (!settings) return false;
 
     // Get the committee members count and validators count
     int committeeMembersCount = settings->GetCommitteeMembersCount();
     int validatorsCount = settings->GetValidatorsCount();
 
-    if (committeeMembersCount <= 0 || validatorsCount <= 0)
-        return false;
+    if (committeeMembersCount <= 0 || validatorsCount <= 0) return false;
 
     // Calculate the index of the committee member to reward
     int index = static_cast<int>(block->GetIndex() % committeeMembersCount);

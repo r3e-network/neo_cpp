@@ -8,11 +8,6 @@ add_executable(test_console_service
 
 target_link_libraries(test_console_service
     PRIVATE
-        neo_console_service
-        neo_core
-        neo_io
-        neo_cryptography
-        neo_extensions
         GTest::gtest
         GTest::gtest_main
 )

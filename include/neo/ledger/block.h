@@ -1,12 +1,13 @@
 #pragma once
 
-#include <chrono>
 #include <neo/io/iserializable.h>
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/block_header.h>
 #include <neo/ledger/transaction.h>
 #include <neo/ledger/witness.h>
+
+#include <chrono>
 #include <vector>
 
 namespace neo::ledger
@@ -16,18 +17,18 @@ namespace neo::ledger
  */
 class Block : public io::ISerializable
 {
-  private:
+   private:
     BlockHeader header_;
     std::vector<Transaction> transactions_;
     mutable io::UInt256 hash_;  // Cached hash
     mutable bool hash_calculated_{false};
 
-  public:
+   public:
     /**
      * @brief Default constructor
      */
     Block() = default;
-    
+
     /**
      * @brief Virtual destructor
      */
@@ -36,10 +37,7 @@ class Block : public io::ISerializable
     /**
      * @brief Get the header of the block
      */
-    const BlockHeader& GetHeader() const
-    {
-        return header_;
-    }
+    const BlockHeader& GetHeader() const { return header_; }
 
     /**
      * @brief Get the header of the block (non-const)
@@ -62,10 +60,7 @@ class Block : public io::ISerializable
     /**
      * @brief Get block version (delegates to header)
      */
-    uint32_t GetVersion() const
-    {
-        return header_.GetVersion();
-    }
+    uint32_t GetVersion() const { return header_.GetVersion(); }
 
     /**
      * @brief Set block version (delegates to header)
@@ -79,10 +74,7 @@ class Block : public io::ISerializable
     /**
      * @brief Get previous block hash (delegates to header)
      */
-    const io::UInt256& GetPreviousHash() const
-    {
-        return header_.GetPrevHash();
-    }
+    const io::UInt256& GetPreviousHash() const { return header_.GetPrevHash(); }
 
     /**
      * @brief Set previous block hash (delegates to header)
@@ -96,10 +88,7 @@ class Block : public io::ISerializable
     /**
      * @brief Get merkle root (delegates to header)
      */
-    const io::UInt256& GetMerkleRoot() const
-    {
-        return header_.GetMerkleRoot();
-    }
+    const io::UInt256& GetMerkleRoot() const { return header_.GetMerkleRoot(); }
 
     /**
      * @brief Set merkle root (delegates to header)
@@ -113,10 +102,7 @@ class Block : public io::ISerializable
     /**
      * @brief Get block timestamp (delegates to header)
      */
-    uint64_t GetTimestamp() const
-    {
-        return header_.GetTimestamp();
-    }
+    uint64_t GetTimestamp() const { return header_.GetTimestamp(); }
 
     /**
      * @brief Set block timestamp (delegates to header)
@@ -130,10 +116,7 @@ class Block : public io::ISerializable
     /**
      * @brief Get block index (delegates to header)
      */
-    uint32_t GetIndex() const
-    {
-        return header_.GetIndex();
-    }
+    uint32_t GetIndex() const { return header_.GetIndex(); }
 
     /**
      * @brief Set block index (delegates to header)
@@ -147,10 +130,7 @@ class Block : public io::ISerializable
     /**
      * @brief Get primary index (delegates to header)
      */
-    uint32_t GetPrimaryIndex() const
-    {
-        return static_cast<uint32_t>(header_.GetPrimaryIndex());
-    }
+    uint32_t GetPrimaryIndex() const { return static_cast<uint32_t>(header_.GetPrimaryIndex()); }
 
     /**
      * @brief Set primary index (delegates to header)
@@ -164,10 +144,7 @@ class Block : public io::ISerializable
     /**
      * @brief Get next consensus address (delegates to header)
      */
-    const io::UInt160& GetNextConsensus() const
-    {
-        return header_.GetNextConsensus();
-    }
+    const io::UInt160& GetNextConsensus() const { return header_.GetNextConsensus(); }
 
     /**
      * @brief Set next consensus address (delegates to header)
@@ -181,26 +158,17 @@ class Block : public io::ISerializable
     /**
      * @brief Get transactions
      */
-    const std::vector<Transaction>& GetTransactions() const
-    {
-        return transactions_;
-    }
+    const std::vector<Transaction>& GetTransactions() const { return transactions_; }
 
     /**
      * @brief Add transaction
      */
-    void AddTransaction(const Transaction& tx)
-    {
-        transactions_.push_back(tx);
-    }
+    void AddTransaction(const Transaction& tx) { transactions_.push_back(tx); }
 
     /**
      * @brief Get nonce (delegates to header)
      */
-    uint64_t GetNonce() const
-    {
-        return header_.GetNonce();
-    }
+    uint64_t GetNonce() const { return header_.GetNonce(); }
 
     /**
      * @brief Set nonce (delegates to header)
@@ -214,10 +182,7 @@ class Block : public io::ISerializable
     /**
      * @brief Get witness (delegates to header)
      */
-    const Witness& GetWitness() const
-    {
-        return header_.GetWitness();
-    }
+    const Witness& GetWitness() const { return header_.GetWitness(); }
 
     /**
      * @brief Set witness (delegates to header)
