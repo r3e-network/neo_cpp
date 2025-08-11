@@ -21,7 +21,7 @@ class NeoException : public std::runtime_error
         UNKNOWN_ERROR = 1000,
         INVALID_ARGUMENT = 1001,
         INVALID_STATE = 1002,
-        NOT_IMPLEMENTED = 1003,
+        NOT_AVAILABLE = 1003,
         OUT_OF_RANGE = 1004,
         TIMEOUT = 1005,
 

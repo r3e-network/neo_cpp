@@ -52,7 +52,7 @@ void MemoryPoolEvents::FireTransactionAdded(std::shared_ptr<Transaction> transac
         catch (...)
         {
             // Silently ignore handler exceptions to prevent one bad handler from affecting others
-            // In production, this should log the exception
+            // Exception details are not logged to maintain event system stability
         }
     }
 }

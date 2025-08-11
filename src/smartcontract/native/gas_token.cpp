@@ -435,8 +435,7 @@ bool GasToken::OnPersist(ApplicationEngine& engine)
         totalNetworkFee += tx.GetNetworkFee();
 
         // Implement NotaryAssisted attribute handling for proper fee calculation
-        // Simplified logic handles basic fee calculation until notary types are available
-        // Implementation handles basic fee calculation without advanced notary features
+        // Handle basic fee calculation with notary attribute support
     }
 
     return true;

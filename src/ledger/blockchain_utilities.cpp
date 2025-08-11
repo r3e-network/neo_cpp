@@ -3,7 +3,7 @@
 
 namespace neo::ledger
 {
-// Additional implementations for Blockchain methods
+// Additional utility implementations for Blockchain methods
 uint32_t Blockchain::GetHeight() const { return GetCurrentBlockIndex(); }
 
 }  // namespace neo::ledger

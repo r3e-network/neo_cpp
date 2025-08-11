@@ -132,6 +132,7 @@ class Message : public io::ISerializable, public io::IJsonSerializable
     io::ByteVector payloadRaw_;
     io::ByteVector payloadCompressed_;
 
+    void CompressPayload(const io::ByteVector& data);
     void DecompressPayload();
     static bool ShouldCompress(MessageCommand command);
     static std::string GetCommandString(MessageCommand command);

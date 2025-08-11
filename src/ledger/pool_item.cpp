@@ -82,7 +82,7 @@ bool PoolItem::ConflictsWith(const PoolItem& other) const
                     (other_scope & ledger::WitnessScope::CustomContracts) != ledger::WitnessScope::None)
                 {
                     // Would need to check AllowedContracts lists for overlap
-                    // Simplified: assume conflict if both have CustomContracts
+                    // Assume conflict if both have CustomContracts scope
                     return true;
                 }
             }

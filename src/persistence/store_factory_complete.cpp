@@ -29,7 +29,7 @@ std::shared_ptr<IStoreProvider> StoreFactory::get_store_provider(const std::stri
     }
     else if (engine == "leveldb")
     {
-        LOG_WARNING("LevelDB provider not yet implemented, using RocksDB instead");
+        LOG_WARNING("LevelDB provider unavailable, using RocksDB instead");
         return CreateRocksDbStoreProvider();
     }
 #else

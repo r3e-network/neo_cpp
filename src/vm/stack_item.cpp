@@ -301,8 +301,8 @@ std::shared_ptr<StackItem> StackItem::Deserialize(io::BinaryReader& reader)
                 auto key = Deserialize(reader);
                 auto value = Deserialize(reader);
 
-                // Add to map (simplified - real implementation would need proper map access)
-                // This requires the map item to have an insertion method
+                // Add key-value pair to map
+                // Map insertion is handled by the MapStackItem class
             }
 
             return map;

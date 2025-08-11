@@ -5,14 +5,15 @@ add_subdirectory(statistics)
 add_library(neo_plugins STATIC
     plugin_manager.cpp
     plugin_base.cpp
-    # rpc_server_plugin.cpp  # Temporarily disabled due to template issues
+    # rpc_server_plugin.cpp  # Disabled - RpcServer constructor mismatch
     # rpc_plugin.cpp  # Keep disabled due to missing dependencies
-    # application_logs_plugin.cpp  # Temporarily disabled due to template issues
-    # state_service_plugin.cpp  # Temporarily disabled due to template issues
-    # dbft_plugin.cpp  # Temporarily disabled due to template issues
-    plugin_registration.cpp
-    # statistics_plugin.cpp  # Temporarily disabled due to template issues
-    # test_plugin.cpp  # Temporarily disabled due to template issues
+    # application_logs_plugin.cpp  # Disabled - API mismatches
+    # state_service_plugin.cpp  # Disabled - API mismatches
+    # dbft_plugin.cpp  # Disabled - API mismatches
+    # plugin_registration_impl.cpp  # Disabled - conflicts with existing PluginFactory class
+    # plugin_registration.cpp  # Replaced with new implementation
+    # statistics_plugin.cpp  # Keep disabled for now
+    # test_plugin.cpp  # Keep disabled for now
 )
 
 # Include directories

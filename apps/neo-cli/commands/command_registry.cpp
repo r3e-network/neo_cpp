@@ -190,7 +190,7 @@ bool ShowCommand::Execute(CLIService* service, const std::vector<std::string>& a
         }
 
         std::cout << "\nAccounts:" << std::endl;
-        std::cout << "\nWallet functionality not fully implemented yet." << std::endl;
+        std::cout << "\nWallet account listing is not available in this build." << std::endl;
     }
     else
     {
@@ -255,7 +255,7 @@ bool WalletCommand::Execute(CLIService* service, const std::vector<std::string>&
         try
         {
             // auto wallet = wallets::NEP6Wallet::Create(args[1], password);
-            std::cout << "Wallet creation not fully implemented yet." << std::endl;
+            std::cout << "Wallet creation is not available in this build." << std::endl;
             return true;
         }
         catch (const std::exception& e)
@@ -273,7 +273,7 @@ bool WalletCommand::Execute(CLIService* service, const std::vector<std::string>&
             return false;
         }
 
-        std::cout << "\nWallet information not available - not fully implemented." << std::endl;
+        std::cout << "\nWallet information is not available in this build." << std::endl;
     }
     else
     {

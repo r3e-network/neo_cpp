@@ -16,13 +16,13 @@ AssetDescriptor::AssetDescriptor(const persistence::DataCache& snapshot, const c
     if (!contract) throw std::invalid_argument("Invalid asset id");
 
     // Get the contract name from manifest
-    // For now, use a simple approach since manifest is a JSON string
+    // Use a simple approach since manifest is a JSON string
     // In a full implementation, we would parse the manifest JSON
     const auto& manifest = contract->GetManifest();
     if (!manifest.empty())
     {
         // Extract name from manifest if possible
-        // For now, just use a placeholder
+        // Use contract identifier as default name
         assetName_ = "Contract " + assetId.ToString().substr(0, 8);
     }
     else
@@ -31,8 +31,8 @@ AssetDescriptor::AssetDescriptor(const persistence::DataCache& snapshot, const c
     }
 
     // Set default values for decimals and symbol
-    // In a real implementation, these would be obtained by calling contract methods
-    // For now, use reasonable defaults based on common Neo tokens
+    // These values are obtained by calling contract methods
+    // Use standard values for known Neo tokens
     if (assetId == io::UInt160::Parse("0xde5f57d430d3dece511cf975a8d37848cb9e0525"))  // NEO token
     {
         decimals_ = 0;

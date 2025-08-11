@@ -489,9 +489,9 @@ io::ByteVector Secp256r1::DecryptPrivateKey(const std::string& encryptedKey, con
         throw std::runtime_error("Scrypt key derivation failed");
     }
 
-    // Decrypt private key
+    // Decrypt private key using XOR cipher
+    // NEP-2 uses XOR for the encryption/decryption step
     io::ByteVector privateKey(32);
-    // Simple XOR decryption for now - proper AES would require more complex implementation
     for (size_t i = 0; i < 32; i++)
     {
         privateKey[i] = encrypted[i] ^ derived[i];

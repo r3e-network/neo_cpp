@@ -28,7 +28,7 @@ class ECPoint : public io::ISerializable
     /**
      * @brief Virtual destructor.
      */
-    virtual ~ECPoint() = default;
+    virtual ~ECPoint();
 
     /**
      * @brief Constructs an ECPoint with the specified curve name.

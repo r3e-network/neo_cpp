@@ -2,7 +2,9 @@
 
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
-#include <neo/network/p2p/payloads/ipayload.h>
+#include <neo/io/json_reader.h>
+#include <neo/io/json_writer.h>
+#include <neo/network/p2p/ipayload.h>
 
 #include <string>
 
@@ -35,9 +37,20 @@ class RejectPayload : public IPayload
         // Currently empty - no data to deserialize
     }
 
-    size_t GetSize() const override
+    size_t GetSize() const
     {
         return 0;  // Empty payload
+    }
+    
+    // IJsonSerializable implementation
+    void SerializeJson(io::JsonWriter& writer) const override
+    {
+        // Currently empty - no data to serialize
+    }
+    
+    void DeserializeJson(const io::JsonReader& reader) override
+    {
+        // Currently empty - no data to deserialize
     }
 };
 }  // namespace neo::network::p2p::payloads

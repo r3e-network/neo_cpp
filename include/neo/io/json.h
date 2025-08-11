@@ -26,6 +26,32 @@ class JsonValue
     JsonValue(const json& j) : data_(j) {}
     JsonValue(json&& j) : data_(std::move(j)) {}
     JsonValue(const std::string& str) : data_(json::parse(str)) {}
+    
+    // Copy constructor - don't copy cached elements
+    JsonValue(const JsonValue& other) : data_(other.data_) {}
+    
+    // Move constructor
+    JsonValue(JsonValue&& other) noexcept 
+        : data_(std::move(other.data_)), 
+          cached_elements_(std::move(other.cached_elements_)) {}
+    
+    // Copy assignment
+    JsonValue& operator=(const JsonValue& other) {
+        if (this != &other) {
+            data_ = other.data_;
+            cached_elements_.clear();  // Clear cache on copy
+        }
+        return *this;
+    }
+    
+    // Move assignment
+    JsonValue& operator=(JsonValue&& other) noexcept {
+        if (this != &other) {
+            data_ = std::move(other.data_);
+            cached_elements_ = std::move(other.cached_elements_);
+        }
+        return *this;
+    }
 
     // Type checks
     bool IsNull() const { return data_.is_null(); }

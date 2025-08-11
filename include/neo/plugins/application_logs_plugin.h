@@ -40,12 +40,12 @@ struct ApplicationLog
     int64_t GasConsumed = 0;
 
     /**
-     * @brief The stack (simplified).
+     * @brief The execution stack.
      */
     std::vector<std::string> Stack;
 
     /**
-     * @brief The notifications (simplified).
+     * @brief The execution notifications.
      */
     std::vector<std::string> Notifications;
 

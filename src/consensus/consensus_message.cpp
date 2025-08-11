@@ -43,8 +43,8 @@ std::unique_ptr<ConsensusMessage> ConsensusMessage::CreateFromType(ConsensusMess
         case ConsensusMessageType::RecoveryRequest:
             return std::make_unique<RecoveryRequestMessage>();
         case ConsensusMessageType::RecoveryMessage:
-            // RecoveryMessage has API incompatibilities, returning nullptr for now
-            return nullptr;
+            // RecoveryMessage requires special handling due to complex state
+            return std::make_unique<RecoveryMessage>(0);  // Default view number
         default:
             return nullptr;
     }

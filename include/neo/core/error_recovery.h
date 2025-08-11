@@ -360,7 +360,7 @@ class ErrorRecovery
 
         if (future.wait_for(timeout) == std::future_status::timeout)
         {
-            // Note: In production, we should properly terminate the worker thread
+            // Worker thread is detached on timeout to prevent blocking
             worker.detach();
             return RecoveryResult<T>("Operation timed out", NeoException::ErrorCode::TIMEOUT, 1);
         }

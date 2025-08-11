@@ -2,9 +2,10 @@
 
 # Create RPC library
 add_library(neo_rpc OBJECT
-    # rpc_server_complete.cpp  # Use stub instead
-    rpc_server_stub.cpp
+    rpc_server_impl.cpp      # RpcServer class implementation
+    rpc_server_unified.cpp  # Complete unified RPC server implementation
     rpc_methods_complete.cpp
+    # rpc_server_stub.cpp  # Replaced with unified implementation
 )
 
 # Set include directories

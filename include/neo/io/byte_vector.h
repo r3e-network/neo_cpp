@@ -17,6 +17,9 @@ namespace neo::io
 class ByteVector
 {
    public:
+    using iterator = std::vector<uint8_t>::iterator;
+    using const_iterator = std::vector<uint8_t>::const_iterator;
+    
     /**
      * @brief Constructs an empty ByteVector.
      */
@@ -150,7 +153,7 @@ class ByteVector
      * @param size Size of the data to insert.
      * @return Iterator to the first inserted element.
      */
-    auto insert(auto pos, const uint8_t* data, size_t size) { return data_.insert(pos, data, data + size); }
+    auto insert(iterator pos, const uint8_t* data, size_t size) { return data_.insert(pos, data, data + size); }
 
     /**
      * @brief Inserts data at the specified position.
@@ -160,7 +163,7 @@ class ByteVector
      * @return Iterator to the first inserted element.
      */
     template <typename InputIt>
-    auto insert(auto pos, InputIt first, InputIt last)
+    auto insert(iterator pos, InputIt first, InputIt last)
     {
         return data_.insert(pos, first, last);
     }

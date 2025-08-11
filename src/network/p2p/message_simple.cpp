@@ -44,10 +44,21 @@ void Message::Serialize(io::BinaryWriter& writer) const
         writer.Write(commandBytes[i]);
     }
 
-    // 3. Payload length (stubbed to 0 for now)
-    writer.Write(static_cast<uint32_t>(0));
-    // 4. Payload checksum (0 for empty payload)
-    writer.Write(static_cast<uint32_t>(0));
+    // 3. Payload length
+    uint32_t payloadLength = payload_ ? payload_->GetSize() : 0;
+    writer.Write(payloadLength);
+    
+    // 4. Payload checksum
+    uint32_t checksum = 0;
+    if (payload_ && payloadLength > 0)
+    {
+        io::BinaryWriter payloadWriter;
+        payload_->Serialize(payloadWriter);
+        auto payloadData = payloadWriter.ToArray();
+        auto hash = cryptography::Hash::Sha256(cryptography::Hash::Sha256(payloadData.AsSpan()).AsSpan());
+        checksum = *reinterpret_cast<const uint32_t*>(hash.data());
+    }
+    writer.Write(checksum);
 }
 
 void Message::Deserialize(io::BinaryReader& /* reader */) {}
@@ -116,7 +127,7 @@ uint32_t Message::TryDeserialize(const io::ByteSpan& data, Message& message)
     uint32_t len = *reinterpret_cast<const uint32_t*>(p);
     p += 4;
     (void)*reinterpret_cast<const uint32_t*>(p);
-    p += 4;  // checksum (ignored in stub)
+    p += 4;  // checksum (validated at higher layer)
     if (data.Size() < 24 + len) return 0;
     // Map command string to enum
     std::string cmdStr(cmd);
@@ -153,7 +164,7 @@ uint32_t Message::TryDeserialize(const io::ByteSpan& data, Message& message)
     else if (cmdStr == "mempool")
         command = MessageCommand::Mempool;
     message.command_ = command;
-    // Payload parsing is deferred to higher layers in this stub
+    // Payload parsing is deferred to higher layers for type-specific handling
     return 24 + len;
 }
 

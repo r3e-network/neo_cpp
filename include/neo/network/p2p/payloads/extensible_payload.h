@@ -8,7 +8,7 @@
 #include <neo/io/uint160.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/witness.h>
-#include <neo/network/p2p/payloads/ipayload.h>
+#include <neo/network/p2p/ipayload.h>
 
 #include <memory>
 #include <string>
@@ -115,8 +115,8 @@ class ExtensiblePayload : public IPayload, public io::IJsonSerializable
     // IPayload implementation
     void Serialize(io::BinaryWriter& writer) const override;
     void Deserialize(io::BinaryReader& reader) override;
-    io::UInt256 GetHash() const override;
-    size_t GetSize() const override;
+    io::UInt256 GetHash() const;
+    size_t GetSize() const;
 
     // IJsonSerializable implementation
     void SerializeJson(io::JsonWriter& writer) const override;

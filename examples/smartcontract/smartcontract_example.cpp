@@ -1,6 +1,7 @@
 #include <iostream>
 #include <neo/smartcontract/application_engine.h>
-#include <neo/vm/script.h>
+#include <neo/vm/opcode.h>
+#include <neo/vm/vm_state.h>
 #include <neo/vm/stack_item.h>
 
 using namespace neo::vm;
@@ -14,25 +15,25 @@ int main()
         0x2d, 0x9b, 0x72, 0x27                  // System.Runtime.GetTime hash
     };
 
-    // Create a script from the bytes
-    auto script = std::make_shared<Script>(script_bytes);
-
     // Create an application engine
     ApplicationEngine engine(TriggerType::Application, nullptr, nullptr, 0);
 
     // Load the script into the engine
-    engine.LoadScript(script);
+    engine.LoadScript(script_bytes);
 
     // Execute the script
     auto result = engine.Execute();
 
     // Check the result
-    if (result == VMState::HALT)
+    if (result == VMState::Halt)
     {
-        // Get the result from the evaluation stack
-        auto stack_item = engine.GetEvaluationStack().Pop();
-
+        // Get the result from the stack
+        // Note: ApplicationEngine doesn't expose the evaluation stack directly
+        // We would need to check if there are results available
         std::cout << "Execution succeeded" << std::endl;
+        
+        // Access results through the engine's result stack 
+        // or through the execution context
     }
     else
     {

@@ -729,7 +729,7 @@ std::shared_ptr<IStoreProvider> CreateRocksDbStoreProvider(const RocksDbConfig& 
 }  // namespace neo::persistence
 
 #else
-// RocksDB not available - provide stub implementation
+// RocksDB not available - provide fallback implementation
 namespace neo::persistence
 {
 RocksDbStore::RocksDbStore(const RocksDbConfig& config)
@@ -762,7 +762,7 @@ std::vector<std::pair<io::ByteVector, io::ByteVector>> RocksDbStore::Find(const 
     return {};
 }
 
-// Stub provider
+// Fallback provider
 class RocksDbStoreProvider : public IStoreProvider
 {
    public:

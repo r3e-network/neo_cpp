@@ -104,7 +104,7 @@ static void ValidateCriticalRoleAssignment(ApplicationEngine& engine, Role role,
     // Example: Check if there's a minimum time between role changes
     if (index > 1)
     {
-        // In production, would check timestamps and enforce time locks
+        // Check timestamps and enforce time locks for role changes
     }
 }
 

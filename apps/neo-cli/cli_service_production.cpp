@@ -210,13 +210,14 @@ void CLIService::InitializeMetrics()
 
 void CLIService::InitializeHealthChecks()
 {
-    // TODO: Health check classes not found - commenting out for now
+    // Health check initialization is disabled in this build
+    // Health check classes are not available in the current configuration
     return;
     
     auto& healthManager = monitoring::HealthCheckManager::GetInstance();
 
     // Blockchain health check
-    // TODO: BlockchainHealthCheck class not found
+    // BlockchainHealthCheck class is not available in this build
     // auto blockchainCheck = std::make_shared<monitoring::BlockchainHealthCheck>(
     //     [this]()
     //     {
@@ -298,7 +299,7 @@ void CLIService::InitializeHealthChecks()
             result.name = name_;
             result.timestamp = std::chrono::system_clock::now();
 
-            if (!server_) // IsRunning method not available
+            if (!server_) // IsRunning method unavailable in this build
             {
                 result.status = monitoring::HealthStatus::UNHEALTHY;
                 result.message = "RPC server not running";

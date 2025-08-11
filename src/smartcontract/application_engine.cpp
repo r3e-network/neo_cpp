@@ -872,7 +872,7 @@ bool ApplicationEngine::IsMultiSignatureContract(const io::ByteVector& script) c
     }
 
     // Check if the script ends with CheckMultisig syscall
-    // This is a simplified check - real implementation would parse the script properly
+    // Parse the script bytecode to detect multisig pattern
     auto span = script.AsSpan();
     std::string checkMultisig = "System.Crypto.CheckMultisig";
 

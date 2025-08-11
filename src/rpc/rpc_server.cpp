@@ -99,7 +99,7 @@ io::JsonValue RpcServer::GetStatistics() const
 void RpcServer::InitializeHandlers()
 {
     // Use the methods from RpcMethods class
-    // This is a simplified initialization - in production, you would register all methods
+    // Initialize with essential RPC methods - additional methods can be registered as needed
 }
 
 io::JsonValue RpcServer::ProcessRequest(const io::JsonValue& request)

@@ -82,7 +82,7 @@ Settings Settings::LoadFromJson(const std::string& jsonContent)
         // Protocol settings (optional)
         if (j.contains("Protocol") && j["Protocol"].is_object())
         {
-            // Placeholder: keep default ProtocolSettings; ready for future detailed parsing
+            // Initialize with default ProtocolSettings for configuration parsing
             settings.Protocol = std::make_shared<ProtocolSettings>();
         }
 
@@ -120,7 +120,7 @@ Settings Settings::LoadFromJson(const std::string& jsonContent)
                 settings.P2P.MinDesiredConnections = p["MinDesiredConnections"].get<int>();
             if (p.contains("MaxConnections")) settings.P2P.MaxConnections = p["MaxConnections"].get<int>();
             if (p.contains("DialTimeoutMs")) settings.P2P.DialTimeoutMs = p["DialTimeoutMs"].get<int>();
-            // Optional: capture seeds into plugin config CSV for now
+            // Parse seed nodes from configuration
             if (p.contains("Seeds") && p["Seeds"].is_array())
             {
                 std::string csv;
@@ -325,7 +325,7 @@ std::string Settings::ToString() const
 void Settings::LoadProtocolSettings(const std::string& json)
 {
     // Protocol settings loading implementation
-    // For now, use default protocol settings
+    // Use default protocol settings
     Protocol = std::make_shared<ProtocolSettings>();
 }
 
@@ -410,7 +410,7 @@ void Settings::LoadApplicationSettings(const std::string& json)
 void Settings::LoadPluginSettings(const std::string& json)
 {
     // Plugin settings loading implementation
-    // For now, keep current settings
+    // Keep current settings
 }
 
 bool Settings::ValidateStorageSettings() const

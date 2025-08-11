@@ -610,7 +610,7 @@ void Neo3Transaction::CalculateHash() const
             buffer.push_back((attributes_.size() >> 8) & 0xFF);
         }
 
-        // Skip attributes for now (empty)
+        // Attributes are empty in this transaction
 
         // Write script length as varint
         if (script_.size() < 0xFD)
@@ -721,7 +721,7 @@ std::vector<ledger::TransactionAttribute> Neo3Transaction::DeserializeAttributes
         ledger::TransactionAttribute attr;
         attr.Deserialize(reader);
 
-        // Check for duplicate attributes (simplified check)
+        // Check for duplicate attribute types
         if (seenTypes.count(attr.GetUsage()) > 0)
         {
             throw std::runtime_error("Duplicate attribute type");

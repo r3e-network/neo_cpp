@@ -18,6 +18,10 @@
 
 namespace neo::cryptography::ecc
 {
+
+// Define virtual destructor to generate vtable
+ECPoint::~ECPoint() = default;
+
 ECPoint::ECPoint() : isInfinity_(true) {}
 
 ECPoint::ECPoint(const std::string& curveName) : curveName_(curveName), isInfinity_(true) {}

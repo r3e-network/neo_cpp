@@ -445,8 +445,8 @@ Validator::ValidationResult Validator::ValidatePort(uint16_t port, const std::st
         return ValidationResult(false, name + " cannot be zero", NeoException::ErrorCode::INVALID_ARGUMENT);
     }
 
-    // Ports 1-1023 are typically reserved (well-known ports)
-    // This is just a warning, not an error for now
+    // Ports 1-1023 are reserved as well-known ports
+    // Allow usage with appropriate permissions
 
     return ValidationResult(true);
 }
@@ -507,8 +507,8 @@ Validator::ValidationResult Validator::ValidateGasAmount(int64_t gas, int64_t ma
 
 Validator::ValidationResult Validator::ValidateNonce(uint32_t nonce)
 {
-    // Nonce validation - for now just check it's not zero (depending on protocol requirements)
-    // This can be customized based on specific Neo protocol requirements
+    // Nonce validation - any value is valid in Neo protocol
+    // Nonce is used for uniqueness and preventing replay attacks
     return ValidationResult(true);
 }
 

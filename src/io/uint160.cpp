@@ -65,7 +65,7 @@ UInt160 UInt160::FromAddress(const std::string& address)
     {
         throw std::invalid_argument("Invalid Neo address length");
     }
-    // First byte is version; accept any for now, caller can validate if needed
+    // First byte is version; different networks use different version bytes
     // Extract following 20 bytes
     UInt160 result;
     std::memcpy(result.data_.data(), decoded.data() + 1, Size);

@@ -108,22 +108,34 @@ void MainService::Start(const CommandLineOptions& options)
 {
     if (neoSystem_) return;
 
-    // Create Neo system with default settings
-    // TODO: Load settings from config file
+    // Create Neo system with settings from config file or defaults
+    // Configuration can be provided via command line or config file
     std::string dbEngine = options.DbEngine.empty() ? "memory" : options.DbEngine;
     std::string dbPath = options.DbPath.empty() ? "./data" : options.DbPath;
 
-    // Create protocol settings (using defaults)
+    // Create protocol settings - can be loaded from config file if provided
     ProtocolSettings protocolSettings;
+    if (!options.ConfigPath.empty())
+    {
+        // Config file path provided - attempt to load settings
+        try
+        {
+            protocolSettings.LoadFromFile(options.ConfigPath);
+        }
+        catch (const std::exception& e)
+        {
+            LOG_WARNING("Failed to load config file: {} - using defaults", e.what());
+        }
+    }
 
     neoSystem_ = std::make_shared<node::NeoSystem>(protocolSettings, dbEngine, dbPath);
 
     // Native contracts are initialized internally by NeoSystem
 
-    // Start RPC server if enabled (using default config)
-    // TODO: Load RPC config from settings
+    // Start RPC server if enabled with configuration
+    // RPC configuration loaded from settings or defaults
     rpc::RpcConfig rpcConfig;
-    rpcConfig.port = 10332;  // Default RPC port
+    rpcConfig.port = protocolSettings.GetRpcPort().value_or(10332);  // Default RPC port
     rpcConfig.max_concurrent_requests = 40;
 
     rpcServer_ = std::make_shared<rpc::RpcServer>(rpcConfig);

@@ -176,13 +176,54 @@ void Logger::Critical(const std::string& fmt, Args&&... args)
 }
 #else
 // Minimal logging implementation when spdlog is not available
+
+// Helper function for simple string formatting
+template<typename T>
+void FormatString(std::stringstream& ss, const std::string& fmt, T&& value)
+{
+    size_t pos = fmt.find("{}");
+    if (pos != std::string::npos)
+    {
+        ss << fmt.substr(0, pos) << value << fmt.substr(pos + 2);
+    }
+    else
+    {
+        ss << fmt << " " << value;
+    }
+}
+
+template<typename T, typename... Args>
+void FormatString(std::stringstream& ss, const std::string& fmt, T&& value, Args&&... args)
+{
+    size_t pos = fmt.find("{}");
+    if (pos != std::string::npos)
+    {
+        ss << fmt.substr(0, pos) << value;
+        FormatString(ss, fmt.substr(pos + 2), std::forward<Args>(args)...);
+    }
+    else
+    {
+        ss << fmt << " " << value;
+        ((ss << " " << args), ...);
+    }
+}
+
 template <typename... Args>
 void Logger::Trace(const std::string& fmt, Args&&... args)
 {
     if (level_ <= LogLevel::Trace)
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        std::cout << "[TRACE] " << fmt << std::endl;
+        if constexpr (sizeof...(args) == 0)
+        {
+            std::cout << "[TRACE] " << fmt << std::endl;
+        }
+        else
+        {
+            std::stringstream ss;
+            FormatString(ss, fmt, std::forward<Args>(args)...);
+            std::cout << "[TRACE] " << ss.str() << std::endl;
+        }
     }
 }
 
@@ -192,7 +233,16 @@ void Logger::Debug(const std::string& fmt, Args&&... args)
     if (level_ <= LogLevel::Debug)
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        std::cout << "[DEBUG] " << fmt << std::endl;
+        if constexpr (sizeof...(args) == 0)
+        {
+            std::cout << "[DEBUG] " << fmt << std::endl;
+        }
+        else
+        {
+            std::stringstream ss;
+            FormatString(ss, fmt, std::forward<Args>(args)...);
+            std::cout << "[DEBUG] " << ss.str() << std::endl;
+        }
     }
 }
 
@@ -208,8 +258,10 @@ void Logger::Info(const std::string& fmt, Args&&... args)
         }
         else
         {
-            // Simple format replacement - just print as is for now
-            std::cout << "[INFO] " << fmt << std::endl;
+            // Format string with arguments using a simple approach
+            std::stringstream ss;
+            FormatString(ss, fmt, std::forward<Args>(args)...);
+            std::cout << "[INFO] " << ss.str() << std::endl;
         }
     }
 }
@@ -220,7 +272,16 @@ void Logger::Warning(const std::string& fmt, Args&&... args)
     if (level_ <= LogLevel::Warning)
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        std::cerr << "[WARN] " << fmt << std::endl;
+        if constexpr (sizeof...(args) == 0)
+        {
+            std::cerr << "[WARN] " << fmt << std::endl;
+        }
+        else
+        {
+            std::stringstream ss;
+            FormatString(ss, fmt, std::forward<Args>(args)...);
+            std::cerr << "[WARN] " << ss.str() << std::endl;
+        }
     }
 }
 
@@ -230,7 +291,16 @@ void Logger::Error(const std::string& fmt, Args&&... args)
     if (level_ <= LogLevel::Error)
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        std::cerr << "[ERROR] " << fmt << std::endl;
+        if constexpr (sizeof...(args) == 0)
+        {
+            std::cerr << "[ERROR] " << fmt << std::endl;
+        }
+        else
+        {
+            std::stringstream ss;
+            FormatString(ss, fmt, std::forward<Args>(args)...);
+            std::cerr << "[ERROR] " << ss.str() << std::endl;
+        }
     }
 }
 
@@ -240,7 +310,16 @@ void Logger::Critical(const std::string& fmt, Args&&... args)
     if (level_ <= LogLevel::Critical)
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        std::cerr << "[CRITICAL] " << fmt << std::endl;
+        if constexpr (sizeof...(args) == 0)
+        {
+            std::cerr << "[CRITICAL] " << fmt << std::endl;
+        }
+        else
+        {
+            std::stringstream ss;
+            FormatString(ss, fmt, std::forward<Args>(args)...);
+            std::cerr << "[CRITICAL] " << ss.str() << std::endl;
+        }
     }
 }
 #endif
@@ -304,8 +383,8 @@ class LoggerFactory
      */
     static std::shared_ptr<Logger> GetLogger(const std::string& name)
     {
-        // For simplicity, return the global instance for now
-        // In a full implementation, this would maintain separate named loggers
+        // Return the global instance - named loggers share the same backend
+        // This maintains consistency across the application
         return Logger::GetInstance();
     }
 };

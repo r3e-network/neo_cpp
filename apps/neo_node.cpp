@@ -214,7 +214,7 @@ class NeoNode
                 // Initialize consensus service with complete dBFT implementation
                 try
                 {
-                    // For now, we'll run as an observer node without active consensus participation
+                    // Running as an observer node without active consensus participation
                     // This allows the node to run and sync without requiring full consensus implementation
                     std::cout << "Running as observer node - consensus participation disabled" << std::endl;
                     

@@ -2,6 +2,15 @@
 #include <neo/core/performance_config.h>
 
 #include <thread>
+#include <fstream>
+#include <sstream>
+
+#ifdef __APPLE__
+#include <sys/types.h>
+#include <sys/sysctl.h>
+#elif defined(_WIN32)
+#include <windows.h>
+#endif
 
 namespace neo::core
 {
@@ -156,9 +165,43 @@ void PerformanceConfig::auto_tune()
         consensus.verification_thread_count = std::min(threading.worker_thread_count / 2, size_t(8));
     }
 
-    // Auto-tune based on available memory (simplified for now)
-    // In production, this would query system memory
-    size_t available_memory = 8ULL * 1024 * 1024 * 1024;  // Assume 8GB
+    // Auto-tune based on available memory
+    // Query system memory or use conservative default
+    size_t available_memory = 8ULL * 1024 * 1024 * 1024;  // Default to 8GB if detection fails
+    
+#ifdef __linux__
+    // Linux: Read from /proc/meminfo
+    std::ifstream meminfo("/proc/meminfo");
+    std::string line;
+    if (meminfo.is_open())
+    {
+        while (std::getline(meminfo, line))
+        {
+            if (line.find("MemAvailable:") == 0)
+            {
+                std::istringstream iss(line);
+                std::string key;
+                size_t value;
+                std::string unit;
+                iss >> key >> value >> unit;
+                available_memory = value * 1024;  // Convert from KB to bytes
+                break;
+            }
+        }
+    }
+#elif defined(__APPLE__)
+    // macOS: Use sysctl
+    size_t size = sizeof(available_memory);
+    sysctlbyname("hw.memsize", &available_memory, &size, nullptr, 0);
+#elif defined(_WIN32)
+    // Windows: Use GlobalMemoryStatusEx
+    MEMORYSTATUSEX statex;
+    statex.dwLength = sizeof(statex);
+    if (GlobalMemoryStatusEx(&statex))
+    {
+        available_memory = statex.ullAvailPhys;
+    }
+#endif
 
     if (available_memory < 2ULL * 1024 * 1024 * 1024)
     {

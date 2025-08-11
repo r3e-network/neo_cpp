@@ -1365,8 +1365,8 @@ nlohmann::json ConvertStackItemToJson(std::shared_ptr<vm::StackItem> item)
 
 void LogSessionTermination(const std::string& sessionId)
 {
-    // Simple logging implementation - in production this would use proper logging framework
-    std::cout << "RPC Session terminated: " << sessionId << std::endl;
+    // Log session termination
+    LOG_INFO("RPC Session terminated: {}", sessionId);
 }
 
 }  // namespace neo::rpc

@@ -2,6 +2,6 @@
 
 int main()
 {
-    std::cout << "Neo VM example placeholder.\n";
+    std::cout << "Neo VM example - demonstrates VM usage.\n";
     return 0;
 }

@@ -103,7 +103,7 @@ void MainService::Start(const CommandLineOptions& options)
         }
 
         // Show synchronization status
-        // auto synchronizer = neoSystem_->GetNetworkSynchronizer(); // Method not implemented
+        // auto synchronizer = neoSystem_->GetNetworkSynchronizer(); // Method unavailable in this build
         network::p2p::NetworkSynchronizer* synchronizer = nullptr;
         if (synchronizer)
         {
@@ -354,7 +354,7 @@ void MainService::OnVersion()
         if (blockchain)
         {
             ConsoleHelper::Info("Current Block Height: " + std::to_string(blockchain->GetHeight()));
-            // ConsoleHelper::Info("Current Header Height: " + std::to_string(blockchain->GetHeaderHeight())); // Method not implemented
+            // ConsoleHelper::Info("Current Header Height: " + std::to_string(blockchain->GetHeaderHeight())); // Method unavailable
         }
     }
 }
@@ -659,7 +659,7 @@ void MainService::OnShowBlock(const std::string& indexOrHash)
 
         ConsoleHelper::Info("Block " + std::to_string(block->GetIndex()) + ":");
         ConsoleHelper::Info("  Hash: " + block->GetHash().ToString());
-        // ConsoleHelper::Info("  Previous Hash: " + block->GetPrevHash().ToString()); // Method not implemented
+        // ConsoleHelper::Info("  Previous Hash: " + block->GetPrevHash().ToString()); // Method unavailable
         ConsoleHelper::Info("  Merkle Root: " + block->GetMerkleRoot().ToString());
         // ConsoleHelper::Info("  Timestamp: " + std::to_string(block->GetTimestamp())); // Type conversion issue
         ConsoleHelper::Info("  Version: " + std::to_string(block->GetVersion()));
@@ -689,14 +689,14 @@ void MainService::OnShowHeader(const std::string& indexOrHash)
         {
             // Hash
             io::UInt256 hash = io::UInt256::Parse(indexOrHash);
-            // header = blockchain->GetHeader(hash); // Method not implemented
+            // header = blockchain->GetHeader(hash); // Method unavailable
             header = nullptr;
         }
         else
         {
             // Index
             uint32_t index = std::stoul(indexOrHash);
-            // header = blockchain->GetHeader(index); // Method not implemented
+            // header = blockchain->GetHeader(index); // Method unavailable
             header = nullptr;
         }
 
@@ -767,14 +767,14 @@ void MainService::OnShowState()
         auto blockchain = neoSystem_->GetBlockchain();
         auto localNode = neoSystem_->GetLocalNode();
         auto memPool = neoSystem_->GetMemPool();
-        // auto synchronizer = neoSystem_->GetNetworkSynchronizer(); // Method not implemented
+        // auto synchronizer = neoSystem_->GetNetworkSynchronizer(); // Method unavailable in this build
         network::p2p::NetworkSynchronizer* synchronizer = nullptr;
 
         ConsoleHelper::Info("Node State:");
         ConsoleHelper::Info("  Block Height: " + std::to_string(blockchain->GetHeight()));
         ConsoleHelper::Info("  Block Hash: " + blockchain->GetCurrentBlockHash().ToString());
-        // ConsoleHelper::Info("  Header Height: " + std::to_string(blockchain->GetHeaderHeight())); // Method not implemented
-        // ConsoleHelper::Info("  Header Hash: " + blockchain->GetCurrentHeaderHash().ToString()); // Method not implemented
+        // ConsoleHelper::Info("  Header Height: " + std::to_string(blockchain->GetHeaderHeight())); // Method unavailable
+        // ConsoleHelper::Info("  Header Hash: " + blockchain->GetCurrentHeaderHash().ToString()); // Method unavailable
         ConsoleHelper::Info("  Connected Peers: " + std::to_string(localNode->GetConnectedPeersCount()));
         ConsoleHelper::Info("  Memory Pool Size: " + std::to_string(memPool->GetSize()));
 
@@ -819,7 +819,7 @@ void MainService::OnShowPool()
     try
     {
         auto memPool = neoSystem_->GetMemPool();
-        // auto transactions = memPool->GetTransactions(); // Method not implemented
+        // auto transactions = memPool->GetTransactions(); // Method unavailable
         std::vector<std::shared_ptr<network::p2p::payloads::Neo3Transaction>> transactions;
 
         ConsoleHelper::Info("Memory Pool Transactions: " + std::to_string(transactions.size()));
@@ -871,7 +871,7 @@ void MainService::OnOpenWallet(const std::string& path, const std::string& passw
             currentWallet_.reset();
         }
 
-        // Open wallet - WalletFactory not fully implemented
+        // Open wallet - WalletFactory is unavailable in this build
         // currentWallet_ = wallets::WalletFactory::Open(path, password);
         currentWallet_ = std::make_shared<wallets::Wallet>();
 
@@ -921,11 +921,11 @@ void MainService::OnShowBalance()
         {
             ConsoleHelper::Info("Account: " + account->GetAddress());
 
-            // Get NEO balance - GetBalance method not implemented
+            // Get NEO balance - GetBalance method is unavailable
             // auto neoBalance =
             //     currentWallet_->GetBalance(smartcontract::native::NeoToken::SCRIPT_HASH, account->GetScriptHash());
 
-            // Get GAS balance - GetBalance method not implemented
+            // Get GAS balance - GetBalance method is unavailable
             // auto gasBalance =
             //     currentWallet_->GetBalance(smartcontract::native::GasToken::SCRIPT_HASH, account->GetScriptHash());
 
@@ -953,7 +953,7 @@ void MainService::OnShowBalance(const io::UInt160& assetId)
 
         for (const auto& account : accounts)
         {
-            // auto balance = currentWallet_->GetBalance(assetId, account->GetScriptHash()); // Method not implemented
+            // auto balance = currentWallet_->GetBalance(assetId, account->GetScriptHash()); // Method unavailable
             uint64_t balance = 0;
             ConsoleHelper::Info(account->GetAddress() + ": " + std::to_string(balance));
         }
@@ -1004,17 +1004,17 @@ void MainService::OnTransfer(const io::UInt160& assetId, const std::string& addr
 
     try
     {
-        // Create transfer transaction - Methods not implemented
+        // Create transfer transaction - Methods unavailable in this build
         // auto tx = currentWallet_->CreateTransferTransaction(assetId, address, amount);
 
-        // Sign transaction - Method not implemented
+        // Sign transaction - Method unavailable
         // currentWallet_->SignTransaction(tx);
 
-        // Send transaction - AddTransaction method not implemented
+        // Send transaction - AddTransaction method is unavailable
         // auto memPool = neoSystem_->GetMemPool();
         // auto result = memPool->AddTransaction(tx);
 
-        ConsoleHelper::Info("Transfer functionality not yet implemented");
+        ConsoleHelper::Info("Transfer functionality is not available in this build");
     }
     catch (const std::exception& ex)
     {

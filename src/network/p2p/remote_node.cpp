@@ -20,6 +20,7 @@
 #include <neo/network/p2p/payloads/verack_payload.h>
 #include <neo/network/p2p/payloads/version_payload.h>
 #include <neo/network/p2p/remote_node.h>
+#include <neo/network/p2p/ipayload.h>
 
 #include <cstdint>
 #include <functional>
@@ -85,7 +86,8 @@ bool RemoteNode::SendVersion()
 
     // Send the version message - use explicit p2p namespace
     LOG_INFO("About to call neo::network::p2p::Message::Create for Version command");
-    auto message = neo::network::p2p::Message::Create(MessageCommand::Version, payload);
+    auto message = neo::network::p2p::Message::Create(MessageCommand::Version, 
+                                                       std::static_pointer_cast<IPayload>(payload));
     LOG_INFO("neo::network::p2p::Message::Create returned message with command: " +
              std::to_string(static_cast<int>(message.GetCommand())));
     return Send(message);
@@ -108,7 +110,7 @@ bool RemoteNode::SendPing()
         std::make_shared<payloads::PingPayload>(payloads::PingPayload::Create(localNode_->GetLastBlockIndex()));
 
     // Send the ping message
-    return Send(Message::Create(MessageCommand::Ping, payload));
+    return Send(Message::Create(MessageCommand::Ping, std::static_pointer_cast<IPayload>(payload)));
 }
 
 bool RemoteNode::SendPong(const payloads::PingPayload& payload)
@@ -122,7 +124,7 @@ bool RemoteNode::SendPong(const payloads::PingPayload& payload)
     pongPayload->SetTimestamp(payload.GetTimestamp());
 
     // Send the pong message
-    return Send(Message::Create(MessageCommand::Pong, pongPayload));
+    return Send(Message::Create(MessageCommand::Pong, std::static_pointer_cast<IPayload>(pongPayload)));
 }
 
 bool RemoteNode::SendGetAddr()
@@ -141,7 +143,7 @@ bool RemoteNode::SendAddr(const std::vector<payloads::NetworkAddressWithTime>& a
     auto payload = std::make_shared<payloads::AddrPayload>(addresses);
 
     // Send the addr message
-    return Send(Message::Create(MessageCommand::Addr, payload));
+    return Send(Message::Create(MessageCommand::Addr, std::static_pointer_cast<IPayload>(payload)));
 }
 
 bool RemoteNode::SendInv(InventoryType type, const std::vector<io::UInt256>& hashes)
@@ -154,7 +156,7 @@ bool RemoteNode::SendInv(InventoryType type, const std::vector<io::UInt256>& has
     payload->SetHashes(hashes);
 
     // Send the inv message
-    return Send(Message::Create(MessageCommand::Inv, payload));
+    return Send(Message::Create(MessageCommand::Inv, std::static_pointer_cast<IPayload>(payload)));
 }
 
 bool RemoteNode::SendGetData(InventoryType type, const std::vector<io::UInt256>& hashes)
@@ -172,7 +174,7 @@ bool RemoteNode::SendGetData(InventoryType type, const std::vector<io::UInt256>&
     payload->SetInventories(inventories);
 
     // Send the getdata message
-    return Send(Message::Create(MessageCommand::GetData, payload));
+    return Send(Message::Create(MessageCommand::GetData, std::static_pointer_cast<IPayload>(payload)));
 }
 
 bool RemoteNode::SendGetBlocks(const io::UInt256& hashStart, int16_t count)
@@ -185,7 +187,7 @@ bool RemoteNode::SendGetBlocks(const io::UInt256& hashStart, int16_t count)
     payload->SetCount(count);
 
     // Send the getblocks message
-    return Send(Message::Create(MessageCommand::GetBlocks, payload));
+    return Send(Message::Create(MessageCommand::GetBlocks, std::static_pointer_cast<IPayload>(payload)));
 }
 
 bool RemoteNode::SendGetBlockByIndex(uint32_t indexStart, uint16_t count)
@@ -196,7 +198,7 @@ bool RemoteNode::SendGetBlockByIndex(uint32_t indexStart, uint16_t count)
     auto payload = std::make_shared<payloads::GetBlockByIndexPayload>(indexStart, count);
 
     // Send the getblockbyindex message
-    return Send(Message::Create(MessageCommand::GetBlockByIndex, payload));
+    return Send(Message::Create(MessageCommand::GetBlockByIndex, std::static_pointer_cast<IPayload>(payload)));
 }
 
 bool RemoteNode::SendGetHeaders(const io::UInt256& hashStart, int16_t count)
@@ -209,7 +211,7 @@ bool RemoteNode::SendGetHeaders(const io::UInt256& hashStart, int16_t count)
     payload->SetCount(count);
 
     // Send the getheaders message
-    return Send(Message::Create(MessageCommand::GetHeaders, payload));
+    return Send(Message::Create(MessageCommand::GetHeaders, std::static_pointer_cast<IPayload>(payload)));
 }
 
 bool RemoteNode::SendMempool()
@@ -220,7 +222,7 @@ bool RemoteNode::SendMempool()
     auto payload = std::make_shared<payloads::MempoolPayload>();
 
     // Send the mempool message
-    return Send(Message::Create(MessageCommand::Mempool, payload));
+    return Send(Message::Create(MessageCommand::Mempool, std::static_pointer_cast<IPayload>(payload)));
 }
 
 bool RemoteNode::SendHeaders(const std::vector<std::shared_ptr<ledger::BlockHeader>>& headers)
@@ -231,7 +233,7 @@ bool RemoteNode::SendHeaders(const std::vector<std::shared_ptr<ledger::BlockHead
     auto payload = std::make_shared<payloads::HeadersPayload>(headers);
 
     // Send the headers message
-    return Send(Message::Create(MessageCommand::Headers, payload));
+    return Send(Message::Create(MessageCommand::Headers, std::static_pointer_cast<IPayload>(payload)));
 }
 
 void RemoteNode::OnMessageReceived(const Message& message)
@@ -717,7 +719,7 @@ void RemoteNode::ProcessTransactionMessage(const Message& message)
     if (!payload) return;
 
     // Cast to transaction - in full implementation, this would be the actual transaction object
-    // For now, we'll handle this as a generic payload and forward to the local node
+    // Handle this as a generic payload and forward to the local node
     LOG_DEBUG("RemoteNode received transaction message");
 
     // Notify the local node about the new transaction

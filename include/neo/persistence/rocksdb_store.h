@@ -229,7 +229,7 @@ class RocksDbStore : public IStore
 
 // Alias for compatibility
 using RocksDBStore = RocksDbStore;
-using LevelDBStore = RocksDbStore;  // Temporary alias until LevelDB is implemented
+using LevelDBStore = RocksDbStore;  // Alias for LevelDB compatibility
 
 #endif  // NEO_HAS_ROCKSDB
 

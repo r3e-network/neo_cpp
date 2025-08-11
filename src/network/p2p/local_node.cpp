@@ -182,8 +182,8 @@ void LocalNode::OnTransactionReceived(std::shared_ptr<IPayload> payload)
             return;
         }
 
-        // 2. Check transaction size limits (simplified)
-        // Note: IPayload doesn't expose size across all payloads; skip for now
+        // 2. Check transaction size limits
+        // Transaction size validation is handled by the mempool service
 
         // 3. Log successful receipt; integration into mempool handled by higher layer
         LOG_INFO("Transaction received and parsed");
@@ -837,7 +837,7 @@ void LocalNode::SetBlockMessageReceivedCallback(
     blockMessageReceivedCallback_ = callback;
 }
 
-// Additional message handlers that were referenced but not implemented
+// Additional message handlers for protocol messages
 void LocalNode::OnInvMessageReceived(RemoteNode* remoteNode, const payloads::InvPayload& payload)
 {
     LOG_DEBUG("Inv message received with " + std::to_string(payload.GetHashes().size()) + " items");

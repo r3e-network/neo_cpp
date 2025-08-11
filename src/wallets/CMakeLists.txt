@@ -3,7 +3,6 @@ add_subdirectory(nep6)
 
 # Create the wallets library
 add_library(neo_wallets OBJECT
-    stubs.cpp  # Temporary stubs for linking
     wallet.cpp # Re-enabled - base class implementation
     wallet_account.cpp # Re-enabled - implementation complete
     # wallet_factory.cpp # Disabled - compilation errors

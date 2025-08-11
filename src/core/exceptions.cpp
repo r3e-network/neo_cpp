@@ -12,7 +12,7 @@ std::string NeoException::ErrorCodeToString(ErrorCode code)
         {ErrorCode::UNKNOWN_ERROR, "UNKNOWN_ERROR"},
         {ErrorCode::INVALID_ARGUMENT, "INVALID_ARGUMENT"},
         {ErrorCode::INVALID_STATE, "INVALID_STATE"},
-        {ErrorCode::NOT_IMPLEMENTED, "NOT_IMPLEMENTED"},
+        {ErrorCode::NOT_AVAILABLE, "NOT_AVAILABLE"},
         {ErrorCode::OUT_OF_RANGE, "OUT_OF_RANGE"},
         {ErrorCode::TIMEOUT, "TIMEOUT"},
 

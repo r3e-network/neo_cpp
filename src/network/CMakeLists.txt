@@ -1,11 +1,13 @@
 # Create the network library
 add_library(neo_network OBJECT
-    stubs.cpp  # Temporary stubs for linking
+    payload_factory.cpp  # Real payload factory implementation
     ip_endpoint.cpp
-    p2p/message_simple.cpp
-    # p2p/message.cpp # Disabled - namespace collision causing wrong ToArray method
+    p2p/ip_endpoint.cpp  # P2P version of IPEndPoint
+    p2p/message_impl.cpp  # Fixed message implementation
+    # p2p/message_complete.cpp  # Replaced with fixed version
+    # p2p/message_simple.cpp  # Replaced with complete implementation
     tcp_server.cpp
-    # p2p_server.cpp # Temporarily disabled due to type conflicts
+    p2p_server.cpp # P2P server implementation
     upnp.cpp
     p2p/node_capability.cpp
     p2p/network_address.cpp
@@ -14,11 +16,12 @@ add_library(neo_network OBJECT
     p2p/tcp_connection.cpp
     p2p/remote_node.cpp
     p2p/local_node.cpp
-    # p2p/local_node_connection.cpp # Temporarily disabled due to missing Transaction
+    p2p/local_node_handlers.cpp  # New implementation with complete message handling
+    # p2p/local_node_connection_impl.cpp  # Removed - API mismatch
     # p2p/local_node_messaging.cpp # Temporarily disabled
     p2p/peer.cpp
     p2p/peer_list.cpp
-    # p2p/task_manager.cpp # Disabled - needs major refactoring
+    p2p/task_manager.cpp # Task manager for P2P network tasks
     # p2p/transaction_router.cpp # Disabled - needs major refactoring
     p2p/channels_config.cpp
     p2p/payloads/extensible_payload.cpp

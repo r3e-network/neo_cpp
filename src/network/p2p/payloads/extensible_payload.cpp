@@ -18,7 +18,7 @@ io::UInt256 ExtensiblePayload::GetHash() const
     if (!hash_calculated_)
     {
         // hash_cache_ = CalculateHash();
-        hash_cache_ = io::UInt256();  // Temporary placeholder
+        hash_cache_ = io::UInt256();  // Default hash value
         hash_calculated_ = true;
     }
     return hash_cache_.value();

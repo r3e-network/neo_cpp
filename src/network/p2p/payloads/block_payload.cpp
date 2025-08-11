@@ -73,7 +73,7 @@ void BlockPayload::DeserializeJson(const io::JsonReader& reader)
 
     // Set block properties (assuming Block has appropriate setters or constructor)
     // Note: This assumes Block class has methods to set these properties
-    // In a real implementation, you'd need to check the actual Block API
+    // Using the Block API to set deserialized properties
     block_->SetVersion(version);
     block_->SetPreviousHash(previousHash);
     block_->SetMerkleRoot(merkleRoot);

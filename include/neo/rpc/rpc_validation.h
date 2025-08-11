@@ -181,7 +181,7 @@ class RpcValidation
      * @param maxCount Maximum number of parameters
      * @throws std::invalid_argument if invalid
      */
-    static void ValidateParamCount(const io::json::JArray& params, size_t minCount, size_t maxCount)
+    static void ValidateParamCount(const nlohmann::json& params, size_t minCount, size_t maxCount)
     {
         size_t count = params.size();
         if (count < minCount)
@@ -204,20 +204,19 @@ class RpcValidation
      * @return The string value
      * @throws std::invalid_argument if invalid
      */
-    static std::string GetStringParam(const io::json::JArray& params, size_t index, const std::string& paramName)
+    static std::string GetStringParam(const nlohmann::json& params, size_t index, const std::string& paramName)
     {
         if (index >= params.size())
         {
             throw std::invalid_argument("Missing required parameter: " + paramName);
         }
 
-        auto param = params[index];
-        if (param->GetType() != io::json::JType::String)
+        if (!params[index].is_string())
         {
             throw std::invalid_argument(paramName + " must be a string");
         }
 
-        return std::static_pointer_cast<io::json::JString>(param)->GetValue();
+        return params[index].get<std::string>();
     }
 
     /**
@@ -228,20 +227,19 @@ class RpcValidation
      * @return The integer value
      * @throws std::invalid_argument if invalid
      */
-    static int64_t GetIntParam(const io::json::JArray& params, size_t index, const std::string& paramName)
+    static int64_t GetIntParam(const nlohmann::json& params, size_t index, const std::string& paramName)
     {
         if (index >= params.size())
         {
             throw std::invalid_argument("Missing required parameter: " + paramName);
         }
 
-        auto param = params[index];
-        if (param->GetType() != io::json::JType::Number)
+        if (!params[index].is_number())
         {
             throw std::invalid_argument(paramName + " must be a number");
         }
 
-        return std::static_pointer_cast<io::json::JNumber>(param)->GetInt64();
+        return params[index].get<int64_t>();
     }
 
     /**
@@ -252,20 +250,19 @@ class RpcValidation
      * @return The boolean value
      * @throws std::invalid_argument if invalid
      */
-    static bool GetBoolParam(const io::json::JArray& params, size_t index, const std::string& paramName)
+    static bool GetBoolParam(const nlohmann::json& params, size_t index, const std::string& paramName)
     {
         if (index >= params.size())
         {
             throw std::invalid_argument("Missing required parameter: " + paramName);
         }
 
-        auto param = params[index];
-        if (param->GetType() != io::json::JType::Boolean)
+        if (!params[index].is_boolean())
         {
             throw std::invalid_argument(paramName + " must be a boolean");
         }
 
-        return std::static_pointer_cast<io::json::JBoolean>(param)->GetValue();
+        return params[index].get<bool>();
     }
 
     /**
@@ -275,7 +272,7 @@ class RpcValidation
      * @param defaultValue Default value if not present
      * @return The string value or default
      */
-    static std::string GetOptionalStringParam(const io::json::JArray& params, size_t index,
+    static std::string GetOptionalStringParam(const nlohmann::json& params, size_t index,
                                               const std::string& defaultValue = "")
     {
         if (index >= params.size())
@@ -283,18 +280,17 @@ class RpcValidation
             return defaultValue;
         }
 
-        auto param = params[index];
-        if (param->GetType() == io::json::JType::Null)
+        if (params[index].is_null())
         {
             return defaultValue;
         }
 
-        if (param->GetType() != io::json::JType::String)
+        if (!params[index].is_string())
         {
             throw std::invalid_argument("Parameter at index " + std::to_string(index) + " must be a string");
         }
 
-        return std::static_pointer_cast<io::json::JString>(param)->GetValue();
+        return params[index].get<std::string>();
     }
 
     /**

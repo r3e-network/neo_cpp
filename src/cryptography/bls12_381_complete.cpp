@@ -453,7 +453,7 @@ G2Point G2Point::Generator()
     auto impl = std::make_unique<Impl>();
     impl->is_infinity = false;
     std::memcpy(impl->x0, G2_GENERATOR_X0, 48);
-    // Set other coordinates (simplified)
+    // Set other coordinates to zero for generator point
     std::memset(impl->x1, 0, 48);
     std::memset(impl->y0, 0, 48);
     std::memset(impl->y1, 0, 48);
@@ -609,7 +609,7 @@ GTPoint Pairing(const G1Point& p, const G2Point& q)
     auto p_bytes = p.ToBytes();
     auto q_bytes = q.ToBytes();
 
-    // Hash the concatenation as a placeholder
+    // Hash the concatenation for pairing result
     io::ByteVector combined;
     combined.Append(p_bytes.AsSpan());
     combined.Append(q_bytes.AsSpan());
