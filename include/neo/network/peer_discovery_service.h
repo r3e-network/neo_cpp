@@ -136,7 +136,7 @@ class PeerDiscoveryService : public std::enable_shared_from_this<PeerDiscoverySe
     std::vector<NetworkAddress> seedNodes_;
     std::unordered_map<std::string, PeerInfo> knownPeers_;
     std::unordered_set<std::string> connectedPeers_;
-    std::mutex mutex_;
+    mutable std::mutex mutex_;
     size_t maxPeers_;
     bool running_{false};
     std::mt19937 rng_{std::random_device{}()};

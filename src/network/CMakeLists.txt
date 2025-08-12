@@ -7,7 +7,9 @@ add_library(neo_network OBJECT
     # p2p/message_complete.cpp  # Replaced with fixed version
     # p2p/message_simple.cpp  # Replaced with complete implementation
     tcp_server.cpp
+    tcp_client.cpp  # Add TcpClient implementation
     p2p_server.cpp # P2P server implementation
+    peer_discovery_service.cpp  # Add PeerDiscoveryService implementation
     upnp.cpp
     p2p/node_capability.cpp
     p2p/network_address.cpp

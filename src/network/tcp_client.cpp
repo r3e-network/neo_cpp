@@ -165,7 +165,7 @@ void TcpClient::ConnectAsync(const IPEndPoint& endpoint,
     {
         if (callback)
         {
-            callback(nullptr, boost::asio::error::not_connected);
+            callback(nullptr, std::make_error_code(std::errc::not_connected));
         }
         return;
     }
@@ -251,7 +251,7 @@ void TcpClient::ConnectAsync(const IPEndPoint& endpoint,
         // Invoke the callback with error
         if (callback)
         {
-            callback(nullptr, boost::asio::error::fault);
+            callback(nullptr, std::make_error_code(std::errc::io_error));
         }
     }
 }
