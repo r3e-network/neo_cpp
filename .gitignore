@@ -28,10 +28,13 @@ CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 install_manifest.txt
-Makefile
+# Ignore CMake-generated Makefiles in subdirectories
+*/Makefile
 *.cmake
 !CMakeLists.txt
 !cmake/*.cmake
+# Keep the root Makefile
+!/Makefile
 
 # vcpkg
 vcpkg_installed/
@@ -434,11 +437,8 @@ vcpkg/downloads/
 vcpkg/packages/
 vcpkg/installed/
 
-# CMake
-CMakeCache.txt
-CMakeFiles/
-cmake_install.cmake
-Makefile
+# CMake (duplicate - already handled above)
+# Removed duplicate CMake entries
 
 # Test results
 TestResults/
