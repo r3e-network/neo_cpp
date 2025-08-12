@@ -106,25 +106,21 @@ std::shared_ptr<Block> Blockchain::GetBlock(uint32_t index) const
     std::shared_lock<std::shared_mutex> lock(blockchain_mutex_);
 
     // Get block hash by index from storage
-    if (!data_cache_)
-        return nullptr;
-        
+    if (!data_cache_) return nullptr;
+
     // Create key for block index lookup
-    auto indexKey = persistence::StorageKey::Create(
-        static_cast<int32_t>(-4),  // Ledger contract ID
-        static_cast<uint8_t>(0x05), // Block index prefix
-        index
-    );
-    
+    auto indexKey = persistence::StorageKey::Create(static_cast<int32_t>(-4),    // Ledger contract ID
+                                                    static_cast<uint8_t>(0x05),  // Block index prefix
+                                                    index);
+
     auto hashItem = data_cache_->TryGet(indexKey);
-    if (!hashItem)
-        return nullptr;
-        
+    if (!hashItem) return nullptr;
+
     // Get the block hash from storage item
     io::UInt256 blockHash;
     io::BinaryReader reader(hashItem->GetValue());
     blockHash.Deserialize(reader);
-    
+
     // Load the block using the hash
     return GetBlock(blockHash);
 }
@@ -135,31 +131,26 @@ std::shared_ptr<Block> Blockchain::GetBlock(const io::UInt256& hash) const
 
     // Check block cache first
     auto it = block_cache_.find(hash);
-    if (it != block_cache_.end())
-        return it->second;
-        
-    if (!data_cache_)
-        return nullptr;
-        
+    if (it != block_cache_.end()) return it->second;
+
+    if (!data_cache_) return nullptr;
+
     // Create key for block lookup
-    auto blockKey = persistence::StorageKey::Create(
-        static_cast<int32_t>(-4),  // Ledger contract ID
-        static_cast<uint8_t>(0x01), // Block prefix
-        hash
-    );
-    
+    auto blockKey = persistence::StorageKey::Create(static_cast<int32_t>(-4),    // Ledger contract ID
+                                                    static_cast<uint8_t>(0x01),  // Block prefix
+                                                    hash);
+
     auto blockItem = data_cache_->TryGet(blockKey);
-    if (!blockItem)
-        return nullptr;
-        
+    if (!blockItem) return nullptr;
+
     // Deserialize the block
     auto block = std::make_shared<Block>();
     io::BinaryReader reader(blockItem->GetValue());
     block->Deserialize(reader);
-    
+
     // Cache the block
     const_cast<Blockchain*>(this)->block_cache_[hash] = block;
-    
+
     return block;
 }
 

@@ -3,6 +3,7 @@
 #include <neo/ledger/event_system.h>
 #include <neo/ledger/pool_item.h>
 #include <neo/ledger/transaction.h>
+#include <neo/logging/logger.h>
 
 #include <algorithm>
 
@@ -49,10 +50,16 @@ void MemoryPoolEvents::FireTransactionAdded(std::shared_ptr<Transaction> transac
         {
             handler(transaction);
         }
+        catch (const std::exception& e)
+        {
+            // Log handler exceptions but continue processing other handlers
+            neo::logging::Logger::Instance().Warning("EventSystem",
+                                                     "Transaction handler exception: " + std::string(e.what()));
+        }
         catch (...)
         {
-            // Silently ignore handler exceptions to prevent one bad handler from affecting others
-            // Exception details are not logged to maintain event system stability
+            // Log unknown exceptions but continue processing
+            neo::logging::Logger::Instance().Warning("EventSystem", "Unknown exception in transaction handler");
         }
     }
 }

@@ -125,10 +125,10 @@ bool TaskManager::RemoveTransactionTask(const io::UInt256& hash)
 void TaskManager::CleanupExpiredTasks()
 {
     std::lock_guard<std::mutex> lock(tasksMutex_);
-    
+
     auto now = std::chrono::system_clock::now();
     auto timeout = std::chrono::seconds(30);
-    
+
     // Clean up expired block tasks
     for (auto it = blockTasks_.begin(); it != blockTasks_.end();)
     {
@@ -141,7 +141,7 @@ void TaskManager::CleanupExpiredTasks()
             ++it;
         }
     }
-    
+
     // Clean up expired transaction tasks
     for (auto it = transactionTasks_.begin(); it != transactionTasks_.end();)
     {
@@ -181,7 +181,7 @@ void TaskManager::ProcessBlockTasks()
     // 2. Send GetData messages for missing blocks
     // 3. Track pending requests
     // 4. Handle timeouts and retries
-    
+
     // Call the cleanup method to remove expired tasks
     CleanupExpiredTasks();
 }
@@ -194,7 +194,7 @@ void TaskManager::ProcessTransactionTasks()
     // 2. Send GetData messages for missing transactions
     // 3. Track pending requests
     // 4. Handle timeouts and retries
-    
+
     // Call the cleanup method to remove expired tasks
     CleanupExpiredTasks();
 }

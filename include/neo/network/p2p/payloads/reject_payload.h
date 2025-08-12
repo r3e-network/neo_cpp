@@ -41,13 +41,13 @@ class RejectPayload : public IPayload
     {
         return 0;  // Empty payload
     }
-    
+
     // IJsonSerializable implementation
     void SerializeJson(io::JsonWriter& writer) const override
     {
         // Currently empty - no data to serialize
     }
-    
+
     void DeserializeJson(const io::JsonReader& reader) override
     {
         // Currently empty - no data to deserialize

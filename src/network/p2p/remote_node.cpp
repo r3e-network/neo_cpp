@@ -1,6 +1,7 @@
 #include <neo/core/logging.h>
 #include <neo/io/byte_vector.h>
 #include <neo/network/ip_endpoint.h>
+#include <neo/network/p2p/ipayload.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p/message.h>
 #include <neo/network/p2p/network_address.h>
@@ -20,7 +21,6 @@
 #include <neo/network/p2p/payloads/verack_payload.h>
 #include <neo/network/p2p/payloads/version_payload.h>
 #include <neo/network/p2p/remote_node.h>
-#include <neo/network/p2p/ipayload.h>
 
 #include <cstdint>
 #include <functional>
@@ -86,8 +86,8 @@ bool RemoteNode::SendVersion()
 
     // Send the version message - use explicit p2p namespace
     LOG_INFO("About to call neo::network::p2p::Message::Create for Version command");
-    auto message = neo::network::p2p::Message::Create(MessageCommand::Version, 
-                                                       std::static_pointer_cast<IPayload>(payload));
+    auto message =
+        neo::network::p2p::Message::Create(MessageCommand::Version, std::static_pointer_cast<IPayload>(payload));
     LOG_INFO("neo::network::p2p::Message::Create returned message with command: " +
              std::to_string(static_cast<int>(message.GetCommand())));
     return Send(message);

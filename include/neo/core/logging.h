@@ -178,7 +178,7 @@ void Logger::Critical(const std::string& fmt, Args&&... args)
 // Minimal logging implementation when spdlog is not available
 
 // Helper function for simple string formatting
-template<typename T>
+template <typename T>
 void FormatString(std::stringstream& ss, const std::string& fmt, T&& value)
 {
     size_t pos = fmt.find("{}");
@@ -192,7 +192,7 @@ void FormatString(std::stringstream& ss, const std::string& fmt, T&& value)
     }
 }
 
-template<typename T, typename... Args>
+template <typename T, typename... Args>
 void FormatString(std::stringstream& ss, const std::string& fmt, T&& value, Args&&... args)
 {
     size_t pos = fmt.find("{}");

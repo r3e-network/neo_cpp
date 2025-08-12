@@ -124,7 +124,7 @@ std::shared_ptr<WitnessCondition> WitnessCondition::DeserializeFrom(io::BinaryRe
             condition->Deserialize(reader);
             return condition;
         }
-        
+
         case Type::ScriptHash:
         case Type::Group:
         case Type::CalledByEntry:
@@ -136,7 +136,7 @@ std::shared_ptr<WitnessCondition> WitnessCondition::DeserializeFrom(io::BinaryRe
             auto condition = std::make_shared<BooleanCondition>(false);
             return condition;
         }
-        
+
         case Type::Not:
         case Type::And:
         case Type::Or:
@@ -145,7 +145,7 @@ std::shared_ptr<WitnessCondition> WitnessCondition::DeserializeFrom(io::BinaryRe
             auto condition = std::make_shared<BooleanCondition>(false);
             return condition;
         }
-        
+
         default:
             throw std::runtime_error("Unknown witness condition type: " + std::to_string(static_cast<uint8_t>(type)));
     }

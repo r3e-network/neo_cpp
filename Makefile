@@ -96,11 +96,15 @@ help:
 	@echo "  $(GREEN)make run-private$(NC)  - Run private network"
 	@echo "  $(GREEN)make run-cli$(NC)      - Run Neo CLI"
 	@echo "  $(GREEN)make run-rpc$(NC)      - Start RPC server"
+	@echo "  $(GREEN)make mainnet$(NC)      - Run Neo node (mainnet) [alias for run]"
+	@echo "  $(GREEN)make testnet$(NC)      - Run Neo node (testnet) [alias for run-testnet]"
 	@echo ""
 	@echo "$(BOLD)$(YELLOW)Docker:$(NC)"
 	@echo "  $(GREEN)make docker$(NC)       - Build Docker image"
 	@echo "  $(GREEN)make docker-run$(NC)   - Run in Docker"
 	@echo "  $(GREEN)make docker-push$(NC)  - Push to registry"
+	@echo "  $(GREEN)make run-docker-mainnet$(NC) - Run mainnet in Docker"
+	@echo "  $(GREEN)make run-docker-testnet$(NC) - Run testnet in Docker"
 	@echo ""
 	@echo "$(BOLD)$(YELLOW)Development:$(NC)"
 	@echo "  $(GREEN)make libs$(NC)         - Build core libraries only"
@@ -223,17 +227,19 @@ tidy: configure
 .PHONY: run
 run: build
 	@echo "$(BOLD)$(CYAN)Starting Neo node (MainNet)...$(NC)"
-	@$(BUILD_DIR)/apps/neo_node --network mainnet --config config/mainnet.json || \
-	$(BUILD_DIR)/apps/neo_node_production_ready --network mainnet --config config/mainnet.json || \
-	$(BUILD_DIR)/apps/neo_node_app --network mainnet --config config/mainnet.json || \
+	@echo "$(YELLOW)Log level: info (use LOG_LEVEL env var to change)$(NC)"
+	@$(BUILD_DIR)/apps/neo_node --network mainnet --config config/mainnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-mainnet.log || \
+	$(BUILD_DIR)/apps/neo_node_production_ready --network mainnet --config config/mainnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-mainnet.log || \
+	$(BUILD_DIR)/apps/neo_node_app --network mainnet --config config/mainnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-mainnet.log || \
 	echo "$(RED)Neo node executable not found$(NC)"
 
 .PHONY: run-testnet
 run-testnet: build
 	@echo "$(BOLD)$(CYAN)Starting Neo node (TestNet)...$(NC)"
-	@$(BUILD_DIR)/apps/neo_node --network testnet --config config/testnet.json || \
-	$(BUILD_DIR)/apps/neo_node_production_ready --network testnet --config config/testnet.json || \
-	$(BUILD_DIR)/apps/neo_node_app --network testnet --config config/testnet.json || \
+	@echo "$(YELLOW)Log level: info (use LOG_LEVEL env var to change)$(NC)"
+	@$(BUILD_DIR)/apps/neo_node --network testnet --config config/testnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-testnet.log || \
+	$(BUILD_DIR)/apps/neo_node_production_ready --network testnet --config config/testnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-testnet.log || \
+	$(BUILD_DIR)/apps/neo_node_app --network testnet --config config/testnet.json --log-level $${LOG_LEVEL:-info} --log-file neo-testnet.log || \
 	echo "$(RED)Neo node executable not found$(NC)"
 
 .PHONY: run-private
@@ -250,6 +256,13 @@ run-cli: build
 run-rpc: build
 	@echo "$(CYAN)Starting RPC server...$(NC)"
 	@$(BUILD_DIR)/apps/neo_node --rpc --config config/rpc.json
+
+# Aliases for requested naming convention
+.PHONY: mainnet
+mainnet: run
+
+.PHONY: testnet
+testnet: run-testnet
 
 .PHONY: examples
 examples: build
@@ -274,12 +287,22 @@ bench: build
 .PHONY: docker
 docker:
 	@echo "$(BOLD)$(CYAN)Building Docker image $(DOCKER_IMAGE):$(DOCKER_TAG)...$(NC)"
-	@$(DOCKER) build \
-		--build-arg VERSION=$(VERSION) \
-		--build-arg BUILD_TYPE=$(BUILD_TYPE) \
-		-t $(DOCKER_IMAGE):$(DOCKER_TAG) \
-		-t $(DOCKER_IMAGE):latest \
-		-f Dockerfile .
+	@if [ -x ./scripts/docker_build.sh ]; then \
+		./scripts/docker_build.sh $(DOCKER_TAG) Dockerfile.optimized; \
+	else \
+		$(DOCKER) build \
+			--build-arg VERSION=$(VERSION) \
+			--build-arg BUILD_TYPE=$(BUILD_TYPE) \
+			-t $(DOCKER_IMAGE):$(DOCKER_TAG) \
+			-t $(DOCKER_IMAGE):latest \
+			-f Dockerfile.optimized . || \
+		$(DOCKER) build \
+			--build-arg VERSION=$(VERSION) \
+			--build-arg BUILD_TYPE=$(BUILD_TYPE) \
+			-t $(DOCKER_IMAGE):$(DOCKER_TAG) \
+			-t $(DOCKER_IMAGE):latest \
+			-f Dockerfile .; \
+	fi
 	@echo "$(GREEN)✓ Docker image built successfully!$(NC)"
 
 .PHONY: docker-run
@@ -306,6 +329,36 @@ docker-push: docker
 	@$(DOCKER) push ghcr.io/r3e-network/$(DOCKER_IMAGE):$(DOCKER_TAG)
 	@echo "$(GREEN)✓ Image pushed to registry$(NC)"
 
+.PHONY: run-docker-mainnet
+run-docker-mainnet: docker
+	@echo "$(BOLD)$(CYAN)Running Neo node (MainNet) in Docker...$(NC)"
+	@$(DOCKER) run -it --rm \
+		--name neo-node-mainnet \
+		-p 10332:10332 \
+		-p 10333:10333 \
+		-p 10334:10334 \
+		-v neo-mainnet-data:/data \
+		-v $(PWD)/config:/config:ro \
+		-e NETWORK=mainnet \
+		-e LOG_LEVEL=info \
+		$(DOCKER_IMAGE):$(DOCKER_TAG) \
+		./neo_node --network mainnet --config /config/mainnet.json --log-level info
+
+.PHONY: run-docker-testnet
+run-docker-testnet: docker
+	@echo "$(BOLD)$(CYAN)Running Neo node (TestNet) in Docker...$(NC)"
+	@$(DOCKER) run -it --rm \
+		--name neo-node-testnet \
+		-p 20332:20332 \
+		-p 20333:20333 \
+		-p 20334:20334 \
+		-v neo-testnet-data:/data \
+		-v $(PWD)/config:/config:ro \
+		-e NETWORK=testnet \
+		-e LOG_LEVEL=info \
+		$(DOCKER_IMAGE):$(DOCKER_TAG) \
+		./neo_node --network testnet --config /config/testnet.json --log-level info
+
 # =============================================================================
 # Cleaning Targets
 # =============================================================================
@@ -329,6 +382,22 @@ distclean:
 	@find . -name "*.so" -type f -delete 2>/dev/null || true
 	@find . -name "*.dylib" -type f -delete 2>/dev/null || true
 	@echo "$(GREEN)✓ Distclean completed!$(NC)"
+
+# =============================================================================
+# Ccache Targets
+# =============================================================================
+
+.PHONY: ccache-stats
+ccache-stats:
+	@echo "$(BOLD)$(CYAN)Ccache Statistics$(NC)"
+	@echo "$(WHITE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@ccache -s || echo "$(YELLOW)ccache not available$(NC)"
+
+.PHONY: ccache-clean
+ccache-clean:
+	@echo "$(YELLOW)Clearing ccache...$(NC)"
+	@ccache -C || echo "$(YELLOW)ccache not available$(NC)"
+	@echo "$(GREEN)✓ Ccache cleared!$(NC)"
 
 # =============================================================================
 # Installation Targets

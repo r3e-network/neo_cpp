@@ -1,18 +1,18 @@
 // Concrete implementations for abstract payload methods
 // This file provides concrete implementations for payload classes
 
-#include <neo/network/p2p/payloads/ping_payload.h>
-#include <neo/network/p2p/payloads/inv_payload.h>
-#include <neo/network/p2p/payloads/get_data_payload.h>
-#include <neo/network/p2p/payloads/get_blocks_payload.h>
+#include <neo/cryptography/crypto.h>
+#include <neo/io/json_reader.h>
+#include <neo/io/json_writer.h>
+#include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/p2p/payloads/get_block_by_index_payload.h>
+#include <neo/network/p2p/payloads/get_blocks_payload.h>
+#include <neo/network/p2p/payloads/get_data_payload.h>
 #include <neo/network/p2p/payloads/get_headers_payload.h>
 #include <neo/network/p2p/payloads/headers_payload.h>
-#include <neo/network/p2p/payloads/addr_payload.h>
+#include <neo/network/p2p/payloads/inv_payload.h>
+#include <neo/network/p2p/payloads/ping_payload.h>
 #include <neo/network/p2p/payloads/version_payload.h>
-#include <neo/io/json_writer.h>
-#include <neo/io/json_reader.h>
-#include <neo/cryptography/crypto.h>
 
 namespace neo::network::p2p::payloads
 {
@@ -213,7 +213,7 @@ void GetHeadersPayload::DeserializeJson(const io::JsonReader& reader)
 {
     io::UInt256 hashStart;
     int16_t count = -1;
-    
+
     reader.ReadStartObject();
     while (reader.Read())
     {
@@ -231,7 +231,7 @@ void GetHeadersPayload::DeserializeJson(const io::JsonReader& reader)
             }
         }
     }
-    
+
     SetHashStart(hashStart);
     SetCount(count);
 }

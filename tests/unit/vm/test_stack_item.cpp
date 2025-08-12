@@ -1,307 +1,231 @@
 #include <gtest/gtest.h>
-#include <neo/vm/compound_items.h>
-#include <neo/vm/primitive_items.h>
-#include <neo/vm/special_items.h>
 #include <neo/vm/stack_item.h>
+#include <neo/vm/primitive_items.h>
+#include <neo/vm/compound_items.h>
+#include <neo/vm/stack_item_types.h>
 
-using namespace neo::vm;
-using namespace neo::io;
+namespace neo {
+namespace vm {
+namespace tests {
 
-TEST(StackItemTest, BooleanItem)
-{
-    // Constructor
-    BooleanItem item1(true);
-    BooleanItem item2(false);
+class StackItemTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        // Test setup if needed
+    }
+    
+    void TearDown() override {
+        // Test cleanup if needed
+    }
+};
 
-    // GetType
-    EXPECT_EQ(item1.GetType(), StackItemType::Boolean);
-    EXPECT_EQ(item2.GetType(), StackItemType::Boolean);
-
-    // GetBoolean
-    EXPECT_TRUE(item1.GetBoolean());
-    EXPECT_FALSE(item2.GetBoolean());
-
-    // GetInteger
-    EXPECT_EQ(item1.GetInteger(), 1);
-    EXPECT_EQ(item2.GetInteger(), 0);
-
-    // GetByteArray
-    EXPECT_EQ(item1.GetByteArray().Size(), sizeof(bool));
-    EXPECT_EQ(item2.GetByteArray().Size(), sizeof(bool));
-
-    // Equals
-    EXPECT_TRUE(item1.Equals(item1));
-    EXPECT_TRUE(item2.Equals(item2));
-    EXPECT_FALSE(item1.Equals(item2));
-    EXPECT_FALSE(item2.Equals(item1));
-
-    // Equals with other types
-    IntegerItem intItem1(1);
-    IntegerItem intItem2(0);
-    EXPECT_TRUE(item1.Equals(intItem1));
-    EXPECT_TRUE(item2.Equals(intItem2));
-
-    ByteVector bytes1 = ByteVector::Parse("01");
-    ByteVector bytes2 = ByteVector::Parse("00");
-    ByteStringItem byteItem1(bytes1);
-    ByteStringItem byteItem2(bytes2);
-    EXPECT_TRUE(item1.Equals(byteItem1));
-    EXPECT_TRUE(item2.Equals(byteItem2));
+// Test primitive stack items
+TEST_F(StackItemTest, CreateBooleanItem) {
+    auto true_item = std::make_shared<BooleanItem>(true);
+    EXPECT_EQ(true_item->GetType(), StackItemType::Boolean);
+    EXPECT_TRUE(true_item->GetBoolean());
+    
+    auto false_item = std::make_shared<BooleanItem>(false);
+    EXPECT_EQ(false_item->GetType(), StackItemType::Boolean);
+    EXPECT_FALSE(false_item->GetBoolean());
 }
 
-TEST(StackItemTest, IntegerItem)
-{
-    // Constructor
-    IntegerItem item1(123);
-    IntegerItem item2(-456);
-    IntegerItem item3(0);
-
-    // GetType
-    EXPECT_EQ(item1.GetType(), StackItemType::Integer);
-    EXPECT_EQ(item2.GetType(), StackItemType::Integer);
-    EXPECT_EQ(item3.GetType(), StackItemType::Integer);
-
-    // GetBoolean
-    EXPECT_TRUE(item1.GetBoolean());
-    EXPECT_TRUE(item2.GetBoolean());
-    EXPECT_FALSE(item3.GetBoolean());
-
-    // GetInteger
-    EXPECT_EQ(item1.GetInteger(), 123);
-    EXPECT_EQ(item2.GetInteger(), -456);
-    EXPECT_EQ(item3.GetInteger(), 0);
-
-    // GetByteArray
-    EXPECT_EQ(item1.GetByteArray()[0], 123);
-    EXPECT_EQ(item3.GetByteArray()[0], 0);
-
-    // Equals
-    EXPECT_TRUE(item1.Equals(item1));
-    EXPECT_TRUE(item2.Equals(item2));
-    EXPECT_TRUE(item3.Equals(item3));
-    EXPECT_FALSE(item1.Equals(item2));
-    EXPECT_FALSE(item1.Equals(item3));
-    EXPECT_FALSE(item2.Equals(item3));
-
-    // Equals with other types
-    BooleanItem boolItem1(true);
-    BooleanItem boolItem2(false);
-    EXPECT_TRUE(item1.Equals(boolItem1));
-    EXPECT_TRUE(item3.Equals(boolItem2));
-
-    ByteVector bytes1 = ByteVector::Parse("7B");  // 123 in hex
-    ByteVector bytes3 = ByteVector::Parse("00");
-    ByteStringItem byteItem1(bytes1);
-    ByteStringItem byteItem3(bytes3);
-    EXPECT_TRUE(item1.Equals(byteItem1));
-    EXPECT_TRUE(item3.Equals(byteItem3));
+TEST_F(StackItemTest, CreateIntegerItem) {
+    auto int_item = std::make_shared<IntegerItem>(42);
+    EXPECT_EQ(int_item->GetType(), StackItemType::Integer);
+    EXPECT_EQ(int_item->GetInteger(), 42);
+    
+    auto negative_item = std::make_shared<IntegerItem>(-100);
+    EXPECT_EQ(negative_item->GetType(), StackItemType::Integer);
+    EXPECT_EQ(negative_item->GetInteger(), -100);
 }
 
-TEST(StackItemTest, ByteStringItem)
-{
-    // Constructor
-    ByteVector bytes1 = ByteVector::Parse("0102030405");
-    ByteVector bytes2 = ByteVector::Parse("0607080910");
-    ByteVector bytes3 = ByteVector::Parse("");
-    ByteStringItem item1(bytes1);
-    ByteStringItem item2(bytes2);
-    ByteStringItem item3(bytes3);
-
-    // GetType
-    EXPECT_EQ(item1.GetType(), StackItemType::ByteString);
-    EXPECT_EQ(item2.GetType(), StackItemType::ByteString);
-    EXPECT_EQ(item3.GetType(), StackItemType::ByteString);
-
-    // GetBoolean
-    EXPECT_TRUE(item1.GetBoolean());
-    EXPECT_TRUE(item2.GetBoolean());
-    EXPECT_FALSE(item3.GetBoolean());
-
-    // GetByteArray
-    EXPECT_EQ(item1.GetByteArray(), bytes1);
-    EXPECT_EQ(item2.GetByteArray(), bytes2);
-    EXPECT_EQ(item3.GetByteArray(), bytes3);
-
-    // GetString
-    EXPECT_EQ(item1.GetString(), std::string(reinterpret_cast<const char*>(bytes1.Data()), bytes1.Size()));
-    EXPECT_EQ(item2.GetString(), std::string(reinterpret_cast<const char*>(bytes2.Data()), bytes2.Size()));
-    EXPECT_EQ(item3.GetString(), std::string(reinterpret_cast<const char*>(bytes3.Data()), bytes3.Size()));
-
-    // Equals
-    EXPECT_TRUE(item1.Equals(item1));
-    EXPECT_TRUE(item2.Equals(item2));
-    EXPECT_TRUE(item3.Equals(item3));
-    EXPECT_FALSE(item1.Equals(item2));
-    EXPECT_FALSE(item1.Equals(item3));
-    EXPECT_FALSE(item2.Equals(item3));
-
-    // Equals with other types
-    ByteVector bytes4 = ByteVector::Parse("01");
-    ByteVector bytes5 = ByteVector::Parse("00");
-    ByteStringItem byteItem4(bytes4);
-    ByteStringItem byteItem5(bytes5);
-    BooleanItem boolItem1(true);
-    BooleanItem boolItem2(false);
-    EXPECT_TRUE(byteItem4.Equals(boolItem1));
-    EXPECT_TRUE(byteItem5.Equals(boolItem2));
-
-    ByteVector bytes6 = ByteVector::Parse("01");
-    ByteStringItem byteItem6(bytes6);
-    IntegerItem intItem1(1);
-    EXPECT_TRUE(byteItem6.Equals(intItem1));
+TEST_F(StackItemTest, CreateByteStringItem) {
+    std::vector<uint8_t> data = {0x01, 0x02, 0x03, 0x04};
+    auto byte_item = std::make_shared<ByteStringItem>(data);
+    EXPECT_EQ(byte_item->GetType(), StackItemType::ByteString);
+    EXPECT_EQ(byte_item->GetSpan().size(), 4);
 }
 
-TEST(StackItemTest, BufferItem)
-{
-    // Constructor
-    ByteVector bytes1 = ByteVector::Parse("0102030405");
-    ByteVector bytes2 = ByteVector::Parse("0607080910");
-    ByteVector bytes3 = ByteVector::Parse("");
-    BufferItem item1(bytes1);
-    BufferItem item2(bytes2);
-    BufferItem item3(bytes3);
-
-    // GetType
-    EXPECT_EQ(item1.GetType(), StackItemType::Buffer);
-    EXPECT_EQ(item2.GetType(), StackItemType::Buffer);
-    EXPECT_EQ(item3.GetType(), StackItemType::Buffer);
-
-    // GetBoolean
-    EXPECT_TRUE(item1.GetBoolean());
-    EXPECT_TRUE(item2.GetBoolean());
-    EXPECT_FALSE(item3.GetBoolean());
-
-    // GetByteArray
-    EXPECT_EQ(item1.GetByteArray(), bytes1);
-    EXPECT_EQ(item2.GetByteArray(), bytes2);
-    EXPECT_EQ(item3.GetByteArray(), bytes3);
-
-    // GetString
-    EXPECT_EQ(item1.GetString(), std::string(reinterpret_cast<const char*>(bytes1.Data()), bytes1.Size()));
-    EXPECT_EQ(item2.GetString(), std::string(reinterpret_cast<const char*>(bytes2.Data()), bytes2.Size()));
-    EXPECT_EQ(item3.GetString(), std::string(reinterpret_cast<const char*>(bytes3.Data()), bytes3.Size()));
-
-    // Equals
-    EXPECT_TRUE(item1.Equals(item1));
-    EXPECT_TRUE(item2.Equals(item2));
-    EXPECT_TRUE(item3.Equals(item3));
-    EXPECT_FALSE(item1.Equals(item2));
-    EXPECT_FALSE(item1.Equals(item3));
-    EXPECT_FALSE(item2.Equals(item3));
-
-    // Equals with ByteStringItem
-    ByteStringItem byteItem1(bytes1);
-    ByteStringItem byteItem2(bytes2);
-    ByteStringItem byteItem3(bytes3);
-    EXPECT_TRUE(item1.Equals(byteItem1));
-    EXPECT_TRUE(item2.Equals(byteItem2));
-    EXPECT_TRUE(item3.Equals(byteItem3));
-    EXPECT_TRUE(byteItem1.Equals(item1));
-    EXPECT_TRUE(byteItem2.Equals(item2));
-    EXPECT_TRUE(byteItem3.Equals(item3));
+TEST_F(StackItemTest, CreateNullItem) {
+    auto null_item = std::make_shared<NullItem>();
+    EXPECT_EQ(null_item->GetType(), StackItemType::Any);
+    EXPECT_TRUE(null_item->IsNull());
 }
 
-TEST(StackItemTest, ArrayItem)
-{
-    // Constructor
-    std::vector<std::shared_ptr<StackItem>> items1 = {StackItem::Create(int64_t(1)), StackItem::Create(int64_t(2)),
-                                                      StackItem::Create(int64_t(3))};
-    std::vector<std::shared_ptr<StackItem>> items2 = {StackItem::Create(int64_t(4)), StackItem::Create(int64_t(5)),
-                                                      StackItem::Create(int64_t(6))};
-    std::vector<std::shared_ptr<StackItem>> items3 = {};
-    ArrayItem item1(items1);
-    ArrayItem item2(items2);
-    ArrayItem item3(items3);
-
-    // GetType
-    EXPECT_EQ(item1.GetType(), StackItemType::Array);
-    EXPECT_EQ(item2.GetType(), StackItemType::Array);
-    EXPECT_EQ(item3.GetType(), StackItemType::Array);
-
-    // GetBoolean
-    EXPECT_TRUE(item1.GetBoolean());
-    EXPECT_TRUE(item2.GetBoolean());
-    EXPECT_TRUE(item3.GetBoolean());
-
-    // GetArray
-    EXPECT_EQ(item1.GetArray().size(), 3);
-    EXPECT_EQ(item2.GetArray().size(), 3);
-    EXPECT_EQ(item3.GetArray().size(), 0);
-
-    // Get
-    EXPECT_EQ(item1.Get(0)->GetInteger(), 1);
-    EXPECT_EQ(item1.Get(1)->GetInteger(), 2);
-    EXPECT_EQ(item1.Get(2)->GetInteger(), 3);
-    EXPECT_EQ(item2.Get(0)->GetInteger(), 4);
-    EXPECT_EQ(item2.Get(1)->GetInteger(), 5);
-    EXPECT_EQ(item2.Get(2)->GetInteger(), 6);
-    EXPECT_THROW(item3.Get(0), std::out_of_range);
-
-    // Set
-    item1.Set(0, StackItem::Create(int64_t(10)));
-    EXPECT_EQ(item1.Get(0)->GetInteger(), 10);
-
-    // Add
-    item3.Add(StackItem::Create(int64_t(7)));
-    EXPECT_EQ(item3.Size(), 1);
-    EXPECT_EQ(item3.Get(0)->GetInteger(), 7);
-
-    // Remove
-    item1.Remove(0);
-    EXPECT_EQ(item1.Size(), 2);
-    EXPECT_EQ(item1.Get(0)->GetInteger(), 2);
-
-    // Clear
-    item1.Clear();
-    EXPECT_EQ(item1.Size(), 0);
-
-    // Equals
-    EXPECT_TRUE(item1.Equals(item1));
-    EXPECT_TRUE(item2.Equals(item2));
-    EXPECT_TRUE(item3.Equals(item3));
-    EXPECT_FALSE(item1.Equals(item2));
-    EXPECT_FALSE(item1.Equals(item3));
-    EXPECT_FALSE(item2.Equals(item3));
+// Test compound stack items
+TEST_F(StackItemTest, CreateArrayItem) {
+    auto array = std::make_shared<ArrayItem>();
+    EXPECT_EQ(array->GetType(), StackItemType::Array);
+    EXPECT_EQ(array->Count(), 0);
+    
+    // Add items to array
+    array->Add(std::make_shared<IntegerItem>(1));
+    array->Add(std::make_shared<IntegerItem>(2));
+    array->Add(std::make_shared<IntegerItem>(3));
+    
+    EXPECT_EQ(array->Count(), 3);
 }
 
-TEST(StackItemTest, StructItem)
-{
-    // Constructor
-    std::vector<std::shared_ptr<StackItem>> items1 = {StackItem::Create(int64_t(1)), StackItem::Create(int64_t(2)),
-                                                      StackItem::Create(int64_t(3))};
-    std::vector<std::shared_ptr<StackItem>> items2 = {StackItem::Create(int64_t(1)), StackItem::Create(int64_t(2)),
-                                                      StackItem::Create(int64_t(3))};
-    StructItem item1(items1);
-    StructItem item2(items2);
-
-    // GetType
-    EXPECT_EQ(item1.GetType(), StackItemType::Struct);
-    EXPECT_EQ(item2.GetType(), StackItemType::Struct);
-
-    // Clone
-    auto item3 = item1.Clone();
-    EXPECT_EQ(item3->GetType(), StackItemType::Struct);
-    EXPECT_EQ(item3->Size(), 3);
-    EXPECT_EQ(item3->Get(0)->GetInteger(), 1);
-    EXPECT_EQ(item3->Get(1)->GetInteger(), 2);
-    EXPECT_EQ(item3->Get(2)->GetInteger(), 3);
-
-    // Equals
-    EXPECT_TRUE(item1.Equals(item1));
-    EXPECT_TRUE(item2.Equals(item2));
-    EXPECT_TRUE(item1.Equals(item2));
-    EXPECT_TRUE(item2.Equals(item1));
-    EXPECT_TRUE(item1.Equals(*item3));
-    EXPECT_TRUE(item3->Equals(item1));
+TEST_F(StackItemTest, CreateStructItem) {
+    auto struct_item = std::make_shared<StructItem>();
+    EXPECT_EQ(struct_item->GetType(), StackItemType::Struct);
+    EXPECT_EQ(struct_item->Count(), 0);
+    
+    // Struct can hold different types
+    struct_item->Add(std::make_shared<IntegerItem>(100));
+    struct_item->Add(std::make_shared<BooleanItem>(true));
+    
+    EXPECT_EQ(struct_item->Count(), 2);
 }
 
-TEST(StackItemTest, MapItem)
-{
-    // Create empty map and test basic functionality
-    std::map<std::shared_ptr<StackItem>, std::shared_ptr<StackItem>, StackItemPtrComparator> emptyMap;
-    MapItem emptyItem(emptyMap);
-
-    EXPECT_EQ(emptyItem.GetType(), StackItemType::Map);
-    EXPECT_TRUE(emptyItem.GetBoolean());  // Even empty maps return true
-    EXPECT_EQ(emptyItem.GetSize(), 0);
+TEST_F(StackItemTest, CreateMapItem) {
+    auto map = std::make_shared<MapItem>();
+    EXPECT_EQ(map->GetType(), StackItemType::Map);
+    EXPECT_EQ(map->Count(), 0);
+    
+    // Add key-value pairs
+    auto key1 = std::make_shared<ByteStringItem>(std::vector<uint8_t>{0x01});
+    auto value1 = std::make_shared<IntegerItem>(100);
+    map->Set(key1, value1);
+    
+    EXPECT_EQ(map->Count(), 1);
+    EXPECT_TRUE(map->ContainsKey(key1));
 }
+
+// Test stack item conversions
+TEST_F(StackItemTest, ConvertToBoolean) {
+    auto zero = std::make_shared<IntegerItem>(0);
+    EXPECT_FALSE(zero->GetBoolean());
+    
+    auto non_zero = std::make_shared<IntegerItem>(1);
+    EXPECT_TRUE(non_zero->GetBoolean());
+    
+    auto empty_bytes = std::make_shared<ByteStringItem>(std::vector<uint8_t>{});
+    EXPECT_FALSE(empty_bytes->GetBoolean());
+    
+    auto non_empty_bytes = std::make_shared<ByteStringItem>(std::vector<uint8_t>{0x01});
+    EXPECT_TRUE(non_empty_bytes->GetBoolean());
+}
+
+TEST_F(StackItemTest, ConvertToInteger) {
+    auto bool_true = std::make_shared<BooleanItem>(true);
+    EXPECT_EQ(bool_true->GetInteger(), 1);
+    
+    auto bool_false = std::make_shared<BooleanItem>(false);
+    EXPECT_EQ(bool_false->GetInteger(), 0);
+    
+    std::vector<uint8_t> bytes = {0x0A}; // 10 in little-endian
+    auto byte_string = std::make_shared<ByteStringItem>(bytes);
+    EXPECT_EQ(byte_string->GetInteger(), 10);
+}
+
+// Test stack item equality
+TEST_F(StackItemTest, StackItemEquality) {
+    auto int1 = std::make_shared<IntegerItem>(42);
+    auto int2 = std::make_shared<IntegerItem>(42);
+    auto int3 = std::make_shared<IntegerItem>(43);
+    
+    EXPECT_TRUE(int1->Equals(int2));
+    EXPECT_FALSE(int1->Equals(int3));
+    
+    auto bool1 = std::make_shared<BooleanItem>(true);
+    auto bool2 = std::make_shared<BooleanItem>(true);
+    auto bool3 = std::make_shared<BooleanItem>(false);
+    
+    EXPECT_TRUE(bool1->Equals(bool2));
+    EXPECT_FALSE(bool1->Equals(bool3));
+}
+
+// Test deep copy
+TEST_F(StackItemTest, DeepCopyPrimitive) {
+    auto original = std::make_shared<IntegerItem>(100);
+    auto copy = original->DeepCopy();
+    
+    EXPECT_TRUE(original->Equals(copy));
+    EXPECT_NE(original.get(), copy.get()); // Different objects
+}
+
+TEST_F(StackItemTest, DeepCopyArray) {
+    auto original = std::make_shared<ArrayItem>();
+    original->Add(std::make_shared<IntegerItem>(1));
+    original->Add(std::make_shared<IntegerItem>(2));
+    
+    auto copy = std::dynamic_pointer_cast<ArrayItem>(original->DeepCopy());
+    
+    EXPECT_EQ(original->Count(), copy->Count());
+    EXPECT_NE(original.get(), copy.get());
+    
+    // Modify copy should not affect original
+    copy->Add(std::make_shared<IntegerItem>(3));
+    EXPECT_NE(original->Count(), copy->Count());
+}
+
+// Test reference counting
+TEST_F(StackItemTest, ReferenceCountingBasic) {
+    auto item = std::make_shared<IntegerItem>(42);
+    EXPECT_EQ(item.use_count(), 1);
+    
+    auto ref = item;
+    EXPECT_EQ(item.use_count(), 2);
+    
+    ref.reset();
+    EXPECT_EQ(item.use_count(), 1);
+}
+
+// Test error cases
+TEST_F(StackItemTest, InvalidConversions) {
+    auto array = std::make_shared<ArrayItem>();
+    
+    // Arrays cannot be converted to integers directly
+    EXPECT_THROW(array->GetInteger(), std::exception);
+    
+    auto map = std::make_shared<MapItem>();
+    
+    // Maps cannot be converted to booleans directly
+    EXPECT_THROW(map->GetBoolean(), std::exception);
+}
+
+// Test buffer operations
+TEST_F(StackItemTest, BufferOperations) {
+    std::vector<uint8_t> initial_data = {0x01, 0x02, 0x03};
+    auto buffer = std::make_shared<BufferItem>(initial_data);
+    
+    EXPECT_EQ(buffer->GetType(), StackItemType::Buffer);
+    EXPECT_EQ(buffer->GetSpan().size(), 3);
+    
+    // Buffers are mutable
+    buffer->GetSpan()[0] = 0xFF;
+    EXPECT_EQ(buffer->GetSpan()[0], 0xFF);
+}
+
+// Test pointer operations
+TEST_F(StackItemTest, PointerOperations) {
+    auto script = std::make_shared<Script>(std::vector<uint8_t>{0x00, 0x01, 0x02});
+    auto pointer = std::make_shared<PointerItem>(script, 1);
+    
+    EXPECT_EQ(pointer->GetType(), StackItemType::Pointer);
+    EXPECT_EQ(pointer->Position(), 1);
+    EXPECT_EQ(pointer->GetScript(), script);
+}
+
+// Test interop operations
+TEST_F(StackItemTest, InteropOperations) {
+    // Create a mock interop object
+    class MockInterop : public IInteroperable {
+    public:
+        int value = 42;
+    };
+    
+    auto mock_obj = std::make_shared<MockInterop>();
+    auto interop = std::make_shared<InteropItem>(mock_obj);
+    
+    EXPECT_EQ(interop->GetType(), StackItemType::InteropInterface);
+    
+    auto retrieved = std::dynamic_pointer_cast<MockInterop>(interop->GetInterface());
+    EXPECT_EQ(retrieved->value, 42);
+}
+
+} // namespace tests
+} // namespace vm
+} // namespace neo

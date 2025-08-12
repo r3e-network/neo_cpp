@@ -111,7 +111,7 @@ void TcpConnection::Close()
     }
 }
 
-void TcpConnection::Send(const Message& message)
+void TcpConnection::Send(const p2p::Message& message)
 {
     if (!running_ || !socket_.is_open()) return;
 
@@ -136,7 +136,7 @@ void TcpConnection::Send(const Message& message)
     }
 }
 
-void TcpConnection::SetMessageReceivedCallback(std::function<void(const Message&)> callback)
+void TcpConnection::SetMessageReceivedCallback(std::function<void(const p2p::Message&)> callback)
 {
     messageReceivedCallback_ = std::move(callback);
 }
@@ -241,8 +241,9 @@ void TcpConnection::HandleReadHeader(const std::error_code& error, size_t bytesT
 
         if (payloadSize == 0)
         {
-            // No payload, create message directly
-            Message message(command, io::ByteVector(), flags);
+            // No payload, create empty payload
+            auto payload = p2p::PayloadFactory::Create(command);
+            p2p::Message message(command, payload);
 
             // Notify listeners
             if (messageReceivedCallback_)
@@ -277,7 +278,7 @@ void TcpConnection::HandleReadHeader(const std::error_code& error, size_t bytesT
 void TcpConnection::ReadPayload(p2p::MessageCommand command, uint32_t payloadLength, uint32_t checksum,
                                 p2p::MessageFlags flags)
 {
-    if (payloadLength > Message::PayloadMaxSize)
+    if (payloadLength > p2p::Message::PayloadMaxSize)
     {
         neo::logging::Logger::Instance().Warning("Network",
                                                  "Payload too large: " + std::to_string(payloadLength) + " bytes");
@@ -304,18 +305,23 @@ void TcpConnection::HandleReadPayload(const std::error_code& error, size_t bytes
     try
     {
         // Create a payload from the received data
-        io::ByteVector payload(io::ByteSpan(receiveBuffer_, bytesTransferred));
+        io::ByteVector payloadData(io::ByteSpan(receiveBuffer_, bytesTransferred));
 
         // Validate checksum
-        if (!ValidateChecksum(payload, checksum))
+        if (!ValidateChecksum(payloadData, checksum))
         {
             neo::logging::Logger::Instance().Warning("Network", "Invalid checksum");
             Close();
             return;
         }
 
+        // Deserialize payload
+        std::istringstream stream(std::string(reinterpret_cast<const char*>(payloadData.Data()), payloadData.Size()));
+        io::BinaryReader reader(stream);
+        auto payload = p2p::PayloadFactory::DeserializePayload(command, reader);
+
         // Create message
-        Message message(command, payload, flags);
+        p2p::Message message(command, payload);
 
         // Notify listeners
         if (messageReceivedCallback_)

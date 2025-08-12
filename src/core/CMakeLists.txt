@@ -10,6 +10,7 @@ add_library(neo_core OBJECT
     neo_system.cpp
     neo_system_factory.cpp  # Factory for proper NeoSystem initialization
     logging.cpp
+    common_logging.cpp     # Common logging implementation
     exceptions.cpp         # Comprehensive exception framework
     validation.cpp         # Input validation and security framework
     error_recovery.cpp     # Error recovery and fault tolerance framework

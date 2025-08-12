@@ -1,6 +1,7 @@
-#include <neo/rpc/rpc_server.h>
 #include <neo/core/logging.h>
 #include <neo/io/json.h>
+#include <neo/rpc/rpc_server.h>
+
 #include <chrono>
 
 namespace neo::rpc
@@ -8,10 +9,7 @@ namespace neo::rpc
 
 // Constructor implementation
 RpcServer::RpcServer(const RpcConfig& config)
-    : config_(config), 
-      running_(false),
-      total_requests_(0),
-      failed_requests_(0)
+    : config_(config), running_(false), total_requests_(0), failed_requests_(0)
 {
     // Initialize logger if not already done
     if (!core::Logger::GetInstance())
@@ -20,16 +18,13 @@ RpcServer::RpcServer(const RpcConfig& config)
     }
     logger_ = core::Logger::GetInstance();
     start_time_ = std::chrono::steady_clock::now();
-    
+
     // Initialize method handlers
     InitializeHandlers();
 }
 
 // Destructor implementation
-RpcServer::~RpcServer()
-{
-    Stop();
-}
+RpcServer::~RpcServer() { Stop(); }
 
 // Start the RPC server
 void RpcServer::Start()
@@ -39,15 +34,13 @@ void RpcServer::Start()
         LOG_WARNING("RPC server is already running");
         return;
     }
-    
+
     LOG_INFO("Starting RPC server on port {}", config_.port);
     running_ = true;
-    
+
     // Start server thread
-    server_thread_ = std::thread([this]() {
-        ServerLoop();
-    });
-    
+    server_thread_ = std::thread([this]() { ServerLoop(); });
+
     LOG_INFO("RPC server started successfully");
 }
 
@@ -58,19 +51,18 @@ void RpcServer::Stop()
     {
         return;
     }
-    
+
     LOG_INFO("Stopping RPC server");
     running_ = false;
-    
+
     // Wait for server thread to finish
     if (server_thread_.joinable())
     {
         server_thread_.join();
     }
-    
+
     LOG_INFO("RPC server stopped");
 }
-
 
 // Get server statistics
 io::JsonValue RpcServer::GetStatistics() const
@@ -78,11 +70,11 @@ io::JsonValue RpcServer::GetStatistics() const
     io::JsonValue stats = io::JsonValue::CreateObject();
     stats.AddMember("total_requests", static_cast<int64_t>(total_requests_.load()));
     stats.AddMember("failed_requests", static_cast<int64_t>(failed_requests_.load()));
-    
+
     auto now = std::chrono::steady_clock::now();
     auto uptime = std::chrono::duration_cast<std::chrono::seconds>(now - start_time_);
     stats.AddMember("uptime_seconds", static_cast<int64_t>(uptime.count()));
-    
+
     if (uptime.count() > 0)
     {
         double rps = static_cast<double>(total_requests_.load()) / uptime.count();
@@ -92,19 +84,18 @@ io::JsonValue RpcServer::GetStatistics() const
     {
         stats.AddMember("requests_per_second", 0.0);
     }
-    
+
     return stats;
 }
-
 
 // Process an RPC request
 io::JsonValue RpcServer::ProcessRequest(const io::JsonValue& request)
 {
     total_requests_++;
-    
+
     io::JsonValue response = io::JsonValue::CreateObject();
     response.AddMember("jsonrpc", "2.0");
-    
+
     // Check if request has required fields
     if (!request.IsObject() || request["method"].IsNull() || request["id"].IsNull())
     {
@@ -116,10 +107,10 @@ io::JsonValue RpcServer::ProcessRequest(const io::JsonValue& request)
         response["id"] = io::JsonValue();
         return response;
     }
-    
+
     response["id"] = request["id"];
     std::string method = request["method"].GetString();
-    
+
     // Find method handler
     auto it = method_handlers_.find(method);
     if (it == method_handlers_.end())
@@ -131,12 +122,12 @@ io::JsonValue RpcServer::ProcessRequest(const io::JsonValue& request)
         response["error"] = error;
         return response;
     }
-    
+
     try
     {
         // Get parameters
         io::JsonValue params = !request["params"].IsNull() ? request["params"] : io::JsonValue();
-        
+
         // Call method handler
         response["result"] = it->second(params);
     }
@@ -149,7 +140,7 @@ io::JsonValue RpcServer::ProcessRequest(const io::JsonValue& request)
         error.AddMember("data", e.what());
         response["error"] = error;
     }
-    
+
     return response;
 }
 
@@ -157,7 +148,8 @@ io::JsonValue RpcServer::ProcessRequest(const io::JsonValue& request)
 void RpcServer::InitializeHandlers()
 {
     // Register blockchain methods
-    method_handlers_["getblockcount"] = [this](const io::JsonValue& params) {
+    method_handlers_["getblockcount"] = [this](const io::JsonValue& params)
+    {
         // Get current block height from blockchain
         io::JsonValue result;
         if (blockchain_)
@@ -170,8 +162,9 @@ void RpcServer::InitializeHandlers()
         }
         return result;
     };
-    
-    method_handlers_["getbestblockhash"] = [this](const io::JsonValue& params) {
+
+    method_handlers_["getbestblockhash"] = [this](const io::JsonValue& params)
+    {
         // Get hash of the latest block
         io::JsonValue result;
         if (blockchain_)
@@ -179,11 +172,13 @@ void RpcServer::InitializeHandlers()
             uint32_t currentIndex = blockchain_->GetCurrentBlockIndex();
             if (currentIndex > 0)
             {
-                // TODO: Get block hash by index from DataCache
+                // Get block hash by index from blockchain
+                // For now, return placeholder until blockchain data access is implemented
                 result.GetJson() = "0x0000000000000000000000000000000000000000000000000000000000000000";
             }
             else
             {
+                // Genesis block has no previous hash
                 result.GetJson() = "0x0000000000000000000000000000000000000000000000000000000000000000";
             }
         }
@@ -193,20 +188,21 @@ void RpcServer::InitializeHandlers()
         }
         return result;
     };
-    
-    method_handlers_["getblock"] = [this](const io::JsonValue& params) {
+
+    method_handlers_["getblock"] = [this](const io::JsonValue& params)
+    {
         // Get block by hash or index
         if (!params.IsArray() || params.Size() == 0)
         {
             throw std::invalid_argument("Missing block hash or index parameter");
         }
-        
+
         io::JsonValue result = io::JsonValue::CreateObject();
-        
+
         if (blockchain_)
         {
             std::shared_ptr<ledger::Block> block;
-            
+
             // Check if parameter is a hash or index
             auto param = params[0];
             if (param.IsString())
@@ -223,7 +219,7 @@ void RpcServer::InitializeHandlers()
                 // uint32_t index = static_cast<uint32_t>(param.GetInt64());
                 // block = GetBlockFromDataCache(blockchain_, index);
             }
-            
+
             if (block)
             {
                 // Serialize block to JSON
@@ -234,7 +230,7 @@ void RpcServer::InitializeHandlers()
                 result.AddMember("previousblockhash", block->GetPrevHash().ToString());
                 result.AddMember("merkleroot", block->GetMerkleRoot().ToString());
                 result.AddMember("witness", block->GetWitness().GetVerificationScript().ToHexString());
-                
+
                 // Add transactions array
                 io::JsonValue txArray = io::JsonValue::CreateArray();
                 for (const auto& tx : block->GetTransactions())
@@ -244,11 +240,12 @@ void RpcServer::InitializeHandlers()
                 result["tx"] = txArray;
             }
         }
-        
+
         return result;
     };
-    
-    method_handlers_["getconnectioncount"] = [this](const io::JsonValue& params) {
+
+    method_handlers_["getconnectioncount"] = [this](const io::JsonValue& params)
+    {
         // Return connected peer count
         io::JsonValue result;
         if (local_node_)
@@ -261,14 +258,15 @@ void RpcServer::InitializeHandlers()
         }
         return result;
     };
-    
-    method_handlers_["getversion"] = [this](const io::JsonValue& params) {
+
+    method_handlers_["getversion"] = [this](const io::JsonValue& params)
+    {
         io::JsonValue version = io::JsonValue::CreateObject();
         version.AddMember("tcpport", static_cast<int64_t>(config_.port));
         version.AddMember("wsport", 0);  // WebSocket port (0 = disabled)
         version.AddMember("nonce", 1234567890);
         version.AddMember("useragent", "Neo C++ Node/1.0.0");
-        
+
         io::JsonValue protocol = io::JsonValue::CreateObject();
         protocol.AddMember("addressversion", 53);
         protocol.AddMember("network", 860833102);  // TestNet
@@ -279,10 +277,62 @@ void RpcServer::InitializeHandlers()
         protocol.AddMember("maxtransactionsperblock", 512);
         protocol.AddMember("memorypoolmaxtransactions", 50000);
         version["protocol"] = protocol;
-        
+
         return version;
     };
-    
+
+    // Register mempool methods (C# Neo compatibility)
+    method_handlers_["getrawmempool"] = [this](const io::JsonValue& params)
+    {
+        io::JsonValue result = io::JsonValue::CreateArray();
+
+        // Get all transactions from mempool
+        if (transaction_pool_)
+        {
+            // C# pattern: Return array of transaction hashes
+            auto stats = transaction_pool_->GetStatistics();
+
+            // Note: In production, would iterate through actual transactions
+            // For now, return empty array as mempool integration is pending
+        }
+
+        return result;
+    };
+
+    method_handlers_["getmempoolinfo"] = [this](const io::JsonValue& params)
+    {
+        io::JsonValue result = io::JsonValue::CreateObject();
+
+        if (transaction_pool_)
+        {
+            auto stats = transaction_pool_->GetStatistics();
+
+            // C# Neo mempool info format
+            result.AddMember("size", static_cast<int64_t>(stats.total_transactions));
+            result.AddMember("bytes", static_cast<int64_t>(stats.memory_usage_bytes));
+            result.AddMember("usage", static_cast<int64_t>(stats.memory_usage_bytes));
+            result.AddMember("total_fee", static_cast<int64_t>(stats.total_fees));
+            result.AddMember("minfee", static_cast<int64_t>(transaction_pool_->GetConfiguration().min_fee_threshold));
+            result.AddMember("maxmempool", static_cast<int64_t>(transaction_pool_->GetConfiguration().max_pool_size));
+            result.AddMember("unverified", static_cast<int64_t>(stats.unverified_count));
+            result.AddMember("verified", static_cast<int64_t>(stats.verified_count));
+        }
+        else
+        {
+            // Return default values if no pool
+            result.AddMember("size", 0);
+            result.AddMember("bytes", 0);
+            result.AddMember("usage", 0);
+            result.AddMember("total_fee", 0);
+            result.AddMember("minfee", 0);
+            result.AddMember("maxmempool", 50000);
+            result.AddMember("unverified", 0);
+            result.AddMember("verified", 0);
+        }
+
+        return result;
+    };
+
     // Register more methods as needed
     LOG_INFO("Initialized RPC method handlers: " + std::to_string(method_handlers_.size()));
 }
@@ -292,12 +342,12 @@ void RpcServer::ServerLoop()
 {
     // HTTP server loop implementation
     // HTTP request handling is managed by the httplib library
-    
+
     while (running_)
     {
         // Simulate server processing
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        
+
         // Process RPC requests - actual HTTP handling is done by httplib
         // This loop maintains server state
         // TODO: Implement request queue processing if needed
@@ -324,12 +374,12 @@ io::JsonValue RpcServer::CreateErrorResponse(const io::JsonValue* id, int code, 
     io::JsonValue response = io::JsonValue::CreateObject();
     response.AddMember("jsonrpc", "2.0");
     response["id"] = id ? *id : io::JsonValue();
-    
+
     io::JsonValue error = io::JsonValue::CreateObject();
     error.AddMember("code", code);
     error.AddMember("message", message);
     response["error"] = error;
-    
+
     return response;
 }
 
@@ -344,12 +394,14 @@ io::JsonValue RpcServer::CreateSuccessResponse(const io::JsonValue* id, const io
 
 // RPC method implementations
 io::JsonValue RpcServer::GetBlock(const io::JsonValue& params) { return io::JsonValue(); }
-io::JsonValue RpcServer::GetBlockCount(const io::JsonValue& params) { 
+io::JsonValue RpcServer::GetBlockCount(const io::JsonValue& params)
+{
     io::JsonValue result;
     result.GetJson() = 0;
     return result;
 }
-io::JsonValue RpcServer::GetBlockHash(const io::JsonValue& params) { 
+io::JsonValue RpcServer::GetBlockHash(const io::JsonValue& params)
+{
     io::JsonValue result;
     result.GetJson() = "";
     return result;
@@ -358,7 +410,8 @@ io::JsonValue RpcServer::GetBlockHeader(const io::JsonValue& params) { return io
 io::JsonValue RpcServer::GetTransaction(const io::JsonValue& params) { return io::JsonValue(); }
 io::JsonValue RpcServer::GetContractState(const io::JsonValue& params) { return io::JsonValue(); }
 io::JsonValue RpcServer::GetStorage(const io::JsonValue& params) { return io::JsonValue(); }
-io::JsonValue RpcServer::GetTransactionHeight(const io::JsonValue& params) { 
+io::JsonValue RpcServer::GetTransactionHeight(const io::JsonValue& params)
+{
     io::JsonValue result;
     result.GetJson() = 0;
     return result;
@@ -367,7 +420,8 @@ io::JsonValue RpcServer::GetNextBlockValidators(const io::JsonValue& params) { r
 io::JsonValue RpcServer::GetCommittee(const io::JsonValue& params) { return io::JsonValue(); }
 io::JsonValue RpcServer::InvokeFunction(const io::JsonValue& params) { return io::JsonValue(); }
 io::JsonValue RpcServer::InvokeScript(const io::JsonValue& params) { return io::JsonValue(); }
-io::JsonValue RpcServer::GetUnclaimedGas(const io::JsonValue& params) { 
+io::JsonValue RpcServer::GetUnclaimedGas(const io::JsonValue& params)
+{
     io::JsonValue result;
     result.GetJson() = "0";
     return result;
@@ -375,7 +429,8 @@ io::JsonValue RpcServer::GetUnclaimedGas(const io::JsonValue& params) {
 io::JsonValue RpcServer::ListPlugins(const io::JsonValue& params) { return io::JsonValue(); }
 io::JsonValue RpcServer::SendRawTransaction(const io::JsonValue& params) { return io::JsonValue(); }
 io::JsonValue RpcServer::SubmitBlock(const io::JsonValue& params) { return io::JsonValue(); }
-io::JsonValue RpcServer::GetConnectionCount(const io::JsonValue& params) { 
+io::JsonValue RpcServer::GetConnectionCount(const io::JsonValue& params)
+{
     io::JsonValue result;
     result.GetJson() = 0;
     return result;

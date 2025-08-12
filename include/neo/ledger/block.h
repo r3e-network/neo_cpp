@@ -217,12 +217,12 @@ class Block : public io::ISerializable
      * @brief Get block size
      */
     uint32_t GetSize() const;
-    
+
     /**
      * @brief Compute and return the Merkle root of transactions
      */
     io::UInt256 ComputeMerkleRoot() const;
-    
+
     /**
      * @brief Verify witness signatures
      */

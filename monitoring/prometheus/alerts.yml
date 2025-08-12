@@ -1,0 +1,83 @@
+groups:
+  - name: neo_node_alerts
+    interval: 30s
+    rules:
+      # Alert if node is not syncing (block height not increasing)
+      - alert: NodeNotSyncing
+        expr: increase(neo_block_height[5m]) == 0
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Neo node is not syncing"
+          description: "Block height has not increased in the last 10 minutes"
+      
+      # Alert if peer count drops below threshold
+      - alert: LowPeerCount
+        expr: neo_peers_connected < 3
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low peer count"
+          description: "Connected peers ({{ $value }}) is below threshold"
+      
+      # Alert if no peers connected
+      - alert: NoPeersConnected
+        expr: neo_peers_connected == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "No peers connected"
+          description: "Node has no connected peers"
+      
+      # Alert if mempool is too large
+      - alert: MempoolTooLarge
+        expr: neo_mempool_size > 50000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Memory pool too large"
+          description: "Memory pool size ({{ $value }}) exceeds threshold"
+      
+      # Alert if block processing is slow
+      - alert: SlowBlockProcessing
+        expr: histogram_quantile(0.95, neo_block_processing_time) > 1000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Slow block processing"
+          description: "95th percentile block processing time ({{ $value }}ms) exceeds 1 second"
+      
+      # Alert if RPC response time is high
+      - alert: HighRPCResponseTime
+        expr: avg(neo_rpc_request_duration_sum / neo_rpc_request_duration_count) > 500
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High RPC response time"
+          description: "Average RPC response time ({{ $value }}ms) exceeds 500ms"
+      
+      # Alert if VM execution is slow
+      - alert: SlowVMExecution
+        expr: histogram_quantile(0.95, neo_vm_execution_time) > 100
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Slow VM execution"
+          description: "95th percentile VM execution time ({{ $value }}ms) exceeds 100ms"
+      
+      # Alert if storage operations are failing
+      - alert: StorageOperationErrors
+        expr: rate(neo_storage_operations_errors[5m]) > 0.01
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Storage operation errors"
+          description: "Storage error rate ({{ $value }}) exceeds threshold"

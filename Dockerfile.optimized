@@ -1,0 +1,96 @@
+# Multi-stage Dockerfile for Neo C++ node with optimizations
+# This version includes retry logic and alternative registry support
+
+# Build stage - using specific digest for reliability
+FROM ubuntu:22.04@sha256:0eb0f877e1c869a300c442c41120e778db7161419244ee5cbc6fa5f134e74736 AS builder
+
+# Set environment variables for non-interactive installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Retry logic for apt-get update
+RUN for i in 1 2 3; do \
+    apt-get update && break || sleep 5; \
+    done && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    git \
+    libboost-all-dev \
+    libssl-dev \
+    librocksdb-dev \
+    libsnappy-dev \
+    liblz4-dev \
+    libzstd-dev \
+    libbz2-dev \
+    ninja-build \
+    pkg-config \
+    ccache \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up ccache for faster rebuilds
+ENV PATH="/usr/lib/ccache:${PATH}"
+ENV CCACHE_DIR=/ccache
+ENV CCACHE_MAXSIZE=1G
+
+# Copy source code
+WORKDIR /build
+COPY . .
+
+# Build the application with ccache
+RUN --mount=type=cache,target=/ccache \
+    mkdir -p build && cd build && \
+    cmake -GNinja \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+        -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+        -DENABLE_LOGGING=ON \
+        -DENABLE_METRICS=ON \
+        .. && \
+    ninja neo_node neo_cli_tool
+
+# Runtime stage - minimal image
+FROM ubuntu:22.04@sha256:0eb0f877e1c869a300c442c41120e778db7161419244ee5cbc6fa5f134e74736
+
+# Install runtime dependencies only
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    libboost-system1.74.0 \
+    libboost-filesystem1.74.0 \
+    libboost-thread1.74.0 \
+    libssl3 \
+    librocksdb7.8 \
+    libsnappy1v5 \
+    liblz4-1 \
+    libzstd1 \
+    libbz2-1.0 \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create neo user for security
+RUN useradd -m -u 1000 -s /bin/bash neo
+
+# Copy binaries from builder
+COPY --from=builder /build/build/apps/neo_node /usr/local/bin/
+COPY --from=builder /build/build/tools/neo_cli_tool /usr/local/bin/
+
+# Copy configuration files
+COPY --from=builder /build/config /opt/neo/config
+
+# Create data directory
+RUN mkdir -p /opt/neo/data && chown -R neo:neo /opt/neo
+
+# Switch to non-root user
+USER neo
+WORKDIR /opt/neo
+
+# Expose ports
+EXPOSE 30333 30332 9090
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD neo_cli_tool version || exit 1
+
+# Default command
+ENTRYPOINT ["neo_node"]
+CMD ["--config", "/opt/neo/config/mainnet.json", "--log-level", "info"]

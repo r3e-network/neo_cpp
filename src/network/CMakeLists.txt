@@ -1,6 +1,7 @@
 # Create the network library
 add_library(neo_network OBJECT
     payload_factory.cpp  # Real payload factory implementation
+    network_address.cpp  # NetworkAddress implementation
     ip_endpoint.cpp
     p2p/ip_endpoint.cpp  # P2P version of IPEndPoint
     p2p/message_impl.cpp  # Fixed message implementation
@@ -8,6 +9,7 @@ add_library(neo_network OBJECT
     # p2p/message_simple.cpp  # Replaced with complete implementation
     tcp_server.cpp
     tcp_client.cpp  # Add TcpClient implementation
+    tcp_connection.cpp  # TcpConnection implementation
     p2p_server.cpp # P2P server implementation
     peer_discovery_service.cpp  # Add PeerDiscoveryService implementation
     upnp.cpp

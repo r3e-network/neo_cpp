@@ -1,23 +1,23 @@
-#include <neo/network/payload_factory.h>
-#include <neo/network/p2p/payloads/version_payload.h>
-#include <neo/network/p2p/payloads/verack_payload.h>
+#include <neo/core/logging.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
+#include <neo/network/p2p/payloads/block_payload.h>
+#include <neo/network/p2p/payloads/filter_add_payload.h>
+#include <neo/network/p2p/payloads/filter_clear_payload.h>
+#include <neo/network/p2p/payloads/filter_load_payload.h>
 #include <neo/network/p2p/payloads/get_addr_payload.h>
-#include <neo/network/p2p/payloads/ping_payload.h>
-#include <neo/network/p2p/payloads/inv_payload.h>
+#include <neo/network/p2p/payloads/get_block_by_index_payload.h>
 #include <neo/network/p2p/payloads/get_blocks_payload.h>
 #include <neo/network/p2p/payloads/get_headers_payload.h>
 #include <neo/network/p2p/payloads/headers_payload.h>
-#include <neo/network/p2p/payloads/get_block_by_index_payload.h>
-#include <neo/network/p2p/payloads/block_payload.h>
-#include <neo/network/p2p/payloads/transaction_payload.h>
+#include <neo/network/p2p/payloads/inv_payload.h>
 #include <neo/network/p2p/payloads/mempool_payload.h>
 #include <neo/network/p2p/payloads/not_found_payload.h>
+#include <neo/network/p2p/payloads/ping_payload.h>
 #include <neo/network/p2p/payloads/reject_payload.h>
-#include <neo/network/p2p/payloads/filter_load_payload.h>
-#include <neo/network/p2p/payloads/filter_add_payload.h>
-#include <neo/network/p2p/payloads/filter_clear_payload.h>
-#include <neo/core/logging.h>
+#include <neo/network/p2p/payloads/transaction_payload.h>
+#include <neo/network/p2p/payloads/verack_payload.h>
+#include <neo/network/p2p/payloads/version_payload.h>
+#include <neo/network/payload_factory.h>
 
 namespace neo::network::p2p
 {
@@ -74,8 +74,8 @@ std::shared_ptr<IPayload> PayloadFactory::Create(MessageCommand command)
 std::shared_ptr<IPayload> PayloadFactory::Create(PayloadType type)
 {
     // Map payload type to message command and use the existing Create method
-    MessageCommand command = MessageCommand::Version; // Default
-    
+    MessageCommand command = MessageCommand::Version;  // Default
+
     switch (type)
     {
         case PayloadType::Version:
@@ -142,7 +142,7 @@ std::shared_ptr<IPayload> PayloadFactory::Create(PayloadType type)
             LOG_WARNING("Unknown payload type: {}", static_cast<uint8_t>(type));
             return nullptr;
     }
-    
+
     return Create(command);
 }
 
@@ -158,8 +158,7 @@ std::shared_ptr<IPayload> PayloadFactory::DeserializePayload(MessageCommand comm
         }
         catch (const std::exception& e)
         {
-            LOG_ERROR("Failed to deserialize payload for command {}: {}", 
-                     static_cast<uint8_t>(command), e.what());
+            LOG_ERROR("Failed to deserialize payload for command {}: {}", static_cast<uint8_t>(command), e.what());
             return nullptr;
         }
     }
@@ -178,8 +177,7 @@ std::shared_ptr<IPayload> PayloadFactory::DeserializePayload(PayloadType type, i
         }
         catch (const std::exception& e)
         {
-            LOG_ERROR("Failed to deserialize payload for type {}: {}", 
-                     static_cast<uint8_t>(type), e.what());
+            LOG_ERROR("Failed to deserialize payload for type {}: {}", static_cast<uint8_t>(type), e.what());
             return nullptr;
         }
     }

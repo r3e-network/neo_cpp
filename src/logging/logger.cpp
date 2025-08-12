@@ -19,17 +19,41 @@ Logger& Logger::GetDefault()
 
 Logger& Logger::Instance() { return GetDefault(); }
 
-void Logger::Debug(const std::string& category, const std::string& message) { Debug("[" + category + "] " + message); }
+void Logger::Debug(const std::string& category, const std::string& message)
+{
+    std::string formatted;
+    formatted.reserve(category.size() + message.size() + 4);
+    formatted.append("[").append(category).append("] ").append(message);
+    Debug(std::move(formatted));
+}
 
-void Logger::Info(const std::string& category, const std::string& message) { Info("[" + category + "] " + message); }
+void Logger::Info(const std::string& category, const std::string& message)
+{
+    std::string formatted;
+    formatted.reserve(category.size() + message.size() + 4);
+    formatted.append("[").append(category).append("] ").append(message);
+    Info(std::move(formatted));
+}
 
-void Logger::Warn(const std::string& category, const std::string& message) { Warn("[" + category + "] " + message); }
+void Logger::Warn(const std::string& category, const std::string& message)
+{
+    std::string formatted;
+    formatted.reserve(category.size() + message.size() + 4);
+    formatted.append("[").append(category).append("] ").append(message);
+    Warn(std::move(formatted));
+}
 
 void Logger::Warning(const std::string& message) { Warn(message); }
 
 void Logger::Warning(const std::string& category, const std::string& message) { Warn(category, message); }
 
-void Logger::Error(const std::string& category, const std::string& message) { Error("[" + category + "] " + message); }
+void Logger::Error(const std::string& category, const std::string& message)
+{
+    std::string formatted;
+    formatted.reserve(category.size() + message.size() + 4);
+    formatted.append("[").append(category).append("] ").append(message);
+    Error(std::move(formatted));
+}
 
 std::shared_ptr<Logger> Logger::Create(const std::string& name) { return std::make_shared<Logger>(name); }
 

@@ -1,13 +1,13 @@
 #include <neo/core/logging.h>
 #include <neo/core/performance_config.h>
 
-#include <thread>
 #include <fstream>
 #include <sstream>
+#include <thread>
 
 #ifdef __APPLE__
-#include <sys/types.h>
 #include <sys/sysctl.h>
+#include <sys/types.h>
 #elif defined(_WIN32)
 #include <windows.h>
 #endif
@@ -168,7 +168,7 @@ void PerformanceConfig::auto_tune()
     // Auto-tune based on available memory
     // Query system memory or use conservative default
     size_t available_memory = 8ULL * 1024 * 1024 * 1024;  // Default to 8GB if detection fails
-    
+
 #ifdef __linux__
     // Linux: Read from /proc/meminfo
     std::ifstream meminfo("/proc/meminfo");

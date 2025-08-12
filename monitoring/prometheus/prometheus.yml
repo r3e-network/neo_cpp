@@ -1,0 +1,28 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'neo-cpp-node'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          instance: 'mainnet-node-1'
+          network: 'mainnet'
+    
+  - job_name: 'neo-cpp-testnet'
+    static_configs:
+      - targets: ['localhost:9091']
+        labels:
+          instance: 'testnet-node-1'
+          network: 'testnet'
+
+# Alerting rules
+rule_files:
+  - 'alerts.yml'
+
+# Alert manager configuration (optional)
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['localhost:9093']

@@ -19,7 +19,7 @@ class ByteVector
    public:
     using iterator = std::vector<uint8_t>::iterator;
     using const_iterator = std::vector<uint8_t>::const_iterator;
-    
+
     /**
      * @brief Constructs an empty ByteVector.
      */

@@ -1,0 +1,155 @@
+{
+  "dashboard": {
+    "title": "Neo C++ Node Monitoring",
+    "uid": "neo-cpp-monitoring",
+    "timezone": "browser",
+    "refresh": "5s",
+    "schemaVersion": 30,
+    "panels": [
+      {
+        "title": "Block Height",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+        "targets": [
+          {
+            "expr": "neo_block_height",
+            "legendFormat": "Current Height"
+          }
+        ]
+      },
+      {
+        "title": "Connected Peers",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+        "targets": [
+          {
+            "expr": "neo_peers_connected",
+            "legendFormat": "Peer Count"
+          }
+        ]
+      },
+      {
+        "title": "Transaction Rate",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+        "targets": [
+          {
+            "expr": "rate(neo_transactions_total[1m])",
+            "legendFormat": "TX/sec"
+          }
+        ]
+      },
+      {
+        "title": "Memory Pool Size",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+        "targets": [
+          {
+            "expr": "neo_mempool_size",
+            "legendFormat": "Mempool Size"
+          }
+        ]
+      },
+      {
+        "title": "Block Processing Time",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 16},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.99, neo_block_processing_time)",
+            "legendFormat": "P99"
+          },
+          {
+            "expr": "histogram_quantile(0.95, neo_block_processing_time)",
+            "legendFormat": "P95"
+          },
+          {
+            "expr": "histogram_quantile(0.50, neo_block_processing_time)",
+            "legendFormat": "P50"
+          }
+        ]
+      },
+      {
+        "title": "RPC Request Rate",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 16},
+        "targets": [
+          {
+            "expr": "sum(rate(neo_rpc_requests_total[1m])) by (method)",
+            "legendFormat": "{{method}}"
+          }
+        ]
+      },
+      {
+        "title": "VM Execution Time",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 24},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.99, neo_vm_execution_time)",
+            "legendFormat": "P99"
+          },
+          {
+            "expr": "histogram_quantile(0.95, neo_vm_execution_time)",
+            "legendFormat": "P95"
+          }
+        ]
+      },
+      {
+        "title": "Storage Operations",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 24},
+        "targets": [
+          {
+            "expr": "sum(rate(neo_storage_operations_total[1m])) by (operation)",
+            "legendFormat": "{{operation}}"
+          }
+        ]
+      },
+      {
+        "title": "Consensus Rounds",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 32},
+        "targets": [
+          {
+            "expr": "neo_consensus_rounds",
+            "legendFormat": "Total Rounds"
+          }
+        ]
+      },
+      {
+        "title": "Node Uptime",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 32},
+        "targets": [
+          {
+            "expr": "neo_node_uptime_seconds",
+            "legendFormat": "Uptime"
+          }
+        ]
+      },
+      {
+        "title": "Total Transactions",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 32},
+        "targets": [
+          {
+            "expr": "neo_transactions_total",
+            "legendFormat": "Total TX"
+          }
+        ]
+      },
+      {
+        "title": "RPC Response Time",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 6, "x": 18, "y": 32},
+        "targets": [
+          {
+            "expr": "avg(neo_rpc_request_duration_sum / neo_rpc_request_duration_count)",
+            "legendFormat": "Avg Response Time"
+          }
+        ]
+      }
+    ]
+  }
+}

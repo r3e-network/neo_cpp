@@ -1,8 +1,8 @@
 #include <neo/core/logging.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/memory_stream.h>
-#include <neo/network/p2p/protocol_handler.h>
 #include <neo/network/p2p/payloads/reject_payload.h>
+#include <neo/network/p2p/protocol_handler.h>
 
 namespace neo::network::p2p
 {
@@ -17,11 +17,11 @@ ProtocolHandler::ProtocolHandler(const Config& config, std::shared_ptr<persisten
 void ProtocolHandler::OnPeerConnected(const io::UInt256& peer_id, bool is_outbound)
 {
     LOG_DEBUG("Peer connected: peer={} outbound={}", peer_id.ToString(), is_outbound);
-    
+
     std::lock_guard<std::mutex> lock(mutex_);
     peer_states_[peer_id] = PeerState();
     // Initialize peer state
-    
+
     // Send version message to new peer
     if (send_callback_)
     {
@@ -32,7 +32,7 @@ void ProtocolHandler::OnPeerConnected(const io::UInt256& peer_id, bool is_outbou
 void ProtocolHandler::OnPeerDisconnected(const io::UInt256& peer_id)
 {
     LOG_DEBUG("Peer disconnected: peer={}", peer_id.ToString());
-    
+
     std::lock_guard<std::mutex> lock(mutex_);
     peer_states_.erase(peer_id);
 }
@@ -177,9 +177,9 @@ void ProtocolHandler::HandleMessage(const io::UInt256& peer_id, const Message& m
 void ProtocolHandler::SendHandshake(const io::UInt256& peer_id)
 {
     LOG_DEBUG("Sending handshake to peer: {}", peer_id.ToString());
-    
+
     if (!send_callback_) return;
-    
+
     // Create version payload
     auto versionPayload = std::make_shared<payloads::VersionPayload>();
     versionPayload->SetVersion(config_.protocol_version);
@@ -188,7 +188,7 @@ void ProtocolHandler::SendHandshake(const io::UInt256& peer_id)
     versionPayload->SetNonce(12345);  // Random nonce
     versionPayload->SetUserAgent(config_.user_agent);
     // Start height and relay are handled by the payload
-    
+
     auto versionMsg = Message::Create(MessageCommand::Version, versionPayload);
     send_callback_(peer_id, versionMsg);
 }
@@ -196,14 +196,14 @@ void ProtocolHandler::SendHandshake(const io::UInt256& peer_id)
 void ProtocolHandler::RequestBlocks(const io::UInt256& peer_id, const std::vector<io::UInt256>& hashes)
 {
     LOG_DEBUG("Requesting blocks from peer={} count={}", peer_id.ToString(), hashes.size());
-    
+
     if (!send_callback_ || hashes.empty()) return;
-    
+
     // Create inventory payload with block hashes
     auto invPayload = std::make_shared<payloads::InvPayload>();
     invPayload->SetType(InventoryType::Block);
     invPayload->SetHashes(hashes);
-    
+
     auto getDataMsg = Message::Create(MessageCommand::GetData, invPayload);
     send_callback_(peer_id, getDataMsg);
 }
@@ -211,28 +211,28 @@ void ProtocolHandler::RequestBlocks(const io::UInt256& peer_id, const std::vecto
 void ProtocolHandler::RequestTransactions(const io::UInt256& peer_id, const std::vector<io::UInt256>& hashes)
 {
     LOG_DEBUG("Requesting transactions from peer={} count={}", peer_id.ToString(), hashes.size());
-    
+
     if (!send_callback_ || hashes.empty()) return;
-    
+
     // Create inventory payload with transaction hashes
     auto invPayload = std::make_shared<payloads::InvPayload>();
     invPayload->SetType(InventoryType::TX);
     invPayload->SetHashes(hashes);
-    
+
     auto getDataMsg = Message::Create(MessageCommand::GetData, invPayload);
     send_callback_(peer_id, getDataMsg);
 }
 
-void ProtocolHandler::BroadcastBlock(const ledger::Block& block) 
-{ 
+void ProtocolHandler::BroadcastBlock(const ledger::Block& block)
+{
     LOG_DEBUG("Broadcasting block: index={} hash={}", block.GetIndex(), block.GetHash().ToString());
-    
+
     if (!send_callback_) return;
-    
+
     // Create block payload
     auto blockPayload = std::make_shared<payloads::BlockPayload>(std::make_shared<ledger::Block>(block));
     auto blockMsg = Message::Create(MessageCommand::Block, blockPayload);
-    
+
     // Broadcast to all connected peers
     std::lock_guard<std::mutex> lock(mutex_);
     for (const auto& [peer_id, state] : peer_states_)
@@ -247,13 +247,14 @@ void ProtocolHandler::BroadcastBlock(const ledger::Block& block)
 void ProtocolHandler::BroadcastTransaction(const ledger::Transaction& transaction)
 {
     LOG_DEBUG("Broadcasting transaction: hash={}", transaction.GetHash().ToString());
-    
+
     if (!send_callback_) return;
-    
+
     // Create transaction payload
-    auto txPayload = std::make_shared<payloads::TransactionPayload>(std::make_shared<payloads::Neo3Transaction>(transaction));
+    auto txPayload =
+        std::make_shared<payloads::TransactionPayload>(std::make_shared<payloads::Neo3Transaction>(transaction));
     auto txMsg = Message::Create(MessageCommand::Transaction, txPayload);
-    
+
     // Broadcast to all connected peers
     std::lock_guard<std::mutex> lock(mutex_);
     for (const auto& [peer_id, state] : peer_states_)
@@ -268,13 +269,13 @@ void ProtocolHandler::BroadcastTransaction(const ledger::Transaction& transactio
 bool ProtocolHandler::IsSynchronized() const
 {
     if (!blockchain_) return false;
-    
+
     std::lock_guard<std::mutex> lock(mutex_);
-    
+
     // Check if we have at least one version_received && state.verack_received peer
     bool has_peer = false;
     uint32_t max_peer_height = 0;
-    
+
     for (const auto& [peer_id, state] : peer_states_)
     {
         if (state.version_received && state.verack_received)
@@ -283,9 +284,9 @@ bool ProtocolHandler::IsSynchronized() const
             max_peer_height = std::max(max_peer_height, state.start_height);
         }
     }
-    
-    if (!has_peer) return true; // No peers, consider synchronized
-    
+
+    if (!has_peer) return true;  // No peers, consider synchronized
+
     // We're synchronized if our height is close to the best peer's height
     uint32_t our_height = 0;  // TODO: Get blockchain height from DataCache
     return our_height >= max_peer_height || (max_peer_height - our_height) <= 1;
@@ -294,7 +295,7 @@ bool ProtocolHandler::IsSynchronized() const
 size_t ProtocolHandler::GetHandshakedPeerCount() const
 {
     std::lock_guard<std::mutex> lock(mutex_);
-    
+
     size_t count = 0;
     for (const auto& [peer_id, state] : peer_states_)
     {
@@ -303,7 +304,7 @@ size_t ProtocolHandler::GetHandshakedPeerCount() const
             count++;
         }
     }
-    
+
     return count;
 }
 
@@ -353,16 +354,16 @@ void ProtocolHandler::HandleVersion(const io::UInt256& peer_id, const payloads::
     LOG_INFO("Version handshake from peer {} completed", peer_id.ToString());
 }
 
-void ProtocolHandler::HandleVerack(const io::UInt256& peer_id) 
-{ 
+void ProtocolHandler::HandleVerack(const io::UInt256& peer_id)
+{
     LOG_DEBUG("Received verack from peer: {}", peer_id.ToString());
-    
+
     std::lock_guard<std::mutex> lock(mutex_);
     auto it = peer_states_.find(peer_id);
     if (it != peer_states_.end())
     {
         it->second.verack_received = true;
-        
+
         // If we've also sent version, handshake is complete
         if (it->second.version_received && it->second.verack_received)
         {
@@ -372,15 +373,15 @@ void ProtocolHandler::HandleVerack(const io::UInt256& peer_id)
     }
 }
 
-void ProtocolHandler::HandleGetAddr(const io::UInt256& peer_id) 
-{ 
+void ProtocolHandler::HandleGetAddr(const io::UInt256& peer_id)
+{
     LOG_DEBUG("Received getaddr from peer: {}", peer_id.ToString());
-    
+
     if (!send_callback_) return;
-    
+
     // Send known peer addresses
     auto addrPayload = std::make_shared<payloads::AddrPayload>();
-    
+
     // Add known peer addresses (limited to prevent flooding)
     std::lock_guard<std::mutex> lock(mutex_);
     size_t count = 0;
@@ -392,7 +393,7 @@ void ProtocolHandler::HandleGetAddr(const io::UInt256& peer_id)
             // Network address management handled by connection layer
         }
     }
-    
+
     if (count > 0)
     {
         auto addrMsg = Message::Create(MessageCommand::Addr, addrPayload);
@@ -403,7 +404,7 @@ void ProtocolHandler::HandleGetAddr(const io::UInt256& peer_id)
 void ProtocolHandler::HandleAddr(const io::UInt256& peer_id, const payloads::AddrPayload& payload)
 {
     LOG_DEBUG("Received addr from peer: {} with {} addresses", peer_id.ToString(), payload.GetAddressList().size());
-    
+
     // Store received addresses for future connections
     for (const auto& addr : payload.GetAddressList())
     {
@@ -444,19 +445,19 @@ void ProtocolHandler::HandlePong(const io::UInt256& peer_id, const payloads::Pin
 void ProtocolHandler::HandleGetHeaders(const io::UInt256& peer_id, const payloads::GetHeadersPayload& payload)
 {
     LOG_DEBUG("Received getheaders from peer: {}", peer_id.ToString());
-    
+
     if (!send_callback_ || !blockchain_) return;
-    
+
     // Create headers response
     auto headersPayload = std::make_shared<payloads::HeadersPayload>();
-    
+
     // Get headers from blockchain
     uint32_t count = payload.GetCount();
-    if (count > 2000) count = 2000; // Limit headers per message
-    
+    if (count > 2000) count = 2000;  // Limit headers per message
+
     // Add headers to payload
     // Fetch headers from blockchain based on request parameters
-    
+
     auto headersMsg = Message::Create(MessageCommand::Headers, headersPayload);
     send_callback_(peer_id, headersMsg);
 }
@@ -464,9 +465,9 @@ void ProtocolHandler::HandleGetHeaders(const io::UInt256& peer_id, const payload
 void ProtocolHandler::HandleHeaders(const io::UInt256& peer_id, const payloads::HeadersPayload& payload)
 {
     LOG_DEBUG("Received headers from peer: {} count={}", peer_id.ToString(), payload.GetHeaders().size());
-    
+
     if (!blockchain_) return;
-    
+
     // Process received headers
     for (const auto& header : payload.GetHeaders())
     {
@@ -478,18 +479,18 @@ void ProtocolHandler::HandleHeaders(const io::UInt256& peer_id, const payloads::
 void ProtocolHandler::HandleGetBlocks(const io::UInt256& peer_id, const payloads::GetBlocksPayload& payload)
 {
     LOG_DEBUG("Received getblocks from peer: {} start={}", peer_id.ToString(), payload.GetHashStart().ToString());
-    
+
     if (!send_callback_ || !blockchain_) return;
-    
+
     // Send inventory of blocks
     auto invPayload = std::make_shared<payloads::InvPayload>();
-    
+
     uint32_t count = payload.GetCount();
-    if (count > 500) count = 500; // Limit blocks per inventory
-    
+    if (count > 500) count = 500;  // Limit blocks per inventory
+
     // Add block hashes to inventory
     // Fetch block hashes from blockchain starting from requested position
-    
+
     if (invPayload->GetHashes().size() > 0)
     {
         auto invMsg = Message::Create(MessageCommand::Inv, invPayload);
@@ -500,9 +501,9 @@ void ProtocolHandler::HandleGetBlocks(const io::UInt256& peer_id, const payloads
 void ProtocolHandler::HandleGetData(const io::UInt256& peer_id, const payloads::InvPayload& payload)
 {
     LOG_DEBUG("Received getdata from peer: {} items={}", peer_id.ToString(), payload.GetHashes().size());
-    
+
     if (!send_callback_) return;
-    
+
     // Send requested data
     auto type = payload.GetType();
     for (const auto& hash : payload.GetHashes())
@@ -525,7 +526,8 @@ void ProtocolHandler::HandleGetData(const io::UInt256& peer_id, const payloads::
             auto tx = mempool_->GetTransaction(hash);
             if (tx)
             {
-                auto txPayload = std::make_shared<payloads::TransactionPayload>(std::make_shared<payloads::Neo3Transaction>(*tx));
+                auto txPayload =
+                    std::make_shared<payloads::TransactionPayload>(std::make_shared<payloads::Neo3Transaction>(*tx));
                 auto txMsg = Message::Create(MessageCommand::Transaction, txPayload);
                 send_callback_(peer_id, txMsg);
             }
@@ -535,15 +537,15 @@ void ProtocolHandler::HandleGetData(const io::UInt256& peer_id, const payloads::
 
 void ProtocolHandler::HandleGetBlockByIndex(const io::UInt256& peer_id, const payloads::GetBlockByIndexPayload& payload)
 {
-    LOG_DEBUG("Received getblockbyindex from peer: {} index={} count={}", 
-              peer_id.ToString(), payload.GetIndexStart(), payload.GetCount());
-    
+    LOG_DEBUG("Received getblockbyindex from peer: {} index={} count={}", peer_id.ToString(), payload.GetIndexStart(),
+              payload.GetCount());
+
     if (!send_callback_ || !blockchain_) return;
-    
+
     uint32_t start = payload.GetIndexStart();
     uint16_t count = payload.GetCount();
-    if (count > 500) count = 500; // Limit blocks per response
-    
+    if (count > 500) count = 500;  // Limit blocks per response
+
     // Send requested blocks
     for (uint32_t i = start; i < start + count; i++)
     {
@@ -557,7 +559,7 @@ void ProtocolHandler::HandleGetBlockByIndex(const io::UInt256& peer_id, const pa
         }
         else
         {
-            break; // No more blocks available
+            break;  // No more blocks available
         }
     }
 }
@@ -565,18 +567,18 @@ void ProtocolHandler::HandleGetBlockByIndex(const io::UInt256& peer_id, const pa
 void ProtocolHandler::HandleInv(const io::UInt256& peer_id, const payloads::InvPayload& payload)
 {
     LOG_DEBUG("Received inv from peer: {} items={}", peer_id.ToString(), payload.GetHashes().size());
-    
+
     if (!send_callback_) return;
-    
+
     // Request data for items we don't have
     auto getDataPayload = std::make_shared<payloads::InvPayload>();
     std::vector<io::UInt256> neededHashes;
-    
+
     auto type = payload.GetType();
     for (const auto& hash : payload.GetHashes())
     {
         bool need_data = false;
-        
+
         if (type == InventoryType::Block && blockchain_)
         {
             // Check if we have this block
@@ -594,13 +596,13 @@ void ProtocolHandler::HandleInv(const io::UInt256& peer_id, const payloads::InvP
                 need_data = true;
             }
         }
-        
+
         if (need_data)
         {
             neededHashes.push_back(hash);
         }
     }
-    
+
     if (!neededHashes.empty())
     {
         getDataPayload->SetType(type);
@@ -613,11 +615,11 @@ void ProtocolHandler::HandleInv(const io::UInt256& peer_id, const payloads::InvP
 void ProtocolHandler::HandleBlock(const io::UInt256& peer_id, const payloads::BlockPayload& payload)
 {
     auto block = payload.GetBlock();
-    LOG_DEBUG("Received block from peer: {} index={} hash={}", 
-              peer_id.ToString(), block->GetIndex(), block->GetHash().ToString());
-    
+    LOG_DEBUG("Received block from peer: {} index={} hash={}", peer_id.ToString(), block->GetIndex(),
+              block->GetHash().ToString());
+
     if (!blockchain_) return;
-    
+
     // Validate and add block to blockchain
     try
     {
@@ -627,10 +629,10 @@ void ProtocolHandler::HandleBlock(const io::UInt256& peer_id, const payloads::Bl
             // TODO: Check if we have the previous block
             LOG_WARNING("Block validation not yet implemented");
         }
-        
+
         // TODO: Add block to blockchain via DataCache
         // blockchain_->AddBlock(*block);
-        
+
         // Relay to other peers
         RelayInventory(InventoryType::Block, block->GetHash(), peer_id);
     }
@@ -644,15 +646,15 @@ void ProtocolHandler::HandleTransaction(const io::UInt256& peer_id, const payloa
 {
     auto tx = payload.GetTransaction();
     LOG_DEBUG("Received transaction from peer: {} hash={}", peer_id.ToString(), tx->GetHash().ToString());
-    
+
     if (!mempool_) return;
-    
+
     // Add transaction to mempool
     try
     {
         // TODO: Validate transaction
         // Transaction validation not yet implemented
-        
+
         // Add to mempool
         if (mempool_->TryAdd(*tx))
         {
@@ -666,15 +668,15 @@ void ProtocolHandler::HandleTransaction(const io::UInt256& peer_id, const payloa
     }
 }
 
-void ProtocolHandler::HandleMempool(const io::UInt256& peer_id) 
-{ 
+void ProtocolHandler::HandleMempool(const io::UInt256& peer_id)
+{
     LOG_DEBUG("Received mempool request from peer: {}", peer_id.ToString());
-    
+
     if (!send_callback_ || !mempool_) return;
-    
+
     // Send inventory of mempool transactions
     auto invPayload = std::make_shared<payloads::InvPayload>();
-    
+
     // Get transactions for block (for now, just use a small number)
     auto transactions = mempool_->GetTransactionsForBlock(100);
     std::vector<io::UInt256> txHashes;
@@ -684,7 +686,7 @@ void ProtocolHandler::HandleMempool(const io::UInt256& peer_id)
     }
     invPayload->SetType(InventoryType::TX);
     invPayload->SetHashes(txHashes);
-    
+
     if (invPayload->GetHashes().size() > 0)
     {
         auto invMsg = Message::Create(MessageCommand::Inv, invPayload);
@@ -695,14 +697,13 @@ void ProtocolHandler::HandleMempool(const io::UInt256& peer_id)
 void ProtocolHandler::HandleNotFound(const io::UInt256& peer_id, const payloads::InvPayload& payload)
 {
     LOG_DEBUG("Received notfound from peer: {} items={}", peer_id.ToString(), payload.GetHashes().size());
-    
+
     // Log items that peer doesn't have
     auto type = payload.GetType();
     for (const auto& hash : payload.GetHashes())
     {
-        LOG_DEBUG("Peer {} doesn't have {} {}", peer_id.ToString(), 
-                  (type == InventoryType::Block ? "block" : "transaction"),
-                  hash.ToString());
+        LOG_DEBUG("Peer {} doesn't have {} {}", peer_id.ToString(),
+                  (type == InventoryType::Block ? "block" : "transaction"), hash.ToString());
     }
 }
 
@@ -710,7 +711,7 @@ std::vector<io::UInt256> ProtocolHandler::GetRelayPeers(const io::UInt256& exclu
 {
     std::lock_guard<std::mutex> lock(mutex_);
     std::vector<io::UInt256> peers;
-    
+
     for (const auto& [peer_id, state] : peer_states_)
     {
         if (state.version_received && state.verack_received && peer_id != exclude_peer)
@@ -718,7 +719,7 @@ std::vector<io::UInt256> ProtocolHandler::GetRelayPeers(const io::UInt256& exclu
             peers.push_back(peer_id);
         }
     }
-    
+
     return peers;
 }
 
@@ -726,15 +727,15 @@ void ProtocolHandler::RelayInventory(payloads::InventoryType type, const io::UIn
                                      const io::UInt256& source_peer)
 {
     LOG_DEBUG("Relaying inventory: type={} hash={}", static_cast<uint8_t>(type), hash.ToString());
-    
+
     if (!send_callback_) return;
-    
+
     // Create inventory message
     auto invPayload = std::make_shared<payloads::InvPayload>();
     invPayload->SetType(type);
     invPayload->SetHashes({hash});
     auto invMsg = Message::Create(MessageCommand::Inv, invPayload);
-    
+
     // Send to all peers except source
     auto peers = GetRelayPeers(source_peer);
     for (const auto& peer_id : peers)
@@ -748,15 +749,15 @@ void ProtocolHandler::RelayInventory(payloads::InventoryType type, const io::UIn
 void ProtocolHandler::SendReject(const io::UInt256& peer_id, const std::string& message, const std::string& reason)
 {
     LOG_DEBUG("Sending reject to peer={} message={} reason={}", peer_id.ToString(), message, reason);
-    
+
     if (!send_callback_) return;
-    
+
     // Create reject payload
     auto rejectPayload = std::make_shared<payloads::RejectPayload>();
     // TODO: RejectPayload doesn't have SetMessage/SetReason methods yet
     // rejectPayload->SetMessage(message);
     // rejectPayload->SetReason(reason);
-    
+
     auto rejectMsg = Message::Create(MessageCommand::Reject, rejectPayload);
     send_callback_(peer_id, rejectMsg);
 }

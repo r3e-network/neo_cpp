@@ -13,7 +13,7 @@ enum class InventoryType : uint8_t
      * @brief Transaction inventory.
      */
     Transaction = 0x2b,  // Neo N3 value
-    
+
     /**
      * @brief Alias for Transaction (backward compatibility).
      */
@@ -28,7 +28,7 @@ enum class InventoryType : uint8_t
      * @brief Extensible payload inventory.
      */
     Extensible = 0x2e,  // Neo N3 value
-    
+
     /**
      * @brief Consensus inventory (legacy).
      */

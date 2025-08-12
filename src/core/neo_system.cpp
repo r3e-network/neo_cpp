@@ -750,14 +750,14 @@ size_t NeoSystem::ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::B
                         LOG_ERROR("Block hash mismatch at height {}", block->GetIndex());
                         continue;
                     }
-                    
+
                     // Verify previous block hash linkage
                     if (block->GetIndex() > 0 && block->GetPrevHash() != blockchain_->GetCurrentBlockHash())
                     {
                         LOG_ERROR("Previous block hash mismatch at height {}", block->GetIndex());
                         continue;
                     }
-                    
+
                     // Verify merkle root
                     auto merkleRoot = block->ComputeMerkleRoot();
                     if (merkleRoot != block->GetMerkleRoot())
@@ -765,7 +765,7 @@ size_t NeoSystem::ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::B
                         LOG_ERROR("Merkle root mismatch at height {}", block->GetIndex());
                         continue;
                     }
-                    
+
                     // Verify witness signatures
                     if (!block->VerifyWitnesses())
                     {
@@ -1037,10 +1037,10 @@ void NeoSystem::initialize_plugins()
 
         // Plugin system initialization - optional feature
         LOG_INFO("Plugin system initialization - checking for configured plugins");
-        
+
         auto& plugin_manager = plugins::PluginManager::GetInstance();
         std::unordered_map<std::string, std::string> plugin_settings;
-        
+
         // Load plugins if configured
         if (!plugin_settings.empty())
         {

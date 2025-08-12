@@ -1,5 +1,6 @@
 # Create the integration tests
 add_executable(test_integration
+    test_integration_main.cpp  # Main function with signal handling
     # test_blockchain.cpp # Disabled due to failures
     # test_network.cpp # Disabled due to failures
     # test_rpc.cpp # Disabled due to failures

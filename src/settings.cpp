@@ -1,3 +1,4 @@
+#include <neo/logging/logger.h>
 #include <neo/protocol_settings.h>
 #include <neo/settings.h>
 
@@ -161,8 +162,14 @@ Settings Settings::LoadFromJson(const std::string& jsonContent)
         }
         return settings;
     }
+    catch (const std::exception& e)
+    {
+        neo::logging::Logger::Instance().Error("Settings", "Failed to load settings: " + std::string(e.what()));
+        return GetDefault();
+    }
     catch (...)
     {
+        neo::logging::Logger::Instance().Error("Settings", "Unknown error loading settings");
         return GetDefault();
     }
 }
@@ -341,8 +348,14 @@ void Settings::LoadStorageSettings(const std::string& json)
         if (s.contains("EnableCompression")) Storage.EnableCompression = s["EnableCompression"].get<bool>();
         if (s.contains("MaxOpenFiles")) Storage.MaxOpenFiles = s["MaxOpenFiles"].get<int>();
     }
-    catch (...)
-    { /* keep existing */
+    catch (const nlohmann::json::exception& e)
+    {
+        neo::logging::Logger::Instance().Warning("Settings", "JSON parse error: " + std::string(e.what()));
+        /* keep existing */
+    }
+    catch (const std::exception& e)
+    {
+        neo::logging::Logger::Instance().Error("Settings", "Error parsing settings: " + std::string(e.what()));
     }
 }
 
@@ -357,8 +370,14 @@ void Settings::LoadRpcSettings(const std::string& json)
         if (r.contains("MaxConnections")) RPC.MaxConnections = r["MaxConnections"].get<int>();
         if (r.contains("RequestTimeoutMs")) RPC.RequestTimeoutMs = r["RequestTimeoutMs"].get<int>();
     }
-    catch (...)
-    { /* keep existing */
+    catch (const nlohmann::json::exception& e)
+    {
+        neo::logging::Logger::Instance().Warning("Settings", "JSON parse error: " + std::string(e.what()));
+        /* keep existing */
+    }
+    catch (const std::exception& e)
+    {
+        neo::logging::Logger::Instance().Error("Settings", "Error parsing settings: " + std::string(e.what()));
     }
 }
 
@@ -385,8 +404,14 @@ void Settings::LoadP2PSettings(const std::string& json)
             Plugins.PluginConfigs["P2P"]["Seeds"] = csv;
         }
     }
-    catch (...)
-    { /* keep existing */
+    catch (const nlohmann::json::exception& e)
+    {
+        neo::logging::Logger::Instance().Warning("Settings", "JSON parse error: " + std::string(e.what()));
+        /* keep existing */
+    }
+    catch (const std::exception& e)
+    {
+        neo::logging::Logger::Instance().Error("Settings", "Error parsing settings: " + std::string(e.what()));
     }
 }
 
@@ -402,8 +427,14 @@ void Settings::LoadApplicationSettings(const std::string& json)
         if (a.contains("MaxLogFileSizeMB")) Application.MaxLogFileSizeMB = a["MaxLogFileSizeMB"].get<int>();
         if (a.contains("MaxLogFiles")) Application.MaxLogFiles = a["MaxLogFiles"].get<int>();
     }
-    catch (...)
-    { /* keep existing */
+    catch (const nlohmann::json::exception& e)
+    {
+        neo::logging::Logger::Instance().Warning("Settings", "JSON parse error: " + std::string(e.what()));
+        /* keep existing */
+    }
+    catch (const std::exception& e)
+    {
+        neo::logging::Logger::Instance().Error("Settings", "Error parsing settings: " + std::string(e.what()));
     }
 }
 

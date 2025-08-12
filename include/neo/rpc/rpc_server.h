@@ -2,6 +2,7 @@
 
 #include <neo/core/logging.h>
 #include <neo/io/json.h>
+#include <neo/ledger/transaction_pool_manager.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/persistence/data_cache.h>
 
@@ -55,6 +56,7 @@ class RpcServer
     // Dependencies
     std::shared_ptr<persistence::DataCache> blockchain_;
     std::shared_ptr<network::p2p::LocalNode> local_node_;
+    std::shared_ptr<ledger::TransactionPoolManager> transaction_pool_;  // C# Neo compatibility
 
     // Statistics
     std::atomic<uint64_t> total_requests_{0};
@@ -89,6 +91,11 @@ class RpcServer
      * @brief Set local node for P2P information
      */
     void SetLocalNode(std::shared_ptr<network::p2p::LocalNode> node) { local_node_ = node; }
+
+    /**
+     * @brief Set transaction pool manager (C# Neo compatibility)
+     */
+    void SetTransactionPool(std::shared_ptr<ledger::TransactionPoolManager> pool) { transaction_pool_ = pool; }
 
     /**
      * @brief Get server statistics

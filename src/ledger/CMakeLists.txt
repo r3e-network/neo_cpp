@@ -3,7 +3,7 @@
 # Create ledger library with complete implementations
 add_library(neo_ledger OBJECT
     blockchain_utilities.cpp  # Utility implementations for blockchain
-    blockchain_fallback.cpp  # Fallback implementations
+    # blockchain_fallback.cpp  # Disabled - conflicts with blockchain_complete.cpp
     ledger_dummy.cpp
     blockchain_complete.cpp  # Complete blockchain implementation
     block.cpp
@@ -18,6 +18,8 @@ add_library(neo_ledger OBJECT
     witness.cpp
     signer.cpp
     witness_rule.cpp
+    transaction_pool_manager.cpp  # Transaction pool management
+    state_synchronization_manager.cpp  # State synchronization
     # transaction_validator.cpp  # Disabled - needs Transaction class refactoring
 )
 

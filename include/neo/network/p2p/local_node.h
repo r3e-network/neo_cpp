@@ -9,12 +9,11 @@
 #include <neo/network/p2p/channels_config.h>
 #include <neo/network/p2p/message.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
+#include <neo/network/p2p/payloads/block_payload.h>
+#include <neo/network/p2p/payloads/extensible_payload.h>
 #include <neo/network/p2p/payloads/filter_add_payload.h>
 #include <neo/network/p2p/payloads/filter_clear_payload.h>
 #include <neo/network/p2p/payloads/filter_load_payload.h>
-#include <neo/network/p2p/payloads/block_payload.h>
-#include <neo/network/p2p/payloads/transaction_payload.h>
-#include <neo/network/p2p/payloads/extensible_payload.h>
 #include <neo/network/p2p/payloads/get_block_by_index_payload.h>
 #include <neo/network/p2p/payloads/get_blocks_payload.h>
 #include <neo/network/p2p/payloads/get_data_payload.h>
@@ -23,6 +22,7 @@
 #include <neo/network/p2p/payloads/inv_payload.h>
 #include <neo/network/p2p/payloads/mempool_payload.h>
 #include <neo/network/p2p/payloads/ping_payload.h>
+#include <neo/network/p2p/payloads/transaction_payload.h>
 #include <neo/network/p2p/payloads/verack_payload.h>
 #include <neo/network/p2p/payloads/version_payload.h>
 #include <neo/network/p2p/peer.h>
@@ -372,34 +372,34 @@ class LocalNode
      * @param payload The filterload payload.
      */
     void OnFilterLoadMessageReceived(RemoteNode* remoteNode, const payloads::FilterLoadPayload& payload);
-    
+
     /**
      * @brief Called when a block message is received.
      * @param remoteNode The remote node.
      * @param payload The block payload.
      */
     void OnBlockMessageReceived(RemoteNode* remoteNode, const payloads::BlockPayload& payload);
-    
+
     /**
      * @brief Called when a transaction message is received.
      * @param remoteNode The remote node.
      * @param payload The transaction payload.
      */
     void OnTransactionMessageReceived(RemoteNode* remoteNode, const payloads::TransactionPayload& payload);
-    
+
     /**
      * @brief Called when an extensible message is received.
      * @param remoteNode The remote node.
      * @param payload The extensible payload.
      */
     void OnExtensibleMessageReceived(RemoteNode* remoteNode, const payloads::ExtensiblePayload& payload);
-    
+
     /**
      * @brief Called when a GetAddr message is received.
      * @param remoteNode The remote node.
      */
     void OnGetAddrMessageReceived(RemoteNode* remoteNode);
-    
+
     /**
      * @brief Called when a Verack message is received.
      * @param remoteNode The remote node.
@@ -523,13 +523,13 @@ class LocalNode
      * @brief Manages the connection lifecycle.
      */
     void ManageConnectionLifecycle();
-    
+
     /**
      * @brief Set callbacks for block and transaction events
      */
     void SetBlockReceivedCallback(std::function<void(std::shared_ptr<ledger::Block>)> callback);
     void SetTransactionReceivedCallback(std::function<void(std::shared_ptr<ledger::Transaction>)> callback);
-    
+
     /**
      * @brief Get blockchain and mempool instances
      */
@@ -537,24 +537,24 @@ class LocalNode
     std::shared_ptr<ledger::MemoryPool> GetMemoryPool() const;
     void SetBlockchain(std::shared_ptr<ledger::Blockchain> blockchain);
     void SetMemoryPool(std::shared_ptr<ledger::MemoryPool> mempool);
-    
+
     /**
      * @brief Relay methods for block and transaction propagation
      */
     void RelayBlock(std::shared_ptr<ledger::Block> block);
     void RelayTransaction(std::shared_ptr<ledger::Transaction> transaction);
-    
+
     /**
      * @brief Request blocks from a remote node
      */
     void RequestBlocks(RemoteNode* remoteNode);
-    
+
     /**
      * @brief Process consensus and state service messages
      */
     void ProcessConsensusMessage(RemoteNode* remoteNode, const payloads::ExtensiblePayload& payload);
     void ProcessStateServiceMessage(RemoteNode* remoteNode, const payloads::ExtensiblePayload& payload);
-    
+
     /**
      * @brief Get consensus and state services
      */
@@ -577,7 +577,7 @@ class LocalNode
     std::unordered_map<std::string, std::unique_ptr<RemoteNode>> connectedNodes_;
     mutable std::mutex connectedNodesMutex_;
     size_t maxConnections_;
-    
+
     std::shared_ptr<class ConsensusService> consensusService_;
     std::shared_ptr<class StateService> stateService_;
     std::atomic<bool> running_;
@@ -611,7 +611,7 @@ class LocalNode
     void HandleConnect(const std::error_code& error, boost::asio::ip::tcp::socket socket, const IPEndPoint& endpoint);
     void AddConnectedNode(std::unique_ptr<RemoteNode> remoteNode);
     void RemoveConnectedNode(const std::string& key);
-    
+
     // Additional member variables for production support
     std::shared_ptr<ledger::Blockchain> blockchain_;
     std::shared_ptr<ledger::MemoryPool> mempool_;

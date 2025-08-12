@@ -21,6 +21,7 @@ option(NEO_ENABLE_SANITIZERS "Enable address and UB sanitizers" OFF)
 
 # Include CMake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(Ccache)          # Enable ccache for faster builds
 include(BuildOptions)    # Include build configuration options
 include(SetupCompiler)
 include(FindDependencies)

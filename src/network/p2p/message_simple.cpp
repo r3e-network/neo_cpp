@@ -47,7 +47,7 @@ void Message::Serialize(io::BinaryWriter& writer) const
     // 3. Payload length
     uint32_t payloadLength = payload_ ? payload_->GetSize() : 0;
     writer.Write(payloadLength);
-    
+
     // 4. Payload checksum
     uint32_t checksum = 0;
     if (payload_ && payloadLength > 0)
